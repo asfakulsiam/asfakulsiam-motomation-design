@@ -27,27 +27,27 @@ Primary aesthetic target: **minimal · modern · unique · strong typography · 
 Requires Node.js 18+.
 
 ```bash
-npx skills add asfakulsiam/motomation-design
+npx skills add asfakulsiam/asfakulsiam-motomation-design
 ```
 
 Or with full URL:
 
 ```bash
-npx skills add https://github.com/asfakulsiam/motomation-design
+npx skills add https://github.com/asfakulsiam/asfakulsiam-motomation-design
 ```
 
 Target specific agents:
 
 ```bash
-npx skills add asfakulsiam/motomation-design --agent claude-code
-npx skills add asfakulsiam/motomation-design --agent cursor
-npx skills add asfakulsiam/motomation-design --agent '*'
+npx skills add asfakulsiam/asfakulsiam-motomation-design --agent claude-code
+npx skills add asfakulsiam/asfakulsiam-motomation-design --agent cursor
+npx skills add asfakulsiam/asfakulsiam-motomation-design --agent '*'
 ```
 
 Install only the main skill if the CLI asks:
 
 ```bash
-npx skills add asfakulsiam/motomation-design --skill asfakulsiam-motomation-design
+npx skills add asfakulsiam/asfakulsiam-motomation-design --skill asfakulsiam-motomation-design
 ```
 
 After install the skill appears in the agent’s skills directory and is automatically loaded when the conversation involves web design, UI, motion, or landing pages.
@@ -155,4 +155,4 @@ MIT — use freely, commercially or personally. Credit is appreciated but not re
 ---
 
 Built by asfakulsiam.  
-Push this folder to your GitHub under `asfakulsiam/motomation-design` (or any name you prefer) and the `npx skills` install command works immediately.
+Push this folder to your GitHub under `asfakulsiam/asfakulsiam-motomation-design` and the `npx skills` install command works immediately.
