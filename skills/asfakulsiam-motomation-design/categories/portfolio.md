@@ -1,5 +1,7 @@
 # Category: Portfolio (designers, developers, photographers, artists)
 
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
+
 **The real job:** be remembered for one thing in 30 seconds, then prove range for the people who stay.
 **Default mood:** Play or Editorial · Dials ENERGY 3 · RHYTHM 2 · MOTION 3 → Tier 2 + one Motomation chapter
 

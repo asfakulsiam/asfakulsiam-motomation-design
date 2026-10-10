@@ -1,5 +1,7 @@
 # Style: Kinetic Type
 
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
+
 **Essence:** typography is the image and the motion. Words move, stretch, split and react.
 **Use when:** portfolios, music, events, launches, type foundries, any brand with a strong voice.
 **Avoid when:** long reading content (keep body text still).

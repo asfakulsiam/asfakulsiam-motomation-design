@@ -1,5 +1,7 @@
 # Category: Architecture / Interiors / Real estate
 
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
+
 **The real job:** space, light and material conveyed through the screen, then a clear way to enquire.
 **Default mood:** Quiet · Dials ENERGY 1 · RHYTHM 2 · MOTION 2 (Tier 4–5 for a walkthrough)
 

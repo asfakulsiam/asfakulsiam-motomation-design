@@ -1,5 +1,7 @@
 # Style: Soft / Neumorphism
 
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
+
 **Essence:** soft extruded surfaces lit from one side, tactile and calm.
 **Use when:** small, tactile interfaces (controls, a device companion app, a wellness product).
 **Avoid when:** content-heavy pages; the low contrast hurts reading and accessibility.

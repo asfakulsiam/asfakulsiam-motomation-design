@@ -1,5 +1,7 @@
 # Style: Organic / Natural
 
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
+
 **Essence:** warmth, texture and imperfection: paper grain, soft curves, natural colour.
 **Use when:** food, craft, wellness, sustainability, hospitality.
 **Avoid when:** the brand is about speed or precision.

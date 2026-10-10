@@ -1,5 +1,7 @@
 # Category: Education / Courses / Schools
 
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
+
 **The real job:** show what someone will be able to do, and make enrolling or applying clear.
 **Default mood:** Editorial or Quiet · Dials ENERGY 2 · RHYTHM 1 · MOTION 1–2
 

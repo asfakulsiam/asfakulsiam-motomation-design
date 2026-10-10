@@ -1,5 +1,7 @@
 # Category: E-commerce
 
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
+
 **The real job:** make the product desirable, then make buying fast and certain.
 **Default mood:** Editorial or Quiet · Dials ENERGY 2 · RHYTHM 2 · MOTION 2 (Motomation for a hero product only)
 

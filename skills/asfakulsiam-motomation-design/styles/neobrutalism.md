@@ -1,5 +1,7 @@
 # Style: Neobrutalism
 
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
+
 **Essence:** honest, raw and loud: hard borders, flat colour, visible structure, a sense of humour.
 **Use when:** youth brands, creative tools, indie products, events, anything that wants to be disarming.
 **Avoid when:** luxury, healthcare, finance trust contexts.

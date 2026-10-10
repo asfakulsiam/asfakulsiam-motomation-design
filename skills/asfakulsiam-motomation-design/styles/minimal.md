@@ -1,5 +1,7 @@
 # Style: Minimal
 
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
+
 **Essence:** fewer things, each perfect. Space and type do the work.
 **Use when:** the product or work is strong enough to stand alone: architecture, luxury, design studios, quiet portfolios.
 **Avoid when:** the audience needs dense information quickly (dashboards, marketplaces).

@@ -1,5 +1,7 @@
 # Style: Flat / Illustrative
 
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
+
 **Essence:** solid colour, clear shapes, friendly illustration, no depth effects.
 **Use when:** education, public services, children's products, explainer-heavy products.
 **Avoid when:** luxury or very technical audiences.

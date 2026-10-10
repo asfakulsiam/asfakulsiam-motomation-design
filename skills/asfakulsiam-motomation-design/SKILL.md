@@ -113,6 +113,12 @@ Higher tiers include all lower-tier craft. Choose the **lowest tier that deliver
 
 ---
 
+## Standards vs house style
+
+Two layers, kept apart on purpose (details in `principles/restraint.md`):
+- **Universal standards: never overridden.** Accessibility (WCAG AA, keyboard, focus), restraint (the four cuts, one signature move, motion budget), motion discipline, real content, a designed reduced-motion fallback, performance budgets.
+- **House style: a default the brief can override.** Minimal canvas, maximal type, editorial grid, a monochrome base with one accent, typography as hero. A dense dashboard, a data tool or an image-led brief may drop any of these; write the override in one line of the plan. Law 2 and the summary below describe the house default, not a standard.
+
 ## House style (summary; full version in `principles/house-style.md`)
 
 - Minimal canvas, maximal type. One display face at a dramatic scale, one text face that disappears.

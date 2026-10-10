@@ -1,5 +1,7 @@
 # Style: Dark Luxe
 
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
+
 **Essence:** a dark room, one light source, precious details.
 **Use when:** premium products, hotels, fragrance, watches, automotive, night-life.
 **Avoid when:** accessibility-critical public information, or bright, friendly brands.

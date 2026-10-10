@@ -1,5 +1,7 @@
 # Category: Hotel / Hospitality
 
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
+
 **The real job:** make someone feel the place before they book, then make booking effortless.
 **Default mood:** Quiet · Dials ENERGY 1 · RHYTHM 2 · MOTION 2 (one Motomation "arrival" chapter allowed)
 

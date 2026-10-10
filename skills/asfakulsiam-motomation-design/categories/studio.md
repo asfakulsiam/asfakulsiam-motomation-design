@@ -1,5 +1,7 @@
 # Category: Studio / Agency
 
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
+
 **The real job:** show taste and thinking, so the right clients self-select and the wrong ones leave.
 **Default mood:** Editorial · Dials ENERGY 2 · RHYTHM 3 · MOTION 2–3
 

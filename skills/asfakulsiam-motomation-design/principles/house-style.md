@@ -1,6 +1,6 @@
 # House Style: asfakulsiam
 
-This is the default look when the brief doesn't override it. It is a point of view, not a template: minimal, modern, typography-led, with motion as the signature.
+This is the default look when the brief doesn't override it. These are defaults, not standards: the universal standards are listed in `principles/restraint.md` and always apply. It is a point of view, not a template: minimal, modern, typography-led, with motion as the signature.
 
 ## The DNA
 

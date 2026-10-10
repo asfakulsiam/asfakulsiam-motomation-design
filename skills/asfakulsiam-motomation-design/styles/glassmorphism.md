@@ -1,5 +1,7 @@
 # Style: Glass
 
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
+
 **Essence:** translucent layers over a rich background, depth through blur and light.
 **Use when:** the concept is about layers, light or transparency (a weather app, a lens, a translucent product, an OS-like interface).
 **Avoid when:** you only want it because it looks "modern". Glass without a reason is the most common AI tell.

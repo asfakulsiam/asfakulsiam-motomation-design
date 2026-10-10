@@ -1,5 +1,7 @@
 # Style: Editorial
 
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
+
 **Essence:** the web as a great magazine: masthead, columns, captions, pull quotes and confident headlines.
 **Use when:** there's a story or a lot of content: studios, publications, culture, long-form product stories.
 **Avoid when:** the page is a single action (a sign-up form).

@@ -1,5 +1,7 @@
 # Style: Swiss / International
 
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
+
 **Essence:** objective, grid-true, typographic clarity. Strong asymmetry, flush-left, rag-right.
 **Use when:** precision is the brand: engineering, architecture, cultural institutions, systems products.
 **Avoid when:** the brand's warmth or play matters more than clarity.

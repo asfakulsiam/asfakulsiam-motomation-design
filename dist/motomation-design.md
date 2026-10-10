@@ -115,6 +115,12 @@ Higher tiers include all lower-tier craft. Choose the **lowest tier that deliver
 
 ---
 
+### Standards vs house style
+
+Two layers, kept apart on purpose (details in `principles/restraint.md`):
+- **Universal standards: never overridden.** Accessibility (WCAG AA, keyboard, focus), restraint (the four cuts, one signature move, motion budget), motion discipline, real content, a designed reduced-motion fallback, performance budgets.
+- **House style: a default the brief can override.** Minimal canvas, maximal type, editorial grid, a monochrome base with one accent, typography as hero. A dense dashboard, a data tool or an image-led brief may drop any of these; write the override in one line of the plan. Law 2 and the summary below describe the house default, not a standard.
+
 ### House style (summary; full version in `principles/house-style.md`)
 
 - Minimal canvas, maximal type. One display face at a dramatic scale, one text face that disappears.
@@ -579,7 +585,7 @@ Set the mood with `--mood=quiet|editorial|play`, or set dials directly with `--e
 
 ## House Style: asfakulsiam
 
-This is the default look when the brief doesn't override it. It is a point of view, not a template: minimal, modern, typography-led, with motion as the signature.
+This is the default look when the brief doesn't override it. These are defaults, not standards: the universal standards are listed in `principles/restraint.md` and always apply. It is a point of view, not a template: minimal, modern, typography-led, with motion as the signature.
 
 ### The DNA
 
@@ -677,7 +683,32 @@ Vary them as part of the structure (see `structures/archetypes.md`). The footer 
 
 ## Restraint
 
-Restraint is what makes a minimal site feel expensive instead of empty.
+Restraint is what makes a minimal site feel expensive instead of empty. It is also a standard, not a style: a dense dashboard needs it as much as a minimal portfolio.
+
+### Two kinds of rules
+
+**Universal standards** apply to every brief, every style and every category. A brief can't switch them off.
+
+| Standard | The rule | Where it's defined |
+|---|---|---|
+| Accessibility | WCAG 2.2 AA contrast (4.5:1 text, 3:1 large text and UI), keyboard reaches everything with a visible focus, nothing hidden from assistive tech | `craft/accessibility.md` |
+| Restraint | the four cuts and the universal budgets below; one signature move | this file, Restraint Gate in `thinking/sequence.md` |
+| Motion discipline | every animation passes the four questions; UI feedback ≤ 250ms; transform/opacity only | `motion/tokens.md` |
+| Real content | no lorem ipsum, invented numbers, fake logos or testimonials | `gates/delivery-gate.md` |
+| Reduced-motion fallback | a designed static version, not "animations off" | `craft/accessibility.md`, each tier file |
+| Performance budgets | LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1, JS budget per tier | `craft/performance.md` |
+
+**House-style defaults** are asfakulsiam's point of view (`principles/house-style.md`). They apply when the brief is silent. A brief, a category or a named style can override them, and the override is not a failure:
+
+| Default | Overridden when… |
+|---|---|
+| Minimal canvas (quiet ground, lots of air) | the content is dense by nature: dashboards, data tools, catalogues with filters, timetables |
+| Maximal type (display at 8–28vw) | the data or the product UI is the hero; then type is compact, tabular and legible at a glance |
+| Editorial grid (folios, hairlines, margin captions) | the task is operational; use a functional grid (panels, tables, toolbars) |
+| Monochrome base, one accent as the only colour | colour encodes information (status, categories, series). Data colours are information, not accents; the one-brand-accent budget and the Restraint Gate still hold. |
+| Typography as hero | imagery, data or the product is what the visitor came for |
+
+Test: if obeying a rule would make the brief worse at its real job, and the rule is in the second table, override it and say so in one line of the plan. If it's in the first table, the brief is wrong, not the rule.
 
 ### The four cuts
 
@@ -689,14 +720,14 @@ Before delivery, make four passes and remove:
 
 ### Budgets
 
-| Item | Budget per page |
-|---|---|
-| Display typefaces | 1 (2 only if the concept is about contrast) |
-| Accent colours | 1 |
-| Signature moves | 1, echoed at most twice |
-| Pinned sections | ≤ 2 on Tier 2–3; Motomation chapters ≤ 2 |
-| Simultaneous animations on screen | ≤ 3 groups |
-| WebGL canvases | 1 |
+| Item | Budget per page | Kind |
+|---|---|---|
+| Signature moves | 1, echoed at most twice | standard |
+| Simultaneous animations on screen | ≤ 3 groups | standard |
+| WebGL canvases | 1 | standard |
+| Pinned sections | ≤ 2 on Tier 2–3; Motomation chapters ≤ 2 | standard |
+| Display typefaces | 1 (2 only if the concept is about contrast); a dashboard may have none | standard |
+| Accent colours | 1 brand accent (data and status colours encode information and don't count) | standard |
 
 ### The "one more thing" test
 
@@ -1609,6 +1640,8 @@ Search them: `node scripts/search.mjs styles "<words>"`. A style is a language, 
 
 ## Style: Dark Luxe
 
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
+
 **Essence:** a dark room, one light source, precious details.
 **Use when:** premium products, hotels, fragrance, watches, automotive, night-life.
 **Avoid when:** accessibility-critical public information, or bright, friendly brands.
@@ -1626,6 +1659,8 @@ Search them: `node scripts/search.mjs styles "<words>"`. A style is a language, 
 <!-- file: styles/editorial.md -->
 
 ## Style: Editorial
+
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
 
 **Essence:** the web as a great magazine: masthead, columns, captions, pull quotes and confident headlines.
 **Use when:** there's a story or a lot of content: studios, publications, culture, long-form product stories.
@@ -1645,6 +1680,8 @@ Search them: `node scripts/search.mjs styles "<words>"`. A style is a language, 
 
 ## Style: Flat / Illustrative
 
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
+
 **Essence:** solid colour, clear shapes, friendly illustration, no depth effects.
 **Use when:** education, public services, children's products, explainer-heavy products.
 **Avoid when:** luxury or very technical audiences.
@@ -1662,6 +1699,8 @@ Search them: `node scripts/search.mjs styles "<words>"`. A style is a language, 
 <!-- file: styles/glassmorphism.md -->
 
 ## Style: Glass
+
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
 
 **Essence:** translucent layers over a rich background, depth through blur and light.
 **Use when:** the concept is about layers, light or transparency (a weather app, a lens, a translucent product, an OS-like interface).
@@ -1681,6 +1720,8 @@ Search them: `node scripts/search.mjs styles "<words>"`. A style is a language, 
 
 ## Style: Kinetic Type
 
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
+
 **Essence:** typography is the image and the motion. Words move, stretch, split and react.
 **Use when:** portfolios, music, events, launches, type foundries, any brand with a strong voice.
 **Avoid when:** long reading content (keep body text still).
@@ -1698,6 +1739,8 @@ Search them: `node scripts/search.mjs styles "<words>"`. A style is a language, 
 <!-- file: styles/minimal.md -->
 
 ## Style: Minimal
+
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
 
 **Essence:** fewer things, each perfect. Space and type do the work.
 **Use when:** the product or work is strong enough to stand alone: architecture, luxury, design studios, quiet portfolios.
@@ -1717,6 +1760,8 @@ Search them: `node scripts/search.mjs styles "<words>"`. A style is a language, 
 
 ## Style: Neobrutalism
 
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
+
 **Essence:** honest, raw and loud: hard borders, flat colour, visible structure, a sense of humour.
 **Use when:** youth brands, creative tools, indie products, events, anything that wants to be disarming.
 **Avoid when:** luxury, healthcare, finance trust contexts.
@@ -1734,6 +1779,8 @@ Search them: `node scripts/search.mjs styles "<words>"`. A style is a language, 
 <!-- file: styles/neumorphism.md -->
 
 ## Style: Soft / Neumorphism
+
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
 
 **Essence:** soft extruded surfaces lit from one side, tactile and calm.
 **Use when:** small, tactile interfaces (controls, a device companion app, a wellness product).
@@ -1753,6 +1800,8 @@ Search them: `node scripts/search.mjs styles "<words>"`. A style is a language, 
 
 ## Style: Organic / Natural
 
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
+
 **Essence:** warmth, texture and imperfection: paper grain, soft curves, natural colour.
 **Use when:** food, craft, wellness, sustainability, hospitality.
 **Avoid when:** the brand is about speed or precision.
@@ -1770,6 +1819,8 @@ Search them: `node scripts/search.mjs styles "<words>"`. A style is a language, 
 <!-- file: styles/swiss.md -->
 
 ## Style: Swiss / International
+
+> **Standards vs style:** this style may override house-style defaults (canvas, type scale, grid, accent); it never overrides the universal standards in `principles/restraint.md`.
 
 **Essence:** objective, grid-true, typographic clarity. Strong asymmetry, flush-left, rag-right.
 **Use when:** precision is the brand: engineering, architecture, cultural institutions, systems products.
@@ -1802,6 +1853,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 
 ## Category: Architecture / Interiors / Real estate
 
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
+
 **The real job:** space, light and material conveyed through the screen, then a clear way to enquire.
 **Default mood:** Quiet · Dials ENERGY 1 · RHYTHM 2 · MOTION 2 (Tier 4–5 for a walkthrough)
 
@@ -1818,6 +1871,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 <!-- file: categories/ecommerce.md -->
 
 ## Category: E-commerce
+
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** make the product desirable, then make buying fast and certain.
 **Default mood:** Editorial or Quiet · Dials ENERGY 2 · RHYTHM 2 · MOTION 2 (Motomation for a hero product only)
@@ -1841,6 +1896,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 
 ## Category: Education / Courses / Schools
 
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
+
 **The real job:** show what someone will be able to do, and make enrolling or applying clear.
 **Default mood:** Editorial or Quiet · Dials ENERGY 2 · RHYTHM 1 · MOTION 1–2
 
@@ -1858,6 +1915,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 
 ## Category: Event / Festival / Conference
 
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
+
 **The real job:** excitement, then the facts (date, place, line-up, tickets) in seconds.
 **Default mood:** Play · Dials ENERGY 3 · RHYTHM 3 · MOTION 3
 
@@ -1874,6 +1933,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 <!-- file: categories/hotel.md -->
 
 ## Category: Hotel / Hospitality
+
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** make someone feel the place before they book, then make booking effortless.
 **Default mood:** Quiet · Dials ENERGY 1 · RHYTHM 2 · MOTION 2 (one Motomation "arrival" chapter allowed)
@@ -1899,6 +1960,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 
 ## Category: Organisation / Non-profit / Public sector
 
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
+
 **The real job:** trust and clarity first: what you do, for whom, and how to act (donate, apply, volunteer, get help).
 **Default mood:** Quiet or Editorial · Dials ENERGY 1–2 · RHYTHM 1 · MOTION 1–2
 
@@ -1916,6 +1979,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 
 ## Category: Personal brand / Creator / Writer
 
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
+
 **The real job:** a recognisable voice and a reason to follow, subscribe or hire.
 **Default mood:** Editorial · Dials ENERGY 2 · RHYTHM 2 · MOTION 2
 
@@ -1932,6 +1997,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 <!-- file: categories/portfolio.md -->
 
 ## Category: Portfolio (designers, developers, photographers, artists)
+
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** be remembered for one thing in 30 seconds, then prove range for the people who stay.
 **Default mood:** Play or Editorial · Dials ENERGY 3 · RHYTHM 2 · MOTION 3 → Tier 2 + one Motomation chapter
@@ -1958,6 +2025,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 
 ## Category: Product launch / Hardware / Single product
 
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
+
 **The real job:** a moment of desire, then the reasons to believe, then pre-order or buy.
 **Default mood:** Play or Dark Luxe · Dials ENERGY 3 · RHYTHM 2 · MOTION 3 → **Motomation home ground**
 
@@ -1975,6 +2044,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 
 ## Category: Restaurant / Food & Drink
 
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
+
 **The real job:** appetite, then a table: hours, menu, booking, location.
 **Default mood:** Editorial or Play · Dials ENERGY 2 · RHYTHM 2 · MOTION 2
 
@@ -1991,6 +2062,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 <!-- file: categories/saas.md -->
 
 ## Category: SaaS / Software
+
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** make one painful problem and its solution obvious, then prove it with the product itself.
 **Default mood:** Editorial · Dials ENERGY 2 · RHYTHM 1–2 · MOTION 2
@@ -2015,6 +2088,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 <!-- file: categories/studio.md -->
 
 ## Category: Studio / Agency
+
+> **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** show taste and thinking, so the right clients self-select and the wrong ones leave.
 **Default mood:** Editorial · Dials ENERGY 2 · RHYTHM 3 · MOTION 2–3
