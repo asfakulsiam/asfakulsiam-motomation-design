@@ -1,6 +1,7 @@
 "use client";
 // Tier 5 Motomation: a pinned image-sequence film scrubbed by scroll, with scene type and a timecode rail.
 // Timeline duration is 1, so scene positions are the storyboard timecodes from MOTION.md.
+// Frames load playhead-first with a request cap and pause in hidden tabs / off-screen (see tier-5 "Loading strategy").
 // Reduced motion, no-JS, and Save-Data visitors get the static storyboard frames instead.
 // Accessibility: the storyboard is the canonical narrative and is never display:none. While the film runs it is
 // visually hidden but stays in the accessibility tree, so a screen reader reads every scene in order without
@@ -40,14 +41,13 @@ export function ImageSequenceFilm({ frames, src, scenes, length = { desktop: 500
 
       const size = mobile ? "m" : "d";
       const count = mobile ? frames.mobile : frames.desktop;
-      const images: HTMLImageElement[] = [];
+      const images: (HTMLImageElement | undefined)[] = [];
       const state = { frame: 0 };
-      let last = -1;
+      let last = -1, shown = -1; // last = playhead frame drawn, shown = index of the image actually on screen
 
       const nearestLoaded = (i: number) => {
         for (let d = 0; d < count; d++) {
-          if (images[i - d]?.complete && images[i - d].naturalWidth) return images[i - d];
-          if (images[i + d]?.complete && images[i + d].naturalWidth) return images[i + d];
+          for (const img of [images[i - d], images[i + d]]) if (img?.complete && img.naturalWidth) return img;
         }
         return undefined;
       };
@@ -56,7 +56,7 @@ export function ImageSequenceFilm({ frames, src, scenes, length = { desktop: 500
         if (i === last && !force) return;
         const img = nearestLoaded(i);
         if (!img) return;
-        last = i;
+        last = i; shown = images.indexOf(img);
         const dpr = Math.min(devicePixelRatio || 1, 2);
         const w = Math.round(el.clientWidth * dpr), h = Math.round(el.clientHeight * dpr); // integers, or the size check never matches
         if (el.width !== w || el.height !== h) { el.width = w; el.height = h; }
@@ -64,11 +64,39 @@ export function ImageSequenceFilm({ frames, src, scenes, length = { desktop: 500
         c.drawImage(img, (w - img.naturalWidth * s) / 2, (h - img.naturalHeight * s) / 2, img.naturalWidth * s, img.naturalHeight * s);
       };
 
-      // first 10 frames eagerly, the rest when the browser is idle
-      const loadFrame = (i: number) => { const img = new Image(); img.decoding = "async"; img.src = src(i, size); img.onload = () => i === Math.round(state.frame) && draw(true); images[i] = img; };
-      for (let i = 0; i < Math.min(10, count); i++) loadFrame(i);
-      const idle = (cb: () => void) => ("requestIdleCallback" in window ? requestIdleCallback(cb) : setTimeout(cb, 200));
-      idle(() => { for (let i = 10; i < count; i++) loadFrame(i); });
+      // Loading: bounded concurrency, nearest-to-playhead first, paused in hidden tabs and while off-screen.
+      const limit = mobile ? 4 : 6;                       // never more than this many frame requests in flight
+      const requested = new Uint8Array(count);            // 0 = not asked, 1 = in flight or done
+      const inFlight = new Map<number, HTMLImageElement>();
+      let onScreen = false;
+      const nextFrame = () => {                           // closest unrequested frame, looking ahead first
+        const p = Math.round(state.frame);
+        for (let d = 0; d < count; d++) for (const i of [p + d, p - d]) if (i >= 0 && i < count && !requested[i]) return i;
+        return -1;
+      };
+      const pump = () => {
+        while (onScreen && !document.hidden && inFlight.size < limit) {
+          const i = nextFrame(); if (i < 0) return;
+          const img = new Image(); img.decoding = "async";
+          requested[i] = 1; inFlight.set(i, img);
+          const settle = () => { inFlight.delete(i); pump(); };
+          img.onload = () => {                            // repaint if this frame is closer to the playhead than what's shown
+            const p = Math.round(state.frame);
+            if (shown < 0 || Math.abs(i - p) < Math.abs(shown - p)) draw(true);
+            settle();
+          };
+          img.onerror = settle;                           // a missing frame is skipped, not retried forever
+          img.src = src(i, size); images[i] = img;
+        }
+      };
+      const cancel = () => {                              // abort in-flight requests; they are re-queued later
+        inFlight.forEach((img, i) => { img.onload = img.onerror = null; img.src = ""; images[i] = undefined; requested[i] = 0; });
+        inFlight.clear();
+      };
+      const io = new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; if (onScreen) pump(); else cancel(); }, { rootMargin: "50% 0px" });
+      io.observe(root.current);
+      const onVisibility = () => (document.hidden ? cancel() : pump());
+      document.addEventListener("visibilitychange", onVisibility);
 
       const stage = root.current.querySelector<HTMLElement>("[data-stage]");
       const rail = root.current.querySelector<HTMLElement>("[data-rail]");
@@ -84,7 +112,7 @@ export function ImageSequenceFilm({ frames, src, scenes, length = { desktop: 500
           },
         },
       });
-      tl.to(state, { frame: count - 1, duration: 1, onUpdate: () => draw() }, 0);
+      tl.to(state, { frame: count - 1, duration: 1, onUpdate: () => { draw(); pump(); } }, 0); // pump: a jump re-targets loading at once
       scenes.forEach((s, i) => {
         const sel = `[data-scene="${i}"]`;
         const len = s.to - s.from, io = Math.min(0.06, len * 0.25);  // in/out time; the middle is the hold
@@ -106,6 +134,7 @@ export function ImageSequenceFilm({ frames, src, scenes, length = { desktop: 500
       addEventListener("resize", onResize);
       return () => {
         removeEventListener("resize", onResize);
+        io.disconnect(); document.removeEventListener("visibilitychange", onVisibility); cancel();
         jumps.forEach((a) => { a.removeEventListener("focus", jump); a.removeEventListener("click", click); });
         if (root.current) delete root.current.dataset.film;
       };

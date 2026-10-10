@@ -1108,19 +1108,16 @@ mm.add({ motion: "(prefers-reduced-motion: no-preference)", small: "(max-width: 
   const canvas = root.querySelector(".film__stage canvas"), c = canvas.getContext("2d");
   const count = small ? 90 : 180;                           // fewer frames on phones
   const src = (i) => `/film/${small ? "m" : "d"}/f_${String(i + 1).padStart(4, "0")}.webp`;
-  const images = []; const state = { frame: 0 }; let last = -1;
+  const images = []; const state = { frame: 0 }; let last = -1, shown = -1;
 
   const nearestLoaded = (i) => {                            // draw the closest frame that has arrived
-    for (let d = 0; d < count; d++) {
-      if (images[i - d]?.complete && images[i - d].naturalWidth) return images[i - d];
-      if (images[i + d]?.complete && images[i + d].naturalWidth) return images[i + d];
-    }
+    for (let d = 0; d < count; d++) for (const img of [images[i - d], images[i + d]]) if (img?.complete && img.naturalWidth) return img;
   };
   const draw = (force = false) => {
     const i = Math.round(state.frame);
     if (i === last && !force) return;                       // same frame: skip the work
     const img = nearestLoaded(i); if (!img) return;
-    last = i;
+    last = i; shown = images.indexOf(img);
     const dpr = Math.min(devicePixelRatio || 1, 2);
     const w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
     if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; } // resize only when the size changes
@@ -1129,10 +1126,25 @@ mm.add({ motion: "(prefers-reduced-motion: no-preference)", small: "(max-width: 
   };
 
   // Loading: see "Loading strategy" in section 5
-  const loadFrame = (i) => { const img = new Image(); img.decoding = "async"; img.src = src(i);
-    img.onload = () => i === Math.round(state.frame) && draw(true); images[i] = img; };
-  for (let i = 0; i < Math.min(10, count); i++) loadFrame(i);
-  (window.requestIdleCallback || ((cb) => setTimeout(cb, 200)))(() => { for (let i = 10; i < count; i++) loadFrame(i); });
+  const limit = small ? 4 : 6, requested = new Uint8Array(count), inFlight = new Map(); let onScreen = false;
+  const nextFrame = () => { const p = Math.round(state.frame);                          // closest unrequested, ahead first
+    for (let d = 0; d < count; d++) for (const i of [p + d, p - d]) if (i >= 0 && i < count && !requested[i]) return i;
+    return -1; };
+  const pump = () => {
+    while (onScreen && !document.hidden && inFlight.size < limit) {
+      const i = nextFrame(); if (i < 0) return;
+      const img = new Image(); img.decoding = "async"; requested[i] = 1; inFlight.set(i, img);
+      const settle = () => { inFlight.delete(i); pump(); };
+      img.onload = () => { const p = Math.round(state.frame);                             // repaint if closer than what's shown
+        if (shown < 0 || Math.abs(i - p) < Math.abs(shown - p)) draw(true); settle(); };
+      img.onerror = settle; img.src = src(i); images[i] = img;
+    }
+  };
+  const cancel = () => { inFlight.forEach((img, i) => { img.onload = img.onerror = null; img.src = ""; images[i] = undefined; requested[i] = 0; }); inFlight.clear(); };
+  const io = new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; onScreen ? pump() : cancel(); }, { rootMargin: "50% 0px" });
+  io.observe(root);
+  const onVisibility = () => (document.hidden ? cancel() : pump());
+  document.addEventListener("visibilitychange", onVisibility);
 
   const stage = root.querySelector(".film__stage");
   const rail = root.querySelector("[data-rail]"), code = root.querySelector("[data-code]");
@@ -1144,7 +1156,7 @@ mm.add({ motion: "(prefers-reduced-motion: no-preference)", small: "(max-width: 
       onUpdate: (self) => { rail.style.transform = `scaleX(${self.progress})`; code.textContent = tc(self.progress * 24); },
     },
   });
-  tl.to(state, { frame: count - 1, duration: 1, onUpdate: () => draw() }, 0);            // the playhead
+  tl.to(state, { frame: count - 1, duration: 1, onUpdate: () => { draw(); pump(); } }, 0); // the playhead; a jump re-targets loading
   scenes.forEach((s, i) => {                                                               // type rides the film
     const sel = `.film [data-scene="${i}"]`, io = Math.min(0.06, (s.to - s.from) * 0.25); // in/out; the middle is the hold
     tl.fromTo(sel, { autoAlpha: 0, yPercent: 30 }, { autoAlpha: 1, yPercent: 0, duration: io }, s.from);
@@ -1161,6 +1173,7 @@ mm.add({ motion: "(prefers-reduced-motion: no-preference)", small: "(max-width: 
   const onResize = () => draw(true);
   addEventListener("resize", onResize);
   return () => { removeEventListener("resize", onResize); root.classList.remove("film-on");
+    io.disconnect(); document.removeEventListener("visibilitychange", onVisibility); cancel();
     jumps.forEach((a) => { a.removeEventListener("focus", jump); a.removeEventListener("click", click); }); };
 });
 
@@ -1198,7 +1211,22 @@ ffmpeg -i master.mov -vf "fps=30,scale=1600:-2" -c:v libwebp -quality 78 public/
 ffmpeg -i master.mov -vf "fps=15,scale=800:-2"  -c:v libwebp -quality 72 public/film/m/f_%04d.webp
 ```
 
-Budgets: desktop ≤ 180 frames and ≤ 8MB total; mobile ≤ 90 frames and ≤ 3MB. Load the first 10 frames eagerly, then the rest while idle. Draw the nearest loaded frame while the rest arrive.
+Budgets: desktop ≤ 180 frames and ≤ 8MB total; mobile ≤ 90 frames and ≤ 3MB. Draw the nearest loaded frame while the rest arrive.
+
+#### Loading strategy
+
+Never fire every frame at once. "10 eager + the rest on idle" queues all 180 requests together: on a slow link the frame the visitor is looking at waits behind 170 they aren't, and a hidden tab keeps downloading. The master pattern (and the TSX example) does this instead:
+
+| Rule | How | Why |
+|---|---|---|
+| Bounded concurrency | at most `limit` requests in flight: **6 desktop, 4 mobile** | leaves bandwidth for fonts and the rest of the page; HTTP/2 doesn't make 180 parallel requests free |
+| Playhead first | each free slot takes the closest unrequested frame to `state.frame`, looking ahead before behind | the frame on screen arrives first; a jump (scene link, fast scroll) re-targets loading at once |
+| Repaint on arrival | a frame that lands closer to the playhead than the one shown triggers `draw(true)` | the image sharpens toward the right frame instead of waiting for an exact match |
+| Pause when hidden | `visibilitychange` → `document.hidden` cancels in-flight requests (`img.src = ""`) and re-queues them | no downloads in background tabs |
+| Pause off-screen | `IntersectionObserver` with `rootMargin: "50% 0px"`: loading starts half a viewport before the film and stops when it leaves | no downloads for a section the visitor scrolled past |
+| Skip, don't retry | a 404 frame settles its slot; `nearestLoaded` covers the gap | one bad file can't stall the queue |
+
+Measured on the TSX example (Chrome, DevTools Fast 3G preset + 6× CPU slowdown, 180 desktop / 90 mobile frames): peak in-flight requests went from 180 to 6 (desktop) and 4 (mobile); no frame requests started while the tab was hidden or while the film was off-screen; after a jump to frame ~150, the next requests were 144, 151, 152, 153 … (nearest first). Save-Data and reduced-motion visitors still download nothing and get the storyboard.
 
 ---
 

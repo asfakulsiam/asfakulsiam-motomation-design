@@ -15,7 +15,7 @@ Production-ready reference components. Each one is typed (strict TypeScript), cl
 | `backgrounds/atmospheric.tsx` | 2 | Drifting light on canvas, DPR-aware, paused off-screen and in hidden tabs |
 | `product/feature-demo.tsx` | 2 | Workbench pattern: scroll-driven product steps; stacked on mobile |
 | `scroll/pinned-chapter.tsx` | 2 | One idea in three beats; shorter on mobile; static under reduced motion |
-| `motomation/image-sequence-film.tsx` | 5 | Pinned image-sequence film with scene type, timecode rail, idle preloading and a static storyboard fallback |
+| `motomation/image-sequence-film.tsx` | 5 | Pinned image-sequence film with scene type, timecode rail, bounded playhead-first frame loading and a static storyboard fallback |
 | `html/motomation-film.html` | 5 | **Single file, no build:** the whole Motomation pattern in vanilla JS. Open it in a browser |
 
 Open the HTML demo locally:
