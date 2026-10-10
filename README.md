@@ -54,7 +54,7 @@ Motomation Design changes the thinking:
 - **12 site categories** and **10 visual styles**, each with its own guidance.
 - **Searchable data:** 44 fonts (with axes and licences), 22 contrast-verified palettes, 29 motion recipes, 20 archetypes, 12 mutations, 40 collision sources.
 - **A Delivery Gate:** a self-critique score, a 25-point AI-default scan and a craft checklist.
-- **Production examples:** 10 strict-TypeScript React components and a single-file HTML Motomation demo.
+- **Production examples:** 9 strict-TypeScript React components, a shared GSAP setup module (`lib/gsap.ts`) and a single-file HTML Motomation demo.
 - **Evals:** 8 test briefs, a weighted rubric and a release gate against a no-skill baseline.
 
 ---
