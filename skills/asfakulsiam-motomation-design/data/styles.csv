@@ -1,0 +1,11 @@
+id,name,keywords,energy,rhythm,motion,type_hint,palette_hint,file
+minimal,Minimal,quiet clean space restraint luxury architecture,1,1-2,1-2,one display + one text; weight contrast,neutrals + one accent,styles/minimal.md
+editorial,Editorial,magazine story columns captions serif,2,2,2,high-contrast serif + book text + mono,paper and ink + print accent,styles/editorial.md
+swiss,Swiss,grid objective precise flush-left modular,2,1-2,1-2,neo-grotesk modular scale,white black + one signal,styles/swiss.md
+neobrutalism,Neobrutalism,raw borders flat loud humour,3,3,1-2,heavy grotesk + mono,flat saturated + black,styles/neobrutalism.md
+glassmorphism,Glass,translucent layers blur light depth,2,2,2-3,clean grotesk,rich background + tinted glass,styles/glassmorphism.md
+neumorphism,Soft,tactile extruded soft controls,1,1,1-2,rounded soft grotesk,mid-light base + paired shadows,styles/neumorphism.md
+flat,Flat / Illustrative,friendly illustration solid shapes education,2,2,1-3,open friendly grotesk,3-5 flat colours,styles/flat.md
+kinetic-type,Kinetic Type,moving words variable axes split letters,3,2-3,2-3,variable fonts with expressive axes,monochrome + one accent,styles/kinetic-type.md
+organic,Organic,warm texture natural craft food,1-2,2,2,soft serif + humanist sans,earth and plant tones,styles/organic.md
+dark-luxe,Dark Luxe,night premium precious light,1-2,1-2,2-3,refined serif or wide sans,near-black + metallic accent,styles/dark-luxe.md

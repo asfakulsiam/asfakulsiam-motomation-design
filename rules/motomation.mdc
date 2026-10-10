@@ -1,0 +1,9 @@
+---
+description: Motomation Design: apply to any website, landing page or web UI design and animation work
+globs: ["**/*.tsx", "**/*.jsx", "**/*.html", "**/*.css", "**/*.astro", "**/*.vue", "**/*.svelte"]
+alwaysApply: false
+---
+For any web design, redesign, animation or critique task, follow the skill at `skills/asfakulsiam-motomation-design/SKILL.md`
+(or `.agents/skills/asfakulsiam-motomation-design/SKILL.md` when installed with `npx skills add`).
+Run the Thinking Sequence before writing UI code, set the three dials, pick the lowest motion tier that delivers the concept,
+and pass the Delivery Gate before handing back. Never ship the AI-default look.

@@ -1,0 +1,30 @@
+id,name,tier,trigger,technique,duration,ease,use_for,avoid,reduced_fallback
+press,Press scale,1,pointerdown,transform scale 0.97,100ms,--ease-out,buttons and cards,links in body text,none needed (tiny) or colour change
+underline-draw,Underline draw,1,hover/focus,background-size 0 to 100%,220ms,--ease-out,"text links, nav",dense link lists,instant underline
+focus-ring,Designed focus ring,1,focus-visible,outline + offset,120ms,--ease-out,every interactive element,never remove,same
+view-reveal,CSS view reveal,1,enter viewport,animation-timeline: view(),scroll-linked,linear,progressive-enhancement reveals,critical content in old browsers,visible
+theme-vt,Theme view transition,1,theme toggle,document.startViewTransition,420ms,--ease-out,dark/light switch,frequent toggles,instant
+line-rise,Line Curtain,2,enter viewport once,"SplitText lines + mask, yPercent 110 to 0",900ms + 80ms stagger,expo.out,headings,body paragraphs,instant final state
+word-blur,Blur focus,2,enter viewport,words from blur(8px) opacity 0,700ms + 40ms stagger,power3.out,short statements about clarity,long text,instant
+ink-fill,Ink Fill,2,scroll scrub,word colour muted to ink,scroll-linked,none,manifestos,short headings,full ink
+batch-rows,Batch rows,2,enter viewport,ScrollTrigger.batch y 24 opacity 0,600ms + 60ms stagger,power3.out,"lists, indexes, grids",above-the-fold content,visible
+parallax-soft,Soft parallax,2,scroll scrub,yPercent -10 on image inside overflow mask,scroll-linked,none,images in editorial layouts,text,static
+pinned-chapter,Pinned chapter,2,scroll pin + scrub,"timeline with pin, end +=200%",scroll-linked,none,one key idea in 2-3 beats,more than 2 per page,static stacked
+horizontal-reel,Horizontal Reel,2,scroll pin + scrub,translate track by overflow width,scroll-linked,none,"work galleries, timelines",touch devices (use native swipe),native horizontal scroll
+stacked-deck,Stacked Deck,2,sticky + scrub,"sticky cards, previous scales 0.92",scroll-linked,none,"process steps, case studies",more than 6 cards,normal list
+velocity-marquee,Velocity marquee,2,scroll velocity,looping xPercent + timeScale + skewX,loop,none,"client lists, line-ups",critical info,static list
+aperture,Aperture reveal,2,scroll scrub,clip-path circle 0% to 75%,scroll-linked,none,section transitions with meaning,every section,plain boundary
+darkroom-develop,Darkroom Develop,2,scroll scrub,filter + overlay to none,scroll-linked,none,"photography, heritage",product photos people need to judge,normal image
+thread-draw,Thread,2,scroll scrub,DrawSVG 0% to 100%,scroll-linked,none,"journeys, processes",busy layouts,fully drawn
+flip-filter,Flip filter,3,state change,GSAP Flip getState/from,600ms,power3.inOut,"filters, grid/list toggles",huge lists (over 200 items),instant
+mpa-vt,Cross-document transition,3,navigation,@view-transition + view-transition-name,520ms,--ease-out-strong,project list to case study,forms mid-flow,instant navigation
+lottie-scrub,Lottie scrub,3,scroll scrub,dotLottie setFrame from progress,scroll-linked,none,illustrated explainers,decorative loops,poster frame
+rive-state,Rive state machine,3,UI events,Rive inputs from hover/press/state,authored,authored,"mascots, interactive illustrations",core navigation,static image
+morph-logo,Logo morph,3,load or scroll,MorphSVG shapeIndex auto,800ms,power2.inOut,"logo to icon, letter to symbol",complex paths with mismatched points,static logo
+shader-reveal,Shader reveal,4,scroll scrub,fragment shader uProgress,scroll-linked,none,material or liquid concepts,text,static image
+dom-gl-planes,DOM-synced WebGL planes,4,scroll,"one canvas, planes matched to img rects",continuous,none,image distortion galleries,more than 1 canvas,normal images
+model-turn,3D model turntable,4,scroll scrub or drag,three.js GLTF rotation,scroll-linked,none,products to inspect,models over 2MB,image sequence or still
+film-sequence,Image-sequence film,5,scroll pin + scrub,canvas frames 90-180,scroll-linked,none (scrub 0.6),Motomation product and place films,pages without a storyboard,static storyboard frames
+film-video,Video scrub film,5,scroll pin + scrub,video.currentTime from progress (-g 1 encode),scroll-linked,none,long shots,iOS without testing,static storyboard frames
+film-type,Type film,5,scroll pin + scrub,DOM timeline duration 1 with scene positions,scroll-linked,none,typographic Motomation hooks,body text,static stacked type
+timecode-rail,Timecode Rail,5,chapter progress,scaleX + tabular timecode,scroll-linked,none,any Motomation chapter,short pins,hidden

@@ -1,0 +1,11 @@
+# Motomation Design
+
+> An agent skill by asfakulsiam for original, award-level websites that are minimal, modern and typography-led, with motion as the signature, up to "Motomation": scrolling that plays like a film. MIT licensed.
+
+- [Skill entry point](skills/asfakulsiam-motomation-design/SKILL.md): router, five laws, default flow, tiers, commands
+- [Thinking Sequence](skills/asfakulsiam-motomation-design/thinking/sequence.md): tension, concept, archetype + mutation, collision, signature, anti-sameness, restraint
+- [Motomation (Tier 5)](skills/asfakulsiam-motomation-design/motion/tier-5-motomation.md): scroll-as-film method and code
+- [Commands](skills/asfakulsiam-motomation-design/commands/overview.md)
+- [Delivery Gate](skills/asfakulsiam-motomation-design/gates/delivery-gate.md)
+- [Single-file edition](dist/motomation-design.md): for chat tools without a shell
+- Install: `npx skills add asfakulsiam/asfakulsiam-motomation-design`

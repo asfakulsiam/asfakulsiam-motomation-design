@@ -1,0 +1,12 @@
+{
+  "name": "asfakulsiam-motomation-design",
+  "displayName": "Motomation Design",
+  "version": "2.0.0",
+  "description": "Original, award-level, typography-led websites with motion as signature, up to scroll-as-film.",
+  "author": { "name": "asfakulsiam" },
+  "license": "MIT",
+  "repository": "https://github.com/asfakulsiam/asfakulsiam-motomation-design",
+  "keywords": ["design", "motion", "gsap", "typography"],
+  "skills": "./skills/",
+  "rules": "./rules/"
+}

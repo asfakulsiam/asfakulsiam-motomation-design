@@ -1,0 +1,21 @@
+id,name,shape,best_for,signature_potential,nav_ideas
+specimen,The Specimen,the page is a type specimen,portfolio studio type-led brands,variable axes reacting to the cursor,folio corner; index of sizes
+ledger,The Ledger,rows and columns like an account book,studio agency archive finance,rows expand into case studies,column headers as nav
+film-reel,The Film Reel,scroll is a timeline of scenes,product-launch portfolio storytelling,scroll-scrubbed scenes with timecode,timecode rail; chapter dots
+index,The Index,a huge typographic list is the homepage,portfolio publication directory,hover previews following the cursor,the list is the nav
+manifesto,The Manifesto,one argument set large like a speech,organisation founder movement,words that fill with ink as read,none until the end
+gallery-wall,The Gallery Wall,free-placed images on a wall to roam,photography art fashion,drag-to-pan canvas with inertia,minimap
+workbench,The Workbench,the product UI is the page,saas dev tools,live demo reacting to scroll,command palette
+letter,The Letter,a personal letter with salutation and signature,founder small-brand invitation,signature drawn on scroll,none; P.S. links
+atlas,The Atlas,a map or diagram you move through,hotel travel real-estate logistics,camera moves across a map per section,map legend
+timeline,The Timeline,history on one axis with years as nav,heritage organisation event,year counter that scrubs,year rail
+catalogue,The Catalogue,numbered objects with spec sheets,ecommerce furniture fashion,spec lines draw in,numbered index
+stage,The Stage,one fixed stage where content enters and leaves,product-launch music event,pinned stage with scene changes,programme list
+diptych,The Diptych,two halves in permanent dialogue,comparison dual-brand hotel day-night,the split line moves with scroll,split toggle
+broadsheet,The Broadsheet,newspaper masthead columns and folios,media journalism opinion restaurant-menu,columns reflow as the reader moves,masthead sections
+console,The Console,a terminal is the interface,dev tools technical products,typed commands build the page,command list
+room,The Room,each section is a room you walk into,hotel gallery architecture,doors and thresholds as transitions,floor plan
+shelf,The Shelf,products as objects on shelves,retail books ceramics,pick up an object to inspect it,shelf labels
+lookbook,The Lookbook,full-bleed editorial spreads page by page,fashion beauty photography,crop-shift between spreads,page numbers
+poster,The Poster,one screen one image with layers beneath,event launch campaign,the poster peels into the details,poster corners
+field-guide,The Field Guide,entries with illustrations notes and classes,education nature many-variant products,annotations that point and label,classification tabs

@@ -1,0 +1,19 @@
+{
+  "name": "asfakulsiam-motomation-design",
+  "version": "2.0.0",
+  "description": "An agent skill for original, award-level, typography-led websites with motion as signature, up to scroll-as-film (Motomation).",
+  "author": "asfakulsiam",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "repository": { "type": "git", "url": "https://github.com/asfakulsiam/asfakulsiam-motomation-design.git" },
+  "keywords": ["agent-skill", "claude-skill", "design", "gsap", "lenis", "scroll-animation", "typography", "motion-design", "anti-slop", "webgl"],
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "check": "node scripts/check-repo.mjs",
+    "build:dist": "node scripts/build-dist.mjs",
+    "collide": "node skills/asfakulsiam-motomation-design/scripts/collide.mjs",
+    "search": "node skills/asfakulsiam-motomation-design/scripts/search.mjs",
+    "contrast": "node skills/asfakulsiam-motomation-design/scripts/contrast.mjs --palettes"
+  }
+}

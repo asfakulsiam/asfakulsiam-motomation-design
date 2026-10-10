@@ -1,0 +1,23 @@
+id,name,family,tier,mood,good_for,file,one_line
+proximity-weight,Proximity Weight,type,2,play editorial,portfolio studio specimen,signatures/type-signatures.md,letters near the cursor get heavier
+letter-relay,Letter Relay,type,2,play editorial,portfolio personal-brand,signatures/type-signatures.md,the hero name travels letter by letter into the header
+line-curtain,Line Curtain,type,2,all,all,signatures/type-signatures.md,headlines rise line by line from masks
+width-sprint,Width Sprint,type,2,play,event product-launch sport,signatures/type-signatures.md,variable width stretches with scroll speed
+decode,Decode,type,2,editorial play,saas console event,signatures/type-signatures.md,labels resolve from random glyphs
+neighbour-moves,Neighbour Moves,type,2,play,portfolio personal-brand,signatures/type-signatures.md,each letter has its own hover move
+ink-fill,Ink Fill,type,2,editorial quiet,studio organisation manifesto,signatures/type-signatures.md,statements fill with ink as you read
+timecode-rail,Timecode Rail,scroll,5,play editorial,product-launch portfolio,signatures/scroll-signatures.md,a running timecode shows chapter progress
+aperture,Aperture,scroll,2,quiet editorial,hotel architecture photography,signatures/scroll-signatures.md,the next section opens through an iris or door
+velocity-skew,Velocity Skew Marquee,scroll,2,play,studio event,signatures/scroll-signatures.md,a marquee that leans with scroll speed
+darkroom-develop,Darkroom Develop,scroll,2,quiet editorial,photography hotel heritage,signatures/scroll-signatures.md,photos develop from blank paper
+stacked-deck,Stacked Deck,scroll,2,editorial,saas studio education,signatures/scroll-signatures.md,sticky cards stack into a table of contents
+horizontal-reel,Horizontal Reel,scroll,2,play editorial,portfolio gallery architecture,signatures/scroll-signatures.md,vertical scroll pulls a film strip sideways
+thread,Thread,scroll,2,editorial quiet,organisation education journey,signatures/scroll-signatures.md,one line draws through the whole page
+seismograph-line,Seismograph Line,cursor,2,editorial play,portfolio studio,signatures/cursor-and-micro-signatures.md,a hairline bends toward the cursor
+lens,Lens,cursor,2,quiet editorial,architecture photography product,signatures/cursor-and-micro-signatures.md,the cursor reveals an alternate layer
+pixel-wake,Pixel Wake,cursor,2,play,portfolio games digital,signatures/cursor-and-micro-signatures.md,the cursor leaves fading pixels
+sticker-scatter,Sticker Scatter,micro,2,play,personal-brand event,signatures/cursor-and-micro-signatures.md,the logo bursts into on-brand stickers
+considerate-magnet,Considerate Magnet,micro,2,editorial play,saas studio,signatures/cursor-and-micro-signatures.md,the primary button leans toward the cursor
+remembered-list,Remembered List,micro,1,all,portfolio studio publication,signatures/cursor-and-micro-signatures.md,the list marks what you already opened
+brand-selection,Brand Selection,micro,1,all,all,signatures/cursor-and-micro-signatures.md,text selection uses the brand accent
+hold-to-commit,Hold to Commit,micro,2,quiet editorial,hotel ecommerce product-launch,signatures/cursor-and-micro-signatures.md,important actions fill while held

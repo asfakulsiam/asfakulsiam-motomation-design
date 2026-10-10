@@ -1,27 +1,9 @@
-# When NOT to use this skill
+# Not for
 
-This skill is powerful but not universal. Using it in the wrong context produces worse results than using nothing.
+This skill is opinionated. Use something else, or turn it down with `--mood=quiet --motion=1`, when:
 
-## Do not use this skill for
-
-- Internal tools and admin dashboards
-- Forms-heavy CRUD applications
-- Documentation sites and knowledge bases
-- Pure content / blog sites with no brand expression goal
-- Projects with less than 2 weeks of timeline
-- Projects where no designer will review the output
-- Accessibility-critical government or healthcare interfaces that must stay extremely simple
-- Sites that must load in under 1 second on 3G
-
-## Use this skill when
-
-- The project has a brand personality that deserves expression
-- You want award-level or portfolio-quality output
-- Motion and storytelling are part of the experience goal
-- You have time to review and refine the agent’s output
-- The site is public-facing and meant to impress or emotionally engage
-
-## Quick decision rule
-
-If the primary job of the page is **utility** → do not use this skill.  
-If the primary job of the page is **expression + storytelling** → use this skill.
+- **The interface is a dense tool:** admin panels, data tables, IDEs, trading terminals. Use a design system (shadcn/ui, Radix, Carbon) and Tier 1 motion only.
+- **The brand has a strict design system already.** Follow it. Use `/critique` and `/polish` here, not `/build`.
+- **Native mobile apps.** The principles transfer, but the code and motion guidance are for the web.
+- **Email templates.** Email clients don't support the techniques used here.
+- **You need a pixel-perfect copy of another site.** `/study` extracts principles on purpose, and it won't clone.

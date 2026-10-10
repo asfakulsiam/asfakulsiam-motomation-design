@@ -1,0 +1,13 @@
+id,name,operator,example
+invert-axis,Invert the axis,vertical becomes horizontal or time runs backwards,a timeline that starts in the present and scrolls into the past
+scale-abuse,Abuse the scale,one element 10x bigger or smaller than expected,a footer wordmark three screens wide
+swap-material,Swap the material,paper becomes glass; a list becomes a map,a price list printed as a receipt
+remove-expected,Remove the expected,"no nav, no hero image or no grid",a hotel site with no photos until the rooms
+ui-is-content,Make the UI the content,the scrollbar is the timeline; the cursor is the product,a torch-cursor that is the lamp being sold
+tempo-shift,Shift the tempo,one section moves at film speed while others stay still,a frozen page with one chapter in slow motion
+print-rule,Borrow a print rule,"marginalia, footnotes, folios or a colophon",case studies told in footnotes
+reverse-reveal,Reverse the reveal,start complete and take away as you scroll,a cluttered desk that tidies as you read
+single-object,Single object,the whole site orbits one object,a ceramic cup that rotates through every section
+wrong-room,Wrong room,use another category's structure,a SaaS homepage built as a restaurant menu
+second-person,Second person,the visitor becomes a character in the layout,your name or local time set in the hero
+constraint,Self-imposed constraint,"one colour, one size or one font weight only",a portfolio set entirely in one size of type

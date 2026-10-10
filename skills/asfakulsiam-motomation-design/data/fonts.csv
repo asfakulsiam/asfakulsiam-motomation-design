@@ -1,0 +1,45 @@
+name,source,license,role,axes,personality,pairs_with,use_for,avoid
+Fraunces,Google Fonts,OFL,display serif,opsz wght SOFT WONK,"warm, quirky old-style with soft or wonky details",Switzer; Instrument Sans; Hanken Grotesk,"organic brands, food, editorial, heritage with humour",strict corporate tone
+Instrument Serif,Google Fonts,OFL,display serif,none (regular + italic),"condensed elegant serif, fashion-editorial",Instrument Sans; Geist; Satoshi,"fashion, portfolios, editorial headlines",body text
+Newsreader,Google Fonts,OFL,text serif,opsz wght,calm newspaper serif built for reading,Schibsted Grotesk; Familjen Grotesk,"long-form, publications, organisations",loud play moods
+Bodoni Moda,Google Fonts,OFL,display serif,opsz wght,"high-contrast didone, luxurious",Switzer; General Sans,"dark luxe, fragrance, fashion",small sizes on dark backgrounds
+Gloock,Google Fonts,OFL,display serif,none,heavy high-contrast serif with sharp wedges,Hanken Grotesk; Satoshi,"dark luxe, posters, editorial hooks",body text
+Young Serif,Google Fonts,OFL,display serif,none,friendly heavy old-style serif,Onest; Instrument Sans,"food, organic, children's brands",technical products
+Cormorant Garamond,Google Fonts,OFL,display serif,wght,delicate calligraphic garamond at large sizes,Hanken Grotesk; Switzer,"hotels, weddings, luxury quiet",small text on screens
+EB Garamond,Google Fonts,OFL,text serif,wght,classic book face,Schibsted Grotesk; Geist,"literary, academic, heritage",play moods
+Big Shoulders Display,Google Fonts,OFL,display sans,wght,"condensed American-industrial, cinematic",Switzer; Geist; JetBrains Mono,"film, sport, events, Motomation titles",long headlines in lowercase
+Archivo,Google Fonts,OFL,display/text sans,wdth wght,grotesk with a wide width range,Newsreader; JetBrains Mono,"kinetic width effects, editorial, sport",when you need a soft tone
+Anybody,Google Fonts,OFL,display sans,wdth wght ital,extreme width axis from ultra-condensed to ultra-wide,Inter Tight (text); Space Mono,"Width Sprint, kinetic type, events",quiet moods
+Bricolage Grotesque,Google Fonts,OFL,display sans,opsz wdth wght,characterful grotesk with ink-trap quirks,Newsreader; Geist Mono,"neobrutalism, creative tools, indie products",luxury
+Familjen Grotesk,Google Fonts,OFL,text/display sans,wght,Scandinavian grotesk with distinct shapes,Newsreader; EB Garamond,"studios, editorial, organisations",play moods
+Hanken Grotesk,Google Fonts,OFL,text sans,wght,neutral geometric-humanist sans,Fraunces; Gloock; Cormorant Garamond,body text for serif-led sites,display identity
+Schibsted Grotesk,Google Fonts,OFL,text/display sans,wght,newsroom grotesk with sturdy forms,Newsreader; EB Garamond,"publications, Swiss style, organisations",soft moods
+Instrument Sans,Google Fonts,OFL,text/display sans,wdth wght,precise neo-grotesk with a width axis,Instrument Serif; Fraunces,"SaaS, studios, minimal",when you need warmth
+Onest,Google Fonts,OFL,text sans,wght,friendly open sans with Cyrillic,Young Serif; Bricolage Grotesque,"education, flat style, public services",luxury
+Syne,Google Fonts,OFL,display sans,wght,art-school display that widens with weight,Hanken Grotesk; Space Mono,"galleries, art, festivals",body text
+Unbounded,Google Fonts,OFL,display sans,wght,"wide rounded display, playful and loud",Onest; JetBrains Mono,"play moods, web3-free tech launches, events",quiet moods
+Geist,Google Fonts,OFL,text sans,wght,clean technical grotesk (by Vercel),Instrument Serif; Fraunces; Geist Mono,"dev tools, SaaS, body text",display identity on its own
+Geist Mono,Google Fonts,OFL,mono,wght,technical mono that pairs with Geist,Geist; Bricolage Grotesque,"labels, timecodes, code",long reading
+JetBrains Mono,Google Fonts,OFL,mono,wght,coding mono with tall x-height,Archivo; Big Shoulders Display,"console archetype, timecodes, captions",body text
+Martian Mono,Google Fonts,OFL,mono,wdth wght,wide-able mono with a strong voice,Syne; Unbounded,"technical brands with personality, index numbers",quiet moods
+Space Mono,Google Fonts,OFL,mono,none,retro-futurist mono,Syne; Anybody,"retro, editorial labels",overused as a display
+Climate Crisis,Google Fonts,OFL,display sans,YEAR,weight melts with a YEAR axis (1979-2019) showing ice loss,Hanken Grotesk,climate and data storytelling: the axis is the concept,any brief not about change over time
+Inter Tight,Google Fonts,OFL,text sans,wght,tight neutral sans for UI text,Anybody; Big Shoulders Display,UI text when chosen deliberately,display identity
+Anek Bangla,Google Fonts,OFL,bangla display/text,wdth wght,Bangla + Latin with a width axis,Hind Siliguri; Instrument Sans,"Bangla kinetic headlines, bilingual sites",when conjunct rendering is untested
+Hind Siliguri,Google Fonts,OFL,bangla text,none (5 weights),clear Bangla UI text,Anek Bangla; Hanken Grotesk,Bangla body text and UI,display identity
+Noto Serif Bengali,Google Fonts,OFL,bangla serif,wdth wght,bookish Bangla serif,Noto Sans Bengali; Newsreader,"Bangla long-form, heritage",small UI labels
+Satoshi,Fontshare,ITF Free Font License,text/display sans,wght,"modern geometric grotesk, crisp",Zodiak; Gambetta; Boska,"SaaS, portfolios, soft and minimal styles",when everyone else uses it: vary with pairings
+General Sans,Fontshare,ITF Free Font License,text sans,wght,soft modern grotesk,Bodoni Moda; Zodiak,"soft and neumorphic styles, wellness",brutalism
+Cabinet Grotesk,Fontshare,ITF Free Font License,display sans,wght,punchy grotesk with tight curves,Sentient; Satoshi,"neobrutalism, posters, launches",quiet luxury
+Clash Display,Fontshare,ITF Free Font License,display sans,wght,sharp contemporary display grotesk,Satoshi; Switzer,"studios, launches, play moods",body text
+Switzer,Fontshare,ITF Free Font License,text sans,wght,neutral Swiss-style grotesk,Fraunces; Big Shoulders Display; Bodoni Moda,"body text, Swiss style, minimal",display identity on its own
+Zodiak,Fontshare,ITF Free Font License,display/text serif,wght,contemporary high-contrast serif,Satoshi; General Sans,"dark luxe, editorial, fashion",tiny UI
+Gambetta,Fontshare,ITF Free Font License,text/display serif,wght,warm robust serif,Satoshi; Switzer,"organic, food, publishing",neobrutalism
+Boska,Fontshare,ITF Free Font License,display serif,wght,sharp contemporary serif with calligraphic tension,Satoshi; Switzer,"fashion, portfolios, editorial hooks",body text
+Sentient,Fontshare,ITF Free Font License,text serif,wght,modern reading serif,Cabinet Grotesk; Satoshi,"long-form, organisations",play display
+Panchang,Fontshare,ITF Free Font License,display sans,wght,ultra-wide display,Switzer,"events, sport, kinetic headlines",long lines
+Tanker,Fontshare,ITF Free Font License,display sans,none,ultra-heavy condensed poster face,Switzer; JetBrains Mono,"posters, events, brutalist hooks",anything quiet
+PP Editorial New,Paid foundry,Commercial (trial available),display serif,none (weights + italics),ultralight high-contrast editorial serif,PP Neue Montreal,"fashion, portfolios, luxury editorial",projects without a font budget
+PP Neue Montreal,Paid foundry,Commercial (trial available),text/display sans,none (weights),refined neo-grotesk,PP Editorial New,"studios, Swiss style",projects without a font budget
+ABC Diatype,Paid foundry,Commercial,text/display sans,wght (variable version),precise contemporary grotesk,ABC Diatype Mono,"studios, tech, Swiss style",projects without a font budget
+GT America,Paid foundry,Commercial,display/text sans,wdth wght,American gothic with extended widths,GT Super,"editorial, sport, culture",projects without a font budget

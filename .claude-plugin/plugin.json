@@ -1,0 +1,23 @@
+{
+  "name": "asfakulsiam-motomation-design",
+  "description": "Original, award-level, typography-led websites with motion as signature, up to scroll-as-film (Motomation). Thinking Sequence, collision engine, 5 motion tiers, delivery gate.",
+  "version": "2.0.0",
+  "author": {
+    "name": "asfakulsiam",
+    "url": "https://github.com/asfakulsiam"
+  },
+  "homepage": "https://github.com/asfakulsiam/asfakulsiam-motomation-design",
+  "repository": "https://github.com/asfakulsiam/asfakulsiam-motomation-design",
+  "license": "MIT",
+  "keywords": [
+    "design",
+    "frontend",
+    "motion",
+    "gsap",
+    "typography",
+    "anti-slop"
+  ],
+  "skills": [
+    "./skills/"
+  ]
+}
