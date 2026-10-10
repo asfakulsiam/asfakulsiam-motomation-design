@@ -1,60 +1,38 @@
-# Tier 5 — Motomation (Scroll-Scrubbed Cinematic Experience)
+# Tier 5 — Motomation
 
-The signature capability of this skill. The entire page becomes a high-end video that the user directs with the scroll wheel or touch. It should feel like watching a carefully directed After Effects sequence, except the user controls the timeline.
+**Definition**  
+Motomation is purposeful scroll-scrubbed motion that turns the page into a directed film. The scroll position acts as a playhead. Content is revealed, transformed, and sequenced with intention.
+
+## When to use
+- The experience is meant to feel cinematic
+- Storytelling is more important than pure utility
+- The brand personality benefits from expressive motion
+- There is time to implement proper fallbacks
 
 ## Core techniques
+- Scroll-scrubbed timelines (GSAP ScrollTrigger with `scrub`)
+- Pinned sections that hold the user while a sequence plays
+- Progressive storytelling (overview first → deeper content)
+- Coordinated typography + media + annotation
+- Optional WebGL / canvas layer for high-impact moments
 
-- Scroll-scrubbed image sequences (canvas or WebGL texture updates)
-- Pinned sections with long scrub timelines
-- ScrollTrigger or equivalent controlling progress of complex timelines
-- Optional: WebGL scenes whose camera, materials, or morph targets are driven by scroll progress
-- Careful orchestration of multiple layers (background, mid-ground, foreground, UI)
-
-## Philosophy
-
-- The scroll is the playhead.
-- Every frame should advance the story, emotion, or product understanding.
-- Silence and stillness are as important as motion. Not every pixel needs to move all the time.
-- The experience must still work (and look intentional) under prefers-reduced-motion — usually by jumping to key static frames or a simplified narrative.
-
-## Implementation principles
-
-1. **Progress is king**  
-   Map scroll progress (0 → 1) to animation progress. Use scrub so the user can scrub forward and backward.
-
-2. **Pin with purpose**  
-   Pin a section only while the cinematic sequence needs the full viewport. Release the pin when the sequence ends.
-
-3. **Asset strategy**  
-   - Image sequences: highly compressed, progressive loading, or video frames extracted and served as images.
-   - Prefer WebP / AVIF where possible.
-   - For 3D: prefer morph targets, camera paths, and material changes over heavy geometry animation.
-   - Preload critical frames; lazy-load the rest.
-
-4. **Layering**  
-   Keep UI (navigation, captions, CTAs) in the DOM above the canvas/WebGL layer so text remains sharp and selectable.
-
-5. **Performance**  
-   - Cap frame updates.
-   - Use requestAnimationFrame responsibly.
-   - Provide a low-power mode or static fallback on low-end devices.
-   - Always test on mobile; touch scroll must feel responsive.
-
-## Typical narrative structures
-
-- Product reveal: object rotates / transforms as the user scrolls, details appear at key progress points.
-- Story chapters: each pinned section tells one part of a larger narrative.
-- Spatial journey: camera flies through a space; content appears at specific locations.
-- Emotional arc: visual intensity, color, and motion density change across the scroll journey.
-
-## Restraint still applies
-
-Even at tier 5, every sequence must earn its place. Spectacle without narrative or emotional purpose fails the restraint gate. The best motomation experiences feel inevitable, not overloaded.
-
-## Reduced-motion fallback
-
-Provide a complete alternative experience: static key frames, short autoplay video (with controls), or a traditional long-scroll page that still communicates the same story. Never leave reduced-motion users with a broken or empty page.
+## Hard rules
+1. Progress is king — animation state must stay in sync with scroll position (including reverse scrolling).
+2. Pin with purpose — only pin when it clarifies a sequence.
+3. Content must remain accessible — never hide essential information exclusively inside canvas or animation.
+4. Always ship a reduced-motion and mobile fallback (usually a beautiful static poster or simplified sequence).
+5. Clean up all timelines, listeners, and GPU resources on unmount / route change.
+6. Prefer transform and opacity. Profile heavier effects.
 
 ## Signature test
+If the user can put down the mouse and the page still feels like a finished film, the Motomation is working.
 
-If the user can put down the mouse and the page still feels like a finished film, the motomation is working. If it feels like a collection of effects, go back to the thinking sequence and strengthen the concept.
+## Performance & accessibility
+- Lazy-load heavy assets
+- Pause offscreen rendering when possible
+- Honor `prefers-reduced-motion`
+- Test on real mobile devices
+- Never use Tier 5 only to look technically impressive
+
+## Relationship to lower tiers
+Tier 5 sits on top of solid Tier 1–3 foundations. Micro-interactions, entrance choreography, and page transitions still matter.
