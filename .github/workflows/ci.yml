@@ -4,19 +4,39 @@ on:
   pull_request:
 jobs:
   check:
+    strategy:
+      fail-fast: false
+      matrix: { node: [18, 20] }
+    name: check (Node ${{ matrix.node }})
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 20 }
+        with: { node-version: "${{ matrix.node }}" }
       - name: Lint repository, data, versions and dist
         run: node scripts/check-repo.mjs
+      - name: Smoke-test skill scripts
+        working-directory: skills/asfakulsiam-motomation-design
+        run: |
+          set -e
+          node --version
+          node scripts/collide.mjs > /dev/null                       # unseeded: real randomness (caught the Node 18 crypto bug)
+          node scripts/collide.mjs --seed 42 > /tmp/a.txt
+          node scripts/collide.mjs --seed 42 > /tmp/b.txt
+          cmp /tmp/a.txt /tmp/b.txt                                  # seeded runs are reproducible
+          node scripts/search.mjs motion "pinned scrub" > /dev/null
+          node scripts/contrast.mjs --palettes > /dev/null
+          cd "$(mktemp -d)" && node "$GITHUB_WORKSPACE/skills/asfakulsiam-motomation-design/scripts/memory.mjs" recent > /dev/null
   examples:
+    strategy:
+      fail-fast: false
+      matrix: { node: [18, 20] }
+    name: examples (Node ${{ matrix.node }})
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 20 }
+        with: { node-version: "${{ matrix.node }}" }
       - name: Type-check React examples (strict)
         run: |
           mkdir -p /tmp/tc && cp -r skills/asfakulsiam-motomation-design/examples /tmp/tc/ex && cd /tmp/tc
