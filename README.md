@@ -59,6 +59,28 @@ Motomation Design changes the thinking:
 
 ---
 
+## Results
+
+One blind benchmark so far ([full report](evals/results/2026-10-11-benchmark.md) · [summary](docs/benchmark-summary.md)). Five briefs were built twice by the same model (`claude_sonnet_5_5`), once without the skill and once with it. Two judges from other model families (GPT-5.4, Gemini 3.1 Pro) scored both against [`evals/rubric.md`](evals/rubric.md) without knowing which was which. Hard gates (contrast, keyboard, reduced motion, placeholders) come from Playwright + axe-core measurements.
+
+| Brief | Without skill | With skill | Δ | Note |
+|---|---|---|---|---|
+| Studio portfolio | 81.5 | 0.0 | -81.5 | skill version failed the contrast gate (captions at 4.45:1) |
+| Boutique hotel | 88.5 | 54.5 | -34.0 | skill version broke on mobile and flipped prices through wrong digits |
+| E-commerce product | 0.0 | 88.0 | +88.0 | baseline failed the contrast gate (label at 4.39:1) |
+| SaaS product | 44.5 | 95.5 | +51.0 |  |
+| Public-interest site | 60.0 | 92.5 | +32.5 |  |
+
+**The skill won 3 of 5 briefs and lost 2.** The mean gated score went from 54.9 to 66.1. The largest gains were on Originality and Typography. The losses were craft failures the skill's own delivery gate should have caught: contrast, mobile overflow, and an animation showing wrong prices. The release gate in `evals/README.md` ("higher on every brief") is **not met**.
+
+<p>
+<img src="docs/benchmark-images/saas-before-after.webp" alt="SaaS brief: a generic template without the skill, a terminal-as-interface page with the skill" width="100%"><br>
+<img src="docs/benchmark-images/public-before-after.webp" alt="Public-interest brief: a conventional layout without the skill, a bilingual manifesto with the skill" width="100%"><br>
+<img src="docs/benchmark-images/hotel-before-after.webp" alt="Hotel brief, where the skill lost: a calm accurate site without the skill, a door split that breaks the hotel name with it" width="100%">
+</p>
+
+Not verified yet: n = 1 per cell, one generator model, raw API calls rather than an agent running the skill's scripts, motion judged from stills, and no variety test run. See the report's "Failures" and "Not verified" sections.
+
 ## Install
 
 ### Coding agents (recommended)
@@ -271,7 +293,7 @@ No. It picks the lowest tier that delivers the concept. A government service get
 Yes. Use `dist/motomation-design.md`. The agent picks from the included data tables instead of running scripts.
 
 **Will two sites made with it look the same?**
-It actively detects and reduces repetition, but it can't guarantee two sites will never look alike. What exists: the collision engine never repeats an archetype or signature inside one run and reports when a pool runs out; `memory.mjs check` flags archetypes, signatures, fonts, palettes and tiers already used in this project's last five runs; and the Thinking Sequence's anti-sameness step compares structure, type, colour, motion, signature and imagery against the obvious version. Limits: memory only sees the project it lives in, and the no-terminal edition relies on the agent following the rules. The variety eval in `evals/` has not been run and published yet.
+It actively detects and reduces repetition, but it can't guarantee two sites will never look alike. What exists: the collision engine never repeats an archetype or signature inside one run and reports when a pool runs out; `memory.mjs check` flags archetypes, signatures, fonts, palettes and tiers already used in this project's last five runs; and the Thinking Sequence's anti-sameness step compares structure, type, colour, motion, signature and imagery against the obvious version. Limits: memory only sees the project it lives in, and the no-terminal edition relies on the agent following the rules. The 5-brief benchmark has been run ([results](evals/results/2026-10-11-benchmark.md)); the 3-run variety test in `evals/` has not.
 
 **Which stack does it target?**
 It detects your stack, and defaults to Next.js App Router + Tailwind. Adapters cover React + Vite, plain HTML and Astro.
