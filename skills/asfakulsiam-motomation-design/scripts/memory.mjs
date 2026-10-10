@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Project memory: remembers what this project already used, so the next design differs.
+// Project memory: remembers what this project already used, so the next design can avoid repeating it.
 // Stored in <project>/.motomation/log.json (the current working directory).
 // Usage:
 //   node scripts/memory.mjs log --archetype ledger --mutation invert-axis --signature letter-relay --fonts "Fraunces/Switzer" --palette "Darkroom" --tier 5 --page home

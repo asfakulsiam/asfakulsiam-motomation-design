@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// The collision engine: real random creative constraints so no two designs start the same way.
+// The collision engine: random creative constraints, so designs don't all start from the model's most likely choice.
 // Usage: node scripts/collide.mjs [--n 3 | --count 3] [--spread] [--category hotel] [--seed 42] [--exclude-recent] [--json]
 // Diversity: draws are taken WITHOUT replacement. Archetypes and signature seeds never repeat inside one run;
 // mutations and collision worlds (with --spread) don't repeat either until their pool runs out, and the output

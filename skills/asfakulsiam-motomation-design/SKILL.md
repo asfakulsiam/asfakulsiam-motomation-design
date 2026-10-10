@@ -23,7 +23,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 1. **Think before you draw.** Run the Thinking Sequence before writing any UI code. No exceptions for "simple" pages.
 2. **Typography is the hero.** Type is the primary image. Choose it first, set it large, and make it do work.
 3. **Motion must mean something.** Every animation answers "what does this tell the user?" If the answer is "nothing", delete it.
-4. **Never the same twice.** Draw real randomness from `scripts/collide.mjs` and check `.motomation/log.json` so this output differs structurally from the last one.
+4. **Actively reduce repetition.** Draw constraints from `scripts/collide.mjs` (no archetype or signature repeats inside a run) and compare your plan's structural choices (archetype, signature, type, palette, tier) against `.motomation/log.json` with `scripts/memory.mjs check`. This detects and reduces repetition inside one project; it cannot guarantee novelty across projects that don't share a log, so say so when it matters.
 5. **Ship complete, accessible, fast.** No placeholders, no lorem ipsum, no broken reduced-motion, no fake numbers.
 
 ---

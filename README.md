@@ -35,7 +35,7 @@ Motomation Design changes the thinking:
 | **Starts with** | A layout template | A **tension** in the brief, resolved into a **concept** |
 | **Structure** | Hero → logos → features → pricing | One of 20 **archetypes** (Ledger, Film Reel, Letter, Atlas…), deliberately **mutated** |
 | **Ideas** | The most likely next token | A **collision** with an unrelated world, drawn by a real random engine |
-| **Memory** | None. It repeats itself | A project log that forces the **next design to differ** |
+| **Memory** | None. It repeats itself | A project log the agent checks, so the next design **actively avoids** recent structural choices |
 | **Type** | Inter at 48px | Type is the image, chosen with a reason and set at 8–28vw |
 | **Motion** | Fade-up on everything | Five tiers, four questions, reduced motion designed in, and **Motomation** at the top |
 | **Delivery** | "Here's your page!" | A six-axis critique score, a 25-point AI-default scan, and a handoff note |
@@ -45,7 +45,7 @@ Motomation Design changes the thinking:
 ## What's inside
 
 - **The Thinking Sequence:** seven steps that make an agent think like a designer: tension → concept → archetype + mutation → forced collision → signature move → anti-sameness check → restraint gate.
-- **Mad Artist Mode:** ten invention techniques plus a collision engine with **real randomness** (`collide.mjs`), so an agent can produce patterns it has never produced before.
+- **Mad Artist Mode:** ten invention techniques plus a collision engine (`collide.mjs`) that draws constraints with a cryptographic random number generator instead of the model's most likely choice, without repeats inside a run. It pushes ideas away from the default; it can't promise an idea nobody has had.
 - **Five motion tiers:** CSS → GSAP/ScrollTrigger/SplitText/Lenis → View Transitions, Flip, Lottie, Rive → WebGL, shaders, WebGPU → **Motomation**.
 - **Motomation (Tier 5):** scroll-as-film. Storyboards with timecodes, image-sequence, video-scrub and DOM-timeline techniques, ffmpeg pipelines, frame budgets, and a designed reduced-motion storyboard.
 - **22 signature moves**, each with idea, reason, code, the detail that matters, an off-switch, and a **paste-ready prompt** for any AI tool.
@@ -271,7 +271,7 @@ No. It picks the lowest tier that delivers the concept. A government service get
 Yes. Use `dist/motomation-design.md`. The agent picks from the included data tables instead of running scripts.
 
 **Will two sites made with it look the same?**
-That's what it's built to prevent. The collision engine draws real random constraints, and the project memory blocks recently used archetypes and signatures. The variety eval checks this before every release.
+It actively detects and reduces repetition, but it can't guarantee two sites will never look alike. What exists: the collision engine never repeats an archetype or signature inside one run and reports when a pool runs out; `memory.mjs check` flags archetypes, signatures, fonts, palettes and tiers already used in this project's last five runs; and the Thinking Sequence's anti-sameness step compares structure, type, colour, motion, signature and imagery against the obvious version. Limits: memory only sees the project it lives in, and the no-terminal edition relies on the agent following the rules. The variety eval in `evals/` has not been run and published yet.
 
 **Which stack does it target?**
 It detects your stack, and defaults to Next.js App Router + Tailwind. Adapters cover React + Vite, plain HTML and Astro.
