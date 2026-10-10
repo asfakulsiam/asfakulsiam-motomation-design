@@ -1070,7 +1070,7 @@ Rules for the storyboard:
 - **3–6 scenes per chapter.** More than 6 and people lose the thread.
 - **Each scene has one idea** and at most one line of display type.
 - **Hold frames:** leave 10–15% of the scroll distance in each scene where nothing moves, so people can read.
-- **Total length:** 300–600% of the viewport height per chapter. Over 800% feels like a trap.
+- **Total length:** 300–600% of the viewport height per chapter on desktop, **300% or less on phones** (`craft/mobile-motion-matrix.md`). Over 800% feels like a trap.
 - **Never hijack:** the scrollbar, keyboard, and screen reader still work; the user can always leave.
 
 ---
@@ -1090,48 +1090,81 @@ Combine them: a canvas sequence (B) for the product, with DOM type (A) layered a
 
 ### 3. The master pattern (A + B)
 
+This is the vanilla version of `examples/motomation/image-sequence-film.tsx`; the logic is line-for-line the same.
+Markup: `<section class="film">` holds `.film__static` (the storyboard: `<figure>`s with a `[data-jump]` link per title)
+and `.film__stage` (`aria-hidden="true"`: a `<canvas>`, one `[data-scene]` caption per scene, the timecode rail).
+
 ```js
 gsap.registerPlugin(ScrollTrigger);
+const scenes = [{ from: 0, to: 0.15 }, { from: 0.15, to: 0.4 }, { from: 0.4, to: 0.7 }, { from: 0.7, to: 1 }]; // = MOTION.md timecodes
+const root = document.querySelector(".film");
 const mm = gsap.matchMedia();
 
 mm.add({ motion: "(prefers-reduced-motion: no-preference)", small: "(max-width: 767px)" }, (ctx) => {
   const { motion, small } = ctx.conditions;
-  if (!motion) return;                              // static storyboard frames are shown by CSS
+  if (!motion || navigator.connection?.saveData) return;   // the static storyboard is already designed
+  root.classList.add("film-on");                            // CSS: storyboard visually hidden (still readable), stage shown
 
-  const canvas = document.querySelector(".film canvas");
-  const c = canvas.getContext("2d");
-  const count = small ? 90 : 180;                   // fewer frames on phones
+  const canvas = root.querySelector(".film__stage canvas"), c = canvas.getContext("2d");
+  const count = small ? 90 : 180;                           // fewer frames on phones
   const src = (i) => `/film/${small ? "m" : "d"}/f_${String(i + 1).padStart(4, "0")}.webp`;
-  const frames = []; const state = { frame: 0 };
+  const images = []; const state = { frame: 0 }; let last = -1;
 
-  const draw = () => {
-    const img = frames[Math.round(state.frame)];
-    if (!img || !img.complete) return;
-    const dpr = Math.min(devicePixelRatio, 2);
-    canvas.width = canvas.clientWidth * dpr; canvas.height = canvas.clientHeight * dpr;
-    const s = Math.max(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight); // cover
-    const w = img.naturalWidth * s, h = img.naturalHeight * s;
-    c.drawImage(img, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
+  const nearestLoaded = (i) => {                            // draw the closest frame that has arrived
+    for (let d = 0; d < count; d++) {
+      if (images[i - d]?.complete && images[i - d].naturalWidth) return images[i - d];
+      if (images[i + d]?.complete && images[i + d].naturalWidth) return images[i + d];
+    }
+  };
+  const draw = (force = false) => {
+    const i = Math.round(state.frame);
+    if (i === last && !force) return;                       // same frame: skip the work
+    const img = nearestLoaded(i); if (!img) return;
+    last = i;
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
+    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; } // resize only when the size changes
+    const s = Math.max(w / img.naturalWidth, h / img.naturalHeight);                         // cover
+    c.drawImage(img, (w - img.naturalWidth * s) / 2, (h - img.naturalHeight * s) / 2, img.naturalWidth * s, img.naturalHeight * s);
   };
 
-  for (let i = 0; i < count; i++) { const img = new Image(); img.decoding = "async"; img.src = src(i); frames.push(img); }
-  frames[0].onload = draw;
+  // Loading: see "Loading strategy" in section 5
+  const loadFrame = (i) => { const img = new Image(); img.decoding = "async"; img.src = src(i);
+    img.onload = () => i === Math.round(state.frame) && draw(true); images[i] = img; };
+  for (let i = 0; i < Math.min(10, count); i++) loadFrame(i);
+  (window.requestIdleCallback || ((cb) => setTimeout(cb, 200)))(() => { for (let i = 10; i < count; i++) loadFrame(i); });
 
+  const stage = root.querySelector(".film__stage");
+  const rail = root.querySelector("[data-rail]"), code = root.querySelector("[data-code]");
   const tl = gsap.timeline({
     defaults: { ease: "none" },
-    scrollTrigger: { trigger: ".film", start: "top top", end: "+=500%", scrub: 0.6, pin: true, anticipatePin: 1 },
+    scrollTrigger: {
+      trigger: root, start: "top top", end: small ? "+=300%" : "+=500%",   // phones: 300% max (craft/mobile-motion-matrix.md)
+      scrub: 0.6, pin: stage, anticipatePin: 1,
+      onUpdate: (self) => { rail.style.transform = `scaleX(${self.progress})`; code.textContent = tc(self.progress * 24); },
+    },
+  });
+  tl.to(state, { frame: count - 1, duration: 1, onUpdate: () => draw() }, 0);            // the playhead
+  scenes.forEach((s, i) => {                                                               // type rides the film
+    const sel = `.film [data-scene="${i}"]`, io = Math.min(0.06, (s.to - s.from) * 0.25); // in/out; the middle is the hold
+    tl.fromTo(sel, { autoAlpha: 0, yPercent: 30 }, { autoAlpha: 1, yPercent: 0, duration: io }, s.from);
+    if (i < scenes.length - 1) tl.to(sel, { autoAlpha: 0, yPercent: -30, duration: io }, s.to - io);
   });
 
-  tl.to(state, { frame: count - 1, duration: 1, onUpdate: draw }, 0)          // the playhead
-    .from(".film .s1", { yPercent: 100, opacity: 0, duration: 0.08 }, 0.02)   // scene 1 type
-    .to(".film .s1",   { yPercent: -100, opacity: 0, duration: 0.06 }, 0.15)
-    .from(".film .s2", { yPercent: 100, opacity: 0, duration: 0.08 }, 0.18)
-    .to(".film .s2",   { yPercent: -100, opacity: 0, duration: 0.06 }, 0.38);
-    // …positions are fractions of the whole film: they ARE the storyboard timecodes
+  // Keyboard + screen readers: focusing a storyboard link scrubs the film to that scene
+  const st = tl.scrollTrigger, jumps = [...root.querySelectorAll("[data-jump]")];
+  const jump = (e) => { const s = scenes[+e.currentTarget.dataset.jump];
+    requestAnimationFrame(() => scrollTo({ top: st.start + (st.end - st.start) * (s.from + s.to) / 2, behavior: "instant" })); };
+  const click = (e) => { e.preventDefault(); jump(e); };
+  jumps.forEach((a) => { a.addEventListener("focus", jump); a.addEventListener("click", click); });
 
-  addEventListener("resize", draw);
-  return () => removeEventListener("resize", draw);
+  const onResize = () => draw(true);
+  addEventListener("resize", onResize);
+  return () => { removeEventListener("resize", onResize); root.classList.remove("film-on");
+    jumps.forEach((a) => { a.removeEventListener("focus", jump); a.removeEventListener("click", click); }); };
 });
+
+function tc(sec) { return [Math.floor(sec / 60), Math.floor(sec) % 60, Math.floor((sec % 1) * 24)].map((n) => String(n).padStart(2, "0")).join(":"); }
 ```
 
 Key idea: **the timeline's duration is 1**, so every position (`0.15`, `0.38`) is literally the timecode from `MOTION.md`. The storyboard and the code use the same numbers.
@@ -1185,17 +1218,21 @@ Budgets: desktop ≤ 180 frames and ≤ 8MB total; mobile ≤ 90 frames and ≤ 
 | Condition | Behaviour |
 |---|---|
 | `prefers-reduced-motion: reduce` | No pin, no scrub. Show 3–4 key frames as static images with their type, stacked as a normal section |
-| Small screens | Fewer frames, shorter `end` (300% max), simpler type moves |
+| Small screens | Fewer frames, `end: "+=300%"` (the maximum), simpler type moves |
 | Slow network / Save-Data | Load the mobile sequence or show the static storyboard frames |
 | No JS | The static storyboard frames are in the HTML by default |
 
 ```css
+/* Default (no JS, reduced motion, Save-Data): the storyboard is a normal designed section */
 .film__static { display: grid; gap: 4rem; }
 .film__stage  { display: none; }
-@media (prefers-reduced-motion: no-preference) {
-  .js .film__static { display: none; }
-  .js .film__stage  { display: block; height: 100vh; }
-}
+/* Film running: the storyboard is visually hidden but never display:none, so screen readers keep the narrative */
+.film-on .film__static figure { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.film-on .film__static figure:focus-within { position: fixed; left: 5vw; bottom: 12vh; z-index: 10; width: auto; height: auto;
+  max-width: min(40ch, 90vw); overflow: visible; clip-path: none; white-space: normal; }       /* focused scene = visible caption card */
+.film-on .film__static figure:focus-within :is(img, canvas) { display: none; }
+.film-on .film:has(figure:focus-within) [data-scene] { opacity: 0 !important; }              /* no double caption */
+.film-on .film__stage { display: block; height: 100svh; }
 ```
 
 ---
