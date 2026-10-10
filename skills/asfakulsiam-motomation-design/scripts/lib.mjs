@@ -2,7 +2,6 @@
 import { readFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { webcrypto } from "node:crypto"; // explicit import: globalThis.crypto is not exposed in Node 18 ES modules
 
 export const SKILL_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 export const DATA = join(SKILL_ROOT, "data");
@@ -55,7 +54,7 @@ export function args(argv = process.argv.slice(2)) {
 export function rng(seed) {
   if (seed === undefined || seed === true) {
     const buf = new Uint32Array(1);
-    return () => (webcrypto.getRandomValues(buf), buf[0] / 2 ** 32);
+    return () => (crypto.getRandomValues(buf), buf[0] / 2 ** 32);
   }
   let s = typeof seed === "number" ? seed : [...String(seed)].reduce((h, ch) => Math.imul(h ^ ch.charCodeAt(0), 2654435761), 1);
   return () => {
