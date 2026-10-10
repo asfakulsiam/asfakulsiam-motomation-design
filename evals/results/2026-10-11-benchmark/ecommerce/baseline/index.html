@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mati — Wood-fired ceramics from Rajshahi</title>
+<meta name="description" content="Mati is a two-person ceramics studio in Rajshahi making wood-fired cups, plates and vases in small batches.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300;1,9..144,400&family=Hind+Siliguri:wght@400;500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--clay:#b4532a;--ash:#e9e1d3;--bone:#f5f0e6;--char:#1f1a16;--soot:#3a312a;--ember:#e0803a;--mute:#6b5f54}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans','Hind Siliguri',sans-serif;background:var(--bone);color:var(--char);line-height:1.6;font-size:17px}
+h1,h2,h3,.serif{font-family:'Fraunces',serif;font-weight:300;line-height:1.05}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--clay);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:0;background:var(--char);color:#fff;padding:.7rem 1rem;z-index:100}
+.skip:focus{left:0}
+header.bar{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:.9rem clamp(1rem,4vw,3rem);background:rgba(245,240,230,.92);backdrop-filter:blur(8px);border-bottom:1px solid #d9cfbd}
+.logo{font-family:Fraunces,serif;font-size:1.7rem;text-decoration:none;letter-spacing:.02em}
+nav{display:flex;gap:clamp(.8rem,3vw,2rem);align-items:center;font-size:.95rem}
+nav a{text-decoration:none}
+nav a:hover{color:var(--clay)}
+.nav-links{display:flex;gap:clamp(.8rem,3vw,2rem)}
+@media(max-width:560px){.nav-links a:nth-child(n+2){display:none}}
+.cartbtn{border:1.5px solid var(--char);background:none;border-radius:99px;padding:.4rem 1rem;font:inherit;cursor:pointer;display:flex;gap:.5rem;align-items:center}
+.cartbtn:hover{background:var(--char);color:var(--bone)}
+.cartbtn b{background:var(--clay);color:#fff;border-radius:99px;min-width:1.5rem;height:1.5rem;display:grid;place-items:center;font-size:.8rem}
+section{padding:clamp(3rem,8vw,7rem) clamp(1rem,4vw,3rem)}
+.wrap{max-width:1240px;margin:auto}
+/* hero product */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(1.5rem,5vw,5rem);align-items:center;padding-top:clamp(2rem,5vw,4rem)}
+@media(max-width:820px){.hero{grid-template-columns:1fr}}
+.stage{aspect-ratio:1/1.05;background:radial-gradient(circle at 50% 40%,#f0d9b8,#d9b48a 60%,#b98a5e);border-radius:48% 52% 46% 54%/ 40% 44% 56% 60%;display:grid;place-items:center;position:relative;overflow:hidden}
+.stage svg{width:78%;height:auto;filter:drop-shadow(0 25px 25px rgba(50,25,10,.35))}
+.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.75rem;color:var(--clay);font-weight:700}
+h1{font-size:clamp(3rem,7.5vw,6.5rem);margin:.6rem 0 1rem}
+h1 em{color:var(--clay)}
+.price{font-family:Fraunces,serif;font-size:2rem;margin:1rem 0}
+.price small{font:400 .9rem DM Sans;color:var(--mute);margin-left:.5rem}
+.lead{max-width:46ch;color:var(--soot)}
+.facts{list-style:none;padding:0;margin:1.2rem 0;display:grid;gap:.3rem;font-size:.95rem;color:var(--soot)}
+.facts li::before{content:"— ";color:var(--clay)}
+.buy{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;margin-top:1.4rem}
+.qty{display:flex;border:1.5px solid var(--char);border-radius:99px}
+.qty button{width:44px;height:48px;border:0;background:none;font-size:1.3rem;cursor:pointer;border-radius:99px}
+.qty button:hover{background:var(--ash)}
+.qty output{min-width:2rem;display:grid;place-items:center;font-weight:500}
+.btn{background:var(--clay);color:#fff;border:0;border-radius:99px;padding:.9rem 2rem;font:700 1rem 'DM Sans';cursor:pointer;min-height:48px;transition:background .2s,transform .2s}
+.btn:hover{background:var(--char)}
+.btn:active{transform:scale(.97)}
+.fire{margin-top:1.4rem;padding:1rem 1.2rem;background:var(--char);color:var(--bone);border-radius:14px;display:flex;gap:.8rem;align-items:center;font-size:.95rem}
+.fire i{width:10px;height:10px;border-radius:50%;background:var(--ember);box-shadow:0 0 12px var(--ember);flex:none;animation:p 2s infinite}
+@keyframes p{50%{opacity:.35}}
+/* story */
+.story{background:var(--char);color:var(--bone)}
+.story h2{font-size:clamp(2.2rem,5vw,4.2rem);max-width:16ch}
+.story h2 em{color:var(--ember)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,3vw,2.5rem);margin-top:3.5rem}
+@media(max-width:760px){.steps{grid-template-columns:1fr}}
+.step{border-top:1px solid #5a4d42;padding-top:1.2rem}
+.step .n{font-family:Fraunces,serif;font-size:clamp(4rem,8vw,7rem);color:var(--ember);line-height:1;font-weight:300}
+.step .u{text-transform:uppercase;letter-spacing:.15em;font-size:.8rem;color:#bfb3a3}
+.step h3{font-size:1.6rem;margin:.6rem 0 .4rem}
+.step p{color:#cfc4b4;font-size:.98rem}
+.bar2{margin-top:3rem;height:10px;border-radius:9px;display:flex;overflow:hidden}
+.bar2 span{display:block;height:100%}
+.legend{display:flex;justify-content:space-between;font-size:.75rem;color:#bfb3a3;margin-top:.5rem;gap:1rem}
+/* shop */
+.shophead{display:flex;justify-content:space-between;align-items:end;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.shophead h2{font-size:clamp(2.2rem,5vw,3.8rem)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2.5vw,2rem)}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}}
+.card{display:flex;flex-direction:column}
+.card .pic{aspect-ratio:1;background:var(--ash);border-radius:18px;display:grid;place-items:center;overflow:hidden;transition:background .3s}
+.card:hover .pic{background:#dfd2bd}
+.card .pic svg{width:66%;transition:transform .5s}
+.card:hover .pic svg{transform:translateY(-6px) rotate(-2deg)}
+.card:nth-child(even) .pic{border-radius:60px 18px 60px 18px}
+.card h3{font-size:1.4rem;margin-top:.9rem;font-weight:400}
+.card .row{display:flex;justify-content:space-between;align-items:center;margin-top:.3rem}
+.card .row span{font-family:Fraunces,serif;font-size:1.2rem}
+.add{border:1.5px solid var(--char);background:none;border-radius:99px;padding:.5rem 1.1rem;font:500 .9rem 'DM Sans';cursor:pointer;min-height:44px}
+.add:hover,.add.done{background:var(--char);color:var(--bone)}
+/* info */
+.info{background:var(--ash)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,5vw,5rem)}
+@media(max-width:760px){.cols{grid-template-columns:1fr}}
+.info h2{font-size:clamp(1.8rem,3.5vw,2.6rem);margin-bottom:.8rem}
+.info p{max-width:44ch;color:var(--soot)}
+.big{font-family:Fraunces,serif;font-size:1.5rem;margin:.5rem 0}
+footer{padding:2.5rem clamp(1rem,4vw,3rem);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.9rem;color:var(--mute)}
+/* cart drawer */
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:var(--bone);z-index:80;transform:translateX(100%);transition:transform .35s;padding:1.5rem;display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,.2);visibility:hidden}
+.drawer.open{transform:none;visibility:visible}
+.drawer header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.drawer h2{font-size:2rem}
+.x{border:0;background:none;font-size:2rem;cursor:pointer;width:44px;height:44px}
+.items{flex:1;overflow:auto;list-style:none;padding:0}
+.items li{display:flex;justify-content:space-between;gap:1rem;padding:.8rem 0;border-bottom:1px solid #d9cfbd;align-items:center}
+.items small{color:var(--mute);display:block}
+.rm{border:0;background:none;color:var(--clay);cursor:pointer;text-decoration:underline;font:inherit;min-height:44px}
+.sum{padding-top:1rem;display:grid;gap:.3rem}
+.sum div{display:flex;justify-content:space-between}
+.sum .t{font-family:Fraunces,serif;font-size:1.5rem;border-top:1px solid var(--char);padding-top:.5rem;margin-top:.3rem}
+.scrim{position:fixed;inset:0;background:rgba(20,12,8,.5);z-index:70;opacity:0;pointer-events:none;transition:opacity .3s}
+.scrim.on{opacity:1;pointer-events:auto}
+.note{font-size:.85rem;color:var(--mute);margin-top:.6rem}
+.rv{opacity:1}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#shop">Skip to shop</a>
+<header class="bar">
+<a class="logo" href="#top" aria-label="Mati home">Mati</a>
+<nav aria-label="Main">
+<span class="nav-links"><a href="#firing">The firing</a><a href="#shop">Shop</a><a href="#info">Shipping</a></span>
+<button class="cartbtn" id="open" aria-label="Open cart, 0 items">Cart <b id="count" aria-hidden="true">0</b></button>
+</nav>
+</header>
+
+<main id="top">
+<section class="hero wrap" aria-labelledby="h1">
+<div class="stage" aria-hidden="true">
+<svg viewBox="0 0 300 300"><defs>
+<linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#6e4a30"/><stop offset=".45" stop-color="#b57a45"/><stop offset="1" stop-color="#4a2f1d"/></linearGradient>
+<radialGradient id="fl" cx=".3" cy=".2" r=".8"><stop offset="0" stop-color="#e6a35a" stop-opacity=".9"/><stop offset="1" stop-color="#e6a35a" stop-opacity="0"/></radialGradient>
+<clipPath id="cc"><path d="M60 70h180c0 70-10 130-45 160-10 8-20 10-45 10s-35-2-45-10C70 200 60 140 60 70z"/></clipPath></defs>
+<ellipse cx="150" cy="262" rx="85" ry="10" fill="#000" opacity=".15"/>
+<path d="M60 70h180c0 70-10 130-45 160-10 8-20 10-45 10s-35-2-45-10C70 200 60 140 60 70z" fill="url(#g1)"/>
+<g clip-path="url(#cc)"><circle cx="100" cy="90" r="70" fill="url(#fl)"/><path d="M60 120c50 20 90-10 180 10v30c-80-20-130 20-180-5z" fill="#d9c9a8" opacity=".35"/><circle cx="200" cy="190" r="26" fill="#2c1a10" opacity=".35"/></g>
+<ellipse cx="150" cy="70" rx="90" ry="14" fill="#3a2414"/><ellipse cx="150" cy="70" rx="80" ry="10" fill="#d9c9a8" opacity=".7"/>
+</svg>
+</div>
+<div>
+<p class="eyebrow">Wood-fired stoneware · Rajshahi</p>
+<h1 id="h1">The <em>Firing</em> Cup</h1>
+<p class="lead">250 ml, wood-fired stoneware with an ash glaze. Each one is marked differently by the flame, so no two are the same.</p>
+<p class="price">৳1,200 <small>each</small></p>
+<ul class="facts"><li>250 ml capacity</li><li>Dishwasher safe, not for the microwave</li><li>Ships in 3–5 days inside Bangladesh</li></ul>
+<div class="buy">
+<div class="qty" role="group" aria-label="Quantity"><button id="minus" aria-label="Decrease quantity">−</button><output id="q" aria-live="polite">1</output><button id="plus" aria-label="Increase quantity">+</button></div>
+<button class="btn" id="addMain">Add to cart</button>
+</div>
+<div class="fire"><i></i><span>Next firing: <strong>18 November</strong> · 32 pieces</span></div>
+</div>
+</section>
+
+<section class="story" id="firing" aria-labelledby="sh">
+<div class="wrap">
+<p class="eyebrow" style="color:var(--ember)">The firing story</p>
+<h2 id="sh" style="margin-top:.8rem">Forty days is not the point. <em>Fire</em> is.</h2>
+<div class="steps">
+<div class="step"><div class="n">3</div><div class="u">days</div><h3>Stacking</h3><p>Rina and Sohel stack the kiln by hand, piece by piece, leaving paths for the flame.</p></div>
+<div class="step"><div class="n">36</div><div class="u">hours</div><h3>Firing</h3><p>Mango wood feeds the fire through the whole firing. Ash settles on the pots and becomes glaze.</p></div>
+<div class="step"><div class="n">4</div><div class="u">days</div><h3>Cooling</h3><p>The kiln cools slowly before it is opened. Then we see what the flame has made.</p></div>
+</div>
+<div class="bar2" role="img" aria-label="Proportion of time: 3 days stacking, 36 hours firing, 4 days cooling"><span style="flex:3;background:#8a6a4c"></span><span style="flex:1.5;background:var(--ember)"></span><span style="flex:4;background:#5a4d42"></span></div>
+<div class="legend"><span>Stacking</span><span>Firing</span><span>Cooling</span></div>
+<p class="note" style="color:#bfb3a3;margin-top:2rem">Small batches of 20–40 pieces per firing.</p>
+</div>
+</section>
+
+<section id="shop" aria-labelledby="sp">
+<div class="wrap">
+<div class="shophead"><h2 id="sp">Everything in the kiln</h2><p class="note">Free shipping over ৳5,000</p></div>
+<div class="grid" id="grid"></div>
+</div>
+</section>
+
+<section class="info" id="info">
+<div class="wrap cols">
+<div><h2>Shipping</h2><p class="big">3–5 days inside Bangladesh</p><p>৳150 flat rate. Free on orders over ৳5,000.</p></div>
+<div><h2>Care</h2><p class="big">Dishwasher safe</p><p>Not for the microwave.</p></div>
+</div>
+</section>
+</main>
+<footer><span class="serif" style="font-size:1.3rem;color:var(--char)">Mati</span><span>Rina &amp; Sohel · Rajshahi, Bangladesh</span></footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Cart" role="dialog" aria-modal="true">
+<header><h2>Your cart</h2><button class="x" id="close" aria-label="Close cart">×</button></header>
+<ul class="items" id="items"></ul>
+<div class="sum" id="sum"></div>
+<p class="note">Demo cart: there is no checkout yet.</p>
+</aside>
+
+<script>
+const P=[
+{id:'cup',n:'The Firing Cup',p:1200,s:'cup'},
+{id:'plate',n:'Morning Plate',p:1800,s:'plate'},
+{id:'vase',n:'Tall Vase',p:6500,s:'vase'},
+{id:'jug',n:'Pour Jug',p:3200,s:'jug'},
+{id:'sbowl',n:'Small Bowl',p:800,s:'sbowl'},
+{id:'rbowl',n:'Rice Bowl',p:1400,s:'rbowl'}];
+const C='#a8683a',D='#5b3a22';
+const S={
+cup:`<path d="M70 60h100c0 50-6 90-28 108-6 5-14 6-22 6s-16-1-22-6C76 150 70 110 70 60z" fill="${C}"/><ellipse cx="120" cy="60" rx="50" ry="8" fill="${D}"/>`,
+plate:`<ellipse cx="120" cy="130" rx="100" ry="30" fill="${C}"/><ellipse cx="120" cy="128" rx="70" ry="18" fill="${D}" opacity=".5"/>`,
+vase:`<path d="M105 20h30v30c0 14 40 30 40 80 0 40-30 60-55 60s-55-20-55-60c0-50 40-66 40-80z" fill="${C}"/><ellipse cx="120" cy="20" rx="15" ry="4" fill="${D}"/>`,
+jug:`<path d="M65 50h90c4 40 8 80-14 110-5 7-15 10-31 10s-26-3-31-10C57 130 61 90 65 50z" fill="${C}"/><path d="M155 70c35-5 35 55 0 60" stroke="${C}" stroke-width="12" fill="none"/><ellipse cx="110" cy="50" rx="45" ry="7" fill="${D}"/>`,
+sbowl:`<path d="M50 90h140c0 40-25 70-70 70s-70-30-70-70z" fill="${C}"/><ellipse cx="120" cy="90" rx="70" ry="10" fill="${D}"/>`,
+rbowl:`<path d="M30 80h180c0 55-35 90-90 90s-90-35-90-90z" fill="${C}"/><ellipse cx="120" cy="80" rx="90" ry="12" fill="${D}"/><path d="M80 170h80v8H80z" fill="${D}"/>`};
+const svg=k=>`<svg viewBox="0 0 240 200" aria-hidden="true">${S[k]}</svg>`;
+const fmt=n=>'৳'+n.toLocaleString('en-IN');
+const cart={};
+const grid=document.getElementById('grid');
+P.forEach(p=>{const d=document.createElement('article');d.className='card';
+d.innerHTML=`<div class="pic">${svg(p.s)}</div><h3>${p.n}</h3><div class="row"><span>${fmt(p.p)}</span><button class="add" data-id="${p.id}" aria-label="Add ${p.n} to cart">Add to cart</button></div>`;grid.appendChild(d)});
+const drawer=document.getElementById('drawer'),scrim=document.getElementById('scrim'),openB=document.getElementById('open');
+function render(){
+ const ids=Object.keys(cart);let n=0,sub=0;
+ const ul=document.getElementById('items');ul.innerHTML='';
+ ids.forEach(id=>{const p=P.find(x=>x.id===id),q=cart[id];n+=q;sub+=q*p.p;
+  const li=document.createElement('li');
+  li.innerHTML=`<div>${p.n}<small>${q} × ${fmt(p.p)}</small></div><div>${fmt(q*p.p)}<br><button class="rm" data-rm="${id}">Remove</button></div>`;ul.appendChild(li)});
+ if(!ids.length)ul.innerHTML='<li>Your cart is empty.</li>';
+ const ship=!n?0:sub>5000?0:150;
+ document.getElementById('sum').innerHTML=n?`<div><span>Subtotal</span><span>${fmt(sub)}</span></div><div><span>Shipping</span><span>${ship?fmt(ship):'Free'}</span></div>${!ship?'':`<small class="note">Add ${fmt(5001-sub)} more for free shipping</small>`}<div class="t"><span>Total</span><span>${fmt(sub+ship)}</span></div>`:'';
+ document.getElementById('count').textContent=n;
+ openB.setAttribute('aria-label',`Open cart, ${n} item${n==1?'':'s'}`);
+}
+function add(id,q){cart[id]=(cart[id]||0)+q;render()}
+function flash(b,t){const o=b.textContent;b.textContent=t;b.classList.add('done');setTimeout(()=>{b.textContent=o;b.classList.remove('done')},1200)}
+grid.addEventListener('click',e=>{const b=e.target.closest('.add');if(b){add(b.dataset.id,1);flash(b,'Added ✓')}});
+let q=1;const qo=document.getElementById('q');
+document.getElementById('minus').onclick=()=>{q=Math.max(1,q-1);qo.textContent=q};
+document.getElementById('plus').onclick=()=>{q=Math.min(20,q+1);qo.textContent=q};
+document.getElementById('addMain').onclick=function(){add('cup',q);flash(this,'Added ✓');q=1;qo.textContent=1};
+document.getElementById('items').addEventListener('click',e=>{const r=e.target.dataset.rm;if(r){delete cart[r];render()}});
+function open(){drawer.classList.add('open');scrim.classList.add('on');document.getElementById('close').focus()}
+function close(){drawer.classList.remove('open');scrim.classList.remove('on');openB.focus()}
+openB.onclick=open;document.getElementById('close').onclick=close;scrim.onclick=close;
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('open'))close();
+ if(e.key==='Tab'&&drawer.classList.contains('open')){const f=[...drawer.querySelectorAll('button')];const a=f[0],z=f[f.length-1];
+  if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}});
+render();
+</script>
+</body>
+</html>

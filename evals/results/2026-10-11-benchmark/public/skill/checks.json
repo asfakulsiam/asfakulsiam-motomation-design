@@ -1,0 +1,52 @@
+{
+ "375": {
+  "loadMs": 1255,
+  "pageHeight": 6848,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "loadMs": 3644,
+  "pageHeight": 6797,
+  "errors": [
+   "Failed to load resource: the server responded with a status of 404 (File not found)"
+  ],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 3,
+    "text": "দান / Donate",
+    "href": "#donate",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "39/40"
+  },
+  "source": {
+   "bytes": 33180,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "usesGSAP": true,
+   "stamp": true
+  }
+ },
+ "slug": "public",
+ "cond": "skill",
+ "1440-reduced": {
+  "loadMs": 682,
+  "pageHeight": 6797,
+  "errors": [],
+  "hOverflow": 0,
+  "hiddenTextUnderReducedMotion": 0
+ },
+ "375-reduced": {
+  "loadMs": 987,
+  "pageHeight": 6848,
+  "errors": [],
+  "hOverflow": 0,
+  "hiddenTextUnderReducedMotion": 0
+ }
+}

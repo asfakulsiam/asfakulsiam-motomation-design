@@ -1,0 +1,9 @@
+{
+ "model": "claude_sonnet_5_5",
+ "condition": "baseline",
+ "brief": "02-dev-tool-landing.md",
+ "finish_reason": "end_turn",
+ "seconds": 35,
+ "chars": 13396,
+ "invent": null
+}

@@ -1,0 +1,63 @@
+{
+ "model": "gpt_5_4",
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "A has the stronger and more singular idea: the brick wall/lifted courtyard metaphor carries through the whole page, and the drawings feel like an architect's catalogue rather than a generic portfolio. Typography and composition are especially confident, though some project text and fine labels look faint, which matches the measured contrast failures. Motion seems concept-linked from the 'lift the wall' framing and reduced-motion state, but this is partly inferred from stills."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B is clear, coherent, and accessible, with a consistent light-through-brick theme and solid project presentation, but it feels more like a refined template than a distinctive studio signature. The type is elegant and the imagery/plans are readable, yet the desktop page has large empty stretches that weaken pacing and suggest less control of narrative flow. Motion is hard to judge from stills; the 'Show light' interactions imply purposeful behavior, but not an especially ambitious motion concept."
+  },
+  "better": "B",
+  "why": "B wins because A is disqualified by the hard contrast gate despite A being more conceptually distinctive."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "A has the stronger and more singular idea: the brick wall/lifted courtyard metaphor carries through the whole page, and the drawings feel like an architect's catalogue rather than a generic portfolio. Typography and composition are especially confident, though some project text and fine labels look faint, which matches the measured contrast failures. Motion seems concept-linked from the 'lift the wall' framing and reduced-motion state, but this is partly inferred from stills."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B is clear, coherent, and accessible, with a consistent light-through-brick theme and solid project presentation, but it feels more like a refined template than a distinctive studio signature. The type is elegant and the imagery/plans are readable, yet the desktop page has large empty stretches that weaken pacing and suggest less control of narrative flow. Motion is hard to judge from stills; the 'Show light' interactions imply purposeful behavior, but not an especially ambitious motion concept."
+ }
+}

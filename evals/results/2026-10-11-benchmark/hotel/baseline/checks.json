@@ -1,0 +1,52 @@
+{
+ "375": {
+  "loadMs": 872,
+  "pageHeight": 5089,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "loadMs": 1052,
+  "pageHeight": 4149,
+  "errors": [
+   "Failed to load resource: the server responded with a status of 404 (File not found)"
+  ],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 7,
+    "text": "Check availability",
+    "href": "https://book.example-hotel.com",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 15992,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "usesGSAP": true,
+   "stamp": false
+  }
+ },
+ "slug": "hotel",
+ "cond": "baseline",
+ "1440-reduced": {
+  "loadMs": 1222,
+  "pageHeight": 4149,
+  "errors": [],
+  "hOverflow": 0,
+  "hiddenTextUnderReducedMotion": 0
+ },
+ "375-reduced": {
+  "loadMs": 1136,
+  "pageHeight": 5089,
+  "errors": [],
+  "hOverflow": 0,
+  "hiddenTextUnderReducedMotion": 0
+ }
+}

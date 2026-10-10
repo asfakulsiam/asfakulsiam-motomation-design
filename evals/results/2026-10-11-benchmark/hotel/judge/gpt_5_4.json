@@ -1,0 +1,63 @@
+{
+ "model": "gpt_5_4",
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 2,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "The door-as-hero concept is strong and distinctive, and the sequencing from house to rooms to rooftop carries a clear mood tied to the brief. Typography is elegant and the room pricing is presented as memorable objects, but mobile has severe horizontal overflow and the first-screen experience on phone feels cramped and partially broken. Reduced-motion support appears present, but the measured contrast failure triggers the hard gate."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "This is calmer and more conventional, but it stays coherent around the door/arrival idea and keeps booking visible at all times. The room facts are clearer than A, the layout is cleaner across desktop and mobile, and the measured checks are solid with no contrast or overflow issues. Motion is harder to judge from stills; the small interactive door suggests some intent, but the reduced-motion view implies a lighter, less story-driven animation system than A."
+  },
+  "better": "B",
+  "why": "B wins because it meets the brief well while staying accessible and robust, whereas A is more daring but fails the contrast hard gate and breaks on mobile."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 2,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "The door-as-hero concept is strong and distinctive, and the sequencing from house to rooms to rooftop carries a clear mood tied to the brief. Typography is elegant and the room pricing is presented as memorable objects, but mobile has severe horizontal overflow and the first-screen experience on phone feels cramped and partially broken. Reduced-motion support appears present, but the measured contrast failure triggers the hard gate."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "This is calmer and more conventional, but it stays coherent around the door/arrival idea and keeps booking visible at all times. The room facts are clearer than A, the layout is cleaner across desktop and mobile, and the measured checks are solid with no contrast or overflow issues. Motion is harder to judge from stills; the small interactive door suggests some intent, but the reduced-motion view implies a lighter, less story-driven animation system than A."
+ }
+}

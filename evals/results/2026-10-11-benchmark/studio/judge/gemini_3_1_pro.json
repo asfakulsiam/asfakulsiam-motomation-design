@@ -1,0 +1,63 @@
+{
+ "model": "gemini_3_1_pro",
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "Site A features a delightful visual language with its detailed, stylized structural illustrations and 'lifting wall' hero concept. However, it fails the color contrast hard gate on multiple text nodes (likely the small red metadata labels), disqualifying an otherwise very strong submission."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B deeply integrates the brief's focus on 'light' and 'courtyards' into both its hero graphic and the interactive 'Show light' buttons on the architectural plans. It executes this cohesive concept flawlessly while passing all accessibility and performance checks."
+  },
+  "better": "B",
+  "why": "Site B presents a highly unified, interactive concept centered on light and passes all hard gates, whereas Site A fails the color contrast requirement."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "Site A features a delightful visual language with its detailed, stylized structural illustrations and 'lifting wall' hero concept. However, it fails the color contrast hard gate on multiple text nodes (likely the small red metadata labels), disqualifying an otherwise very strong submission."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B deeply integrates the brief's focus on 'light' and 'courtyards' into both its hero graphic and the interactive 'Show light' buttons on the architectural plans. It executes this cohesive concept flawlessly while passing all accessibility and performance checks."
+ }
+}

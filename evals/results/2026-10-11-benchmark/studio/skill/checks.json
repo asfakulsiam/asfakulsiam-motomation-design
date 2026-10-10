@@ -1,0 +1,64 @@
+{
+ "375": {
+  "loadMs": 1010,
+  "pageHeight": 8136,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 5
+   }
+  ],
+  "contrastViolations": 5
+ },
+ "1440": {
+  "loadMs": 1510,
+  "pageHeight": 7739,
+  "errors": [
+   "Failed to load resource: the server responded with a status of 404 (File not found)"
+  ],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 5
+   }
+  ],
+  "contrastViolations": 5,
+  "keyboard": {
+   "primaryReached": {
+    "step": 6,
+    "text": "CONTACT",
+    "href": "#contact",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "36/40"
+  },
+  "source": {
+   "bytes": 26555,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "usesGSAP": true,
+   "stamp": true
+  }
+ },
+ "slug": "studio",
+ "cond": "skill",
+ "1440-reduced": {
+  "loadMs": 863,
+  "pageHeight": 6389,
+  "errors": [],
+  "hOverflow": 0,
+  "hiddenTextUnderReducedMotion": 0
+ },
+ "375-reduced": {
+  "loadMs": 742,
+  "pageHeight": 7162,
+  "errors": [],
+  "hOverflow": 0,
+  "hiddenTextUnderReducedMotion": 0
+ }
+}

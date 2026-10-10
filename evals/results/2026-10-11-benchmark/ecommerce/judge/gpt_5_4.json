@@ -1,0 +1,71 @@
+{
+ "model": "gpt_5_4",
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1",
+    "Text hidden under reduced motion"
+   ],
+   "notes": "A has a clear warm editorial-retail idea and keeps buying fast, with the cup, prices, firing schedule, story, shipping and care all easy to find. The type pairing and restrained palette are elegant, but the product grid feels conventional and the pottery illustrations are simpler and less distinctive than the layout promises. Access fails the hard gate due to a measured contrast issue and hidden text in reduced-motion mode, which also makes motion confidence low."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1",
+    "Text hidden under reduced motion"
+   ],
+   "notes": "B has a much stronger point of view: the whole page is organized like an editorial specimen sheet, and that idea carries from hero to catalog to firing notes. Typography is the identity here, and the structure, captions, numbering and illustrated marks make the work feel specific to the brief while still preserving a clear purchase path. It is slightly denser and some footer copy appears to invent tool/font credits not supported by the brief, but the hard gate failure here is still the measured contrast issue plus hidden text under reduced motion."
+  },
+  "better": "B",
+  "why": "B is more conceptually unified, more original, and uses typography and structure in a more memorable brief-appropriate way while still functioning as a shop."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1",
+   "Text hidden under reduced motion"
+  ],
+  "notes": "A has a clear warm editorial-retail idea and keeps buying fast, with the cup, prices, firing schedule, story, shipping and care all easy to find. The type pairing and restrained palette are elegant, but the product grid feels conventional and the pottery illustrations are simpler and less distinctive than the layout promises. Access fails the hard gate due to a measured contrast issue and hidden text in reduced-motion mode, which also makes motion confidence low."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1",
+   "Text hidden under reduced motion"
+  ],
+  "notes": "B has a much stronger point of view: the whole page is organized like an editorial specimen sheet, and that idea carries from hero to catalog to firing notes. Typography is the identity here, and the structure, captions, numbering and illustrated marks make the work feel specific to the brief while still preserving a clear purchase path. It is slightly denser and some footer copy appears to invent tool/font credits not supported by the brief, but the hard gate failure here is still the measured contrast issue plus hidden text under reduced motion."
+ }
+}

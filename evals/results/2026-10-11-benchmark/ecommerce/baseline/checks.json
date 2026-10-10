@@ -1,0 +1,64 @@
+{
+ "375": {
+  "loadMs": 1052,
+  "pageHeight": 5416,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 1
+   }
+  ],
+  "contrastViolations": 1
+ },
+ "1440": {
+  "loadMs": 1030,
+  "pageHeight": 3499,
+  "errors": [
+   "Failed to load resource: the server responded with a status of 404 (File not found)"
+  ],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 1
+   }
+  ],
+  "contrastViolations": 1,
+  "keyboard": {
+   "primaryReached": {
+    "step": 9,
+    "text": "Add to cart",
+    "href": "",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 17505,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "usesGSAP": false,
+   "stamp": false
+  }
+ },
+ "slug": "ecommerce",
+ "cond": "baseline",
+ "1440-reduced": {
+  "loadMs": 726,
+  "pageHeight": 3499,
+  "errors": [],
+  "hOverflow": 0,
+  "hiddenTextUnderReducedMotion": 3
+ },
+ "375-reduced": {
+  "loadMs": 1103,
+  "pageHeight": 5416,
+  "errors": [],
+  "hOverflow": 0,
+  "hiddenTextUnderReducedMotion": 3
+ }
+}

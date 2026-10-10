@@ -1,0 +1,9 @@
+{
+ "model": "claude_sonnet_5_5",
+ "condition": "baseline",
+ "brief": "04-boutique-hotel.md",
+ "finish_reason": "end_turn",
+ "seconds": 43,
+ "chars": 16003,
+ "invent": null
+}

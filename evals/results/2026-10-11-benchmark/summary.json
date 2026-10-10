@@ -1,0 +1,142 @@
+{
+ "studio": {
+  "baseline": {
+   "mean": {
+    "Concept": 4.5,
+    "Originality": 3.5,
+    "Typography": 4.0,
+    "Motion": 3.5,
+    "Craft": 4.0,
+    "Access & performance": 5.0
+   },
+   "tot": 81.5,
+   "adj": 81.5,
+   "gate": "pass"
+  },
+  "skill": {
+   "mean": {
+    "Concept": 4.5,
+    "Originality": 5.0,
+    "Typography": 4.5,
+    "Motion": 4.0,
+    "Craft": 4.0,
+    "Access & performance": 1.5
+   },
+   "tot": 80.0,
+   "adj": 0,
+   "gate": "contrast: 5 figcaptions at 4.45:1"
+  }
+ },
+ "hotel": {
+  "baseline": {
+   "mean": {
+    "Concept": 4.5,
+    "Originality": 4.5,
+    "Typography": 4.5,
+    "Motion": 3.5,
+    "Craft": 4.5,
+    "Access & performance": 5.0
+   },
+   "tot": 88.5,
+   "adj": 88.5,
+   "gate": "pass"
+  },
+  "skill": {
+   "mean": {
+    "Concept": 3.0,
+    "Originality": 3.5,
+    "Typography": 2.5,
+    "Motion": 3.5,
+    "Craft": 2.0,
+    "Access & performance": 1.5
+   },
+   "tot": 54.5,
+   "adj": 54.5,
+   "gate": "pass"
+  }
+ },
+ "ecommerce": {
+  "baseline": {
+   "mean": {
+    "Concept": 3.5,
+    "Originality": 3.0,
+    "Typography": 3.5,
+    "Motion": 3.0,
+    "Craft": 4.0,
+    "Access & performance": 2.0
+   },
+   "tot": 63.5,
+   "adj": 0,
+   "gate": "contrast: eyebrow label at 4.39:1"
+  },
+  "skill": {
+   "mean": {
+    "Concept": 5.0,
+    "Originality": 5.0,
+    "Typography": 5.0,
+    "Motion": 4.0,
+    "Craft": 4.5,
+    "Access & performance": 2.5
+   },
+   "tot": 88.0,
+   "adj": 88.0,
+   "gate": "pass"
+  }
+ },
+ "saas": {
+  "baseline": {
+   "mean": {
+    "Concept": 2.5,
+    "Originality": 1.5,
+    "Typography": 2.5,
+    "Motion": 3.0,
+    "Craft": 1.5,
+    "Access & performance": 2.5
+   },
+   "tot": 44.5,
+   "adj": 44.5,
+   "gate": "pass"
+  },
+  "skill": {
+   "mean": {
+    "Concept": 5.0,
+    "Originality": 5.0,
+    "Typography": 5.0,
+    "Motion": 4.0,
+    "Craft": 4.5,
+    "Access & performance": 5.0
+   },
+   "tot": 95.5,
+   "adj": 95.5,
+   "gate": "pass"
+  }
+ },
+ "public": {
+  "baseline": {
+   "mean": {
+    "Concept": 2.5,
+    "Originality": 2.0,
+    "Typography": 3.0,
+    "Motion": 2.5,
+    "Craft": 4.0,
+    "Access & performance": 4.5
+   },
+   "tot": 60.0,
+   "adj": 60.0,
+   "gate": "pass"
+  },
+  "skill": {
+   "mean": {
+    "Concept": 5.0,
+    "Originality": 5.0,
+    "Typography": 5.0,
+    "Motion": 4.0,
+    "Craft": 4.5,
+    "Access & performance": 4.0
+   },
+   "tot": 92.5,
+   "adj": 92.5,
+   "gate": "pass"
+  }
+ }
+}

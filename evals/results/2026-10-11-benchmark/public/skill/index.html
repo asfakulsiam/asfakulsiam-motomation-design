@@ -1,0 +1,547 @@
+<!-- motomation · archetype: manifesto · mutation: invert-axis (floors count down toward the roots) · signature: ink-fill (+ elevator-panel nav) · tier: 2 · critique: C4 H4 S4 R4 M4 V4 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sundari Trust · ম্যানগ্রোভ ফিরিয়ে আনি · Bringing the mangroves back</title>
+<meta name="description" content="Sundari Trust restores mangroves in the Sundarbans buffer zone with local communities. 140 hectares replanted since 2019. Donate or volunteer. বাংলা ও English.">
+<meta property="og:title" content="Sundari Trust · Bringing the mangroves back">
+<meta property="og:description" content="140 hectares replanted since 2019 (Sundari Trust annual report 2025). Donate or volunteer.">
+<meta name="theme-color" content="#ECEFEA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Noto+Serif+Bengali:wght@400..800&family=Hind+Siliguri:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Sundari Trust","email":"hello@sundaritrust.org","description":"A non-profit restoring mangroves in the Sundarbans buffer zone with local communities.","knowsLanguage":["bn","en"]}
+</script>
+<style>
+/* motomation · archetype: manifesto · mutation: invert-axis · signature: ink-fill · tier: 2 */
+:root{
+  --ground:#ECEFEA; --surface:#DFE5DE; --ink:#151A16; --muted:#525C54; --faint:#5F695F;
+  --line:color-mix(in oklab,var(--ink) 18%,transparent);
+  --accent:#1E6B52; --accent-ink:#fff;
+  --m:clamp(20px,5vw,96px); --mr:var(--m);
+  --ease:cubic-bezier(0.22,1,0.36,1); --ease-strong:cubic-bezier(0.16,1,0.3,1);
+  --f-bn:"Noto Serif Bengali","Hind Siliguri",serif;
+  --f-en:"Fraunces",Georgia,serif;
+  --f-tx:"Hind Siliguri","Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono","Hind Siliguri",ui-monospace,monospace;
+}
+@media(min-width:900px){:root{--mr:calc(var(--m) + 4.5rem)}}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:auto}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 1.0625rem/1.65 var(--f-tx);padding-bottom:56px;-webkit-font-smoothing:antialiased}
+@media(min-width:900px){body{padding-bottom:0}}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+::selection{background:var(--accent);color:var(--accent-ink)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip{position:absolute;left:var(--m);top:-4rem;z-index:50;background:var(--ink);color:var(--ground);padding:.7rem 1rem;text-decoration:none}
+.skip:focus{top:1rem}
+.wrap{padding-inline:var(--m) var(--mr)}
+.mono{font:500 .8rem/1.4 var(--f-mono);letter-spacing:.08em;text-transform:uppercase}
+.mono[lang=bn]{text-transform:none;letter-spacing:.02em}
+
+/* bilingual helpers */
+.bi>[lang]{display:block}
+.t-bn{font-family:var(--f-bn);font-weight:600;line-height:1.25;letter-spacing:0}
+.t-en{font-family:var(--f-en);font-weight:400;font-style:italic;line-height:1.2;letter-spacing:-.01em;color:var(--muted);font-variation-settings:"opsz" 96}
+h2.bi .t-bn{font-size:clamp(2rem,5.4vw,4.4rem)}
+h2.bi .t-en{font-size:clamp(1.3rem,2.6vw,2.2rem);margin-top:.5rem}
+.sec{padding-block:clamp(5rem,12vw,10rem);scroll-margin-top:0}
+.sec--alt{background:var(--surface)}
+.floor{display:flex;gap:.9rem;align-items:baseline;margin-bottom:2rem;color:var(--muted)}
+.floor b{font-weight:500;color:var(--accent)}
+
+/* header */
+.top{position:absolute;inset:0 0 auto 0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.25rem var(--m) 0}
+.mark{text-decoration:none;display:flex;flex-direction:column;line-height:1.25}
+.mark [lang=bn]{font:600 1.15rem/1.3 var(--f-bn)}
+.mark [lang=en]{font:500 .8rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.top nav{display:flex;gap:1.4rem}
+.lnk{font-weight:500;text-decoration:none;background:linear-gradient(currentColor 0 0) 0 100%/0 1px no-repeat;transition:background-size .22s var(--ease);padding-block:.2rem}
+.lnk:hover,.lnk:focus-visible{background-size:100% 1px}
+.lnk .sl{color:var(--muted)}
+
+/* hero */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:7rem;position:relative}
+.hero .wrap{padding-bottom:clamp(1.5rem,4vw,3rem)}
+.hero h1{margin:1.2rem 0 1.8rem}
+.rise{display:block;overflow:hidden;padding-block:.14em;margin-block:-.14em}
+.rise>span{display:block}
+.hero h1 [lang=bn]{font:600 clamp(3.1rem,10.5vw,10rem)/1.2 var(--f-bn);letter-spacing:0;text-wrap:balance}
+.hero h1 [lang=en]{font:300 italic clamp(1.6rem,4.2vw,3.6rem)/1.1 var(--f-en);letter-spacing:-.02em;color:var(--muted);margin-top:.4rem;font-variation-settings:"opsz" 144}
+.lead{max-width:62ch;display:grid;gap:.5rem}
+.lead [lang=en]{color:var(--muted)}
+.cta{display:flex;flex-wrap:wrap;gap:1rem 1.6rem;align-items:center;margin-top:2rem}
+.btn{display:inline-flex;flex-direction:column;align-items:flex-start;gap:0;background:var(--accent);color:var(--accent-ink);border:0;font:500 1rem/1.35 var(--f-tx);padding:.8rem 1.5rem;min-height:48px;text-decoration:none;cursor:pointer;border-radius:2px;transition:transform .12s var(--ease),background-color .16s var(--ease)}
+.btn small{font-size:.85rem;opacity:.92;font-weight:400}
+.btn:hover{background:#17553f}
+.btn:active{transform:scale(.97)}
+.roots{width:100%;height:clamp(150px,20vw,280px);stroke:var(--ink);stroke-width:2;fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0}
+@media(prefers-reduced-motion:no-preference){.roots{animation:draw 2.8s var(--ease-strong) .4s both}}
+@keyframes draw{from{stroke-dashoffset:1}}
+.roots .tip{fill:var(--accent);stroke:none}
+.roots .water{fill:color-mix(in oklab,var(--accent) 9%,transparent);stroke:none}
+.roots .wl{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:none}
+
+/* manifesto */
+.manifesto{padding-block:clamp(4rem,10vw,9rem);border-top:1px solid var(--line)}
+.manifesto .bnp{font:500 clamp(1.6rem,3.3vw,2.7rem)/1.55 var(--f-bn);max-width:30ch;letter-spacing:0}
+.manifesto .enp{font:400 clamp(1.3rem,2.3vw,1.95rem)/1.4 var(--f-en);max-width:36ch;margin:clamp(2.5rem,6vw,5rem) 0 0 clamp(0px,14vw,16rem);letter-spacing:-.01em;text-wrap:pretty}
+.ink-on [data-ink] .w{color:var(--faint);transition:color .28s var(--ease)}
+.ink-on [data-ink] .w.on{color:var(--ink)}
+
+/* work */
+.rows{margin-top:clamp(2.5rem,6vw,5rem);border-top:1px solid var(--ink)}
+.row{display:grid;grid-template-columns:3rem 1fr;gap:.5rem 1rem;padding:1.8rem 0;border-bottom:1px solid var(--line)}
+.row .ix{color:var(--accent);padding-top:.5rem}
+.row h3{font:600 clamp(1.5rem,2.6vw,2.2rem)/1.3 var(--f-bn)}
+.row h3 span{display:block;font:400 italic 1.2rem/1.3 var(--f-en);color:var(--muted)}
+.row .d{display:grid;gap:.4rem;max-width:56ch;margin-top:.5rem}
+.row .d [lang=en]{color:var(--muted)}
+@media(min-width:900px){
+  .row{grid-template-columns:4rem 1fr 1.1fr;align-items:start}
+  .row .d{margin-top:.3rem}
+}
+
+/* figure */
+.fig{display:grid;gap:3rem}
+.big{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2em 1.2rem;line-height:1}
+.big .n{font:300 clamp(6rem,24vw,22rem)/.85 var(--f-en);letter-spacing:-.05em;font-variant-numeric:tabular-nums;font-variation-settings:"opsz" 144}
+.big .u{display:grid;gap:.2rem}
+.big .u [lang=bn]{font:600 clamp(1.6rem,3.4vw,2.8rem)/1.3 var(--f-bn)}
+.big .u [lang=en]{font:italic 400 clamp(1.1rem,2vw,1.6rem)/1.2 var(--f-en);color:var(--muted)}
+.dots{display:grid;grid-template-columns:repeat(14,1fr);gap:clamp(6px,1.1vw,14px);max-width:620px}
+.dots i{aspect-ratio:1;border-radius:50%;background:var(--accent)}
+.src{margin-top:1.4rem;color:var(--muted);max-width:60ch}
+.src [lang]{display:block}
+.src a{color:var(--ink)}
+@media(min-width:900px){.fig{grid-template-columns:1.25fr 1fr;align-items:end}}
+
+/* forms */
+.split{display:grid;gap:3rem}
+@media(min-width:900px){.split{grid-template-columns:5fr 6fr;gap:5rem}.split .stick{position:sticky;top:4rem;align-self:start}}
+.intro{max-width:44ch;margin-top:1.8rem;display:grid;gap:.4rem}
+.intro [lang=en]{color:var(--muted)}
+.note{margin-top:1rem;font-size:.95rem;color:var(--muted)}
+form{display:grid;gap:1.6rem}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend,.lb{display:block;font:500 .8rem/1.4 var(--f-mono);letter-spacing:.06em;color:var(--muted);margin-bottom:.6rem;padding:0}
+.lb span,legend span{margin-right:.4rem}
+.fld input[type=text],.fld input[type=email],.fld input[type=tel]{width:100%;background:transparent;border:0;border-bottom:1px solid var(--muted);font:400 1.1rem var(--f-tx);color:var(--ink);padding:.6rem 0;border-radius:0;min-height:44px}
+.fld input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.fld input[aria-invalid=true]{border-bottom:2px solid #A12D1D}
+.err{display:block;min-height:1.4em;font-size:.9rem;color:#8E2415;margin-top:.25rem}
+.opts{display:grid;gap:.7rem}
+.opt{position:relative;display:grid;grid-template-columns:auto 1fr;gap:.2rem 1.2rem;align-items:center;border:1px solid var(--muted);padding:.9rem 1.1rem;cursor:pointer;border-radius:2px;transition:border-color .16s var(--ease),background-color .16s var(--ease)}
+.opt input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.opt .p{font:500 clamp(1.5rem,2.6vw,2rem)/1 var(--f-en);font-variant-numeric:tabular-nums;min-width:5.2rem}
+.opt .t [lang]{display:block;line-height:1.4}
+.opt .t [lang=en]{color:var(--muted);font-size:.95rem}
+.opt:has(:checked){border-color:var(--accent);background:color-mix(in oklab,var(--accent) 10%,transparent);box-shadow:inset 0 0 0 1px var(--accent)}
+.opt:has(:focus-visible){outline:3px solid var(--accent);outline-offset:3px}
+.opts--row{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+.opts--row .opt{grid-template-columns:1fr;padding:.8rem 1rem}
+.opts--row .opt .t{font-weight:500}
+.status{padding:1rem 1.2rem;border-left:3px solid var(--accent);background:color-mix(in oklab,var(--accent) 10%,transparent);display:none}
+.status.show{display:block}
+.status [lang]{display:block}
+
+/* footer */
+.foot{background:var(--ink);color:#ECEFEA;padding-block:clamp(4rem,9vw,8rem) 2rem;overflow:hidden}
+.foot a{color:#9FE0C3}
+.foot :focus-visible{outline-color:#9FE0C3}
+.foot .mono{color:#A9B5AC}
+.mail{display:inline-block;font:400 clamp(1.5rem,5vw,4rem)/1.2 var(--f-en);letter-spacing:-.02em;margin:1rem 0 0;text-decoration-thickness:1px;text-underline-offset:.15em;overflow-wrap:anywhere}
+.giant{font:600 clamp(5rem,26vw,24rem)/1.2 var(--f-bn);margin:clamp(2rem,6vw,5rem) 0 0;letter-spacing:0;color:#ECEFEA;white-space:nowrap;opacity:.96}
+.colo{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem 2rem;border-top:1px solid rgba(236,239,234,.25);padding-top:1.2rem;margin-top:1rem;color:#A9B5AC;font-size:.95rem}
+
+/* elevator rail */
+.rail{position:fixed;z-index:30;left:0;right:0;bottom:0;background:var(--ground);border-top:1px solid var(--ink)}
+.rail ol{list-style:none;margin:0;padding:0;display:flex}
+.rail li{flex:1;position:relative}
+.rail a{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;text-decoration:none;line-height:1.1;border-left:1px solid var(--line);transition:background-color .16s var(--ease),color .16s var(--ease)}
+.rail li:first-child a{border-left:0}
+.rail .nb{font:600 1.25rem/1.2 var(--f-bn)}
+.rail .ne{font:500 .75rem/1 var(--f-mono)}
+.rail .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.rail a[aria-current]{background:var(--accent);color:var(--accent-ink)}
+.rail a:hover:not([aria-current]){background:var(--surface)}
+@media(min-width:900px){
+  .rail{left:auto;right:1.25rem;top:50%;bottom:auto;transform:translateY(-50%);border:1px solid var(--ink);border-radius:2px}
+  .rail ol{flex-direction:column}
+  .rail a{width:52px;min-height:58px;border-left:0;border-top:1px solid var(--line)}
+  .rail li:first-child a{border-top:0}
+  .rail .lbl{width:auto;height:auto;clip-path:none;overflow:visible;right:calc(100% + .6rem);top:50%;transform:translateY(-50%);background:var(--ink);color:var(--ground);padding:.35rem .7rem;font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .16s var(--ease);border-radius:2px}
+  .rail a:hover .lbl,.rail a:focus-visible .lbl{opacity:1}
+  .rail .lbl [lang]{display:inline}
+  .rail .lbl [lang=en]{margin-left:.4rem;opacity:.85}
+}
+@media(max-width:560px){.top nav .sl{display:none}.top nav{gap:1rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content · মূল অংশে যান</a>
+
+<header class="top">
+  <a class="mark" href="#begin" aria-label="Sundari Trust, সুন্দরী ট্রাস্ট"><span lang="bn">সুন্দরী ট্রাস্ট</span><span lang="en">Sundari Trust</span></a>
+  <nav aria-label="Primary">
+    <a class="lnk" href="#donate"><span lang="bn">দান</span> <span class="sl">/</span> <span lang="en">Donate</span></a>
+    <a class="lnk" href="#volunteer"><span lang="bn">স্বেচ্ছাসেবা</span> <span class="sl">/</span> <span lang="en">Volunteer</span></a>
+  </nav>
+</header>
+
+<nav class="rail" aria-label="Floors · তলা">
+  <ol>
+    <li><a href="#begin" data-floor="begin" aria-label="Floor 5: Begin"><span class="nb" lang="bn" aria-hidden="true">৫</span><span class="ne" aria-hidden="true">5</span><span class="lbl" aria-hidden="true"><span lang="bn">শুরু</span><span lang="en">Begin</span></span></a></li>
+    <li><a href="#work" data-floor="work" aria-label="Floor 4: Work"><span class="nb" lang="bn" aria-hidden="true">৪</span><span class="ne" aria-hidden="true">4</span><span class="lbl" aria-hidden="true"><span lang="bn">কাজ</span><span lang="en">Work</span></span></a></li>
+    <li><a href="#figure" data-floor="figure" aria-label="Floor 3: Figure"><span class="nb" lang="bn" aria-hidden="true">৩</span><span class="ne" aria-hidden="true">3</span><span class="lbl" aria-hidden="true"><span lang="bn">সংখ্যা</span><span lang="en">Figure</span></span></a></li>
+    <li><a href="#donate" data-floor="donate" aria-label="Floor 2: Donate"><span class="nb" lang="bn" aria-hidden="true">২</span><span class="ne" aria-hidden="true">2</span><span class="lbl" aria-hidden="true"><span lang="bn">দান</span><span lang="en">Donate</span></span></a></li>
+    <li><a href="#volunteer" data-floor="volunteer" aria-label="Floor 1: Volunteer"><span class="nb" lang="bn" aria-hidden="true">১</span><span class="ne" aria-hidden="true">1</span><span class="lbl" aria-hidden="true"><span lang="bn">স্বেচ্ছাসেবা</span><span lang="en">Volunteer</span></span></a></li>
+  </ol>
+</nav>
+
+<main id="main">
+
+<!-- FLOOR 5 -->
+<section id="begin" aria-labelledby="h1">
+  <div class="hero">
+    <div class="wrap">
+      <p class="mono"><span lang="bn">সুন্দরবন বাফার অঞ্চল</span> · <span lang="en">Sundarbans buffer zone</span></p>
+      <h1 id="h1">
+        <span class="rise"><span lang="bn">ম্যানগ্রোভ ফিরিয়ে আনি</span></span>
+        <span class="rise"><span lang="en">Bringing the mangroves back</span></span>
+      </h1>
+      <div class="lead">
+        <p lang="bn">সুন্দরবনের বাফার অঞ্চলে স্থানীয় মানুষের সঙ্গে আমরা ম্যানগ্রোভ ফিরিয়ে আনছি।</p>
+        <p lang="en">We restore mangroves in the Sundarbans buffer zone, together with the communities who live there.</p>
+      </div>
+      <div class="cta">
+        <a class="btn" href="#donate"><span lang="bn">দান করুন</span><small lang="en">Donate</small></a>
+        <a class="lnk" href="#volunteer"><span lang="bn">স্বেচ্ছাসেবক হন</span> / <span lang="en">Volunteer</span></a>
+      </div>
+    </div>
+    <svg class="roots" viewBox="0 0 1200 250" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Line drawing of mangrove trees standing on arching roots in shallow water">
+      <defs>
+        <g id="tree">
+          <path pathLength="1" d="M0,-110 C2,-70 -2,-30 0,0"/>
+          <path pathLength="1" d="M0,0 C-30,8 -60,40 -70,90"/>
+          <path pathLength="1" d="M0,0 C-12,20 -22,55 -26,92"/>
+          <path pathLength="1" d="M0,0 C12,20 22,55 26,92"/>
+          <path pathLength="1" d="M0,0 C30,8 60,40 70,90"/>
+          <path pathLength="1" d="M0,-55 C-20,-70 -40,-76 -56,-98"/>
+          <path pathLength="1" d="M0,-75 C20,-90 40,-96 58,-116"/>
+          <circle class="tip" cx="-56" cy="-98" r="5"/>
+          <circle class="tip" cx="58" cy="-116" r="5"/>
+          <circle class="tip" cx="0" cy="-110" r="5"/>
+        </g>
+      </defs>
+      <rect class="water" x="0" y="170" width="1200" height="80"/>
+      <path class="wl" d="M0,170 H1200"/>
+      <use href="#tree" transform="translate(90,150)"/>
+      <use href="#tree" transform="translate(300,150) scale(.75)"/>
+      <use href="#tree" transform="translate(530,150) scale(1.1)"/>
+      <use href="#tree" transform="translate(720,150) scale(.85)"/>
+      <use href="#tree" transform="translate(940,150)"/>
+      <use href="#tree" transform="translate(1125,150) scale(.7)"/>
+    </svg>
+  </div>
+
+  <div class="manifesto">
+    <div class="wrap">
+      <p class="floor mono"><b lang="bn">৫</b><span lang="bn">শুরু</span><span lang="en">Floor 5 · Begin</span></p>
+      <p class="bnp" lang="bn" data-ink>সুন্দরবনকে ধরে রাখে শিকড়। আমরা এর বাফার অঞ্চলে সেখানকার মানুষের সঙ্গে কাজ করি: নার্সারিতে চারা তৈরি, বর্ষায় রোপণ, আর প্রতিটি প্লটে তিন বছরের যত্ন।</p>
+      <p class="enp" lang="en" data-ink>Roots hold the Sundarbans together. We work in its buffer zone with the people who live there: growing seedlings in community nurseries, planting in the monsoon, and staying for three years of care on every plot.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FLOOR 4 -->
+<section id="work" class="sec" aria-labelledby="h-work" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="floor mono"><b lang="bn">৪</b><span lang="bn">কাজ</span><span lang="en">Floor 4 · Work</span></p>
+    <h2 id="h-work" class="bi"><span class="t-bn" lang="bn">নার্সারি থেকে নোনা মাটি, তিন ধাপে</span><span class="t-en" lang="en">From nursery to tidal mud, in three steps</span></h2>
+    <div class="rows">
+      <article class="row">
+        <p class="ix mono">01</p>
+        <h3><span class="t-bn" lang="bn" style="font:inherit">নার্সারি</span><span lang="en">Nurseries</span></h3>
+        <div class="d">
+          <p lang="bn">নারী দলগুলো সম্প্রদায়ের নার্সারি চালায়, শ্যামনগর ও কয়রায়।</p>
+          <p lang="en">Community nurseries run by women's groups in Shyamnagar and Koyra.</p>
+        </div>
+      </article>
+      <article class="row">
+        <p class="ix mono">02</p>
+        <h3><span lang="bn" style="font:inherit;display:block;color:inherit">রোপণ</span><span lang="en">Planting</span></h3>
+        <div class="d">
+          <p lang="bn">বর্ষাকালে চারা রোপণ করা হয়।</p>
+          <p lang="en">We plant in the monsoon.</p>
+        </div>
+      </article>
+      <article class="row">
+        <p class="ix mono">03</p>
+        <h3><span lang="bn" style="font:inherit;display:block;color:inherit">যত্ন</span><span lang="en">Care</span></h3>
+        <div class="d">
+          <p lang="bn">প্রতিটি প্লটের তিন বছর ধরে যত্ন নেওয়া হয়।</p>
+          <p lang="en">Three years of care for each plot.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FLOOR 3 -->
+<section id="figure" class="sec sec--alt" aria-labelledby="h-fig">
+  <div class="wrap">
+    <p class="floor mono"><b lang="bn">৩</b><span lang="bn">সংখ্যা</span><span lang="en">Floor 3 · Figure</span></p>
+    <h2 id="h-fig" class="sr">১৪০ হেক্টর / 140 hectares replanted since 2019</h2>
+    <div class="fig">
+      <div>
+        <div class="big" aria-hidden="true">
+          <span class="n">140</span>
+          <span class="u"><span lang="bn">হেক্টর</span><span lang="en">hectares</span></span>
+        </div>
+        <div class="src">
+          <p lang="bn">২০১৯ সাল থেকে পুনরায় রোপণ করা হয়েছে।</p>
+          <p lang="en">Replanted since 2019.</p>
+          <p lang="bn" style="margin-top:.8rem">সূত্র: সুন্দরী ট্রাস্ট বার্ষিক প্রতিবেদন ২০২৫</p>
+          <p lang="en">Source: Sundari Trust annual report 2025</p>
+        </div>
+      </div>
+      <figure style="margin:0">
+        <div class="dots" id="dots" aria-hidden="true"></div>
+        <figcaption class="mono" style="margin-top:1rem;color:var(--muted)"><span lang="en">One dot, one hectare. 140 dots.</span> · <span lang="bn">একটি বিন্দু, এক হেক্টর</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- FLOOR 2 -->
+<section id="donate" class="sec" aria-labelledby="h-don">
+  <div class="wrap">
+    <p class="floor mono"><b lang="bn">২</b><span lang="bn">দান</span><span lang="en">Floor 2 · Donate</span></p>
+    <div class="split">
+      <div class="stick">
+        <h2 id="h-don" class="bi"><span class="t-bn" lang="bn">এক ট্রে চারা দিয়ে শুরু</span><span class="t-en" lang="en">Start with one tray</span></h2>
+        <div class="intro">
+          <p lang="bn">তিনটি উপায়ে দান করা যায়। একবার অথবা প্রতি মাসে।</p>
+          <p lang="en">Three ways to give. One-time or monthly.</p>
+        </div>
+        <p class="note"><span lang="bn">এটি একটি ডেমো ফর্ম; কোনো অর্থ কাটা হয় না।</span> <span lang="en">This is a demo form. No payment is taken.</span></p>
+      </div>
+      <form id="donate-form" novalidate>
+        <fieldset>
+          <legend><span lang="bn">পরিমাণ</span>/ <span lang="en">Amount</span></legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="amt" value="500"><span class="p">৳500</span><span class="t"><span lang="bn">একটি নার্সারি ট্রে-তে চারা</span><span lang="en">grows a nursery tray</span></span></label>
+            <label class="opt"><input type="radio" name="amt" value="2000" checked><span class="p">৳2,000</span><span class="t"><span lang="bn">রোপণ প্লটের এক সারি</span><span lang="en">plants a plot row</span></span></label>
+            <label class="opt"><input type="radio" name="amt" value="10000"><span class="p">৳10,000</span><span class="t"><span lang="bn">এক মৌসুমের যত্ন</span><span lang="en">funds a season of care</span></span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend><span lang="bn">কতবার</span>/ <span lang="en">How often</span></legend>
+          <div class="opts opts--row">
+            <label class="opt"><input type="radio" name="freq" value="one" checked><span class="t"><span lang="bn">একবার</span><span lang="en">One-time</span></span></label>
+            <label class="opt"><input type="radio" name="freq" value="month"><span class="t"><span lang="bn">প্রতি মাসে</span><span lang="en">Monthly</span></span></label>
+          </div>
+        </fieldset>
+        <div class="fld">
+          <label class="lb" for="d-name"><span lang="bn">নাম</span>/ <span lang="en">Name</span></label>
+          <input id="d-name" name="name" type="text" autocomplete="name" aria-describedby="d-name-e" required>
+          <span class="err" id="d-name-e"></span>
+        </div>
+        <div class="fld">
+          <label class="lb" for="d-mail"><span lang="bn">ইমেইল</span>/ <span lang="en">Email</span></label>
+          <input id="d-mail" name="email" type="email" autocomplete="email" aria-describedby="d-mail-e" required>
+          <span class="err" id="d-mail-e"></span>
+        </div>
+        <div><button class="btn" type="submit"><span id="give-bn" lang="bn">দান করুন ৳২,০০০</span><small id="give-en" lang="en">Give ৳2,000 one-time</small></button></div>
+        <div class="status" id="d-status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FLOOR 1 -->
+<section id="volunteer" class="sec sec--alt" aria-labelledby="h-vol">
+  <div class="wrap">
+    <p class="floor mono"><b lang="bn">১</b><span lang="bn">স্বেচ্ছাসেবা</span><span lang="en">Floor 1 · Volunteer</span></p>
+    <div class="split">
+      <div class="stick">
+        <h2 id="h-vol" class="bi"><span class="t-bn" lang="bn">রোপণের মৌসুমে আসুন</span><span class="t-en" lang="en">Join the planting season</span></h2>
+        <div class="intro">
+          <p lang="bn">রোপণের মৌসুম জুলাই থেকে সেপ্টেম্বর। কোন মাস আপনার জন্য সুবিধার, জানান।</p>
+          <p lang="en">Planting season runs July to September. Tell us which month suits you.</p>
+        </div>
+      </div>
+      <form id="vol-form" novalidate>
+        <div class="fld">
+          <label class="lb" for="v-name"><span lang="bn">নাম</span>/ <span lang="en">Name</span></label>
+          <input id="v-name" name="name" type="text" autocomplete="name" aria-describedby="v-name-e" required>
+          <span class="err" id="v-name-e"></span>
+        </div>
+        <div class="fld">
+          <label class="lb" for="v-mail"><span lang="bn">ইমেইল</span>/ <span lang="en">Email</span></label>
+          <input id="v-mail" name="email" type="email" autocomplete="email" aria-describedby="v-mail-e" required>
+          <span class="err" id="v-mail-e"></span>
+        </div>
+        <div class="fld">
+          <label class="lb" for="v-tel"><span lang="bn">ফোন</span>/ <span lang="en">Phone</span></label>
+          <input id="v-tel" name="phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="v-tel-e" required>
+          <span class="err" id="v-tel-e"></span>
+        </div>
+        <fieldset aria-describedby="v-m-e">
+          <legend><span lang="bn">পছন্দের মাস</span>/ <span lang="en">Preferred month</span></legend>
+          <div class="opts opts--row">
+            <label class="opt"><input type="radio" name="month" value="July"><span class="t"><span lang="bn">জুলাই</span><span lang="en">July</span></span></label>
+            <label class="opt"><input type="radio" name="month" value="August"><span class="t"><span lang="bn">আগস্ট</span><span lang="en">August</span></span></label>
+            <label class="opt"><input type="radio" name="month" value="September"><span class="t"><span lang="bn">সেপ্টেম্বর</span><span lang="en">September</span></span></label>
+          </div>
+          <span class="err" id="v-m-e"></span>
+        </fieldset>
+        <div><button class="btn" type="submit"><span lang="bn">নাম লেখান</span><small lang="en">Sign up to volunteer</small></button></div>
+        <div class="status" id="v-status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="mono"><span lang="bn">যোগাযোগ</span> · <span lang="en">Contact</span></p>
+    <a class="mail" href="mailto:hello@sundaritrust.org">hello@sundaritrust.org</a>
+    <p class="giant" lang="bn" aria-hidden="true">সুন্দরী</p>
+    <div class="colo">
+      <p>Sundari Trust · <span lang="bn">সুন্দরী ট্রাস্ট</span></p>
+      <p><span lang="en">140 hectares replanted since 2019. Source: annual report 2025.</span></p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var bnDigits = '০১২৩৪৫৬৭৮৯';
+  function toBn(s){ return String(s).replace(/\d/g,function(d){return bnDigits[d]}); }
+
+  /* 140 dots: one per hectare */
+  var grid = document.getElementById('dots');
+  for(var i=0;i<140;i++){ grid.appendChild(document.createElement('i')); }
+
+  /* elevator rail: the lit floor follows the reader */
+  var links = [].slice.call(document.querySelectorAll('[data-floor]'));
+  function light(id){ links.forEach(function(a){ if(a.dataset.floor===id){a.setAttribute('aria-current','location')}else{a.removeAttribute('aria-current')} }); }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting) light(e.target.id); });
+    },{rootMargin:'-45% 0px -50% 0px'});
+    links.forEach(function(a){ io.observe(document.getElementById(a.dataset.floor)); });
+  }
+  light('begin');
+
+  /* donate form (front-end mock) */
+  var df = document.getElementById('donate-form');
+  var fmt = {500:'500',2000:'2,000',10000:'10,000'};
+  function giveLabel(){
+    var a = df.amt.value, f = df.freq.value;
+    document.getElementById('give-bn').textContent = 'দান করুন ৳' + toBn(fmt[a]);
+    document.getElementById('give-en').textContent = 'Give ৳' + fmt[a] + (f==='month' ? ' monthly' : ' one-time');
+  }
+  df.addEventListener('change',giveLabel); giveLabel();
+
+  function setErr(input,msgBn,msgEn){
+    var e = document.getElementById(input.id+'-e');
+    if(msgEn){ e.textContent = msgBn+' / '+msgEn; input.setAttribute('aria-invalid','true'); }
+    else { e.textContent=''; input.removeAttribute('aria-invalid'); }
+    return !!msgEn;
+  }
+  var mailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function checkText(inp,bn,en){ return setErr(inp, bn, inp.value.trim()? '' : en); }
+  function checkMail(inp){ return setErr(inp,'সঠিক ইমেইল লিখুন', mailRe.test(inp.value.trim())?'':'Enter a valid email'); }
+
+  df.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var n=df.querySelector('#d-name'), m=df.querySelector('#d-mail');
+    var bad=[checkText(n,'নাম লিখুন','Enter your name')?n:null, checkMail(m)?m:null].filter(Boolean);
+    var st=document.getElementById('d-status');
+    if(bad.length){ bad[0].focus(); st.className='status'; st.textContent=''; return; }
+    var freqBn = df.freq.value==='month'?'প্রতি মাসে':'একবার';
+    var freqEn = df.freq.value==='month'?'monthly':'one-time';
+    st.innerHTML='<span lang="bn"></span><span lang="en"></span>';
+    st.children[0].textContent='ধন্যবাদ, '+n.value.trim()+'। ৳'+toBn(fmt[df.amt.value])+' ('+freqBn+') — এটি ডেমো, কোনো অর্থ কাটা হয়নি।';
+    st.children[1].textContent='Thank you, '+n.value.trim()+'. ৳'+fmt[df.amt.value]+' ('+freqEn+'). This was a demo, so no payment was taken.';
+    st.className='status show';
+  });
+
+  /* volunteer form */
+  var vf = document.getElementById('vol-form');
+  vf.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var n=vf.querySelector('#v-name'), m=vf.querySelector('#v-mail'), t=vf.querySelector('#v-tel');
+    var me=document.getElementById('v-m-e'), month=vf.month.value;
+    var bad=[];
+    if(checkText(n,'নাম লিখুন','Enter your name')) bad.push(n);
+    if(checkMail(m)) bad.push(m);
+    if(checkText(t,'ফোন নম্বর লিখুন','Enter a phone number')) bad.push(t);
+    me.textContent = month ? '' : 'একটি মাস বেছে নিন / Choose a month';
+    if(!month) bad.push(vf.querySelector('input[name=month]'));
+    var st=document.getElementById('v-status');
+    if(bad.length){ bad[0].focus(); st.className='status'; st.textContent=''; return; }
+    var mb={July:'জুলাই',August:'আগস্ট',September:'সেপ্টেম্বর'}[month];
+    st.innerHTML='<span lang="bn"></span><span lang="en"></span>';
+    st.children[0].textContent='ধন্যবাদ, '+n.value.trim()+'। '+mb+' মাসের জন্য আপনার নাম নেওয়া হয়েছে (ডেমো ফর্ম)।';
+    st.children[1].textContent='Thank you, '+n.value.trim()+'. You are noted for '+month+'. This is a demo form, so nothing was sent.';
+    st.className='status show';
+  });
+
+  /* motion: Tier 2, skipped entirely for reduced motion or if the CDN failed */
+  if(reduce || !window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from('.hero h1 .rise > span',{yPercent:110,duration:1,ease:'expo.out',stagger:.12,delay:.1});
+  gsap.from('.hero .lead, .hero .cta',{opacity:0,y:16,duration:.8,ease:'power3.out',stagger:.1,delay:.6});
+
+  /* ink fill: the manifesto fills with ink as it is read */
+  document.documentElement.classList.add('ink-on');
+  [].slice.call(document.querySelectorAll('[data-ink]')).forEach(function(p){
+    var words = p.textContent.trim().split(/\s+/);
+    p.textContent='';
+    var spans = words.map(function(w,i){
+      var s=document.createElement('span'); s.className='w'; s.textContent=w;
+      p.appendChild(s); if(i<words.length-1) p.appendChild(document.createTextNode(' '));
+      return s;
+    });
+    ScrollTrigger.create({
+      trigger:p,start:'top 78%',end:'bottom 52%',
+      onUpdate:function(self){
+        var n=Math.round(self.progress*spans.length);
+        spans.forEach(function(s,i){ s.classList.toggle('on',i<n); });
+      },
+      onRefresh:function(self){
+        var n=Math.round(self.progress*spans.length);
+        spans.forEach(function(s,i){ s.classList.toggle('on',i<n); });
+      }
+    });
+  });
+
+  /* the figure: 140 dots light one by one */
+  var dots=[].slice.call(grid.children);
+  gsap.set(dots,{opacity:.14});
+  ScrollTrigger.create({trigger:grid,start:'top 85%',once:true,onEnter:function(){
+    gsap.to(dots,{opacity:1,duration:.4,ease:'power2.out',stagger:{each:.011}});
+  }});
+
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(function(){ ScrollTrigger.refresh(); }); }
+})();
+</script>
+</body>
+</html>

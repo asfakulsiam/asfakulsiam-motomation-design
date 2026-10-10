@@ -1,0 +1,42 @@
+{
+ "studio/skill": [
+  {
+   "html": "<figcaption>Plan · not to scale</figcaption>",
+   "msg": "Element has insufficient color contrast of 4.45 (foreground color: #6b6157, background color: #e4dcd1, font si"
+  },
+  {
+   "html": "<figcaption>Plan · dashed line is the jali screen</figcaption>",
+   "msg": "Element has insufficient color contrast of 4.45 (foreground color: #6b6157, background color: #e4dcd1, font si"
+  },
+  {
+   "html": "<figcaption>Plan · columns marked solid</figcaption>",
+   "msg": "Element has insufficient color contrast of 4.45 (foreground color: #6b6157, background color: #e4dcd1, font si"
+  },
+  {
+   "html": "<figcaption>Plan · dashed square is the skylight</figcaption>",
+   "msg": "Element has insufficient color contrast of 4.45 (foreground color: #6b6157, background color: #e4dcd1, font si"
+  },
+  {
+   "html": "<figcaption>Plan · the thick line is the shared wall</figcaption>",
+   "msg": "Element has insufficient color contrast of 4.45 (foreground color: #6b6157, background color: #e4dcd1, font si"
+  }
+ ],
+ "hotel/skill": [
+  {
+   "html": "<div class=\"big\" aria-hidden=\"true\">Haveli 1893</div>",
+   "msg": "Element has insufficient color contrast of 1.22 (foreground color: #2f2924, background color: #1e1814, font si"
+  }
+ ],
+ "ecommerce/skill": [
+  {
+   "html": "<div class=\"giant\" aria-hidden=\"true\">Mati</div>",
+   "msg": "Element has insufficient color contrast of 1.24 (foreground color: #2d2620, background color: #17120f, font si"
+  }
+ ],
+ "ecommerce/baseline": [
+  {
+   "html": "<p class=\"eyebrow\">Wood-fired stoneware · Rajshahi</p>",
+   "msg": "Element has insufficient color contrast of 4.39 (foreground color: #b4532a, background color: #f5f0e6, font si"
+  }
+ ]
+}

@@ -1,0 +1,9 @@
+{
+ "model": "claude_sonnet_5_5",
+ "condition": "baseline",
+ "brief": "07-architecture-studio.md",
+ "finish_reason": "end_turn",
+ "seconds": 39,
+ "chars": 12548,
+ "invent": null
+}

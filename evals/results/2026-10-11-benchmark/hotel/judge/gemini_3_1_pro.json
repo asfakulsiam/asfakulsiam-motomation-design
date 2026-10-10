@@ -1,0 +1,65 @@
+{
+ "model": "gemini_3_1_pro",
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 2,
+    "Originality": 2,
+    "Typography": 1,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Invented statistics, logos or testimonials (hallucinated entirely incorrect room prices)",
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "Site A attempts a literal 'door opening' scroll interaction but fails on basic execution and accuracy. It completely ignores the provided pricing data to invent its own random numbers, features a bizarre and unreadable typographic treatment for those prices, and breaks on mobile with significant horizontal overflow."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B delivers a stunning piece of editorial web design that perfectly captures the requested 'quiet mood'. The typography is exceptionally refined, the layout is pristine across all viewports, and the subtle architectural motifs gracefully tie the sections together without overwhelming the content."
+  },
+  "better": "B",
+  "why": "Site B is a highly polished, perfectly executed design that nails the brief's tone, whereas Site A hallucinates incorrect data, breaks on mobile, and suffers from poor typographic choices."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 2,
+   "Originality": 2,
+   "Typography": 1,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Invented statistics, logos or testimonials (hallucinated entirely incorrect room prices)",
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "Site A attempts a literal 'door opening' scroll interaction but fails on basic execution and accuracy. It completely ignores the provided pricing data to invent its own random numbers, features a bizarre and unreadable typographic treatment for those prices, and breaks on mobile with significant horizontal overflow."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B delivers a stunning piece of editorial web design that perfectly captures the requested 'quiet mood'. The typography is exceptionally refined, the layout is pristine across all viewports, and the subtle architectural motifs gracefully tie the sections together without overwhelming the content."
+ }
+}

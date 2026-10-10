@@ -1,0 +1,9 @@
+{
+ "model": "claude_sonnet_5_5",
+ "condition": "baseline",
+ "brief": "03-ceramics-shop.md",
+ "finish_reason": "end_turn",
+ "seconds": 51,
+ "chars": 17516,
+ "invent": null
+}

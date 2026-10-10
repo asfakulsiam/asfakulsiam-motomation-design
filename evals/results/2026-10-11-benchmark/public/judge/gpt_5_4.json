@@ -1,0 +1,59 @@
+{
+ "model": "gpt_5_4",
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A is clear, calm, and competent, with all required content present and a friendly illustrated mangrove motif. But the idea is fairly conventional public-interest web design, and the section cards/forms feel generic rather than authored. Motion is hard to judge from stills, but nothing in the layout suggests it plays a storytelling role; reduced-motion handling and accessibility checks are strong."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B has a strong single idea carried throughout: the site behaves like a measured field document/building stack, with floors, counting, roots, and the 140-hectare figure all integrated into the visual language. The bilingual typography is far more distinctive and confident than A, and the 140-dot graphic is an excellent factual device. I am slightly cautious on access/performance because the interface is denser and more experimental, but the measured checks pass and reduced-motion screenshots show proper fallback."
+  },
+  "better": "B",
+  "why": "B is the rarer design: it turns the brief into a coherent, memorable visual system without inventing facts, while A is solid but much more template-like."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A is clear, calm, and competent, with all required content present and a friendly illustrated mangrove motif. But the idea is fairly conventional public-interest web design, and the section cards/forms feel generic rather than authored. Motion is hard to judge from stills, but nothing in the layout suggests it plays a storytelling role; reduced-motion handling and accessibility checks are strong."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B has a strong single idea carried throughout: the site behaves like a measured field document/building stack, with floors, counting, roots, and the 140-hectare figure all integrated into the visual language. The bilingual typography is far more distinctive and confident than A, and the 140-dot graphic is an excellent factual device. I am slightly cautious on access/performance because the interface is denser and more experimental, but the measured checks pass and reduced-motion screenshots show proper fallback."
+ }
+}

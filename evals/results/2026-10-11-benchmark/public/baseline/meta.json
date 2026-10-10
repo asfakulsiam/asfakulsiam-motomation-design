@@ -1,0 +1,9 @@
+{
+ "model": "claude_sonnet_5_5",
+ "condition": "baseline",
+ "brief": "05-climate-nonprofit.md",
+ "finish_reason": "end_turn",
+ "seconds": 43,
+ "chars": 14683,
+ "invent": null
+}

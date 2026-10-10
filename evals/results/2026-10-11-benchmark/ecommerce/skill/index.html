@@ -1,0 +1,486 @@
+<!-- motomation · archetype: field-guide · mutation: print-rule (marginalia + footnotes) · signature: departure-board flip (firing schedule + cart count) · tier: 1 · critique: C4 H5 S5 R4 M4 V5 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mati · Wood-fired ceramics from Rajshahi</title>
+<meta name="description" content="Mati is a two-person ceramics studio in Rajshahi. Wood-fired cups, plates and vases in small batches. The Firing Cup is ৳1,200. Ships within Bangladesh.">
+<meta property="og:title" content="Mati · Wood-fired ceramics from Rajshahi">
+<meta property="og:description" content="Small batches of 20–40 pieces per firing. Next firing: 18 November.">
+<meta name="theme-color" content="#EFE9E1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..800,0..100,0..1;1,9..144,300..800,0..100,0..1&family=Hanken+Grotesk:wght@400;500;600&family=Hind+Siliguri:wght@400;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Product","name":"The Firing Cup","description":"250 ml wood-fired stoneware cup with ash glaze, each one marked differently by the flame.","brand":{"@type":"Brand","name":"Mati"},"offers":{"@type":"Offer","price":"1200","priceCurrency":"BDT"}}
+</script>
+<style>
+/* motomation · archetype: field-guide · mutation: print-rule · signature: departure-board flip · tier: 1 */
+:root{
+  --ground:#EFE9E1; --surface:#E4DCD1; --ink:#2A241E; --muted:#5E554B;
+  --line:color-mix(in oklab,var(--ink) 18%,transparent);
+  --accent:#B8431F; --accent-ink:#fff; --kiln:#17120F; --chalk:#F1EBE2;
+  --ember:#FF8A5C;
+  --ease-out:cubic-bezier(0.22,1,0.36,1);
+  --display:"Fraunces","Hind Siliguri",Georgia,serif;
+  --text:"Hanken Grotesk","Hind Siliguri",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --m:clamp(20px,5vw,84px);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--ground);color:var(--ink);font:400 clamp(1rem,.95rem + .2vw,1.12rem)/1.6 var(--text);overflow-x:hidden}
+h1,h2,h3{font-family:var(--display);font-weight:500;font-variation-settings:"SOFT" 100,"WONK" 1;text-wrap:balance;line-height:1}
+p{text-wrap:pretty;max-width:62ch}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.dark :focus-visible{outline-color:var(--ember)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip{position:absolute;left:var(--m);top:-60px;background:var(--ink);color:var(--ground);padding:.6rem 1rem;z-index:100}
+.skip:focus{top:8px}
+.mono{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+.price{font-variant-numeric:tabular-nums}
+.wrap{padding-inline:var(--m)}
+
+/* header */
+header.top{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem var(--m);background:color-mix(in oklab,var(--ground) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.logo{font:600 1.7rem/1 var(--display);font-variation-settings:"SOFT" 100,"WONK" 1;text-decoration:none;letter-spacing:-.02em}
+nav.main{display:flex;gap:clamp(.8rem,3vw,2rem)}
+nav.main a{text-decoration:none;background:linear-gradient(currentColor 0 0) 0 100%/0 1px no-repeat;transition:background-size 220ms var(--ease-out);padding:.5rem 0;font-size:.95rem}
+@media (hover:hover){nav.main a:hover{background-size:100% 1px}}
+.cartbtn{display:inline-flex;align-items:center;gap:.6rem;border:1px solid var(--ink);background:transparent;padding:.45rem .8rem;min-height:44px;border-radius:2px;transition:background-color 160ms var(--ease-out),transform 120ms var(--ease-out)}
+.cartbtn:active{transform:scale(.97)}
+@media (hover:hover){.cartbtn:hover{background:var(--surface)}}
+.cartbtn .flap{font-size:.95rem}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:48px;padding:.7rem 1.3rem;background:var(--accent);color:var(--accent-ink);border:0;border-radius:2px;font-weight:600;transition:transform 120ms var(--ease-out),background-color 160ms var(--ease-out)}
+.btn:active{transform:scale(.97)}
+@media (hover:hover){.btn:hover{background:#9C3516}}
+.btn.line{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+@media (hover:hover){.btn.line:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:repeat(12,1fr);gap:0 clamp(12px,1.6vw,24px);padding:clamp(28px,5vw,64px) var(--m) clamp(56px,8vw,120px);align-items:end}
+.hero .head{grid-column:1/8;align-self:center}
+.hero h1{font-size:clamp(3.6rem,10.5vw,10rem);letter-spacing:-.045em;line-height:.88;font-weight:420}
+.hero h1 em{font-style:italic;color:var(--accent);font-weight:380}
+.hero sup{font:500 .9rem var(--mono);vertical-align:top;margin-left:.2em;color:var(--muted);letter-spacing:0}
+.lede{margin-top:clamp(1.4rem,3vw,2.4rem);font-size:clamp(1.1rem,1rem + .6vw,1.45rem);line-height:1.45}
+.fn{margin-top:1.4rem;color:var(--muted);font:500 .8rem/1.5 var(--mono);letter-spacing:.04em;max-width:46ch;border-top:1px solid var(--line);padding-top:.7rem}
+.hero .buy{grid-column:8/13;display:grid;gap:1rem}
+.fig{background:var(--surface);position:relative;display:grid;place-items:center;padding:1rem}
+.fig svg{width:min(100%,min(400px,44vh));height:auto;display:block;transition:transform 600ms var(--ease-out)}
+.fig .cap{position:absolute;left:.9rem;top:.7rem;color:var(--muted)}
+.fig .another{position:absolute;right:.7rem;bottom:.7rem;background:var(--ground);border:1px solid var(--line);padding:.4rem .7rem;min-height:44px;border-radius:2px;font-size:.85rem}
+@media (hover:hover){.fig .another:hover{border-color:var(--ink)}}
+.panel{border-top:2px solid var(--ink);padding-top:1rem;display:grid;gap:.7rem}
+.panel .row1{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap}
+.panel h2{font-size:clamp(1.8rem,1.4rem + 1.4vw,2.6rem)}
+.panel .p{font:500 clamp(1.7rem,1.4rem + 1vw,2.3rem)/1 var(--display)}
+.panel small{color:var(--muted);font-size:.92rem}
+.when{display:flex;gap:.5rem 1.2rem;flex-wrap:wrap;color:var(--ink)}
+.when b{font-weight:600}
+
+/* shop */
+section.shop{padding:clamp(56px,8vw,130px) var(--m)}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:1rem;flex-wrap:wrap;margin-bottom:clamp(1.6rem,4vw,3rem);border-bottom:1px solid var(--ink);padding-bottom:1rem}
+.sec-head h2{font-size:clamp(2.4rem,1.5rem + 4.4vw,5.5rem);letter-spacing:-.035em}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,44px) clamp(14px,2vw,28px)}
+.card{display:grid;grid-template-rows:auto 1fr}
+.card .fig{aspect-ratio:1/1;padding:8%}
+.card .fig svg{width:100%}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){.card:hover .fig svg{transform:translateY(-6px) rotate(-1.5deg)}}
+.card .meta{display:grid;gap:.3rem;padding:.9rem 0 0}
+.card .meta .t{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+.card h3{font-size:clamp(1.5rem,1.2rem + 1vw,2rem);font-weight:500}
+.card .meta .mono{color:var(--muted)}
+.card .btn{margin-top:.6rem;width:100%}
+.margin{border-top:1px solid var(--line);padding-top:1rem;display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem;align-self:stretch}
+.margin big{font:400 clamp(4.5rem,9vw,8rem)/.8 var(--display);font-variation-settings:"SOFT" 100,"WONK" 1;letter-spacing:-.05em;color:var(--accent)}
+.margin p{font-size:1.05rem}
+
+/* firing board */
+.dark{background:var(--kiln);color:var(--chalk)}
+section.fire{padding:clamp(64px,9vw,150px) var(--m)}
+.fire .intro{display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem clamp(12px,1.6vw,24px);margin-bottom:clamp(2rem,5vw,4rem)}
+.fire h2{grid-column:1/9;font-size:clamp(2.6rem,1.4rem + 6vw,7rem);letter-spacing:-.04em;line-height:.92}
+.fire h2 i{color:var(--ember);font-weight:400}
+.fire .intro p{grid-column:1/8;color:#CFC6B9;font-size:clamp(1.05rem,1rem + .4vw,1.3rem)}
+.fire .intro .mono{grid-column:1/-1;color:#B3A99B}
+ol.board{list-style:none;padding:0;border-bottom:1px solid #4a3f35}
+.board li{display:grid;grid-template-columns:2.4rem 1fr auto;gap:.6rem 1.2rem;align-items:center;padding:1.1rem 0;border-top:1px solid #4a3f35}
+.board .n{font:500 .8rem var(--mono);color:#B3A99B}
+.board .flap{font-size:clamp(1rem,3.7vw,2.1rem)}
+.board .cell{background:#2D2620;border:1px solid #3a322b;color:var(--chalk)}
+.board li.next .cell{color:var(--ember)}
+.board .extra{grid-column:2/-1;color:#B3A99B}
+.board li.sum .cell{background:#3a2e24}
+.flap{display:inline-flex;flex-wrap:wrap;gap:.1em .55em;vertical-align:middle}
+.w{display:inline-flex;white-space:nowrap}
+.cell{display:inline-grid;place-items:center;width:.92em;height:1.45em;margin:1px;background:#2D2620;color:var(--chalk);font:700 1em/1 var(--mono);border-radius:2px;position:relative}
+.cell::after{content:"";position:absolute;inset:50% 0 auto;height:1px;background:rgba(0,0,0,.45)}
+
+/* notes */
+section.notes{padding:clamp(56px,8vw,130px) var(--m)}
+.notes ol{list-style:none;padding:0;border-top:1px solid var(--ink)}
+.notes li{display:grid;grid-template-columns:clamp(3rem,10vw,9rem) 1fr;gap:1rem clamp(12px,3vw,40px);padding:1.4rem 0;border-bottom:1px solid var(--line);align-items:baseline}
+.notes .k{font:400 clamp(2.6rem,6vw,5rem)/.9 var(--display);color:var(--accent);font-variation-settings:"SOFT" 100,"WONK" 1}
+.notes h3{font-size:clamp(1.4rem,1.1rem + 1vw,2rem);margin-bottom:.4rem}
+.notes p{font-size:clamp(1.05rem,1rem + .3vw,1.25rem)}
+
+/* footer */
+footer{padding:clamp(40px,6vw,80px) var(--m) 0;overflow:hidden}
+footer .row{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;color:var(--chalk)}
+footer .row p{color:#CFC6B9}
+footer .giant{font:400 36vw/.74 var(--display);font-variation-settings:"SOFT" 100,"WONK" 1;letter-spacing:-.06em;margin:clamp(2rem,5vw,4rem) 0 -.04em -.04em;color:#2D2620;user-select:none}
+
+/* cart */
+.veil{position:fixed;inset:0;background:rgba(23,18,15,.5);z-index:40;opacity:0;visibility:hidden;transition:opacity 240ms var(--ease-out),visibility 240ms}
+aside.cart{position:fixed;top:0;right:0;bottom:0;width:min(440px,100vw);background:var(--ground);z-index:50;transform:translateX(100%);visibility:hidden;transition:transform 320ms cubic-bezier(.32,.72,0,1),visibility 320ms;display:flex;flex-direction:column;padding:1.2rem 1.4rem;border-left:1px solid var(--ink)}
+body.cart-open .veil{opacity:1;visibility:visible}
+body.cart-open aside.cart{transform:none;visibility:visible}
+.cart header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--ink);padding-bottom:.8rem}
+.cart h2{font-size:1.8rem}
+.cart .close{border:1px solid var(--ink);background:transparent;min-height:44px;min-width:44px;border-radius:2px}
+.cart ul{list-style:none;padding:0;overflow:auto;flex:1;margin:.4rem 0}
+.cart li{display:grid;grid-template-columns:1fr auto;gap:.2rem 1rem;padding:.9rem 0;border-bottom:1px solid var(--line);align-items:center}
+.cart li b{font:500 1.25rem var(--display)}
+.qty{display:inline-flex;align-items:center;gap:.2rem}
+.qty button{width:44px;height:44px;border:1px solid var(--line);background:transparent;border-radius:2px;font-size:1.1rem}
+.qty span{min-width:2ch;text-align:center;font-variant-numeric:tabular-nums}
+.cart .empty{color:var(--muted);padding:1rem 0}
+.sums{border-top:1px solid var(--ink);padding-top:.8rem;display:grid;gap:.35rem}
+.sums div{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}
+.sums .tot{font:500 1.5rem var(--display);padding-top:.4rem}
+.sums .hint{color:var(--muted);font-size:.9rem;display:block}
+.cart .btn{width:100%;margin-top:.8rem}
+#msg{color:var(--muted);font-size:.9rem;min-height:1.4em;margin-top:.5rem}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .hero .head,.hero .buy{grid-column:1/-1}
+  .hero .buy{margin-top:2rem}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .fire h2,.fire .intro p{grid-column:1/-1}
+}
+@media (max-width:560px){
+  nav.main a{font-size:.88rem}
+  .grid{grid-template-columns:1fr}
+  .board li{grid-template-columns:2rem 1fr}
+  .board li>.flap:last-of-type,.board .dur{grid-column:2/-1}
+  .logo{font-size:1.45rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:.01ms!important;animation:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- shared SVG defs: glaze, flame flashes, silhouettes -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="glaze" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D6D0B8"/><stop offset=".55" stop-color="#B5AD90"/><stop offset="1" stop-color="#8D7E66"/></linearGradient>
+    <radialGradient id="f1"><stop offset="0" stop-color="#B5602F" stop-opacity=".6"/><stop offset="1" stop-color="#B5602F" stop-opacity="0"/></radialGradient>
+    <radialGradient id="f2"><stop offset="0" stop-color="#6E4228" stop-opacity=".55"/><stop offset="1" stop-color="#6E4228" stop-opacity="0"/></radialGradient>
+    <radialGradient id="f3"><stop offset="0" stop-color="#E2A560" stop-opacity=".6"/><stop offset="1" stop-color="#E2A560" stop-opacity="0"/></radialGradient>
+    <radialGradient id="f4"><stop offset="0" stop-color="#43372C" stop-opacity=".5"/><stop offset="1" stop-color="#43372C" stop-opacity="0"/></radialGradient>
+    <clipPath id="clip-cup"><path d="M58 58H142L131 150Q129 166 113 166H87Q71 166 69 150Z"/></clipPath>
+    <clipPath id="clip-plate"><path d="M14 118A86 26 0 1 0 186 118A86 26 0 1 0 14 118Z"/></clipPath>
+    <clipPath id="clip-vase"><path d="M86 24H114L111 62Q152 92 149 132Q147 172 120 176H80Q53 172 51 132Q48 92 89 62Z"/></clipPath>
+    <clipPath id="clip-jug"><path d="M62 66H126Q142 108 134 150Q132 168 114 168H76Q58 168 56 150Q48 108 62 66Z"/></clipPath>
+    <clipPath id="clip-bowl"><path d="M46 96H154Q152 138 118 152H82Q48 138 46 96Z"/></clipPath>
+    <clipPath id="clip-rice"><path d="M30 82H170Q172 138 126 160H74Q28 138 30 82Z"/></clipPath>
+  </defs>
+</svg>
+
+<header class="top">
+  <a class="logo" href="#top" aria-label="Mati, home">Mati</a>
+  <nav class="main" aria-label="Primary">
+    <a href="#shop">Shop</a>
+    <a href="#firing">The firing</a>
+    <a href="#notes">Notes</a>
+  </nav>
+  <button class="cartbtn" id="cartbtn" aria-expanded="false" aria-controls="cart" aria-label="Open cart, 0 items">
+    <span>Cart</span><span class="flap" id="count" aria-hidden="true"></span>
+  </button>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="head">
+    <p class="mono" style="color:var(--muted);margin-bottom:1.2rem">Rajshahi · Rina &amp; Sohel</p>
+    <h1>Marked<br>by the <em>flame.</em><sup>1</sup></h1>
+    <p class="lede">Wood-fired cups, plates and vases, made in small batches of 20–40 pieces per firing.</p>
+    <p class="fn"><span aria-hidden="true">1</span> <span class="sr">Note 1:</span> Each Firing Cup is marked differently by the flame.</p>
+  </div>
+  <div class="buy">
+    <div class="fig" id="herofig">
+      <span class="mono cap">Fig. 01 · illustration</span>
+      <div id="heroware"></div>
+      <button class="another" id="another" type="button">See another mark</button>
+    </div>
+    <div class="panel">
+      <div class="row1"><h2>The Firing Cup</h2><span class="p price">৳1,200</span></div>
+      <small>250 ml · wood-fired stoneware · ash glaze. Your cup will carry its own marks.</small>
+      <p class="when"><span>Next firing <b>18 November</b></span><span><b>32 pieces</b></span></p>
+      <button class="btn" type="button" data-add="cup" id="heroadd">Add to cart</button>
+      <small>Ships in 3–5 days inside Bangladesh · ৳150 flat, free over ৳5,000</small>
+    </div>
+  </div>
+</section>
+
+<section class="shop" id="shop" aria-labelledby="shop-h">
+  <div class="sec-head">
+    <h2 id="shop-h">Also from the kiln</h2>
+    <span class="mono" style="color:var(--muted)">Plates 02–06</span>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="fire dark" id="firing" aria-labelledby="fire-h">
+  <div class="intro">
+    <span class="mono">The firing, as a timetable</span>
+    <h2 id="fire-h">Three days, thirty-six hours, <i>four days.</i></h2>
+    <p>Every piece waits through the same schedule: the kiln is stacked, fired with mango wood, then left to cool. About eight and a half days in all, and the flame decides where the ash lands.</p>
+  </div>
+  <ol class="board" id="board">
+    <li><span class="n">01</span><span class="sr">Stacking, 3 days</span><span class="flap" data-t="Stacking" aria-hidden="true"></span><span class="flap dur" data-t="3 days" aria-hidden="true"></span></li>
+    <li><span class="n">02</span><span class="sr">Firing with mango wood, 36 hours</span><span class="flap" data-t="Mango wood fire" aria-hidden="true"></span><span class="flap dur" data-t="36 hours" aria-hidden="true"></span></li>
+    <li><span class="n">03</span><span class="sr">Cooling, 4 days</span><span class="flap" data-t="Cooling" aria-hidden="true"></span><span class="flap dur" data-t="4 days" aria-hidden="true"></span></li>
+    <li class="sum"><span class="n">∑</span><span class="sr">One firing, about 8 and a half days</span><span class="flap" data-t="One firing" aria-hidden="true"></span><span class="flap dur" data-t="8½ days" aria-hidden="true"></span></li>
+    <li class="next"><span class="n">→</span><span class="sr">Next firing, 18 November, 32 pieces</span><span class="flap" data-t="Next firing" aria-hidden="true"></span><span class="flap dur" data-t="18 Nov" aria-hidden="true"></span><span class="extra mono">32 pieces</span></li>
+  </ol>
+</section>
+
+<section class="notes" id="notes" aria-labelledby="notes-h">
+  <div class="sec-head"><h2 id="notes-h">Notes in the margin</h2></div>
+  <ol>
+    <li><span class="k" aria-hidden="true">2</span><div><h3>Shipping</h3><p>3–5 days inside Bangladesh. ৳150 flat; free over ৳5,000. Mati ships within Bangladesh only.</p></div></li>
+    <li><span class="k" aria-hidden="true">3</span><div><h3>Care</h3><p>Dishwasher safe. Not for the microwave.</p></div></li>
+    <li><span class="k" aria-hidden="true">4</span><div><h3>Batches</h3><p>Each firing makes 20–40 pieces. The next one is on 18 November, with 32 pieces.</p></div></li>
+  </ol>
+</section>
+</main>
+
+<footer class="dark">
+  <div class="row">
+    <p>Mati · a two-person ceramics studio in Rajshahi, Bangladesh.<br>Rina and Sohel.</p>
+    <p>Set in Fraunces and Hanken Grotesk.<br>Drawn in SVG, fired in the mind.</p>
+  </div>
+  <div class="giant" aria-hidden="true">Mati</div>
+</footer>
+
+<div class="veil" id="veil"></div>
+<aside class="cart" id="cart" aria-label="Cart" aria-hidden="true">
+  <header>
+    <h2>Your cart</h2>
+    <button class="close" id="close" type="button" aria-label="Close cart">✕</button>
+  </header>
+  <ul id="lines"></ul>
+  <div class="sums">
+    <div><span>Subtotal</span><span id="sub" class="price">৳0</span></div>
+    <div><span>Delivery</span><span id="ship" class="price">–</span></div>
+    <span class="hint" id="hint"></span>
+    <div class="tot"><span>Total</span><span id="tot" class="price">৳0</span></div>
+  </div>
+  <button class="btn" id="checkout" type="button">Checkout</button>
+  <p id="msg" role="status"></p>
+</aside>
+<div class="sr" id="live" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  const $=(s,r=document)=>r.querySelector(s);
+  const rm=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fmt=n=>'৳'+n.toLocaleString('en-US');
+
+  /* ---------- products ---------- */
+  const P=[
+    {id:'cup',name:'The Firing Cup',price:1200,kind:'cup',seed:7,label:'Firing Cup'},
+    {id:'plate',name:'Morning Plate',price:1800,kind:'plate',seed:23,label:'Plate'},
+    {id:'vase',name:'Tall Vase',price:6500,kind:'vase',seed:41,label:'Vase'},
+    {id:'jug',name:'Pour Jug',price:3200,kind:'jug',seed:58,label:'Jug'},
+    {id:'bowl',name:'Small Bowl',price:800,kind:'bowl',seed:77,label:'Bowl'},
+    {id:'rice',name:'Rice Bowl',price:1400,kind:'rice',seed:94,label:'Bowl'}
+  ];
+  const byId=Object.fromEntries(P.map(p=>[p.id,p]));
+
+  /* ---------- illustration: each piece gets its own flame marks ---------- */
+  const S={
+    cup:{d:"M58 58H142L131 150Q129 166 113 166H87Q71 166 69 150Z",top:58,y:168,rim:'<ellipse cx="100" cy="58" rx="42" ry="6"/>'},
+    plate:{d:"M14 118A86 26 0 1 0 186 118A86 26 0 1 0 14 118Z",top:96,y:146,rim:'<ellipse cx="100" cy="116" rx="62" ry="16"/>'},
+    vase:{d:"M86 24H114L111 62Q152 92 149 132Q147 172 120 176H80Q53 172 51 132Q48 92 89 62Z",top:24,y:178,rim:'<ellipse cx="100" cy="24" rx="14" ry="3"/>'},
+    jug:{d:"M62 66H126Q142 108 134 150Q132 168 114 168H76Q58 168 56 150Q48 108 62 66Z",top:66,y:170,rim:'<ellipse cx="94" cy="66" rx="32" ry="5"/>',back:'<path d="M128 84Q172 84 160 122Q154 140 134 138" fill="none" stroke="#9B9179" stroke-width="9" stroke-linecap="round"/>'},
+    bowl:{d:"M46 96H154Q152 138 118 152H82Q48 138 46 96Z",top:96,y:154,rim:'<ellipse cx="100" cy="96" rx="54" ry="7"/>'},
+    rice:{d:"M30 82H170Q172 138 126 160H74Q28 138 30 82Z",top:82,y:162,rim:'<ellipse cx="100" cy="82" rx="70" ry="9"/>'}
+  };
+  function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+  function ware(kind,seed,label){
+    const s=S[kind],r=rng(seed);let m='';
+    const n=6+Math.floor(r()*4);
+    for(let i=0;i<n;i++){
+      m+=`<circle cx="${(20+r()*160).toFixed(1)}" cy="${(30+r()*140).toFixed(1)}" r="${(16+r()*36).toFixed(1)}" fill="url(#f${1+Math.floor(r()*4)})" opacity="${(.5+r()*.5).toFixed(2)}"/>`;
+    }
+    for(let i=0;i<3;i++){
+      const w=4+r()*6,x=40+r()*120,h=18+r()*46;
+      m+=`<rect x="${x.toFixed(1)}" y="${s.top-2}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" rx="${(w/2).toFixed(1)}" fill="#ECE8D6" opacity=".55"/>`;
+    }
+    for(let i=0;i<18;i++){
+      m+=`<circle cx="${(20+r()*160).toFixed(1)}" cy="${(30+r()*140).toFixed(1)}" r="${(.6+r()*.9).toFixed(1)}" fill="#3A2C22" opacity=".5"/>`;
+    }
+    return `<svg viewBox="0 0 200 200" role="img" aria-label="Illustration of the ${label}, with its own flame marks">
+      <ellipse cx="100" cy="${s.y}" rx="62" ry="5" fill="#2A241E" opacity=".18"/>
+      ${s.back||''}
+      <path d="${s.d}" fill="url(#glaze)"/>
+      <g clip-path="url(#clip-${kind})">${m}</g>
+      <path d="${s.d}" fill="none" stroke="#2A241E" stroke-opacity=".4"/>
+      <g fill="#3A2F26" fill-opacity=".32" stroke="#2A241E" stroke-opacity=".45">${s.rim}</g>
+    </svg>`;
+  }
+
+  /* hero cup */
+  const seeds=[7,19,42,63,88,105];let si=0;
+  const hw=$('#heroware');
+  function drawHero(){hw.innerHTML=ware('cup',seeds[si],'Firing Cup')}
+  drawHero();
+  $('#another').addEventListener('click',()=>{si=(si+1)%seeds.length;drawHero();$('#live').textContent='Showing another mark.'});
+
+  /* shop grid */
+  const grid=$('#grid');
+  P.slice(1).forEach((p,i)=>{
+    const n=String(i+2).padStart(2,'0');
+    grid.insertAdjacentHTML('beforeend',`<article class="card">
+      <div class="fig">${ware(p.kind,p.seed,p.name)}</div>
+      <div class="meta">
+        <span class="mono">Fig. ${n} · ${p.label}</span>
+        <div class="t"><h3>${p.name}</h3><span class="price">${fmt(p.price)}</span></div>
+        <button class="btn line" type="button" data-add="${p.id}" aria-label="Add ${p.name} to cart">Add to cart</button>
+      </div></article>`);
+  });
+  grid.insertAdjacentHTML('beforeend',`<aside class="margin" aria-label="Margin note">
+    <big aria-hidden="true">20–40</big>
+    <p>pieces per firing. The next firing is on 18 November, with 32 pieces. <a href="#firing">See how it goes.</a></p></aside>`);
+
+  /* ---------- departure-board flap ---------- */
+  const G='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  function build(el,text){
+    el.textContent='';
+    text.toUpperCase().split(' ').forEach(w=>{
+      const wd=document.createElement('span');wd.className='w';
+      [...w].forEach(c=>{const s=document.createElement('span');s.className='cell';s.dataset.c=c;s.textContent=c;wd.appendChild(s)});
+      el.appendChild(wd);
+    });
+  }
+  function flip(el){
+    if(rm())return;
+    const cells=[...el.querySelectorAll('.cell')];
+    const steps=cells.map((_,i)=>6+i*2+Math.floor(Math.random()*3));
+    let t=0;
+    const id=setInterval(()=>{
+      t++;let done=true;
+      cells.forEach((c,i)=>{
+        if(t>=steps[i])c.textContent=c.dataset.c;
+        else{done=false;c.textContent=G[Math.floor(Math.random()*G.length)]}
+      });
+      if(done)clearInterval(id);
+    },45);
+  }
+  function setFlap(el,text,animate){build(el,text);if(animate)flip(el)}
+
+  const rows=[...document.querySelectorAll('#board li')];
+  rows.forEach(li=>li.querySelectorAll('.flap').forEach(f=>build(f,f.dataset.t)));
+  if('IntersectionObserver' in window&&!rm()){
+    const io=new IntersectionObserver(es=>{
+      es.forEach(e=>{
+        if(!e.isIntersecting)return;
+        io.unobserve(e.target);
+        const i=rows.indexOf(e.target);
+        setTimeout(()=>e.target.querySelectorAll('.flap').forEach(flip),i*180);
+      });
+    },{threshold:.6});
+    rows.forEach(r=>io.observe(r));
+  }
+
+  /* ---------- cart ---------- */
+  const cart={};
+  const cb=$('#cartbtn'),panel=$('#cart');
+  let opener=null;
+  function totals(){
+    let n=0,sub=0;
+    for(const id in cart){n+=cart[id];sub+=cart[id]*byId[id].price}
+    const ship=n===0?0:(sub>5000?0:150);
+    return{n,sub,ship,tot:sub+ship};
+  }
+  let lastN=-1;
+  function render(){
+    const t=totals();
+    const ul=$('#lines');ul.innerHTML='';
+    const ids=Object.keys(cart);
+    if(!ids.length)ul.innerHTML='<li class="empty" style="display:block;border:0">Nothing here yet. The Firing Cup is a good place to start.</li>';
+    ids.forEach(id=>{
+      const p=byId[id];
+      ul.insertAdjacentHTML('beforeend',`<li><b>${p.name}</b><span class="price">${fmt(p.price*cart[id])}</span>
+        <span class="qty"><button type="button" data-dec="${id}" aria-label="Remove one ${p.name}">−</button><span aria-label="Quantity">${cart[id]}</span><button type="button" data-inc="${id}" aria-label="Add one ${p.name}">+</button></span><span></span></li>`);
+    });
+    $('#sub').textContent=fmt(t.sub);
+    $('#ship').textContent=t.n===0?'–':(t.ship===0?'Free':fmt(t.ship));
+    $('#tot').textContent=fmt(t.tot);
+    $('#hint').textContent=t.n>0&&t.sub<=5000?`Add ${fmt(5000-t.sub+1)} more for free delivery.`:'';
+    cb.setAttribute('aria-label',`Open cart, ${t.n} item${t.n===1?'':'s'}`);
+    setFlap($('#count'),String(t.n),t.n!==lastN&&lastN!==-1);
+    lastN=t.n;
+  }
+  function add(id,btn){
+    cart[id]=(cart[id]||0)+1;
+    render();
+    $('#live').textContent=`${byId[id].name} added. ${totals().n} in cart.`;
+    $('#msg').textContent='';
+    if(btn){
+      const old=btn.dataset.l||btn.textContent;btn.dataset.l=old;
+      btn.textContent='Added ✓';clearTimeout(btn._t);
+      btn._t=setTimeout(()=>{btn.textContent=old},1200);
+    }
+  }
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('[data-add]');if(a)return add(a.dataset.add,a);
+    const i=e.target.closest('[data-inc]');if(i){cart[i.dataset.inc]++;return render()}
+    const d=e.target.closest('[data-dec]');
+    if(d){const id=d.dataset.dec;cart[id]--;if(cart[id]<=0)delete cart[id];render()}
+  });
+  function open(){
+    opener=document.activeElement;
+    document.body.classList.add('cart-open');
+    panel.setAttribute('aria-hidden','false');cb.setAttribute('aria-expanded','true');
+    setTimeout(()=>$('#close').focus(),30);
+  }
+  function close(){
+    document.body.classList.remove('cart-open');
+    panel.setAttribute('aria-hidden','true');cb.setAttribute('aria-expanded','false');
+    (opener||cb).focus();
+  }
+  cb.addEventListener('click',open);
+  $('#close').addEventListener('click',close);
+  $('#veil').addEventListener('click',close);
+  document.addEventListener('keydown',e=>{
+    if(!document.body.classList.contains('cart-open'))return;
+    if(e.key==='Escape')close();
+    if(e.key==='Tab'){
+      const f=[...panel.querySelectorAll('button')].filter(b=>b.offsetParent!==null);
+      const first=f[0],last=f[f.length-1];
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+      else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+    }
+  });
+  $('#checkout').addEventListener('click',()=>{
+    $('#msg').textContent=totals().n?"Checkout isn't connected in this preview. Your cart stays on this page.":'Add something to the cart first.';
+  });
+  render();
+})();
+</script>
+</body>
+</html>

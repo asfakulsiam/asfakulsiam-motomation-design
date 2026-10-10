@@ -1,0 +1,52 @@
+{
+ "375": {
+  "loadMs": 1677,
+  "pageHeight": 5677,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "loadMs": 1043,
+  "pageHeight": 6019,
+  "errors": [
+   "Failed to load resource: the server responded with a status of 404 (File not found)"
+  ],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 5,
+    "text": "Pricing",
+    "href": "#pricing",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 24285,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "usesGSAP": true,
+   "stamp": true
+  }
+ },
+ "slug": "saas",
+ "cond": "skill",
+ "1440-reduced": {
+  "loadMs": 961,
+  "pageHeight": 5119,
+  "errors": [],
+  "hOverflow": 0,
+  "hiddenTextUnderReducedMotion": 0
+ },
+ "375-reduced": {
+  "loadMs": 735,
+  "pageHeight": 4865,
+  "errors": [],
+  "hOverflow": 0,
+  "hiddenTextUnderReducedMotion": 0
+ }
+}

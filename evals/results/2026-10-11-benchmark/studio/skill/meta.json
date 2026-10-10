@@ -1,0 +1,9 @@
+{
+ "model": "claude_sonnet_5_5",
+ "condition": "skill",
+ "brief": "07-architecture-studio.md",
+ "finish_reason": "end_turn",
+ "seconds": 146,
+ "chars": 26566,
+ "invent": "COLLISION ENGINE \u00b7 category: Architecture / Real estate \u00b7 seed 2026\n\nDraw 1\n  Archetype  : The Catalogue (catalogue): numbered objects with spec sheets\n  Mutation   : Reverse the reveal: start complete and take away as you scroll\n  Collision  : metronome (music) \u2192 steal \"steady tick and swing\"\n               e.g. a stagger rhythm locked to a visible beat\n  Kinetic    : a word develops, driven by hover\n  Seed move  : Sticker Scatter: the logo bursts into on-brand stickers\n\nDraw 2\n  Archetype  : The Atlas (atlas): a map or diagram you move through\n  Mutation   : Invert the axis: vertical becomes horizontal or time runs backwards\n  Collision  : elevator panel (architecture) \u2192 steal \"floor numbers that light in sequence\"\n               e.g. section nav as lit floor numbers\n  Kinetic    : a line travels, driven by cursor distance\n  Seed move  : Ink Fill: statements fill with ink as you read\n\nDraw 3\n  Archetype  : The Lookbook (lookbook): full-bleed editorial spreads page by page\n  Mutation   : Borrow a print rule: marginalia, footnotes, folios or a colophon\n  Collision  : railway departure board (transport) \u2192 steal \"characters flip into place in rows\"\n               e.g. menus and prices that flip on change\n  Kinetic    : an image develops, driven by idle time\n  Seed move  : Hold to Commit: important actions fill while held\n\nDiversity (measured)\n  archetypes       : 3/3 unique  \u2713\n  signature seeds  : 3/3 unique  \u2713\n  mutations        : 3/3 unique  \u2713\n  collision worlds : 3/3 unique  \u2713\n\nTreat these as constraints, not answers. Combine, bend or reject them, but start from them.\nNext: write Tension \u2192 Concept with one draw, then run the Thinking Sequence (thinking/sequence.md).\n"
+}

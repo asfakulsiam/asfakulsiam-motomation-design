@@ -1,0 +1,59 @@
+{
+ "model": "gemini_3_1_pro",
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 2,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "A clean and functional execution that safely meets the brief using familiar non-profit website patterns. While technically competent and accessible, the design lacks a distinctive conceptual hook or original visual identity, resulting in a somewhat generic feel."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "An exceptionally strong, editorial approach that elevates the content through stark, beautiful typography and unique structural choices like the countdown side-navigation. Details like the 140-dot visualization for the replanted area demonstrate a deep engagement with the brief's specifics."
+  },
+  "better": "B",
+  "why": "Site B offers a far more original and sophisticated design, utilizing excellent typography and clever layout structure to create a highly memorable experience."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 2,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "A clean and functional execution that safely meets the brief using familiar non-profit website patterns. While technically competent and accessible, the design lacks a distinctive conceptual hook or original visual identity, resulting in a somewhat generic feel."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "An exceptionally strong, editorial approach that elevates the content through stark, beautiful typography and unique structural choices like the countdown side-navigation. Details like the 140-dot visualization for the replanted area demonstrate a deep engagement with the brief's specifics."
+ }
+}

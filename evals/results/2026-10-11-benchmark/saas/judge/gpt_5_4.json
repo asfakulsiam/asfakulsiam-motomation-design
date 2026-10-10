@@ -1,0 +1,59 @@
+{
+ "model": "gpt_5_4",
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [],
+   "notes": "A is clear and competent, with the terminal-to-result story shown early and the brief covered faithfully, but the idea stays at 'dark SaaS landing page' rather than becoming a distinct point of view. Typography and spacing are solid but conventional, and the 375px horizontal overflow is a meaningful craft/access deduction on a benchmark that explicitly requires mobile fit."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B has a strong, unified editorial-console concept: the log stream, elegant serif display, green terminal palette, and section copy all reinforce the same idea. It is much more distinctive while still serving the audience and brief, and the measured checks are cleaner on mobile and reduced motion; motion cannot be fully verified from stills, but the design strongly suggests purposeful storytelling rather than decoration."
+  },
+  "better": "B",
+  "why": "B is the more coherent and original design system, with stronger typography, cleaner mobile execution, and no measured responsiveness issue."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [],
+  "notes": "A is clear and competent, with the terminal-to-result story shown early and the brief covered faithfully, but the idea stays at 'dark SaaS landing page' rather than becoming a distinct point of view. Typography and spacing are solid but conventional, and the 375px horizontal overflow is a meaningful craft/access deduction on a benchmark that explicitly requires mobile fit."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B has a strong, unified editorial-console concept: the log stream, elegant serif display, green terminal palette, and section copy all reinforce the same idea. It is much more distinctive while still serving the audience and brief, and the measured checks are cleaner on mobile and reduced motion; motion cannot be fully verified from stills, but the design strongly suggests purposeful storytelling rather than decoration."
+ }
+}

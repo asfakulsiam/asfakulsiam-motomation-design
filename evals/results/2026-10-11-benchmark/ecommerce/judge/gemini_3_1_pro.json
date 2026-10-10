@@ -1,0 +1,59 @@
+{
+ "model": "gemini_3_1_pro",
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "A clean, functional e-commerce interpretation of the brief. While the dark timeline section adds visual interest, the overall layout and typographic choices feel familiar and safely standard."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "An exceptional execution with a strong editorial identity that perfectly suits the artisanal ceramics. Features like the footnote structure, split-flap timetable, and the interactive 'See another mark' button show incredible attention to detail and originality."
+  },
+  "better": "B",
+  "why": "Site B elevates the brief from a standard shop into a beautifully crafted, editorial experience with flawless typography and highly original structural choices."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "A clean, functional e-commerce interpretation of the brief. While the dark timeline section adds visual interest, the overall layout and typographic choices feel familiar and safely standard."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "An exceptional execution with a strong editorial identity that perfectly suits the artisanal ceramics. Features like the footnote structure, split-flap timetable, and the interactive 'See another mark' button show incredible attention to detail and originality."
+ }
+}

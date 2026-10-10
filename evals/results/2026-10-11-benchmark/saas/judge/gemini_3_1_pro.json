@@ -1,0 +1,59 @@
+{
+ "model": "gemini_3_1_pro",
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 2,
+    "Originality": 1,
+    "Typography": 2,
+    "Motion": 3,
+    "Craft": 1,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "The design relies heavily on a standard SaaS template approach, lacking a distinct identity or memorable concept. Furthermore, the 110px horizontal overflow on mobile represents a significant failure in basic responsive craft."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "An exceptionally strong and original take on a developer tool, using unexpected editorial typography (the bold serif italic) to create a highly memorable signature. The bespoke layout of the terminal mockups and flawless technical execution make it outstanding."
+  },
+  "better": "B",
+  "why": "Site B delivers a highly original, meticulously crafted design with a powerful typographic identity, whereas Site A is a generic template suffering from a major mobile layout bug."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 2,
+   "Originality": 1,
+   "Typography": 2,
+   "Motion": 3,
+   "Craft": 1,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "The design relies heavily on a standard SaaS template approach, lacking a distinct identity or memorable concept. Furthermore, the 110px horizontal overflow on mobile represents a significant failure in basic responsive craft."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "An exceptionally strong and original take on a developer tool, using unexpected editorial typography (the bold serif italic) to create a highly memorable signature. The bespoke layout of the terminal mockups and flawless technical execution make it outstanding."
+ }
+}
