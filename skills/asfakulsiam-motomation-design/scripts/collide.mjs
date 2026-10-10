@@ -4,7 +4,7 @@
 // Diversity: draws are taken WITHOUT replacement. Archetypes and signature seeds never repeat inside one run;
 // mutations and collision worlds (with --spread) don't repeat either until their pool runs out, and the output
 // says exactly when that happened. Nothing overlaps silently.
-import { load, args, rng, pick } from "./lib.mjs";
+import { load, args, rng, pick, fingerprint, similarity, fpText } from "./lib.mjs";
 import { recent } from "./memory.mjs";
 
 const a = args();
@@ -64,6 +64,16 @@ for (let i = 0; i < n; i++) {
   });
 }
 
+// Each draw's structural fingerprint (layout family, signature type, tier). Sections and type scale come later, in
+// the plan, so this is partial; it's compared against the project log so a draw that rebuilds a recent page is flagged.
+const logged = recent(5), allSignatures = load("signatures");
+for (const d of draws) {
+  d.fingerprint = fingerprint({ archetype: d.archetype, signature: d.signature_seed.id, tier: d.signature_seed.tier }, allSignatures);
+  const best = logged.map((r) => similarity(d.fingerprint, r.fingerprint || fingerprint({ archetype: r.archetype, signature: r.signature, tier: r.tier }, allSignatures)))
+    .filter((x) => x.compared >= 2).sort((x, y) => y.score - x.score)[0];
+  d.closest_logged = best ? best.score : null;
+}
+
 // What diversity this run actually achieved (counted, not promised)
 const uniq = (f) => new Set(draws.map(f)).size;
 const diversity = {
@@ -86,6 +96,7 @@ draws.forEach((d, i) => {
   console.log(`               e.g. ${d.collision.becomes}`);
   console.log(`  Kinetic    : ${d.kinetic}`);
   console.log(`  Seed move  : ${d.signature_seed.name}: ${d.signature_seed.one_line}`);
+  console.log(`  Fingerprint: ${fpText(d.fingerprint)}${d.closest_logged == null ? "" : `  (closest logged run: ${Math.round(d.closest_logged * 100)}%${d.closest_logged >= 0.7 ? " ⚠ rebuilds a recent page" : ""})`}`);
   console.log("");
 });
 const line = (label, got, poolName) => {
