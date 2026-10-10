@@ -2350,9 +2350,10 @@ Type a command at the start of a message. Commands combine with flags. Without a
 **Output:** preview block → complete code → Delivery Gate scores → handoff note.
 
 #### `/invent [topic]`
-**What:** runs the collision engine (`scripts/collide.mjs --n 3 --spread`) and proposes **three different concepts**, each with tension, concept, archetype + mutation, collision and signature.
+**What:** runs the collision engine (`scripts/collide.mjs --n 3 --spread`; `--count N` for more) and proposes **three different concepts**, each with tension, concept, archetype + mutation, collision and signature.
+**Guarantees (enforced by the script, reported in its "Diversity (measured)" block):** the three draws never share an archetype or a signature seed; mutations and collision worlds don't repeat either while their pools last (12 mutations, 20 archetypes, 22 signature seeds). When `--count` asks for more than a pool holds, the script says which pool ran out and from which draw repeats start; it never overlaps silently. Copy that block into the output. Without a shell, draw by hand and state that uniqueness was checked by eye.
 **When:** you're stuck, or the first idea feels familiar.
-**Output:** three concept cards. Pick one and continue with `/build`.
+**Output:** three concept cards plus the measured diversity line. Pick one and continue with `/build`.
 
 #### `/signature [section]`
 **What:** invents one signature move for the site or a section, bent from `signatures/` to the concept.
