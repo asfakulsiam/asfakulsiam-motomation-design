@@ -57,10 +57,16 @@
   .rail { position: absolute; left: 5vw; right: 5vw; bottom: 5vh; display: flex; gap: 1rem; align-items: center; font: 500 0.75rem var(--mono); font-variant-numeric: tabular-nums; letter-spacing: 0.08em; }
   .rail i { position: relative; flex: 1; height: 1px; background: var(--line); }
   .rail i b { position: absolute; inset: 0; background: var(--accent); transform-origin: left; transform: scaleX(0); }
-  @media (prefers-reduced-motion: no-preference) {
-    .js .film__static { display: none; }
-    .js .film__stage { display: block; }
-  }
+  .film__static a { text-decoration: none; }
+  /* Film mode: the storyboard stays in the accessibility tree (never display:none). Each figure is visually
+     hidden; a focused scene link turns its figure into a visible caption card over the stage. */
+  .film-on .film__static { padding: 0; gap: 0; }
+  .film-on .film__static figure { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .film-on .film__static figure:focus-within { position: fixed; left: 5vw; bottom: 14vh; z-index: 6; display: block; width: auto; height: auto; max-width: min(36ch, 90vw); overflow: visible; clip-path: none; white-space: normal; }
+  .film-on .film__static figure:focus-within canvas { display: none; }
+  .film-on .film__static figure:focus-within figcaption p:first-child { font-size: clamp(2.75rem, 8vw, 9rem); line-height: .88; }
+  .film-on .film:has(figure:focus-within) .scene { opacity: 0 !important; }
+  .film-on .film__stage { display: block; }
 
   .ask { min-height: 90svh; display: grid; align-content: center; justify-items: start; gap: 2rem; padding: 0 5vw; }
   .ask h2 { font: 800 clamp(3rem, 10vw, 11rem)/0.86 var(--display); font-variation-settings: "wdth" 60; text-transform: uppercase; letter-spacing: -0.02em; }
@@ -94,15 +100,15 @@
   </section>
 
   <section class="film" aria-label="The film, in four scenes">
-    <!-- Static storyboard: shown for reduced motion and without JavaScript -->
+    <!-- Storyboard: shown for reduced motion and without JavaScript; while the film runs it is the accessible narrative -->
     <div class="film__static">
-      <figure><canvas data-still="0.05" aria-hidden="true"></canvas><figcaption><p>Darkness</p><p>A single ring waits in an empty room.</p></figcaption></figure>
-      <figure><canvas data-still="0.35" aria-hidden="true"></canvas><figcaption><p>Orbit</p><p>The camera circles; the ring turns to show its depth.</p></figcaption></figure>
-      <figure><canvas data-still="0.62" aria-hidden="true"></canvas><figcaption><p>Exploded</p><p>Every strand separates so you can see how it's made.</p></figcaption></figure>
-      <figure><canvas data-still="0.95" aria-hidden="true"></canvas><figcaption><p>Whole</p><p>It closes into one form, the frame holds, and the page lets go.</p></figcaption></figure>
+      <figure id="scene-1"><canvas data-still="0.05" aria-hidden="true"></canvas><figcaption><p><a href="#scene-1" data-jump="0"><span class="sr-only">Scene 1 of 4: </span>Darkness</a></p><p>A single ring waits in an empty room.</p></figcaption></figure>
+      <figure id="scene-2"><canvas data-still="0.35" aria-hidden="true"></canvas><figcaption><p><a href="#scene-2" data-jump="1"><span class="sr-only">Scene 2 of 4: </span>Orbit</a></p><p>The camera circles; the ring turns to show its depth.</p></figcaption></figure>
+      <figure id="scene-3"><canvas data-still="0.62" aria-hidden="true"></canvas><figcaption><p><a href="#scene-3" data-jump="2"><span class="sr-only">Scene 3 of 4: </span>Exploded</a></p><p>Every strand separates so you can see how it's made.</p></figcaption></figure>
+      <figure id="scene-4"><canvas data-still="0.95" aria-hidden="true"></canvas><figcaption><p><a href="#scene-4" data-jump="3"><span class="sr-only">Scene 4 of 4: </span>Whole</a></p><p>It closes into one form, the frame holds, and the page lets go.</p></figcaption></figure>
     </div>
     <!-- Film stage: pinned and scrubbed -->
-    <div class="film__stage">
+    <div class="film__stage" aria-hidden="true"><!-- visual mirror of the storyboard above -->
       <canvas aria-hidden="true"></canvas>
       <div class="scene" data-scene><p>Darkness</p><p>A single ring waits in an empty room.</p></div>
       <div class="scene" data-scene><p>Orbit</p><p>The camera circles; the ring turns to show its depth.</p></div>
@@ -178,6 +184,7 @@
   mm.add({ motion: "(prefers-reduced-motion: no-preference)", fine: "(hover: hover) and (pointer: fine)", mobile: "(max-width: 767px)" }, (ctx) => {
     const { motion, fine, mobile } = ctx.conditions;
     if (!motion) return;
+    document.documentElement.classList.add("film-on"); // CSS swaps the visible storyboard for the stage
 
     // Line Curtain on headings and statements
     document.querySelectorAll("[data-lines]").forEach((el) => SplitText.create(el, {
@@ -227,8 +234,18 @@
     });
     draw(); addEventListener("resize", draw);
 
+    // Keyboard + screen reader: focusing a scene link scrubs the film to the middle of that scene
+    const st = tl.scrollTrigger;
+    const jumps = [...document.querySelectorAll("[data-jump]")];
+    const jump = (e) => { const [a, b] = scenes[+e.currentTarget.dataset.jump];
+      requestAnimationFrame(() => scrollTo({ top: st.start + (st.end - st.start) * (a + b) / 2, behavior: "instant" })); };
+    const click = (e) => { e.preventDefault(); jump(e); };
+    jumps.forEach((a) => { a.addEventListener("focus", jump); a.addEventListener("click", click); });
+
     document.fonts?.ready.then(() => ScrollTrigger.refresh());
-    return () => { removeEventListener("resize", draw); if (onMove) removeEventListener("pointermove", onMove); split.revert(); };
+    return () => { removeEventListener("resize", draw); if (onMove) removeEventListener("pointermove", onMove); split.revert();
+      jumps.forEach((a) => { a.removeEventListener("focus", jump); a.removeEventListener("click", click); });
+      document.documentElement.classList.remove("film-on"); };
   });
 })();
 </script>

@@ -2,7 +2,10 @@
 // Tier 5 Motomation: a pinned image-sequence film scrubbed by scroll, with scene type and a timecode rail.
 // Timeline duration is 1, so scene positions are the storyboard timecodes from MOTION.md.
 // Reduced motion, no-JS, and Save-Data visitors get the static storyboard frames instead.
-import { useRef } from "react";
+// Accessibility: the storyboard is the canonical narrative and is never display:none. While the film runs it is
+// visually hidden but stays in the accessibility tree, so a screen reader reads every scene in order without
+// scrolling. Each scene title is a link: focusing it scrubs the film to that scene and shows the caption card.
+import { useId, useRef } from "react";
 import { gsap, useGSAP, MQ } from "../lib/gsap";
 
 export type Scene = { from: number; to: number; title: string; caption?: string; still: string; alt: string };
@@ -23,6 +26,7 @@ const tc = (s: number) => {
 export function ImageSequenceFilm({ frames, src, scenes, length = { desktop: 500, mobile: 300 }, seconds = 24 }: Props) {
   const root = useRef<HTMLElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
+  const uid = useId().replace(/:/g, "");
 
   useGSAP(() => {
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
@@ -88,22 +92,41 @@ export function ImageSequenceFilm({ frames, src, scenes, length = { desktop: 500
         if (i < scenes.length - 1) tl.to(sel, { autoAlpha: 0, yPercent: -30, duration: io }, s.to - io);
       });
 
+      // Keyboard + screen reader: focusing a scene link scrubs the film to the middle of that scene
+      const st = tl.scrollTrigger!;
+      const jumps = [...root.current.querySelectorAll<HTMLAnchorElement>("[data-jump]")];
+      const jump = (e: Event) => {
+        const s = scenes[Number((e.currentTarget as HTMLElement).dataset.jump)];
+        if (s) requestAnimationFrame(() => scrollTo({ top: st.start + (st.end - st.start) * ((s.from + s.to) / 2), behavior: "instant" as ScrollBehavior }));
+      };
+      const click = (e: Event) => { e.preventDefault(); jump(e); };
+      jumps.forEach((a) => { a.addEventListener("focus", jump); a.addEventListener("click", click); });
+
       const onResize = () => draw(true);
       addEventListener("resize", onResize);
-      return () => { removeEventListener("resize", onResize); if (root.current) delete root.current.dataset.film; };
+      return () => {
+        removeEventListener("resize", onResize);
+        jumps.forEach((a) => { a.removeEventListener("focus", jump); a.removeEventListener("click", click); });
+        if (root.current) delete root.current.dataset.film;
+      };
     });
   }, { scope: root });
 
   return (
     <section ref={root} className="group relative bg-[var(--ground)] text-[var(--ink)]">
-      {/* Static storyboard: the default. Hidden only when the film is running. */}
-      <div className="grid gap-[12vh] px-[5vw] py-[12vh] group-data-[film=on]:hidden">
-        {scenes.map((s) => (
-          <figure key={s.title} className="grid gap-6 md:grid-cols-12">
+      <style>{FILM_A11Y_CSS}</style>
+      {/* Static storyboard: the default, and the accessible narrative. Visually hidden (never display:none) while the film runs. */}
+      <div data-storyboard className="grid gap-[12vh] px-[5vw] py-[12vh] group-data-[film=on]:gap-0 group-data-[film=on]:p-0">
+        {scenes.map((s, i) => (
+          <figure key={s.title} id={`${uid}-scene-${i}`} className="grid gap-6 md:grid-cols-12">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={s.still} alt={s.alt} loading="lazy" className="w-full md:col-span-8" />
             <figcaption className="md:col-span-4 md:self-end">
-              <p className="text-[clamp(1.75rem,3.5vw,3.5rem)] leading-[1.02] tracking-[-0.02em]">{s.title}</p>
+              <p className="text-[clamp(1.75rem,3.5vw,3.5rem)] leading-[1.02] tracking-[-0.02em]">
+                <a href={`#${uid}-scene-${i}`} data-jump={i} className="no-underline">
+                  <span className="sr-only">Scene {i + 1} of {scenes.length}: </span>{s.title}
+                </a>
+              </p>
               {s.caption && <p className="mt-3 text-[var(--muted)]">{s.caption}</p>}
             </figcaption>
           </figure>
@@ -113,7 +136,8 @@ export function ImageSequenceFilm({ frames, src, scenes, length = { desktop: 500
       {/* Film stage */}
       <div data-stage className="relative hidden h-[100svh] overflow-hidden group-data-[film=on]:block">
         <canvas ref={canvas} className="absolute inset-0 h-full w-full" aria-hidden="true" />
-        <div className="absolute inset-x-[5vw] bottom-[12vh]">
+        {/* Visual mirror of the storyboard: aria-hidden because the same text is already exposed above */}
+        <div className="absolute inset-x-[5vw] bottom-[12vh]" aria-hidden="true">
           {scenes.map((s, i) => (
             <div key={s.title} data-scene={i} className="invisible absolute bottom-0 left-0 max-w-[18ch]">
               <p className="text-[clamp(2.5rem,7vw,8rem)] leading-[0.92] tracking-[-0.03em]">{s.title}</p>
@@ -121,7 +145,7 @@ export function ImageSequenceFilm({ frames, src, scenes, length = { desktop: 500
             </div>
           ))}
         </div>
-        <div className="absolute inset-x-[5vw] bottom-[5vh] flex items-center gap-4 font-mono text-xs tabular-nums tracking-[0.08em]">
+        <div aria-hidden="true" className="absolute inset-x-[5vw] bottom-[5vh] flex items-center gap-4 font-mono text-xs tabular-nums tracking-[0.08em]">
           <span data-code>00:00:00</span>
           <span className="relative h-px flex-1 bg-[var(--line,rgba(127,127,127,.3))]">
             <span data-rail className="absolute inset-0 origin-left scale-x-0 bg-[var(--accent)]" />
@@ -132,3 +156,11 @@ export function ImageSequenceFilm({ frames, src, scenes, length = { desktop: 500
     </section>
   );
 }
+
+// Film-mode storyboard: visually hidden but readable; a focused scene becomes a visible caption card over the stage.
+const FILM_A11Y_CSS = `
+[data-film=on] [data-storyboard] figure{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+[data-film=on] [data-storyboard] figure:focus-within{position:fixed;left:5vw;bottom:12vh;z-index:10;width:auto;height:auto;max-width:min(40ch,90vw);overflow:visible;clip-path:none;white-space:normal;display:block}
+[data-film=on] [data-storyboard] figure:focus-within img{display:none}
+[data-film=on]:has([data-storyboard] figure:focus-within) [data-scene]{opacity:0!important}
+`;
