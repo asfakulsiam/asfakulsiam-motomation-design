@@ -2,6 +2,30 @@
 
 All notable changes to this skill. Versions follow [Semantic Versioning](https://semver.org).
 
+## [2.1.0] - 2026-10-11
+
+Fix run: fourteen tasks, applied in order. Listed newest first; each bullet names the task and the files it touched.
+
+### Changed
+- **Task 14 · Single-file edition rebuilt:** `dist/motomation-design.md` regenerated with `node scripts/build-dist.mjs` from the sources below; no manual edits.
+- **Task 13 · Version 2.1.0:** this entry; version bumped in `skills/asfakulsiam-motomation-design/VERSION`, `SKILL.md`, `package.json`, `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.cursor-plugin/plugin.json`, `.codex-plugin/plugin.json`, `gemini-extension.json` and the README badge.
+- **Task 12 · Standards vs house style:** `principles/restraint.md` separates universal standards (accessibility, restraint, motion discipline, real content, reduced-motion fallback, performance budgets) from house-style defaults a brief can override (minimal canvas, maximal type, editorial grid, monochrome + one accent, typography as hero). There's a new section in `SKILL.md`, one sentence in `principles/house-style.md`, and a one-line note in every `styles/*.md` and `categories/*.md`. The Restraint Gate is unchanged.
+
+### Added
+- **Task 11 · Structural fingerprints:** `scripts/lib.mjs` gains `fingerprint()`, `similarity()` and `mutationFor()` (layout family, type-scale bucket, section order, motion tier, signature type; deterministic, offline). `scripts/memory.mjs check` flags ≥ 70% structural overlap, names the matching run and dimensions, and offers a mutation; `log` stores the fingerprint (log schema v2; v1 logs still read); a new `fingerprint` command. `scripts/collide.mjs` prints each draw's fingerprint and closest-logged score. `thinking/sequence.md` step 6 is updated.
+- **Task 10 · Published results:** a "Results" section in `README.md`, `docs/benchmark-summary.md`, and before/after images in `docs/benchmark-images/` (one shows a loss).
+- **Task 9 · First benchmark:** five briefs expanded in `evals/briefs/` (02, 03, 04, 05, 07). The blind run, with and without the skill (two cross-family judges, measured hard gates), is in `evals/results/2026-10-11-benchmark.md`, with all outputs, screenshots and judge files in `evals/results/2026-10-11-benchmark/`. The skill won 3 of 5 briefs; the release gate is **not** met; failures are listed.
+
+### Fixed
+- **Task 8 · Tier 5 frame loading:** `examples/motomation/image-sequence-film.tsx` and the master pattern in `motion/tier-5-motomation.md` now load frames with bounded concurrency (6 desktop / 4 mobile), nearest-to-playhead first, and cancel and pause in hidden tabs and off-screen. There's a new "Loading strategy" section. Measured under Fast 3G + 6× CPU: peak in-flight requests fell from 180 to 6.
+- **Task 7 · Counts:** `README.md` now says 9 React components plus a shared GSAP module, not "10 components"; every other count was verified by command.
+- **Task 6 · Honest repetition claims:** "Never the same twice" and similar guarantees were replaced in `SKILL.md`, `README.md`, `scripts/collide.mjs` and `scripts/memory.mjs` with claims that map to real mechanisms and state their limits.
+- **Task 5 · `/invent` diversity:** `scripts/collide.mjs` draws without replacement, so archetypes and signature seeds never repeat inside a run. Mutations and collision worlds repeat only once their pool is exhausted, and the output says so. A "Diversity (measured)" report and a `--count` alias were added. `commands/overview.md` documents the guarantees.
+- **Task 4 · Node 18 in CI:** `.github/workflows/ci.yml` runs both jobs on Node 18 and 20 and smoke-tests the skill scripts.
+- **Task 3 · Doc ↔ example parity:** the master pattern in `motion/tier-5-motomation.md` matches `examples/motomation/image-sequence-film.tsx` (canvas sizing, nearest-frame draw, pin length, accessible fallback CSS).
+- **Task 2 · Accessible Tier 5 storyboard:** in `examples/motomation/image-sequence-film.tsx` and `examples/html/motomation-film.html`, the storyboard is never `display: none`; each scene is a keyboard-reachable link that scrubs the film, and the stage overlay is `aria-hidden`.
+- **Task 1 · Node 18 crash:** `scripts/lib.mjs` imports `webcrypto` from `node:crypto`, so `scripts/collide.mjs` runs on Node 18; seeded output is byte-identical on Node 18 and 20.
+
 ## [2.0.0] - 2026-10-10
 
 A full rebuild. Every file was rewritten from scratch.

@@ -7,7 +7,7 @@ Original, award-level websites that are minimal, modern and typography-led, with
 At the top tier, scrolling plays like a film.
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.0.0-E0442B?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2.1.0-E0442B?style=flat-square)](CHANGELOG.md)
 [![Agent Skill](https://img.shields.io/badge/agent%20skill-npx%20skills%20add-111111?style=flat-square)](#install)
 [![Zero dependencies](https://img.shields.io/badge/scripts-zero%20dependencies-111111?style=flat-square)](skills/asfakulsiam-motomation-design/scripts)
 

@@ -7,14 +7,14 @@
   },
   "metadata": {
     "description": "Motomation Design by asfakulsiam",
-    "version": "2.0.0"
+    "version": "2.1.0"
   },
   "plugins": [
     {
       "name": "asfakulsiam-motomation-design",
       "source": "./",
       "description": "Original, award-level, typography-led websites with motion as signature, up to scroll-as-film.",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "author": {
         "name": "asfakulsiam"
       },
