@@ -18,7 +18,7 @@
 // measure needs Playwright (+ axe-core for the axe numbers). judge shells out to --judge-cmd, which must print the
 // judge's JSON reply; the prompt and image list are written to files so any model or provider can be plugged in.
 import { spawn, spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, writeFileSync, cpSync, rmSync, readdirSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync, cpSync, rmSync, readdirSync, statSync } from "node:fs";
 import { join, resolve, dirname } from "node:path";
 import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
@@ -46,9 +46,10 @@ const OUT = resolve(flags.out || join(ROOT, `evals/results/${new Date().toISOStr
 const N = +(flags.n || 3);
 const only = flags.only ? String(flags.only).split(",") : Object.keys(BRIEFS).filter((k) => !BRIEFS[k].motion); // the v2 set by default
 // Arms: baseline (no skill), gated (baseline + the measured gate script only, no skill docs), skill. Default keeps v2's two arms.
-export const ARMS = ["baseline", "gated", "skill"];
+export const ARMS = ["baseline", "matched", "gated", "skill"];
 const arms = String(flags.arms || "baseline,skill").split(",").filter((a) => ARMS.includes(a));
 const TIER = flags.tier !== undefined ? +flags.tier : null; // force a motion tier (all arms are told the same tier)
+const MATCH_TURNS = +(flags["match-turns"] || 24); // matched arm: the skill arm's median turn count, passed in after the skill arm has run
 const runs = () => only.flatMap((slug) => BRIEFS[slug].seeds.slice(0, N).flatMap((seed) => arms.map((cond) => ({ slug, seed, cond, dir: join(OUT, slug, `${cond}-s${seed}`) }))));
 
 const TASK = "Build the website described in the brief below as a single self-contained index.html in the current folder (inline CSS and JS, no build step; Google Fonts/Fontshare and the GSAP CDN are allowed, no image URLs). Use only facts from the brief.";
@@ -59,6 +60,9 @@ export function promptFor({ slug, seed, cond }) {
   const brief = generatorBrief(slug);
   const tier = TIER === null ? "" : ` Build it at motion Tier ${TIER} (${TIER >= 5 ? "scroll-driven film: pinned, scrubbed sequences; WebGL allowed" : "signature scroll motion: pinned or scrubbed sections"}), with a reduced-motion version that keeps all content.`;
   if (cond === "baseline") return `You are an expert web designer and front-end developer. ${TASK}${tier} Check your work before you finish.\n\n${brief}`;
+  // matched = the baseline prompt with the skill arm's effort: the same turn budget, told to plan, look, critique and revise.
+  // If the skill only wins because it works longer, this arm closes the gap (v2.4.0, benchmark v3).
+  if (cond === "matched") return `You are an expert web designer and front-end developer. ${TASK}${tier} Take the time a careful designer would: you have about ${MATCH_TURNS} turns, and you should use most of them. Work in stages: (1) write down the concept and the design system (type, colour, layout, motion) before any code; (2) build; (3) look at the page at 1440px and 375px; (4) write a critique of what is weak, generic or broken; (5) revise; repeat looking, critiquing and revising at least twice. Check accessibility (contrast, keyboard, reduced motion) yourself before you finish.\n\n${brief}`;
   // gated = the baseline prompt plus the same measured gate the skill uses, without any of the skill's knowledge
   if (cond === "gated") return `You are an expert web designer and front-end developer. ${TASK}${tier} Before you finish, run \`node gate/gate.mjs index.html\` and fix every failure it reports until it prints PASS (if it prints "not verified", say so).\n\n${brief}`;
   return `Use the asfakulsiam-motomation-design skill: /build this brief. When you run the collision engine, use --seed ${seed}.${tier ? ` Force the motion tier: --tier=${TIER}.` : ""} ${TASK} Follow the skill end to end, including its Delivery Gate, and finish with the handoff.\n\n${brief}`;
@@ -86,6 +90,89 @@ function runAgent(r) {
       writeFileSync(join(r.dir, "run.json"), JSON.stringify(meta, null, 1)); console.log(`${r.slug} ${r.cond} s${r.seed}: exit ${code}, ${meta.turns} turns, ${meta.seconds}s, index.html ${meta.output ? "yes" : "MISSING"}`); ok(meta);
     });
   });
+}
+// ── raw-API agent (v2.4.0) ────────────────────────────────────────────────────────────────────────────────────────
+// For machines where no coding-agent CLI can run (benchmark v3 had Claude Code installed but could not launch it with
+// file permissions). A small, scripted tool loop around one model: every arm gets the same tools and the same turn cap.
+// Tools: <read path/>, <run>cmd</run> (node, ls, cat, wc, mkdir only; cwd = the run folder), <write path>…</write>,
+// <look path/> (screenshots at 1440 and 375, returned as images), <done/>. Skill arm: the system prompt is the skill's
+// SKILL.md and the skill folder is at
+// ./skill so its scripts run. Labelled "raw API" everywhere it is reported; it is not Claude Code.
+// Skill arm system prompt = SKILL.md (the router), as Claude Code loads a skill; every other file is read on demand.
+const TOOLS_DOC = `You work in a folder on a Linux machine through these tools. Use them by writing the tags in your reply; you may use several per reply, they run in order, and you get every result in the next message.
+<read path="relative/path"/>                     read a text file (or list a folder)
+<run>ls -la</run>                                  run a command in the folder. Allowed: node, ls, cat, wc, mkdir. No network installs.
+<write path="index.html">…full file content…</write>   create or overwrite a file (always the whole file)
+<look path="index.html"/>                        screenshots of the page at 1440px and 375px wide, returned as images
+<done/>                                          you are finished (only after index.html is written)
+Keep prose short; the work is in the files.`;
+function rawTools(reply) {
+  // models trained on function calling sometimes answer in <invoke name><parameter …> form: accept it as the same tools
+  reply = reply.replace(/<invoke name="(\w+)">([\s\S]*?)<\/invoke>/g, (m, name, body) => { const q = {}; body.replace(/<parameter name="(\w+)">([\s\S]*?)<\/parameter>/g, (_, k, v) => (q[k] = v));
+    const path = (q.path || q.file || "").trim(); if (name === "write") return `<write path="${path}">${q.content ?? ""}</write>`; if (name === "read") return `<read path="${path}"/>`;
+    if (name === "run" || name === "bash") return `<run>${q.cmd || q.command || ""}</run>`; if (name === "look") return `<look path="${path}"/>`; if (name === "done") return "<done/>"; return m; });
+  const acts = []; const re = /<read\s+path="([^"]+)"\s*\/>|<run>([\s\S]*?)<\/run>|<write\s+path="([^"]+)">([\s\S]*?)<\/write>|<look\s+path="([^"]+)"\s*\/>|<done\s*\/>/g; let m;
+  while ((m = re.exec(reply))) acts.push(m[1] ? { t: "read", path: m[1] } : m[2] !== undefined ? { t: "run", cmd: m[2].trim() } : m[3] ? { t: "write", path: m[3], body: m[4].replace(/^\n/, "") } : m[5] ? { t: "look", path: m[5] } : { t: "done" });
+  return acts;
+}
+const inside = (dir, p) => { const f = resolve(dir, p); if (f !== dir && !f.startsWith(dir + "/")) throw new Error("path outside the folder"); return f; };
+const callModel = (req) => new Promise((ok) => {
+  const p = spawn("bash", ["-c", flags["model-cmd"]], { stdio: ["pipe", "pipe", "pipe"] }); let out = "", err = "";
+  p.stdout.on("data", (d) => (out += d)); p.stderr.on("data", (d) => (err += d)); p.on("close", (code) => { let usage = null; try { usage = JSON.parse(err.trim().split("\n").pop()); } catch {} ok({ code, text: out, usage, err: err.slice(-400) }); });
+  p.stdin.end(JSON.stringify(req));
+});
+async function lookAt(dir, path, n) {
+  const req = createRequire(join(process.cwd(), "noop.js")); let pw = await import(req.resolve("playwright")); pw = pw.chromium ? pw : pw.default;
+  const b = await pw.chromium.launch(); const shots = [];
+  try { for (const [w, h] of [[1440, 900], [375, 812]]) { const pg = await b.newPage({ viewport: { width: w, height: h } }); const errs = []; pg.on("pageerror", (e) => errs.push(e.message));
+    await pg.goto("file://" + inside(dir, path), { waitUntil: "networkidle", timeout: 45000 }).catch(() => {}); await pg.waitForTimeout(1200);
+    const f = join(dir, ".look", `t${n}-${w}.png`); mkdirSync(dirname(f), { recursive: true }); await pg.screenshot({ path: f, fullPage: true, clip: { x: 0, y: 0, width: w, height: Math.min(h * 3, await pg.evaluate(() => document.documentElement.scrollHeight)) } });
+    shots.push({ f, w, errs }); await pg.close(); } } finally { await b.close(); }
+  return shots;
+}
+async function runRawAgent(r) {
+  rmSync(r.dir, { recursive: true, force: true }); mkdirSync(r.dir, { recursive: true });
+  if (r.cond === "skill") cpSync(SKILL, join(r.dir, "skill"), { recursive: true });
+  if (r.cond === "gated") { mkdirSync(join(r.dir, "gate")); for (const f of ["gate.mjs", "memory.mjs", "lib.mjs"]) cpSync(join(SKILL, "scripts", f), join(r.dir, "gate", f)); }
+  writeFileSync(join(r.dir, "package.json"), JSON.stringify({ name: "run", private: true })); // a project root, so the skill's memory log lands here
+  let prompt = promptFor(r); if (r.cond === "skill") prompt = prompt.replace("Use the asfakulsiam-motomation-design skill:", "Use the asfakulsiam-motomation-design skill (it is your system prompt; its files are in ./skill, its scripts in ./skill/scripts):");
+  writeFileSync(join(r.dir, "prompt.txt"), prompt);
+  const system = (r.cond === "skill" ? "The asfakulsiam-motomation-design skill is installed. Its SKILL.md follows; every path it names is inside ./skill (e.g. ./skill/thinking/sequence.md, ./skill/scripts/gate.mjs). Read the files it routes you to.\n\n" + readFileSync(join(SKILL, "SKILL.md"), "utf8") + "\n\n---\n\n" : "") + TOOLS_DOC;
+  const msgs = [{ role: "user", content: prompt }]; const tr = []; const t0 = Date.now(); let turns = 0, done = false, tin = 0, tout = 0, served = new Set(), fail = null;
+  const cap = +(flags["max-turns"] || 40);
+  while (turns < cap && !done) {
+    // keep the context bounded without making the agent re-read: documents it read stay whole; only file bodies it wrote
+    // more than 4 turns ago shrink to their size (the file is on disk), and only the latest screenshots stay
+    const lastImg = msgs.map((m, i) => (Array.isArray(m.content) && m.content.some((b) => b.type === "image") ? i : -1)).filter((i) => i >= 0).pop();
+    const view = msgs.map((m, i) => {
+      if (m.role === "assistant") return i < msgs.length - 8 ? { ...m, content: m.content.replace(/(<write\s+path="[^"]+">)([\s\S]*?)(<\/write>)/g, (_, a, b, c) => `${a}[${b.length} bytes, on disk]${c}`).replace(/(<parameter name="content">)([\s\S]*?)(<\/parameter>)/g, (_, a, b, c) => `${a}[${b.length} bytes, on disk]${c}`) } : m;
+      if (i === 0 || !Array.isArray(m.content) || i === lastImg) return m;
+      const c = m.content.filter((b) => b.type !== "image"); return { ...m, content: c.length ? c : "[screenshots shown earlier]" }; });
+    const res = await callModel({ model: flags.model || "claude_sonnet_5_5", system, messages: view, max_tokens: 48000, reasoning: flags.reasoning || "medium" }); turns++;
+    if (res.code !== 0 || !res.text.trim()) { fail = `model call failed (exit ${res.code}): ${res.err}`; tr.push({ turn: turns, error: fail }); break; }
+    if (res.usage) { tin += res.usage.in || 0; tout += res.usage.out || 0; if (res.usage.served) served.add(res.usage.served); }
+    msgs.push({ role: "assistant", content: res.text }); const acts = rawTools(res.text); const outs = []; const imgs = [];
+    for (const a of acts) {
+      try {
+        if (a.t === "done") { done = true; break; }
+        if (a.t === "read") { const f = inside(r.dir, a.path); outs.push(`<read ${a.path}>\n` + (existsSync(f) && statSync(f).isDirectory() ? readdirSync(f).join("\n") : readFileSync(f, "utf8").slice(0, 60000))); }
+        if (a.t === "write") { const f = inside(r.dir, a.path); mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, a.body); outs.push(`<write ${a.path}> ${a.body.length} bytes written`); }
+        if (a.t === "run") { if (!/^(node|ls|cat|wc|mkdir)\b/.test(a.cmd) || /[;&|`$<>]/.test(a.cmd.replace(/"[^"]*"|'[^']*'/g, ""))) { outs.push(`<run> refused: only node, ls, cat, wc, mkdir, one command, no shell operators`); continue; }
+          const x = spawnSync("bash", ["-c", a.cmd], { cwd: r.dir, encoding: "utf8", timeout: 300000, maxBuffer: 32 << 20, env: { ...process.env, NODE_PATH: flags["node-path"] || process.env.NODE_PATH || "" } }); outs.push(`<run ${a.cmd}> exit ${x.status}\n` + ((x.stdout || "") + (x.stderr || "")).slice(-20000)); }
+        if (a.t === "look") { const sh = await lookAt(r.dir, a.path, turns); outs.push(`<look ${a.path}> ` + sh.map((s) => `${s.w}px${s.errs.length ? ` (JS errors: ${s.errs.slice(0, 3).join(" | ")})` : ""}`).join(", ")); for (const s of sh) imgs.push({ type: "image", path: s.f }); }
+      } catch (e) { outs.push(`<${a.t}> error: ${String(e.message || e).slice(0, 300)}`); }
+    }
+    tr.push({ turn: turns, reply: res.text, actions: acts.map((a) => ({ ...a, body: a.body ? `[${a.body.length} bytes]` : undefined })), results: outs.map((o) => o.slice(0, 4000)), usage: res.usage });
+    writeFileSync(join(r.dir, "transcript.jsonl"), tr.map((x) => JSON.stringify(x)).join("\n") + "\n"); // per turn, so a long run can be watched
+    if (done) break;
+    const fb = outs.length ? outs.join("\n\n") : "No tool tags found in your reply. Use the tools, or <done/> if index.html is written.";
+    msgs.push({ role: "user", content: imgs.length ? [{ type: "text", text: fb }, ...imgs] : fb });
+  }
+  writeFileSync(join(r.dir, "transcript.jsonl"), tr.map((x) => JSON.stringify(x)).join("\n") + "\n");
+  const meta = { ...r, exit: fail ? 1 : 0, seconds: Math.round((Date.now() - t0) / 1000), turns, finished: done ? "done" : fail ? "error" : "turn cap", agent: `raw API (scripted tool loop in run-agent-benchmark.mjs), model ${flags.model || "claude_sonnet_5_5"}`,
+    served: [...served], tokens: { in: tin, out: tout }, output: existsSync(join(r.dir, "index.html")), error: fail };
+  for (const d of ["skill", "gate", ".look"]) rmSync(join(r.dir, d), { recursive: true, force: true });
+  writeFileSync(join(r.dir, "run.json"), JSON.stringify(meta, null, 1)); console.log(`${r.slug} ${r.cond} s${r.seed}: ${meta.finished}, ${turns} turns, ${meta.seconds}s, index.html ${meta.output ? "yes" : "MISSING"}`); return meta;
 }
 async function pool(items, n, fn) { const out = []; let i = 0; await Promise.all(Array.from({ length: n }, async () => { while (i < items.length) { const k = i++; out[k] = await fn(items[k]); } })); return out; }
 
@@ -171,7 +258,7 @@ async function judgePair(slug, seed, model, pair = ["baseline", "skill"]) {
 const total = (s) => AX.reduce((a, k) => a + (s[k] || 0) * W[k], 0) / 5;
 
 async function main() {
-  if (phase === "generate") { mkdirSync(OUT, { recursive: true }); const todo = runs().filter((r) => flags.force || !existsSync(join(r.dir, "run.json"))); await pool(todo, +(flags.parallel || 4), runAgent); return; }
+  if (phase === "generate") { mkdirSync(OUT, { recursive: true }); const todo = runs().filter((r) => flags.force || !existsSync(join(r.dir, "run.json"))); await pool(todo, +(flags.parallel || 4), flags.agent === "raw-api" ? runRawAgent : runAgent); return; }
   if (phase === "measure") {
     const req = createRequire(join(process.cwd(), "noop.js")); let pw; try { pw = await import(req.resolve("playwright")); pw = pw.chromium ? pw : pw.default; } catch { console.log("not verified — no browser (Playwright not found from the current folder)"); process.exit(3); }
     await pool(runs().filter((r) => existsSync(join(r.dir, "run.json")) && (flags.force || !existsSync(join(r.dir, "checks.json")))), +(flags.parallel || 3), async (r) => { await measure(r, pw); console.log(`measured ${r.slug} ${r.cond} s${r.seed}`); }); return;
