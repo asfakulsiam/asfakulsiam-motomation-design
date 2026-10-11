@@ -76,7 +76,7 @@ export const LAYOUT_FAMILY = {
   ledger: "rows", index: "rows", catalogue: "rows", "field-guide": "rows", broadsheet: "columns",
   "film-reel": "sequence", timeline: "sequence", room: "sequence", lookbook: "sequence",
   manifesto: "statement", poster: "statement", specimen: "statement", letter: "statement",
-  "gallery-wall": "canvas", atlas: "canvas", stage: "stage", diptych: "stage",
+  "gallery-wall": "canvas", atlas: "canvas", stage: "stage", diptych: "split", // diptych: two halves in dialogue, its own family (was grouped with stage)
   workbench: "product", console: "product", shelf: "product",
 };
 const SECTION_ALIASES = {
