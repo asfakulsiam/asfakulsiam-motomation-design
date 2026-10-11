@@ -5,7 +5,8 @@
 //   node scripts/gate.mjs --verify <file.html> [--url http://…]   check the stamp written in the file against a fresh scan
 //
 // Checks (all bounded: each one is only as strong as what it measures, and says what it skipped):
-//   contrast   every visible text element vs the pixels actually behind it (text hidden, page screenshotted, sampled)
+//   contrast   every visible text element vs the pixels actually behind it (text hidden, page screenshotted, sampled;
+//              judged by the 10th-percentile sample; warns when > 30% of text elements could not be measured)
 //              → fails below 4.5:1 (body) or 3:1 (large: ≥24px, or ≥18.66px bold)
 //   overflow   at 375, 390, 768, 1440: page scroll width, and elements escaping the viewport or pushing text out of
 //              their parent by >1px with no clipping ancestor
@@ -113,6 +114,7 @@ async function open(browser, url, opts) {
 }
 
 // ── checks ───────────────────────────────────────────────────────────────────
+const SKIP_WARN_PCT = 30; // warn when more than this share of text elements could not be measured
 async function contrast(browser, url) {
   // Measure each text element in the scroll position where a visitor sees it: scroll a viewport at a time, hide all
   // text, screenshot the viewport, and sample the pixels behind every element that is fully on screen.
@@ -174,9 +176,13 @@ async function contrast(browser, url) {
           const d = cx.getImageData(px, py, 1, 1).data; samples.push({ r: d[0], g: d[1], b: d[2] });
         }
         const fa = c.fg.a * c.op;
-        const ratios = samples.map((bg) => __g.ratio({ r: c.fg.r * fa + bg.r * (1 - fa), g: c.fg.g * fa + bg.g * (1 - fa), b: c.fg.b * fa + bg.b * (1 - fa) }, bg)).sort((p, q) => p - q);
-        const bgMed = samples.slice().sort((p, q) => __g.lum(p) - __g.lum(q))[Math.floor(samples.length / 2)];
-        return { ...c, ratio: +ratios[Math.floor(ratios.length / 2)].toFixed(2), min: +ratios[0].toFixed(2), fgHex: hex(c.fg), bgHex: hex(bgMed) };
+        const pairs = samples.map((bg) => ({ bg, r: __g.ratio({ r: c.fg.r * fa + bg.r * (1 - fa), g: c.fg.g * fa + bg.g * (1 - fa), b: c.fg.b * fa + bg.b * (1 - fa) }, bg) })).sort((p, q) => p.r - q.r);
+        const ratios = pairs.map((x) => x.r);
+        const bgMed = pairs[Math.floor((pairs.length - 1) * 0.1)].bg; // the background behind the judged (10th-percentile) sample
+        // judge by the 10th-percentile sample, not the median: text that sits half on a light image must not pass
+        // on the strength of its dark half. One stray sample (a hairline, a grain dot) still can't fail it alone.
+        const p10 = ratios[Math.floor((ratios.length - 1) * 0.1)];
+        return { ...c, ratio: +p10.toFixed(2), median: +ratios[Math.floor(ratios.length / 2)].toFixed(2), min: +ratios[0].toFixed(2), fgHex: hex(c.fg), bgHex: hex(bgMed) };
       });
     }, { shot, vis });
     for (const r of res) done.set(r.i, r);
@@ -186,7 +192,8 @@ async function contrast(browser, url) {
   const measured = [...done.values()];
   const large = (r) => r.size >= 24 || (r.size >= 18.66 && r.weight >= 700);
   const fails = measured.filter((r) => r.ratio < (large(r) ? 3 : 4.5)).map((r) => ({ el: r.label, text: r.text, ratio: r.ratio, need: large(r) ? 3 : 4.5, fg: r.fgHex, bg: r.bgHex, size: r.size }));
-  return { measured: measured.length, skipped: total - measured.length, notVisibleAtScan: [...seenHidden].filter((i) => !done.has(i)).length, fails };
+  const skipped = total - measured.length, skippedPct = total ? Math.round((skipped / total) * 100) : 0;
+  return { measured: measured.length, skipped, total, skippedPct, lowCoverage: skippedPct > SKIP_WARN_PCT, notVisibleAtScan: [...seenHidden].filter((i) => !done.has(i)).length, fails };
 }
 
 async function overflowAt(browser, url, width) {
@@ -444,6 +451,7 @@ function print(r) {
   const L = (s = "") => console.log(s);
   L(`DELIVERY GATE · ${r.target}`);
   L(`  contrast  ${r.counts.contrast === 0 ? "✓" : "✗"} ${r.counts.contrast} below AA  (${r.contrast.measured} text elements measured against rendered pixels; ${r.contrast.skipped} skipped; ${r.contrast.notVisibleAtScan} not visible at scan time)`);
+  if (r.contrast.lowCoverage) L(`  ⚠ contrast coverage: ${r.contrast.skipped} of ${r.contrast.total} text elements (${r.contrast.skippedPct}%) were skipped (moving, occluded or never fully on screen) — more than ${SKIP_WARN_PCT}%, so c${r.counts.contrast} is not a full measurement. Check the skipped text by hand or make it measurable.`);
   for (const f of r.contrast.fails.slice(0, 12)) L(`     ${f.ratio}:1 < ${f.need}:1  ${f.fg} on ${f.bg}  ${f.size}px  ${f.el}  "${f.text}"`);
   L(`  overflow  ${r.counts.overflow === 0 ? "✓" : "✗"} ${r.counts.overflow} at ${WIDTHS.join("/")}px`);
   for (const f of r.overflow.fails.slice(0, 12)) L(`     ${f.width}px  ${f.kind} by ${f.px}px  ${f.el}${f.text ? `  "${f.text}"` : ""}`);

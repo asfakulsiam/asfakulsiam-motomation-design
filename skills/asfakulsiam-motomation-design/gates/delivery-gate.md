@@ -17,7 +17,7 @@ It runs five bounded checks in a real browser and prints numbers:
 
 | Code | Check | Fails when |
 |---|---|---|
-| `c` | **Contrast**: every visible text element against the pixels actually behind it. The text is hidden, the viewport is screenshotted at each scroll position and the background is sampled. Each element is judged at its most visible state. | below 4.5:1 for body text, below 3:1 for large text (≥ 24px, or ≥ 18.66px bold) |
+| `c` | **Contrast**: every visible text element against the pixels actually behind it. The text is hidden, the viewport is screenshotted at each scroll position and the background is sampled. Each element is judged at its most visible state, by its 10th-percentile sample (not the median), so text that sits partly on a pale image edge cannot pass on its dark half. | below 4.5:1 for body text, below 3:1 for large text (≥ 24px, or ≥ 18.66px bold) |
 | `o` | **Overflow** at 375, 390, 768 and 1440px | the page scrolls sideways, or an element leaves the viewport or pushes text out of its parent by more than 1px with no clipping ancestor |
 | `w` | **Long display words** at 375px: every h1–h3 and any text ≥ 32px, including decorative text | the text is wider than its box, leaves the viewport, breaks a word across lines, or splits one word across elements (e.g. "Have" + "li" on two door leaves) |
 | `rm` | **Reduced motion**: the page loaded with `prefers-reduced-motion: reduce` | text that is visible normally is hidden, or pixels keep changing on a still page |
@@ -30,7 +30,7 @@ The output ends with a stamp line built only from those numbers:
 
 **No browser, no pass.** If Playwright or Chromium is missing, the script prints `not verified — no browser` and exits with code 3. Report exactly that in the handoff (`Measured: not verified — no browser`) and leave the `gate:` segment out of the stamp. Don't write a pass you didn't measure.
 
-The checks are bounded, and each reports what it skipped (text that was covered or never settled, elements parked off-canvas such as skip links and closed drawers). A clean run means these five things were measured. It doesn't mean the page is accessible. Keyboard paths, focus order and copy still need Parts 1–3.
+The checks are bounded, and each reports what it skipped (text that was covered or never settled, elements parked off-canvas such as skip links and closed drawers). When more than 30% of text elements are skipped for contrast, the gate prints a coverage warning: the `c` count is then not a full measurement, and the skipped text needs a check by hand. A clean run means these five things were measured. It doesn't mean the page is accessible. Keyboard paths, focus order and copy still need Parts 1–3.
 
 Exit codes: `0` pass · `1` fail · `2` stamp rejected · `3` not verified.
 
