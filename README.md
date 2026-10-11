@@ -305,7 +305,7 @@ It detects your stack, and defaults to Next.js App Router + Tailwind. Adapters c
 Yes. GSAP and all its plugins (SplitText, ScrollTrigger, MorphSVG and more) are free, including for commercial use, under GSAP's own Standard License.
 
 **Can I use effects from component libraries?**
-Yes, in your project, under each library's license. The skill describes effects as concepts in its own words and never bundles third-party component code.
+Yes, in your project, under each library's license. The skill describes effects as concepts in its own words and never bundles third-party component code. For React Bits, `references/react-bits/INDEX.md` maps 19 components to tiers, costs, slop warnings and reduced-motion behaviour, with a link to each.
 
 ---
 
@@ -315,4 +315,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). In short: original work only, short sing
 
 ## License
 
-[MIT](LICENSE) © asfakulsiam
+[MIT](LICENSE) © asfakulsiam. The whole repository is MIT: it contains no third-party component code.
+
+React Bits is used as a **reference library**, not vendored. Its licence ([MIT + Commons Clause](https://github.com/DavidHDev/react-bits/blob/main/LICENSE.md), © David Haz) allows the components inside an application, website or product, but not redistributing the components themselves, alone or in a bundle. So the skill links to them (`skills/asfakulsiam-motomation-design/references/react-bits/INDEX.md`) and builds the concepts in its own code. Your project can still install or copy a React Bits component under that licence.
