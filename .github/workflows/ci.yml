@@ -26,6 +26,10 @@ jobs:
           cmp /tmp/a.txt /tmp/b.txt                                  # seeded runs are reproducible
           node scripts/search.mjs motion "pinned scrub" > /dev/null
           node scripts/contrast.mjs --palettes > /dev/null
+          node --check scripts/gate.mjs
+          # no Playwright here: the gate must refuse to pass (exit 3, "not verified — no browser"), never print PASS
+          set +e; node scripts/gate.mjs examples/html/motomation-film.html > /tmp/gate.txt; code=$?; set -e
+          cat /tmp/gate.txt; test "$code" = 3 && grep -q "not verified — no browser" /tmp/gate.txt
           cd "$(mktemp -d)" && node "$GITHUB_WORKSPACE/skills/asfakulsiam-motomation-design/scripts/memory.mjs" recent > /dev/null
   examples:
     strategy:
