@@ -1,0 +1,19 @@
+DELIVERY GATE · /tmp/herofix/index.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (8 measured; 1 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (8 measured; 1 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (8 measured; 1 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (8 measured; 1 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (1 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (9 compared)
+  names     ✓ 0 missing alt / accessible names  (2 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (1 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  2 sections, entrances: static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 2KB gzipped
+  records    DESIGN.md: /tmp/herofix/DESIGN.md · memory log: /tmp/herofix/.motomation/log.json · stamp fields: {"archetype":"poster","mutation":"remove-the-expected","signature":"plait","tier":"1"}
+  critique → C5[restraint:kept] H5[375:0] S5[last5:none] R5[cuts:3,anim:2] M5[t1:pins0/2,webgl0/1,js2/30KB,rm0] V5[entrance-repeats:0]
+  PASS  stamp → critique: C5[restraint:kept] H5[375:0] S5[last5:none] R5[cuts:3,anim:2] M5[t1:pins0/2,webgl0/1,js2/30KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 9848a24dad
+
+STAMP VERIFIED · critique and gate numbers match a fresh scan · gate PASS
+verify exit 0

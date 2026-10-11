@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Murta · Shital pati, the cool mat of Balaganj, Sylhet</title>
+<meta name="description" content="Murta is a cooperative of shital pati weavers in Balaganj, Sylhet, Bangladesh. Cool mats woven by hand from split murta cane. Request the swatch box.">
+<meta name="theme-color" content="#F1EBDA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,380..500,50;1,9..144,380..500,50&family=Hanken+Grotesk:wght@400;500;600&family=Noto+Serif+Bengali:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* motomation · archetype: poster · mutation: remove-the-expected · signature: plait · tier: 1 · critique: C5[restraint:kept] H5[375:0] S5[last5:none] R5[cuts:3,anim:2] M5[t1:pins0/2,webgl0/1,js2/30KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 9848a24dad */
+:root{
+  --ground:#F1EBDA; --ink:#1E2A20; --muted:#4A5247; --accent:#8E2B1E; --rule:rgba(30,42,32,.28);
+  --display:"Fraunces","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --text:"Hanken Grotesk","Segoe UI",sans-serif;
+  --bn:"Noto Serif Bengali","Kalpurush",serif;
+  --ease-out:cubic-bezier(.2,.7,.2,1);
+  --pad:clamp(1.25rem,4vw,3.5rem);
+}
+*{box-sizing:border-box;margin:0}
+html{background:var(--ground);color:var(--ink)}
+body{font:400 1.0625rem/1.55 var(--text);-webkit-font-smoothing:antialiased}
+.skip{position:absolute;left:var(--pad);top:-4rem;background:var(--ink);color:var(--ground);padding:.6rem 1rem;z-index:5}
+.skip:focus{top:.75rem}
+
+.hero{min-height:100svh;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+.copy{display:flex;flex-direction:column;justify-content:space-between;gap:2.5rem;padding:var(--pad);max-width:60rem}
+.eyebrow{font:500 .8125rem/1.4 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:420;font-variation-settings:"opsz" 144,"SOFT" 50;
+   font-size:clamp(2.15rem,5.4vw,5.25rem);line-height:1.02;letter-spacing:-.018em;text-wrap:balance;max-width:14em}
+h1 em{font-style:italic;font-weight:400}
+.lede{margin-top:1.75rem;max-width:34rem;color:var(--muted)}
+.act{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.75rem;margin-top:2.25rem}
+.btn{display:inline-flex;align-items:center;gap:.75rem;min-height:3.25rem;padding:.9rem 1.5rem;background:var(--accent);color:var(--ground);
+     font:600 1rem/1 var(--text);text-decoration:none;border-radius:2px;transition:background-color .16s ease-out,transform .16s ease-out}
+.btn svg{width:1.1rem;height:1.1rem;transition:transform .16s ease-out}
+.btn:hover{background:#74200F}
+.btn:hover svg{transform:translateX(4px)}
+.btn:active{transform:translateY(1px)}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.plate{display:flex;flex-wrap:wrap;gap:.35rem 1rem;align-items:baseline;border-top:1px solid var(--rule);padding-top:1rem;font-size:.9375rem;color:var(--muted)}
+.plate .bn{font:500 1.125rem/1.4 var(--bn);color:var(--ink)}
+.plate i{font-family:var(--display);font-variation-settings:"opsz" 14}
+
+.weave{position:relative;background:#3B3524;overflow:hidden;min-height:18rem}
+.weave svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.weave rect{stroke:rgba(30,22,6,.28);stroke-width:.6}
+.weave .w{animation:plait-y .7s var(--ease-out) both;animation-delay:calc(var(--d)*16ms + 120ms)}
+.weave .f{animation:plait-x .7s var(--ease-out) both;animation-delay:calc(var(--d)*16ms + 120ms)}
+@keyframes plait-y{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+@keyframes plait-x{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+  .weave{order:-1;min-height:0;height:24svh}
+  .copy{gap:1.75rem;padding-top:1.5rem}
+  .lede{margin-top:1.1rem}
+  .act{margin-top:1.5rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .weave .w,.weave .f{animation:none}
+  .btn,.btn svg{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#swatch">Skip to the action</a>
+<main class="hero">
+  <div class="copy">
+    <p class="eyebrow">Murta · Balaganj, Sylhet, Bangladesh</p>
+    <div>
+      <h1>Shital pati, the cool mat, <em>woven by hand</em> from split murta cane.</h1>
+      <p class="lede">A cooperative of weavers in Balaganj. Their craft was inscribed on UNESCO’s list of the Intangible Cultural Heritage of Humanity in 2017.</p>
+      <div class="act">
+        <!-- [NEEDS COPY] replace the mailto address with the cooperative's real order inbox or form URL -->
+        <a id="swatch" class="btn" href="mailto:?subject=Swatch%20box%20request%20(Murta%20shital%20pati)">Request the swatch box
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 10h13M11 4l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+    <p class="plate"><span class="bn" lang="bn">শীতল পাটি</span><span><i>Schumannianthus dichotomus</i>, the murta cane</span></p>
+  </div>
+  <div class="weave" aria-hidden="true"><svg id="loom" viewBox="0 0 400 560" preserveAspectRatio="xMidYMid slice"></svg></div>
+</main>
+<script>
+/* 2/2 twill drawn from strips: a cell shows the warp (vertical) or the weft (horizontal), offset one step per row */
+(function(){
+  var svg=document.getElementById('loom'),NS='http://www.w3.org/2000/svg',C=20,cols=20,rows=28;
+  var warp=['#D8CC9F','#CFC191','#E0D6AE','#D3C697'],weft=['#C9BA85','#BFAF78','#D3C48F','#C4B47C'];
+  for(var j=0;j<rows;j++)for(var i=0;i<cols;i++){
+    var up=((i+j)%4)<2,x=i*C,y=j*C,el=document.createElementNS(NS,'rect'),fill;
+    if(up){fill=(i%10===5)?'#8A7B4E':warp[i%4];el.setAttribute('class','w');el.setAttribute('x',x+2);el.setAttribute('y',y);el.setAttribute('width',C-4);el.setAttribute('height',C);}
+    else{fill=(j%10===4)?'#8E2B1E':weft[j%4];el.setAttribute('class','f');el.setAttribute('x',x);el.setAttribute('y',y+2);el.setAttribute('width',C);el.setAttribute('height',C-4);}
+    el.setAttribute('fill',fill);el.setAttribute('rx',2);el.style.setProperty('--d',i+j);svg.appendChild(el);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "runs": [
+    {
+      "date": "2026-10-11T14:18:53.548Z",
+      "archetype": "poster",
+      "signature": "plait",
+      "fonts": "Fraunces/Hanken Grotesk",
+      "fingerprint": {
+        "layout": "statement"
+      }
+    }
+  ]
+}
