@@ -4,6 +4,8 @@ A shared language for effects, so a designer and an agent mean the same thing. E
 
 React Bits is a reference library here, not a dependency. Its licence (MIT + Commons Clause) forbids redistributing the components themselves, alone or in a bundle, so this skill never contains their source; that is a licence term, not a style preference. Build the concept yourself (the default), or, when the user wants the exact component, install or copy it into **their project** from reactbits.dev with its notice kept. See `references/react-bits/SELECTION.md`.
 
+Find before build (see `SKILL.md`, step 6): for a standard effect, check the project's own components, then this table and `references/react-bits/INDEX.md`, then a registry, before writing it custom. The signature move is never swapped for a library effect.
+
 ## Text effects
 
 | Concept | What it does | Tier | Earns its place when | Reference |

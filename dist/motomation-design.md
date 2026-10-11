@@ -68,9 +68,22 @@ Files are short on purpose. Load them as you need them, not all at once.
 3. Design system      typography → colour → layout  → write DESIGN.md (templates/DESIGN.md)
 4. Motion plan        motion/tokens.md + tier file  → write MOTION.md (templates/MOTION.md)
 5. Preview block      show the plan (below) and wait for approval only if the user asked to review first
-6. Build              adapter for the stack; complete code, real copy
+6. Build              find before build (below), then the adapter for the stack; complete code, real copy
 7. Delivery Gate      gates/delivery-gate.md        → score, fix, stamp, log to memory
 ```
+
+#### Find before build (step 6)
+
+Standard UI gets found, not invented. Signature moments get invented, not found.
+
+- **Standard UI** means forms, inputs, menus, dialogs, tabs, accordions, toasts, tables, pagination, date pickers, carousels and any effect with a row in `references/react-bits/INDEX.md`. Before writing one from scratch, check in this order and stop at the first fit:
+  1. what the project already has (its components folder, its UI kit, its design system);
+  2. this skill: `examples/` and, for effects, `references/react-bits/INDEX.md` (build the concept at its tier, or use the React Bits component in the project under its licence);
+  3. an accessible headless or registry component that fits the stack (for example the project's existing shadcn/ui, Radix or React Aria setup).
+
+  Only then write it custom, and say which of the three had nothing.
+- **Signature moments are exempt.** The signature move, the hook and anything the Thinking Sequence calls the concept are designed for this brief. Don't swap them for a library effect because one exists.
+- Whatever you find still passes the Delivery Gate, the tier budget and the reduced-motion rules. Found code isn't trusted code.
 
 #### Preview block (show before building)
 
@@ -2879,6 +2892,8 @@ The most portable route: works in any host, and in chat tools that can only prod
 A shared language for effects, so a designer and an agent mean the same thing. Each entry is a **concept**, described in this skill's own words, with the tier it needs and when it earns its place. Many of these ideas are popular in open-source effect libraries such as React Bits (reactbits.dev). The **Reference** column links every concept to this skill's own signature or example, or to its React Bits page; `references/react-bits/INDEX.md` adds tier, cost, slop warnings and reduced-motion behaviour for the 19 React Bits components this skill relies on.
 
 React Bits is a reference library here, not a dependency. Its licence (MIT + Commons Clause) forbids redistributing the components themselves, alone or in a bundle, so this skill never contains their source; that is a licence term, not a style preference. Build the concept yourself (the default), or, when the user wants the exact component, install or copy it into **their project** from reactbits.dev with its notice kept. See `references/react-bits/SELECTION.md`.
+
+Find before build (see `SKILL.md`, step 6): for a standard effect, check the project's own components, then this table and `references/react-bits/INDEX.md`, then a registry, before writing it custom. The signature move is never swapped for a library effect.
 
 ### Text effects
 
