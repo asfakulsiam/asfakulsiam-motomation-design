@@ -22,7 +22,7 @@ Commands: `/shape /build /invent /signature /motomate /animate /type /bolder /qu
 - **The folder name must equal the `name` in SKILL.md front-matter.**
 - **Keep files short and single-purpose.** SKILL.md is a router; detail lives in the topic files it points to.
 - **Description = when to use.** The SKILL.md `description` says when to trigger, not a feature list.
-- **Original work only.** Don't paste text or code from other projects. React Bits components (Commons Clause) and unlicensed repos must never be copied in. Describe concepts in your own words.
+- **Original work only.** Don't paste text or code from other projects, component libraries or repositories. Learn the idea, then write it in your own words and code.
 - **Scripts are zero-dependency Node 18+ ES modules.** No `npm install` should ever be needed to use the skill.
 - **Data files are CSV** with a header row. Keep IDs kebab-case and unique. Run `node scripts/check-repo.mjs` after edits.
 - **Examples** must type-check in strict mode, clean up (`useGSAP` / `gsap.context`), and include reduced-motion and touch paths.

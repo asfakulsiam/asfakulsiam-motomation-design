@@ -25,7 +25,6 @@ Like any design practice, it was shaped by studying the work of others. These ar
 | [awesome-claude-design](https://github.com/VoltAgent/awesome-claude-design) | `DESIGN.md` as a portable record of a design system |
 | [Miguel Clavel](https://github.com/miguelclavel/interaction-recipes) | Small interaction moments that notice the visitor: pixel trails, sticker bursts, a list that remembers what you opened, brand-coloured selection, a curve carousel. Several signatures here are original takes on those ideas |
 | [GSAP](https://github.com/greensock/GSAP) | The animation runtime for Tiers 3–5. Used under GSAP's own Standard License (free, including commercial use), not MIT |
-| [React Bits](https://github.com/DavidHDev/react-bits) by **David Haz** | A wide vocabulary of text, background, cursor and layout effects. Used as a reference library: `references/react-bits/` maps 19 of its components to this skill's tiers and links to each. No React Bits code is included, because its licence (MIT + Commons Clause) does not allow redistributing the components |
 
 ## Tools the skill points to
 

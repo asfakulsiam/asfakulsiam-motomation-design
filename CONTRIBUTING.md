@@ -3,7 +3,7 @@
 Thank you for helping make AI-made websites less alike.
 
 ## Ground rules
-1. **Original work only.** Write in your own words and code. Don't paste text or code from other skills, component libraries or unlicensed repositories. React Bits components, for example, may not be redistributed. Describe concepts, link to the source and write your own implementation.
+1. **Original work only.** Write in your own words and code. Don't paste text or code from other skills, component libraries or repositories. Study how something works, then build it your own way. New components go in `skills/asfakulsiam-motomation-design/examples/components/<family>/` with a `// @motomation-component` header; run `node scripts/build-components.mjs` and rebuild the gallery.
 2. **Short, single-purpose files.** SKILL.md is a router. Put detail in topic files.
 3. **Every motion example** needs a reduced-motion path, a touch path and cleanup.
 4. **Data rows** need a unique kebab-case id and must not break the CSV columns. Palettes must pass `node skills/asfakulsiam-motomation-design/scripts/contrast.mjs --palettes`.

@@ -7,7 +7,7 @@ Original, award-level websites that are minimal, modern and typography-led, with
 At the top tier, scrolling plays like a film.
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.2.0-E0442B?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2.3.0-E0442B?style=flat-square)](CHANGELOG.md)
 [![Agent Skill](https://img.shields.io/badge/agent%20skill-npx%20skills%20add-111111?style=flat-square)](#install)
 [![Zero dependencies (gate: Playwright, optional)](https://img.shields.io/badge/scripts-zero%20dependencies%20%28gate%3A%20Playwright%2C%20optional%29-111111?style=flat-square)](skills/asfakulsiam-motomation-design/scripts)
 
@@ -52,8 +52,9 @@ Motomation Design changes the thinking:
 - **A house style:** minimal canvas, maximal type, one accent, editorial grid, motion with weight.
 - **3 dials** (Energy, Rhythm, Motion, each 1–3) and 3 moods (Quiet, Editorial, Play).
 - **12 site categories** and **10 visual styles**, each with its own guidance.
-- **Searchable data:** 44 fonts (with axes and licences), 22 contrast-verified palettes, 29 motion recipes, 20 archetypes, 12 mutations, 40 collision sources.
+- **Searchable data:** 43 components, 44 fonts (with axes and licences), 22 contrast-verified palettes, 29 motion recipes, 20 archetypes, 12 mutations, 40 collision sources.
 - **A Delivery Gate:** a self-critique score, a 25-point AI-default scan and a craft checklist.
+- **A component library:** 43 original effect components in 6 families (type, scroll, cursor, backgrounds, layout, micro-interactions), each one file with props, a reduced-motion path and touch behaviour, a live gallery and a shadcn-style registry. See [Component library](#component-library).
 - **Production examples:** 9 strict-TypeScript React components, a shared GSAP setup module (`lib/gsap.ts`) and a single-file HTML Motomation demo.
 - **Evals:** 8 test briefs, a weighted rubric and a release gate against a no-skill baseline.
 
@@ -293,6 +294,35 @@ Each has its own file with default dials, archetypes, section order, a signature
 
 ---
 
+## Component library
+
+43 components, all written for this skill, in six families:
+
+| Family | Components |
+|---|---|
+| Type (10) | Blur Focus, Curved Text, Decode, Ink Fill, Letter Relay, Neighbour Moves, Pressure Type, Scroll Float, Split-Flap, Width Sprint |
+| Scroll (7) | Aperture, Darkroom Develop, Horizontal Reel, Reading Rail, Stacked Deck, Thread, Velocity Marquee |
+| Cursor (6) | Image Trail, Lens, Pixel Wake, Seismograph Line, Target Cursor, Tilt Card |
+| Backgrounds (6) | Contour Lines, Dot Field, Grain, Halftone, Light Sweep, Liquid Field (WebGL) |
+| Layout (6) | Bento Reveal, Curve Carousel, Dock, Flowing Menu, Infinite Canvas, Sticky Index |
+| Micro-interactions (8) | Brand Selection, Click Spark, Copy Button, Count-Up, Hold to Commit, Remembered List, Squish Switch, Sticker Scatter |
+
+Each component is one strict-TypeScript React file with no dependencies beyond React and a small shared helper (`_lib/motion.ts`). Its header records the tier, when to use it, when it's slop, and its reduced-motion, touch and accessibility behaviour. The catalogue in [`examples/components/README.md`](skills/asfakulsiam-motomation-design/examples/components/README.md) and `data/components.csv` are generated from those headers, so agents can search them:
+
+```bash
+node skills/asfakulsiam-motomation-design/scripts/search.mjs components "photo reveal on scroll"
+```
+
+Install one into a project (the file plus the shared helper):
+
+```bash
+npx shadcn@latest add https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/main/registry/<id>.json
+```
+
+See them all live: open [`examples/gallery/index.html`](skills/asfakulsiam-motomation-design/examples/gallery/index.html) in a browser. It's one self-contained file, passes the skill's own Delivery Gate, and shows every fallback when your OS has reduced motion turned on.
+
+---
+
 ## Repository layout
 
 ```
@@ -314,6 +344,9 @@ skills/asfakulsiam-motomation-design/   ← the installable skill
   data/               searchable CSVs
   scripts/            collide, search, memory, contrast
   examples/           React components + single-file HTML demo
+    components/       43-component library (catalogue README, one file each)
+    gallery/          live demo page for every component
+registry/                    ← one JSON per component for `npx shadcn add`
 dist/motomation-design.md   ← single-file edition for chat tools
 evals/                       ← test briefs, rubric, release gate
 .claude-plugin/ .cursor-plugin/ .codex-plugin/ gemini-extension.json rules/
@@ -339,7 +372,7 @@ It detects your stack, and defaults to Next.js App Router + Tailwind. Adapters c
 Yes. GSAP and all its plugins (SplitText, ScrollTrigger, MorphSVG and more) are free, including for commercial use, under GSAP's own Standard License.
 
 **Can I use effects from component libraries?**
-Yes, in your project, under each library's license. The skill describes effects as concepts in its own words and never bundles third-party component code. For React Bits, `references/react-bits/INDEX.md` maps 19 components to tiers, costs, slop warnings and reduced-motion behaviour, with a link to each.
+You don't need one. The skill ships its own library of 43 components (see [Component library](#component-library)), all written for this project. If your project already uses another library, the skill checks it first and uses it under that library's licence.
 
 ---
 
@@ -351,4 +384,3 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). In short: original work only, short sing
 
 [MIT](LICENSE) © asfakulsiam. The whole repository is MIT: it contains no third-party component code.
 
-React Bits is used as a **reference library**, not vendored. Its licence ([MIT + Commons Clause](https://github.com/DavidHDev/react-bits/blob/main/LICENSE.md), © David Haz) allows the components inside an application, website or product, but not redistributing the components themselves, alone or in a bundle. So the skill links to them (`skills/asfakulsiam-motomation-design/references/react-bits/INDEX.md`) and builds the concepts in its own code. Your project can still install or copy a React Bits component under that licence.

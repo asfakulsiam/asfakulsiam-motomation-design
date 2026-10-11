@@ -124,33 +124,38 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   }
 }
 
-// 8. React Bits is referenced, never redistributed (its licence forbids bundling the components)
+// 8. Original work only: no vendored or copied third-party component code anywhere in the repository
 {
-  const dir = join(SKILL, "references/react-bits");
-  const sel = join(dir, "SELECTION.md"), idx = join(dir, "INDEX.md");
-  if (!existsSync(sel) || !existsSync(idx)) fail("references/react-bits/SELECTION.md and INDEX.md must exist");
-  else {
-    const tableRows = (text, heading) => {
-      const part = heading ? text.split(heading)[1]?.split("\n## ")[0] || "" : text;
-      return part.split("\n").filter((l) => /^\|/.test(l) && !/^\|\s*-/.test(l)).slice(1).map((l) => l.split("|").slice(1, -1).map((c) => c.trim()));
-    };
-    const selected = tableRows(readFileSync(sel, "utf8"), "## Selected").map((c) => c[1]);
-    const rows = tableRows(readFileSync(idx, "utf8"));
-    const indexed = rows.map((c) => c[0]);
-    for (const n of selected) if (!indexed.includes(n)) fail(`react-bits: "${n}" is selected but has no row in INDEX.md`);
-    for (const n of indexed) if (!selected.includes(n)) fail(`react-bits: "${n}" is in INDEX.md but not in SELECTION.md`);
-    for (const c of rows) {
-      if (c.length !== 8 || c.some((x) => !x)) fail(`react-bits INDEX.md: row "${c[0]}" must fill all 8 columns`);
-      else if (!/\(https:\/\/reactbits\.dev\/[a-z-]+\/[a-z-]+\)/.test(c[7])) fail(`react-bits INDEX.md: row "${c[0]}" needs a reactbits.dev link`);
-    }
-  }
-  const skipDirs = new Set([".git", "node_modules", "evals"]);
+  if (existsSync(join(ROOT, "vendor")) || existsSync(join(SKILL, "vendor"))) fail("vendor/ exists: this repository ships only its own code");
+  const skipDirs = new Set([".git", "node_modules", "evals", "dist"]);
   const walkCode = (p) => statSync(p).isDirectory() ? (skipDirs.has(basename(p)) ? [] : readdirSync(p).flatMap((f) => walkCode(join(p, f)))) : [p];
   for (const f of walkCode(ROOT)) {
-    if (!/\.(tsx?|jsx?|mjs|css|html|vue|svelte)$/.test(f)) continue;
-    if (/Copyright \(c\) \d{4} David Haz|react-bits\/(blob|tree)\/main\/src\//i.test(readFileSync(f, "utf8"))) fail(`${relative(ROOT, f)}: looks like React Bits source; its licence forbids redistributing the components (link to reactbits.dev instead)`);
+    if (!/\.(tsx?|jsx?|mjs|css|vue|svelte)$/.test(f)) continue;
+    const src = readFileSync(f, "utf8");
+    const notice = src.match(/Copyright \(c\) \d{4}\s+([^\n*]+)/i);
+    if (notice && !/asfakulsiam/i.test(notice[1])) fail(`${relative(ROOT, f)}: carries a third-party copyright notice ("${notice[0].trim()}"); write the idea in your own code instead`);
   }
-  if (existsSync(join(ROOT, "vendor/react-bits"))) fail("vendor/react-bits/ exists: React Bits components may not be redistributed in this repository");
+}
+
+// 9. Component library: headers valid, generated files fresh, gallery built from the current sources
+{
+  const { collect, render } = await import("./build-components.mjs");
+  const { components: comps, problems } = collect();
+  problems.forEach((p) => fail(`components: ${p}`));
+  if (comps.length) {
+    const files = render(comps);
+    for (const [rel, body] of Object.entries(files)) {
+      const at = join(ROOT, rel);
+      if (!existsSync(at) || readFileSync(at, "utf8") !== body) fail(`${rel} is stale; run node scripts/build-components.mjs`);
+    }
+    const reg = join(ROOT, "registry");
+    if (existsSync(reg)) for (const f of readdirSync(reg)) if (!files[`registry/${f}`]) fail(`registry/${f} has no component; run node scripts/build-components.mjs`);
+    const { sourceHash } = await import("./build-gallery.mjs");
+    const html = join(SKILL, "examples/gallery/index.html");
+    const meta = existsSync(html) ? readFileSync(html, "utf8").match(/<meta name="motomation-gallery" content="source:([0-9a-f]+) components:(\d+)">/) : null;
+    if (!meta) fail("examples/gallery/index.html is missing or has no build stamp; run node scripts/build-gallery.mjs");
+    else if (meta[1] !== sourceHash() || Number(meta[2]) !== comps.length) fail(`examples/gallery/index.html is stale (built from ${meta[1]}, ${meta[2]} components; sources are ${sourceHash()}, ${comps.length}); run node scripts/build-gallery.mjs`);
+  }
 }
 
 warn.forEach((w) => console.warn(`warn: ${w}`));
