@@ -1,5 +1,6 @@
 "use client";
-// Tier 2 pinned chapter: one idea in three beats. Shorter on mobile, static under reduced motion.
+// Tier 2 pinned chapter: one idea in three beats. Shorter on mobile (image reveal only, beats stay stacked),
+// static under reduced motion.
 import { useRef } from "react";
 import { gsap, useGSAP, MQ } from "../lib/gsap";
 
@@ -19,7 +20,8 @@ export function PinnedChapter({ title, beats, image, alt }: { title: string; bea
         scrollTrigger: { trigger: root.current, start: "top top", end: mobile ? "+=150%" : "+=250%", scrub: 0.8, pin: true, anticipatePin: 1 },
       });
       tl.fromTo("[data-image]", { clipPath: "inset(30% 20% 30% 20%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1 }, 0);
-      lines.forEach((el, i) => {
+      // Below md the beats stack in the grid and stay readable; fading them one by one would leave gaps.
+      if (!mobile) lines.forEach((el, i) => {
         const at = (i / lines.length) * 0.9;
         tl.fromTo(el, { autoAlpha: 0, yPercent: 40 }, { autoAlpha: 1, yPercent: 0, duration: 0.12 }, at);
         if (i < lines.length - 1) tl.to(el, { autoAlpha: 0, yPercent: -40, duration: 0.12 }, at + 0.9 / lines.length - 0.1);

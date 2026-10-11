@@ -3,8 +3,9 @@
 // (ChatGPT, Grok, Google AI Studio, Gemini, v0, Lovable, Claude Projects) that can't install skills.
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = new URL("..", import.meta.url).pathname;
+const ROOT = fileURLToPath(new URL("..", import.meta.url)); // decoded and OS-native (Windows drive letters, spaces)
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");
 const version = readFileSync(join(SKILL, "VERSION"), "utf8").trim();
 

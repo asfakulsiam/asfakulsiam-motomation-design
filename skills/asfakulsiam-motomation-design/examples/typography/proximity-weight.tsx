@@ -1,6 +1,7 @@
 "use client";
 // Proximity Weight: letters near the cursor get heavier. Needs a variable font with a wght axis.
 // Fine pointer + motion allowed only; otherwise a static weight. Screen readers get the plain word.
+// Letter positions are cached (page space) and re-measured on resize only, never on scroll.
 import { useEffect, useRef } from "react";
 
 type Props = { text: string; min?: number; max?: number; radius?: number; className?: string };
@@ -11,18 +12,22 @@ export function ProximityWeight({ text, min = 300, max = 900, radius = 180, clas
   useEffect(() => {
     const root = ref.current;
     if (!root) return;
+    // Fine pointer + motion allowed only. Re-evaluated live: turning on reduced motion mid-session stops the effect.
     const ok = matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
-    if (!ok.matches) return;
-
     const letters = Array.from(root.querySelectorAll<HTMLSpanElement>("[data-l]"));
+
+    // Letter centres in page coordinates. Scrolling doesn't move them, so they are cached and re-measured only
+    // when the layout can change: viewport resize and web-font load.
     let centres: { x: number; y: number }[] = [];
     const measure = () => {
+      letters.forEach((el) => (el.style.fontVariationSettings = "")); // measure at the resting weight
       centres = letters.map((el) => {
         const r = el.getBoundingClientRect();
         return { x: r.left + r.width / 2 + scrollX, y: r.top + r.height / 2 + scrollY };
       });
+      if (px > -9999) paint();
     };
-    let px = -9999, py = -9999, raf = 0;
+    let px = -9999, py = -9999, raf = 0, resizeRaf = 0, on = false;
     const paint = () => {
       raf = 0;
       letters.forEach((el, i) => {
@@ -35,17 +40,29 @@ export function ProximityWeight({ text, min = 300, max = 900, radius = 180, clas
       px = e.pageX; py = e.pageY;
       if (!raf) raf = requestAnimationFrame(paint);
     };
-    const ro = new ResizeObserver(measure);
-    ro.observe(root);
-    measure();
-    addEventListener("pointermove", onMove, { passive: true });
-    addEventListener("scroll", measure, { passive: true });
-    return () => {
-      ro.disconnect();
+    const onResize = () => { if (!resizeRaf) resizeRaf = requestAnimationFrame(() => { resizeRaf = 0; measure(); }); };
+
+    const start = () => {
+      if (on) return; on = true;
+      measure();
+      document.fonts?.ready.then(() => on && measure());
+      addEventListener("pointermove", onMove, { passive: true });
+      addEventListener("resize", onResize);
+    };
+    const stop = () => {
+      if (!on) return; on = false;
       removeEventListener("pointermove", onMove);
-      removeEventListener("scroll", measure);
-      cancelAnimationFrame(raf);
+      removeEventListener("resize", onResize);
+      cancelAnimationFrame(raf); cancelAnimationFrame(resizeRaf); raf = resizeRaf = 0;
+      px = py = -9999;
       letters.forEach((el) => (el.style.fontVariationSettings = ""));
+    };
+    const onPreference = () => (ok.matches ? start() : stop());
+    onPreference();
+    ok.addEventListener("change", onPreference);
+    return () => {
+      ok.removeEventListener("change", onPreference);
+      stop();
     };
   }, [min, max, radius]);
 

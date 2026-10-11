@@ -61,6 +61,7 @@ export function ImageSequenceFilm({ frames, src, scenes, length = { desktop: 500
         const w = Math.round(el.clientWidth * dpr), h = Math.round(el.clientHeight * dpr); // integers, or the size check never matches
         if (el.width !== w || el.height !== h) { el.width = w; el.height = h; }
         const s = Math.max(w / img.naturalWidth, h / img.naturalHeight);
+        c.clearRect(0, 0, w, h); // frames with transparency (PNG/WebP alpha) must not stack on the previous frame
         c.drawImage(img, (w - img.naturalWidth * s) / 2, (h - img.naturalHeight * s) / 2, img.naturalWidth * s, img.naturalHeight * s);
       };
 

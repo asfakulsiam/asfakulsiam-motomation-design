@@ -4,8 +4,9 @@ import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import { join, relative, basename } from "node:path";
 import { execFileSync } from "node:child_process";
 import { parseCSV } from "../skills/asfakulsiam-motomation-design/scripts/lib.mjs";
+import { fileURLToPath } from "node:url";
 
-const ROOT = new URL("..", import.meta.url).pathname;
+const ROOT = fileURLToPath(new URL("..", import.meta.url)); // decoded and OS-native (Windows drive letters, spaces)
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");
 const errors = []; const warn = [];
 const fail = (m) => errors.push(m);
