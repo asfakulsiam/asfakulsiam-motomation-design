@@ -2413,7 +2413,7 @@ node scripts/gate.mjs dist/index.html          # or a folder, or http://localhos
 node scripts/gate.mjs --verify dist/index.html # re-scan and check the stamp written in the file
 ```
 
-It runs five bounded checks in a real browser and prints numbers:
+It runs six bounded checks in a real browser and prints numbers:
 
 | Code | Check | Fails when |
 |---|---|---|
@@ -2422,15 +2422,16 @@ It runs five bounded checks in a real browser and prints numbers:
 | `w` | **Long display words** at 375px: every h1–h3 and any text ≥ 32px, including decorative text | the text is wider than its box, leaves the viewport, breaks a word across lines, or splits one word across elements (e.g. "Have" + "li" on two door leaves) |
 | `rm` | **Reduced motion**: the page loaded with `prefers-reduced-motion: reduce` | text that is visible normally is hidden, or pixels keep changing on a still page |
 | `a` | **Alt and names** | an `img` has no `alt`, or a link, button, input or other focusable element has no accessible name |
+| `n` | **Numbers**: every number (counters, prices, `progress`/`meter`, `aria-valuenow`) read at scroll 0, after jumping to the end, and under reduced motion, then compared with the value it settles on once scrolled into view. A value that changes by itself between two settled reads (a clock, a live ticker) is listed as live and not judged. | an element is visible with a value that is later corrected: "0 hectares" before a count-up runs, a price replaced after load, a counter that never runs under reduced motion |
 
 The output ends with a stamp line built only from those numbers:
-`gate: c0 o0 w0 rm0 a0 · gate/2 · <id>`. The id is a hash of what was measured on this page, so the same page gives the same id and a different page does not. `c` is the total of the per-width contrast failures. A `gate/1` stamp (contrast at 1440 only) is rejected by `--verify`: re-run the gate and paste the new line.
+`gate: c0 o0 w0 rm0 a0 n0 · gate/2 · <id>`. The id is a hash of what was measured on this page, so the same page gives the same id and a different page does not. `c` is the total of the per-width contrast failures. A `gate/1` stamp (five checks, contrast at 1440 only, no `n`) is rejected by `--verify`: re-run the gate and paste the new line.
 
 **Rule: a stamp is only valid if it contains numbers produced by `scripts/gate.mjs` in the same run. A hand-written stamp is rejected.** Paste the line the script printed. Never type the numbers yourself and never copy them from an example or an earlier page. `--verify` re-scans the page and rejects any stamp whose numbers or id differ from the fresh scan, or that has no `gate:` segment at all.
 
 **No browser, no pass.** If Playwright or Chromium is missing, the script prints `not verified — no browser` and exits with code 3. Report exactly that in the handoff (`Measured: not verified — no browser`) and leave the `gate:` segment out of the stamp. Don't write a pass you didn't measure.
 
-The checks are bounded, and each reports what it skipped (text that was covered or never settled, elements parked off-canvas such as skip links and closed drawers). When more than 30% of text elements are skipped for contrast, the gate prints a coverage warning: the `c` count is then not a full measurement, and the skipped text needs a check by hand. A clean run means these five things were measured. It doesn't mean the page is accessible. Keyboard paths, focus order and copy still need Parts 1–3.
+The checks are bounded, and each reports what it skipped (text that was covered or never settled, elements parked off-canvas such as skip links and closed drawers). When more than 30% of text elements are skipped for contrast, the gate prints a coverage warning: the `c` count is then not a full measurement, and the skipped text needs a check by hand. A clean run means these six things were measured. It doesn't mean the page is accessible. Keyboard paths, focus order and copy still need Parts 1–3.
 
 Exit codes: `0` pass · `1` fail · `2` stamp rejected · `3` not verified (no browser, or the scan ran past `--timeout`, default 600 s, which very tall pages such as the 36,000px component gallery can do).
 

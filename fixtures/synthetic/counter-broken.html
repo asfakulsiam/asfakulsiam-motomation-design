@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synthetic · broken counter and price flip</title>
+<style>body{margin:0;font:18px/1.5 system-ui,sans-serif;color:#111;background:#fff}main{padding:2rem}.n{font-size:2.5rem;font-variant-numeric:tabular-nums}</style></head>
+<body><main>
+  <h1>Restoration so far</h1>
+  <p>Room from <span id="price">BDT 9,500</span> a night</p>
+  <div style="height:1200px"></div>
+  <p><span class="n" id="ha" data-to="1250">0</span> hectares of mangrove replanted</p>
+</main>
+<script>
+  // price flip: the server-rendered price is replaced after load (a stale default corrected by JS)
+  setTimeout(() => { document.getElementById("price").textContent = "BDT 7,800"; }, 1200);
+  // "0 hectares": the counter only runs when it scrolls into view and never runs under reduced motion either
+  const el = document.getElementById("ha");
+  const io = new IntersectionObserver(([e]) => { if (!e.isIntersecting || el.dataset.done || matchMedia("(prefers-reduced-motion: reduce)").matches) return; el.dataset.done = 1;
+    const t0 = performance.now(); const f = (t) => { const p = Math.min(1, (t - t0) / 1000); el.textContent = Math.round(1250 * p).toLocaleString("en-US"); if (p < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); });
+  io.observe(el);
+</script></body></html>

@@ -16,6 +16,10 @@
 //   motion     with prefers-reduced-motion: text visible normally but hidden under reduced motion, and pixels still
 //              changing on a still page
 //   names      img without alt, interactive elements without an accessible name
+//   numbers    numbers (counters, prices, progress values) read at scroll 0, at scroll end and under reduced motion, then
+//              compared with the value each one settles on in view; any element that shows a value that is later
+//              corrected ("0 hectares" before a count-up runs, a price that flips after load) fails. Values that keep
+//              changing on their own (clocks, live tickers) are listed as live and not judged.
 //
 //   --timeout <s>  give up on a target after s seconds (default 600) and print "not verified — timed out"; exit 3.
 //                  Very tall pages (the 36,000px gallery) would otherwise run for a very long time.
@@ -31,7 +35,7 @@ import { createHash } from "node:crypto";
 import { projectRoot } from "./memory.mjs";
 
 export const WIDTHS = [375, 390, 768, 1440];
-export const GATE_VERSION = "gate/2"; // gate/2: contrast measured per viewport
+export const GATE_VERSION = "gate/2"; // gate/2: contrast measured per viewport; numbers check (n)
 
 // ── args ──────────────────────────────────────────────────────────────────────
 const argv = process.argv.slice(2);
@@ -344,6 +348,61 @@ async function names(browser, url) {
   await ctx.close(); return { checked: r.checked, fails: r.out };
 }
 
+async function numbers(browser, url) {
+  // Wrong value during animation: a number that is visible with one value and later corrected to another.
+  // Samples: normal motion at scroll 0 (straight after load), normal motion after jumping to the end (anchor links,
+  // fast flicks), and reduced motion at scroll 0 and at the end. Truth: each element scrolled into view and left to
+  // settle (read twice, 1.5 s apart; a value that changes between the two reads is live, e.g. a clock, and is skipped).
+  const READ = () => {
+    const nums = (t) => (t.match(/[-+−]?\d[\d,.\u00a0\u202f]*\d|\d/g) || []).map((x) => x.replace(/[,\u00a0\u202f]/g, "").replace("−", "-"));
+    const out = {};
+    for (const e of document.body.querySelectorAll("*")) {
+      if (["SCRIPT", "STYLE", "NOSCRIPT", "TEMPLATE", "TITLE"].includes(e.tagName) || __g.srOnly(e) || __g.decorative(e)) continue;
+      const own = [...e.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent).join(" ");
+      let vals = nums(own);
+      if (e.tagName === "PROGRESS" || e.tagName === "METER") vals = [String(e.value)];
+      const vn = e.getAttribute("aria-valuenow"); if (vn !== null && /progressbar|meter|slider/.test(e.getAttribute("role") || "")) vals = [vn];
+      if (!vals.length) continue;
+      const s = getComputedStyle(e); const r = e.getBoundingClientRect();
+      const shown = s.display !== "none" && s.visibility !== "hidden" && __g.opacity(e) > 0.05 && r.width > 0 && r.height > 0;
+      out[__g.key(e)] = { v: vals.join(" "), shown, label: __g.label(e), text: (own.trim() || e.textContent.trim()).replace(/\s+/g, " ").slice(0, 40) };
+    }
+    return out;
+  };
+  const sample = async (reduced) => {
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, reducedMotion: reduced ? "reduce" : "no-preference" });
+    const page = await ctx.newPage();
+    await page.goto(url, { waitUntil: "load", timeout: 60000 }).catch(() => {});
+    await page.addScriptTag({ content: PAGE_LIB }).catch(() => {}); await page.waitForTimeout(700);
+    const top = await page.evaluate(READ).catch(() => ({}));
+    await page.evaluate(() => scrollTo(0, document.documentElement.scrollHeight)); await page.waitForTimeout(900);
+    const end = await page.evaluate(READ).catch(() => ({}));
+    let truth = null, live = null;
+    if (!reduced) {
+      // settle every number in view, one at a time, in page order (count-ups usually start on entering the screen)
+      const keys = Object.keys({ ...top, ...end });
+      await page.evaluate(() => scrollTo(0, 0)); await page.waitForTimeout(300);
+      const H = await page.evaluate(() => document.documentElement.scrollHeight);
+      for (let y = 0; y < Math.min(H, 40000); y += 450) { await page.evaluate((v) => scrollTo(0, v), y); await page.waitForTimeout(120); }
+      for (const k of keys.slice(0, 200)) await page.evaluate((k) => { const parts = k.split(">"); let n = document.body; for (const p of parts.slice(1)) { const [t, i] = p.split(":"); n = [...(n?.children || [])].filter((c) => c.tagName.toLowerCase() === t)[+i - 1]; } n?.scrollIntoView?.({ block: "center" }); }, k).then(() => page.waitForTimeout(60));
+      await page.waitForTimeout(2600); const a = await page.evaluate(READ).catch(() => ({}));
+      await page.waitForTimeout(1500); const b = await page.evaluate(READ).catch(() => ({}));
+      truth = a; live = new Set(Object.keys(a).filter((k) => b[k] && b[k].v !== a[k].v));
+    }
+    await ctx.close(); return { top, end, truth, live };
+  };
+  const N = await sample(false); const R = await sample(true);
+  const fails = []; let checked = 0;
+  for (const [k, t] of Object.entries(N.truth || {})) {
+    if (N.live.has(k)) continue; checked++;
+    for (const [when, snap] of [["at scroll 0", N.top], ["after jumping to the end", N.end], ["under reduced motion", R.top], ["under reduced motion, at the end", R.end]]) {
+      const x = snap[k]; if (!x || !x.shown || x.v === t.v) continue;
+      fails.push({ el: t.label, shown: x.text, truth: t.text, when }); break;
+    }
+  }
+  return { checked, live: N.live.size, fails };
+}
+
 async function structure(browser, url) {
   // entrance pattern per top-level section, and the measurable motion budget (pins, WebGL canvases, JS weight)
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 }); const page = await ctx.newPage();
@@ -431,13 +490,13 @@ export async function scan(target, browser, opts = {}) {
   try {
     const c = await contrastAll(browser, url);
     const o = []; for (const w of WIDTHS) o.push(await overflowAt(browser, url, w));
-    const w = await words(browser, url); const m = await motion(browser, url); const n = await names(browser, url); const st = await structure(browser, url);
+    const w = await words(browser, url); const m = await motion(browser, url); const n = await names(browser, url); const nu = await numbers(browser, url); const st = await structure(browser, url);
     // fingerprint of the served HTML with stamp comments removed: same page → same id, any other page → a different id
     const html = await fetch(url).then((r) => r.text()).catch(() => "");
     const pageHash = createHash("sha256").update(html.replace(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g, "")).digest("hex").slice(0, 16);
     const overflowFails = o.flatMap((x) => [...(x.pageScroll > 1 ? [{ width: x.width, el: "page", kind: "horizontal scroll", px: x.pageScroll }] : []), ...x.items.map((i) => ({ width: x.width, ...i }))]);
-    const counts = { contrast: c.fails.length, overflow: overflowFails.length, words: w.fails.length, motion: m.hiddenUnderReducedMotion.length + (m.pixelsChangingWhenStillPct > 0.5 ? 1 : 0), names: n.fails.length };
-    const id = createHash("sha256").update(JSON.stringify({ v: GATE_VERSION, counts, sizes: [w.checked, m.compared, n.checked], page: pageHash, c: c.fails.map((x) => x.width + x.el + x.ratio), o: overflowFails.map((x) => x.width + x.el + x.px), w: w.fails.map((x) => x.el + x.problem), m: m.hiddenUnderReducedMotion.map((x) => x.el), n: n.fails.map((x) => x.el) })).digest("hex").slice(0, 10);
+    const counts = { contrast: c.fails.length, overflow: overflowFails.length, words: w.fails.length, motion: m.hiddenUnderReducedMotion.length + (m.pixelsChangingWhenStillPct > 0.5 ? 1 : 0), names: n.fails.length, numbers: nu.fails.length };
+    const id = createHash("sha256").update(JSON.stringify({ v: GATE_VERSION, counts, sizes: [w.checked, m.compared, n.checked, nu.checked], page: pageHash, c: c.fails.map((x) => x.width + x.el + x.ratio), nu: nu.fails.map((x) => x.el + x.when + x.truth) /* not the shown value: a mid-count frame is timing-dependent */, o: overflowFails.map((x) => x.width + x.el + x.px), w: w.fails.map((x) => x.el + x.problem), m: m.hiddenUnderReducedMotion.map((x) => x.el), n: n.fails.map((x) => x.el) })).digest("hex").slice(0, 10);
     const pass = Object.values(counts).every((v) => v === 0);
     // the critique axes, each derived from a named check (gates/delivery-gate.md, Part 1)
     const local = !/^https?:/.test(target) ? (statSync(resolve(target)).isDirectory() ? resolve(target) : dirname(resolve(target))) : process.cwd();
@@ -447,15 +506,15 @@ export async function scan(target, browser, opts = {}) {
     const logFile = opts.log || [join(local, ".motomation/log.json"), join(projectRoot(local), ".motomation/log.json"), join(projectRoot(), ".motomation/log.json")].find((f) => existsSync(f));
     const record = readRecord(designFile); const mem = await memoryAxis(logFile, meta, st.sectionIds);
     const critique = critiqueOf({ hier: w.hier, words375: w.fails.length, overflow375: overflowFails.filter((x) => x.width === 375).length, motionFails: counts.motion, st, tier: meta.tier, record, mem });
-    return { target, url, version: GATE_VERSION, pass, counts, id, stamp: stampOf(counts, id), critique, sources: { design: designFile || null, log: logFile || null, meta }, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n };
+    return { target, url, version: GATE_VERSION, pass, counts, id, stamp: stampOf(counts, id), critique, sources: { design: designFile || null, log: logFile || null, meta }, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu };
   } finally { close(); }
 }
-export const stampOf = (k, id) => `gate: c${k.contrast} o${k.overflow} w${k.words} rm${k.motion} a${k.names} · ${GATE_VERSION} · ${id}`;
+export const stampOf = (k, id) => `gate: c${k.contrast} o${k.overflow} w${k.words} rm${k.motion} a${k.names} n${k.numbers ?? 0} · ${GATE_VERSION} · ${id}`;
 export function readStamp(html) {
   // a page may carry the stamp in an HTML comment and in the stylesheet; every stamp that carries a gate segment must hold up
   const all = [...html.matchAll(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g)].map((m) => m[0]);
   if (!all.length) return null;
-  const parse = (raw) => { const g = raw.match(/gate: c(\d+) o(\d+) w(\d+) rm(\d+) a(\d+) · (gate\/\d+) · ([0-9a-f]{10})/); return g ? { counts: { contrast: +g[1], overflow: +g[2], words: +g[3], motion: +g[4], names: +g[5] }, version: g[6], id: g[7] } : null; };
+  const parse = (raw) => { const g = raw.match(/gate: c(\d+) o(\d+) w(\d+) rm(\d+) a(\d+)(?: n(\d+))? · (gate\/\d+) · ([0-9a-f]{10})/); return g ? { counts: { contrast: +g[1], overflow: +g[2], words: +g[3], motion: +g[4], names: +g[5], ...(g[6] !== undefined ? { numbers: +g[6] } : {}) }, version: g[7], id: g[8] } : null; };
   const fieldsOf = (raw) => { const f = {}; for (const k of ["archetype", "mutation", "signature", "tier"]) { const m = raw.match(new RegExp(k + ":\\s*([^·*\\n]+?)\\s*(?:·|\\*/|-->)")); if (m) f[k] = m[1].trim(); } return f; };
   const critOf = (raw) => raw.match(/critique:\s*(.+?)\s*(?:·\s*gate:|\*\/|-->)/)?.[1].trim() || null;
   const withGate = all.map((raw) => ({ raw, gate: parse(raw), critique: critOf(raw) })).filter((x) => x.gate);
@@ -480,6 +539,8 @@ function print(r) {
   for (const f of r.motion.hiddenUnderReducedMotion.slice(0, 12)) L(`     hidden  ${f.el}  "${f.text}"`);
   L(`  names     ${r.counts.names === 0 ? "✓" : "✗"} ${r.counts.names} missing alt / accessible names  (${r.names.checked} interactive elements checked)`);
   for (const f of r.names.fails.slice(0, 12)) L(`     ${f.problem}  ${f.el}  ${f.html || f.src || ""}`);
+  L(`  numbers   ${r.counts.numbers === 0 ? "✓" : "✗"} ${r.counts.numbers} values shown wrong before they settle  (${r.numbers.checked} numbers checked at scroll 0, scroll end and reduced motion; ${r.numbers.live} live values skipped)`);
+  for (const f of r.numbers.fails.slice(0, 12)) L(`     ${f.el}  shows "${f.shown}" ${f.when}, settles on "${f.truth}"`);
   const st = r.structure;
   L(`  hierarchy  h1×${r.words.hier.h1}, ${r.words.hier.skips} skipped heading levels, ${r.words.hier.focalTies} element(s) tied for largest on the first 375px screen`);
   L(`  structure  ${st.sections} sections, entrances: ${st.patterns.join(" | ")} → ${st.repeats} repeat(s); pins ${st.pins}, WebGL canvases ${st.webgl}, JS ${st.jsKB}KB gzipped${st.jsUnknown ? ` (+${st.jsUnknown} script(s) not fetched)` : ""}`);
