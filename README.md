@@ -95,10 +95,27 @@ Benchmark v2, run inside a real coding agent ([full report](evals/results/2026-1
 
 The skill wins every pair before the gates too, so the gates only widen the margin. The two briefs the skill lost in v1 (studio contrast, hotel mobile overflow) were won on every seed, and `gate.mjs` measured c0 o0 on all six of those skill pages.
 
-<p>
-<img src="docs/benchmark-images/v2-hotel-4102.webp" alt="Hotel brief, seed 4102: without the skill a conventional page that fails contrast (gated 0); with the skill a full-height door with the name set large (98.5)" width="100%"><br>
+### Before and after
+
+Same brief, same model, same seed: without the skill on the left, with it on the right. Losses are included.
+
+**Hotel (brief 04), v2: won.** Without the skill the page fails contrast (gated 0); with it, a full-height door with the name set large (98.5).
+<img src="docs/benchmark-images/v2-hotel-4102.webp" alt="Hotel brief, seed 4102: without the skill a conventional page that fails contrast (gated 0); with the skill a full-height door with the name set large (98.5)" width="100%">
+
+**Hotel (brief 04), v1: lost, 54.5 vs 88.5.** The door-split hero breaks the name into "Have li", the page overflows a phone by 105px, and room prices flip through wrong digits. The gate that now catches all three (`words`, `overflow`, `numbers`) was built because of this page.
+<img src="docs/benchmark-images/hotel-before-after.webp" alt="Hotel brief, v1: without the skill a clean cream page with a small door (88.5); with the skill a dark riveted door filling the screen with the name split as 'Have li' (54.5)" width="100%">
+
+**SaaS (brief 02), v2: won every pair, lost on variety.** Three seeds, three wins (94, 93.5, 92), and three versions of the same page: a big serif headline on the left, a log panel on the right. The cause (the evaluator's note leaking into the prompt) is fixed in v2.4.0; see the [variety report](evals/results/2026-10-11-variety.md).
+<img src="docs/benchmark-images/v2-saas-sameness.webp" alt="SaaS brief, v2: the three skill pages for seeds 2101, 2102 and 2103 side by side, each a large headline left and a log panel right" width="100%">
+
+**SaaS (brief 02), v1: won, 95.5 vs 44.5.** A generic dark template that overflows a phone, against a page where the log stream is the hero.
+<img src="docs/benchmark-images/saas-before-after.webp" alt="SaaS brief, v1: without the skill a generic dark landing page (44.5); with the skill a serif headline over a scrolling log stream (95.5)" width="100%">
+
+**Studio (brief 07), v2: won, 74.5 vs 96.5.**
 <img src="docs/benchmark-images/v2-studio-7101.webp" alt="Studio brief, seed 7101: without the skill 74.5, with the skill 96.5" width="100%">
-</p>
+
+**Public interest (brief 05), v1: won.** A conventional layout against a bilingual manifesto that keeps the one real figure with its source.
+<img src="docs/benchmark-images/public-before-after.webp" alt="Public-interest brief, v1: a conventional layout without the skill; a bilingual manifesto with the skill" width="100%">
 
 **What this doesn't show yet:**
 - Effort isn't matched: skill runs used 19–66 turns, the baseline 3–12.
