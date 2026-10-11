@@ -1,0 +1,28 @@
+:root{--ground:#f4f1ea;--surface:#fbf9f4;--ink:#1c1b19;--muted:#5d5a53;--line:rgba(28,27,25,.16);--accent:#c2361d;
+--font-display:"Fraunces",Georgia,"Times New Roman",serif;--font-flex:"Anybody",Georgia,serif;--font-mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;--font-text:Georgia,"Iowan Old Style","Times New Roman",serif}
+*{box-sizing:border-box}html{background:var(--ground);color:var(--ink)}body{margin:0;font:17px/1.55 var(--font-text);-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent);color:var(--ground)}
+a{color:inherit;text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.skip{position:absolute;left:12px;top:-60px;background:var(--ink);color:var(--ground);padding:10px 14px;z-index:100;border-radius:6px}.skip:focus{top:12px}
+h1,h2,h3{font-family:var(--font-display);font-weight:500}
+.lede{max-width:44rem;margin:0 24px 12vh;font-size:clamp(1.05rem,1.6vw,1.3rem);color:var(--muted)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:48px;padding:0 24px;max-width:1240px;margin:0 auto}
+@media (min-width:900px){.layout{grid-template-columns:180px minmax(0,1fr)}}
+.family{font-size:clamp(2.2rem,5vw,3.6rem);margin:12vh 0 24px;letter-spacing:-.02em;border-top:1px solid var(--line);padding-top:16px}
+.card{margin:0 0 72px}
+.card-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.card-head h3{font-size:clamp(1.4rem,2.6vw,2rem);margin:0}
+.tier{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.what{max-width:46rem;margin:6px 0 18px}
+.stage{margin:0 0 18px}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 28px;margin:0 0 10px;font-size:15px}
+.notes dt{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}.notes dd{margin:2px 0 0}
+.file{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:14px;color:var(--muted);margin:0}
+.file code{font-family:var(--font-mono);overflow-wrap:anywhere}
+.hint{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;color:var(--muted);margin:14px 0 0}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+.pill{font:inherit;font-size:15px;padding:10px 16px;border-radius:999px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;text-decoration:none}
+.foot{border-top:1px solid var(--line);margin-top:12vh;padding:24px;font-size:14px;color:var(--muted)}
+code{overflow-wrap:anywhere}
+.lede-head{font-family:var(--font-display);font-weight:500;color:var(--ink)}
