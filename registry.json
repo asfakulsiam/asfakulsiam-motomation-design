@@ -178,6 +178,18 @@
       "description": "A card rotates in 3D toward the cursor with a soft moving highlight, like holding a physical card to the light."
     },
     {
+      "name": "aurora",
+      "type": "registry:component",
+      "title": "Aurora",
+      "description": "Curtains of northern light hang across a night sky: a sharp lower hem, fading upward in vertical rays, folding slowly. A small WebGL shader draws it; a CSS poster stands in everywhere else."
+    },
+    {
+      "name": "beams",
+      "type": "registry:component",
+      "title": "Beams",
+      "description": "Parallel shafts of sunlight fall through a row of high windows (a clerestory, a mill, a stage rig) at one shared angle and sway slightly in depth. CSS 3D only: soft gradient shafts rotated in a perspective space; no WebGL, because transforms are enough here."
+    },
+    {
       "name": "contour-lines",
       "type": "registry:component",
       "title": "Contour Lines",
@@ -188,6 +200,12 @@
       "type": "registry:component",
       "title": "Dot Field",
       "description": "A grid of dots that swell and push away from the cursor, then ease back, like a pin-art board."
+    },
+    {
+      "name": "globe",
+      "type": "registry:component",
+      "title": "Globe",
+      "description": "A sphere of evenly spaced dots turns slowly, the far side faint, with a few brighter markers for real places (lat/lon). WebGL points; a CSS dotted disc stands in everywhere else."
     },
     {
       "name": "grain",
@@ -212,6 +230,24 @@
       "type": "registry:component",
       "title": "Liquid Field",
       "description": "Slow flowing colour like ink in water or silk in wind, drawn by a tiny WebGL fragment shader with a CSS gradient fallback."
+    },
+    {
+      "name": "mesh-gradient",
+      "type": "registry:component",
+      "title": "Mesh Gradient",
+      "description": "Four soft pools of colour drift very slowly over a ground colour and blend where they meet, like a dyed silk or a weather map. CSS only: each pool is a radial gradient moved with transform; no blur filter, no WebGL."
+    },
+    {
+      "name": "meteors",
+      "type": "registry:component",
+      "title": "Meteors",
+      "description": "Now and then a thin streak of light crosses a night sky at one shared angle and burns out; long quiet gaps between them. CSS only: each streak is a gradient line moved with transform."
+    },
+    {
+      "name": "particle-field",
+      "type": "registry:component",
+      "title": "Particle Field",
+      "description": "Dust drifting through a beam of light: soft particles at three depths, the near ones larger and brighter, all moving slowly sideways and bobbing. WebGL points; a CSS poster of scattered motes stands in elsewhere."
     },
     {
       "name": "bento-reveal",

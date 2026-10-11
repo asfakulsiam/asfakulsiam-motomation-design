@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Component harness: for every component in the gallery (or --only a,b,c), take a screenshot of its card at 1440 and 375,
 // with and without reduced motion, and record console errors, layout shift inside the card, and the source size.
-// Usage: node tests/components/harness.mjs [--only id,id] [--out dir] [--json report.json]
+// Usage: node tests/components/harness.mjs [--only id,id] [--out dir] [--json report.json] [--query "?ambient=force"]
 // Needs playwright (NODE_PATH). Fails (exit 1) on any console error, CLS > 0.02, or a source file over the size budget.
 import { chromium } from "playwright";
 import { createServer } from "node:http";
@@ -24,7 +24,7 @@ const list = rows.filter((r) => !only || only.includes(r.id));
 
 const dir = join(SKILL, "examples/gallery");
 const srv = createServer((q, s) => { const f = join(dir, decodeURIComponent(q.url.split("?")[0]) === "/" ? "index.html" : decodeURIComponent(q.url.split("?")[0])); if (!existsSync(f)) { s.writeHead(404); return s.end(); } s.writeHead(200, { "content-type": extname(f) === ".html" ? "text/html; charset=utf-8" : "application/octet-stream" }); s.end(readFileSync(f)); }).listen(0);
-const url = `http://127.0.0.1:${srv.address().port}/index.html`;
+const url = `http://127.0.0.1:${srv.address().port}/index.html${arg("--query", "")}`;
 const b = await chromium.launch();
 const report = []; let failed = 0;
 for (const [w, h] of [[1440, 900], [375, 812]]) for (const rm of [false, true]) {
@@ -52,14 +52,16 @@ for (const [w, h] of [[1440, 900], [375, 812]]) for (const rm of [false, true]) 
       else await pg.touchscreen.tap(bb.x + bb.width / 2, bb.y + bb.height / 2);
       await pg.waitForTimeout(250);
     }
-    const shot = join(out, `${c.id}-${w}${rm ? "-reduced" : ""}.png`);
+    // which path rendered: a live canvas, running Web Animations, or the static poster
+    const mode = await card.evaluate((el) => (el.querySelector(".stage canvas") ? "canvas" : el.querySelector(".stage")?.getAnimations({ subtree: true }).some((a) => a.playState === "running") ? "animating" : "static"));
+    const shot = join(out, `${c.id}-${w}${rm ? "-reduced" : ""}${arg("--query", "") ? "-q" : ""}.png`);
     await card.screenshot({ path: shot });
     const size = statSync(join(SKILL, c.file)).size;
     const e = errs.slice(before);
     const ok = !e.length && cls <= 0.02 && size <= BUDGET;
     if (!ok) failed++;
-    report.push({ id: c.id, w, reduced: rm, cls: +cls.toFixed(4), bytes: size, errors: e, ok, shot });
-    console.log(`${ok ? "ok  " : "FAIL"} ${c.id.padEnd(22)} ${w}${rm ? " reduced" : "        "} cls ${cls.toFixed(3)} · ${(size / 1024).toFixed(1)} KB · ${e.length ? "errors: " + e.join(" | ") : "no console errors"}`);
+    report.push({ id: c.id, w, reduced: rm, mode, cls: +cls.toFixed(4), bytes: size, errors: e, ok, shot });
+    console.log(`${ok ? "ok  " : "FAIL"} ${c.id.padEnd(22)} ${w}${rm ? " reduced" : "        "} ${mode.padEnd(9)} cls ${cls.toFixed(3)} · ${(size / 1024).toFixed(1)} KB · ${e.length ? "errors: " + e.join(" | ") : "no console errors"}`);
   }
   await ctx.close();
 }

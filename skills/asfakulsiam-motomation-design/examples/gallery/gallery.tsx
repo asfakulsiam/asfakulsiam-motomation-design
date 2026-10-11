@@ -24,6 +24,12 @@ import { GlowBorder } from "../components/ui/glow-border";
 import { RainbowBorder } from "../components/ui/rainbow-border";
 import { ShimmerButton } from "../components/ui/shimmer-button";
 import { SpotlightCard } from "../components/ui/spotlight-card";
+import { Aurora } from "../components/backgrounds/aurora";
+import { Beams } from "../components/backgrounds/beams";
+import { Globe } from "../components/backgrounds/globe";
+import { MeshGradient } from "../components/backgrounds/mesh-gradient";
+import { Meteors } from "../components/backgrounds/meteors";
+import { ParticleField } from "../components/backgrounds/particle-field";
 import { Aperture } from "../components/scroll/aperture";
 import { DarkroomDevelop } from "../components/scroll/darkroom-develop";
 import { HorizontalReel } from "../components/scroll/horizontal-reel";
@@ -132,6 +138,12 @@ const DEMOS: Record<string, () => ReactNode> = {
   grain: () => <div style={{ ...box, minHeight: 260, background: "#c9b48f" }}><Grain opacity={0.12} animate /><p style={{ ...display(), position: "relative", color: "#1c1b19" }}>Printed matter.</p></div>,
   halftone: () => <div style={{ ...box, padding: 0 }}><Halftone src={COURTYARD} alt="Courtyard house printed as halftone dots" cell={7} style={{ width: "100%" }} /></div>,
   "light-sweep": () => <div style={{ ...box, minHeight: 260, background: "#2a1a12", color: "#f6e7c8" }}><LightSweep /><p style={{ ...display(), position: "relative", color: "#f6e7c8" }}>Afternoon.</p></div>,
+  aurora: () => <div style={{ ...box, minHeight: 320, alignContent: "end" }}><Aurora /><p style={{ ...display(), position: "relative", color: "#eef3f8" }}>Tromsø, 69° N.</p></div>,
+  beams: () => <div style={{ ...box, minHeight: 320, alignContent: "end" }}><Beams /><p style={{ ...display(), position: "relative", color: "#f4ecdc" }}>The nave at noon.</p></div>,
+  meteors: () => <div style={{ ...box, minHeight: 320, alignContent: "end" }}><Meteors /><p style={{ ...display(), position: "relative", color: "#eef0f6" }}>Perseids, 12 August.</p></div>,
+  globe: () => <div style={{ ...box, minHeight: 360, alignContent: "end" }}><Globe markers={[{ lat: 23.8, lon: 90.4 }, { lat: 51.5, lon: -0.1 }, { lat: 25.2, lon: 55.3 }, { lat: 40.7, lon: -74 }]} /><p style={{ ...display("clamp(1.6rem, 4vw, 2.6rem)"), position: "relative", color: "#eef0f6" }}>Dhaka · London · Dubai · New York</p></div>,
+  "particle-field": () => <div style={{ ...box, minHeight: 320, alignContent: "end" }}><ParticleField /><p style={{ ...display(), position: "relative", color: "#f3e9d6" }}>Reel two, 1958.</p></div>,
+  "mesh-gradient": () => <div style={{ ...box, minHeight: 320, alignContent: "end" }}><MeshGradient /><p style={{ ...display(), position: "relative", color: "#2a2118" }}>Indigo &amp; madder.</p></div>,
   "liquid-field": () => <div style={{ ...box, minHeight: 320 }}><LiquidField /><p style={{ ...display(), position: "relative", color: "#f4f1ea" }}>Silk, moving.</p></div>,
   "bento-reveal": () => <BentoReveal tiles={[{ content: <><p className="eyebrow">Founded</p><p style={display()}>2011</p></>, col: 2, row: 2 }, { content: <p>Three partners</p> }, { content: <p>Five houses</p> }, { content: <p>Brick and courtyards, Dhaka</p>, col: 2 }]} />,
   "curve-carousel": () => <div style={{ ...box, padding: "28px 0" }}><CurveCarousel label="Projects" cardWidth={260} items={TILES.slice(0, 6).map((t, i) => <figure key={i} style={{ margin: 0, background: "var(--ground)", borderRadius: 14, padding: 10, boxShadow: "0 12px 40px rgba(0,0,0,.14)" }}><img src={t} alt={`Project ${i + 1}`} style={{ width: "100%", borderRadius: 8, display: "block" }} /><figcaption style={{ padding: "8px 2px 0" }}>Project {i + 1}</figcaption></figure>)} /></div>,
