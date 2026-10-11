@@ -31,4 +31,6 @@ A release ships only if, compared with the baseline:
 - no brief fails a **hard gate** (reduced motion, keyboard access, contrast, no placeholders).
 
 ## Variety test
+Automated part: `node evals/variety.mjs` prints collision draws for 5 seeds and the fingerprint similarity matrix of published builds. Latest: [`results/2026-10-11-variety.md`](results/2026-10-11-variety.md).
+
 Run `briefs/03-ceramics-shop.md` three times in the same project, without clearing `.motomation/log.json`. The archetype, signature and nav must differ each time.
