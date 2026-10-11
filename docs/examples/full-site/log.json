@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "runs": [
+    {
+      "date": "2026-10-11T16:38:57.240Z",
+      "page": "home,books,ekti-nodir-naam,visit",
+      "archetype": "lookbook",
+      "mutation": "constraint",
+      "signature": "issue-stamp",
+      "fonts": "EB Garamond/Noto Serif Bengali",
+      "palette": "Paper & Vermilion",
+      "tier": "1",
+      "fingerprint": {
+        "layout": "sequence",
+        "tier": 1
+      }
+    }
+  ]
+}

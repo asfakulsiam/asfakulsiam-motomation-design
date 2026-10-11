@@ -31,6 +31,7 @@ Real sessions, copied with their commands, outputs, screenshots and gate results
 | Example | What it shows |
 |---|---|
 | [Hero section](skills/asfakulsiam-motomation-design/examples/prompts/hero.md) | One viewport for a real craft: collision draw, memory check, build, gate, stamp, Restraint Gate log |
+| [Four-page site](skills/asfakulsiam-motomation-design/examples/prompts/full-site.md) | A whole small site from one prompt: Thinking Sequence, data-file choices, one signature across pages, a gate and verified stamp per page |
 | [Component swap](skills/asfakulsiam-motomation-design/examples/prompts/component.md) | `HoldToCommit` dropped into an existing React app: search, choice, diff, typecheck, gate, interaction test |
 
 ---

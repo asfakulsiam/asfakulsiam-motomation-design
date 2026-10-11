@@ -1,0 +1,17 @@
+Use the asfakulsiam-motomation-design skill: /build a four-page website as static HTML files (index.html, books.html, ekti-nodir-naam.html, visit.html) that share one stylesheet and one script. Use --seed 2410 for the collision engine.
+
+Client: Kheya Press, a small independent publisher in Banglabazar, Old Dhaka. It publishes Bangla translations of world fiction, one title at a time, 500 copies per printing.
+Facts you may use:
+- Founded 2016. Six titles in print (below).
+- No online checkout. Copies are sold at the shop, or ordered by email (orders@kheyapress.com.bd) and delivered inside Dhaka, cash on delivery.
+- Shop: 38/2 Pyaridas Road, Banglabazar, Dhaka 1100. Open Saturday to Thursday, 11:00 to 19:00. Closed Friday.
+- Every February the press has a stall at the Amar Ekushey Book Fair.
+Titles (Bangla title · English title · translated from · translator · first printed · price):
+1. শীতের ডাকঘর · The Winter Post Office · Norwegian · Shirin Akhter · 2016 · 450 ৳
+2. লবণের বাড়ি · The Salt House · Turkish · Tanvir Ahmed · 2018 · 380 ৳
+3. কাচের ঘোড়া · The Glass Horse · Georgian · Mahmud Rahman · 2020 · 350 ৳
+4. রাতের ট্রাম · The Night Tram · Czech · Arif Hossain · 2022 · 400 ৳
+5. আমার মায়ের অক্ষর · My Mother's Alphabet · Korean · Nusrat Jahan · 2024 · 480 ৳
+6. একটি নদীর নাম · The Name of a River · Portuguese · Rumana Haque · 2026 · 420 ৳ (newest; it gets its own page with this opening line: "নদীটার কোনো নাম ছিল না। গ্রামের লোকেরা শুধু বলত, ওপারে যাবে? সেই প্রশ্নটাই একদিন তার নাম হয়ে গেল।" — "The river had no name. The villagers only ever asked, going across? One day that question became its name.")
+Pages: Home (what the press is, the newest title, the way to the books), Books (all six with translator, language, year and price), the newest title's page (the opening line, price, how to order), Visit (address, hours, how to order, the book fair).
+No photographs are available. Do not invent statistics, reviews, awards, prices or opening hours beyond the facts above.

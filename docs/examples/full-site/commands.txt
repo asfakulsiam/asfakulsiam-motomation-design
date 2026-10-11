@@ -1,0 +1,129 @@
+$ node scripts/collide.mjs --n 3 --spread --category ecommerce --seed 2410
+COLLISION ENGINE · category: E-commerce · seed 2410
+
+Draw 1
+  Archetype  : The Lookbook (lookbook): full-bleed editorial spreads page by page
+  If it can't serve the brief, take: The Catalogue (catalogue), not a favourite
+  Mutation   : Self-imposed constraint: one colour, one size or one font weight only
+  Collision  : stamp and postmark (post) → steal "ink impression with a date"
+               e.g. a 'viewed' or 'booked' stamp with the real date
+  Kinetic    : a line splits, driven by scroll velocity
+  Seed move  : Neighbour Moves: each letter has its own hover move
+  Fingerprint: layout=sequence · tier=2 · signature_type=type
+
+Draw 2
+  Archetype  : The Shelf (shelf): products as objects on shelves
+  If it can't serve the brief, take: The Catalogue (catalogue), not a favourite
+  Mutation   : Reverse the reveal: start complete and take away as you scroll
+  Collision  : kaleidoscope (toys) → steal "mirrored symmetry that turns"
+               e.g. a gallery mirrored around the cursor
+  Kinetic    : an image splits, driven by hover
+  Seed move  : Proximity Weight: letters near the cursor get heavier
+  Fingerprint: layout=product · tier=2 · signature_type=type
+
+Draw 3
+  Archetype  : The Poster (poster): one screen one image with layers beneath
+  If it can't serve the brief, take: The Stage (stage), not a favourite
+  Mutation   : Shift the tempo: one section moves at film speed while others stay still
+  Collision  : theatre curtain (performance) → steal "reveal by withdrawal sideways"
+               e.g. sections that open from the centre
+  Kinetic    : a number flips, driven by the visitor's local time
+  Seed move  : Remembered List: the list marks what you already opened
+  Fingerprint: layout=statement · tier=1 · signature_type=micro
+
+Diversity (measured)
+  archetypes       : 3/3 unique  ✓
+  signature seeds  : 3/3 unique  ✓
+  mutations        : 3/3 unique  ✓
+  collision worlds : 3/3 unique  ✓
+
+Treat these as constraints, not answers. Combine, bend or reject them, but start from them.
+Next: write Tension → Concept with one draw, then run the Thinking Sequence (thinking/sequence.md).
+
+$ node scripts/memory.mjs recent
+No runs logged yet in this project (/home/user/workspace/runs/full-site/.motomation/log.json).
+$ node scripts/search.mjs fonts "bengali book editorial serif"
+fonts: top 5 for "bengali book editorial serif"
+
+■ Noto Serif Bengali  (score 9.73)
+  source         Google Fonts
+  license        OFL
+  role           bangla serif
+  axes           wdth wght
+  personality    bookish Bangla serif
+  pairs_with     Noto Sans Bengali; Newsreader
+  use_for        Bangla long-form, heritage
+  avoid          small UI labels
+
+■ EB Garamond  (score 4.76)
+  source         Google Fonts
+  license        OFL
+  role           text serif
+  axes           wght
+  personality    classic book face
+  pairs_with     Schibsted Grotesk; Geist
+  use_for        literary, academic, heritage
+  avoid          play moods
+
+■ Instrument Serif  (score 3.36)
+  source         Google Fonts
+  license        OFL
+  role           display serif
+  axes           none (regular + italic)
+  personality    condensed elegant serif, fashion-editorial
+  pairs_with     Instrument Sans; Geist; Satoshi
+  use_for        fashion, portfolios, editorial headlines
+  avoid          body text
+
+■ PP Editorial New  (score 3.33)
+  source         Paid foundry
+  license        Commercial (trial available)
+  role           display serif
+  axes           none (weights + italics)
+  personality    ultralight high-contrast editorial serif
+  pairs_with     PP Neue Montreal
+  use_for        fashion, portfolios, luxury editorial
+  avoid          projects without a font budget
+
+■ Zodiak  (score 2.68)
+  source         Fontshare
+  license        ITF Free Font License
+  role           display/text serif
+  axes           wght
+  personality    contemporary high-contrast serif
+  pairs_with     Satoshi; General Sans
+  use_for        dark luxe, editorial, fashion
+  avoid          tiny UI
+
+
+$ node scripts/search.mjs palettes "printed matter paper ink"
+palettes: top 2 for "printed matter paper ink"
+
+■ Paper & Vermilion  (score 8.10)
+  mood           editorial
+  ground         #F3F0EA
+  surface        #EAE6DE
+  ink            #151412
+  muted          #5E5A53
+  accent         #C8401C
+  accent_ink     #FFFFFF
+  story          printed matter, newsrooms, studios
+  accent_text    large-only
+
+■ Ink & Rose  (score 2.78)
+  mood           editorial
+$ node scripts/contrast.mjs #151412 #F3F0EA
+#151412 on #F3F0EA: 16.18:1  body PASS · large PASS · AAA PASS
+$ node scripts/contrast.mjs #5E5A53 #F3F0EA
+#5E5A53 on #F3F0EA: 6.02:1  body PASS · large PASS · AAA —
+$ node scripts/contrast.mjs #C8401C #F3F0EA
+#C8401C on #F3F0EA: 4.38:1  body FAIL · large PASS · AAA —
+$ node scripts/contrast.mjs #FFFFFF #C8401C
+#FFFFFF on #C8401C: 4.99:1  body PASS · large PASS · AAA —
+$ node scripts/contrast.mjs #5E5A53 #EAE6DE
+#5E5A53 on #EAE6DE: 5.50:1  body PASS · large PASS · AAA —
+$ node scripts/contrast.mjs #151412 #EAE6DE
+#151412 on #EAE6DE: 14.79:1  body PASS · large PASS · AAA PASS
+$ node scripts/memory.mjs log --archetype lookbook --mutation constraint --signature issue-stamp --fonts "EB Garamond/Noto Serif Bengali" --palette "Paper & Vermilion" --tier 1 --page "home,books,ekti-nodir-naam,visit"
+Logged run #1 to /home/user/workspace/runs/full-site/.motomation/log.json
+  fingerprint: layout=sequence · tier=1
