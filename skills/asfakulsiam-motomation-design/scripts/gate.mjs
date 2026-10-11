@@ -5,8 +5,9 @@
 //   node scripts/gate.mjs --verify <file.html> [--url http://…]   check the stamp written in the file against a fresh scan
 //
 // Checks (all bounded: each one is only as strong as what it measures, and says what it skipped):
-//   contrast   every visible text element vs the pixels actually behind it (text hidden, page screenshotted, sampled;
-//              judged by the 10th-percentile sample; warns when > 30% of text elements could not be measured)
+//   contrast   at 375, 390, 768 and 1440: every visible text element vs the pixels actually behind it (text hidden,
+//              viewport screenshotted, sampled; judged by the 10th-percentile sample; warns when > 30% of text elements
+//              could not be measured). Reported per viewport, so a mobile-only crop, overlay or background is caught.
 //              → fails below 4.5:1 (body) or 3:1 (large: ≥24px, or ≥18.66px bold)
 //   overflow   at 375, 390, 768, 1440: page scroll width, and elements escaping the viewport or pushing text out of
 //              their parent by >1px with no clipping ancestor
@@ -30,7 +31,7 @@ import { createHash } from "node:crypto";
 import { projectRoot } from "./memory.mjs";
 
 export const WIDTHS = [375, 390, 768, 1440];
-export const GATE_VERSION = "gate/1";
+export const GATE_VERSION = "gate/2"; // gate/2: contrast measured per viewport
 
 // ── args ──────────────────────────────────────────────────────────────────────
 const argv = process.argv.slice(2);
@@ -118,11 +119,12 @@ async function open(browser, url, opts) {
 
 // ── checks ───────────────────────────────────────────────────────────────────
 const SKIP_WARN_PCT = 30; // warn when more than this share of text elements could not be measured
-async function contrast(browser, url) {
+async function contrast(browser, url, VW = 1440) {
   // Measure each text element in the scroll position where a visitor sees it: scroll a viewport at a time, hide all
   // text, screenshot the viewport, and sample the pixels behind every element that is fully on screen.
-  const VW = 1440, VH = 900;
-  const { ctx, page } = await open(browser, url, { viewport: { width: VW, height: VH } });
+  // Run once per width: mobile layouts crop images differently, stack text over photos and swap backgrounds.
+  const VH = VW < 800 ? 812 : 900; const mobile = VW < 800;
+  const { ctx, page } = await open(browser, url, { viewport: { width: VW, height: VH }, hasTouch: mobile, isMobile: mobile });
   await page.evaluate(() => __g.textEls().forEach((e, i) => e.setAttribute("data-g-id", i)));
   const H = Math.min(await page.evaluate(() => document.documentElement.scrollHeight), 40000);
   const done = new Map(); const seenHidden = new Set();
@@ -194,9 +196,15 @@ async function contrast(browser, url) {
   await ctx.close();
   const measured = [...done.values()];
   const large = (r) => r.size >= 24 || (r.size >= 18.66 && r.weight >= 700);
-  const fails = measured.filter((r) => r.ratio < (large(r) ? 3 : 4.5)).map((r) => ({ el: r.label, text: r.text, ratio: r.ratio, need: large(r) ? 3 : 4.5, fg: r.fgHex, bg: r.bgHex, size: r.size }));
+  const fails = measured.filter((r) => r.ratio < (large(r) ? 3 : 4.5)).map((r) => ({ width: VW, el: r.label, text: r.text, ratio: r.ratio, need: large(r) ? 3 : 4.5, fg: r.fgHex, bg: r.bgHex, size: r.size }));
   const skipped = total - measured.length, skippedPct = total ? Math.round((skipped / total) * 100) : 0;
-  return { measured: measured.length, skipped, total, skippedPct, lowCoverage: skippedPct > SKIP_WARN_PCT, notVisibleAtScan: [...seenHidden].filter((i) => !done.has(i)).length, fails };
+  return { width: VW, measured: measured.length, skipped, total, skippedPct, lowCoverage: skippedPct > SKIP_WARN_PCT, notVisibleAtScan: [...seenHidden].filter((i) => !done.has(i)).length, fails };
+}
+async function contrastAll(browser, url) {
+  const byWidth = []; for (const w of WIDTHS) byWidth.push(await contrast(browser, url, w));
+  const sum = (k) => byWidth.reduce((n, x) => n + x[k], 0);
+  return { byWidth, measured: sum("measured"), skipped: sum("skipped"), total: sum("total"), notVisibleAtScan: sum("notVisibleAtScan"),
+    skippedPct: sum("total") ? Math.round((sum("skipped") / sum("total")) * 100) : 0, lowCoverage: byWidth.some((x) => x.lowCoverage), fails: byWidth.flatMap((x) => x.fails) };
 }
 
 async function overflowAt(browser, url, width) {
@@ -421,7 +429,7 @@ export function critiqueOf({ hier, words375, overflow375, motionFails, st, tier,
 export async function scan(target, browser, opts = {}) {
   const { url, close } = await toUrl(target);
   try {
-    const c = await contrast(browser, url);
+    const c = await contrastAll(browser, url);
     const o = []; for (const w of WIDTHS) o.push(await overflowAt(browser, url, w));
     const w = await words(browser, url); const m = await motion(browser, url); const n = await names(browser, url); const st = await structure(browser, url);
     // fingerprint of the served HTML with stamp comments removed: same page → same id, any other page → a different id
@@ -429,7 +437,7 @@ export async function scan(target, browser, opts = {}) {
     const pageHash = createHash("sha256").update(html.replace(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g, "")).digest("hex").slice(0, 16);
     const overflowFails = o.flatMap((x) => [...(x.pageScroll > 1 ? [{ width: x.width, el: "page", kind: "horizontal scroll", px: x.pageScroll }] : []), ...x.items.map((i) => ({ width: x.width, ...i }))]);
     const counts = { contrast: c.fails.length, overflow: overflowFails.length, words: w.fails.length, motion: m.hiddenUnderReducedMotion.length + (m.pixelsChangingWhenStillPct > 0.5 ? 1 : 0), names: n.fails.length };
-    const id = createHash("sha256").update(JSON.stringify({ v: GATE_VERSION, counts, sizes: [w.checked, m.compared, n.checked], page: pageHash, c: c.fails.map((x) => x.el + x.ratio), o: overflowFails.map((x) => x.width + x.el + x.px), w: w.fails.map((x) => x.el + x.problem), m: m.hiddenUnderReducedMotion.map((x) => x.el), n: n.fails.map((x) => x.el) })).digest("hex").slice(0, 10);
+    const id = createHash("sha256").update(JSON.stringify({ v: GATE_VERSION, counts, sizes: [w.checked, m.compared, n.checked], page: pageHash, c: c.fails.map((x) => x.width + x.el + x.ratio), o: overflowFails.map((x) => x.width + x.el + x.px), w: w.fails.map((x) => x.el + x.problem), m: m.hiddenUnderReducedMotion.map((x) => x.el), n: n.fails.map((x) => x.el) })).digest("hex").slice(0, 10);
     const pass = Object.values(counts).every((v) => v === 0);
     // the critique axes, each derived from a named check (gates/delivery-gate.md, Part 1)
     const local = !/^https?:/.test(target) ? (statSync(resolve(target)).isDirectory() ? resolve(target) : dirname(resolve(target))) : process.cwd();
@@ -458,9 +466,12 @@ export function readStamp(html) {
 function print(r) {
   const L = (s = "") => console.log(s);
   L(`DELIVERY GATE · ${r.target}`);
-  L(`  contrast  ${r.counts.contrast === 0 ? "✓" : "✗"} ${r.counts.contrast} below AA  (${r.contrast.measured} text elements measured against rendered pixels; ${r.contrast.skipped} skipped; ${r.contrast.notVisibleAtScan} not visible at scan time)`);
-  if (r.contrast.lowCoverage) L(`  ⚠ contrast coverage: ${r.contrast.skipped} of ${r.contrast.total} text elements (${r.contrast.skippedPct}%) were skipped (moving, occluded or never fully on screen) — more than ${SKIP_WARN_PCT}%, so c${r.counts.contrast} is not a full measurement. Check the skipped text by hand or make it measurable.`);
-  for (const f of r.contrast.fails.slice(0, 12)) L(`     ${f.ratio}:1 < ${f.need}:1  ${f.fg} on ${f.bg}  ${f.size}px  ${f.el}  "${f.text}"`);
+  L(`  contrast  ${r.counts.contrast === 0 ? "✓" : "✗"} ${r.counts.contrast} below AA across ${WIDTHS.join("/")}px  (measured against rendered pixels at each width)`);
+  for (const x of r.contrast.byWidth) {
+    L(`     ${String(x.width).padStart(4)}px  ${x.fails.length === 0 ? "✓" : "✗"} ${x.fails.length} below AA  (${x.measured} measured; ${x.skipped} skipped; ${x.notVisibleAtScan} not visible at scan time)`);
+    if (x.lowCoverage) L(`     ⚠ ${x.width}px coverage: ${x.skipped} of ${x.total} text elements (${x.skippedPct}%) were skipped (moving, occluded or never fully on screen) — more than ${SKIP_WARN_PCT}%, so this width is not a full measurement. Check the skipped text by hand or make it measurable.`);
+    for (const f of x.fails.slice(0, 8)) L(`        ${f.ratio}:1 < ${f.need}:1  ${f.fg} on ${f.bg}  ${f.size}px  ${f.el}  "${f.text}"`);
+  }
   L(`  overflow  ${r.counts.overflow === 0 ? "✓" : "✗"} ${r.counts.overflow} at ${WIDTHS.join("/")}px`);
   for (const f of r.overflow.fails.slice(0, 12)) L(`     ${f.width}px  ${f.kind} by ${f.px}px  ${f.el}${f.text ? `  "${f.text}"` : ""}`);
   L(`  words     ${r.counts.words === 0 ? "✓" : "✗"} ${r.counts.words} display-text problems at 375px  (${r.words.checked} display elements checked)`);

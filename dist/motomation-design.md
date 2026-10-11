@@ -2417,14 +2417,14 @@ It runs five bounded checks in a real browser and prints numbers:
 
 | Code | Check | Fails when |
 |---|---|---|
-| `c` | **Contrast**: every visible text element against the pixels actually behind it. The text is hidden, the viewport is screenshotted at each scroll position and the background is sampled. Each element is judged at its most visible state, by its 10th-percentile sample (not the median), so text that sits partly on a pale image edge cannot pass on its dark half. | below 4.5:1 for body text, below 3:1 for large text (≥ 24px, or ≥ 18.66px bold) |
+| `c` | **Contrast** at 375, 390, 768 and 1440px, reported per width: every visible text element against the pixels actually behind it. The text is hidden, the viewport is screenshotted at each scroll position and the background is sampled. A phone layout that stacks a caption over a pale crop of the image fails at 375 even when the desktop layout passes. Each element is judged at its most visible state, by its 10th-percentile sample (not the median), so text that sits partly on a pale image edge cannot pass on its dark half. | below 4.5:1 for body text, below 3:1 for large text (≥ 24px, or ≥ 18.66px bold) |
 | `o` | **Overflow** at 375, 390, 768 and 1440px | the page scrolls sideways, or an element leaves the viewport or pushes text out of its parent by more than 1px with no clipping ancestor |
 | `w` | **Long display words** at 375px: every h1–h3 and any text ≥ 32px, including decorative text | the text is wider than its box, leaves the viewport, breaks a word across lines, or splits one word across elements (e.g. "Have" + "li" on two door leaves) |
 | `rm` | **Reduced motion**: the page loaded with `prefers-reduced-motion: reduce` | text that is visible normally is hidden, or pixels keep changing on a still page |
 | `a` | **Alt and names** | an `img` has no `alt`, or a link, button, input or other focusable element has no accessible name |
 
 The output ends with a stamp line built only from those numbers:
-`gate: c0 o0 w0 rm0 a0 · gate/1 · <id>`. The id is a hash of what was measured on this page, so the same page gives the same id and a different page does not.
+`gate: c0 o0 w0 rm0 a0 · gate/2 · <id>`. The id is a hash of what was measured on this page, so the same page gives the same id and a different page does not. `c` is the total of the per-width contrast failures. A `gate/1` stamp (contrast at 1440 only) is rejected by `--verify`: re-run the gate and paste the new line.
 
 **Rule: a stamp is only valid if it contains numbers produced by `scripts/gate.mjs` in the same run. A hand-written stamp is rejected.** Paste the line the script printed. Never type the numbers yourself and never copy them from an example or an earlier page. `--verify` re-scans the page and rejects any stamp whose numbers or id differ from the fresh scan, or that has no `gate:` segment at all.
 

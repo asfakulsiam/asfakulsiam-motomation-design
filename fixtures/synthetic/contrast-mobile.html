@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synthetic · contrast fails only on phones</title>
+<!-- At 1440px the caption sits beside the image on dark paper (passes). Below 800px the layout stacks the caption over
+     the pale lower part of the image, a common mobile crop, and it fails. The old gate measured 1440×900 only. -->
+<style>
+  body { margin: 0; background: #15171a; color: #f2efe8; font: 18px/1.5 system-ui, sans-serif; }
+  .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 3rem; align-items: center; }
+  .art { height: 420px; background: linear-gradient(#2a3a4a, #e9e4d8); border-radius: 6px; }
+  .cap { color: #f2efe8; }
+  @media (max-width: 799px) {
+    .hero { display: block; position: relative; padding: 0; }
+    .art { height: 520px; border-radius: 0; }
+    .cap { position: absolute; left: 1.25rem; right: 1.25rem; bottom: 1.5rem; color: #f2efe8; }
+  }
+</style></head>
+<body><main><section class="hero">
+  <div class="art" role="img" aria-label="Evening sky over the river"></div>
+  <div class="cap"><h1>River light</h1><p>Evening walks along the Buriganga, every Friday.</p></div>
+</section></main></body></html>
