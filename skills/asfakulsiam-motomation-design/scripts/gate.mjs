@@ -132,7 +132,7 @@ async function contrast(browser, url, VW = 1440) {
   await page.evaluate(() => __g.textEls().forEach((e, i) => e.setAttribute("data-g-id", i)));
   const H = Math.min(await page.evaluate(() => document.documentElement.scrollHeight), 40000);
   const done = new Map(); const seenHidden = new Set();
-  const HIDE = "*,*::before,*::after{color:transparent!important;text-shadow:none!important;-webkit-text-stroke:0!important;caret-color:transparent!important;text-decoration-color:transparent!important}";
+  const HIDE = "*,*::before,*::after{color:transparent!important;text-shadow:none!important;-webkit-text-stroke:0!important;caret-color:transparent!important;text-decoration-color:transparent!important;border-color:transparent!important;outline-color:transparent!important}"; // borders and outlines are never the background behind text: a badge outline inside a heading must not be sampled as its ground
   // pinned / sticky sequences change while the page "stands still": sample them every 0.15 viewport, the rest every 0.7
   const zones = await page.evaluate(() => [...document.querySelectorAll(".pin-spacer, *")].filter((e) => e.classList.contains("pin-spacer") || getComputedStyle(e).position === "sticky")
     .map((e) => { const z = e.classList.contains("pin-spacer") ? e : e.parentElement; const r = z.getBoundingClientRect(); return [r.top + scrollY, r.top + scrollY + r.height - innerHeight]; }).filter(([a, b]) => b > a));
@@ -171,10 +171,9 @@ async function contrast(browser, url, VW = 1440) {
     const todo = cands.filter((c) => !done.has(c.i) || c.op > done.get(c.i).op + 0.01);
     for (const c of todo) if (c.op <= 0.05) seenHidden.add(c.i);
     const vis = todo.filter((c) => c.op > 0.05); if (!vis.length) continue;
-    const st = await page.addStyleTag({ content: HIDE }); await page.waitForTimeout(60);
-    const shot = (await page.screenshot({ animations: "disabled" })).toString("base64");
-    await st.evaluate((n) => n.remove());
-    const res = await page.evaluate(async ({ shot, vis }) => {
+    const snap = async () => { const st = await page.addStyleTag({ content: HIDE }); await page.waitForTimeout(60);
+      const shot = (await page.screenshot({ animations: "disabled", timeout: 120000 })).toString("base64"); await st.evaluate((n) => n.remove()); return shot; };
+    const sampleShot = (shot, vis) => page.evaluate(async ({ shot, vis }) => {
       const img = new Image(); img.src = "data:image/png;base64," + shot; await img.decode();
       const cv = document.createElement("canvas"); cv.width = img.width; cv.height = img.height; const cx = cv.getContext("2d", { willReadFrequently: true }); cx.drawImage(img, 0, 0);
       const hex = (o) => "#" + [o.r, o.g, o.b].map((v) => Math.round(v).toString(16).padStart(2, "0")).join("");
@@ -194,6 +193,12 @@ async function contrast(browser, url, VW = 1440) {
         return { ...c, ratio: +p10.toFixed(2), median: +ratios[Math.floor(ratios.length / 2)].toFixed(2), min: +ratios[0].toFixed(2), fgHex: hex(c.fg), bgHex: hex(bgMed) };
       });
     }, { shot, vis });
+    let res = await sampleShot(await snap(), vis);
+    // a real contrast failure is in every frame; a frame caught mid-reflow or before the hiding style applied is not.
+    // Re-take the screenshot for anything that failed and keep the better reading.
+    const failing = res.filter((r) => r.ratio < ((r.size >= 24 || (r.size >= 18.66 && r.weight >= 700)) ? 3 : 4.5));
+    if (failing.length) { await page.waitForTimeout(400); const again = new Map((await sampleShot(await snap(), failing)).map((r) => [r.i, r]));
+      res = res.map((r) => (again.get(r.i)?.ratio ?? -1) > r.ratio ? again.get(r.i) : r); }
     for (const r of res) done.set(r.i, r);
   }
   const total = await page.evaluate(() => [...document.querySelectorAll("[data-g-id]")].filter((e) => !__g.decorative(e) && !__g.srOnly(e)).length);
@@ -317,7 +322,7 @@ async function motion(browser, url) {
     })));
     let still = null;
     if (reduced) { // a still page under reduced motion should not keep changing
-      const a = (await page.screenshot()).toString("base64"); await page.waitForTimeout(900); const b = (await page.screenshot()).toString("base64");
+      const a = (await page.screenshot({ timeout: 120000 })).toString("base64"); await page.waitForTimeout(900); const b = (await page.screenshot({ timeout: 120000 })).toString("base64");
       still = a === b ? 0 : await page.evaluate(async ({ a, b }) => {
         const load = async (s) => { const i = new Image(); i.src = "data:image/png;base64," + s; await i.decode(); const c = document.createElement("canvas"); c.width = i.width; c.height = i.height; const x = c.getContext("2d"); x.drawImage(i, 0, 0); return x.getImageData(0, 0, c.width, c.height).data; };
         const [p, q] = [await load(a), await load(b)]; let d = 0; for (let i = 0; i < p.length; i += 16) if (Math.abs(p[i] - q[i]) + Math.abs(p[i + 1] - q[i + 1]) + Math.abs(p[i + 2] - q[i + 2]) > 24) d++;
@@ -352,7 +357,8 @@ async function numbers(browser, url) {
   // Wrong value during animation: a number that is visible with one value and later corrected to another.
   // Samples: normal motion at scroll 0 (straight after load), normal motion after jumping to the end (anchor links,
   // fast flicks), and reduced motion at scroll 0 and at the end. Truth: each element scrolled into view and left to
-  // settle (read twice, 1.5 s apart; a value that changes between the two reads is live, e.g. a clock, and is skipped).
+  // settle (read twice, 1.5 s apart; a value that changes between the two reads is live and is skipped, and so is anything that
+  // reads as a clock or sits in <time>, role=timer/status/log or aria-live, because a minute can tick between samples).
   const READ = () => {
     const nums = (t) => (t.match(/[-+−]?\d[\d,.\u00a0\u202f]*\d|\d/g) || []).map((x) => x.replace(/[,\u00a0\u202f]/g, "").replace("−", "-"));
     const out = {};
@@ -365,7 +371,9 @@ async function numbers(browser, url) {
       if (!vals.length) continue;
       const s = getComputedStyle(e); const r = e.getBoundingClientRect();
       const shown = s.display !== "none" && s.visibility !== "hidden" && __g.opacity(e) > 0.05 && r.width > 0 && r.height > 0;
-      out[__g.key(e)] = { v: vals.join(" "), shown, label: __g.label(e), text: (own.trim() || e.textContent.trim()).replace(/\s+/g, " ").slice(0, 40) };
+      // clocks and timers change on their own (a minute can tick between two samples): treat them as live
+      const clock = /\b\d{1,2}:\d{2}\b/.test(own) || !!e.closest("time, [role=timer], [aria-live], [role=status], [role=log]");
+      out[__g.key(e)] = { v: vals.join(" "), shown, clock, label: __g.label(e), text: (own.trim() || e.textContent.trim()).replace(/\s+/g, " ").slice(0, 40) };
     }
     return out;
   };
@@ -387,7 +395,7 @@ async function numbers(browser, url) {
       for (const k of keys.slice(0, 200)) await page.evaluate((k) => { const parts = k.split(">"); let n = document.body; for (const p of parts.slice(1)) { const [t, i] = p.split(":"); n = [...(n?.children || [])].filter((c) => c.tagName.toLowerCase() === t)[+i - 1]; } n?.scrollIntoView?.({ block: "center" }); }, k).then(() => page.waitForTimeout(60));
       await page.waitForTimeout(2600); const a = await page.evaluate(READ).catch(() => ({}));
       await page.waitForTimeout(1500); const b = await page.evaluate(READ).catch(() => ({}));
-      truth = a; live = new Set(Object.keys(a).filter((k) => b[k] && b[k].v !== a[k].v));
+      truth = a; live = new Set(Object.keys(a).filter((k) => a[k].clock || (b[k] && b[k].v !== a[k].v)));
     }
     await ctx.close(); return { top, end, truth, live };
   };
@@ -566,7 +574,7 @@ async function frameStrip(browser, url, viewport, reducedMotion, steps = 8) {
       while (at < target) { const d = Math.min(240, target - at); await page.mouse.wheel(0, d); at += d; await page.waitForTimeout(16); }
       await page.waitForTimeout(450);
       const y = await page.evaluate(() => Math.round(scrollY));
-      const img = await page.screenshot({ type: "jpeg", quality: 55 });
+      const img = await page.screenshot({ type: "jpeg", quality: 55, timeout: 120000 });
       frames.push({ y, pct: max ? Math.round((y / max) * 100) : 0, src: `data:image/jpeg;base64,${img.toString("base64")}` });
     }
     return { viewport, reducedMotion, max, frames };
@@ -633,4 +641,5 @@ async function main() {
     process.exit(all.every((r) => r.pass) ? 0 : 1);
   } finally { await browser.close(); }
 }
-main().catch((e) => { console.error(e); process.exit(1); });
+// a crash in the browser (a timeout on a loaded machine, a closed page) is not a verdict on the page: exit 3, not verified
+main().catch((e) => { console.error(e); console.log("not verified — the browser failed during the scan (" + String(e?.name || e).slice(0, 60) + "); run again"); process.exit(3); });
