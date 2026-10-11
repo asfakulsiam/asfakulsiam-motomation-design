@@ -32,6 +32,8 @@ for (const [w, h] of [[1440, 900], [375, 812]]) for (const rm of [false, true]) 
   const pg = await ctx.newPage(); const errs = [];
   pg.on("pageerror", (e) => errs.push(String(e))); pg.on("console", (m) => m.type() === "error" && errs.push(m.text()));
   await pg.goto(url, { waitUntil: "networkidle" });
+  // hide the gallery's own fixed/sticky chrome (header, rail, index) so it never covers a card in the screenshots
+  await pg.evaluate(() => { for (const el of document.querySelectorAll("body *")) { if (el.closest("article.card")) continue; const p = getComputedStyle(el).position; if (p === "fixed" || p === "sticky") el.style.visibility = "hidden"; } });
   for (const c of list) {
     const before = errs.length;
     const card = pg.locator(`article#${CSS_escape(c.id)}`);
@@ -43,6 +45,13 @@ for (const [w, h] of [[1440, 900], [375, 812]]) for (const rm of [false, true]) 
       const po = new PerformanceObserver((l) => { for (const e of l.getEntries()) if (!e.hadRecentInput && e.sources?.some((s) => s.node && el.contains(s.node))) v += e.value; });
       po.observe({ type: "layout-shift", buffered: false }); await new Promise((r) => setTimeout(r, 1800)); po.disconnect(); return v;
     }, c.id);
+    // interact: sweep the pointer across the demo stage (desktop) or tap its centre (mobile), so hover and press paths run too
+    const stage = card.locator(".stage"); const bb = await stage.boundingBox();
+    if (bb) {
+      if (w >= 500) { await pg.mouse.move(bb.x + 4, bb.y + bb.height * 0.5); for (let k = 1; k <= 8; k++) { await pg.mouse.move(bb.x + bb.width * (0.08 * k), bb.y + bb.height * (0.3 + 0.03 * k)); await pg.waitForTimeout(40); } }
+      else await pg.touchscreen.tap(bb.x + bb.width / 2, bb.y + bb.height / 2);
+      await pg.waitForTimeout(250);
+    }
     const shot = join(out, `${c.id}-${w}${rm ? "-reduced" : ""}.png`);
     await card.screenshot({ path: shot });
     const size = statSync(join(SKILL, c.file)).size;

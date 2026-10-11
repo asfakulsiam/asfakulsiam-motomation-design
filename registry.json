@@ -250,6 +250,36 @@
       "description": "A sticky side index lists the page's sections and highlights the one you are reading, with a marker that slides between entries."
     },
     {
+      "name": "glare-card",
+      "type": "registry:component",
+      "title": "Glare Card",
+      "description": "A flat, laminated card with a foil sheen: a soft band of colour and a sharp white glint slide across it as the pointer moves, the way a hologram on an ID card or a trading card catches light. The card itself never tilts (for tilt, use Tilt Card)."
+    },
+    {
+      "name": "glow-border",
+      "type": "registry:component",
+      "title": "Glow Border",
+      "description": "The edge of a card lights up nearest the pointer, as if the pointer were a lamp held close to it; the light fades along the edge with distance. Only the border glows, never the surface."
+    },
+    {
+      "name": "rainbow-border",
+      "type": "registry:component",
+      "title": "Rainbow Border",
+      "description": "A thin border made of a turning colour wheel around a card or button. It turns while you point at or focus the element and rests otherwise."
+    },
+    {
+      "name": "shimmer-button",
+      "type": "registry:component",
+      "title": "Shimmer Button",
+      "description": "A button that a narrow band of light crosses once when you point at it or focus it, and that presses down slightly when clicked."
+    },
+    {
+      "name": "spotlight-card",
+      "type": "registry:component",
+      "title": "Spotlight Card",
+      "description": "A dark card with a soft pool of light that follows the pointer across its surface, like a torch on a wall."
+    },
+    {
       "name": "brand-selection",
       "type": "registry:component",
       "title": "Brand Selection",
