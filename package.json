@@ -1,6 +1,6 @@
 {
   "name": "asfakulsiam-motomation-design",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "An agent skill for original, award-level, typography-led websites with motion as signature, up to scroll-as-film (Motomation).",
   "author": "asfakulsiam",
   "license": "MIT",
@@ -13,6 +13,8 @@
     "check": "node scripts/check-repo.mjs",
     "build:dist": "node scripts/build-dist.mjs",
     "build:lite": "node scripts/build-lite.mjs",
+    "build:components": "node scripts/build-components.mjs",
+    "build:gallery": "node scripts/build-gallery.mjs",
     "collide": "node skills/asfakulsiam-motomation-design/scripts/collide.mjs",
     "search": "node skills/asfakulsiam-motomation-design/scripts/search.mjs",
     "contrast": "node skills/asfakulsiam-motomation-design/scripts/contrast.mjs --palettes"

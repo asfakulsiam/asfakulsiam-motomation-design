@@ -2,6 +2,25 @@
 
 All notable changes to this skill. Versions follow [Semantic Versioning](https://semver.org).
 
+## [2.3.0] - 2026-10-11
+
+### Added
+- **Component library:** 43 original components in `examples/components/` across six families: type (10), scroll (7), cursor (6), backgrounds (6), layout (6) and micro-interactions (8). Each is one strict-TypeScript React file with props and defaults, a reduced-motion path, touch behaviour and a `// @motomation-component` header (tier, use when, avoid when, accessibility). They share `_lib/motion.ts` (reduced motion, pointer type, in-view, scroll progress, velocity, one frame loop, easing and duration tokens).
+- `scripts/build-components.mjs` generates the catalogue (`examples/components/README.md`), `data/components.csv` (searchable: `search.mjs components "<query>"`) and a shadcn-format registry (`registry/<id>.json`, `registry.json`) from the headers.
+- `examples/gallery/index.html`: one self-contained page with a live demo of every component, built by `scripts/build-gallery.mjs`. It passes the Delivery Gate (contrast, overflow, words, reduced motion, names: all 0).
+- check-repo: component headers validated, catalogue, data and registry freshness, gallery build stamp checked against the sources.
+
+### Changed
+- Effects vocabulary: every concept now points to this skill's own component, signature or tier file, with new rows for the new concepts and a Scroll section.
+- Find before build points to the component library.
+- check-repo section 8 is now a general rule: no `vendor/` folder and no third-party copyright notices in code.
+
+### Fixed
+- Delivery Gate: letters were paired as one split word even when other letters sat between them ("a" and "t" in E·l·a·s·t·i·c); a split word's letters each counted as a separate focal point; a marquee's hidden, clipped track was reported as leaving the viewport. Real split words and visible text running off the edge are still caught (fixture checked before and after).
+
+### Removed
+- `references/react-bits/` and every pointer to outside effect libraries. The skill contains only its own work.
+
 ## [2.2.0] - 2026-10-11
 
 Development run v2.2.0: tasks in Phases 0–7, applied in order. Each bullet names the task and the files it touched. Pre-flight: the four tasks of the prior plan (measured gate, cheap code-readable rules, typography as house default, traced stamp) were already in 2.1.0 (commits 2ab97d3, 6a4665f, 0b39dc5, 8a76c06), so they were verified and skipped.
