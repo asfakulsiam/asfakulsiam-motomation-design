@@ -1,0 +1,265 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "motomation",
+  "homepage": "https://github.com/asfakulsiam/asfakulsiam-motomation-design",
+  "items": [
+    {
+      "name": "blur-focus",
+      "type": "registry:component",
+      "title": "Blur Focus",
+      "description": "Words sharpen from a soft blur into focus, one after another, as the line enters the screen."
+    },
+    {
+      "name": "curved-text",
+      "type": "registry:component",
+      "title": "Curved Text",
+      "description": "Text set around a circle like a stamp or seal, with an optional slow turn."
+    },
+    {
+      "name": "decode",
+      "type": "registry:component",
+      "title": "Decode",
+      "description": "A short label resolves from random glyphs, left to right, when it enters the screen or on hover."
+    },
+    {
+      "name": "ink-fill",
+      "type": "registry:component",
+      "title": "Ink Fill",
+      "description": "A statement starts in the muted colour and fills with ink word by word as the reader scrolls through it."
+    },
+    {
+      "name": "letter-relay",
+      "type": "registry:component",
+      "title": "Letter Relay",
+      "description": "A large hero name shrinks and travels into a fixed header slot letter by letter as you scroll the first screen, so the name hands itself to the navigation."
+    },
+    {
+      "name": "neighbour-moves",
+      "type": "registry:component",
+      "title": "Neighbour Moves",
+      "description": "Each letter of a name has its own small move on hover (lift, tilt, stretch, spin, drop), so the word feels like a cast of characters."
+    },
+    {
+      "name": "pressure-type",
+      "type": "registry:component",
+      "title": "Pressure Type",
+      "description": "Each letter of one display word stretches wider and heavier as the cursor nears it, like pressing into rubber."
+    },
+    {
+      "name": "scroll-float",
+      "type": "registry:component",
+      "title": "Scroll Float",
+      "description": "Letters of a display line rise and settle into place one by one, driven by scroll position, so scrolling back reverses it."
+    },
+    {
+      "name": "split-flap",
+      "type": "registry:component",
+      "title": "Split Flap",
+      "description": "Each character flips through the alphabet to its value like a departure board, settling left to right; changing the value flips again."
+    },
+    {
+      "name": "width-sprint",
+      "type": "registry:component",
+      "title": "Width Sprint",
+      "description": "A display word stretches wider the faster you scroll and relaxes back when you stop, using the font's width axis."
+    },
+    {
+      "name": "aperture",
+      "type": "registry:component",
+      "title": "Aperture",
+      "description": "The next section opens through a growing circle (an iris) as you scroll into it, from a small porthole to full bleed."
+    },
+    {
+      "name": "darkroom-develop",
+      "type": "registry:component",
+      "title": "Darkroom Develop",
+      "description": "A photograph develops from blank paper as it scrolls in: pale and flat first, then contrast, then tone, like a print in the tray."
+    },
+    {
+      "name": "horizontal-reel",
+      "type": "registry:component",
+      "title": "Horizontal Reel",
+      "description": "A section pins and vertical scroll pulls a strip of frames sideways, like film through a gate; a frame counter follows."
+    },
+    {
+      "name": "reading-rail",
+      "type": "registry:component",
+      "title": "Reading Rail",
+      "description": "A thin rail at the top or edge of the screen fills as you read an article, with an optional chapter label that changes at each heading."
+    },
+    {
+      "name": "stacked-deck",
+      "type": "registry:component",
+      "title": "Stacked Deck",
+      "description": "Cards stick one after another and stack like a deck; covered cards step back and dim, leaving their titles as a table of contents."
+    },
+    {
+      "name": "thread",
+      "type": "registry:component",
+      "title": "Thread",
+      "description": "One line draws itself down the page as you scroll, linking sections like a seam, a route or a timeline."
+    },
+    {
+      "name": "velocity-marquee",
+      "type": "registry:component",
+      "title": "Velocity Marquee",
+      "description": "A looping marquee that drifts on its own, speeds up with scroll speed, follows scroll direction and leans (skews) while you scroll fast."
+    },
+    {
+      "name": "image-trail",
+      "type": "registry:component",
+      "title": "Image Trail",
+      "description": "Moving the cursor across an area drops a trail of images that appear, linger briefly and shrink away, cycling through a set."
+    },
+    {
+      "name": "lens",
+      "type": "registry:component",
+      "title": "Lens",
+      "description": "A circle follows the cursor and reveals a second layer underneath: sketch under final, night under day, before under after."
+    },
+    {
+      "name": "pixel-wake",
+      "type": "registry:component",
+      "title": "Pixel Wake",
+      "description": "The cursor leaves a trail of square pixels on a grid that fade out behind it, like a wake on a low-resolution screen."
+    },
+    {
+      "name": "seismograph-line",
+      "type": "registry:component",
+      "title": "Seismograph Line",
+      "description": "A hairline divider bends toward the cursor as it passes and springs back with a small wobble, like a needle on a seismograph."
+    },
+    {
+      "name": "target-cursor",
+      "type": "registry:component",
+      "title": "Target Cursor",
+      "description": "A small crosshair follows the cursor; over anything clickable it snaps out into corner brackets that frame the target."
+    },
+    {
+      "name": "tilt-card",
+      "type": "registry:component",
+      "title": "Tilt Card",
+      "description": "A card rotates in 3D toward the cursor with a soft moving highlight, like holding a physical card to the light."
+    },
+    {
+      "name": "contour-lines",
+      "type": "registry:component",
+      "title": "Contour Lines",
+      "description": "Topographic contour lines drawn as SVG that slowly drift, like a map breathing; deterministic from a seed."
+    },
+    {
+      "name": "dot-field",
+      "type": "registry:component",
+      "title": "Dot Field",
+      "description": "A grid of dots that swell and push away from the cursor, then ease back, like a pin-art board."
+    },
+    {
+      "name": "grain",
+      "type": "registry:component",
+      "title": "Grain",
+      "description": "A film-grain layer over a section or the whole page, static by default or gently flickering at a low frame rate."
+    },
+    {
+      "name": "halftone",
+      "type": "registry:component",
+      "title": "Halftone",
+      "description": "Renders an image as print dots on a canvas, sized by brightness, like a newspaper photo; dots can grow in as it enters the screen."
+    },
+    {
+      "name": "light-sweep",
+      "type": "registry:component",
+      "title": "Light Sweep",
+      "description": "A slow band of light crosses a surface every few seconds, like sun moving through a window or a scanner pass."
+    },
+    {
+      "name": "liquid-field",
+      "type": "registry:component",
+      "title": "Liquid Field",
+      "description": "Slow flowing colour like ink in water or silk in wind, drawn by a tiny WebGL fragment shader with a CSS gradient fallback."
+    },
+    {
+      "name": "bento-reveal",
+      "type": "registry:component",
+      "title": "Bento Reveal",
+      "description": "A modular grid of mixed-size tiles that enter in reading order with a short stagger the first time the grid scrolls in."
+    },
+    {
+      "name": "curve-carousel",
+      "type": "registry:component",
+      "title": "Curve Carousel",
+      "description": "Cards sit on a shallow arc; the focused card is upright and in front, its neighbours tilt and recede. Arrow keys, buttons, drag and swipe move it."
+    },
+    {
+      "name": "dock",
+      "type": "registry:component",
+      "title": "Dock",
+      "description": "A row of icon buttons that magnify smoothly as the cursor passes along them, neighbours growing a little less."
+    },
+    {
+      "name": "flowing-menu",
+      "type": "registry:component",
+      "title": "Flowing Menu",
+      "description": "A big typographic list of links; hovering an item rolls a band over it from the edge the cursor entered, carrying a marquee of the item's words."
+    },
+    {
+      "name": "infinite-canvas",
+      "type": "registry:component",
+      "title": "Infinite Canvas",
+      "description": "Drag (or use arrow keys) to pan an endless wall of tiles that repeats in every direction, with a little momentum when you let go."
+    },
+    {
+      "name": "sticky-index",
+      "type": "registry:component",
+      "title": "Sticky Index",
+      "description": "A sticky side index lists the page's sections and highlights the one you are reading, with a marker that slides between entries."
+    },
+    {
+      "name": "brand-selection",
+      "type": "registry:component",
+      "title": "Brand Selection",
+      "description": "Text selection uses the brand accent and ink instead of the browser's blue, scoped to a section or the whole page."
+    },
+    {
+      "name": "click-spark",
+      "type": "registry:component",
+      "title": "Click Spark",
+      "description": "A tiny burst of lines radiates from the click point inside a wrapped area, then disappears."
+    },
+    {
+      "name": "copy-button",
+      "type": "registry:component",
+      "title": "Copy Confirm",
+      "description": "A copy button whose icon morphs to a tick and whose label says \"Copied\" for two seconds, then returns."
+    },
+    {
+      "name": "count-up",
+      "type": "registry:component",
+      "title": "Count Up",
+      "description": "A number counts from a start value to its real value once, when it first enters the screen, with tabular figures so it doesn't jitter."
+    },
+    {
+      "name": "hold-to-commit",
+      "type": "registry:component",
+      "title": "Hold to Commit",
+      "description": "An important action fills while you press and hold, and only confirms when the fill completes; letting go early drains it back."
+    },
+    {
+      "name": "remembered-list",
+      "type": "registry:component",
+      "title": "Remembered List",
+      "description": "A list of links quietly marks the ones you've already opened (a small tick and a lighter weight), remembered across visits on this device."
+    },
+    {
+      "name": "squish-switch",
+      "type": "registry:component",
+      "title": "Squish Switch",
+      "description": "A toggle whose knob stretches while pressed and squashes as it lands on the other side, like a soft rubber key."
+    },
+    {
+      "name": "sticker-scatter",
+      "type": "registry:component",
+      "title": "Sticker Scatter",
+      "description": "Clicking the logo or name bursts a handful of on-brand stickers (emoji or short glyphs) that fly out, spin, land and fade, like emptying a pocket of stickers."
+    }
+  ]
+}
