@@ -13,6 +13,8 @@ Score each axis 1–5. The weighted total is out of 100.
 
 Weighted total = Σ(score × weight) / 5.
 
+**Evidence for Motion.** Stills can't show motion, so when a scroll-frame strip is available (8 viewport frames at even scroll steps, from the benchmark's `measure` step or `gate.mjs --report`), score Motion from it first: what changes between frames, whether the sequence progresses with scroll, and whether that serves the concept. Use the reduced-motion capture for the fallback. Easing and timing can't be judged from frames, so don't reward or punish them without a recording. The axes, anchors and weights above are unchanged.
+
 ## Hard gates (any failure = 0 for that run)
 - Lorem ipsum, placeholder components or `TODO`s in the output
 - Any animation without a reduced-motion path

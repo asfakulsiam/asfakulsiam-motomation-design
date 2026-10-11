@@ -106,7 +106,19 @@ async function measure(r, pw) {
       o.keyboard = { primaryReached: reached, focusStepsWithVisibleRing: `${ring}/40` };
       const src = readFileSync(html, "utf8"); o.source = { bytes: src.length, reducedMotionQuery: /prefers-reduced-motion/.test(src), placeholders: (src.match(/lorem ipsum|TODO|placeholder\.com|via\.placeholder/gi) || []).length, stamp: (src.match(/motomation ·[^*>]*/) || [""])[0].slice(0, 300) };
     }
-    res[tag] = o; await c.close();
+    res[tag] = o;
+    // scroll-frame strip (1440, full motion): 8 viewport frames after wheel-scrolling to even steps, tiled 4×2, so judges see motion states, not one still
+    if (w === 1440 && !rm) {
+      await p.evaluate(() => scrollTo(0, 0)); await p.waitForTimeout(400);
+      const max = await p.evaluate(() => Math.max(0, document.documentElement.scrollHeight - innerHeight)); const frames = []; let at = 0;
+      for (let i = 0; i < 8; i++) { const t = Math.round((max * i) / 7); while (at < t) { const d = Math.min(240, t - at); await p.mouse.wheel(0, d); at += d; await p.waitForTimeout(16); }
+        await p.waitForTimeout(450); frames.push({ y: await p.evaluate(() => Math.round(scrollY)), b64: (await p.screenshot({ type: "jpeg", quality: 60 })).toString("base64") }); }
+      const sp = await c.newPage(); await sp.setViewportSize({ width: 1440, height: 520 });
+      await sp.setContent(`<body style="margin:0;background:#000;display:grid;grid-template-columns:repeat(4,360px);grid-auto-rows:225px;gap:0;line-height:0">${frames.map((f, i) => `<div style="position:relative"><img src="data:image/jpeg;base64,${f.b64}" style="width:360px;height:225px;display:block"><span style="position:absolute;left:4px;top:4px;background:#000;color:#fff;font:12px monospace;padding:1px 4px">${i + 1} · ${f.y}px</span></div>`).join("")}</body>`);
+      await sp.waitForTimeout(200); await sp.screenshot({ path: join(r.dir, "shot-1440-strip.png"), clip: { x: 0, y: 0, width: 1440, height: 450 } }); await sp.close();
+      o.strip = { frames: frames.map((f) => f.y), maxScroll: max };
+    }
+    await c.close();
   }
   await b.close();
   const g = spawnSync(process.execPath, [join(SKILL, "scripts/gate.mjs"), html, "--json"], { cwd: process.cwd(), encoding: "utf8", maxBuffer: 64 << 20 });
@@ -133,10 +145,15 @@ async function judgePair(slug, seed, model, pair = ["baseline", "skill"]) {
   const dirs = { [pair[0]]: join(OUT, slug, `${pair[0]}-s${seed}`), [pair[1]]: join(OUT, slug, `${pair[1]}-s${seed}`) };
   const order = [...pair]; if (parseInt(createHash("sha256").update(`${slug}-${seed}${pairTag(pair)}`).digest("hex").slice(0, 8), 16) % 2) order.reverse();
   const imgs = [], desc = [];
-  for (const [L, cond] of [["A", order[0]], ["B", order[1]]]) for (const [tag, cap] of [["1440-fold", "1440px, first screen"], ["1440-full", "1440px, page (up to 6 screens)"], ["375-full", "375px phone, page"], ["1440-reduced-full", "1440px with prefers-reduced-motion"]]) {
-    imgs.push(join(dirs[cond], existsSync(join(dirs[cond], `shot-${tag}.png`)) ? `shot-${tag}.png` : `shot-${tag}.webp`)); /* results are committed as .webp */ desc.push(`Image ${imgs.length}: Site ${L}, ${cap}`); }
+  const shot = (d, tag) => [`shot-${tag}.png`, `shot-${tag}.webp`].map((f) => join(d, f)).find(existsSync); /* results are committed as .webp */
+  const strips = pair.every((c) => shot(dirs[c], "1440-strip")); // only when both sites have one, so A and B are judged on the same evidence
+  const VIEWS = [["1440-fold", "1440px, first screen"], ["1440-full", "1440px, page (up to 6 screens)"], ["375-full", "375px phone, page"], ["1440-reduced-full", "1440px with prefers-reduced-motion"], ...(strips ? [["1440-strip", "1440px scroll-frame strip: 8 viewport frames at even scroll steps, read left to right then the second row; each frame is labelled with its scroll position"]] : [])];
+  for (const [L, cond] of [["A", order[0]], ["B", order[1]]]) for (const [tag, cap] of VIEWS) { imgs.push(shot(dirs[cond], tag) || join(dirs[cond], `shot-${tag}.webp`)); desc.push(`Image ${imgs.length}: Site ${L}, ${cap}`); }
+  const motionNote = strips
+    ? "Score Motion mainly from the scroll-frame strips: compare consecutive frames for what moves (pinning, scrubbing, reveals, a sequence that progresses) and whether it serves the brief, then use the reduced-motion screenshot and the checks for the fallback. Stills can't show easing or timing; say when you're unsure."
+    : "Motion can't be seen in stills: score Motion from what the reduced-motion and normal screenshots imply plus the checks, and say when you're unsure.";
   const checks = { A: summarize(JSON.parse(readFileSync(join(dirs[order[0]], "checks.json")))), B: summarize(JSON.parse(readFileSync(join(dirs[order[1]], "checks.json")))) };
-  const prompt = `You are a strict, blind design reviewer. Two websites (Site A and Site B) were built for the same brief by different processes. You don't know how either was made; judge only what you see and the measured checks.\n\nBRIEF:\n${readFileSync(join(ROOT, "evals/briefs", BRIEFS[slug].file), "utf8")}\n\nRUBRIC (score each axis 1-5 using its anchors; use the whole scale):\n${readFileSync(join(ROOT, "evals/rubric.md"), "utf8")}\n\nIMAGES: ${desc.join("; ")}. Motion can't be seen in stills: score Motion from what the reduced-motion and normal screenshots imply plus the checks, and say when you're unsure.\n\nMEASURED CHECKS (automated, Playwright + axe-core):\n${JSON.stringify(checks, null, 1)}\n\nReturn ONLY JSON:\n{"A": {"scores": {${AX.map((a) => `"${a}": n`).join(", ")}}, "hard_gate_failures": ["..."], "notes": "2-3 sentences"}, "B": {...same...}, "better": "A|B|tie", "why": "one sentence"}`;
+  const prompt = `You are a strict, blind design reviewer. Two websites (Site A and Site B) were built for the same brief by different processes. You don't know how either was made; judge only what you see and the measured checks.\n\nBRIEF:\n${readFileSync(join(ROOT, "evals/briefs", BRIEFS[slug].file), "utf8")}\n\nRUBRIC (score each axis 1-5 using its anchors; use the whole scale):\n${readFileSync(join(ROOT, "evals/rubric.md"), "utf8")}\n\nIMAGES: ${desc.join("; ")}. ${motionNote}\n\nMEASURED CHECKS (automated, Playwright + axe-core):\n${JSON.stringify(checks, null, 1)}\n\nReturn ONLY JSON:\n{"A": {"scores": {${AX.map((a) => `"${a}": n`).join(", ")}}, "hard_gate_failures": ["..."], "notes": "2-3 sentences"}, "B": {...same...}, "better": "A|B|tie", "why": "one sentence"}`;
   const jd = join(OUT, slug, "judge"); mkdirSync(jd, { recursive: true });
   const base = `s${seed}-${pairTag(pair)}${model}`; const pf = join(jd, `${base}.prompt.txt`), imf = join(jd, `${base}.images.txt`); writeFileSync(pf, prompt); writeFileSync(imf, imgs.join("\n"));
   const cmd = String(flags["judge-cmd"]).replaceAll("{model}", model).replaceAll("{prompt}", pf).replaceAll("{images}", imf);
