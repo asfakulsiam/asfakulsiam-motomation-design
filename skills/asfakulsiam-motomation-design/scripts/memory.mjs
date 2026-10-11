@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 // Project memory: remembers what this project already used, so the next design can avoid repeating it.
-// Stored in <project>/.motomation/log.json (the current working directory).
+// Stored in <project>/.motomation/log.json. <project> is the nearest folder, walking up from the current folder,
+// that holds a package.json or a .git; the skill's own folder is never used, so running the script from inside an
+// installed skill still writes to the project that contains it. Override with --project <dir>.
 // Usage:
 //   node scripts/memory.mjs log --archetype ledger --mutation invert-axis --signature letter-relay --fonts "Fraunces/Switzer" --palette "Darkroom" --tier 5 --page home
 //   node scripts/memory.mjs recent [--n 5]
@@ -9,12 +11,28 @@
 // Two checks: (1) exact IDs used in the last N runs, (2) structural fingerprint similarity (layout family, type scale,
 // section order, motion tier, signature type). Deterministic and offline: no network, no models, no embeddings.
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { join, resolve, dirname, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { args, load, fingerprint, similarity, mutationFor, fpText } from "./lib.mjs";
 
-const DIR = join(process.cwd(), ".motomation");
+const SKILL_DIR = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+/** The project that owns the memory log: nearest ancestor of `start` with package.json or .git, outside the skill folder. */
+export function projectRoot(start = process.cwd()) {
+  let dir = resolve(start);
+  if (dir === SKILL_DIR || dir.startsWith(SKILL_DIR + sep)) dir = dirname(SKILL_DIR); // never inside the skill itself
+  const first = dir;
+  for (;;) {
+    if (existsSync(join(dir, "package.json")) || existsSync(join(dir, ".git"))) return dir;
+    const up = dirname(dir);
+    if (up === dir) return first; // no marker anywhere: fall back to where the walk started
+    dir = up;
+  }
+}
+const cliProject = (() => { const i = process.argv.indexOf("--project"); const eq = process.argv.find((x) => x.startsWith("--project=")); return eq ? eq.slice(10) : i > -1 ? process.argv[i + 1] : undefined; })();
+const ROOT = cliProject ? resolve(cliProject) : projectRoot();
+const DIR = join(ROOT, ".motomation");
 const FILE = join(DIR, "log.json");
+export const logPath = () => FILE;
 const FIELDS = ["page", "archetype", "mutation", "signature", "fonts", "palette", "tier", "nav", "footer", "notes"];
 const FP_FLAGS = { layout: "layout", "type-scale": "type_scale", sections: "sections", "signature-type": "signature_type" }; // extra structural inputs
 const THRESHOLD = 0.7;
@@ -47,7 +65,8 @@ if (isMain) {
     console.log(`  fingerprint: ${fpText(entry.fingerprint)}`);
   } else if (cmd === "recent") {
     const runs = recent(Number(a.n || 5));
-    if (!runs.length) { console.log("No runs logged yet in this project."); process.exit(0); }
+    if (!runs.length) { console.log(`No runs logged yet in this project (${FILE}).`); process.exit(0); }
+    console.log(`Log: ${FILE}`);
     runs.forEach((r, i) => console.log(`${i + 1}. ${r.date.slice(0, 10)} · ${FIELDS.filter((f) => r[f]).map((f) => `${f}: ${r[f]}`).join(" · ")}\n   fingerprint: ${fpText(fpFrom(r))}`));
   } else if (cmd === "check") {
     const runs = recent(Number(a.n || 5)); let clash = 0;
@@ -80,7 +99,7 @@ if (isMain) {
   } else if (cmd === "fingerprint") {
     const fp = fpFrom(a); console.log(fpText(fp)); if (a.json) console.log(JSON.stringify(fp));
   } else {
-    console.log("Usage: node scripts/memory.mjs <log|recent|check|fingerprint> [--archetype x] [--signature y] [--fonts a/b] [--palette p] [--tier n] [--page p] [--sections a,b,c] [--type-scale 1.333] [--layout family] [--threshold 0.7]");
+    console.log("Usage: node scripts/memory.mjs <log|recent|check|fingerprint> [--archetype x] [--signature y] [--fonts a/b] [--palette p] [--tier n] [--page p] [--sections a,b,c] [--type-scale 1.333] [--layout family] [--threshold 0.7] [--project <dir>]");
     process.exit(cmd ? 1 : 0);
   }
 }

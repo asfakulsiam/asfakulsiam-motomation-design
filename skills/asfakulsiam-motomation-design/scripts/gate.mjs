@@ -23,6 +23,7 @@ import { readFileSync, existsSync, statSync, writeFileSync } from "node:fs";
 import { resolve, dirname, basename, extname, join } from "node:path";
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
+import { projectRoot } from "./memory.mjs";
 
 export const WIDTHS = [375, 390, 768, 1440];
 export const GATE_VERSION = "gate/1";
@@ -420,7 +421,7 @@ export async function scan(target, browser, opts = {}) {
     const pageStamp = !/^https?:/.test(target) ? readStamp(readFileSync(statSync(resolve(target)).isDirectory() ? join(resolve(target), "index.html") : resolve(target), "utf8"))?.fields : null;
     const meta = { ...(pageStamp || {}), ...(opts.archetype ? { archetype: opts.archetype } : {}), ...(opts.signature ? { signature: opts.signature } : {}), ...(opts.tier !== undefined ? { tier: opts.tier } : {}) };
     const designFile = opts.design || [join(local, "DESIGN.md"), join(process.cwd(), "DESIGN.md")].find((f) => existsSync(f));
-    const logFile = opts.log || [join(local, ".motomation/log.json"), join(process.cwd(), ".motomation/log.json")].find((f) => existsSync(f));
+    const logFile = opts.log || [join(local, ".motomation/log.json"), join(projectRoot(local), ".motomation/log.json"), join(projectRoot(), ".motomation/log.json")].find((f) => existsSync(f));
     const record = readRecord(designFile); const mem = await memoryAxis(logFile, meta, st.sectionIds);
     const critique = critiqueOf({ hier: w.hier, words375: w.fails.length, overflow375: overflowFails.filter((x) => x.width === 375).length, motionFails: counts.motion, st, tier: meta.tier, record, mem });
     return { target, url, version: GATE_VERSION, pass, counts, id, stamp: stampOf(counts, id), critique, sources: { design: designFile || null, log: logFile || null, meta }, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n };

@@ -241,8 +241,11 @@ node scripts/search.mjs fonts "condensed cinematic"          # BM25 search over 
 node scripts/search.mjs motion "pinned scrub" --tier 5
 node scripts/memory.mjs recent                               # what this project already used
 node scripts/memory.mjs check --archetype ledger             # exits 2 if it was used recently
+node scripts/memory.mjs recent --project /path/to/project    # explicit project folder
 node scripts/contrast.mjs "#151412" "#F3F0EA"                # WCAG contrast
 ```
+
+The memory log is per project. `memory.mjs` walks up from the folder you run it in to the nearest `package.json` or `.git`, skips the skill's own folder, and writes `<project>/.motomation/log.json`. So running it from inside `.claude/skills/…` still records the project that installed the skill. `--project <dir>` overrides the lookup.
 
 ---
 

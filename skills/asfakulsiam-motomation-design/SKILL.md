@@ -145,6 +145,8 @@ Two layers, kept apart on purpose (details in `principles/restraint.md`):
 
 All scripts are zero-dependency Node.js (v18+). Run them from the skill folder.
 
+The memory log always belongs to the project, not the skill: `memory.mjs` walks up from the current folder to the nearest `package.json` or `.git` (skipping the skill's own folder) and uses `<project>/.motomation/log.json`. Pass `--project <dir>` when the project has neither marker or you want a different one.
+
 ```bash
 node scripts/collide.mjs --n 3                  # draw 3 random concept collisions (real randomness)
 node scripts/collide.mjs --category hotel --seed 42
@@ -152,6 +154,7 @@ node scripts/search.mjs fonts "editorial serif warm"
 node scripts/search.mjs motion "pinned scrub" --tier 5
 node scripts/search.mjs signatures "cursor type"
 node scripts/memory.mjs recent                  # what this project already used
+node scripts/memory.mjs recent --project ../..  # same, for an explicit project folder
 node scripts/memory.mjs log --archetype ledger --signature letter-relay --fonts "Fraunces/Switzer"
 node scripts/contrast.mjs "#111111" "#F4F1EA"   # WCAG contrast check
 ```
