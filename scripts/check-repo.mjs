@@ -84,6 +84,7 @@ if (!run([join(S, "contrast.mjs"), "--palettes"])) fail("a palette in data/palet
 
 // 6. dist is fresh
 if (!run([join(ROOT, "scripts/build-dist.mjs"), "--check"])) fail("dist/motomation-design.md is out of date (run: node scripts/build-dist.mjs)");
+if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomation-lite.md is out of date or over its 8k-token budget (run: node scripts/build-lite.mjs)");
 
 // 7. Shared rules (data/rules.csv) are spelled the same everywhere
 {

@@ -12,6 +12,7 @@
   "scripts": {
     "check": "node scripts/check-repo.mjs",
     "build:dist": "node scripts/build-dist.mjs",
+    "build:lite": "node scripts/build-lite.mjs",
     "collide": "node skills/asfakulsiam-motomation-design/scripts/collide.mjs",
     "search": "node skills/asfakulsiam-motomation-design/scripts/search.mjs",
     "contrast": "node skills/asfakulsiam-motomation-design/scripts/contrast.mjs --palettes"
