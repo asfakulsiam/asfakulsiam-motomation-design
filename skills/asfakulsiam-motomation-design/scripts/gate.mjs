@@ -470,8 +470,47 @@ function print(r) {
   L("");
 }
 
+
+// ── optional motion report (--report): scroll-frame strips, not part of the gate's numbers ──
+async function frameStrip(browser, url, viewport, reducedMotion, steps = 8) {
+  const ctx = await browser.newContext({ viewport, reducedMotion }); const page = await ctx.newPage();
+  try {
+    await page.goto(url, { waitUntil: "load", timeout: 30000 }).catch(() => {}); await page.waitForTimeout(800);
+    const max = await page.evaluate(() => Math.max(0, document.documentElement.scrollHeight - innerHeight));
+    const frames = []; let at = 0;
+    for (let i = 0; i < steps; i++) {
+      const target = Math.round((max * i) / (steps - 1));
+      // wheel in small steps so scroll-linked code sees real scroll events, then settle
+      while (at < target) { const d = Math.min(240, target - at); await page.mouse.wheel(0, d); at += d; await page.waitForTimeout(16); }
+      await page.waitForTimeout(450);
+      const y = await page.evaluate(() => Math.round(scrollY));
+      const img = await page.screenshot({ type: "jpeg", quality: 55 });
+      frames.push({ y, pct: max ? Math.round((y / max) * 100) : 0, src: `data:image/jpeg;base64,${img.toString("base64")}` });
+    }
+    return { viewport, reducedMotion, max, frames };
+  } finally { await ctx.close(); }
+}
+export async function motionReport(target, browser, r, outFile) {
+  const { url, close } = await toUrl(target);
+  try {
+    const strips = [await frameStrip(browser, url, { width: 1440, height: 900 }, "no-preference"), await frameStrip(browser, url, { width: 375, height: 812 }, "no-preference"), await frameStrip(browser, url, { width: 1440, height: 900 }, "reduce")];
+    const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+    const strip = (s) => `<section><h2>${s.viewport.width}px · ${s.reducedMotion === "reduce" ? "reduced motion" : "full motion"} · ${s.frames.length} frames over ${s.max}px of scroll</h2><div class="strip">${s.frames.map((f) => `<figure><img src="${f.src}" width="${s.viewport.width === 375 ? 150 : 300}" alt="frame at ${f.y}px"><figcaption>${f.y}px · ${f.pct}%</figcaption></figure>`).join("")}</div></section>`;
+    const html = `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Motion report · ${esc(target)}</title>
+<style>body{margin:0;padding:32px;background:#111214;color:#e9e9ec;font:15px/1.5 ui-monospace,Menlo,Consolas,monospace}h1{font-size:20px;margin:0 0 4px}h2{font-size:14px;color:#b7b7bf;margin:28px 0 10px}p{margin:4px 0;color:#c9c9d1}.strip{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px}figure{margin:0;flex:none}img{display:block;border:1px solid #2c2d33;height:auto}figcaption{font-size:12px;color:#9a9aa3;margin-top:4px}.pass{color:#7ee2a8}.fail{color:#ff8f8f}</style>
+<h1>Motion report · ${esc(target)}</h1>
+<p class="${r.pass ? "pass" : "fail"}">${r.pass ? "PASS" : "FAIL"} · critique: ${esc(r.critique)} · ${esc(r.stamp)}</p>
+<p>Frames are taken after wheel-scrolling to each position and waiting 450ms. This report is for reviewing motion by eye and for judges; it adds nothing to the gate's numbers.</p>
+${strips.map(strip).join("\n")}
+</html>`;
+    writeFileSync(outFile, html);
+    return { outFile, frames: strips.reduce((n, s) => n + s.frames.length, 0), bytes: Buffer.byteLength(html) };
+  } finally { await close?.(); }
+}
+
 async function main() {
-  if (flags.help || (!targets.length && !flags.verify)) { console.log("Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y]   |   --verify <file.html> [--url u]"); process.exit(targets.length ? 0 : 1); }
+  if (typeof flags.report === "string" && !targets.length) { targets.push(flags.report); flags.report = true; } // `--report file.html` alone: the file is the target
+  if (flags.help || (!targets.length && !flags.verify)) { console.log("Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]]   |   --report <file.html>   |   --verify <file.html> [--url u]"); process.exit(targets.length ? 0 : 1); }
   const pw = await loadPlaywright();
   if (!pw) { console.log("not verified — no browser (install Playwright: npm i -D playwright && npx playwright install chromium)"); process.exit(3); }
   let browser; try { browser = await pw.chromium.launch(); } catch (e) { console.log(`not verified — no browser (${String(e.message).split("\n")[0]})`); process.exit(3); }
@@ -492,6 +531,10 @@ async function main() {
       console.log(`STAMP VERIFIED · critique and gate numbers match a fresh scan${r.pass ? " · gate PASS" : " · but the gate FAILS (the stamp honestly records failures)"}`); process.exit(r.pass ? 0 : 1);
     }
     const all = []; for (const t of targets) { const r = await scan(t, browser, opts); all.push(r); if (!flags.json) print(r); }
+    if (flags.report) for (const [i, t] of targets.entries()) {
+      const out = typeof flags.report === "string" ? resolve(flags.report) : join(/^https?:/.test(t) ? process.cwd() : (statSync(resolve(t)).isDirectory() ? resolve(t) : dirname(resolve(t))), `${/^https?:/.test(t) ? "page" : basename(resolve(t)).replace(/\.html?$/, "")}.motion-report.html`);
+      const rep = await motionReport(t, browser, all[i], out); console.error(`motion report → ${rep.outFile} (${rep.frames} frames, ${(rep.bytes / 1024).toFixed(0)} KB)`);
+    }
     if (flags.json) console.log(JSON.stringify(all.length === 1 ? all[0] : all, null, 2));
     if (flags.out) writeFileSync(String(flags.out), JSON.stringify(all.length === 1 ? all[0] : all, null, 2));
     process.exit(all.every((r) => r.pass) ? 0 : 1);

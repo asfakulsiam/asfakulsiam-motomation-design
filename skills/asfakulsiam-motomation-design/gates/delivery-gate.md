@@ -34,6 +34,8 @@ The checks are bounded, and each reports what it skipped (text that was covered 
 
 Exit codes: `0` pass · `1` fail · `2` stamp rejected · `3` not verified.
 
+**Optional motion report.** `node scripts/gate.mjs --report dist/index.html` (or `--report out.html` after a target) also writes a self-contained HTML file with scroll-frame strips: 8 frames at 1440px, 8 at 375px and 8 at 1440px under reduced motion. Use it to review motion by eye, show a client, or give judges something better than one screenshot. It's off by default, doesn't change the text output, and adds nothing to the gate's numbers.
+
 ---
 
 ## Part 1: Self-critique (score 1–5)

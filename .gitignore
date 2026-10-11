@@ -2,3 +2,4 @@ node_modules/
 .DS_Store
 .motomation/
 *.log
+*.motion-report.html
