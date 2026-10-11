@@ -6,7 +6,7 @@ This is the default look when the brief doesn't override it. These are defaults,
 
 | Trait | In practice |
 |---|---|
-| **Type as image** | The display face is set at 8–28vw for the hook. Headlines carry the composition; photos support them. |
+| **Type as image** | The display face is set at 8–28vw for the hook. Headlines carry the composition; photos support them. (Type-led briefs. Content-led briefs use the compact scale in `principles/typography.md` §3.) |
 | **Quiet canvas** | Off-white or near-black grounds with a hint of warmth or coolness, never pure `#FFFFFF` + `#000000` unless the concept is stark. |
 | **One accent** | A single signal colour, used at the moment that matters (the CTA, the active state, the signature). |
 | **Editorial grid** | 12 columns with visible logic: index numbers, folios, hairline rules, captions in the margin. Break the grid once per screen, on purpose. |

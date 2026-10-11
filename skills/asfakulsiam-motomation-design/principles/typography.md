@@ -1,6 +1,11 @@
 # Typography
 
-Typography is the main tool of this skill. On a minimal site, the type **is** the visual identity. Choose type first, before colour or layout.
+Typography is the main tool of this skill. Choose type first, before colour or layout, on every brief. How large it gets depends on the job:
+
+- **Type-led (the house default):** portfolios, studios, editorial, launches, brand sites. The type **is** the visual identity. Use the display scale in §3 and let one word carry the screen.
+- **Content-led (an override, written in one line of the plan):** dashboards, data tools, service UIs, booking and checkout flows, catalogues with filters. The data, product or imagery is the hero. Type leads by clarity: use the compact scale in §3, tabular numerals and dense but legible rows. Don't force a display word into a screen people use to get work done.
+
+Both kinds keep the same standards: size floors, contrast, measure, a reasoned choice of face (Law 2 in `SKILL.md`; standards vs defaults in `principles/restraint.md`).
 
 ## 1. Choose with a reason
 
@@ -19,7 +24,7 @@ Inter, Roboto, Open Sans, Lato, Poppins, Montserrat, Arial/Helvetica fallbacks a
 
 ## 3. Scale
 
-Use a fluid, dramatic scale. A good starting point:
+**Display scale (type-led briefs).** Use a fluid, dramatic scale. A good starting point:
 
 ```css
 :root {
@@ -32,7 +37,22 @@ Use a fluid, dramatic scale. A good starting point:
 }
 ```
 
-- Display sizes in `vw` (via `clamp`) so the word fills the composition at every width.
+**Compact scale (content-led briefs).** Small steps, nothing in `vw` above the page title, numbers in tabular figures:
+
+```css
+:root {
+  --ui--1: 0.75rem;   /* table meta, axis labels (12px floor) */
+  --ui-0:  0.875rem;  /* dense table rows, controls */
+  --ui-1:  1rem;      /* body, form fields */
+  --ui-2:  1.25rem;   /* panel titles */
+  --ui-3:  clamp(1.5rem, 1.3rem + 0.8vw, 2rem);  /* page title: the largest type on the screen */
+  --ui-kpi: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem); /* key figures, tabular-nums */
+}
+```
+
+The page's character comes from the face, the weights, the numerals and the rhythm of rows, not from size.
+
+- Display sizes in `vw` (via `clamp`) so the word fills the composition at every width (type-led briefs only).
 
 ### Long words at 375 (check by reading, no browser)
 

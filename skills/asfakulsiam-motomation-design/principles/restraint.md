@@ -20,10 +20,10 @@ Restraint is what makes a minimal site feel expensive instead of empty. It is al
 | Default | Overridden when… |
 |---|---|
 | Minimal canvas (quiet ground, lots of air) | the content is dense by nature: dashboards, data tools, catalogues with filters, timetables |
-| Maximal type (display at 8–28vw) | the data or the product UI is the hero; then type is compact, tabular and legible at a glance |
+| Maximal type (display at 8–28vw) | the data or the product UI is the hero; then type is compact, tabular and legible at a glance (compact scale in `principles/typography.md` §3) |
 | Editorial grid (folios, hairlines, margin captions) | the task is operational; use a functional grid (panels, tables, toolbars) |
 | Monochrome base, one accent as the only colour | colour encodes information (status, categories, series). Data colours are information, not accents; the one-brand-accent budget and the Restraint Gate still hold. |
-| Typography as hero | imagery, data or the product is what the visitor came for |
+| Typography as hero ("set it large", Law 2) | imagery, data or the product is what the visitor came for. Type still leads by clarity, and is still chosen first and with a reason. |
 
 Test: if obeying a rule would make the brief worse at its real job, and the rule is in the second table, override it and say so in one line of the plan. If it's in the first table, the brief is wrong, not the rule.
 

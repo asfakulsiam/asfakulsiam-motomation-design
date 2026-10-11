@@ -21,7 +21,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 ## The five laws
 
 1. **Think before you draw.** Run the Thinking Sequence before writing any UI code. No exceptions for "simple" pages.
-2. **Typography is the hero.** Type is the primary image. Choose it first, set it large, and make it do work.
+2. **Typography is the hero, by default.** In the house style, type is the primary image: choose it first, set it large, make it do work. When the visitor came for data, a product UI or imagery (dashboards, service tools, catalogues, booking flows), type leads by clarity instead of size: compact, tabular, legible at a glance, with no hero-scale display forced in. Either way, type is chosen first and with a reason, and its standards (size floors, contrast, measure) never relax.
 3. **Motion must mean something.** Every animation answers "what does this tell the user?" If the answer is "nothing", delete it.
 4. **Actively reduce repetition.** Draw constraints from `scripts/collide.mjs` (no archetype or signature repeats inside a run) and compare your plan's structural choices (archetype, signature, type, palette, tier) against `.motomation/log.json` with `scripts/memory.mjs check`. This detects and reduces repetition inside one project; it cannot guarantee novelty across projects that don't share a log, so say so when it matters.
 5. **Ship complete, accessible, fast.** No placeholders, no lorem ipsum, no broken reduced-motion, no fake numbers.
@@ -117,7 +117,7 @@ Higher tiers include all lower-tier craft. Choose the **lowest tier that deliver
 
 Two layers, kept apart on purpose (details in `principles/restraint.md`):
 - **Universal standards: never overridden.** Accessibility (WCAG AA, keyboard, focus), restraint (the four cuts, one signature move, motion budget), motion discipline, real content, a designed reduced-motion fallback, performance budgets.
-- **House style: a default the brief can override.** Minimal canvas, maximal type, editorial grid, a monochrome base with one accent, typography as hero. A dense dashboard, a data tool or an image-led brief may drop any of these; write the override in one line of the plan. Law 2 and the summary below describe the house default, not a standard.
+- **House style: a default the brief can override.** Minimal canvas, maximal type, editorial grid, a monochrome base with one accent, typography as hero. A dense dashboard, a data tool or an image-led brief may drop any of these; write the override in one line of the plan. Law 2's "set it large" and the summary below describe the house default, not a standard. Law 2's "choose type first, with a reason" applies to every brief.
 
 ## House style (summary; full version in `principles/house-style.md`)
 

@@ -23,7 +23,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 ### The five laws
 
 1. **Think before you draw.** Run the Thinking Sequence before writing any UI code. No exceptions for "simple" pages.
-2. **Typography is the hero.** Type is the primary image. Choose it first, set it large, and make it do work.
+2. **Typography is the hero, by default.** In the house style, type is the primary image: choose it first, set it large, make it do work. When the visitor came for data, a product UI or imagery (dashboards, service tools, catalogues, booking flows), type leads by clarity instead of size: compact, tabular, legible at a glance, with no hero-scale display forced in. Either way, type is chosen first and with a reason, and its standards (size floors, contrast, measure) never relax.
 3. **Motion must mean something.** Every animation answers "what does this tell the user?" If the answer is "nothing", delete it.
 4. **Actively reduce repetition.** Draw constraints from `scripts/collide.mjs` (no archetype or signature repeats inside a run) and compare your plan's structural choices (archetype, signature, type, palette, tier) against `.motomation/log.json` with `scripts/memory.mjs check`. This detects and reduces repetition inside one project; it cannot guarantee novelty across projects that don't share a log, so say so when it matters.
 5. **Ship complete, accessible, fast.** No placeholders, no lorem ipsum, no broken reduced-motion, no fake numbers.
@@ -119,7 +119,7 @@ Higher tiers include all lower-tier craft. Choose the **lowest tier that deliver
 
 Two layers, kept apart on purpose (details in `principles/restraint.md`):
 - **Universal standards: never overridden.** Accessibility (WCAG AA, keyboard, focus), restraint (the four cuts, one signature move, motion budget), motion discipline, real content, a designed reduced-motion fallback, performance budgets.
-- **House style: a default the brief can override.** Minimal canvas, maximal type, editorial grid, a monochrome base with one accent, typography as hero. A dense dashboard, a data tool or an image-led brief may drop any of these; write the override in one line of the plan. Law 2 and the summary below describe the house default, not a standard.
+- **House style: a default the brief can override.** Minimal canvas, maximal type, editorial grid, a monochrome base with one accent, typography as hero. A dense dashboard, a data tool or an image-led brief may drop any of these; write the override in one line of the plan. Law 2's "set it large" and the summary below describe the house default, not a standard. Law 2's "choose type first, with a reason" applies to every brief.
 
 ### House style (summary; full version in `principles/house-style.md`)
 
@@ -591,7 +591,7 @@ This is the default look when the brief doesn't override it. These are defaults,
 
 | Trait | In practice |
 |---|---|
-| **Type as image** | The display face is set at 8–28vw for the hook. Headlines carry the composition; photos support them. |
+| **Type as image** | The display face is set at 8–28vw for the hook. Headlines carry the composition; photos support them. (Type-led briefs. Content-led briefs use the compact scale in `principles/typography.md` §3.) |
 | **Quiet canvas** | Off-white or near-black grounds with a hint of warmth or coolness, never pure `#FFFFFF` + `#000000` unless the concept is stark. |
 | **One accent** | A single signal colour, used at the moment that matters (the CTA, the active state, the signature). |
 | **Editorial grid** | 12 columns with visible logic: index numbers, folios, hairline rules, captions in the margin. Break the grid once per screen, on purpose. |
@@ -703,10 +703,10 @@ Restraint is what makes a minimal site feel expensive instead of empty. It is al
 | Default | Overridden when… |
 |---|---|
 | Minimal canvas (quiet ground, lots of air) | the content is dense by nature: dashboards, data tools, catalogues with filters, timetables |
-| Maximal type (display at 8–28vw) | the data or the product UI is the hero; then type is compact, tabular and legible at a glance |
+| Maximal type (display at 8–28vw) | the data or the product UI is the hero; then type is compact, tabular and legible at a glance (compact scale in `principles/typography.md` §3) |
 | Editorial grid (folios, hairlines, margin captions) | the task is operational; use a functional grid (panels, tables, toolbars) |
 | Monochrome base, one accent as the only colour | colour encodes information (status, categories, series). Data colours are information, not accents; the one-brand-accent budget and the Restraint Gate still hold. |
-| Typography as hero | imagery, data or the product is what the visitor came for |
+| Typography as hero ("set it large", Law 2) | imagery, data or the product is what the visitor came for. Type still leads by clarity, and is still chosen first and with a reason. |
 
 Test: if obeying a rule would make the brief worse at its real job, and the rule is in the second table, override it and say so in one line of the plan. If it's in the first table, the brief is wrong, not the rule.
 
@@ -740,7 +740,12 @@ When you want to add something, ask: *does this make the concept clearer or just
 
 ## Typography
 
-Typography is the main tool of this skill. On a minimal site, the type **is** the visual identity. Choose type first, before colour or layout.
+Typography is the main tool of this skill. Choose type first, before colour or layout, on every brief. How large it gets depends on the job:
+
+- **Type-led (the house default):** portfolios, studios, editorial, launches, brand sites. The type **is** the visual identity. Use the display scale in §3 and let one word carry the screen.
+- **Content-led (an override, written in one line of the plan):** dashboards, data tools, service UIs, booking and checkout flows, catalogues with filters. The data, product or imagery is the hero. Type leads by clarity: use the compact scale in §3, tabular numerals and dense but legible rows. Don't force a display word into a screen people use to get work done.
+
+Both kinds keep the same standards: size floors, contrast, measure, a reasoned choice of face (Law 2 in `SKILL.md`; standards vs defaults in `principles/restraint.md`).
 
 ### 1. Choose with a reason
 
@@ -759,7 +764,7 @@ Inter, Roboto, Open Sans, Lato, Poppins, Montserrat, Arial/Helvetica fallbacks a
 
 ### 3. Scale
 
-Use a fluid, dramatic scale. A good starting point:
+**Display scale (type-led briefs).** Use a fluid, dramatic scale. A good starting point:
 
 ```css
 :root {
@@ -772,7 +777,22 @@ Use a fluid, dramatic scale. A good starting point:
 }
 ```
 
-- Display sizes in `vw` (via `clamp`) so the word fills the composition at every width.
+**Compact scale (content-led briefs).** Small steps, nothing in `vw` above the page title, numbers in tabular figures:
+
+```css
+:root {
+  --ui--1: 0.75rem;   /* table meta, axis labels (12px floor) */
+  --ui-0:  0.875rem;  /* dense table rows, controls */
+  --ui-1:  1rem;      /* body, form fields */
+  --ui-2:  1.25rem;   /* panel titles */
+  --ui-3:  clamp(1.5rem, 1.3rem + 0.8vw, 2rem);  /* page title: the largest type on the screen */
+  --ui-kpi: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem); /* key figures, tabular-nums */
+}
+```
+
+The page's character comes from the face, the weights, the numerals and the rhythm of rows, not from size.
+
+- Display sizes in `vw` (via `clamp`) so the word fills the composition at every width (type-led briefs only).
 
 #### Long words at 375 (check by reading, no browser)
 
