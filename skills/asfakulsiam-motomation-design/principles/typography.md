@@ -1,11 +1,21 @@
 # Typography
 
-Typography is the main tool of this skill. Choose type first, before colour or layout, on every brief. How large it gets depends on the job:
+Typography is the main tool of this skill. Choose type first, before colour or layout, on every brief. Then choose **one of two modes**. They are a fork, not a default with exceptions: each is a complete way of designing, and neither is what you fall back to when the other doesn't fit.
 
-- **Type-led (the house default):** portfolios, studios, editorial, launches, brand sites. The type **is** the visual identity. Use the display scale in §3 and let one word carry the screen.
-- **Content-led (an override, written in one line of the plan):** dashboards, data tools, service UIs, booking and checkout flows, catalogues with filters. The data, product or imagery is the hero. Type leads by clarity: use the compact scale in §3, tabular numerals and dense but legible rows. Don't force a display word into a screen people use to get work done.
+| | HOUSE STYLE (typography-led) | SERVICE STYLE (information-led) |
+|---|---|---|
+| Default for | Portfolio, studio, editorial, brand, launch and manifesto sites | Dashboards, SaaS product and admin UIs, dense service UIs: booking, checkout, catalogues with filters, data tools |
+| What the visitor came for | An impression: who this is and why it is different | A task: read, compare, find, act |
+| The hero | The type itself. One word or line carries the screen | The data, the product UI or the imagery. Type makes it legible |
+| Scale | Display scale (§3) | Compact scale (§3) |
+| Numbers | Can be set as display | Tabular figures (`font-variant-numeric: tabular-nums`), aligned in columns |
+| Density | Generous: few elements, large measure of space | Dense but legible: rows, labels, small steps |
+| Display face | Chosen for character, at dramatic size | Optional. Often one family at several weights |
+| Motion | Can carry the story (Tier 2–5) | Feedback and state changes first (Tier 1–2); a signature lives in one place |
 
-Both kinds keep the same standards: size floors, contrast, measure, a reasoned choice of face (Law 2 in `SKILL.md`; standards vs defaults in `principles/restraint.md`).
+**State the mode in the plan, with the reason from the brief:** `Type mode : SERVICE STYLE (operators scan 40 rows a minute; the numbers are the content)`. A brief that sits between the two (a SaaS marketing site, a hotel, an e-commerce product page) still picks one and says why. A SaaS marketing site that sells through a product demo is usually SERVICE STYLE in the product frame and may use a HOUSE STYLE headline above it; say which part is which.
+
+Both modes keep the same standards: size floors, contrast, measure, a reasoned choice of face (Law 2 in `SKILL.md`; standards vs defaults in `principles/restraint.md`). SERVICE STYLE is not "house style with smaller type", and HOUSE STYLE is not a licence to drop legibility.
 
 ## 1. Choose with a reason
 
@@ -24,7 +34,7 @@ Search the curated list: `node scripts/search.mjs fonts "<mood words>"`. `data/f
 
 ## 3. Scale
 
-**Display scale (type-led briefs).** Use a fluid, dramatic scale. A good starting point:
+**Display scale (HOUSE STYLE).** Use a fluid, dramatic scale. A good starting point:
 
 ```css
 :root {
@@ -37,7 +47,7 @@ Search the curated list: `node scripts/search.mjs fonts "<mood words>"`. `data/f
 }
 ```
 
-**Compact scale (content-led briefs).** Small steps, nothing in `vw` above the page title, numbers in tabular figures:
+**Compact scale (SERVICE STYLE).** Small steps, nothing in `vw` above the page title, numbers in tabular figures:
 
 ```css
 :root {
@@ -52,7 +62,7 @@ Search the curated list: `node scripts/search.mjs fonts "<mood words>"`. `data/f
 
 The page's character comes from the face, the weights, the numerals and the rhythm of rows, not from size.
 
-- Display sizes in `vw` (via `clamp`) so the word fills the composition at every width (type-led briefs only).
+- Display sizes in `vw` (via `clamp`) so the word fills the composition at every width (HOUSE STYLE only).
 
 ### Long words at 375 (check by reading, no browser)
 

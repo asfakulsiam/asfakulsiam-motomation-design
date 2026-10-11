@@ -12,6 +12,8 @@
 - **Rejected:** 
 
 ## Typography
+Type mode: HOUSE STYLE (typography-led) | SERVICE STYLE (information-led) — because <reason from the brief>
+
 | Role | Family | Weight/axes | Size token | Notes |
 |---|---|---|---|---|
 | Display | | | `--step-4` | |

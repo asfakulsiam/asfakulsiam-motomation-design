@@ -1,0 +1,37 @@
+COLLISION ENGINE · category: SaaS · seed 2401
+
+Draw 1
+  Archetype  : The Lookbook (lookbook): full-bleed editorial spreads page by page
+  Mutation   : Borrow a print rule: marginalia, footnotes, folios or a colophon
+  Collision  : scoreboard (sport) → steal "big flip digits and periods"
+               e.g. stats that flip to real values
+  Kinetic    : a letter splits, driven by idle time
+  Seed move  : Ink Fill: statements fill with ink as you read
+  Fingerprint: layout=sequence · tier=2 · signature_type=type
+
+Draw 2
+  Archetype  : The Catalogue (catalogue): numbered objects with spec sheets
+  Mutation   : Reverse the reveal: start complete and take away as you scroll
+  Collision  : stamp and postmark (post) → steal "ink impression with a date"
+               e.g. a 'viewed' or 'booked' stamp with the real date
+  Kinetic    : the background magnifies, driven by a section entering
+  Seed move  : Pixel Wake: the cursor leaves fading pixels
+  Fingerprint: layout=rows · tier=2 · signature_type=cursor
+
+Draw 3
+  Archetype  : The Console (console): a terminal is the interface
+  Mutation   : Single object: the whole site orbits one object
+  Collision  : herbarium (botany) → steal "pressed specimens with labels"
+               e.g. products pinned with handwritten labels
+  Kinetic    : a grid cell magnifies, driven by a section entering
+  Seed move  : Width Sprint: variable width stretches with scroll speed
+  Fingerprint: layout=product · tier=2 · signature_type=type
+
+Diversity (measured)
+  archetypes       : 3/3 unique  ✓
+  signature seeds  : 3/3 unique  ✓
+  mutations        : 3/3 unique  ✓
+  collision worlds : 3/3 unique  ✓
+
+Treat these as constraints, not answers. Combine, bend or reject them, but start from them.
+Next: write Tension → Concept with one draw, then run the Thinking Sequence (thinking/sequence.md).

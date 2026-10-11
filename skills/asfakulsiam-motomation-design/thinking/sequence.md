@@ -124,6 +124,7 @@ Archetype : Film Reel (Tier 5 scroll-film) mutated by "invert the axis": the ree
 Collision : 35mm contact sheet → frame numbers, sprocket holes as a progress rail, grease-pencil circles as hover marks
 Signature : Hovering a project draws a grease-pencil circle around it; scrolling past the reel's end rewinds it with a film-leader countdown
 Dials     : ENERGY 3 · RHYTHM 2 · MOTION 3 → Tier 5
+Type mode : HOUSE STYLE (a portfolio: the work and the name are the impression, nobody comes to compare rows)
 Type      : Big Shoulders Display (condensed, cinematic) / Switzer (neutral text)
 Palette   : Darkroom: #0E0D0B, #F2EEE6, accent safelight red #E0442B
 Not doing : Bento grid of thumbnails with a centred "Hi, I'm…" hero

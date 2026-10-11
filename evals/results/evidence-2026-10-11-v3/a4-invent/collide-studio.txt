@@ -1,0 +1,37 @@
+COLLISION ENGINE · category: Studio / Agency · seed 2402
+
+Draw 1
+  Archetype  : The Broadsheet (broadsheet): newspaper masthead columns and folios
+  Mutation   : Self-imposed constraint: one colour, one size or one font weight only
+  Collision  : receipt printer (retail) → steal "paper feeding line by line"
+               e.g. order summaries printing as you scroll
+  Kinetic    : a word tilts, driven by idle time
+  Seed move  : Proximity Weight: letters near the cursor get heavier
+  Fingerprint: layout=columns · tier=2 · signature_type=type
+
+Draw 2
+  Archetype  : The Ledger (ledger): rows and columns like an account book
+  Mutation   : Wrong room: use another category's structure
+  Collision  : monsoon window (weather) → steal "rain streaks distorting the view"
+               e.g. a shader that streaks images on scroll velocity
+  Kinetic    : a line bends, driven by hover
+  Seed move  : Sticker Scatter: the logo bursts into on-brand stickers
+  Fingerprint: layout=rows · tier=2 · signature_type=micro
+
+Draw 3
+  Archetype  : The Manifesto (manifesto): one argument set large like a speech
+  Mutation   : Invert the axis: vertical becomes horizontal or time runs backwards
+  Collision  : typewriter (writing) → steal "carriage return and ink strike"
+               e.g. headlines typed with a strike effect, carriage returns as section breaks
+  Kinetic    : the whole page bends, driven by page exit
+  Seed move  : Thread: one line draws through the whole page
+  Fingerprint: layout=statement · tier=2 · signature_type=scroll
+
+Diversity (measured)
+  archetypes       : 3/3 unique  ✓
+  signature seeds  : 3/3 unique  ✓
+  mutations        : 3/3 unique  ✓
+  collision worlds : 3/3 unique  ✓
+
+Treat these as constraints, not answers. Combine, bend or reject them, but start from them.
+Next: write Tension → Concept with one draw, then run the Thinking Sequence (thinking/sequence.md).

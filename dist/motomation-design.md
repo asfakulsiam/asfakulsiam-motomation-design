@@ -23,7 +23,10 @@ If there is even a small chance this skill applies to a web design task, use it.
 ### The five laws
 
 1. **Think before you draw.** Run the Thinking Sequence before writing any UI code. No exceptions for "simple" pages.
-2. **Typography is the hero, by default.** In the house style, type is the primary image: choose it first, set it large, make it do work. When the visitor came for data, a product UI or imagery (dashboards, service tools, catalogues, booking flows), type leads by clarity instead of size: compact, tabular, legible at a glance, with no hero-scale display forced in. Either way, type is chosen first and with a reason, and its standards (size floors, contrast, measure) never relax.
+2. **Type is chosen first, in one of two modes.** Pick the mode from the brief, write it in the plan with the reason, and design fully inside it. Neither mode is a fallback for the other.
+   - **HOUSE STYLE (typography-led).** Default for portfolio, studio, editorial and brand work. Type is the primary image: set it large, make it do work, let one word carry the screen.
+   - **SERVICE STYLE (information-led).** Default for dashboards, SaaS product and admin UIs, and dense service UIs (booking, checkout, catalogues with filters, data tools). The visitor came to read, compare or act: type leads by clarity, with a compact scale, tabular figures and dense, legible rows; no hero-scale display word.
+   - Both modes keep the same standards: size floors, contrast, measure and a reasoned choice of face. A brief that sits between them (a SaaS marketing site, a hotel) picks one and says why. Detail: `principles/typography.md`.
 3. **Motion must mean something.** Every animation answers "what does this tell the user?" If the answer is "nothing", delete it.
 4. **Actively reduce repetition.** Draw constraints from `scripts/collide.mjs` (no archetype or signature repeats inside a run) and compare your plan's structural choices (archetype, signature, type, palette, tier) against `.motomation/log.json` with `scripts/memory.mjs check`. This detects and reduces repetition inside one project; it cannot guarantee novelty across projects that don't share a log, so say so when it matters.
 5. **Ship complete, accessible, fast.** No placeholders, no lorem ipsum, no broken reduced-motion, no fake numbers.
@@ -95,6 +98,7 @@ Archetype   : <structure> mutated by <mutation>
 Collision   : <unrelated source> → <what it lends the design>
 Signature   : <the one move people will remember>
 Dials       : ENERGY <1-3> · RHYTHM <1-3> · MOTION <1-3> → Tier <1-5>
+Type mode   : HOUSE STYLE | SERVICE STYLE (<why, from the brief>)
 Type        : <display> / <text> (<why>)
 Palette     : <name or hexes> (<why>)
 Not doing   : <the obvious choice you rejected and why>
@@ -132,9 +136,10 @@ Higher tiers include all lower-tier craft. Choose the **lowest tier that deliver
 
 Two layers, kept apart on purpose (details in `principles/restraint.md`):
 - **Universal standards: never overridden.** Accessibility (WCAG AA, keyboard, focus), restraint (the four cuts, one signature move, motion budget), motion discipline, real content, a designed reduced-motion fallback, performance budgets.
-- **House style: a default the brief can override.** Minimal canvas, maximal type, editorial grid, a monochrome base with one accent, typography as hero. A dense dashboard, a data tool or an image-led brief may drop any of these; write the override in one line of the plan. Law 2's "set it large" and the summary below describe the house default, not a standard. Law 2's "choose type first, with a reason" applies to every brief.
+- **Type mode: a fork, chosen per brief (Law 2).** HOUSE STYLE (typography-led) or SERVICE STYLE (information-led), written in the plan with the reason. The mode decides scale and density; it never relaxes a standard.
+- **House defaults: what HOUSE STYLE starts from.** Minimal canvas, maximal type, editorial grid, a monochrome base with one accent. A brief may drop any of these; write the change in one line of the plan. SERVICE STYLE starts from the compact scale and the product's own density instead.
 
-### House style (summary; full version in `principles/house-style.md`)
+### House style defaults (summary; full version in `principles/house-style.md`)
 
 - Minimal canvas, maximal type. One display face at a dramatic scale, one text face that disappears.
 - Monochrome base plus **one** accent used at the key moment.
@@ -374,6 +379,7 @@ Archetype : Film Reel (Tier 5 scroll-film) mutated by "invert the axis": the ree
 Collision : 35mm contact sheet → frame numbers, sprocket holes as a progress rail, grease-pencil circles as hover marks
 Signature : Hovering a project draws a grease-pencil circle around it; scrolling past the reel's end rewinds it with a film-leader countdown
 Dials     : ENERGY 3 · RHYTHM 2 · MOTION 3 → Tier 5
+Type mode : HOUSE STYLE (a portfolio: the work and the name are the impression, nobody comes to compare rows)
 Type      : Big Shoulders Display (condensed, cinematic) / Switzer (neutral text)
 Palette   : Darkroom: #0E0D0B, #F2EEE6, accent safelight red #E0442B
 Not doing : Bento grid of thumbnails with a centred "Hi, I'm…" hero
@@ -608,7 +614,7 @@ This is the default look when the brief doesn't override it. These are defaults,
 
 | Trait | In practice |
 |---|---|
-| **Type as image** | The display face is set at 8–28vw for the hook. Headlines carry the composition; photos support them. (Type-led briefs. Content-led briefs use the compact scale in `principles/typography.md` §3.) |
+| **Type as image** | The display face is set at 8–28vw for the hook. Headlines carry the composition; photos support them. (HOUSE STYLE briefs. SERVICE STYLE briefs use the compact scale in `principles/typography.md` §3.) |
 | **Quiet canvas** | Off-white or near-black grounds with a hint of warmth or coolness, never pure `#FFFFFF` + `#000000` unless the concept is stark. |
 | **One accent** | A single signal colour, used at the moment that matters (the CTA, the active state, the signature). |
 | **Editorial grid** | 12 columns with visible logic: index numbers, folios, hairline rules, captions in the margin. Break the grid once per screen, on purpose. |
@@ -757,12 +763,22 @@ When you want to add something, ask: *does this make the concept clearer or just
 
 ## Typography
 
-Typography is the main tool of this skill. Choose type first, before colour or layout, on every brief. How large it gets depends on the job:
+Typography is the main tool of this skill. Choose type first, before colour or layout, on every brief. Then choose **one of two modes**. They are a fork, not a default with exceptions: each is a complete way of designing, and neither is what you fall back to when the other doesn't fit.
 
-- **Type-led (the house default):** portfolios, studios, editorial, launches, brand sites. The type **is** the visual identity. Use the display scale in §3 and let one word carry the screen.
-- **Content-led (an override, written in one line of the plan):** dashboards, data tools, service UIs, booking and checkout flows, catalogues with filters. The data, product or imagery is the hero. Type leads by clarity: use the compact scale in §3, tabular numerals and dense but legible rows. Don't force a display word into a screen people use to get work done.
+| | HOUSE STYLE (typography-led) | SERVICE STYLE (information-led) |
+|---|---|---|
+| Default for | Portfolio, studio, editorial, brand, launch and manifesto sites | Dashboards, SaaS product and admin UIs, dense service UIs: booking, checkout, catalogues with filters, data tools |
+| What the visitor came for | An impression: who this is and why it is different | A task: read, compare, find, act |
+| The hero | The type itself. One word or line carries the screen | The data, the product UI or the imagery. Type makes it legible |
+| Scale | Display scale (§3) | Compact scale (§3) |
+| Numbers | Can be set as display | Tabular figures (`font-variant-numeric: tabular-nums`), aligned in columns |
+| Density | Generous: few elements, large measure of space | Dense but legible: rows, labels, small steps |
+| Display face | Chosen for character, at dramatic size | Optional. Often one family at several weights |
+| Motion | Can carry the story (Tier 2–5) | Feedback and state changes first (Tier 1–2); a signature lives in one place |
 
-Both kinds keep the same standards: size floors, contrast, measure, a reasoned choice of face (Law 2 in `SKILL.md`; standards vs defaults in `principles/restraint.md`).
+**State the mode in the plan, with the reason from the brief:** `Type mode : SERVICE STYLE (operators scan 40 rows a minute; the numbers are the content)`. A brief that sits between the two (a SaaS marketing site, a hotel, an e-commerce product page) still picks one and says why. A SaaS marketing site that sells through a product demo is usually SERVICE STYLE in the product frame and may use a HOUSE STYLE headline above it; say which part is which.
+
+Both modes keep the same standards: size floors, contrast, measure, a reasoned choice of face (Law 2 in `SKILL.md`; standards vs defaults in `principles/restraint.md`). SERVICE STYLE is not "house style with smaller type", and HOUSE STYLE is not a licence to drop legibility.
 
 ### 1. Choose with a reason
 
@@ -781,7 +797,7 @@ Search the curated list: `node scripts/search.mjs fonts "<mood words>"`. `data/f
 
 ### 3. Scale
 
-**Display scale (type-led briefs).** Use a fluid, dramatic scale. A good starting point:
+**Display scale (HOUSE STYLE).** Use a fluid, dramatic scale. A good starting point:
 
 ```css
 :root {
@@ -794,7 +810,7 @@ Search the curated list: `node scripts/search.mjs fonts "<mood words>"`. `data/f
 }
 ```
 
-**Compact scale (content-led briefs).** Small steps, nothing in `vw` above the page title, numbers in tabular figures:
+**Compact scale (SERVICE STYLE).** Small steps, nothing in `vw` above the page title, numbers in tabular figures:
 
 ```css
 :root {
@@ -809,7 +825,7 @@ Search the curated list: `node scripts/search.mjs fonts "<mood words>"`. `data/f
 
 The page's character comes from the face, the weights, the numerals and the rhythm of rows, not from size.
 
-- Display sizes in `vw` (via `clamp`) so the word fills the composition at every width (type-led briefs only).
+- Display sizes in `vw` (via `clamp`) so the word fills the composition at every width (HOUSE STYLE only).
 
 #### Long words at 375 (check by reading, no browser)
 
@@ -2722,7 +2738,7 @@ Type a command at the start of a message. Commands combine with flags. Without a
 **Output:** preview block → complete code → Delivery Gate scores → handoff note.
 
 #### `/invent [topic]`
-**What:** runs the collision engine (`scripts/collide.mjs --n 3 --spread`; `--count N` for more) and proposes **three different concepts**, each with tension, concept, archetype + mutation, collision and signature.
+**What:** runs the collision engine (`scripts/collide.mjs --n 3 --spread`; `--count N` for more) and proposes **three different concepts**, each with tension, concept, type mode (HOUSE STYLE or SERVICE STYLE, with the reason from the brief), archetype + mutation, collision and signature.
 **Guarantees (enforced by the script, reported in its "Diversity (measured)" block):** the three draws never share an archetype or a signature seed; mutations and collision worlds don't repeat either while their pools last (12 mutations, 20 archetypes, 22 signature seeds). When `--count` asks for more than a pool holds, the script says which pool ran out and from which draw repeats start; it never overlaps silently. Copy that block into the output. Without a shell, draw by hand and state that uniqueness was checked by eye.
 **When:** you're stuck, or the first idea feels familiar.
 **Output:** three concept cards plus the measured diversity line. Pick one and continue with `/build`.
@@ -3178,6 +3194,8 @@ Use these to **study**, not to copy. Run `/study <url>` to extract principles.
 - **Rejected:** 
 
 ### Typography
+Type mode: HOUSE STYLE (typography-led) | SERVICE STYLE (information-led) — because <reason from the brief>
+
 | Role | Family | Weight/axes | Size token | Notes |
 |---|---|---|---|---|
 | Display | | | `--step-4` | |
