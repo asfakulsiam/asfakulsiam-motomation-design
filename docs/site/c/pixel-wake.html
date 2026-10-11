@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pixel Wake · Motomation docs</title>
+<meta name="description" content="The cursor leaves a trail of square pixels on a grid that fade out behind it, like a wake on a low-resolution screen.">
+<meta name="motomation-docs" content="source:d906adc7649eff4f components:68">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Fraunces:opsz,wght@9..144,300..800&family=Hanken+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-page="component" data-id="pixel-wake">
+<div id="root"><noscript><p style="padding:24px">These docs need JavaScript for the live demos. The catalogue is in skills/asfakulsiam-motomation-design/examples/components/README.md.</p></noscript></div>
+<script type="application/json" id="source">"\"use client\";\n// @motomation-component\n// id: pixel-wake\n// name: Pixel Wake\n// family: cursor\n// tier: 2\n// deps: react\n// what: The cursor leaves a trail of square pixels on a grid that fade out behind it, like a wake on a low-resolution screen.\n// use-when: Digital, pixel, retro, game and screen-themed concepts; usually only over the hero.\n// avoid-when: Over body text; on calm or luxury briefs; together with another cursor effect.\n// reduced-motion: No trail.\n// touch: No trail.\n// a11y: A decorative canvas (aria-hidden) that never blocks clicks (pointer-events none).\nimport { useEffect, useRef, type CSSProperties } from \"react\";\nimport { useReducedMotion, useFinePointer } from \"../_lib/motion\";\n\ntype Props = { cell?: number; fadeMs?: number; color?: string; className?: string; style?: CSSProperties };\n\nexport function PixelWake({ cell = 18, fadeMs = 700, color = \"#e0442b\", className, style }: Props) {\n  const ref = useRef\u003cHTMLCanvasElement>(null);\n  const reduce = useReducedMotion();\n  const fine = useFinePointer();\n  useEffect(() => {\n    const c = ref.current; if (!c || reduce || !fine) return; const ctx = c.getContext(\"2d\"); if (!ctx) return;\n    const host = c.parentElement!; const cells = new Map\u003cstring, number>(); let raf = 0; const dpr = Math.min(2, devicePixelRatio || 1);\n    const size = () => { c.width = host.clientWidth * dpr; c.height = host.clientHeight * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };\n    const draw = () => {\n      const now = performance.now(); ctx.clearRect(0, 0, c.width, c.height); ctx.fillStyle = color;\n      for (const [k, t] of cells) { const a = 1 - (now - t) / fadeMs; if (a \u003c= 0) { cells.delete(k); continue; } const [x, y] = k.split(\",\").map(Number); ctx.globalAlpha = a; ctx.fillRect(x * cell, y * cell, cell - 1, cell - 1); }\n      ctx.globalAlpha = 1; raf = cells.size ? requestAnimationFrame(draw) : 0;\n    };\n    const move = (e: PointerEvent) => { const r = host.getBoundingClientRect(); const x = Math.floor((e.clientX - r.left) / cell), y = Math.floor((e.clientY - r.top) / cell); if (x \u003c 0 || y \u003c 0) return; cells.set(`${x},${y}`, performance.now()); if (!raf) raf = requestAnimationFrame(draw); };\n    size(); const ro = new ResizeObserver(size); ro.observe(host); host.addEventListener(\"pointermove\", move);\n    return () => { ro.disconnect(); host.removeEventListener(\"pointermove\", move); cancelAnimationFrame(raf); };\n  }, [reduce, fine, cell, fadeMs, color]);\n  return \u003ccanvas ref={ref} aria-hidden=\"true\" className={className} style={{ position: \"absolute\", inset: 0, width: \"100%\", height: \"100%\", pointerEvents: \"none\", ...style }} />;\n}\n"</script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

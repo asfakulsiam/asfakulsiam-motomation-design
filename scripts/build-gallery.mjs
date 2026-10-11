@@ -23,7 +23,7 @@ export const PINNED = { esbuild: "0.28.2", react: "19.2.6", "react-dom": "19.2.6
 /** Hash of every source file the gallery is built from, in a stable order. */
 export function sourceHash() {
   const files = []; const walk = (d) => { for (const f of readdirSync(d).sort()) { const p = join(d, f); if (statSync(p).isDirectory()) walk(p); else if (/\.(tsx?|css)$/.test(f) && !/index\.html$/.test(f)) files.push(p); } };
-  walk(join(SKILL, "examples/components")); files.push(join(GAL, "gallery.tsx"), join(GAL, "gallery.css"));
+  walk(join(SKILL, "examples/components")); files.push(join(GAL, "demos.tsx"), join(GAL, "gallery.tsx"), join(GAL, "gallery.css"));
   const h = createHash("sha256"); for (const f of files) { h.update(relative(SKILL, f)); h.update(readFileSync(f)); } return h.digest("hex").slice(0, 16);
 }
 

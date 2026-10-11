@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reading Rail · Motomation docs</title>
+<meta name="description" content="A thin rail at the top or edge of the screen fills as you read an article, with an optional chapter label that changes at each heading.">
+<meta name="motomation-docs" content="source:d906adc7649eff4f components:68">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Fraunces:opsz,wght@9..144,300..800&family=Hanken+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-page="component" data-id="reading-rail">
+<div id="root"><noscript><p style="padding:24px">These docs need JavaScript for the live demos. The catalogue is in skills/asfakulsiam-motomation-design/examples/components/README.md.</p></noscript></div>
+<script type="application/json" id="source">"\"use client\";\n// @motomation-component\n// id: reading-rail\n// name: Reading Rail\n// family: scroll\n// tier: 1\n// deps: react\n// what: A thin rail at the top or edge of the screen fills as you read an article, with an optional chapter label that changes at each heading.\n// use-when: Long reads, case studies and documentation pages.\n// avoid-when: Short pages; landing pages; next to another progress indicator.\n// reduced-motion: The rail still reflects progress (it's information, not decoration) but moves in 5% steps instead of continuously.\n// touch: Same as desktop.\n// a11y: role progressbar with aria-valuenow, updated at most every 5%.\nimport { useRef, useState, type CSSProperties, type RefObject } from \"react\";\nimport { useStickyProgress, useReducedMotion } from \"../_lib/motion\";\n\ntype Props = { target: RefObject\u003cHTMLElement | null>; color?: string; height?: number; className?: string; style?: CSSProperties };\n\nexport function ReadingRail({ target, color = \"var(--accent, #e0442b)\", height = 3, className, style }: Props) {\n  const bar = useRef\u003cHTMLDivElement>(null);\n  const [step, setStep] = useState(0);\n  const reduce = useReducedMotion();\n  useStickyProgress(target, (p) => { const s = Math.round(p * 20) * 5; if (bar.current) bar.current.style.transform = `scaleX(${reduce ? s / 100 : p})`; setStep((o) => (o === s ? o : s)); });\n  return (\n    \u003cdiv role=\"progressbar\" aria-label=\"Reading progress\" aria-valuemin={0} aria-valuemax={100} aria-valuenow={step} className={className}\n      style={{ position: \"fixed\", insetInline: 0, top: 0, height, zIndex: 50, background: \"transparent\", ...style }}>\n      \u003cdiv ref={bar} style={{ height: \"100%\", background: color, transformOrigin: \"0 50%\", transform: \"scaleX(0)\" }} />\n    \u003c/div>\n  );\n}\n"</script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

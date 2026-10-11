@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand Selection · Motomation docs</title>
+<meta name="description" content="Text selection uses the brand accent and ink instead of the browser's blue, scoped to a section or the whole page.">
+<meta name="motomation-docs" content="source:d906adc7649eff4f components:68">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Fraunces:opsz,wght@9..144,300..800&family=Hanken+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-page="component" data-id="brand-selection">
+<div id="root"><noscript><p style="padding:24px">These docs need JavaScript for the live demos. The catalogue is in skills/asfakulsiam-motomation-design/examples/components/README.md.</p></noscript></div>
+<script type="application/json" id="source">"\"use client\";\n// @motomation-component\n// id: brand-selection\n// name: Brand Selection\n// family: micro\n// tier: 1\n// deps: react\n// what: Text selection uses the brand accent and ink instead of the browser's blue, scoped to a section or the whole page.\n// use-when: Almost always; it's a tiny, free detail that shows care.\n// avoid-when: The accent and its text colour don't pass 4.5:1 together.\n// reduced-motion: Not applicable (no motion).\n// touch: Same as desktop.\n// a11y: Check the contrast of selection text on the selection colour (scripts/contrast.mjs).\nimport type { CSSProperties, ReactNode } from \"react\";\nimport { useId } from \"react\";\n\ntype Props = { children: ReactNode; background?: string; color?: string; className?: string; style?: CSSProperties };\n\nexport function BrandSelection({ children, background = \"var(--accent, #e0442b)\", color = \"var(--ground, #fff)\", className, style }: Props) {\n  const id = \"mm-sel-\" + useId().replace(/:/g, \"\");\n  return (\n    \u003cdiv data-sel={id} className={className} style={style}>\n      \u003cstyle>{`[data-sel=\"${id}\"] ::selection{background:${background};color:${color}}`}\u003c/style>\n      {children}\n    \u003c/div>\n  );\n}\n"</script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

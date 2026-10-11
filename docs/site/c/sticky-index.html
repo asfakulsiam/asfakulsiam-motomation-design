@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sticky Index · Motomation docs</title>
+<meta name="description" content="A sticky side index lists the page's sections and highlights the one you are reading, with a marker that slides between entries.">
+<meta name="motomation-docs" content="source:d906adc7649eff4f components:68">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Fraunces:opsz,wght@9..144,300..800&family=Hanken+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-page="component" data-id="sticky-index">
+<div id="root"><noscript><p style="padding:24px">These docs need JavaScript for the live demos. The catalogue is in skills/asfakulsiam-motomation-design/examples/components/README.md.</p></noscript></div>
+<script type="application/json" id="source">"\"use client\";\n// @motomation-component\n// id: sticky-index\n// name: Sticky Index\n// family: layout\n// tier: 1\n// deps: react\n// what: A sticky side index lists the page's sections and highlights the one you are reading, with a marker that slides between entries.\n// use-when: Long case studies, reports, documentation, annual reviews.\n// avoid-when: Short pages; mobile (it collapses to a top select); landing pages.\n// reduced-motion: The marker jumps instead of sliding.\n// touch: Hidden below 900px; sections stay in normal flow.\n// a11y: A nav of in-page links with aria-current on the active section.\nimport { useEffect, useState, type CSSProperties } from \"react\";\nimport { useReducedMotion, useMedia, EASE } from \"../_lib/motion\";\n\ntype Props = { sections: { id: string; label: string }[]; label?: string; className?: string; style?: CSSProperties };\n\nexport function StickyIndex({ sections, label = \"On this page\", className, style }: Props) {\n  const reduce = useReducedMotion();\n  const wide = useMedia(\"(min-width: 900px)\");\n  const [active, setActive] = useState(0);\n  useEffect(() => {\n    const els = sections.map((s) => document.getElementById(s.id)).filter((e): e is HTMLElement => !!e);\n    const io = new IntersectionObserver((entries) => { for (const e of entries) if (e.isIntersecting) setActive(els.indexOf(e.target as HTMLElement)); }, { rootMargin: \"-40% 0px -55% 0px\" });\n    els.forEach((e) => io.observe(e)); return () => io.disconnect();\n  }, [sections]);\n  if (!wide) return null;\n  return (\n    \u003cnav aria-label={label} className={className} style={{ position: \"sticky\", top: 96, alignSelf: \"start\", ...style }}>\n      \u003cp style={{ fontSize: 12, letterSpacing: \"0.12em\", textTransform: \"uppercase\", margin: \"0 0 12px\", opacity: 0.7 }}>{label}\u003c/p>\n      \u003col style={{ listStyle: \"none\", margin: 0, padding: \"0 0 0 14px\", position: \"relative\", borderLeft: \"1px solid var(--line, rgba(0,0,0,.15))\" }}>\n        \u003cspan aria-hidden=\"true\" style={{ position: \"absolute\", left: -1, top: 0, width: 2, height: 28, background: \"var(--accent, #e0442b)\", transform: `translateY(${active * 32 + 2}px)`, transition: reduce ? \"none\" : `transform 260ms ${EASE.out}` }} />\n        {sections.map((s, i) => \u003cli key={s.id} style={{ height: 32, display: \"flex\", alignItems: \"center\" }}>\n          \u003ca href={`#${s.id}`} aria-current={i === active ? \"location\" : undefined} style={{ color: \"inherit\", textDecoration: \"none\", fontWeight: i === active ? 600 : 400, opacity: i === active ? 1 : 0.7 }}>{s.label}\u003c/a>\u003c/li>)}\n      \u003c/ol>\n    \u003c/nav>\n  );\n}\n"</script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

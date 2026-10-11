@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Velocity Marquee · Motomation docs</title>
+<meta name="description" content="A looping marquee that drifts on its own, speeds up with scroll speed, follows scroll direction and leans (skews) while you scroll fast.">
+<meta name="motomation-docs" content="source:d906adc7649eff4f components:68">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Fraunces:opsz,wght@9..144,300..800&family=Hanken+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-page="component" data-id="velocity-marquee">
+<div id="root"><noscript><p style="padding:24px">These docs need JavaScript for the live demos. The catalogue is in skills/asfakulsiam-motomation-design/examples/components/README.md.</p></noscript></div>
+<script type="application/json" id="source">"\"use client\";\n// @motomation-component\n// id: velocity-marquee\n// name: Velocity Marquee\n// family: scroll\n// tier: 2\n// deps: react\n// what: A looping marquee that drifts on its own, speeds up with scroll speed, follows scroll direction and leans (skews) while you scroll fast.\n// use-when: Sport, launches, events and a single line of brand words between sections.\n// avoid-when: Content the reader needs (prices, dates); more than one marquee per page.\n// reduced-motion: A static, wrapped row of the same words.\n// touch: Same as desktop.\n// a11y: The words are read once (the duplicated copies are aria-hidden); hovering or focusing pauses the drift.\nimport { useRef, type CSSProperties } from \"react\";\nimport { useReducedMotion, useFrameLoop, useScrollVelocity, clamp } from \"../_lib/motion\";\n\ntype Props = { items: string[]; speed?: number; maxSkew?: number; separator?: string; className?: string; style?: CSSProperties };\n\nexport function VelocityMarquee({ items, speed = 40, maxSkew = 10, separator = \" — \", className, style }: Props) {\n  const wrap = useRef\u003cHTMLDivElement>(null);\n  const track = useRef\u003cHTMLDivElement>(null);\n  const reduce = useReducedMotion();\n  const state = useRef({ x: 0, v: 0, dir: 1, paused: false });\n  useScrollVelocity((v) => { state.current.v = v; if (Math.abs(v) > 0.5) state.current.dir = Math.sign(v); }, !reduce);\n  useFrameLoop(wrap, (_t, dt) => {\n    const s = state.current; const el = track.current; if (!el || s.paused) return;\n    const half = el.scrollWidth / 2; s.x -= (s.dir * speed * dt) / 1000 + s.v * 0.6; s.x = ((s.x % half) - half) % half;\n    el.style.transform = `translate3d(${s.x}px,0,0) skewX(${clamp(-s.v, -maxSkew, maxSkew)}deg)`;\n  }, !reduce);\n  const line = items.join(separator) + separator;\n  if (reduce) return \u003cp className={className} style={{ display: \"flex\", flexWrap: \"wrap\", gap: \"0 0.5em\", ...style }}>{items.join(separator)}\u003c/p>;\n  return (\n    \u003cdiv ref={wrap} className={className} style={{ overflow: \"hidden\", whiteSpace: \"nowrap\", ...style }}\n      onPointerEnter={() => (state.current.paused = true)} onPointerLeave={() => (state.current.paused = false)} onFocus={() => (state.current.paused = true)} onBlur={() => (state.current.paused = false)}>\n      \u003cspan style={{ position: \"absolute\", width: 1, height: 1, overflow: \"hidden\", clip: \"rect(0 0 0 0)\" }}>{items.join(\", \")}\u003c/span>\n      \u003cdiv ref={track} aria-hidden=\"true\" style={{ display: \"inline-flex\", willChange: \"transform\" }}>\u003cspan>{line}\u003c/span>\u003cspan>{line}\u003c/span>\u003c/div>\n    \u003c/div>\n  );\n}\n"</script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

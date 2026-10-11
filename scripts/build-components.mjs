@@ -72,14 +72,16 @@ export function render(components) {
   const cols = ["id", "name", "family", "tier", "file", "export", "what", "use_when", "avoid_when", "reduced_motion", "touch", "a11y"];
   files["skills/asfakulsiam-motomation-design/data/components.csv"] = [cols.join(","), ...components.map((c) => [c.id, c.name, c.family, c.tier, c.file.replace(/^examples\//, "examples/"), c.export, c.what, c["use-when"], c["avoid-when"], c["reduced-motion"], c.touch, c.a11y].map(csvCell).join(","))].join("\n") + "\n";
   // registry (shadcn schema): each item ships its file + the shared helper; deps are npm packages beyond react
-  // each item ships the _lib helpers it imports (always motion.ts; ambient.ts for the heavy backgrounds), resolved transitively
+  // each item ships the _lib helpers it imports (always motion.ts; ambient.ts for the heavy backgrounds), resolved transitively.
+  // They are typed registry:component, not registry:lib: shadcn moves lib files to the `lib` alias (src/lib/motion.ts),
+  // which breaks the component's `../_lib/motion` import; as components they land beside it (verified with shadcn add).
   const libFile = (n) => readFileSync(join(LIB, `_lib/${n}.ts`), "utf8");
   const libsOf = (src, seen = new Set(["motion"])) => { for (const m of src.matchAll(/from "(?:\.\.\/_lib|\.)\/(\w+)"/g)) if (!seen.has(m[1])) { seen.add(m[1]); libsOf(libFile(m[1]), seen); } return [...seen]; };
   const items = [];
   for (const c of components) {
     const npm = c.deps.split(/[ ,]+/).filter((d) => d && d !== "react");
     const item = { $schema: "https://ui.shadcn.com/schema/registry-item.json", name: c.id, type: "registry:component", title: c.name, description: c.what, dependencies: npm,
-      files: [{ path: `components/motomation/${c.family}/${c.id}.tsx`, type: "registry:component", content: c.src }, ...libsOf(c.src).map((n) => ({ path: `components/motomation/_lib/${n}.ts`, type: "registry:lib", content: libFile(n) }))],
+      files: [{ path: `components/motomation/${c.family}/${c.id}.tsx`, type: "registry:component", content: c.src }, ...libsOf(c.src).map((n) => ({ path: `components/motomation/_lib/${n}.ts`, type: "registry:component", content: libFile(n) }))],
       meta: { family: c.family, tier: Number(c.tier), reducedMotion: c["reduced-motion"], useWhen: c["use-when"], avoidWhen: c["avoid-when"] } };
     files[`registry/${c.id}.json`] = JSON.stringify(item, null, 2) + "\n";
     items.push({ name: c.id, type: "registry:component", title: c.name, description: c.what });

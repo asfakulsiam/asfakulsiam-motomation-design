@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aperture · Motomation docs</title>
+<meta name="description" content="The next section opens through a growing circle (an iris) as you scroll into it, from a small porthole to full bleed.">
+<meta name="motomation-docs" content="source:d906adc7649eff4f components:68">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Fraunces:opsz,wght@9..144,300..800&family=Hanken+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-page="component" data-id="aperture">
+<div id="root"><noscript><p style="padding:24px">These docs need JavaScript for the live demos. The catalogue is in skills/asfakulsiam-motomation-design/examples/components/README.md.</p></noscript></div>
+<script type="application/json" id="source">"\"use client\";\n// @motomation-component\n// id: aperture\n// name: Aperture\n// family: scroll\n// tier: 2\n// deps: react\n// what: The next section opens through a growing circle (an iris) as you scroll into it, from a small porthole to full bleed.\n// use-when: A chapter change that is a real threshold: entering a room, a lens, a window, a reveal of the product.\n// avoid-when: Every section; content that must be readable at the edges before the iris opens.\n// reduced-motion: The section is fully open from the start.\n// touch: Same as desktop.\n// a11y: Content is always in the DOM and readable by assistive tech; only clip-path animates.\nimport { useRef, type CSSProperties, type ReactNode } from \"react\";\nimport { useReducedMotion, useScrollProgress, clamp } from \"../_lib/motion\";\n\ntype Props = { children: ReactNode; shape?: \"circle\" | \"door\"; from?: number; className?: string; style?: CSSProperties };\n\nexport function Aperture({ children, shape = \"circle\", from = 6, className, style }: Props) {\n  const ref = useRef\u003cHTMLDivElement>(null);\n  const reduce = useReducedMotion();\n  useScrollProgress(ref, (p) => {\n    const el = ref.current; if (!el) return; const k = clamp((p - 0.05) / 0.4);\n    el.style.clipPath = shape === \"circle\" ? `circle(${from + (75 - from) * k}% at 50% 50%)` : `inset(0 ${(1 - k) * 42}% round ${(1 - k) * 999}px ${(1 - k) * 999}px 0 0)`;\n  }, !reduce);\n  return \u003cdiv ref={ref} className={className} style={{ clipPath: reduce ? \"none\" : shape === \"circle\" ? `circle(${from}% at 50% 50%)` : \"inset(0 42% round 999px 999px 0 0)\", ...style }}>{children}\u003c/div>;\n}\n"</script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

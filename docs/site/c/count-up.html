@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Count Up · Motomation docs</title>
+<meta name="description" content="A number counts from a start value to its real value once, when it first enters the screen, with tabular figures so it doesn't jitter.">
+<meta name="motomation-docs" content="source:d906adc7649eff4f components:68">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Fraunces:opsz,wght@9..144,300..800&family=Hanken+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-page="component" data-id="count-up">
+<div id="root"><noscript><p style="padding:24px">These docs need JavaScript for the live demos. The catalogue is in skills/asfakulsiam-motomation-design/examples/components/README.md.</p></noscript></div>
+<script type="application/json" id="source">"\"use client\";\n// @motomation-component\n// id: count-up\n// name: Count Up\n// family: micro\n// tier: 2\n// deps: react\n// what: A number counts from a start value to its real value once, when it first enters the screen, with tabular figures so it doesn't jitter.\n// use-when: Real, sourced figures that are the point of a section (one to three per page).\n// avoid-when: Invented or rounded-up stats; prices; anything a screenshot mid-count would misreport (see the v2 benchmark note).\n// reduced-motion: Shows the final value at once.\n// touch: Same as desktop.\n// a11y: The final value is in the accessible name from the start; the counting digits are aria-hidden. Before it counts, the visible value is the final value (no-JS and screenshots never show 0).\nimport { useEffect, useRef, useState, type CSSProperties } from \"react\";\nimport { useInView, useReducedMotion } from \"../_lib/motion\";\n\ntype Props = { value: number; from?: number; duration?: number; decimals?: number; locale?: string; prefix?: string; suffix?: string; className?: string; style?: CSSProperties };\n\nexport function CountUp({ value, from = 0, duration = 1400, decimals = 0, locale, prefix = \"\", suffix = \"\", className, style }: Props) {\n  const ref = useRef\u003cHTMLSpanElement>(null);\n  const seen = useInView(ref, { margin: \"0px 0px -20% 0px\" });\n  const reduce = useReducedMotion();\n  const fmt = (n: number) => prefix + n.toLocaleString(locale, { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + suffix;\n  const [shown, setShown] = useState(fmt(value));\n  const played = useRef(false);\n  useEffect(() => {\n    if (!seen || reduce || played.current) return; played.current = true;\n    const t0 = performance.now(); let raf = 0;\n    const step = (t: number) => { const k = Math.min(1, (t - t0) / duration); const e = 1 - Math.pow(1 - k, 4); setShown(fmt(from + (value - from) * e)); if (k \u003c 1) raf = requestAnimationFrame(step); };\n    raf = requestAnimationFrame(step); return () => cancelAnimationFrame(raf);\n  }, [seen, reduce]); // eslint-disable-line react-hooks/exhaustive-deps\n  return \u003cspan ref={ref} aria-label={fmt(value)} className={className} style={{ fontVariantNumeric: \"tabular-nums\", ...style }}>\u003cspan aria-hidden=\"true\">{shown}\u003c/span>\u003c/span>;\n}\n"</script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+pages      68/68 load with a heading, a live demo, the install command and no console errors
+playground 61/68 pages have live controls; the rest explain why not: confetti, hold-to-commit, letter-relay, reading-rail, split-flap, sticky-index, target-cursor
+search     index lists 68; "scroll" → 15 (15 of 68 match “scroll”); "paper fold" → 0; "zzzz" → 0; "typewr" + Enter → typewriter.html
+install    clipboard after "Copy install command": npx shadcn@latest add https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/main/registry/count-up.json
+source     "Copy source" → 2253 chars, starts "\"use client\";\n// @motomation-component\n/"
+playground count-up suffix " km", decimals 1 → demo reads "৳1,500.0 km"
+reduced    toggle: matchMedia(reduce) false → true; persists across pages; Typewriter shows 50 characters at once (no typing)
+mobile     iframe viewport 375px wide, demo text "Monsoon IdentsChannel rebrand · 2024Chan…"
+
+all checks passed

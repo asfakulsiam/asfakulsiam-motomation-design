@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thread · Motomation docs</title>
+<meta name="description" content="One line draws itself down the page as you scroll, linking sections like a seam, a route or a timeline.">
+<meta name="motomation-docs" content="source:d906adc7649eff4f components:68">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Fraunces:opsz,wght@9..144,300..800&family=Hanken+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-page="component" data-id="thread">
+<div id="root"><noscript><p style="padding:24px">These docs need JavaScript for the live demos. The catalogue is in skills/asfakulsiam-motomation-design/examples/components/README.md.</p></noscript></div>
+<script type="application/json" id="source">"\"use client\";\n// @motomation-component\n// id: thread\n// name: Thread\n// family: scroll\n// tier: 2\n// deps: react\n// what: One line draws itself down the page as you scroll, linking sections like a seam, a route or a timeline.\n// use-when: Journeys, timelines, craft (stitching, drawing), routes and process pages.\n// avoid-when: As decoration on a page without a journey; together with another scroll signature.\n// reduced-motion: The line is fully drawn and still.\n// touch: Same as desktop.\n// a11y: The SVG is decorative (aria-hidden); the content sits above it in normal flow.\nimport { useRef, type CSSProperties, type ReactNode } from \"react\";\nimport { useReducedMotion, useScrollProgress, clamp } from \"../_lib/motion\";\n\ntype Props = { children: ReactNode; path?: string; strokeWidth?: number; color?: string; className?: string; style?: CSSProperties };\nconst WAVE = \"M50 0 C 90 120, 10 220, 50 340 S 90 560, 50 680 S 10 900, 50 1000\";\n\nexport function Thread({ children, path = WAVE, strokeWidth = 2, color = \"var(--accent, #e0442b)\", className, style }: Props) {\n  const wrap = useRef\u003cHTMLDivElement>(null);\n  const line = useRef\u003cSVGPathElement>(null);\n  const reduce = useReducedMotion();\n  useScrollProgress(wrap, (p) => {\n    const l = line.current; if (!l) return; const len = l.getTotalLength();\n    l.style.strokeDasharray = `${len}`; l.style.strokeDashoffset = `${len * (1 - clamp((p - 0.1) / 0.75))}`;\n  }, !reduce);\n  return (\n    \u003cdiv ref={wrap} className={className} style={{ position: \"relative\", ...style }}>\n      \u003csvg aria-hidden=\"true\" viewBox=\"0 0 100 1000\" preserveAspectRatio=\"none\" style={{ position: \"absolute\", inset: 0, width: \"100%\", height: \"100%\", pointerEvents: \"none\", overflow: \"visible\" }}>\n        \u003cpath ref={line} d={path} fill=\"none\" stroke={color} strokeWidth={strokeWidth} vectorEffect=\"non-scaling-stroke\" strokeLinecap=\"round\" />\n      \u003c/svg>\n      \u003cdiv style={{ position: \"relative\" }}>{children}\u003c/div>\n    \u003c/div>\n  );\n}\n"</script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

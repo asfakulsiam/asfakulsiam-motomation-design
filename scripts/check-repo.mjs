@@ -213,6 +213,21 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   if (templates.length && (!existsSync(readme) || readFileSync(readme, "utf8") !== renderReadme(templates))) fail("examples/templates/README.md is stale; run node scripts/build-templates.mjs");
 }
 
+// 9d. Docs site: one page per component, built from the current sources (scripts/build-docs-site.mjs)
+{
+  const idx = join(ROOT, "docs/site/index.html");
+  if (existsSync(idx)) {
+    const { sourceHash } = await import("./build-docs-site.mjs");
+    const meta = readFileSync(idx, "utf8").match(/<meta name="motomation-docs" content="source:([0-9a-f]+) components:(\d+)">/);
+    const want = sourceHash();
+    if (!meta) fail("docs/site/index.html has no build stamp; run node scripts/build-docs-site.mjs");
+    else if (meta[1] !== want) fail(`docs/site is stale (built from ${meta[1]}, sources are ${want}); run node scripts/build-docs-site.mjs`);
+    const { components } = (await import("./build-components.mjs")).collect();
+    for (const c of components) if (!existsSync(join(ROOT, "docs/site/c", `${c.id}.html`))) fail(`docs/site/c/${c.id}.html missing: every component has a docs page`);
+    for (const f of ["assets/site.js", "assets/site.css"]) if (!existsSync(join(ROOT, "docs/site", f))) fail(`docs/site/${f} missing`);
+  }
+}
+
 // 10. Every worked example is discoverable from the top of the README (before "Why this exists")
 {
   const readme = readFileSync(join(ROOT, "README.md"), "utf8");

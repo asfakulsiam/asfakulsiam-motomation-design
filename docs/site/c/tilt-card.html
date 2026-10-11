@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tilt Card · Motomation docs</title>
+<meta name="description" content="A card rotates in 3D toward the cursor with a soft moving highlight, like holding a physical card to the light.">
+<meta name="motomation-docs" content="source:d906adc7649eff4f components:68">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Fraunces:opsz,wght@9..144,300..800&family=Hanken+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-page="component" data-id="tilt-card">
+<div id="root"><noscript><p style="padding:24px">These docs need JavaScript for the live demos. The catalogue is in skills/asfakulsiam-motomation-design/examples/components/README.md.</p></noscript></div>
+<script type="application/json" id="source">"\"use client\";\n// @motomation-component\n// id: tilt-card\n// name: Tilt Card\n// family: cursor\n// tier: 2\n// deps: react\n// what: A card rotates in 3D toward the cursor with a soft moving highlight, like holding a physical card to the light.\n// use-when: Physical objects: tickets, cards, passes, packaging, a single product.\n// avoid-when: Grids of many cards; text-heavy cards; cards that are links to long content (the motion distracts).\n// reduced-motion: Flat card, no rotation or highlight.\n// touch: Flat card.\n// a11y: Children render normally; the highlight is aria-hidden.\nimport { useRef, type CSSProperties, type ReactNode } from \"react\";\nimport { useReducedMotion, useFinePointer, EASE } from \"../_lib/motion\";\n\ntype Props = { children: ReactNode; max?: number; glare?: boolean; className?: string; style?: CSSProperties };\n\nexport function TiltCard({ children, max = 10, glare = true, className, style }: Props) {\n  const card = useRef\u003cHTMLDivElement>(null);\n  const shine = useRef\u003cHTMLSpanElement>(null);\n  const reduce = useReducedMotion();\n  const fine = useFinePointer();\n  const live = fine && !reduce;\n  const move = (e: React.PointerEvent) => {\n    const el = card.current; if (!el || !live) return; const r = el.getBoundingClientRect();\n    const px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;\n    el.style.transform = `perspective(900px) rotateX(${-py * max}deg) rotateY(${px * max}deg)`;\n    if (shine.current) shine.current.style.background = `radial-gradient(circle at ${(px + 0.5) * 100}% ${(py + 0.5) * 100}%, rgba(255,255,255,.35), transparent 55%)`;\n  };\n  const leave = () => { if (card.current) card.current.style.transform = \"perspective(900px) rotateX(0) rotateY(0)\"; if (shine.current) shine.current.style.background = \"transparent\"; };\n  return (\n    \u003cdiv ref={card} onPointerMove={move} onPointerLeave={leave} className={className}\n      style={{ position: \"relative\", transformStyle: \"preserve-3d\", transition: `transform 200ms ${EASE.out}`, willChange: live ? \"transform\" : undefined, ...style }}>\n      {children}\n      {glare && live && \u003cspan ref={shine} aria-hidden=\"true\" style={{ position: \"absolute\", inset: 0, borderRadius: \"inherit\", pointerEvents: \"none\", mixBlendMode: \"soft-light\" }} />}\n    \u003c/div>\n  );\n}\n"</script>
+<script src="../assets/site.js"></script>
+</body>
+</html>
