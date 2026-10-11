@@ -1,23 +1,22 @@
 "use client";
 // Motomation component helpers: the shared motion rules every component in examples/components follows.
 // No dependencies beyond React. Each hook cleans up after itself and respects reduced motion.
-import { useEffect, useRef, useState, type RefObject } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type RefObject } from "react";
 
 export const clamp = (v: number, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, v));
 export const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
 const query = (q: string) => (typeof window !== "undefined" && "matchMedia" in window ? window.matchMedia(q) : null);
 
-/** Live media-query state. Starts false on the server and on first render, so markup is static until hydrated. */
+/** Live media-query state, correct on the first client render: it reads the query while rendering (through
+ *  useSyncExternalStore), so a reduced-motion user never gets one animated render before an effect corrects it.
+ *  On the server there is no media query: it returns false there, and React re-renders with the real value on hydration. */
 export function useMedia(q: string): boolean {
-  const [on, setOn] = useState(false);
-  useEffect(() => {
-    const m = query(q); if (!m) return;
-    const sync = () => setOn(m.matches); sync();
-    m.addEventListener("change", sync);
-    return () => m.removeEventListener("change", sync);
-  }, [q]);
-  return on;
+  return useSyncExternalStore(
+    (onChange) => { const m = query(q); if (!m) return () => {}; m.addEventListener("change", onChange); return () => m.removeEventListener("change", onChange); },
+    () => query(q)?.matches ?? false,
+    () => false,
+  );
 }
 /** True when the user asked for reduced motion. Components show their final state instead of animating. */
 export const useReducedMotion = () => useMedia("(prefers-reduced-motion: reduce)");
