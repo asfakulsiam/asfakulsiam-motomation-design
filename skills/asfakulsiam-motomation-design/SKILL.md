@@ -143,7 +143,7 @@ Two layers, kept apart on purpose (details in `principles/restraint.md`):
 
 ## Tools inside this skill
 
-All scripts are zero-dependency Node.js (v18+). Run them from the skill folder.
+All scripts are Node.js (v18+) and zero-dependency, except `gate.mjs`, which needs Playwright (optional: without it the gate says "not verified" and exits 3). Run them from the skill folder.
 
 The memory log always belongs to the project, not the skill: `memory.mjs` walks up from the current folder to the nearest `package.json` or `.git` (skipping the skill's own folder) and uses `<project>/.motomation/log.json`. Pass `--project <dir>` when the project has neither marker or you want a different one.
 

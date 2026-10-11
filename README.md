@@ -9,7 +9,7 @@ At the top tier, scrolling plays like a film.
 [![License: MIT](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](LICENSE)
 [![Version](https://img.shields.io/badge/version-2.1.0-E0442B?style=flat-square)](CHANGELOG.md)
 [![Agent Skill](https://img.shields.io/badge/agent%20skill-npx%20skills%20add-111111?style=flat-square)](#install)
-[![Zero dependencies](https://img.shields.io/badge/scripts-zero%20dependencies-111111?style=flat-square)](skills/asfakulsiam-motomation-design/scripts)
+[![Zero dependencies (gate: Playwright, optional)](https://img.shields.io/badge/scripts-zero%20dependencies%20%28gate%3A%20Playwright%2C%20optional%29-111111?style=flat-square)](skills/asfakulsiam-motomation-design/scripts)
 
 ```bash
 npx skills add asfakulsiam/asfakulsiam-motomation-design
@@ -245,7 +245,7 @@ The rule: **use the lowest tier that delivers the concept.** Tier 5 is the signa
 
 ## Tools inside the skill
 
-Zero-dependency Node.js scripts (Node 18+). No `npm install` needed.
+Node.js scripts (Node 18+). Everything except the Delivery Gate is zero-dependency: no `npm install` needed.
 
 ```bash
 cd skills/asfakulsiam-motomation-design      # or your agent's skills folder, e.g. .claude/skills/…
@@ -256,6 +256,25 @@ node scripts/memory.mjs recent                               # what this project
 node scripts/memory.mjs check --archetype ledger             # exits 2 if it was used recently
 node scripts/memory.mjs recent --project /path/to/project    # explicit project folder
 node scripts/contrast.mjs "#151412" "#F3F0EA"                # WCAG contrast
+```
+
+### Delivery Gate: `gate.mjs` (optional: needs Playwright)
+
+`gate.mjs` renders the page in a real browser and measures what the Delivery Gate asks for:
+- contrast against the pixels actually behind each text element (judged by the 10th-percentile sample, with a warning when more than 30% of text can't be measured);
+- overflow at 375, 390, 768 and 1440px;
+- display words that break at 375px;
+- text hidden only under reduced motion;
+- missing accessible names;
+- heading hierarchy, entrance repetition and JS weight.
+
+It then writes a stamp whose numbers `--verify` can re-check. Playwright is the only dependency in the repo, and it's optional. Without it, the gate prints "not verified — no browser" and exits 3, and every other script works as before.
+
+```bash
+npm i -D playwright && npx playwright install chromium       # once, in your project (or globally)
+node scripts/gate.mjs path/to/index.html                     # or a URL, or a folder of pages
+node scripts/gate.mjs --verify path/to/index.html            # re-scan and check the stamp written in the file
+node scripts/gate.mjs site/ --json --out gate-report.json    # machine-readable report
 ```
 
 The memory log is per project. `memory.mjs` walks up from the folder you run it in to the nearest `package.json` or `.git`, skips the skill's own folder, and writes `<project>/.motomation/log.json`. So running it from inside `.claude/skills/…` still records the project that installed the skill. `--project <dir>` overrides the lookup.
