@@ -286,6 +286,24 @@
       "description": "A sticky side index lists the page's sections and highlights the one you are reading, with a marker that slides between entries."
     },
     {
+      "name": "animated-list",
+      "type": "registry:component",
+      "title": "Animated List",
+      "description": "Entries arrive one at a time, like orders coming into a kitchen or messages into a log: each slides up into its slot and settles. It plays once, then the list is simply a list."
+    },
+    {
+      "name": "confetti",
+      "type": "registry:component",
+      "title": "Confetti",
+      "description": "Paper pieces burst from a point, tumble and flutter down under gravity and air drag, and are gone in under two seconds. Fired by you, from code, at a real moment."
+    },
+    {
+      "name": "device-mockup",
+      "type": "registry:component",
+      "title": "Device Mockup",
+      "description": "A phone, browser or laptop frame drawn in CSS around real content (a screenshot or live markup). For a tall screenshot, pointing at the screen scrolls it slowly to the bottom, like someone reading."
+    },
+    {
       "name": "glare-card",
       "type": "registry:component",
       "title": "Glare Card",
@@ -296,6 +314,30 @@
       "type": "registry:component",
       "title": "Glow Border",
       "description": "The edge of a card lights up nearest the pointer, as if the pointer were a lamp held close to it; the light fades along the edge with distance. Only the border glows, never the surface."
+    },
+    {
+      "name": "icon-cloud",
+      "type": "registry:component",
+      "title": "Icon Cloud",
+      "description": "Labels or small icons sit on the surface of an invisible ball that turns slowly; dragging spins it and it coasts to a stop. The near side is large and sharp, the far side small and faint."
+    },
+    {
+      "name": "loader-skeleton",
+      "type": "registry:component",
+      "title": "Loader Skeleton",
+      "description": "Grey placeholder shapes in the exact layout of the content that's coming (an avatar, a title, a few lines), with a faint light passing over them, so the page doesn't jump when the content lands."
+    },
+    {
+      "name": "loader-spinner",
+      "type": "registry:component",
+      "title": "Loader Spinner",
+      "description": "A thin ring whose arc stretches and shortens as it turns, for waits of unknown length. It only appears after a short delay, so fast loads never flash a spinner."
+    },
+    {
+      "name": "orbiting-circles",
+      "type": "registry:component",
+      "title": "Orbiting Circles",
+      "description": "Small badges travel on one or two thin circular orbits around a centre, staying upright as they go; the outer ring turns the other way, more slowly. Pointing at it stops the orbits."
     },
     {
       "name": "rainbow-border",
@@ -314,6 +356,12 @@
       "type": "registry:component",
       "title": "Spotlight Card",
       "description": "A dark card with a soft pool of light that follows the pointer across its surface, like a torch on a wall."
+    },
+    {
+      "name": "terminal",
+      "type": "registry:component",
+      "title": "Terminal",
+      "description": "A terminal window replays a short session when it scrolls into view: each command types itself after the prompt, its output appears at once, then the next command starts."
     },
     {
       "name": "brand-selection",

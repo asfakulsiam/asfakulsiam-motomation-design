@@ -15,6 +15,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useInView, useReducedMotion } from "../_lib/motion";
 
 type Props = { text: string; speed?: number; delay?: number; caret?: boolean; as?: "p" | "h1" | "h2" | "h3" | "span"; className?: string; style?: CSSProperties };
+const bar: CSSProperties = { position: "absolute", top: "0.1em", bottom: "0.05em", width: "0.08em", marginLeft: "0.03em", background: "currentColor" };
 const SR: CSSProperties = { position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0 0 0 0)", whiteSpace: "nowrap" };
 
 export function Typewriter({ text, speed = 38, delay = 200, caret = true, as: Tag = "p", className, style }: Props) {
@@ -35,14 +36,12 @@ export function Typewriter({ text, speed = 38, delay = 200, caret = true, as: Ta
     <Tag ref={ref as never} className={className} style={{ position: "relative", ...style }}>
       <span style={SR}>{text}</span>
       <span aria-hidden="true">
+        {caret && !reduce && shown === 0 && <span style={{ position: "relative" }}><span style={{ ...bar, left: 0 }} /></span>}
         {text.split("").map((ch, i) => (
           <span key={i} style={{ opacity: i < shown ? 1 : 0, position: "relative" }}>
-            {/* the caret rides on the next character to be typed, as a zero-width absolute bar, so it moves without reflow */}
-            {caret && !reduce && i === Math.min(shown, text.length - 1) && (
-              <span style={{ position: "absolute", top: "0.1em", bottom: "0.05em", width: "0.08em", background: "currentColor",
-                ...(shown >= text.length ? { left: "100%", opacity: done ? 0 : 1, transition: "opacity 400ms 600ms" } : { left: "-0.04em" }) }} />
-            )}
             {ch}
+            {/* the caret rides on the last typed (visible) character as a zero-width absolute bar, so it moves without reflow */}
+            {caret && !reduce && i === shown - 1 && <span style={{ ...bar, left: "100%", opacity: done ? 0 : 1, transition: "opacity 400ms 600ms" }} />}
           </span>
         ))}
       </span>

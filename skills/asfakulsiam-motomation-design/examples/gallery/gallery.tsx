@@ -30,6 +30,14 @@ import { Globe } from "../components/backgrounds/globe";
 import { MeshGradient } from "../components/backgrounds/mesh-gradient";
 import { Meteors } from "../components/backgrounds/meteors";
 import { ParticleField } from "../components/backgrounds/particle-field";
+import { AnimatedList } from "../components/ui/animated-list";
+import { useConfetti } from "../components/ui/confetti";
+import { DeviceMockup } from "../components/ui/device-mockup";
+import { IconCloud } from "../components/ui/icon-cloud";
+import { LoaderSkeleton } from "../components/ui/loader-skeleton";
+import { LoaderSpinner } from "../components/ui/loader-spinner";
+import { OrbitingCircles } from "../components/ui/orbiting-circles";
+import { Terminal } from "../components/ui/terminal";
 import { Aperture } from "../components/scroll/aperture";
 import { DarkroomDevelop } from "../components/scroll/darkroom-develop";
 import { HorizontalReel } from "../components/scroll/horizontal-reel";
@@ -75,6 +83,19 @@ const tile = (hue: number, label: string) => svg(`<rect width="400" height="400"
 const TILES = Array.from({ length: 15 }, (_, i) => tile((i * 47) % 360, `No. ${String(i + 1).padStart(2, "0")}`));
 
 const FAMILY_TITLES: Record<string, string> = { type: "Type", text: "Text effects", scroll: "Scroll", cursor: "Cursor", backgrounds: "Backgrounds", layout: "Layout and galleries", ui: "Buttons, cards and UI", micro: "Micro-interactions" };
+function ConfettiDemo() {
+  const fire = useConfetti();
+  const [done, setDone] = useState(false);
+  return (
+    <div style={{ ...box, placeItems: "center", textAlign: "center" }}>
+      <button type="button" className="demo-btn" onClick={(e) => { const r = e.currentTarget.getBoundingClientRect(); fire({ x: r.left + r.width / 2, y: r.top }); setDone(true); }}
+        style={{ padding: ".8em 1.4em", borderRadius: 999, border: 0, background: "var(--ink)", color: "var(--ground)", font: "inherit", fontWeight: 600, cursor: "pointer" }}>Send RSVP</button>
+      <p className="hint" role="status">{done ? "You're on the list for 14 February. See you there." : "A real, one-time success: the confetti is extra, the sentence is the message."}</p>
+    </div>
+  );
+}
+const orbitBadge = (t: string) => <span style={{ display: "grid", placeItems: "center", width: 44, height: 44, borderRadius: "50%", background: "var(--ground)", border: "1px solid var(--line)", fontFamily: "var(--font-mono)", fontSize: 11 }}>{t}</span>;
+const pageMock = <div style={{ fontFamily: "var(--font-display)", color: "#1d1a16" }}>{["Morning bake", "Khejur gur buns", "Sourdough, 900 g", "Opening hours", "Find us"].map((t, i) => <div key={t} style={{ padding: "22px 18px", borderBottom: "1px solid #eee", background: i % 2 ? "#faf6ee" : "#fff" }}><p style={{ margin: 0, fontSize: i ? 18 : 28 }}>{t}</p><p style={{ margin: ".3em 0 0", fontFamily: "system-ui", fontSize: 12, color: "#6b6357" }}>7am to 2pm, closed Fridays.</p></div>)}</div>;
 const box: CSSProperties = { position: "relative", minHeight: 260, borderRadius: 14, background: "var(--surface)", border: "1px solid var(--line)", padding: 28, overflow: "hidden", display: "grid", alignContent: "center" };
 const display = (size = "clamp(2.4rem, 6vw, 5rem)"): CSSProperties => ({ fontFamily: "var(--font-display)", fontSize: size, lineHeight: 0.95, margin: 0, letterSpacing: "-0.02em" });
 
@@ -120,6 +141,15 @@ const DEMOS: Record<string, () => ReactNode> = {
   "spotlight-card": () => <div style={{ ...box, gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 12, background: "#0d0b08" }}>{["Hall I · Drawings", "Hall II · Maps", "Hall III · Letters"].map((t) => <SpotlightCard key={t} style={{ padding: "28px 22px", minHeight: 150 }}><p style={{ margin: 0, fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: ".12em", color: "#c9bfae" }}>OPEN TILL 21:00</p><p style={{ ...display("1.5rem"), margin: ".5em 0 0" }}>{t}</p></SpotlightCard>)}</div>,
   "glare-card": () => <div style={{ ...box, placeItems: "center", background: "#e9e2d4" }}><GlareCard style={{ width: "min(100%, 320px)", aspectRatio: "1.586", background: "linear-gradient(135deg, #24405c, #12202f)", color: "#f3efe6", boxShadow: "0 18px 40px rgba(0,0,0,.25)" }}><div style={{ position: "absolute", inset: 0, padding: 20, display: "flex", flexDirection: "column", justifyContent: "space-between" }}><p style={{ margin: 0, fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".16em" }}>READER'S PASS · 2026</p><p style={{ ...display("1.5rem"), margin: 0 }}>Northbrook Library</p></div></GlareCard><p className="hint">Move the pointer across the card, or drag a finger.</p></div>,
   "glow-border": () => <div style={{ ...box, gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 12, background: "#0d0b08" }}>{[["Mix", "from 4,000"], ["Master", "from 2,500"], ["Both", "from 6,000"]].map(([t, p]) => <GlowBorder key={t}><div style={{ padding: "24px 20px", color: "#f1e9da" }}><p style={{ ...display("1.5rem"), margin: 0 }}>{t}</p><p style={{ margin: ".4em 0 0", fontFamily: "var(--font-mono)", fontSize: 13, color: "#c9bfae" }}>BDT {p} / track</p></div></GlowBorder>)}</div>,
+  "animated-list": () => <div style={box}><AnimatedList itemStyle={{ padding: "10px 14px", borderRadius: 10, background: "var(--ground)", border: "1px solid var(--line)", fontFamily: "var(--font-mono)", fontSize: 13 }}>{["07:02 · 2 × sourdough · Gulshan", "07:05 · 6 × gur buns · Banani", "07:11 · 1 × sourdough · Dhanmondi", "07:14 · 12 × gur buns · office order"].map((t) => <span key={t}>{t}</span>)}</AnimatedList></div>,
+  "orbiting-circles": () => <div style={box}><OrbitingCircles label="Tilottoma and its five suppliers" center={<span style={{ ...display("1.3rem"), display: "grid", placeItems: "center", width: 92, height: 92, borderRadius: "50%", background: "var(--ink)", color: "var(--ground)" }}>Bakery</span>}
+    rings={[{ radius: 0.62, items: [{ label: "Flour mill, Bogura", node: orbitBadge("Mill") }, { label: "Date-palm tappers, Jashore", node: orbitBadge("Gur") }, { label: "Dairy, Sirajganj", node: orbitBadge("Milk") }] }, { radius: 0.95, reverse: true, items: [{ label: "Salt works, Cox's Bazar", node: orbitBadge("Salt") }, { label: "Firewood co-op", node: orbitBadge("Wood") }] }]} size={320} /></div>,
+  "icon-cloud": () => <div style={box}><IconCloud size={320} items={["Neem", "Shimul", "Krishnachura", "Kadam", "Bakul", "Hijal", "Arjun", "Jarul", "Chhatim", "Debdaru", "Nageshwar", "Palash", "Sonalu", "Kanchan", "Supari", "Tal", "Khejur", "Hogla"].map((t) => <span key={t} style={{ fontFamily: "var(--font-display)", fontSize: 18 }}>{t}</span>)} /><p className="hint">Drag sideways to spin.</p></div>,
+  terminal: () => <div style={box}><Terminal title="~/projects" lines={[{ cmd: "npx skills add asfakulsiam/asfakulsiam-motomation-design", out: "✓ installed motomation-design (skills/asfakulsiam-motomation-design)" }, { cmd: "node skill/scripts/gate.mjs index.html", out: "Delivery Gate: PASS · 0 contrast failures · reduced motion ok" }]} /></div>,
+  "device-mockup": () => <div style={{ ...box, gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 24, alignItems: "center" }}><DeviceMockup kind="phone" label="Bakery site on a phone" tall>{pageMock}</DeviceMockup><DeviceMockup kind="browser" label="Bakery site in a browser" url="tilottoma.bd" tall>{pageMock}</DeviceMockup></div>,
+  confetti: () => <ConfettiDemo />,
+  "loader-spinner": () => <div style={{ ...box, gridAutoFlow: "column", justifyContent: "start", gap: 32, alignItems: "center" }}><LoaderSpinner /><LoaderSpinner size={40} showLabel label="Checking payment…" color="var(--accent)" /></div>,
+  "loader-skeleton": () => <div style={{ ...box, gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}><LoaderSkeleton /><LoaderSkeleton media avatar={false} lines={2} /></div>,
   aperture: () => <div style={{ display: "grid", gap: 14 }}><p style={{ ...display("clamp(1.6rem, 4vw, 3rem)") }}>Step inside.</p><Aperture style={{ borderRadius: 14, overflow: "hidden" }}><img src={COURTYARD} alt="Courtyard house seen through an opening" style={{ width: "100%", display: "block" }} /></Aperture></div>,
   "darkroom-develop": () => <div style={{ ...box, padding: 0 }}><DarkroomDevelop src={COURTYARD} alt="Illustration of a brick courtyard house under a low sun" width={800} height={520} style={{ width: "100%" }} /></div>,
   "horizontal-reel": () => <HorizontalReel frames={TILES.slice(0, 6).map((t, i) => <figure key={i} style={{ margin: 0 }}><img src={t} alt={`Frame ${i + 1}, abstract study`} style={{ width: "100%", aspectRatio: "16/10", objectFit: "cover", borderRadius: 10, display: "block" }} /><figcaption className="hint">Frame {i + 1}</figcaption></figure>)} frameWidth="min(62vw, 560px)" />,
