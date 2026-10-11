@@ -3271,6 +3271,15 @@ Sun-Bleached,quiet,#F6EFE6,#EEE3D4,#2B2118,#6E5E4E,#C2562F,#FFFFFF,"travel, summ
 Pine & Fog,quiet,#E9ECE8,#DCE1DB,#17201B,#526057,#2F5D46,#FFFFFF,"outdoors, cabins, nature non-profits",body
 ```
 
+### data/rules.csv
+
+```csv
+key,value,note
+ui_feedback_max_ms,250,"Longest duration for UI feedback: press, hover, focus, toggles, tooltips. Menus, modals, reveals and page transitions use the ranges in motion/tokens.md."
+banned_display_fonts,Inter|Roboto|Open Sans|Lato|Poppins|Montserrat|Arial|Helvetica|system-ui,"Never the display (identity) face. Fine as text faces when chosen on purpose. system-ui means the system UI stack."
+caution_fonts,Playfair Display|Space Grotesk,"Not banned, but AI defaults: use only with a stated reason, never on autopilot."
+```
+
 ### data/signatures.csv
 
 ```csv
