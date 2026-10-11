@@ -265,10 +265,19 @@ async function words(browser, url) {
       if (gap > a.fs * 0.12 && gap < a.fs * 4 && new RegExp("(^|[^\\p{L}])" + word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "($|[^\\p{L}])", "u").test(page))
         out.push({ el: __g.label(a.e) + " + " + __g.label(b.e), text: a.t + "|" + b.t, problem: `word "${a.t + b.t}" is split across two elements with a ${Math.round(gap)}px gap` });
     }
-    return { checked, out };
+    // hierarchy at 375: one h1, no skipped heading levels, one focal point on the first screen (a single largest text)
+    const hs = [...document.querySelectorAll("h1,h2,h3,h4,h5,h6")].filter((h) => !gone(h) && getComputedStyle(h).display !== "none");
+    let skips = 0; let prevL = 0; for (const h of hs) { const L = +h.tagName[1]; if (prevL && L > prevL + 1) skips++; prevL = L; }
+    const first = [...document.body.querySelectorAll("*")].filter((e) => __g.hasText(e) && !gone(e)).map((e) => ({ e, r: e.getBoundingClientRect(), fs: parseFloat(getComputedStyle(e).fontSize) })).filter((x) => x.r.width > 0 && x.r.top < innerHeight && x.r.bottom > 0 && x.r.right > 0 && x.r.left < vw);
+    const max = Math.max(0, ...first.map((x) => x.fs)); const big = first.filter((x) => x.fs >= max * 0.95);
+    // an <em> inside the h1, or an outline layer stacked on the fill, is the same focal point
+    const overlap = (a, b) => { const w = Math.min(a.right, b.right) - Math.max(a.left, b.left), h = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top); return w > 0 && h > 0 && (w * h) / Math.min(a.width * a.height, b.width * b.height) > 0.5; };
+    const uniq = []; for (const x of big) if (!big.some((o) => o !== x && o.e.contains(x.e)) && !uniq.some((u) => overlap(u.r, x.r))) uniq.push(x);
+    const ties = uniq.length;
+    return { checked, out, hier: { h1: hs.filter((h) => h.tagName === "H1").length, skips, focalTies: ties, largest: max } };
   });
   await ctx.close();
-  return { checked: r.checked, fails: r.out };
+  return { checked: r.checked, fails: r.out, hier: r.hier };
 }
 
 async function motion(browser, url) {
@@ -311,13 +320,94 @@ async function names(browser, url) {
   await ctx.close(); return { checked: r.checked, fails: r.out };
 }
 
+async function structure(browser, url) {
+  // entrance pattern per top-level section, and the measurable motion budget (pins, WebGL canvases, JS weight)
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 }); const page = await ctx.newPage();
+  await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 }).catch(() => {});
+  await page.addScriptTag({ content: PAGE_LIB }).catch(() => {});
+  const SNAP = () => { window.__secs = window.__secs || [...document.querySelectorAll("section, main > *, body > header, body > footer")].filter((e, i, a) => !a.some((o) => o !== e && o.contains(e)) && e.getBoundingClientRect().height > 40);
+    return __secs.map((sec) => [...sec.querySelectorAll("*")].filter((e) => __g.hasText(e) || ["IMG", "svg", "CANVAS", "VIDEO", "FIGURE", "PICTURE"].includes(e.tagName)).slice(0, 10).map((e) => {
+      const cs = getComputedStyle(e); const m = new DOMMatrix(cs.transform === "none" ? undefined : cs.transform);
+      return { o: __g.opacity(e), x: m.m41, y: m.m42, sc: Math.hypot(m.a, m.b), clip: cs.clipPath, f: cs.filter };
+    })); };
+  await page.waitForTimeout(60);
+  const pre = await page.evaluate(SNAP).catch(() => []);
+  await page.waitForTimeout(1200);
+  const n = await page.evaluate(() => (window.__secs || []).length).catch(() => 0); const post = [];
+  for (let i = 0; i < n; i++) { await page.evaluate((k) => __secs[k].scrollIntoView({ block: "start" }), i); await page.waitForTimeout(1000); post.push((await page.evaluate(SNAP))[i]); }
+  const patterns = pre.map((els, i) => { const counts = {};
+    (els || []).forEach((a, j) => { const b = post[i]?.[j]; if (!b) return; const k = [];
+      if (Math.abs(a.o - b.o) > 0.05) k.push("fade"); if (Math.abs(a.x - b.x) > 4) k.push("x"); if (Math.abs(a.y - b.y) > 4) k.push("y");
+      if (Math.abs(a.sc - b.sc) > 0.02) k.push("scale"); if (a.clip !== b.clip) k.push("clip"); if (a.f !== b.f) k.push("filter");
+      if (k.length) counts[k.join("+")] = (counts[k.join("+")] || 0) + 1; });
+    const top = Object.entries(counts).sort((p, q) => q[1] - p[1])[0]; return top ? top[0] : "static"; });
+  const seen = {}; for (const p of patterns) if (p !== "static") seen[p] = (seen[p] || 0) + 1;
+  const repeats = Object.values(seen).reduce((a, c) => a + c - 1, 0);
+  const bud = await page.evaluate(() => {
+    const pins = document.querySelectorAll(".pin-spacer").length + [...document.querySelectorAll("*")].filter((e) => getComputedStyle(e).position === "sticky" && e.parentElement && e.parentElement.getBoundingClientRect().height >= innerHeight * 1.5).length;
+    const webgl = [...document.querySelectorAll("canvas")].filter((c) => { try { return c.getContext("2d") === null; } catch { return true; } }).length;
+    const scripts = [...document.scripts].map((s) => (s.src ? { src: s.src } : { inline: s.textContent }));
+    const ids = (window.__secs || []).map((s) => s.id || s.getAttribute("aria-label") || s.tagName.toLowerCase()).filter(Boolean);
+    return { pins, webgl, scripts, ids };
+  });
+  await ctx.close();
+  const { gzipSync } = await import("node:zlib"); let js = 0, unknown = 0;
+  for (const sc of bud.scripts) {
+    if (sc.inline !== undefined) { js += gzipSync(sc.inline).length; continue; }
+    try { const r = await fetch(sc.src); js += gzipSync(Buffer.from(await r.arrayBuffer())).length; } catch { unknown++; }
+  }
+  return { sections: patterns.length, patterns, repeats, pins: bud.pins, webgl: bud.webgl, jsKB: Math.round(js / 1024), jsUnknown: unknown, sectionIds: bud.ids };
+}
+
+// Tier budgets: craft/performance.md (JS, gzipped) and principles/restraint.md (pins, WebGL)
+export const JS_BUDGET_KB = { 0: 30, 1: 30, 2: 80, 3: 140, 4: 250, 5: 250 };
+function readRecord(file) {
+  // the "Restraint Gate record" section of DESIGN.md (templates/DESIGN.md)
+  if (!file || !existsSync(file)) return null;
+  const t = readFileSync(file, "utf8"); const i = t.search(/^##\s+Restraint Gate record/im); if (i < 0) return null;
+  const sec = t.slice(i).split(/\n##\s/)[0];
+  const sv = sec.match(/Concept survived:\s*([^\n]+)/i); if (!sv) return null;
+  const v = sv[1].trim().toLowerCase(); if (v.includes("<")) return null; // still the template placeholder
+  const changes = +(v.match(/after\s+(\d+)/)?.[1] || 0);
+  const lines = (re) => sec.split("\n").filter((l) => re.test(l) && l.replace(re, "").replace(/[-—:\s]/g, "").length > 2 && !/<[^>]+>/.test(l)).length;
+  return { survived: v.startsWith("yes") ? (changes ? "changed" : "kept") : "replaced", changes, cuts: lines(/^\s*-\s*Cut:/i), anim: lines(/^\s*-\s*Rejected animation:/i) };
+}
+async function memoryAxis(logFile, stamp, sectionIds) {
+  if (!stamp?.archetype || !stamp?.signature) return null;
+  const { fingerprint, similarity, load } = await import("./lib.mjs");
+  let runs = []; if (logFile && existsSync(logFile)) { try { runs = JSON.parse(readFileSync(logFile, "utf8")).runs || []; } catch {} }
+  const last = runs[runs.length - 1];
+  if (last && last.archetype === stamp.archetype && last.signature === stamp.signature && String(last.tier) === String(stamp.tier)) runs = runs.slice(0, -1); // this run, already logged
+  const prev = runs.slice(-5); if (!prev.length) return { s: 5, trace: logFile && existsSync(logFile) ? "last5:none" : "last5:no-log" };
+  const sigs = load("signatures"); const mine = fingerprint({ archetype: stamp.archetype, signature: stamp.signature, tier: stamp.tier, sections: sectionIds }, sigs);
+  const fp = (r) => r.fingerprint || fingerprint({ archetype: r.archetype, signature: r.signature, tier: r.tier, sections: r.sections }, sigs);
+  const worst = Math.max(0, ...prev.map((r) => similarity(mine, fp(r)).score));
+  const reusedA = prev.some((r) => r.archetype === stamp.archetype), reusedS = prev.some((r) => r.signature === stamp.signature);
+  const pct = Math.round(worst * 100);
+  const sc = worst >= 0.999 ? 1 : reusedA && reusedS ? 2 : reusedA || reusedS || worst >= 0.7 ? 3 : worst >= 0.5 ? 4 : 5;
+  return { s: sc, trace: `last5:${reusedA ? "archetype-reused" : "archetype-new"},${reusedS ? "signature-reused" : "signature-new"},fp${pct}` };
+}
+export function critiqueOf({ hier, words375, overflow375, motionFails, st, tier, record, mem }) {
+  const issues = words375 + (overflow375 ? 1 : 0) + (hier.h1 === 1 ? 0 : 1) + hier.skips + (hier.focalTies > 1 ? 1 : 0);
+  const H = `H${Math.max(1, 5 - issues)}[375:${issues}]`;
+  let M = "M?[no-tier]";
+  if (tier !== undefined && tier !== null && tier !== "") { const t = +tier; const over = (st.pins > 2 ? 1 : 0) + (st.webgl > 1 ? 1 : 0) + (st.jsKB > JS_BUDGET_KB[t] ? 1 : 0);
+    let m = Math.max(1, 5 - over); if (motionFails) m = Math.min(m, 2);
+    M = `M${m}[t${t}:pins${st.pins}/2,webgl${st.webgl}/1,js${st.jsKB}/${JS_BUDGET_KB[t]}KB,rm${motionFails}]`; }
+  const V = `V${Math.max(1, 5 - st.repeats)}[entrance-repeats:${st.repeats}]`;
+  const C = record ? `C${record.survived === "kept" ? 5 : record.survived === "changed" ? Math.max(2, 5 - record.changes) : 1}[restraint:${record.survived}${record.changes ? record.changes : ""}]` : "C?[no-record]";
+  const R = record ? `R${Math.min(5, 1 + record.cuts + record.anim)}[cuts:${record.cuts},anim:${record.anim}]` : "R?[no-record]";
+  const S = mem ? `S${mem.s}[${mem.trace}]` : "S?[no-archetype-in-stamp]";
+  return `${C} ${H} ${S} ${R} ${M} ${V}`;
+}
+
 // ── run ──────────────────────────────────────────────────────────────────────
-export async function scan(target, browser) {
+export async function scan(target, browser, opts = {}) {
   const { url, close } = await toUrl(target);
   try {
     const c = await contrast(browser, url);
     const o = []; for (const w of WIDTHS) o.push(await overflowAt(browser, url, w));
-    const w = await words(browser, url); const m = await motion(browser, url); const n = await names(browser, url);
+    const w = await words(browser, url); const m = await motion(browser, url); const n = await names(browser, url); const st = await structure(browser, url);
     // fingerprint of the served HTML with stamp comments removed: same page → same id, any other page → a different id
     const html = await fetch(url).then((r) => r.text()).catch(() => "");
     const pageHash = createHash("sha256").update(html.replace(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g, "")).digest("hex").slice(0, 16);
@@ -325,7 +415,15 @@ export async function scan(target, browser) {
     const counts = { contrast: c.fails.length, overflow: overflowFails.length, words: w.fails.length, motion: m.hiddenUnderReducedMotion.length + (m.pixelsChangingWhenStillPct > 0.5 ? 1 : 0), names: n.fails.length };
     const id = createHash("sha256").update(JSON.stringify({ v: GATE_VERSION, counts, sizes: [w.checked, m.compared, n.checked], page: pageHash, c: c.fails.map((x) => x.el + x.ratio), o: overflowFails.map((x) => x.width + x.el + x.px), w: w.fails.map((x) => x.el + x.problem), m: m.hiddenUnderReducedMotion.map((x) => x.el), n: n.fails.map((x) => x.el) })).digest("hex").slice(0, 10);
     const pass = Object.values(counts).every((v) => v === 0);
-    return { target, url, version: GATE_VERSION, pass, counts, id, stamp: stampOf(counts, id), contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n };
+    // the critique axes, each derived from a named check (gates/delivery-gate.md, Part 1)
+    const local = !/^https?:/.test(target) ? (statSync(resolve(target)).isDirectory() ? resolve(target) : dirname(resolve(target))) : process.cwd();
+    const pageStamp = !/^https?:/.test(target) ? readStamp(readFileSync(statSync(resolve(target)).isDirectory() ? join(resolve(target), "index.html") : resolve(target), "utf8"))?.fields : null;
+    const meta = { ...(pageStamp || {}), ...(opts.archetype ? { archetype: opts.archetype } : {}), ...(opts.signature ? { signature: opts.signature } : {}), ...(opts.tier !== undefined ? { tier: opts.tier } : {}) };
+    const designFile = opts.design || [join(local, "DESIGN.md"), join(process.cwd(), "DESIGN.md")].find((f) => existsSync(f));
+    const logFile = opts.log || [join(local, ".motomation/log.json"), join(process.cwd(), ".motomation/log.json")].find((f) => existsSync(f));
+    const record = readRecord(designFile); const mem = await memoryAxis(logFile, meta, st.sectionIds);
+    const critique = critiqueOf({ hier: w.hier, words375: w.fails.length, overflow375: overflowFails.filter((x) => x.width === 375).length, motionFails: counts.motion, st, tier: meta.tier, record, mem });
+    return { target, url, version: GATE_VERSION, pass, counts, id, stamp: stampOf(counts, id), critique, sources: { design: designFile || null, log: logFile || null, meta }, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n };
   } finally { close(); }
 }
 export const stampOf = (k, id) => `gate: c${k.contrast} o${k.overflow} w${k.words} rm${k.motion} a${k.names} · ${GATE_VERSION} · ${id}`;
@@ -334,8 +432,11 @@ export function readStamp(html) {
   const all = [...html.matchAll(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g)].map((m) => m[0]);
   if (!all.length) return null;
   const parse = (raw) => { const g = raw.match(/gate: c(\d+) o(\d+) w(\d+) rm(\d+) a(\d+) · (gate\/\d+) · ([0-9a-f]{10})/); return g ? { counts: { contrast: +g[1], overflow: +g[2], words: +g[3], motion: +g[4], names: +g[5] }, version: g[6], id: g[7] } : null; };
-  const withGate = all.map((raw) => ({ raw, gate: parse(raw) })).filter((x) => x.gate);
-  return withGate.length ? { raw: withGate[0].raw, gate: withGate[0].gate, others: withGate.slice(1), unmeasured: all.length - withGate.length } : { raw: all[0], gate: null, others: [], unmeasured: all.length };
+  const fieldsOf = (raw) => { const f = {}; for (const k of ["archetype", "mutation", "signature", "tier"]) { const m = raw.match(new RegExp(k + ":\\s*([^·*\\n]+?)\\s*(?:·|\\*/|-->)")); if (m) f[k] = m[1].trim(); } return f; };
+  const critOf = (raw) => raw.match(/critique:\s*(.+?)\s*(?:·\s*gate:|\*\/|-->)/)?.[1].trim() || null;
+  const withGate = all.map((raw) => ({ raw, gate: parse(raw), critique: critOf(raw) })).filter((x) => x.gate);
+  const best = withGate[0] || { raw: all[0], gate: null, critique: critOf(all[0]) };
+  return { raw: best.raw, gate: best.gate, critique: best.critique, fields: fieldsOf(best.raw), others: withGate.slice(1), unmeasured: all.length - withGate.length };
 }
 
 function print(r) {
@@ -351,28 +452,37 @@ function print(r) {
   for (const f of r.motion.hiddenUnderReducedMotion.slice(0, 12)) L(`     hidden  ${f.el}  "${f.text}"`);
   L(`  names     ${r.counts.names === 0 ? "✓" : "✗"} ${r.counts.names} missing alt / accessible names  (${r.names.checked} interactive elements checked)`);
   for (const f of r.names.fails.slice(0, 12)) L(`     ${f.problem}  ${f.el}  ${f.html || f.src || ""}`);
-  L(`  ${r.pass ? "PASS" : "FAIL"}  stamp → ${r.stamp}`);
+  const st = r.structure;
+  L(`  hierarchy  h1×${r.words.hier.h1}, ${r.words.hier.skips} skipped heading levels, ${r.words.hier.focalTies} element(s) tied for largest on the first 375px screen`);
+  L(`  structure  ${st.sections} sections, entrances: ${st.patterns.join(" | ")} → ${st.repeats} repeat(s); pins ${st.pins}, WebGL canvases ${st.webgl}, JS ${st.jsKB}KB gzipped${st.jsUnknown ? ` (+${st.jsUnknown} script(s) not fetched)` : ""}`);
+  L(`  records    DESIGN.md: ${r.sources.design || "none"} · memory log: ${r.sources.log || "none"} · stamp fields: ${JSON.stringify(r.sources.meta)}`);
+  L(`  critique → ${r.critique}${/\?/.test(r.critique) ? "   (axes marked ? have no record to derive from)" : ""}`);
+  L(`  ${r.pass ? "PASS" : "FAIL"}  stamp → critique: ${r.critique} · ${r.stamp}`);
   L("");
 }
 
 async function main() {
-  if (flags.help || (!targets.length && !flags.verify)) { console.log("Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file]   |   --verify <file.html> [--url u]"); process.exit(targets.length ? 0 : 1); }
+  if (flags.help || (!targets.length && !flags.verify)) { console.log("Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y]   |   --verify <file.html> [--url u]"); process.exit(targets.length ? 0 : 1); }
   const pw = await loadPlaywright();
   if (!pw) { console.log("not verified — no browser (install Playwright: npm i -D playwright && npx playwright install chromium)"); process.exit(3); }
   let browser; try { browser = await pw.chromium.launch(); } catch (e) { console.log(`not verified — no browser (${String(e.message).split("\n")[0]})`); process.exit(3); }
+  const opts = { design: flags.design ? resolve(String(flags.design)) : undefined, log: flags.log ? resolve(String(flags.log)) : undefined, tier: flags.tier !== undefined ? String(flags.tier) : undefined, archetype: flags.archetype, signature: flags.signature };
   try {
     if (flags.verify) {
       const file = String(flags.verify); const st = readStamp(readFileSync(file, "utf8"));
       if (!st) { console.log(`STAMP REJECTED · ${file}: no motomation stamp comment found`); process.exit(2); }
       if (!st.gate) { console.log(`STAMP REJECTED · ${file}: the stamp has no measured gate values (a hand-written or copied stamp). Run node scripts/gate.mjs and paste its stamp.\n  found: ${st.raw.slice(0, 160)}`); process.exit(2); }
-      const r = await scan(flags.url ? String(flags.url) : file, browser); print(r);
+      if (!st.critique) { console.log(`STAMP REJECTED · ${file}: no critique segment. Paste the full "critique: … · gate: …" line gate.mjs printed.`); process.exit(2); }
+      if (!/^C\d\[[^\]]+\] H\d\[[^\]]+\] S\d\[[^\]]+\] R\d\[[^\]]+\] M\d\[[^\]]+\] V\d\[[^\]]+\]$/.test(st.critique)) { console.log(`STAMP REJECTED · ${file}: critique "${st.critique}" is not traced. Every axis needs its number and the check it came from, e.g. H4[375:1]. Unmeasured scores are rejected.`); process.exit(2); }
+      const r = await scan(flags.url ? String(flags.url) : file, browser, opts); print(r);
+      if (st.critique !== r.critique) { console.log(`STAMP REJECTED · critique says "${st.critique}" but the checks give "${r.critique}"`); process.exit(2); }
       for (const g of [st.gate, ...st.others.map((o) => o.gate)]) {
         const same = JSON.stringify(g.counts) === JSON.stringify(r.counts) && g.id === r.id && g.version === r.version;
         if (!same) { console.log(`STAMP REJECTED · stamp says "${stampOf(g.counts, g.id)}" but a fresh scan measures "${r.stamp}"`); process.exit(2); }
       }
-      console.log(`STAMP VERIFIED · numbers match a fresh scan${r.pass ? " · gate PASS" : " · but the gate FAILS (the stamp honestly records failures)"}`); process.exit(r.pass ? 0 : 1);
+      console.log(`STAMP VERIFIED · critique and gate numbers match a fresh scan${r.pass ? " · gate PASS" : " · but the gate FAILS (the stamp honestly records failures)"}`); process.exit(r.pass ? 0 : 1);
     }
-    const all = []; for (const t of targets) { const r = await scan(t, browser); all.push(r); if (!flags.json) print(r); }
+    const all = []; for (const t of targets) { const r = await scan(t, browser, opts); all.push(r); if (!flags.json) print(r); }
     if (flags.json) console.log(JSON.stringify(all.length === 1 ? all[0] : all, null, 2));
     if (flags.out) writeFileSync(String(flags.out), JSON.stringify(all.length === 1 ? all[0] : all, null, 2));
     process.exit(all.every((r) => r.pass) ? 0 : 1);

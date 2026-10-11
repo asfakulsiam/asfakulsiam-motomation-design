@@ -175,6 +175,7 @@ Full behaviour of each command is in `commands/overview.md`. Critique output for
 - Explain the plan in the preview block, then build. Keep prose short. The work is the answer.
 - Deliver complete files. No `// rest of code here`, no TODOs, no placeholder images without a clear `alt` and a sourcing note.
 - Put a stamp comment at the top of the main stylesheet or layout:
-  `/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: C4 H5 S4 R5 M4 V5 */`
+  `/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: <from gate.mjs> · gate: <from gate.mjs> */`
+  The critique and gate segments are pasted from `node scripts/gate.mjs`, never typed. Each axis carries its trace, e.g. `H4[375:1]`. See `gates/delivery-gate.md`, Part 1.
 - After delivery, log the run: `node scripts/memory.mjs log ...` (or append to `.motomation/log.json` by hand).
 - End with: what you chose, what you rejected, and one thing to try next.

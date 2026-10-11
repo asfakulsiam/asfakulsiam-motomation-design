@@ -44,3 +44,10 @@
 - Source: 
 - Treatment: 
 - `[NEEDS ASSET]` list: 
+
+## Restraint Gate record
+<!-- Filled in at step 7 of the Thinking Sequence. scripts/gate.mjs derives the C and R critique scores from these lines, so keep the exact prefixes. -->
+- Concept survived: <yes | yes, after 1 change | no>
+- Cut: <what was removed> — <why it had no job>
+- Rejected animation: <the animation> — <which of the four questions it failed>
+

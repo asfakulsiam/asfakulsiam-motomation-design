@@ -177,7 +177,8 @@ Full behaviour of each command is in `commands/overview.md`. Critique output for
 - Explain the plan in the preview block, then build. Keep prose short. The work is the answer.
 - Deliver complete files. No `// rest of code here`, no TODOs, no placeholder images without a clear `alt` and a sourcing note.
 - Put a stamp comment at the top of the main stylesheet or layout:
-  `/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: C4 H5 S4 R5 M4 V5 */`
+  `/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: <from gate.mjs> · gate: <from gate.mjs> */`
+  The critique and gate segments are pasted from `node scripts/gate.mjs`, never typed. Each axis carries its trace, e.g. `H4[375:1]`. See `gates/delivery-gate.md`, Part 1.
 - After delivery, log the run: `node scripts/memory.mjs log ...` (or append to `.motomation/log.json` by hand).
 - End with: what you chose, what you rejected, and one thing to try next.
 
@@ -2402,10 +2403,28 @@ Exit codes: `0` pass · `1` fail · `2` stamp rejected · `3` not verified.
 | **M**otion | Does every animation pass the four questions and have fallbacks? | Motion explains, never decorates, and reduced motion is designed |
 | **V**ariety | Is this structurally different from previous runs (memory log) and from the template? | Different archetype, signature, type and nav from the last 5 runs |
 
-**Any score below 4 → revise before continuing.** Write the scores into the stamp comment, after the `gate:` line from Part 0:
-`/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: C<n> H<n> S<n> R<n> M<n> V<n> · gate: <paste the line gate.mjs printed> */`
+#### Where each number comes from
 
-The placeholders are deliberate. There are no numbers to copy. A stamp without a measured `gate:` segment is rejected by `node scripts/gate.mjs --verify`.
+You don't type the scores. Each axis is derived from one named check, and `scripts/gate.mjs` prints the result with its trace. The question in the table above is what the axis means. The check below is how it's scored.
+
+| Axis | Check | Source | Score |
+|---|---|---|---|
+| **C** | Did the concept survive the Restraint Gate? | `DESIGN.md` → "Restraint Gate record" → `Concept survived:` | `yes` → 5 · `yes, after N change(s)` → 5 − N (min 2) · `no` (replaced) → 1 |
+| **H** | 375 hierarchy test: display words fit (`w`), no overflow at 375, exactly one `h1`, no skipped heading levels, one largest text on the first 375px screen | measured by gate.mjs | 5 − issues (min 1) |
+| **S** | Is the archetype/signature unique across the last 5 runs, and how similar is the structural fingerprint? | `.motomation/log.json` (via `scripts/lib.mjs` fingerprints) + the stamp's archetype, signature, tier | both new and fingerprint < 50% → 5 · < 70% → 4 · one reused or ≥ 70% → 3 · both reused → 2 · identical → 1 |
+| **R** | How many things the Restraint Gate cut and logged | `DESIGN.md` → "Restraint Gate record" → `- Cut:` and `- Rejected animation:` lines | 1 + cuts + rejected animations (max 5). Four logged rejections → R5 |
+| **M** | Is the tier under budget? | measured by gate.mjs against the stamp's `tier`: pinned sections ≤ 2, WebGL canvases ≤ 1, JS (gzipped) ≤ the tier budget in `craft/performance.md`, reduced motion clean (`rm0`) | 5 − budget breaches (min 1); any `rm` failure caps M at 2 |
+| **V** | How many sections repeat an entrance pattern already used on the page? | measured by gate.mjs: each top-level section's entrance (fade, x, y, scale, clip, filter, or static) | 5 − repeats (min 1). Static sections don't count |
+
+A traced stamp reads like this, with the trace in brackets after each number:
+`critique: C5[restraint:kept] H4[375:1] S5[last5:archetype-new,signature-new,fp31] R5[cuts:2,anim:2] M5[t2:pins1/2,webgl0/1,js41/80KB,rm0] V3[entrance-repeats:2]`
+
+That line is an illustration of the format, not numbers to copy. `--verify` recomputes every axis from the page, `DESIGN.md` and the memory log, and rejects the stamp if any number or trace differs. It also rejects bare scores like `C5 H4 S5 R4 M5 V5`, and axes marked `?` (no record to derive from, e.g. `C?[no-record]` when `DESIGN.md` has no Restraint Gate record).
+
+**Any score below 4 → revise before continuing.** Then paste the stamp line gate.mjs printed into the stamp comment:
+`/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: <paste> · gate: <paste> */`
+
+The placeholders are deliberate. There are no numbers to copy. Write the archetype, mutation, signature and tier first, because gate.mjs reads them from the comment. Then run `node scripts/gate.mjs <build>` and replace the critique and gate segments with what it printed. Check with `node scripts/gate.mjs --verify <build>`.
 
 ---
 
@@ -2460,7 +2479,8 @@ The placeholders are deliberate. There are no numbers to copy. A stamp without a
 - [ ] Performance: LCP image preloaded, heavy libraries loaded dynamically, off-screen work paused
 - [ ] SEO: title, description, OG image, structured data, `llms.txt` (for sites)
 - [ ] Copy: real, specific, no banned phrases; `[NEEDS COPY]` markers listed for the user
-- [ ] `node scripts/gate.mjs` run on the build; its stamp line pasted (or "not verified — no browser" reported)
+- [ ] "Restraint Gate record" filled in `DESIGN.md` (concept survived?, every cut, every rejected animation)
+- [ ] `node scripts/gate.mjs` run on the build; its full `critique: … · gate: …` line pasted and `--verify` passes (or "not verified — no browser" reported)
 - [ ] Stamp comment written; run logged with `node scripts/memory.mjs log …`
 
 ---
@@ -2959,7 +2979,13 @@ Use these to **study**, not to copy. Run `/study <url>` to extract principles.
 ### Imagery
 - Source: 
 - Treatment: 
-- `[NEEDS ASSET]` list:
+- `[NEEDS ASSET]` list: 
+
+### Restraint Gate record
+<!-- Filled in at step 7 of the Thinking Sequence. scripts/gate.mjs derives the C and R critique scores from these lines, so keep the exact prefixes. -->
+- Concept survived: <yes | yes, after 1 change | no>
+- Cut: <what was removed> — <why it had no job>
+- Rejected animation: <the animation> — <which of the four questions it failed>
 
 
 ---
