@@ -64,6 +64,42 @@
       "description": "A display word stretches wider the faster you scroll and relaxes back when you stop, using the font's width axis."
     },
     {
+      "name": "ascii-text",
+      "type": "registry:component",
+      "title": "ASCII Text",
+      "description": "A word drawn as a grid of characters, sampled from the word's own letterforms; it settles out of character noise when it enters the screen."
+    },
+    {
+      "name": "glitch",
+      "type": "registry:component",
+      "title": "Glitch",
+      "description": "On hover, focus or tap, the word tears for a moment: two offset colour copies slip sideways in thin bands, then it settles. Never loops."
+    },
+    {
+      "name": "rotating-words",
+      "type": "registry:component",
+      "title": "Rotating Words",
+      "description": "One word in a sentence turns over to the next, like a rolling counter, a few times, then rests. The slot is as wide as the longest word (with the sentence's ending attached), so nothing around it moves."
+    },
+    {
+      "name": "scramble-on-hover",
+      "type": "registry:component",
+      "title": "Scramble on Hover",
+      "description": "Letters near the pointer scramble into other glyphs, like a magnet passing over iron filings, and settle back as it moves on. Unlike Decode, it reacts locally, where the cursor is."
+    },
+    {
+      "name": "shiny-text",
+      "type": "registry:component",
+      "title": "Shiny Text",
+      "description": "A single band of light passes once across a short label, like light catching foil or a brass plate, when it enters the screen and again on hover."
+    },
+    {
+      "name": "typewriter",
+      "type": "registry:component",
+      "title": "Typewriter",
+      "description": "A line types itself out, character by character, when it scrolls into view, with a caret that fades once the line is complete."
+    },
+    {
       "name": "aperture",
       "type": "registry:component",
       "title": "Aperture",

@@ -13,6 +13,12 @@ import { PressureType } from "../components/type/pressure-type";
 import { ScrollFloat } from "../components/type/scroll-float";
 import { SplitFlap } from "../components/type/split-flap";
 import { WidthSprint } from "../components/type/width-sprint";
+import { AsciiText } from "../components/text/ascii-text";
+import { Glitch } from "../components/text/glitch";
+import { RotatingWords } from "../components/text/rotating-words";
+import { ScrambleOnHover } from "../components/text/scramble-on-hover";
+import { ShinyText } from "../components/text/shiny-text";
+import { Typewriter } from "../components/text/typewriter";
 import { Aperture } from "../components/scroll/aperture";
 import { DarkroomDevelop } from "../components/scroll/darkroom-develop";
 import { HorizontalReel } from "../components/scroll/horizontal-reel";
@@ -57,7 +63,7 @@ const SKETCH = svg(`<rect width="800" height="520" fill="#f4f1ea"/><g fill="none
 const tile = (hue: number, label: string) => svg(`<rect width="400" height="400" fill="hsl(${hue} 45% 82%)"/><circle cx="${120 + (hue % 160)}" cy="${140 + (hue % 90)}" r="${70 + (hue % 50)}" fill="hsl(${hue} 55% 42%)"/><rect x="40" y="300" width="${120 + (hue % 200)}" height="20" fill="hsl(${hue} 40% 22%)"/><text x="40" y="370" font-family="monospace" font-size="24" fill="hsl(${hue} 40% 18%)">${label}</text>`, 400, 400);
 const TILES = Array.from({ length: 15 }, (_, i) => tile((i * 47) % 360, `No. ${String(i + 1).padStart(2, "0")}`));
 
-const FAMILY_TITLES: Record<string, string> = { type: "Type", scroll: "Scroll", cursor: "Cursor", backgrounds: "Backgrounds", layout: "Layout and galleries", micro: "Micro-interactions" };
+const FAMILY_TITLES: Record<string, string> = { type: "Type", text: "Text effects", scroll: "Scroll", cursor: "Cursor", backgrounds: "Backgrounds", layout: "Layout and galleries", ui: "Buttons, cards and UI", micro: "Micro-interactions" };
 const box: CSSProperties = { position: "relative", minHeight: 260, borderRadius: 14, background: "var(--surface)", border: "1px solid var(--line)", padding: 28, overflow: "hidden", display: "grid", alignContent: "center" };
 const display = (size = "clamp(2.4rem, 6vw, 5rem)"): CSSProperties => ({ fontFamily: "var(--font-display)", fontSize: size, lineHeight: 0.95, margin: 0, letterSpacing: "-0.02em" });
 
@@ -92,6 +98,12 @@ const DEMOS: Record<string, () => ReactNode> = {
   "scroll-float": () => <div style={box}><ScrollFloat text="Float up, settle down." style={display()} /></div>,
   "split-flap": () => <div style={box}><SplitFlapDemo /></div>,
   "width-sprint": () => <div style={box}><WidthSprint text="Faster" style={{ ...display("clamp(3rem, 12vw, 8rem)"), fontFamily: "var(--font-flex)" }} /><p className="hint">Scroll quickly past this card.</p></div>,
+  typewriter: () => <div style={box}><Typewriter as="p" text="Dear Rumana, the river was higher than we thought." style={{ ...display("clamp(1.4rem, 3.4vw, 2.4rem)"), fontFamily: "var(--font-mono)", lineHeight: 1.2 }} /></div>,
+  glitch: () => <div style={box}><p style={{ ...display("clamp(2.6rem, 9vw, 6rem)"), margin: 0 }}><Glitch text="NO SIGNAL" /></p><p className="hint">Hover or tap the words.</p></div>,
+  "ascii-text": () => <div style={box}><AsciiText text="TELEX" cols={88} /></div>,
+  "rotating-words": () => <div style={box}><RotatingWords as="p" before="We build houses for " words={["grandparents", "monsoons", "slow mornings"]} after="." style={{ ...display("clamp(1.6rem, 4vw, 3rem)"), lineHeight: 1.2 }} wordStyle={{ fontStyle: "italic", color: "var(--accent)" }} /></div>,
+  "shiny-text": () => <div style={{ ...box, background: "#1d1a16", placeItems: "center" }}><ShinyText as="p" text="ESTD 1893 · BRASS & IRON" ink="#c9a15b" shine="#fff3cf" style={{ fontFamily: "var(--font-mono)", letterSpacing: ".18em", fontSize: 18, margin: 0 }} /><p className="hint" style={{ color: "#c9c3b8" }}>Hover or tap to catch the light again.</p></div>,
+  "scramble-on-hover": () => <div style={box}><p style={{ ...display("clamp(2rem, 7vw, 4.6rem)"), fontFamily: "var(--font-mono)", margin: 0 }}><ScrambleOnHover text="CIPHER ROOM" /></p><p className="hint">Run the cursor along the words, or tap them.</p></div>,
   aperture: () => <div style={{ display: "grid", gap: 14 }}><p style={{ ...display("clamp(1.6rem, 4vw, 3rem)") }}>Step inside.</p><Aperture style={{ borderRadius: 14, overflow: "hidden" }}><img src={COURTYARD} alt="Courtyard house seen through an opening" style={{ width: "100%", display: "block" }} /></Aperture></div>,
   "darkroom-develop": () => <div style={{ ...box, padding: 0 }}><DarkroomDevelop src={COURTYARD} alt="Illustration of a brick courtyard house under a low sun" width={800} height={520} style={{ width: "100%" }} /></div>,
   "horizontal-reel": () => <HorizontalReel frames={TILES.slice(0, 6).map((t, i) => <figure key={i} style={{ margin: 0 }}><img src={t} alt={`Frame ${i + 1}, abstract study`} style={{ width: "100%", aspectRatio: "16/10", objectFit: "cover", borderRadius: 10, display: "block" }} /><figcaption className="hint">Frame {i + 1}</figcaption></figure>)} frameWidth="min(62vw, 560px)" />,

@@ -14,7 +14,7 @@ const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");
 const LIB = join(SKILL, "examples/components");
 const RAW = "https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/main";
-export const FAMILIES = { type: "Type", scroll: "Scroll", cursor: "Cursor", backgrounds: "Backgrounds", layout: "Layout and galleries", micro: "Micro-interactions" };
+export const FAMILIES = { type: "Type", text: "Text effects", scroll: "Scroll", cursor: "Cursor", backgrounds: "Backgrounds", layout: "Layout and galleries", ui: "Buttons, cards and UI", micro: "Micro-interactions" };
 export const KEYS = ["id", "name", "family", "tier", "deps", "what", "use-when", "avoid-when", "reduced-motion", "touch", "a11y"];
 
 export function readHeader(src) {
