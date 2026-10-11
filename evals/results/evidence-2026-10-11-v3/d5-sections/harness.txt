@@ -1,0 +1,154 @@
+ok   contact-event-venue            1440         cls 0.000 · overflow 0 · 525px · no console errors
+ok   contact-hotel-atlas            1440         cls 0.000 · overflow 0 · 525px · no console errors
+ok   contact-studio-copy            1440         cls 0.000 · overflow 0 · 450px · no console errors
+ok   cta-org-donate                 1440         cls 0.000 · overflow 0 · 578px · no console errors
+ok   cta-personal-subscribe         1440         cls 0.000 · overflow 0 · 531px · no console errors
+ok   cta-saas-trial                 1440         cls 0.000 · overflow 0 · 499px · no console errors
+ok   cta-shop-hold                  1440         cls 0.000 · overflow 0 · 508px · no console errors
+ok   feature-editorial-pullquote    1440         cls 0.000 · overflow 0 · 533px · no console errors
+ok   features-hotel-rooms           1440         cls 0.000 · overflow 0 · 3827px · no console errors
+ok   features-org-impact            1440         cls 0.000 · overflow 0 · 543px · no console errors
+ok   features-saas-bento            1440         cls 0.000 · overflow 0 · 730px · no console errors
+ok   features-saas-console          1440         cls 0.000 · overflow 0 · 643px · no console errors
+ok   features-shop-specs            1440         cls 0.000 · overflow 0 · 2687px · no console errors
+ok   features-studio-services       1440         cls 0.000 · overflow 0 · 591px · no console errors
+ok   footer-editorial-folio         1440         cls 0.000 · overflow 0 · 504px · no console errors
+ok   footer-org-seismograph         1440         cls 0.000 · overflow 0 · 526px · no console errors
+ok   footer-studio-marquee          1440         cls 0.000 · overflow 0 · 420px · no console errors
+ok   gallery-shop-carousel          1440         cls 0.000 · overflow 0 · 734px · no console errors
+ok   hero-editorial-broadsheet      1440         cls 0.000 · overflow 0 · 827px · no console errors
+ok   hero-event-poster              1440         cls 0.000 · overflow 0 · 829px · no console errors
+ok   hero-hotel-room                1440         cls 0.000 · overflow 0 · 901px · no console errors
+ok   hero-org-manifesto             1440         cls 0.000 · overflow 0 · 924px · no console errors
+ok   hero-personal-letter           1440         cls 0.000 · overflow 0 · 648px · no console errors
+ok   hero-portfolio-index           1440         cls 0.000 · overflow 0 · 828px · no console errors
+ok   hero-saas-workbench            1440         cls 0.000 · overflow 0 · 668px · no console errors
+ok   hero-shop-catalogue            1440         cls 0.000 · overflow 0 · 849px · no console errors
+ok   hero-studio-ledger             1440         cls 0.000 · overflow 0 · 673px · no console errors
+ok   pricing-event-tickets          1440         cls 0.000 · overflow 0 · 516px · no console errors
+ok   pricing-hotel-seasons          1440         cls 0.000 · overflow 0 · 613px · no console errors
+ok   pricing-saas-switch            1440         cls 0.000 · overflow 0 · 628px · no console errors
+ok   pricing-shop-glazes            1440         cls 0.000 · overflow 0 · 567px · no console errors
+ok   team-event-lineup              1440         cls 0.000 · overflow 0 · 980px · no console errors
+ok   team-org-field-guide           1440         cls 0.000 · overflow 0 · 865px · no console errors
+ok   team-studio-rows               1440         cls 0.000 · overflow 0 · 1319px · no console errors
+ok   testimonial-hotel-guestbook    1440         cls 0.000 · overflow 0 · 618px · no console errors
+ok   testimonial-personal-replies   1440         cls 0.000 · overflow 0 · 691px · no console errors
+ok   testimonial-saas-ink           1440         cls 0.000 · overflow 0 · 517px · no console errors
+ok   testimonial-shop-notes         1440         cls 0.000 · overflow 0 · 540px · no console errors
+ok   contact-event-venue            1440 reduced cls 0.000 · overflow 0 · 525px · no console errors
+ok   contact-hotel-atlas            1440 reduced cls 0.000 · overflow 0 · 525px · no console errors
+ok   contact-studio-copy            1440 reduced cls 0.000 · overflow 0 · 450px · no console errors
+ok   cta-org-donate                 1440 reduced cls 0.000 · overflow 0 · 578px · no console errors
+ok   cta-personal-subscribe         1440 reduced cls 0.000 · overflow 0 · 531px · no console errors
+ok   cta-saas-trial                 1440 reduced cls 0.000 · overflow 0 · 499px · no console errors
+ok   cta-shop-hold                  1440 reduced cls 0.000 · overflow 0 · 508px · no console errors
+ok   feature-editorial-pullquote    1440 reduced cls 0.000 · overflow 0 · 533px · no console errors
+ok   features-hotel-rooms           1440 reduced cls 0.000 · overflow 0 · 717px · no console errors
+ok   features-org-impact            1440 reduced cls 0.000 · overflow 0 · 543px · no console errors
+ok   features-saas-bento            1440 reduced cls 0.000 · overflow 0 · 730px · no console errors
+ok   features-saas-console          1440 reduced cls 0.000 · overflow 0 · 643px · no console errors
+ok   features-shop-specs            1440 reduced cls 0.000 · overflow 0 · 2687px · no console errors
+ok   features-studio-services       1440 reduced cls 0.000 · overflow 0 · 591px · no console errors
+ok   footer-editorial-folio         1440 reduced cls 0.000 · overflow 0 · 504px · no console errors
+ok   footer-org-seismograph         1440 reduced cls 0.000 · overflow 0 · 526px · no console errors
+ok   footer-studio-marquee          1440 reduced cls 0.000 · overflow 0 · 530px · no console errors
+ok   gallery-shop-carousel          1440 reduced cls 0.000 · overflow 0 · 734px · no console errors
+ok   hero-editorial-broadsheet      1440 reduced cls 0.000 · overflow 0 · 827px · no console errors
+ok   hero-event-poster              1440 reduced cls 0.000 · overflow 0 · 829px · no console errors
+ok   hero-hotel-room                1440 reduced cls 0.000 · overflow 0 · 901px · no console errors
+ok   hero-org-manifesto             1440 reduced cls 0.000 · overflow 0 · 924px · no console errors
+ok   hero-personal-letter           1440 reduced cls 0.000 · overflow 0 · 648px · no console errors
+ok   hero-portfolio-index           1440 reduced cls 0.000 · overflow 0 · 963px · no console errors
+ok   hero-saas-workbench            1440 reduced cls 0.000 · overflow 0 · 668px · no console errors
+ok   hero-shop-catalogue            1440 reduced cls 0.000 · overflow 0 · 849px · no console errors
+ok   hero-studio-ledger             1440 reduced cls 0.000 · overflow 0 · 673px · no console errors
+ok   pricing-event-tickets          1440 reduced cls 0.000 · overflow 0 · 516px · no console errors
+ok   pricing-hotel-seasons          1440 reduced cls 0.000 · overflow 0 · 613px · no console errors
+ok   pricing-saas-switch            1440 reduced cls 0.000 · overflow 0 · 628px · no console errors
+ok   pricing-shop-glazes            1440 reduced cls 0.000 · overflow 0 · 567px · no console errors
+ok   team-event-lineup              1440 reduced cls 0.000 · overflow 0 · 1249px · no console errors
+ok   team-org-field-guide           1440 reduced cls 0.000 · overflow 0 · 865px · no console errors
+ok   team-studio-rows               1440 reduced cls 0.000 · overflow 0 · 1319px · no console errors
+ok   testimonial-hotel-guestbook    1440 reduced cls 0.000 · overflow 0 · 618px · no console errors
+ok   testimonial-personal-replies   1440 reduced cls 0.000 · overflow 0 · 691px · no console errors
+ok   testimonial-saas-ink           1440 reduced cls 0.000 · overflow 0 · 517px · no console errors
+ok   testimonial-shop-notes         1440 reduced cls 0.000 · overflow 0 · 540px · no console errors
+ok   contact-event-venue            375         cls 0.000 · overflow 0 · 531px · no console errors
+ok   contact-hotel-atlas            375         cls 0.000 · overflow 0 · 665px · no console errors
+ok   contact-studio-copy            375         cls 0.000 · overflow 0 · 523px · no console errors
+ok   cta-org-donate                 375         cls 0.000 · overflow 0 · 637px · no console errors
+ok   cta-personal-subscribe         375         cls 0.000 · overflow 0 · 425px · no console errors
+ok   cta-saas-trial                 375         cls 0.000 · overflow 0 · 337px · no console errors
+ok   cta-shop-hold                  375         cls 0.000 · overflow 0 · 366px · no console errors
+ok   feature-editorial-pullquote    375         cls 0.000 · overflow 0 · 545px · no console errors
+ok   features-hotel-rooms           375         cls 0.000 · overflow 0 · 478px · no console errors
+ok   features-org-impact            375         cls 0.000 · overflow 0 · 648px · no console errors
+ok   features-saas-bento            375         cls 0.000 · overflow 0 · 1002px · no console errors
+ok   features-saas-console          375         cls 0.000 · overflow 0 · 753px · no console errors
+ok   features-shop-specs            375         cls 0.000 · overflow 0 · 2521px · no console errors
+ok   features-studio-services       375         cls 0.000 · overflow 0 · 898px · no console errors
+ok   footer-editorial-folio         375         cls 0.000 · overflow 0 · 692px · no console errors
+ok   footer-org-seismograph         375         cls 0.000 · overflow 0 · 637px · no console errors
+ok   footer-studio-marquee          375         cls 0.000 · overflow 0 · 317px · no console errors
+ok   gallery-shop-carousel          375         cls 0.000 · overflow 0 · 568px · no console errors
+ok   hero-editorial-broadsheet      375         cls 0.000 · overflow 0 · 700px · no console errors
+ok   hero-event-poster              375         cls 0.000 · overflow 0 · 748px · no console errors
+ok   hero-hotel-room                375         cls 0.000 · overflow 0 · 813px · no console errors
+ok   hero-org-manifesto             375         cls 0.000 · overflow 0 · 655px · no console errors
+ok   hero-personal-letter           375         cls 0.000 · overflow 0 · 597px · no console errors
+ok   hero-portfolio-index           375         cls 0.000 · overflow 0 · 425px · no console errors
+ok   hero-saas-workbench            375         cls 0.000 · overflow 0 · 744px · no console errors
+ok   hero-shop-catalogue            375         cls 0.000 · overflow 0 · 921px · no console errors
+ok   hero-studio-ledger             375         cls 0.000 · overflow 0 · 539px · no console errors
+ok   pricing-event-tickets          375         cls 0.000 · overflow 0 · 630px · no console errors
+ok   pricing-hotel-seasons          375         cls 0.000 · overflow 0 · 998px · no console errors
+ok   pricing-saas-switch            375         cls 0.000 · overflow 0 · 810px · no console errors
+ok   pricing-shop-glazes            375         cls 0.000 · overflow 0 · 851px · no console errors
+ok   team-event-lineup              375         cls 0.000 · overflow 0 · 528px · no console errors
+ok   team-org-field-guide           375         cls 0.000 · overflow 0 · 1611px · no console errors
+ok   team-studio-rows               375         cls 0.000 · overflow 0 · 756px · no console errors
+ok   testimonial-hotel-guestbook    375         cls 0.000 · overflow 0 · 442px · no console errors
+ok   testimonial-personal-replies   375         cls 0.000 · overflow 0 · 640px · no console errors
+ok   testimonial-saas-ink           375         cls 0.000 · overflow 0 · 491px · no console errors
+ok   testimonial-shop-notes         375         cls 0.000 · overflow 0 · 777px · no console errors
+ok   contact-event-venue            375 reduced cls 0.000 · overflow 0 · 531px · no console errors
+ok   contact-hotel-atlas            375 reduced cls 0.000 · overflow 0 · 665px · no console errors
+ok   contact-studio-copy            375 reduced cls 0.000 · overflow 0 · 523px · no console errors
+ok   cta-org-donate                 375 reduced cls 0.000 · overflow 0 · 637px · no console errors
+ok   cta-personal-subscribe         375 reduced cls 0.000 · overflow 0 · 425px · no console errors
+ok   cta-saas-trial                 375 reduced cls 0.000 · overflow 0 · 337px · no console errors
+ok   cta-shop-hold                  375 reduced cls 0.000 · overflow 0 · 366px · no console errors
+ok   feature-editorial-pullquote    375 reduced cls 0.000 · overflow 0 · 545px · no console errors
+ok   features-hotel-rooms           375 reduced cls 0.000 · overflow 0 · 478px · no console errors
+ok   features-org-impact            375 reduced cls 0.000 · overflow 0 · 648px · no console errors
+ok   features-saas-bento            375 reduced cls 0.000 · overflow 0 · 1002px · no console errors
+ok   features-saas-console          375 reduced cls 0.000 · overflow 0 · 753px · no console errors
+ok   features-shop-specs            375 reduced cls 0.000 · overflow 0 · 2521px · no console errors
+ok   features-studio-services       375 reduced cls 0.000 · overflow 0 · 898px · no console errors
+ok   footer-editorial-folio         375 reduced cls 0.000 · overflow 0 · 692px · no console errors
+ok   footer-org-seismograph         375 reduced cls 0.000 · overflow 0 · 637px · no console errors
+ok   footer-studio-marquee          375 reduced cls 0.000 · overflow 0 · 497px · no console errors
+ok   gallery-shop-carousel          375 reduced cls 0.000 · overflow 0 · 568px · no console errors
+ok   hero-editorial-broadsheet      375 reduced cls 0.000 · overflow 0 · 700px · no console errors
+ok   hero-event-poster              375 reduced cls 0.000 · overflow 0 · 748px · no console errors
+ok   hero-hotel-room                375 reduced cls 0.000 · overflow 0 · 813px · no console errors
+ok   hero-org-manifesto             375 reduced cls 0.000 · overflow 0 · 655px · no console errors
+ok   hero-personal-letter           375 reduced cls 0.000 · overflow 0 · 597px · no console errors
+ok   hero-portfolio-index           375 reduced cls 0.000 · overflow 0 · 560px · no console errors
+ok   hero-saas-workbench            375 reduced cls 0.000 · overflow 0 · 744px · no console errors
+ok   hero-shop-catalogue            375 reduced cls 0.000 · overflow 0 · 921px · no console errors
+ok   hero-studio-ledger             375 reduced cls 0.000 · overflow 0 · 539px · no console errors
+ok   pricing-event-tickets          375 reduced cls 0.000 · overflow 0 · 630px · no console errors
+ok   pricing-hotel-seasons          375 reduced cls 0.000 · overflow 0 · 998px · no console errors
+ok   pricing-saas-switch            375 reduced cls 0.000 · overflow 0 · 810px · no console errors
+ok   pricing-shop-glazes            375 reduced cls 0.000 · overflow 0 · 851px · no console errors
+ok   team-event-lineup              375 reduced cls 0.000 · overflow 0 · 708px · no console errors
+ok   team-org-field-guide           375 reduced cls 0.000 · overflow 0 · 1611px · no console errors
+ok   team-studio-rows               375 reduced cls 0.000 · overflow 0 · 756px · no console errors
+ok   testimonial-hotel-guestbook    375 reduced cls 0.000 · overflow 0 · 442px · no console errors
+ok   testimonial-personal-replies   375 reduced cls 0.000 · overflow 0 · 640px · no console errors
+ok   testimonial-saas-ink           375 reduced cls 0.000 · overflow 0 · 491px · no console errors
+ok   testimonial-shop-notes         375 reduced cls 0.000 · overflow 0 · 777px · no console errors
+
+38 sections × 4 views: all passed

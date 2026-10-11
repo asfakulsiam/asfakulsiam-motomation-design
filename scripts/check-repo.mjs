@@ -158,6 +158,15 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   }
 }
 
+// 9b. Page sections: headers valid (kind, archetype, listed components exist and are imported), README fresh
+{
+  const { collect, renderReadme } = await import("./build-sections.mjs");
+  const { sections, problems } = collect();
+  problems.forEach((p) => fail(`sections: ${p}`));
+  const readme = join(SKILL, "examples/sections/README.md");
+  if (sections.length && (!existsSync(readme) || readFileSync(readme, "utf8") !== renderReadme(sections))) fail("examples/sections/README.md is stale; run node scripts/build-sections.mjs");
+}
+
 // 10. Every worked example is discoverable from the top of the README (before "Why this exists")
 {
   const readme = readFileSync(join(ROOT, "README.md"), "utf8");

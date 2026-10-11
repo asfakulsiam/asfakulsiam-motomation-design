@@ -11,7 +11,7 @@
 // reduced-motion: Letters sit in place; no scroll listener runs.
 // touch: Same as desktop.
 // a11y: The line is the accessible name; letter spans are aria-hidden.
-import { useRef, type CSSProperties } from "react";
+import { Fragment, useRef, type CSSProperties } from "react";
 import { useReducedMotion, useScrollProgress, clamp } from "../_lib/motion";
 
 type Props = { text: string; rise?: number; spread?: number; as?: "h2" | "h3" | "p"; className?: string; style?: CSSProperties };
@@ -24,14 +24,25 @@ export function ScrollFloat({ text, rise = 0.6, spread = 0.5, as: Tag = "h2", cl
     const el = ref.current; if (!el) return;
     // settle between 10% and 45% of the element's trip through the viewport
     const k = clamp((p - 0.1) / 0.35);
-    el.querySelectorAll<HTMLSpanElement>("[data-c]").forEach((c, i) => {
-      const start = (i / chars.length) * spread; const t = clamp((k - start) / (1 - spread));
+    el.querySelectorAll<HTMLSpanElement>("[data-c]").forEach((c) => {
+      const i = Number(c.dataset.i); const start = (i / chars.length) * spread; const t = clamp((k - start) / (1 - spread));
       c.style.transform = `translateY(${(1 - t) * rise}em) scaleY(${1 + (1 - t) * 0.35})`; c.style.opacity = String(0.2 + t * 0.8);
     });
   }, !reduce);
   return (
     <Tag ref={ref as never} aria-label={text} className={className} style={{ overflow: "hidden", ...style }}>
-      {chars.map((c, i) => <span key={i} data-c aria-hidden="true" style={{ display: "inline-block", transformOrigin: "50% 100%", willChange: reduce ? undefined : "transform" }}>{c === " " ? "\u00a0" : c}</span>)}
+      {/* letters are grouped into no-wrap words with real spaces between, so lines only break between words */}
+      {text.split(" ").map((word, w, words) => {
+        const offset = words.slice(0, w).reduce((n, x) => n + x.length + 1, 0);
+        return (
+          <Fragment key={w}>
+            <span aria-hidden="true" style={{ whiteSpace: "nowrap" }}>
+              {word.split("").map((c, i) => <span key={i} data-c data-i={offset + i} style={{ display: "inline-block", transformOrigin: "50% 100%", willChange: reduce ? undefined : "transform" }}>{c}</span>)}
+            </span>
+            {w < words.length - 1 ? " " : null}
+          </Fragment>
+        );
+      })}
     </Tag>
   );
 }
