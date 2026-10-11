@@ -52,3 +52,42 @@ jobs:
             "include": ["ex/**/*.ts", "ex/**/*.tsx"] }
           JSON
           npx tsc -p tsconfig.json
+  gate-fixtures:
+    # The real Delivery Gate in a real browser. Playwright is not a dependency of the skill, so this job installs it
+    # itself. If the install fails (no network, registry down) the job says "not verified" instead of passing; once
+    # Playwright is installed, the fixtures are enforced: good must pass, bad must fail with the expected errors.
+    name: gate fixtures (Playwright)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - name: Install Playwright + Chromium (optional)
+        id: pw
+        continue-on-error: true
+        run: |
+          npm i --no-save --no-package-lock playwright@1.59.0
+          npx playwright install --with-deps chromium
+      - name: Gate the fixtures (enforced when Playwright installed)
+        run: |
+          if [ "${{ steps.pw.outcome }}" = "success" ]; then
+            REQUIRE_BROWSER=1 node scripts/check-fixtures.mjs
+          else
+            echo "::warning::Playwright could not be installed; gate fixtures not verified"
+            node scripts/check-fixtures.mjs
+          fi
+      - name: Gallery gate finishes inside its timeout
+        if: steps.pw.outcome == 'success'
+        working-directory: skills/asfakulsiam-motomation-design
+        run: |
+          # the gallery is ~36,000px tall; before --timeout this step could run for hours. Exit 3 (timed out) is
+          # acceptable here, hanging is not. Pass/fail of the gallery itself is not asserted.
+          set +e; timeout 900 node scripts/gate.mjs examples/gallery/index.html --timeout 600 > /tmp/gallery.txt; code=$?; set -e
+          tail -5 /tmp/gallery.txt; echo "gate exit $code"
+          test "$code" != 124
+      - name: Timeout watchdog kicks in on a synthetic tall page
+        if: steps.pw.outcome == 'success'
+        run: |
+          set +e; node skills/asfakulsiam-motomation-design/scripts/gate.mjs fixtures/synthetic/tall.html --timeout 20 > /tmp/tall.txt; code=$?; set -e
+          cat /tmp/tall.txt; test "$code" = 3 && grep -q "not verified — timed out after 20s" /tmp/tall.txt

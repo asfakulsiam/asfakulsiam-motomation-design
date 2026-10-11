@@ -1,0 +1,11 @@
+{
+  "note": "scripts/check-fixtures.mjs: the gate must exit 1 on this page and report at least these counts. Raising a count is fine; a 0 means a check stopped working.",
+  "exit": 1,
+  "atLeast": {
+    "contrast": 1,
+    "overflow": 1,
+    "words": 1,
+    "motion": 1,
+    "names": 2
+  }
+}

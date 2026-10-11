@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fixture · good · Tide Table Co-op</title>
+<!-- Gate fixture: a small page that must PASS every check in scripts/gate.mjs. CI runs it (scripts/check-fixtures.mjs). -->
+<style>
+  :root { --ink: #16181b; --paper: #f4f1ea; --mute: #4a4d52; --accent: #0b5d4b; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 18px/1.55 Georgia, "Times New Roman", serif; }
+  header, main, footer { max-width: 60rem; margin: 0 auto; padding: 2rem 1.25rem; }
+  h1 { font-size: clamp(2.4rem, 8vw, 5rem); line-height: 1.02; margin: 0 0 1rem; overflow-wrap: normal; }
+  h2 { font-size: 1.6rem; margin: 2.5rem 0 .75rem; }
+  .lede { color: var(--mute); max-width: 36rem; }
+  .figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1.25rem; padding: 0; list-style: none; }
+  .figures li { border-top: 2px solid var(--ink); padding-top: .75rem; }
+  .n { font-size: 2.25rem; font-variant-numeric: tabular-nums; display: block; }
+  a.button { display: inline-block; background: var(--accent); color: #fff; padding: .8rem 1.2rem; text-decoration: none; border-radius: 4px; }
+  a.button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  progress { width: 100%; }
+  .reveal { opacity: 1; transform: none; transition: transform .6s ease, opacity .6s ease; }
+  @media (prefers-reduced-motion: no-preference) { .js .reveal:not(.in) { opacity: 0; transform: translateY(16px); } }
+  footer { color: var(--mute); font-size: 1rem; }
+</style>
+</head>
+<body>
+<header>
+  <p class="lede">Tide Table Co-op · Khulna</p>
+  <h1>Tide times for char farmers</h1>
+  <p class="lede">A free SMS service that tells families on river islands when the next high tide will reach their fields.</p>
+  <a class="button" href="#join">Join by SMS</a>
+</header>
+<main>
+  <section class="reveal" aria-labelledby="h-numbers">
+    <h2 id="h-numbers">This season</h2>
+    <ul class="figures">
+      <li><span class="n">412</span> households on the list</li>
+      <li><span class="n">18</span> islands covered</li>
+      <li><span class="n">06:40</span> earliest alert sent</li>
+    </ul>
+  </section>
+  <section class="reveal" aria-labelledby="h-progress">
+    <h2 id="h-progress">Funding for the monsoon</h2>
+    <label for="fund">BDT 62,000 of 100,000 raised</label>
+    <progress id="fund" max="100" value="62"></progress>
+  </section>
+  <section class="reveal" id="join" aria-labelledby="h-join">
+    <h2 id="h-join">Join</h2>
+    <p>Text <strong>TIDE</strong> and your island's name to 16222. You can stop at any time by texting STOP.</p>
+    <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='80'%3E%3Cpath d='M0 40 Q40 10 80 40 T160 40 T240 40 T320 40' stroke='%230b5d4b' stroke-width='4' fill='none'/%3E%3C/svg%3E" width="320" height="80" alt="A drawn line of three waves">
+  </section>
+</main>
+<footer><p>Fixture page for the Motomation Delivery Gate. Not a real service.</p></footer>
+<script>
+  document.documentElement.classList.add("js");
+  const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && e.target.classList.add("in")), { threshold: 0.1 });
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+</script>
+</body>
+</html>

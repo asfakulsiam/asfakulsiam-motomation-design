@@ -2432,7 +2432,7 @@ The output ends with a stamp line built only from those numbers:
 
 The checks are bounded, and each reports what it skipped (text that was covered or never settled, elements parked off-canvas such as skip links and closed drawers). When more than 30% of text elements are skipped for contrast, the gate prints a coverage warning: the `c` count is then not a full measurement, and the skipped text needs a check by hand. A clean run means these five things were measured. It doesn't mean the page is accessible. Keyboard paths, focus order and copy still need Parts 1–3.
 
-Exit codes: `0` pass · `1` fail · `2` stamp rejected · `3` not verified.
+Exit codes: `0` pass · `1` fail · `2` stamp rejected · `3` not verified (no browser, or the scan ran past `--timeout`, default 600 s, which very tall pages such as the 36,000px component gallery can do).
 
 **Optional motion report.** `node scripts/gate.mjs --report dist/index.html` (or `--report out.html` after a target) also writes a self-contained HTML file with scroll-frame strips: 8 frames at 1440px, 8 at 375px and 8 at 1440px under reduced motion. Use it to review motion by eye, show a client, or give judges something better than one screenshot. It's off by default, doesn't change the text output, and adds nothing to the gate's numbers.
 

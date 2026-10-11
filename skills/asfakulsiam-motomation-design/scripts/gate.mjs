@@ -16,6 +16,9 @@
 //              changing on a still page
 //   names      img without alt, interactive elements without an accessible name
 //
+//   --timeout <s>  give up on a target after s seconds (default 600) and print "not verified — timed out"; exit 3.
+//                  Very tall pages (the 36,000px gallery) would otherwise run for a very long time.
+//
 // Needs Playwright (npm i -D playwright && npx playwright install chromium). Without a browser it prints
 // "not verified — no browser" and exits 3. It never prints a pass it didn't measure.
 // Exit codes: 0 pass · 1 fail · 2 stamp rejected · 3 not verified.
@@ -513,9 +516,20 @@ ${strips.map(strip).join("\n")}
   } finally { await close?.(); }
 }
 
+// a scan that runs past --timeout seconds is not a measurement: say so and exit 3, like a missing browser
+const TIMEOUT_S = flags.timeout !== undefined ? +flags.timeout : 600;
+function withTimeout(p, target) {
+  if (!(TIMEOUT_S > 0)) return p;
+  let t; const timer = new Promise((_, no) => { t = setTimeout(() => no(Object.assign(new Error("timeout"), { gateTimeout: true })), TIMEOUT_S * 1000); });
+  return Promise.race([p, timer]).finally(() => clearTimeout(t)).catch((e) => {
+    if (!e.gateTimeout) throw e;
+    console.log(`not verified — timed out after ${TIMEOUT_S}s scanning ${target} (raise --timeout, or gate a shorter page)`); process.exit(3);
+  });
+}
+
 async function main() {
   if (typeof flags.report === "string" && !targets.length) { targets.push(flags.report); flags.report = true; } // `--report file.html` alone: the file is the target
-  if (flags.help || (!targets.length && !flags.verify)) { console.log("Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]]   |   --report <file.html>   |   --verify <file.html> [--url u]"); process.exit(targets.length ? 0 : 1); }
+  if (flags.help || (!targets.length && !flags.verify)) { console.log("Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]] [--timeout s]   |   --report <file.html>   |   --verify <file.html> [--url u]"); process.exit(targets.length ? 0 : 1); }
   const pw = await loadPlaywright();
   if (!pw) { console.log("not verified — no browser (install Playwright: npm i -D playwright && npx playwright install chromium)"); process.exit(3); }
   let browser; try { browser = await pw.chromium.launch(); } catch (e) { console.log(`not verified — no browser (${String(e.message).split("\n")[0]})`); process.exit(3); }
@@ -527,7 +541,7 @@ async function main() {
       if (!st.gate) { console.log(`STAMP REJECTED · ${file}: the stamp has no measured gate values (a hand-written or copied stamp). Run node scripts/gate.mjs and paste its stamp.\n  found: ${st.raw.slice(0, 160)}`); process.exit(2); }
       if (!st.critique) { console.log(`STAMP REJECTED · ${file}: no critique segment. Paste the full "critique: … · gate: …" line gate.mjs printed.`); process.exit(2); }
       if (!/^C\d\[[^\]]+\] H\d\[[^\]]+\] S\d\[[^\]]+\] R\d\[[^\]]+\] M\d\[[^\]]+\] V\d\[[^\]]+\]$/.test(st.critique)) { console.log(`STAMP REJECTED · ${file}: critique "${st.critique}" is not traced. Every axis needs its number and the check it came from, e.g. H4[375:1]. Unmeasured scores are rejected.`); process.exit(2); }
-      const r = await scan(flags.url ? String(flags.url) : file, browser, opts); print(r);
+      const r = await withTimeout(scan(flags.url ? String(flags.url) : file, browser, opts), file); print(r);
       if (st.critique !== r.critique) { console.log(`STAMP REJECTED · critique says "${st.critique}" but the checks give "${r.critique}"`); process.exit(2); }
       for (const g of [st.gate, ...st.others.map((o) => o.gate)]) {
         const same = JSON.stringify(g.counts) === JSON.stringify(r.counts) && g.id === r.id && g.version === r.version;
@@ -535,7 +549,7 @@ async function main() {
       }
       console.log(`STAMP VERIFIED · critique and gate numbers match a fresh scan${r.pass ? " · gate PASS" : " · but the gate FAILS (the stamp honestly records failures)"}`); process.exit(r.pass ? 0 : 1);
     }
-    const all = []; for (const t of targets) { const r = await scan(t, browser, opts); all.push(r); if (!flags.json) print(r); }
+    const all = []; for (const t of targets) { const r = await withTimeout(scan(t, browser, opts), t); all.push(r); if (!flags.json) print(r); }
     if (flags.report) for (const [i, t] of targets.entries()) {
       const out = typeof flags.report === "string" ? resolve(flags.report) : join(/^https?:/.test(t) ? process.cwd() : (statSync(resolve(t)).isDirectory() ? resolve(t) : dirname(resolve(t))), `${/^https?:/.test(t) ? "page" : basename(resolve(t)).replace(/\.html?$/, "")}.motion-report.html`);
       const rep = await motionReport(t, browser, all[i], out); console.error(`motion report → ${rep.outFile} (${rep.frames} frames, ${(rep.bytes / 1024).toFixed(0)} KB)`);

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fixture · bad · Known defects</title>
+<!-- Gate fixture: every check in scripts/gate.mjs must FAIL here, with the counts in expected.json. Do not "fix" this page. -->
+<style>
+  body { margin: 0; background: #ffffff; color: #111; font: 18px/1.5 system-ui, sans-serif; }
+  main { padding: 2rem 1.25rem; }
+  .faint { color: #b9b9b9; }                                   /* contrast: ~1.9:1 on white */
+  .wide { width: 720px; background: #eee; }                    /* overflow: wider than a 375px phone */
+  h1.huge { font-size: 64px; white-space: nowrap; }            /* words: a display word leaves the 375px viewport */
+  @media (prefers-reduced-motion: reduce) { .entrance { opacity: 0; } }   /* motion: hidden only under reduced motion */
+  .n { font-size: 2rem; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<main>
+  <h1 class="huge">Extraordinarily</h1>
+  <p class="faint">This sentence is too pale to read on white.</p>
+  <div class="wide"><p>This box is 720 pixels wide, so phones scroll sideways.</p></div>
+  <p class="entrance">This paragraph disappears for visitors who prefer reduced motion.</p>
+  <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'/%3E" width="40" height="40">
+  <button><svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 8h12" stroke="#111"/></svg></button>
+  <p><span class="n" id="hectares">0</span> hectares restored</p>
+  <div style="height:1400px"></div>
+  <p><span class="n" id="trees">0</span> trees planted</p>
+</main>
+<script>
+  // numbers: a count-up that starts at 0 and only runs when the element enters the screen, so "0" is what shows first
+  const run = (el, to) => { const t0 = performance.now(); const f = (t) => { const p = Math.min(1, (t - t0) / 1200); el.textContent = Math.round(to * p).toLocaleString("en-US"); if (p < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); };
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting && !e.target.dataset.done) { e.target.dataset.done = 1; run(e.target, +e.target.dataset.to); } }));
+  document.getElementById("hectares").dataset.to = 1250; document.getElementById("trees").dataset.to = 48000;
+  document.querySelectorAll(".n").forEach((el) => io.observe(el));
+</script>
+</body>
+</html>
