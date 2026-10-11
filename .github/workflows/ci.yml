@@ -15,6 +15,8 @@ jobs:
         with: { node-version: "${{ matrix.node }}" }
       - name: Lint repository, data, versions and dist
         run: node scripts/check-repo.mjs
+      - name: MCP server answers the protocol (raw stdio session)
+        run: node tests/mcp/session.mjs
       - name: Smoke-test skill scripts
         working-directory: skills/asfakulsiam-motomation-design
         run: |

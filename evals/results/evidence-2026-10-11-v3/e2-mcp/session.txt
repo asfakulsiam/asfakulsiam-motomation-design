@@ -1,0 +1,31 @@
+── raw stdio session (client → server, server → client)
+→ {"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"raw-test","version":"1"}}}
+← {"jsonrpc":"2.0","id":1,"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":false},"resources":{"listChanged":false,"subscribe":false}},"serverInfo":{"name":"motomation","title":"Motomation components","version":"2.3.0"},"instructions":"Search, read, preview and install Motomation motion components. Read a component's avoid-when before using it; every component has a reduced-motion path."} … (421 chars)
+→ {"jsonrpc":"2.0","method":"notifications/initialized"}
+→ {"jsonrpc":"2.0","id":2,"method":"tools/list"}
+← {"jsonrpc":"2.0","id":2,"result":{"tools":[{"name":"search_components","title":"Search components","description":"Search the Motomation motion components by words (all must match name, id, family, what, use-when). Returns ids for the other tools. Each result says what it does; call get_component before using one, and read its avoid-when.","inputSchema":{"type":"object","properties":{"query":{"type":"string","descript … (3255 chars)
+→ {"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"search_components","arguments":{"query":"scroll text","limit":4}}}
+← {"jsonrpc":"2.0","id":3,"result":{"content":[{"type":"text","text":"typewriter · Typewriter (text, tier 1): A line types itself out, character by character, when it scrolls into view, with a caret that fades once the line is complete."}],"structuredContent":{"total":1,"results":[{"id":"typewriter","name":"Typewriter","family":"text","tier":1,"what":"A line types itself out, character by character, when it scrolls int … (484 chars)
+→ {"jsonrpc":"2.0","id":4,"method":"tools/call","params":{"name":"install_component","arguments":{"id":"ink-fill","project_dir":"/tmp/mm-mcp-J6d9dU"}}}
+← {"jsonrpc":"2.0","id":4,"result":{"content":[{"type":"text","text":"Installed Ink Fill: 2 written.\nsrc/components/motomation/type/ink-fill.tsx\nsrc/components/motomation/_lib/motion.ts\nimport { InkFill } from \"@/components/motomation/type/ink-fill\"; React is the only dependency."}],"structuredContent":{"id":"ink-fill","written":["src/components/motomation/type/ink-fill.tsx","src/components/motomation/_lib/motion. … (544 chars)
+→ {"jsonrpc":"2.0","id":5,"method":"resources/read","params":{"uri":"motomation://data/signatures.csv"}}
+← {"jsonrpc":"2.0","id":5,"result":{"contents":[{"uri":"motomation://data/signatures.csv","mimeType":"text/csv","text":"id,name,family,tier,mood,good_for,file,one_line\r\nproximity-weight,Proximity Weight,type,2,play editorial,portfolio studio specimen,signatures/type-signatures.md,letters near the cursor get heavier\r\nletter-relay,Letter Relay,type,2,play editorial,portfolio personal-brand,signatures/type-signatures. … (3400 chars)
+→ {"jsonrpc":"2.0","id":6,"method":"tools/call","params":{"name":"get_component","arguments":{"id":"nope"}}}
+← {"jsonrpc":"2.0","id":6,"result":{"content":[{"type":"text","text":"No component \"nope\". Use search_components to find ids."}],"isError":true}}
+→ {"jsonrpc":"2.0","id":7,"method":"bogus/method"}
+← {"jsonrpc":"2.0","id":7,"error":{"code":-32601,"message":"Method not found: bogus/method"}}
+
+── official SDK client
+@modelcontextprotocol/sdk 1.32.1 · server {"name":"motomation","title":"Motomation components","version":"2.3.0"}
+tools/list → search_components, get_component, preview_component, install_component, query_data
+search "paper" (tier ≤ 2) → confetti, darkroom-develop, halftone
+get_component count-up → props value from=0 duration=1400 decimals=0 locale prefix="" suffix="" className style; install "npx shadcn@latest add https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/main/registry/count-up.json"
+install_component aurora → Installed Aurora: 3 written. | src/components/motomation/backgrounds/aurora.tsx | src/components/motomation/_lib/motion.ts | src/components/motomation/_lib/ambient.ts | import { Aurora } from "@/components/motomation/backgrounds/aurora"; React is the only dependency.
+install again → written 0, kept 3
+install count-up (plain) → public/motomation/count-up/count-up.css, public/motomation/count-up/count-up.js, public/motomation/count-up/plain.html, public/motomation/count-up/tailwind.html, public/motomation/_lib/motion.js
+query_data archetypes "poster" → 1 rows; first id poster
+resources/list → 81 (catalogue + components + data sets); catalogue has 68 entries
+preview_component beams (reduced) → https://asfakulsiam.github.io/asfakulsiam-motomation-design/c/beams.html?frame=1&rm=1; screenshot 170 KB PNG
+
+scratch projects: /tmp/mm-mcp-J6d9dU /tmp/mm-mcp-sdk-0nXFj0
+all checks passed

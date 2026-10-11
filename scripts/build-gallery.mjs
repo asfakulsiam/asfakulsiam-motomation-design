@@ -52,6 +52,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
 <title>Motomation components · ${components.length} motion components</title>
 <meta name="description" content="${components.length} original motion components for the Motomation Design skill, live, with reduced-motion fallbacks.">
 <meta name="motomation-gallery" content="source:${sourceHash()} components:${components.length}">
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Fraunces:opsz,wght@9..144,300..800&display=swap">
 <style>${css}</style>

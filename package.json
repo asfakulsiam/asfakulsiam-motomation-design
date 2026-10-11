@@ -15,6 +15,7 @@
     "build:lite": "node scripts/build-lite.mjs",
     "build:components": "node scripts/build-components.mjs",
     "build:gallery": "node scripts/build-gallery.mjs",
+    "mcp": "node mcp/server.mjs",
     "collide": "node skills/asfakulsiam-motomation-design/scripts/collide.mjs",
     "search": "node skills/asfakulsiam-motomation-design/scripts/search.mjs",
     "contrast": "node skills/asfakulsiam-motomation-design/scripts/contrast.mjs --palettes"
