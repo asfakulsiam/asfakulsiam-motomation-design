@@ -1,0 +1,79 @@
+{
+ "375": {
+  "pageHeight": 4479,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 1
+   }
+  ],
+  "contrastViolations": 1
+ },
+ "1440": {
+  "pageHeight": 4191,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 1
+   }
+  ],
+  "contrastViolations": 1,
+  "keyboard": {
+   "primaryReached": {
+    "step": 8,
+    "text": "Check availability",
+    "href": "https://book.example-hotel.com",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 15157,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 4191,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4479,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 1,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0
+  },
+  "stamp": "gate: c1 o0 w0 rm0 a0 · gate/1 · 6ac8fade35",
+  "critique": "C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0]",
+  "contrast": [
+   {
+    "el": "b",
+    "text": "1893",
+    "ratio": 3.82,
+    "need": 4.5,
+    "fg": "#9a6a2a",
+    "bg": "#efe7d8",
+    "size": 21.6
+   }
+  ],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

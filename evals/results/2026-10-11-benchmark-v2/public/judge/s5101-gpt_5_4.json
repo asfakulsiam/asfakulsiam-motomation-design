@@ -1,0 +1,60 @@
+{
+ "model": "gpt_5_4",
+ "seed": 5101,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a clear mangrove-restoration idea carried through with the rooted illustration, earthy palette, and calm public-interest tone. The full-page composition is clean and bilingual handling is strong, though some large blank bands weaken pacing and I cannot verify whether motion adds much beyond restrained reveal behavior. Measured checks are excellent, with solid keyboard access, reduced-motion handling, no contrast issues, and compact HTML."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B presents a stronger and more distinctive editorial concept: the seedling diagram, numbered sections, and restrained poster-like system feel coherent from top to bottom. Typography does more identity work here, especially in the large bilingual headline and the structured section labeling, although some desktop spacing feels airy to the point of underfilled. Motion is hard to judge from stills, but the reduced-motion state appears intact and the automated checks show strong accessibility and performance basics."
+  },
+  "better": "B",
+  "why": "B is the more memorable and fully authored design, with a clearer signature visual system and stronger typographic identity while still passing all hard gates and measured checks."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a clear mangrove-restoration idea carried through with the rooted illustration, earthy palette, and calm public-interest tone. The full-page composition is clean and bilingual handling is strong, though some large blank bands weaken pacing and I cannot verify whether motion adds much beyond restrained reveal behavior. Measured checks are excellent, with solid keyboard access, reduced-motion handling, no contrast issues, and compact HTML."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B presents a stronger and more distinctive editorial concept: the seedling diagram, numbered sections, and restrained poster-like system feel coherent from top to bottom. Typography does more identity work here, especially in the large bilingual headline and the structured section labeling, although some desktop spacing feels airy to the point of underfilled. Motion is hard to judge from stills, but the reduced-motion state appears intact and the automated checks show strong accessibility and performance basics."
+ }
+}

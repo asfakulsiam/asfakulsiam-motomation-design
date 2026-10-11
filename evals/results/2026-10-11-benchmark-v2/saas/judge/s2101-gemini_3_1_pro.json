@@ -1,0 +1,60 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 2101,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 2,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Delivers a textbook 'developer dark mode' landing page that feels instantly familiar but perhaps too safe. It executes the required components cleanly and meets all technical benchmarks flawlessly, but lacks a distinct visual identity."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 3,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Takes a bold, editorial approach with its typography that stands out significantly in the typical developer tools space. The visual motif of filtering gray lines down to the one red line is a brilliant, CSS-only execution of the core value proposition."
+  },
+  "better": "B",
+  "why": "Site B takes a successful risk with an unexpected editorial aesthetic and a clever CSS graphic that perfectly illustrates the product's core promise, making it far more memorable than Site A's standard approach."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 2,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Delivers a textbook 'developer dark mode' landing page that feels instantly familiar but perhaps too safe. It executes the required components cleanly and meets all technical benchmarks flawlessly, but lacks a distinct visual identity."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 3,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Takes a bold, editorial approach with its typography that stands out significantly in the typical developer tools space. The visual motif of filtering gray lines down to the one red line is a brilliant, CSS-only execution of the core value proposition."
+ }
+}

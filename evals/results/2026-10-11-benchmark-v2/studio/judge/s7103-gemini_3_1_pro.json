@@ -1,0 +1,60 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 7103,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A brilliant, execution-heavy concept where an interactive slider changes the lighting and shadows across all project illustrations and their corresponding plans simultaneously. The typography is elegant and the layout is impeccably crafted, perfectly matching the benchmark of a high-end architecture studio."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "The site attempts a similar interactive lighting concept in the hero section but falls short in execution, with flat project illustrations that lack the depth to properly utilize the effect. The overall design feels closer to a standard template, and the heavy brick background detracts from the quiet mood requested in the brief."
+  },
+  "better": "A",
+  "why": "Site A perfectly executes a deeply integrated, highly original concept (interactive shadows) with flawless craft, whereas Site B's implementation feels superficial and visually flatter."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "The site attempts a similar interactive lighting concept in the hero section but falls short in execution, with flat project illustrations that lack the depth to properly utilize the effect. The overall design feels closer to a standard template, and the heavy brick background detracts from the quiet mood requested in the brief."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A brilliant, execution-heavy concept where an interactive slider changes the lighting and shadows across all project illustrations and their corresponding plans simultaneously. The typography is elegant and the layout is impeccably crafted, perfectly matching the benchmark of a high-end architecture studio."
+ }
+}

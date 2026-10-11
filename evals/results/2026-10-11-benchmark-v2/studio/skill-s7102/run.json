@@ -1,0 +1,12 @@
+{
+ "slug": "studio",
+ "seed": 7102,
+ "cond": "skill",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-11-benchmark-v2/studio/skill-s7102",
+ "exit": 0,
+ "seconds": 308,
+ "turns": 20,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

@@ -1,0 +1,97 @@
+{
+ "375": {
+  "pageHeight": 4656,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 3
+   }
+  ],
+  "contrastViolations": 3
+ },
+ "1440": {
+  "pageHeight": 2997,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 3
+   }
+  ],
+  "contrastViolations": 3,
+  "keyboard": {
+   "primaryReached": {
+    "step": 7,
+    "text": "Add to cart",
+    "href": "",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "37/40"
+  },
+  "source": {
+   "bytes": 17383,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 2997,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4656,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 3,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0
+  },
+  "stamp": "gate: c3 o0 w0 rm0 a0 · gate/1 · d5bf4f6488",
+  "critique": "C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V3[entrance-repeats:2]",
+  "contrast": [
+   {
+    "el": "p.eyebrow",
+    "text": "Rajshahi · wood-fired · small batches",
+    "ratio": 4.36,
+    "need": 4.5,
+    "fg": "#b4532a",
+    "bg": "#f5efe4",
+    "size": 13.6
+   },
+   {
+    "el": "strong",
+    "text": "18 November",
+    "ratio": 4.36,
+    "need": 4.5,
+    "fg": "#b4532a",
+    "bg": "#f5efe4",
+    "size": 15.2
+   },
+   {
+    "el": "p.eyebrow",
+    "text": "The shop",
+    "ratio": 4.36,
+    "need": 4.5,
+    "fg": "#b4532a",
+    "bg": "#f5efe4",
+    "size": 13.6
+   }
+  ],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

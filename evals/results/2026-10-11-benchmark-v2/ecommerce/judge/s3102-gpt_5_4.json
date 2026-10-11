@@ -1,0 +1,60 @@
+{
+ "model": "gpt_5_4",
+ "seed": 3102,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a strong editorial idea built around flame-marked individuality, and the type does most of the identity work very well. The hero and product grid are elegant, but the long near-empty gap before shipping/care on desktop hurts craft and pacing, and the motion potential reads restrained rather than story-driving from the stills."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B carries one clear concept through the whole page: the cup, the firing process, and the shelf all feel part of the same system. The hierarchy is bold and confident, the process bars imply meaningful motion, and the layout is more complete and consistently resolved across sections, though the 'receipt' wording is a slightly affected UX choice."
+  },
+  "better": "B",
+  "why": "B is more fully composed and conceptually continuous across the entire shopping flow, with stronger section-to-section resolution and fewer visible layout dead spots."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a strong editorial idea built around flame-marked individuality, and the type does most of the identity work very well. The hero and product grid are elegant, but the long near-empty gap before shipping/care on desktop hurts craft and pacing, and the motion potential reads restrained rather than story-driving from the stills."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B carries one clear concept through the whole page: the cup, the firing process, and the shelf all feel part of the same system. The hierarchy is bold and confident, the process bars imply meaningful motion, and the layout is more complete and consistently resolved across sections, though the 'receipt' wording is a slightly affected UX choice."
+ }
+}

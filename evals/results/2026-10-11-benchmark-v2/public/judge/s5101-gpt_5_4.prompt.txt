@@ -1,0 +1,88 @@
+You are a strict, blind design reviewer. Two websites (Site A and Site B) were built for the same brief by different processes. You don't know how either was made; judge only what you see and the measured checks.
+
+BRIEF:
+# Brief 05: Climate non-profit (benchmark: public-interest website)
+Site for **Sundari Trust**, a non-profit that restores mangroves in the Sundarbans buffer zone with local communities. Needs donations and volunteer sign-ups. Bangla and English.
+
+## Content
+- Real figure: **140 hectares replanted since 2019** (source: Sundari Trust annual report 2025). Use only this figure.
+- Work: community nurseries run by women's groups in Shyamnagar and Koyra; planting in the monsoon; three years of care for each plot.
+- Donate: ৳500 grows a nursery tray, ৳2,000 plants a plot row, ৳10,000 funds a season of care (one-time or monthly; the form can be a front-end mock).
+- Volunteer: planting season July–September; sign-up form with name, email, phone, preferred month.
+- Bilingual: the headline and section titles in Bangla and English (e.g. "ম্যানগ্রোভ ফিরিয়ে আনি / Bringing the mangroves back").
+- Contact: hello@sundaritrust.org.
+
+**Expect:** WCAG AA, MOTION ≤ 2, no guilt imagery, the real figure with its source, bilingual typography.
+
+## Benchmark conditions (identical for baseline and skill runs)
+- Deliver **one self-contained `index.html`** (inline CSS and JS). Allowed external resources: Google Fonts or Fontshare CSS, and GSAP 3 + ScrollTrigger from a CDN. No other libraries, no image URLs: draw imagery with CSS, SVG or canvas.
+- Use only the facts in this brief. Don't invent clients, logos, testimonials or statistics; leave them out.
+- It must work at 375px and 1440px wide, by keyboard, and with `prefers-reduced-motion: reduce`.
+
+
+RUBRIC (score each axis 1-5 using its anchors; use the whole scale):
+# Rubric
+
+Score each axis 1–5. The weighted total is out of 100.
+
+| Axis | Weight | 1 | 3 | 5 |
+|---|---|---|---|---|
+| **Concept** | 20 | No idea, just sections | An idea exists but isn't carried through | One clear idea, felt in every section |
+| **Originality** | 20 | Indistinguishable from a template | Some fresh choices | Structure, type and signature are unexpected yet right |
+| **Typography** | 15 | Default fonts and timid scale | Good choices, uneven craft | Type is the identity; details are perfect |
+| **Motion** | 15 | Decorative or broken | Purposeful but generic | Motion tells the story; tier matches the concept |
+| **Craft** | 15 | Visual bugs, misalignment | Mostly clean | Pixel-tight on desktop and mobile |
+| **Access & performance** | 15 | Fails reduced motion, keyboard or contrast | Passes basics | Designed fallbacks; fast; nothing hidden from assistive tech |
+
+Weighted total = Σ(score × weight) / 5.
+
+## Hard gates (any failure = 0 for that run)
+- Lorem ipsum, placeholder components or `TODO`s in the output
+- Any animation without a reduced-motion path
+- Body text contrast under 4.5:1
+- Keyboard users can't reach the primary action
+- Invented statistics, logos or testimonials
+
+
+IMAGES: Image 1: Site A, 1440px, first screen; Image 2: Site A, 1440px, page (up to 6 screens); Image 3: Site A, 375px phone, page; Image 4: Site A, 1440px with prefers-reduced-motion; Image 5: Site B, 1440px, first screen; Image 6: Site B, 1440px, page (up to 6 screens); Image 7: Site B, 375px phone, page; Image 8: Site B, 1440px with prefers-reduced-motion. Motion can't be seen in stills: score Motion from what the reduced-motion and normal screenshots imply plus the checks, and say when you're unsure.
+
+MEASURED CHECKS (automated, Playwright + axe-core):
+{
+ "A": {
+  "axe_wcag_violations_1440": [],
+  "contrast_failing_nodes": 0,
+  "keyboard_primary_action": {
+   "step": 4,
+   "text": "Donate · দান",
+   "href": "#donate",
+   "ring": true
+  },
+  "focus_ring_visible_steps": "38/40",
+  "text_hidden_under_reduced_motion": 0,
+  "horizontal_overflow_px_375": 0,
+  "js_errors": [],
+  "has_reduced_motion_query": true,
+  "placeholder_strings": 0,
+  "html_bytes": 18685
+ },
+ "B": {
+  "axe_wcag_violations_1440": [],
+  "contrast_failing_nodes": 0,
+  "keyboard_primary_action": {
+   "step": 4,
+   "text": "Donate\nদান",
+   "href": "#donate",
+   "ring": true
+  },
+  "focus_ring_visible_steps": "38/40",
+  "text_hidden_under_reduced_motion": 0,
+  "horizontal_overflow_px_375": 0,
+  "js_errors": [],
+  "has_reduced_motion_query": true,
+  "placeholder_strings": 0,
+  "html_bytes": 23649
+ }
+}
+
+Return ONLY JSON:
+{"A": {"scores": {"Concept": n, "Originality": n, "Typography": n, "Motion": n, "Craft": n, "Access & performance": n}, "hard_gate_failures": ["..."], "notes": "2-3 sentences"}, "B": {...same...}, "better": "A|B|tie", "why": "one sentence"}

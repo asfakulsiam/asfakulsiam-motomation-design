@@ -1,0 +1,60 @@
+{
+ "model": "gpt_5_4",
+ "seed": 2103,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a strong, coherent terminal-first idea that carries through every section: the page feels built for on-call engineers, not a generic SaaS shell. Typography and layout do most of the branding, and the product is convincingly shown working in both terminal and result views; reduced-motion and keyboard checks pass cleanly. Motion cannot be verified from stills, but the reduced-motion parity suggests restraint and a real fallback rather than animation-dependent storytelling."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [],
+   "notes": "B is clear and serviceable, but it reads much closer to a polished template: conventional hero, cards, and pricing blocks with a weaker overall point of view. It does show the product working, but the middle sections feel sparse and underdeveloped compared with the brief’s benchmark ambition, and the axe critical violation materially lowers confidence in accessibility. Motion is hard to judge from stills; nothing suggests a strong narrative use of it."
+  },
+  "better": "A",
+  "why": "A better fulfills the brief with a distinctive console/workbench concept, stronger typographic identity, and more convincing product storytelling while also passing the measured accessibility checks more cleanly."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [],
+  "notes": "B is clear and serviceable, but it reads much closer to a polished template: conventional hero, cards, and pricing blocks with a weaker overall point of view. It does show the product working, but the middle sections feel sparse and underdeveloped compared with the brief’s benchmark ambition, and the axe critical violation materially lowers confidence in accessibility. Motion is hard to judge from stills; nothing suggests a strong narrative use of it."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a strong, coherent terminal-first idea that carries through every section: the page feels built for on-call engineers, not a generic SaaS shell. Typography and layout do most of the branding, and the product is convincingly shown working in both terminal and result views; reduced-motion and keyboard checks pass cleanly. Motion cannot be verified from stills, but the reduced-motion parity suggests restraint and a real fallback rather than animation-dependent storytelling."
+ }
+}

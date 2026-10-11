@@ -1,0 +1,60 @@
+{
+ "model": "gpt_5_4",
+ "seed": 2101,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a coherent console-first idea: dark terminal aesthetics, monospace accents, and the product demo are aligned with the on-call engineer audience. It is clean and usable, but some sections feel sparse and generic, especially the large empty bands around How it works and Pricing, which weakens originality and overall finish. Motion is hard to verify from stills; the reduced-motion state is intact, but the experience appears functional rather than story-driven."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B carries one strong editorial/workbench concept throughout: the serif-led headline, log-line visualization, terminal panel, and result view all reinforce the product promise in a distinctive way. Typography is the identity here and the structure feels more authored than templated, though a few mobile choices are less efficient and slightly awkward in reading order/hero composition. Motion cannot be fully seen, but the highlighted-line device and replayable terminal imply purposeful storytelling, and the reduced-motion version remains complete."
+  },
+  "better": "B",
+  "why": "B is the more memorable and fully realized design, with a stronger concept, more distinctive typography, and a better integrated product story while still passing all hard gates and checks."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a coherent console-first idea: dark terminal aesthetics, monospace accents, and the product demo are aligned with the on-call engineer audience. It is clean and usable, but some sections feel sparse and generic, especially the large empty bands around How it works and Pricing, which weakens originality and overall finish. Motion is hard to verify from stills; the reduced-motion state is intact, but the experience appears functional rather than story-driven."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B carries one strong editorial/workbench concept throughout: the serif-led headline, log-line visualization, terminal panel, and result view all reinforce the product promise in a distinctive way. Typography is the identity here and the structure feels more authored than templated, though a few mobile choices are less efficient and slightly awkward in reading order/hero composition. Motion cannot be fully seen, but the highlighted-line device and replayable terminal imply purposeful storytelling, and the reduced-motion version remains complete."
+ }
+}

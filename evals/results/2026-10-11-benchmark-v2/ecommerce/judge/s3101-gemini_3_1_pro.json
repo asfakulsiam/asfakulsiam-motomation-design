@@ -1,0 +1,60 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 3101,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Executes a brilliant concept for the firing story, mapping scroll distance to the time it takes in reality, complete with a textbook-perfect static fallback displaying the three states side-by-side for reduced motion. The typography is elegant and editorial, completely bypassing standard e-commerce tropes to fit the artisanal brief perfectly."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Follows a much more conventional e-commerce template with standard product cards and a static informational section for the firing process. While cleanly built and fully accessible, it lacks a strong unifying creative concept, and the typography choices feel somewhat generic compared to the benchmark."
+  },
+  "better": "A",
+  "why": "Site A delivers a highly creative, accessible scroll-interaction to tell the product's story and utilizes elegant, editorial typography that elevates the entire experience far above a standard template."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Follows a much more conventional e-commerce template with standard product cards and a static informational section for the firing process. While cleanly built and fully accessible, it lacks a strong unifying creative concept, and the typography choices feel somewhat generic compared to the benchmark."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Executes a brilliant concept for the firing story, mapping scroll distance to the time it takes in reality, complete with a textbook-perfect static fallback displaying the three states side-by-side for reduced motion. The typography is elegant and editorial, completely bypassing standard e-commerce tropes to fit the artisanal brief perfectly."
+ }
+}

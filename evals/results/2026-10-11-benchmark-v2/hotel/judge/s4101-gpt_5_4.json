@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 4101,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 3,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A carries one strong idea throughout: arrival by door and lane, with the vertical waypoint rail, arched motifs, and restrained old-house mood all working together. Typography is especially accomplished and the room facts are exceptionally clear; reduced-motion and keyboard support are solid by both screenshots and checks. Motion is harder to judge from stills, and while it appears disciplined rather than flashy, there is limited evidence that it meaningfully tells the story beyond navigation/state."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 3,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "B has a clear door-centered concept and some memorable interactive-looking signatures, especially the open doorway and the persistent booking bars. It is fresh and elegant, but less consistently resolved than A: the large empty areas, mixed section strength, and mobile composition feel looser, and the implied motion may be doing more conceptual work than the static content. It fails the hard gate on contrast, so the run is disqualified regardless of other merits."
+  },
+  "better": "A",
+  "why": "A is the stronger design overall and the only one that clears the hard gates, with a more fully integrated concept, sharper information design, and cleaner execution."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 3,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "B has a clear door-centered concept and some memorable interactive-looking signatures, especially the open doorway and the persistent booking bars. It is fresh and elegant, but less consistently resolved than A: the large empty areas, mixed section strength, and mobile composition feel looser, and the implied motion may be doing more conceptual work than the static content. It fails the hard gate on contrast, so the run is disqualified regardless of other merits."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 3,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A carries one strong idea throughout: arrival by door and lane, with the vertical waypoint rail, arched motifs, and restrained old-house mood all working together. Typography is especially accomplished and the room facts are exceptionally clear; reduced-motion and keyboard support are solid by both screenshots and checks. Motion is harder to judge from stills, and while it appears disciplined rather than flashy, there is limited evidence that it meaningfully tells the story beyond navigation/state."
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 4103,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has one strong idea—doors as the signature of the house and the room types—and it carries that through hero, rates, and section icons with unusual confidence. Typography and spacing feel benchmark-level, and the reduced-motion state still preserves the concept by showing the door opened without hiding content. Motion cannot be verified from stills, but the alternate state suggests purposeful storytelling rather than generic effects."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "B has a clear door/arrival concept and a refined first impression, with the persistent booking bar helping meet the brief's reachability requirement. But the page loses some force in the middle with flatter, more standard content blocks, and the mobile sticky bar feels intrusive over the hero illustration. Most importantly, measured contrast failures trigger a hard-gate fail regardless of the otherwise solid structure."
+  },
+  "better": "A",
+  "why": "A is the more complete and distinctive interpretation of the brief, and B fails the hard gate on contrast."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "B has a clear door/arrival concept and a refined first impression, with the persistent booking bar helping meet the brief's reachability requirement. But the page loses some force in the middle with flatter, more standard content blocks, and the mobile sticky bar feels intrusive over the hero illustration. Most importantly, measured contrast failures trigger a hard-gate fail regardless of the otherwise solid structure."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has one strong idea—doors as the signature of the house and the room types—and it carries that through hero, rates, and section icons with unusual confidence. Typography and spacing feel benchmark-level, and the reduced-motion state still preserves the concept by showing the door opened without hiding content. Motion cannot be verified from stills, but the alternate state suggests purposeful storytelling rather than generic effects."
+ }
+}

@@ -1,0 +1,60 @@
+{
+ "model": "gpt_5_4",
+ "seed": 7102,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a strong, consistent idea: light moving across brick and courtyard space, carried from the hero through the project imagery and plans. Typography is excellent and gives the studio a distinct identity; the slider-led light study suggests meaningful motion, though I cannot fully verify how nuanced it feels from stills alone. Overall craft is very high on both desktop and mobile."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B presents a clear mood and a coherent brick-and-courtyard language, with a restrained editorial structure and consistent plans. Its concept is quieter and less fully embodied than A's because the imagery and page rhythm feel more static and repetitive; motion is hard to judge from stills and appears secondary rather than story-driving. Clean, accessible, and performant, but less memorable in type and overall signature."
+  },
+  "better": "A",
+  "why": "A translates the brief into a more distinctive and fully integrated visual system, with stronger typography and a clearer light-driven concept."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B presents a clear mood and a coherent brick-and-courtyard language, with a restrained editorial structure and consistent plans. Its concept is quieter and less fully embodied than A's because the imagery and page rhythm feel more static and repetitive; motion is hard to judge from stills and appears secondary rather than story-driving. Clean, accessible, and performant, but less memorable in type and overall signature."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a strong, consistent idea: light moving across brick and courtyard space, carried from the hero through the project imagery and plans. Typography is excellent and gives the studio a distinct identity; the slider-led light study suggests meaningful motion, though I cannot fully verify how nuanced it feels from stills alone. Overall craft is very high on both desktop and mobile."
+ }
+}

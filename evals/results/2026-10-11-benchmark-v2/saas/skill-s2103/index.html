@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tracewell — from 4 million log lines to the one that matters</title>
+<meta name="description" content="Tracewell is a CLI and web app that finds the one log line that explains an incident. Built for on-call backend engineers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* motomation · archetype: ledger · mutation: one-weight · signature: quiet-down · tier: 2 · critique: C5[restraint:kept] H5[375:0] S5[last5:no-log] R5[cuts:4,anim:2] M5[t2:pins0/2,webgl0/1,js47/80KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 · gate/1 · 3782de22a2 */
+:root{
+  --ground:#0E1110; --panel:#151917; --ink:#ECEEE9; --muted:#8A928C; --rule:#2A302C;
+  --accent:#FFB547; --paper:#ECEEE9; --paper-ink:#0E1110; --paper-muted:#566059; --paper-rule:#C5CAC3;
+  --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:"Geist",ui-sans-serif,system-ui,sans-serif;
+  --pad:clamp(20px,4vw,64px);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;font-weight:400}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 1.0625rem/1.6 var(--sans);overflow-x:hidden}
+h1,h2,h3,p,ol,ul,pre{margin:0}
+ol,ul{padding:0;list-style:none}
+a{color:inherit;text-underline-offset:.2em}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:var(--pad);top:-60px;background:var(--accent);color:var(--paper-ink);padding:10px 14px;font:400 .875rem var(--mono);z-index:10;text-decoration:none}
+.skip:focus{top:12px}
+.mono{font-family:var(--mono)}
+.wrap{padding-inline:var(--pad);max-width:1600px;margin-inline:auto}
+.label{font:400 .8125rem/1.4 var(--mono);color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+
+/* nav */
+header.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px var(--pad);border-bottom:1px solid var(--rule)}
+.mark{font:400 1.125rem var(--mono);text-decoration:none;display:inline-flex;align-items:center;gap:10px;min-height:44px}
+.mark i{width:10px;height:10px;background:var(--accent);display:inline-block}
+nav ul{display:flex;gap:20px}
+nav a{font:400 .875rem var(--mono);display:inline-flex;align-items:center;min-height:44px;color:var(--muted);text-decoration:none}
+nav a:hover{color:var(--ink);text-decoration:underline}
+
+/* hero */
+.hero{display:grid;gap:36px;padding-block:clamp(36px,6vw,88px) clamp(48px,7vw,104px)}
+h1{font:400 clamp(2.05rem,6.4vw,4.6rem)/1.04 var(--mono);letter-spacing:-.03em;text-wrap:balance;max-width:15ch}
+h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:44ch;color:var(--muted);margin-top:22px}
+.hero-install{margin-top:28px}
+@media(min-width:960px){
+  .hero{grid-template-columns:5fr 7fr;align-items:center;gap:56px}
+}
+
+/* command chip */
+.cmd{display:flex;align-items:stretch;border:1px solid var(--rule);background:var(--panel);max-width:560px}
+.cmd code{flex:1;min-width:0;padding:12px 14px;font:400 .875rem/1.5 var(--mono);overflow-wrap:anywhere;color:var(--ink)}
+.cmd code::before{content:"$ ";color:var(--muted)}
+.copy{font:400 .8125rem var(--mono);background:transparent;color:var(--ink);border:0;border-left:1px solid var(--rule);padding:0 14px;min-width:76px;min-height:44px;cursor:pointer;transition:background-color .15s,color .15s}
+.copy:hover{background:var(--ink);color:var(--paper-ink)}
+.cmd + .cmd{margin-top:10px}
+
+/* ledger of log lines (signature) */
+.ledger{position:relative;overflow:hidden;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--ground)}
+.ledger .contours{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;color:var(--rule)}
+.ledger ol{position:relative}
+.ln{position:relative;display:grid;grid-template-columns:4.6rem 1fr;gap:12px;padding:7px 12px;font:400 .8125rem/1.5 var(--mono);color:var(--muted);border-bottom:1px solid transparent}
+.ln .svc{display:none}
+.ln .msg{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ln .bar{position:absolute;inset:0;background:var(--accent);z-index:0;transform-origin:left center}
+.ln > span:not(.bar){position:relative;z-index:1}
+.ln.key{color:var(--paper-ink);padding-block:12px}
+.ln.key .msg{white-space:normal;overflow:visible}
+.ln.key .tag{display:inline-block;background:var(--paper-ink);color:var(--accent);padding:0 6px;margin-right:8px}
+.ledger-cap{display:flex;justify-content:space-between;gap:12px;padding:10px 12px;border-bottom:1px solid var(--rule)}
+@media(min-width:560px){.ln{grid-template-columns:4.6rem 7.5rem 1fr}.ln .svc{display:block}.ln.key .msg{grid-column:3}}
+@media(hover:hover){.ln:not(.key):hover{color:var(--ink)}}
+
+/* sections */
+section{border-top:1px solid var(--rule);padding-block:clamp(56px,8vw,120px)}
+.sec-head{display:grid;gap:12px;margin-bottom:clamp(32px,5vw,64px)}
+h2{font:400 clamp(1.5rem,3.6vw,2.6rem)/1.15 var(--mono);letter-spacing:-.02em;max-width:22ch;text-wrap:balance}
+@media(min-width:960px){.sec-head{grid-template-columns:5fr 7fr;align-items:end}}
+
+/* steps */
+.steps li{display:grid;gap:10px;padding:26px 0;border-top:1px solid var(--rule);transition:color .3s var(--ease)}
+.steps li:last-child{border-bottom:1px solid var(--rule)}
+.steps .n{font:400 .8125rem var(--mono);color:var(--muted)}
+.steps h3{font:400 clamp(1.15rem,2.4vw,1.6rem)/1.3 var(--mono);overflow-wrap:anywhere}
+.steps h3 code{color:var(--accent);font:inherit}
+.steps p{color:var(--muted);max-width:52ch}
+.steps.live li{color:var(--muted)}
+.steps.live li.on{color:var(--ink)}
+.steps.live li.on p{color:var(--ink)}
+@media(min-width:960px){.steps li{grid-template-columns:5fr 7fr;gap:56px;align-items:baseline}.steps .n{grid-column:1;margin-bottom:-6px}.steps h3{grid-column:1}.steps p{grid-column:2;grid-row:1/3}}
+
+/* demo */
+.demo{display:grid;gap:20px}
+@media(min-width:960px){.demo{grid-template-columns:6fr 6fr;align-items:start}}
+.panel-label{display:flex;justify-content:space-between;gap:10px;margin-bottom:10px}
+.term{background:var(--panel);border:1px solid var(--rule);padding:18px 16px;font:400 .8125rem/1.65 var(--mono);color:var(--ink);overflow-wrap:anywhere;white-space:pre-wrap;min-height:20rem}
+.term .dim{color:var(--muted)}
+.term .hot{color:var(--accent)}
+.term .l{display:block}
+.result{background:var(--paper);color:var(--paper-ink);border:1px solid var(--paper-rule)}
+.result .rhead{padding:16px 16px 14px;border-bottom:1px solid var(--paper-rule)}
+.result .rhead p{font:400 .8125rem var(--mono);color:var(--paper-muted)}
+.result .rhead h3{font:400 1.15rem/1.35 var(--mono);margin-top:6px}
+.rank{padding:16px;border-bottom:1px solid var(--paper-rule);display:grid;gap:8px}
+.rank:last-of-type{border-bottom:0}
+.rank .row{display:flex;gap:10px;align-items:baseline}
+.rank .pos{font:400 .8125rem var(--mono);color:var(--paper-muted);flex:none}
+.rank code{font:400 .8125rem/1.5 var(--mono);overflow-wrap:anywhere;min-width:0}
+.rank.first code{background:var(--accent);padding:2px 6px}
+.meter{height:6px;background:var(--paper-rule);position:relative;overflow:hidden}
+.meter i{position:absolute;inset:0;background:var(--paper-ink);transform-origin:left center;transform:scaleX(var(--w,1))}
+.rank .note{font:400 .9375rem/1.55 var(--sans);color:var(--paper-muted);max-width:56ch}
+.rfoot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--paper-ink);color:var(--paper)}
+.rfoot span{font:400 .8125rem var(--mono)}
+.sharebtn{font:400 .8125rem var(--mono);background:var(--accent);color:var(--paper-ink);border:0;min-height:44px;padding:0 16px;cursor:pointer}
+.sharebtn:hover{background:var(--paper)}
+.sample{margin-top:14px;max-width:70ch}
+
+/* pricing */
+.plans li{display:grid;gap:14px;padding:28px 0;border-top:1px solid var(--rule)}
+.plans li:last-child{border-bottom:1px solid var(--rule)}
+.plans h3{font:400 clamp(1.4rem,3vw,2rem)/1.2 var(--mono)}
+.price{font:400 clamp(1.4rem,3vw,2rem)/1.2 var(--mono)}
+.price small{font:400 .875rem var(--mono);color:var(--muted);display:block;margin-top:4px}
+.plans ul{display:grid;gap:6px;color:var(--muted)}
+.plans ul li{display:block;padding:0;border:0}
+.plans ul li::before{content:"— ";color:var(--muted)}
+.plans li.team ul{color:var(--ink)}
+.plans li.team h3::after{content:"";display:inline-block;width:10px;height:10px;background:var(--accent);margin-left:12px}
+@media(min-width:960px){.plans>li{grid-template-columns:5fr 3fr 4fr;gap:56px;align-items:start}}
+
+/* install */
+.install{display:grid;gap:28px}
+.install h2{max-width:16ch}
+@media(min-width:960px){.install{grid-template-columns:5fr 7fr;align-items:end}}
+footer{border-top:1px solid var(--rule);padding:22px var(--pad) 40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+footer p{font:400 .8125rem var(--mono);color:var(--muted)}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="mark" href="#top" aria-label="Tracewell, top of page"><i aria-hidden="true"></i>tracewell</a>
+  <nav aria-label="Primary"><ul>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#install">Install</a></li>
+  </ul></nav>
+</header>
+
+<main id="main">
+  <div class="wrap" id="top">
+    <div class="hero">
+      <div>
+        <h1>From 4 million log lines to <em>the one</em> that matters.</h1>
+        <p class="lede">Tracewell is a CLI and web app that finds the one log line that explains an incident. Made for the engineer who is on call.</p>
+        <div class="hero-install">
+          <div class="cmd"><code id="c1">brew install tracewell</code><button class="copy" type="button" data-copy="brew install tracewell" aria-label="Copy brew install command">copy</button></div>
+        </div>
+      </div>
+
+      <figure style="margin:0">
+        <div class="ledger" id="ledger" role="img" aria-label="Sample log stream. Every line is dimmed except one: an error about a connection pool running out, marked as the explanation.">
+          <svg class="contours" aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false">
+            <g fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke">
+              <ellipse class="ct" cx="50" cy="52" rx="14" ry="9" vector-effect="non-scaling-stroke"/>
+              <ellipse class="ct" cx="50" cy="52" rx="26" ry="17" vector-effect="non-scaling-stroke"/>
+              <ellipse class="ct" cx="50" cy="52" rx="40" ry="27" vector-effect="non-scaling-stroke"/>
+              <ellipse class="ct" cx="50" cy="52" rx="56" ry="40" vector-effect="non-scaling-stroke"/>
+            </g>
+          </svg>
+          <div class="ledger-cap label" aria-hidden="true"><span>sample · last 15m</span><span>4,000,000 lines → 1</span></div>
+          <ol aria-hidden="true">
+            <li class="ln"><span class="t">14:01:52</span><span class="svc">gateway</span><span class="msg">GET /v1/charges 200 41ms</span></li>
+            <li class="ln"><span class="t">14:01:52</span><span class="svc">payments-api</span><span class="msg">charge accepted, queued for ledger</span></li>
+            <li class="ln"><span class="t">14:01:53</span><span class="svc">worker</span><span class="msg">heartbeat ok</span></li>
+            <li class="ln"><span class="t">14:01:55</span><span class="svc">gateway</span><span class="msg">GET /healthz 200 2ms</span></li>
+            <li class="ln"><span class="t">14:01:57</span><span class="svc">payments-api</span><span class="msg">cache hit customer profile</span></li>
+            <li class="ln"><span class="t">14:01:58</span><span class="svc">ledger-svc</span><span class="msg">commit batch ok</span></li>
+            <li class="ln key"><span class="bar"></span><span class="t">14:02:03</span><span class="svc">payments-api</span><span class="msg"><span class="tag">why</span>ERROR pool exhausted: timed out waiting for an idle database connection</span></li>
+            <li class="ln"><span class="t">14:02:05</span><span class="svc">payments-api</span><span class="msg">WARN retrying request to ledger-svc</span></li>
+            <li class="ln"><span class="t">14:02:06</span><span class="svc">gateway</span><span class="msg">POST /v1/charges 504</span></li>
+            <li class="ln"><span class="t">14:02:06</span><span class="svc">worker</span><span class="msg">heartbeat ok</span></li>
+            <li class="ln"><span class="t">14:02:08</span><span class="svc">gateway</span><span class="msg">GET /healthz 200 3ms</span></li>
+            <li class="ln"><span class="t">14:02:09</span><span class="svc">ledger-svc</span><span class="msg">commit batch ok</span></li>
+          </ol>
+        </div>
+        <figcaption class="sample label" style="margin-top:12px">Sample output. Same stream, quieter.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <section id="how" aria-labelledby="how-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">01 · How it works</p>
+        <h2 id="how-h">Three steps. The second one does the finding.</h2>
+      </div>
+      <ol class="steps" id="steps">
+        <li class="on">
+          <span class="n">step 1</span>
+          <h3><code>tracewell ingest</code></h3>
+          <p>Stream logs from files, Docker or Kubernetes.</p>
+        </li>
+        <li>
+          <span class="n">step 2</span>
+          <h3><code>tracewell why --since 15m</code></h3>
+          <p>Ranks lines by how unusual they are compared with the last 7 days.</p>
+        </li>
+        <li>
+          <span class="n">step 3</span>
+          <h3>Share the link</h3>
+          <p>Send the explanation link to the team, so everyone starts from the same line.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="demo" aria-labelledby="demo-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">02 · The product working</p>
+        <h2 id="demo-h">Ask why. Read one line.</h2>
+      </div>
+      <div class="demo">
+        <div>
+          <div class="panel-label label"><span>terminal</span><span>sample session</span></div>
+          <div class="term" id="term" role="region" aria-label="Sample terminal session" tabindex="0"><span class="l"><span class="dim">$</span> tracewell ingest</span><span class="l dim">streaming from kubernetes · namespace payments</span><span class="l dim">ready. logs are being kept for comparison.</span><span class="l"> </span><span class="l"><span class="dim">$</span> tracewell why --since 15m</span><span class="l dim">comparing the last 15m with the last 7 days</span><span class="l"> </span><span class="l hot">#1  14:02:03  payments-api</span><span class="l">    ERROR pool exhausted: timed out waiting for an idle database connection</span><span class="l dim">    never seen in the last 7 days</span><span class="l"> </span><span class="l">#2  14:02:05  payments-api</span><span class="l dim">    WARN retrying request to ledger-svc</span><span class="l"> </span><span class="l">#3  14:02:06  gateway</span><span class="l dim">    POST /v1/charges 504</span><span class="l"> </span><span class="l hot">explanation link ready. Paste it in the incident channel.</span></div>
+        </div>
+        <div>
+          <div class="panel-label label"><span>web app · result view</span><span>sample</span></div>
+          <div class="result">
+            <div class="rhead">
+              <p>since 15m · compared with the last 7 days</p>
+              <h3>The database connection pool ran out.</h3>
+            </div>
+            <div class="rank first">
+              <div class="row"><span class="pos">#1</span><code>ERROR pool exhausted: timed out waiting for an idle database connection</code></div>
+              <div class="meter" aria-hidden="true"><i style="--w:1"></i></div>
+              <p class="note">Never seen in the last 7 days. The lines after it are what that failure looked like from outside.</p>
+            </div>
+            <div class="rank">
+              <div class="row"><span class="pos">#2</span><code>WARN retrying request to ledger-svc</code></div>
+              <div class="meter" aria-hidden="true"><i style="--w:.55"></i></div>
+            </div>
+            <div class="rank">
+              <div class="row"><span class="pos">#3</span><code>POST /v1/charges 504</code></div>
+              <div class="meter" aria-hidden="true"><i style="--w:.3"></i></div>
+            </div>
+            <div class="rfoot"><span>Bars show relative unusualness.</span><button class="sharebtn" type="button" id="share">Copy explanation link</button></div>
+          </div>
+        </div>
+      </div>
+      <p class="sample label">Both views are illustrative samples built in HTML and CSS, not a recording of real systems.</p>
+    </div>
+  </section>
+
+  <section id="pricing" aria-labelledby="pr-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">03 · Pricing</p>
+        <h2 id="pr-h">Two plans. Pay per seat.</h2>
+      </div>
+      <ul class="plans">
+        <li>
+          <h3>Free</h3>
+          <p class="price">$0<small>1 user</small></p>
+          <ul><li>3 days of retention</li></ul>
+        </li>
+        <li class="team">
+          <h3>Team</h3>
+          <p class="price">$12<small>per seat per month</small></p>
+          <ul><li>30 days of retention</li><li>Shared incidents</li><li>SSO</li></ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="install" aria-labelledby="in-h">
+    <div class="wrap install">
+      <div>
+        <p class="label" style="margin-bottom:12px">04 · Install</p>
+        <h2 id="in-h">Run it on the next incident.</h2>
+      </div>
+      <div>
+        <div class="cmd"><code>brew install tracewell</code><button class="copy" type="button" data-copy="brew install tracewell" aria-label="Copy brew install command">copy</button></div>
+        <div class="cmd"><code>curl -fsSL https://tracewell.dev/install.sh | sh</code><button class="copy" type="button" data-copy="curl -fsSL https://tracewell.dev/install.sh | sh" aria-label="Copy curl install command">copy</button></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>tracewell</p>
+  <p>The one line that explains the incident.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  /* copy buttons: work with or without motion, with or without the clipboard API */
+  function flash(btn,text){
+    var old=btn.getAttribute('data-label')||btn.textContent;
+    btn.setAttribute('data-label',old);
+    btn.textContent=text;
+    clearTimeout(btn._t);
+    btn._t=setTimeout(function(){btn.textContent=old},1400);
+  }
+  function copy(text,btn,ok){
+    function fallback(){
+      var ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');
+      ta.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.appendChild(ta);ta.select();
+      var done=false;try{done=document.execCommand('copy')}catch(e){}
+      document.body.removeChild(ta);flash(btn,done?ok:'select it');
+    }
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(function(){flash(btn,ok)},fallback)}else{fallback()}
+  }
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click',function(){copy(b.getAttribute('data-copy'),b,'copied')});
+  });
+  var share=document.getElementById('share');
+  if(share){share.addEventListener('click',function(){
+    /* the sample has no real link; say so honestly */
+    flash(share,'sample only');
+  })}
+
+  if(!window.gsap||!window.ScrollTrigger){return}
+  gsap.registerPlugin(ScrollTrigger);
+  var mm=gsap.matchMedia();
+
+  mm.add('(prefers-reduced-motion: no-preference)',function(){
+    /* 1. signature: the wall of lines goes quiet around one line */
+    var lines=gsap.utils.toArray('#ledger .ln:not(.key)');
+    var tl=gsap.timeline({delay:.5,defaults:{ease:'power3.out'}});
+    tl.from(lines,{color:'#ECEEE9',duration:.35,stagger:.07,clearProps:'color'},0)
+      .from('#ledger .key .bar',{scaleX:0,duration:.6,clearProps:'transform'},.35)
+      .from('#ledger .ct',{opacity:0,duration:.6,stagger:.12,clearProps:'opacity'},.5);
+
+    /* 2. echo: the active step stays lit while the others quiet down */
+    var steps=gsap.utils.toArray('#steps li');
+    var list=document.getElementById('steps');
+    list.classList.add('live');
+    steps.forEach(function(li){
+      ScrollTrigger.create({
+        trigger:li,start:'top 60%',end:'bottom 60%',
+        onToggle:function(self){if(self.isActive){steps.forEach(function(s){s.classList.toggle('on',s===li)})}}
+      });
+    });
+
+    /* 3. the terminal answers, one line at a time */
+    gsap.from('#term .l',{opacity:0,y:6,duration:.3,stagger:.12,ease:'power3.out',clearProps:'opacity,transform',
+      scrollTrigger:{trigger:'#term',start:'top 80%',once:true}});
+
+    /* 4. result bars grow once */
+    gsap.from('.meter i',{scaleX:0,duration:.6,stagger:.12,ease:'power3.out',clearProps:'transform',
+      scrollTrigger:{trigger:'.result',start:'top 75%',once:true}});
+
+    return function(){list.classList.remove('live')};
+  });
+  window.addEventListener('load',function(){ScrollTrigger.refresh()});
+})();
+</script>
+</body>
+</html>

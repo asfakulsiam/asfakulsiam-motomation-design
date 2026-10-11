@@ -1,0 +1,60 @@
+{
+ "model": "gpt_5_4",
+ "seed": 7101,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a strong, coherent idea built around light moving across brick and courtyard space, and that idea carries from the hero into the project list, imagery, and plan diagrams. Typography is especially confident and elegant, with the italic emphasis on 'open courtyard' and the restrained palette doing real identity work; the page also looks highly resolved on both desktop and mobile. Motion cannot be fully verified from stills, but the light timeline and reduced-motion state suggest motion is integral rather than decorative."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B also has a clear brick-and-light concept, especially in the hero and project illustrations, and it fulfills the brief content more completely within the screenshots by showing all five projects with plans and studio/process sections. However, the long blank stretches in the desktop page, looser spacing, and less refined composition reduce the sense of control and polish compared with A. Motion is harder to credit highly here: the prompt text implies a scroll-driven light effect, but from the stills it reads more as a conventional gimmick than a fully integrated narrative system."
+  },
+  "better": "A",
+  "why": "A is the more distinctive and better-crafted design, with a clearer signature and substantially stronger typographic and compositional control."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B also has a clear brick-and-light concept, especially in the hero and project illustrations, and it fulfills the brief content more completely within the screenshots by showing all five projects with plans and studio/process sections. However, the long blank stretches in the desktop page, looser spacing, and less refined composition reduce the sense of control and polish compared with A. Motion is harder to credit highly here: the prompt text implies a scroll-driven light effect, but from the stills it reads more as a conventional gimmick than a fully integrated narrative system."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a strong, coherent idea built around light moving across brick and courtyard space, and that idea carries from the hero into the project list, imagery, and plan diagrams. Typography is especially confident and elegant, with the italic emphasis on 'open courtyard' and the restrained palette doing real identity work; the page also looks highly resolved on both desktop and mobile. Motion cannot be fully verified from stills, but the light timeline and reduced-motion state suggest motion is integral rather than decorative."
+ }
+}

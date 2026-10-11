@@ -1,0 +1,57 @@
+{
+ "375": {
+  "pageHeight": 5231,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 3688,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 5,
+    "text": "Give · দান",
+    "href": "#give",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 22054,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": "motomation · archetype: manifesto · mutation: reverse-the-reveal · signature: ebb-tide · tier: 2 · critique: C4[restraint:changed1] H4[375:1] S5[last5:no-log] R5[cuts:2,anim:3] M5[t2:pins0/2,webgl0/1,js48/80KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 · gate/1 · 9a4006f8cf "
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3688,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 5231,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0
+  },
+  "stamp": "gate: c0 o0 w0 rm0 a0 · gate/1 · 9a4006f8cf",
+  "critique": "C4[restraint:changed1] H4[375:1] S5[last5:none] R5[cuts:2,anim:3] M5[t2:pins0/2,webgl0/1,js48/80KB,rm0] V5[entrance-repeats:0]",
+  "contrast": [],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

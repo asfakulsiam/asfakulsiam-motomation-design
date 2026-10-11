@@ -1,0 +1,12 @@
+{
+ "slug": "hotel",
+ "seed": 4102,
+ "cond": "baseline",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-11-benchmark-v2/hotel/baseline-s4102",
+ "exit": 0,
+ "seconds": 54,
+ "turns": 3,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

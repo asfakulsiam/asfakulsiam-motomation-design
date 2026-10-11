@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tracewell: from 4 million log lines to the one that matters</title>
+<meta name="description" content="Tracewell is a CLI and web app that finds the one log line that explains an incident. Stream logs, run tracewell why, share the explanation link. Free, or $12 per seat per month.">
+<meta name="theme-color" content="#F1EEE6">
+<meta property="og:title" content="Tracewell: from 4 million log lines to the one that matters">
+<meta property="og:description" content="A CLI and web app that finds the one log line that explains an incident.">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Tracewell","applicationCategory":"DeveloperApplication","description":"A CLI and web app that finds the one log line that explains an incident.","offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Team","price":"12","priceCurrency":"USD","description":"Per seat per month"}]}
+</script>
+<script>
+  /* Motion is opt-in: the class is set only when the visitor has not asked for reduced motion.
+     Without it, every page state in the CSS below is already the finished one. */
+  if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) document.documentElement.classList.add("js-motion");
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono&family=Instrument+Serif&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<style>
+/* motomation · archetype: console · mutation: constraint · signature: ink-strike · tier: 2 · critique: C5[restraint:kept] H5[375:0] S5[last5:no-log] R5[cuts:3,anim:2] M5[t2:pins1/2,webgl0/1,js49/80KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 · gate/1 · 9529505655 */
+
+/* Contrast pairs (checked with scripts/contrast.mjs)
+   --ink on --paper 15.87 · --muted on --paper 6.39 (paper only) · --accent on --paper 5.64
+   --panel-ink on --panel 14.91 · --panel-muted on --panel 7.24 (panel only) · --panel-ink on --accent 5.29
+   --paper on --accent 5.64 (selection) */
+:root {
+  --paper: #F1EEE6;
+  --ink: #16140F;
+  --muted: #5A554B;
+  --accent: #B3270E;
+  --panel: #16140F;
+  --panel-ink: #ECE7DA;
+  --panel-muted: #A8A294;
+  --panel-line: #3A362E;
+  --line: color-mix(in oklab, var(--ink) 22%, transparent);
+
+  --serif: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --step--1: 0.75rem;
+  --step-0: clamp(1.125rem, 1.05rem + 0.3vw, 1.3rem);
+  --step-1: clamp(1.3rem, 1.15rem + 0.6vw, 1.7rem);
+  --step-2: clamp(2rem, 1.2rem + 3vw, 3.6rem);
+  --step-3: clamp(2.25rem, 1.6rem + 2.6vw, 3.75rem);
+  --step-4: clamp(2.9rem, 0.9rem + 6.6vw, 6.5rem);
+  --ui-0: 0.875rem;
+
+  --gutter: clamp(20px, 4vw, 48px);
+  --sec: clamp(4.5rem, 9vw, 8rem);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 1rem; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: 400 var(--step-0)/1.45 var(--serif);
+  font-synthesis: none; text-rendering: optimizeLegibility;
+}
+/* the mutation: one weight, everywhere */
+h1, h2, h3, h4, b, strong, th, button, code, pre { font-weight: 400; }
+h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+::selection { background: var(--accent); color: var(--paper); }
+
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; transition: color 120ms var(--ease-out); }
+a:hover { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.panel :focus-visible, .cmd :focus-visible { outline-color: var(--panel-ink); }
+
+.wrap { width: min(100% - 2 * var(--gutter), 1320px); margin-inline: auto; }
+.label { font: 400 var(--step--1)/1.3 var(--mono); letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.skip { position: absolute; left: var(--gutter); top: 0; transform: translateY(-200%); background: var(--ink); color: var(--paper); padding: 0.75rem 1rem; font: 400 var(--ui-0)/1 var(--mono); z-index: 10; }
+.skip:focus { transform: none; }
+
+/* ───────── masthead ───────── */
+.mast { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0 1.5rem; padding-block: 0.75rem; }
+.mark { font: 400 1.0625rem/1 var(--mono); text-decoration: none; letter-spacing: 0.02em; padding-block: 0.8rem; }
+.mast ul { display: flex; flex-wrap: wrap; gap: 0 1.25rem; }
+.mast li a { display: inline-block; padding-block: 0.8rem; font: 400 var(--ui-0)/1 var(--mono); }
+
+/* ───────── hero ───────── */
+.hero { padding-block: clamp(1.5rem, 4vw, 3.5rem) var(--sec); overflow-x: clip; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2.75rem; }
+.hero h1 { font: 400 var(--step-4)/0.95 var(--serif); letter-spacing: -0.02em; text-wrap: balance; margin-top: 1rem; }
+.lead { max-width: 34ch; margin-top: 1.5rem; font-size: var(--step-1); line-height: 1.3; text-wrap: pretty; }
+.hero .cmd { margin-top: 2rem; max-width: 34rem; }
+.alt { margin-top: 0.9rem; font: 400 var(--ui-0)/1.4 var(--mono); }
+
+.cmd { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.75rem; align-items: center; padding: 0.75rem 0.75rem 0.75rem 1rem; background: var(--panel); color: var(--panel-ink); border-radius: 4px; }
+.cmd code { font: 400 var(--ui-0)/1.5 var(--mono); overflow-wrap: anywhere; min-width: 0; }
+.cmd code::before { content: "$ "; color: var(--panel-muted); user-select: none; }
+.btn { font: 400 var(--ui-0)/1 var(--mono); min-height: 44px; padding: 0 1rem; background: var(--panel-ink); color: var(--panel); border: 0; border-radius: 3px; cursor: pointer; transition: transform 120ms var(--ease-out), background-color 120ms var(--ease-out); }
+.btn:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: #fff; } }
+@media (min-width: 560px) { .cmd { grid-template-columns: minmax(0, 1fr) auto; } }
+
+/* log lines: used on the paper tape and inside the dark panels */
+.ln { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 1rem; font: 400 0.8125rem/1.5 var(--mono); }
+.txt { position: relative; display: grid; grid-template-columns: auto auto minmax(0, 1fr); column-gap: 0.75rem; min-width: 0; }
+.txt .t { font-variant-numeric: tabular-nums; }
+.msg { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.strike { position: absolute; left: -2px; right: -2px; top: 50%; height: 1.5px; background: currentColor; transform-origin: 0 50%; pointer-events: none; }
+.js-motion .strike { transform: scaleX(0); }
+.tag { font: 400 var(--step--1)/1.4 var(--mono); letter-spacing: 0.04em; }
+.ln.key { background: var(--accent); color: var(--panel-ink); padding: 0.6rem 0.75rem; margin-block: 0.4rem; border-radius: 2px; }
+.ln.key .msg { white-space: normal; overflow: visible; overflow-wrap: anywhere; }
+.ln.key .tag { color: var(--panel-ink); }
+@media (min-width: 560px) { .ln { font-size: var(--ui-0); } }
+
+.tape { border-left: 1px solid var(--line); padding-left: 1rem; min-width: 0; }
+.tape-head { display: flex; justify-content: space-between; gap: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--ink); }
+.tape .ln:not(.key) { color: var(--muted); padding-block: 0.4rem; border-bottom: 1px solid var(--line); }
+.tape .ln.key { margin-inline: -0.75rem 0; }
+.tape figcaption { margin-top: 0.9rem; font: 400 var(--step--1)/1.5 var(--mono); color: var(--muted); max-width: 46ch; }
+
+@media (min-width: 900px) {
+  .hero-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 3rem; align-items: center; }
+  .tape { margin-right: calc(var(--gutter) * -1); }
+}
+
+/* ───────── the session (pinned demo) ───────── */
+.chapter { border-top: 1px solid var(--ink); }
+.chapter-pin { padding-block: var(--sec); }
+.chapter-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+.chapter h2, .pricing h2, .install h2 { font: 400 var(--step-2)/1 var(--serif); letter-spacing: -0.015em; text-wrap: balance; }
+.steps { display: grid; gap: 1.25rem; margin-top: 2rem; }
+.steps li { border-left: 2px solid var(--line); padding-left: 1rem; transition: border-color 150ms var(--ease-out), color 150ms var(--ease-out); }
+.is-pinned .steps li.is-active { border-left-color: var(--accent); }
+.is-pinned .steps li:not(.is-active) { color: var(--muted); }
+.steps .idx { font: 400 var(--step--1)/1 var(--mono); letter-spacing: 0.09em; }
+.steps code { display: block; margin-top: 0.4rem; font: 400 var(--ui-0)/1.4 var(--mono); overflow-wrap: anywhere; }
+.steps p { margin-top: 0.3rem; font-size: var(--step-1); line-height: 1.25; max-width: 30ch; }
+
+.stage { display: grid; gap: 1rem; min-width: 0; }
+.panel { background: var(--panel); color: var(--panel-ink); border-radius: 4px; min-width: 0; }
+.panel-bar { display: flex; justify-content: space-between; gap: 1rem; padding: 0.7rem 1rem; border-bottom: 1px solid var(--panel-line); font: 400 var(--step--1)/1.3 var(--mono); letter-spacing: 0.09em; text-transform: uppercase; color: var(--panel-muted); }
+.panel-body { padding: 1rem; display: grid; gap: 0.35rem; font: 400 0.8125rem/1.5 var(--mono); }
+@media (min-width: 560px) { .panel-body { font-size: var(--ui-0); } }
+.cmdline { margin-top: 0.4rem; }
+.cmdline:first-child { margin-top: 0; }
+.ps { color: var(--panel-muted); user-select: none; }
+.typed { display: inline-block; vertical-align: top; }
+.out { color: var(--panel-muted); overflow-wrap: anywhere; }
+.out b { color: var(--panel-ink); }
+.panel .ln:not(.key) { color: var(--panel-muted); }
+.panel .ln.key { margin-inline: -0.5rem; }
+.panel .tag { color: var(--panel-muted); }
+.panel .ln .tag { grid-column: 1; }
+@media (min-width: 700px) { .panel .ln { grid-template-columns: minmax(0, 1fr) auto; } .panel .ln .tag { grid-column: auto; text-align: right; } }
+
+.result .panel-body { gap: 0.75rem; padding: 1.25rem 1rem 1rem; font-family: var(--serif); }
+.result h3 { font: 400 var(--step-1)/1.1 var(--serif); letter-spacing: -0.01em; text-wrap: balance; }
+.reason { font-size: 1.125rem; line-height: 1.3; max-width: 52ch; }
+.share { display: flex; flex-wrap: wrap; gap: 0.75rem 1rem; align-items: center; padding-top: 0.9rem; border-top: 1px solid var(--panel-line); }
+.share code { flex: 1 1 12rem; min-width: 0; font: 400 var(--ui-0)/1.4 var(--mono); overflow-wrap: anywhere; }
+.note { font: 400 var(--step--1)/1.5 var(--mono); color: var(--muted); max-width: 60ch; }
+
+@media (min-width: 900px) {
+  .chapter-grid { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 4rem; align-items: center; }
+}
+@media (min-width: 900px) and (min-height: 760px) {
+  .is-pinned .chapter-pin { min-height: 100svh; display: grid; align-content: center; padding-block: 1.5rem; }
+}
+
+/* ───────── pricing ───────── */
+.pricing { padding-block: var(--sec); border-top: 1px solid var(--ink); }
+.plans { display: grid; grid-template-columns: minmax(0, 1fr); margin-top: clamp(2rem, 5vw, 3.5rem); border-top: 1px solid var(--ink); }
+.plan { padding-block: 1.75rem 2.25rem; min-width: 0; }
+.plan + .plan { border-top: 1px solid var(--line); }
+.plan h3 { font: 400 var(--step-3)/1 var(--serif); letter-spacing: -0.015em; }
+.sub { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.6rem; margin-top: 0.75rem; font: 400 var(--ui-0)/1.4 var(--mono); }
+.sub .amt { font: 400 2.25rem/1 var(--serif); font-variant-numeric: tabular-nums; }
+.specs { margin-top: 1.5rem; font: 400 var(--ui-0)/1.4 var(--mono); }
+.specs li { padding-block: 0.6rem; border-top: 1px solid var(--line); }
+.bar { display: block; height: 6px; margin-top: 0.6rem; background: var(--line); }
+.bar i { display: block; height: 100%; background: var(--ink); transform-origin: 0 50%; transform: scaleX(var(--w)); }
+.pricing .note { margin-top: 1.25rem; }
+@media (min-width: 760px) {
+  .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .plan { padding: 2rem 2.5rem 2.5rem; }
+  .plan:first-child { padding-left: 0; }
+  .plan + .plan { border-top: 0; border-left: 1px solid var(--line); }
+}
+
+/* ───────── install ───────── */
+.install { padding-block: var(--sec); border-top: 1px solid var(--ink); }
+.install-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+.install p.lede { margin-top: 1rem; max-width: 28ch; font-size: var(--step-1); line-height: 1.3; }
+.ways { display: grid; gap: 1.75rem; align-content: start; }
+.way .label { display: block; margin-bottom: 0.6rem; }
+@media (min-width: 900px) { .install-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 4rem; } }
+
+footer { border-top: 1px solid var(--ink); padding-block: 2rem 3rem; }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 1rem 2rem; }
+.foot p { max-width: 40ch; }
+.foot ul { display: flex; flex-wrap: wrap; gap: 0 1.25rem; font: 400 var(--ui-0)/1 var(--mono); }
+.foot li a { display: inline-block; padding-block: 0.8rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation: none !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap">
+  <nav class="mast" aria-label="Primary">
+    <a class="mark" href="#top" aria-label="Tracewell, top of page">tracewell</a>
+    <ul>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#install">Install</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="hero-h">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="label">CLI + web app · for on-call backend engineers</p>
+        <h1 id="hero-h">From 4 million log lines to the one that matters.</h1>
+        <p class="lead">Tracewell finds the one log line that explains an incident.</p>
+        <div class="cmd">
+          <code>brew install tracewell</code>
+          <button class="btn" type="button" data-copy="brew install tracewell" aria-label="Copy brew install command"><span class="lbl">Copy</span></button>
+        </div>
+        <p class="alt"><a href="#install">Other ways to install</a></p>
+      </div>
+
+      <figure class="tape" aria-label="Sample log lines with the ordinary ones struck out">
+        <div class="tape-head label"><span>incident.log</span><span>sample lines</span></div>
+        <div class="ln"><span class="txt"><span class="t">14:01:58</span><span>INFO</span><span class="msg">GET /healthz 200</span><i class="strike" aria-hidden="true"></i></span></div>
+        <div class="ln"><span class="txt"><span class="t">14:01:58</span><span>DEBUG</span><span class="msg">cache hit session:u_2291</span><i class="strike" aria-hidden="true"></i></span></div>
+        <div class="ln"><span class="txt"><span class="t">14:01:59</span><span>INFO</span><span class="msg">POST /cart/items 201</span><i class="strike" aria-hidden="true"></i></span></div>
+        <div class="ln"><span class="txt"><span class="t">14:01:59</span><span>INFO</span><span class="msg">GET /healthz 200</span><i class="strike" aria-hidden="true"></i></span></div>
+        <div class="ln"><span class="txt"><span class="t">14:02:00</span><span>DEBUG</span><span class="msg">cache hit session:u_0417</span><i class="strike" aria-hidden="true"></i></span></div>
+        <div class="ln"><span class="txt"><span class="t">14:02:00</span><span>INFO</span><span class="msg">worker-4 job done queue=emails</span><i class="strike" aria-hidden="true"></i></span></div>
+        <div class="ln key"><span class="txt"><span class="t">14:02:01</span><span>WARN</span><span class="msg">orders-db: remaining connection slots are reserved for non-replication superuser connections</span></span></div>
+        <div class="ln"><span class="txt"><span class="t">14:02:01</span><span>INFO</span><span class="msg">GET /healthz 200</span><i class="strike" aria-hidden="true"></i></span></div>
+        <div class="ln"><span class="txt"><span class="t">14:02:02</span><span>DEBUG</span><span class="msg">cache hit session:u_8812</span><i class="strike" aria-hidden="true"></i></span></div>
+        <div class="ln"><span class="txt"><span class="t">14:02:02</span><span>INFO</span><span class="msg">GET /static/app.css 304</span><i class="strike" aria-hidden="true"></i></span></div>
+        <div class="ln"><span class="txt"><span class="t">14:02:03</span><span>INFO</span><span class="msg">worker-2 job done queue=emails</span><i class="strike" aria-hidden="true"></i></span></div>
+        <div class="ln"><span class="txt"><span class="t">14:02:03</span><span>DEBUG</span><span class="msg">cache hit session:u_5530</span><i class="strike" aria-hidden="true"></i></span></div>
+        <figcaption>Sample lines. Struck lines are routine; the highlighted one is what <code>tracewell why</code> surfaces.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="chapter" id="how" aria-labelledby="how-h">
+    <div class="chapter-pin">
+      <div class="wrap chapter-grid">
+        <div>
+          <h2 id="how-h">Ingest, ask why, share the link.</h2>
+          <ol class="steps">
+            <li data-step="1" class="is-active">
+              <span class="idx">(01)</span>
+              <code>tracewell ingest</code>
+              <p>Streams logs from files, Docker or Kubernetes.</p>
+            </li>
+            <li data-step="2">
+              <span class="idx">(02)</span>
+              <code>tracewell why --since 15m</code>
+              <p>Ranks lines by how unusual they are compared with the last 7 days.</p>
+            </li>
+            <li data-step="3">
+              <span class="idx">(03)</span>
+              <code>Share the explanation link</code>
+              <p>Send it to the team. They open the same line, with the reason.</p>
+            </li>
+          </ol>
+        </div>
+
+        <div class="stage">
+          <div class="panel term" role="group" aria-label="Sample terminal session">
+            <div class="panel-bar"><span>~/checkout · zsh</span><span>sample session</span></div>
+            <div class="panel-body">
+              <p class="cmdline c1"><span class="ps" aria-hidden="true">$ </span><span class="typed typed1">tracewell ingest</span></p>
+              <p class="out o1">following  docker      checkout-api</p>
+              <p class="out o1">following  kubernetes  orders-db-0</p>
+              <p class="out o1">reading    files       /var/log/nginx/access.log</p>
+
+              <p class="cmdline c2"><span class="ps" aria-hidden="true">$ </span><span class="typed typed2">tracewell why --since 15m</span></p>
+              <p class="out o2 head">ranked against the last 7 days, most unusual kept</p>
+              <div class="ln o2"><span class="txt"><span class="t">14:01:58</span><span>INFO</span><span class="msg">GET /healthz 200</span><i class="strike" aria-hidden="true"></i></span><span class="tag">seen daily</span></div>
+              <div class="ln o2"><span class="txt"><span class="t">14:02:00</span><span>DEBUG</span><span class="msg">cache hit session:u_0417</span><i class="strike" aria-hidden="true"></i></span><span class="tag">seen daily</span></div>
+              <div class="ln key o2"><span class="txt"><span class="t">14:02:01</span><span>WARN</span><span class="msg">orders-db: remaining connection slots are reserved for non-replication superuser connections</span></span><span class="tag">#1 · not in 7 days</span></div>
+              <div class="ln o2"><span class="txt"><span class="t">14:02:02</span><span>INFO</span><span class="msg">GET /static/app.css 304</span><i class="strike" aria-hidden="true"></i></span><span class="tag">seen daily</span></div>
+              <div class="ln o2"><span class="txt"><span class="t">14:02:03</span><span>INFO</span><span class="msg">worker-2 job done queue=emails</span><i class="strike" aria-hidden="true"></i></span><span class="tag">seen daily</span></div>
+            </div>
+          </div>
+
+          <article class="panel result" aria-labelledby="res-h">
+            <div class="panel-bar"><span>Tracewell · incident</span><span>last 15 minutes</span></div>
+            <div class="panel-body">
+              <h3 id="res-h">orders-db has no connection slots left.</h3>
+              <div class="ln key"><span class="txt"><span class="t">14:02:01</span><span>WARN</span><span class="msg">orders-db: remaining connection slots are reserved for non-replication superuser connections</span></span></div>
+              <p class="reason">Not seen in the previous 7 days. Every other line in this window is routine.</p>
+              <div class="share">
+                <code>tracewell.dev/i/r3k9x2</code>
+                <button class="btn" type="button" data-copy="tracewell.dev/i/r3k9x2" aria-label="Copy explanation link"><span class="lbl">Copy link</span></button>
+              </div>
+            </div>
+          </article>
+          <p class="note">Sample session. The log lines and the link are illustrative.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing" id="pricing" aria-labelledby="price-h">
+    <div class="wrap">
+      <h2 id="price-h">Free for one. $12 a seat for the team.</h2>
+      <div class="plans">
+        <article class="plan">
+          <h3>Free</h3>
+          <p class="sub"><span class="amt">1</span> user</p>
+          <ul class="specs">
+            <li>3 days of retention<span class="bar" aria-hidden="true"><i data-w="0.1" style="--w:0.1"></i></span></li>
+          </ul>
+        </article>
+        <article class="plan">
+          <h3>Team</h3>
+          <p class="sub"><span class="amt">$12</span> per seat per month</p>
+          <ul class="specs">
+            <li>30 days of retention<span class="bar" aria-hidden="true"><i data-w="1" style="--w:1"></i></span></li>
+            <li>Shared incidents</li>
+            <li>SSO</li>
+          </ul>
+        </article>
+      </div>
+      <p class="note">Bars show retention on one scale: 3 days against 30.</p>
+    </div>
+  </section>
+
+  <section class="install" id="install" aria-labelledby="inst-h">
+    <div class="wrap install-grid">
+      <div>
+        <h2 id="inst-h">Install it, then ask why.</h2>
+        <p class="lede">One command, then point it at your logs.</p>
+      </div>
+      <div class="ways">
+        <div class="way">
+          <span class="label">Homebrew</span>
+          <div class="cmd">
+            <code>brew install tracewell</code>
+            <button class="btn" type="button" data-copy="brew install tracewell" aria-label="Copy Homebrew install command"><span class="lbl">Copy</span></button>
+          </div>
+        </div>
+        <div class="way">
+          <span class="label">Shell script</span>
+          <div class="cmd">
+            <code>curl -fsSL https://tracewell.dev/install.sh | sh</code>
+            <button class="btn" type="button" data-copy="curl -fsSL https://tracewell.dev/install.sh | sh" aria-label="Copy shell script install command"><span class="lbl">Copy</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p><a class="mark" href="#top" style="font-family:var(--mono);font-size:1rem;text-decoration:none">tracewell</a> finds the one log line that explains an incident.</p>
+    <ul>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#install">Install</a></li>
+    </ul>
+  </div>
+</footer>
+
+<p id="live" class="sr" role="status" aria-live="polite"></p>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var root = document.documentElement;
+
+  /* ── copy buttons (no motion, always on) ── */
+  var live = document.getElementById("live");
+  document.querySelectorAll("[data-copy]").forEach(function (btn) {
+    var lbl = btn.querySelector(".lbl"), original = lbl.textContent, timer;
+    btn.addEventListener("click", function () {
+      var text = btn.getAttribute("data-copy");
+      var done = function (ok) {
+        lbl.textContent = ok ? "Copied" : "Press Ctrl+C";
+        live.textContent = ok ? "Copied: " + text : "Copy failed. Select the command and copy it by hand.";
+        clearTimeout(timer);
+        timer = setTimeout(function () { lbl.textContent = original; }, 1800);
+      };
+      var fallback = function () {
+        var ta = document.createElement("textarea");
+        ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        var ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+        document.body.removeChild(ta); done(ok);
+      };
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(function () { done(true); }, fallback);
+      else fallback();
+    });
+  });
+
+  /* ── motion (Tier 2) ── */
+  if (!root.classList.contains("js-motion")) return;
+  if (!window.gsap || !window.ScrollTrigger) { root.classList.remove("js-motion"); return; }
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* outward from the highlighted line: the strike spreads from what matters */
+  function outward(rows) {
+    var k = rows.findIndex(function (r) { return r.classList.contains("key"); });
+    return rows
+      .map(function (r, i) { return { r: r, d: Math.abs(i - k) }; })
+      .filter(function (x) { return !x.r.classList.contains("key"); })
+      .sort(function (a, b) { return a.d - b.d; })
+      .map(function (x) { return x.r.querySelector(".strike"); });
+  }
+
+  /* hero strike + retention bars: motion preference only */
+  var mmA = gsap.matchMedia();
+  mmA.add("(prefers-reduced-motion: no-preference)", function () {
+    var tape = Array.prototype.slice.call(document.querySelectorAll(".tape .ln"));
+    gsap.to(outward(tape), { scaleX: 1, duration: 0.4, ease: "power3.out", stagger: 0.11, delay: 0.5 });
+
+    document.querySelectorAll(".bar i").forEach(function (bar) {
+      gsap.fromTo(bar, { scaleX: 0 }, { scaleX: parseFloat(bar.dataset.w), duration: 0.8, ease: "power3.out",
+        scrollTrigger: { trigger: ".plans", start: "top 75%", once: true } });
+    });
+    return function () { root.classList.remove("js-motion"); };
+  });
+
+  /* the session: pinned and scrubbed on big screens, struck on arrival elsewhere */
+  var chapter = document.querySelector(".chapter");
+  var pin = chapter.querySelector(".chapter-pin");
+  var steps = Array.prototype.slice.call(chapter.querySelectorAll(".steps li"));
+  var termRows = Array.prototype.slice.call(chapter.querySelectorAll(".term .ln"));
+  var termStrikes = outward(termRows);
+
+  var mmB = gsap.matchMedia();
+  mmB.add({ motion: "(prefers-reduced-motion: no-preference)", wide: "(min-width: 900px) and (min-height: 760px)" }, function (ctx) {
+    if (!ctx.conditions.motion) return;
+
+    if (!ctx.conditions.wide) {
+      gsap.to(termStrikes, { scaleX: 1, duration: 0.4, ease: "power3.out", stagger: 0.12,
+        scrollTrigger: { trigger: ".term .head", start: "top 80%", once: true } });
+      return;
+    }
+
+    chapter.classList.add("is-pinned");
+    var q = function (s) { return chapter.querySelectorAll(s); };
+    var typed1 = q(".typed1"), typed2 = q(".typed2");
+    var o1 = q(".o1"), c2 = q(".c2"), o2 = q(".o2"), result = chapter.querySelector(".result");
+
+    gsap.set(q(".typed1, .typed2"), { clipPath: "inset(0 100% 0 0)" });
+    /* reveals use a wipe + visibility, never opacity: text keeps its full contrast in every frame */
+    var wipeOut = { clipPath: "inset(0 0 100% 0)", visibility: "hidden" };
+    gsap.set(o1, Object.assign({ y: 8 }, wipeOut));
+    gsap.set(c2, { visibility: "hidden" });
+    gsap.set(o2, Object.assign({ y: 8 }, wipeOut));
+    gsap.set(result, { y: 24, visibility: "hidden" }); /* the panel carries its own background, so it slides whole */
+    gsap.set(termStrikes, { scaleX: 0 });
+
+    var setStep = function (n) { steps.forEach(function (li, i) { li.classList.toggle("is-active", i === n - 1); }); };
+
+    var tl = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: {
+        trigger: pin, start: "top top", end: "+=200%", pin: true, scrub: 0.6, anticipatePin: 1, invalidateOnRefresh: true,
+        onUpdate: function (self) { setStep(self.progress < 0.28 ? 1 : self.progress < 0.68 ? 2 : 3); }
+      }
+    });
+    tl.to(typed1, { clipPath: "inset(0 0% 0 0)", duration: 0.1, ease: "steps(16)" }, 0.02)
+      .to(o1, { clipPath: "inset(0 0 0% 0)", visibility: "visible", y: 0, duration: 0.05, stagger: 0.04 }, 0.13)
+      .set(c2, { visibility: "visible" }, 0.3)
+      .to(typed2, { clipPath: "inset(0 0% 0 0)", duration: 0.12, ease: "steps(25)" }, 0.31)
+      .to(o2, { clipPath: "inset(0 0 0% 0)", visibility: "visible", y: 0, duration: 0.04, stagger: 0.025 }, 0.45)
+      .to(termStrikes, { scaleX: 1, duration: 0.05, stagger: 0.025 }, 0.6)
+      .to(result, { visibility: "visible", y: 0, duration: 0.12 }, 0.7)
+      .to({}, { duration: 0.18 }, 0.82);
+
+    return function () { chapter.classList.remove("is-pinned"); setStep(1); };
+  });
+
+  document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+});
+</script>
+</body>
+</html>

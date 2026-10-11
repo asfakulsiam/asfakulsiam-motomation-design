@@ -1,0 +1,60 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 7101,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Brilliant execution of the brief with a standout timeline feature that ties directly into the 'light and brick' positioning. The CSS/SVG graphics are evocative and structural, perfectly matching the architectural context, and the typography establishes a sophisticated, quiet mood."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A clean and functional layout with an appropriate warm color palette. However, the abstract geometric header and simpler project graphics feel less integrated with the core architectural themes compared to the other site, resulting in a less compelling narrative."
+  },
+  "better": "A",
+  "why": "Site A delivers a much stronger, bespoke visual concept with its interactive timeline and superior CSS/SVG graphics that directly translate the brief's themes."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A clean and functional layout with an appropriate warm color palette. However, the abstract geometric header and simpler project graphics feel less integrated with the core architectural themes compared to the other site, resulting in a less compelling narrative."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Brilliant execution of the brief with a standout timeline feature that ties directly into the 'light and brick' positioning. The CSS/SVG graphics are evocative and structural, perfectly matching the architectural context, and the typography establishes a sophisticated, quiet mood."
+ }
+}

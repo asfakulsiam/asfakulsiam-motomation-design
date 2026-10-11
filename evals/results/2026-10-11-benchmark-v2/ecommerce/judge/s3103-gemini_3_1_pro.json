@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 3103,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "A pleasant, warm design with nice CSS illustrations, but the layout remains fairly standard for e-commerce. It fails the contrast hard gate, likely due to the small orange text used for tags and dates on the light background."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "An exceptional editorial approach that feels like a premium print catalog. The scroll-tied timeline that changes the cup's illustration from raw clay to glazed is a brilliant, thematic use of motion and technology."
+  },
+  "better": "B",
+  "why": "Site B executes a highly original, flawless editorial concept with brilliant storytelling mechanics, whereas Site A has contrast accessibility failures."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "A pleasant, warm design with nice CSS illustrations, but the layout remains fairly standard for e-commerce. It fails the contrast hard gate, likely due to the small orange text used for tags and dates on the light background."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "An exceptional editorial approach that feels like a premium print catalog. The scroll-tied timeline that changes the cup's illustration from raw clay to glazed is a brilliant, thematic use of motion and technology."
+ }
+}

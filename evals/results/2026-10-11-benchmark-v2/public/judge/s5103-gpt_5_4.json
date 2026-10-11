@@ -1,0 +1,60 @@
+{
+ "model": "gpt_5_4",
+ "seed": 5103,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a strong single idea: a restrained editorial identity paired with drawn mangrove forms, and that idea carries from hero to data section to forms. The type and bilingual handling are much more distinctive and confident than a typical non-profit template; motion is inferred rather than seen, but the reduced-motion state preserves content and the sapling grid/water note suggests purposeful storytelling."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B is clean, competent, and accessible, but it feels more like a polished standard public-interest landing page than a singular concept. The illustration and forms are well handled, yet the structure is conventional and the typographic voice is less ownable; motion is hard to judge from stills and appears likely modest rather than concept-driving."
+  },
+  "better": "A",
+  "why": "A is the more memorable and fully authored design, with stronger concept, originality, and typographic identity while still meeting the access and performance checks."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B is clean, competent, and accessible, but it feels more like a polished standard public-interest landing page than a singular concept. The illustration and forms are well handled, yet the structure is conventional and the typographic voice is less ownable; motion is hard to judge from stills and appears likely modest rather than concept-driving."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a strong single idea: a restrained editorial identity paired with drawn mangrove forms, and that idea carries from hero to data section to forms. The type and bilingual handling are much more distinctive and confident than a typical non-profit template; motion is inferred rather than seen, but the reduced-motion state preserves content and the sapling grid/water note suggests purposeful storytelling."
+ }
+}

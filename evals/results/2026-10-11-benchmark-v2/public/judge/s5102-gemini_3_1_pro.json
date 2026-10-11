@@ -1,0 +1,60 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 5102,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 2,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 2,
+    "Craft": 2,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "Relies on a generic layout and an illustration that doesn't connect meaningfully to the data. Crucially, it omits most of the provided content for the 'How we work' section. The counter animation is also confusing, displaying arbitrary numbers alongside the actual statistic."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [],
+   "notes": "Delivers a sophisticated, editorial design with beautiful typography and a clever 140-square grid concept that directly visualizes the brief's main statistic. Its main flaw is a common but severe reduced-motion anti-pattern: freezing the counter at '0' instead of snapping to the final value."
+  },
+  "better": "B",
+  "why": "Site B's elegant typography, complete inclusion of the brief's content, and clever data visualization far outclass Site A's generic, incomplete approach, despite B's flaw in handling reduced motion."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 2,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 2,
+   "Craft": 2,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "Relies on a generic layout and an illustration that doesn't connect meaningfully to the data. Crucially, it omits most of the provided content for the 'How we work' section. The counter animation is also confusing, displaying arbitrary numbers alongside the actual statistic."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [],
+  "notes": "Delivers a sophisticated, editorial design with beautiful typography and a clever 140-square grid concept that directly visualizes the brief's main statistic. Its main flaw is a common but severe reduced-motion anti-pattern: freezing the counter at '0' instead of snapping to the final value."
+ }
+}

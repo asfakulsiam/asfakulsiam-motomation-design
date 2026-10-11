@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 4103,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Executes the brief reliably with a literal but cohesive door motif and solid accessibility fundamentals. While the typography is elegant, the overall layout feels a bit safe and blocky compared to high-end boutique expectations."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "Presents a highly sophisticated, editorial design with gorgeous typographic hierarchy and a strong central visual motif. Unfortunately, it fails the contrast hard gate (likely on inline links or gold kicker labels), invalidating an otherwise excellent aesthetic execution."
+  },
+  "better": "A",
+  "why": "Although Site B possesses a vastly superior and premium aesthetic, Site A wins by default as Site B fails a hard gate for text contrast."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "Presents a highly sophisticated, editorial design with gorgeous typographic hierarchy and a strong central visual motif. Unfortunately, it fails the contrast hard gate (likely on inline links or gold kicker labels), invalidating an otherwise excellent aesthetic execution."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Executes the brief reliably with a literal but cohesive door motif and solid accessibility fundamentals. While the typography is elegant, the overall layout feels a bit safe and blocky compared to high-end boutique expectations."
+ }
+}

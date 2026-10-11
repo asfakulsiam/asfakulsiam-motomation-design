@@ -1,0 +1,63 @@
+{
+ "375": {
+  "pageHeight": 4749,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 4182,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 4,
+    "text": "Donate\nদান",
+    "href": "#donate",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 19193,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 4217,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4749,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 0,
+   "words": 1,
+   "motion": 0,
+   "names": 0
+  },
+  "stamp": "gate: c0 o0 w1 rm0 a0 · gate/1 · 01ae958ce4",
+  "critique": "C?[no-record] H4[375:1] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0]",
+  "contrast": [],
+  "overflow": [],
+  "words": [
+   {
+    "el": "p#fig-h.big",
+    "text": "140hectares · হেক্টর",
+    "problem": "word \"140hectares\" breaks across lines"
+   }
+  ],
+  "motion": [],
+  "names": []
+ }
+}

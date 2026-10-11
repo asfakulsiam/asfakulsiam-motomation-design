@@ -1,0 +1,60 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 4102,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Masterful execution of a core concept with the interactive doors. The typography is elegant and perfectly suited to a historical boutique hotel. The reduced motion fallback is exceptionally well-thought-out, presenting the 'open' state immediately without the scroll animation."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [],
+   "notes": "The design is functional but feels a bit like a standard template with a few bespoke illustrations dropped in. The icons in the room section detract from the luxury boutique feel, and it suffers from an accessibility contrast violation."
+  },
+  "better": "A",
+  "why": "Site A delivers a highly sophisticated, conceptually strong experience with flawless execution and accessibility considerations."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [],
+  "notes": "The design is functional but feels a bit like a standard template with a few bespoke illustrations dropped in. The icons in the room section detract from the luxury boutique feel, and it suffers from an accessibility contrast violation."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Masterful execution of a core concept with the interactive doors. The typography is elegant and perfectly suited to a historical boutique hotel. The reduced motion fallback is exceptionally well-thought-out, presenting the 'open' state immediately without the scroll animation."
+ }
+}

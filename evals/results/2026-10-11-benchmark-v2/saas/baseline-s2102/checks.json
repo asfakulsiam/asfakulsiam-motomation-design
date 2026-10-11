@@ -1,0 +1,201 @@
+{
+ "375": {
+  "pageHeight": 4048,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 14
+   },
+   {
+    "id": "scrollable-region-focusable",
+    "impact": "serious",
+    "nodes": 2
+   }
+  ],
+  "contrastViolations": 14
+ },
+ "1440": {
+  "pageHeight": 2863,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 13
+   }
+  ],
+  "contrastViolations": 13,
+  "keyboard": {
+   "primaryReached": {
+    "step": 4,
+    "text": "Pricing",
+    "href": "#pricing",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "37/40"
+  },
+  "source": {
+   "bytes": 14907,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 2863,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4048,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 14,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0
+  },
+  "stamp": "gate: c14 o0 w0 rm0 a0 · gate/1 · f87e5feadb",
+  "critique": "C?[no-record] H4[375:1] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V2[entrance-repeats:3]",
+  "contrast": [
+   {
+    "el": "span.p",
+    "text": "$",
+    "ratio": 3.74,
+    "need": 4.5,
+    "fg": "#6f7266",
+    "bg": "#131511",
+    "size": 13.6
+   },
+   {
+    "el": "span",
+    "text": "terminal",
+    "ratio": 3.74,
+    "need": 4.5,
+    "fg": "#6f7266",
+    "bg": "#131511",
+    "size": 12
+   },
+   {
+    "el": "span",
+    "text": "tracewell.dev / incident",
+    "ratio": 3.74,
+    "need": 4.5,
+    "fg": "#6f7266",
+    "bg": "#131511",
+    "size": 12
+   },
+   {
+    "el": "span",
+    "text": "Most unusual line",
+    "ratio": 3.74,
+    "need": 4.5,
+    "fg": "#6f7266",
+    "bg": "#131511",
+    "size": 12
+   },
+   {
+    "el": "span",
+    "text": "last 15m vs. last 7 days",
+    "ratio": 3.74,
+    "need": 4.5,
+    "fg": "#6f7266",
+    "bg": "#131511",
+    "size": 12
+   },
+   {
+    "el": "span",
+    "text": "INFO",
+    "ratio": 3.26,
+    "need": 4.5,
+    "fg": "#6f7266",
+    "bg": "#131511",
+    "size": 11.52
+   },
+   {
+    "el": "span",
+    "text": "retrying request to ledger-db attempt=2",
+    "ratio": 3.26,
+    "need": 4.5,
+    "fg": "#6f7266",
+    "bg": "#131511",
+    "size": 11.52
+   },
+   {
+    "el": "span",
+    "text": "INFO",
+    "ratio": 3.26,
+    "need": 4.5,
+    "fg": "#6f7266",
+    "bg": "#131511",
+    "size": 11.52
+   },
+   {
+    "el": "span",
+    "text": "retrying request to ledger-db attempt=3",
+    "ratio": 3.26,
+    "need": 4.5,
+    "fg": "#6f7266",
+    "bg": "#131511",
+    "size": 11.52
+   },
+   {
+    "el": "span",
+    "text": "WARN",
+    "ratio": 3.26,
+    "need": 4.5,
+    "fg": "#6f7266",
+    "bg": "#131511",
+    "size": 11.52
+   },
+   {
+    "el": "span",
+    "text": "request took longer than expected path=/charge",
+    "ratio": 3.26,
+    "need": 4.5,
+    "fg": "#6f7266",
+    "bg": "#131511",
+    "size": 11.52
+   },
+   {
+    "el": "p.note",
+    "text": "Illustrative example of the result view. Log lines",
+    "ratio": 3.74,
+    "need": 4.5,
+    "fg": "#6f7266",
+    "bg": "#131511",
+    "size": 11.52
+   },
+   {
+    "el": "span.p",
+    "text": "$",
+    "ratio": 3.74,
+    "need": 4.5,
+    "fg": "#6f7266",
+    "bg": "#131511",
+    "size": 13.6
+   },
+   {
+    "el": "span.p",
+    "text": "$",
+    "ratio": 3.74,
+    "need": 4.5,
+    "fg": "#6f7266",
+    "bg": "#131511",
+    "size": 13.6
+   }
+  ],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

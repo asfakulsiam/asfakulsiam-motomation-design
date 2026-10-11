@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 4102,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a very clear governing idea—the house’s doors—and carries it through hero, room counts, breakfast skyline, house history, and arrival with unusual restraint. Typography and layout feel bespoke and precise, and the reduced-motion version still preserves the narrative by revealing the courtyard rather than hiding content. Motion is inferred rather than seen, but the normal vs reduced screenshots suggest story-led interaction instead of generic decoration."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "B has a coherent door-based idea and keeps booking highly visible, but it feels more like a polished editorial template than a singular identity tied to this house. The typography is elegant and the content is organized clearly, though several sections are more conventional and the sticky booking bar on mobile crowds the composition. Motion may support the door metaphor, but from the stills it appears modest and somewhat generic; in any case the contrast failure triggers a hard gate."
+  },
+  "better": "A",
+  "why": "A is more conceptually complete, more original in structure and signature, and it passes all hard gates while B fails contrast."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "B has a coherent door-based idea and keeps booking highly visible, but it feels more like a polished editorial template than a singular identity tied to this house. The typography is elegant and the content is organized clearly, though several sections are more conventional and the sticky booking bar on mobile crowds the composition. Motion may support the door metaphor, but from the stills it appears modest and somewhat generic; in any case the contrast failure triggers a hard gate."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a very clear governing idea—the house’s doors—and carries it through hero, room counts, breakfast skyline, house history, and arrival with unusual restraint. Typography and layout feel bespoke and precise, and the reduced-motion version still preserves the narrative by revealing the courtyard rather than hiding content. Motion is inferred rather than seen, but the normal vs reduced screenshots suggest story-led interaction instead of generic decoration."
+ }
+}

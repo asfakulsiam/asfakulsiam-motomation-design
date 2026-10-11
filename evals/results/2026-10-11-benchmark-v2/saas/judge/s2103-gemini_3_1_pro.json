@@ -1,0 +1,60 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 2103,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a striking and highly relevant concept. The 'log scanner' visualization in the hero perfectly communicates the value proposition without relying on generic imagery. The stark, terminal-inspired aesthetic is executed with confidence and directly speaks to the target developer audience."
+  },
+  "B": {
+   "scores": {
+    "Concept": 2,
+    "Originality": 1,
+    "Typography": 2,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B applies a generic SaaS template to the brief, resulting in a design that lacks a distinct identity or connection to the product's specific function. While the content is present, the visual execution is uninspired, and it suffers from a structural accessibility violation."
+  },
+  "better": "A",
+  "why": "Site A features a highly original, bespoke design concept that perfectly matches the developer audience and core product value, whereas Site B is entirely generic."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 2,
+   "Originality": 1,
+   "Typography": 2,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B applies a generic SaaS template to the brief, resulting in a design that lacks a distinct identity or connection to the product's specific function. While the content is present, the visual execution is uninspired, and it suffers from a structural accessibility violation."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a striking and highly relevant concept. The 'log scanner' visualization in the hero perfectly communicates the value proposition without relying on generic imagery. The stark, terminal-inspired aesthetic is executed with confidence and directly speaks to the target developer audience."
+ }
+}

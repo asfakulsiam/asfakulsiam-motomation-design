@@ -1,0 +1,60 @@
+{
+ "model": "gpt_5_4",
+ "seed": 3101,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a clear editorial concept built around the firing process, and it carries from hero through story, shelf, and delivery sections. The typography is the strongest asset: large serif display, restrained supporting text, and strong hierarchy feel considered on both desktop and mobile. Motion is inferred rather than seen, but the reduced-motion version still preserves the narrative structure, suggesting purposeful scroll storytelling without breaking accessibility."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B has an attractive hero and good product-card clarity, but the concept is less consistently carried through and the page pacing is uneven, with large empty areas and a weaker first full-page screenshot. Typography is elegant in the hero and section headings, though the rest feels more conventional and card-driven. Motion likely centers on the firing timeline/progress bar, but from the stills it reads more generic, and overall craft is hurt by spacing imbalance and the awkward mobile overlap in the featured product card."
+  },
+  "better": "A",
+  "why": "A is the more complete and coherent response to the brief, with stronger editorial identity, tighter craft, and a firing story that feels integrated rather than appended."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B has an attractive hero and good product-card clarity, but the concept is less consistently carried through and the page pacing is uneven, with large empty areas and a weaker first full-page screenshot. Typography is elegant in the hero and section headings, though the rest feels more conventional and card-driven. Motion likely centers on the firing timeline/progress bar, but from the stills it reads more generic, and overall craft is hurt by spacing imbalance and the awkward mobile overlap in the featured product card."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a clear editorial concept built around the firing process, and it carries from hero through story, shelf, and delivery sections. The typography is the strongest asset: large serif display, restrained supporting text, and strong hierarchy feel considered on both desktop and mobile. Motion is inferred rather than seen, but the reduced-motion version still preserves the narrative structure, suggesting purposeful scroll storytelling without breaking accessibility."
+ }
+}

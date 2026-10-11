@@ -1,0 +1,60 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 5101,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A is a highly functional and accessible execution that safely meets all brief requirements. However, it relies heavily on generic template patterns and basic visual choices, resulting in a site that lacks a distinct identity."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B establishes a strong, editorial visual identity through excellent typography and a distinctive illustration style. Its major flaw is the handling of the animated counter: by entirely hiding the animated section for reduced-motion users, it inadvertently removes the required source citation from the page."
+  },
+  "better": "B",
+  "why": "Site B's vastly superior typography and original editorial layout create a much stronger brand identity, outweighing the clunky reduced-motion fallback that slightly compromises its content delivery."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A is a highly functional and accessible execution that safely meets all brief requirements. However, it relies heavily on generic template patterns and basic visual choices, resulting in a site that lacks a distinct identity."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B establishes a strong, editorial visual identity through excellent typography and a distinctive illustration style. Its major flaw is the handling of the animated counter: by entirely hiding the animated section for reduced-motion users, it inadvertently removes the required source citation from the page."
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 2102,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a stunning, highly original editorial concept that perfectly visualizes the 'finding the needle in the haystack' metaphor through struck-through typography. The execution is flawless, combining elegant serif headings with crisp terminal elements while passing all accessibility checks."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "Site B relies on a predictable, generic dark-mode developer tool aesthetic that lacks a distinct identity. Furthermore, it fails a hard gate due to multiple severe color contrast violations, making secondary text and terminal output difficult to read."
+  },
+  "better": "A",
+  "why": "Site A is a masterful, unexpected take on the brief that perfectly aligns form and function, whereas Site B is a generic template marred by severe accessibility failures."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "Site B relies on a predictable, generic dark-mode developer tool aesthetic that lacks a distinct identity. Furthermore, it fails a hard gate due to multiple severe color contrast violations, making secondary text and terminal output difficult to read."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a stunning, highly original editorial concept that perfectly visualizes the 'finding the needle in the haystack' metaphor through struck-through typography. The execution is flawless, combining elegant serif headings with crisp terminal elements while passing all accessibility checks."
+ }
+}

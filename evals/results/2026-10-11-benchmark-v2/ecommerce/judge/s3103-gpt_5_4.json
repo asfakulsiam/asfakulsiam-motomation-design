@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 3103,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "There is a coherent warm editorial/shop direction, and the hero plus firing section communicate the brief clearly. But the shop section feels underdeveloped and the overall system becomes sparse rather than intentional in places; measured contrast failures trigger a hard gate, and that overrides otherwise decent keyboard and reduced-motion handling."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "This carries one strong idea throughout: a restrained editorial catalog paired with a process timeline, and it stays convincing on desktop and mobile. Typography, layout hierarchy, and drawn product imagery are much more deliberate than A, and the checks show clean accessibility/performance basics with no gate failures; motion is inferred to support the narrative, though still-image review limits certainty."
+  },
+  "better": "B",
+  "why": "B is the stronger and more complete design, and A fails a hard accessibility gate for contrast."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "There is a coherent warm editorial/shop direction, and the hero plus firing section communicate the brief clearly. But the shop section feels underdeveloped and the overall system becomes sparse rather than intentional in places; measured contrast failures trigger a hard gate, and that overrides otherwise decent keyboard and reduced-motion handling."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "This carries one strong idea throughout: a restrained editorial catalog paired with a process timeline, and it stays convincing on desktop and mobile. Typography, layout hierarchy, and drawn product imagery are much more deliberate than A, and the checks show clean accessibility/performance basics with no gate failures; motion is inferred to support the narrative, though still-image review limits certainty."
+ }
+}

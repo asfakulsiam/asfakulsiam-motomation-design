@@ -1,0 +1,60 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 7102,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "An exceptional execution centered around a brilliant, interactive core idea: the time-of-day light dial that dynamically shades every SVG illustration on the page. The typography is elegant and perfectly suited to an architectural portfolio, while the craft of the responsive SVGs is outstanding."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A solid, clean design with a nice grid motif that nods to brickwork, but it functions mostly as a standard list of sections. The minimalist, almost 8-bit SVG illustrations are an interesting aesthetic choice, though they feel slightly disconnected from the elegant serif typography."
+  },
+  "better": "A",
+  "why": "Site A elevates a standard portfolio into an interactive experience with its brilliant light-dial concept, directly answering the brief's themes in a highly original and beautifully crafted way."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A solid, clean design with a nice grid motif that nods to brickwork, but it functions mostly as a standard list of sections. The minimalist, almost 8-bit SVG illustrations are an interesting aesthetic choice, though they feel slightly disconnected from the elegant serif typography."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "An exceptional execution centered around a brilliant, interactive core idea: the time-of-day light dial that dynamically shades every SVG illustration on the page. The typography is elegant and perfectly suited to an architectural portfolio, while the craft of the responsive SVGs is outstanding."
+ }
+}

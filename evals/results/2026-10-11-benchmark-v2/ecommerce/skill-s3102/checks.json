@@ -1,0 +1,57 @@
+{
+ "375": {
+  "pageHeight": 3708,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 3841,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 6,
+    "text": "Add to receipt",
+    "href": "",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "37/40"
+  },
+  "source": {
+   "bytes": 27856,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": "motomation · archetype: letter · mutation: invert-axis · signature: receipt-print · tier: 2 · critique: C5[restraint:kept] H4[375:1] S5[last5:no-log] R5[cuts:3,anim:4] M5[t2:pins1/2,webgl0/1,js50/80KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 · gate/1 · 203772e0b3 "
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3841,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 3708,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0
+  },
+  "stamp": "gate: c0 o0 w0 rm0 a0 · gate/1 · 203772e0b3",
+  "critique": "C5[restraint:kept] H4[375:1] S5[last5:none] R5[cuts:3,anim:4] M5[t2:pins1/2,webgl0/1,js50/80KB,rm0] V5[entrance-repeats:0]",
+  "contrast": [],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

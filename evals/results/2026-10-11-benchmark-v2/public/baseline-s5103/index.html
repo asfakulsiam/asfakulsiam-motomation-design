@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sundari Trust — Bringing the mangroves back | ম্যানগ্রোভ ফিরিয়ে আনি</title>
+<meta name="description" content="Sundari Trust restores mangroves in the Sundarbans buffer zone with local communities. Donate or volunteer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Hind+Siliguri:wght@400;500;600&family=Noto+Serif+Bengali:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f6f1e6;--ink:#12281f;--muted:#43544b;--green:#1d5c45;--deep:#0f2e24;--clay:#8a3d1e;--line:#cfc6b0;--soft:#ebe4d2;--sun:#f0c987}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1.0625rem/1.65 Inter,"Hind Siliguri",system-ui,sans-serif;overflow-x:hidden}
+:lang(bn),.bn{font-family:"Hind Siliguri","Noto Serif Bengali",sans-serif;line-height:1.8}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.15;margin:0}
+.bn-h{font-family:"Noto Serif Bengali","Hind Siliguri",serif;font-weight:700;line-height:1.5;display:block}
+a{color:var(--green)}
+:focus-visible{outline:3px solid var(--clay);outline-offset:3px;border-radius:2px}
+.skip{position:absolute;left:1rem;top:-4rem;background:var(--deep);color:#fff;padding:.7rem 1rem;z-index:10}
+.skip:focus{top:1rem}
+.wrap{max-width:1160px;margin:0 auto;padding:0 1.25rem}
+header.top{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;align-items:center;justify-content:space-between;padding:1rem 0}
+.brand{font:600 1.25rem Fraunces,serif;text-decoration:none;color:var(--ink)}
+.brand span{font-family:"Noto Serif Bengali",serif;font-weight:700;color:var(--green);margin-left:.4rem;font-size:1.05rem}
+nav ul{display:flex;flex-wrap:wrap;gap:.25rem 1.25rem;list-style:none;margin:0;padding:0}
+nav a{color:var(--ink);text-decoration:none;padding:.5rem 0;display:inline-block;font-weight:500;font-size:.95rem}
+nav a:hover{text-decoration:underline}
+.hero{display:grid;gap:2rem;padding:2.5rem 0 4rem;align-items:center}
+@media(min-width:900px){.hero{grid-template-columns:1.15fr .85fr;padding:4rem 0 5rem}}
+.eyebrow{font-weight:600;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--clay);margin:0 0 1rem}
+.hero h1{font-size:clamp(2.1rem,5.5vw,4rem)}
+.hero h1 .bn-h{font-size:clamp(2.2rem,6vw,4.2rem);color:var(--green);margin-bottom:.3rem}
+.hero p.lead{font-size:1.2rem;max-width:34rem;margin:1.5rem 0 2rem}
+.btns{display:flex;flex-wrap:wrap;gap:.75rem}
+.btn{display:inline-block;padding:.85rem 1.5rem;border-radius:999px;font:600 1rem Inter,sans-serif;text-decoration:none;border:2px solid var(--green);cursor:pointer;min-height:48px}
+.btn.p{background:var(--green);color:#fff}.btn.p:hover{background:var(--deep)}
+.btn.s{background:transparent;color:var(--green)}.btn.s:hover{background:var(--soft)}
+.art{width:100%;height:auto;display:block;border-radius:1.5rem;background:linear-gradient(#f7e3bd,#f1d4a0 55%,#cfe0cf 55%,#9cc0b0)}
+.fig{background:var(--deep);color:var(--paper);padding:4rem 0}
+.fig .wrap{display:grid;gap:1.5rem;align-items:end}
+@media(min-width:800px){.fig .wrap{grid-template-columns:auto 1fr;gap:3rem}}
+.big{font:600 clamp(4.5rem,14vw,9rem)/1 Fraunces,serif;color:var(--sun)}
+.fig p{margin:.25rem 0;max-width:36rem;font-size:1.15rem}
+.fig .src{font-size:.95rem;color:#c9d8cf}
+section.s{padding:4.5rem 0}
+.sh{margin-bottom:2.25rem;max-width:42rem}
+.sh h2{font-size:clamp(1.8rem,4vw,2.6rem)}
+.sh .bn-h{font-size:clamp(1.6rem,3.6vw,2.3rem);color:var(--green);margin-bottom:.2rem}
+.cols{display:grid;gap:1.25rem}
+@media(min-width:800px){.cols.three{grid-template-columns:repeat(3,1fr)}.cols.two{grid-template-columns:1fr 1fr}}
+.card{background:var(--soft);border-radius:1rem;padding:1.5rem;border:1px solid var(--line)}
+.card h3{font-size:1.3rem;margin-bottom:.5rem}
+.card .bn{display:block;font-weight:600;color:var(--green);margin-bottom:.5rem}
+.card p{margin:0}
+.alt{background:var(--soft)}
+form{background:var(--paper);border:1px solid var(--line);border-radius:1rem;padding:1.5rem}
+fieldset{border:0;margin:0 0 1.25rem;padding:0}
+legend,label.l{font-weight:600;margin-bottom:.5rem;display:block;padding:0}
+.opt{position:relative;display:block}
+.opt input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.opt>span{display:block;border:2px solid var(--line);border-radius:.75rem;padding:.75rem 1rem;background:#fff;height:100%}
+.opt b{font-family:Fraunces,serif;font-size:1.25rem}
+.opt small{display:block;color:var(--muted)}
+.opt input:checked+span{border-color:var(--green);background:#e4efe8}
+.opt input:focus-visible+span{outline:3px solid var(--clay);outline-offset:2px}
+.freq{display:flex;gap:.6rem;flex-wrap:wrap}.freq .opt{flex:1;min-width:130px}
+.field{margin-bottom:1rem}
+input[type=text],input[type=email],input[type=tel],select{width:100%;font:inherit;padding:.75rem .9rem;border:2px solid #6d7a72;border-radius:.6rem;background:#fff;color:var(--ink);min-height:48px}
+.hint{color:var(--muted);font-size:.9rem;margin:.75rem 0 0}
+.msg{margin-top:1rem;padding:1rem;border-radius:.6rem;background:#e4efe8;border:1px solid var(--green);display:none}
+.msg.on{display:block}
+.err{color:#9b1c1c;font-size:.95rem;margin:.5rem 0 0}
+.season{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0 0}
+.season span{background:var(--deep);color:var(--paper);padding:.4rem 1rem;border-radius:999px;font-weight:500}
+footer{background:var(--deep);color:var(--paper);padding:3rem 0}
+footer a{color:var(--sun)}
+footer p{margin:.3rem 0}
+.js .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.js .rv.in{opacity:1;transform:none}
+.sway{transform-origin:50% 100%;transform-box:fill-box;animation:sway 7s ease-in-out infinite alternate}
+@keyframes sway{to{transform:rotate(1.6deg)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.sway{animation:none}.js .rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<header class="top">
+  <a class="brand" href="#top">Sundari Trust<span lang="bn">সুন্দরী ট্রাস্ট</span></a>
+  <nav aria-label="Main"><ul>
+    <li><a href="#work">Our work · <span lang="bn">কাজ</span></a></li>
+    <li><a href="#donate">Donate · <span lang="bn">দান</span></a></li>
+    <li><a href="#volunteer">Volunteer · <span lang="bn">স্বেচ্ছাসেবা</span></a></li>
+    <li><a href="#contact">Contact · <span lang="bn">যোগাযোগ</span></a></li>
+  </ul></nav>
+</header>
+</div>
+
+<main id="main">
+<div class="wrap">
+<section class="hero" id="top">
+  <div>
+    <p class="eyebrow">Sundarbans buffer zone · <span lang="bn">সুন্দরবনের বাফার অঞ্চল</span></p>
+    <h1><span class="bn-h" lang="bn">ম্যানগ্রোভ ফিরিয়ে আনি</span>Bringing the mangroves back</h1>
+    <p class="lead">Sundari Trust restores mangroves in the Sundarbans buffer zone, working alongside local communities, one nursery tray and one plot at a time.</p>
+    <p class="lead bn" lang="bn" style="margin-top:-1rem">স্থানীয় মানুষের সঙ্গে মিলে আমরা সুন্দরবনের বাফার অঞ্চলে ম্যানগ্রোভ ফিরিয়ে আনছি।</p>
+    <div class="btns">
+      <a class="btn p" href="#donate">Donate · <span lang="bn">দান করুন</span></a>
+      <a class="btn s" href="#volunteer">Volunteer · <span lang="bn">স্বেচ্ছাসেবী হোন</span></a>
+    </div>
+  </div>
+  <svg class="art" viewBox="0 0 400 420" role="img" aria-label="Illustration of young mangrove trees on arching roots at the water's edge at sunrise">
+    <circle cx="270" cy="170" r="58" fill="#f0c987"/>
+    <g class="sway">
+      <g stroke="#1d5c45" stroke-width="5" fill="none" stroke-linecap="round"><path d="M110 250c-30 40-34 70-36 100M110 250c0 40 6 70 8 100M110 250c28 38 40 66 48 100"/><path d="M110 250V150" stroke-width="7"/></g>
+      <g fill="#2f7a5c"><ellipse cx="110" cy="130" rx="46" ry="32"/><ellipse cx="78" cy="160" rx="28" ry="20"/><ellipse cx="142" cy="160" rx="28" ry="20"/></g>
+    </g>
+    <g class="sway" style="animation-delay:-3s">
+      <g stroke="#1d5c45" stroke-width="4" fill="none" stroke-linecap="round"><path d="M270 290c-20 25-24 48-26 70M270 290c0 24 4 48 6 70M270 290c20 24 28 44 34 70"/><path d="M270 290v-60" stroke-width="5"/></g>
+      <g fill="#3b8c6a"><ellipse cx="270" cy="215" rx="32" ry="22"/><ellipse cx="248" cy="238" rx="19" ry="14"/><ellipse cx="292" cy="238" rx="19" ry="14"/></g>
+    </g>
+    <g stroke="#1d5c45" stroke-width="3" fill="none" stroke-linecap="round"><path d="M340 350v-40M340 330c-8-6-12-14-12-20M340 322c8-6 12-12 12-18"/><path d="M200 350v-26M200 342c-7-5-10-12-10-18M200 336c7-5 10-10 10-16"/></g>
+    <path d="M0 360c60-10 100 10 160 0s120-10 240 0V420H0z" fill="#6ea08c"/>
+    <path d="M0 385c70-8 120 8 200 0s130-8 200 0V420H0z" fill="#4c8068"/>
+  </svg>
+</section>
+</div>
+
+<section class="fig" aria-labelledby="figh">
+  <div class="wrap">
+    <div class="big" aria-hidden="true">140</div>
+    <div>
+      <h2 id="figh" style="font-size:1.6rem">140 hectares replanted since 2019</h2>
+      <p class="bn" lang="bn">২০১৯ সাল থেকে ১৪০ হেক্টর পুনঃরোপণ</p>
+      <p class="src">Source: Sundari Trust annual report 2025</p>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="work" aria-labelledby="workh">
+<div class="wrap">
+  <div class="sh rv"><span class="bn-h" lang="bn">আমাদের কাজ</span><h2 id="workh">How the work happens</h2></div>
+  <div class="cols three">
+    <article class="card rv"><h3>Community nurseries</h3><span class="bn" lang="bn">কমিউনিটি নার্সারি</span><p>Women's groups in Shyamnagar and Koyra run the nurseries where mangrove seedlings are raised.</p></article>
+    <article class="card rv"><h3>Planting in the monsoon</h3><span class="bn" lang="bn">বর্ষায় রোপণ</span><p>Planting happens in the monsoon season, together with local communities.</p></article>
+    <article class="card rv"><h3>Three years of care</h3><span class="bn" lang="bn">তিন বছরের পরিচর্যা</span><p>Every plot is looked after for three years.</p></article>
+  </div>
+</div>
+</section>
+
+<section class="s alt" id="donate" aria-labelledby="donh">
+<div class="wrap">
+  <div class="sh rv"><span class="bn-h" lang="bn">দান করুন</span><h2 id="donh">Help grow the next plot</h2><p>Give once or every month. Choose what you'd like to fund.</p></div>
+  <form id="donform" class="rv" novalidate>
+    <fieldset><legend>Amount · <span lang="bn">পরিমাণ</span></legend>
+      <div class="cols three" style="gap:.6rem">
+        <label class="opt"><input type="radio" name="amt" value="500" checked><span><b>৳500</b><small>grows a nursery tray</small></span></label>
+        <label class="opt"><input type="radio" name="amt" value="2,000"><span><b>৳2,000</b><small>plants a plot row</small></span></label>
+        <label class="opt"><input type="radio" name="amt" value="10,000"><span><b>৳10,000</b><small>funds a season of care</small></span></label>
+      </div>
+    </fieldset>
+    <fieldset><legend>Frequency · <span lang="bn">কতবার</span></legend>
+      <div class="freq">
+        <label class="opt"><input type="radio" name="freq" value="one-time" checked><span>One-time · <span lang="bn">একবার</span></span></label>
+        <label class="opt"><input type="radio" name="freq" value="monthly"><span>Monthly · <span lang="bn">প্রতি মাসে</span></span></label>
+      </div>
+    </fieldset>
+    <button class="btn p" type="submit">Donate · <span lang="bn">দান করুন</span></button>
+    <p class="hint">This is a demonstration form; no payment is taken.</p>
+    <div class="msg" id="donmsg" role="status" aria-live="polite" tabindex="-1"></div>
+  </form>
+</div>
+</section>
+
+<section class="s" id="volunteer" aria-labelledby="volh">
+<div class="wrap">
+  <div class="sh rv"><span class="bn-h" lang="bn">স্বেচ্ছাসেবী হোন</span><h2 id="volh">Plant with us</h2>
+    <p>Planting season runs July–September. <span lang="bn">রোপণের মৌসুম জুলাই–সেপ্টেম্বর।</span></p>
+    <div class="season" aria-hidden="true"><span>July</span><span>August</span><span>September</span></div></div>
+  <form id="volform" class="rv" novalidate>
+    <div class="cols two">
+      <div class="field"><label class="l" for="vn">Name · <span lang="bn">নাম</span></label><input id="vn" type="text" autocomplete="name" required></div>
+      <div class="field"><label class="l" for="ve">Email · <span lang="bn">ইমেইল</span></label><input id="ve" type="email" autocomplete="email" required></div>
+      <div class="field"><label class="l" for="vp">Phone · <span lang="bn">ফোন</span></label><input id="vp" type="tel" autocomplete="tel" required></div>
+      <div class="field"><label class="l" for="vm">Preferred month · <span lang="bn">পছন্দের মাস</span></label>
+        <select id="vm" required><option value="">Choose a month</option><option>July</option><option>August</option><option>September</option></select></div>
+    </div>
+    <button class="btn p" type="submit">Sign up · <span lang="bn">নাম লেখান</span></button>
+    <p class="err" id="volerr" role="alert"></p>
+    <div class="msg" id="volmsg" role="status" aria-live="polite" tabindex="-1"></div>
+  </form>
+</div>
+</section>
+</main>
+
+<footer id="contact">
+<div class="wrap">
+  <h2 style="font-size:1.6rem">Contact · <span lang="bn">যোগাযোগ</span></h2>
+  <p><a href="mailto:hello@sundaritrust.org">hello@sundaritrust.org</a></p>
+  <p>Sundari Trust · <span lang="bn">সুন্দরী ট্রাস্ট</span></p>
+</div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var rvs=document.querySelectorAll('.rv');
+if(rm||!('IntersectionObserver' in window)){rvs.forEach(function(e){e.classList.add('in')})}
+else{var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});rvs.forEach(function(e){io.observe(e)})}
+function $(id){return document.getElementById(id)}
+$('donform').addEventListener('submit',function(e){
+  e.preventDefault();
+  var f=e.target,m=$('donmsg');
+  m.textContent='Thank you. Your '+f.freq.value+' gift of ৳'+f.amt.value+' is noted (demo only; no payment was taken). ধন্যবাদ।';
+  m.classList.add('on');m.focus();
+});
+$('volform').addEventListener('submit',function(e){
+  e.preventDefault();
+  var n=$('vn'),em=$('ve'),p=$('vp'),mo=$('vm'),er=$('volerr'),m=$('volmsg');
+  m.classList.remove('on');er.textContent='';
+  var checks=[[n,'name'],[em,'email'],[p,'phone number'],[mo,'preferred month']];
+  for(var i=0;i<checks.length;i++){
+    var x=checks[i][0];
+    if(!x.value.trim()||(x===em&&!em.validity.valid)){er.textContent='Please enter a valid '+checks[i][1]+'.';x.focus();return}
+  }
+  m.textContent='Thank you, '+n.value.trim()+'. We will write to '+em.value.trim()+' about planting in '+mo.value+'. ধন্যবাদ।';
+  m.classList.add('on');m.focus();e.target.reset();
+});
+</script>
+</body>
+</html>

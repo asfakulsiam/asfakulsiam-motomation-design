@@ -1,0 +1,73 @@
+{
+ "375": {
+  "pageHeight": 4664,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 3114,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 9,
+    "text": "Add to cart",
+    "href": "",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 22555,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3114,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4664,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 0,
+   "words": 3,
+   "motion": 0,
+   "names": 0
+  },
+  "stamp": "gate: c0 o0 w3 rm0 a0 · gate/1 · eea4b2b2e8",
+  "critique": "C?[no-record] H2[375:3] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V4[entrance-repeats:1]",
+  "contrast": [],
+  "overflow": [],
+  "words": [
+   {
+    "el": "div.n",
+    "text": "3days",
+    "problem": "word \"3days\" breaks across lines"
+   },
+   {
+    "el": "div.n",
+    "text": "36hours",
+    "problem": "word \"36hours\" breaks across lines"
+   },
+   {
+    "el": "div.n",
+    "text": "4days",
+    "problem": "word \"4days\" breaks across lines"
+   }
+  ],
+  "motion": [],
+  "names": []
+ }
+}

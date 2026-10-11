@@ -1,0 +1,60 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 3102,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Delivers a warm, artisanal feel with pleasant SVG illustrations and an organic color palette. The layout is clean and functional, though it adheres to a fairly standard e-commerce structure for the shop section."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 3,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A striking, editorial approach that brilliantly structures the firing story in reverse ('Last step first'). Its bold typography, confident use of negative space, and unique list-based shop view create a highly memorable and premium experience."
+  },
+  "better": "B",
+  "why": "Site B's inventive layout concept and exceptional typographic hierarchy make it a more distinctive and engaging interpretation of the brief."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Delivers a warm, artisanal feel with pleasant SVG illustrations and an organic color palette. The layout is clean and functional, though it adheres to a fairly standard e-commerce structure for the shop section."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 3,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A striking, editorial approach that brilliantly structures the firing story in reverse ('Last step first'). Its bold typography, confident use of negative space, and unique list-based shop view create a highly memorable and premium experience."
+ }
+}

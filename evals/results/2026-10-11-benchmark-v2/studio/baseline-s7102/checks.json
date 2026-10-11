@@ -1,0 +1,83 @@
+{
+ "375": {
+  "pageHeight": 6533,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 6967,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 6,
+    "text": "Contact",
+    "href": "#contact",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "36/40"
+  },
+  "source": {
+   "bytes": 15685,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 6967,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 6533,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 0,
+   "words": 5,
+   "motion": 0,
+   "names": 0
+  },
+  "stamp": "gate: c0 o0 w5 rm0 a0 · gate/1 · 49b6db1cb6",
+  "critique": "C?[no-record] H1[375:5] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V3[entrance-repeats:2]",
+  "contrast": [],
+  "overflow": [],
+  "words": [
+   {
+    "el": "h3#p0",
+    "text": "01Courtyard House",
+    "problem": "word \"01Courtyard\" breaks across lines"
+   },
+   {
+    "el": "h3#p1",
+    "text": "02Jali House",
+    "problem": "word \"02Jali\" breaks across lines"
+   },
+   {
+    "el": "h3#p2",
+    "text": "03River Room",
+    "problem": "word \"03River\" breaks across lines"
+   },
+   {
+    "el": "h3#p3",
+    "text": "04Brick Library",
+    "problem": "word \"04Brick\" breaks across lines"
+   },
+   {
+    "el": "h3#p4",
+    "text": "05Twin Courts",
+    "problem": "word \"05Twin\" breaks across lines"
+   }
+  ],
+  "motion": [],
+  "names": []
+ }
+}

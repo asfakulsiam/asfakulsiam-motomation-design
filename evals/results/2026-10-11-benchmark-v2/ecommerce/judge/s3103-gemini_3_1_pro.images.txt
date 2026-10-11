@@ -1,0 +1,8 @@
+/home/user/workspace/repo/evals/results/2026-10-11-benchmark-v2/ecommerce/baseline-s3103/shot-1440-fold.png
+/home/user/workspace/repo/evals/results/2026-10-11-benchmark-v2/ecommerce/baseline-s3103/shot-1440-full.png
+/home/user/workspace/repo/evals/results/2026-10-11-benchmark-v2/ecommerce/baseline-s3103/shot-375-full.png
+/home/user/workspace/repo/evals/results/2026-10-11-benchmark-v2/ecommerce/baseline-s3103/shot-1440-reduced-full.png
+/home/user/workspace/repo/evals/results/2026-10-11-benchmark-v2/ecommerce/skill-s3103/shot-1440-fold.png
+/home/user/workspace/repo/evals/results/2026-10-11-benchmark-v2/ecommerce/skill-s3103/shot-1440-full.png
+/home/user/workspace/repo/evals/results/2026-10-11-benchmark-v2/ecommerce/skill-s3103/shot-375-full.png
+/home/user/workspace/repo/evals/results/2026-10-11-benchmark-v2/ecommerce/skill-s3103/shot-1440-reduced-full.png

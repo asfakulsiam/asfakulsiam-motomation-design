@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 2102,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 3,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a strong editorial-console concept carried consistently through hero, process, pricing and install, and it fulfills the brief's requirement to show both the terminal session and result view. Typography is the main identity here: the serif display paired with monospaced UI feels distinctive and well controlled. Motion is hard to verify from stills and the reduced-motion version appears essentially unchanged, so it seems safe and restrained rather than story-driving."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "B is clear and product-oriented, with a credible dark-mode developer-tool feel and a solid walkthrough of ingest, ranking and sharing. The product panels are useful, but the overall structure and visual language read closer to a polished SaaS template than a singular idea. It fails the hard gate on contrast with 13 serious color-contrast violations, which forces the run to zero regardless of other strengths."
+  },
+  "better": "A",
+  "why": "A wins because it passes all hard gates and delivers a more distinctive, fully realized concept with stronger typographic identity and equally strong product demonstration."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "B is clear and product-oriented, with a credible dark-mode developer-tool feel and a solid walkthrough of ingest, ranking and sharing. The product panels are useful, but the overall structure and visual language read closer to a polished SaaS template than a singular idea. It fails the hard gate on contrast with 13 serious color-contrast violations, which forces the run to zero regardless of other strengths."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 3,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a strong editorial-console concept carried consistently through hero, process, pricing and install, and it fulfills the brief's requirement to show both the terminal session and result view. Typography is the main identity here: the serif display paired with monospaced UI feels distinctive and well controlled. Motion is hard to verify from stills and the reduced-motion version appears essentially unchanged, so it seems safe and restrained rather than story-driving."
+ }
+}

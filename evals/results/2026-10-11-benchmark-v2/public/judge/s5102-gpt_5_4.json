@@ -1,0 +1,68 @@
+{
+ "model": "gpt_5_4",
+ "seed": 5102,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [
+    "Invented statistic shown in normal/mobile screens: '99 hectares' and '122 hectares' conflict with the brief's only allowed figure of 140 hectares."
+   ],
+   "notes": "A has a coherent mangrove-landscape concept and strong bilingual headline presence, with warm public-interest tone and solid form usability. The main failure is severe: the impact figure is inconsistent across screens, which breaks factual trust; otherwise the page is clean, accessible, and visually well-made."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [
+    "Invented/incorrect statistic shown in normal/mobile screens: '0 hectares replanted since 2019' conflicts with the brief's only allowed figure of 140 hectares."
+   ],
+   "notes": "B has the clearer idea: a restrained editorial system built around counting, plots, and growth stages, and that idea carries through structure, type, and diagrams. Typography and information design are more distinctive than A, though the temporary wrong '0 hectares' state in screenshots is a hard factual failure and some mobile spacing feels less resolved."
+  },
+  "better": "B",
+  "why": "B is the stronger design overall because its concept, originality, and typographic system are more distinctive and consistently tied to the story, despite both entries failing the factual hard gate."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [
+   "Invented statistic shown in normal/mobile screens: '99 hectares' and '122 hectares' conflict with the brief's only allowed figure of 140 hectares."
+  ],
+  "notes": "A has a coherent mangrove-landscape concept and strong bilingual headline presence, with warm public-interest tone and solid form usability. The main failure is severe: the impact figure is inconsistent across screens, which breaks factual trust; otherwise the page is clean, accessible, and visually well-made."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [
+   "Invented/incorrect statistic shown in normal/mobile screens: '0 hectares replanted since 2019' conflicts with the brief's only allowed figure of 140 hectares."
+  ],
+  "notes": "B has the clearer idea: a restrained editorial system built around counting, plots, and growth stages, and that idea carries through structure, type, and diagrams. Typography and information design are more distinctive than A, though the temporary wrong '0 hectares' state in screenshots is a hard factual failure and some mobile spacing feels less resolved."
+ }
+}

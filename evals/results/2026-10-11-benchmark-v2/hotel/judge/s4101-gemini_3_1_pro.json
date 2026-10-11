@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 4101,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 3,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A presents a highly cohesive concept with its vertical timeline navigation, creating a strong sense of place and narrative journey. The typography is exceptional, and the execution is flawless across viewports without compromising accessibility."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 3,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "Site B introduces a charming interactive door concept as its signature, but the overall layout feels less refined and cohesive as you scroll. Unfortunately, it suffers from a serious contrast failure in the automated checks, triggering a hard gate."
+  },
+  "better": "A",
+  "why": "Site A executes a unique, narrative-driven layout with flawless typography and craft, whereas Site B fails an accessibility hard gate and lacks the same cohesive polish."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 3,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "Site B introduces a charming interactive door concept as its signature, but the overall layout feels less refined and cohesive as you scroll. Unfortunately, it suffers from a serious contrast failure in the automated checks, triggering a hard gate."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 3,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A presents a highly cohesive concept with its vertical timeline navigation, creating a strong sense of place and narrative journey. The typography is exceptional, and the execution is flawless across viewports without compromising accessibility."
+ }
+}

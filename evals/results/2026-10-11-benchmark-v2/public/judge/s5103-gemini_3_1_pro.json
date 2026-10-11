@@ -1,0 +1,60 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 5103,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "An exceptional execution that turns the key statistic into a core conceptual piece. The scroll-driven 'receding water' animation to reveal 140 saplings is brilliant, and its static fallback for reduced motion is perfect. The bilingual typography is confident, striking, and deeply integrated into the identity."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A clean, functional, and accessible response to the brief. However, it relies heavily on standard structural patterns and feels much closer to a generic template. The typography is safe and the visual language, while pleasant, lacks the conceptual depth of a bespoke solution."
+  },
+  "better": "A",
+  "why": "Site A delivers a deeply original, concept-driven experience with superior typography and a masterclass in meaningful motion design with accessible fallbacks."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A clean, functional, and accessible response to the brief. However, it relies heavily on standard structural patterns and feels much closer to a generic template. The typography is safe and the visual language, while pleasant, lacks the conceptual depth of a bespoke solution."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "An exceptional execution that turns the key statistic into a core conceptual piece. The scroll-driven 'receding water' animation to reveal 140 saplings is brilliant, and its static fallback for reduced motion is perfect. The bilingual typography is confident, striking, and deeply integrated into the identity."
+ }
+}

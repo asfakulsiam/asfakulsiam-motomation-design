@@ -1,0 +1,60 @@
+{
+ "model": "gpt_5_4",
+ "seed": 7103,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a very clear governing idea: light moving through brick and into a courtyard, and it carries from the hero into every project image and plan. The typography is excellent and feels like the identity, though some plan panels are a bit sparse or diagrammatically weak compared with the richness of the images. Motion seems concept-driven via the sun slider, but from stills I can't verify how polished the transitions feel in full motion."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B also has a strong light-and-brick concept, with a moody brick field and consistent project system, but it is less singular than A and drifts closer to a refined portfolio template. The plans are clearer and more architectural than A's, and the overall page craft is very tight on both desktop and mobile. Motion appears purposeful through the shared light-control device, though this is somewhat uncertain from screenshots alone."
+  },
+  "better": "A",
+  "why": "A feels more authored and memorable, with a stronger typographic signature and a clearer concept threaded through the entire experience."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B also has a strong light-and-brick concept, with a moody brick field and consistent project system, but it is less singular than A and drifts closer to a refined portfolio template. The plans are clearer and more architectural than A's, and the overall page craft is very tight on both desktop and mobile. Motion appears purposeful through the shared light-control device, though this is somewhat uncertain from screenshots alone."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a very clear governing idea: light moving through brick and into a courtyard, and it carries from the hero into every project image and plan. The typography is excellent and feels like the identity, though some plan panels are a bit sparse or diagrammatically weak compared with the richness of the images. Motion seems concept-driven via the sun slider, but from stills I can't verify how polished the transitions feel in full motion."
+ }
+}
