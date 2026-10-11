@@ -6,6 +6,8 @@
 Original, award-level websites that are minimal, modern and typography-led, with motion as the signature.
 At the top tier, scrolling plays like a film.
 
+**New here? [Start here → what it is, who it's for, and what a session looks like](ABOUT.md)**
+
 [![License: MIT](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](LICENSE)
 [![Version](https://img.shields.io/badge/version-2.3.0-E0442B?style=flat-square)](CHANGELOG.md)
 [![Agent Skill](https://img.shields.io/badge/agent%20skill-npx%20skills%20add-111111?style=flat-square)](#install)
