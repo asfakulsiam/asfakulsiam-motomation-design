@@ -66,12 +66,22 @@ const tokens = estimateTokens(out);
 if (tokens > TOKEN_BUDGET) { console.error(`motomation-lite.md is ~${tokens} tokens, over the ${TOKEN_BUDGET} budget. Trim the selection in scripts/build-lite.mjs.`); process.exit(1); }
 
 const target = join(ROOT, "dist/motomation-lite.md");
+// The README states the lite size between markers. This script writes it, so the number is generated, never typed:
+// <!-- lite-tokens -->about 7.8k tokens<!-- /lite-tokens -->  (rounded to 0.1k, from the same estimate as the budget)
+const README = join(ROOT, "README.md");
+const claim = `<!-- lite-tokens -->about ${(tokens / 1000).toFixed(1)}k tokens<!-- /lite-tokens -->`;
+const MARK = /<!-- lite-tokens -->[\s\S]*?<!-- \/lite-tokens -->/;
+const readme = readFileSync(README, "utf8");
+if (!MARK.test(readme)) { console.error("README.md has no <!-- lite-tokens --> marker for the lite size."); process.exit(1); }
 if (process.argv.includes("--check")) {
   let current = ""; try { current = readFileSync(target, "utf8"); } catch {}
   if (current !== out) { console.error("dist/motomation-lite.md is out of date. Run: node scripts/build-lite.mjs"); process.exit(1); }
+  const said = readme.match(MARK)[0];
+  if (said !== claim) { console.error(`README says "${said.replace(/<!--[^>]*-->/g, "")}" but the lite is ~${tokens} tokens ("${claim.replace(/<!--[^>]*-->/g, "")}"). Run: node scripts/build-lite.mjs`); process.exit(1); }
   console.log(`lite is up to date (~${tokens} tokens, budget ${TOKEN_BUDGET})`);
 } else {
   mkdirSync(join(ROOT, "dist"), { recursive: true });
   writeFileSync(target, out);
+  if (readme.match(MARK)[0] !== claim) writeFileSync(README, readme.replace(MARK, claim));
   console.log(`Wrote dist/motomation-lite.md (${(out.length / 1024).toFixed(1)} KB, ~${tokens} tokens estimated, budget ${TOKEN_BUDGET})`);
 }
