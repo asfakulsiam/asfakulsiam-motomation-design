@@ -1,0 +1,3 @@
+/* @motomation-variant · id: ink-fill · react: skills/asfakulsiam-motomation-design/examples/components/type/ink-fill.tsx */
+/* No styles of its own: the element keeps your type; only word colours change (set by ink-fill.js). */
+.mm-ink-fill { color: var(--ink, #111); }

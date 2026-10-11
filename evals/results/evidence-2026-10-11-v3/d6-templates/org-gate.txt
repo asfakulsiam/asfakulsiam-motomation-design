@@ -1,0 +1,46 @@
+### org
+$ node skills/asfakulsiam-motomation-design/scripts/memory.mjs check --project skills/asfakulsiam-motomation-design/examples/templates --archetype manifesto --signature seismograph-line --tier 2 --sections hero-org-manifesto,features-org-impact,team-org-field-guide,cta-org-donate,footer-org-seismograph
+IDs
+✓ archetype "manifesto" is fresh
+✓ signature "seismograph-line" is fresh
+✗ tier "2" was used in 5 of the last 5 runs → choose another
+Structure  (fingerprint: layout=statement · sections=hero-org-manifesto>features-org-impact>team-org-field-guide>cta-org-donate>footer-org-seismograph · tier=2 · signature_type=cursor)
+✓ closest logged run is #1 at 41% (< 70%); shared: signature_type, tier
+$ node skills/asfakulsiam-motomation-design/scripts/memory.mjs log --project skills/asfakulsiam-motomation-design/examples/templates --archetype manifesto --mutation constraint --signature seismograph-line --fonts "Gloock/Schibsted Grotesk" --palette org --tier 2 --page org --sections hero-org-manifesto,features-org-impact,team-org-field-guide,cta-org-donate,footer-org-seismograph
+Logged run #6 to /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/.motomation/log.json
+  fingerprint: layout=statement · sections=hero-org-manifesto>features-org-impact>team-org-field-guide>cta-org-donate>footer-org-seismograph · tier=2 · signature_type=cursor
+DELIVERY GATE · skills/asfakulsiam-motomation-design/examples/templates/org.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (90 measured; 1 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (82 measured; 9 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (86 measured; 5 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (82 measured; 9 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (12 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (91 compared)
+  names     ✓ 0 missing alt / accessible names  (7 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (19 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  hierarchy  h1×1, 0 skipped heading levels, 21 element(s) tied for largest on the first 375px screen
+  structure  5 sections, entrances: static | static | static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 68KB gzipped
+  records    DESIGN.md: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/org/DESIGN.md · memory log: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/.motomation/log.json · stamp fields: {"archetype":"manifesto","mutation":"constraint","signature":"seismograph-line","tier":"2"}
+  critique → C4[restraint:changed1] H4[375:1] S5[last5:archetype-new,signature-new,fp41] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js68/80KB,rm0] V5[entrance-repeats:0]
+  PASS  stamp → critique: C4[restraint:changed1] H4[375:1] S5[last5:archetype-new,signature-new,fp41] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js68/80KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 3fd60de5b4
+
+DELIVERY GATE · skills/asfakulsiam-motomation-design/examples/templates/org.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (90 measured; 1 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (82 measured; 9 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (86 measured; 5 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (82 measured; 9 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (12 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (91 compared)
+  names     ✓ 0 missing alt / accessible names  (7 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (19 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  hierarchy  h1×1, 0 skipped heading levels, 21 element(s) tied for largest on the first 375px screen
+  structure  5 sections, entrances: static | static | static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 68KB gzipped
+  records    DESIGN.md: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/org/DESIGN.md · memory log: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/.motomation/log.json · stamp fields: {"archetype":"manifesto","mutation":"constraint","signature":"seismograph-line","tier":"2"}
+  critique → C4[restraint:changed1] H4[375:1] S5[last5:archetype-new,signature-new,fp41] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js68/80KB,rm0] V5[entrance-repeats:0]
+  PASS  stamp → critique: C4[restraint:changed1] H4[375:1] S5[last5:archetype-new,signature-new,fp41] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js68/80KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 3fd60de5b4
+
+STAMP VERIFIED · critique and gate numbers match a fresh scan · gate PASS

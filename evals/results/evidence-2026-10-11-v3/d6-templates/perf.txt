@@ -1,0 +1,19 @@
+ok   studio-portfolio   desktop fcp 192ms · lcp 192ms · tbt 9ms · cls 0.000 · scroll 180 frames 60.0 fps, p95 16.7 ms, dropped 0.0% · no console errors
+ok   studio-portfolio   mobile  fcp 236ms · lcp 236ms · tbt 170ms · cls 0.001 · scroll 163 frames 60.0 fps, p95 16.7 ms, dropped 0.0% · no console errors
+ok   saas-landing       desktop fcp 152ms · lcp 152ms · tbt 0ms · cls 0.000 · scroll 191 frames 60.0 fps, p95 16.7 ms, dropped 0.0% · no console errors
+ok   saas-landing       mobile  fcp 448ms · lcp 448ms · tbt 212ms · cls 0.001 · scroll 228 frames 59.2 fps, p95 16.7 ms, dropped 1.3% (slow frames in testimonial-saas-ink 3) · no console errors
+ok   shop-product       desktop fcp 156ms · lcp 156ms · tbt 0ms · cls 0.000 · scroll 335 frames 60.0 fps, p95 16.7 ms, dropped 0.0% · no console errors
+ok   shop-product       mobile  fcp 388ms · lcp 388ms · tbt 123ms · cls 0.000 · scroll 355 frames 60.0 fps, p95 16.8 ms, dropped 0.0% · no console errors
+ok   editorial-article  desktop fcp 140ms · lcp 140ms · tbt 0ms · cls 0.000 · scroll 64 frames 60.0 fps, p95 16.8 ms, dropped 0.0% · no console errors
+ok   editorial-article  mobile  fcp 348ms · lcp 348ms · tbt 114ms · cls 0.000 · scroll 79 frames 60.0 fps, p95 16.8 ms, dropped 0.0% · no console errors
+ok   hotel              desktop fcp 172ms · lcp 172ms · tbt 2ms · cls 0.000 · scroll 373 frames 60.0 fps, p95 16.7 ms, dropped 0.0% · no console errors
+ok   hotel              mobile  fcp 328ms · lcp 328ms · tbt 100ms · cls 0.000 · scroll 174 frames 60.0 fps, p95 16.8 ms, dropped 0.0% · no console errors
+ok   org                desktop fcp 156ms · lcp 156ms · tbt 0ms · cls 0.000 · scroll 162 frames 60.0 fps, p95 16.7 ms, dropped 0.0% · no console errors
+ok   org                mobile  fcp 364ms · lcp 364ms · tbt 194ms · cls 0.000 · scroll 186 frames 59.4 fps, p95 16.8 ms, dropped 0.5% (slow frames in features-org-impact 1) · no console errors
+ok   event              desktop fcp 168ms · lcp 168ms · tbt 0ms · cls 0.000 · scroll 132 frames 60.0 fps, p95 16.7 ms, dropped 0.0% · no console errors
+ok   event              mobile  fcp 352ms · lcp 352ms · tbt 97ms · cls 0.000 · scroll 113 frames 59.5 fps, p95 16.7 ms, dropped 0.9% (slow frames in team-event-lineup 1) · no console errors
+ok   personal           desktop fcp 108ms · lcp 108ms · tbt 0ms · cls 0.000 · scroll 66 frames 60.0 fps, p95 16.7 ms, dropped 0.0% · no console errors
+ok   personal           mobile  fcp 356ms · lcp 356ms · tbt 153ms · cls 0.000 · scroll 55 frames 60.0 fps, p95 16.7 ms, dropped 0.0% · no console errors
+
+8 templates × 2 profiles: all passed
+PERF-DONE 0

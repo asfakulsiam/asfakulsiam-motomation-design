@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Split Flap · CSS + HTML</title>
+<!-- @motomation-variant · id: split-flap · variant: CSS + HTML · react: skills/asfakulsiam-motomation-design/examples/components/type/split-flap.tsx · behaviour: split-flap.js (shared by both HTML variants) -->
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../_lib/demo.css">
+<link rel="stylesheet" href="split-flap.css">
+</head>
+<body>
+<main class="demo">
+<p class="demo-label">Next free start</p>
+<p class="demo-big"><span class="mm-split-flap" data-mm="split-flap" data-value="JAN 2027">JAN 2027</span></p>
+<button type="button" class="demo-button" onclick="const f=document.querySelector('[data-mm=split-flap]');f.dataset.value=f.dataset.value==='JAN 2027'?'MAR 2027':'JAN 2027'">Change the date</button>
+</main>
+<script type="module" src="split-flap.js"></script>
+</body>
+</html>

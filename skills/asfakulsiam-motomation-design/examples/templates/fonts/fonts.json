@@ -1,0 +1,136 @@
+[
+ {
+  "family": "Bodoni Moda",
+  "style": "italic",
+  "weight": "400 700",
+  "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+  "file": "BodoniModa-400-700-italic-latin.woff2"
+ },
+ {
+  "family": "Bodoni Moda",
+  "style": "normal",
+  "weight": "400 700",
+  "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+  "file": "BodoniModa-400-700-normal-latin.woff2"
+ },
+ {
+  "family": "Bricolage Grotesque",
+  "style": "normal",
+  "weight": "300 700",
+  "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+  "file": "BricolageGrotesque-300-700-normal-latin.woff2"
+ },
+ {
+  "family": "Cormorant Garamond",
+  "style": "italic",
+  "weight": "400 600",
+  "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+  "file": "CormorantGaramond-400-600-italic-latin.woff2"
+ },
+ {
+  "family": "Cormorant Garamond",
+  "style": "normal",
+  "weight": "400 600",
+  "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+  "file": "CormorantGaramond-400-600-normal-latin.woff2"
+ },
+ {
+  "family": "Familjen Grotesk",
+  "style": "normal",
+  "weight": "400 600",
+  "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+  "file": "FamiljenGrotesk-400-600-normal-latin.woff2"
+ },
+ {
+  "family": "Fraunces",
+  "style": "italic",
+  "weight": "300 700",
+  "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+  "file": "Fraunces-300-700-italic-latin.woff2"
+ },
+ {
+  "family": "Fraunces",
+  "style": "normal",
+  "weight": "300 700",
+  "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+  "file": "Fraunces-300-700-normal-latin.woff2"
+ },
+ {
+  "family": "Gloock",
+  "style": "normal",
+  "weight": "400",
+  "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+  "file": "Gloock-400-normal-latin.woff2"
+ },
+ {
+  "family": "Hanken Grotesk",
+  "style": "normal",
+  "weight": "400 700",
+  "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+  "file": "HankenGrotesk-400-700-normal-latin.woff2"
+ },
+ {
+  "family": "Hind Siliguri",
+  "style": "normal",
+  "weight": "400",
+  "unicodeRange": "U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2, U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1, U+11DF0-11DF1",
+  "file": "HindSiliguri-400-normal-bengali.woff2"
+ },
+ {
+  "family": "Hind Siliguri",
+  "style": "normal",
+  "weight": "600",
+  "unicodeRange": "U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2, U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1, U+11DF0-11DF1",
+  "file": "HindSiliguri-600-normal-bengali.woff2"
+ },
+ {
+  "family": "Instrument Serif",
+  "style": "italic",
+  "weight": "400",
+  "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+  "file": "InstrumentSerif-400-italic-latin.woff2"
+ },
+ {
+  "family": "Instrument Serif",
+  "style": "normal",
+  "weight": "400",
+  "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+  "file": "InstrumentSerif-400-normal-latin.woff2"
+ },
+ {
+  "family": "Schibsted Grotesk",
+  "style": "normal",
+  "weight": "400 700",
+  "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+  "file": "SchibstedGrotesk-400-700-normal-latin.woff2"
+ },
+ {
+  "family": "Young Serif",
+  "style": "normal",
+  "weight": "400",
+  "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+  "file": "YoungSerif-400-normal-latin.woff2"
+ },
+ {
+  "family": "Instrument Sans",
+  "style": "normal",
+  "weight": "400 600",
+  "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+  "file": "InstrumentSans-400-600-normal-latin.woff2"
+ },
+ {
+  "family": "JetBrains Mono",
+  "style": "normal",
+  "weight": "400",
+  "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+  "file": "JetBrainsMono-400-normal-latin.woff2"
+ },
+ {
+  "family": "Anybody",
+  "style": "normal",
+  "weight": "100 900",
+  "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+  "file": "Anybody-100-900-normal-latin.woff2",
+  "stretch": "50% 150%"
+ }
+]

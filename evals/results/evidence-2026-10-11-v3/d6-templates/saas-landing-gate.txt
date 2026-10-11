@@ -1,0 +1,46 @@
+### saas-landing
+$ node skills/asfakulsiam-motomation-design/scripts/memory.mjs check --project skills/asfakulsiam-motomation-design/examples/templates --archetype workbench --signature ink-fill --tier 2 --sections hero-saas-workbench,features-saas-bento,features-saas-console,testimonial-saas-ink,pricing-saas-switch,cta-saas-trial
+IDs
+✓ archetype "workbench" is fresh
+✓ signature "ink-fill" is fresh
+✗ tier "2" was used in 1 of the last 1 runs → choose another
+Structure  (fingerprint: layout=product · sections=hero-saas-workbench>features-saas-bento>features-saas-console>testimonial-saas-ink>pricing-saas-switch>cta-saas-trial · tier=2 · signature_type=type)
+✓ closest logged run is #1 at 18% (< 70%); shared: tier
+$ node skills/asfakulsiam-motomation-design/scripts/memory.mjs log --project skills/asfakulsiam-motomation-design/examples/templates --archetype workbench --mutation ui-is-content --signature ink-fill --fonts "Bricolage Grotesque/Hanken Grotesk" --palette saas-landing --tier 2 --page saas-landing --sections hero-saas-workbench,features-saas-bento,features-saas-console,testimonial-saas-ink,pricing-saas-switch,cta-saas-trial
+Logged run #2 to /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/.motomation/log.json
+  fingerprint: layout=product · sections=hero-saas-workbench>features-saas-bento>features-saas-console>testimonial-saas-ink>pricing-saas-switch>cta-saas-trial · tier=2 · signature_type=type
+DELIVERY GATE · skills/asfakulsiam-motomation-design/examples/templates/saas-landing.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (169 measured; 8 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (162 measured; 15 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (170 measured; 7 skipped; 3 not visible at scan time)
+     1440px  ✓ 0 below AA  (173 measured; 4 skipped; 1 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (12 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (177 compared)
+  names     ✓ 0 missing alt / accessible names  (5 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (36 numbers checked at scroll 0, scroll end and reduced motion; 14 live values skipped)
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  6 sections, entrances: fade+y | fade | fade | static | static | fade → 2 repeat(s); pins 0, WebGL canvases 0, JS 68KB gzipped
+  records    DESIGN.md: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/saas-landing/DESIGN.md · memory log: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/.motomation/log.json · stamp fields: {"archetype":"workbench","mutation":"ui-is-content","signature":"ink-fill","tier":"2"}
+  critique → C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp18] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js68/80KB,rm0] V3[entrance-repeats:2]
+  PASS  stamp → critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp18] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js68/80KB,rm0] V3[entrance-repeats:2] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 5f4e25882c
+
+DELIVERY GATE · skills/asfakulsiam-motomation-design/examples/templates/saas-landing.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (168 measured; 9 skipped; 1 not visible at scan time)
+      390px  ✓ 0 below AA  (162 measured; 15 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (170 measured; 7 skipped; 3 not visible at scan time)
+     1440px  ✓ 0 below AA  (173 measured; 4 skipped; 1 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (12 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (177 compared)
+  names     ✓ 0 missing alt / accessible names  (5 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (36 numbers checked at scroll 0, scroll end and reduced motion; 14 live values skipped)
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  6 sections, entrances: fade+y | fade | fade | static | static | fade → 2 repeat(s); pins 0, WebGL canvases 0, JS 68KB gzipped
+  records    DESIGN.md: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/saas-landing/DESIGN.md · memory log: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/.motomation/log.json · stamp fields: {"archetype":"workbench","mutation":"ui-is-content","signature":"ink-fill","tier":"2"}
+  critique → C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp18] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js68/80KB,rm0] V3[entrance-repeats:2]
+  PASS  stamp → critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp18] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js68/80KB,rm0] V3[entrance-repeats:2] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 5f4e25882c
+
+STAMP VERIFIED · critique and gate numbers match a fresh scan · gate PASS

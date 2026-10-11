@@ -1,0 +1,3 @@
+/* @motomation-variant · id: aperture · react: skills/asfakulsiam-motomation-design/examples/components/scroll/aperture.tsx */
+/* No styles of its own: aperture.js sets clip-path from scroll. Give the block its size (e.g. aspect-ratio). */
+.mm-aperture { overflow: hidden; }

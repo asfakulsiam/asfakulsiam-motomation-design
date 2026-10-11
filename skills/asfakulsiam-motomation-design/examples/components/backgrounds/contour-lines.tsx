@@ -10,7 +10,7 @@
 // avoid-when: Urban or tech brands without a land story; behind dense text.
 // reduced-motion: Still lines.
 // touch: Same as desktop.
-// a11y: Decorative SVG (aria-hidden). Each drift is a CSS transform, so it costs no JS per frame.
+// a11y: Decorative SVG (aria-hidden). The drift is a CSS transform on three composited layers: no JS and no repaint per frame.
 import { useMemo, type CSSProperties } from "react";
 import { useReducedMotion } from "../_lib/motion";
 
@@ -28,11 +28,17 @@ export function ContourLines({ lines = 14, seed = 7, color = "currentColor", sec
       return `M${mid(pts[pts.length - 1], pts[0])} ` + pts.map((p, k) => `Q${p[0].toFixed(1)},${p[1].toFixed(1)} ${mid(p, pts[(k + 1) % pts.length])}`).join(" ") + "Z";
     });
   }, [lines, seed]);
+  // three layers, each its own <svg> animated as a whole: transforms on an HTML-level box are composited, whereas
+  // transforms on paths inside one SVG repaint the whole drawing every frame
+  const layers = [0, 1, 2].map((g) => paths.filter((_, i) => i % 3 === g));
   return (
-    <svg aria-hidden="true" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" className={className} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", color, opacity: 0.35, ...style }}>
-      {paths.map((d, i) => <path key={i} d={d} fill="none" stroke="currentColor" strokeWidth={1} vectorEffect="non-scaling-stroke"
-        style={{ transformOrigin: "50% 50%", animation: reduce ? "none" : `mm-contour ${seconds + i}s ease-in-out ${-i * 1.3}s infinite alternate` }} />)}
+    <div aria-hidden="true" className={className} style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden", color, opacity: 0.35, ...style }}>
+      {layers.map((ds, g) => (
+        <svg key={g} viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", willChange: reduce ? undefined : "transform", animation: reduce ? "none" : `mm-contour ${seconds + g * 7}s ease-in-out ${-g * 4}s infinite ${g === 1 ? "alternate-reverse" : "alternate"}` }}>
+          {ds.map((d, i) => <path key={i} d={d} fill="none" stroke="currentColor" strokeWidth={1} vectorEffect="non-scaling-stroke" />)}
+        </svg>
+      ))}
       <style>{`@keyframes mm-contour{from{transform:translate(-6px,-3px) scale(.99)}to{transform:translate(6px,3px) scale(1.01)}}`}</style>
-    </svg>
+    </div>
   );
 }

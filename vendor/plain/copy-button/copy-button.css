@@ -1,0 +1,4 @@
+/* @motomation-variant · id: copy-button · react: skills/asfakulsiam-motomation-design/examples/components/micro/copy-button.tsx */
+.mm-copy-button { position: relative; display: inline-flex; align-items: center; gap: 8px; font: inherit; padding: 8px 14px; border-radius: 8px; border: 1px solid currentColor; background: transparent; color: inherit; cursor: pointer; }
+.mm-copy-button path { transition: d 200ms ease-out; }
+@media (prefers-reduced-motion: reduce) { .mm-copy-button path { transition: none; } }

@@ -1,0 +1,23 @@
+PASS  count-up           text same · reduced still y/y/y · errors 0
+PASS  split-flap         text same · after action same · reduced still y/y/y · errors 0
+PASS  copy-button        text same · after action same · reduced still y/y/y · errors 0
+PASS  ink-fill           text same · reduced still y/y/y · errors 0
+PASS  typewriter         text same · reduced still y/y/y · errors 0
+PASS  animated-list      text same · reduced still y/y/y · errors 0
+PASS  contour-lines      text same · reduced still y/y/y · errors 0
+PASS  glow-border        text same · reduced still y/y/y · errors 0
+PASS  rotating-words     text same · reduced still y/y/y · errors 0
+PASS  squish-switch      text same · after action same · reduced still y/y/y · errors 0
+PASS  tilt-card          text same · reduced still y/y/y · errors 0
+PASS  velocity-marquee   text same · reduced still y/y/y · errors 0
+PASS  flowing-menu       text same · reduced still y/y/y · errors 0
+PASS  grain              text same · reduced still y/y/y · errors 0
+PASS  scramble-on-hover  text same · reduced still y/y/y · errors 0
+PASS  shimmer-button     text same · reduced still y/y/y · errors 0
+PASS  aperture           text same · reduced still y/y/y · errors 0
+PASS  beams              text same · reduced still y/y/y · errors 0
+PASS  bento-reveal       text same · reduced still y/y/y · errors 0
+PASS  blur-focus         text same · reduced still y/y/y · errors 0
+
+20/20 components match across React, CSS + HTML and Tailwind
+CMP-DONE 0

@@ -1,0 +1,46 @@
+### shop-product
+$ node skills/asfakulsiam-motomation-design/scripts/memory.mjs check --project skills/asfakulsiam-motomation-design/examples/templates --archetype catalogue --signature hold-to-commit --tier 2 --sections hero-shop-catalogue,features-shop-specs,testimonial-shop-notes,cta-shop-hold,gallery-shop-carousel,pricing-shop-glazes
+IDs
+✓ archetype "catalogue" is fresh
+✓ signature "hold-to-commit" is fresh
+✗ tier "2" was used in 2 of the last 2 runs → choose another
+Structure  (fingerprint: layout=rows · sections=hero-shop-catalogue>features-shop-specs>testimonial-shop-notes>cta-shop-hold>gallery-shop-carousel>pricing-shop-glazes · tier=2 · signature_type=micro)
+✓ closest logged run is #1 at 47% (< 70%); shared: layout, tier
+$ node skills/asfakulsiam-motomation-design/scripts/memory.mjs log --project skills/asfakulsiam-motomation-design/examples/templates --archetype catalogue --mutation single-object --signature hold-to-commit --fonts "Fraunces/Familjen Grotesk" --palette shop-product --tier 2 --page shop-product --sections hero-shop-catalogue,features-shop-specs,testimonial-shop-notes,cta-shop-hold,gallery-shop-carousel,pricing-shop-glazes
+Logged run #3 to /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/.motomation/log.json
+  fingerprint: layout=rows · sections=hero-shop-catalogue>features-shop-specs>testimonial-shop-notes>cta-shop-hold>gallery-shop-carousel>pricing-shop-glazes · tier=2 · signature_type=micro
+DELIVERY GATE · skills/asfakulsiam-motomation-design/examples/templates/shop-product.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (63 measured; 5 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (63 measured; 5 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (63 measured; 5 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (67 measured; 1 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (16 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (68 compared)
+  names     ✓ 0 missing alt / accessible names  (4 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (30 numbers checked at scroll 0, scroll end and reduced motion; 1 live values skipped)
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  6 sections, entrances: static | static | static | static | static | static → 0 repeat(s); pins 4, WebGL canvases 0, JS 68KB gzipped
+  records    DESIGN.md: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/shop-product/DESIGN.md · memory log: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/.motomation/log.json · stamp fields: {"archetype":"catalogue","mutation":"single-object","signature":"hold-to-commit","tier":"2"}
+  critique → C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp47] R5[cuts:2,anim:2] M4[t2:pins4/2,webgl0/1,js68/80KB,rm0] V5[entrance-repeats:0]
+  PASS  stamp → critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp47] R5[cuts:2,anim:2] M4[t2:pins4/2,webgl0/1,js68/80KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · be03e24a81
+
+DELIVERY GATE · skills/asfakulsiam-motomation-design/examples/templates/shop-product.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (63 measured; 5 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (63 measured; 5 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (63 measured; 5 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (67 measured; 1 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (16 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (68 compared)
+  names     ✓ 0 missing alt / accessible names  (4 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (30 numbers checked at scroll 0, scroll end and reduced motion; 1 live values skipped)
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  6 sections, entrances: static | static | static | static | static | static → 0 repeat(s); pins 4, WebGL canvases 0, JS 68KB gzipped
+  records    DESIGN.md: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/shop-product/DESIGN.md · memory log: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/.motomation/log.json · stamp fields: {"archetype":"catalogue","mutation":"single-object","signature":"hold-to-commit","tier":"2"}
+  critique → C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp47] R5[cuts:2,anim:2] M4[t2:pins4/2,webgl0/1,js68/80KB,rm0] V5[entrance-repeats:0]
+  PASS  stamp → critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp47] R5[cuts:2,anim:2] M4[t2:pins4/2,webgl0/1,js68/80KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · be03e24a81
+
+STAMP VERIFIED · critique and gate numbers match a fresh scan · gate PASS

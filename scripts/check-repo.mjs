@@ -124,9 +124,39 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   }
 }
 
-// 8. Original work only: no vendored or copied third-party component code anywhere in the repository
+// 8. Original work only: no vendored or copied third-party component code anywhere in the repository.
+//    vendor/ may hold only vendor/plain/: this project's own CSS + HTML and Tailwind variants of its own components.
 {
-  if (existsSync(join(ROOT, "vendor")) || existsSync(join(SKILL, "vendor"))) fail("vendor/ exists: this repository ships only its own code");
+  if (existsSync(join(SKILL, "vendor"))) fail("skills/…/vendor/ exists: this repository ships only its own code");
+  const V = join(ROOT, "vendor");
+  if (existsSync(V)) {
+    for (const f of readdirSync(V)) if (f !== "plain") fail(`vendor/${f}: only vendor/plain/ (our own framework-free variants) may live in vendor/`);
+    const P = join(V, "plain"), walkV = (p) => statSync(p).isDirectory() ? readdirSync(p).flatMap((f) => walkV(join(p, f))) : [p];
+    if (existsSync(P)) {
+      for (const f of walkV(P)) {
+        const rel = relative(ROOT, f), src = readFileSync(f, "utf8");
+        if (!/\.(js|css|html|json|md)$/.test(f)) { fail(`${rel}: unexpected file type in vendor/plain`); continue; }
+        if (!src.includes("@motomation-variant")) fail(`${rel}: missing the @motomation-variant header`);
+        const react = src.match(/react: (\S+\.tsx)/); if (react && !existsSync(join(ROOT, react[1]))) fail(`${rel}: react source ${react[1]} does not exist`);
+        if (/\.js$/.test(f)) for (const m of src.matchAll(/^\s*import\b[^"']*["']([^"']+)["']/gm)) if (!m[1].startsWith("./") && !m[1].startsWith("../")) fail(`${rel}: imports "${m[1]}"; vendor/plain has no dependencies (relative imports only)`);
+        if (/\.html$/.test(f)) for (const m of src.matchAll(/<(?:script|link)\b[^>]*(?:src|href)="(https?:)?\/\//g)) fail(`${rel}: loads a remote script or stylesheet; the variants are self-contained`);
+      }
+      // the top 20 by usage: how many D5 sections import the component, then how many D6 templates reach it, then name
+      const secDir = join(SKILL, "examples/sections"), tplDir = join(SKILL, "examples/templates");
+      const compOf = (src) => new Set([...src.matchAll(/from "\.\.\/components\/[a-z]+\/([a-z0-9-]+)"/g)].map((m) => m[1]));
+      const secComps = Object.fromEntries(readdirSync(secDir).filter((f) => f.endsWith(".tsx") && !f.startsWith("_")).map((f) => [f.replace(/\.tsx$/, ""), compOf(readFileSync(join(secDir, f), "utf8"))]));
+      const use = {}; const bump = (c, k) => { use[c] ??= { s: 0, t: 0 }; use[c][k]++; };
+      for (const cs of Object.values(secComps)) for (const c of cs) bump(c, "s");
+      for (const d of readdirSync(tplDir).filter((d) => existsSync(join(tplDir, d, "page.tsx")))) {
+        const secs = [...readFileSync(join(tplDir, d, "page.tsx"), "utf8").matchAll(/from "\.\.\/\.\.\/sections\/([a-z0-9-]+)"/g)].map((m) => m[1]);
+        for (const c of new Set(secs.flatMap((s) => [...(secComps[s] || [])]))) bump(c, "t"); }
+      const want = Object.keys(use).sort((a, b) => use[b].s - use[a].s || use[b].t - use[a].t || a.localeCompare(b)).slice(0, 20);
+      const listed = JSON.parse(readFileSync(join(P, "top20.json"), "utf8")).components.map((c) => c.id);
+      if (JSON.stringify([...listed].sort()) !== JSON.stringify([...want].sort())) fail(`vendor/plain/top20.json lists ${listed.join(", ")}; the top 20 by usage are now ${want.join(", ")}`);
+      for (const id of listed) for (const f of [`${id}.js`, `${id}.css`, "plain.html", "tailwind.html"]) if (!existsSync(join(P, id, f))) fail(`vendor/plain/${id}/${f} missing: each top-20 component ships React + CSS/HTML + Tailwind`);
+      if (!existsSync(join(P, "README.md"))) fail("vendor/plain/README.md missing");
+    }
+  }
   const skipDirs = new Set([".git", "node_modules", "evals", "dist"]);
   const walkCode = (p) => statSync(p).isDirectory() ? (skipDirs.has(basename(p)) ? [] : readdirSync(p).flatMap((f) => walkCode(join(p, f)))) : [p];
   for (const f of walkCode(ROOT)) {
@@ -165,6 +195,22 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   problems.forEach((p) => fail(`sections: ${p}`));
   const readme = join(SKILL, "examples/sections/README.md");
   if (sections.length && (!existsSync(readme) || readFileSync(readme, "utf8") !== renderReadme(sections))) fail("examples/sections/README.md is stale; run node scripts/build-sections.mjs");
+}
+
+// 9c. Page templates: import only sections, built from their current sources, README fresh, stamped by the gate
+{
+  const { collect, renderReadme, sourceHash } = await import("./build-templates.mjs");
+  const { templates, problems } = await collect();
+  problems.forEach((p) => fail(`templates: ${p}`));
+  for (const t of templates) {
+    const at = join(SKILL, t.html);
+    if (!existsSync(at)) { fail(`${t.html} is missing; run node scripts/build-templates.mjs`); continue; }
+    const html = readFileSync(at, "utf8"); const meta = html.match(/<meta name="motomation-template" content="source:([0-9a-f]+)/);
+    if (!meta || meta[1] !== sourceHash(t)) fail(`${t.html} is stale (its sections or components changed); run node scripts/build-templates.mjs, then gate and stamp it again`);
+    if (!/motomation · [^*]*critique: [^*]+ · gate: c\d+ o\d+ w\d+ rm\d+ a\d+ n\d+ · gate\/\d+ · [0-9a-f]{10}/.test(html)) fail(`${t.html} has no measured gate stamp; run scripts/gate.mjs on it and paste the stamp with build-templates.mjs --stamp`);
+  }
+  const readme = join(SKILL, "examples/templates/README.md");
+  if (templates.length && (!existsSync(readme) || readFileSync(readme, "utf8") !== renderReadme(templates))) fail("examples/templates/README.md is stale; run node scripts/build-templates.mjs");
 }
 
 // 10. Every worked example is discoverable from the top of the README (before "Why this exists")

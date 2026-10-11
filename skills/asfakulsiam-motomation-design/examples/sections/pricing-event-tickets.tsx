@@ -26,7 +26,7 @@ export function PricingEventTickets() {
                 <p style={{ fontFamily: MONO, fontSize: 11, letterSpacing: ".14em", margin: 0 }}>MONSOON JAZZ NIGHT · 14 NOV</p>
                 <h3 style={h("1.7rem")}>{tier}</h3>
                 <p style={{ margin: 0, fontFamily: MONO, fontSize: 13 }}>{seats}</p>
-                {i === 2 && <ShinyText as="p" text="WITH INTERVAL DRINKS" ink="#8a6420" shine="#fff1c7" style={{ fontFamily: MONO, fontSize: 11, letterSpacing: ".16em", margin: 0 }} />}
+                {i === 2 && <ShinyText as="p" text="WITH INTERVAL DRINKS" ink="#805d1d" shine="#fff1c7" style={{ fontFamily: MONO, fontSize: 11, letterSpacing: ".16em", margin: 0 }} />}
               </div>
               <div style={{ borderLeft: "2px dashed rgba(42,33,24,.35)", padding: "22px 18px", display: "grid", placeItems: "center", writingMode: "vertical-rl" }}><span style={h("1.6rem")}>{price}</span></div>
             </div>

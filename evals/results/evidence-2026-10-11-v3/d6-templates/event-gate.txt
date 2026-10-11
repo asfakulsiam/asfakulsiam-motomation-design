@@ -1,0 +1,48 @@
+### event
+$ node skills/asfakulsiam-motomation-design/scripts/memory.mjs check --project skills/asfakulsiam-motomation-design/examples/templates --archetype poster --signature velocity-skew --tier 4 --sections hero-event-poster,team-event-lineup,pricing-event-tickets,contact-event-venue
+IDs
+✓ archetype "poster" is fresh
+✓ signature "velocity-skew" is fresh
+✓ tier "4" is fresh
+Structure  (fingerprint: layout=statement · sections=hero-event-poster>team-event-lineup>pricing-event-tickets>contact-event-venue · tier=4 · signature_type=scroll)
+✓ closest logged run is #6 at 38% (< 70%); shared: layout
+$ node skills/asfakulsiam-motomation-design/scripts/memory.mjs log --project skills/asfakulsiam-motomation-design/examples/templates --archetype poster --mutation scale-abuse --signature velocity-skew --fonts "Anybody/Instrument Sans" --palette event --tier 4 --page event --sections hero-event-poster,team-event-lineup,pricing-event-tickets,contact-event-venue
+Logged run #7 to /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/.motomation/log.json
+  fingerprint: layout=statement · sections=hero-event-poster>team-event-lineup>pricing-event-tickets>contact-event-venue · tier=4 · signature_type=scroll
+DELIVERY GATE · skills/asfakulsiam-motomation-design/examples/templates/event.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (31 measured; 1 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (31 measured; 1 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (22 measured; 10 skipped; 0 not visible at scan time)
+     ⚠ 768px coverage: 10 of 32 text elements (31%) were skipped (moving, occluded or never fully on screen) — more than 30%, so this width is not a full measurement. Check the skipped text by hand or make it measurable.
+     1440px  ✓ 0 below AA  (31 measured; 1 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (13 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (32 compared)
+  names     ✓ 0 missing alt / accessible names  (10 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (10 numbers checked at scroll 0, scroll end and reduced motion; 7 live values skipped)
+  hierarchy  h1×1, 0 skipped heading levels, 2 element(s) tied for largest on the first 375px screen
+  structure  4 sections, entrances: static | static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 68KB gzipped
+  records    DESIGN.md: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/event/DESIGN.md · memory log: /tmp/event-log.json · stamp fields: {"archetype":"poster","mutation":"scale-abuse","signature":"velocity-skew","tier":"4"}
+  critique → C5[restraint:kept] H4[375:1] S5[last5:archetype-new,signature-new,fp38] R5[cuts:2,anim:2] M5[t4:pins0/2,webgl0/1,js68/250KB,rm0] V5[entrance-repeats:0]
+  PASS  stamp → critique: C5[restraint:kept] H4[375:1] S5[last5:archetype-new,signature-new,fp38] R5[cuts:2,anim:2] M5[t4:pins0/2,webgl0/1,js68/250KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 8f8e6d8210
+
+DELIVERY GATE · skills/asfakulsiam-motomation-design/examples/templates/event.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (31 measured; 1 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (31 measured; 1 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (22 measured; 10 skipped; 0 not visible at scan time)
+     ⚠ 768px coverage: 10 of 32 text elements (31%) were skipped (moving, occluded or never fully on screen) — more than 30%, so this width is not a full measurement. Check the skipped text by hand or make it measurable.
+     1440px  ✓ 0 below AA  (31 measured; 1 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (13 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (32 compared)
+  names     ✓ 0 missing alt / accessible names  (10 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (10 numbers checked at scroll 0, scroll end and reduced motion; 7 live values skipped)
+  hierarchy  h1×1, 0 skipped heading levels, 2 element(s) tied for largest on the first 375px screen
+  structure  4 sections, entrances: static | static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 68KB gzipped
+  records    DESIGN.md: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/event/DESIGN.md · memory log: /tmp/event-log.json · stamp fields: {"archetype":"poster","mutation":"scale-abuse","signature":"velocity-skew","tier":"4"}
+  critique → C5[restraint:kept] H4[375:1] S5[last5:archetype-new,signature-new,fp38] R5[cuts:2,anim:2] M5[t4:pins0/2,webgl0/1,js68/250KB,rm0] V5[entrance-repeats:0]
+  PASS  stamp → critique: C5[restraint:kept] H4[375:1] S5[last5:archetype-new,signature-new,fp38] R5[cuts:2,anim:2] M5[t4:pins0/2,webgl0/1,js68/250KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 8f8e6d8210
+
+STAMP VERIFIED · critique and gate numbers match a fresh scan · gate PASS

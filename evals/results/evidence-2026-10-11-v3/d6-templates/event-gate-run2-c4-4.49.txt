@@ -1,0 +1,22 @@
+DELIVERY GATE · skills/asfakulsiam-motomation-design/examples/templates/event.html
+  contrast  ✗ 4 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✗ 1 below AA  (31 measured; 1 skipped; 0 not visible at scan time)
+        4.49:1 < 4.5:1  #8a6420 on #f6ead2  11px  p  "WITH INTERVAL DRINKS"
+      390px  ✗ 1 below AA  (31 measured; 1 skipped; 0 not visible at scan time)
+        4.49:1 < 4.5:1  #8a6420 on #f6ead2  11px  p  "WITH INTERVAL DRINKS"
+      768px  ✗ 1 below AA  (22 measured; 10 skipped; 0 not visible at scan time)
+     ⚠ 768px coverage: 10 of 32 text elements (31%) were skipped (moving, occluded or never fully on screen) — more than 30%, so this width is not a full measurement. Check the skipped text by hand or make it measurable.
+        4.49:1 < 4.5:1  #8a6420 on #f6ead2  11px  p  "WITH INTERVAL DRINKS"
+     1440px  ✗ 1 below AA  (31 measured; 1 skipped; 0 not visible at scan time)
+        4.49:1 < 4.5:1  #8a6420 on #f6ead2  11px  p  "WITH INTERVAL DRINKS"
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (13 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (32 compared)
+  names     ✓ 0 missing alt / accessible names  (10 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (10 numbers checked at scroll 0, scroll end and reduced motion; 7 live values skipped)
+  hierarchy  h1×1, 0 skipped heading levels, 2 element(s) tied for largest on the first 375px screen
+  structure  4 sections, entrances: static | static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 68KB gzipped
+  records    DESIGN.md: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/event/DESIGN.md · memory log: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/.motomation/log.json · stamp fields: {"archetype":"poster","mutation":"scale-abuse","signature":"velocity-skew","tier":"4"}
+  critique → C5[restraint:kept] H4[375:1] S1[last5:archetype-reused,signature-reused,fp100] R5[cuts:2,anim:2] M5[t4:pins0/2,webgl0/1,js68/250KB,rm0] V5[entrance-repeats:0]
+  FAIL  stamp → critique: C5[restraint:kept] H4[375:1] S1[last5:archetype-reused,signature-reused,fp100] R5[cuts:2,anim:2] M5[t4:pins0/2,webgl0/1,js68/250KB,rm0] V5[entrance-repeats:0] · gate: c4 o0 w0 rm0 a0 n0 · gate/2 · 9f90a1c1d3
+

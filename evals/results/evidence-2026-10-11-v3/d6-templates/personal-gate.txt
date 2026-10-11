@@ -1,0 +1,52 @@
+### personal
+$ node skills/asfakulsiam-motomation-design/scripts/memory.mjs check --project skills/asfakulsiam-motomation-design/examples/templates --archetype letter --signature thread --tier 2 --sections hero-personal-letter,testimonial-personal-replies,cta-personal-subscribe
+IDs
+✓ archetype "letter" is fresh
+✓ signature "thread" is fresh
+✗ tier "2" was used in 4 of the last 5 runs → choose another
+Structure  (fingerprint: layout=statement · sections=hero-personal-letter>testimonial-personal-replies>cta-personal-subscribe · tier=2 · signature_type=scroll)
+✓ closest logged run is #7 at 62% (< 70%); shared: layout, signature_type
+$ node skills/asfakulsiam-motomation-design/scripts/memory.mjs log --project skills/asfakulsiam-motomation-design/examples/templates --archetype letter --mutation second-person --signature thread --fonts "Instrument Serif/Familjen Grotesk" --palette personal --tier 2 --page personal --sections hero-personal-letter,testimonial-personal-replies,cta-personal-subscribe
+Logged run #8 to /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/.motomation/log.json
+  fingerprint: layout=statement · sections=hero-personal-letter>testimonial-personal-replies>cta-personal-subscribe · tier=2 · signature_type=scroll
+DELIVERY GATE · skills/asfakulsiam-motomation-design/examples/templates/personal.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (10 measured; 8 skipped; 4 not visible at scan time)
+     ⚠ 375px coverage: 8 of 18 text elements (44%) were skipped (moving, occluded or never fully on screen) — more than 30%, so this width is not a full measurement. Check the skipped text by hand or make it measurable.
+      390px  ✓ 0 below AA  (10 measured; 8 skipped; 4 not visible at scan time)
+     ⚠ 390px coverage: 8 of 18 text elements (44%) were skipped (moving, occluded or never fully on screen) — more than 30%, so this width is not a full measurement. Check the skipped text by hand or make it measurable.
+      768px  ✓ 0 below AA  (16 measured; 2 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (10 measured; 8 skipped; 4 not visible at scan time)
+     ⚠ 1440px coverage: 8 of 18 text elements (44%) were skipped (moving, occluded or never fully on screen) — more than 30%, so this width is not a full measurement. Check the skipped text by hand or make it measurable.
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (5 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (18 compared)
+  names     ✓ 0 missing alt / accessible names  (4 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (3 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  hierarchy  h1×1, 0 skipped heading levels, 3 element(s) tied for largest on the first 375px screen
+  structure  3 sections, entrances: fade | fade | static → 1 repeat(s); pins 0, WebGL canvases 0, JS 65KB gzipped
+  records    DESIGN.md: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/personal/DESIGN.md · memory log: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/.motomation/log.json · stamp fields: {"archetype":"letter","mutation":"second-person","signature":"thread","tier":"2"}
+  critique → C4[restraint:changed1] H4[375:1] S4[last5:archetype-new,signature-new,fp62] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js65/80KB,rm0] V4[entrance-repeats:1]
+  PASS  stamp → critique: C4[restraint:changed1] H4[375:1] S4[last5:archetype-new,signature-new,fp62] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js65/80KB,rm0] V4[entrance-repeats:1] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 9d6c178794
+
+DELIVERY GATE · skills/asfakulsiam-motomation-design/examples/templates/personal.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (10 measured; 8 skipped; 4 not visible at scan time)
+     ⚠ 375px coverage: 8 of 18 text elements (44%) were skipped (moving, occluded or never fully on screen) — more than 30%, so this width is not a full measurement. Check the skipped text by hand or make it measurable.
+      390px  ✓ 0 below AA  (10 measured; 8 skipped; 4 not visible at scan time)
+     ⚠ 390px coverage: 8 of 18 text elements (44%) were skipped (moving, occluded or never fully on screen) — more than 30%, so this width is not a full measurement. Check the skipped text by hand or make it measurable.
+      768px  ✓ 0 below AA  (16 measured; 2 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (10 measured; 8 skipped; 4 not visible at scan time)
+     ⚠ 1440px coverage: 8 of 18 text elements (44%) were skipped (moving, occluded or never fully on screen) — more than 30%, so this width is not a full measurement. Check the skipped text by hand or make it measurable.
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (5 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (18 compared)
+  names     ✓ 0 missing alt / accessible names  (4 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (3 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  hierarchy  h1×1, 0 skipped heading levels, 3 element(s) tied for largest on the first 375px screen
+  structure  3 sections, entrances: fade | fade | static → 1 repeat(s); pins 0, WebGL canvases 0, JS 65KB gzipped
+  records    DESIGN.md: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/personal/DESIGN.md · memory log: /home/user/workspace/motomation/skills/asfakulsiam-motomation-design/examples/templates/.motomation/log.json · stamp fields: {"archetype":"letter","mutation":"second-person","signature":"thread","tier":"2"}
+  critique → C4[restraint:changed1] H4[375:1] S4[last5:archetype-new,signature-new,fp62] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js65/80KB,rm0] V4[entrance-repeats:1]
+  PASS  stamp → critique: C4[restraint:changed1] H4[375:1] S4[last5:archetype-new,signature-new,fp62] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js65/80KB,rm0] V4[entrance-repeats:1] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 9d6c178794
+
+STAMP VERIFIED · critique and gate numbers match a fresh scan · gate PASS

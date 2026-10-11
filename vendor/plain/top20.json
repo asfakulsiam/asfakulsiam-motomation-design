@@ -1,0 +1,85 @@
+{
+  "@motomation-variant": "top 20 components by usage (D5 sections, then D6 templates, then name); see README.md",
+  "components": [
+    {
+      "id": "count-up",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/micro/count-up.tsx"
+    },
+    {
+      "id": "split-flap",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/type/split-flap.tsx"
+    },
+    {
+      "id": "copy-button",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/micro/copy-button.tsx"
+    },
+    {
+      "id": "ink-fill",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/type/ink-fill.tsx"
+    },
+    {
+      "id": "typewriter",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/text/typewriter.tsx"
+    },
+    {
+      "id": "animated-list",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/ui/animated-list.tsx"
+    },
+    {
+      "id": "contour-lines",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/backgrounds/contour-lines.tsx"
+    },
+    {
+      "id": "glow-border",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/ui/glow-border.tsx"
+    },
+    {
+      "id": "rotating-words",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/text/rotating-words.tsx"
+    },
+    {
+      "id": "squish-switch",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/micro/squish-switch.tsx"
+    },
+    {
+      "id": "tilt-card",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/cursor/tilt-card.tsx"
+    },
+    {
+      "id": "velocity-marquee",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/scroll/velocity-marquee.tsx"
+    },
+    {
+      "id": "flowing-menu",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/layout/flowing-menu.tsx"
+    },
+    {
+      "id": "grain",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/backgrounds/grain.tsx"
+    },
+    {
+      "id": "scramble-on-hover",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/text/scramble-on-hover.tsx"
+    },
+    {
+      "id": "shimmer-button",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/ui/shimmer-button.tsx"
+    },
+    {
+      "id": "aperture",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/scroll/aperture.tsx"
+    },
+    {
+      "id": "beams",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/backgrounds/beams.tsx"
+    },
+    {
+      "id": "bento-reveal",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/layout/bento-reveal.tsx"
+    },
+    {
+      "id": "blur-focus",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/type/blur-focus.tsx"
+    }
+  ]
+}

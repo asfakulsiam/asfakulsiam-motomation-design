@@ -1,0 +1,12 @@
+/* @motomation-variant · id: _lib/demo · the preview page shell for the plain (CSS + HTML) demos only; not part of any component. */
+:root { --ground: #f4efe6; --surface: #fbf8f2; --ink: #1d1a16; --muted: #5f574b; --line: rgba(29,26,22,.16); --accent: #b5401f; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ground); color: var(--ink); font-family: "Instrument Sans", ui-sans-serif, sans-serif; font-size: 17px; line-height: 1.55; }
+.demo { max-width: 960px; margin: 0 auto; padding: 64px 24px; display: grid; gap: 32px; }
+.demo-big { font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.1; margin: 0; }
+.demo-label { font-family: ui-monospace, monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0; }
+.demo-card { padding: 18px 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+.demo-panel { position: relative; height: 360px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.demo-dark { background: #17140f; color: #f4efe6; padding: 48px; border-radius: 16px; }
+.demo-spacer { height: 70vh; }
+.demo-button { font: inherit; padding: 8px 14px; border-radius: 8px; border: 1px solid currentColor; background: transparent; color: inherit; cursor: pointer; justify-self: start; }

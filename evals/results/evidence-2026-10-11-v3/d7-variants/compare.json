@@ -1,0 +1,337 @@
+[
+  {
+    "id": "count-up",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": null,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "Audited, 2025 1,260 people paid to watch their own river, monthly.",
+      "roles": []
+    },
+    "pass": true
+  },
+  {
+    "id": "split-flap",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": true,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "Next free start JAN 2027 Change the date",
+      "roles": [
+        "button:Change the date"
+      ]
+    },
+    "pass": true
+  },
+  {
+    "id": "copy-button",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": true,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "work@hawa.studio Copy email",
+      "roles": [
+        "button:Copy email"
+      ]
+    },
+    "pass": true
+  },
+  {
+    "id": "ink-fill",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": null,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "We exist to make that ruling mean something on the bank: we survey, we go to court, and we pay local people to watch their water.",
+      "roles": []
+    },
+    "pass": true
+  },
+  {
+    "id": "typewriter",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": null,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "Dear reader, this month is about the binders.",
+      "roles": []
+    },
+    "pass": true
+  },
+  {
+    "id": "animated-list",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": null,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "Replies to No. 36 “My grandfather was a binder in Banglabazar.” “Printed it and gave it to my mother.” “Please do the umbrella repairers next.”",
+      "roles": []
+    },
+    "pass": true
+  },
+  {
+    "id": "contour-lines",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": null,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "Above sea level.",
+      "roles": []
+    },
+    "pass": true
+  },
+  {
+    "id": "glow-border",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": null,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "Shop ৳ 299 a month. One shop, two phones.",
+      "roles": []
+    },
+    "pass": true
+  },
+  {
+    "id": "rotating-words",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": null,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "The day's accounts, closed in a minute, for grocers, pharmacies and tea stalls.",
+      "roles": []
+    },
+    "pass": true
+  },
+  {
+    "id": "squish-switch",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": true,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "Pay yearly",
+      "roles": [
+        "switch:[false]"
+      ]
+    },
+    "pass": true
+  },
+  {
+    "id": "tilt-card",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": null,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "Monsoon Jazz Night · 14 Nov Front stalls Rows A–E · ৳ 1,500",
+      "roles": []
+    },
+    "pass": true
+  },
+  {
+    "id": "velocity-marquee",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": null,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "Bangladesh Bank Museum, Sonargaon Archive, Ministry of Water, Old Dhaka Trust",
+      "roles": []
+    },
+    "pass": true
+  },
+  {
+    "id": "flowing-menu",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": null,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "19:30 · Rafa Quartet 20:20 · Sumi Akand 21:30 · Armeen Musa",
+      "roles": [
+        "navigation:Running order",
+        "link:19:30 · Rafa Quartet",
+        "link:20:20 · Sumi Akand",
+        "link:21:30 · Armeen Musa"
+      ]
+    },
+    "pass": true
+  },
+  {
+    "id": "grain",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": null,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "We came for one night and stayed four.",
+      "roles": []
+    },
+    "pass": true
+  },
+  {
+    "id": "scramble-on-hover",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": null,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "Ayesha Siddiqua Tanvir Hasan Mithila Das",
+      "roles": []
+    },
+    "pass": true
+  },
+  {
+    "id": "shimmer-button",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": null,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "Start a free month",
+      "roles": [
+        "link:Start a free month"
+      ]
+    },
+    "pass": true
+  },
+  {
+    "id": "aperture",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": null,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "",
+      "roles": [
+        "img:The courtyard in the late afternoon"
+      ]
+    },
+    "pass": true
+  },
+  {
+    "id": "beams",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": null,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "MONSOON JAZZ NIGHT",
+      "roles": []
+    },
+    "pass": true
+  },
+  {
+    "id": "bento-reveal",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": null,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "Type it as you say it Rice, 5 kg, ৳ 420 Credit book 14 customers owe ৳ 18,450 Stock alert Mustard oil: 3 left Offline Syncs when the network returns",
+      "roles": []
+    },
+    "pass": true
+  },
+  {
+    "id": "blur-focus",
+    "errors": [],
+    "sameText": true,
+    "sameAfter": null,
+    "still": {
+      "react": true,
+      "plain": true,
+      "tailwind": true
+    },
+    "react": {
+      "text": "The river took the school. The village rebuilt it on stilts.",
+      "roles": []
+    },
+    "pass": true
+  }
+]

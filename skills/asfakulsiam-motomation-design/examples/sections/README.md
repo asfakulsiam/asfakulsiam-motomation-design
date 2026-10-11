@@ -63,7 +63,7 @@ By kind: heroes 9 · features 7 · galleries 1 · pricing 4 · testimonials 4 ·
 | Section | Archetype | Components | Signature (why it earns its place) | Mobile | Reduced motion |
 |---|---|---|---|---|---|
 | [`team-event-lineup`](team-event-lineup.tsx) | stage | VelocityMarquee, FlowingMenu | The running order is the information concert-goers want (who, when), and the marquee is the house's billboard; the people, not a "lineup" graphic. | The marquee keeps running at its base speed; sets are full-width rows that open on tap. | The marquee is a static line of names; rows invert without the flowing text. |
-| [`team-org-field-guide`](team-org-field-guide.tsx) | field-guide | Halftone | The people who do the work, catalogued the way the trust catalogues rivers; the halftone ties portraits to the survey prints. | Entries stack one per row, portrait above notes. | Halftone is static by nature; nothing moves. |
+| [`team-org-field-guide`](team-org-field-guide.tsx) | field-guide | Halftone | The people who do the work, catalogued the way the trust catalogues rivers; the one halftone ties the page to the survey prints, and it shows the water, not the people. | The survey print sits above the entries; entries stack one per row. | The print is drawn at full size at once; nothing moves. |
 | [`team-studio-rows`](team-studio-rows.tsx) | ledger | Lens, ScrambleOnHover | A team page with no headshot grid: the people are entries in the book and in the room, and the lens connects the two. | The lens becomes a toggle button (Lens's touch path); rows stack name over role. | The lens is a toggle; names don't scramble. |
 
 ## Calls to action

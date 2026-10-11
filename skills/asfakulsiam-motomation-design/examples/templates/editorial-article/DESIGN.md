@@ -1,0 +1,55 @@
+# DESIGN.md: The river took the school — The Delta Review
+
+> How it looks. Page template `editorial-article` in `examples/templates/`, composed from `examples/sections/` only.
+
+## Concept
+- **Tension:** A long-read about loss must not feel like a content page.
+- **Concept sentence:** The article is set as a broadsheet front page, and only the pull quote moves.
+- **Archetype + mutation:** broadsheet + print-rule
+- **Collision:** newspaper front page × reading progress
+- **Signature move:** decode
+- **Dials:** ENERGY 1 · RHYTHM 2 · MOTION 1 → Tier 2
+- **Rejected:** Full-bleed hero photo with the headline over it; sticky share bar.
+
+## Typography
+Type mode: HOUSE STYLE (typography-led), because the writing is the product
+
+| Role | Family | Weight/axes | Size token | Notes |
+|---|---|---|---|---|
+| Display | Bodoni Moda | as shipped in `fonts/` | `clamp()` per section | headings h1–h3 |
+| Heading | Bodoni Moda | — | `clamp()` per section | |
+| Body | Instrument Sans | 400–600 | 17px base | Hind Siliguri for Bangla and ৳ |
+| Mono / labels | JetBrains Mono | 400 | 11–13px | labels, numbers, codes |
+
+## Colour
+| Token | Value | Contrast vs ground | Use |
+|---|---|---|---|
+| `--ground` | #f5f1e8 | — | page background |
+| `--ink` | #161616 | 16.05:1 | text |
+| `--muted` | #55504a | 7.08:1 | secondary text, labels |
+| `--accent` | #9b1c1c | 7.23:1 | the one moment (links, the active choice, the signature's line) |
+
+## Layout
+- Grid: each section's own (see its header); auto-fit columns collapse to one column at 375
+- Margins / gutters: `clamp(20px, 5vw, 72px)` sides, sections `clamp(56px, 9vw, 128px)` tall padding
+- Section spacing: by section padding only; no dividers beyond the sections' own rules
+- Nav: none (single page, skip link to `#main`)
+- Footer (sign-off): `footer-editorial-folio`
+
+## Components
+- Buttons: real `<button>`/`<a>`, native focus ring in `--accent`
+- Links: underlined, inherit colour
+- Cards (only if needed): only where the section is a set of comparable things (plans, rooms, tickets)
+- Forms: only where the page asks for something (email, amount)
+
+## Imagery
+- Source: Photographs by Shafiq Alam [NEEDS ASSET]
+- Treatment: none beyond what the section does
+- `[NEEDS ASSET]` list: see Source
+
+## Restraint Gate record
+- Concept survived: yes
+- Cut: a share bar — the folio footer and the reading rail are the only chrome
+- Cut: related-article cards — 'You've read' does the job without tracking
+- Rejected animation: decoding the deck and byline as well as the headline — one decode is a headline; three is noise
+- Rejected animation: a parallax photograph — the story has no photograph at the top, on purpose

@@ -1,0 +1,36 @@
+# Page templates
+
+8 whole pages, each composed only from the sections in `examples/sections/` (a template imports sections and nothing else; `node scripts/build-templates.mjs` checks this). Each sets its brand once: colours and fonts as CSS variables, so the same sections change voice per page. Each built page is server-rendered HTML with its own stamp, measured by the Delivery Gate (`scripts/gate.mjs`) and checked with `gate.mjs --verify`.
+
+| Page | Kind | Archetype · mutation · signature | Tier | Sections (in order) | Fonts |
+|---|---|---|---|---|---|
+| [The river took the school — The Delta Review](editorial-article.html) ([source](editorial-article/page.tsx)) | editorial article | broadsheet · print-rule · decode | 2 | `hero-editorial-broadsheet` → `feature-editorial-pullquote` → `footer-editorial-folio` | Bodoni Moda / Instrument Sans / JetBrains Mono |
+| [Monsoon Jazz Night — National Theatre Hall, 14 November](event.html) ([source](event/page.tsx)) | event landing | poster · scale-abuse · velocity-skew | 4 | `hero-event-poster` → `team-event-lineup` → `pricing-event-tickets` → `contact-event-venue` | Anybody / Instrument Sans / JetBrains Mono |
+| [Haveli Panam — seven rooms in Sonargaon](hotel.html) ([source](hotel/page.tsx)) | hotel / hospitality | room · reverse-reveal · aperture | 2 | `hero-hotel-room` → `features-hotel-rooms` → `pricing-hotel-seasons` → `testimonial-hotel-guestbook` → `contact-hotel-atlas` | Cormorant Garamond / Instrument Sans / JetBrains Mono |
+| [River Commons — a public trust for Bangladesh's rivers](org.html) ([source](org/page.tsx)) | public-interest organisation | manifesto · constraint · seismograph-line | 2 | `hero-org-manifesto` → `features-org-impact` → `team-org-field-guide` → `cta-org-donate` → `footer-org-seismograph` | Gloock / Schibsted Grotesk / JetBrains Mono |
+| [Letters from Nusrat — one letter a month](personal.html) ([source](personal/page.tsx)) | personal brand | letter · second-person · thread | 2 | `hero-personal-letter` → `testimonial-personal-replies` → `cta-personal-subscribe` | Instrument Serif / Familjen Grotesk / JetBrains Mono |
+| [Tally — bookkeeping in Bangla and English for small shops](saas-landing.html) ([source](saas-landing/page.tsx)) | SaaS landing | workbench · ui-is-content · ink-fill | 2 | `hero-saas-workbench` → `features-saas-bento` → `features-saas-console` → `testimonial-saas-ink` → `pricing-saas-switch` → `cta-saas-trial` | Bricolage Grotesque / Hanken Grotesk / JetBrains Mono |
+| [Mati — No. 14-07, Ash celadon plate](shop-product.html) ([source](shop-product/page.tsx)) | e-commerce product | catalogue · single-object · hold-to-commit | 2 | `hero-shop-catalogue` → `features-shop-specs` → `testimonial-shop-notes` → `cta-shop-hold` → `gallery-shop-carousel` → `pricing-shop-glazes` | Fraunces / Familjen Grotesk / JetBrains Mono |
+| [Hawa Studio — design for public institutions, Dhaka](studio-portfolio.html) ([source](studio-portfolio/page.tsx)) | portfolio (studio) | ledger · swap-material · lens | 2 | `hero-studio-ledger` → `features-studio-services` → `team-studio-rows` → `contact-studio-copy` → `footer-studio-marquee` | Young Serif / Hanken Grotesk / JetBrains Mono |
+
+**What each page is**
+
+- **The river took the school — The Delta Review** (editorial article): A long-read set like a broadsheet: masthead, deck and columns, one pull quote that inks in as it is read, and a folio footer that remembers what you've read.
+- **Monsoon Jazz Night — National Theatre Hall, 14 November** (event landing): A one-night concert as a poster: the name under stage light, the lineup in running order, tickets drawn as tickets, and how to get to the hall.
+- **Haveli Panam — seven rooms in Sonargaon** (hotel / hospitality): A heritage hotel that opens with a door: the courtyard, a walk along the upstairs gallery of rooms, rates by season, one guest-book entry, and the way from Dhaka.
+- **River Commons — a public trust for Bangladesh's rivers** (public-interest organisation): A river trust's case in one page: the claim, a year of audited hearings, the people who watch the banks, gifts tied to real costs, and the registration a donor checks.
+- **Letters from Nusrat — one letter a month** (personal brand): A writer's homepage that is this month's letter: written to the reader, with replies that came in the post and a postscript to subscribe.
+- **Tally — bookkeeping in Bangla and English for small shops** (SaaS landing): A bookkeeping app for corner shops where the product is the page: the day's ledger, the four screens, the export line, one customer's evening, two plans.
+- **Mati — No. 14-07, Ash celadon plate** (e-commerce product): One plate from a small firing, sold like a catalogue lot: the object, its making in four steps, buyers' notes, a deliberate hold to reserve, then the rest of the shelf.
+- **Hawa Studio — design for public institutions, Dhaka** (portfolio (studio)): A design studio's site kept as its account book: projects as ledger entries, services with fixed shapes, the team at the table, and the wait time for a new start.
+
+**Build and check one**
+
+```sh
+node scripts/build-templates.mjs --only <id>          # from the repository root
+node skills/asfakulsiam-motomation-design/scripts/gate.mjs skills/asfakulsiam-motomation-design/examples/templates/<id>.html
+node scripts/build-templates.mjs --stamp <id> "critique: … · gate: …"   # paste the line the gate printed
+node skills/asfakulsiam-motomation-design/scripts/gate.mjs --verify skills/asfakulsiam-motomation-design/examples/templates/<id>.html
+```
+
+Fonts are self-hosted from `fonts/` (SIL Open Font License 1.1; see `fonts/LICENSES.md`). Every page also loads Hind Siliguri for Bangla text and the taka sign, limited by `unicode-range` so it downloads only when Bengali characters are on the page.
