@@ -61,25 +61,38 @@ Motomation Design changes the thinking:
 
 ## Results
 
-One blind benchmark so far ([full report](evals/results/2026-10-11-benchmark.md) · [summary](docs/benchmark-summary.md)). Five briefs were built twice by the same model (`claude_sonnet_5_5`), once without the skill and once with it. Two judges from other model families (GPT-5.4, Gemini 3.1 Pro) scored both against [`evals/rubric.md`](evals/rubric.md) without knowing which was which. Hard gates (contrast, keyboard, reduced motion, placeholders) come from Playwright + axe-core measurements.
+Benchmark v2, run inside a real coding agent ([full report](evals/results/2026-10-11-benchmark-v2.md) · [summary](docs/benchmark-summary.md)). Five briefs, three seeds each, built in Claude Code by the same model (`claude_sonnet_5_5`) with and without the skill: 30 runs, 15 blind pairs. Two judges from other model families (GPT-5.4, Gemini 3.1 Pro) scored every pair against [`evals/rubric.md`](evals/rubric.md) without knowing which was which. Hard gates (contrast, keyboard, reduced motion, placeholders) come from Playwright + axe-core and `gate.mjs` measurements.
 
-| Brief | Without skill | With skill | Δ | Note |
-|---|---|---|---|---|
-| Studio portfolio | 81.5 | 0.0 | -81.5 | skill version failed the contrast gate (captions at 4.45:1) |
-| Boutique hotel | 88.5 | 54.5 | -34.0 | skill version broke on mobile and flipped prices through wrong digits |
-| E-commerce product | 0.0 | 88.0 | +88.0 | baseline failed the contrast gate (label at 4.39:1) |
-| SaaS product | 44.5 | 95.5 | +51.0 |  |
-| Public-interest site | 60.0 | 92.5 | +32.5 |  |
+| | Without skill | With skill |
+|---|---|---|
+| Pairs won | 0 of 15 | **15 of 15** |
+| Mean gated score | 45.9 | **92.4** |
+| Mean raw score (no gates) | 67.1 | **92.4** |
+| Pages failing a measured hard gate | 5 of 15 (contrast) | 0 of 15 |
 
-**The skill won 3 of 5 briefs and lost 2.** The mean gated score went from 54.9 to 66.1. The largest gains were on Originality and Typography. The losses were craft failures the skill's own delivery gate should have caught: contrast, mobile overflow, and an animation showing wrong prices. The release gate in `evals/README.md` ("higher on every brief") is **not met**.
+| Brief | Seeds | Baseline gated (mean) | Skill gated (mean) |
+|---|---|---|---|
+| 07 Architecture studio | 7101–7103 | 74.8 | 96.0 |
+| 04 Boutique hotel | 4101–4103 | 0.0 (all three fail contrast) | 91.7 |
+| 03 Ceramics shop | 3101–3103 | 47.3 | 93.2 |
+| 02 Developer tool (SaaS) | 2101–2103 | 40.0 | 93.2 |
+| 05 Climate non-profit | 5101–5103 | 67.3 | 88.0 |
+
+The skill wins every pair before the gates too, so the gates only widen the margin. The two briefs the skill lost in v1 (studio contrast, hotel mobile overflow) were won on every seed, and `gate.mjs` measured c0 o0 on all six of those skill pages.
 
 <p>
-<img src="docs/benchmark-images/saas-before-after.webp" alt="SaaS brief: a generic template without the skill, a terminal-as-interface page with the skill" width="100%"><br>
-<img src="docs/benchmark-images/public-before-after.webp" alt="Public-interest brief: a conventional layout without the skill, a bilingual manifesto with the skill" width="100%"><br>
-<img src="docs/benchmark-images/hotel-before-after.webp" alt="Hotel brief, where the skill lost: a calm accurate site without the skill, a door split that breaks the hotel name with it" width="100%">
+<img src="docs/benchmark-images/v2-hotel-4102.webp" alt="Hotel brief, seed 4102: without the skill a conventional page that fails contrast (gated 0); with the skill a full-height door with the name set large (98.5)" width="100%"><br>
+<img src="docs/benchmark-images/v2-studio-7101.webp" alt="Studio brief, seed 7101: without the skill 74.5, with the skill 96.5" width="100%">
 </p>
 
-Not verified yet: n = 1 per cell, one generator model, raw API calls rather than an agent running the skill's scripts, motion judged from stills, and no variety test run. See the report's "Failures" and "Not verified" sections.
+**What this doesn't show yet:**
+- Effort isn't matched: skill runs used 19–66 turns, the baseline 3–12.
+- The judges saw the measured checks.
+- Motion was judged from stills.
+- Only one agent and one model were tested.
+- One skill page (public 5102) shows a scrubbed counter at 0 mid-scroll.
+
+All of these are listed in the report's "Fails" and "Why this may overstate the skill" sections. The v1 single-prompt benchmark (3 of 5 won) is kept in the [CHANGELOG](CHANGELOG.md) and its [report](evals/results/2026-10-11-benchmark.md).
 
 ## Install
 
@@ -296,7 +309,7 @@ No. It picks the lowest tier that delivers the concept. A government service get
 Yes. Use `dist/motomation-design.md`. The agent picks from the included data tables instead of running scripts.
 
 **Will two sites made with it look the same?**
-It actively detects and reduces repetition, but it can't guarantee two sites will never look alike. What exists: the collision engine never repeats an archetype or signature inside one run and reports when a pool runs out; `memory.mjs check` flags archetypes, signatures, fonts, palettes and tiers already used in this project's last five runs; and the Thinking Sequence's anti-sameness step compares structure, type, colour, motion, signature and imagery against the obvious version. Limits: memory only sees the project it lives in, and the no-terminal edition relies on the agent following the rules. The 5-brief benchmark has been run ([results](evals/results/2026-10-11-benchmark.md)); the 3-run variety test in `evals/` has not.
+It actively detects and reduces repetition, but it can't guarantee two sites will never look alike. What exists: the collision engine never repeats an archetype or signature inside one run and reports when a pool runs out; `memory.mjs check` flags archetypes, signatures, fonts, palettes and tiers already used in this project's last five runs; and the Thinking Sequence's anti-sameness step compares structure, type, colour, motion, signature and imagery against the obvious version. Limits: memory only sees the project it lives in, and the no-terminal edition relies on the agent following the rules. The 5-brief benchmark has been run twice ([v2 results](evals/results/2026-10-11-benchmark-v2.md), [v1](evals/results/2026-10-11-benchmark.md)); the 3-run variety test in `evals/` has not.
 
 **Which stack does it target?**
 It detects your stack, and defaults to Next.js App Router + Tailwind. Adapters cover React + Vite, plain HTML and Astro.
