@@ -6,7 +6,7 @@ Use these to **study**, not to copy. Run `/study <url>` to extract principles.
 |---|---|
 | Award-level sites to study | awwwards.com, thefwa.com, cssdesignawards.com, godly.website, siteinspire.com |
 | Motion and scroll references | gsap.com/showcase, codepen.io (search "ScrollTrigger"), lenis.darkroom.engineering |
-| Effect components (install under their licenses) | reactbits.dev, 21st.dev, affectui.com, ui.aceternity.com, magicui.design |
+| Effect components (install under their licenses) | reactbits.dev (reference index: `references/react-bits/INDEX.md`), 21st.dev, affectui.com, ui.aceternity.com, magicui.design |
 | Small interaction ideas with prompts | github.com/miguelclavel/interaction-recipes |
 | Type | fonts.google.com, fontshare.com, pangrampangram.com, typewolf.com, fontsinuse.com |
 | Colour | coolors.co, oklch.com, huemint.com, realtimecolors.com |

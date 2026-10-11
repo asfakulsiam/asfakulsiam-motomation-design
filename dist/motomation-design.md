@@ -2785,72 +2785,74 @@ The most portable route: works in any host, and in chat tools that can only prod
 
 ## Effects Vocabulary
 
-A shared language for effects, so a designer and an agent mean the same thing. Each entry is a **concept**, described in this skill's own words, with the tier it needs and when it earns its place. Many of these ideas are popular in open-source effect libraries such as React Bits (reactbits.dev). If a project wants a ready-made component, install it from that library under its license. Never paste its source into this skill.
+A shared language for effects, so a designer and an agent mean the same thing. Each entry is a **concept**, described in this skill's own words, with the tier it needs and when it earns its place. Many of these ideas are popular in open-source effect libraries such as React Bits (reactbits.dev). The **Reference** column links every concept to this skill's own signature or example, or to its React Bits page; `references/react-bits/INDEX.md` adds tier, cost, slop warnings and reduced-motion behaviour for the 19 React Bits components this skill relies on.
+
+React Bits is a reference library here, not a dependency. Its licence (MIT + Commons Clause) forbids redistributing the components themselves, alone or in a bundle, so this skill never contains their source; that is a licence term, not a style preference. Build the concept yourself (the default), or, when the user wants the exact component, install or copy it into **their project** from reactbits.dev with its notice kept. See `references/react-bits/SELECTION.md`.
 
 ### Text effects
 
-| Concept | What it does | Tier | Earns its place when |
-|---|---|---|---|
-| Line rise | Lines slide up from behind masks | 2 | Default editorial reveal |
-| Blur focus | Words sharpen from blur into focus | 2 | The concept is about clarity or focus |
-| Decode | Characters resolve from random glyphs | 2 | Technical, secret or data-led brands; short labels only |
-| Proximity weight | Weight/width follows cursor distance | 2 | Type-led identities; one word only |
-| Pressure type | Letters stretch or compress toward the cursor | 2 | Playful, elastic brands |
-| Scroll float | Letters bob into place as they scroll in | 2 | Play mood display lines |
-| Ink fill | Words fill from muted to ink while reading | 2 | Manifestos, about statements |
-| Velocity type | Text skews or widens with scroll speed | 2 | Sport, speed, launches |
-| Split-flap | Characters flip like a departure board | 2 | Schedules, menus, travel |
-| Curved text | Text runs along a circle or path | 1–2 | Badges, stamps, seals |
-| Text gradient sweep | A highlight runs across the text | 1 | A single key word, rarely |
-| Type film | A headline choreographed across a pinned chapter | 5 | Motomation hooks |
+| Concept | What it does | Tier | Earns its place when | Reference |
+|---|---|---|---|---|
+| Line rise | Lines slide up from behind masks | 2 | Default editorial reveal | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/text-animations/split-text) |
+| Blur focus | Words sharpen from blur into focus | 2 | The concept is about clarity or focus | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/text-animations/blur-text) |
+| Decode | Characters resolve from random glyphs | 2 | Technical, secret or data-led brands; short labels only | signature `decode` in `signatures/type-signatures.md` |
+| Proximity weight | Weight/width follows cursor distance | 2 | Type-led identities; one word only | signature `proximity-weight` in `signatures/type-signatures.md` · `examples/typography/proximity-weight.tsx` |
+| Pressure type | Letters stretch or compress toward the cursor | 2 | Playful, elastic brands | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/text-animations/text-pressure) |
+| Scroll float | Letters bob into place as they scroll in | 2 | Play mood display lines | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/text-animations/scroll-float) |
+| Ink fill | Words fill from muted to ink while reading | 2 | Manifestos, about statements | signature `ink-fill` in `signatures/type-signatures.md` |
+| Velocity type | Text skews or widens with scroll speed | 2 | Sport, speed, launches | signature `velocity-skew` in `signatures/scroll-signatures.md` |
+| Split-flap | Characters flip like a departure board | 2 | Schedules, menus, travel | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/text-animations/split-flap-text) |
+| Curved text | Text runs along a circle or path | 1–2 | Badges, stamps, seals | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/text-animations/circular-text) |
+| Text gradient sweep | A highlight runs across the text | 1 | A single key word, rarely | [React Bits](https://reactbits.dev/text-animations/gradient-text) |
+| Type film | A headline choreographed across a pinned chapter | 5 | Motomation hooks | `motion/tier-5-motomation.md` · `examples/html/motomation-film.html` |
 
 ### Backgrounds and atmosphere
 
-| Concept | What it does | Tier | Earns its place when |
-|---|---|---|---|
-| Grain | Animated or static film noise | 1–2 | Analogue, photographic or warm moods |
-| Liquid field | Flowing colour like silk or ink in water | 4 | The material is liquid, fabric or light |
-| Dot / grid field | A grid of dots or lines that reacts to the cursor | 2–4 | Technical, structural concepts |
-| Aurora / light bands | Soft moving light | 4 | Night, sky, northern brands. Overused, needs a strong reason |
-| Dither / halftone | Images rendered as print dots | 2–4 | Print, retro, newspaper concepts |
-| Particles / galaxy | Fields of points in space | 4 | Space, data or scale concepts. Usually decoration |
-| Shader distortion | Images ripple or bend on hover/scroll | 4 | Water, heat, memory |
+| Concept | What it does | Tier | Earns its place when | Reference |
+|---|---|---|---|---|
+| Grain | Animated or static film noise | 1–2 | Analogue, photographic or warm moods | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/animations/noise) |
+| Liquid field | Flowing colour like silk or ink in water | 4 | The material is liquid, fabric or light | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/backgrounds/silk) |
+| Dot / grid field | A grid of dots or lines that reacts to the cursor | 2–4 | Technical, structural concepts | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/backgrounds/dot-grid) |
+| Aurora / light bands | Soft moving light | 4 | Night, sky, northern brands. Overused, needs a strong reason | [React Bits](https://reactbits.dev/backgrounds/aurora) |
+| Dither / halftone | Images rendered as print dots | 2–4 | Print, retro, newspaper concepts | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/backgrounds/dither) |
+| Particles / galaxy | Fields of points in space | 4 | Space, data or scale concepts. Usually decoration | [React Bits](https://reactbits.dev/backgrounds/particles) · [React Bits](https://reactbits.dev/backgrounds/galaxy) |
+| Shader distortion | Images ripple or bend on hover/scroll | 4 | Water, heat, memory | [React Bits](https://reactbits.dev/animations/ripple-distortion) · `motion/tier-4-max.md` |
 
 ### Cursor and interaction
 
-| Concept | What it does | Tier | Earns its place when |
-|---|---|---|---|
-| Image trail | Images spawn along the cursor path | 2 | Photographers, archives |
-| Pixel wake | Pixel squares trail the cursor | 2 | Digital, pixel, retro concepts |
-| Lens | A circle reveals an alternate layer | 2 | Before/after, sketch/final, day/night |
-| Magnet | Elements lean toward the cursor | 2 | 1–2 primary actions only |
-| Target cursor | The cursor locks to interactive elements | 2 | Precision tools, games |
-| Splash / fluid cursor | The cursor stirs a fluid simulation | 4 | Liquid concepts only |
-| Tilt card | Cards rotate in 3D toward the cursor | 2 | Physical objects (cards, tickets, products) |
+| Concept | What it does | Tier | Earns its place when | Reference |
+|---|---|---|---|---|
+| Image trail | Images spawn along the cursor path | 2 | Photographers, archives | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/animations/image-trail) |
+| Pixel wake | Pixel squares trail the cursor | 2 | Digital, pixel, retro concepts | signature `pixel-wake` in `signatures/cursor-and-micro-signatures.md` |
+| Lens | A circle reveals an alternate layer | 2 | Before/after, sketch/final, day/night | signature `lens` in `signatures/cursor-and-micro-signatures.md` |
+| Magnet | Elements lean toward the cursor | 2 | 1–2 primary actions only | signature `considerate-magnet` in `signatures/cursor-and-micro-signatures.md` · `examples/micro-interactions/magnetic-button.tsx` |
+| Target cursor | The cursor locks to interactive elements | 2 | Precision tools, games | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/animations/target-cursor) |
+| Splash / fluid cursor | The cursor stirs a fluid simulation | 4 | Liquid concepts only | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/animations/splash-cursor) |
+| Tilt card | Cards rotate in 3D toward the cursor | 2 | Physical objects (cards, tickets, products) | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/components/tilted-card) |
 
 ### Layout and galleries
 
-| Concept | What it does | Tier | Earns its place when |
-|---|---|---|---|
-| Stacked deck | Sticky cards stack while scrolling | 2 | Sequences and case studies |
-| Horizontal reel | Vertical scroll drives a horizontal strip | 2 | Film, gallery, timeline concepts |
-| Dome / sphere gallery | Images on a 3D sphere you drag | 4 | Exploration, archives |
-| Curve carousel | Cards ride a curved path, the focused one in front | 2 | Case studies, products |
-| Infinite canvas | Drag to pan an endless grid of work | 2–4 | Gallery Wall archetype |
-| Bento | A modular grid of mixed tiles | 1 | Only when content truly has mixed weights. Overused |
-| Flowing menu | Menu items reveal a marquee image on hover | 2 | Portfolio and studio navigation |
-| Dock | Icons magnify near the cursor | 2 | App-like tool collections |
+| Concept | What it does | Tier | Earns its place when | Reference |
+|---|---|---|---|---|
+| Stacked deck | Sticky cards stack while scrolling | 2 | Sequences and case studies | signature `stacked-deck` in `signatures/scroll-signatures.md` |
+| Horizontal reel | Vertical scroll drives a horizontal strip | 2 | Film, gallery, timeline concepts | signature `horizontal-reel` in `signatures/scroll-signatures.md` |
+| Dome / sphere gallery | Images on a 3D sphere you drag | 4 | Exploration, archives | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/components/dome-gallery) |
+| Curve carousel | Cards ride a curved path, the focused one in front | 2 | Case studies, products | [miguelclavel/curve-carousel](https://github.com/miguelclavel/curve-carousel) (MIT) |
+| Infinite canvas | Drag to pan an endless grid of work | 2–4 | Gallery Wall archetype | Gallery Wall archetype in `structures/archetypes.md` |
+| Bento | A modular grid of mixed tiles | 1 | Only when content truly has mixed weights. Overused | [React Bits](https://reactbits.dev/components/magic-bento) |
+| Flowing menu | Menu items reveal a marquee image on hover | 2 | Portfolio and studio navigation | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/components/flowing-menu) |
+| Dock | Icons magnify near the cursor | 2 | App-like tool collections | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/components/dock) |
 
 ### Micro-interactions
 
-| Concept | What it does | Tier | Earns its place when |
-|---|---|---|---|
-| Hold to commit | Press and hold fills, then confirms | 1–2 | Important, irreversible actions |
-| Count-up | Numbers count to their value | 2 | Real figures with sources only |
-| Click spark | Small burst on click | 1 | Playful brands; rarely |
-| Sticker scatter | Logo bursts into stickers | 2 | Play mood, personal sites |
-| Squish switch / jelly radio | Elastic toggles | 1–2 | Play mood products |
-| Swipe to confirm | Slide to commit an action | 2 | Mobile-first flows |
+| Concept | What it does | Tier | Earns its place when | Reference |
+|---|---|---|---|---|
+| Hold to commit | Press and hold fills, then confirms | 1–2 | Important, irreversible actions | signature `hold-to-commit` in `signatures/cursor-and-micro-signatures.md` |
+| Count-up | Numbers count to their value | 2 | Real figures with sources only | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/text-animations/count-up) |
+| Click spark | Small burst on click | 1 | Playful brands; rarely | `references/react-bits/INDEX.md` · [React Bits](https://reactbits.dev/animations/click-spark) |
+| Sticker scatter | Logo bursts into stickers | 2 | Play mood, personal sites | signature `sticker-scatter` in `signatures/cursor-and-micro-signatures.md` |
+| Squish switch / jelly radio | Elastic toggles | 1–2 | Play mood products | `motion/tier-1-basic.md` · `motion/tokens.md` |
+| Swipe to confirm | Slide to commit an action | 2 | Mobile-first flows | `motion/tier-2-intermediate.md` · `craft/accessibility.md` (keep a tap alternative) |
 
 Use this vocabulary in briefs and critiques: "Replace the aurora background with a grain + lens concept tied to the darkroom idea."
 
@@ -2918,7 +2920,7 @@ Use these to **study**, not to copy. Run `/study <url>` to extract principles.
 |---|---|
 | Award-level sites to study | awwwards.com, thefwa.com, cssdesignawards.com, godly.website, siteinspire.com |
 | Motion and scroll references | gsap.com/showcase, codepen.io (search "ScrollTrigger"), lenis.darkroom.engineering |
-| Effect components (install under their licenses) | reactbits.dev, 21st.dev, affectui.com, ui.aceternity.com, magicui.design |
+| Effect components (install under their licenses) | reactbits.dev (reference index: `references/react-bits/INDEX.md`), 21st.dev, affectui.com, ui.aceternity.com, magicui.design |
 | Small interaction ideas with prompts | github.com/miguelclavel/interaction-recipes |
 | Type | fonts.google.com, fontshare.com, pangrampangram.com, typewolf.com, fontsinuse.com |
 | Colour | coolors.co, oklch.com, huemint.com, realtimecolors.com |
@@ -2931,6 +2933,105 @@ Use these to **study**, not to copy. Run `/study <url>` to extract principles.
 1. Collect three references from **outside** the category (a hotel brief studies a bookshop, a film title and a museum).
 2. Extract principles: what is the structure, the type logic, the motion language?
 3. Never copy a layout, illustration or code wholesale. Check the license before using any asset or code.
+
+
+---
+
+<!-- file: references/react-bits/INDEX.md -->
+
+## React Bits · reference index
+
+One row per selected component (see `SELECTION.md`). "Cost" is what the React Bits version pulls in (checked at commit `90b2750`). When you build the concept yourself, follow the tier's budget in `motion/`. "Reduced motion" describes what the React Bits version does today and what this skill requires either way. No React Bits code lives in this repository. Its licence forbids redistributing the components in a bundle (see `SELECTION.md`).
+
+| Name | Concept | Tier | Cost (React Bits version) | Earns its place when | Slop when | Reduced motion | Reference |
+|---|---|---|---|---|---|---|---|
+| Split Text | Lines or words rise from behind masks | 2 | GSAP + ScrollTrigger + SplitText | The default editorial reveal for one headline per section | Every heading on the page animates the same way | No built-in handling. Render the text static | [reactbits.dev](https://reactbits.dev/text-animations/split-text) |
+| Blur Text | Words sharpen from blur into focus | 2 | motion/react | The concept is clarity, focus, waking up | Used as a generic entrance; blur on body copy | No built-in handling. Show sharp text, no blur | [reactbits.dev](https://reactbits.dev/text-animations/blur-text) |
+| Text Pressure | Letters stretch or compress toward the cursor (variable font) | 2 | none (variable font with wdth/wght axes) | Playful, elastic, type-led identities; one word | Body text, or more than one word group per page | No built-in handling. Static resting axes; fine pointer only | [reactbits.dev](https://reactbits.dev/text-animations/text-pressure) |
+| Scroll Float | Letters bob into place as a line scrolls in | 2 | GSAP + ScrollTrigger | Play-mood display lines | Serious or quiet moods; long lines | No built-in handling. Letters in place, no scrub | [reactbits.dev](https://reactbits.dev/text-animations/scroll-float) |
+| Split Flap Text | Characters flip like a departure board | 2 | none | Schedules, menus, travel, arrivals, any "board" | Headlines that aren't data; constant re-flipping | Built in: CSS and a hook stop the flaps. Keep it | [reactbits.dev](https://reactbits.dev/text-animations/split-flap-text) |
+| Circular Text | Text runs around a circle | 1 | motion/react (rotation) | Badges, stamps, seals, "est." marks | A spinning badge in every hero | No built-in handling. No rotation; text stays on the path | [reactbits.dev](https://reactbits.dev/text-animations/circular-text) |
+| Count Up | Numbers count to their value | 2 | motion/react | Real figures with a source, shown once | Invented stats; counters on every number | No built-in handling. Show the final value at once | [reactbits.dev](https://reactbits.dev/text-animations/count-up) |
+| Noise | Animated film grain over the page | 1 | none (canvas) | Analogue, photographic, warm moods | Grain on a clinical SaaS UI; grain that lowers text contrast | Built in: checks the preference. Static grain is fine | [reactbits.dev](https://reactbits.dev/animations/noise) |
+| Silk | Flowing fabric-like colour field | 4 | three + @react-three/fiber (WebGL) | The material really is liquid, fabric or light | A default hero backdrop; "premium" without a concept | No built-in handling. One still frame or CSS gradient | [reactbits.dev](https://reactbits.dev/backgrounds/silk) |
+| Dot Grid | A dot grid that reacts to the cursor | 3 | none (canvas) | Technical, structural, measurement concepts | Filler behind marketing copy | Built in: motion set to 0. Keep a static grid | [reactbits.dev](https://reactbits.dev/backgrounds/dot-grid) |
+| Dither | Image or field rendered as print dots | 4 | three + @react-three/fiber + postprocessing | Print, newspaper, retro-computing concepts | Dithering for texture alone; on photos people must read | No built-in handling. Static dithered still | [reactbits.dev](https://reactbits.dev/backgrounds/dither) |
+| Image Trail | Images spawn along the cursor path | 2 | GSAP | Photographers, archives, "a lot of work" stories | Stock images; on touch devices | No built-in handling. No trail; show a static grid | [reactbits.dev](https://reactbits.dev/animations/image-trail) |
+| Target Cursor | The cursor locks onto interactive elements | 2 | react-dom (portal) | Precision tools, games, HUD concepts | Content sites; any site where the real cursor matters | Built in: checks the preference. Never hide the system cursor for coarse pointers | [reactbits.dev](https://reactbits.dev/animations/target-cursor) |
+| Splash Cursor | The cursor stirs a fluid simulation | 4 | none (raw WebGL) | Liquid concepts only (ink, water, paint) | A party trick on any other page | No built-in handling. Off entirely | [reactbits.dev](https://reactbits.dev/animations/splash-cursor) |
+| Tilted Card | Cards rotate in 3D toward the cursor | 2 | motion/react | Physical objects: cards, tickets, products | Every card in a grid tilts | No built-in handling. Flat card | [reactbits.dev](https://reactbits.dev/components/tilted-card) |
+| Dome Gallery | Images on a draggable 3D sphere | 4 | @use-gesture/react (CSS 3D) | Exploration, archives, "browse the whole collection" | Fewer than ~20 images; anything that needs a linear read | No built-in handling. A plain grid with the same images | [reactbits.dev](https://reactbits.dev/components/dome-gallery) |
+| Flowing Menu | Menu items reveal a marquee image on hover | 2 | GSAP | Portfolio and studio navigation with real imagery | Primary navigation of a product or docs site | No built-in handling. Plain links; no marquee | [reactbits.dev](https://reactbits.dev/components/flowing-menu) |
+| Dock | Icons magnify near the cursor | 2 | react-dom | App-like tool collections | Website navigation pretending to be macOS | Built in: checks the preference. Keep icons at rest size | [reactbits.dev](https://reactbits.dev/components/dock) |
+| Click Spark | A small burst on click | 1 | none (canvas) | Playful brands; a single celebratory action | Every click on the page | No built-in handling. No burst | [reactbits.dev](https://reactbits.dev/animations/click-spark) |
+
+### How to use a row
+
+1. The concept must survive the Restraint Gate: it serves the brief's idea, not the page's decoration.
+2. Build it at the row's tier with `motion/tokens.md`, guarded by `gsap.matchMedia()` or a `prefers-reduced-motion` check that renders the "Reduced motion" column.
+3. If the user wants the exact React Bits component, install or copy it into **their project** from the reference link, with its notice kept. Never into this skill.
+4. Run `scripts/gate.mjs` on the result like any other page.
+
+
+---
+
+<!-- file: references/react-bits/SELECTION.md -->
+
+## React Bits · selection
+
+Which [React Bits](https://reactbits.dev) components this skill uses as a **reference library**, and at which motion tier. Checked against React Bits at commit `90b2750` (11 October 2026).
+
+### Why reference, not vendor
+
+React Bits is published under MIT + Commons Clause ([LICENSE.md](https://github.com/DavidHDev/react-bits/blob/main/LICENSE.md), © 2026 David Haz). It allows using the components *as part of an application, website, or product*, including commercial ones. It does **not** allow anyone to "sell, sublicense, or redistribute the components themselves, whether alone, in a bundle, or as a ported version". A skill repository that ships their source to every agent that installs it is a bundle of the components, whether or not anyone pays for it. So this skill holds **no React Bits code**. It holds the concept, the tier, the judgement, and a link.
+
+There are two ways to use an effect in a project:
+
+1. **Build it from the concept** (the default). Use the description in `INDEX.md`, the tier rules in `motion/`, and this skill's own examples. The result is original code in the user's project.
+2. **Use the React Bits component in the project itself.** This means installing it into the user's site from React Bits' official registry or copying it from reactbits.dev into that project. Their licence allows this because the component becomes part of a website. Do this only when the user asks for that exact component, and keep their notice in the copied file.
+
+### Selection rules
+
+- Pick a component only if it covers a concept in `references/effects-vocabulary.md` that this skill has **no signature move for**.
+- Skip components that duplicate a signature in `data/signatures.csv`. The signature is this skill's own version.
+- Skip components the vocabulary already calls decoration or overused unless a brief proves the case: Aurora, Particles, Galaxy, Shiny Text, Gradient Text.
+
+### Selected (19)
+
+| Group | React Bits component | Vocabulary concept | Tier |
+|---|---|---|---|
+| Text | Split Text | Line rise | 2 |
+| Text | Blur Text | Blur focus | 2 |
+| Text | Text Pressure | Pressure type | 2 |
+| Text | Scroll Float | Scroll float | 2 |
+| Text | Split Flap Text | Split-flap | 2 |
+| Text | Circular Text | Curved text | 1 |
+| Text | Count Up | Count-up | 2 |
+| Background | Noise | Grain | 1 |
+| Background | Silk | Liquid field | 4 |
+| Background | Dot Grid | Dot / grid field | 3 |
+| Background | Dither | Dither / halftone | 4 |
+| Cursor | Image Trail | Image trail | 2 |
+| Cursor | Target Cursor | Target cursor | 2 |
+| Cursor | Splash Cursor | Splash / fluid cursor | 4 |
+| Cursor | Tilted Card | Tilt card | 2 |
+| Scroll / layout | Dome Gallery | Dome / sphere gallery | 4 |
+| Scroll / layout | Flowing Menu | Flowing menu | 2 |
+| Scroll / layout | Dock | Dock | 2 |
+| Micro | Click Spark | Click spark | 1 |
+
+### Not selected, because a signature already covers it
+
+| React Bits component | Covered by |
+|---|---|
+| Variable Proximity | `proximity-weight` |
+| Decrypted Text, Scrambled Text | `decode` |
+| Scroll Reveal | `ink-fill` |
+| Scroll Velocity | `velocity-skew` |
+| Magnet | `considerate-magnet` |
+| Pixel Trail | `pixel-wake` |
+| Scroll Stack | `stacked-deck` |
+| Scroll Expand | `aperture` |
 
 
 ---
