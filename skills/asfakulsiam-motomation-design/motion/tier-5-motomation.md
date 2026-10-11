@@ -185,7 +185,7 @@ Measured on the TSX example (Chrome, DevTools Fast 3G preset + 6× CPU slowdown,
 ## 6. Pacing and craft
 
 - **Easing lives in the scrub, not the tweens.** Use `ease: "none"` inside the film and `scrub: 0.4–1` for weight.
-- **Camera language:** push in (scale 1 → 1.15), pan (x), reveal (clip-path), rack focus (blur 8px → 0 on one layer). Use one camera move per scene.
+- **Camera language:** push in (scale 1 → 1.15), pan (x), reveal (clip-path, when the reveal is the scene), rack focus (blur 8px → 0 on one layer: paint-heavy, so one layer only, with a perf check and a sharp static frame as the fallback). Use one camera move per scene. What you may animate follows the one rule in `motion/tokens.md` ("What to animate"): `transform` and `opacity` by default; `clip-path` when the shape change is the concept; paint-heavy properties only with a perf check and a static fallback; layout properties never.
 - **Type rides the film:** headlines enter and leave between hold frames; they never move while the user is meant to read them.
 - **Sound design without sound:** use rhythm. Alternate fast scenes with slow holds, like a film edit.
 - **Progress is visible:** a thin timecode or progress rail tells people how long the chapter is.

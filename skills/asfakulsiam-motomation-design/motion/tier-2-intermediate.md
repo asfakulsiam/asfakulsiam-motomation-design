@@ -72,6 +72,7 @@ useGSAP(() => {
 
 ## Rules
 
+- What you may animate follows the one rule in `motion/tokens.md` ("What to animate"): `transform` and `opacity` by default; `clip-path` when the shape change is the concept; paint-heavy properties only with a perf check and a static fallback; layout properties never. The pinned chapter above animates `clip-path` on purpose: the image unmasking is the beat.
 - Wrap everything in `gsap.matchMedia()` with a reduced-motion condition.
 - Set final states in CSS and animate **from** them, so no-JS and reduced-motion users see finished content.
 - `scrub: true` for exact sync, `scrub: 0.5–1.5` for weight. Use `ease: "none"` inside scrubbed timelines.

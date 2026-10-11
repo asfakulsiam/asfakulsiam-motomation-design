@@ -44,6 +44,7 @@ Use it for filtering, grid ↔ list switching, and expanding a thumbnail into a 
 
 ## Rules
 
+- What you may animate follows the one rule in `motion/tokens.md` ("What to animate"): `transform` and `opacity` by default; `clip-path` when the shape change is the concept; paint-heavy properties only with a perf check and a static fallback; layout properties never. View-transition wipes may use `clip-path`; a blurred cross-fade is paint-heavy.
 - Page transitions under 700ms. The user is waiting for content.
 - Never block navigation on an animation finishing.
 - Every authored animation (Lottie/Rive) needs a static fallback and a reduced-motion poster.

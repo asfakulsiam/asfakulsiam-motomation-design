@@ -6,8 +6,21 @@ Load this before any motion work.
 
 1. **Should it move at all?** How often will people see it? Something seen 100 times a day (a menu, a button) gets the smallest, fastest motion or none. Something seen once (the hook, a story chapter) can be rich.
 2. **What does it tell the user?** Pick one: *where something came from · where it went · what changed · what to look at · what this brand feels like*. If none applies, delete it.
-3. **What's the cheapest tool that does it?** CSS before GSAP, GSAP before WebGL. Animate `transform`, `opacity`, `clip-path` and `filter` (sparingly); never `top`, `left`, `width` or `height`.
+3. **What's the cheapest tool that does it?** CSS before GSAP, GSAP before WebGL, and the cheapest property: see "What to animate" below.
 4. **What happens at the edges?** Interruption (hover out mid-animation), exit, rapid repeat, reduced motion, touch, slow devices.
+
+## What to animate (the one rule)
+
+Every tier file, `principles/restraint.md` and `craft/performance.md` point here. Costs and the checks behind them are in `craft/performance.md` ("What each property costs", P1–P2).
+
+| Property | Rule |
+|---|---|
+| `transform`, `opacity` | **Prefer.** The default for all routine motion: reveals, parallax, hovers, pins, page transitions |
+| `clip-path` (basic shapes: `inset()`, `circle()`, `polygon()`) | **Allowed when it serves the concept**: the shape opening *is* the idea (an iris into the next chapter, an image unmasking inside a pinned chapter, a wipe between scenes). Not as decoration on routine reveals. The reduced-motion state shows the content unclipped |
+| `filter` (blur, drop-shadow), `backdrop-filter`, `mask`, `box-shadow`, moving gradients, large-area `clip-path` | **Paint-heavy: only with a performance check and a static fallback.** Limit it to one element (or write down why it covers more), measure the frame time under a 4× CPU throttle at the largest viewport it appears at, and ship a static version that keeps the meaning when it is off |
+| `width`, `height`, `top`, `left`, `margin`, `padding`, `font-size`, grid tracks | **Never animated.** Use `transform` (scale, translate) or FLIP |
+
+The library follows it: `examples/components/scroll/aperture.tsx` and `examples/scroll/pinned-chapter.tsx` animate `clip-path` because the opening is the concept, and both show the content fully open under reduced motion.
 
 ## Easing tokens
 

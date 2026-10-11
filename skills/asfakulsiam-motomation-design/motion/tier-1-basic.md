@@ -47,6 +47,7 @@ function setTheme(next) {
 
 ## Rules
 
+- What you may animate follows the one rule in `motion/tokens.md` ("What to animate"): `transform` and `opacity` by default; `clip-path` when the shape change is the concept; paint-heavy properties only with a perf check and a static fallback; layout properties never.
 - Transition only what changes: `transition: transform 160ms, opacity 160ms`, never `transition: all`.
 - Use `@media (hover: hover)` to scope hover effects.
 - Use the `motion/tokens.md` durations. UI feedback (press, hover, focus, toggles, tooltips) stays at or under <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->; view transitions use the page-transition range in `motion/tokens.md`.

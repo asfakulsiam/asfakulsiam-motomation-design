@@ -31,6 +31,7 @@ void main() {
 
 ## Performance budget (hard limits)
 
+- What you may animate follows the one rule in `motion/tokens.md` ("What to animate"): `transform` and `opacity` by default; `clip-path` when the shape change is the concept; paint-heavy properties only with a perf check and a static fallback; layout properties never. Inside the canvas, shaders replace these properties; the DOM around it follows the same rule.
 - One WebGL canvas per page. Share it across sections (DOM-synced planes) rather than creating many.
 - `renderer.setPixelRatio(Math.min(devicePixelRatio, 2))`; on mobile cap at 1.5.
 - Pause rendering when the canvas is off-screen (`IntersectionObserver`) or the tab is hidden.

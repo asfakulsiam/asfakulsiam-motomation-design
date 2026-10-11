@@ -741,7 +741,7 @@ Restraint is what makes a minimal site feel expensive instead of empty. It is al
 |---|---|---|
 | Accessibility | WCAG 2.2 AA contrast (4.5:1 text, 3:1 large text and UI), keyboard reaches everything with a visible focus, nothing hidden from assistive tech | `craft/accessibility.md` |
 | Restraint | the four cuts and the universal budgets below; one signature move | this file, Restraint Gate in `thinking/sequence.md` |
-| Motion discipline | every animation passes the four questions; UI feedback ≤ <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->; transform/opacity only | `motion/tokens.md` |
+| Motion discipline | every animation passes the four questions; UI feedback ≤ <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->; prefer transform/opacity, clip-path when it serves the concept, paint-heavy effects only with a perf check and a static fallback, layout properties never | `motion/tokens.md` ("What to animate") |
 | Real content | no lorem ipsum, invented numbers, fake logos or testimonials | `gates/delivery-gate.md` |
 | Reduced-motion fallback | a designed static version, not "animations off" | `craft/accessibility.md`, each tier file |
 | Performance budgets | LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1, JS budget per tier | `craft/performance.md` |
@@ -959,6 +959,7 @@ function setTheme(next) {
 
 ### Rules
 
+- What you may animate follows the one rule in `motion/tokens.md` ("What to animate"): `transform` and `opacity` by default; `clip-path` when the shape change is the concept; paint-heavy properties only with a perf check and a static fallback; layout properties never.
 - Transition only what changes: `transition: transform 160ms, opacity 160ms`, never `transition: all`.
 - Use `@media (hover: hover)` to scope hover effects.
 - Use the `motion/tokens.md` durations. UI feedback (press, hover, focus, toggles, tooltips) stays at or under <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->; view transitions use the page-transition range in `motion/tokens.md`.
@@ -1042,6 +1043,7 @@ useGSAP(() => {
 
 ### Rules
 
+- What you may animate follows the one rule in `motion/tokens.md` ("What to animate"): `transform` and `opacity` by default; `clip-path` when the shape change is the concept; paint-heavy properties only with a perf check and a static fallback; layout properties never. The pinned chapter above animates `clip-path` on purpose: the image unmasking is the beat.
 - Wrap everything in `gsap.matchMedia()` with a reduced-motion condition.
 - Set final states in CSS and animate **from** them, so no-JS and reduced-motion users see finished content.
 - `scrub: true` for exact sync, `scrub: 0.5–1.5` for weight. Use `ease: "none"` inside scrubbed timelines.
@@ -1099,6 +1101,7 @@ Use it for filtering, grid ↔ list switching, and expanding a thumbnail into a 
 
 ### Rules
 
+- What you may animate follows the one rule in `motion/tokens.md` ("What to animate"): `transform` and `opacity` by default; `clip-path` when the shape change is the concept; paint-heavy properties only with a perf check and a static fallback; layout properties never. View-transition wipes may use `clip-path`; a blurred cross-fade is paint-heavy.
 - Page transitions under 700ms. The user is waiting for content.
 - Never block navigation on an animation finishing.
 - Every authored animation (Lottie/Rive) needs a static fallback and a reduced-motion poster.
@@ -1141,6 +1144,7 @@ void main() {
 
 ### Performance budget (hard limits)
 
+- What you may animate follows the one rule in `motion/tokens.md` ("What to animate"): `transform` and `opacity` by default; `clip-path` when the shape change is the concept; paint-heavy properties only with a perf check and a static fallback; layout properties never. Inside the canvas, shaders replace these properties; the DOM around it follows the same rule.
 - One WebGL canvas per page. Share it across sections (DOM-synced planes) rather than creating many.
 - `renderer.setPixelRatio(Math.min(devicePixelRatio, 2))`; on mobile cap at 1.5.
 - Pause rendering when the canvas is off-screen (`IntersectionObserver`) or the tab is hidden.
@@ -1355,7 +1359,7 @@ Measured on the TSX example (Chrome, DevTools Fast 3G preset + 6× CPU slowdown,
 ### 6. Pacing and craft
 
 - **Easing lives in the scrub, not the tweens.** Use `ease: "none"` inside the film and `scrub: 0.4–1` for weight.
-- **Camera language:** push in (scale 1 → 1.15), pan (x), reveal (clip-path), rack focus (blur 8px → 0 on one layer). Use one camera move per scene.
+- **Camera language:** push in (scale 1 → 1.15), pan (x), reveal (clip-path, when the reveal is the scene), rack focus (blur 8px → 0 on one layer: paint-heavy, so one layer only, with a perf check and a sharp static frame as the fallback). Use one camera move per scene. What you may animate follows the one rule in `motion/tokens.md` ("What to animate"): `transform` and `opacity` by default; `clip-path` when the shape change is the concept; paint-heavy properties only with a perf check and a static fallback; layout properties never.
 - **Type rides the film:** headlines enter and leave between hold frames; they never move while the user is meant to read them.
 - **Sound design without sound:** use rhythm. Alternate fast scenes with slow holds, like a film edit.
 - **Progress is visible:** a thin timecode or progress rail tells people how long the chapter is.
@@ -1410,8 +1414,21 @@ Load this before any motion work.
 
 1. **Should it move at all?** How often will people see it? Something seen 100 times a day (a menu, a button) gets the smallest, fastest motion or none. Something seen once (the hook, a story chapter) can be rich.
 2. **What does it tell the user?** Pick one: *where something came from · where it went · what changed · what to look at · what this brand feels like*. If none applies, delete it.
-3. **What's the cheapest tool that does it?** CSS before GSAP, GSAP before WebGL. Animate `transform`, `opacity`, `clip-path` and `filter` (sparingly); never `top`, `left`, `width` or `height`.
+3. **What's the cheapest tool that does it?** CSS before GSAP, GSAP before WebGL, and the cheapest property: see "What to animate" below.
 4. **What happens at the edges?** Interruption (hover out mid-animation), exit, rapid repeat, reduced motion, touch, slow devices.
+
+### What to animate (the one rule)
+
+Every tier file, `principles/restraint.md` and `craft/performance.md` point here. Costs and the checks behind them are in `craft/performance.md` ("What each property costs", P1–P2).
+
+| Property | Rule |
+|---|---|
+| `transform`, `opacity` | **Prefer.** The default for all routine motion: reveals, parallax, hovers, pins, page transitions |
+| `clip-path` (basic shapes: `inset()`, `circle()`, `polygon()`) | **Allowed when it serves the concept**: the shape opening *is* the idea (an iris into the next chapter, an image unmasking inside a pinned chapter, a wipe between scenes). Not as decoration on routine reveals. The reduced-motion state shows the content unclipped |
+| `filter` (blur, drop-shadow), `backdrop-filter`, `mask`, `box-shadow`, moving gradients, large-area `clip-path` | **Paint-heavy: only with a performance check and a static fallback.** Limit it to one element (or write down why it covers more), measure the frame time under a 4× CPU throttle at the largest viewport it appears at, and ship a static version that keeps the meaning when it is off |
+| `width`, `height`, `top`, `left`, `margin`, `padding`, `font-size`, grid tracks | **Never animated.** Use `transform` (scale, translate) or FLIP |
+
+The library follows it: `examples/components/scroll/aperture.tsx` and `examples/scroll/pinned-chapter.tsx` animate `clip-path` because the opening is the concept, and both show the content fully open under reduced motion.
 
 ### Easing tokens
 
