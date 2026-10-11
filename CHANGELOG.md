@@ -2,6 +2,44 @@
 
 All notable changes to this skill. Versions follow [Semantic Versioning](https://semver.org).
 
+## [2.2.0] - 2026-10-11
+
+Development run v2.2.0: tasks in Phases 0–7, applied in order. Each bullet names the task and the files it touched. Pre-flight: the four tasks of the prior plan (measured gate, cheap code-readable rules, typography as house default, traced stamp) were already in 2.1.0 (commits 2ab97d3, 6a4665f, 0b39dc5, 8a76c06), so they were verified and skipped.
+
+### Added
+- **Benchmark v2 (run on 2.1.0, recorded here):** inside Claude Code, 5 briefs × 3 seeds × 2 conditions, blind GPT-5.4 + Gemini judges. The skill won 15 of 15 pairs; gated mean 45.9 → 92.4, raw 67.1 → 92.4. Report: `evals/results/2026-10-11-benchmark-v2.md`.
+- **T2.1 · Shared rules:** `data/rules.csv` is the single source for the UI-feedback limit (250ms), the banned display fonts and the caution fonts. `scripts/rules.mjs` renders them.
+- **T3.1 · React Bits selection:** `references/react-bits/SELECTION.md` covers 19 components mapped to tiers. 8 were skipped because a signature already covers them.
+- **T3.3 · React Bits index:** `references/react-bits/INDEX.md` gives the concept, tier, cost, when it earns its place, when it's slop, reduced-motion behaviour and a reactbits.dev link, one row per component.
+- **T3.7 · Licence guard:** `scripts/check-repo.mjs` checks that SELECTION and INDEX agree, and fails on React Bits source or a `vendor/react-bits/` folder.
+
+### Changed
+- **T2.2 · One value everywhere:** `SKILL.md`, `principles/typography.md`, `principles/restraint.md`, `principles/house-style.md`, `motion/tier-1-basic.md` and `gates/delivery-gate.md` now spell the shared rules through `<!--rule:KEY-->` markers. Before, the UI-feedback limit was 500, 300 or 250ms depending on the file, and SKILL.md's font list was shorter. `check-repo.mjs` fails when a marker differs from the CSV or a rule is restated by hand. `gate.mjs` holds no copy of these rules.
+- **T3.5 · Effects vocabulary:** `references/effects-vocabulary.md` has a Reference column on all 40 concepts. The "never paste React Bits source" rule now states its reason: the licence forbids redistributing the components.
+- **T3.6 · Licensing notes:** the `README.md` License section explains that React Bits is referenced, not vendored. `ACKNOWLEDGEMENTS.md` credits React Bits and David Haz.
+- **T4.1 · README results:** v2 replaces v1 in `README.md`, with two v2 before/after images (`docs/benchmark-images/v2-*.webp`). v1 stays in this changelog (2.1.0, Task 9) and in its report.
+- **T4.2 · README tools:** `gate.mjs` is documented with its Playwright install steps. The badge now reads "zero dependencies (gate: Playwright, optional)", and the `SKILL.md` tools line matches.
+- **T4.3 · Benchmark summary:** `docs/benchmark-summary.md` leads with v2 and keeps v1 below it.
+- **T4.4 · Acknowledgements:** `ACKNOWLEDGEMENTS.md` names what was borrowed (i-have-adhd, Anthropic skill-creator, Hallmark, anti-slop, Impeccable) and the studied lineage (taste-skill, Emil Kowalski, design-motion-principles, ui-ux-pro-max, awesome-claude-design, Miguel Clavel, GSAP under its own license, React Bits).
+
+### Fixed
+- **T0.1 · Unsafe source:** verified that no file names CreativeAgencyStyle (0 hits), so nothing needed removing.
+- **T1.1 · Lenis provider:** `examples/providers/smooth-scroll.tsx` read the Lenis instance once at mount, before it existed, so the page didn't scroll at all (scrollY 0 after 6 wheel events in a Next 15 app). It now reads the ref inside the ticker callback and connects ScrollTrigger through `lenis.on('scroll')` once `useLenis()` publishes the instance (scrollY 3600, 76 ScrollTrigger updates).
+- **T1.2 · Memory location:** `scripts/memory.mjs` writes `.motomation/` at the project root. It walks up to the nearest `package.json`/`.git`, never uses the skill's own folder, and accepts `--project <dir>`. `gate.mjs` reads the log from the same root. Documented in `SKILL.md` and `README.md`.
+- **T1.3 · Demo stamp:** `examples/html/motomation-film.html` has one signature (timecode-rail) and a gate-generated stamp that passes `gate.mjs --verify`. Proximity Weight is recorded as a supporting detail in the new `examples/html/DESIGN.md`.
+- **T1.4 · Args parser:** `scripts/lib.mjs` splits `--key=value` at the first `=` only.
+- **T1.5 · Contrast:** `scripts/contrast.mjs` prints floor-rounded ratios (4.4988 used to print as "4.50 FAIL"), checks the accent as text at 4.5:1, and is importable. `data/palettes.csv` has an `accent_text` column (body | large-only); 6 of 22 palettes are large-only.
+- **T1.6 · Gate contrast:** `scripts/gate.mjs` judges each text element by its 10th-percentile background sample instead of the median. It warns when more than 30% of text elements were skipped. The studio v1 4.45:1 captions are still flagged.
+- **T1.7 · Examples:**
+  - `typography/proximity-weight.tsx` caches letter positions, re-measures on resize only, and follows live reduced-motion changes.
+  - `scroll/pinned-chapter.tsx` has no beat fades below md.
+  - `motomation/image-sequence-film.tsx` clears the canvas before each frame.
+  - `scripts/check-repo.mjs` and `scripts/build-dist.mjs` use `fileURLToPath`.
+- **T2.3 · Diptych fingerprint:** `scripts/lib.mjs` gives Diptych its own layout family (`split`), so it's no longer grouped with Stage.
+
+### Not done
+- **T3.2 · Vendoring React Bits: blocked.** React Bits' LICENSE.md forbids redistributing "the components themselves-whether alone, in a bundle, or as a ported version", so no React Bits code was copied. T3.4 (wrappers) and T3.8 (typecheck of vendored code) have nothing to act on.
+
 ## [2.1.0] - 2026-10-11
 
 Fix run: fourteen tasks, applied in order. Listed newest first; each bullet names the task and the files it touched.
