@@ -82,7 +82,7 @@ The placeholders are deliberate. There are no numbers to copy. Write the archety
 5. Is the nav "logo left, 5 links centre, button right", and the footer four columns of links, without thought?
 
 **Visual**
-6. Is the display font Inter, Roboto, Open Sans, Lato, Poppins, Montserrat or a system font?
+6. Is the display font <!--rule:banned_display_fonts-->Inter, Roboto, Open Sans, Lato, Poppins, Montserrat, Arial, Helvetica or the system UI stack<!--/rule-->? Is <!--rule:caution_fonts-->Playfair Display and Space Grotesk<!--/rule--> used without a stated reason?
 7. Is there a purple/blue/pink gradient, a glowing orb or blurred blobs without meaning?
 8. Is glassmorphism used without the concept needing layers?
 9. Is there an icon above every feature title?
@@ -100,7 +100,7 @@ The placeholders are deliberate. There are no numbers to copy. Write the archety
 17. Does anything fade-up on scroll just because it can?
 18. Is any animation missing a reduced-motion path?
 19. Are layout properties animated?
-20. Do UI feedback animations exceed 300ms, or use ease-in or `scale(0)` entrances?
+20. Do UI feedback animations exceed <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->, or use ease-in or `scale(0)` entrances?
 21. Is the scroll hijacked (custom scroll that breaks keyboard, anchor links or screen readers)?
 22. Does any loop or canvas keep running off-screen?
 

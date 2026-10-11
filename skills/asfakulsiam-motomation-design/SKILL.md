@@ -131,13 +131,13 @@ Two layers, kept apart on purpose (details in `principles/restraint.md`):
 
 ## Hard bans (full list in `gates/delivery-gate.md`)
 
-- Inter, Roboto, Open Sans, Poppins or a system font as the **display** face (fine as text when chosen on purpose).
+- <!--rule:banned_display_fonts-->Inter, Roboto, Open Sans, Lato, Poppins, Montserrat, Arial, Helvetica or the system UI stack<!--/rule--> as the **display** face (fine as text when chosen on purpose). <!--rule:caution_fonts-->Playfair Display and Space Grotesk<!--/rule--> only with a stated reason: they became AI defaults. (Values: `data/rules.csv`.)
 - Purple-to-blue gradients, glowing blobs, glassmorphism with no reason, and the three-icon feature row.
 - Centred hero + subtitle + two buttons + screenshot, unless the concept demands it and you can say why.
 - Lorem ipsum, "Lorem Corp", invented statistics, fake logos, fake testimonials.
 - Animating layout properties (`top`, `left`, `width`, `height`) when `transform` or `opacity` will do.
 - Any animation without a `prefers-reduced-motion` path.
-- `scale(0)` entrances, ease-in on entrances, durations over 500 ms on UI feedback.
+- `scale(0)` entrances, ease-in on entrances, UI feedback (press, hover, focus, toggles, tooltips) longer than <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->.
 
 ---
 

@@ -49,4 +49,4 @@ function setTheme(next) {
 
 - Transition only what changes: `transition: transform 160ms, opacity 160ms`, never `transition: all`.
 - Use `@media (hover: hover)` to scope hover effects.
-- Use the `motion/tokens.md` durations. Tier 1 stays under 300ms.
+- Use the `motion/tokens.md` durations. UI feedback (press, hover, focus, toggles, tooltips) stays at or under <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->; view transitions use the page-transition range in `motion/tokens.md`.

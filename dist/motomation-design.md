@@ -133,13 +133,13 @@ Two layers, kept apart on purpose (details in `principles/restraint.md`):
 
 ### Hard bans (full list in `gates/delivery-gate.md`)
 
-- Inter, Roboto, Open Sans, Poppins or a system font as the **display** face (fine as text when chosen on purpose).
+- <!--rule:banned_display_fonts-->Inter, Roboto, Open Sans, Lato, Poppins, Montserrat, Arial, Helvetica or the system UI stack<!--/rule--> as the **display** face (fine as text when chosen on purpose). <!--rule:caution_fonts-->Playfair Display and Space Grotesk<!--/rule--> only with a stated reason: they became AI defaults. (Values: `data/rules.csv`.)
 - Purple-to-blue gradients, glowing blobs, glassmorphism with no reason, and the three-icon feature row.
 - Centred hero + subtitle + two buttons + screenshot, unless the concept demands it and you can say why.
 - Lorem ipsum, "Lorem Corp", invented statistics, fake logos, fake testimonials.
 - Animating layout properties (`top`, `left`, `width`, `height`) when `transform` or `opacity` will do.
 - Any animation without a `prefers-reduced-motion` path.
-- `scale(0)` entrances, ease-in on entrances, durations over 500 ms on UI feedback.
+- `scale(0)` entrances, ease-in on entrances, UI feedback (press, hover, focus, toggles, tooltips) longer than <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->.
 
 ---
 
@@ -628,7 +628,7 @@ Start monochrome. Add the accent last. Example grounds:
 ### Motion defaults
 
 - Tier 2 as the baseline for marketing sites; Tier 5 for at least one chapter when the brief allows it.
-- Entrance ease `cubic-bezier(0.16, 1, 0.3, 1)`, 600–900ms for editorial reveals; UI feedback stays under 250ms.
+- Entrance ease `cubic-bezier(0.16, 1, 0.3, 1)`, 600–900ms for editorial reveals; UI feedback stays at or under <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->.
 - Reveal text by **lines** with masks. Never fade a whole paragraph in from 0.
 - Lenis smooth scroll for Tier 2+, synced to the GSAP ticker.
 
@@ -697,7 +697,7 @@ Restraint is what makes a minimal site feel expensive instead of empty. It is al
 |---|---|---|
 | Accessibility | WCAG 2.2 AA contrast (4.5:1 text, 3:1 large text and UI), keyboard reaches everything with a visible focus, nothing hidden from assistive tech | `craft/accessibility.md` |
 | Restraint | the four cuts and the universal budgets below; one signature move | this file, Restraint Gate in `thinking/sequence.md` |
-| Motion discipline | every animation passes the four questions; UI feedback ≤ 250ms; transform/opacity only | `motion/tokens.md` |
+| Motion discipline | every animation passes the four questions; UI feedback ≤ <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->; transform/opacity only | `motion/tokens.md` |
 | Real content | no lorem ipsum, invented numbers, fake logos or testimonials | `gates/delivery-gate.md` |
 | Reduced-motion fallback | a designed static version, not "animations off" | `craft/accessibility.md`, each tier file |
 | Performance budgets | LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1, JS budget per tier | `craft/performance.md` |
@@ -764,7 +764,7 @@ Search the curated list: `node scripts/search.mjs fonts "<mood words>"`. `data/f
 
 ### 2. Banned as display faces
 
-Inter, Roboto, Open Sans, Lato, Poppins, Montserrat, Arial/Helvetica fallbacks and the system UI stack. They're fine as **text** faces when chosen deliberately, never as the identity. Also avoid using Playfair Display and Space Grotesk on autopilot: they became AI defaults.
+<!--rule:banned_display_fonts-->Inter, Roboto, Open Sans, Lato, Poppins, Montserrat, Arial, Helvetica or the system UI stack<!--/rule-->. They're fine as **text** faces when chosen deliberately, never as the identity. Also avoid using <!--rule:caution_fonts-->Playfair Display and Space Grotesk<!--/rule--> on autopilot: they became AI defaults. The lists live in `data/rules.csv`.
 
 ### 3. Scale
 
@@ -907,7 +907,7 @@ function setTheme(next) {
 
 - Transition only what changes: `transition: transform 160ms, opacity 160ms`, never `transition: all`.
 - Use `@media (hover: hover)` to scope hover effects.
-- Use the `motion/tokens.md` durations. Tier 1 stays under 300ms.
+- Use the `motion/tokens.md` durations. UI feedback (press, hover, focus, toggles, tooltips) stays at or under <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->; view transitions use the page-transition range in `motion/tokens.md`.
 
 
 ---
@@ -2441,7 +2441,7 @@ The placeholders are deliberate. There are no numbers to copy. Write the archety
 5. Is the nav "logo left, 5 links centre, button right", and the footer four columns of links, without thought?
 
 **Visual**
-6. Is the display font Inter, Roboto, Open Sans, Lato, Poppins, Montserrat or a system font?
+6. Is the display font <!--rule:banned_display_fonts-->Inter, Roboto, Open Sans, Lato, Poppins, Montserrat, Arial, Helvetica or the system UI stack<!--/rule-->? Is <!--rule:caution_fonts-->Playfair Display and Space Grotesk<!--/rule--> used without a stated reason?
 7. Is there a purple/blue/pink gradient, a glowing orb or blurred blobs without meaning?
 8. Is glassmorphism used without the concept needing layers?
 9. Is there an icon above every feature title?
@@ -2459,7 +2459,7 @@ The placeholders are deliberate. There are no numbers to copy. Write the archety
 17. Does anything fade-up on scroll just because it can?
 18. Is any animation missing a reduced-motion path?
 19. Are layout properties animated?
-20. Do UI feedback animations exceed 300ms, or use ease-in or `scale(0)` entrances?
+20. Do UI feedback animations exceed <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->, or use ease-in or `scale(0)` entrances?
 21. Is the scroll hijacked (custom scroll that breaks keyboard, anchor links or screen readers)?
 22. Does any loop or canvas keep running off-screen?
 

@@ -20,7 +20,7 @@ Search the curated list: `node scripts/search.mjs fonts "<mood words>"`. `data/f
 
 ## 2. Banned as display faces
 
-Inter, Roboto, Open Sans, Lato, Poppins, Montserrat, Arial/Helvetica fallbacks and the system UI stack. They're fine as **text** faces when chosen deliberately, never as the identity. Also avoid using Playfair Display and Space Grotesk on autopilot: they became AI defaults.
+<!--rule:banned_display_fonts-->Inter, Roboto, Open Sans, Lato, Poppins, Montserrat, Arial, Helvetica or the system UI stack<!--/rule-->. They're fine as **text** faces when chosen deliberately, never as the identity. Also avoid using <!--rule:caution_fonts-->Playfair Display and Space Grotesk<!--/rule--> on autopilot: they became AI defaults. The lists live in `data/rules.csv`.
 
 ## 3. Scale
 

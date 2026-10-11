@@ -10,7 +10,7 @@ Restraint is what makes a minimal site feel expensive instead of empty. It is al
 |---|---|---|
 | Accessibility | WCAG 2.2 AA contrast (4.5:1 text, 3:1 large text and UI), keyboard reaches everything with a visible focus, nothing hidden from assistive tech | `craft/accessibility.md` |
 | Restraint | the four cuts and the universal budgets below; one signature move | this file, Restraint Gate in `thinking/sequence.md` |
-| Motion discipline | every animation passes the four questions; UI feedback ≤ 250ms; transform/opacity only | `motion/tokens.md` |
+| Motion discipline | every animation passes the four questions; UI feedback ≤ <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->; transform/opacity only | `motion/tokens.md` |
 | Real content | no lorem ipsum, invented numbers, fake logos or testimonials | `gates/delivery-gate.md` |
 | Reduced-motion fallback | a designed static version, not "animations off" | `craft/accessibility.md`, each tier file |
 | Performance budgets | LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1, JS budget per tier | `craft/performance.md` |

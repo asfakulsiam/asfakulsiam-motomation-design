@@ -39,7 +39,7 @@ Start monochrome. Add the accent last. Example grounds:
 ## Motion defaults
 
 - Tier 2 as the baseline for marketing sites; Tier 5 for at least one chapter when the brief allows it.
-- Entrance ease `cubic-bezier(0.16, 1, 0.3, 1)`, 600–900ms for editorial reveals; UI feedback stays under 250ms.
+- Entrance ease `cubic-bezier(0.16, 1, 0.3, 1)`, 600–900ms for editorial reveals; UI feedback stays at or under <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->.
 - Reveal text by **lines** with masks. Never fade a whole paragraph in from 0.
 - Lenis smooth scroll for Tier 2+, synced to the GSAP ticker.
 

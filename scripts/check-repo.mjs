@@ -4,6 +4,7 @@ import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import { join, relative, basename } from "node:path";
 import { execFileSync } from "node:child_process";
 import { parseCSV } from "../skills/asfakulsiam-motomation-design/scripts/lib.mjs";
+import { renderRule, rules as loadRules, bannedDisplayFonts } from "../skills/asfakulsiam-motomation-design/scripts/rules.mjs";
 import { fileURLToPath } from "node:url";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url)); // decoded and OS-native (Windows drive letters, spaces)
@@ -83,6 +84,41 @@ if (!run([join(S, "contrast.mjs"), "--palettes"])) fail("a palette in data/palet
 
 // 6. dist is fresh
 if (!run([join(ROOT, "scripts/build-dist.mjs"), "--check"])) fail("dist/motomation-design.md is out of date (run: node scripts/build-dist.mjs)");
+
+// 7. Shared rules (data/rules.csv) are spelled the same everywhere
+{
+  const R = loadRules();
+  const markerRe = /<!--rule:([a-z_]+)-->([\s\S]*?)<!--\/rule-->/g;
+  // every file that states a shared rule, and the rules it must carry as markers
+  const required = {
+    "SKILL.md": ["banned_display_fonts", "caution_fonts", "ui_feedback_max_ms"],
+    "principles/typography.md": ["banned_display_fonts", "caution_fonts"],
+    "principles/restraint.md": ["ui_feedback_max_ms"],
+    "principles/house-style.md": ["ui_feedback_max_ms"],
+    "motion/tier-1-basic.md": ["ui_feedback_max_ms"],
+    "gates/delivery-gate.md": ["banned_display_fonts", "caution_fonts", "ui_feedback_max_ms"],
+  };
+  for (const [file, keys] of Object.entries(required)) {
+    const text = readFileSync(join(SKILL, file), "utf8");
+    const found = new Set([...text.matchAll(markerRe)].map((m) => m[1]));
+    for (const k of keys) if (!found.has(k)) fail(`${file}: missing <!--rule:${k}--> marker (value from data/rules.csv)`);
+  }
+  const banned = bannedDisplayFonts().filter((f) => f !== "system-ui");
+  const scan = [...mdFiles, join(SKILL, "scripts/gate.mjs"), join(ROOT, "README.md"), join(ROOT, "AGENTS.md"), join(ROOT, "rules/motomation.md"), join(ROOT, "rules/motomation.mdc")].filter((f) => existsSync(f));
+  for (const f of scan) {
+    const text = readFileSync(f, "utf8");
+    for (const [, k, inner] of text.matchAll(markerRe)) {
+      if (!R[k]) { fail(`${relative(ROOT, f)}: unknown rule marker ${k}`); continue; }
+      const want = renderRule(k, R);
+      if (inner !== want) fail(`${relative(ROOT, f)}: rule ${k} says "${inner}", data/rules.csv says "${want}"`);
+    }
+    // restated without a marker: a UI-feedback duration, or a list of three or more banned display fonts
+    text.replace(markerRe, "").split("\n").forEach((line, i) => {
+      if (/UI feedback[^.;|]{0,60}?\b\d{2,4}\s?ms\b/i.test(line)) fail(`${relative(ROOT, f)}:${i + 1}: UI-feedback duration written by hand; use <!--rule:ui_feedback_max_ms-->`);
+      if (banned.filter((b) => new RegExp(`\\b${b}\\b`).test(line)).length >= 3) fail(`${relative(ROOT, f)}:${i + 1}: banned-font list written by hand; use <!--rule:banned_display_fonts-->`);
+    });
+  }
+}
 
 warn.forEach((w) => console.warn(`warn: ${w}`));
 if (errors.length) { errors.forEach((e) => console.error(`✗ ${e}`)); console.error(`\n${errors.length} problem(s).`); process.exit(1); }
