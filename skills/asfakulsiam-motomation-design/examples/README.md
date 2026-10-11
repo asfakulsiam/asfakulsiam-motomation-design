@@ -16,7 +16,7 @@ Production-ready reference components. Each one is typed (strict TypeScript), cl
 | `product/feature-demo.tsx` | 2 | Workbench pattern: scroll-driven product steps; stacked on mobile |
 | `scroll/pinned-chapter.tsx` | 2 | One idea in three beats; shorter on mobile; static under reduced motion |
 | `motomation/image-sequence-film.tsx` | 5 | Pinned image-sequence film with scene type, timecode rail, bounded playhead-first frame loading and a static storyboard fallback |
-| `html/motomation-film.html` | 5 | **Single file, no build:** the whole Motomation pattern in vanilla JS. Open it in a browser |
+| `html/motomation-film.html` | 5 | **One HTML file, no build:** the whole Motomation pattern in vanilla JS. GSAP, Lenis and the fonts are self-hosted in `html/lib/` (licences in `lib/LICENSES.md`), so it runs and its stamp verifies offline. Open it in a browser |
 
 **Component library:** `components/` holds 43 more original components in six families (type, scroll, cursor, backgrounds, layout, micro-interactions). These need only React. See `components/README.md` for the catalogue and `gallery/index.html` for live demos.
 

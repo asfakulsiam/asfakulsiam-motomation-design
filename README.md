@@ -413,5 +413,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). In short: original work only, short sing
 
 ## License
 
-[MIT](LICENSE) © asfakulsiam. The whole repository is MIT: it contains no third-party component code.
+[MIT](LICENSE) © asfakulsiam. Every component, script and document is MIT and original: the repository contains no third-party component code. One exception, not covered by the MIT licence: the runtime files self-hosted for the offline demo in [`examples/html/lib/`](skills/asfakulsiam-motomation-design/examples/html/lib/LICENSES.md) (GSAP under its Standard License, Lenis under MIT, fonts under the SIL OFL), copied unmodified with their notices.
 
