@@ -238,7 +238,9 @@ async function words(browser, url) {
       checked++;
       const text = e.textContent.replace(/\s+/g, " ").trim(); const lab = { el: __g.label(e), text: text.slice(0, 48) };
       if (e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).overflowX === "visible") out.push({ ...lab, problem: `text wider than its box by ${e.scrollWidth - e.clientWidth}px` });
-      if (rc.right > vw + 1 || rc.left < -1) out.push({ ...lab, problem: `leaves the viewport by ${Math.round(Math.max(rc.right - vw, -rc.left))}px` });
+      // a marquee track: decorative (aria-hidden) text that a clipping ancestor cuts off on purpose; its readable copy lives elsewhere
+      const clippedTrack = (() => { let hid = false; for (let q = e; q && q !== document.body; q = q.parentElement) { if (q.getAttribute?.("aria-hidden") === "true") hid = true; const ox = getComputedStyle(q).overflowX; if (hid && q !== e && (ox === "hidden" || ox === "clip")) return true; } return false; })();
+      if ((rc.right > vw + 1 || rc.left < -1) && !clippedTrack) out.push({ ...lab, problem: `leaves the viewport by ${Math.round(Math.max(rc.right - vw, -rc.left))}px` });
       // map characters to text nodes, then measure each word's rendered boxes
       const walker = document.createTreeWalker(e, NodeFilter.SHOW_TEXT); const chars = []; let n;
       // a word never continues across a <br> or into a different block box
@@ -269,6 +271,8 @@ async function words(browser, url) {
       .map((e) => { const rg = document.createRange(); rg.selectNodeContents(e); return { e, t: e.textContent.trim(), r: rg.getBoundingClientRect(), fs: parseFloat(getComputedStyle(e).fontSize) }; }).sort((a, b) => a.r.left - b.r.left);
     for (let i = 0; i < frags.length; i++) for (let j = 0; j < frags.length; j++) {
       const a = frags[i], b = frags[j]; if (a === b || Math.abs(a.fs - b.fs) > 1 || Math.abs(a.r.top - b.r.top) > a.fs * 0.3 || b.r.left < a.r.right - 1) continue;
+      // only neighbours: a fragment sitting between them on the same line means a and b are not one word ("a" and "t" in E·l·a·s·t·i·c)
+      if (frags.some((c) => c !== a && c !== b && Math.abs(c.r.top - a.r.top) <= a.fs * 0.3 && c.r.left >= a.r.right - 1 && c.r.right <= b.r.left + 1)) continue;
       const gap = b.r.left - a.r.right; const word = (a.t + b.t).toLowerCase();
       if (gap > a.fs * 0.12 && gap < a.fs * 4 && new RegExp("(^|[^\\p{L}])" + word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "($|[^\\p{L}])", "u").test(page))
         out.push({ el: __g.label(a.e) + " + " + __g.label(b.e), text: a.t + "|" + b.t, problem: `word "${a.t + b.t}" is split across two elements with a ${Math.round(gap)}px gap` });
@@ -280,7 +284,8 @@ async function words(browser, url) {
     const max = Math.max(0, ...first.map((x) => x.fs)); const big = first.filter((x) => x.fs >= max * 0.95);
     // an <em> inside the h1, or an outline layer stacked on the fill, is the same focal point
     const overlap = (a, b) => { const w = Math.min(a.right, b.right) - Math.max(a.left, b.left), h = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top); return w > 0 && h > 0 && (w * h) / Math.min(a.width * a.height, b.width * b.height) > 0.5; };
-    const uniq = []; for (const x of big) if (!big.some((o) => o !== x && o.e.contains(x.e)) && !uniq.some((u) => overlap(u.r, x.r))) uniq.push(x);
+    // letters of one split word (one span per letter, same parent) are one focal point, not one per letter
+    const uniq = []; for (const x of big) if (!big.some((o) => o !== x && o.e.contains(x.e)) && !uniq.some((u) => overlap(u.r, x.r) || (u.e.parentElement === x.e.parentElement && u.e.textContent.trim().length <= 2 && x.e.textContent.trim().length <= 2))) uniq.push(x);
     const ties = uniq.length;
     return { checked, out, hier: { h1: hs.filter((h) => h.tagName === "H1").length, skips, focalTies: ties, largest: max } };
   });
