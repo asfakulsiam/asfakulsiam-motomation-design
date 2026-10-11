@@ -6,7 +6,7 @@
 Original, award-level websites that are minimal, modern and typography-led, with motion as the signature.
 At the top tier, scrolling plays like a film.
 
-**New here? [Start here → what it is, who it's for, and what a session looks like](ABOUT.md)**
+**New here? [Start here → what it is, who it's for, and what a session looks like](ABOUT.md)** · **[See it in action → worked examples](#see-it-in-action)**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](LICENSE)
 [![Version](https://img.shields.io/badge/version-2.3.0-E0442B?style=flat-square)](CHANGELOG.md)
@@ -23,6 +23,15 @@ npx skills add asfakulsiam/asfakulsiam-motomation-design
 <sub>Above: <a href="skills/asfakulsiam-motomation-design/examples/html/motomation-film.html">examples/html/motomation-film.html</a>, a complete Tier 5 Motomation page in one HTML file with no build step.</sub>
 
 </div>
+
+## See it in action
+
+Real sessions, copied with their commands, outputs, screenshots and gate results. Open one before reading the rest.
+
+| Example | What it shows |
+|---|---|
+| [Hero section](skills/asfakulsiam-motomation-design/examples/prompts/hero.md) | One viewport for a real craft: collision draw, memory check, build, gate, stamp, Restraint Gate log |
+| [Component swap](skills/asfakulsiam-motomation-design/examples/prompts/component.md) | `HoldToCommit` dropped into an existing React app: search, choice, diff, typecheck, gate, interaction test |
 
 ---
 

@@ -158,6 +158,16 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   }
 }
 
+// 10. Every worked example is discoverable from the top of the README (before "Why this exists")
+{
+  const readme = readFileSync(join(ROOT, "README.md"), "utf8");
+  const top = readme.split(/^## Why this exists/m)[0];
+  const dir = join(SKILL, "examples/prompts");
+  if (existsSync(dir)) for (const f of readdirSync(dir).filter((x) => x.endsWith(".md"))) {
+    if (!top.includes(`examples/prompts/${f}`)) fail(`README.md: examples/prompts/${f} is not linked in "See it in action" (above "Why this exists")`);
+  }
+}
+
 warn.forEach((w) => console.warn(`warn: ${w}`));
 if (errors.length) { errors.forEach((e) => console.error(`✗ ${e}`)); console.error(`\n${errors.length} problem(s).`); process.exit(1); }
 console.log(`✓ repository OK (skill v${v}, ${mdFiles.length} docs, ${Object.keys(ids).length} data sets)`);
