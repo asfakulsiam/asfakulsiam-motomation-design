@@ -9,6 +9,12 @@ Proof that the skill does what it claims. Run them before a release.
 4. Score both outputs with `rubric.md`, ideally with a judge (a person or a separate model) who doesn't know which output used the skill.
 5. Record the results in `results/<date>-<agent>-<model>.md`.
 
+## Automated runner (`run-agent-benchmark.mjs`)
+`generate → measure → judge → score`, inside Claude Code (`claude -p`), blind cross-family judges, hard gates from measurements. Options added in v2.2.0:
+- `--arms baseline,gated,skill`: the **gated** arm gets the baseline prompt plus `scripts/gate.mjs` (the tool only, none of the skill's docs) and is told to fix what it reports. Comparing gated with skill separates the value of the knowledge from the value of the measured gate. The default stays `baseline,skill`, so v2 is reproducible.
+- `--pairs baseline:skill,gated:skill,baseline:gated`: which pairs `judge` and `score` compare. `baseline:skill` keeps v2's file names and summary shape.
+- `--only portfolio,launch,festival --tier 4` (or `5`): the motion-heavy briefs 01, 06 and 08 at a forced tier. Every arm is told the same tier.
+
 ## Release gate
 A release ships only if, compared with the baseline:
 - the average total score is higher on **every** brief,
