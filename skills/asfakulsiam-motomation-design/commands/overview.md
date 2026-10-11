@@ -83,7 +83,7 @@ A design review in the format of `commands/critique-format.md`: scores, the thre
 A technical gate: accessibility, performance, reduced motion, mobile matrix, SEO and the AI-default scan. Returns pass/fail per item with file and line references.
 
 ### `/study [reference URL or screenshot]`
-Extracts the **design DNA** of a reference (structure, type logic, colour roles, motion language, signature) **without copying it**. Returns principles you can apply to a different brief, plus what not to copy.
+Extracts the **design DNA** of a reference **without copying it**, and writes it into `DESIGN.md` as a "Studied direction" in five sections: type, palette, layout, motion, signature. It ends with what to take (decisions) and what to leave (anything that would make a copy). Agent-driven: the agent opens the URL or reads the screenshot, and no script fetches anything. Measured values are marked as measured, and missing evidence as `not observed`. Full input, output and rules: `commands/study.md`.
 
 ---
 

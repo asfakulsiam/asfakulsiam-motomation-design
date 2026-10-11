@@ -188,7 +188,7 @@ Each command lists **what** it does, **when** to use it and **where** it applies
 |---|---|---|---|
 | `/critique [target or URL]` | A scored design review: top 3 problems, fixes, what to keep | Before revisions, or to review any site | Your work or a reference |
 | `/audit [target]` | A technical gate: accessibility, performance, reduced motion, mobile matrix, SEO, AI-default scan | Before launch | Any codebase |
-| `/study [URL or screenshot]` | Extracts the **design DNA** of a reference without copying it | You love a site and want its principles, not its layout | References and competitors |
+| `/study [URL or screenshot]` | Extracts the **design DNA** of a reference into `DESIGN.md` (type, palette, layout, motion, signature) without copying it | You love a site and want its principles, not its layout | References and competitors |
 | `/polish [target]` | The last pass: spacing, details, states, OG image, stamp and memory log | Right before shipping | Finished pages |
 
 ### Meta
