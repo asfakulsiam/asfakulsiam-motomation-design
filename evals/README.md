@@ -15,6 +15,9 @@ Proof that the skill does what it claims. Run them before a release.
 - `--pairs baseline:skill,gated:skill,baseline:gated`: which pairs `judge` and `score` compare. `baseline:skill` keeps v2's file names and summary shape.
 - `--only portfolio,launch,festival --tier 4` (or `5`): the motion-heavy briefs 01, 06 and 08 at a forced tier. Every arm is told the same tier.
 
+## Where the screenshots are
+Since v2.2.0, benchmark screenshots (`shot-*.webp`, about 15 MB) live on the [`evals` branch](https://github.com/asfakulsiam/asfakulsiam-motomation-design/tree/evals/evals/results), so installing the skill doesn't download them. Main keeps every report, `summary.json`, `checks.json`, judge file, prompt, transcript and built `index.html`. The report images link to the `evals` branch. To re-judge an old run, check out its screenshots first: `git checkout origin/evals -- evals/results/<run>`.
+
 ## Agents tested so far
 | Agent | Benchmarked | Notes |
 |---|---|---|

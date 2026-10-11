@@ -42,11 +42,11 @@ Brief: [`evals/briefs/07-architecture-studio.md`](../briefs/07-architecture-stud
 
 | | Baseline | Skill |
 |---|---|---|
-| 1440 · first screen | ![](2026-10-11-benchmark/studio/baseline/shot-1440-fold.webp) | ![](2026-10-11-benchmark/studio/skill/shot-1440-fold.webp) |
-| 1440 · page | ![](2026-10-11-benchmark/studio/baseline/shot-1440-full.webp) | ![](2026-10-11-benchmark/studio/skill/shot-1440-full.webp) |
-| 375 · page | ![](2026-10-11-benchmark/studio/baseline/shot-375-full.webp) | ![](2026-10-11-benchmark/studio/skill/shot-375-full.webp) |
-| 1440 · reduced motion | ![](2026-10-11-benchmark/studio/baseline/shot-1440-reduced-full.webp) | ![](2026-10-11-benchmark/studio/skill/shot-1440-reduced-full.webp) |
-| 375 · reduced motion | ![](2026-10-11-benchmark/studio/baseline/shot-375-reduced-full.webp) | ![](2026-10-11-benchmark/studio/skill/shot-375-reduced-full.webp) |
+| 1440 · first screen | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/studio/baseline/shot-1440-fold.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/studio/skill/shot-1440-fold.webp) |
+| 1440 · page | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/studio/baseline/shot-1440-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/studio/skill/shot-1440-full.webp) |
+| 375 · page | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/studio/baseline/shot-375-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/studio/skill/shot-375-full.webp) |
+| 1440 · reduced motion | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/studio/baseline/shot-1440-reduced-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/studio/skill/shot-1440-reduced-full.webp) |
+| 375 · reduced motion | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/studio/baseline/shot-375-reduced-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/studio/skill/shot-375-reduced-full.webp) |
 
 | Axis | baseline · GPT-5.4 | baseline · Gemini 3.1 | skill · GPT-5.4 | skill · Gemini 3.1 |
 |---|---|---|---|---|
@@ -71,11 +71,11 @@ Brief: [`evals/briefs/04-boutique-hotel.md`](../briefs/04-boutique-hotel.md) · 
 
 | | Baseline | Skill |
 |---|---|---|
-| 1440 · first screen | ![](2026-10-11-benchmark/hotel/baseline/shot-1440-fold.webp) | ![](2026-10-11-benchmark/hotel/skill/shot-1440-fold.webp) |
-| 1440 · page | ![](2026-10-11-benchmark/hotel/baseline/shot-1440-full.webp) | ![](2026-10-11-benchmark/hotel/skill/shot-1440-full.webp) |
-| 375 · page | ![](2026-10-11-benchmark/hotel/baseline/shot-375-full.webp) | ![](2026-10-11-benchmark/hotel/skill/shot-375-full.webp) |
-| 1440 · reduced motion | ![](2026-10-11-benchmark/hotel/baseline/shot-1440-reduced-full.webp) | ![](2026-10-11-benchmark/hotel/skill/shot-1440-reduced-full.webp) |
-| 375 · reduced motion | ![](2026-10-11-benchmark/hotel/baseline/shot-375-reduced-full.webp) | ![](2026-10-11-benchmark/hotel/skill/shot-375-reduced-full.webp) |
+| 1440 · first screen | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/hotel/baseline/shot-1440-fold.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/hotel/skill/shot-1440-fold.webp) |
+| 1440 · page | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/hotel/baseline/shot-1440-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/hotel/skill/shot-1440-full.webp) |
+| 375 · page | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/hotel/baseline/shot-375-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/hotel/skill/shot-375-full.webp) |
+| 1440 · reduced motion | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/hotel/baseline/shot-1440-reduced-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/hotel/skill/shot-1440-reduced-full.webp) |
+| 375 · reduced motion | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/hotel/baseline/shot-375-reduced-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/hotel/skill/shot-375-reduced-full.webp) |
 
 | Axis | baseline · GPT-5.4 | baseline · Gemini 3.1 | skill · GPT-5.4 | skill · Gemini 3.1 |
 |---|---|---|---|---|
@@ -100,11 +100,11 @@ Brief: [`evals/briefs/03-ceramics-shop.md`](../briefs/03-ceramics-shop.md) · ou
 
 | | Baseline | Skill |
 |---|---|---|
-| 1440 · first screen | ![](2026-10-11-benchmark/ecommerce/baseline/shot-1440-fold.webp) | ![](2026-10-11-benchmark/ecommerce/skill/shot-1440-fold.webp) |
-| 1440 · page | ![](2026-10-11-benchmark/ecommerce/baseline/shot-1440-full.webp) | ![](2026-10-11-benchmark/ecommerce/skill/shot-1440-full.webp) |
-| 375 · page | ![](2026-10-11-benchmark/ecommerce/baseline/shot-375-full.webp) | ![](2026-10-11-benchmark/ecommerce/skill/shot-375-full.webp) |
-| 1440 · reduced motion | ![](2026-10-11-benchmark/ecommerce/baseline/shot-1440-reduced-full.webp) | ![](2026-10-11-benchmark/ecommerce/skill/shot-1440-reduced-full.webp) |
-| 375 · reduced motion | ![](2026-10-11-benchmark/ecommerce/baseline/shot-375-reduced-full.webp) | ![](2026-10-11-benchmark/ecommerce/skill/shot-375-reduced-full.webp) |
+| 1440 · first screen | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/ecommerce/baseline/shot-1440-fold.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/ecommerce/skill/shot-1440-fold.webp) |
+| 1440 · page | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/ecommerce/baseline/shot-1440-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/ecommerce/skill/shot-1440-full.webp) |
+| 375 · page | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/ecommerce/baseline/shot-375-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/ecommerce/skill/shot-375-full.webp) |
+| 1440 · reduced motion | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/ecommerce/baseline/shot-1440-reduced-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/ecommerce/skill/shot-1440-reduced-full.webp) |
+| 375 · reduced motion | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/ecommerce/baseline/shot-375-reduced-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/ecommerce/skill/shot-375-reduced-full.webp) |
 
 | Axis | baseline · GPT-5.4 | baseline · Gemini 3.1 | skill · GPT-5.4 | skill · Gemini 3.1 |
 |---|---|---|---|---|
@@ -129,11 +129,11 @@ Brief: [`evals/briefs/02-dev-tool-landing.md`](../briefs/02-dev-tool-landing.md)
 
 | | Baseline | Skill |
 |---|---|---|
-| 1440 · first screen | ![](2026-10-11-benchmark/saas/baseline/shot-1440-fold.webp) | ![](2026-10-11-benchmark/saas/skill/shot-1440-fold.webp) |
-| 1440 · page | ![](2026-10-11-benchmark/saas/baseline/shot-1440-full.webp) | ![](2026-10-11-benchmark/saas/skill/shot-1440-full.webp) |
-| 375 · page | ![](2026-10-11-benchmark/saas/baseline/shot-375-full.webp) | ![](2026-10-11-benchmark/saas/skill/shot-375-full.webp) |
-| 1440 · reduced motion | ![](2026-10-11-benchmark/saas/baseline/shot-1440-reduced-full.webp) | ![](2026-10-11-benchmark/saas/skill/shot-1440-reduced-full.webp) |
-| 375 · reduced motion | ![](2026-10-11-benchmark/saas/baseline/shot-375-reduced-full.webp) | ![](2026-10-11-benchmark/saas/skill/shot-375-reduced-full.webp) |
+| 1440 · first screen | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/saas/baseline/shot-1440-fold.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/saas/skill/shot-1440-fold.webp) |
+| 1440 · page | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/saas/baseline/shot-1440-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/saas/skill/shot-1440-full.webp) |
+| 375 · page | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/saas/baseline/shot-375-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/saas/skill/shot-375-full.webp) |
+| 1440 · reduced motion | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/saas/baseline/shot-1440-reduced-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/saas/skill/shot-1440-reduced-full.webp) |
+| 375 · reduced motion | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/saas/baseline/shot-375-reduced-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/saas/skill/shot-375-reduced-full.webp) |
 
 | Axis | baseline · GPT-5.4 | baseline · Gemini 3.1 | skill · GPT-5.4 | skill · Gemini 3.1 |
 |---|---|---|---|---|
@@ -158,11 +158,11 @@ Brief: [`evals/briefs/05-climate-nonprofit.md`](../briefs/05-climate-nonprofit.m
 
 | | Baseline | Skill |
 |---|---|---|
-| 1440 · first screen | ![](2026-10-11-benchmark/public/baseline/shot-1440-fold.webp) | ![](2026-10-11-benchmark/public/skill/shot-1440-fold.webp) |
-| 1440 · page | ![](2026-10-11-benchmark/public/baseline/shot-1440-full.webp) | ![](2026-10-11-benchmark/public/skill/shot-1440-full.webp) |
-| 375 · page | ![](2026-10-11-benchmark/public/baseline/shot-375-full.webp) | ![](2026-10-11-benchmark/public/skill/shot-375-full.webp) |
-| 1440 · reduced motion | ![](2026-10-11-benchmark/public/baseline/shot-1440-reduced-full.webp) | ![](2026-10-11-benchmark/public/skill/shot-1440-reduced-full.webp) |
-| 375 · reduced motion | ![](2026-10-11-benchmark/public/baseline/shot-375-reduced-full.webp) | ![](2026-10-11-benchmark/public/skill/shot-375-reduced-full.webp) |
+| 1440 · first screen | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/public/baseline/shot-1440-fold.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/public/skill/shot-1440-fold.webp) |
+| 1440 · page | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/public/baseline/shot-1440-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/public/skill/shot-1440-full.webp) |
+| 375 · page | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/public/baseline/shot-375-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/public/skill/shot-375-full.webp) |
+| 1440 · reduced motion | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/public/baseline/shot-1440-reduced-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/public/skill/shot-1440-reduced-full.webp) |
+| 375 · reduced motion | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/public/baseline/shot-375-reduced-full.webp) | ![](https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/results/2026-10-11-benchmark/public/skill/shot-375-reduced-full.webp) |
 
 | Axis | baseline · GPT-5.4 | baseline · Gemini 3.1 | skill · GPT-5.4 | skill · Gemini 3.1 |
 |---|---|---|---|---|
