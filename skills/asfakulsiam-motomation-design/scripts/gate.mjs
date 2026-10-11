@@ -460,7 +460,9 @@ async function memoryAxis(logFile, stamp, sectionIds) {
   const { fingerprint, similarity, load } = await import("./lib.mjs");
   let runs = []; if (logFile && existsSync(logFile)) { try { runs = JSON.parse(readFileSync(logFile, "utf8")).runs || []; } catch {} }
   const last = runs[runs.length - 1];
-  if (last && last.archetype === stamp.archetype && last.signature === stamp.signature && String(last.tier) === String(stamp.tier)) runs = runs.slice(0, -1); // this run, already logged
+  // this run, already logged: same archetype and signature, and the same tier (or no tier logged; `memory.mjs log` without
+  // --tier used to make --verify score the page against itself, S1, after the agent logged it)
+  if (last && last.archetype === stamp.archetype && last.signature === stamp.signature && (last.tier === undefined || last.tier === null || last.tier === "" || String(last.tier) === String(stamp.tier))) runs = runs.slice(0, -1);
   const prev = runs.slice(-5); if (!prev.length) return { s: 5, trace: logFile && existsSync(logFile) ? "last5:none" : "last5:no-log" };
   const sigs = load("signatures"); const mine = fingerprint({ archetype: stamp.archetype, signature: stamp.signature, tier: stamp.tier, sections: sectionIds }, sigs);
   const fp = (r) => r.fingerprint || fingerprint({ archetype: r.archetype, signature: r.signature, tier: r.tier, sections: r.sections }, sigs);
