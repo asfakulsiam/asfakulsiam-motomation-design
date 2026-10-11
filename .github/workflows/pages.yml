@@ -1,0 +1,49 @@
+name: Pages
+# Publishes the static builds on GitHub Pages: no server, no build step here. Everything is built and committed
+# (scripts/build-*.mjs); check-repo fails the job if any of them is stale, so Pages never serves an old build.
+#   /            docs site (docs/site): search, a page per component, playground, reduced-motion toggle, mobile preview
+#   /gallery/    the full gallery (every component live on one page), with search, reduced-motion toggle, Mobile 375
+#   /templates/  the 8 gated page templates
+#   /plain/      the CSS + HTML and Tailwind variants of the top 20 components
+on:
+  push:
+    branches: [main]
+    paths: [docs/site/**, skills/asfakulsiam-motomation-design/examples/gallery/**, skills/asfakulsiam-motomation-design/examples/templates/**, vendor/plain/**, .github/workflows/pages.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: Builds are fresh (gallery, docs site, templates, variants)
+        run: node scripts/check-repo.mjs
+      - name: Assemble the site
+        run: |
+          set -e
+          S=skills/asfakulsiam-motomation-design/examples
+          mkdir -p _site/gallery _site/templates _site/plain
+          cp -r docs/site/index.html docs/site/c docs/site/assets _site/
+          cp $S/gallery/index.html _site/gallery/index.html
+          cp $S/templates/*.html _site/templates/ && cp -r $S/templates/fonts _site/templates/fonts
+          cp -r vendor/plain/. _site/plain/
+          touch _site/.nojekyll
+          test "$(ls _site/c/*.html | wc -l)" -eq "$(ls -d $S/components/*/*.tsx | wc -l)"   # a page per component
+          grep -q 'motomation-gallery' _site/gallery/index.html
+          echo "pages: $(find _site -name '*.html' | wc -l) html files"
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: _site }
+      - id: deployment
+        uses: actions/deploy-pages@v4

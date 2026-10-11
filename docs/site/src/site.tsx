@@ -3,6 +3,7 @@
 // demos.tsx), not rebuilt here. Built by scripts/build-docs-site.mjs into docs/site/.
 import { Children, cloneElement, isValidElement, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
+import { rmNow, setRM } from "../../../skills/asfakulsiam-motomation-design/examples/gallery/rm"; // first: installs the reduced-motion override
 import { DEMOS, COMPONENTS, FAMILY_TITLES, RAW } from "../../../skills/asfakulsiam-motomation-design/examples/gallery/demos";
 
 type Prop = { name: string; type: string; optional: boolean; def: string | null; control: "number" | "string" | "boolean" | "select" | null; options?: string[] };
@@ -15,24 +16,6 @@ const qs = new URLSearchParams(location.search);
 const FRAME = qs.has("frame");
 const ROOT = page === "index" ? "" : "../";
 const install = (id: string) => `npx shadcn@latest add ${RAW}/registry/${id}.json`;
-
-// ── reduced motion: a site-wide override of the (prefers-reduced-motion: reduce) query, so every component's own
-//    useReducedMotion follows the toggle live. Off / on / follow the system; stored in localStorage.
-const RM_Q = "(prefers-reduced-motion: reduce)";
-const sysMM = window.matchMedia.bind(window);
-const rmListeners = new Set<(e: MediaQueryListEvent) => void>();
-const rmStored = () => { const f = qs.get("rm") ?? localStorage.getItem("mm-rm"); return f === "1" ? true : f === "0" ? false : null; };
-const rmNow = () => rmStored() ?? sysMM(RM_Q).matches;
-window.matchMedia = ((q: string) => {
-  if (q.replace(/\s+/g, " ").trim() !== RM_Q) return sysMM(q);
-  const mql = { get matches() { return rmNow(); }, media: RM_Q, onchange: null,
-    addEventListener: (_: string, f: (e: MediaQueryListEvent) => void) => rmListeners.add(f), removeEventListener: (_: string, f: (e: MediaQueryListEvent) => void) => rmListeners.delete(f),
-    addListener: (f: (e: MediaQueryListEvent) => void) => rmListeners.add(f), removeListener: (f: (e: MediaQueryListEvent) => void) => rmListeners.delete(f), dispatchEvent: () => true };
-  return mql as unknown as MediaQueryList;
-}) as typeof window.matchMedia;
-function setRM(v: boolean) { localStorage.setItem("mm-rm", v ? "1" : "0"); document.documentElement.classList.toggle("rm", v);
-  rmListeners.forEach((f) => f({ matches: v, media: RM_Q } as MediaQueryListEvent)); window.dispatchEvent(new Event("mm-rm")); }
-document.documentElement.classList.toggle("rm", rmNow());
 
 async function copy(text: string) {
   try { await navigator.clipboard.writeText(text); return true; } catch {

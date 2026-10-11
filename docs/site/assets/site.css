@@ -27,6 +27,18 @@ h1,h2,h3{font-family:var(--font-display);font-weight:500}
 .foot{border-top:1px solid var(--line);margin-top:12vh;padding:24px;font-size:14px;color:var(--muted)}
 code{overflow-wrap:anywhere}
 .lede-head{font-family:var(--font-display);font-weight:500;color:var(--ink)}
+.toolbar{position:sticky;top:0;z-index:60;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;padding:10px 24px;background:rgba(244,241,234,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(8px);font:14px/1.3 var(--font-mono)}
+.tb-search{flex:1;min-width:200px;max-width:460px}.tb-search input{width:100%;font:15px var(--font-text);padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.tb-count{margin:0;color:var(--muted)}
+.tb-switch,.tb-btn{display:inline-flex;align-items:center;gap:8px;font:inherit;color:var(--ink);background:none;border:0;cursor:pointer;padding:6px 0}
+.tb-btn{border:1px solid var(--ink);border-radius:8px;padding:6px 12px;background:var(--surface)}
+.tb-track{position:relative;width:36px;height:20px;border-radius:999px;background:#c9c3b6;transition:background .18s ease-out}.tb-track span{position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .18s ease-out}
+.tb-switch[aria-checked=true] .tb-track{background:var(--accent)}.tb-switch[aria-checked=true] .tb-track span{transform:translateX(16px)}
+.tb-phone{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:60px 16px 16px;background:rgba(28,27,25,.72)}
+.tb-phone iframe{width:395px;max-width:100%;height:min(760px,calc(100vh - 80px));border:10px solid var(--ink);border-radius:28px;background:var(--ground)}
+.tb-close{position:absolute;top:14px;right:16px;background:var(--ground)}
+.rm *{transition-duration:0s!important}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* Motomation docs site. Same grounds and inks as the gallery (examples/gallery/gallery.css); the layout is its own. */
 :root { --ground: #f4f1ea; --surface: #fbfaf6; --ink: #1c1b19; --muted: #5d5a53; --line: rgba(28,27,25,.14); --accent: #b4441f; --accent-ink: #fff;
