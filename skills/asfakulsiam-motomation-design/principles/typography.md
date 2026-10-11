@@ -33,6 +33,17 @@ Use a fluid, dramatic scale. A good starting point:
 ```
 
 - Display sizes in `vw` (via `clamp`) so the word fills the composition at every width.
+
+### Long words at 375 (check by reading, no browser)
+
+For every display heading, take its **longest word** and the font size the `clamp()` resolves to at 375px (the minimum, or `preferred` worked out at 3.75px per `vw`). Estimate the word's width:
+
+`width ≈ characters × font-size × k`. Use k ≈ 0.45 for condensed faces, 0.5 for serifs, 0.55 for grotesks, 0.65 for wide or extended faces, and +0.1 for all caps.
+
+The word must fit in the 375px content box (≈ 335px with 20px gutters). If it doesn't, lower the `clamp()` minimum to `335 / (characters × k)`, or change the line. Don't fix it with `overflow-wrap: anywhere`, which breaks the word mid-letter. Example: "Transparency" is 12 characters in a grotesk, 335 / (12 × 0.55) ≈ 50px, so a `clamp(4rem, …)` (64px) minimum overflows.
+
+- **Never build one word from separate moving parts.** A word split across door leaves, panels or columns that move apart reads as two words ("Have li"). Split at a word boundary, or keep the word in one element and move it as one piece.
+- **Small text sizes are floors.** Body ≥ 16px; captions and mono labels ≥ 12px; under 14px over an image only on a solid chip (see `craft/accessibility.md`).
 - Body text never below 16px. Measure 60–75 characters (`max-width: 68ch`).
 - Line-height: display 0.85–1.0, headings 1.05–1.2, body 1.5–1.65.
 

@@ -773,6 +773,17 @@ Use a fluid, dramatic scale. A good starting point:
 ```
 
 - Display sizes in `vw` (via `clamp`) so the word fills the composition at every width.
+
+#### Long words at 375 (check by reading, no browser)
+
+For every display heading, take its **longest word** and the font size the `clamp()` resolves to at 375px (the minimum, or `preferred` worked out at 3.75px per `vw`). Estimate the word's width:
+
+`width ≈ characters × font-size × k`. Use k ≈ 0.45 for condensed faces, 0.5 for serifs, 0.55 for grotesks, 0.65 for wide or extended faces, and +0.1 for all caps.
+
+The word must fit in the 375px content box (≈ 335px with 20px gutters). If it doesn't, lower the `clamp()` minimum to `335 / (characters × k)`, or change the line. Don't fix it with `overflow-wrap: anywhere`, which breaks the word mid-letter. Example: "Transparency" is 12 characters in a grotesk, 335 / (12 × 0.55) ≈ 50px, so a `clamp(4rem, …)` (64px) minimum overflows.
+
+- **Never build one word from separate moving parts.** A word split across door leaves, panels or columns that move apart reads as two words ("Have li"). Split at a word boundary, or keep the word in one element and move it as one piece.
+- **Small text sizes are floors.** Body ≥ 16px; captions and mono labels ≥ 12px; under 14px over an image only on a solid chip (see `craft/accessibility.md`).
 - Body text never below 16px. Measure 60–75 characters (`max-width: 68ch`).
 - Line-height: display 0.85–1.0, headings 1.05–1.2, body 1.5–1.65.
 
@@ -2125,6 +2136,20 @@ Award-level means usable by everyone. These rules are part of the design, not a 
 
 ### Visual
 - Contrast: 4.5:1 body text, 3:1 large text and UI component boundaries. Verify with `node scripts/contrast.mjs`.
+
+#### Contrast rules you can check by reading the CSS
+
+You don't need a browser or a script for these. Read the stylesheet and check each rule. A "no" on any of them is a failure.
+
+1. **Every text token against every surface it sits on.** Write the pairs as a comment next to the tokens, one per surface, with the ratio: `/* --muted on --ground 5.01 · on --surface 4.45 ✗ */`. A tinted panel, card, band or overlay counts as its own surface. Checking only against the page ground isn't enough.
+2. **A muted token belongs to one surface.** `--muted` is for `--ground` only. Text inside any rule whose background is something else (`--surface`, `--panel`, a dark band) uses `--ink` or a token made for that surface (`--muted-on-surface`). Read each `color: var(--muted)` and look up the background of that selector and its parents. If it isn't the ground, that's a failure.
+3. **Margin for small, muted text.** Muted text below 14px, or mono/uppercase captions, needs at least **4.7:1**, not 4.5. Thin strokes at 11–13px lose contrast to antialiasing, and a 4.45 that rounds to "about 4.5" is a fail.
+4. **Small text has a floor.** Nothing below 12px (`0.75rem`). Text under 14px over an image or video sits on a solid chip, never straight on the picture.
+5. **No dimming by opacity.** Never lower text contrast with `opacity` or an alpha colour (`rgb(… / .6)`, `#0008`). The ratio then depends on whatever is behind it. Use a solid token with a known ratio.
+6. **Text over images or gradients** sits on a solid or scrimmed area with a stated worst-case ratio. Without one, it fails.
+7. **No text below 4.5:1 on the ground.** That includes eyebrows, links and accent-coloured labels: an accent that reads as "bold" on screen is often 3.5–4.4:1 at 12px.
+
+Example. In the v2.1.0 studio output, `.plan{background:var(--surface)}` and `.plan figcaption{color:var(--muted);font-size:.7rem}` fail rules 1–3 by reading alone. `--muted` (#6B6157) passes on the ground (#EFE9E1) but sits on `--surface` (#E4DCD1) at 4.45:1, in 11px mono caps. The measured gate (`scripts/gate.mjs`) later confirms the same five captions at 4.45:1.
 - Focus is always visible and designed (`:focus-visible` ring in the accent colour, 2px or more, with offset).
 - Never convey meaning by colour alone.
 - Text resizes to 200% without loss; layout holds at 320px wide.
@@ -2268,6 +2293,19 @@ A design is responsive when it's **recomposed**, not just squeezed.
 - Use container queries (`@container`) for components that live in different widths.
 - Test at 320, 375, 768, 1024, 1440 and 1920px, and in landscape on phones.
 - Use `svh`/`dvh` units for full-height sections so mobile browser bars don't cut content.
+
+### Overflow rules you can check by reading the CSS
+
+None of these needs a browser. At 375px the content box is about **335px** (375 minus two 20px gutters; use your real gutter). Any box that can't shrink below that overflows the page.
+
+1. **Grid tracks shrink.** Content tracks are `minmax(0, 1fr)`, not a bare `1fr`. A bare `1fr` keeps the track at least as wide as its widest unbreakable child, so one wide child widens the whole page. Flex children holding text or media get `min-width: 0`.
+2. **`aspect-ratio` + `min-height` hides a minimum width.** The box can't be narrower than `min-height × ratio`. Check that the product is ≤ 335px at 375, or drop the `min-height` on mobile.
+3. **Fixed widths fit.** Every `width`, `min-width`, `flex-basis` or track size in px or rem fits in 335px at 375, including padding and gap.
+4. **`white-space: nowrap` has a length limit.** Only on labels you know are short (≤ 20 characters at button size). Long buttons, prices with units, and nav rows must be able to wrap.
+5. **Never overflow a container without an explicit overflow rule.** Anything allowed to be wider than its parent (marquees, horizontal galleries, oversized display words, code blocks) sits inside a parent with `overflow-x: clip`, `hidden` or `auto`, written next to it. Wide content without one is a failure.
+6. **Long display words at 375.** Check each display heading with the formula in `principles/typography.md` §3 ("Long words at 375"). The longest word has to fit in 335px at the size the `clamp()` gives at 375.
+
+Example. In the v2.1.0 hotel output, `.grid{grid-template-columns:1fr}` (rule 1) holds `.sky{aspect-ratio:2/1;min-height:230px}` (rule 2). 230 × 2 = 460px > 335px, so reading alone predicts the overflow. The measured gate found the page 105px too wide at 375 (480px for a 375px screen).
 
 
 ---
