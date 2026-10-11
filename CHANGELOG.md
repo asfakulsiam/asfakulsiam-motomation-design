@@ -32,6 +32,7 @@ Development run v2.2.0: tasks in Phases 0–7, applied in order. Each bullet nam
 - **T5.2 · Copy pass:** `craft/copy.md` (which already existed) gains headline rules and an original copy pass for rhythm-and-filler tells. It shares 0 seven-word sequences with Humanizer. `gates/delivery-gate.md` Part 2 gains items 26–29, and its Part 3 copy line points to the pass.
 - **T6.3 · Agents tested:** `evals/README.md` lists what's actually benchmarked. Only Claude Code is. Codex was unauthenticated, and Cursor, Gemini CLI and Aider weren't installed.
 - **T6.6 · Repo size:** the 320 benchmark screenshots (about 15 MB) moved to the `evals` branch. Report images link there (50 of 50 links checked), and `evals/` in main went from 21 MB to 5.9 MB.
+- **T7.2 · Release gates:** `check-repo`, `build-dist --check`, `build-lite --check`, a strict typecheck of 10 example files (0 errors on Node 18 and 20), `gate.mjs` + `--verify` on `examples/html/motomation-film.html` (PASS, STAMP VERIFIED, stamp id unchanged) and a local replay of the CI check job on Node 18.20.8 and 20 all pass. GitHub CI is green on all 4 jobs. Tagged `v2.2.0`.
 - **T7.1 · Version 2.2.0:** bumped in `VERSION`, `SKILL.md`, `package.json`, the three plugin manifests, `.claude-plugin/marketplace.json`, `gemini-extension.json` and the README badge. `check-repo.mjs` now also checks the marketplace file and the badge.
 
 ### Fixed
