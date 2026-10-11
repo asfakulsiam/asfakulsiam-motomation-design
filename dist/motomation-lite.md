@@ -284,6 +284,12 @@ Now remove things.
 24. Are there clickable `div`s, missing labels or missing `alt` text?
 25. Are there `markers: true`, console logs or unused imports left in?
 
+**Copy** (the copy pass in `craft/copy.md`)
+26. Does more than one section headline share the same shape (all questions, all "X. Y." fragments, all mirror sentences)?
+27. Does any sentence end in a vague "-ing" benefit tail, or cite unnamed experts or studies?
+28. Is the same thing called by more than one name across the page (synonym cycling)?
+29. Does an em dash appear in most paragraphs, or does every section close with a generic invitation?
+
 ---
 
 ### Part 3: Craft checklist
@@ -297,7 +303,7 @@ Now remove things.
 - [ ] Accessibility: keyboard path, visible focus, landmarks, skip link, alt text
 - [ ] Performance: LCP image preloaded, heavy libraries loaded dynamically, off-screen work paused
 - [ ] SEO: title, description, OG image, structured data, `llms.txt` (for sites)
-- [ ] Copy: real, specific, no banned phrases; `[NEEDS COPY]` markers listed for the user
+- [ ] Copy: real, specific, no banned phrases; the copy pass in `craft/copy.md` run with every row "none found" or fixed; `[NEEDS COPY]` markers listed for the user
 - [ ] "Restraint Gate record" filled in `DESIGN.md` (concept survived?, every cut, every rejected animation)
 - [ ] `node scripts/gate.mjs` run on the build; its full `critique: … · gate: …` line pasted and `--verify` passes (or "not verified — no browser" reported)
 - [ ] Stamp comment written; run logged with `node scripts/memory.mjs log …`
