@@ -71,6 +71,9 @@ const versions = {
   ".cursor-plugin/plugin.json": JSON.parse(readFileSync(join(ROOT, ".cursor-plugin/plugin.json"), "utf8")).version,
   ".codex-plugin/plugin.json": JSON.parse(readFileSync(join(ROOT, ".codex-plugin/plugin.json"), "utf8")).version,
   "gemini-extension.json": JSON.parse(readFileSync(join(ROOT, "gemini-extension.json"), "utf8")).version,
+  ".claude-plugin/marketplace.json (metadata)": JSON.parse(readFileSync(join(ROOT, ".claude-plugin/marketplace.json"), "utf8")).metadata?.version,
+  ...Object.fromEntries((JSON.parse(readFileSync(join(ROOT, ".claude-plugin/marketplace.json"), "utf8")).plugins || []).map((p, i) => [`.claude-plugin/marketplace.json plugins[${i}]`, p.version])),
+  "README version badge": readFileSync(join(ROOT, "README.md"), "utf8").match(/badge\/version-([\d.]+)-/)?.[1],
 };
 for (const [k, val] of Object.entries(versions)) if (val !== v) fail(`${k} version ${val} ≠ VERSION ${v}`);
 if (!readFileSync(join(ROOT, "CHANGELOG.md"), "utf8").includes(`## [${v}]`)) fail(`CHANGELOG.md has no entry for ${v}`);

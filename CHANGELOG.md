@@ -12,6 +12,14 @@ Development run v2.2.0: tasks in Phases 0–7, applied in order. Each bullet nam
 - **T3.1 · React Bits selection:** `references/react-bits/SELECTION.md` covers 19 components mapped to tiers. 8 were skipped because a signature already covers them.
 - **T3.3 · React Bits index:** `references/react-bits/INDEX.md` gives the concept, tier, cost, when it earns its place, when it's slop, reduced-motion behaviour and a reactbits.dev link, one row per component.
 - **T3.7 · Licence guard:** `scripts/check-repo.mjs` checks that SELECTION and INDEX agree, and fails on React Bits source or a `vendor/react-bits/` folder.
+- **T4.5 · Lite edition:** `dist/motomation-lite.md` (about 5.3k tokens by tiktoken cl100k) holds the five laws, flow, tiers, bans, the seven-step Thinking Sequence, the AI-default scan, the craft checklist and short lists of archetypes, mutations and signatures. It's built by `scripts/build-lite.mjs`, reproducible byte for byte, and checked by `check-repo` for freshness and an 8k-token budget.
+- **T5.1 · `/study`:** `commands/study.md` turns the one-paragraph stub into a full command that writes a five-part Studied direction (type, palette, layout, motion, signature, plus take/leave) into `DESIGN.md`. It's agent-driven, so no script fetches the URL.
+- **T5.3 · Find before build:** `SKILL.md` step 6 says standard UI is found first (the project's own components, then this skill's examples and React Bits index, then a registry). Signature moments are always designed. `references/effects-vocabulary.md` points to it.
+- **T5.4 · Motion report:** `gate.mjs --report` writes a self-contained HTML file with scroll-frame strips (1440, 375, reduced motion). It's off by default, and the text output is unchanged.
+- **T6.1 · Third benchmark arm:** `evals/run-agent-benchmark.mjs --arms baseline,gated,skill`. The gated arm gets the baseline prompt plus `gate.mjs` only. `--pairs` picks which arms are judged against each other, and the defaults reproduce v2 exactly.
+- **T6.2 · Motion briefs:** briefs 01, 06 and 08 are in the runner (`--only portfolio,launch,festival --tier 4|5`).
+- **T6.4 · Motion evidence for judges:** `measure` writes `shot-1440-strip.png` (8 frames at even scroll steps), and the judge prompt scores Motion from the strips when both sites have one. `evals/rubric.md` explains the evidence, with axes and weights unchanged.
+- **T6.5 · Variety test:** `evals/variety.mjs` and `evals/results/2026-10-11-variety.md`. 5 seeds gave 5 archetypes and 4 signatures (mean similarity 0.28). The published builds use 12 archetypes across 15 runs. SaaS reuses `console`, which fails the variety rule on archetype.
 
 ### Changed
 - **T2.2 · One value everywhere:** `SKILL.md`, `principles/typography.md`, `principles/restraint.md`, `principles/house-style.md`, `motion/tier-1-basic.md` and `gates/delivery-gate.md` now spell the shared rules through `<!--rule:KEY-->` markers. Before, the UI-feedback limit was 500, 300 or 250ms depending on the file, and SKILL.md's font list was shorter. `check-repo.mjs` fails when a marker differs from the CSV or a rule is restated by hand. `gate.mjs` holds no copy of these rules.
@@ -21,6 +29,10 @@ Development run v2.2.0: tasks in Phases 0–7, applied in order. Each bullet nam
 - **T4.2 · README tools:** `gate.mjs` is documented with its Playwright install steps. The badge now reads "zero dependencies (gate: Playwright, optional)", and the `SKILL.md` tools line matches.
 - **T4.3 · Benchmark summary:** `docs/benchmark-summary.md` leads with v2 and keeps v1 below it.
 - **T4.4 · Acknowledgements:** `ACKNOWLEDGEMENTS.md` names what was borrowed (i-have-adhd, Anthropic skill-creator, Hallmark, anti-slop, Impeccable) and the studied lineage (taste-skill, Emil Kowalski, design-motion-principles, ui-ux-pro-max, awesome-claude-design, Miguel Clavel, GSAP under its own license, React Bits).
+- **T5.2 · Copy pass:** `craft/copy.md` (which already existed) gains headline rules and an original copy pass for rhythm-and-filler tells. It shares 0 seven-word sequences with Humanizer. `gates/delivery-gate.md` Part 2 gains items 26–29, and its Part 3 copy line points to the pass.
+- **T6.3 · Agents tested:** `evals/README.md` lists what's actually benchmarked. Only Claude Code is. Codex was unauthenticated, and Cursor, Gemini CLI and Aider weren't installed.
+- **T6.6 · Repo size:** the 320 benchmark screenshots (about 15 MB) moved to the `evals` branch. Report images link there (50 of 50 links checked), and `evals/` in main went from 21 MB to 5.9 MB.
+- **T7.1 · Version 2.2.0:** bumped in `VERSION`, `SKILL.md`, `package.json`, the three plugin manifests, `.claude-plugin/marketplace.json`, `gemini-extension.json` and the README badge. `check-repo.mjs` now also checks the marketplace file and the badge.
 
 ### Fixed
 - **T0.1 · Unsafe source:** verified that no file names CreativeAgencyStyle (0 hits), so nothing needed removing.
@@ -39,6 +51,8 @@ Development run v2.2.0: tasks in Phases 0–7, applied in order. Each bullet nam
 
 ### Not done
 - **T3.2 · Vendoring React Bits: blocked.** React Bits' LICENSE.md forbids redistributing "the components themselves-whether alone, in a bundle, or as a ported version", so no React Bits code was copied. T3.4 (wrappers) and T3.8 (typecheck of vendored code) have nothing to act on.
+- **T6.1 / T6.2 / T6.3 runs: blocked.** Claude Code in the run's environment was not logged in, and Codex returned 401, so no new generations exist: none for the three-arm brief, briefs 01/06/08 at Tiers 4–5, or other agents. The code is in place, and plumbing was checked with a stub agent.
+- **T6.4 judge run: blocked.** No cross-family judge model was available. Strips were rendered for studio s7101 (both arms), and the prompt was checked dry.
 
 ## [2.1.0] - 2026-10-11
 
