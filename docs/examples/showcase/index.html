@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kalo Ghor · opening titles for Bangladeshi independent film</title>
+<meta name="description" content="Kalo Ghor is a two-person studio in Dhaka that designs opening titles for Bangladeshi independent films: lettering by Tahsin Ara, motion by Rafi Mahmud.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&family=Instrument+Serif:ital@0;1&family=Noto+Serif+Bengali:wght@400&display=swap">
+<style>/* motomation · archetype: film-reel · mutation: ui-is-content · signature: tide-rail · tier: 2 · critique: C5[restraint:kept] H5[375:0] S5[last5:none] R5[cuts:4,anim:2] M5[t2:pins1/2,webgl0/1,js3/80KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 93085a8d44 */</style>
+<style>
+:root { --ground: #0D0D0F; --surface: #18181B; --ink: #EDEBE6; --muted: #A3A09A; --accent: #C9A15B;
+  --serif: "Instrument Serif", "Noto Serif Bengali", Georgia, serif; --bn: "Noto Serif Bengali", "Instrument Serif", serif; --sans: "Instrument Sans", system-ui, sans-serif;
+  --m: clamp(20px, 5vw, 80px); --rail: 96px; }
+* { box-sizing: border-box; }
+html { background: var(--ground); color: var(--ink); }
+body { margin: 0; font: 400 1.0625rem/1.55 var(--sans); }
+h1, h2, h3, p, ul, ol, dl, dd { margin: 0; font-weight: 400; }
+[lang="bn"] { font-family: var(--bn); }
+a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: .2em; }
+a:hover, a:focus-visible { text-decoration-thickness: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.skip { position: absolute; left: -9999px; } .skip:focus { left: 12px; top: 12px; z-index: 20; background: var(--ground); padding: 8px 12px; }
+.label { font: 500 .8125rem/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+.top { position: fixed; inset: 0 0 auto 0; z-index: 10; display: flex; justify-content: space-between; align-items: baseline; padding: 18px var(--m); pointer-events: none; }
+.top > * { pointer-events: auto; }
+.top .name { font: 400 1.25rem/1 var(--serif); text-decoration: none; }
+
+/* the reel: one pinned stage */
+.reel { position: relative; height: 700svh; }
+.stage { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.credit { position: absolute; inset: 0 calc(var(--rail) + var(--m)) 0 var(--m); display: grid; align-content: center; gap: 18px; opacity: 0; visibility: hidden; will-change: opacity, transform; }
+.credit .big { font: 400 clamp(3rem, 15vw, 9.5rem)/1.12 var(--serif); }
+.credit .big[lang="bn"] { line-height: 1.25; }
+.credit .en { font: italic 400 clamp(1.75rem, 4vw, 3rem)/1.1 var(--serif); }
+.credit .line { font: 400 clamp(2rem, 5.4vw, 4.25rem)/1.12 var(--serif); max-width: 16ch; }
+.credit .line em { font-style: italic; color: var(--accent); }
+.credit dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 20px; margin-top: 8px; }
+.credit dd { font-variant-numeric: tabular-nums; }
+.credit .who { display: grid; gap: 22px; }
+.credit .who p:not(.label) { font: 400 clamp(2rem, 5vw, 3.75rem)/1.1 var(--serif); }
+
+/* the tide rail (signature) */
+.rail { position: absolute; top: 0; right: 0; bottom: 0; width: var(--rail); border-left: 1px solid #2a2a2e; display: grid; grid-template-rows: auto minmax(0, 1fr); padding: 76px 0 28px; }
+.rail time { display: block; text-align: center; font: 500 .75rem/1 var(--sans); letter-spacing: .06em; color: var(--accent); font-variant-numeric: tabular-nums; padding-bottom: 14px; }
+.rail .track { position: relative; margin: 0 auto; width: 44px; }
+.rail svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.rail .tide { fill: none; stroke: var(--accent); stroke-width: 1.5; vector-effect: non-scaling-stroke; opacity: .9; }
+.rail .past { fill: color-mix(in srgb, var(--accent) 22%, transparent); stroke: none; }
+.rail .head { stroke: var(--ink); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.rail .marks { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; }
+.rail .marks li { position: absolute; left: 50%; transform: translate(-50%, -50%); }
+.rail button { width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 0; padding: 0; cursor: pointer; color: var(--accent); }
+.rail button span { width: 9px; height: 9px; border: 1.5px solid currentColor; border-radius: 50%; background: var(--ground); transition: transform .2s cubic-bezier(.2,.7,.2,1); }
+.rail button:hover span, .rail button:focus-visible span, .rail button[aria-current="true"] span { transform: scale(1.5); background: currentColor; }
+
+/* the index: the same facts, plainly */
+.index { background: var(--surface); padding: clamp(64px, 12vh, 140px) var(--m); }
+.index h2 { font: 400 clamp(2.25rem, 6vw, 4.5rem)/1.05 var(--serif); }
+.index ol { list-style: none; padding: 0; margin: 40px 0 0; border-top: 1px solid #333338; }
+.index li { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 6px 24px; padding: 22px 0; border-bottom: 1px solid #333338; align-items: baseline; }
+.index .t { font: 400 clamp(1.75rem, 3.4vw, 2.5rem)/1.2 var(--bn); }
+.index .t span { display: block; font: italic 400 1.25rem/1.3 var(--serif); color: var(--muted); }
+.index .f { font-variant-numeric: tabular-nums; color: var(--muted); }
+.index .people { margin-top: 56px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 46rem; }
+.index .people p:last-child { font: 400 1.5rem/1.3 var(--serif); }
+.sign { padding: 56px var(--m) 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 18px; }
+.sign .mail { font: 400 clamp(1.75rem, 5vw, 3.5rem)/1.1 var(--serif); }
+
+@media (max-width: 760px) {
+  :root { --rail: 0px; }
+  .credit { inset: 0 var(--m) 96px var(--m); }
+  .rail { top: auto; left: 0; width: auto; height: 84px; border-left: 0; border-top: 1px solid #2a2a2e; grid-template-rows: none; grid-template-columns: auto minmax(0, 1fr); align-items: center; padding: 0 var(--m); gap: 14px; }
+  .rail time { padding: 0; }
+  .rail .track { width: 100%; height: 44px; }
+  .rail .marks li { top: 50% !important; }
+  .index li { grid-template-columns: minmax(0, 1fr); }
+  .index .people { grid-template-columns: minmax(0, 1fr); }
+}
+/* reduced motion, or no script: the sequence is a plain stack of credits; the rail is not needed */
+@media (prefers-reduced-motion: reduce) {
+  .reel { height: auto; } .stage { position: static; height: auto; overflow: visible; padding: 96px 0 40px; }
+  .credit { position: static; opacity: 1; visibility: visible; padding: 48px var(--m); transform: none !important; }
+  .rail { display: none; }
+}
+html:not(.js) .reel { height: auto; } html:not(.js) .stage { position: static; height: auto; padding: 96px 0 40px; }
+html:not(.js) .credit { position: static; opacity: 1; visibility: visible; padding: 48px var(--m); } html:not(.js) .rail { display: none; }
+</style>
+</head>
+<body>
+<a class="skip" href="#index">Skip the sequence, go to the list of work</a>
+<header class="top"><a class="name" href="#top"><span lang="bn">কালো ঘর</span> · Kalo Ghor</a><a href="mailto:studio@kaloghor.com.bd">Write to us</a></header>
+<main id="top">
+  <section class="reel" aria-label="The studio, as an opening title sequence">
+    <div class="stage">
+      <div class="credit" data-film="">
+        <p class="label">A studio in Dhaka</p>
+        <h1 class="big" lang="bn">কালো ঘর</h1>
+        <p class="en">Kalo Ghor, the dark room</p>
+      </div>
+      <div class="credit">
+        <p class="line">Opening titles for <em>Bangladeshi independent film.</em> Lettered by hand, set in motion, seen once in the dark.</p>
+      </div>
+      <div class="credit" data-film="nodir-opare">
+        <p class="label">Feature · 2024</p>
+        <h2 class="big" lang="bn">নদীর ওপারে</h2>
+        <p class="en">Across the River</p>
+        <dl class="label"><dt>Directed by</dt><dd>Sadia Islam</dd><dt>Title sequence</dt><dd>2 min 10 s</dd></dl>
+      </div>
+      <div class="credit" data-film="ghum">
+        <p class="label">Short film · 2025</p>
+        <h2 class="big" lang="bn">ঘুম</h2>
+        <p class="en">Sleep</p>
+        <dl class="label"><dt>Directed by</dt><dd>Imran Kabir</dd><dt>Title sequence</dt><dd>48 s</dd></dl>
+      </div>
+      <div class="credit" data-film="shohor">
+        <p class="label">Documentary · 2023</p>
+        <h2 class="big" lang="bn">শহর</h2>
+        <p class="en">The City</p>
+        <dl class="label"><dt>Directed by</dt><dd>Mitu Rahman</dd><dt>Title sequence</dt><dd>1 min 30 s</dd></dl>
+      </div>
+      <div class="credit">
+        <div class="who">
+          <div><p class="label">Lettering</p><p>Tahsin Ara</p></div>
+          <div><p class="label">Motion</p><p>Rafi Mahmud</p></div>
+        </div>
+      </div>
+      <div class="credit">
+        <p class="label">Your film next</p>
+        <p class="line"><a href="mailto:studio@kaloghor.com.bd">studio@kaloghor.com.bd</a></p>
+      </div>
+      <nav class="rail" aria-label="Sequence timeline">
+        <time aria-hidden="true">00:00:00:00</time>
+        <div class="track">
+          <svg aria-hidden="true" preserveAspectRatio="none"><path class="past"/><path class="tide"/><line class="head"/></svg>
+          <ol class="marks">
+            <li><button type="button" data-to="2" aria-label="Jump to Across the River"><span></span></button></li>
+            <li><button type="button" data-to="3" aria-label="Jump to Sleep"><span></span></button></li>
+            <li><button type="button" data-to="4" aria-label="Jump to The City"><span></span></button></li>
+          </ol>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+  <section class="index" id="index" aria-labelledby="h-index" tabindex="-1">
+    <p class="label">The work, as a list</p>
+    <h2 id="h-index">Three title sequences.</h2>
+    <ol>
+      <li><p class="t" lang="bn">নদীর ওপারে<span lang="en">Across the River</span></p><p>Feature, directed by Sadia Islam</p><p class="f">2024 · sequence 2 min 10 s</p></li>
+      <li><p class="t" lang="bn">ঘুম<span lang="en">Sleep</span></p><p>Short film, directed by Imran Kabir</p><p class="f">2025 · sequence 48 s</p></li>
+      <li><p class="t" lang="bn">শহর<span lang="en">The City</span></p><p>Documentary, directed by Mitu Rahman</p><p class="f">2023 · sequence 1 min 30 s</p></li>
+    </ol>
+    <div class="people">
+      <div><p class="label">Lettering</p><p>Tahsin Ara</p></div>
+      <div><p class="label">Motion</p><p>Rafi Mahmud</p></div>
+    </div>
+  </section>
+</main>
+<footer class="sign">
+  <a class="mail" href="mailto:studio@kaloghor.com.bd">studio@kaloghor.com.bd</a>
+  <p class="label">Kalo Ghor · Dhaka</p>
+</footer>
+<script>
+// The Tide Rail. Each credit rises, holds and falls with scroll; the rail draws the sum of what is on screen
+// (the tide line), the part already played, a playhead and a 24 fps timecode. Reduced motion: none of this runs.
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  if (reduce.matches) return;
+  document.documentElement.classList.add("js");
+  const reel = document.querySelector(".reel"), credits = [...reel.querySelectorAll(".credit")], N = credits.length;
+  const svg = reel.querySelector(".rail svg"), tide = svg.querySelector(".tide"), past = svg.querySelector(".past"), head = svg.querySelector(".head");
+  const time = reel.querySelector(".rail time"), marks = [...reel.querySelectorAll(".rail button")];
+  const FPS = 24, SECONDS = 150; // the length of this sequence, if it were a film
+  const smooth = (t) => t * t * (3 - 2 * t);
+  // one credit's tide: rise over 35% of its slot, hold 30%, fall 35%
+  const level = (i, p) => { const s = (p * N) - i; if (s <= 0 || s >= 1) return 0; return s < 0.35 ? smooth(s / 0.35) : s < 0.65 ? 1 : smooth((1 - s) / 0.35); };
+  const vertical = () => innerWidth > 760;
+  let W = 0, H = 0, top = 0, span = 1;
+  function measure() {
+    const r = svg.getBoundingClientRect(); W = r.width; H = r.height;
+    top = reel.getBoundingClientRect().top + scrollY; span = Math.max(1, reel.offsetHeight - innerHeight);
+    const pts = []; for (let k = 0; k <= 160; k++) { const p = k / 160; let d = 0; for (let i = 0; i < N; i++) d += level(i, p); pts.push([p, d]); }
+    const xy = ([p, d]) => vertical() ? [W / 2 + (d - 0.5) * W * 0.8, p * H] : [p * W, H / 2 - (d - 0.5) * H * 0.8];
+    tide.setAttribute("d", "M" + pts.map((q) => xy(q).map((v) => v.toFixed(1)).join(" ")).join(" L"));
+    svg.dataset.pts = JSON.stringify(pts.map(xy));
+    marks.forEach((b) => { const p = (+b.dataset.to + 0.5) / N; const li = b.parentElement; if (vertical()) { li.style.top = `${p * H}px`; li.style.left = "50%"; } else { li.style.left = `${p * W}px`; li.style.top = "50%"; } });
+  }
+  const tc = (sec) => { const f = Math.floor(sec * FPS), ff = f % FPS, s = Math.floor(f / FPS); return [Math.floor(s / 3600), Math.floor(s / 60) % 60, s % 60, ff].map((v) => String(v).padStart(2, "0")).join(":"); };
+  let queued = false, visible = true, last = -1;
+  function frame() {
+    queued = false;
+    const p = Math.min(1, Math.max(0, (scrollY - top) / span)); if (Math.abs(p - last) < 1e-4) return; last = p;
+    credits.forEach((c, i) => { const o = level(i, p), s = (p * N) - i; c.style.opacity = o.toFixed(3); c.style.visibility = o < 0.02 ? "hidden" : "visible";
+      c.style.transform = `translateY(${((0.5 - Math.min(1, Math.max(0, s))) * 48).toFixed(1)}px)`; c.inert = o < 0.5; });
+    // the first credit is on screen from the first frame: the sequence opens on the studio's name
+    if (p < 0.5 / N) { credits[0].style.opacity = "1"; credits[0].style.visibility = "visible"; credits[0].style.transform = "none"; credits[0].inert = false; }
+    const pts = JSON.parse(svg.dataset.pts || "[]"), n = Math.round(p * 160);
+    if (pts.length) { const done = pts.slice(0, n + 1);
+      past.setAttribute("d", vertical() ? `M${W / 2 - W * 0.4} 0 L${done.map((q) => q.join(" ")).join(" L")} L${W / 2 - W * 0.4} ${pts[n][1]} Z` : `M0 ${H / 2 + H * 0.4} L${done.map((q) => q.join(" ")).join(" L")} L${pts[n][0]} ${H / 2 + H * 0.4} Z`);
+      if (vertical()) { head.setAttribute("x1", 0); head.setAttribute("x2", W); head.setAttribute("y1", p * H); head.setAttribute("y2", p * H); }
+      else { head.setAttribute("y1", 0); head.setAttribute("y2", H); head.setAttribute("x1", p * W); head.setAttribute("x2", p * W); } }
+    time.textContent = tc(p * SECONDS);
+    const active = Math.floor(p * N); marks.forEach((b) => b.setAttribute("aria-current", String(+b.dataset.to === active)));
+  }
+  const ask = () => { if (!queued && visible) { queued = true; requestAnimationFrame(frame); } };
+  marks.forEach((b) => b.addEventListener("click", () => { const p = (+b.dataset.to + 0.5) / N; scrollTo({ top: top + p * span, behavior: "smooth" }); }));
+  new IntersectionObserver((es) => { visible = es[0].isIntersecting; if (visible) ask(); }).observe(reel);
+  addEventListener("scroll", ask, { passive: true });
+  new ResizeObserver(() => { measure(); last = -1; ask(); }).observe(document.documentElement);
+  reduce.addEventListener("change", () => location.reload());
+  measure(); frame();
+})();
+</script>
+</body>
+</html>

@@ -149,7 +149,9 @@ async function contrast(browser, url, VW = 1440) {
       // only layers that actually paint over the text count (an invisible closed backdrop or a faint grain overlay doesn't)
       const paints = (n) => { if (__g.opacity(n) < 0.5) return false; const cs = getComputedStyle(n); if (cs.visibility === "hidden") return false;
         return ["IMG", "VIDEO", "CANVAS", "svg", "IFRAME"].includes(n.tagName) || (__g.rgba(cs.backgroundColor)?.a ?? 0) >= 0.5 || cs.backgroundImage !== "none"; };
-      const pts = [[0.5, 0.5], [0.15, 0.3], [0.85, 0.3], [0.15, 0.7], [0.85, 0.7]];
+      // test every point the sampler below reads (6 columns × 3 rows). Testing fewer points let text whose bottom row
+      // sat under a fixed booking bar through, and its "background" was the bar (v2.4.0 fix; found on a real hotel page)
+      const pts = []; for (let a = 0; a < 6; a++) for (let b = 0; b < 3; b++) pts.push([(a + 0.5) / 6, (b + 0.5) / 3]);
       const occluded = pts.some(([fx, fy]) => {
         const stack = document.elementsFromPoint(Math.min(innerWidth - 1, r.left + r.width * fx), Math.min(innerHeight - 1, r.top + r.height * fy));
         const top = stack.find((n) => n === e || e.contains(n) || n.contains(e) || paints(n));
@@ -201,7 +203,10 @@ async function contrast(browser, url, VW = 1440) {
       res = res.map((r) => (again.get(r.i)?.ratio ?? -1) > r.ratio ? again.get(r.i) : r); }
     for (const r of res) done.set(r.i, r);
   }
-  const total = await page.evaluate(() => [...document.querySelectorAll("[data-g-id]")].filter((e) => !__g.decorative(e) && !__g.srOnly(e)).length);
+  // total = every text element counted at the end of the scan, plus any measured or seen earlier: a scrubbed sequence can
+  // hide its credits (visibility:hidden) by the last frame, and counting only the end left "measured" above "total" (v2.4.0 fix)
+  const endIds = await page.evaluate(() => [...document.querySelectorAll("[data-g-id]")].filter((e) => !__g.decorative(e) && !__g.srOnly(e)).map((e) => +e.dataset.gId));
+  const total = new Set([...endIds, ...done.keys(), ...seenHidden]).size;
   await ctx.close();
   const measured = [...done.values()];
   const large = (r) => r.size >= 24 || (r.size >= 18.66 && r.weight >= 700);

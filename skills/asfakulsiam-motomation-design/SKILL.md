@@ -102,6 +102,27 @@ Palette     : <name or hexes> (<why>)
 Not doing   : <the obvious choice you rejected and why>
 ```
 
+## When to use the short route
+
+Two routes. Pick one before you start, and say which in your first line, with the reason: `Route: short (a contrast fix on an existing page; no new structure or signature)`.
+
+| | Full route | Short route |
+|---|---|---|
+| Use for | Design work: a new page, site, section or component; a redesign; anything that changes what the page is or how it moves | Minor work on something that exists: fix spacing, change a colour, fix contrast, adjust or swap a component, fix a reduced-motion or keyboard bug |
+| Thinking Sequence | All 7 steps | Not run. No archetype selection, no collision draw, no new signature move |
+| Restraint Gate | Yes | Yes: the fix adds nothing that isn't needed. Note what you didn't add |
+| Reduced motion | Yes | Yes: every motion you touch keeps its reduced-motion path |
+| Accessibility | Yes | Yes: contrast, names, keyboard, focus for everything you touch |
+| Delivery Gate | Yes, with a stamp | Yes: run it before and after on the page, report both. Stamp only if the page already had one or you were asked |
+
+How to run the short route:
+
+1. **Name the cause first.** Run the gate (or read the code) and say what is actually wrong, before editing anything.
+2. **Change only what the cause needs.** Keep the existing design: its type, palette, layout and motion. If the fix needs a new colour, take it from the page's own palette, darkened or lightened until it passes `scripts/contrast.mjs`.
+3. **Run the gate again** and report the before and after numbers side by side.
+
+Switch to the full route, and say so, when the fix turns out to need a new structure, a new signature, or a different concept. A short route that grows into a redesign without saying so is the failure this section exists to stop. Worked example: `examples/prompts/fix-existing.md`.
+
 ---
 
 ## The Thinking Sequence (summary; full version in `thinking/sequence.md`)

@@ -1,0 +1,12 @@
+## Thinking Sequence: Kalo Ghor (one page)
+
+1. **Tension:** opening titles are watched once, in the dark, for two minutes, before anyone knows the film ↔ a portfolio is read in daylight, skimmed in seconds, by people deciding quickly.
+2. **Concept:** The page is an opening title sequence: scrolling plays the credits, and a running timecode tells you where you are in it.
+3. **Archetype + mutation:** The Film Reel (scroll is a timeline of scenes), mutated by "make the UI the content": the scrollbar's job (where am I, how much is left) moves into the design as a timeline rail with timecode. Broken rule: a reel shows scenes; here the navigation itself is the scene-strip.
+4. **Collision:** tide chart (sea) → periodic rise and fall. Every credit rises into view, holds, and falls away like a tide, and the rail draws the tide line: how much is on screen at each moment of the sequence.
+5. **Signature move:** The Tide Rail. A rail at the edge of the screen draws the rise and fall of the credits as one tide line, with a playhead, a running 24 fps timecode, and one mark per film that you can press to jump to it.
+6. **Anti-Sameness Check:** memory has no earlier run. AI-default scan: no hero → logos → features → testimonials, no centred headline with two buttons, no thumbnail bento, no "Our work" grid with play buttons. **The first plan failed the check:** the top search results for "cinematic" (Big Shoulders Display, Darkroom palette) plus Film Reel reproduce the skill's own worked example in `thinking/sequence.md` in three of six dimensions (structure, type, colour). Every agent that reads the skill gets that example. Mutated: type → Instrument Serif + Noto Serif Bengali (credits set in a serif, Bangla first, the way this studio letters); palette → Night Brass (projector brass on black, not safelight red); signature → the tide rail (not grease-pencil circles). Against the obvious version (a grid of video thumbnails with play buttons) the plan differs in structure, type, colour, motion, signature and imagery.
+7. **Restraint Gate:** see DESIGN.md. Concept survived: yes.
+
+Dials: ENERGY 2 · RHYTHM 3 · MOTION 2 → Tier 2. One pinned, scroll-scrubbed chapter carries the idea. Not Tier 4: nothing here is spatial, material or lit, and there are no images to distort. Not Tier 3: there is one page, so there are no page transitions to design.
+Type mode: HOUSE STYLE (a studio portfolio: the visitor came for an impression of how this studio sets titles, and the type is the work).

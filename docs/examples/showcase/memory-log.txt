@@ -1,0 +1,3 @@
+$ node scripts/memory.mjs log --archetype film-reel --mutation ui-is-content --signature tide-rail --fonts "Instrument Serif/Noto Serif Bengali/Instrument Sans" --palette "Night Brass" --tier 2 --page home
+Logged run #1 to /home/user/workspace/runs/showcase/.motomation/log.json
+  fingerprint: layout=sequence · tier=2

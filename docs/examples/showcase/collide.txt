@@ -1,0 +1,40 @@
+COLLISION ENGINE · category: Studio / Agency · seed 2430
+
+Draw 1
+  Archetype  : The Film Reel (film-reel): scroll is a timeline of scenes
+  If it can't serve the brief, take: The Index (index), not a favourite
+  Mutation   : Make the UI the content: the scrollbar is the timeline; the cursor is the product
+  Collision  : tide chart (sea) → steal "periodic rise and fall"
+               e.g. content density rising and falling with scroll
+  Kinetic    : the whole page magnifies, driven by page exit
+  Seed move  : Aperture: the next section opens through an iris or door
+  Fingerprint: layout=sequence · tier=2 · signature_type=scroll
+
+Draw 2
+  Archetype  : The Specimen (specimen): the page is a type specimen
+  If it can't serve the brief, take: The Stage (stage), not a favourite
+  Mutation   : Second person: the visitor becomes a character in the layout
+  Collision  : film leader (cinema) → steal "countdown 3-2-1 before a reel"
+               e.g. an intro countdown that hands into a Motomation chapter
+  Kinetic    : a letter develops, driven by a section entering
+  Seed move  : Stacked Deck: sticky cards stack into a table of contents
+  Fingerprint: layout=statement · tier=2 · signature_type=scroll
+
+Draw 3
+  Archetype  : The Manifesto (manifesto): one argument set large like a speech
+  If it can't serve the brief, take: The Index (index), not a favourite
+  Mutation   : Borrow a print rule: marginalia, footnotes, folios or a colophon
+  Collision  : elevator panel (architecture) → steal "floor numbers that light in sequence"
+               e.g. section nav as lit floor numbers
+  Kinetic    : a grid cell develops, driven by click
+  Seed move  : Velocity Skew Marquee: a marquee that leans with scroll speed
+  Fingerprint: layout=statement · tier=2 · signature_type=scroll
+
+Diversity (measured)
+  archetypes       : 3/3 unique  ✓
+  signature seeds  : 3/3 unique  ✓
+  mutations        : 3/3 unique  ✓
+  collision worlds : 3/3 unique  ✓
+
+Treat these as constraints, not answers. Combine, bend or reject them, but start from them.
+Next: write Tension → Concept with one draw, then run the Thinking Sequence (thinking/sequence.md).

@@ -26,12 +26,14 @@ npx skills add asfakulsiam/asfakulsiam-motomation-design
 
 ## See it in action
 
-Real sessions, copied with their commands, outputs, screenshots and gate results. Open one before reading the rest.
+Real sessions, copied with their commands, outputs, screenshots and gate results. Open one before reading the rest. All of them, with the agent, tier and result of each: [examples/prompts/README.md](skills/asfakulsiam-motomation-design/examples/prompts/README.md).
 
 | Example | What it shows |
 |---|---|
+| [**Flagship: one prompt, the whole skill**](skills/asfakulsiam-motomation-design/examples/prompts/showcase.md) | Every step of the full route on one page: collision draw, CSV choices, an Anti-Sameness Check that fails the first plan, Restraint Gate record, Tier 2 tide rail, gate and a stamp traced field by field |
 | [Hero section](skills/asfakulsiam-motomation-design/examples/prompts/hero.md) | One viewport for a real craft: collision draw, memory check, build, gate, stamp, Restraint Gate log |
 | [Four-page site](skills/asfakulsiam-motomation-design/examples/prompts/full-site.md) | A whole small site from one prompt: Thinking Sequence, data-file choices, one signature across pages, a gate and verified stamp per page |
+| [Fix an existing page](skills/asfakulsiam-motomation-design/examples/prompts/fix-existing.md) | The short route on a real failing page: route stated, cause named, a 3-line fix, gate before (32 failures) and after (0) |
 | [Component swap](skills/asfakulsiam-motomation-design/examples/prompts/component.md) | `HoldToCommit` dropped into an existing React app: search, choice, diff, typecheck, gate, interaction test |
 
 ---

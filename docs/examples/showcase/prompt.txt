@@ -1,0 +1,10 @@
+Use the asfakulsiam-motomation-design skill: /build a one-page portfolio as a single HTML file (index.html). Use --seed 2430 for the collision engine.
+
+Client: Kalo Ghor (কালো ঘর, "the dark room"), a two-person studio in Dhaka that designs opening titles for Bangladeshi independent films. Tahsin Ara draws the lettering; Rafi Mahmud animates it.
+Work (Bangla title · English title · kind · director · year · length of the title sequence):
+- নদীর ওপারে · Across the River · feature · Sadia Islam · 2024 · 2 min 10 s
+- ঘুম · Sleep · short film · Imran Kabir · 2025 · 48 s
+- শহর · The City · documentary · Mitu Rahman · 2023 · 1 min 30 s
+Contact: studio@kaloghor.com.bd
+Audience: film directors and festival programmers deciding who should title their next film.
+No stills or video are available yet. Do not invent clients, awards, festival selections or numbers.

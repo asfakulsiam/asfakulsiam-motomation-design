@@ -1,0 +1,13 @@
+== node scripts/gate.mjs --verify docs/examples/hero/index.html --log docs/examples/hero/log.json
+STAMP VERIFIED · critique and gate numbers match a fresh scan · gate PASS
+== node scripts/gate.mjs --verify docs/examples/full-site/index.html --log docs/examples/full-site/log.json
+STAMP VERIFIED · critique and gate numbers match a fresh scan · gate PASS
+== node scripts/gate.mjs --verify docs/examples/full-site/books.html --log docs/examples/full-site/log.json
+STAMP VERIFIED · critique and gate numbers match a fresh scan · gate PASS
+== node scripts/gate.mjs --verify docs/examples/full-site/ekti-nodir-naam.html --log docs/examples/full-site/log.json
+STAMP VERIFIED · critique and gate numbers match a fresh scan · gate PASS
+== node scripts/gate.mjs --verify docs/examples/full-site/visit.html --log docs/examples/full-site/log.json
+STAMP VERIFIED · critique and gate numbers match a fresh scan · gate PASS
+== node scripts/gate.mjs --verify docs/examples/showcase/index.html --log docs/examples/showcase/log.json
+STAMP VERIFIED · critique and gate numbers match a fresh scan · gate PASS
+DONE

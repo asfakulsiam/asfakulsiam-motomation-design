@@ -1,0 +1,12 @@
+$ node scripts/contrast.mjs #EDEBE6 #0D0D0F
+#EDEBE6 on #0D0D0F: 16.29:1  body PASS · large PASS · AAA PASS
+$ node scripts/contrast.mjs #A3A09A #0D0D0F
+#A3A09A on #0D0D0F: 7.44:1  body PASS · large PASS · AAA PASS
+$ node scripts/contrast.mjs #C9A15B #0D0D0F
+#C9A15B on #0D0D0F: 8.07:1  body PASS · large PASS · AAA PASS
+$ node scripts/contrast.mjs #A3A09A #18181B
+#A3A09A on #18181B: 6.79:1  body PASS · large PASS · AAA —
+$ node scripts/contrast.mjs #C9A15B #18181B
+#C9A15B on #18181B: 7.36:1  body PASS · large PASS · AAA PASS
+$ node scripts/contrast.mjs #0D0D0F #C9A15B
+#0D0D0F on #C9A15B: 8.07:1  body PASS · large PASS · AAA PASS

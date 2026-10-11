@@ -1,0 +1,78 @@
+$ node scripts/memory.mjs recent
+No runs logged yet in this project (/home/user/workspace/runs/showcase/.motomation/log.json).
+
+$ node scripts/search.mjs fonts "condensed cinematic film title display"
+fonts: top 5 for "condensed cinematic film title display"
+
+■ Big Shoulders Display  (score 13.51)
+  source         Google Fonts
+  license        OFL
+  role           display sans
+  axes           wght
+  personality    condensed American-industrial, cinematic
+  pairs_with     Switzer; Geist; JetBrains Mono
+  use_for        film, sport, events, Motomation titles
+  avoid          long headlines in lowercase
+
+■ Tanker  (score 2.55)
+  source         Fontshare
+  license        ITF Free Font License
+  role           display sans
+  axes           none
+  personality    ultra-heavy condensed poster face
+  pairs_with     Switzer; JetBrains Mono
+  use_for        posters, events, brutalist hooks
+  avoid          anything quiet
+
+■ Instrument Serif  (score 2.46)
+  source         Google Fonts
+
+$ node scripts/search.mjs fonts "bengali display"
+fonts: top 5 for "bengali display"
+
+■ Noto Serif Bengali  (score 4.83)
+  source         Google Fonts
+  license        OFL
+  role           bangla serif
+  axes           wdth wght
+  personality    bookish Bangla serif
+  pairs_with     Noto Sans Bengali; Newsreader
+  use_for        Bangla long-form, heritage
+  avoid          small UI labels
+
+■ Clash Display  (score 0.31)
+  source         Fontshare
+
+$ node scripts/search.mjs palettes "dark cinema black film"
+palettes: top 2 for "dark cinema black film"
+
+■ Darkroom  (score 6.90)
+  mood           play
+  ground         #0E0D0B
+  surface        #1A1814
+  ink            #F2EEE6
+  muted          #A8A196
+  accent         #E0442B
+  accent_ink     #0E0D0B
+  story          film, photography, Motomation chapters
+  accent_text    body
+
+■ Safelight  (score 4.16)
+  mood           play
+  ground         #140B0A
+  surface        #21110F
+  ink            #F6E9E2
+  muted          #B89A90
+  accent         #FF5A3C
+$ node scripts/search.mjs signatures "timeline timecode scrub"
+signatures: top 1 for "timeline timecode scrub"
+
+■ timecode-rail  (score 4.54)
+  name           Timecode Rail
+  family         scroll
+  tier           5
+  mood           play editorial
+  good_for       product-launch portfolio
+  file           signatures/scroll-signatures.md
+  one_line       a running timecode shows chapter progress
+

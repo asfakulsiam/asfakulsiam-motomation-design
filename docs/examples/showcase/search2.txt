@@ -1,0 +1,67 @@
+$ node scripts/search.mjs palettes "night river blue tide"
+palettes: top 3 for "night river blue tide"
+
+■ Night Brass  (score 3.82)
+  mood           quiet
+  ground         #0D0D0F
+  surface        #18181B
+  ink            #EDEBE6
+  muted          #A3A09A
+  accent         #C9A15B
+  accent_ink     #0D0D0F
+  story          hotels at night, fragrance, watches
+  accent_text    body
+
+■ Monsoon Dhaka  (score 3.68)
+  mood           editorial
+  ground         #ECEFEA
+  surface        #DFE5DE
+  ink            #151A16
+  muted          #525C54
+  accent         #1E6B52
+  accent_ink     #FFFFFF
+  story          Bangladeshi brands, rain, rivers, green heritage
+  accent_text    body
+
+■ Safelight  (score 2.96)
+  mood           play
+  ground         #140B0A
+  surface        #21110F
+  ink            #F6E9E2
+  muted          #B89A90
+  accent         #FF5A3C
+  accent_ink     #140B0A
+  story          darkroom, music, nightlife
+  accent_text    body
+
+$ node scripts/search.mjs fonts "serif display editorial titles"
+fonts: top 5 for "serif display editorial titles"
+
+■ Big Shoulders Display  (score 3.57)
+  source         Google Fonts
+  license        OFL
+  role           display sans
+  axes           wght
+  personality    condensed American-industrial, cinematic
+  pairs_with     Switzer; Geist; JetBrains Mono
+  use_for        film, sport, events, Motomation titles
+  avoid          long headlines in lowercase
+
+■ Instrument Serif  (score 3.54)
+  source         Google Fonts
+  license        OFL
+  role           display serif
+  axes           none (regular + italic)
+  personality    condensed elegant serif, fashion-editorial
+  pairs_with     Instrument Sans; Geist; Satoshi
+  use_for        fashion, portfolios, editorial headlines
+  avoid          body text
+
+■ PP Editorial New  (score 3.50)
+  source         Paid foundry
+  license        Commercial (trial available)
+  role           display serif
+  axes           none (weights + italics)
+  personality    ultralight high-contrast editorial serif
+  pairs_with     PP Neue Montreal
+  use_for        fashion, portfolios, luxury editorial

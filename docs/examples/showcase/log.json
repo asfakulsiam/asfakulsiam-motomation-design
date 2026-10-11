@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "runs": [
+    {
+      "date": "2026-10-11T17:18:51.526Z",
+      "page": "home",
+      "archetype": "film-reel",
+      "mutation": "ui-is-content",
+      "signature": "tide-rail",
+      "fonts": "Instrument Serif/Noto Serif Bengali/Instrument Sans",
+      "palette": "Night Brass",
+      "tier": "2",
+      "fingerprint": {
+        "layout": "sequence",
+        "tier": 2
+      }
+    }
+  ]
+}

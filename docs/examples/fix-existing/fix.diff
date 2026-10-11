@@ -1,0 +1,29 @@
+--- before.html	2026-10-11 16:52:15.624636526 +0000
++++ index.html	2026-10-11 17:02:21.136636526 +0000
+@@ -11,7 +11,7 @@
+ <style>
+ :root{
+   --plaster:#efe6d6; --plaster-2:#e6dac5; --ink:#2a211b; --soft:#5e5044;
+-  --door:#3b4a3f; --door-dk:#2b372f; --iron:#1d1a18; --brass:#a77b35; --line:#cdbfa8;
++  --door:#3b4a3f; --door-dk:#2b372f; --iron:#1d1a18; --brass:#a77b35; --brass-text:#7a5a22; --line:#cdbfa8;
+   --serif:"Cormorant Garamond",Georgia,serif; --sans:"Instrument Sans",system-ui,sans-serif;
+ }
+ *{box-sizing:border-box;margin:0}
+@@ -38,7 +38,7 @@
+ /* hero + doors */
+ .hero{padding:56px 0 72px;overflow:hidden}
+ .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+-.eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);font-weight:600}
++.eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass-text);font-weight:600}
+ h1{font:400 clamp(46px,7vw,92px)/.98 var(--serif);margin:14px 0 22px;letter-spacing:-.01em}
+ h1 em{font-style:italic;color:var(--door)}
+ .lede{max-width:44ch;color:var(--soft);font-size:19px;margin-bottom:30px}
+@@ -87,7 +87,7 @@
+ .time{font:italic 400 clamp(64px,10vw,120px)/1 var(--serif);color:var(--brass)}
+ .walks{list-style:none;padding:0;margin-top:26px;border-top:1px solid var(--line)}
+ .walks li{padding:16px 0;border-bottom:1px solid var(--line);font:500 24px/1.25 var(--serif);display:flex;gap:16px}
+-.walks li span{font:600 13px var(--sans);letter-spacing:.1em;color:var(--brass);padding-top:8px}
++.walks li span{font:600 13px var(--sans);letter-spacing:.1em;color:var(--brass-text);padding-top:8px}
+ .facts{display:grid;grid-template-columns:auto 1fr;gap:6px 22px;margin-top:26px}
+ .facts dt{font:italic 400 34px/1.2 var(--serif);color:var(--door)}
+ .facts dd{align-self:center;color:var(--soft)}
