@@ -1,0 +1,15 @@
+:root { --ink: #1c1d1f; --paper: #f6f5f1; --line: #dedbd2; --red: #b3261e; font-family: system-ui, sans-serif; color: var(--ink); background: var(--paper); }
+body { margin: 0; }
+.page { max-width: 640px; margin: 0 auto; padding: 48px 20px; }
+.eyebrow { font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: #5b5d61; margin: 0 0 6px; }
+h1 { font-size: 32px; margin: 0 0 32px; }
+h2 { font-size: 18px; margin: 0 0 10px; }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+label { display: block; font-size: 14px; margin-bottom: 6px; }
+input { width: 100%; box-sizing: border-box; padding: 10px; border: 1px solid var(--line); border-radius: 6px; font: inherit; margin-bottom: 12px; }
+.btn { font: inherit; padding: 10px 16px; border-radius: 6px; border: 1px solid var(--ink); background: var(--ink); color: #fff; cursor: pointer; }
+.btn-danger { background: var(--red); border-color: var(--red); }
+.danger { border-color: #e9b9b5; }
+.hold-danger { --accent: #f1b9b4; --ground: #fff; border-color: var(--red) !important; border-radius: 6px !important; padding: 10px 16px !important; min-height: 44px; }
+.hold-danger:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.hint { font-size: 13px; color: #5b5d61; margin: 8px 0 0; }

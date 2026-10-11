@@ -1,0 +1,4 @@
+pointer released at 700 ms → status: (none)
+pointer held 2 s → status: Workspace scheduled for deletion.
+keyboard Space held 2 s → status: Workspace scheduled for deletion.
+keyboard Space released at 600 ms → status: (none)
