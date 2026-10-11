@@ -4,7 +4,8 @@
 // Diversity: draws are taken WITHOUT replacement. Archetypes and signature seeds never repeat inside one run;
 // mutations and collision worlds (with --spread) don't repeat either until their pool runs out, and the output
 // says exactly when that happened. Nothing overlaps silently.
-import { load, args, rng, pick, fingerprint, similarity, fpText } from "./lib.mjs";
+import { load, args, rng, pick, fingerprint, similarity, fpText, LAYOUT_FAMILY } from "./lib.mjs";
+const layoutFamily = (id) => LAYOUT_FAMILY[id] || id;
 import { recent } from "./memory.mjs";
 
 const a = args();
@@ -64,6 +65,23 @@ for (let i = 0; i < n; i++) {
   });
 }
 
+// Fallback archetype per draw: if the drawn archetype can't serve the brief, the agent takes this one instead of
+// picking a favourite by hand (hand-picked overrides converge: v2 SaaS runs replaced two different draws with
+// `console`). It comes from its own seeded stream, so adding it changed no existing draw. It fits the category when
+// one is given, is never an archetype drawn in this run, and prefers a different layout family from its draw.
+{
+  const rf = rng(a.seed === undefined ? undefined : `${a.seed}:fallback`);
+  const drawn = new Set(draws.map((d) => d.archetype)), allArch = load("archetypes");
+  for (const d of draws) {
+    const fam = layoutFamily(d.archetype);
+    const pool = allArch.filter((x) => !drawn.has(x.id) && (!catIds.length || catIds.includes(x.id)));
+    const other = pool.filter((x) => layoutFamily(x.id) !== fam);
+    const f = (other.length ? other : pool.length ? pool : allArch.filter((x) => x.id !== d.archetype));
+    const pickd = f.length ? pick(f, rf) : null;
+    d.fallback = pickd ? { archetype: pickd.id, archetype_name: pickd.name, shape: pickd.shape } : null;
+  }
+}
+
 // Each draw's structural fingerprint (layout family, signature type, tier). Sections and type scale come later, in
 // the plan, so this is partial; it's compared against the project log so a draw that rebuilds a recent page is flagged.
 const logged = recent(5), allSignatures = load("signatures");
@@ -91,6 +109,7 @@ console.log(`COLLISION ENGINE${cat ? ` · category: ${cat.name}` : ""}${a.seed !
 draws.forEach((d, i) => {
   console.log(`Draw ${i + 1}`);
   console.log(`  Archetype  : ${d.archetype_name} (${d.archetype}): ${d.shape}`);
+  if (d.fallback) console.log(`  If it can't serve the brief, take: ${d.fallback.archetype_name} (${d.fallback.archetype}), not a favourite`);
   console.log(`  Mutation   : ${d.mutation.name}: ${d.mutation.operator}`);
   console.log(`  Collision  : ${d.collision.source} (${d.collision.world}) → steal "${d.collision.property}"`);
   console.log(`               e.g. ${d.collision.becomes}`);

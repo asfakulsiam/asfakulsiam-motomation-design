@@ -25,6 +25,7 @@ import { createRequire } from "node:module";
 
 const ROOT = resolve(dirname(new URL(import.meta.url).pathname), "..");
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");
+export const generatorBrief = (slug) => readFileSync(join(ROOT, "evals/briefs", BRIEFS[slug].file), "utf8").replace(/^\*\*Expect:\*\*.*$\n?/m, "").trimEnd() + "\n";
 export const BRIEFS = {
   studio: { file: "07-architecture-studio.md", seeds: [7101, 7102, 7103], primary: /contact|enquir|email|studio@/i },
   hotel: { file: "04-boutique-hotel.md", seeds: [4101, 4102, 4103], primary: /availab|book/i },
@@ -52,7 +53,10 @@ const runs = () => only.flatMap((slug) => BRIEFS[slug].seeds.slice(0, N).flatMap
 
 const TASK = "Build the website described in the brief below as a single self-contained index.html in the current folder (inline CSS and JS, no build step; Google Fonts/Fontshare and the GSAP CDN are allowed, no image URLs). Use only facts from the brief.";
 export function promptFor({ slug, seed, cond }) {
-  const brief = readFileSync(join(ROOT, "evals/briefs", BRIEFS[slug].file), "utf8");
+  // The **Expect:** line is the evaluator's note, not part of the client's brief. Before v2.4.0 it was sent to the
+  // agent too ("Console or Workbench thinking", "a signature tied to doors"), which steered every arm toward the
+  // same archetype and signature: the cause of the v2 SaaS console collision. Generators never see it now.
+  const brief = generatorBrief(slug);
   const tier = TIER === null ? "" : ` Build it at motion Tier ${TIER} (${TIER >= 5 ? "scroll-driven film: pinned, scrubbed sequences; WebGL allowed" : "signature scroll motion: pinned or scrubbed sections"}), with a reduced-motion version that keeps all content.`;
   if (cond === "baseline") return `You are an expert web designer and front-end developer. ${TASK}${tier} Check your work before you finish.\n\n${brief}`;
   // gated = the baseline prompt plus the same measured gate the skill uses, without any of the skill's knowledge

@@ -308,6 +308,8 @@ Mutation operators (or draw one with `node scripts/collide.mjs`):
 
 **Test:** name the original structure, then name the rule you broke. If you can't name the broken rule, you haven't mutated it.
 
+**When the draw doesn't fit.** If the drawn archetype can't serve the brief, take the draw's seeded fallback (`collide.mjs` prints "If it can't serve the brief, take: …"). Don't swap in the archetype you like best: hand-picked replacements converge. In the v2 benchmark, two SaaS runs drew different archetypes (Lookbook, Gallery Wall), both replaced them with Console, and the two pages came out as the same structure. If the fallback can't serve the brief either, write one line in the plan saying why both failed, then choose.
+
 ---
 
 ### 4. Forced Collision
@@ -351,6 +353,8 @@ Compare your plan against three things:
    `node scripts/memory.mjs check --archetype <x> --signature <y> --tier <n> --sections hero,work,contact --type-scale <ratio>`.
    It checks two things against the last 5 runs. First, exact IDs: an archetype or signature already used. Second, a **structural fingerprint**: layout family, type-scale bucket, section order, motion tier and signature type, scored 0–100%. A different archetype with the same rows layout, the same section order and the same kind of signature is still a repeat. At **≥ 70%** the script names the run you're rebuilding and the dimensions that match, and offers a mutation aimed at the heaviest one. Apply it (or justify the overlap in one line) and check again. Exit code 2 means a clash. `/invent` prints each draw's partial fingerprint and flags draws that rebuild a recent page. After delivery, `memory.mjs log` with the same flags stores the fingerprint. Without a shell, compare the five dimensions by hand against `.motomation/log.json`.
 3. **The obvious version:** write down what a template would do. Your plan must differ in at least **three** of: structure, type, colour, motion, signature, imagery.
+
+**Controlled reuse across separate projects.** Memory only knows its own project, so two projects (or two benchmark seeds) can land on the same archetype. That is allowed only as a documented mutation: the second use carries a different mutation **and** a different structural fingerprint (layout, tier or signature type differs), and the plan says so in one line: `Reuse : Letter again (used in <project>), mutated by remove-expected; signature type micro, not type`. Inside one project nothing changes: memory blocks the repeat, and the release gate still requires 3 different archetypes and signatures across 3 runs of the same brief.
 
 **Test:** if a stranger saw your site next to the last one you made, would they think the same person made them on autopilot? If yes, mutate again.
 
