@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fixture · scroll sequence with legible inactive steps</title>
+<!-- Gate fixture (v2.5.0, task A1): the benchmark v3 ceramics s3103 pattern. A sticky stage on the left, a list of
+     steps on the right; the step in the middle of the screen gets .on, every other step is dimmed with opacity.
+     ?inactive=0.34 (default) puts an inactive 20px step at about 2.1:1 on the paper colour: the gate must fail it.
+     ?inactive=0.8 keeps the same sequence legible (above 4.5:1): the gate must pass it. -->
+<style>
+  :root { --paper: #f4efe6; --ink: #1f1a17; --dim: 0.8; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 20px/1.5 Georgia, serif; }
+  header, footer { padding: 18vh 6vw; }
+  h1 { font-size: 56px; line-height: 1.05; margin: 0 0 16px; }
+  .seq { display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; padding: 0 6vw; }
+  .stage { position: sticky; top: 0; height: 100vh; display: grid; place-items: center; }
+  .stage figure { margin: 0; width: min(36vw, 420px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #d9cbb3, #a8875f); transition: transform .3s; }
+  .steps { list-style: none; margin: 0; padding: 0; }
+  .steps li { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; }
+  .steps h2 { font-size: 40px; margin: 0 0 12px; }
+  .steps p { margin: 0; max-width: 34ch; }
+  .js .steps li:not(.on) { opacity: var(--dim); }
+  @media (max-width: 760px) { .seq { grid-template-columns: 1fr; } .stage { height: 60vh; position: sticky; top: 0; z-index: 0; } .steps { position: relative; } }
+</style>
+</head>
+<body>
+<header><h1>Kiln, in three firings</h1><p>A fixture for the Delivery Gate. Scroll the list; the current step is lit.</p></header>
+<main>
+  <section class="seq" aria-label="Firing sequence">
+    <div class="stage" aria-hidden="true"><figure></figure></div>
+    <ol class="steps">
+      <li><h2>Bisque</h2><p>The first firing turns clay into ceramic at about 1000 degrees, slowly, over a night.</p></li>
+      <li><h2>Glaze</h2><p>Glaze goes on by hand. Each pot is dipped once and wiped clean at the foot.</p></li>
+      <li><h2>Reduction</h2><p>The second firing starves the kiln of air, and the iron in the glaze turns green.</p></li>
+      <li><h2>Cooling</h2><p>Two days with the door shut. Opening early cracks the glaze.</p></li>
+    </ol>
+  </section>
+</main>
+<footer><p>End of the sequence.</p></footer>
+<script>
+  const q = new URLSearchParams(location.search).get("inactive");
+  if (q) document.documentElement.style.setProperty("--dim", q);
+  document.documentElement.classList.add("js");
+  const steps = [...document.querySelectorAll(".steps li")];
+  const pick = () => { const mid = innerHeight / 2; let best = steps[0], d = Infinity;
+    for (const s of steps) { const r = s.getBoundingClientRect(); const c = Math.abs(r.top + r.height / 2 - mid); if (c < d) { d = c; best = s; } }
+    for (const s of steps) s.classList.toggle("on", s === best); };
+  addEventListener("scroll", pick, { passive: true }); addEventListener("resize", pick); pick();
+</script>
+</body>
+</html>

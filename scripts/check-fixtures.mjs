@@ -2,7 +2,8 @@
 // Runs the Delivery Gate on the fixtures and checks it still tells good from bad.
 //
 //   node scripts/check-fixtures.mjs            fixtures/good must pass, fixtures/bad must fail with ≥ the counts in
-//                                              fixtures/bad/expected.json
+//                                              fixtures/bad/expected.json; the scroll-step fixtures must fail
+//                                              (dimmed) and pass (legible)
 //   REQUIRE_BROWSER=1 node scripts/check-fixtures.mjs   a missing browser is an error, not a skip (CI sets this
 //                                              once Playwright installed)
 //
@@ -40,4 +41,10 @@ for (const [k, n] of Object.entries(want.atLeast)) {
   const got = bad.json?.counts?.[k];
   say(got >= n, `fixtures/bad: ${k} ${got ?? "?"} (expected ≥ ${n})`);
 }
+// scroll sequences (v2.5.0): a dimmed inactive step at 2.1:1 must fail, the same sequence at 8.3:1 must pass
+const dim = run("fixtures/synthetic/scroll-steps-dimmed.html");
+const inactive = (dim.json?.contrast?.fails || []).filter((f) => f.state === "inactive").length;
+say(dim.code === 1 && inactive > 0, `fixtures/synthetic/scroll-steps-dimmed fails on inactive steps (exit ${dim.code}, ${inactive} inactive-step contrast failure(s))`);
+const leg = run("fixtures/synthetic/scroll-steps-legible.html");
+say(leg.code === 0, `fixtures/synthetic/scroll-steps-legible passes (exit ${leg.code}${leg.json ? ` · ${leg.json.stamp}` : ""})`);
 process.exit(failed ? 1 : 0);
