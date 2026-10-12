@@ -2,6 +2,57 @@
 
 All notable changes to this skill. Versions follow [Semantic Versioning](https://semver.org).
 
+## [2.4.0] - 2026-10-12
+
+Development run v2.4.0, in two passes: the first pass built the front door, the reliability fixes, the breadth (components, sections, templates), distribution (docs site, MCP server, Pages) and the multi-agent benchmark infrastructure; the completion run (this release) verified the partials, ran and published benchmark v3, added per-component CI and the marketplace listings, and shipped. Newest work first; each bullet names its task and files.
+
+### Completion run (2026-10-12)
+- **D1–D4 · Release:** version 2.4.0 in `VERSION`, `SKILL.md`, `package.json`, every plugin manifest (`.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.cursor-plugin/plugin.json`, `.codex-plugin/plugin.json`, `gemini-extension.json`) and the README badge, enforced by `scripts/check-repo.mjs`; README Results shows v3 next to v2; tag `v2.4.0`.
+- **C2 · Listings:** tracked in `RELEASE-NOTES.md`. Live: the repository's own Claude Code marketplace (`.claude-plugin/marketplace.json`, validated and installed from GitHub with `claude plugin marketplace add`) and Codex marketplace (`codex plugin marketplace add`), `npx skills add` (skills.sh CLI). Submitted through the directories' own discovery: Gemini CLI extension gallery (`gemini-extension.json` at the root + `gemini-cli-extension` topic), SkillsMP (`claude-skills` / `claude-code-skill` topics), claudemarketplaces.com (valid marketplace schema). Not submitted, with the reason: the official Claude, Cursor and OpenAI plugin directories (account-holder web forms), and two awesome lists whose rules exclude new, low-star or AI-submitted entries.
+- **C1 · Per-component CI:** `.github/workflows/components.yml` + `tests/components/per-component.mjs` + `tests/components/fixtures/per-component.fixture.tsx` + `tests/components/baselines.json`. Every component in `data/components.csv`, sharded by family: screenshot fingerprint against a committed baseline at 1440 and 375, the Delivery Gate on its own demo page, a 4 KB gzipped size budget, reduced-motion stillness, and mount/unmount with no console errors and no animation frames left pending. A coverage job fails if a component has no baseline or a family has no shard. The interaction suites (hold-to-commit, reduced-motion first render, confetti) and the whole-gallery harness run in the same workflow. Proven to fail on purpose-made regressions (reduced-motion path removed; a leaked rAF loop + console error).
+- **C1 fixes (found by the new CI):** `Lens` cancels its easing frame on unmount; `StackedDeck` card numbers 0.55 → 0.75 opacity (3.81:1 → 7.1:1 at 20px); gallery demos: the glare-card hint and the device-mockup's small text reach AA on their tinted surfaces, the orbiting-circles label sits in its own box. Registry, gallery, docs site and the `shop-product` / `studio-portfolio` templates rebuilt; both templates re-gated and re-stamped (`gate.mjs --verify`: verified).
+- **B1–B5 · Benchmark v3:** 133 builds at commit `6f2724f` (Claude Code 2.1.286 + `claude_sonnet_5_5`; judges GPT-5.4 and Gemini 3.1 Pro; measured on GitHub Actions, Chromium 147.0.7727.15, axe-core 4.14.0). Reports: `evals/results/2026-10-12-benchmark-v3.md` (baseline, gated baseline, skill, matched effort), `evals/results/2026-10-12-benchmark-v3-motion.md` (briefs 01/06/08 at Tier 4, judged from `gate.mjs --report` strips by the new `evals/judge-motion-strips.py`), `evals/results/2026-10-12-benchmark-v3-competitors.md` (taste-skill, ui-ux-pro-max, frontend-design), `evals/results/2026-10-12-benchmark-v3-codex.md` (Codex CLI + `gpt_5_4`). Results: skill vs baseline 12–2–1, vs gated baseline 14–1–0, vs matched effort 10–5–0, vs the three competitors 14–1, 14–1, 11–3–1; Tier 4 full rubric 7–2 but **motion-only 3–6**; Codex 3–2. The losses, the hard-gate failures and the pipeline problems are listed in each report. Screenshots and motion reports on the `evals` branch; before/after images `docs/benchmark-images/v3-*.webp`. Runner fixes: the judge step now runs judgments in parallel (async spawn), and one page whose measurement throws no longer ends the measure pool. Measurement workflow kept on branch `bench-v3`.
+- **Known gaps found by v3 (not fixed in this release):** `gate.mjs` measures a scroll sequence's steps only in their active state, so dimmed inactive steps can fail axe contrast unseen (ceramics s3103); at Tier 4 the skill's reduced-motion fallback and choreography lost to plain baselines when judged from strips; in a CPU-starved sandbox `gate.mjs` crashes or times out and the skill moves on unverified (Codex run).
+- **A1–A4 · Partials verified, no change needed:** hold-to-commit (13/13 interaction tests), reduced-motion first render (5/5, video under `/tmp/agent-browser/`), lite token count (README and `build-lite.mjs --check` agree, ~7.8k ≤ 8k), byte-identical gallery rebuilds with the pinned toolchain. Marked SKIP with gate output in the run log.
+
+### First pass (2026-10-11 → 2026-10-12)
+#### Multi-agent bridges
+- **Codex agent** for the benchmark (`--agent codex`, skills installed into the run folder at `.agents/skills`), Responses-API bridge (`evals/adapters/responses-bridge.py`); the Anthropic bridge takes system-role messages and JSON-string tool arguments (6f2724f).
+- **Anthropic-Messages bridge** for running Claude Code on the benchmark (`evals/adapters/anthropic-bridge.py`); runner competitor arms (`--competitors name=dir:skill`), installed like ours and judged blind (f9325fc).
+- **Raw-API agent** (`--agent raw-api --model-cmd`), matched-effort arm, model adapter (`evals/adapters/pplx-llm.py`), transcript per turn (5d4aef5).
+
+#### Inspiration review
+- **Step 0:** `docs/INSPIRATION-REVIEW.md` — 39 repositories reviewed for concepts only, no code copied; CreativeAgencyStyle treated as malware (file list only) (8fe7b54).
+
+#### Distribution
+- **E2 · MCP server:** `mcp/server.mjs`, no dependencies: search, get, preview, install components; query data; resources for the catalogue, sources and data CSVs (500c0fd).
+- **E3 · GitHub Pages:** `.github/workflows/pages.yml` publishes the docs site, the full gallery, the templates and the plain variants; gallery toolbar with search, reduced-motion toggle and a 375 view (8599ccc).
+- **E1 · Docs site:** `docs/site/` — a page per component with live demo, prop playground, mobile preview, copy + install; search; reduced-motion toggle (ee5f36d).
+
+#### Breadth
+- **D6 + D7:** 8 gated page templates (`examples/templates/`); CSS + HTML and Tailwind variants of the top 20 components (68bad7a).
+- **D5:** 38 page sections (`examples/sections/`), header validator and index (`scripts/build-sections.mjs`, check-repo 9b), section harness (`tests/sections/harness.mjs`) (072b8a4).
+- **D1–D4:** the component library grows from 43 to 68 components in 8 families: six text components, five ui components, six heavy backgrounds on a shared `examples/components/_lib/ambient.ts` (capability probe, poster, DPR ≤ 1.5, pause off-screen), eight ui pieces; component and gallery harnesses (`tests/components/harness.mjs`, `tests/components/gallery-harness.mjs`), confetti test (5ecb4eb, 2ae93eb, 747e1c3, 841b8c0).
+
+#### Reliability fixes
+- **A4 (T3.2) / C5:** one rule for what to animate (`motion/tokens.md`): prefer transform/opacity, clip-path when it is the concept, paint-heavy with a perf check and static fallback; check-repo 11 keeps every doc consistent (a410e33, 755a89a).
+- **C4:** esbuild 0.28.2 / react 19.2.6 / react-dom 19.2.6 pinned for the gallery; byte-identical rebuilds (ecae128).
+- **C3:** `scripts/build-lite.mjs` writes the lite token count into README; `--check` (run by check-repo) fails when they disagree (c9b6cd6).
+- **C2:** `useMedia` / `useReducedMotion` read the media query on the first client render (`useSyncExternalStore`); `tests/components/reduced-motion.test.mjs` proves no blurred painted frame (ee65036).
+- **C1:** `examples/html/motomation-film.html` self-hosts GSAP, Lenis and fonts; its gate/2 stamp verifies offline (19b1297).
+- **C6:** short-route evidence: full vs short prompt, route stated, standards kept (dff209a).
+- **A5 (T3.3):** SaaS variety collision fixed: evaluator notes stripped from generator prompts, seeded fallback archetype, controlled-reuse rule (46f2aa0).
+- **A4 (T3.1):** Law 2 is an explicit fork: house style (typography-led) vs service style (information-led) (2ad19fb).
+- **A3 (T2.3):** hold-to-commit assistive-tech click path (arm, then confirm), unmount/blur cleanup, 13 interaction tests (`tests/components/hold-to-commit.test.mjs`) (83da5a9).
+- **T2.4:** gate numbers check: values shown wrong before they settle (f74996b). **T2.2:** gate contrast at 375/390/768/1440, per viewport (gate/2) (54ffdb6). **T2.1:** CI gate-fixtures job with Playwright, `fixtures/good` + `fixtures/bad`, gate `--timeout` (34fd248). Gate fixes found by the worked examples (fc77175, 8cf39a8).
+
+#### Front door and proof
+- **A2 (T2.5):** `craft/performance.md` and `craft/responsiveness.md`, next to `craft/accessibility.md` (6e25a6d).
+- **B10:** README "Before and after" with six comparisons from `docs/benchmark-images/`, including the v1 hotel loss and the v2 SaaS sameness (8a4d280).
+- **B1–B4 / T0.2–T0.4:** worked examples in `examples/prompts/` (hero, full-site, component, fix-existing, showcase) with prompts index; SKILL.md short route (69ac301, a868174, 74e46f1, ab75b23).
+- **A1 (T0.7):** README "See it in action" links every worked example; check-repo enforces it (865127d).
+- **T0.1:** `ABOUT.md`, a plain-language introduction linked above the fold (f6c7627).
+
 ## [2.3.0] - 2026-10-11
 
 ### Added
