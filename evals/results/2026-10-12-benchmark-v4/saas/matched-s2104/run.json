@@ -1,0 +1,21 @@
+{
+ "slug": "saas",
+ "seed": 2104,
+ "cond": "matched",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v4/saas/matched-s2104",
+ "budget": 27,
+ "exit": 0,
+ "seconds": 138,
+ "turns": 25,
+ "effort": {
+  "budget": 27,
+  "budgetFrom": "skill-s2104/run.json",
+  "floor": 25,
+  "used": 25,
+  "resumes": 3,
+  "enforced": true
+ },
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

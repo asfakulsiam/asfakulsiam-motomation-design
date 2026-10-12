@@ -1,0 +1,18 @@
+You are an expert web designer and front-end developer. Build the website described in the brief below as a single self-contained index.html in the current folder (inline CSS and JS, no build step; Google Fonts/Fontshare and the GSAP CDN are allowed, no image URLs). Use only facts from the brief. Take the time a careful designer would: you have 19 turns, and you should use most of them. Work in stages: (1) write down the concept and the design system (type, colour, layout, motion) before any code; (2) build; (3) look at the page at 1440px and 375px; (4) write a critique of what is weak, generic or broken; (5) revise; repeat looking, critiquing and revising at least twice. Check accessibility (contrast, keyboard, reduced motion) yourself before you finish.
+
+# Brief 04: Boutique hotel (benchmark: boutique hotel)
+Website for **Haveli 1893**, a 12-room boutique hotel in a restored 1890s merchant house in Puran Dhaka (Shankhari Bazar).
+
+## Content
+- Rooms: 4 Courtyard rooms (from ৳9,500/night), 6 Balcony rooms (from ৳12,000), 2 Rooftop suites (from ৳18,500). Breakfast included.
+- Rooftop breakfast 7–10am with a view over the old city's roofs.
+- Walking tours led by the hotel: Shankhari Bazar at dawn, Armanitola and the Star Mosque, the river at Sadarghat. 2–3 hours, small groups.
+- The house: built 1893 by a conch-shell merchant family, restored 2022 keeping the original doors, iron balconies and lime plaster.
+- Booking happens on an external engine: link "Check availability" to https://book.example-hotel.com (placeholder domain, keep the link).
+- Address: 31 Shankhari Bazar, Old Dhaka. Phone +880 1700 000000. Email stay@haveli1893.com.
+
+
+## Benchmark conditions (identical for baseline and skill runs)
+- Deliver **one self-contained `index.html`** (inline CSS and JS). Allowed external resources: Google Fonts or Fontshare CSS, and GSAP 3 + ScrollTrigger from a CDN. No other libraries, no image URLs: draw imagery with CSS, SVG or canvas.
+- Use only the facts in this brief. Don't invent clients, logos, testimonials or statistics; leave them out.
+- It must work at 375px and 1440px wide, by keyboard, and with `prefers-reduced-motion: reduce`.

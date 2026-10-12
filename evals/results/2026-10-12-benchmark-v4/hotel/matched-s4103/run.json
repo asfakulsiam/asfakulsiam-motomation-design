@@ -1,0 +1,21 @@
+{
+ "slug": "hotel",
+ "seed": 4103,
+ "cond": "matched",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v4/hotel/matched-s4103",
+ "budget": 20,
+ "exit": 1,
+ "seconds": 140,
+ "turns": 21,
+ "effort": {
+  "budget": 20,
+  "budgetFrom": "skill-s4103/run.json",
+  "floor": 18,
+  "used": 21,
+  "resumes": 0,
+  "enforced": false
+ },
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

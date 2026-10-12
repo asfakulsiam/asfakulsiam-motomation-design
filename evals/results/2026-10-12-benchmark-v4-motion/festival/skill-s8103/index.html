@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>14–15 February, Chattogram: an independent music festival</title>
+<meta name="description" content="A two-day independent music festival in Chattogram, 14–15 February. Eighteen artists, two stages, tickets ৳1,500 per day.">
+<meta property="og:title" content="14–15 February, Chattogram: an independent music festival">
+<meta property="og:description" content="Two days, two stages, eighteen artists. Tickets ৳1,500 per day.">
+<meta name="theme-color" content="#0b0d12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Instrument+Sans:wght@400;500;600&family=Noto+Sans+Bengali:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* motomation · archetype: broadsheet · mutation: paper-becomes-glass-list-becomes-map · signature: light-behind-glass · tier: 4 · critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp40] R5[cuts:4,anim:2] M5[t4:pins0/2,webgl1/1,js49/250KB,rm0] V4[entrance-repeats:1] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 25bfce5dd1 */
+:root{
+  --ground:#0b0d12; --ink:#f3eee4; --muted:#cdc6b8; --accent:#ff6a3d; --rule:rgba(243,238,228,.22);
+  --display:"Big Shoulders Display","Noto Sans Bengali",Impact,sans-serif;
+  --text:"Instrument Sans","Noto Sans Bengali",sans-serif;
+  --ease-out:cubic-bezier(.22,1,.36,1); --ease-out-strong:cubic-bezier(.16,1,.3,1);
+  --step--1:clamp(.8125rem,.78rem + .15vw,.9rem);
+  --step-0:clamp(1rem,.96rem + .2vw,1.125rem);
+  --step-3:clamp(2.25rem,1.6rem + 3.2vw,4.25rem);
+  --step-5:clamp(7rem,2rem + 31vw,30rem);
+  --pad:clamp(1rem,3.2vw,3rem);
+}
+*{box-sizing:border-box;margin:0}
+html{background:var(--ground);color:var(--ink);scroll-behavior:smooth}
+body{font:400 var(--step-0)/1.55 var(--text);min-height:100vh;overflow-x:hidden}
+::selection{background:var(--accent);color:var(--ground)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:0;background:var(--ink);color:var(--ground);padding:.6rem 1rem;z-index:20}
+.skip:focus{left:var(--pad);top:var(--pad)}
+
+/* light layer: WebGL canvas, or a designed still */
+#light{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+.still{position:fixed;inset:0;z-index:0;display:none;
+  background:
+   radial-gradient(60vmax 60vmax at 12% 8%,rgba(255,106,61,.20),transparent 62%),
+   radial-gradient(55vmax 55vmax at 90% 92%,rgba(243,238,228,.12),transparent 62%),
+   var(--ground)}
+.still svg{position:absolute;inset:0;width:100%;height:100%}
+.no-gl .still,.reduced .still{display:block}
+.no-gl #light,.reduced #light{display:none}
+main,header,footer{position:relative;z-index:1}
+
+/* masthead strip */
+.mast{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:center;padding:1rem var(--pad);border-bottom:1px solid var(--rule);
+  font:600 var(--step--1)/1.3 var(--text);letter-spacing:.14em;text-transform:uppercase}
+.mast nav{display:flex;gap:1.25rem;justify-content:flex-end}
+.mast nav a{text-decoration:none;padding:.5rem 0;border-bottom:1px solid transparent;transition:border-color .15s var(--ease-out),color .15s var(--ease-out)}
+.mast nav a:hover{border-color:var(--accent);color:var(--accent)}
+.mast .where{color:var(--muted)}
+.mast .mid{text-align:center}
+
+/* hero */
+.hero{padding:clamp(1.5rem,5vw,4rem) var(--pad) clamp(2rem,6vw,5rem);min-height:calc(100svh - 3.5rem);display:flex;flex-direction:column;justify-content:space-between}
+.folio{display:flex;justify-content:space-between;gap:1rem;font:600 var(--step--1)/1.3 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:800;line-height:.82;text-transform:uppercase;letter-spacing:-.01em;margin-top:2rem}
+h1 .l{display:block;overflow:hidden;padding-bottom:.06em}
+h1 .d{font-size:var(--step-5);display:block;color:var(--ink)}
+h1 .m{font-size:clamp(3rem,1rem + 14vw,13rem);color:var(--accent)}
+h1 .c{font-size:clamp(2rem,.5rem + 7vw,6.5rem);color:var(--ink)}
+.lede{display:grid;grid-template-columns:repeat(12,1fr);gap:1rem;margin-top:2.5rem;border-top:1px solid var(--rule);padding-top:1.25rem}
+.lede p{grid-column:1/span 7;font-size:clamp(1.125rem,1rem + .7vw,1.6rem);line-height:1.35;max-width:40ch;text-wrap:balance}
+.lede ul{grid-column:9/span 4;list-style:none;padding:0;font:600 var(--step--1)/1.9 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.lede li span{color:var(--ink)}
+
+section{padding:clamp(3rem,8vw,7rem) var(--pad);border-top:1px solid var(--rule)}
+.kicker{font:600 var(--step--1)/1.3 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:1rem}
+h2{font-family:var(--display);font-weight:800;font-size:var(--step-3);line-height:.95;text-transform:uppercase;text-wrap:balance;max-width:16ch}
+
+/* edition: broadsheet columns */
+.cols{display:grid;grid-template-columns:repeat(3,1fr);margin-top:2.5rem}
+.cols article{padding:0 clamp(1rem,2.5vw,2.5rem);border-left:1px solid var(--rule)}
+.cols article:first-child{padding-left:0;border-left:0}
+.cols h3{font-family:var(--display);font-weight:700;font-size:clamp(1.6rem,1.2rem + 1.4vw,2.4rem);text-transform:uppercase;line-height:1;margin-bottom:.6rem}
+.cols p{color:var(--muted);max-width:34ch}
+.cols .n{font:600 var(--step--1) var(--text);letter-spacing:.14em;color:var(--accent);display:block;margin-bottom:.8rem}
+
+/* contact sheet */
+.sheet-head{display:flex;justify-content:space-between;align-items:end;gap:2rem;flex-wrap:wrap}
+.sheet-head p{color:var(--muted);max-width:36ch}
+.sheet{list-style:none;padding:0;margin-top:2.5rem;display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--rule);border-left:1px solid var(--rule)}
+.frame{position:relative;aspect-ratio:3/4;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:.8rem;display:flex;flex-direction:column;justify-content:space-between}
+.frame .no{font-family:var(--display);font-weight:800;font-size:clamp(2.2rem,1.2rem + 3.4vw,4.5rem);line-height:.9}
+.frame .edge{font:600 .75rem/1.3 var(--text);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:.5rem}
+.frame .who{font:500 var(--step--1)/1.3 var(--text);color:var(--ink)}
+.frame svg{position:absolute;inset:6%;width:88%;height:88%;pointer-events:none;overflow:visible}
+.frame ellipse{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .2s var(--ease-out)}
+.frame:hover ellipse{stroke-dashoffset:0}
+.reduced .frame:nth-child(6n+1) ellipse{stroke-dashoffset:0}
+
+/* stages */
+.stages{display:grid;grid-template-columns:1fr 1fr;margin-top:3rem;border-top:1px solid var(--rule)}
+.stage{padding:2rem clamp(0rem,2vw,2rem) 1rem 0}
+.stage+.stage{padding-left:clamp(1rem,3vw,3rem);border-left:1px solid var(--rule)}
+.stage .tag{font:600 var(--step--1) var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.stage h3{font-family:var(--display);font-weight:800;font-size:clamp(3.5rem,1rem + 9vw,9rem);line-height:.85;text-transform:uppercase;margin:.8rem 0 1rem}
+.stage:first-child h3{color:var(--accent)}
+.stage p{color:var(--muted);max-width:32ch}
+
+/* tickets */
+.tickets{display:grid;grid-template-columns:7fr 5fr;gap:clamp(1.5rem,5vw,5rem);align-items:start}
+.price{font-family:var(--display);font-weight:800;font-size:clamp(4.5rem,1rem + 14vw,13rem);line-height:.85;margin:1rem 0 .5rem}
+.price small{font:600 var(--step--1) var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin-top:.8rem}
+fieldset{border:0;padding:0;display:grid;gap:.8rem}
+legend{font:600 var(--step--1) var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.day{position:relative;display:block}
+.day input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0}
+.day span.t{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;border:1px solid var(--rule);padding:1.1rem 1.25rem;min-height:4.5rem;
+  transition:border-color .15s var(--ease-out),background-color .15s var(--ease-out)}
+.day b{font-family:var(--display);font-weight:800;font-size:2.4rem;line-height:1;text-transform:uppercase}
+.day i{font:600 var(--step--1) var(--text);letter-spacing:.14em;text-transform:uppercase;font-style:normal;color:var(--muted)}
+.day input:checked+span.t{border-color:var(--accent);background:rgba(255,106,61,.12)}
+.day input:checked+span.t i{color:var(--ink)}
+.day input:focus-visible+span.t{outline:2px solid var(--accent);outline-offset:3px}
+.day:hover span.t{border-color:var(--muted)}
+.total{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--ink);margin-top:1.25rem;padding-top:1rem}
+.total span{font:600 var(--step--1) var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.total output{font-family:var(--display);font-weight:800;font-size:3rem;line-height:1}
+.note{margin-top:1rem;color:var(--muted);font-size:var(--step--1)}
+
+footer{padding:2rem var(--pad) 3rem;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font:600 var(--step--1)/1.4 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+@media (max-width:760px){
+  .mast{grid-template-columns:1fr;gap:.4rem;text-align:left}
+  .mast .mid{text-align:left}.mast nav{justify-content:flex-start}
+  .lede p,.lede ul{grid-column:1/-1}
+  .cols{grid-template-columns:1fr;gap:2rem}
+  .cols article{padding:1.25rem 0 0;border-left:0;border-top:1px solid var(--rule)}
+  .cols article:first-child{border-top:0;padding-top:0}
+  .sheet{grid-template-columns:repeat(3,1fr)}
+  .stages,.tickets{grid-template-columns:1fr}
+  .stage+.stage{padding-left:0;border-left:0;border-top:1px solid var(--rule)}
+  .stage{padding-right:0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#lineup">Skip to the lineup</a>
+<canvas id="light" aria-hidden="true"></canvas>
+<div class="still" aria-hidden="true">
+  <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#f3eee4" stroke-opacity=".12" stroke-width=".12">
+    <g stroke="#ff6a3d" stroke-opacity=".28"><circle cx="12" cy="8" r="10"/><circle cx="12" cy="8" r="20"/><circle cx="12" cy="8" r="30"/><circle cx="12" cy="8" r="40"/><circle cx="12" cy="8" r="50"/></g>
+    <circle cx="90" cy="92" r="10"/><circle cx="90" cy="92" r="20"/><circle cx="90" cy="92" r="30"/><circle cx="90" cy="92" r="40"/><circle cx="90" cy="92" r="50"/>
+  </svg>
+</div>
+
+<header class="mast">
+  <span class="where">Chattogram</span>
+  <span class="mid">Independent music festival</span>
+  <nav aria-label="Sections"><a href="#lineup">Lineup</a><a href="#stages">Stages</a><a href="#tickets">Tickets</a></nav>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="folio"><span>Two days</span><span>Two stages</span><span>Eighteen artists</span></div>
+    <h1 aria-label="14–15 February, Chattogram">
+      <span class="l"><span class="d" data-line>14–15</span></span>
+      <span class="l"><span class="m" data-line style="display:block">February</span></span>
+      <span class="l"><span class="c" data-line style="display:block">Chattogram</span></span>
+    </h1>
+    <div class="lede">
+      <p>An independent music festival. Eighteen artists play across two stages, over two days.</p>
+      <ul><li>Tickets <span>৳1,500</span> per day</li><li>Day one <span>14 February</span></li><li>Day two <span>15 February</span></li></ul>
+    </div>
+  </div>
+
+  <section id="edition" aria-labelledby="h-edition">
+    <span class="kicker">The edition</span>
+    <h2 id="h-edition">What is set, so far</h2>
+    <div class="cols">
+      <article data-col><span class="n">01</span><h3>Two days</h3><p>The festival runs on 14 and 15 February. Tickets are sold per day, at ৳1,500 each.</p></article>
+      <article data-col><span class="n">02</span><h3>Two stages</h3><p>Music plays on two stages, and the page follows a light from one to the other.</p></article>
+      <article data-col><span class="n">03</span><h3>Eighteen artists</h3><p>An independent line-up, in Chattogram. Eighteen frames are waiting below for their names.</p></article>
+    </div>
+  </section>
+
+  <section id="lineup" aria-labelledby="h-lineup">
+    <div class="sheet-head">
+      <div><span class="kicker">The lineup</span><h2 id="h-lineup">Eighteen frames, eighteen artists</h2></div>
+      <p>Names to be announced. Move across the sheet, and each frame is marked as the light passes it.</p>
+    </div>
+    <ol class="sheet" id="sheet"></ol>
+  </section>
+
+  <section id="stages" aria-labelledby="h-stages">
+    <span class="kicker">The stages</span>
+    <h2 id="h-stages">One light, then the other</h2>
+    <div class="stages">
+      <article class="stage" data-stage><span class="tag">Stage</span><h3>One</h3><p>Position, schedule and artists to be announced.</p></article>
+      <article class="stage" data-stage><span class="tag">Stage</span><h3>Two</h3><p>Position, schedule and artists to be announced.</p></article>
+    </div>
+  </section>
+
+  <section id="tickets" aria-labelledby="h-tickets">
+    <div class="tickets">
+      <div>
+        <span class="kicker">Tickets</span>
+        <h2 id="h-tickets">Pick your days</h2>
+        <p class="price">৳1,500<small>Per day, per person</small></p>
+      </div>
+      <form onsubmit="return false" aria-label="Choose festival days">
+        <fieldset>
+          <legend>Days</legend>
+          <label class="day"><input type="checkbox" name="d" value="14" checked><span class="t"><b>14 February</b><i>Day one</i></span></label>
+          <label class="day"><input type="checkbox" name="d" value="15"><span class="t"><b>15 February</b><i>Day two</i></span></label>
+        </fieldset>
+        <div class="total"><span id="tl">Your total</span><output for="tl" aria-live="polite" id="total">৳1,500</output></div>
+        <p class="note">Ticket sales link to be announced.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer><span>Independent music festival</span><span>Chattogram · 14–15 February</span><a href="#top">Back to top</a></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(() => {
+  const root = document.documentElement;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const coarse = matchMedia("(pointer: coarse)").matches;
+
+  /* contact sheet: 18 frames, built once */
+  const sheet = document.getElementById("sheet");
+  const letters = "ABCDEF";
+  for (let i = 1; i <= 18; i++) {
+    const n = String(i).padStart(2, "0");
+    const li = document.createElement("li");
+    li.className = "frame";
+    li.innerHTML = '<svg viewBox="0 0 100 100" aria-hidden="true"><ellipse cx="50" cy="50" rx="46" ry="43" pathLength="1" transform="rotate(-8 50 50)"/></svg>' +
+      '<span class="edge"><span>' + n + letters[(i - 1) % 6] + '</span><span>▸</span></span>' +
+      '<span class="no">' + n + '</span>' +
+      '<span class="who">Artist ' + n + '<br>Name to be announced</span>';
+    sheet.appendChild(li);
+  }
+
+  /* tickets: total is correct in the HTML, updated only on change */
+  const total = document.getElementById("total");
+  const boxes = [...document.querySelectorAll('input[name="d"]')];
+  const fmt = n => "৳" + n.toLocaleString("en-US");
+  boxes.forEach(b => b.addEventListener("change", () => {
+    total.textContent = fmt(boxes.filter(x => x.checked).length * 1500);
+  }));
+
+  /* Tier 4: one WebGL canvas, light behind glass */
+  const canvas = document.getElementById("light");
+  let gl = null;
+  if (!reduce) { try { gl = canvas.getContext("webgl", { antialias: false, alpha: false, powerPreference: "low-power" }); } catch (e) { gl = null; } }
+  if (reduce) root.classList.add("reduced");
+  else if (!gl) root.classList.add("no-gl");
+
+  const state = { split: 0, p: 0 };
+
+  if (gl) {
+    const vs = "attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}";
+    const fs = `precision mediump float;
+uniform vec2 uRes,uP,uA,uB;uniform float uT;
+float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
+void main(){
+  vec2 uv=gl_FragCoord.xy/uRes;vec2 s=vec2(uRes.x/uRes.y,1.);
+  float dA=length((uv-uA)*s),dB=length((uv-uB)*s),dP=length((uv-uP)*s);
+  vec3 acc=vec3(1.,.416,.239),wht=vec3(.953,.933,.894);
+  vec3 col=vec3(.043,.051,.071);
+  col+=acc*exp(-dA*dA*4.2)*.10;
+  col+=wht*exp(-dB*dB*4.2)*.06;
+  col+=wht*exp(-dP*dP*38.)*.05;
+  float rA=smoothstep(.44,.5,abs(fract(dA*9.-uT*.06)-.5))*exp(-dA*2.6)*.04;
+  float rB=smoothstep(.44,.5,abs(fract(dB*9.-uT*.06)-.5))*exp(-dB*2.6)*.03;
+  col+=acc*rA+wht*rB;
+  col+=(h(gl_FragCoord.xy+uT)-.5)*.014;
+  gl_FragColor=vec4(col,1.);
+}`;
+    const sh = (t, src) => { const o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); return o; };
+    const pr = gl.createProgram();
+    gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(pr);
+    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) { gl = null; root.classList.add("no-gl"); }
+    else {
+      gl.useProgram(pr);
+      const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(pr, "a"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      const U = n => gl.getUniformLocation(pr, n);
+      const uRes = U("uRes"), uP = U("uP"), uA = U("uA"), uB = U("uB"), uT = U("uT");
+      const dprCap = coarse ? 1.25 : 1.5;
+      const resize = () => {
+        const d = Math.min(devicePixelRatio || 1, dprCap);
+        canvas.width = Math.round(innerWidth * d); canvas.height = Math.round(innerHeight * d);
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      };
+      resize(); addEventListener("resize", resize);
+
+      const ptr = { x: .5, y: .5, tx: .5, ty: .5, seen: false };
+      addEventListener("pointermove", e => {
+        if (e.pointerType === "touch" && !ptr.seen) ptr.seen = true;
+        ptr.tx = e.clientX / innerWidth; ptr.ty = 1 - e.clientY / innerHeight; ptr.seen = true;
+      }, { passive: true });
+      const lerp = (a, b, k) => a + (b - a) * k;
+      let run = true, raf = 0;
+      const frame = t => {
+        const sec = t / 1000;
+        if (!ptr.seen) { ptr.tx = .5 + .3 * Math.sin(sec * .35); ptr.ty = .5 + .22 * Math.cos(sec * .27); }
+        ptr.x = lerp(ptr.x, ptr.tx, .12); ptr.y = lerp(ptr.y, ptr.ty, .12);
+        const p = state.p, k = state.split;
+        /* stage lights wander the page with scroll, then settle to left and right in the stages section */
+        const ax = lerp(.14 + .18 * Math.sin(p * 9), .22, k), ay = lerp(.9 - .75 * p, .5, k);
+        const bx = lerp(.86 - .18 * Math.sin(p * 9 + 1), .78, k), by = lerp(.12 + .75 * p, .5, k);
+        gl.uniform2f(uRes, canvas.width, canvas.height);
+        gl.uniform2f(uP, ptr.x, ptr.y); gl.uniform2f(uA, ax, ay); gl.uniform2f(uB, bx, by);
+        gl.uniform1f(uT, sec % 1000);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+        raf = run ? requestAnimationFrame(frame) : 0;
+      };
+      const start = () => { if (!raf && !document.hidden) { run = true; raf = requestAnimationFrame(frame); } };
+      document.addEventListener("visibilitychange", () => { if (document.hidden) { run = false; cancelAnimationFrame(raf); raf = 0; } else start(); });
+      start();
+    }
+  }
+
+  /* scroll: progress drives the stage lights; GSAP entrances only when motion is allowed */
+  const ready = () => {
+    if (!window.gsap || !window.ScrollTrigger) return;
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.create({ start: 0, end: "max", onUpdate: s => { state.p = s.progress; } });
+    ScrollTrigger.create({ trigger: "#stages", start: "top 85%", end: "center center", scrub: true, onUpdate: s => { state.split = s.progress; },
+      onLeaveBack: () => { state.split = 0; } });
+    ScrollTrigger.create({ trigger: "#tickets", start: "top bottom", end: "top 40%", scrub: true, onUpdate: s => { state.split = 1 - s.progress * .6; } });
+
+    const mm = gsap.matchMedia();
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      gsap.from("[data-line]", { yPercent: 105, duration: .9, ease: "expo.out", stagger: .1 });
+      gsap.from("[data-col]", { opacity: 0, y: 24, duration: .7, ease: "power3.out", stagger: .1,
+        scrollTrigger: { trigger: ".cols", start: "top 80%", once: true } });
+      gsap.from(".frame", { clipPath: "inset(0 0 100% 0)", duration: .6, ease: "power3.out", stagger: { each: .04, from: "start" },
+        scrollTrigger: { trigger: "#sheet", start: "top 80%", once: true } });
+      gsap.from("[data-stage]", { yPercent: 8, opacity: 0, duration: .8, ease: "expo.out", stagger: .15,
+        scrollTrigger: { trigger: ".stages", start: "top 80%", once: true } });
+    });
+    window.addEventListener("load", () => ScrollTrigger.refresh());
+  };
+  if (window.gsap) ready(); else addEventListener("load", ready);
+})();
+</script>
+</body>
+</html>

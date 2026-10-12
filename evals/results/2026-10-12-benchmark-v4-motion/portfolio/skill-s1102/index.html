@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rafi, motion designer in Dhaka | Title sequences</title>
+<meta name="description" content="Rafi is a motion designer in Dhaka with eight years of work for music videos, broadcast idents and product launches. Hire him for title sequences.">
+<meta property="og:title" content="Rafi, motion designer in Dhaka">
+<meta property="og:description" content="Eight years of music videos, broadcast idents and product launches. Next: your title sequence.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0a0908">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Rafi","jobTitle":"Motion designer","homeLocation":{"@type":"Place","name":"Dhaka"}}</script>
+<!-- [NEEDS COPY: Rafi's email address. The brief says contact is by email only but gives none. Set it in the two mailto: links.] -->
+<style>
+/* motomation · archetype: poster · mutation: single-object · signature: focus-pull · tier: 4 · critique: not verified · gate: not verified — sandbox too constrained */
+:root{
+  --ground:#0a0908; --ink:#efe8da; --muted:#cdc4b2; --accent:#ffb03a;
+  --display:"Big Shoulders Display","Arial Narrow",sans-serif;
+  --text:"Switzer",system-ui,sans-serif;
+  --ease-out:cubic-bezier(0.22,1,0.36,1);
+  --pad:clamp(1.25rem,4vw,3.5rem);
+}
+*{box-sizing:border-box;margin:0}
+html{background:var(--ground);color:var(--ink);-webkit-text-size-adjust:100%}
+body{font:400 1.0625rem/1.55 var(--text);min-height:100svh;overflow-x:hidden}
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;pointer-events:none}
+main,footer,.top{position:relative;z-index:1}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.skip{position:absolute;left:var(--pad);top:-4rem;background:var(--ink);color:var(--ground);padding:.6rem 1rem;z-index:10;transition:top 150ms var(--ease-out)}
+.skip:focus{top:1rem}
+
+.top{position:absolute;top:0;right:0;padding:1.25rem var(--pad);z-index:5}
+.mail{font-size:.875rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;
+  background:linear-gradient(var(--accent),var(--accent)) left bottom/100% 1px no-repeat;padding-bottom:.3rem;
+  transition:background-size 150ms var(--ease-out)}
+.mail:hover{background-size:100% 4px}
+.mail:active{transform:scale(.97)}
+
+.label{font-size:.875rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.display{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.82;letter-spacing:-.005em;text-wrap:balance}
+
+/* hero */
+.hero{min-height:100svh;display:grid;align-content:end;padding:6rem var(--pad) clamp(1.5rem,5svh,3.5rem);position:relative}
+.hero h1{font-size:min(36vw,50svh);margin:.6rem 0 1.4rem -.04em;will-change:filter}
+.hero .row{display:grid;gap:1.25rem;grid-template-columns:minmax(0,1fr);max-width:78rem}
+.hero .lede{max-width:34ch;font-size:clamp(1.15rem,2.2vw,1.5rem);line-height:1.35}
+.ledger{display:flex;flex-wrap:wrap;gap:.4rem 1.6rem;list-style:none;padding:0;border-top:1px solid rgba(239,232,218,.28);padding-top:.9rem}
+@media (min-width:900px){.hero .row{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:end}}
+
+/* chapters */
+.ch{height:200svh;position:relative}
+.stage{position:sticky;top:0;height:100svh;display:grid;align-content:end;padding:6rem var(--pad) clamp(1.5rem,5svh,3.5rem);overflow:hidden}
+.stage .idx{margin-bottom:1rem}
+.stage h2{font-size:min(23vw,40svh);margin-left:-.04em;will-change:filter}
+.cap{display:grid;gap:.5rem;margin-top:1.6rem;max-width:36ch;border-top:1px solid rgba(239,232,218,.28);padding-top:.9rem}
+.cap .kind{font-weight:500;color:var(--ink)}
+.cap .line{color:var(--muted)}
+
+/* contact */
+.contact{min-height:100svh;display:grid;align-content:end;padding:6rem var(--pad) clamp(1.5rem,5svh,3.5rem);position:relative}
+.contact h2{font-size:min(17vw,34svh);margin:.8rem 0 2rem -.04em;max-width:11ch}
+.contact .go{display:inline-block;font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(2rem,6vw,4.5rem);line-height:1;text-decoration:none;
+  background:linear-gradient(var(--accent),var(--accent)) left bottom/100% 3px no-repeat;padding-bottom:.25rem;transition:background-size 150ms var(--ease-out)}
+.contact .go:hover{background-size:100% 100%;color:var(--ground)}
+.contact .go:active{transform:scale(.98)}
+.contact .note{margin-top:1.1rem;color:var(--muted)}
+footer{padding:1.5rem var(--pad) 2rem;display:flex;flex-wrap:wrap;gap:.5rem 2rem;border-top:1px solid rgba(239,232,218,.28);margin:0 var(--pad)}
+
+/* designed still (reduced motion or no WebGL): plates instead of the shader */
+.plate{display:none}
+.still #gl{display:none}
+.still .plate{display:block;position:absolute;z-index:-1;width:min(48vw,34rem);aspect-ratio:1;right:var(--pad);top:50%;transform:translateY(-50%)}
+.still .ch{height:auto}
+.still .stage{position:relative;height:auto;min-height:80svh;overflow:visible}
+.still .hero h1,.still .stage h2{will-change:auto}
+@media (max-width:899px){.still .plate{width:min(70vw,20rem);top:5.5rem;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .mail,.contact .go{transition:none}
+  .skip{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#work">Skip to the work</a>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="top"><a class="mail" href="mailto:?subject=Title%20sequence">Email Rafi</a></div>
+
+<main id="main">
+  <section class="hero" data-sec="0" aria-labelledby="name">
+    <svg class="plate" data-seed="0" viewBox="0 0 400 400" aria-hidden="true" focusable="false"></svg>
+    <p class="label">Motion designer · Dhaka</p>
+    <h1 class="display" id="name" data-blur>Rafi</h1>
+    <div class="row">
+      <p class="lede">Eight years of music videos, broadcast idents and product launches. Next: your title sequence.</p>
+      <ul class="ledger label" aria-label="Eight years of work for">
+        <li>Music videos</li><li>Broadcast idents</li><li>Product launches</li>
+      </ul>
+    </div>
+  </section>
+
+  <div id="work">
+    <section class="ch" data-sec="1" aria-labelledby="p1">
+      <div class="stage">
+        <svg class="plate" data-seed="1" viewBox="0 0 400 400" aria-hidden="true" focusable="false"></svg>
+        <p class="label idx">01 / 03</p>
+        <h2 class="display" id="p1" data-blur>Bhoot</h2>
+        <div class="cap"><p class="kind">Title sequence · 2023</p><p class="line">The kind of job Rafi wants more of: the first minute of someone else's film.</p></div>
+      </div>
+    </section>
+    <section class="ch" data-sec="2" aria-labelledby="p2">
+      <div class="stage">
+        <svg class="plate" data-seed="2" viewBox="0 0 400 400" aria-hidden="true" focusable="false"></svg>
+        <p class="label idx">02 / 03</p>
+        <h2 class="display" id="p2" data-blur>Monsoon Idents</h2>
+        <div class="cap"><p class="kind">Channel rebrand · 2024</p><p class="line">A channel's identity, in the seconds between programmes.</p></div>
+      </div>
+    </section>
+    <section class="ch" data-sec="3" aria-labelledby="p3">
+      <div class="stage">
+        <svg class="plate" data-seed="3" viewBox="0 0 400 400" aria-hidden="true" focusable="false"></svg>
+        <p class="label idx">03 / 03</p>
+        <h2 class="display" id="p3" data-blur>Koi</h2>
+        <div class="cap"><p class="kind">Product launch film · 2025</p><p class="line">A product's first appearance, cut to picture.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="contact" data-sec="4" aria-labelledby="hire">
+    <svg class="plate" data-seed="4" viewBox="0 0 400 400" aria-hidden="true" focusable="false"></svg>
+    <p class="label">Open for title sequences</p>
+    <h2 class="display" id="hire">Bring him the first minute</h2>
+    <p><a class="go" href="mailto:?subject=Title%20sequence">Email Rafi</a></p>
+    <p class="note">Email is the only way to reach him.</p>
+  </section>
+</main>
+
+<footer class="label"><span>Rafi</span><span>Motion designer</span><span>Dhaka</span></footer>
+
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  reduce.addEventListener("change", function () { location.reload(); });
+
+  /* ---------- designed still: plates drawn in SVG (rings are focus trails, dots are bokeh) ---------- */
+  function hash(n, s) { var x = Math.sin(n * 127.1 + s * 31.7) * 43758.5453; return x - Math.floor(x); }
+  function buildPlates() {
+    var NS = "http://www.w3.org/2000/svg";
+    document.querySelectorAll(".plate").forEach(function (svg) {
+      if (svg.childNodes.length) return;
+      var seed = +svg.getAttribute("data-seed");
+      function add(tag, attrs) { var el = document.createElementNS(NS, tag); for (var k in attrs) el.setAttribute(k, attrs[k]); svg.appendChild(el); }
+      for (var i = 0; i < 22; i++) {
+        var x = 20 + hash(i, seed) * 360, y = 20 + hash(i + 50, seed) * 360;
+        var sharp = (x + y) / 760;            /* soft top-left, sharp bottom-right */
+        var r = 26 - sharp * 20 + hash(i + 20, seed) * 6;
+        if (sharp < 0.5) add("circle", { cx: x, cy: y, r: r, fill: "#ffb03a", "fill-opacity": (0.06 + sharp * 0.1).toFixed(3) });
+        else add("circle", { cx: x, cy: y, r: r * 0.5, fill: "none", stroke: "#ffb03a", "stroke-opacity": (0.35 + sharp * 0.4).toFixed(2), "stroke-width": 1.2 });
+      }
+      for (var j = 0; j < 6; j++) {
+        add("circle", { cx: 200, cy: 200, r: 60 + j * 22, fill: "none", stroke: "#ffb03a",
+          "stroke-opacity": (0.1 + j * 0.13).toFixed(2), "stroke-width": (14 - j * 2.4).toFixed(1) });
+      }
+    });
+  }
+
+  function canGL() {
+    try { var c = document.createElement("canvas"); return !!c.getContext("webgl2"); } catch (e) { return false; }
+  }
+  if (reduce.matches || !canGL()) { root.classList.add("still"); buildPlates(); return; }
+
+  /* ---------- Tier 4: one fixed canvas, one fragment shader ---------- */
+  var canvas = document.getElementById("gl");
+  var gl = canvas.getContext("webgl2", { antialias: false, alpha: false, powerPreference: "low-power" });
+  var vs = "#version 300 es\nin vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
+  var fs = "#version 300 es\nprecision highp float;\n" +
+    "uniform vec2 uRes;uniform float uF,uT,uSeed;uniform vec2 uM;out vec4 o;\n" +
+    "float h(float n){return fract(sin(n*127.1+uSeed*31.7)*43758.5453);}\n" +
+    "void main(){\n" +
+    " float asp=uRes.x/uRes.y;\n" +
+    " vec2 p=gl_FragCoord.xy/uRes.y-vec2(asp*.5,.5);p+=uM*.03;\n" +
+    " float b=1.-uF;float acc=0.;\n" +
+    " for(int i=0;i<26;i++){float k=float(i);\n" +
+    "  vec2 c=vec2(h(k)-.5,h(k+50.)-.5)*vec2(asp*1.15,1.1);c.x+=asp*.1;\n" +
+    "  c+=vec2(sin(uT*.07*(1.+h(k+9.))+k),cos(uT*.06*(1.+h(k+3.))+k*1.3))*.02;\n" +
+    "  float r0=mix(.006,.03,h(k+20.));float r=r0*(1.+b*4.);float s=mix(.0015,.05,b);\n" +
+    "  float d=length(p-c);\n" +
+    "  float disc=smoothstep(r+s,r-s,d);\n" +
+    "  float rim=smoothstep(r-s*2.,r,d)*smoothstep(r+s,r,d);\n" +
+    "  acc+=(disc*.5+rim*.5*(1.-b*.6))*(r0*r0)/(r*r)*mix(.25,.55,h(k+30.));}\n" +
+    " vec2 lc=asp<1.?vec2(0.,.12):vec2(asp*.2,-.02);\n" +
+    " float R=min(.3,asp*.36);float w=mix(.0025,.07,b);\n" +
+    " float ring=smoothstep(w,0.,abs(length(p-lc)-R))*mix(1.,.3,b)*mix(1.,.5,b);\n" +
+    " float I=min(acc*.6+ring*.45,.5);\n" +
+    " float g=fract(sin(dot(gl_FragCoord.xy,vec2(12.9898,78.233))+uT)*43758.5453)-.5;\n" +
+    " vec3 col=vec3(.039,.035,.031)+vec3(1.,.69,.23)*I+g*.012;\n" +
+    " o=vec4(col,1.);}";
+  function sh(type, src) { var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null; }
+  var v = sh(gl.VERTEX_SHADER, vs), f = sh(gl.FRAGMENT_SHADER, fs);
+  var prog = gl.createProgram();
+  if (!v || !f) { root.classList.add("still"); buildPlates(); return; }
+  gl.attachShader(prog, v); gl.attachShader(prog, f); gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { root.classList.add("still"); buildPlates(); return; }
+  gl.useProgram(prog);
+  var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  var loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  var U = {}; ["uRes", "uF", "uT", "uSeed", "uM"].forEach(function (n) { U[n] = gl.getUniformLocation(prog, n); });
+
+  function resize() {
+    var dpr = Math.min(window.devicePixelRatio || 1, matchMedia("(hover:none)").matches ? 1 : 1.5);
+    canvas.width = Math.round(innerWidth * dpr); canvas.height = Math.round(innerHeight * dpr);
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    measure();
+  }
+
+  /* ---------- scroll state ---------- */
+  var secs = Array.prototype.slice.call(document.querySelectorAll("[data-sec]"));
+  var tops = [], heights = [];
+  function measure() {
+    secs.forEach(function (s, i) { var r = s.getBoundingClientRect(); tops[i] = r.top + scrollY; heights[i] = r.height; });
+  }
+  function clamp(x) { return Math.max(0, Math.min(1, x)); }
+  function ss(a, b, x) { var t = clamp((x - a) / (b - a)); return t * t * (3 - 2 * t); }
+
+  var intro = 0, t0 = performance.now();
+  var seed = 0, seedTarget = 0, focus = 0;
+  var mx = 0, my = 0, tmx = 0, tmy = 0;
+  if (matchMedia("(hover:hover) and (pointer:fine)").matches) {
+    addEventListener("pointermove", function (e) { tmx = e.clientX / innerWidth - .5; tmy = .5 - e.clientY / innerHeight; }, { passive: true });
+  }
+  var blurEls = secs.map(function (s) { return s.querySelector("[data-blur]"); });
+  var lastBlur = [];
+  function setBlur(i, fv) {
+    var el = blurEls[i]; if (!el) return;
+    var px = Math.round((1 - fv) * 12 * 2) / 2;
+    if (lastBlur[i] === px) return; lastBlur[i] = px;
+    el.style.filter = px > 0 ? "blur(" + px + "px)" : "none";
+  }
+
+  var running = true, raf = 0;
+  function frame(now) {
+    if (!running) return;
+    var y = scrollY, vh = innerHeight;
+    intro = ss(0, 1, (now - t0 - 300) / 2400);
+    var fv = [0, 0, 0, 0, 0];
+    /* hero: focus pulled on load, released as it leaves */
+    var hp = clamp((y - tops[0]) / heights[0]);
+    fv[0] = intro * (1 - ss(.35, .9, hp));
+    /* chapters: rise, hold, release across the sticky stage */
+    for (var i = 1; i <= 3; i++) {
+      var q = clamp((y - tops[i]) / (heights[i] - vh));
+      fv[i] = ss(0, .25, q) * (1 - ss(.75, 1, q));
+    }
+    /* contact: rises and holds */
+    fv[4] = ss(0, .6, clamp((y + vh - tops[4]) / vh));
+    var f0 = Math.max(fv[0], fv[1], fv[2], fv[3], fv[4]);
+    for (var k = 0; k < 5; k++) setBlur(k, k === 4 ? 1 : fv[k]);
+    focus += (f0 - focus) * .2;
+    /* the shot changes only while the picture is soft */
+    var mid = y + vh * .5;
+    for (var j = 0; j < 5; j++) if (mid >= tops[j]) seedTarget = j;
+    if (focus < .08) seed = seedTarget;
+    mx += (tmx - mx) * .06; my += (tmy - my) * .06;
+    gl.uniform2f(U.uRes, canvas.width, canvas.height);
+    gl.uniform1f(U.uF, focus); gl.uniform1f(U.uT, (now - t0) / 1000); gl.uniform1f(U.uSeed, seed);
+    gl.uniform2f(U.uM, mx, my);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    raf = requestAnimationFrame(frame);
+  }
+  function start() { if (!running) { running = true; raf = requestAnimationFrame(frame); } }
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) { running = false; cancelAnimationFrame(raf); } else start();
+  });
+  addEventListener("resize", resize);
+  addEventListener("load", measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  canvas.addEventListener("webglcontextlost", function (e) { e.preventDefault(); running = false; root.classList.add("still"); buildPlates(); blurEls.forEach(function (el) { if (el) el.style.filter = "none"; }); });
+  resize();
+  raf = requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

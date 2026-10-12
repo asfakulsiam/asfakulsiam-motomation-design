@@ -1,0 +1,12 @@
+{
+ "slug": "ecommerce",
+ "seed": 3105,
+ "cond": "skill",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v4/ecommerce/skill-s3105",
+ "exit": 0,
+ "seconds": 810,
+ "turns": 28,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

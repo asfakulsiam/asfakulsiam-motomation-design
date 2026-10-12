@@ -1,0 +1,12 @@
+{
+ "slug": "saas",
+ "seed": 2106,
+ "cond": "skill",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v4/saas/skill-s2106",
+ "exit": 0,
+ "seconds": 400,
+ "turns": 19,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

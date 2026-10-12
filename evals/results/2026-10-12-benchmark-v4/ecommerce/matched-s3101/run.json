@@ -1,0 +1,21 @@
+{
+ "slug": "ecommerce",
+ "seed": 3101,
+ "cond": "matched",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v4/ecommerce/matched-s3101",
+ "budget": 23,
+ "exit": 0,
+ "seconds": 141,
+ "turns": 21,
+ "effort": {
+  "budget": 23,
+  "budgetFrom": "skill-s3101/run.json",
+  "floor": 21,
+  "used": 21,
+  "resumes": 1,
+  "enforced": true
+ },
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

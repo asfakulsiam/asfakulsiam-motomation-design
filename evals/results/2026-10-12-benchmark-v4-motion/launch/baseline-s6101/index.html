@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Halo — a ring of light for your desk</title>
+<meta name="description" content="Halo is a ring-shaped desk lamp with a single touch control and three light temperatures. $189. Pre-orders ship in March.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0c0b;--fg:#f2ede4;--mute:#a39b8e;--glow:#ffb86b;--serif:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{background:var(--bg);color:var(--fg);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--glow);outline-offset:4px}
+nav{position:fixed;inset:0 0 auto 0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(20px,4vw,48px);mix-blend-mode:difference}
+nav b{font:300 1.4rem var(--serif);letter-spacing:.2em}
+nav a{font-size:.85rem;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
+.eyebrow{font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mute)}
+h1,h2{font-family:var(--serif);font-weight:300;line-height:1.02;letter-spacing:-.02em}
+h1{font-size:clamp(3.4rem,10vw,9rem)}
+h2{font-size:clamp(2.2rem,5.5vw,4.6rem)}
+p{color:var(--mute);line-height:1.6;max-width:34ch}
+.stage{position:relative;height:100vh;height:100svh;overflow:hidden}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%}
+.copy{position:absolute;left:clamp(20px,6vw,90px);bottom:clamp(40px,10vh,110px);z-index:2;display:grid;gap:18px}
+.beat{position:absolute;left:clamp(20px,6vw,90px);bottom:clamp(40px,10vh,110px);max-width:min(30rem,80vw);display:grid;gap:14px;z-index:2}
+.beat.r{left:auto;right:clamp(20px,6vw,90px);text-align:right;justify-items:end}
+.hint{position:absolute;right:clamp(20px,4vw,48px);bottom:32px;font-size:.75rem;color:var(--mute);letter-spacing:.15em;text-transform:uppercase;z-index:2}
+.bar{position:absolute;left:0;bottom:0;height:2px;background:var(--glow);width:0;z-index:3}
+.temps{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;text-align:center;display:grid;gap:14px;justify-items:center;pointer-events:none}
+.temps ol{list-style:none;padding:0;display:flex;gap:clamp(14px,4vw,48px);margin-top:18px}
+.temps li{font:300 clamp(1.2rem,3vw,2rem) var(--serif);opacity:.3;transition:opacity .3s}
+.temps li.on{opacity:1}
+.temps p{text-align:center;min-height:3.2em}
+.buy{padding:clamp(80px,16vh,180px) clamp(20px,6vw,90px);display:grid;gap:28px;justify-items:start;border-top:1px solid #2a2622}
+.price{font:300 clamp(4rem,12vw,10rem) var(--serif);line-height:1}
+.btn{display:inline-block;background:var(--glow);color:#1a1209;padding:16px 32px;border-radius:99px;font-weight:500;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 40px #ffb86b55}
+footer{padding:28px clamp(20px,6vw,90px);color:var(--mute);font-size:.8rem;border-top:1px solid #2a2622}
+/* reduced-motion / no-JS: stacked, all content visible */
+.rm .stage{height:auto;min-height:100vh;padding:120px 0 60px}
+.rm .stage canvas{position:relative;display:block;height:60vh}
+.rm .beat,.rm .copy,.rm .temps{position:relative;inset:auto;transform:none;left:auto;right:auto;bottom:auto;margin:32px clamp(20px,6vw,90px)}
+.rm .beat.r{text-align:left;justify-items:start}
+.rm .temps{text-align:left;justify-items:start}
+.rm .temps li{opacity:1}
+.rm .hint,.rm .bar{display:none}
+</style>
+</head>
+<body>
+<nav><b>HALO</b><a href="#preorder">Pre-order</a></nav>
+<main>
+<section class="stage" id="hero" aria-label="Halo, the ring-shaped desk lamp">
+  <canvas data-lamp aria-hidden="true"></canvas>
+  <div class="copy">
+    <span class="eyebrow">Halo · Desk lamp</span>
+    <h1>A ring<br>of light.</h1>
+    <p>A ring-shaped desk lamp with a single touch control.</p>
+  </div>
+  <div class="beat r" data-beat="1">
+    <span class="eyebrow">Form</span>
+    <h2>One ring.<br>Nothing else.</h2>
+    <p>The lamp is the shape: a single ring that holds the light.</p>
+  </div>
+  <div class="beat" data-beat="2">
+    <span class="eyebrow">Control</span>
+    <h2>One touch.</h2>
+    <p>A single touch control. No dials, no menus.</p>
+  </div>
+  <div class="hint">Scroll</div>
+  <div class="bar"></div>
+</section>
+
+<section class="stage" id="light" aria-label="Three light temperatures">
+  <canvas data-lamp data-mode="temp" aria-hidden="true"></canvas>
+  <div class="temps">
+    <span class="eyebrow">Three light temperatures</span>
+    <h2>Pick your light.</h2>
+    <ol><li data-t="0">Warm</li><li data-t="1">Neutral</li><li data-t="2">Cool</li></ol>
+    <p>Touch the ring to move between all three.</p>
+  </div>
+</section>
+
+<section class="buy" id="preorder">
+  <span class="eyebrow">Pre-order</span>
+  <h2>Halo</h2>
+  <div class="price">$189</div>
+  <p>Pre-orders ship in March.</p>
+  <a class="btn" href="#preorder">Pre-order Halo</a>
+</section>
+</main>
+<footer>Halo — a ring-shaped desk lamp. Single touch control. Three light temperatures.</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(()=>{
+const FRAMES=180, TEMPS=[[255,170,90],[255,236,205],[200,225,255]];
+const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(rm||!window.gsap)document.documentElement.classList.add('rm'),document.body.classList.add('rm');
+
+// Procedural stand-in for the 180 rendered frames: frame index drives the ring's turn and glow.
+function draw(cv,frame,col){
+  const d=Math.min(devicePixelRatio||1,2),w=cv.clientWidth,h=cv.clientHeight;
+  if(cv.width!==Math.round(w*d)){cv.width=Math.round(w*d);cv.height=Math.round(h*d)}
+  const c=cv.getContext('2d');c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);
+  const p=frame/(FRAMES-1),cx=w*(w>700?.62:.5),cy=h*.42,R=Math.min(w,h)*.27;
+  const turn=Math.cos(p*Math.PI*1.2)*.5+.5;            // 1 = face-on, 0 = edge-ish
+  const ry=R*(.18+.82*turn),glow=.25+.75*Math.sin(Math.min(1,p*1.6)*Math.PI/2);
+  const [r,g,b]=col,rgb=`${r},${g},${b}`;
+  const gr=c.createRadialGradient(cx,cy,R*.2,cx,cy,R*2.6);
+  gr.addColorStop(0,`rgba(${rgb},${.35*glow})`);gr.addColorStop(1,`rgba(${rgb},0)`);
+  c.fillStyle=gr;c.fillRect(0,0,w,h);
+  // stem + base
+  const by=h*.86;c.strokeStyle='#3a342d';c.lineWidth=Math.max(4,R*.04);c.lineCap='round';
+  c.beginPath();c.moveTo(cx,cy+ry);c.lineTo(cx,by);c.stroke();
+  c.fillStyle='#1d1a17';c.beginPath();c.ellipse(cx,by,R*.5,R*.08,0,0,7);c.fill();
+  // desk light pool
+  const pl=c.createRadialGradient(cx,by,0,cx,by,R*1.4);
+  pl.addColorStop(0,`rgba(${rgb},${.28*glow})`);pl.addColorStop(1,`rgba(${rgb},0)`);
+  c.fillStyle=pl;c.beginPath();c.ellipse(cx,by,R*1.4,R*.25,0,0,7);c.fill();
+  // ring
+  c.lineWidth=R*.12;c.strokeStyle=`rgba(${rgb},${.35+.65*glow})`;c.shadowColor=`rgba(${rgb},.9)`;c.shadowBlur=40*glow;
+  c.beginPath();c.ellipse(cx,cy,R,ry,0,0,7);c.stroke();
+  c.shadowBlur=0;c.lineWidth=R*.03;c.strokeStyle='rgba(255,255,255,.7)';
+  c.beginPath();c.ellipse(cx,cy,R,ry,0,0,7);c.stroke();
+  // touch point
+  c.fillStyle='#f2ede4';c.beginPath();c.arc(cx,cy+ry,R*.03,0,7);c.fill();
+}
+const cvs=[...document.querySelectorAll('[data-lamp]')];
+const st=new Map(cvs.map(c=>[c,{f:rm||!window.gsap?FRAMES*.6|0:0,col:TEMPS[0]}]));
+const paint=c=>{const s=st.get(c);draw(c,s.f,s.col)};
+const paintAll=()=>cvs.forEach(paint);
+addEventListener('resize',paintAll);
+document.fonts&&document.fonts.ready.then(paintAll);paintAll();
+if(rm||!window.gsap)return;
+
+gsap.registerPlugin(ScrollTrigger);
+// Hero: scrub through 180 frames, two beats
+const hs=st.get(cvs[0]),beats=gsap.utils.toArray('[data-beat]');
+gsap.set(beats,{autoAlpha:0,y:30});
+const tl=gsap.timeline({scrollTrigger:{trigger:'#hero',start:'top top',end:'+=300%',pin:true,scrub:.6}});
+tl.to('.copy',{autoAlpha:0,y:-40,duration:.12},.1)
+  .to('.hint',{autoAlpha:0,duration:.05},.05)
+  .to(hs,{f:FRAMES-1,ease:'none',duration:1,onUpdate:()=>paint(cvs[0])},0)
+  .to(beats[0],{autoAlpha:1,y:0,duration:.1},.28).to(beats[0],{autoAlpha:0,y:-30,duration:.1},.52)
+  .to(beats[1],{autoAlpha:1,y:0,duration:.1},.64).to('.bar',{width:'100%',ease:'none',duration:1},0);
+
+// Temperatures: scrub between three colours
+const ts=st.get(cvs[1]),lis=[...document.querySelectorAll('[data-t]')],mix=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t);
+ts.f=FRAMES-1;
+ScrollTrigger.create({trigger:'#light',start:'top top',end:'+=200%',pin:true,scrub:true,
+  onUpdate:s=>{const x=s.progress*2,i=Math.min(1,Math.floor(x)),t=x-i;
+    ts.col=mix(TEMPS[i],TEMPS[i+1],gsap.parseEase('power1.inOut')(Math.min(1,Math.max(0,(t-.15)/.7))));
+    ts.f=FRAMES-1-Math.round(s.progress*40);
+    lis.forEach((l,k)=>l.classList.toggle('on',k===Math.round(x)));paint(cvs[1]);}});
+lis[0].classList.add('on');
+gsap.from('.buy > *',{y:40,autoAlpha:0,stagger:.12,scrollTrigger:{trigger:'.buy',start:'top 70%'}});
+})();
+</script>
+</body>
+</html>

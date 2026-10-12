@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mati — wood-fired ceramics from Rajshahi</title>
+<meta name="description" content="Mati is a two-person ceramics studio in Rajshahi making wood-fired cups, plates and vases in small batches. Ships within Bangladesh.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Hanken+Grotesk:wght@400;500;600&family=Noto+Sans+Bengali:wght@500&display=swap" rel="stylesheet">
+<style>
+/* motomation · archetype: catalogue-hero · mutation: heat-bar timeline · signature: mark-another · tier: 1 */
+:root{
+  --bone:#EFEAE0; --paper:#F7F3EB; --char:#1E1A17; --muted:#575048; --line:#cfc6b6;
+  --ember:#A93F17; --ember-d:#8A3112; --ash:#D9D2C4;
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Hanken Grotesk','Noto Sans Bengali',system-ui,sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bone);color:var(--char);font:400 1.0625rem/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+.taka{font-family:'Noto Sans Bengali','Hanken Grotesk',sans-serif;font-weight:500}
+.num{font-variant-numeric:tabular-nums}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ember);outline-offset:3px;border-radius:2px}
+.skip{position:absolute;left:12px;top:-60px;background:var(--char);color:var(--bone);padding:10px 14px;z-index:50}
+.skip:focus{top:12px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+
+/* header */
+header.top{border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{font:600 1.75rem/1 var(--serif);text-decoration:none;letter-spacing:.01em}
+.brand small{font:400 .8125rem var(--sans);color:var(--muted);margin-left:12px;letter-spacing:.02em}
+nav.main{display:flex;gap:28px;align-items:center}
+nav.main a.l{text-decoration:none;font-size:.9375rem;padding:10px 0}
+nav.main a.l:hover{text-decoration:underline;text-underline-offset:5px}
+.cartbtn{font:500 .9375rem var(--sans);background:var(--char);color:var(--bone);border:0;padding:11px 18px;min-height:44px;cursor:pointer;display:flex;gap:10px;align-items:center;border-radius:2px;transition:background .15s}
+.cartbtn:hover{background:#000}
+.cartbtn .count{background:var(--bone);color:var(--char);min-width:24px;height:24px;border-radius:12px;display:grid;place-items:center;font-size:.8125rem;font-weight:600;padding:0 6px}
+.cartbtn.bump .count{animation:bump .25s var(--ease)}
+@keyframes bump{50%{transform:scale(1.25)}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(24px,5vw,72px);padding:clamp(28px,5vw,64px) 0 clamp(40px,6vw,80px);align-items:center}
+.stage{position:relative;aspect-ratio:1/1;background:var(--paper);border:1px solid var(--line);display:grid;place-items:center;overflow:hidden}
+.stage svg{width:92%;height:auto;overflow:visible}
+.stage .tag{position:absolute;left:16px;top:14px;font-size:.8125rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.stage .mark{position:absolute;right:14px;bottom:14px;font:500 .9375rem var(--sans);background:transparent;color:var(--char);border:1px solid var(--char);padding:10px 16px;min-height:44px;cursor:pointer;border-radius:2px;transition:background .15s,color .15s}
+.stage .mark:hover{background:var(--char);color:var(--bone)}
+.stage .serial{position:absolute;left:16px;bottom:22px;font-size:.8125rem;color:var(--muted)}
+.eyebrow{font-size:.8125rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ember-d);font-weight:600}
+h1{font:400 clamp(2.6rem,5.2vw,4.4rem)/1.02 var(--serif);margin:12px 0 18px;letter-spacing:-.01em}
+.lede{max-width:34em;color:var(--muted)}
+.spec{margin:26px 0;border-top:1px solid var(--line)}
+.spec div{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--line);font-size:.9688rem}
+.spec dt{color:var(--muted)} .spec dd{text-align:right;margin:0}
+.buy{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.price{font:400 2.25rem/1 var(--serif)}
+.qty{display:flex;align-items:center;border:1px solid var(--char);border-radius:2px}
+.qty button{width:44px;height:44px;border:0;background:transparent;font-size:1.25rem;cursor:pointer;color:var(--char)}
+.qty button:hover{background:var(--ash)}
+.qty output{min-width:34px;text-align:center;font-weight:600}
+.btn{font:600 1rem var(--sans);background:var(--ember);color:#fff;border:0;padding:0 28px;min-height:48px;cursor:pointer;border-radius:2px;transition:background .15s,transform .15s}
+.btn:hover{background:var(--ember-d)} .btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:var(--char);border:1px solid var(--char)}
+.btn.ghost:hover{background:var(--char);color:var(--bone)}
+.next{margin-top:22px;padding:14px 16px;background:var(--char);color:var(--bone);display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;border-radius:2px}
+.next b{font:400 1.375rem var(--serif)}
+.next span{color:#d8d0c1;font-size:.9375rem}
+
+/* sections */
+section{padding:clamp(48px,7vw,96px) 0;border-top:1px solid var(--line)}
+.shead{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:34px;flex-wrap:wrap}
+h2{font:400 clamp(1.9rem,3.4vw,2.8rem)/1.08 var(--serif);max-width:16em}
+.shead p{max-width:28em;color:var(--muted)}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.card{background:var(--bone);padding:20px;display:flex;flex-direction:column;gap:14px}
+.card .art{aspect-ratio:4/3;background:var(--paper);display:grid;place-items:center}
+.card .art svg{height:90%;width:auto;overflow:visible}
+.card h3{font:400 1.5rem/1.15 var(--serif)}
+.card .row{display:flex;justify-content:space-between;align-items:center;margin-top:auto;gap:12px}
+.card .p{font-size:1.125rem;font-weight:600}
+.card .btn{min-height:44px;padding:0 18px;font-size:.9375rem}
+
+/* firing */
+.firing{background:var(--char);color:var(--bone);border-top:0}
+.firing h2{color:var(--bone)} .firing .shead p{color:#d2cabb}
+.heat{display:grid;grid-template-columns:72fr 36fr 96fr;gap:4px;margin-top:10px}
+.seg{padding:16px 0 0;border-top:6px solid var(--bone);transform-origin:left;transform:scaleX(0);transition:transform 1.1s var(--ease)}
+.seg:nth-child(1){border-color:#8a7f6e}
+.seg:nth-child(2){border-image:linear-gradient(90deg,#E8A33D,#C2461A) 1;transition-delay:.35s}
+.seg:nth-child(3){border-color:#6c6256;transition-delay:.7s}
+.seg>*{opacity:0;transition:opacity .6s .5s}
+.heat.on .seg{transform:none} .heat.on .seg>*{opacity:1}
+.seg .big{font:400 clamp(1.6rem,3vw,2.6rem)/1 var(--serif)}
+.seg .what{font-weight:600;margin-top:8px}
+.seg .sub{color:#d2cabb;font-size:.9375rem;margin-top:4px;max-width:24ch}
+.seg:nth-child(2) .big{color:#F0B25A}
+.scale{margin-top:26px;color:#d2cabb;font-size:.875rem}
+
+/* info */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,72px)}
+.two h2{margin-bottom:18px}
+.ledger{border-top:1px solid var(--char)}
+.ledger div{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line)}
+.ledger dd{margin:0;text-align:right;font-weight:600}
+
+footer{border-top:1px solid var(--line);padding:40px 0 56px;color:var(--muted);font-size:.9375rem}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer .brand{color:var(--char)}
+
+/* drawer */
+.scrim{position:fixed;inset:0;background:rgba(30,26,23,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:30}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:var(--paper);z-index:40;transform:translateX(100%);visibility:hidden;transition:transform .25s var(--ease),visibility 0s .25s;display:flex;flex-direction:column;padding:24px;border-left:1px solid var(--char)}
+body.open .drawer{transform:none;visibility:visible;transition:transform .25s var(--ease)}
+body.open .scrim{opacity:1;pointer-events:auto}
+.drawer h2{font-size:1.75rem}
+.drawer .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.x{width:44px;height:44px;border:1px solid var(--char);background:transparent;font-size:1.25rem;cursor:pointer;border-radius:2px;color:var(--char)}
+.lines{list-style:none;padding:0;overflow:auto;flex:1;border-top:1px solid var(--line)}
+.lines li{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.lines .nm{font:400 1.25rem var(--serif)}
+.lines .mini{display:flex;align-items:center;gap:8px;margin-top:6px}
+.lines .mini button{width:36px;height:36px;min-width:36px;border:1px solid var(--char);background:transparent;cursor:pointer;border-radius:2px;color:var(--char)}
+.lines .mini button.rm{width:auto;padding:0 12px;border-color:var(--line);color:var(--muted);margin-left:6px}
+.empty{color:var(--muted);padding:24px 0}
+.sum{padding-top:16px}
+.sum div{display:flex;justify-content:space-between;padding:4px 0}
+.sum .tot{font-weight:600;font-size:1.25rem;border-top:1px solid var(--char);margin-top:8px;padding-top:12px}
+.sum small{display:block;color:var(--muted);margin:6px 0 14px}
+.sum .btn{width:100%}
+.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);background:var(--char);color:var(--bone);padding:12px 18px;border-radius:2px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:45;font-size:.9375rem}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr 1fr}
+  .two{grid-template-columns:1fr}
+  .brand small{display:none}
+}
+@media (max-width:640px){
+  nav.main a.l{display:none}
+  .grid{grid-template-columns:1fr}
+  .heat{grid-template-columns:1fr;gap:26px}
+  .seg{transform-origin:left}
+  .price{font-size:2rem}
+  .buy .btn{flex:1 1 100%}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  .seg{transform:none}.seg>*{opacity:1}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#shop">Skip to the shop</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Mati, home">Mati<small>Rajshahi · wood-fired ceramics</small></a>
+    <nav class="main" aria-label="Main">
+      <a class="l" href="#shop">Shop</a>
+      <a class="l" href="#firing">The firing</a>
+      <a class="l" href="#shipping">Shipping &amp; care</a>
+      <button class="cartbtn" id="cartOpen" aria-haspopup="dialog" aria-controls="drawer">Cart <span class="count num" id="count" aria-live="polite" aria-label="0 items">0</span></button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<div class="wrap">
+  <div class="hero">
+    <div class="stage">
+      <span class="tag">The Firing Cup · 250 ml</span>
+      <svg id="heroCup" viewBox="0 0 200 200" role="img" aria-label="Drawing of the Firing Cup with an ash glaze and flame marks"></svg>
+      <span class="serial num" id="serial">Mark no. 1</span>
+      <button class="mark" id="another" type="button">Mark another</button>
+    </div>
+    <div>
+      <p class="eyebrow">Featured · small batch</p>
+      <h1>The Firing Cup</h1>
+      <p class="lede">Wood-fired stoneware with an ash glaze. The flame marks each cup differently, so no two are the same. Press the button on the drawing to see how.</p>
+      <dl class="spec">
+        <div><dt>Volume</dt><dd>250 ml</dd></div>
+        <div><dt>Material</dt><dd>Wood-fired stoneware, ash glaze</dd></div>
+        <div><dt>Care</dt><dd>Dishwasher safe · not for the microwave</dd></div>
+      </dl>
+      <div class="buy">
+        <div class="price num"><span class="taka">৳</span>1,200</div>
+        <div class="qty" role="group" aria-label="Quantity">
+          <button type="button" id="minus" aria-label="Fewer">−</button>
+          <output id="q" class="num" aria-live="polite">1</output>
+          <button type="button" id="plus" aria-label="More">+</button>
+        </div>
+        <button class="btn" id="addHero" type="button">Add to cart</button>
+      </div>
+      <div class="next">
+        <b>Next firing: 18 November</b>
+        <span>32 pieces in this firing</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="shop" aria-labelledby="shopH">
+  <div class="wrap">
+    <div class="shead">
+      <h2 id="shopH">Also from the kiln</h2>
+      <p>Cups, plates and vases, made by Rina and Sohel in batches of 20–40 pieces per firing.</p>
+    </div>
+    <ul class="grid" id="grid" style="list-style:none;padding:0"></ul>
+  </div>
+</section>
+
+<section class="firing" id="firing" aria-labelledby="fireH">
+  <div class="wrap">
+    <div class="shead">
+      <h2 id="fireH">Every firing takes days, and the kiln never rushes</h2>
+      <p>Each batch goes through three stages. The bar below is drawn to scale.</p>
+    </div>
+    <div class="heat" id="heat">
+      <div class="seg"><div class="big num">3 days</div><div class="what">Stacking</div></div>
+      <div class="seg"><div class="big num">36 hours</div><div class="what">Firing</div><div class="sub">Fed with mango wood.</div></div>
+      <div class="seg"><div class="big num">4 days</div><div class="what">Cooling</div></div>
+    </div>
+    <p class="scale">Stacking 3 days · firing 36 hours · cooling 4 days</p>
+  </div>
+</section>
+
+<section id="shipping" aria-labelledby="shipH">
+  <div class="wrap two">
+    <div>
+      <h2 id="shipH">Shipping inside Bangladesh</h2>
+      <dl class="ledger">
+        <div><dt>Delivery</dt><dd>3–5 days</dd></div>
+        <div><dt>Flat rate</dt><dd class="num"><span class="taka">৳</span>150</dd></div>
+        <div><dt>Free over</dt><dd class="num"><span class="taka">৳</span>5,000</dd></div>
+      </dl>
+    </div>
+    <div>
+      <h2>Care</h2>
+      <dl class="ledger">
+        <div><dt>Dishwasher</dt><dd>Safe</dd></div>
+        <div><dt>Microwave</dt><dd>Not for the microwave</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><a class="brand" href="#top">Mati</a><p>A ceramics studio in Rajshahi.</p></div>
+    <p>Rina and Sohel · wood-fired in small batches · ships within Bangladesh</p>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="cartH" tabindex="-1">
+  <div class="head"><h2 id="cartH">Your cart</h2><button class="x" id="cartClose" aria-label="Close cart">✕</button></div>
+  <ul class="lines" id="lines"></ul>
+  <div class="sum" id="sum"></div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+  var PRODUCTS=[
+    {id:'plate',name:'Morning Plate',price:1800,shape:'plate'},
+    {id:'vase',name:'Tall Vase',price:6500,shape:'vase'},
+    {id:'jug',name:'Pour Jug',price:3200,shape:'jug'},
+    {id:'small-bowl',name:'Small Bowl',price:800,shape:'sbowl'},
+    {id:'rice-bowl',name:'Rice Bowl',price:1400,shape:'rbowl'}
+  ];
+  var CUP={id:'cup',name:'The Firing Cup',price:1200,shape:'cup'};
+  var ALL=[CUP].concat(PRODUCTS);
+  var SHAPES={
+    cup:{d:'M58 52H142L134 150Q133 164 118 164H82Q67 164 66 150Z',rim:'M58 52Q100 62 142 52'},
+    plate:{d:'M14 112Q100 98 186 112Q182 132 160 136H40Q18 132 14 112Z',rim:'M14 112Q100 126 186 112'},
+    vase:{d:'M86 22H114L112 58Q152 86 150 124Q148 172 120 178H80Q52 172 50 124Q48 86 88 58Z',rim:'M86 22Q100 30 114 22'},
+    jug:{d:'M56 62H128Q144 96 140 140Q138 170 120 172H66Q48 170 46 140Q42 96 56 62Z',rim:'M56 62Q92 74 128 62',extra:'<path d="M138 84Q172 86 166 118Q162 138 140 138" fill="none" stroke-width="9"/><path d="M56 62L44 54" fill="none" stroke-width="8"/>'},
+    sbowl:{d:'M44 92H156Q154 142 120 158H80Q46 142 44 92Z',rim:'M44 92Q100 104 156 92'},
+    rbowl:{d:'M28 78H172Q176 132 134 160H66Q24 132 28 78Z',rim:'M28 78Q100 92 172 78'}
+  };
+  function rng(s){return function(){s|=0;s=s+0x6D2B79F5|0;var t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+  function pieceSVG(shape,seed,uid,label){
+    var s=SHAPES[shape],r=rng(seed),g='';
+    var cx=20+r()*60,cy=10+r()*80,rx=40+r()*50,ry=30+r()*50;
+    var cx2=r()*100,cy2=r()*100;
+    var dots='';
+    for(var i=0;i<14;i++){dots+='<circle cx="'+(10+r()*180).toFixed(1)+'" cy="'+(20+r()*160).toFixed(1)+'" r="'+(0.8+r()*1.8).toFixed(1)+'" fill="#3b2a1e" opacity="'+(0.25+r()*.4).toFixed(2)+'"/>';}
+    return '<svg viewBox="0 0 200 200" role="img" aria-label="'+label+'">'
+     +'<defs><linearGradient id="a'+uid+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cbbfa6"/><stop offset=".6" stop-color="#a99d86"/><stop offset="1" stop-color="#8d8269"/></linearGradient>'
+     +'<radialGradient id="f'+uid+'" cx="'+cx.toFixed(0)+'%" cy="'+cy.toFixed(0)+'%" r="'+(rx/100).toFixed(2)+'"><stop offset="0" stop-color="#b3501f" stop-opacity=".85"/><stop offset=".55" stop-color="#8a3b17" stop-opacity=".4"/><stop offset="1" stop-color="#8a3b17" stop-opacity="0"/></radialGradient>'
+     +'<radialGradient id="g'+uid+'" cx="'+cx2.toFixed(0)+'%" cy="'+cy2.toFixed(0)+'%" r=".45"><stop offset="0" stop-color="#e7dcc0" stop-opacity=".7"/><stop offset="1" stop-color="#e7dcc0" stop-opacity="0"/></radialGradient>'
+     +'<clipPath id="c'+uid+'"><path d="'+s.d+'"/></clipPath></defs>'
+     +'<ellipse cx="100" cy="184" rx="'+(shape==='plate'?84:62)+'" ry="5" fill="#1E1A17" opacity=".12"/>'
+     +(s.extra?'<g stroke="#8d8269" fill="none">'+s.extra+'</g>':'')
+     +'<path d="'+s.d+'" fill="url(#a'+uid+')"/>'
+     +'<g clip-path="url(#c'+uid+')"><rect width="200" height="200" fill="url(#g'+uid+')"/><rect width="200" height="200" fill="url(#f'+uid+')"/><rect x="-20" y="'+(r()*120).toFixed(0)+'" width="260" height="'+(10+r()*30).toFixed(0)+'" fill="#7a2f10" opacity=".28" transform="rotate('+(r()*40-20).toFixed(0)+' 100 100)"/>'+dots+'</g>'
+     +'<path d="'+s.d+'" fill="none" stroke="#1E1A17" stroke-opacity=".55" stroke-width="1.5"/>'
+     +'<path d="'+s.rim+'" fill="none" stroke="#1E1A17" stroke-opacity=".4" stroke-width="1.5"/></svg>';
+  }
+  function fmt(n){return n.toLocaleString('en-US')}
+  function money(n){return '<span class="taka">৳</span>'+fmt(n)}
+
+  /* hero cup + signature */
+  var mark=1,heroEl=document.getElementById('heroCup');
+  function drawHero(){
+    var wrap=document.createElement('div');
+    wrap.innerHTML=pieceSVG('cup',mark*7919+3,'h','Drawing of the Firing Cup with an ash glaze and flame marks');
+    var n=wrap.firstChild;heroEl.setAttribute('viewBox','0 0 200 200');
+    heroEl.innerHTML=n.innerHTML;
+    document.getElementById('serial').textContent='Mark no. '+mark;
+  }
+  drawHero();
+  document.getElementById('another').addEventListener('click',function(){mark++;drawHero();});
+
+  /* grid */
+  var grid=document.getElementById('grid');
+  PRODUCTS.forEach(function(p,i){
+    var li=document.createElement('li');li.className='card';
+    li.innerHTML='<div class="art">'+pieceSVG(p.shape,i*131+17,'p'+i,p.name+', drawing')+'</div>'
+      +'<h3>'+p.name+'</h3><div class="row"><span class="p num">'+money(p.price)+'</span>'
+      +'<button class="btn ghost" type="button" data-add="'+p.id+'" aria-label="Add '+p.name+' to cart">Add to cart</button></div>';
+    grid.appendChild(li);
+  });
+  /* the sixth cell: the firing note, so the grid has no hole at 3 columns */
+  var note=document.createElement('li');note.className='card';
+  note.innerHTML='<div class="art" style="background:var(--char);color:var(--bone);padding:20px;text-align:left;display:flex;flex-direction:column;justify-content:center;gap:6px"><span style="font:400 1.1rem var(--serif)">Next firing</span><span style="font:400 2.6rem/1 var(--serif)">18 Nov</span><span style="color:#d2cabb;font-size:.9375rem">32 pieces</span></div><h3>Small batches</h3><p style="color:var(--muted)">20–40 pieces per firing.</p>';
+  grid.appendChild(note);
+
+  /* cart */
+  var cart={},body=document.body,drawer=document.getElementById('drawer'),lastFocus=null;
+  var $=function(id){return document.getElementById(id)};
+  function find(id){return ALL.filter(function(p){return p.id===id})[0]}
+  function render(){
+    var n=0,sub=0,ids=Object.keys(cart);
+    ids.forEach(function(id){n+=cart[id];sub+=cart[id]*find(id).price});
+    $('count').textContent=n;$('count').setAttribute('aria-label',n+(n===1?' item':' items'));
+    var L=$('lines');
+    if(!ids.length){L.innerHTML='<li class="empty" style="display:block">Your cart is empty.</li>';$('sum').innerHTML='';return}
+    L.innerHTML=ids.map(function(id){var p=find(id);
+      return '<li><div><div class="nm">'+p.name+'</div><div class="mini"><button type="button" data-dec="'+id+'" aria-label="One fewer '+p.name+'">−</button><span class="num" aria-label="Quantity">'+cart[id]+'</span><button type="button" data-inc="'+id+'" aria-label="One more '+p.name+'">+</button><button type="button" class="rm" data-rm="'+id+'" aria-label="Remove '+p.name+'">Remove</button></div></div><div class="num">'+money(p.price*cart[id])+'</div></li>'}).join('');
+    var ship=sub>5000?0:150,tot=sub+ship;
+    var hint=sub>5000?'Free delivery applied (over ৳5,000).':'Add ৳'+fmt(5001-sub)+' more for free delivery.';
+    $('sum').innerHTML='<div><span>Subtotal</span><span class="num">'+money(sub)+'</span></div><div><span>Shipping (3–5 days)</span><span class="num">'+(ship?money(ship):'Free')+'</span></div><div class="tot"><span>Total</span><span class="num">'+money(tot)+'</span></div><small>'+hint+'</small><button class="btn" type="button" id="co">Checkout</button>';
+  }
+  var tt;
+  function toast(m){var t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('show')},2200)}
+  function add(id,q){cart[id]=(cart[id]||0)+q;render();var b=$('cartOpen');b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');toast(q+' × '+find(id).name+' added to cart')}
+  var qty=1;
+  $('plus').onclick=function(){qty=Math.min(qty+1,20);$('q').textContent=qty};
+  $('minus').onclick=function(){qty=Math.max(qty-1,1);$('q').textContent=qty};
+  $('addHero').onclick=function(){add('cup',qty)};
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-add],[data-inc],[data-dec],[data-rm],#co');if(!t)return;
+    if(t.dataset.add)add(t.dataset.add,1);
+    else if(t.dataset.inc){cart[t.dataset.inc]++;render()}
+    else if(t.dataset.dec){var k=t.dataset.dec;if(--cart[k]<1)delete cart[k];render()}
+    else if(t.dataset.rm){delete cart[t.dataset.rm];render()}
+    else if(t.id==='co'){toast('This is a demo: checkout is not connected.')}
+  });
+  function open(){lastFocus=document.activeElement;body.classList.add('open');setInert(true);drawer.focus()}
+  function close(){body.classList.remove('open');setInert(false);if(lastFocus)lastFocus.focus()}
+  function setInert(on){['top','shop','firing','shipping'].forEach(function(i){var e=$(i);if(e){on?e.setAttribute('inert',''):e.removeAttribute('inert')}});document.querySelector('header.top').toggleAttribute('inert',on);document.querySelector('footer').toggleAttribute('inert',on)}
+  $('cartOpen').onclick=open;$('cartClose').onclick=close;$('scrim').onclick=close;
+  document.addEventListener('keydown',function(e){
+    if(!body.classList.contains('open'))return;
+    if(e.key==='Escape')close();
+    if(e.key==='Tab'){var f=drawer.querySelectorAll('button');if(!f.length)return;var a=f[0],z=f[f.length-1];
+      if(e.shiftKey&&(document.activeElement===a||document.activeElement===drawer)){e.preventDefault();z.focus()}
+      else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}
+  });
+  render();
+
+  /* firing bar reveal */
+  var heat=$('heat');
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(en,o){if(en[0].isIntersecting){heat.classList.add('on');o.disconnect()}},{threshold:.35}).observe(heat);
+  }else heat.classList.add('on');
+})();
+</script>
+</body>
+</html>

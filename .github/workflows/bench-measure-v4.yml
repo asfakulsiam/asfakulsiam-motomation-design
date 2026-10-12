@@ -1,0 +1,65 @@
+name: Benchmark v4 measure
+# Measurement step of benchmark v4 (v2.5.0 run), on GitHub's runners like v3 (the generation sandbox has 2 CPUs).
+# Generation and judging run elsewhere; this job renders each built index.html (Playwright Chromium + axe-core +
+# scripts/gate.mjs from the tested skill folder), exactly as `run-agent-benchmark.mjs measure` does locally, and uploads
+# checks.json + screenshots. Motion shards also write gate.mjs --report motion reports (the strips the motion judges see).
+# One shard = one output × brief × arm. Same runner image, browser and toolchain for every arm.
+on:
+  push:
+    branches: [bench-v4]
+jobs:
+  measure:
+    name: ${{ matrix.out }} ${{ matrix.slug }} ${{ matrix.arm }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        include:
+          - { out: 2026-10-12-benchmark-v4, slug: studio, arm: skill, n: 6 }
+          - { out: 2026-10-12-benchmark-v4, slug: studio, arm: matched, n: 6 }
+          - { out: 2026-10-12-benchmark-v4, slug: hotel, arm: skill, n: 6 }
+          - { out: 2026-10-12-benchmark-v4, slug: hotel, arm: matched, n: 6 }
+          - { out: 2026-10-12-benchmark-v4, slug: ecommerce, arm: skill, n: 6 }
+          - { out: 2026-10-12-benchmark-v4, slug: ecommerce, arm: matched, n: 6 }
+          - { out: 2026-10-12-benchmark-v4, slug: saas, arm: skill, n: 6 }
+          - { out: 2026-10-12-benchmark-v4, slug: saas, arm: matched, n: 6 }
+          - { out: 2026-10-12-benchmark-v4, slug: public, arm: skill, n: 6 }
+          - { out: 2026-10-12-benchmark-v4, slug: public, arm: matched, n: 6 }
+          - { out: 2026-10-12-benchmark-v4-motion, slug: portfolio, arm: baseline, n: 3 }
+          - { out: 2026-10-12-benchmark-v4-motion, slug: portfolio, arm: skill, n: 3 }
+          - { out: 2026-10-12-benchmark-v4-motion, slug: launch, arm: baseline, n: 3 }
+          - { out: 2026-10-12-benchmark-v4-motion, slug: launch, arm: skill, n: 3 }
+          - { out: 2026-10-12-benchmark-v4-motion, slug: festival, arm: baseline, n: 3 }
+          - { out: 2026-10-12-benchmark-v4-motion, slug: festival, arm: skill, n: 3 }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - name: Toolchain (pinned) + Chromium
+        run: |
+          npm i --no-save --no-package-lock --silent playwright@1.59.0 axe-core@4.14.0
+          npx playwright install --with-deps chromium
+          npx playwright --version; node -e "console.log('axe-core', require('axe-core/package.json').version)"; nproc; free -m
+      - name: Measure
+        run: |
+          node evals/run-agent-benchmark.mjs measure --out "$PWD/evals/results/${{ matrix.out }}" --n ${{ matrix.n }} --only ${{ matrix.slug }} --arms ${{ matrix.arm }} --parallel 1 --force \
+            --competitors "taste=/x:design-taste-frontend,uiux=/x:ui-ux-pro-max,fdesign=/x:frontend-design"
+          ls evals/results/${{ matrix.out }}/${{ matrix.slug }}/${{ matrix.arm }}-s*/checks.json
+      - name: Motion reports (motion briefs only)
+        if: contains(matrix.out, 'motion')
+        run: |
+          for d in evals/results/${{ matrix.out }}/${{ matrix.slug }}/${{ matrix.arm }}-s*; do
+            node skills/asfakulsiam-motomation-design/scripts/gate.mjs $d/index.html --tier 4 --report $d/motion-report.html > $d/gate-report.txt 2>&1 || true
+            tail -2 $d/gate-report.txt
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: m-${{ matrix.out }}-${{ matrix.slug }}-${{ matrix.arm }}
+          path: |
+            evals/results/${{ matrix.out }}/${{ matrix.slug }}/${{ matrix.arm }}-s*/checks.json
+            evals/results/${{ matrix.out }}/${{ matrix.slug }}/${{ matrix.arm }}-s*/shot-*.png
+            evals/results/${{ matrix.out }}/${{ matrix.slug }}/${{ matrix.arm }}-s*/motion-report.html
+            evals/results/${{ matrix.out }}/${{ matrix.slug }}/${{ matrix.arm }}-s*/gate-report.txt
+          retention-days: 14
