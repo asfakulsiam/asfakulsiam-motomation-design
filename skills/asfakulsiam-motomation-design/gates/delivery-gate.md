@@ -17,7 +17,7 @@ It runs six bounded checks in a real browser and prints numbers:
 
 | Code | Check | Fails when |
 |---|---|---|
-| `c` | **Contrast** at 375, 390, 768 and 1440px, reported per width: every visible text element against the pixels actually behind it. The text is hidden, the viewport is screenshotted at each scroll position and the background is sampled. A phone layout that stacks a caption over a pale crop of the image fails at 375 even when the desktop layout passes. Each element is judged at its most visible state, by its 10th-percentile sample (not the median), so text that sits partly on a pale image edge cannot pass on its dark half. | below 4.5:1 for body text, below 3:1 for large text (≥ 24px, or ≥ 18.66px bold) |
+| `c` | **Contrast** at 375, 390, 768 and 1440px, reported per width: every visible text element against the pixels actually behind it. The text is hidden, the viewport is screenshotted at each scroll position and the background is sampled. A phone layout that stacks a caption over a pale crop of the image fails at 375 even when the desktop layout passes. Each element is judged by its 10th-percentile sample (not the median), so text that sits partly on a pale image edge cannot pass on its dark half. Every element is measured at every sampled scroll position (every 0.7 viewport, every 0.15 viewport in pinned zones, plus 0/25/50/75/100% of the page and of each zone); a scroll-sequence step is judged in its active (most visible) state **and in every inactive state it rests in**, so a dimmed step at 2.1:1 fails (v2.5.0; see `craft/scroll-sequences.md`). | below 4.5:1 for body text, below 3:1 for large text (≥ 24px, or ≥ 18.66px bold) |
 | `o` | **Overflow** at 375, 390, 768 and 1440px | the page scrolls sideways, or an element leaves the viewport or pushes text out of its parent by more than 1px with no clipping ancestor |
 | `w` | **Long display words** at 375px: every h1–h3 and any text ≥ 32px, including decorative text | the text is wider than its box, leaves the viewport, breaks a word across lines, or splits one word across elements (e.g. "Have" + "li" on two door leaves) |
 | `rm` | **Reduced motion**: the page loaded with `prefers-reduced-motion: reduce` | text that is visible normally is hidden, or pixels keep changing on a still page |
@@ -33,7 +33,9 @@ The output ends with a stamp line built only from those numbers:
 
 The checks are bounded, and each reports what it skipped (text that was covered or never settled, elements parked off-canvas such as skip links and closed drawers). When more than 30% of text elements are skipped for contrast, the gate prints a coverage warning: the `c` count is then not a full measurement, and the skipped text needs a check by hand. A clean run means these six things were measured. It doesn't mean the page is accessible. Keyboard paths, focus order and copy still need Parts 1–3.
 
-Exit codes: `0` pass · `1` fail · `2` stamp rejected · `3` not verified (no browser, or the scan ran past `--timeout`, default 600 s, which very tall pages such as the 36,000px component gallery can do).
+Exit codes: `0` pass · `1` fail · `2` stamp rejected · `3` not verified (no browser, or the scan ran past `--timeout`, default 600 s, which very tall pages such as the 36,000px component gallery can do, or the sandbox is too constrained to run the browser).
+
+**Constrained sandboxes** (Codex CLI, small CI containers, 2-CPU machines): the gate probes the machine, and if Chromium fails to start, crashes or times out it retries once in a light footprint (one renderer process via `--renderer-process-limit=1 --no-zygote`, `--disable-gpu --disable-dev-shm-usage`, operation timeouts ×3; the checks are identical). If that fails too it prints `not verified — sandbox too constrained: <reason> (attempt 1 …; attempt 2 …; machine …)` and exits 3. Report that line verbatim; don't call the page verified. `--light` starts in the light footprint; `--timeout-ms` sets the budget. Details: `docs/adapters/codex.md`.
 
 **Optional motion report.** `node scripts/gate.mjs --report dist/index.html` (or `--report out.html` after a target) also writes a self-contained HTML file with scroll-frame strips: 8 frames at 1440px, 8 at 375px and 8 at 1440px under reduced motion. Use it to review motion by eye, show a client, or give judges something better than one screenshot. It's off by default, doesn't change the text output, and adds nothing to the gate's numbers.
 
@@ -128,12 +130,16 @@ The placeholders are deliberate. There are no numbers to copy. Write the archety
 - [ ] Layout: one deliberate grid break per screen, recomposed (not squeezed) on mobile
 - [ ] Motion: tokens used; `gsap.matchMedia()` with reduced-motion and pointer conditions; `ScrollTrigger.refresh()` after load
 - [ ] Mobile motion matrix applied
+- [ ] Scroll sequences (pinned, scrubbed, image-sequence, lit-step lists) reviewed per `craft/scroll-sequences.md`, record in the handoff:
+  - [ ] Each step's contrast passes AA **active and inactive** (dimmed text measured as rendered: text × opacity + background × (1 − opacity))
+  - [ ] Reduced-motion fallback is a **designed still**, not a poster: unpinned plates, every step fully visible
+  - [ ] **No step shows a value that is later corrected**
 - [ ] Accessibility: keyboard path, visible focus, landmarks, skip link, alt text
 - [ ] Performance: LCP image preloaded, heavy libraries loaded dynamically, off-screen work paused
 - [ ] SEO: title, description, OG image, structured data, `llms.txt` (for sites)
 - [ ] Copy: real, specific, no banned phrases; the copy pass in `craft/copy.md` run with every row "none found" or fixed; `[NEEDS COPY]` markers listed for the user
 - [ ] "Restraint Gate record" filled in `DESIGN.md` (concept survived?, every cut, every rejected animation)
-- [ ] `node scripts/gate.mjs` run on the build; its full `critique: … · gate: …` line pasted and `--verify` passes (or "not verified — no browser" reported)
+- [ ] `node scripts/gate.mjs` run on the build; its full `critique: … · gate: …` line pasted and `--verify` passes (or the exact "not verified — …" line reported: no browser, timed out, or sandbox too constrained)
 - [ ] Stamp comment written; run logged with `node scripts/memory.mjs log …`
 
 ---
