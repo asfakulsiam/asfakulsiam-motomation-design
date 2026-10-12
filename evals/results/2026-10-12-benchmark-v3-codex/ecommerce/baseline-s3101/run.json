@@ -1,0 +1,12 @@
+{
+ "slug": "ecommerce",
+ "seed": 3101,
+ "cond": "baseline",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-codex/ecommerce/baseline-s3101",
+ "exit": 0,
+ "seconds": 352,
+ "turns": 22,
+ "agent": "codex-cli 0.130.0",
+ "output": true,
+ "stderr": "Reading additional input from stdin...\n"
+}

@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Haveli 1893 — Boutique Hotel in Puran Dhaka</title>
+  <meta name="description" content="Haveli 1893 is a 12-room boutique hotel in a restored 1890s merchant house in Shankhari Bazar, Old Dhaka, with rooftop breakfast and small-group walking tours." />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <meta property="og:title" content="Haveli 1893 — Boutique Hotel in Puran Dhaka" />
+  <meta property="og:description" content="A restored 1893 merchant house in Shankhari Bazar with 12 rooms, rooftop breakfast and walking tours." />
+  <style>
+    /* motomation · archetype: room · mutation: invert-axis · signature: aperture-doorway · tier: 1 · critique: not verified — timed out after 60s scanning index.html · gate: not verified — no pass stamp */
+    :root {
+      --paper: #f4efe6;
+      --paper-strong: #ebe2d2;
+      --ink: #1b1816;
+      --muted: #6f6258;
+      --line: rgba(60, 42, 29, 0.18);
+      --accent: #7a2f20;
+      --accent-soft: rgba(122, 47, 32, 0.14);
+      --shadow: 0 20px 60px rgba(41, 28, 20, 0.10);
+      --radius: 1.5rem;
+      --content: min(1120px, calc(100vw - 2rem));
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --section-space: clamp(4rem, 7vw, 8rem);
+      --display: "Cormorant Garamond", serif;
+      --body: "Manrope", system-ui, sans-serif;
+      --mono: "Azeret Mono", monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--body);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(122, 47, 32, 0.06), transparent 28%),
+        linear-gradient(180deg, #f8f3eb 0%, var(--paper) 24%, #f3ecdf 100%);
+      line-height: 1.55;
+      min-width: 320px;
+    }
+
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button, input, textarea, select { font: inherit; }
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 0.35rem;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -3rem;
+      z-index: 100;
+      padding: 0.75rem 1rem;
+      background: var(--ink);
+      color: var(--paper);
+      text-decoration: none;
+      transition: top 180ms var(--ease-out);
+    }
+    .skip-link:focus { top: 1rem; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(10px);
+      background: rgba(244, 239, 230, 0.84);
+      border-bottom: 1px solid var(--line);
+    }
+    .header-inner,
+    .section-inner,
+    .footer-inner {
+      width: var(--content);
+      margin: 0 auto;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 0;
+    }
+    .brand {
+      display: inline-grid;
+      gap: 0.15rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand-mark,
+    .footer-mark {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .brand-name,
+    .footer-name {
+      font-family: var(--display);
+      font-size: 1.65rem;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+    }
+
+    .site-nav ul {
+      display: flex;
+      list-style: none;
+      gap: clamp(0.75rem, 2vw, 1.5rem);
+      padding: 0;
+      margin: 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .site-nav a,
+    .contact-link {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+    .site-nav a:hover,
+    .site-nav a[aria-current="true"],
+    .contact-link:hover { color: var(--ink); }
+
+    .button,
+    .button-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      border-radius: 999px;
+      padding: 0.9rem 1.35rem;
+      text-decoration: none;
+      min-height: 2.75rem;
+      transition: transform 180ms var(--ease-out), background-color 180ms var(--ease-out), color 180ms var(--ease-out), border-color 180ms var(--ease-out);
+    }
+    .button {
+      background: var(--ink);
+      color: var(--paper);
+      border: 1px solid var(--ink);
+      box-shadow: var(--shadow);
+    }
+    .button:hover,
+    .button:focus-visible { transform: translateY(-1px); }
+    .button-secondary {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid rgba(27, 24, 22, 0.18);
+    }
+    .button-secondary:hover,
+    .button-secondary:focus-visible { border-color: var(--accent); }
+
+    main { overflow: clip; }
+
+    .hero {
+      padding: clamp(2rem, 4vw, 4rem) 0 0;
+    }
+    .hero-shell {
+      width: var(--content);
+      margin: 0 auto;
+      display: grid;
+      gap: 1.5rem;
+    }
+    .eyebrow,
+    .folio,
+    .detail-label,
+    .card-kicker,
+    .contact-kicker {
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(17rem, 0.9fr);
+      gap: clamp(1.25rem, 3vw, 3rem);
+      align-items: end;
+    }
+    .hero-copy {
+      display: grid;
+      gap: 1.25rem;
+      padding: clamp(1rem, 2vw, 2rem) 0 clamp(1rem, 2vw, 2rem);
+    }
+    .hero-title,
+    .section-title,
+    .panel-rate strong,
+    .contact-value {
+      font-family: var(--display);
+      letter-spacing: -0.04em;
+      text-wrap: balance;
+    }
+    .hero-title {
+      margin: 0;
+      font-size: clamp(3.7rem, 10vw, 7.6rem);
+      line-height: 0.84;
+      max-width: 10ch;
+    }
+    .hero-copy p {
+      margin: 0;
+      max-width: 58ch;
+      font-size: 1.02rem;
+      color: #3e342d;
+    }
+    .hero-actions,
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+    }
+    .hero-meta {
+      padding-top: 0.25rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .aperture {
+      position: relative;
+      border-radius: min(14rem, 42vw) min(14rem, 42vw) 1.8rem 1.8rem;
+      border: 1px solid rgba(58, 41, 27, 0.14);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.55), rgba(235, 226, 210, 0.45)),
+        linear-gradient(180deg, rgba(122, 47, 32, 0.07), rgba(122, 47, 32, 0));
+      box-shadow: var(--shadow);
+      overflow: clip;
+      isolation: isolate;
+    }
+    .aperture::before,
+    .aperture::after {
+      content: "";
+      position: absolute;
+      inset: 1rem;
+      border-radius: inherit;
+      border: 1px solid rgba(122, 47, 32, 0.15);
+      pointer-events: none;
+    }
+    .aperture::after {
+      inset: 1.8rem;
+      border-color: rgba(27, 24, 22, 0.08);
+    }
+    .hero-art {
+      min-height: clamp(24rem, 52vw, 40rem);
+      padding: clamp(1rem, 2vw, 1.5rem);
+      display: grid;
+      align-items: stretch;
+    }
+    .art-svg {
+      width: 100%;
+      height: 100%;
+    }
+    .art-lines,
+    .art-fill,
+    .roof-band,
+    .balcony-band,
+    .door-band {
+      transition: transform 900ms var(--ease-out), opacity 900ms var(--ease-out), stroke-dashoffset 1100ms var(--ease-out), clip-path 1000ms var(--ease-out);
+      transform-origin: center;
+    }
+    .art-lines {
+      stroke-dasharray: 1200;
+      stroke-dashoffset: 1200;
+      opacity: 0.55;
+    }
+    .art-fill {
+      clip-path: inset(100% 0 0 0);
+    }
+    .hero-shell.is-visible .art-lines,
+    .threshold-card.is-visible .art-lines {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+    .hero-shell.is-visible .art-fill,
+    .threshold-card.is-visible .art-fill {
+      clip-path: inset(0 0 0 0);
+    }
+
+    .hero-lane {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.8rem;
+      padding: 0 0 1.2rem;
+    }
+    .lane-piece {
+      padding: 0.95rem 1rem;
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 0.3rem;
+    }
+    .lane-piece strong {
+      font-size: 0.96rem;
+      font-weight: 600;
+    }
+    .lane-piece span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .section {
+      padding: var(--section-space) 0 0;
+    }
+    .section-inner {
+      display: grid;
+      gap: 1.4rem;
+    }
+    .section-head {
+      display: grid;
+      gap: 0.5rem;
+      max-width: 58rem;
+    }
+    .section-title {
+      margin: 0;
+      font-size: clamp(2.5rem, 5vw, 4.8rem);
+      line-height: 0.9;
+    }
+    .section-head p {
+      margin: 0;
+      color: #4e423a;
+      max-width: 56ch;
+      font-size: 1rem;
+    }
+
+    .threshold-layout {
+      display: grid;
+      gap: 1.25rem;
+      align-items: start;
+    }
+    .threshold-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(16rem, 0.95fr);
+      gap: clamp(1rem, 2vw, 2rem);
+      background: rgba(255,255,255,0.48);
+      border: 1px solid rgba(58, 41, 27, 0.14);
+      border-radius: min(12rem, 20vw) min(12rem, 20vw) 1.5rem 1.5rem;
+      padding: clamp(1rem, 2vw, 1.5rem);
+      box-shadow: var(--shadow);
+      overflow: clip;
+    }
+    .threshold-copy {
+      display: grid;
+      gap: 1rem;
+      align-content: start;
+      padding: 0.4rem;
+    }
+    .threshold-copy p,
+    .threshold-copy ul,
+    .threshold-copy dl {
+      margin: 0;
+    }
+    .threshold-copy ul {
+      padding-left: 1.1rem;
+      display: grid;
+      gap: 0.5rem;
+      color: #443831;
+    }
+    .threshold-copy li::marker { color: var(--accent); }
+    .threshold-copy dt {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+    .threshold-copy dd {
+      margin: 0 0 0.75rem;
+      color: #413630;
+    }
+    .threshold-art {
+      position: relative;
+      min-height: 18rem;
+      padding: 0.5rem;
+    }
+    .threshold-card:nth-child(even) {
+      grid-template-columns: minmax(16rem, 0.95fr) minmax(0, 1.05fr);
+    }
+    .threshold-card:nth-child(even) .threshold-copy { order: 2; }
+    .threshold-card:nth-child(even) .threshold-art { order: 1; }
+
+    .room-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .room-panel {
+      position: relative;
+      padding: 1.2rem;
+      border-radius: 1.25rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(235, 226, 210, 0.72));
+      border: 1px solid rgba(58, 41, 27, 0.12);
+      display: grid;
+      gap: 0.9rem;
+      min-height: 100%;
+    }
+    .room-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0.75rem;
+      border: 1px solid rgba(122, 47, 32, 0.10);
+      border-radius: 0.95rem;
+      pointer-events: none;
+    }
+    .panel-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.8rem;
+      align-items: baseline;
+    }
+    .panel-top h3,
+    .subsection-title,
+    .booking-title {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .panel-rate strong {
+      font-size: 1.75rem;
+      line-height: 1;
+    }
+    .panel-rate span,
+    .panel-note {
+      display: block;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    .panel-stats {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      border-top: 1px solid var(--line);
+      padding-top: 0.9rem;
+      font-size: 0.92rem;
+      color: #463932;
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .info-card,
+    .booking-card,
+    .contact-card {
+      background: rgba(255,255,255,0.45);
+      border: 1px solid rgba(58, 41, 27, 0.13);
+      border-radius: 1.5rem;
+      padding: clamp(1.2rem, 2vw, 1.5rem);
+      box-shadow: var(--shadow);
+    }
+    .info-card {
+      display: grid;
+      gap: 1rem;
+    }
+    .info-card p,
+    .booking-card p,
+    .contact-card p {
+      margin: 0;
+      color: #473b34;
+    }
+
+    .booking-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(15rem, 0.8fr);
+      gap: 1rem;
+      align-items: stretch;
+    }
+    .booking-card,
+    .contact-card {
+      display: grid;
+      gap: 1rem;
+      align-content: start;
+    }
+    .contact-list {
+      display: grid;
+      gap: 0.8rem;
+    }
+    .contact-row {
+      display: grid;
+      gap: 0.2rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--line);
+    }
+    .contact-value {
+      font-size: clamp(1.35rem, 3vw, 2.2rem);
+      line-height: 1;
+    }
+    .contact-small {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .site-footer {
+      padding: var(--section-space) 0 2rem;
+    }
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--line);
+    }
+    .footer-note {
+      color: var(--muted);
+      font-size: 0.94rem;
+      max-width: 48ch;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(1.2rem);
+      transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+    }
+    .is-visible[data-reveal] {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (min-width: 980px) {
+      .threshold-layout {
+        grid-template-columns: minmax(13rem, 15rem) minmax(0, 1fr);
+        gap: 1.4rem;
+      }
+      .threshold-rail {
+        position: sticky;
+        top: 6rem;
+        display: grid;
+        gap: 0.9rem;
+        padding-top: 0.5rem;
+      }
+      .threshold-rail::before {
+        content: "";
+        position: absolute;
+        left: 0.55rem;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: linear-gradient(180deg, rgba(122,47,32,0), rgba(122,47,32,0.28), rgba(122,47,32,0));
+      }
+      .rail-link {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: fit-content;
+        padding: 0.35rem 0 0.35rem 1.2rem;
+        text-decoration: none;
+        color: var(--muted);
+      }
+      .rail-link::before {
+        content: "";
+        position: absolute;
+        left: 0.15rem;
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 999px;
+        border: 1px solid rgba(122, 47, 32, 0.32);
+        background: rgba(255,255,255,0.7);
+        transition: transform 180ms var(--ease-out), background-color 180ms var(--ease-out), border-color 180ms var(--ease-out);
+      }
+      .rail-link:hover,
+      .rail-link:focus-visible,
+      .rail-link[aria-current="true"] {
+        color: var(--ink);
+      }
+      .rail-link:hover::before,
+      .rail-link:focus-visible::before,
+      .rail-link[aria-current="true"]::before {
+        transform: scale(1.15);
+        background: var(--accent);
+        border-color: var(--accent);
+      }
+      .threshold-stack {
+        display: grid;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 979px) {
+      .header-inner,
+      .site-nav ul { align-items: flex-start; }
+      .header-inner {
+        flex-direction: column;
+        padding: 0.85rem 0 1rem;
+      }
+      .hero-grid,
+      .threshold-card,
+      .threshold-card:nth-child(even),
+      .room-grid,
+      .split-grid,
+      .booking-grid {
+        grid-template-columns: 1fr;
+      }
+      .threshold-card:nth-child(even) .threshold-copy,
+      .threshold-card:nth-child(even) .threshold-art { order: initial; }
+      .hero-title { max-width: 9ch; }
+      .hero-lane { grid-template-columns: 1fr; }
+      .threshold-rail {
+        display: flex;
+        gap: 0.75rem;
+        overflow-x: auto;
+        padding-bottom: 0.25rem;
+        scrollbar-width: thin;
+      }
+      .rail-link {
+        flex: 0 0 auto;
+        padding: 0.7rem 0.9rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255,255,255,0.48);
+        text-decoration: none;
+        color: var(--muted);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      [data-reveal],
+      .art-lines,
+      .art-fill {
+        opacity: 1 !important;
+        transform: none !important;
+        stroke-dashoffset: 0 !important;
+        clip-path: inset(0 0 0 0) !important;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Hotel",
+      "name": "Haveli 1893",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "31 Shankhari Bazar",
+        "addressLocality": "Old Dhaka",
+        "addressCountry": "BD"
+      },
+      "telephone": "+880 1700 000000",
+      "email": "stay@haveli1893.com"
+    }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Haveli 1893 home">
+        <span class="brand-mark">Old Dhaka · Est. 1893</span>
+        <span class="brand-name">Haveli 1893</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#stay">Rooms</a></li>
+          <li><a href="#walks">Walking tours</a></li>
+          <li><a href="#house">The house</a></li>
+          <li><a href="#visit">Visit</a></li>
+        </ul>
+      </nav>
+      <a class="button" href="https://book.example-hotel.com" target="_blank" rel="noreferrer">Check availability</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-shell" data-reveal>
+        <div class="eyebrow">Boutique hotel · Shankhari Bazar</div>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <h1 class="hero-title" id="hero-title">A merchant house, kept open to the lane.</h1>
+            <p>Haveli 1893 is a 12-room boutique hotel in a restored 1890s merchant house in Puran Dhaka. Original doors, iron balconies and lime plaster remain, while booking stays simple and breakfast is already included.</p>
+            <div class="hero-actions">
+              <a class="button" href="https://book.example-hotel.com" target="_blank" rel="noreferrer">Check availability</a>
+              <a class="button-secondary" href="#stay">See rooms and rates</a>
+            </div>
+            <div class="hero-meta" aria-label="Quick facts">
+              <span>12 rooms</span>
+              <span aria-hidden="true">·</span>
+              <span>Rooftop breakfast 7–10am</span>
+              <span aria-hidden="true">·</span>
+              <span>31 Shankhari Bazar, Old Dhaka</span>
+            </div>
+          </div>
+
+          <div class="aperture hero-art" aria-hidden="true">
+            <svg class="art-svg" viewBox="0 0 560 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="wash" x1="280" y1="20" x2="280" y2="740" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#F9F4EC"/>
+                  <stop offset="1" stop-color="#E6D6BF"/>
+                </linearGradient>
+                <linearGradient id="brick" x1="150" y1="200" x2="420" y2="690" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#B77D63" stop-opacity="0.16"/>
+                  <stop offset="1" stop-color="#7A2F20" stop-opacity="0.10"/>
+                </linearGradient>
+              </defs>
+              <rect class="art-fill" x="12" y="12" width="536" height="736" rx="220" fill="url(#wash)"/>
+              <path class="art-fill roof-band" d="M57 624C149 554 180 522 235 438C258 401 273 370 280 334C290 380 307 416 331 449C375 510 417 549 505 611V719H57V624Z" fill="url(#brick)"/>
+              <path class="art-fill balcony-band" d="M127 335H433V532H127V335Z" fill="#F3E7D6" fill-opacity="0.5"/>
+              <path class="art-lines" d="M124 331H436V534H124V331Z" stroke="#6A301E" stroke-width="2.2"/>
+              <path class="art-lines" d="M156 362V503M203 362V503M250 362V503M297 362V503M344 362V503M391 362V503" stroke="#6A301E" stroke-opacity="0.68" stroke-width="1.7"/>
+              <path class="art-lines" d="M130 405H430M130 454H430" stroke="#6A301E" stroke-opacity="0.72" stroke-width="2"/>
+              <path class="art-lines" d="M173 286C190 256 212 242 242 242H318C349 242 370 256 387 286L416 331H144L173 286Z" stroke="#3C2A1D" stroke-width="2.2"/>
+              <path class="art-lines" d="M82 621C182 552 217 516 261 440C272 420 279 399 280 373C281 399 289 420 302 441C349 519 385 555 478 618" stroke="#3C2A1D" stroke-width="2.8" stroke-linecap="round"/>
+              <path class="art-lines" d="M85 621H475" stroke="#3C2A1D" stroke-width="2.4"/>
+              <path class="art-lines" d="M110 647H447M137 675H420" stroke="#6A301E" stroke-opacity="0.55" stroke-width="1.8"/>
+              <path class="art-lines" d="M280 129V241" stroke="#3C2A1D" stroke-width="2.1"/>
+              <path class="art-lines" d="M221 153C248 131 313 131 340 153" stroke="#3C2A1D" stroke-width="2.1"/>
+              <path class="art-lines" d="M186 534V688M374 534V688" stroke="#3C2A1D" stroke-width="2.2"/>
+              <path class="art-lines" d="M186 688H374" stroke="#3C2A1D" stroke-width="2.2"/>
+              <path class="art-lines" d="M226 532V650M334 532V650" stroke="#6A301E" stroke-opacity="0.58" stroke-width="1.8"/>
+              <circle class="art-fill door-band" cx="280" cy="280" r="242" fill="url(#wash)" fill-opacity="0.22"/>
+            </svg>
+          </div>
+        </div>
+        <div class="hero-lane" aria-label="Highlights">
+          <div class="lane-piece">
+            <strong>Three room types</strong>
+            <span>Courtyard, Balcony and Rooftop Suite, with breakfast included.</span>
+          </div>
+          <div class="lane-piece">
+            <strong>Walk the old city</strong>
+            <span>Small-group tours to Shankhari Bazar, Armanitola, Star Mosque and Sadarghat.</span>
+          </div>
+          <div class="lane-piece">
+            <strong>The rooftop at morning</strong>
+            <span>Breakfast is served from 7–10am with a view over the roofs of Old Dhaka.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stay" aria-labelledby="stay-title">
+      <div class="section-inner threshold-layout">
+        <div class="threshold-rail" aria-label="Stay page sections">
+          <a class="rail-link" href="#stay">Stay</a>
+          <a class="rail-link" href="#walks">Walks</a>
+          <a class="rail-link" href="#house">House</a>
+          <a class="rail-link" href="#visit">Visit</a>
+        </div>
+
+        <div class="threshold-stack">
+          <article class="threshold-card" data-reveal>
+            <div class="threshold-copy">
+              <div class="card-kicker">Threshold one</div>
+              <h2 class="section-title" id="stay-title">Choose a room by the view it keeps.</h2>
+              <p>The house has 12 rooms in three categories. Each rate is a starting nightly rate, and breakfast is included with every stay.</p>
+              <div class="room-grid" role="list" aria-label="Room types and rates">
+                <section class="room-panel" role="listitem" aria-labelledby="courtyard-room">
+                  <div class="panel-top">
+                    <h3 id="courtyard-room">Courtyard room</h3>
+                    <div class="panel-rate"><strong>৳9,500</strong><span>from / night</span></div>
+                  </div>
+                  <p>4 rooms arranged around the quieter inner side of the house.</p>
+                  <div class="panel-stats"><span>4 rooms</span><span>Breakfast included</span></div>
+                </section>
+                <section class="room-panel" role="listitem" aria-labelledby="balcony-room">
+                  <div class="panel-top">
+                    <h3 id="balcony-room">Balcony room</h3>
+                    <div class="panel-rate"><strong>৳12,000</strong><span>from / night</span></div>
+                  </div>
+                  <p>6 rooms with the iron balcony language of the merchant house carried into the stay.</p>
+                  <div class="panel-stats"><span>6 rooms</span><span>Breakfast included</span></div>
+                </section>
+                <section class="room-panel" role="listitem" aria-labelledby="rooftop-suite">
+                  <div class="panel-top">
+                    <h3 id="rooftop-suite">Rooftop suite</h3>
+                    <div class="panel-rate"><strong>৳18,500</strong><span>from / night</span></div>
+                  </div>
+                  <p>2 suites for the highest perch in the house and the closest outlook over the roofs.</p>
+                  <div class="panel-stats"><span>2 suites</span><span>Breakfast included</span></div>
+                </section>
+              </div>
+            </div>
+            <div class="threshold-art aperture" aria-hidden="true">
+              <svg class="art-svg" viewBox="0 0 520 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect class="art-fill" x="8" y="8" width="504" height="424" rx="180" fill="#F8F0E5"/>
+                <path class="art-fill" d="M73 356C118 310 149 285 191 244C223 214 241 194 260 162C280 196 303 221 338 252C375 286 410 313 448 346V400H73V356Z" fill="#E8D8C4"/>
+                <path class="art-lines" d="M74 356C114 319 154 282 183 252C217 217 243 186 260 146C277 186 303 217 337 252C365 281 405 316 447 346" stroke="#3C2A1D" stroke-width="2.4" stroke-linecap="round"/>
+                <path class="art-lines" d="M84 355H438" stroke="#3C2A1D" stroke-width="2.2"/>
+                <path class="art-lines" d="M151 130H367V326H151V130Z" stroke="#6A301E" stroke-width="2.1"/>
+                <path class="art-lines" d="M182 163V297M228 163V297M274 163V297M320 163V297" stroke="#6A301E" stroke-width="1.7" stroke-opacity="0.75"/>
+                <path class="art-lines" d="M154 197H364M154 248H364" stroke="#6A301E" stroke-width="1.9" stroke-opacity="0.75"/>
+                <path class="art-lines" d="M194 101C208 82 225 72 249 72H271C295 72 312 82 326 101L349 129H171L194 101Z" stroke="#3C2A1D" stroke-width="2.1"/>
+              </svg>
+            </div>
+          </article>
+
+          <article class="threshold-card" id="breakfast" data-reveal>
+            <div class="threshold-copy">
+              <div class="card-kicker">Threshold two</div>
+              <h2 class="section-title">Breakfast above the lane.</h2>
+              <p>Breakfast is served on the rooftop from 7–10am, with a view over the old city’s roofs. It is part of every stay, so the day starts upstairs before the walks begin below.</p>
+              <div class="split-grid">
+                <div class="info-card">
+                  <h3 class="subsection-title">Morning rhythm</h3>
+                  <p>The rooftop keeps one clear schedule: breakfast from 7–10am, above the close-packed roofscape of Old Dhaka.</p>
+                </div>
+                <div class="info-card">
+                  <h3 class="subsection-title">Included already</h3>
+                  <p>No room type needs a separate breakfast decision. Every nightly rate already includes it.</p>
+                </div>
+              </div>
+            </div>
+            <div class="threshold-art aperture" aria-hidden="true">
+              <svg class="art-svg" viewBox="0 0 520 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect class="art-fill" x="8" y="8" width="504" height="424" rx="180" fill="#F8F0E5"/>
+                <path class="art-fill" d="M50 318H472V399H50V318Z" fill="#E7D8C4"/>
+                <path class="art-lines" d="M76 287L123 250L163 278L208 226L252 268L300 207L354 252L402 212L445 248" stroke="#3C2A1D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path class="art-lines" d="M52 318H468M66 344H454M92 370H428" stroke="#6A301E" stroke-width="1.9" stroke-opacity="0.8"/>
+                <circle class="art-fill" cx="365" cy="114" r="40" fill="#D8B069" fill-opacity="0.38"/>
+                <path class="art-lines" d="M168 161H360" stroke="#6A301E" stroke-width="2"/>
+                <path class="art-lines" d="M205 161V125H323V161" stroke="#6A301E" stroke-width="2"/>
+                <path class="art-lines" d="M197 190H330C346 190 358 202 358 218V240H169V218C169 202 181 190 197 190Z" stroke="#3C2A1D" stroke-width="2.1"/>
+                <path class="art-lines" d="M244 240V285M280 240V285" stroke="#6A301E" stroke-width="1.8"/>
+              </svg>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="walks" aria-labelledby="walks-title">
+      <div class="section-inner">
+        <div class="section-head" data-reveal>
+          <div class="folio">Threshold three</div>
+          <h2 class="section-title" id="walks-title">Walk out with the hotel, not away from it.</h2>
+          <p>Haveli 1893 leads small-group walking tours through Old Dhaka. Each walk takes 2–3 hours and stays close to the districts that define the house’s setting.</p>
+        </div>
+        <div class="split-grid">
+          <article class="info-card" data-reveal>
+            <h3 class="subsection-title">At dawn in Shankhari Bazar</h3>
+            <p>A hotel-led walk through the lane at first light, when the street’s scale and rhythm come forward.</p>
+          </article>
+          <article class="info-card" data-reveal>
+            <h3 class="subsection-title">Armanitola and the Star Mosque</h3>
+            <p>A 2–3 hour route connecting nearby history and architecture in a small group.</p>
+          </article>
+          <article class="info-card" data-reveal>
+            <h3 class="subsection-title">Toward Sadarghat</h3>
+            <p>The river becomes the final chapter, reached through the old city rather than around it.</p>
+          </article>
+          <article class="info-card" data-reveal>
+            <h3 class="subsection-title">Small-group pace</h3>
+            <p>Every walk is kept to a small group, so the route remains guided rather than crowded.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="house" aria-labelledby="house-title">
+      <div class="section-inner">
+        <article class="threshold-card" data-reveal>
+          <div class="threshold-copy">
+            <div class="card-kicker">Threshold four</div>
+            <h2 class="section-title" id="house-title">Built in 1893. Restored in 2022.</h2>
+            <p>The house began as the residence of a conch-shell merchant family in 1893. Its 2022 restoration kept the original doors, iron balconies and lime plaster, so the stay still moves through the old fabric of the building.</p>
+            <dl>
+              <dt>House origin</dt>
+              <dd>Merchant house built in 1893 by a conch-shell merchant family.</dd>
+              <dt>Restoration</dt>
+              <dd>Restored in 2022 with the original doors, iron balconies and lime plaster retained.</dd>
+            </dl>
+          </div>
+          <div class="threshold-art aperture" aria-hidden="true">
+            <svg class="art-svg" viewBox="0 0 520 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect class="art-fill" x="8" y="8" width="504" height="424" rx="180" fill="#F8F0E5"/>
+              <path class="art-fill" d="M84 337H437V399H84V337Z" fill="#E7D8C4"/>
+              <path class="art-lines" d="M108 336V120H413V336" stroke="#3C2A1D" stroke-width="2.4"/>
+              <path class="art-lines" d="M130 142H391V203H130V142ZM130 226H391V287H130V226Z" stroke="#6A301E" stroke-width="1.9"/>
+              <path class="art-lines" d="M168 143V203M223 143V203M298 143V203M353 143V203M168 226V287M223 226V287M298 226V287M353 226V287" stroke="#6A301E" stroke-width="1.6" stroke-opacity="0.78"/>
+              <path class="art-lines" d="M260 94V120" stroke="#3C2A1D" stroke-width="2.1"/>
+              <path class="art-lines" d="M213 116C224 93 240 80 260 80C280 80 296 93 307 116" stroke="#3C2A1D" stroke-width="2.1"/>
+              <path class="art-lines" d="M96 336H425M131 362H390" stroke="#3C2A1D" stroke-width="2.2"/>
+            </svg>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="visit" aria-labelledby="visit-title">
+      <div class="section-inner">
+        <div class="section-head" data-reveal>
+          <div class="folio">Threshold five</div>
+          <h2 class="section-title" id="visit-title">Keep the booking close at hand.</h2>
+          <p>The feeling of the house stays slow; the booking path does not. Use the external booking engine whenever you are ready, or contact the hotel directly.</p>
+        </div>
+        <div class="booking-grid">
+          <article class="booking-card" data-reveal>
+            <div class="detail-label">Booking</div>
+            <h3 class="booking-title">Check availability on the external booking engine.</h3>
+            <p>Room availability is handled outside the site. The link below opens the hotel’s booking engine.</p>
+            <div>
+              <a class="button" href="https://book.example-hotel.com" target="_blank" rel="noreferrer">Check availability</a>
+            </div>
+          </article>
+          <article class="contact-card" data-reveal>
+            <div class="contact-kicker">Contact</div>
+            <div class="contact-list">
+              <div class="contact-row">
+                <span class="contact-small">Address</span>
+                <span class="contact-value">31 Shankhari Bazar</span>
+                <span class="contact-small">Old Dhaka</span>
+              </div>
+              <div class="contact-row">
+                <span class="contact-small">Phone</span>
+                <a class="contact-link contact-value" href="tel:+8801700000000">+880 1700 000000</a>
+              </div>
+              <div class="contact-row">
+                <span class="contact-small">Email</span>
+                <a class="contact-link contact-value" href="mailto:stay@haveli1893.com">stay@haveli1893.com</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-mark">Haveli 1893</div>
+        <div class="footer-name">Old Dhaka</div>
+      </div>
+      <p class="footer-note">A 12-room boutique hotel in a restored merchant house in Puran Dhaka, with rooftop breakfast and hotel-led walking tours through the old city.</p>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const revealTargets = document.querySelectorAll('[data-reveal], .hero-shell, .threshold-card');
+      const sectionLinks = Array.from(document.querySelectorAll('.rail-link'));
+      const sections = sectionLinks
+        .map((link) => document.querySelector(link.getAttribute('href')))
+        .filter(Boolean);
+
+      const showAll = () => revealTargets.forEach((node) => node.classList.add('is-visible'));
+
+      if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+        showAll();
+      } else {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+
+        revealTargets.forEach((node) => revealObserver.observe(node));
+      }
+
+      if ('IntersectionObserver' in window && sectionLinks.length) {
+        const navObserver = new IntersectionObserver((entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+          if (!visible) return;
+          sectionLinks.forEach((link) => {
+            const match = link.getAttribute('href') === '#' + visible.target.id;
+            if (match) link.setAttribute('aria-current', 'true');
+            else link.removeAttribute('aria-current');
+          });
+        }, { threshold: [0.3, 0.5, 0.8] });
+
+        sections.forEach((section) => navObserver.observe(section));
+      }
+    })();
+  </script>
+</body>
+</html>

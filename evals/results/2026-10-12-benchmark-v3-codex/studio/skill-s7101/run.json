@@ -1,0 +1,12 @@
+{
+ "slug": "studio",
+ "seed": 7101,
+ "cond": "skill",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-codex/studio/skill-s7101",
+ "exit": 0,
+ "seconds": 888,
+ "turns": 29,
+ "agent": "codex-cli 0.130.0",
+ "output": true,
+ "stderr": "Reading additional input from stdin...\n2026-10-12T08:09:17.125998Z ERROR codex_core_skills::manager: failed to install system skills: io error while remove existing system skills dir: Directory not empty (os error 39)\n2026-10-12T08:14:46.782921Z ERROR codex_core::tools::router: error=write_stdin failed: stdin is closed for this session; rerun exec_command with tty=true to keep stdin open\n"
+}

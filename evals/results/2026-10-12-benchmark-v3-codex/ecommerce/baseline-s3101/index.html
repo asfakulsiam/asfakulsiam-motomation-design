@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mati — The Firing Cup</title>
+  <meta name="description" content="Shop wood-fired cups, plates and vases from Mati, a two-person ceramics studio in Rajshahi. Ships within Bangladesh.">
+  <meta name="theme-color" content="#efe4d3">
+  <!-- motomation · archetype: stage + ledger mutation · mutation: product stage with numbered firing ledger · signature: glaze reveal cup · tier: 3 · critique: not verified — the browser failed during the scan (Error); run again · gate: timeout after 40s in this container -->
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #efe4d3;
+      --bg-2: #e3d2bc;
+      --panel: rgba(247, 240, 230, 0.86);
+      --panel-strong: #f8f1e7;
+      --line: rgba(56, 40, 28, 0.16);
+      --text: #2d2018;
+      --muted: #6f5745;
+      --accent: #935531;
+      --accent-2: #d58e4b;
+      --ash: #d3cbc0;
+      --clay: #b86e40;
+      --glaze-deep: #5b4637;
+      --glaze-light: #ddd1b4;
+      --shadow: 0 20px 60px rgba(54, 33, 19, 0.12);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --gutter: clamp(18px, 3vw, 36px);
+      --max: 1280px;
+      --header-h: 78px;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+      --cup-glaze: 68;
+      --cup-tilt: 0deg;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Manrope", "Hind Siliguri", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(213, 142, 75, 0.22), transparent 32%),
+        linear-gradient(180deg, #f4eadb 0%, #efe4d3 35%, #eadbc6 100%);
+      line-height: 1.5;
+      min-width: 320px;
+    }
+
+    img, svg { display: block; max-width: 100%; }
+    button, input, select, textarea { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; }
+    a, button { -webkit-tap-highlight-color: transparent; }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -48px;
+      padding: 12px 16px;
+      background: var(--text);
+      color: #fff;
+      border-radius: 999px;
+      z-index: 100;
+      transition: top 0.16s var(--ease-out);
+    }
+
+    .skip-link:focus { top: 16px; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(239, 228, 211, 0.72);
+      border-bottom: 1px solid rgba(56, 40, 28, 0.09);
+    }
+
+    .header-inner,
+    .section-inner,
+    .footer-inner {
+      width: min(calc(100% - (var(--gutter) * 2)), var(--max));
+      margin: 0 auto;
+    }
+
+    .header-inner {
+      min-height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: grid;
+      gap: 2px;
+    }
+
+    .brand-mark,
+    .hero-title,
+    .section-title,
+    .product-name,
+    .ledger-number,
+    .stat-value {
+      font-family: "Cormorant Garamond", "Hind Siliguri", serif;
+    }
+
+    .brand-mark {
+      font-size: 1.7rem;
+      line-height: 0.95;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-copy {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      min-width: 0;
+    }
+
+    .header-nav a,
+    .cart-pill {
+      min-height: 44px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.94rem;
+      transition: background-color 0.18s var(--ease-out), border-color 0.18s var(--ease-out), transform 0.18s var(--ease-out);
+    }
+
+    .header-nav a:hover,
+    .header-nav a:focus-visible {
+      background: rgba(255, 255, 255, 0.42);
+      border-color: rgba(56, 40, 28, 0.08);
+    }
+
+    .cart-pill {
+      border: 1px solid rgba(56, 40, 28, 0.12);
+      background: rgba(255, 255, 255, 0.52);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+    }
+
+    .cart-count {
+      min-width: 1.8rem;
+      min-height: 1.8rem;
+      padding: 0 0.45rem;
+      border-radius: 999px;
+      display: inline-grid;
+      place-items: center;
+      background: var(--text);
+      color: #f7f1e8;
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    main { overflow-x: clip; }
+
+    .section { padding: clamp(32px, 6vw, 72px) 0; }
+
+    .hero {
+      padding: clamp(24px, 4vw, 46px) 0 clamp(36px, 8vw, 90px);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr) minmax(0, 0.72fr);
+      gap: clamp(18px, 3vw, 32px);
+      align-items: start;
+    }
+
+    .eyebrow,
+    .section-kicker,
+    .product-meta,
+    .panel-label,
+    .ledger-label,
+    .product-code,
+    .mini-note {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 20px;
+      align-content: start;
+      padding-top: clamp(12px, 2vw, 24px);
+      min-width: 0;
+    }
+
+    .hero-title,
+    .section-title {
+      line-height: 0.9;
+      margin: 0;
+      text-wrap: balance;
+    }
+
+    .hero-title {
+      font-size: clamp(4rem, 11vw, 8.6rem);
+      font-weight: 600;
+      max-width: 7ch;
+    }
+
+    .hero-copy p,
+    .section-intro,
+    .buy-panel li,
+    .product-copy,
+    .footer-note {
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .hero-copy p { margin: 0; }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 8px;
+    }
+
+    .button,
+    .ghost-button,
+    .add-button {
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 40, 28, 0.12);
+      transition: transform 0.18s var(--ease-out), background-color 0.18s var(--ease-out), border-color 0.18s var(--ease-out);
+    }
+
+    .button,
+    .add-button {
+      background: var(--text);
+      color: #f7f1e8;
+      font-weight: 700;
+    }
+
+    .button:hover,
+    .button:focus-visible,
+    .add-button:hover,
+    .add-button:focus-visible,
+    .ghost-button:hover,
+    .ghost-button:focus-visible,
+    .cart-pill:hover,
+    .cart-pill:focus-visible {
+      transform: translateY(-1px);
+    }
+
+    .ghost-button {
+      background: rgba(255, 255, 255, 0.42);
+      color: var(--text);
+    }
+
+    .hero-ledger {
+      display: grid;
+      gap: 10px;
+      padding-top: 8px;
+    }
+
+    .ledger-row {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      padding: 12px 0;
+      border-top: 1px solid var(--line);
+      align-items: start;
+    }
+
+    .ledger-row:last-child { border-bottom: 1px solid var(--line); }
+
+    .ledger-number {
+      font-size: 2rem;
+      line-height: 0.8;
+      color: var(--accent);
+      width: 2.3rem;
+    }
+
+    .ledger-row p { margin: 2px 0 0; color: var(--muted); }
+
+    .hero-stage {
+      position: relative;
+      min-width: 0;
+    }
+
+    .stage-card,
+    .buy-panel,
+    .story-ledger,
+    .product-card,
+    .shipping-grid article,
+    .footer-block {
+      background: var(--panel);
+      border: 1px solid rgba(56, 40, 28, 0.08);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+    }
+
+    .stage-card {
+      position: relative;
+      min-height: clamp(430px, 62vw, 760px);
+      overflow: hidden;
+      padding: clamp(18px, 3vw, 28px);
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.88), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,0.64) 0%, rgba(235, 221, 200, 0.82) 100%);
+      display: grid;
+      align-items: end;
+    }
+
+    .stage-rings {
+      position: absolute;
+      inset: 10% 8% auto;
+      height: 50%;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    .stage-rings::before,
+    .stage-rings::after {
+      content: "";
+      position: absolute;
+      inset: auto 50% 0;
+      translate: -50% 0;
+      border-radius: 50%;
+      border: 1px solid rgba(147, 85, 49, 0.12);
+      width: min(84%, 420px);
+      aspect-ratio: 1;
+    }
+
+    .stage-rings::after {
+      width: min(58%, 280px);
+      bottom: 22%;
+      border-color: rgba(45, 32, 24, 0.14);
+    }
+
+    .cup-wrap {
+      position: relative;
+      z-index: 1;
+      width: min(88%, 430px);
+      margin: 0 auto;
+      filter: drop-shadow(0 26px 40px rgba(56, 38, 25, 0.18));
+      transform: rotate(var(--cup-tilt)) translateZ(0);
+      transform-origin: 50% 60%;
+      transition: transform 0.3s var(--ease-out);
+    }
+
+    .stage-card:hover .cup-wrap,
+    .stage-card:focus-within .cup-wrap {
+      --cup-tilt: -2deg;
+    }
+
+    .cup-svg { width: 100%; height: auto; }
+
+    .cup-glaze-mask {
+      transform-box: fill-box;
+      transform-origin: center bottom;
+      transform: scaleY(calc(var(--cup-glaze) / 100));
+      transition: transform 0.4s var(--ease-out);
+    }
+
+    .stage-caption {
+      position: absolute;
+      inset: auto 22px 20px 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: end;
+      font-size: 0.92rem;
+    }
+
+    .stage-caption strong { display: block; font-weight: 700; }
+
+    .buy-panel {
+      position: sticky;
+      top: calc(var(--header-h) + 16px);
+      padding: 22px;
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+      background: rgba(248, 241, 231, 0.93);
+    }
+
+    .buy-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .product-name {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 0.92;
+      font-weight: 600;
+    }
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .spec-list,
+    .shipping-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .spec-list li,
+    .shipping-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    .spec-list strong,
+    .shipping-list strong { font-weight: 700; }
+
+    .stock-note {
+      display: grid;
+      gap: 6px;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(56, 40, 28, 0.08);
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+    }
+
+    .status-pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(147, 85, 49, 0.1);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .cart-message {
+      min-height: 1.4em;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: clamp(18px, 3vw, 34px);
+      align-items: start;
+    }
+
+    .story-copy {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .section-title {
+      font-size: clamp(2.6rem, 7vw, 5rem);
+      font-weight: 600;
+      max-width: 9ch;
+    }
+
+    .story-ledger {
+      padding: 20px;
+      display: grid;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .story-step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: start;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .story-step:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .story-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, var(--accent-2), var(--accent));
+      box-shadow: 0 0 0 8px rgba(147, 85, 49, 0.08);
+      margin-top: 6px;
+      flex: 0 0 auto;
+    }
+
+    .story-step h3,
+    .shipping-grid h3,
+    .footer-block h3 {
+      margin: 0 0 4px;
+      font-size: 1.05rem;
+    }
+
+    .story-step p,
+    .shipping-grid p,
+    .footer-block p,
+    .product-copy,
+    .shipping-list li,
+    .spec-list li,
+    .stage-caption,
+    .section-intro,
+    .mini-note {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .story-note {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .story-note .footer-block {
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.42);
+      box-shadow: none;
+    }
+
+    .stat-value {
+      display: block;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      line-height: 0.9;
+      color: var(--text);
+    }
+
+    .products-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: end;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(14px, 2vw, 22px);
+    }
+
+    .product-card {
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .product-figure {
+      border-radius: calc(var(--radius) - 8px);
+      border: 1px solid rgba(56, 40, 28, 0.07);
+      min-height: 180px;
+      background:
+        radial-gradient(circle at 50% 22%, rgba(255,255,255,0.7), transparent 30%),
+        linear-gradient(180deg, rgba(255,255,255,0.62), rgba(234, 220, 199, 0.95));
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      overflow: hidden;
+    }
+
+    .product-figure svg {
+      width: min(100%, 220px);
+      height: auto;
+      filter: drop-shadow(0 18px 26px rgba(56, 38, 25, 0.15));
+    }
+
+    .product-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+    }
+
+    .product-top h3 {
+      margin: 0;
+      font-size: 1.4rem;
+      line-height: 1;
+      font-family: "Cormorant Garamond", "Hind Siliguri", serif;
+    }
+
+    .product-price {
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .add-button {
+      justify-self: start;
+      padding-inline: 16px;
+    }
+
+    .shipping-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(16px, 2vw, 24px);
+    }
+
+    .shipping-grid article,
+    .footer-block { padding: 20px; }
+
+    .footer-inner {
+      padding: 0 0 44px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 20px;
+    }
+
+    .footer-block {
+      background: rgba(255, 255, 255, 0.42);
+      box-shadow: none;
+    }
+
+    .footer-note { margin-top: 10px; }
+
+    .reveal,
+    .reveal-up {
+      opacity: 1;
+      transform: none;
+    }
+
+    .js .reveal,
+    .js .reveal-up {
+      opacity: 0;
+    }
+
+    .js .reveal-up {
+      transform: translateY(22px);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .product-card:hover,
+      .shipping-grid article:hover,
+      .footer-block:hover,
+      .buy-panel:hover {
+        border-color: rgba(56, 40, 28, 0.14);
+      }
+    }
+
+    @media (max-width: 1120px) {
+      .hero-grid,
+      .story-grid,
+      .footer-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .buy-panel {
+        position: static;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .products-grid,
+      .shipping-grid,
+      .story-note {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-title { max-width: 6ch; }
+      .header-inner { padding-block: 10px; align-items: start; }
+      .header-nav { width: 100%; justify-content: flex-start; }
+      .header-nav a,
+      .cart-pill { padding-inline: 14px; }
+    }
+
+    @media (max-width: 640px) {
+      :root { --header-h: 112px; }
+
+      .hero {
+        padding-top: 20px;
+      }
+
+      .hero-grid { gap: 18px; }
+
+      .hero-copy {
+        order: 1;
+      }
+
+      .hero-stage {
+        order: 2;
+      }
+
+      .buy-panel {
+        order: 3;
+        padding: 18px;
+      }
+
+      .stage-card {
+        min-height: 360px;
+      }
+
+      .stage-caption,
+      .status-row,
+      .buy-head,
+      .product-top,
+      .products-head {
+        grid-template-columns: minmax(0, 1fr);
+        display: grid;
+      }
+
+      .spec-list li,
+      .shipping-list li {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 4px;
+      }
+
+      .hero-actions { flex-direction: column; }
+      .hero-actions > * { width: 100%; text-align: center; justify-content: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+
+      .js .reveal,
+      .js .reveal-up {
+        opacity: 1;
+        transform: none;
+      }
+
+      .cup-glaze-mask { transform: scaleY(0.86); }
+      .cup-wrap { transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Mati home">
+        <span class="brand-mark">Mati</span>
+        <span class="brand-copy">Rajshahi · ceramics studio</span>
+      </a>
+      <nav class="header-nav" aria-label="Primary">
+        <a href="#story">Firing story</a>
+        <a href="#shop">Other products</a>
+        <a href="#shipping">Shipping &amp; care</a>
+        <button class="cart-pill" type="button" aria-label="Cart items">
+          Cart
+          <span class="cart-count" id="cart-count" aria-live="polite" aria-atomic="true">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="section hero" id="top">
+      <div class="section-inner hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow reveal">Wood-fired stoneware · ships within Bangladesh</p>
+          <h1 class="hero-title reveal">The Firing Cup</h1>
+          <p class="reveal-up">Mati is a two-person ceramics studio in Rajshahi. Rina and Sohel make wood-fired cups, plates and vases in small batches of 20–40 pieces per firing.</p>
+          <p class="reveal-up">This cup holds 250&nbsp;ml, carries an ash glaze, and each one is marked differently by the flame.</p>
+          <div class="hero-actions reveal-up">
+            <a class="button" href="#buy-panel">Buy the featured cup</a>
+            <a class="ghost-button" href="#story">Read the firing story</a>
+          </div>
+          <div class="hero-ledger reveal-up" aria-label="Studio facts">
+            <div class="ledger-row">
+              <span class="ledger-number" aria-hidden="true">01</span>
+              <div>
+                <div class="ledger-label">Studio</div>
+                <p>Two people, one studio, Rajshahi.</p>
+              </div>
+            </div>
+            <div class="ledger-row">
+              <span class="ledger-number" aria-hidden="true">02</span>
+              <div>
+                <div class="ledger-label">Batch</div>
+                <p>Small firings of 20–40 pieces.</p>
+              </div>
+            </div>
+            <div class="ledger-row">
+              <span class="ledger-number" aria-hidden="true">03</span>
+              <div>
+                <div class="ledger-label">Next firing</div>
+                <p>18 November · 32 pieces.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-stage reveal-up" aria-hidden="true">
+          <div class="stage-card" id="cup-stage">
+            <div class="stage-rings"></div>
+            <div class="cup-wrap">
+              <svg class="cup-svg" viewBox="0 0 440 520" role="presentation">
+                <defs>
+                  <linearGradient id="clayGradient" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#c47c4b"></stop>
+                    <stop offset="100%" stop-color="#925432"></stop>
+                  </linearGradient>
+                  <linearGradient id="glazeGradient" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#efe7d2"></stop>
+                    <stop offset="45%" stop-color="#ccbba1"></stop>
+                    <stop offset="100%" stop-color="#534032"></stop>
+                  </linearGradient>
+                  <clipPath id="cupShapeClip">
+                    <path d="M134 116C151 96 290 96 307 116C325 137 331 190 328 303C325 400 309 445 290 463C267 485 175 485 151 463C132 445 116 400 113 303C110 190 116 137 134 116Z"></path>
+                  </clipPath>
+                </defs>
+                <ellipse cx="220" cy="456" rx="126" ry="28" fill="rgba(81,54,34,0.16)"></ellipse>
+                <ellipse cx="220" cy="112" rx="122" ry="34" fill="#dfd2bc"></ellipse>
+                <path d="M134 116C151 96 290 96 307 116C325 137 331 190 328 303C325 400 309 445 290 463C267 485 175 485 151 463C132 445 116 400 113 303C110 190 116 137 134 116Z" fill="url(#clayGradient)"></path>
+                <g clip-path="url(#cupShapeClip)">
+                  <rect class="cup-glaze-mask" x="94" y="92" width="252" height="378" fill="url(#glazeGradient)"></rect>
+                  <path d="M125 178C150 165 176 157 201 156C235 154 280 172 303 190C319 203 328 217 333 227V122H110V184C114 184 119 181 125 178Z" fill="rgba(255,255,255,0.26)"></path>
+                  <path d="M118 289C139 273 160 264 183 260C205 257 239 261 266 275C291 288 314 311 330 350V472H111V309C112 302 114 295 118 289Z" fill="rgba(74,55,43,0.28)"></path>
+                </g>
+                <path d="M134 116C151 96 290 96 307 116C325 137 331 190 328 303C325 400 309 445 290 463C267 485 175 485 151 463C132 445 116 400 113 303C110 190 116 137 134 116Z" fill="none" stroke="rgba(75,52,36,0.26)" stroke-width="5"></path>
+                <path d="M307 180C365 182 390 220 390 268C390 321 357 353 318 352" fill="none" stroke="rgba(75,52,36,0.28)" stroke-width="24" stroke-linecap="round"></path>
+                <path d="M307 180C365 182 390 220 390 268C390 321 357 353 318 352" fill="none" stroke="#d7cab3" stroke-width="11" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <div class="stage-caption">
+              <div>
+                <span class="panel-label">Featured piece</span>
+                <strong>250 ml · ash glaze</strong>
+              </div>
+              <div>
+                <span class="panel-label">Marked by the flame</span>
+                <strong>Each one varies</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="buy-panel reveal-up" id="buy-panel" aria-label="Purchase panel">
+          <div class="buy-head">
+            <div>
+              <div class="panel-label">Featured product</div>
+              <h2 class="product-name">The Firing Cup</h2>
+            </div>
+            <div class="price">৳1,200</div>
+          </div>
+
+          <p class="product-copy">Wood-fired stoneware with an ash glaze. The next firing is on 18 November, with 32 pieces in the batch.</p>
+
+          <ul class="spec-list" aria-label="Product specifications">
+            <li><span>Material</span><strong>Wood-fired stoneware</strong></li>
+            <li><span>Finish</span><strong>Ash glaze</strong></li>
+            <li><span>Capacity</span><strong>250 ml</strong></li>
+          </ul>
+
+          <div class="stock-note">
+            <div class="status-row">
+              <span class="mini-note">Next firing</span>
+              <span class="status-pill">32 pieces</span>
+            </div>
+            <strong>18 November</strong>
+          </div>
+
+          <ul class="shipping-list" aria-label="Shipping and care summary">
+            <li><span>Shipping inside Bangladesh</span><strong>3–5 days</strong></li>
+            <li><span>Delivery</span><strong>৳150 flat · free over ৳5,000</strong></li>
+            <li><span>Care</span><strong>Dishwasher safe · not for the microwave</strong></li>
+          </ul>
+
+          <button class="add-button add-to-cart" type="button" data-product="The Firing Cup" data-price="1200">Add to cart</button>
+          <div class="cart-message" id="cart-message" aria-live="polite"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="story">
+      <div class="section-inner story-grid">
+        <div class="story-copy">
+          <p class="section-kicker reveal">The firing story</p>
+          <h2 class="section-title reveal">Three days. 36 hours. Four days.</h2>
+          <p class="section-intro reveal-up">Three days of stacking, 36 hours of firing with mango wood, then four days of cooling before the batch is ready to leave Rajshahi.</p>
+          <div class="story-note reveal-up" aria-label="Firing summary">
+            <div class="footer-block">
+              <span class="mini-note">Stacking</span>
+              <span class="stat-value">3</span>
+              <p>days of stacking</p>
+            </div>
+            <div class="footer-block">
+              <span class="mini-note">Firing</span>
+              <span class="stat-value">36</span>
+              <p>hours with mango wood</p>
+            </div>
+            <div class="footer-block">
+              <span class="mini-note">Cooling</span>
+              <span class="stat-value">4</span>
+              <p>days of cooling</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-ledger reveal-up" aria-label="Firing process">
+          <div class="story-step">
+            <span class="story-dot" aria-hidden="true"></span>
+            <div>
+              <h3>Stacking</h3>
+              <p>Three days of placing the work for the firing.</p>
+            </div>
+          </div>
+          <div class="story-step">
+            <span class="story-dot" aria-hidden="true"></span>
+            <div>
+              <h3>Firing</h3>
+              <p>36 hours of firing with mango wood.</p>
+            </div>
+          </div>
+          <div class="story-step">
+            <span class="story-dot" aria-hidden="true"></span>
+            <div>
+              <h3>Cooling</h3>
+              <p>Four days of cooling before the batch is handled.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="shop">
+      <div class="section-inner">
+        <div class="products-head">
+          <div>
+            <p class="section-kicker reveal">Other products</p>
+            <h2 class="section-title reveal" style="max-width: 8ch;">Other products.</h2>
+          </div>
+          <p class="section-intro reveal-up">Cups, plates, bowls, a jug and a vase — all made in the same studio rhythm.</p>
+        </div>
+
+        <div class="products-grid" aria-label="Products">
+          <article class="product-card reveal-up">
+            <div class="product-figure" aria-hidden="true">
+              <svg viewBox="0 0 240 220" role="presentation">
+                <ellipse cx="120" cy="168" rx="88" ry="18" fill="rgba(81,54,34,0.12)"></ellipse>
+                <ellipse cx="120" cy="108" rx="76" ry="44" fill="#d9ccb5"></ellipse>
+                <ellipse cx="120" cy="108" rx="60" ry="28" fill="rgba(255,255,255,0.78)"></ellipse>
+                <path d="M58 110C58 148 84 170 120 170C156 170 182 148 182 110" fill="none" stroke="#b77043" stroke-width="24" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <div class="product-top">
+              <h3>Morning Plate</h3>
+              <div class="product-price">৳1,800</div>
+            </div>
+            <p class="product-copy">Wood-fired ceramics from the same Rajshahi studio.</p>
+            <button class="add-button add-to-cart" type="button" data-product="Morning Plate" data-price="1800">Add to cart</button>
+          </article>
+
+          <article class="product-card reveal-up">
+            <div class="product-figure" aria-hidden="true">
+              <svg viewBox="0 0 240 220" role="presentation">
+                <ellipse cx="120" cy="192" rx="68" ry="16" fill="rgba(81,54,34,0.12)"></ellipse>
+                <path d="M89 36C100 26 140 26 151 36C162 47 170 81 170 139C170 180 158 194 149 199C140 205 100 205 91 199C82 194 70 180 70 139C70 81 78 47 89 36Z" fill="#b86e40"></path>
+                <path d="M86 74C102 61 129 59 147 67C156 71 163 78 168 89V139C168 180 156 194 148 199C139 205 101 205 92 199C83 194 72 180 72 139V96C75 87 79 80 86 74Z" fill="#d7c8af"></path>
+                <path d="M89 36C100 26 140 26 151 36C162 47 170 81 170 139C170 180 158 194 149 199C140 205 100 205 91 199C82 194 70 180 70 139C70 81 78 47 89 36Z" fill="none" stroke="rgba(75,52,36,0.22)" stroke-width="4"></path>
+              </svg>
+            </div>
+            <div class="product-top">
+              <h3>Tall Vase</h3>
+              <div class="product-price">৳6,500</div>
+            </div>
+            <p class="product-copy">Small-batch work made by Rina and Sohel.</p>
+            <button class="add-button add-to-cart" type="button" data-product="Tall Vase" data-price="6500">Add to cart</button>
+          </article>
+
+          <article class="product-card reveal-up">
+            <div class="product-figure" aria-hidden="true">
+              <svg viewBox="0 0 240 220" role="presentation">
+                <ellipse cx="120" cy="184" rx="72" ry="16" fill="rgba(81,54,34,0.12)"></ellipse>
+                <path d="M86 79C92 69 104 61 121 60C138 61 150 69 156 79V123C156 152 142 168 121 168C100 168 86 152 86 123V79Z" fill="#c27b4b"></path>
+                <path d="M104 58C104 42 112 31 121 31C130 31 138 42 138 58V64H104V58Z" fill="#d7c8af"></path>
+                <path d="M82 81C91 70 102 66 121 66C140 66 151 70 160 81" fill="none" stroke="#d9ccb5" stroke-width="12" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <div class="product-top">
+              <h3>Pour Jug</h3>
+              <div class="product-price">৳3,200</div>
+            </div>
+            <p class="product-copy">Made in the same wood-fired batches.</p>
+            <button class="add-button add-to-cart" type="button" data-product="Pour Jug" data-price="3200">Add to cart</button>
+          </article>
+
+          <article class="product-card reveal-up">
+            <div class="product-figure" aria-hidden="true">
+              <svg viewBox="0 0 240 220" role="presentation">
+                <ellipse cx="120" cy="170" rx="70" ry="16" fill="rgba(81,54,34,0.12)"></ellipse>
+                <path d="M72 104C72 141 92 165 120 165C148 165 168 141 168 104" fill="none" stroke="#b86e40" stroke-width="26" stroke-linecap="round"></path>
+                <path d="M84 99C90 118 102 127 120 127C138 127 150 118 156 99" fill="none" stroke="#d8ccb8" stroke-width="14" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <div class="product-top">
+              <h3>Small Bowl</h3>
+              <div class="product-price">৳800</div>
+            </div>
+            <p class="product-copy">Wood-fired stoneware from Rajshahi.</p>
+            <button class="add-button add-to-cart" type="button" data-product="Small Bowl" data-price="800">Add to cart</button>
+          </article>
+
+          <article class="product-card reveal-up">
+            <div class="product-figure" aria-hidden="true">
+              <svg viewBox="0 0 240 220" role="presentation">
+                <ellipse cx="120" cy="174" rx="78" ry="16" fill="rgba(81,54,34,0.12)"></ellipse>
+                <path d="M62 104C62 148 89 170 120 170C151 170 178 148 178 104" fill="none" stroke="#b46f43" stroke-width="28" stroke-linecap="round"></path>
+                <path d="M72 100C79 122 96 133 120 133C144 133 161 122 168 100" fill="none" stroke="#d8ccb8" stroke-width="14" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <div class="product-top">
+              <h3>Rice Bowl</h3>
+              <div class="product-price">৳1,400</div>
+            </div>
+            <p class="product-copy">A bowl from the same small-batch firing cycle.</p>
+            <button class="add-button add-to-cart" type="button" data-product="Rice Bowl" data-price="1400">Add to cart</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="shipping">
+      <div class="section-inner shipping-grid">
+        <article class="reveal-up">
+          <p class="section-kicker">Shipping</p>
+          <h3>Within Bangladesh</h3>
+          <p>Orders ship in 3–5 days inside Bangladesh. Delivery is ৳150 flat, and shipping is free over ৳5,000.</p>
+        </article>
+        <article class="reveal-up">
+          <p class="section-kicker">Care</p>
+          <h3>Care notes</h3>
+          <p>Dishwasher safe. Not for the microwave.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="section">
+    <div class="footer-inner">
+      <div class="footer-block reveal-up">
+        <p class="section-kicker">Mati</p>
+        <h3>Wood-fired ceramics from Rajshahi.</h3>
+        <p class="footer-note">Rina and Sohel make cups, plates and vases in small batches, then ship within Bangladesh.</p>
+      </div>
+      <div class="footer-block reveal-up">
+        <p class="section-kicker">Cart status</p>
+        <h3><span id="footer-cart-count">0</span> item<span id="footer-cart-plural">s</span> selected</h3>
+        <p class="footer-note">No checkout is connected here. The cart counter works in-page.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="sr-only" aria-live="polite" aria-atomic="true" id="live-region"></div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "The Firing Cup",
+    "brand": {
+      "@type": "Brand",
+      "name": "Mati"
+    },
+    "description": "250 ml wood-fired stoneware cup with ash glaze; each one is marked differently by the flame.",
+    "material": "Wood-fired stoneware",
+    "offers": {
+      "@type": "Offer",
+      "price": "1200",
+      "priceCurrency": "BDT",
+      "availability": "https://schema.org/InStock"
+    }
+  }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script>
+    (() => {
+      const cartCount = document.getElementById('cart-count');
+      const footerCartCount = document.getElementById('footer-cart-count');
+      const footerCartPlural = document.getElementById('footer-cart-plural');
+      const cartMessage = document.getElementById('cart-message');
+      const liveRegion = document.getElementById('live-region');
+      const buttons = document.querySelectorAll('.add-to-cart');
+      let count = 0;
+      let messageTimer;
+
+      const syncCart = (label) => {
+        cartCount.textContent = String(count);
+        footerCartCount.textContent = String(count);
+        footerCartPlural.textContent = count === 1 ? '' : 's';
+        const message = `${label} added. Cart now has ${count} item${count === 1 ? '' : 's'}.`;
+        cartMessage.textContent = message;
+        liveRegion.textContent = message;
+        window.clearTimeout(messageTimer);
+        messageTimer = window.setTimeout(() => {
+          cartMessage.textContent = '';
+        }, 2200);
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          count += 1;
+          syncCart(button.dataset.product || 'Item');
+        });
+      });
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const setGlaze = (value) => {
+        document.documentElement.style.setProperty('--cup-glaze', String(value));
+      };
+
+      if (prefersReduced.matches) {
+        setGlaze(86);
+        return;
+      }
+
+      const bootMotion = () => {
+        if (!window.gsap || !window.ScrollTrigger) {
+          setGlaze(82);
+          document.querySelectorAll('.reveal, .reveal-up').forEach((el) => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+          });
+          return;
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+        const mm = gsap.matchMedia();
+        mm.add(
+          {
+            motion: '(prefers-reduced-motion: no-preference)',
+            touch: '(hover: none)',
+            desktop: '(min-width: 900px)'
+          },
+          (context) => {
+            const { motion, touch } = context.conditions;
+            if (!motion) return;
+
+            gsap.set('.reveal, .reveal-up', { opacity: 1 });
+
+            gsap.utils.toArray('.reveal').forEach((element) => {
+              gsap.from(element, {
+                yPercent: 18,
+                opacity: 0,
+                duration: 0.9,
+                ease: 'expo.out',
+                scrollTrigger: {
+                  trigger: element,
+                  start: 'top 88%',
+                  once: true
+                }
+              });
+            });
+
+            gsap.utils.toArray('.reveal-up').forEach((element) => {
+              gsap.from(element, {
+                y: 24,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+                scrollTrigger: {
+                  trigger: element,
+                  start: 'top 90%',
+                  once: true
+                }
+              });
+            });
+
+            gsap.fromTo(':root',
+              { '--cup-glaze': 46 },
+              {
+                '--cup-glaze': 92,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: '#cup-stage',
+                  start: 'top 82%',
+                  end: 'bottom top',
+                  scrub: 0.9
+                }
+              }
+            );
+
+            if (!touch) {
+              gsap.to('.cup-wrap', {
+                rotate: -3,
+                yPercent: -2,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: '#cup-stage',
+                  start: 'top bottom',
+                  end: 'bottom top',
+                  scrub: 1.1
+                }
+              });
+            }
+
+            document.fonts.ready.then(() => ScrollTrigger.refresh());
+            window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
+          }
+        );
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bootMotion, { once: true });
+      } else {
+        bootMotion();
+      }
+    })();
+  </script>
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</body>
+</html>

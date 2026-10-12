@@ -16,47 +16,16 @@ jobs:
       max-parallel: 20
       matrix:
         include:
-          - { out: 2026-10-12-benchmark-v3, slug: studio, arm: baseline }
-          - { out: 2026-10-12-benchmark-v3, slug: studio, arm: gated }
-          - { out: 2026-10-12-benchmark-v3, slug: studio, arm: skill }
-          - { out: 2026-10-12-benchmark-v3, slug: studio, arm: matched }
-          - { out: 2026-10-12-benchmark-v3, slug: studio, arm: c-taste }
-          - { out: 2026-10-12-benchmark-v3, slug: studio, arm: c-uiux }
-          - { out: 2026-10-12-benchmark-v3, slug: studio, arm: c-fdesign }
-          - { out: 2026-10-12-benchmark-v3, slug: hotel, arm: baseline }
-          - { out: 2026-10-12-benchmark-v3, slug: hotel, arm: gated }
-          - { out: 2026-10-12-benchmark-v3, slug: hotel, arm: skill }
-          - { out: 2026-10-12-benchmark-v3, slug: hotel, arm: matched }
-          - { out: 2026-10-12-benchmark-v3, slug: hotel, arm: c-taste }
-          - { out: 2026-10-12-benchmark-v3, slug: hotel, arm: c-uiux }
-          - { out: 2026-10-12-benchmark-v3, slug: hotel, arm: c-fdesign }
-          - { out: 2026-10-12-benchmark-v3, slug: ecommerce, arm: baseline }
-          - { out: 2026-10-12-benchmark-v3, slug: ecommerce, arm: gated }
-          - { out: 2026-10-12-benchmark-v3, slug: ecommerce, arm: skill }
-          - { out: 2026-10-12-benchmark-v3, slug: ecommerce, arm: matched }
-          - { out: 2026-10-12-benchmark-v3, slug: ecommerce, arm: c-taste }
-          - { out: 2026-10-12-benchmark-v3, slug: ecommerce, arm: c-uiux }
-          - { out: 2026-10-12-benchmark-v3, slug: ecommerce, arm: c-fdesign }
-          - { out: 2026-10-12-benchmark-v3, slug: saas, arm: baseline }
-          - { out: 2026-10-12-benchmark-v3, slug: saas, arm: gated }
-          - { out: 2026-10-12-benchmark-v3, slug: saas, arm: skill }
-          - { out: 2026-10-12-benchmark-v3, slug: saas, arm: matched }
-          - { out: 2026-10-12-benchmark-v3, slug: saas, arm: c-taste }
-          - { out: 2026-10-12-benchmark-v3, slug: saas, arm: c-uiux }
-          - { out: 2026-10-12-benchmark-v3, slug: saas, arm: c-fdesign }
-          - { out: 2026-10-12-benchmark-v3, slug: public, arm: baseline }
-          - { out: 2026-10-12-benchmark-v3, slug: public, arm: gated }
-          - { out: 2026-10-12-benchmark-v3, slug: public, arm: skill }
-          - { out: 2026-10-12-benchmark-v3, slug: public, arm: matched }
-          - { out: 2026-10-12-benchmark-v3, slug: public, arm: c-taste }
-          - { out: 2026-10-12-benchmark-v3, slug: public, arm: c-uiux }
-          - { out: 2026-10-12-benchmark-v3, slug: public, arm: c-fdesign }
-          - { out: 2026-10-12-benchmark-v3-motion, slug: portfolio, arm: baseline }
-          - { out: 2026-10-12-benchmark-v3-motion, slug: portfolio, arm: skill }
-          - { out: 2026-10-12-benchmark-v3-motion, slug: launch, arm: baseline }
-          - { out: 2026-10-12-benchmark-v3-motion, slug: launch, arm: skill }
-          - { out: 2026-10-12-benchmark-v3-motion, slug: festival, arm: baseline }
-          - { out: 2026-10-12-benchmark-v3-motion, slug: festival, arm: skill }
+          - { out: 2026-10-12-benchmark-v3-codex, slug: studio, arm: baseline }
+          - { out: 2026-10-12-benchmark-v3-codex, slug: studio, arm: skill }
+          - { out: 2026-10-12-benchmark-v3-codex, slug: hotel, arm: baseline }
+          - { out: 2026-10-12-benchmark-v3-codex, slug: hotel, arm: skill }
+          - { out: 2026-10-12-benchmark-v3-codex, slug: ecommerce, arm: baseline }
+          - { out: 2026-10-12-benchmark-v3-codex, slug: ecommerce, arm: skill }
+          - { out: 2026-10-12-benchmark-v3-codex, slug: saas, arm: baseline }
+          - { out: 2026-10-12-benchmark-v3-codex, slug: saas, arm: skill }
+          - { out: 2026-10-12-benchmark-v3-codex, slug: public, arm: baseline }
+          - { out: 2026-10-12-benchmark-v3-codex, slug: public, arm: skill }
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -68,7 +37,7 @@ jobs:
           npx playwright --version; node -e "console.log('axe-core', require('axe-core/package.json').version)"
       - name: Measure
         run: |
-          node evals/run-agent-benchmark.mjs measure --out "$PWD/evals/results/${{ matrix.out }}" --n 3 --only ${{ matrix.slug }} --arms ${{ matrix.arm }} --parallel 1 --force \
+          node evals/run-agent-benchmark.mjs measure --out "$PWD/evals/results/${{ matrix.out }}" --n ${{ contains(matrix.out, 'codex') && 1 || 3 }} --only ${{ matrix.slug }} --arms ${{ matrix.arm }} --parallel 1 --force \
             --competitors "taste=/x:design-taste-frontend,uiux=/x:ui-ux-pro-max,fdesign=/x:frontend-design"
           ls evals/results/${{ matrix.out }}/${{ matrix.slug }}/${{ matrix.arm }}-s*/checks.json
       - uses: actions/upload-artifact@v4
