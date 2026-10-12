@@ -343,12 +343,16 @@ Now remove things.
 - [ ] Layout: one deliberate grid break per screen, recomposed (not squeezed) on mobile
 - [ ] Motion: tokens used; `gsap.matchMedia()` with reduced-motion and pointer conditions; `ScrollTrigger.refresh()` after load
 - [ ] Mobile motion matrix applied
+- [ ] Scroll sequences (pinned, scrubbed, image-sequence, lit-step lists) reviewed per `craft/scroll-sequences.md`, record in the handoff:
+  - [ ] Each step's contrast passes AA **active and inactive** (dimmed text measured as rendered: text × opacity + background × (1 − opacity))
+  - [ ] Reduced-motion fallback is a **designed still**, not a poster: unpinned plates, every step fully visible
+  - [ ] **No step shows a value that is later corrected**
 - [ ] Accessibility: keyboard path, visible focus, landmarks, skip link, alt text
 - [ ] Performance: LCP image preloaded, heavy libraries loaded dynamically, off-screen work paused
 - [ ] SEO: title, description, OG image, structured data, `llms.txt` (for sites)
 - [ ] Copy: real, specific, no banned phrases; the copy pass in `craft/copy.md` run with every row "none found" or fixed; `[NEEDS COPY]` markers listed for the user
 - [ ] "Restraint Gate record" filled in `DESIGN.md` (concept survived?, every cut, every rejected animation)
-- [ ] `node scripts/gate.mjs` run on the build; its full `critique: … · gate: …` line pasted and `--verify` passes (or "not verified — no browser" reported)
+- [ ] `node scripts/gate.mjs` run on the build; its full `critique: … · gate: …` line pasted and `--verify` passes (or the exact "not verified — …" line reported: no browser, timed out, or sandbox too constrained)
 - [ ] Stamp comment written; run logged with `node scripts/memory.mjs log …`
 
 ---

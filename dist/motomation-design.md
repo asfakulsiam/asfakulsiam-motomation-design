@@ -743,7 +743,7 @@ Restraint is what makes a minimal site feel expensive instead of empty. It is al
 | Restraint | the four cuts and the universal budgets below; one signature move | this file, Restraint Gate in `thinking/sequence.md` |
 | Motion discipline | every animation passes the four questions; UI feedback ≤ <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->; prefer transform/opacity, clip-path when it serves the concept, paint-heavy effects only with a perf check and a static fallback, layout properties never | `motion/tokens.md` ("What to animate") |
 | Real content | no lorem ipsum, invented numbers, fake logos or testimonials | `gates/delivery-gate.md` |
-| Reduced-motion fallback | a designed static version, not "animations off" | `craft/accessibility.md`, each tier file |
+| Reduced-motion fallback | a designed still that reads as its own composition, not "animations off" and not one frame of the animation (see "Designed stills" below) | `craft/accessibility.md`, each tier file, "Designed stills" below |
 | Performance budgets | LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1, JS budget per tier | `craft/performance.md` |
 
 **House-style defaults** are asfakulsiam's point of view (`principles/house-style.md`). They apply when the brief is silent. A brief, a category or a named style can override them, and the override is not a failure:
@@ -776,6 +776,18 @@ Before delivery, make four passes and remove:
 | Pinned sections | ≤ 2 on Tier 2–3; Motomation chapters ≤ 2 | standard |
 | Display typefaces | 1 (2 only if the concept is about contrast); a dashboard may have none | standard |
 | Accent colours | 1 brand accent (data and status colours encode information and don't count) | standard |
+
+### Designed stills (reduced motion at Tier 3–5)
+
+Benchmark v3 judged reduced-motion strips on their own: the skill's Tier 4 pages lost to a plain baseline 6 of 9 times (2.50 of 5) because the reduced version was the same page with the shader frozen and the hero still pinned. A frozen frame is a downgrade; a still is a design. Under `prefers-reduced-motion: reduce`:
+
+1. **Don't mount the canvas.** Render a still composed for the purpose, in SVG or CSS. Every Tier 4 background in `examples/components/backgrounds/` ships one (aurora → a long-exposure plate, meteors → star trails, globe → a chart plate, particle-field → a star chart, beams → pools of light on the floor, mesh-gradient → a colour study, liquid-field → a marbled sheet).
+2. **Translate the motion into the picture.** What moved becomes something drawn: time as trails, flow as bands, a path as a line, a sequence as numbered plates. The still says what the motion said.
+3. **Keep the mood, change the frame.** Same palette, same density, same weight of composition; a different arrangement from any frame of the animation. If a screenshot of the still could be mistaken for a paused frame, it's a poster, not a still.
+4. **Unpin.** A pinned chapter or scrubbed sequence becomes a stack of plates: each step in normal flow, fully visible, each with its own still. Nothing stays pinned while text scrolls past it.
+5. **Complete on its own.** Judged alone, with no knowledge of the full version, the still must look finished: a focal point, the type set against it with AA contrast, no empty box where the canvas was.
+
+Check it the way v3 judged it: capture the reduced-motion strip (`gate.mjs --report`), look at it without the full-motion strip, and ask whether it is a designed page or a page with the motion switched off.
 
 ### The "one more thing" test
 
@@ -1154,7 +1166,7 @@ void main() {
 ### Fallbacks (required)
 
 1. **No WebGL / low power:** a static image or CSS version of the same idea.
-2. **Reduced motion:** render one still frame, no time-based animation, no scroll distortion.
+2. **Reduced motion:** a designed still, not one frame of the animation: don't mount the canvas, render an SVG/CSS composition in the same palette that translates the motion into the picture (trails, bands, plates), and unpin anything pinned. Rules and examples in `principles/restraint.md` ("Designed stills"); every Tier 4 background in `examples/components/backgrounds/` ships one.
 3. **Mobile:** simpler shader, fewer particles, or the static version (see `craft/mobile-motion-matrix.md`).
 
 ```js
@@ -2350,6 +2362,18 @@ Mobile is not desktop with less space. Touch has no hover, a thumb blocks the vi
 | Smooth scroll (Lenis) | Lenis keeps native touch scrolling by default (`syncTouch: false`). Keep it that way |
 | Page transitions | Keep, ≤ 400ms |
 
+### Reduced motion, any device
+
+`prefers-reduced-motion: reduce` wins over every row above, on phones and desktops alike. The fallback is a designed still (`principles/restraint.md`, "Designed stills"), not the same layout frozen.
+
+| Effect | Reduced-motion behaviour |
+|---|---|
+| WebGL / 3D background (Tier 4) | Canvas not mounted. The component's designed still (SVG/CSS), composed differently from any animated frame |
+| Pinned chapter, scrubbed sequence (Tier 2, 5) | Unpinned: each step in normal flow as its own plate, fully visible, no dimmed inactive steps |
+| Image-sequence film (Tier 5) | The storyboard: 3–5 chosen frames as numbered plates with captions, not the first frame |
+| Ambient CSS loops (beams, meteors, mesh) | The component's designed still; no Web Animations created |
+| Line reveals, counters | Final state on first paint |
+
 ```js
 const mm = gsap.matchMedia();
 mm.add({ desktop: "(min-width: 768px) and (hover: hover)", mobile: "(max-width: 767px)",
@@ -2534,6 +2558,74 @@ Check the longest word with the formula in `principles/typography.md` §3 before
 
 ---
 
+<!-- file: craft/scroll-sequences.md -->
+
+## Scroll Sequences
+
+A scroll sequence is any part of a page whose state is set by the scroll position: a pinned chapter, an image-sequence film, a sticky stage with a list of steps beside it, a scrubbed timeline, a list whose current item is lit. They are the most expensive thing on a page to get right, and they fail in three quiet ways that a screenshot of the finished page never shows.
+
+### Why this file exists
+
+Benchmark v3, ceramics shop, seed 3103 (`evals/results/2026-10-12-benchmark-v3/ecommerce/skill-s3103/`). The page had a sticky kiln stage and four firing steps; the step in the middle of the screen got `.on`, and every other step was dimmed with `.js-scrub .steps li:not(.on) { opacity: .4 }`. Lit, the step labels read at 6.62:1. Dimmed, the same labels read at **2.1:1** and the body text at 3.37:1, and a visitor reads the dimmed steps for most of the scroll, because only one step is lit at a time. The page shipped with a gate pass (the gate judged each element only at its most visible state; fixed in v2.5.0) and then failed the benchmark's hard gate on axe's contrast check, scoring 0.
+
+The lesson isn't "don't dim". It's that a sequence has more states than its active one, and every state a visitor can read is a state that has to work.
+
+### The review rule
+
+Before shipping any page with a scroll sequence, review every step in every state it can rest in. Three checks, each by hand, each recorded in the handoff:
+
+#### 1. Contrast in both states: active and inactive
+
+For every step, list the states it rests in (lit and dimmed, current and past, revealed and waiting) and measure the text in each:
+
+- **Work out the colour a dimmed step actually renders.** Opacity blends the text with what is behind it: rendered = text × opacity + background × (1 − opacity). A dimmed label is not its CSS colour; it is that blend. Measure the blend against the background with `node scripts/contrast.mjs <blend> <background>`.
+- **AA applies to every readable state.** 4.5:1 for body text, 3:1 for large text (≥ 24px, or ≥ 18.66px bold). If an inactive step can be read, it must pass. If it can't pass, don't dim it with opacity: dim it with a quieter colour that still meets AA, a weight change, a rule or marker beside the active step, or hide the inactive steps fully (`opacity: 0` / `visibility: hidden`) so nothing half-legible is left on screen.
+- **Check the background in that state too.** A sticky stage that changes image per step changes what is behind every step.
+- **Then let the gate confirm it.** Since v2.5.0, `scripts/gate.mjs` measures every element at every sampled scroll position (plus 0/25/50/75/100% of the page and of each pinned zone) and fails any inactive state below AA, printing each step's states (`active op 1: 6.62:1 ✓ · inactive op 0.4: 2.1:1 ✗`). The manual check comes first because the gate samples positions; the review covers every state by construction.
+
+Quick reference for dimming dark text (#1f1a17) on paper (#f4efe6): opacity .34 → 2.1:1, .4 → 2.4:1, .6 → 4.3:1 (still fails body text), .8 → 8.3:1. On a dark ground the numbers are similar: light text at opacity .4 rarely passes. **Opacity below about .7 on body text almost never meets AA.**
+
+#### 2. The fallback is a designed still, not a poster
+
+Under `prefers-reduced-motion: reduce` (and when the capability probe says no), the sequence must become a composition of its own, not the first frame:
+
+- Unpin. Each step in normal flow as a plate, fully visible, with no dimmed inactive steps (a reduced-motion visitor never scrolls the lit state onto a step, so dimmed steps stay dimmed forever).
+- Each plate has its own visual, from the storyboard (`motion/tier-5-motomation.md`) or the background's designed still (`principles/restraint.md`, "Designed stills").
+- Look at the reduced-motion strip on its own (`node scripts/gate.mjs --report index.html`, third strip). If a frame of it could be mistaken for a paused frame of the full version, it's a poster: redesign it.
+
+#### 3. No step shows a value that is later corrected
+
+A sequence that counts, totals, fills or prices as it scrubs must never show a wrong number while it waits:
+
+- A step's number is correct in the HTML before any script runs (`0 hectares` waiting for a count-up is wrong; `412 hectares` that counts up from 0 only while it is in view and finishes on 412 is fine, if the starting value is never left on screen at rest).
+- Under reduced motion every value is final on first paint.
+- A step that is reached by jumping (a link, a refresh mid-page, the End key) shows its final value, not the value from the step before.
+
+The gate's numbers check (`n`) reads values at scroll 0, at the end and under reduced motion; this review covers the steps in between.
+
+### Review record (paste into the handoff)
+
+```
+Scroll sequence review: <selector of the sequence>, <n> steps
+  1. contrast   step states: active <ratio>, inactive <ratio> (blend <hex> on <hex>) — PASS / FAIL
+  2. fallback   reduced motion: unpinned plates with their own stills — PASS / FAIL (what it shows)
+  3. values     no step shows a value later corrected — PASS / FAIL (which)
+```
+
+### Worked example: the v3 ceramics s3103 page, reviewed by this checklist
+
+| Check | What the review finds | Result |
+|---|---|---|
+| 1. Contrast, active | `.steps li.on .label` #e8835a on #1c1714 → 6.62:1; body #efeae0 → 14.81:1 | pass |
+| 1. Contrast, inactive | `li:not(.on)` at opacity .4: label blend #6e4230 on #1c1714 → **2.10:1** (needs 4.5); body blend #706b66 on #1c1714 → **3.37:1** (needs 4.5) | **FAIL** |
+| 2. Fallback | under reduced motion the script returns before adding `.js-scrub` and marks every step `.on` ("finished cup, all steps readable"): all four steps fully visible, the stage shows the finished state; but `.stage{position:sticky}` is not inside a motion query, so the stage stays pinned while the steps scroll past | partial: no dimmed step (contrast passes), but it is not unpinned into plates — a finding to fix, separate from the contrast failure |
+| 3. Values | step durations ("3 days", "36 hours") are static text | pass |
+
+The review fails the page on check 1 before it ships, which is the failure axe found in v3 (4 contrast nodes at 1440) and the gate now finds too (14 inactive-step failures across 375/390/768/1440).
+
+
+---
+
 <!-- file: craft/seo-performance.md -->
 
 ## SEO and Discoverability
@@ -2576,7 +2668,7 @@ It runs six bounded checks in a real browser and prints numbers:
 
 | Code | Check | Fails when |
 |---|---|---|
-| `c` | **Contrast** at 375, 390, 768 and 1440px, reported per width: every visible text element against the pixels actually behind it. The text is hidden, the viewport is screenshotted at each scroll position and the background is sampled. A phone layout that stacks a caption over a pale crop of the image fails at 375 even when the desktop layout passes. Each element is judged at its most visible state, by its 10th-percentile sample (not the median), so text that sits partly on a pale image edge cannot pass on its dark half. | below 4.5:1 for body text, below 3:1 for large text (≥ 24px, or ≥ 18.66px bold) |
+| `c` | **Contrast** at 375, 390, 768 and 1440px, reported per width: every visible text element against the pixels actually behind it. The text is hidden, the viewport is screenshotted at each scroll position and the background is sampled. A phone layout that stacks a caption over a pale crop of the image fails at 375 even when the desktop layout passes. Each element is judged by its 10th-percentile sample (not the median), so text that sits partly on a pale image edge cannot pass on its dark half. Every element is measured at every sampled scroll position (every 0.7 viewport, every 0.15 viewport in pinned zones, plus 0/25/50/75/100% of the page and of each zone); a scroll-sequence step is judged in its active (most visible) state **and in every inactive state it rests in**, so a dimmed step at 2.1:1 fails (v2.5.0; see `craft/scroll-sequences.md`). | below 4.5:1 for body text, below 3:1 for large text (≥ 24px, or ≥ 18.66px bold) |
 | `o` | **Overflow** at 375, 390, 768 and 1440px | the page scrolls sideways, or an element leaves the viewport or pushes text out of its parent by more than 1px with no clipping ancestor |
 | `w` | **Long display words** at 375px: every h1–h3 and any text ≥ 32px, including decorative text | the text is wider than its box, leaves the viewport, breaks a word across lines, or splits one word across elements (e.g. "Have" + "li" on two door leaves) |
 | `rm` | **Reduced motion**: the page loaded with `prefers-reduced-motion: reduce` | text that is visible normally is hidden, or pixels keep changing on a still page |
@@ -2592,7 +2684,9 @@ The output ends with a stamp line built only from those numbers:
 
 The checks are bounded, and each reports what it skipped (text that was covered or never settled, elements parked off-canvas such as skip links and closed drawers). When more than 30% of text elements are skipped for contrast, the gate prints a coverage warning: the `c` count is then not a full measurement, and the skipped text needs a check by hand. A clean run means these six things were measured. It doesn't mean the page is accessible. Keyboard paths, focus order and copy still need Parts 1–3.
 
-Exit codes: `0` pass · `1` fail · `2` stamp rejected · `3` not verified (no browser, or the scan ran past `--timeout`, default 600 s, which very tall pages such as the 36,000px component gallery can do).
+Exit codes: `0` pass · `1` fail · `2` stamp rejected · `3` not verified (no browser, or the scan ran past `--timeout`, default 600 s, which very tall pages such as the 36,000px component gallery can do, or the sandbox is too constrained to run the browser).
+
+**Constrained sandboxes** (Codex CLI, small CI containers, 2-CPU machines): the gate probes the machine, and if Chromium fails to start, crashes or times out it retries once in a light footprint (one renderer process via `--renderer-process-limit=1 --no-zygote`, `--disable-gpu --disable-dev-shm-usage`, operation timeouts ×3; the checks are identical). If that fails too it prints `not verified — sandbox too constrained: <reason> (attempt 1 …; attempt 2 …; machine …)` and exits 3. Report that line verbatim; don't call the page verified. `--light` starts in the light footprint; `--timeout-ms` sets the budget. Details: `docs/adapters/codex.md`.
 
 **Optional motion report.** `node scripts/gate.mjs --report dist/index.html` (or `--report out.html` after a target) also writes a self-contained HTML file with scroll-frame strips: 8 frames at 1440px, 8 at 375px and 8 at 1440px under reduced motion. Use it to review motion by eye, show a client, or give judges something better than one screenshot. It's off by default, doesn't change the text output, and adds nothing to the gate's numbers.
 
@@ -2687,12 +2781,16 @@ The placeholders are deliberate. There are no numbers to copy. Write the archety
 - [ ] Layout: one deliberate grid break per screen, recomposed (not squeezed) on mobile
 - [ ] Motion: tokens used; `gsap.matchMedia()` with reduced-motion and pointer conditions; `ScrollTrigger.refresh()` after load
 - [ ] Mobile motion matrix applied
+- [ ] Scroll sequences (pinned, scrubbed, image-sequence, lit-step lists) reviewed per `craft/scroll-sequences.md`, record in the handoff:
+  - [ ] Each step's contrast passes AA **active and inactive** (dimmed text measured as rendered: text × opacity + background × (1 − opacity))
+  - [ ] Reduced-motion fallback is a **designed still**, not a poster: unpinned plates, every step fully visible
+  - [ ] **No step shows a value that is later corrected**
 - [ ] Accessibility: keyboard path, visible focus, landmarks, skip link, alt text
 - [ ] Performance: LCP image preloaded, heavy libraries loaded dynamically, off-screen work paused
 - [ ] SEO: title, description, OG image, structured data, `llms.txt` (for sites)
 - [ ] Copy: real, specific, no banned phrases; the copy pass in `craft/copy.md` run with every row "none found" or fixed; `[NEEDS COPY]` markers listed for the user
 - [ ] "Restraint Gate record" filled in `DESIGN.md` (concept survived?, every cut, every rejected animation)
-- [ ] `node scripts/gate.mjs` run on the build; its full `critique: … · gate: …` line pasted and `--verify` passes (or "not verified — no browser" reported)
+- [ ] `node scripts/gate.mjs` run on the build; its full `critique: … · gate: …` line pasted and `--verify` passes (or the exact "not verified — …" line reported: no browser, timed out, or sandbox too constrained)
 - [ ] Stamp comment written; run logged with `node scripts/memory.mjs log …`
 
 ---
@@ -3444,18 +3542,18 @@ pixel-wake,Pixel Wake,cursor,2,examples/components/cursor/pixel-wake.tsx,PixelWa
 seismograph-line,Seismograph Line,cursor,2,examples/components/cursor/seismograph-line.tsx,SeismographLine,"A hairline divider bends toward the cursor as it passes and springs back with a small wobble, like a needle on a seismograph.","Dividers on calm editorial pages where one living detail is enough; sound, measurement and science brands.",Every divider; busy pages; pages that already have a cursor effect.,A straight line.,A straight line (no hover).,"Decorative: role presentation, aria-hidden."
 target-cursor,Target Cursor,cursor,2,examples/components/cursor/target-cursor.tsx,TargetCursor,A small crosshair follows the cursor; over anything clickable it snaps out into corner brackets that frame the target.,"Precision tools, cameras, games, architecture and engineering concepts.",Content sites; together with another cursor effect; when it would hide the system cursor (it doesn't by default).,Brackets jump to targets without easing.,Not rendered.,"Decorative overlay (aria-hidden, pointer-events none); the system cursor stays visible unless hideCursor is set."
 tilt-card,Tilt Card,cursor,2,examples/components/cursor/tilt-card.tsx,TiltCard,"A card rotates in 3D toward the cursor with a soft moving highlight, like holding a physical card to the light.","Physical objects: tickets, cards, passes, packaging, a single product.",Grids of many cards; text-heavy cards; cards that are links to long content (the motion distracts).,"Flat card, no rotation or highlight.",Flat card.,Children render normally; the highlight is aria-hidden.
-aurora,Aurora,backgrounds,4,examples/components/backgrounds/aurora.tsx,Aurora,"Curtains of northern light hang across a night sky: a sharp lower hem, fading upward in vertical rays, folding slowly. A small WebGL shader draws it; a CSS poster stands in everywhere else.","The subject is the far north, night, cold, observation, polar travel or a planetarium: behind a hero or a single quiet section.","As a generic ""AI glow"" background; behind body copy; light themes; pages that already run WebGL.","One still frame of the curtains (WebGL), or the poster.",Renders at two-thirds resolution on coarse pointers.,"Decorative (aria-hidden). Capability probe first (Save-Data, ≤ 2 cores, < 4 GB, no or software WebGL → poster only); DPR ≤ 1.5; paused off screen and in hidden tabs; poster and canvas fill the same absolute box, so no layout shift. Keep `sky` dark: text on top is checked against the sky, and the curtains stay in the upper half."
-beams,Beams,backgrounds,4,examples/components/backgrounds/beams.tsx,Beams,"Parallel shafts of sunlight fall through a row of high windows (a clerestory, a mill, a stage rig) at one shared angle and sway slightly in depth. CSS 3D only: soft gradient shafts rotated in a perspective space; no WebGL, because transforms are enough here.","Churches, mills, warehouses, galleries, theatres, anything lit through high windows: behind one dark hero.","Bright themes; as ""spotlight on our product"" decoration; together with other moving backgrounds.","The shafts, still, at their resting angles (this is also the poster).",Same as desktop (no pointer input).,"Decorative (aria-hidden). Capability probe (Save-Data, ≤ 2 cores, < 4 GB → still poster); only transform animates (composite-only), via Web Animations that pause off screen and in hidden tabs; absolute box, so no layout shift. Shafts are faint (≤ 0.36 alpha) and their soft edges are a static mask on a transformed layer (not animated), so text contrast is checked on the ground. No canvas, so no DPR cost."
+aurora,Aurora,backgrounds,4,examples/components/backgrounds/aurora.tsx,Aurora,"Curtains of northern light hang across a night sky: a sharp lower hem, fading upward in vertical rays, folding slowly. A small WebGL shader draws it; a CSS poster stands in everywhere else.","The subject is the far north, night, cold, observation, polar travel or a planetarium: behind a hero or a single quiet section.","As a generic ""AI glow"" background; behind body copy; light themes; pages that already run WebGL.","A designed still, not a frozen frame: a long-exposure plate. The curtains settle into three smooth ribbons of the same two colours over a dark ridge, under circular star trails; no canvas is mounted.",Renders at two-thirds resolution on coarse pointers.,"Decorative (aria-hidden). Capability probe first (Save-Data, ≤ 2 cores, < 4 GB, no or software WebGL → poster only); DPR ≤ 1.5; paused off screen and in hidden tabs; poster and canvas fill the same absolute box, so no layout shift. Keep `sky` dark: text on top is checked against the sky, and the curtains stay in the upper half."
+beams,Beams,backgrounds,4,examples/components/backgrounds/beams.tsx,Beams,"Parallel shafts of sunlight fall through a row of high windows (a clerestory, a mill, a stage rig) at one shared angle and sway slightly in depth. CSS 3D only: soft gradient shafts rotated in a perspective space; no WebGL, because transforms are enough here.","Churches, mills, warehouses, galleries, theatres, anything lit through high windows: behind one dark hero.","Bright themes; as ""spotlight on our product"" decoration; together with other moving backgrounds.","A designed still: noon held. Hard-edged shafts fall through the windows and land as bright pools on the floor, dust caught in the light; not the sway stopped.",Same as desktop (no pointer input).,"Decorative (aria-hidden). Capability probe (Save-Data, ≤ 2 cores, < 4 GB → still poster); only transform animates (composite-only), via Web Animations that pause off screen and in hidden tabs; absolute box, so no layout shift. Shafts are faint (≤ 0.36 alpha) and their soft edges are a static mask on a transformed layer (not animated), so text contrast is checked on the ground. No canvas, so no DPR cost."
 contour-lines,Contour Lines,backgrounds,2,examples/components/backgrounds/contour-lines.tsx,ContourLines,"Topographic contour lines drawn as SVG that slowly drift, like a map breathing; deterministic from a seed.","Landscape, outdoors, climate, geography, agriculture and mapping concepts.",Urban or tech brands without a land story; behind dense text.,Still lines.,Same as desktop.,Decorative SVG (aria-hidden). The drift is a CSS transform on three composited layers: no JS and no repaint per frame.
 dot-field,Dot Field,backgrounds,2,examples/components/backgrounds/dot-field.tsx,DotField,"A grid of dots that swell and push away from the cursor, then ease back, like a pin-art board.","Technical, structural, data or grid-led concepts; behind a hero with little text.",Behind body text; organic or luxury briefs; together with a cursor signature.,A still dot grid.,A still dot grid.,"Decorative canvas (aria-hidden, pointer-events none); paused off screen and in hidden tabs."
-globe,Globe,backgrounds,4,examples/components/backgrounds/globe.tsx,Globe,"A sphere of evenly spaced dots turns slowly, the far side faint, with a few brighter markers for real places (lat/lon). WebGL points; a CSS dotted disc stands in everywhere else.","The business is genuinely about places on Earth (shipping, a diaspora, offices in named cities, a travel route), and the markers are real.","As a generic ""global"" or ""scale"" signal; with invented markers; on pages that already run WebGL; at small sizes (the dots turn to noise).","The globe, still, facing the first marker.","Same, at two-thirds resolution.","Decorative (aria-hidden): list the places in text nearby too. Capability probe (Save-Data, ≤ 2 cores, < 4 GB, no or software WebGL → poster); DPR ≤ 1.5; paused off screen and in hidden tabs; fills its absolute box, so no layout shift."
+globe,Globe,backgrounds,4,examples/components/backgrounds/globe.tsx,Globe,"A sphere of evenly spaced dots turns slowly, the far side faint, with a few brighter markers for real places (lat/lon). WebGL points; a CSS dotted disc stands in everywhere else.","The business is genuinely about places on Earth (shipping, a diaspora, offices in named cities, a travel route), and the markers are real.","As a generic ""global"" or ""scale"" signal; with invented markers; on pages that already run WebGL; at small sizes (the dots turn to noise).","A designed still: a chart plate of the globe facing the first marker, drawn in line (graticule, rim, the markers ringed and joined by arcs in order), not the dot sphere stopped. No canvas is mounted.","Same, at two-thirds resolution.","Decorative (aria-hidden): list the places in text nearby too. Capability probe (Save-Data, ≤ 2 cores, < 4 GB, no or software WebGL → poster); DPR ≤ 1.5; paused off screen and in hidden tabs; fills its absolute box, so no layout shift."
 grain,Grain,backgrounds,1,examples/components/backgrounds/grain.tsx,Grain,"A film-grain layer over a section or the whole page, static by default or gently flickering at a low frame rate.","Analogue, photographic, warm or printed moods; to take the digital edge off flat colour.","Over small text at high opacity; on clinical, technical brands; animated on low-end mobile.",Static grain.,Static grain (flicker is skipped on coarse pointers to save battery).,"Decorative (aria-hidden, pointer-events none); keep opacity low enough that contrast still passes."
 halftone,Halftone,backgrounds,2,examples/components/backgrounds/halftone.tsx,Halftone,"Renders an image as print dots on a canvas, sized by brightness, like a newspaper photo; dots can grow in as it enters the screen.","Print, newspaper, zine, poster, protest and retro concepts.",Product photos people must inspect; portraits where likeness matters; many on one page.,Dots render at full size immediately.,"The dots print at full size a few rows per frame, top to bottom, like a press: growing thousands of dots every",The canvas has role img and the alt text; the source image needs CORS headers if it's on another origin.
 light-sweep,Light Sweep,backgrounds,1,examples/components/backgrounds/light-sweep.tsx,LightSweep,"A slow band of light crosses a surface every few seconds, like sun moving through a window or a scanner pass.","Architecture, light, time-of-day and hospitality concepts; behind one hero or one card.","Behind text where the band would drop contrast; as a ""shimmer"" on buttons; more than one per screen.",No sweep.,Same as desktop.,"Decorative (aria-hidden, pointer-events none). CSS only."
-liquid-field,Liquid Field,backgrounds,4,examples/components/backgrounds/liquid-field.tsx,LiquidField,"Slow flowing colour like ink in water or silk in wind, drawn by a tiny WebGL fragment shader with a CSS gradient fallback.","The material really is liquid, fabric, light or weather; behind a hero with one line of type.","As generic ""AI gradient"" decoration; behind body text; on pages that already use WebGL.",A still frame of the same colours.,Runs at half resolution on coarse pointers.,"Decorative canvas (aria-hidden); paused off screen and in hidden tabs; falls back to a CSS gradient when WebGL is unavailable, loses its context, or renders wrong colours (it reads back one pixel to check). Keep all three colours dark (or all light) so text on top keeps its contrast everywhere."
-mesh-gradient,Mesh Gradient,backgrounds,4,examples/components/backgrounds/mesh-gradient.tsx,MeshGradient,"Four soft pools of colour drift very slowly over a ground colour and blend where they meet, like a dyed silk or a weather map. CSS only: each pool is a radial gradient moved with transform; no blur filter, no WebGL.","The palette itself is the brand (a paint, a cosmetics line, a dye house, a weather service), and a calmer, cheaper option than Liquid Field is right.","As the default ""modern"" hero background; behind body copy; with more than one other effect on the page; with clashing colours (the overlaps make new ones).","The pools, still, in their resting places (this is also the poster).",Same as desktop.,"Decorative (aria-hidden). Capability probe (Save-Data, ≤ 2 cores, < 4 GB → still poster); transform-only Web Animations, paused off screen and in hidden tabs; absolute box, so no layout shift. Pick pool colours with the same lightness as the ground so text contrast holds everywhere. No canvas, so no DPR cost."
-meteors,Meteors,backgrounds,4,examples/components/backgrounds/meteors.tsx,Meteors,Now and then a thin streak of light crosses a night sky at one shared angle and burns out; long quiet gaps between them. CSS only: each streak is a gradient line moved with transform.,"Night skies, observatories, wishes, launches that are literal (a rocket club), New Year: behind one dark hero.","As ""speed"" or ""innovation"" decoration; light themes; more than one sky per page; busy sections where a flicker at the edge distracts from reading.",A still sky with two frozen streaks (this is also the poster).,Same as desktop.,"Decorative (aria-hidden). Capability probe (Save-Data, ≤ 2 cores, < 4 GB → still poster). Streaks are short and sparse (one at a time on average, ≥ 4s gaps), so nothing flashes. Transform/opacity only via Web Animations that pause off screen and in hidden tabs; absolute box, so no layout shift. No canvas, so no DPR cost."
-particle-field,Particle Field,backgrounds,4,examples/components/backgrounds/particle-field.tsx,ParticleField,"Dust drifting through a beam of light: soft particles at three depths, the near ones larger and brighter, all moving slowly sideways and bobbing. WebGL points; a CSS poster of scattered motes stands in elsewhere.","Cinema, projection, workshops, old rooms, archives, snowfall or pollen: a quiet atmosphere behind a dark hero.","""Tech"" or ""data"" decoration; as a starfield warp; behind text-heavy sections; on pages that already run WebGL. For a cursor-reactive grid use Dot Field.","The particles, still (one WebGL frame), or the poster.",60% of the particles at two-thirds resolution.,"Decorative (aria-hidden). Capability probe (Save-Data, ≤ 2 cores, < 4 GB, no or software WebGL → poster); DPR ≤ 1.5; paused off screen and in hidden tabs; fills its absolute box, so no layout shift. Particles stay faint (alpha ≤ 0.9 on the nearest), so text contrast is checked against the ground."
+liquid-field,Liquid Field,backgrounds,4,examples/components/backgrounds/liquid-field.tsx,LiquidField,"Slow flowing colour like ink in water or silk in wind, drawn by a tiny WebGL fragment shader with a CSS gradient fallback.","The material really is liquid, fabric, light or weather; behind a hero with one line of type.","As generic ""AI gradient"" decoration; behind body text; on pages that already use WebGL.","A designed still: a marbled sheet. Combed bands of the same three colours, like marbled paper keeping the trace of moving ink; no canvas is mounted.",Runs at half resolution on coarse pointers.,"Decorative canvas (aria-hidden); paused off screen and in hidden tabs; falls back to a CSS gradient when WebGL is unavailable, loses its context, or renders wrong colours (it reads back one pixel to check). Keep all three colours dark (or all light) so text on top keeps its contrast everywhere."
+mesh-gradient,Mesh Gradient,backgrounds,4,examples/components/backgrounds/mesh-gradient.tsx,MeshGradient,"Four soft pools of colour drift very slowly over a ground colour and blend where they meet, like a dyed silk or a weather map. CSS only: each pool is a radial gradient moved with transform; no blur filter, no WebGL.","The palette itself is the brand (a paint, a cosmetics line, a dye house, a weather service), and a calmer, cheaper option than Liquid Field is right.","As the default ""modern"" hero background; behind body copy; with more than one other effect on the page; with clashing colours (the overlaps make new ones).","A designed still: a colour study. The four colours laid out as soft horizontal fields (horizon, body, ground) with a fine grain; not the drift stopped.",Same as desktop.,"Decorative (aria-hidden). Capability probe (Save-Data, ≤ 2 cores, < 4 GB → still poster); transform-only Web Animations, paused off screen and in hidden tabs; absolute box, so no layout shift. Pick pool colours with the same lightness as the ground so text contrast holds everywhere. No canvas, so no DPR cost."
+meteors,Meteors,backgrounds,4,examples/components/backgrounds/meteors.tsx,Meteors,Now and then a thin streak of light crosses a night sky at one shared angle and burns out; long quiet gaps between them. CSS only: each streak is a gradient line moved with transform.,"Night skies, observatories, wishes, launches that are literal (a rocket club), New Year: behind one dark hero.","As ""speed"" or ""innovation"" decoration; light themes; more than one sky per page; busy sections where a flicker at the edge distracts from reading.","A designed still: a long-exposure night, star trails wheeling round the pole and one bright meteor crossing them at the same angle, over a low horizon. The streak tracks are not rendered.",Same as desktop.,"Decorative (aria-hidden). Capability probe (Save-Data, ≤ 2 cores, < 4 GB → still poster). Streaks are short and sparse (one at a time on average, ≥ 4s gaps), so nothing flashes. Transform/opacity only via Web Animations that pause off screen and in hidden tabs; absolute box, so no layout shift. No canvas, so no DPR cost."
+particle-field,Particle Field,backgrounds,4,examples/components/backgrounds/particle-field.tsx,ParticleField,"Dust drifting through a beam of light: soft particles at three depths, the near ones larger and brighter, all moving slowly sideways and bobbing. WebGL points; a CSS poster of scattered motes stands in elsewhere.","Cinema, projection, workshops, old rooms, archives, snowfall or pollen: a quiet atmosphere behind a dark hero.","""Tech"" or ""data"" decoration; as a starfield warp; behind text-heavy sections; on pages that already run WebGL. For a cursor-reactive grid use Dot Field.","A designed still: a star chart. The motes keep their density and depth, and a few are joined into constellations; no canvas is mounted.",60% of the particles at two-thirds resolution.,"Decorative (aria-hidden). Capability probe (Save-Data, ≤ 2 cores, < 4 GB, no or software WebGL → poster); DPR ≤ 1.5; paused off screen and in hidden tabs; fills its absolute box, so no layout shift. Particles stay faint (alpha ≤ 0.9 on the nearest), so text contrast is checked against the ground."
 bento-reveal,Bento Reveal,layout,1,examples/components/layout/bento-reveal.tsx,BentoReveal,A modular grid of mixed-size tiles that enter in reading order with a short stagger the first time the grid scrolls in.,"Content that truly has mixed weights (one big feature, several small facts).",Equal-weight content (use a list); as the default landing layout (it's overused); more than one per page.,Tiles are visible from the start.,Collapses to one column below 640px.,A normal list; order in the DOM matches visual order.
 curve-carousel,Curve Carousel,layout,2,examples/components/layout/curve-carousel.tsx,CurveCarousel,"Cards sit on a shallow arc; the focused card is upright and in front, its neighbours tilt and recede. Arrow keys, buttons, drag and swipe move it.",3–9 case studies or products where one at a time is the point.,Content people need to compare; more than 9 items; as autoplaying decoration.,Cards change position without easing.,Swipe left or right.,"A labelled region with previous/next buttons, aria-live status (""2 of 5""), and arrow-key support; hidden cards are inert."
 dock,Dock,layout,2,examples/components/layout/dock.tsx,Dock,"A row of icon buttons that magnify smoothly as the cursor passes along them, neighbours growing a little less.","App-like tool collections, launchers and playful personal sites with 4–8 actions.",Primary navigation that needs labels; touch-first sites; more than 8 items.,No magnification.,No magnification; normal-size buttons.,"Real buttons or links with visible tooltips on focus and hover, and accessible names."
