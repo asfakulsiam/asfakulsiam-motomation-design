@@ -1,0 +1,12 @@
+{
+ "slug": "studio",
+ "seed": 7103,
+ "cond": "c-taste",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/studio/c-taste-s7103",
+ "exit": 0,
+ "seconds": 128,
+ "turns": 6,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

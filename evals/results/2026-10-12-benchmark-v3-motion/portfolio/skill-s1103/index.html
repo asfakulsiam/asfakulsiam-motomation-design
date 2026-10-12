@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rafi — motion designer in Dhaka, for title sequences</title>
+<meta name="description" content="Rafi is a motion designer in Dhaka with eight years of work for music videos, broadcast idents and product launches. Hire him for title sequences.">
+<meta name="theme-color" content="#0B0B0A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500&display=swap" rel="stylesheet">
+<style>
+/* motomation · archetype: film-reel · mutation: no nav · signature: projector-lamp · tier: 4 · critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp37] R5[cuts:3,anim:2] M5[t4:pins1/2,webgl1/1,js49/250KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 4db2f387a6 */
+:root{
+  --ink:#0B0B0A;--bone:#EDE8DC;--dim:#B9B3A5;--accent:#FF5A2B;
+  --ease-out-strong:cubic-bezier(0.16,1,0.3,1);
+  --display:"Big Shoulders Display","Arial Narrow",sans-serif;
+  --text:"Switzer",Georgia,serif;
+  --pad:clamp(1.25rem,4vw,3.5rem);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--ink);color:var(--bone);-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{font-family:var(--text);font-size:1.125rem;line-height:1.55;overflow-x:hidden;min-height:100vh}
+canvas#lamp{position:fixed;inset:0;width:100%;height:100%;z-index:-1;display:block;background:var(--ink)}
+.no-gl body{background:radial-gradient(120% 90% at 85% -10%,#2a2823 0%,var(--ink) 60%)}
+main{position:relative}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.skip{position:absolute;left:var(--pad);top:-4rem;background:var(--bone);color:var(--ink);padding:.6rem 1rem;z-index:20;text-decoration:none}
+.skip:focus{top:1rem}
+.label{font-size:.875rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:500}
+.display{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.84;letter-spacing:-.005em;text-wrap:balance}
+.hire{position:fixed;top:1.1rem;right:var(--pad);z-index:10;font-size:.875rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;text-decoration:none;padding:.65rem 0;border-bottom:1px solid var(--bone);transition:color .16s var(--ease-out-strong),border-color .16s var(--ease-out-strong)}
+.hire:hover{color:var(--accent);border-color:var(--accent)}
+section{padding:0 var(--pad)}
+
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:6rem;padding-bottom:var(--pad)}
+.hero .label{margin-bottom:1.5rem}
+.hero h1{font-size:min(44vw,58vh);overflow:hidden;padding-top:.04em;padding-bottom:.02em}
+.hero h1 span{display:block}
+.hero p.lede{max-width:34ch;font-size:clamp(1.25rem,2.4vw,1.75rem);line-height:1.3;margin-top:2rem}
+.hero p.lede b{font-weight:500;color:var(--accent)}
+
+.credits{padding-top:clamp(6rem,16vh,12rem);padding-bottom:clamp(6rem,16vh,12rem)}
+.credits ol{list-style:none;border-top:1px solid #4a473f}
+.credits li{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;border-bottom:1px solid #4a473f;padding:1.1rem 0}
+.credits li .display{font-size:clamp(1.9rem,7vw,7.5rem);min-width:0;overflow-wrap:normal}
+@media (max-width:520px){.credits li .display{font-size:1.9rem}}
+.credits li.next .display{color:var(--accent)}
+
+.reel{padding:0}
+.card{position:relative;min-height:100svh;padding:6rem var(--pad) var(--pad);display:flex;flex-direction:column;justify-content:flex-end;border-top:1px solid #4a473f}
+.card .meta{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;margin-bottom:1.2rem}
+.stamp{display:inline-block;border:2px solid var(--accent);color:var(--accent);padding:.25rem 1rem .15rem .8rem;font-family:var(--display);font-weight:800;font-size:1.9rem;letter-spacing:.06em;line-height:1.1;white-space:nowrap;outline:1px solid var(--accent);outline-offset:3px}
+.card h2{font-size:min(21vw,31vh);overflow:hidden;padding-top:.04em}
+.card h2 span{display:block}
+.card .kind{margin-top:1.4rem;font-size:clamp(1.125rem,2vw,1.5rem);max-width:30ch}
+.is-pinned{position:relative;height:100svh;overflow:hidden;border-top:1px solid #4a473f}
+.is-pinned .card{position:absolute;inset:0;border-top:0}
+
+.contact{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:6rem;padding-bottom:var(--pad);border-top:1px solid #4a473f}
+.contact .display{font-size:min(14vw,22vh)}
+.contact a.mail{display:inline-block;margin-top:2rem;font-size:clamp(1.25rem,3vw,2rem);font-weight:500;text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:.2rem;align-self:flex-start;transition:color .16s var(--ease-out-strong)}
+.contact a.mail:hover{color:var(--accent)}
+.contact p.small{margin-top:1.5rem;color:var(--dim);font-size:1rem;max-width:44ch}
+footer{padding:1.5rem var(--pad) 2rem}
+</style>
+</head>
+<body>
+<a class="skip" href="#work">Skip to the work</a>
+<canvas id="lamp" aria-hidden="true"></canvas>
+<a class="hire" href="#contact">Hire for titles</a>
+
+<main id="main">
+  <section class="hero" aria-labelledby="name">
+    <p class="label">Motion designer · Dhaka</p>
+    <h1 id="name" class="display"><span>Rafi</span></h1>
+    <p class="lede">Eight years of motion for music videos, broadcast idents and product launches. Now <b>title sequences</b>.</p>
+  </section>
+
+  <section class="credits" aria-label="Eight years of work">
+    <p class="label" style="margin-bottom:1.5rem">Eight years of work for</p>
+    <ol>
+      <li><span class="display">Music videos</span></li>
+      <li><span class="display">Broadcast idents</span></li>
+      <li><span class="display">Product launches</span></li>
+      <li class="next"><span class="display">Next: title sequences</span></li>
+    </ol>
+  </section>
+
+  <section class="reel" id="work" aria-label="Selected projects">
+    <div class="reel-stage" id="stage">
+      <article class="card">
+        <div class="meta"><span class="label">Reel 01 of 03 · Title sequence</span><span class="stamp">2023</span></div>
+        <h2 class="display"><span>Bhoot</span></h2>
+        <p class="kind">A title sequence.</p>
+      </article>
+      <article class="card">
+        <div class="meta"><span class="label">Reel 02 of 03 · Channel rebrand</span><span class="stamp">2024</span></div>
+        <h2 class="display"><span>Monsoon</span><span>Idents</span></h2>
+        <p class="kind">A channel rebrand, told in idents.</p>
+      </article>
+      <article class="card">
+        <div class="meta"><span class="label">Reel 03 of 03 · Product launch film</span><span class="stamp">2025</span></div>
+        <h2 class="display"><span>Koi</span></h2>
+        <p class="kind">A product launch film.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="cta">
+    <p class="label">End titles</p>
+    <h2 id="cta" class="display">Have a title sequence to make?</h2>
+    <!-- NEEDS CLARIFICATION: the brief says "email only" but gives no address. Put it in this mailto. -->
+    <a class="mail" href="mailto:">Email Rafi</a>
+    <p class="small">Email is the only way to reach him. Rafi works from Dhaka.</p>
+  </section>
+</main>
+<footer><p class="label">Rafi · Motion designer · Dhaka</p></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var fine=matchMedia("(pointer: fine)").matches;
+  var canvas=document.getElementById("lamp");
+
+  /* Tier 4: one WebGL canvas, the projector lamp */
+  var gl=null;
+  try{gl=canvas.getContext("webgl",{antialias:false,alpha:false,powerPreference:"low-power"});}catch(e){}
+  var U={lamp:0,scroll:0,px:0.5,py:0.5,t:0};
+  var draw=function(){};
+  if(!gl){document.documentElement.classList.add("no-gl");}
+  else{
+    var vs="attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
+    var fs=[
+      "precision mediump float;",
+      "uniform vec2 uRes,uPtr;uniform float uT,uLamp,uScroll;",
+      "float h(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}",
+      "void main(){",
+      " vec2 uv=gl_FragCoord.xy/uRes;vec2 a=vec2(uRes.x/uRes.y,1.);",
+      " vec2 src=vec2(.92-.5*uScroll+(uPtr.x-.5)*.06,1.15)*a;",
+      " vec2 d=normalize(vec2(-.35+uScroll*.9+(uPtr.x-.5)*.1,-1.));",
+      " vec2 v=uv*a-src;float l=length(v);",
+      " float c=dot(normalize(v),d);",
+      " float beam=smoothstep(.93,1.,c)*exp(-l*.9);",
+      " float dust=h(floor(uv*uRes/3.)+floor(uT*12.));",
+      " beam*=.85+.15*sin(uT*24.+l*3.);",
+      " float spec=step(.9965,dust)*beam*2.;",
+      " vec3 col=vec3(.043,.043,.039);",
+      " col+=vec3(.93,.9,.82)*beam*.17*uLamp;",
+      " col+=vec3(1.,.9,.8)*spec*.12*uLamp;",
+      " float g=h(uv*uRes+uT*60.)-.5;col+=g*.028;",
+      " col*=1.-.55*dot(uv-.5,uv-.5);",
+      " gl_FragColor=vec4(col,1.);",
+      "}"].join("\n");
+    var sh=function(t,s){var o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return gl.getShaderParameter(o,gl.COMPILE_STATUS)?o:null;};
+    var pr=gl.createProgram(),v=sh(gl.VERTEX_SHADER,vs),f=sh(gl.FRAGMENT_SHADER,fs);
+    if(!v||!f){gl=null;document.documentElement.classList.add("no-gl");}
+    else{
+      gl.attachShader(pr,v);gl.attachShader(pr,f);gl.linkProgram(pr);gl.useProgram(pr);
+      var b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);
+      gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+      var loc=gl.getAttribLocation(pr,"p");gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+      var L={r:gl.getUniformLocation(pr,"uRes"),t:gl.getUniformLocation(pr,"uT"),l:gl.getUniformLocation(pr,"uLamp"),s:gl.getUniformLocation(pr,"uScroll"),p:gl.getUniformLocation(pr,"uPtr")};
+      var size=function(){
+        var dpr=Math.min(window.devicePixelRatio||1,innerWidth<700?1:1.5)*0.5;
+        canvas.width=Math.max(2,Math.round(innerWidth*dpr));canvas.height=Math.max(2,Math.round(innerHeight*dpr));
+        gl.viewport(0,0,canvas.width,canvas.height);
+      };
+      size();addEventListener("resize",function(){size();if(reduce)draw();});
+      draw=function(){
+        gl.uniform2f(L.r,canvas.width,canvas.height);gl.uniform1f(L.t,U.t);gl.uniform1f(L.l,U.lamp);
+        gl.uniform1f(L.s,U.scroll);gl.uniform2f(L.p,U.px,U.py);gl.drawArrays(gl.TRIANGLES,0,3);
+      };
+    }
+  }
+
+  var readScroll=function(){var m=document.documentElement.scrollHeight-innerHeight;U.scroll=m>0?Math.min(1,scrollY/m):0;};
+
+  if(reduce){
+    /* one still frame: lamp fully on, no time, no scroll distortion */
+    U.lamp=1;U.t=3.7;U.scroll=0.15;draw();
+    return;
+  }
+
+  /* render loop, paused when the tab is hidden */
+  var raf=0,t0=performance.now();
+  var tick=function(now){U.t=(now-t0)/1000;readScroll();draw();raf=requestAnimationFrame(tick);};
+  var start=function(){if(!raf&&gl)raf=requestAnimationFrame(tick);};
+  document.addEventListener("visibilitychange",function(){if(document.hidden){cancelAnimationFrame(raf);raf=0;}else start();});
+  if(fine)addEventListener("pointermove",function(e){U.px+=(e.clientX/innerWidth-U.px)*0.2;U.py=e.clientY/innerHeight;},{passive:true});
+  start();
+
+  /* GSAP: motion with a meaning */
+  if(!window.gsap||!window.ScrollTrigger){U.lamp=1;return;}
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* the lamp warms up: the film begins */
+  gsap.to(U,{lamp:1,duration:1.8,ease:"power2.out"});
+  /* name rises out of its mask */
+  gsap.from("#name span",{yPercent:105,duration:1.1,ease:"expo.out",delay:0.25});
+  gsap.from(".hero .label,.hero .lede",{opacity:0,y:16,duration:0.9,ease:"expo.out",delay:0.9,stagger:0.12});
+
+  /* credits roll in from the left, one line at a time */
+  gsap.utils.toArray(".credits li").forEach(function(li){
+    gsap.from(li,{opacity:0,x:-48,duration:0.9,ease:"expo.out",scrollTrigger:{trigger:li,start:"top 88%",once:true}});
+  });
+
+  /* the reel: pinned on desktop, stacked otherwise */
+  var mm=gsap.matchMedia();
+  mm.add("(min-width: 800px) and (min-height: 560px)",function(){
+    var stage=document.getElementById("stage");
+    var cards=gsap.utils.toArray(".card");
+    stage.classList.add("is-pinned");
+    gsap.set(cards.slice(1),{autoAlpha:0});
+    var tl=gsap.timeline({defaults:{ease:"none"},scrollTrigger:{trigger:stage,start:"top top",end:"+=220%",pin:true,scrub:0.6}});
+    for(var i=1;i<cards.length;i++){
+      var prev=cards[i-1],cur=cards[i];
+      tl.to(prev,{autoAlpha:0,y:-30,duration:0.25},"+=0.5");
+      tl.set(cur,{autoAlpha:1});
+      tl.fromTo(cur.querySelectorAll("h2 span"),{yPercent:105},{yPercent:0,duration:0.45,stagger:0.08},">");
+      tl.fromTo(cur.querySelectorAll(".meta,.kind"),{opacity:0},{opacity:1,duration:0.3},"<0.1");
+    }
+    tl.to({},{duration:0.5});
+    return function(){stage.classList.remove("is-pinned");};
+  });
+  mm.add("(max-width: 799px), (max-height: 559px)",function(){
+    gsap.utils.toArray(".card h2 span").forEach(function(s){
+      gsap.from(s,{yPercent:105,duration:0.9,ease:"expo.out",scrollTrigger:{trigger:s,start:"top 90%",once:true}});
+    });
+  });
+
+  addEventListener("load",function(){ScrollTrigger.refresh();});
+})();
+</script>
+</body>
+</html>

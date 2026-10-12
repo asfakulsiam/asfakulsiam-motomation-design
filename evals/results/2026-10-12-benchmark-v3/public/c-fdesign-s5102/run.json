@@ -1,0 +1,12 @@
+{
+ "slug": "public",
+ "seed": 5102,
+ "cond": "c-fdesign",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/public/c-fdesign-s5102",
+ "exit": 0,
+ "seconds": 75,
+ "turns": 5,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

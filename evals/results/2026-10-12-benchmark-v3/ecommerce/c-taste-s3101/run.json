@@ -1,0 +1,12 @@
+{
+ "slug": "ecommerce",
+ "seed": 3101,
+ "cond": "c-taste",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/ecommerce/c-taste-s3101",
+ "exit": 0,
+ "seconds": 111,
+ "turns": 5,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

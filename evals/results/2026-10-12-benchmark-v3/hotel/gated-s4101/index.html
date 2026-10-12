@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Haveli 1893 — Boutique hotel in Puran Dhaka</title>
+<meta name="description" content="Haveli 1893: a 12-room boutique hotel in a restored 1890s merchant house in Shankhari Bazar, Old Dhaka.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--plaster:#f3ead9;--ink:#2a1d17;--soft:#5a4a3f;--brick:#8a2f1c;--iron:#1f2a2e;--paper:#f8f2e6;--gold:#e0b873}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:"Hanken Grotesk",system-ui,sans-serif;background:var(--plaster);color:var(--ink);line-height:1.6;font-size:1.0625rem;overflow-x:hidden}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;line-height:1.05;letter-spacing:-.01em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--brick);outline-offset:3px}
+.dark :focus-visible{outline-color:var(--gold)}
+.skip{position:absolute;left:-999px;top:0;background:var(--ink);color:#fff;padding:.7rem 1rem;z-index:20}
+.skip:focus{left:0}
+.wrap{width:min(1180px,100% - 2.5rem);margin-inline:auto}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.1rem 0;flex-wrap:wrap}
+.logo{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:1.6rem;text-decoration:none;letter-spacing:.02em}
+nav ul{list-style:none;padding:0;display:flex;gap:1.3rem;flex-wrap:wrap}
+nav a{text-decoration:none;font-size:.95rem;padding:.4rem 0;display:inline-block}
+nav a:hover{text-decoration:underline;text-underline-offset:5px}
+.btn{display:inline-block;background:var(--brick);color:#fff;text-decoration:none;font-weight:600;padding:.95rem 1.6rem;border-radius:2px;border:2px solid var(--brick);transition:background .25s,color .25s}
+.btn:hover{background:var(--ink);border-color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;padding:3rem 0 5rem}
+.eyebrow{font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--brick);margin-bottom:1.2rem}
+.hero h1{font-size:clamp(3.2rem,9vw,7.2rem)}
+.hero h1 em{font-style:italic;color:var(--brick)}
+.hero p.lead{font-size:1.25rem;max-width:34ch;margin:1.6rem 0 2rem;color:var(--soft)}
+.cta{display:flex;gap:1rem;flex-wrap:wrap}
+.arch{width:100%;max-width:440px;margin-inline:auto;display:block}
+section{padding:5rem 0}
+h2{font-size:clamp(2.4rem,5vw,4rem);margin-bottom:1rem}
+.dark{background:var(--iron);color:#f3ead9}
+.dark .eyebrow{color:var(--gold)}
+.dark .muted{color:#d6cbb6}
+.house{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.facts{list-style:none;padding:0;border-top:1px solid currentColor}
+.facts li{display:flex;gap:1.2rem;padding:1.1rem 0;border-bottom:1px solid currentColor;align-items:baseline}
+.facts b{font-family:"Cormorant Garamond",serif;font-size:2rem;min-width:5.5rem;color:var(--gold)}
+.rooms{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.room{background:var(--paper);border:1px solid #cdbfa3;padding:1.8rem;display:flex;flex-direction:column;gap:.7rem;border-radius:2px}
+.room svg{width:100%;height:120px}
+.room h3{font-size:2rem}
+.room .n{font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);font-weight:600}
+.price{font-family:"Cormorant Garamond",serif;font-size:2.2rem;font-weight:600;color:var(--brick)}
+.price small{font-family:"Hanken Grotesk",sans-serif;font-size:.9rem;color:var(--soft);font-weight:400}
+.note{margin-top:1.6rem;color:var(--soft)}
+.split{display:grid;grid-template-columns:.9fr 1.1fr;gap:4rem;align-items:center}
+.sun{width:100%;max-width:420px;margin-inline:auto;display:block}
+.tours{list-style:none;padding:0;margin-top:2rem;counter-reset:t}
+.tours li{counter-increment:t;display:grid;grid-template-columns:3rem 1fr;gap:1rem;padding:1.3rem 0;border-top:1px solid #cdbfa3}
+.tours li::before{content:"0" counter(t);font-family:"Cormorant Garamond",serif;font-size:2rem;color:var(--brick)}
+.tours h3{font-size:1.8rem}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
+.contact address{font-style:normal;font-size:1.2rem;display:grid;gap:.8rem;margin-top:1.5rem;align-content:start}
+.contact a.l{text-underline-offset:4px}
+footer{padding:2rem 0;font-size:.9rem;background:#141c1f;color:#d6cbb6}
+@media(max-width:860px){
+.hero,.house,.split,.contact{grid-template-columns:1fr;gap:2.5rem}
+.rooms{grid-template-columns:1fr}
+section{padding:3.5rem 0}
+.hero{padding-bottom:3rem}
+nav ul{gap:1rem}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<header class="top">
+<a class="logo" href="#top">Haveli 1893</a>
+<nav aria-label="Primary"><ul>
+<li><a href="#house">The house</a></li><li><a href="#rooms">Rooms</a></li><li><a href="#breakfast">Breakfast</a></li><li><a href="#walks">Walks</a></li><li><a href="#contact">Contact</a></li>
+</ul></nav>
+</header>
+</div>
+<main id="main">
+<div class="wrap hero" id="top">
+<div>
+<p class="eyebrow">Shankhari Bazar · Puran Dhaka</p>
+<h1>Stay inside <em>the old city</em></h1>
+<p class="lead">Twelve rooms in a restored 1890s merchant house. Breakfast on the roof, included.</p>
+<div class="cta"><a class="btn" href="https://book.example-hotel.com">Check availability</a><a class="btn ghost" href="#rooms">See the rooms</a></div>
+</div>
+<svg class="arch rv" viewBox="0 0 400 480" role="img" aria-label="Illustration of an arched doorway with an iron balcony above">
+<rect width="400" height="480" fill="#e8dcc3"/>
+<path d="M60 480V210a140 140 0 0 1 280 0V480z" fill="#8a2f1c"/>
+<path d="M95 480V215a105 105 0 0 1 210 0V480z" fill="#2a1d17"/>
+<path d="M200 110v370M95 300h210" stroke="#e0b873" stroke-width="3" opacity=".7"/>
+<g stroke="#1f2a2e" stroke-width="5" fill="none"><path d="M20 120h360M20 160h360"/><path d="M40 120v40M80 120v40M120 120v40M160 120v40M200 120v40M240 120v40M280 120v40M320 120v40M360 120v40"/></g>
+<circle cx="200" cy="50" r="22" fill="#e0b873"/>
+</svg>
+</div>
+
+<section class="dark" id="house"><div class="wrap house">
+<div>
+<p class="eyebrow">The house</p>
+<h2>Built by conch-shell merchants</h2>
+<p class="muted">The house was built in 1893 by a conch-shell merchant family, and restored in 2022. We kept the original doors, the iron balconies and the lime plaster.</p>
+</div>
+<ul class="facts">
+<li><b>1893</b><span>Built by a conch-shell merchant family</span></li>
+<li><b>2022</b><span>Restored, keeping the original doors, iron balconies and lime plaster</span></li>
+<li><b>12</b><span>Rooms, in Shankhari Bazar</span></li>
+</ul>
+</div></section>
+
+<section id="rooms"><div class="wrap">
+<p class="eyebrow">Rooms</p>
+<h2>Three ways to sleep here</h2>
+<p>Breakfast is included with every room.</p>
+<div class="rooms">
+<article class="room"><svg viewBox="0 0 200 120" aria-hidden="true"><rect width="200" height="120" fill="#e8dcc3"/><rect x="60" y="20" width="80" height="100" fill="#cdbfa3"/><path d="M70 120V55a30 30 0 0 1 60 0v65z" fill="#2a1d17"/></svg><span class="n">4 rooms</span><h3>Courtyard</h3><p class="price"><small>from </small>৳9,500<small> / night</small></p></article>
+<article class="room"><svg viewBox="0 0 200 120" aria-hidden="true"><rect width="200" height="120" fill="#e8dcc3"/><rect x="30" y="60" width="140" height="6" fill="#1f2a2e"/><path d="M30 66v30M60 66v30M90 66v30M120 66v30M150 66v30M170 66v30" stroke="#1f2a2e" stroke-width="4"/><rect x="50" y="10" width="100" height="50" fill="#8a2f1c"/></svg><span class="n">6 rooms</span><h3>Balcony</h3><p class="price"><small>from </small>৳12,000<small> / night</small></p></article>
+<article class="room"><svg viewBox="0 0 200 120" aria-hidden="true"><rect width="200" height="120" fill="#e8dcc3"/><circle cx="150" cy="35" r="18" fill="#e0b873"/><path d="M0 120V85h30V70h40v20h30V75h50v15h50v30z" fill="#1f2a2e"/></svg><span class="n">2 suites</span><h3>Rooftop suite</h3><p class="price"><small>from </small>৳18,500<small> / night</small></p></article>
+</div>
+<p class="note">Bookings are made on our booking engine.</p>
+<p style="margin-top:1.2rem"><a class="btn" href="https://book.example-hotel.com">Check availability</a></p>
+</div></section>
+
+<section class="dark" id="breakfast"><div class="wrap split">
+<svg class="sun rv" viewBox="0 0 400 300" role="img" aria-label="Illustration of the sun over old city rooftops">
+<circle cx="200" cy="120" r="70" fill="#e0b873"/>
+<path d="M0 300V210h50v-30h60v40h40v-50h70v30h50v-20h60v40h30v80z" fill="#0e1517"/>
+</svg>
+<div>
+<p class="eyebrow">Rooftop breakfast · 7–10am</p>
+<h2>Breakfast above the roofs</h2>
+<p class="muted">Every morning from 7 to 10, breakfast is served on the rooftop with a view over the old city's roofs. It is included in your stay.</p>
+</div>
+</div></section>
+
+<section id="walks"><div class="wrap">
+<p class="eyebrow">Walking tours</p>
+<h2>Led by the hotel</h2>
+<p>Each walk takes 2–3 hours, in small groups.</p>
+<ol class="tours">
+<li><div><h3>Shankhari Bazar at dawn</h3></div></li>
+<li><div><h3>Armanitola and the Star Mosque</h3></div></li>
+<li><div><h3>The river at Sadarghat</h3></div></li>
+</ol>
+</div></section>
+
+<section class="dark" id="contact"><div class="wrap contact">
+<div>
+<p class="eyebrow">Find us</p>
+<h2>Come to Shankhari Bazar</h2>
+<p><a class="btn" href="https://book.example-hotel.com">Check availability</a></p>
+</div>
+<address>
+<span>31 Shankhari Bazar, Old Dhaka</span>
+<a class="l" href="tel:+8801700000000">+880 1700 000000</a>
+<a class="l" href="mailto:stay@haveli1893.com">stay@haveli1893.com</a>
+</address>
+</div></section>
+</main>
+<footer><div class="wrap">Haveli 1893 · 31 Shankhari Bazar, Old Dhaka</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  if(!window.gsap||!window.ScrollTrigger||matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.from(".hero h1,.hero .lead,.hero .cta",{y:24,duration:.9,stagger:.12,ease:"power3.out"});
+  gsap.utils.toArray(".room,.tours li,.facts li,.rv").forEach(function(el){
+    gsap.from(el,{y:30,duration:.8,ease:"power2.out",scrollTrigger:{trigger:el,start:"top 92%",once:true}});
+  });
+})();
+</script>
+</body>
+</html>

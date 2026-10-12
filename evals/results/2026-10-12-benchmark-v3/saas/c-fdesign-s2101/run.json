@@ -1,0 +1,12 @@
+{
+ "slug": "saas",
+ "seed": 2101,
+ "cond": "c-fdesign",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/saas/c-fdesign-s2101",
+ "exit": 0,
+ "seconds": 65,
+ "turns": 4,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

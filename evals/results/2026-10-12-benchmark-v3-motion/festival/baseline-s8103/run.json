@@ -1,0 +1,12 @@
+{
+ "slug": "festival",
+ "seed": 8103,
+ "cond": "baseline",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-motion/festival/baseline-s8103",
+ "exit": 0,
+ "seconds": 59,
+ "turns": 6,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

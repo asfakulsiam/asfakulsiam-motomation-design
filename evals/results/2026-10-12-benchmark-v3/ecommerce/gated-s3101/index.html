@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mati — wood-fired ceramics from Rajshahi</title>
+<meta name="description" content="Mati is a two-person ceramics studio in Rajshahi making wood-fired cups, plates and vases in small batches.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1e9dd;--ink:#241c17;--mute:#5c4d42;--clay:#8a3b1e;--ash:#d9cdbb;--dark:#241c17;--paper:#faf5ec}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Hind Siliguri",system-ui,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.1;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--clay);outline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--ash)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{font-family:Fraunces,serif;font-weight:600;font-size:28px;text-decoration:none;letter-spacing:.04em}
+nav{display:flex;gap:20px;align-items:center}
+nav a{text-decoration:none;font-size:16px}
+nav a:hover{text-decoration:underline}
+.cartbtn{background:var(--dark);color:var(--paper);border:0;border-radius:999px;padding:8px 16px;font:600 16px "Hind Siliguri",sans-serif;cursor:pointer;min-height:44px}
+.hide-s{display:inline}
+@media(max-width:600px){.hide-s{display:none}}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:56px 0}
+@media(max-width:820px){.hero{grid-template-columns:1fr;padding:32px 0}}
+.eyebrow{font-size:15px;color:var(--clay);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin:0 0 12px}
+h1{font-size:clamp(40px,7vw,84px);margin-bottom:20px}
+.price{font-family:Fraunces,serif;font-size:32px;margin:16px 0}
+.lede{max-width:34em;color:var(--mute)}
+.btn{display:inline-block;background:var(--clay);color:#fff;border:0;border-radius:6px;padding:12px 24px;font:600 17px "Hind Siliguri",sans-serif;cursor:pointer;min-height:48px;text-decoration:none}
+.btn:hover{background:#6e2d15}
+.btn.small{padding:8px 16px;min-height:44px;font-size:16px}
+.art{background:var(--ash);border-radius:200px 200px 12px 12px;aspect-ratio:4/5;display:grid;place-items:center;max-width:460px;width:100%;justify-self:center}
+.art svg{width:76%;height:auto}
+.flame{transform-origin:50% 100%;animation:flick 2.6s ease-in-out infinite alternate}
+@keyframes flick{to{transform:scaleY(1.06) skewX(-2deg)}}
+.facts{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,auto);gap:8px 28px;justify-content:start}
+@media(max-width:500px){.facts{grid-template-columns:1fr 1fr}}
+.facts b{display:block;font-family:Fraunces,serif;font-size:22px}
+.facts span{font-size:15px;color:var(--mute)}
+section{padding:64px 0}
+h2{font-size:clamp(30px,4.5vw,48px);margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px;list-style:none;padding:0;margin:0}
+.card{background:var(--paper);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:8px;height:100%;transition:transform .25s}
+.card:hover{transform:translateY(-4px)}
+.card .thumb{background:var(--ash);border-radius:8px;aspect-ratio:1;display:grid;place-items:center}
+.card .thumb svg{width:62%;height:auto}
+.card h3{font-size:22px}
+.card .row{display:flex;justify-content:space-between;align-items:center;margin-top:auto;gap:8px}
+.card .p{font-family:Fraunces,serif;font-size:20px}
+.dark{background:var(--dark);color:var(--paper)}
+.dark .eyebrow{color:#f0a37f}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;list-style:none;margin:0;padding:0}
+@media(max-width:760px){.steps{grid-template-columns:1fr}}
+.steps li{border-top:2px solid #f0a37f;padding-top:16px}
+.steps strong{font-family:Fraunces,serif;font-size:clamp(40px,6vw,64px);display:block;line-height:1}
+.steps p{color:#d9cdbb;margin:8px 0 0}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+@media(max-width:760px){.info{grid-template-columns:1fr}}
+.info p{color:var(--mute);margin:0 0 12px}
+footer{padding:32px 0;border-top:1px solid var(--ash);color:var(--mute);font-size:15px}
+#cart{position:fixed;right:0;top:0;height:100%;width:min(380px,100%);background:var(--paper);box-shadow:-8px 0 30px rgba(0,0,0,.25);padding:24px;transform:translateX(105%);transition:transform .3s;z-index:10;display:flex;flex-direction:column;visibility:hidden}
+#cart.open{transform:none;visibility:visible}
+#cart ul{list-style:none;padding:0;margin:16px 0;overflow:auto;flex:1}
+#cart li{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--ash)}
+#cart .tot{font-weight:600;display:flex;justify-content:space-between}
+#cart small{color:var(--mute);display:block;margin:6px 0 16px}
+.x{align-self:flex-end;background:none;border:1px solid var(--mute);border-radius:6px;min-height:44px;padding:4px 14px;font:600 16px "Hind Siliguri",sans-serif;cursor:pointer;color:var(--ink)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<a class="logo" href="#top">Mati</a>
+<nav aria-label="Main">
+<a href="#shop" class="hide-s">Shop</a><a href="#firing" class="hide-s">The firing</a><a href="#shipping" class="hide-s">Shipping</a>
+<button class="cartbtn" id="open" aria-controls="cart" aria-expanded="false">Cart (<span id="count">0</span>)</button>
+</nav></div></header>
+
+<main id="top">
+<div class="wrap hero">
+<div>
+<p class="eyebrow">Wood-fired in Rajshahi · Next firing 18 November</p>
+<h1>The Firing Cup</h1>
+<p class="lede">250 ml, wood-fired stoneware with an ash glaze. Each one is marked differently by the flame.</p>
+<p class="price">৳1,200</p>
+<button class="btn" data-add="The Firing Cup" data-price="1200">Add to cart</button>
+<ul class="facts">
+<li><b>18 Nov</b><span>next firing</span></li>
+<li><b>32</b><span>pieces in the batch</span></li>
+<li><b>250 ml</b><span>per cup</span></li>
+</ul>
+</div>
+<div class="art" role="img" aria-label="Drawing of a wood-fired cup with a flame mark across its side">
+<svg viewBox="0 0 200 200" aria-hidden="true">
+<ellipse cx="100" cy="176" rx="64" ry="8" fill="#241c17" opacity=".18"/>
+<path d="M40 52h120l-12 108a14 14 0 0 1-14 12H66a14 14 0 0 1-14-12z" fill="#6b4a36"/>
+<path d="M40 52h120l-3 26c-30 14-84 10-114-2z" fill="#c9b79a"/>
+<ellipse cx="100" cy="52" rx="60" ry="9" fill="#3a281c"/>
+<path class="flame" d="M64 172c-6-30 14-44 8-72 22 14 20 34 36 42 4-14 14-20 24-24-2 30 8 40 4 54z" fill="#d9692f" opacity=".75"/>
+<path d="M60 110c20-10 50 6 80-6" stroke="#f1e9dd" stroke-width="3" fill="none" opacity=".5"/>
+</svg></div>
+</div>
+
+<section id="shop" class="wrap" aria-labelledby="shop-h">
+<h2 id="shop-h">The rest of the shelf</h2>
+<ul class="grid" id="grid"></ul>
+</section>
+
+<section id="firing" class="dark" aria-labelledby="f-h"><div class="wrap">
+<p class="eyebrow">Small batches of 20–40 pieces</p>
+<h2 id="f-h">How a firing goes</h2>
+<ol class="steps">
+<li><strong>3 days</strong><p>Stacking the kiln, piece by piece.</p></li>
+<li><strong>36 hours</strong><p>Firing with mango wood.</p></li>
+<li><strong>4 days</strong><p>Cooling, before anything is opened.</p></li>
+</ol>
+</div></section>
+
+<section id="shipping" class="wrap" aria-labelledby="s-h">
+<h2 id="s-h">Shipping and care</h2>
+<div class="info">
+<div><h3>Shipping</h3><p>3–5 days inside Bangladesh. ৳150 flat; free over ৳5,000.</p></div>
+<div><h3>Care</h3><p>Dishwasher safe. Not for the microwave.</p></div>
+</div>
+<p>Mati is Rina and Sohel, a two-person studio in Rajshahi.</p>
+</section>
+</main>
+<footer><div class="wrap">Mati · Rajshahi, Bangladesh · Ships within Bangladesh</div></footer>
+
+<aside id="cart" aria-label="Cart">
+<button class="x" id="close">Close</button>
+<h2 style="font-size:28px;margin:8px 0 0">Your cart</h2>
+<ul id="items"></ul>
+<div class="tot"><span>Subtotal</span><span id="sub">৳0</span></div>
+<div class="tot"><span>Shipping</span><span id="ship">৳0</span></div>
+<small>Flat ৳150, free over ৳5,000. Checkout is not available in this demo.</small>
+<div class="tot" style="font-size:20px"><span>Total</span><span id="total">৳0</span></div>
+</aside>
+<div class="sr" role="status" id="live"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+const products=[["Morning Plate",1800,"plate"],["Tall Vase",6500,"vase"],["Pour Jug",3200,"jug"],["Small Bowl",800,"bowl"],["Rice Bowl",1400,"bowl"]];
+const shapes={
+plate:'<ellipse cx="50" cy="60" rx="44" ry="14" fill="#6b4a36"/><ellipse cx="50" cy="55" rx="44" ry="13" fill="#c9b79a"/><ellipse cx="50" cy="55" rx="28" ry="7" fill="#a98f6d"/>',
+vase:'<path d="M42 10h16v22c18 10 22 40 14 62H28c-8-22-4-52 14-62z" fill="#6b4a36"/><path d="M42 10h16v6H42z" fill="#c9b79a"/><path d="M34 70c14 6 28 0 38-6" stroke="#d9692f" stroke-width="3" fill="none" opacity=".7"/>',
+jug:'<path d="M30 24h34l6 8c6 0 14 4 14 18s-8 16-14 16c-2 14-8 22-18 22H40c-10 0-14-14-14-34z" fill="#6b4a36"/><path d="M30 24h34l4 6H28z" fill="#c9b79a"/>',
+bowl:'<path d="M10 40h80c0 28-16 44-40 44S10 68 10 40z" fill="#6b4a36"/><ellipse cx="50" cy="40" rx="40" ry="8" fill="#c9b79a"/><path d="M24 58c14 8 38 8 52-2" stroke="#d9692f" stroke-width="3" fill="none" opacity=".7"/>'};
+const fmt=n=>"৳"+n.toLocaleString("en-US");
+document.getElementById("grid").innerHTML=products.map(([n,p,s])=>`<li><div class="card"><div class="thumb"><svg viewBox="0 0 100 100" aria-hidden="true">${shapes[s]}</svg></div><h3>${n}</h3><div class="row"><span class="p">${fmt(p)}</span><button class="btn small" data-add="${n}" data-price="${p}" aria-label="Add ${n} to cart">Add to cart</button></div></div></li>`).join("");
+const cart=[];
+const $=id=>document.getElementById(id);
+function render(){
+ const q=cart.reduce((a,c)=>a+c.q,0),sub=cart.reduce((a,c)=>a+c.q*c.p,0),ship=!q?0:sub>5000?0:150;
+ $("count").textContent=q;$("sub").textContent=fmt(sub);$("ship").textContent=ship?fmt(ship):(q?"Free":"৳0");$("total").textContent=fmt(sub+ship);
+ $("items").innerHTML=cart.length?cart.map(c=>`<li><span>${c.n} × ${c.q}</span><span>${fmt(c.q*c.p)}</span></li>`).join(""):"<li>Nothing here yet.</li>";
+}
+document.addEventListener("click",e=>{
+ const b=e.target.closest("[data-add]");if(!b)return;
+ const n=b.dataset.add,p=+b.dataset.price,f=cart.find(c=>c.n===n);
+ f?f.q++:cart.push({n,p,q:1});render();$("live").textContent=n+" added to cart";
+});
+const cartEl=$("cart");
+function toggle(o){cartEl.classList.toggle("open",o);$("open").setAttribute("aria-expanded",o);if(o)$("close").focus();else $("open").focus()}
+$("open").onclick=()=>toggle(true);$("close").onclick=()=>toggle(false);
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&cartEl.classList.contains("open"))toggle(false)});
+render();
+if(window.gsap&&window.ScrollTrigger&&!matchMedia("(prefers-reduced-motion: reduce)").matches){
+ gsap.registerPlugin(ScrollTrigger);
+ gsap.from(".card",{y:24,duration:.6,stagger:.08,ease:"power2.out",scrollTrigger:{trigger:"#grid",start:"top 85%"}});
+ gsap.from(".steps li",{y:24,duration:.6,stagger:.15,ease:"power2.out",scrollTrigger:{trigger:".steps",start:"top 85%"}});
+}
+</script>
+</body>
+</html>

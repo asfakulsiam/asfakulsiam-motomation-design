@@ -1,0 +1,4 @@
+Use the asfakulsiam-motomation-design skill: /build this brief. When you run the collision engine, use --seed 1102. Force the motion tier: --tier=4. Build the website described in the brief below as a single self-contained index.html in the current folder (inline CSS and JS, no build step; Google Fonts/Fontshare and the GSAP CDN are allowed, no image URLs). Use only facts from the brief. Follow the skill end to end, including its Delivery Gate, and finish with the handoff.
+
+# Brief 01: Motion designer portfolio
+Portfolio for Rafi, a motion designer in Dhaka with 8 years of work for music videos, broadcast idents and product launches. He wants studios to hire him for title sequences. Projects: "Monsoon Idents" (channel rebrand, 2024), "Bhoot" (title sequence, 2023), "Koi" (product launch film, 2025). Contact: email only.

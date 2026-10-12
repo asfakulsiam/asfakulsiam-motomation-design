@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mati | Wood-fired ceramics from Rajshahi</title>
+<meta name="description" content="Mati is a two-person ceramics studio in Rajshahi making wood-fired cups, plates and vases in small batches. Ships within Bangladesh.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Noto+Sans+Bengali:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#e7eaea; --bg-2:#dce1e1; --panel:#f3f5f5; --ink:#1c2428; --ink-2:#47535a;
+  --line:#c3cacb; --accent:#b8421a; --on-accent:#fff8f3; --ember:#d9622f;
+  --glaze:#cfd8d4; --stone:#4a3d38; --shadow:rgb(28 36 40 / .14);
+  --r:12px; --pad:clamp(20px,5vw,72px);
+  --display:"Cabinet Grotesk","Geist","Noto Sans Bengali",system-ui,sans-serif;
+  --body:"Geist","Noto Sans Bengali",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#14191b; --bg-2:#1b2225; --panel:#20282b; --ink:#e8ebea; --ink-2:#a9b4b6;
+    --line:#37424a; --accent:#ef7d4c; --on-accent:#1a0f09; --ember:#ef7d4c;
+    --glaze:#aab6b2; --stone:#3a2f2b; --shadow:rgb(0 0 0 / .4);
+  }
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1360px;margin-inline:auto;padding-inline:var(--pad)}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.025em;line-height:1.02}
+h2{font-size:clamp(2rem,4.4vw,3.5rem);max-width:16ch}
+p{max-width:62ch;color:var(--ink-2)}
+.eyebrow{font:600 .78rem/1 var(--body);text-transform:uppercase;letter-spacing:.16em;color:var(--accent)}
+.skip{position:absolute;left:12px;top:-60px;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:var(--r);z-index:100}
+.skip:focus{top:12px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;font:600 1rem/1 var(--body);min-height:48px;padding:0 24px;border-radius:var(--r);border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;text-decoration:none;transition:transform .3s cubic-bezier(.16,1,.3,1),background-color .2s,color .2s}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.btn:active{transform:scale(.98) translateY(1px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.primary:hover{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.btn.small{min-height:42px;padding:0 18px;font-size:.95rem}
+
+/* nav */
+header.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+@media (prefers-reduced-transparency:reduce){header.nav{background:var(--bg);backdrop-filter:none}}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.brand{font:800 1.7rem/1 var(--display);letter-spacing:-.03em;text-decoration:none}
+.nav ul{display:flex;gap:28px;list-style:none;padding:0}
+.nav ul a{text-decoration:none;font-weight:500;color:var(--ink-2);padding:8px 2px}
+.nav ul a:hover{color:var(--ink)}
+.cart-btn{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 16px;border-radius:var(--r);border:1.5px solid var(--ink);background:transparent;color:var(--ink);font:600 .95rem/1 var(--body);cursor:pointer}
+.cart-btn:hover{background:var(--ink);color:var(--bg)}
+.cart-count{display:inline-grid;place-items:center;min-width:24px;height:24px;padding:0 6px;border-radius:8px;background:var(--accent);color:var(--on-accent);font-size:.85rem}
+.cart-count.bump{animation:bump .45s cubic-bezier(.16,1,.3,1)}
+@keyframes bump{40%{transform:scale(1.35)}}
+@media (max-width:720px){.nav ul{display:none}}
+
+/* hero */
+.hero{min-height:calc(100dvh - 68px);display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:clamp(24px,5vw,80px);padding-block:32px 48px}
+.hero h1{font-size:clamp(2.6rem,6vw,5.4rem);max-width:11ch;margin-block:18px 22px}
+.hero p{font-size:1.2rem;margin-bottom:32px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero-art{position:relative;aspect-ratio:1/1.08;border-radius:var(--r);background:radial-gradient(120% 90% at 30% 15%,var(--bg-2),var(--panel));display:grid;place-items:center;overflow:hidden}
+.hero-art svg{width:78%;height:auto;filter:drop-shadow(0 28px 22px var(--shadow))}
+.hero-art .ember-glow{position:absolute;inset:auto -10% -30% -10%;height:60%;background:radial-gradient(closest-side,color-mix(in srgb,var(--ember) 38%,transparent),transparent);pointer-events:none}
+@media (max-width:860px){.hero{grid-template-columns:1fr;min-height:0;padding-top:28px}.hero-art{order:-1;aspect-ratio:4/3}.hero-art svg{width:56%}.hero h1{max-width:14ch}}
+
+/* featured */
+.feature{padding-block:clamp(72px,10vw,150px)}
+.feature-grid{display:grid;grid-template-columns:5fr 6fr;gap:clamp(28px,6vw,100px);align-items:center}
+.feature-art{aspect-ratio:1/1;border-radius:var(--r);background:var(--panel);display:grid;place-items:center;border:1px solid var(--line)}
+.feature-art svg{width:70%;height:auto;filter:drop-shadow(0 22px 18px var(--shadow))}
+.feature h2{margin-bottom:20px}
+.price{font:800 2.2rem/1 var(--display);margin-block:26px 8px;letter-spacing:-.02em}
+.facts{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:12px 40px;margin-block:26px 30px}
+.facts div dt{font-size:.85rem;color:var(--ink-2)}
+.facts div dd{font:700 1.25rem/1.3 var(--display);margin:0}
+.next{padding:16px 20px;border-left:3px solid var(--accent);background:var(--panel);border-radius:0 var(--r) var(--r) 0;margin-bottom:28px;max-width:46ch;color:var(--ink)}
+@media (max-width:860px){.feature-grid{grid-template-columns:1fr}.facts{grid-template-columns:repeat(2,auto)}}
+
+/* firing */
+.firing{background:var(--bg-2);padding-block:clamp(72px,10vw,150px)}
+.firing-head{margin-bottom:clamp(36px,6vw,80px)}
+.firing-head p{margin-top:18px}
+.timeline{position:relative;padding-left:clamp(28px,6vw,96px)}
+.rail{position:absolute;left:6px;top:8px;bottom:8px;width:3px;background:var(--line);border-radius:3px}
+.rail i{position:absolute;inset:0;background:var(--accent);border-radius:3px;transform-origin:top;transform:scaleY(1)}
+.step{padding-block:clamp(22px,4vw,48px);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:8px 40px;align-items:baseline;position:relative}
+.step::before{content:"";position:absolute;left:calc(-1 * clamp(28px,6vw,96px) + 0px);top:calc(clamp(22px,4vw,48px) + 18px);width:15px;height:15px;border-radius:5px;background:var(--bg-2);border:3px solid var(--accent);transform:translateX(-4px)}
+.step .big{font:800 clamp(3.2rem,9vw,8rem)/.95 var(--display);letter-spacing:-.04em}
+.step .big small{font-size:.32em;letter-spacing:-.01em;margin-left:.2em;color:var(--ink-2);font-weight:700}
+.step h3{font-size:clamp(1.4rem,2.4vw,2rem);margin-bottom:6px}
+@media (max-width:720px){.step{grid-template-columns:1fr}}
+
+/* shop */
+.shop{padding-block:clamp(72px,10vw,150px)}
+.shop h2{margin-bottom:12px}
+.shop .lead{margin-bottom:44px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.tile{position:relative;border-radius:var(--r);padding:24px;display:flex;flex-direction:column;justify-content:space-between;min-height:340px;overflow:hidden;background:var(--panel);border:1px solid var(--line)}
+.tile .art{flex:1;display:grid;place-items:center;padding:12px 0}
+.tile .art svg{width:min(62%,230px);height:auto;transition:transform .5s cubic-bezier(.16,1,.3,1);filter:drop-shadow(0 16px 12px var(--shadow))}
+.tile:hover .art svg{transform:translateY(-6px) rotate(-1.5deg)}
+.tile .meta{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.tile h3{font-size:1.5rem}
+.tile .pr{font:600 1.05rem/1.4 var(--body);color:var(--ink-2)}
+.t-plate{grid-column:1/8;background:var(--bg-2)}
+.t-vase{grid-column:8/13;grid-row:1/3;min-height:420px}
+.t-jug{grid-column:1/5}
+.t-sbowl{grid-column:5/8;background:var(--bg-2)}
+.t-rbowl{grid-column:1/13;flex-direction:row;align-items:center;min-height:240px;gap:24px}
+.t-rbowl .art{flex:0 0 28%}
+.t-rbowl .meta{flex:1;justify-content:space-between;align-items:center}
+@media (max-width:860px){
+  .grid{grid-template-columns:1fr}
+  .tile,.t-plate,.t-vase,.t-jug,.t-sbowl,.t-rbowl{grid-column:1/-1;grid-row:auto;min-height:300px}
+  .t-rbowl{flex-direction:column;align-items:stretch}.t-rbowl .art{flex:1}.t-rbowl .meta{align-items:end}
+}
+
+/* shipping + care */
+.info{padding-block:clamp(60px,8vw,120px);border-top:1px solid var(--line)}
+.info-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(28px,6vw,100px)}
+.info h2{font-size:clamp(1.7rem,3vw,2.5rem);margin-bottom:18px}
+.info .big-fig{font:800 clamp(2.4rem,5vw,4rem)/1 var(--display);color:var(--ink);letter-spacing:-.03em;margin-bottom:14px}
+.info .big-fig span{color:var(--accent)}
+@media (max-width:860px){.info-grid{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding-block:40px;color:var(--ink-2);font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+/* cart dialog */
+dialog.cart{margin:0 0 0 auto;height:100dvh;max-height:none;width:min(440px,100%);max-width:100%;border:0;padding:0;background:var(--bg);color:var(--ink);box-shadow:-20px 0 60px var(--shadow)}
+dialog.cart::backdrop{background:rgb(10 14 16 / .5)}
+dialog.cart[open]{display:flex;flex-direction:column;animation:slide .4s cubic-bezier(.16,1,.3,1)}
+@keyframes slide{from{transform:translateX(40px);opacity:0}}
+.cart-head{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--line)}
+.cart-head h2{font-size:1.6rem}
+.iconbtn{min-width:44px;min-height:44px;border-radius:var(--r);border:1.5px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;font:600 1rem var(--body)}
+.iconbtn:hover{border-color:var(--ink)}
+.cart-body{flex:1;overflow:auto;padding:8px 24px}
+.empty{padding:48px 0;text-align:center}
+.empty svg{width:90px;margin:0 auto 14px;display:block;opacity:.9}
+.empty p{margin-inline:auto}
+.line{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:16px 0}
+.line + .line{border-top:1px solid var(--line)}
+.line .th{width:64px;height:64px;border-radius:var(--r);background:var(--panel);display:grid;place-items:center}
+.line .th svg{width:70%}
+.line b{font-family:var(--display);font-size:1.1rem}
+.qty{display:inline-flex;align-items:center;gap:4px;margin-top:6px}
+.qty button{width:34px;height:34px;border-radius:10px;border:1.5px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;font-size:1.1rem}
+.qty button:hover{border-color:var(--ink)}
+.qty span{min-width:28px;text-align:center;font-weight:600}
+.rm{background:none;border:0;color:var(--ink-2);text-decoration:underline;cursor:pointer;font:inherit;font-size:.9rem;min-height:32px}
+.cart-foot{padding:20px 24px 24px;border-top:1px solid var(--line);background:var(--panel)}
+.row{display:flex;justify-content:space-between;margin-bottom:8px}
+.row.total{font:800 1.4rem var(--display);margin-top:12px}
+.note{font-size:.92rem;margin-top:10px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:var(--r);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s cubic-bezier(.16,1,.3,1);z-index:30;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Mati, home">Mati</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#cup">The Firing Cup</a></li>
+        <li><a href="#firing">The firing</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#shipping">Shipping</a></li>
+      </ul>
+    </nav>
+    <button class="cart-btn" id="cartOpen" aria-haspopup="dialog">Cart <span class="cart-count" id="cartCount" aria-label="0 items">0</span></button>
+  </div>
+</header>
+
+<main id="main">
+<section class="wrap hero" id="top">
+  <div>
+    <p class="eyebrow" style="margin-bottom:0">Rajshahi, Bangladesh</p>
+    <h1 data-hero>Cups marked by the flame.</h1>
+    <p data-hero>Wood-fired cups, plates and vases from Rina and Sohel, made in batches of 20-40 pieces in Rajshahi.</p>
+    <div class="cta" data-hero>
+      <a class="btn primary" href="#cup">Shop the cup</a>
+      <a class="btn" href="#firing">See the firing</a>
+    </div>
+  </div>
+  <div class="hero-art" data-hero-art>
+    <div class="ember-glow" aria-hidden="true"></div>
+    <div id="heroCup" role="img" aria-label="Illustration of The Firing Cup, a wood-fired stoneware cup with ash glaze"></div>
+  </div>
+</section>
+
+<section class="wrap feature" id="cup">
+  <div class="feature-grid">
+    <div class="feature-art" data-reveal><div id="featCup" role="img" aria-label="The Firing Cup, drawn in SVG"></div></div>
+    <div data-reveal>
+      <h2>The Firing Cup</h2>
+      <p>Wood-fired stoneware with an ash glaze. Each one is marked differently by the flame, so no two cups are the same.</p>
+      <p class="price">৳1,200</p>
+      <dl class="facts">
+        <div><dt>Size</dt><dd>250 ml</dd></div>
+        <div><dt>Clay</dt><dd>Stoneware</dd></div>
+        <div><dt>Glaze</dt><dd>Wood ash</dd></div>
+      </dl>
+      <p class="next"><strong>Next firing: 18 November.</strong> 32 pieces in this batch.</p>
+      <button class="btn primary" data-add="cup">Add to cart</button>
+    </div>
+  </div>
+</section>
+
+<section class="firing" id="firing" aria-labelledby="firingTitle">
+  <div class="wrap">
+    <div class="firing-head" data-reveal>
+      <h2 id="firingTitle">How a firing goes</h2>
+      <p>Every batch of 20-40 pieces goes through the same three stages in the kiln.</p>
+    </div>
+    <div class="timeline" id="timeline">
+      <div class="rail" aria-hidden="true"><i id="railFill"></i></div>
+      <div class="step" data-reveal>
+        <div class="big">3<small>days</small></div>
+        <div><h3>Stacking</h3><p>Pieces are set into the kiln by hand, so the flame can reach each one.</p></div>
+      </div>
+      <div class="step" data-reveal>
+        <div class="big">36<small>hours</small></div>
+        <div><h3>Firing with mango wood</h3><p>Ash from the wood settles on the pots and melts into the glaze.</p></div>
+      </div>
+      <div class="step" data-reveal>
+        <div class="big">4<small>days</small></div>
+        <div><h3>Cooling</h3><p>The kiln stays closed until it has cooled. Then Rina and Sohel open it.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap shop" id="shop">
+  <h2 data-reveal>More from the studio</h2>
+  <p class="lead" data-reveal>Cups, plates, vases and bowls, made in the same small batches.</p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="wrap info" id="shipping">
+  <div class="info-grid">
+    <div data-reveal>
+      <h2>Shipping within Bangladesh</h2>
+      <div class="big-fig">3-5 days</div>
+      <p>Flat <strong>৳150</strong> per order. Free over <strong>৳5,000</strong>.</p>
+    </div>
+    <div data-reveal>
+      <h2>Care</h2>
+      <p>Dishwasher safe. Not for the microwave.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><strong style="color:var(--ink)">Mati</strong>, a ceramics studio by Rina and Sohel in Rajshahi.</span>
+    <span>Ships within Bangladesh.</span>
+  </div>
+</footer>
+
+<dialog class="cart" id="cart" aria-labelledby="cartTitle">
+  <div class="cart-head">
+    <h2 id="cartTitle">Your cart</h2>
+    <button class="iconbtn" id="cartClose" aria-label="Close cart">Close</button>
+  </div>
+  <div class="cart-body" id="cartBody"></div>
+  <div class="cart-foot" id="cartFoot" hidden>
+    <div class="row"><span>Subtotal</span><span id="sub"></span></div>
+    <div class="row"><span>Shipping</span><span id="ship"></span></div>
+    <div class="row total"><span>Total</span><span id="total"></span></div>
+    <p class="note" id="shipNote"></p>
+    <p class="note">Checkout is not open on this page yet.</p>
+  </div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+"use strict";
+var PRODUCTS = {
+  cup:   {name:"The Firing Cup", price:1200, shape:"cup"},
+  plate: {name:"Morning Plate", price:1800, shape:"plate"},
+  vase:  {name:"Tall Vase", price:6500, shape:"vase"},
+  jug:   {name:"Pour Jug", price:3200, shape:"jug"},
+  sbowl: {name:"Small Bowl", price:800, shape:"sbowl"},
+  rbowl: {name:"Rice Bowl", price:1400, shape:"rbowl"}
+};
+var SHIP = 150, FREE_OVER = 5000;
+var uid = 0;
+var fmt = function(n){ return "৳" + n.toLocaleString("en-US"); };
+
+/* Vessel drawings: each is made of an outline, a glaze gradient and flame marks. */
+var OUT = {
+  cup:   {d:"M58 62 L142 62 L133 150 Q131 168 114 168 L86 168 Q69 168 67 150 Z", rim:[100,62,42,9], vb:"0 0 200 190"},
+  plate: {d:"M12 92 Q14 128 100 132 Q186 128 188 92 Z", rim:[100,92,88,22], vb:"0 40 200 120"},
+  vase:  {d:"M84 14 L116 14 L113 56 Q158 96 146 150 Q140 186 100 186 Q60 186 54 150 Q42 96 87 56 Z", rim:[100,14,16,4], vb:"0 0 200 200"},
+  jug:   {d:"M62 50 L128 50 Q150 52 150 74 L146 138 Q144 168 104 168 Q64 168 62 138 L56 74 Q54 52 62 50 Z", rim:[100,50,42,8], vb:"0 20 210 170", extra:'<path d="M148 70 Q190 70 186 110 Q182 140 146 138" fill="none" stroke="var(--stone)" stroke-width="12" stroke-linecap="round"/>'},
+  sbowl: {d:"M34 82 Q40 148 100 152 Q160 148 166 82 Z", rim:[100,82,66,12], vb:"0 50 200 120"},
+  rbowl: {d:"M24 70 Q28 138 82 148 L82 160 L118 160 L118 148 Q172 138 176 70 Z", rim:[100,70,76,13], vb:"0 40 200 140"}
+};
+var SEEDS = {cup:[.3,.62,.8],plate:[.2,.55,.85],vase:[.35,.7,.5],jug:[.25,.6,.78],sbowl:[.4,.7,.3],rbowl:[.28,.5,.82]};
+function vessel(kind, tint){
+  var o = OUT[kind], id = "v" + (++uid), s = SEEDS[kind] || SEEDS.cup;
+  var r = o.rim, marks = "";
+  for (var i = 0; i < 3; i++){
+    var cx = 20 + s[i] * 160, cy = r[1] + 20 + ((i * 37) % 60);
+    marks += '<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+(16+i*6)+'" ry="'+(30+i*8)+'" fill="url(#'+id+'f)" transform="rotate('+(-25+i*28)+' '+cx+' '+cy+')"/>';
+  }
+  return '<svg viewBox="'+o.vb+'" aria-hidden="true" focusable="false">'+
+   '<defs>'+
+   '<linearGradient id="'+id+'g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--glaze)"/><stop offset=".45" stop-color="var(--glaze)"/><stop offset="1" stop-color="var(--stone)"/></linearGradient>'+
+   '<linearGradient id="'+id+'s" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".22"/><stop offset=".35" stop-color="#fff" stop-opacity=".12"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></linearGradient>'+
+   '<radialGradient id="'+id+'f"><stop offset="0" stop-color="var(--ember)" stop-opacity=".75"/><stop offset="1" stop-color="var(--ember)" stop-opacity="0"/></radialGradient>'+
+   '<clipPath id="'+id+'c"><path d="'+o.d+'"/></clipPath></defs>'+
+   (o.extra||"")+
+   '<path d="'+o.d+'" fill="url(#'+id+'g)"/>'+
+   '<g clip-path="url(#'+id+'c)">'+marks+'<rect x="0" y="0" width="200" height="220" fill="url(#'+id+'s)"/></g>'+
+   '<ellipse cx="'+r[0]+'" cy="'+r[1]+'" rx="'+r[2]+'" ry="'+r[3]+'" fill="var(--stone)"/>'+
+   '<ellipse cx="'+r[0]+'" cy="'+(r[1]+1)+'" rx="'+(r[2]-5)+'" ry="'+Math.max(r[3]-3,1.5)+'" fill="var(--bg-2)" opacity=".35"/>'+
+   '</svg>';
+}
+document.getElementById("heroCup").innerHTML = vessel("cup");
+document.getElementById("featCup").innerHTML = vessel("cup");
+document.querySelectorAll("#heroCup svg").forEach(function(s){ s.style.width="100%"; });
+
+/* Product grid */
+var grid = document.getElementById("grid");
+["plate","vase","jug","sbowl","rbowl"].forEach(function(k){
+  var p = PRODUCTS[k], el = document.createElement("article");
+  el.className = "tile t-" + k; el.setAttribute("data-reveal","");
+  el.innerHTML = '<div class="art" role="img" aria-label="'+p.name+', drawn in SVG">'+vessel(p.shape)+'</div>'+
+    '<div class="meta"><div><h3>'+p.name+'</h3><span class="pr">'+fmt(p.price)+'</span></div>'+
+    '<button class="btn small" data-add="'+k+'" aria-label="Add '+p.name+' to cart">Add to cart</button></div>';
+  grid.appendChild(el);
+});
+
+/* Cart */
+var cart = {}, dlg = document.getElementById("cart"), lastFocus = null;
+var countEl = document.getElementById("cartCount"), toast = document.getElementById("toast"), toastT;
+function totals(){
+  var n = 0, sub = 0;
+  Object.keys(cart).forEach(function(k){ n += cart[k]; sub += cart[k] * PRODUCTS[k].price; });
+  return {n:n, sub:sub, ship: n === 0 ? 0 : (sub > FREE_OVER ? 0 : SHIP)};
+}
+function render(){
+  var t = totals(), body = document.getElementById("cartBody"), foot = document.getElementById("cartFoot");
+  countEl.textContent = t.n; countEl.setAttribute("aria-label", t.n + (t.n === 1 ? " item" : " items"));
+  if (t.n === 0){
+    foot.hidden = true;
+    body.innerHTML = '<div class="empty"><svg viewBox="0 0 90 70" aria-hidden="true"><path d="M14 18 H76 L70 56 Q69 64 60 64 H30 Q21 64 20 56 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><ellipse cx="45" cy="18" rx="31" ry="6" fill="none" stroke="currentColor" stroke-width="3"/></svg><h3>Your cart is empty</h3><p>Add a piece from the shop and it will show up here.</p><p style="margin-top:18px"><a class="btn" href="#shop" id="emptyShop">Go to the shop</a></p></div>';
+    var es = document.getElementById("emptyShop"); if (es) es.addEventListener("click", function(){ dlg.close(); });
+    return;
+  }
+  body.innerHTML = Object.keys(cart).map(function(k){
+    var p = PRODUCTS[k], q = cart[k];
+    return '<div class="line"><div class="th">'+vessel(p.shape)+'</div><div><b>'+p.name+'</b><div>'+fmt(p.price)+'</div>'+
+      '<div class="qty"><button data-dec="'+k+'" aria-label="Decrease quantity of '+p.name+'">-</button><span aria-live="polite">'+q+'</span><button data-inc="'+k+'" aria-label="Increase quantity of '+p.name+'">+</button></div></div>'+
+      '<div style="text-align:right"><b>'+fmt(p.price*q)+'</b><br><button class="rm" data-rm="'+k+'" aria-label="Remove '+p.name+'">Remove</button></div></div>';
+  }).join("");
+  foot.hidden = false;
+  document.getElementById("sub").textContent = fmt(t.sub);
+  document.getElementById("ship").textContent = t.ship ? fmt(t.ship) : "Free";
+  document.getElementById("total").textContent = fmt(t.sub + t.ship);
+  document.getElementById("shipNote").textContent = t.ship
+    ? "Add " + fmt(FREE_OVER + 1 - t.sub) + " more for free shipping. Delivery takes 3-5 days inside Bangladesh."
+    : "Free shipping applied. Delivery takes 3-5 days inside Bangladesh.";
+}
+function say(msg){
+  toast.textContent = msg; toast.classList.add("show");
+  clearTimeout(toastT); toastT = setTimeout(function(){ toast.classList.remove("show"); }, 2200);
+}
+function add(k){
+  cart[k] = (cart[k] || 0) + 1; render();
+  countEl.classList.remove("bump"); void countEl.offsetWidth; countEl.classList.add("bump");
+  say(PRODUCTS[k].name + " added to cart");
+}
+document.addEventListener("click", function(e){
+  var b = e.target.closest("[data-add],[data-inc],[data-dec],[data-rm]"); if (!b) return;
+  if (b.dataset.add) add(b.dataset.add);
+  else if (b.dataset.inc){ cart[b.dataset.inc]++; render(); }
+  else if (b.dataset.dec){ if (--cart[b.dataset.dec] <= 0) delete cart[b.dataset.dec]; render(); }
+  else if (b.dataset.rm){ delete cart[b.dataset.rm]; render(); }
+});
+document.getElementById("cartOpen").addEventListener("click", function(){ lastFocus = this; dlg.showModal(); });
+document.getElementById("cartClose").addEventListener("click", function(){ dlg.close(); });
+dlg.addEventListener("click", function(e){ if (e.target === dlg) dlg.close(); });
+dlg.addEventListener("close", function(){ if (lastFocus) lastFocus.focus(); });
+render();
+
+/* Motion: hierarchy on load, reveal on scroll, and a rail that tracks progress through the firing. */
+var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (window.gsap && window.ScrollTrigger && !reduce){
+  gsap.registerPlugin(ScrollTrigger);
+  var ctx = gsap.context(function(){
+    gsap.from("[data-hero]", {opacity:0, y:28, duration:.9, ease:"expo.out", stagger:.09});
+    gsap.from("[data-hero-art]", {opacity:0, scale:.96, duration:1.1, ease:"expo.out"});
+    gsap.from("#heroCup", {y:40, rotate:-3, duration:1.4, ease:"expo.out", delay:.15});
+    gsap.utils.toArray("[data-reveal]").forEach(function(el){
+      gsap.from(el, {opacity:0, y:36, duration:.9, ease:"expo.out",
+        scrollTrigger:{trigger:el, start:"top 88%", once:true}});
+    });
+    gsap.fromTo("#railFill", {scaleY:0}, {scaleY:1, ease:"none",
+      scrollTrigger:{trigger:"#timeline", start:"top 70%", end:"bottom 60%", scrub:true, invalidateOnRefresh:true}});
+  });
+  window.addEventListener("pagehide", function(){ ctx.revert(); });
+}
+})();
+</script>
+</body>
+</html>

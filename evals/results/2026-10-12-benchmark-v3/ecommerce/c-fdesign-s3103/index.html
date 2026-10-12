@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mati: wood-fired ceramics from Rajshahi</title>
+<meta name="description" content="Wood-fired cups, plates and vases from a two-person studio in Rajshahi. Small batches, shipped within Bangladesh.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600&family=Noto+Sans+Bengali:wght@400;600&family=Young+Serif&display=swap" rel="stylesheet">
+<style>
+:root{--ash:#d8dbd0;--soot:#2a2622;--glaze:#6c8a7a;--ember:#b5441f;--paper:#eceee6;--line:#2a262233;
+--serif:"Young Serif","Noto Sans Bengali",Georgia,serif;--sans:"Familjen Grotesk","Noto Sans Bengali",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--ash);color:var(--soot);font:400 1.0625rem/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ember);outline-offset:3px}
+.wrap{width:min(1200px,100% - 2.5rem);margin-inline:auto}
+.skip{position:absolute;left:-999px;top:0;background:var(--soot);color:var(--paper);padding:.6rem 1rem;z-index:99}
+.skip:focus{left:0}
+header.top{position:sticky;top:0;z-index:20;background:var(--ash);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font:1.6rem var(--serif);text-decoration:none;letter-spacing:.02em}
+nav{display:flex;gap:1.5rem;align-items:center}
+nav a{text-decoration:none;font-weight:500}
+nav a:hover{text-decoration:underline;text-underline-offset:4px}
+.cartbtn{font:inherit;font-weight:600;background:var(--soot);color:var(--paper);border:0;border-radius:999px;padding:.5rem 1.1rem;cursor:pointer;min-height:44px}
+.cartbtn b{display:inline-grid;place-items:center;min-width:1.5rem;height:1.5rem;margin-left:.4rem;border-radius:99px;background:var(--ember);font-size:.85rem}
+@media(max-width:620px){nav a{display:none}}
+
+h1,h2{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.01em}
+h1{font-size:clamp(3.2rem,9vw,7.5rem)}
+h2{font-size:clamp(2rem,4.5vw,3.4rem);margin-bottom:1.2rem}
+.hero{padding:clamp(2rem,5vw,4rem) 0 clamp(3rem,7vw,6rem)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:2rem;align-items:center}
+.hero p.lead{max-width:34ch;font-size:1.25rem;margin:1.4rem 0}
+.facts{display:flex;flex-wrap:wrap;gap:.4rem 1.6rem;margin-bottom:1.6rem;font-weight:500}
+.price{font:2rem var(--serif)}
+.row{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center}
+.btn{font:inherit;font-weight:600;cursor:pointer;min-height:48px;padding:.65rem 1.5rem;border-radius:4px;border:2px solid var(--soot);background:var(--soot);color:var(--paper);transition:background .2s,transform .15s}
+.btn:hover{background:var(--ember);border-color:var(--ember)}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;color:var(--soot)}
+.btn.ghost:hover{background:var(--soot);border-color:var(--soot);color:var(--paper)}
+.btn.added{background:var(--glaze);border-color:var(--glaze)}
+.stage{position:relative;aspect-ratio:1/1;max-width:560px;width:100%;justify-self:center}
+.stage svg{width:100%;height:100%;display:block;overflow:visible}
+.stage .note{position:absolute;left:0;right:0;bottom:-.2rem;text-align:center;font-size:.95rem}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+
+section{padding:clamp(3rem,7vw,6rem) 0}
+.story{background:var(--soot);color:var(--paper)}
+.story p{max-width:56ch}
+.bar{display:flex;margin:2.5rem 0 1rem;height:92px;gap:4px}
+.seg{position:relative;padding:.7rem .8rem;overflow:hidden;transform-origin:left;display:flex;flex-direction:column;justify-content:flex-end;line-height:1.25;font-size:.95rem}
+.seg strong{font:1.25rem var(--serif);font-weight:400;display:block}
+.seg.s1{background:#4a443d;flex:72}
+.seg.s2{background:var(--ember);flex:36}
+.seg.s3{background:var(--glaze);color:var(--soot);flex:96}
+.bar-key{display:grid;grid-template-columns:72fr 36fr 96fr;gap:4px;font-size:.95rem}
+.story small{display:block;margin-top:1.5rem;opacity:.8;font-size:.95rem}
+@media(max-width:700px){
+ .bar{flex-direction:column;height:auto}
+ .seg{min-height:64px;flex:none!important;width:var(--w)}
+ .seg.s1{--w:75%}.seg.s2{--w:40%}.seg.s3{--w:100%}
+ .bar-key{display:none}}
+
+.list{list-style:none;padding:0;border-top:2px solid var(--soot)}
+.item{display:grid;grid-template-columns:90px 1fr auto auto;gap:1rem 1.5rem;align-items:center;padding:1rem 0;border-bottom:1px solid var(--line)}
+.item svg{width:90px;height:90px}
+.item h3{font:1.5rem var(--serif);font-weight:400}
+.item .p{font:1.35rem var(--serif)}
+@media(max-width:560px){.item{grid-template-columns:64px 1fr auto}.item svg{width:64px;height:64px}.item .p{grid-column:3;grid-row:1}.item .btn{grid-column:2/4;grid-row:2}}
+
+.info{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem)}
+.info h2{font-size:clamp(1.8rem,3.5vw,2.6rem)}
+.info p{max-width:44ch}
+@media(max-width:700px){.info{grid-template-columns:1fr}}
+footer{border-top:1px solid var(--line);padding:2rem 0 3rem;font-size:.95rem}
+
+/* cart */
+.scrim{position:fixed;inset:0;background:#2a262266;opacity:0;pointer-events:none;transition:opacity .25s;z-index:30}
+.cart{position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:var(--paper);z-index:31;padding:1.5rem;display:flex;flex-direction:column;transform:translateX(102%);transition:transform .3s;visibility:hidden}
+body.open .scrim{opacity:1;pointer-events:auto}
+body.open .cart{transform:none;visibility:visible}
+.cart header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.cart h2{font-size:1.9rem;margin:0}
+.lines{list-style:none;padding:0;overflow:auto;flex:1}
+.lines li{display:grid;grid-template-columns:1fr auto;gap:.2rem 1rem;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.qty{display:flex;align-items:center;gap:.3rem}
+.qty button,.x{font:inherit;width:44px;height:44px;border:1px solid var(--soot);background:transparent;border-radius:4px;cursor:pointer;font-size:1.1rem}
+.qty button:hover,.x:hover{background:var(--ash)}
+.x{border:0;font-size:1.6rem}
+.sum{padding-top:1rem}
+.sum div{display:flex;justify-content:space-between;padding:.15rem 0}
+.sum .tot{font:1.4rem var(--serif);border-top:2px solid var(--soot);margin-top:.5rem;padding-top:.6rem}
+.empty{padding:1rem 0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#shop">Skip to the shop</a>
+<header class="top"><div class="wrap">
+ <a class="logo" href="#top" aria-label="Mati, home">Mati</a>
+ <nav aria-label="Main">
+  <a href="#firing">The firing</a><a href="#shop">Shop</a><a href="#shipping">Shipping and care</a>
+  <button class="cartbtn" id="openCart" aria-haspopup="dialog">Cart<b id="count" aria-live="polite">0</b></button>
+ </nav>
+</div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+ <div>
+  <h1>The Firing Cup</h1>
+  <p class="lead">Wood-fired stoneware with an ash glaze. The flame marks each cup differently, so no two match.</p>
+  <div class="facts"><span>250 ml</span><span>Next firing: 18 November</span><span>32 pieces</span></div>
+  <div class="row">
+   <span class="price">৳1,200</span>
+   <button class="btn" data-add="firing-cup">Add to cart</button>
+   <button class="btn ghost" id="another">Show another cup</button>
+  </div>
+ </div>
+ <figure class="stage" id="stage" style="margin:0">
+  <svg viewBox="0 0 400 400" role="img" aria-label="Drawing of a Firing Cup with ash glaze and flame marks. Each press of the button draws a differently marked cup.">
+   <defs>
+    <clipPath id="cupClip"><path d="M70 120 H330 C330 230 305 318 262 336 Q200 350 138 336 C95 318 70 230 70 120Z"/></clipPath>
+    <linearGradient id="clay" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b6a50"/><stop offset="1" stop-color="#5a4333"/></linearGradient>
+    <linearGradient id="glz" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6c8a7a"/><stop offset="1" stop-color="#9fb3a2"/></linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="9"/></filter>
+   </defs>
+   <ellipse cx="200" cy="352" rx="150" ry="12" fill="#2a262622"/>
+   <g clip-path="url(#cupClip)">
+    <rect x="60" y="110" width="280" height="250" fill="url(#clay)"/>
+    <path id="glaze" fill="url(#glz)"/>
+    <g id="marks" filter="url(#soft)"></g>
+   </g>
+   <ellipse cx="200" cy="120" rx="130" ry="18" fill="#3b2f26"/>
+   <ellipse cx="200" cy="122" rx="116" ry="12" fill="#6c8a7a" opacity=".55"/>
+   <path d="M70 120 H330" stroke="#2a2622" stroke-opacity=".2" fill="none"/>
+  </svg>
+  <figcaption class="note" id="cupNote">Cup 1 of the batch</figcaption>
+ </figure>
+</div></div>
+
+<section class="story" id="firing"><div class="wrap">
+ <h2>Eight and a half days for one firing</h2>
+ <p>Rina and Sohel make 20–40 pieces per firing. Stacking the kiln takes three days. The fire burns for 36 hours on mango wood. Then the kiln cools for four days before anyone opens it.</p>
+ <div class="bar" id="bar">
+  <div class="seg s1"><strong>3 days</strong>Stacking</div>
+  <div class="seg s2"><strong>36 hours</strong>Firing with mango wood</div>
+  <div class="seg s3"><strong>4 days</strong>Cooling</div>
+ </div>
+ <small>Bar widths are drawn to scale.</small>
+</div></section>
+
+<section id="shop"><div class="wrap">
+ <h2>Everything in the studio</h2>
+ <ul class="list" id="list"></ul>
+</div></section>
+
+<section id="shipping"><div class="wrap info">
+ <div><h2>Shipping</h2>
+  <p>We ship within Bangladesh. Delivery takes 3–5 days and costs ৳150 flat. Orders over ৳5,000 ship free.</p></div>
+ <div><h2>Care</h2>
+  <p>Dishwasher safe. Not for the microwave.</p></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">Mati is a ceramics studio in Rajshahi, run by Rina and Sohel.</div></footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="cart" id="cart" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+ <header><h2 id="cartTitle">Your cart</h2><button class="x" id="closeCart" aria-label="Close cart">×</button></header>
+ <ul class="lines" id="lines"></ul>
+ <div class="sum" id="sum"></div>
+</aside>
+<div class="sr" role="status" id="live"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(()=>{
+const $=s=>document.querySelector(s);
+const fmt=n=>"৳"+n.toLocaleString("en-US");
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const P=[
+ {id:"firing-cup",name:"The Firing Cup",price:1200,hidden:true},
+ {id:"morning-plate",name:"Morning Plate",price:1800,d:"M8 58 Q45 70 82 58 L78 64 Q45 76 12 64Z"},
+ {id:"tall-vase",name:"Tall Vase",price:6500,d:"M36 8 H54 L52 24 C70 38 72 62 62 80 H28 C18 62 20 38 38 24Z"},
+ {id:"pour-jug",name:"Pour Jug",price:3200,d:"M24 26 H58 L66 20 L68 28 H64 C70 44 66 66 58 76 H26 C18 66 18 44 24 26Z M64 34 C80 34 80 58 62 58 L62 54 C72 54 72 40 64 40Z"},
+ {id:"small-bowl",name:"Small Bowl",price:800,d:"M18 42 H72 C72 62 58 72 45 72 C32 72 18 62 18 42Z"},
+ {id:"rice-bowl",name:"Rice Bowl",price:1400,d:"M12 36 H78 C78 64 62 76 45 76 C28 76 12 64 12 36Z"}
+];
+const byId=Object.fromEntries(P.map(p=>[p.id,p]));
+
+/* product list */
+$("#list").innerHTML=P.filter(p=>!p.hidden).map(p=>`
+<li class="item">
+ <svg viewBox="0 0 90 90" aria-hidden="true"><path d="${p.d}" fill="#6c8a7a" fill-rule="evenodd"/><path d="${p.d}" fill="#b5441f" opacity=".18" fill-rule="evenodd" transform="translate(2 2)"/></svg>
+ <h3>${p.name}</h3><span class="p">${fmt(p.price)}</span>
+ <button class="btn" data-add="${p.id}" aria-label="Add ${p.name} to cart">Add to cart</button>
+</li>`).join("");
+
+/* cart */
+let cart={};
+try{cart=JSON.parse(sessionStorage.getItem("mati-cart")||"{}")}catch(e){}
+let lastFocus=null;
+function render(){
+ const ids=Object.keys(cart).filter(i=>cart[i]>0&&byId[i]);
+ const n=ids.reduce((a,i)=>a+cart[i],0), sub=ids.reduce((a,i)=>a+cart[i]*byId[i].price,0);
+ $("#count").textContent=n;
+ $("#lines").innerHTML=ids.length?ids.map(i=>`<li><div><strong>${byId[i].name}</strong><br>${fmt(byId[i].price)} each</div>
+  <div class="qty"><button data-q="${i}" data-d="-1" aria-label="Remove one ${byId[i].name}">−</button><span aria-label="Quantity">${cart[i]}</span><button data-q="${i}" data-d="1" aria-label="Add one ${byId[i].name}">+</button></div></li>`).join("")
+  :`<li class="empty">Your cart is empty. Add a cup, plate or vase from the shop.</li>`;
+ const ship=sub===0?0:sub>5000?0:150;
+ $("#sum").innerHTML=ids.length?`<div><span>Subtotal</span><span>${fmt(sub)}</span></div>
+  <div><span>Shipping, 3–5 days</span><span>${ship?fmt(ship):"Free"}</span></div>
+  <div class="tot"><span>Total</span><span>${fmt(sub+ship)}</span></div>
+  ${sub<=5000?`<p style="margin-top:.6rem;font-size:.95rem">Add ${fmt(5001-sub)} more for free shipping.</p>`:""}`:"";
+ try{sessionStorage.setItem("mati-cart",JSON.stringify(cart))}catch(e){}
+}
+function openCart(){lastFocus=document.activeElement;document.body.classList.add("open");$("#closeCart").focus()}
+function closeCart(){document.body.classList.remove("open");(lastFocus||$("#openCart")).focus()}
+$("#openCart").onclick=openCart;$("#closeCart").onclick=closeCart;$("#scrim").onclick=closeCart;
+document.addEventListener("keydown",e=>{
+ if(!document.body.classList.contains("open"))return;
+ if(e.key==="Escape")closeCart();
+ if(e.key==="Tab"){const f=[...$("#cart").querySelectorAll("button")];const a=f[0],z=f[f.length-1];
+  if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}
+  else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}
+});
+document.addEventListener("click",e=>{
+ const a=e.target.closest("[data-add]");
+ if(a){const id=a.dataset.add;cart[id]=(cart[id]||0)+1;render();
+  $("#live").textContent=`${byId[id].name} added. ${$("#count").textContent} in cart.`;
+  const t=a.textContent;a.textContent="Added";a.classList.add("added");
+  setTimeout(()=>{a.textContent=t;a.classList.remove("added")},1100);
+  if(!reduce&&window.gsap)gsap.fromTo("#count",{scale:1.6},{scale:1,duration:.4,ease:"back.out(3)"});}
+ const q=e.target.closest("[data-q]");
+ if(q){cart[q.dataset.q]=Math.max(0,(cart[q.dataset.q]||0)+ +q.dataset.d);render();
+  const same=document.querySelector(`[data-q="${q.dataset.q}"][data-d="${q.dataset.d}"]`);(same||$("#closeCart")).focus();}
+});
+render();
+
+/* flame-marked cup */
+let seed=7,cupNo=1;
+const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+function drawCup(){
+ const top=150+rnd()*40;
+ let d=`M60 ${top}`;
+ for(let x=60;x<=340;x+=28)d+=` L${x} ${top+Math.sin(x/37+rnd()*3)*8+rnd()*(rnd()>.6?70:14)}`;
+ d+=" L340 360 L60 360Z";
+ $("#glaze").setAttribute("d",d);
+ const cols=["#b5441f","#d98a3d","#2a2622","#e7e0cc"];
+ let m="";
+ const count=4+Math.floor(rnd()*4);
+ for(let i=0;i<count;i++){
+  const c=cols[Math.floor(rnd()*cols.length)];
+  m+=`<ellipse cx="${80+rnd()*240}" cy="${140+rnd()*190}" rx="${14+rnd()*40}" ry="${10+rnd()*26}" fill="${c}" opacity="${.25+rnd()*.4}" transform="rotate(${rnd()*80-40} 200 240)"/>`;
+ }
+ $("#marks").innerHTML=m;
+}
+drawCup();
+$("#another").onclick=()=>{
+ seed=Math.floor(Math.random()*2e9)+1;cupNo=Math.floor(Math.random()*32)+1;
+ drawCup();
+ $("#cupNote").textContent=`A different cup: no. ${cupNo} of 32`;
+ if(!reduce&&window.gsap)gsap.fromTo("#marks,#glaze",{opacity:0},{opacity:1,duration:.6});
+};
+
+/* motion: one hero reveal, one bar draw */
+if(!reduce&&window.gsap){
+ gsap.from(".hero h1,.hero .lead,.hero .facts,.hero .row",{y:24,opacity:0,duration:.8,stagger:.12,ease:"power2.out"});
+ gsap.from("#stage svg",{opacity:0,scale:.94,duration:1.1,ease:"power2.out"});
+ if(window.ScrollTrigger){gsap.registerPlugin(ScrollTrigger);
+  gsap.from(".seg",{scaleX:0,duration:1.2,stagger:.35,ease:"power2.inOut",
+   scrollTrigger:{trigger:"#bar",start:"top 85%",once:true}});}
+}
+})();
+</script>
+</body>
+</html>

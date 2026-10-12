@@ -1,0 +1,12 @@
+{
+ "slug": "saas",
+ "seed": 2101,
+ "cond": "baseline",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/saas/baseline-s2101",
+ "exit": 0,
+ "seconds": 46,
+ "turns": 3,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}
