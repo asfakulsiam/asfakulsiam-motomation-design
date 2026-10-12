@@ -8,7 +8,7 @@
 // what: Now and then a thin streak of light crosses a night sky at one shared angle and burns out; long quiet gaps between them. CSS only: each streak is a gradient line moved with transform.
 // use-when: Night skies, observatories, wishes, launches that are literal (a rocket club), New Year: behind one dark hero.
 // avoid-when: As "speed" or "innovation" decoration; light themes; more than one sky per page; busy sections where a flicker at the edge distracts from reading.
-// reduced-motion: A still sky with two frozen streaks (this is also the poster).
+// reduced-motion: A designed still: a long-exposure night, star trails wheeling round the pole and one bright meteor crossing them at the same angle, over a low horizon. The streak tracks are not rendered.
 // touch: Same as desktop.
 // a11y: Decorative (aria-hidden). Capability probe (Save-Data, ≤ 2 cores, < 4 GB → still poster). Streaks are short and sparse (one at a time on average, ≥ 4s gaps), so nothing flashes. Transform/opacity only via Web Animations that pause off screen and in hidden tabs; absolute box, so no layout shift. No canvas, so no DPR cost.
 import { useRef, type CSSProperties } from "react";
@@ -17,6 +17,23 @@ import { useCapability, useAmbientAnimations } from "../_lib/ambient";
 
 type Props = { count?: number; angle?: number; color?: string; sky?: string; className?: string; style?: CSSProperties };
 const stars = Array.from({ length: 40 }, (_, i) => `radial-gradient(1px 1px at ${(i * 53) % 100}% ${(i * 29) % 100}%, rgba(255,255,255,${0.25 + (i % 4) * 0.15}), transparent)`).join(", ");
+
+// Reduced motion: the photograph an astronomer would take of this sky: an hour of star trails and the one meteor that
+// crossed it. A composition of its own, so the still isn't the animation with the streaks frozen mid-flight.
+function MeteorsStill({ angle, color, sky }: { angle: number; color: string; sky: string }) {
+  const trails = Array.from({ length: 22 }, (_, i) => { const r = 60 + i * 34, a0 = (i * 0.83) % 6.28, a1 = a0 + 0.5 + (i % 4) * 0.12;
+    return `M${360 + r * Math.cos(a0)} ${140 + r * Math.sin(a0)}A${r} ${r} 0 0 1 ${360 + r * Math.cos(a1)} ${140 + r * Math.sin(a1)}`; }).join("");
+  const t = ((90 - angle) * Math.PI) / 180, x0 = 1180, y0 = 160, len = 520;
+  return (
+    <svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" }}>
+      <defs><linearGradient id="me-m" x1={x0} y1={y0} x2={x0 - Math.cos(t) * len} y2={y0 + Math.sin(t) * len} gradientUnits="userSpaceOnUse"><stop offset="0" stopColor={color} stopOpacity="0" /><stop offset="1" stopColor={color} /></linearGradient></defs>
+      <rect width="1600" height="1000" fill={sky} />
+      <path d={trails} fill="none" stroke="#fff" strokeOpacity=".26" strokeWidth="1.2" strokeLinecap="round" />
+      <line x1={x0} y1={y0} x2={x0 - Math.cos(t) * len} y2={y0 + Math.sin(t) * len} stroke="url(#me-m)" strokeWidth="3" strokeLinecap="round" />
+      <path d="M0 930Q400 900 800 918T1600 906V1000H0Z" fill="#000" fillOpacity=".55" />
+    </svg>
+  );
+}
 
 export function Meteors({ count = 6, angle = 32, color = "#fff4e0", sky = "#070912", className, style }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -30,7 +47,7 @@ export function Meteors({ count = 6, angle = 32, color = "#fff4e0", sky = "#0709
   }));
   return (
     <span ref={ref} aria-hidden="true" className={className} style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none", background: `${stars}, ${sky}`, ...style }}>
-      {Array.from({ length: count }, (_, i) => (
+      {reduce ? <MeteorsStill angle={angle} color={color} sky={sky} /> : Array.from({ length: count }, (_, i) => (
         // a tall, tilted track; the streak travels down it in units of its own height
         <span key={i} style={{ position: "absolute", left: `${8 + ((i * 41) % 90)}%`, top: "-40%", height: "160%", width: 2, transform: `rotate(${angle}deg)`, transformOrigin: "50% 0" }}>
           <span data-streak="" style={{ position: "absolute", left: 0, top: 0, width: 2, height: "11%", borderRadius: 2, background: `linear-gradient(to bottom, transparent, ${color})`,

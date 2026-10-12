@@ -41,7 +41,7 @@ void main() {
 ## Fallbacks (required)
 
 1. **No WebGL / low power:** a static image or CSS version of the same idea.
-2. **Reduced motion:** render one still frame, no time-based animation, no scroll distortion.
+2. **Reduced motion:** a designed still, not one frame of the animation: don't mount the canvas, render an SVG/CSS composition in the same palette that translates the motion into the picture (trails, bands, plates), and unpin anything pinned. Rules and examples in `principles/restraint.md` ("Designed stills"); every Tier 4 background in `examples/components/backgrounds/` ships one.
 3. **Mobile:** simpler shader, fewer particles, or the static version (see `craft/mobile-motion-matrix.md`).
 
 ```js
