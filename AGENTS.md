@@ -11,6 +11,7 @@ For any website, landing page, web UI, animation or design-critique task, follow
 2. For new ideas, run `node skills/asfakulsiam-motomation-design/scripts/collide.mjs --n 3 --spread`. It gives real randomness, not imagined randomness.
 3. Set the dials (ENERGY / RHYTHM / MOTION, each 1–3). Choose the **lowest** motion tier that delivers the concept.
 4. Show the preview block, build complete code, then pass `gates/delivery-gate.md`.
+   In a sandbox (Codex CLI, small containers), give `scripts/gate.mjs` its default 600 s and don't wrap it in a shorter `timeout`; if it prints `not verified — sandbox too constrained: …`, report that line verbatim. See `docs/adapters/codex.md`.
 5. Stamp the stylesheet and log the run with `scripts/memory.mjs log …`, so the next design differs.
 
 Commands: `/shape /build /invent /signature /motomate /animate /type /bolder /quieter /distill /mutate /overdrive /critique /audit /study /polish /dials /help /version /check-update /update-skill`. See `commands/overview.md`.
