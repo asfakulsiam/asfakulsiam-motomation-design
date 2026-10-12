@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 3101,
+ "pair": [
+  "c-fdesign",
+  "skill"
+ ],
+ "order": {
+  "A": "c-fdesign",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 1,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "The earthy palette, oversized serif hero and simple vessel drawings give the featured cup a clear presence, and the firing-duration blocks are a smart response to the story. But the idea weakens into a more conventional product grid after the first section, and the scroll-frame strip shows little meaningful motion beyond ordinary scrolling. It is technically solid and accessible, yet the mobile layout feels competent rather than especially refined."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "The contact-sheet treatment of the 32 cups is a strong central idea: it makes the flame-mark variation the interface and turns the product page into something specific to this brief. The editorial/catalog structure carries through the shelf list, firing story and shipping tables, so the whole page feels authored rather than assembled from standard sections. Motion is harder to prove from still frames, but the firing section appears to use restrained scroll-linked progression that supports the narrative, with a clean reduced-motion fallback."
+  },
+  "better": "B",
+  "why": "B has the clearer and more original concept, and it sustains that identity across buying, storytelling and layout without sacrificing accessibility."
+ },
+ "c-fdesign": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 1,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "The earthy palette, oversized serif hero and simple vessel drawings give the featured cup a clear presence, and the firing-duration blocks are a smart response to the story. But the idea weakens into a more conventional product grid after the first section, and the scroll-frame strip shows little meaningful motion beyond ordinary scrolling. It is technically solid and accessible, yet the mobile layout feels competent rather than especially refined."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "The contact-sheet treatment of the 32 cups is a strong central idea: it makes the flame-mark variation the interface and turns the product page into something specific to this brief. The editorial/catalog structure carries through the shelf list, firing story and shipping tables, so the whole page feels authored rather than assembled from standard sections. Motion is harder to prove from still frames, but the firing section appears to use restrained scroll-linked progression that supports the narrative, with a clean reduced-motion fallback."
+ }
+}

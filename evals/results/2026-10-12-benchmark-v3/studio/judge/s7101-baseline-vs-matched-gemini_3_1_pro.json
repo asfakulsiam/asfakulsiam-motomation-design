@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 7101,
+ "pair": [
+  "baseline",
+  "matched"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a highly polished, architectural feel with beautiful CSS/SVG illustrations that perfectly match the brick and courtyard theme. The typography is elegant, and the pinning scroll sequence for the featured projects adds a sophisticated layer of interaction that degrades gracefully for reduced motion."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B presents a clean, readable layout with a nice abstract courtyard motif in the hero section. However, the alternating project layout and simple scroll behavior feel more conventional, and the illustrations lack the depth and detail seen in the benchmark."
+  },
+  "better": "A",
+  "why": "Site A elevates the studio's portfolio with exquisite SVG/CSS illustrations and a compelling scroll-pinned layout that makes the projects feel curated and tactile."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B presents a clean, readable layout with a nice abstract courtyard motif in the hero section. However, the alternating project layout and simple scroll behavior feel more conventional, and the illustrations lack the depth and detail seen in the benchmark."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a highly polished, architectural feel with beautiful CSS/SVG illustrations that perfectly match the brick and courtyard theme. The typography is elegant, and the pinning scroll sequence for the featured projects adds a sophisticated layer of interaction that degrades gracefully for reduced motion."
+ }
+}

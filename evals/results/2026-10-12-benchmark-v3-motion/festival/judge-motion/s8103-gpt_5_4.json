@@ -1,0 +1,55 @@
+{
+ "model": "gpt_5_4",
+ "seed": 8103,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 4,
+    "Choreography": 4,
+    "Mobile motion": 3,
+    "Reduced-motion fallback": 4,
+    "Motion craft": 3
+   },
+   "notes": "Clear chaptered scroll motion: hero, intro, day 1, day 2, artist count, stages, line-up, tickets. That is a real motion structure tied to the festival info, not just generic fades. Consecutive desktop frames suggest pinned/full-screen panels with a logical scrubbed progression. Mobile keeps the same idea, but some sampled states look unstable: the artist count is caught at '0' on desktop and '15' on mobile, and the line-up shows partly faded/half-revealed tiles in one frame. Reduced motion appears shorter/simpler and keeps the content readable without relying on animation. Stills cannot show easing/timing, so that part is uncertain."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 4,
+    "Choreography": 3,
+    "Mobile motion": 4,
+    "Reduced-motion fallback": 1,
+    "Motion craft": 4
+   },
+   "notes": "There is a motion idea here: persistent sound-wave/ring background with scroll chapters for 'two stages, one beat', line-up, and tickets, so it does connect to the music brief. The progression is coherent, but the strips show less transformation between steps than A; much of it reads as steady section scrolling over a pinned background rather than stronger reveals or scrubs. Mobile remains sensible and readable, with no obvious motion breakage. Craft is generally clean in the strips: no blank frames, no major overlap caused by motion. The big problem is reduced motion: the reduced strip appears effectively identical to full motion, with the same sequence and length, so there is little evidence of a genuine fallback. Stills cannot show easing/timing, so that part is uncertain."
+  },
+  "winner": "A"
+ },
+ "served": "{\"requested\": \"gpt_5_4\", \"served\": \"gpt_5_4\", \"in\": 6207, \"cached\": 0, \"out\": 375, \"reasoning\": 2357, \"secs\": 43.9}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 4,
+   "Choreography": 4,
+   "Mobile motion": 3,
+   "Reduced-motion fallback": 4,
+   "Motion craft": 3
+  },
+  "notes": "Clear chaptered scroll motion: hero, intro, day 1, day 2, artist count, stages, line-up, tickets. That is a real motion structure tied to the festival info, not just generic fades. Consecutive desktop frames suggest pinned/full-screen panels with a logical scrubbed progression. Mobile keeps the same idea, but some sampled states look unstable: the artist count is caught at '0' on desktop and '15' on mobile, and the line-up shows partly faded/half-revealed tiles in one frame. Reduced motion appears shorter/simpler and keeps the content readable without relying on animation. Stills cannot show easing/timing, so that part is uncertain.",
+  "total": 72.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 4,
+   "Choreography": 3,
+   "Mobile motion": 4,
+   "Reduced-motion fallback": 1,
+   "Motion craft": 4
+  },
+  "notes": "There is a motion idea here: persistent sound-wave/ring background with scroll chapters for 'two stages, one beat', line-up, and tickets, so it does connect to the music brief. The progression is coherent, but the strips show less transformation between steps than A; much of it reads as steady section scrolling over a pinned background rather than stronger reveals or scrubs. Mobile remains sensible and readable, with no obvious motion breakage. Craft is generally clean in the strips: no blank frames, no major overlap caused by motion. The big problem is reduced motion: the reduced strip appears effectively identical to full motion, with the same sequence and length, so there is little evidence of a genuine fallback. Stills cannot show easing/timing, so that part is uncertain.",
+  "total": 64.0
+ },
+ "winner": "baseline"
+}

@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 7101,
+ "pair": [
+  "baseline",
+  "gated"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "gated"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A captures the quiet, architectural mood beautifully with delicate SVG plans and a sophisticated, alternating layout. The typography is elegant and the color palette reinforces the brick and earth theme perfectly. Motion is basic but functional."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B also delivers a very strong, cohesive aesthetic with robust SVG illustrations and excellent typographic hierarchy. The layout is clean and accessible, though the illustrations feel slightly less like refined architectural plans compared to A."
+  },
+  "better": "A",
+  "why": "Site A edges out with its finer, more abstract and elegant SVG line-work that better suits a high-end architecture studio."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A captures the quiet, architectural mood beautifully with delicate SVG plans and a sophisticated, alternating layout. The typography is elegant and the color palette reinforces the brick and earth theme perfectly. Motion is basic but functional."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B also delivers a very strong, cohesive aesthetic with robust SVG illustrations and excellent typographic hierarchy. The layout is clean and accessible, though the illustrations feel slightly less like refined architectural plans compared to A."
+ }
+}

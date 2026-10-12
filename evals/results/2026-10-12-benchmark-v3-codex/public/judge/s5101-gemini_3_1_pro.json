@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 5101,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 2,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a highly polished, cohesive 'field ledger' aesthetic. The bilingual typography is beautifully handled, giving both languages equal weight and excellent hierarchy. Motion appears limited to basic scrolling, but the overall craft is exceptional."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B presents a solid 'specimen sheet' concept with clear layout and good bilingual integration. The execution is clean and accessible, though the visual design and typography lack the final layer of polish seen in Site A."
+  },
+  "better": "A",
+  "why": "Site A excels with superior typographical refinement and a tighter, more compelling execution of its concept."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 2,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a highly polished, cohesive 'field ledger' aesthetic. The bilingual typography is beautifully handled, giving both languages equal weight and excellent hierarchy. Motion appears limited to basic scrolling, but the overall craft is exceptional."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B presents a solid 'specimen sheet' concept with clear layout and good bilingual integration. The execution is clean and accessible, though the visual design and typography lack the final layer of polish seen in Site A."
+ }
+}

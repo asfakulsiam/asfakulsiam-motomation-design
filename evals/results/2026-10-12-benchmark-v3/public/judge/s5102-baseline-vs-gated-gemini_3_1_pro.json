@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 5102,
+ "pair": [
+  "baseline",
+  "gated"
+ ],
+ "order": {
+  "A": "gated",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 2,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A is a functional, clean interpretation of the brief but lacks a strong central concept. The CSS illustrations are extremely basic, and the scrolling experience is entirely static, missing an opportunity to tell the story of restoration. It passes all accessibility checks perfectly but feels like a standard template."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B brilliantly captures the brief with an engaging CSS illustration of mangroves that grow (stems and roots extend) as the user scrolls, perfectly tying motion to the concept of restoration. The bilingual typography is handled with excellent hierarchy, and the donation section is beautifully crafted. It loses slight points on access due to a minor contrast violation, likely on the orange buttons, but remains vastly superior."
+  },
+  "better": "B",
+  "why": "Site B elevates the brief through a purposeful, scroll-driven mangrove growth animation and exceptional typographic craft, creating a much more compelling narrative."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B brilliantly captures the brief with an engaging CSS illustration of mangroves that grow (stems and roots extend) as the user scrolls, perfectly tying motion to the concept of restoration. The bilingual typography is handled with excellent hierarchy, and the donation section is beautifully crafted. It loses slight points on access due to a minor contrast violation, likely on the orange buttons, but remains vastly superior."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 2,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A is a functional, clean interpretation of the brief but lacks a strong central concept. The CSS illustrations are extremely basic, and the scrolling experience is entirely static, missing an opportunity to tell the story of restoration. It passes all accessibility checks perfectly but feels like a standard template."
+ }
+}

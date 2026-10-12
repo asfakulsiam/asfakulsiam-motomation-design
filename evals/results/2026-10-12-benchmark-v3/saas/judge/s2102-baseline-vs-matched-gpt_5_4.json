@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 2102,
+ "pair": [
+  "baseline",
+  "matched"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "matched"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 2,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "The core message is clear and the terminal/result pair fits the brief well, but the overall structure feels close to a standard dark SaaS template. Craft is hurt by the large 375px overflow and by sections that appear oddly empty in the normal captures, suggesting a fragile reveal system even though the reduced-motion fallback preserves the content."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "This carries one strong idea throughout: raw logs compressing into a single explanation, reinforced by the hero, labels, demo, pricing and install sections. The motion appears concept-serving from the scroll strip, and the editorial terminal aesthetic is more distinctive, though minor mobile overflow keeps it short of perfect craft/access scores."
+  },
+  "better": "B",
+  "why": "B is the more coherent and distinctive design, and it delivers the brief with stronger concept integration and fewer visible craft problems."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 2,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "The core message is clear and the terminal/result pair fits the brief well, but the overall structure feels close to a standard dark SaaS template. Craft is hurt by the large 375px overflow and by sections that appear oddly empty in the normal captures, suggesting a fragile reveal system even though the reduced-motion fallback preserves the content."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "This carries one strong idea throughout: raw logs compressing into a single explanation, reinforced by the hero, labels, demo, pricing and install sections. The motion appears concept-serving from the scroll strip, and the editorial terminal aesthetic is more distinctive, though minor mobile overflow keeps it short of perfect craft/access scores."
+ }
+}

@@ -1,0 +1,555 @@
+{
+ "generated": "2026-10-12T09:40:32.718Z",
+ "briefs": {
+  "studio": {
+   "pair": [
+    "baseline",
+    "skill"
+   ],
+   "pairs": [
+    {
+     "seed": 7101,
+     "baseline": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-codex/studio/baseline-s7101",
+      "turns": 19,
+      "seconds": 308,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 5,
+         "Originality": 5,
+         "Typography": 4,
+         "Motion": 4,
+         "Craft": 2,
+         "Access & performance": 2
+        },
+        "total": 76,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 3,
+         "Originality": 2,
+         "Typography": 3,
+         "Motion": 3,
+         "Craft": 2,
+         "Access & performance": 3
+        },
+        "total": 53,
+        "claimedGates": []
+       }
+      ],
+      "raw": 64.5,
+      "gated": 64.5,
+      "gates": [],
+      "gate": {
+       "contrast": 12,
+       "overflow": 141,
+       "words": 5,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: atlas · mutation: elevator-panel-lit-rail · signature: numbered-chapter-rail · tier: 1 · critique: not-run-in-cli · gate: memory-logged; static-check-only "
+     },
+     "skill": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-codex/studio/skill-s7101",
+      "turns": 29,
+      "seconds": 888,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 4,
+         "Originality": 4,
+         "Typography": 5,
+         "Motion": 3,
+         "Craft": 5,
+         "Access & performance": 5
+        },
+        "total": 86,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 5,
+         "Originality": 5,
+         "Typography": 5,
+         "Motion": 5,
+         "Craft": 5,
+         "Access & performance": 5
+        },
+        "total": 100,
+        "claimedGates": []
+       }
+      ],
+      "raw": 93,
+      "gated": 93,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: stage · mutation: remove-expected · signature: line-curtain · tier: 1 --"
+     },
+     "delta": 28.5,
+     "verdict": "skill"
+    }
+   ],
+   "wins": 1,
+   "losses": 0,
+   "ties": 0,
+   "notScored": 0,
+   "outcome": "consistent win"
+  },
+  "hotel": {
+   "pair": [
+    "baseline",
+    "skill"
+   ],
+   "pairs": [
+    {
+     "seed": 4101,
+     "baseline": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-codex/hotel/baseline-s4101",
+      "turns": 20,
+      "seconds": 306,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 5,
+         "Originality": 5,
+         "Typography": 4,
+         "Motion": 4,
+         "Craft": 2,
+         "Access & performance": 3
+        },
+        "total": 79,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 4,
+         "Originality": 4,
+         "Typography": 4,
+         "Motion": 4,
+         "Craft": 2,
+         "Access & performance": 5
+        },
+        "total": 77,
+        "claimedGates": []
+       }
+      ],
+      "raw": 78,
+      "gated": 78,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 3,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: room · mutation: invert-axis · signature: aperture-doorway · tier: 1 · critique: not verified — timed out after 60s scanning index.html · gate: not verified — no pass stamp "
+     },
+     "skill": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-codex/hotel/skill-s4101",
+      "turns": 48,
+      "seconds": 1360,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 4,
+         "Originality": 4,
+         "Typography": 4,
+         "Motion": 3,
+         "Craft": 5,
+         "Access & performance": 5
+        },
+        "total": 83,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 4,
+         "Originality": 3,
+         "Typography": 4,
+         "Motion": 3,
+         "Craft": 4,
+         "Access & performance": 5
+        },
+        "total": 76,
+        "claimedGates": []
+       }
+      ],
+      "raw": 79.5,
+      "gated": 79.5,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: room · mutation: print-rule marginalia · signature: stitched-threshold · tier: 2 · critique: C5[restraint:kept] H4[375:1] S5[last5:none] R4[cuts:2,anim:1] M5[t2:pins0/2,webgl0/1,js48/80KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 9a4f8cd05c "
+     },
+     "delta": 1.5,
+     "verdict": "skill"
+    }
+   ],
+   "wins": 1,
+   "losses": 0,
+   "ties": 0,
+   "notScored": 0,
+   "outcome": "consistent win"
+  },
+  "ecommerce": {
+   "pair": [
+    "baseline",
+    "skill"
+   ],
+   "pairs": [
+    {
+     "seed": 3101,
+     "baseline": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-codex/ecommerce/baseline-s3101",
+      "turns": 22,
+      "seconds": 352,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 4,
+         "Originality": 3,
+         "Typography": 4,
+         "Motion": 3,
+         "Craft": 4,
+         "Access & performance": 5
+        },
+        "total": 76,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 5,
+         "Originality": 4,
+         "Typography": 4,
+         "Motion": 4,
+         "Craft": 4,
+         "Access & performance": 5
+        },
+        "total": 87,
+        "claimedGates": []
+       }
+      ],
+      "raw": 81.5,
+      "gated": 81.5,
+      "gates": [],
+      "gate": {
+       "contrast": 8,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: stage + ledger mutation · mutation: product stage with numbered firing ledger · signature: glaze reveal cup · tier: 3 · critique: not verified — the browser failed during the scan (Error); run again · gate: timeout after 40s in this container --"
+     },
+     "skill": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-codex/ecommerce/skill-s3101",
+      "turns": 27,
+      "seconds": 682,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 4,
+         "Originality": 4,
+         "Typography": 4,
+         "Motion": 3,
+         "Craft": 3,
+         "Access & performance": 5
+        },
+        "total": 77,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 4,
+         "Originality": 4,
+         "Typography": 5,
+         "Motion": 2,
+         "Craft": 5,
+         "Access & performance": 5
+        },
+        "total": 83,
+        "claimedGates": []
+       }
+      ],
+      "raw": 80,
+      "gated": 80,
+      "gates": [],
+      "gate": {
+       "contrast": 64,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: diptych · mutation: single-object · signature: kiln-ledger · tier: 2 "
+     },
+     "delta": -1.5,
+     "verdict": "baseline"
+    }
+   ],
+   "wins": 0,
+   "losses": 1,
+   "ties": 0,
+   "notScored": 0,
+   "outcome": "consistent loss"
+  },
+  "saas": {
+   "pair": [
+    "baseline",
+    "skill"
+   ],
+   "pairs": [
+    {
+     "seed": 2101,
+     "baseline": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-codex/saas/baseline-s2101",
+      "turns": 27,
+      "seconds": 633,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 4,
+         "Originality": 3,
+         "Typography": 4,
+         "Motion": 2,
+         "Craft": 5,
+         "Access & performance": 5
+        },
+        "total": 76,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 4,
+         "Originality": 4,
+         "Typography": 4,
+         "Motion": 4,
+         "Craft": 5,
+         "Access & performance": 5
+        },
+        "total": 86,
+        "claimedGates": []
+       }
+      ],
+      "raw": 81,
+      "gated": 81,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: console · mutation: collapse-to-one · signature: trace-rail · tier: 2 "
+     },
+     "skill": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-codex/saas/skill-s2101",
+      "turns": 29,
+      "seconds": 532,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 3,
+         "Originality": 4,
+         "Typography": 3,
+         "Motion": 3,
+         "Craft": 1,
+         "Access & performance": 2
+        },
+        "total": 55,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 2,
+         "Originality": 2,
+         "Typography": 2,
+         "Motion": 1,
+         "Craft": 1,
+         "Access & performance": 2
+        },
+        "total": 34,
+        "claimedGates": []
+       }
+      ],
+      "raw": 44.5,
+      "gated": 44.5,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 33,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: ledger · mutation: folio-evidence · signature: thread · tier: 2 · critique: not verified — browser failed during the scan · gate: not verified — browser failed during the scan --"
+     },
+     "delta": -36.5,
+     "verdict": "baseline"
+    }
+   ],
+   "wins": 0,
+   "losses": 1,
+   "ties": 0,
+   "notScored": 0,
+   "outcome": "consistent loss"
+  },
+  "public": {
+   "pair": [
+    "baseline",
+    "skill"
+   ],
+   "pairs": [
+    {
+     "seed": 5101,
+     "baseline": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-codex/public/baseline-s5101",
+      "turns": 19,
+      "seconds": 302,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 4,
+         "Originality": 3,
+         "Typography": 4,
+         "Motion": 2,
+         "Craft": 4,
+         "Access & performance": 5
+        },
+        "total": 73,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 5,
+         "Originality": 4,
+         "Typography": 5,
+         "Motion": 2,
+         "Craft": 5,
+         "Access & performance": 5
+        },
+        "total": 87,
+        "claimedGates": []
+       }
+      ],
+      "raw": 80,
+      "gated": 80,
+      "gates": [],
+      "gate": {
+       "contrast": 9,
+       "overflow": 1,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 1
+      },
+      "stamp": "motomation · archetype: ledger · mutation: shoreline-thread-through-sections · signature: tidal-rootline-progress · tier: 1 · critique: not-verified-no-browser · gate: not-verified-no-browser "
+     },
+     "skill": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-codex/public/skill-s5101",
+      "turns": 39,
+      "seconds": 2573,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 5,
+         "Originality": 5,
+         "Typography": 5,
+         "Motion": 2,
+         "Craft": 5,
+         "Access & performance": 5
+        },
+        "total": 91,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 4,
+         "Originality": 4,
+         "Typography": 4,
+         "Motion": 2,
+         "Craft": 4,
+         "Access & performance": 5
+        },
+        "total": 77,
+        "claimedGates": []
+       }
+      ],
+      "raw": 84,
+      "gated": 84,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: diptych · mutation: remove-the-expected · signature: herbarium-labels · tier: 1 · critique: C4[restraint:changed1] H5[375:0] S5[last5:archetype-new,signature-new,fp34] R4[cuts:1,anim:2] M5[t1:pins1/2,webgl0/1,js2/30KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · g"
+     },
+     "delta": 4,
+     "verdict": "skill"
+    }
+   ],
+   "wins": 1,
+   "losses": 0,
+   "ties": 0,
+   "notScored": 0,
+   "outcome": "consistent win"
+  }
+ }
+}

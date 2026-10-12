@@ -1,0 +1,12 @@
+{
+ "slug": "studio",
+ "seed": 7101,
+ "cond": "matched",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/studio/matched-s7101",
+ "exit": 0,
+ "seconds": 87,
+ "turns": 7,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

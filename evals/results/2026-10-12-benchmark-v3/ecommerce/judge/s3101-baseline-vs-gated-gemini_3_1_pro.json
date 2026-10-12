@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 3101,
+ "pair": [
+  "baseline",
+  "gated"
+ ],
+ "order": {
+  "A": "gated",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 2,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 1,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a functional but very basic interpretation of the brief. The CSS illustrations are somewhat rudimentary, and the layout feels more like a standard template than an editorial experience. Motion is essentially non-existent beyond native scrolling."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B captures the organic, editorial feel perfectly. The CSS/SVG illustrations use beautiful gradients to simulate the flame marks, and the typography is elegant and well-scaled. The scroll-driven animation where the hero cup pins and transitions into the featured product section adds a highly polished, purposeful touch."
+  },
+  "better": "B",
+  "why": "Site B elevates the brief with superior craft in its drawn imagery, elegant typography, and a purposeful scroll animation that connects the narrative."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B captures the organic, editorial feel perfectly. The CSS/SVG illustrations use beautiful gradients to simulate the flame marks, and the typography is elegant and well-scaled. The scroll-driven animation where the hero cup pins and transitions into the featured product section adds a highly polished, purposeful touch."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 2,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 1,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a functional but very basic interpretation of the brief. The CSS illustrations are somewhat rudimentary, and the layout feels more like a standard template than an editorial experience. Motion is essentially non-existent beyond native scrolling."
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 3101,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 2,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A features a beautiful editorial layout with exceptional typographic hierarchy and a refined color palette. The execution is pixel-perfect across devices, but it lacks meaningful scroll-based motion, missing an opportunity to elevate the storytelling."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B employs a strong three-column layout where the featured cup remains pinned in the center while the narrative and purchase details scroll past. This is a very effective and purposeful use of motion that perfectly serves the editorial brief."
+  },
+  "better": "B",
+  "why": "Site B successfully integrates purposeful scroll-based pinning into its layout, making the storytelling much more engaging than Site A's static approach."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B employs a strong three-column layout where the featured cup remains pinned in the center while the narrative and purchase details scroll past. This is a very effective and purposeful use of motion that perfectly serves the editorial brief."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 2,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A features a beautiful editorial layout with exceptional typographic hierarchy and a refined color palette. The execution is pixel-perfect across devices, but it lacks meaningful scroll-based motion, missing an opportunity to elevate the storytelling."
+ }
+}

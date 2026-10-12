@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 5102,
+ "pair": [
+  "matched",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "matched"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a beautifully refined editorial layout that handles the bilingual brief flawlessly. The typography is elegant and well-balanced, and the scroll-triggered animation of the 140-hectare grid filling with saplings is a brilliant, concept-driven detail. The only minor flaw is a typo ('b500' instead of '৳500') in the donate button."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B uses strong color blocking and clear structural divisions to organize the information effectively. The number counter and filling grid are nice touches for the 140-hectare statistic, though solid orange squares lack the charm of Site A's saplings. The bilingual typography is handled well but feels slightly less integrated into the core design language."
+  },
+  "better": "A",
+  "why": "Site A effortlessly integrates the dual-language requirement into a highly polished editorial aesthetic, and its data visualization using tiny animated saplings perfectly reinforces the brief's concept."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B uses strong color blocking and clear structural divisions to organize the information effectively. The number counter and filling grid are nice touches for the 140-hectare statistic, though solid orange squares lack the charm of Site A's saplings. The bilingual typography is handled well but feels slightly less integrated into the core design language."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a beautifully refined editorial layout that handles the bilingual brief flawlessly. The typography is elegant and well-balanced, and the scroll-triggered animation of the 140-hectare grid filling with saplings is a brilliant, concept-driven detail. The only minor flaw is a typo ('b500' instead of '৳500') in the donate button."
+ }
+}

@@ -1,0 +1,55 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 8103,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 5,
+    "Choreography": 5,
+    "Mobile motion": 5,
+    "Reduced-motion fallback": 5,
+    "Motion craft": 5
+   },
+   "notes": "Excellent motion design. Employs horizontal scroll sections, dynamic count-ups, and grid assembly that perfectly capture the vibrant, energetic festival brief. The choreography is highly intentional, adapting smoothly to mobile, and the reduced-motion fallback intelligently stacks the content for accessibility without breaking."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 2,
+    "Choreography": 1,
+    "Mobile motion": 1,
+    "Reduced-motion fallback": 5,
+    "Motion craft": 3
+   },
+   "notes": "Barely any motion to review. It appears to be a standard vertical scroll over a static or subtly expanding background graphic. Lacks any choreographed reveals, pinning, or transitions to elevate the festival brief. The reduced-motion fallback is fine simply because the primary experience is already static."
+  },
+  "winner": "A"
+ },
+ "served": "{\"requested\": \"gemini_3_1_pro\", \"served\": \"gemini_3_1_pro\", \"in\": 7154, \"cached\": 0, \"out\": 269, \"reasoning\": 615, \"secs\": 12.5}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 5,
+   "Choreography": 5,
+   "Mobile motion": 5,
+   "Reduced-motion fallback": 5,
+   "Motion craft": 5
+  },
+  "notes": "Excellent motion design. Employs horizontal scroll sections, dynamic count-ups, and grid assembly that perfectly capture the vibrant, energetic festival brief. The choreography is highly intentional, adapting smoothly to mobile, and the reduced-motion fallback intelligently stacks the content for accessibility without breaking.",
+  "total": 100.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 2,
+   "Choreography": 1,
+   "Mobile motion": 1,
+   "Reduced-motion fallback": 5,
+   "Motion craft": 3
+  },
+  "notes": "Barely any motion to review. It appears to be a standard vertical scroll over a static or subtly expanding background graphic. Lacks any choreographed reveals, pinning, or transitions to elevate the festival brief. The reduced-motion fallback is fine simply because the primary experience is already static.",
+  "total": 48.0
+ },
+ "winner": "baseline"
+}

@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 6102,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a very clear idea: the lamp begins as a thin glowing ellipse and resolves into a full ring, then the same ring carries the temperature story and the close. The typography does most of the branding work and the scroll-frame strip shows a proper storyboarded sequence rather than generic parallax. I held Craft to 4 because the live-scroll full-page captures read sparse and slightly awkward compared with the excellent reduced-motion fallback, but the measured checks are otherwise exemplary."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "B is handsome and cinematic, with a strong hero render and consistently premium type, but the idea is less singular and the structure feels more like a stylish product template with floating chapter cards. In the scroll-frame strip, motion mainly pins the lamp and swaps text states; it progresses, but it does not tell the product story as clearly or as specifically as the brief's image-sequence chapter implies. Accessibility basics mostly pass, yet the automated ARIA violation keeps this from scoring higher on access."
+  },
+  "better": "A",
+  "why": "A fulfills the brief more directly with a clearer concept, stronger typographic identity, and a scroll-sequenced motion chapter that actually explains the product."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a very clear idea: the lamp begins as a thin glowing ellipse and resolves into a full ring, then the same ring carries the temperature story and the close. The typography does most of the branding work and the scroll-frame strip shows a proper storyboarded sequence rather than generic parallax. I held Craft to 4 because the live-scroll full-page captures read sparse and slightly awkward compared with the excellent reduced-motion fallback, but the measured checks are otherwise exemplary."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "B is handsome and cinematic, with a strong hero render and consistently premium type, but the idea is less singular and the structure feels more like a stylish product template with floating chapter cards. In the scroll-frame strip, motion mainly pins the lamp and swaps text states; it progresses, but it does not tell the product story as clearly or as specifically as the brief's image-sequence chapter implies. Accessibility basics mostly pass, yet the automated ARIA violation keeps this from scoring higher on access."
+ }
+}

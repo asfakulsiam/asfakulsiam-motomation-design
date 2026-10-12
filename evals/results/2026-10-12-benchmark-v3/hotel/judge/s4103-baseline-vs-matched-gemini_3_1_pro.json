@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 4103,
+ "pair": [
+  "baseline",
+  "matched"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "The concept of parting the double doors via scroll is brilliantly executed and perfectly answers the brief's request for a signature tied to arrival. The typography is elegant and atmospheric, and the CSS/SVG illustrations beautifully support the quiet mood without feeling heavy."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A solid, clean implementation with attractive, stylized SVG illustrations and strong typography. However, the site feels more like a standard vertical stack of sections, and the motion lacks the narrative depth present in Site A."
+  },
+  "better": "A",
+  "why": "Site A delivers a highly original, concept-driven scroll experience that flawlessly answers the brief's emotional and functional requirements."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A solid, clean implementation with attractive, stylized SVG illustrations and strong typography. However, the site feels more like a standard vertical stack of sections, and the motion lacks the narrative depth present in Site A."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "The concept of parting the double doors via scroll is brilliantly executed and perfectly answers the brief's request for a signature tied to arrival. The typography is elegant and atmospheric, and the CSS/SVG illustrations beautifully support the quiet mood without feeling heavy."
+ }
+}

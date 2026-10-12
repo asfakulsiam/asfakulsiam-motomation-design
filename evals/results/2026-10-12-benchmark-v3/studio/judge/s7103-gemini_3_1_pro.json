@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 7103,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a strong, architectural feel with its terracotta palette and horizontal scroll execution for the projects. The typography is elegant and scales well, while the SVG illustrations are clear and informative. The reduced-motion fallback correctly translates the layout to a vertical stack."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B achieves an exceptionally quiet and sophisticated mood, perfectly aligning with the brief. The typography is beautifully detailed with thoughtful italic accents, and the pinned-scroll motion sequence smoothly guides the user through the architectural concepts. The SVG illustrations are exceptionally well-crafted, creating a highly polished portfolio."
+  },
+  "better": "B",
+  "why": "Site B offers a more sophisticated typographic hierarchy and exceptionally crafted SVG illustrations that elevate the overall studio identity."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B achieves an exceptionally quiet and sophisticated mood, perfectly aligning with the brief. The typography is beautifully detailed with thoughtful italic accents, and the pinned-scroll motion sequence smoothly guides the user through the architectural concepts. The SVG illustrations are exceptionally well-crafted, creating a highly polished portfolio."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a strong, architectural feel with its terracotta palette and horizontal scroll execution for the projects. The typography is elegant and scales well, while the SVG illustrations are clear and informative. The reduced-motion fallback correctly translates the layout to a vertical stack."
+ }
+}

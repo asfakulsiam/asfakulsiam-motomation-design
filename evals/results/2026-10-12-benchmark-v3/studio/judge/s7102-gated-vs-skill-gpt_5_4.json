@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 7102,
+ "pair": [
+  "gated",
+  "skill"
+ ],
+ "order": {
+  "A": "gated",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 1,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a clear quiet idea—serif grandeur, brick color, courtyard diagrams—and it stays consistent across the page. The typography is the strongest asset, but the alternating project layout is fairly familiar and the scroll-frame strip shows essentially no meaningful motion beyond normal page progression. Craft and accessibility are solid, with a notably lean build."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B turns brick, light and courtyard into the core system of the site: the list, the plans, and especially the project imagery all express the same idea. The scroll-strip shows a real sequence of openings, perforations, skylight and raised forms developing with scroll, and the reduced-motion version preserves the content in static states. It is more ambitious and memorable than A, though some small text and the oversized hero make the typography/craft slightly less immaculate than the concept."
+  },
+  "better": "B",
+  "why": "B more fully embodies the brief by making brick, light and courtyards the page’s visual language and scroll narrative, while A is elegant but comparatively static and conventional."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 1,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a clear quiet idea—serif grandeur, brick color, courtyard diagrams—and it stays consistent across the page. The typography is the strongest asset, but the alternating project layout is fairly familiar and the scroll-frame strip shows essentially no meaningful motion beyond normal page progression. Craft and accessibility are solid, with a notably lean build."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B turns brick, light and courtyard into the core system of the site: the list, the plans, and especially the project imagery all express the same idea. The scroll-strip shows a real sequence of openings, perforations, skylight and raised forms developing with scroll, and the reduced-motion version preserves the content in static states. It is more ambitious and memorable than A, though some small text and the oversized hero make the typography/craft slightly less immaculate than the concept."
+ }
+}

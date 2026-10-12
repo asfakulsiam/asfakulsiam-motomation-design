@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 5103,
+ "pair": [
+  "c-fdesign",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-fdesign"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "The site provides a clean, readable layout with a reasonable typographic hierarchy for both languages. However, the tree illustrations feel like generic lollipops rather than mangroves, and the 140 leaf icons trigger 140 serious WCAG violations due to improper list markup."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A much stronger conceptual approach: the mangrove root illustration cleverly divides the above-water and below-water sections, grounding the design in the specific context of the Sundarbans. The 140-hectare grid animation is an effective data visualization, and the code passes all accessibility checks cleanly."
+  },
+  "better": "B",
+  "why": "Site B features a more relevant visual concept with its mangrove roots, better execution of the 140-hectare visualization, and zero accessibility errors compared to Site A's 140 listitem violations."
+ },
+ "c-fdesign": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A much stronger conceptual approach: the mangrove root illustration cleverly divides the above-water and below-water sections, grounding the design in the specific context of the Sundarbans. The 140-hectare grid animation is an effective data visualization, and the code passes all accessibility checks cleanly."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "The site provides a clean, readable layout with a reasonable typographic hierarchy for both languages. However, the tree illustrations feel like generic lollipops rather than mangroves, and the 140 leaf icons trigger 140 serious WCAG violations due to improper list markup."
+ }
+}

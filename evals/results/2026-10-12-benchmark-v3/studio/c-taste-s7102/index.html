@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ittaghor Studio | Architecture in Dhaka</title>
+<meta name="description" content="Ittaghor Studio is a three-partner architecture practice in Dhaka. Houses built around light, brick and an open courtyard.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* One theme family, follows the system. One accent (brick). Radius 0 everywhere. */
+:root{
+  --bg:#e8ebe9; --panel:#dde1de; --ink:#1b2220; --muted:#4b5551; --line:#b9c0bc;
+  --accent:#9a3d28; --on-accent:#fbfaf9;
+  --sky:#d3dad6; --ground:#aab3ae; --brick:#9a3d28; --brick-d:#7a2f1f; --mortar:#c9a79c; --water:#8fa09b; --light:#f1efe6;
+  --sans:'Geist',system-ui,-apple-system,'Segoe UI',sans-serif; --mono:'Geist Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#131716; --panel:#1b211f; --ink:#e7eae8; --muted:#a3ada9; --line:#34403c;
+    --accent:#e0866c; --on-accent:#141716;
+    --sky:#222a28; --ground:#2d3633; --brick:#a8452e; --brick-d:#832f1e; --mortar:#6b3a2e; --water:#3b4a46; --light:#f0e9d2;
+  }
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--sans);overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.skip{position:absolute;left:1rem;top:-4rem;background:var(--accent);color:var(--on-accent);padding:.6rem 1rem;z-index:30}
+.skip:focus{top:1rem}
+.wrap{max-width:1400px;margin:0 auto;padding:0 1.25rem}
+@media(min-width:768px){.wrap{padding:0 2.5rem}}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+.nav .wrap{height:64px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{font-weight:600;letter-spacing:-.01em;text-decoration:none;white-space:nowrap}
+.nav ul{list-style:none;padding:0;display:flex;gap:1.25rem;font-size:.95rem}
+.nav ul a{text-decoration:none;padding:.5rem .1rem;background:linear-gradient(var(--accent),var(--accent)) 0 100%/0 2px no-repeat;transition:background-size .3s var(--ease)}
+.nav ul a:hover{background-size:100% 2px}
+@media(min-width:768px){.nav ul{gap:2.25rem}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:.6rem;white-space:nowrap;background:var(--accent);color:var(--on-accent);padding:.95rem 1.5rem;text-decoration:none;font-weight:500;border:0;transition:transform .3s var(--ease)}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(1px) scale(.98)}
+.btn svg{width:16px;height:16px;transition:transform .3s var(--ease)}
+.btn:hover svg{transform:translateY(3px)}
+
+/* hero */
+.hero{min-height:calc(100dvh - 64px);display:grid;align-items:center;padding:2rem 0 2.5rem}
+.hero .wrap{display:grid;gap:2rem;align-items:center}
+.hero h1{font-weight:500;letter-spacing:-.035em;line-height:1.04;font-size:clamp(2.2rem,5vw + .4rem,3.3rem);max-width:20ch}
+.hero h1 em{font-style:italic;font-weight:400;padding-bottom:.08em}
+.hero p{color:var(--muted);max-width:44ch;margin:1.25rem 0 1.75rem}
+.hero-img{height:min(46dvh,420px);overflow:hidden;background:var(--sky)}
+.hero-img svg{display:block;width:100%;height:100%}
+@media(min-width:900px){
+  .hero .wrap{grid-template-columns:7fr 5fr;gap:4rem}
+  .hero h1{max-width:none;font-size:clamp(2.6rem,3.7vw,3.4rem)}
+  .hero-img{height:min(68dvh,620px)}
+}
+
+/* sections */
+section{padding:5rem 0}
+@media(min-width:768px){section{padding:8rem 0}}
+h2{font-weight:500;letter-spacing:-.03em;line-height:1.08;font-size:clamp(1.9rem,4vw,3rem)}
+.lede{color:var(--muted);max-width:60ch;margin-top:1rem}
+
+/* projects viewer */
+.viewer{display:grid;gap:1.5rem;margin-top:3rem}
+[role=tablist]{display:flex;gap:0;overflow-x:auto;scroll-snap-type:x mandatory;border-bottom:1px solid var(--line);scrollbar-width:thin}
+[role=tab]{flex:0 0 auto;scroll-snap-align:start;min-width:11rem;text-align:left;background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);font:inherit;padding:.9rem 1rem .8rem 0;margin-right:1rem;cursor:pointer;transition:color .3s var(--ease),border-color .3s var(--ease)}
+[role=tab] b{display:block;font-weight:500;font-size:1.05rem;color:inherit}
+[role=tab] span{font-size:.85rem;font-family:var(--mono)}
+[role=tab]:hover{color:var(--ink)}
+[role=tab][aria-selected=true]{color:var(--ink);border-bottom-color:var(--accent)}
+.panel{display:grid;gap:1.5rem}
+.panel figure.img{background:var(--sky);aspect-ratio:3/2;overflow:hidden}
+.panel figure.img svg{display:block;width:100%;height:100%}
+.plan{background:var(--panel);padding:1.25rem;display:flex;flex-direction:column;gap:.75rem}
+.plan svg{width:100%;height:auto;max-height:260px;color:var(--ink)}
+.plan figcaption{font-size:.85rem;color:var(--muted);font-family:var(--mono)}
+.plan .heavy{stroke-width:6}
+.info h3{font-weight:500;letter-spacing:-.025em;font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.1}
+.info .meta{font-family:var(--mono);font-size:.9rem;color:var(--muted);margin:.5rem 0 1rem}
+.info p{max-width:34ch;font-size:1.2rem}
+@media(min-width:900px){
+  .panel{grid-template-columns:1.55fr 1fr;grid-template-areas:"img info" "img plan";align-items:start;gap:2rem}
+  .panel .img{grid-area:img}.panel .info{grid-area:info}.panel .plan{grid-area:plan}
+  .panel figure.img{aspect-ratio:auto;height:100%;min-height:440px}
+}
+
+/* studio */
+.studio{border-top:1px solid var(--line)}
+.studio .wrap{display:grid;gap:3rem}
+.names{list-style:none;padding:0;font-weight:500;letter-spacing:-.04em;line-height:1.02;font-size:clamp(2.3rem,8.5vw,5.8rem)}
+.names li:nth-child(2){padding-left:1.5rem}
+.names li:nth-child(3){padding-left:3rem}
+.facts{display:grid;gap:1rem;align-content:start}
+.bricks{height:56px;background:
+  linear-gradient(var(--mortar),var(--mortar)) 0 50%/100% 2px no-repeat,
+  repeating-linear-gradient(90deg,transparent 0 46px,var(--mortar) 46px 48px),var(--brick)}
+@media(min-width:900px){
+  .studio .wrap{grid-template-columns:1.4fr 1fr;gap:6rem;align-items:end}
+  .names li:nth-child(2){padding-left:4rem}.names li:nth-child(3){padding-left:8rem}
+}
+
+/* process */
+.process{background:var(--panel)}
+.steps{list-style:none;padding:0;margin-top:3.5rem;display:grid;gap:2rem;position:relative}
+.steps li{font-weight:500;letter-spacing:-.03em;font-size:clamp(1.8rem,3.5vw,2.6rem);line-height:1.1;padding-left:2.25rem;position:relative}
+.steps li::before{content:"";position:absolute;left:0;top:.35em;width:.9rem;height:.9rem;background:var(--accent)}
+.steps li.rail{padding:0;font-size:0}.steps li.rail::before{display:none}
+.steps li.rail,.rail{position:absolute;left:.42rem;top:.8em;bottom:1.2em;width:2px;background:var(--accent);transform-origin:top}
+@media(min-width:900px){
+  .steps{grid-template-columns:repeat(4,1fr);gap:1.5rem;padding-top:2.2rem}
+  .steps li{padding:2.2rem 0 0}
+  .steps li:nth-child(2){margin-top:2.5rem}.steps li:nth-child(3){margin-top:5rem}.steps li:nth-child(4){margin-top:7.5rem}
+  .steps li::before{top:0;left:0}
+  .steps li.rail{left:0;right:0;top:.42rem;bottom:auto;width:auto;height:2px;transform-origin:left}
+}
+
+/* contact */
+.contact a.mail{display:inline-block;margin-top:2rem;font-weight:500;letter-spacing:-.04em;line-height:1.1;font-size:clamp(1.55rem,6.4vw,4.4rem);text-decoration:none;border-bottom:3px solid var(--accent);word-break:break-word;transition:color .3s var(--ease)}
+.contact a.mail:hover{color:var(--accent)}
+footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-between}
+
+/* motion: only hide things when JS + GSAP + motion allowed */
+.reveal-ready .rv{opacity:0;transform:translateY(28px)}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition-duration:.01ms!important}
+  .reveal-ready .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#projects">Skip to projects</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="brick" width="32" height="16" patternUnits="userSpaceOnUse">
+      <rect width="32" height="16" fill="var(--brick)"/>
+      <path d="M0 .5H32M0 8.5H32M0 0V8M16 8V16" stroke="var(--mortar)" stroke-width="1.5" fill="none"/>
+    </pattern>
+    <pattern id="jali" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="var(--brick-d)"/>
+      <path d="M10 3L17 10L10 17L3 10Z" fill="var(--sky)"/>
+    </pattern>
+  </defs>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Ittaghor Studio</a>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#studio">Studio</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1 class="hl">Houses built around light, brick and an <em>open courtyard.</em></h1>
+        <p class="hl">Ittaghor Studio is a three-partner architecture practice in Dhaka, founded in 2011.</p>
+        <a class="btn hl" href="#projects">See projects
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M8 2v11M3 8.5l5 5 5-5"/></svg>
+        </a>
+      </div>
+      <div class="hero-img" id="heroImg" role="img" aria-label="Elevation drawing of two brick wings with a neem tree standing in the courtyard between them"></div>
+    </div>
+  </div>
+
+  <section id="projects" aria-labelledby="h-projects">
+    <div class="wrap">
+      <h2 id="h-projects" class="rv">Five houses</h2>
+      <div class="viewer">
+        <div role="tablist" aria-label="Featured projects" id="tabs"></div>
+        <div class="panel" role="tabpanel" id="panel" tabindex="0"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="studio" class="studio" aria-labelledby="h-studio">
+    <div class="wrap">
+      <div>
+        <h2 id="h-studio" class="visually" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Studio</h2>
+        <ul class="names" aria-label="Partners">
+          <li class="nm">Nusrat Jahan</li>
+          <li class="nm">Tanvir Ahmed</li>
+          <li class="nm">Farhan Kabir</li>
+        </ul>
+      </div>
+      <div class="facts rv">
+        <p>Three partners, one practice in Dhaka since 2011. We are known for brick and courtyard houses.</p>
+        <div class="bricks" role="img" aria-label="Brick coursing"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="process" aria-labelledby="h-process">
+    <div class="wrap">
+      <h2 id="h-process" class="rv">How a house gets made</h2>
+      <ol class="steps">
+                <li class="st">Site visit</li>
+        <li class="st">Sketch</li>
+        <li class="st">Brick sample</li>
+        <li class="st">Build</li>
+        <li class="rail" id="rail" aria-hidden="true"></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="contact" class="contact" aria-labelledby="h-contact">
+    <div class="wrap">
+      <h2 id="h-contact" class="rv">Planning a house?</h2>
+      <a class="mail rv" href="mailto:studio@ittaghor.studio">studio@ittaghor.studio</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Ittaghor Studio, Dhaka</span>
+    <span>Founded 2011</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+  var canMotion=function(){return !reduce.matches && window.gsap && window.ScrollTrigger;};
+
+  /* ---------- project data (facts from the brief) ---------- */
+  var P=[
+    {n:'Courtyard House',pl:'Bashundhara, Dhaka',y:'2019',t:'A family home wrapped around a single neem tree.'},
+    {n:'Jali House',pl:'Rajshahi',y:'2021',t:'Perforated brick screens that cool the rooms by shading them.'},
+    {n:'River Room',pl:'Sirajganj',y:'2022',t:'A weekend house raised above the monsoon line.'},
+    {n:'Brick Library',pl:'Khulna',y:'2023',t:'A school library lit only from above.'},
+    {n:'Twin Courts',pl:'Chattogram',y:'2024',t:'Two households, two courtyards, one shared wall.'}
+  ];
+
+  /* ---------- "images": elevation drawings in SVG ---------- */
+  var base='<rect width="480" height="320" fill="var(--sky)"/><rect y="268" width="480" height="52" fill="var(--ground)"/>';
+  var IMG=[
+    base+'<rect x="180" y="188" width="120" height="80" fill="url(#brick)" opacity=".7"/>'+
+      '<rect x="30" y="150" width="150" height="118" fill="url(#brick)"/><rect x="300" y="150" width="150" height="118" fill="url(#brick)"/>'+
+      '<rect x="22" y="138" width="166" height="12" fill="var(--ink)"/><rect x="292" y="138" width="166" height="12" fill="var(--ink)"/>'+
+      '<rect x="236" y="186" width="8" height="82" fill="var(--ink)"/><circle cx="240" cy="160" r="46" fill="var(--ink)" opacity=".85"/><circle cx="212" cy="184" r="26" fill="var(--ink)" opacity=".85"/><circle cx="270" cy="182" r="28" fill="var(--ink)" opacity=".85"/>',
+    base+'<rect x="40" y="56" width="400" height="14" fill="var(--ink)"/><rect x="60" y="70" width="360" height="198" fill="url(#brick)"/>'+
+      '<rect x="100" y="96" width="280" height="148" fill="url(#jali)"/><rect x="100" y="70" width="280" height="26" fill="var(--ink)" opacity=".18"/>',
+    base+'<rect y="226" width="480" height="94" fill="var(--water)"/>'+
+      [100,200,300,370].map(function(x){return '<rect x="'+x+'" y="186" width="10" height="82" fill="var(--ink)"/>';}).join('')+
+      '<rect y="226" width="480" height="94" fill="var(--water)" opacity=".55"/>'+
+      '<path d="M0 246q30-9 60 0t60 0 60 0 60 0 60 0 60 0 60 0 60 0M0 286q30-9 60 0t60 0 60 0 60 0 60 0 60 0 60 0 60 0" stroke="var(--sky)" stroke-width="2" fill="none"/>'+
+      '<rect x="70" y="106" width="340" height="80" fill="url(#brick)"/><rect x="60" y="96" width="360" height="10" fill="var(--ink)"/>'+
+      '<path d="M0 206H480" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="6 6" opacity=".6"/>',
+    base+'<polygon points="200,118 280,118 350,268 130,268" fill="var(--light)" opacity=".45"/>'+
+      '<rect x="70" y="124" width="340" height="144" fill="url(#brick)"/><rect x="60" y="114" width="360" height="10" fill="var(--ink)"/>'+
+      '<rect x="196" y="104" width="88" height="14" fill="var(--light)"/><rect x="196" y="116" width="88" height="2" fill="var(--ink)"/>'+
+      '<polygon points="200,124 280,124 350,268 130,268" fill="var(--light)" opacity=".5"/>',
+    base+'<rect x="40" y="164" width="186" height="104" fill="url(#brick)"/><rect x="254" y="164" width="186" height="104" fill="url(#brick)"/>'+
+      '<rect x="226" y="112" width="28" height="156" fill="var(--brick-d)"/>'+
+      '<rect x="90" y="164" width="86" height="40" fill="var(--sky)"/><rect x="304" y="164" width="86" height="40" fill="var(--sky)"/>'+
+      '<rect x="131" y="190" width="5" height="14" fill="var(--ink)"/><circle cx="133" cy="184" r="12" fill="var(--ink)" opacity=".85"/>'+
+      '<rect x="345" y="190" width="5" height="14" fill="var(--ink)"/><circle cx="347" cy="184" r="12" fill="var(--ink)" opacity=".85"/>'+
+      '<rect x="32" y="154" width="202" height="10" fill="var(--ink)"/><rect x="246" y="154" width="202" height="10" fill="var(--ink)"/>'
+  ];
+  function svgWrap(inner,vb,slice,label){
+    return '<svg viewBox="'+vb+'" preserveAspectRatio="'+(slice?'xMidYMid slice':'xMidYMid meet')+'" aria-hidden="true" focusable="false">'+inner+'</svg>';
+  }
+
+  /* ---------- plans: simple line drawings, pathLength=1 so they can be drawn on ---------- */
+  function L(x1,y1,x2,y2,c){return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" pathLength="1"'+(c?' class="'+c+'"':'')+'/>';}
+  function R(x,y,w,h){return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" pathLength="1"/>';}
+  function C(x,y,r){return '<circle cx="'+x+'" cy="'+y+'" r="'+r+'" pathLength="1"/>';}
+  var jali='';for(var i=0;i<13;i++){jali+=R(40+i*20,46,10,8);}
+  var PLAN=[
+    R(30,30,260,180)+R(110,80,100,80)+C(160,120,22)+L(30,80,110,80)+L(210,80,290,80)+L(30,160,110,160)+L(210,160,290,160)+L(110,30,110,80)+L(210,30,210,80)+L(110,160,110,210)+L(210,160,210,210),
+    R(30,40,260,160)+L(150,40,150,200)+L(150,120,290,120)+jali,
+    R(50,50,200,120)+L(50,110,250,110)+R(258,50,32,120)+L(258,80,290,80)+L(258,110,290,110)+L(258,140,290,140)+C(50,170,6)+C(116,170,6)+C(184,170,6)+C(250,170,6)+'<path d="M20 205q20-10 40 0t40 0 40 0 40 0 40 0 40 0 40 0" pathLength="1"/>',
+    R(30,30,260,180)+R(110,75,100,90)+L(110,75,210,165)+L(210,75,110,165)+L(50,50,270,50)+L(50,190,270,190)+L(50,50,50,70)+L(270,50,270,70),
+    R(20,40,280,160)+L(160,40,160,200,'heavy')+R(50,80,70,60)+C(85,110,14)+R(200,100,70,60)+C(235,130,14)
+  ];
+  var PLAN_LABEL=[
+    'Plan: rooms around a central courtyard with one tree',
+    'Plan: two rooms behind a perforated brick screen',
+    'Plan: a raised house on piers with a stair, above the water line',
+    'Plan: a reading hall with a central rooflight',
+    'Plan: two houses, each with a courtyard, split by one shared wall'
+  ];
+
+  /* ---------- hero image ---------- */
+  document.getElementById('heroImg').innerHTML=svgWrap(IMG[0],'0 0 480 320',true);
+
+  /* ---------- tabs + panel ---------- */
+  var tabs=document.getElementById('tabs'),panel=document.getElementById('panel'),cur=-1;
+  P.forEach(function(p,i){
+    var b=document.createElement('button');
+    b.type='button';b.setAttribute('role','tab');b.id='tab'+i;b.setAttribute('aria-controls','panel');
+    b.innerHTML='<b>'+p.n+'</b><span>'+p.y+'</span>';
+    b.addEventListener('click',function(){show(i,true);});
+    b.addEventListener('keydown',function(e){
+      var k=e.key,n=null;
+      if(k==='ArrowRight'||k==='ArrowDown')n=(i+1)%P.length;
+      else if(k==='ArrowLeft'||k==='ArrowUp')n=(i+P.length-1)%P.length;
+      else if(k==='Home')n=0;else if(k==='End')n=P.length-1;
+      if(n!==null){e.preventDefault();show(n,true);tabs.children[n].focus();}
+    });
+    tabs.appendChild(b);
+  });
+
+  function show(i,animate){
+    if(i===cur)return;cur=i;var p=P[i];
+    Array.prototype.forEach.call(tabs.children,function(b,j){
+      b.setAttribute('aria-selected',j===i);b.tabIndex=j===i?0:-1;
+    });
+    panel.setAttribute('aria-labelledby','tab'+i);
+    panel.innerHTML=
+      '<figure class="img" role="img" aria-label="Elevation drawing of '+p.n+'">'+svgWrap(IMG[i],'0 0 480 320',true)+'</figure>'+
+      '<div class="info"><h3>'+p.n+'</h3><p class="meta">'+p.pl+'<br>'+p.y+'</p><p>'+p.t+'</p></div>'+
+      '<figure class="plan" role="img" aria-label="'+PLAN_LABEL[i]+'">'+
+        '<svg viewBox="0 0 320 240" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true" focusable="false">'+PLAN[i]+'</svg>'+
+        '<figcaption>Plan, '+p.n+'</figcaption></figure>';
+    if(animate&&canMotion()){
+      var shapes=panel.querySelectorAll('.plan svg > *');
+      gsap.set(shapes,{strokeDasharray:1,strokeDashoffset:1});
+      gsap.timeline()
+        .from(panel.querySelector('.img svg'),{opacity:0,scale:1.05,duration:.9,ease:'power3.out'},0)
+        .from(panel.querySelector('.info'),{opacity:0,y:16,duration:.6,ease:'power3.out'},.1)
+        .to(shapes,{strokeDashoffset:0,duration:1.1,stagger:.04,ease:'power2.inOut'},.2);
+    }
+  }
+  show(0,false);
+
+  /* ---------- page motion (GSAP). Each effect has one job. ---------- */
+  var ctx;
+  function setupMotion(){
+    if(ctx){ctx.revert();ctx=null;document.documentElement.classList.remove('reveal-ready');}
+    if(!canMotion())return;
+    gsap.registerPlugin(ScrollTrigger);
+    document.documentElement.classList.add('reveal-ready');
+    ctx=gsap.context(function(){
+      /* hierarchy: headline, sub, CTA arrive in order; the drawing settles in */
+      gsap.set('.hl',{opacity:0,y:24});
+      gsap.to('.hl',{opacity:1,y:0,duration:.9,stagger:.12,ease:'power3.out',delay:.1});
+      gsap.from('#heroImg svg',{opacity:0,scale:1.08,duration:1.4,ease:'power3.out'});
+      /* reveal on entry so each section is read in order */
+      gsap.utils.toArray('.rv').forEach(function(el){
+        gsap.to(el,{opacity:1,y:0,duration:.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%',once:true}});
+      });
+      /* storytelling: partner names step in one by one */
+      gsap.from('.nm',{opacity:0,x:-40,duration:.9,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'.names',start:'top 80%',once:true}});
+      /* storytelling: the rail draws as the process advances from visit to build */
+      var wide=window.matchMedia('(min-width:900px)').matches;
+      gsap.fromTo('#rail',wide?{scaleX:0}:{scaleY:0},{scaleX:1,scaleY:1,ease:'none',scrollTrigger:{trigger:'.steps',start:'top 80%',end:'bottom 60%',scrub:.6}});
+      gsap.from('.st',{opacity:0,y:20,duration:.7,stagger:.18,ease:'power3.out',scrollTrigger:{trigger:'.steps',start:'top 80%',once:true}});
+      /* first plan draws when the projects section is reached */
+      var shapes=panel.querySelectorAll('.plan svg > *');
+      gsap.set(shapes,{strokeDasharray:1,strokeDashoffset:1});
+      gsap.to(shapes,{strokeDashoffset:0,duration:1.2,stagger:.04,ease:'power2.inOut',scrollTrigger:{trigger:'#panel',start:'top 75%',once:true}});
+    });
+  }
+  setupMotion();
+  var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(ctx)ScrollTrigger.refresh();},200);});
+  var onChange=function(){
+    if(reduce.matches){if(ctx){ctx.revert();ctx=null;}document.documentElement.classList.remove('reveal-ready');
+      panel.querySelectorAll('.plan svg > *').forEach(function(s){s.style.strokeDasharray='';s.style.strokeDashoffset='';});}
+    else setupMotion();
+  };
+  if(reduce.addEventListener)reduce.addEventListener('change',onChange);
+})();
+</script>
+</body>
+</html>

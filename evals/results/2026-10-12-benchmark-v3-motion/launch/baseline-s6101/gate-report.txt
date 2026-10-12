@@ -1,0 +1,31 @@
+DELIVERY GATE · /home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-motion/launch/baseline-s6101/index.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (11 measured; 4 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (11 measured; 4 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (11 measured; 4 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (10 measured; 5 skipped; 0 not visible at scan time)
+     ⚠ 1440px coverage: 5 of 15 text elements (33%) were skipped (moving, occluded or never fully on screen) — more than 30%, so this width is not a full measurement. Check the skipped text by hand or make it measurable.
+  overflow  ✗ 12 at 375/390/768/1440px
+     375px  text overflows parent by 55px  button  "One"
+     375px  text overflows parent by 121px  button  "Two"
+     375px  text overflows parent by 198px  button  "Three"
+     390px  text overflows parent by 55px  button  "One"
+     390px  text overflows parent by 121px  button  "Two"
+     390px  text overflows parent by 198px  button  "Three"
+     768px  text overflows parent by 55px  button  "One"
+     768px  text overflows parent by 121px  button  "Two"
+     768px  text overflows parent by 198px  button  "Three"
+     1440px  text overflows parent by 55px  button  "One"
+     1440px  text overflows parent by 121px  button  "Two"
+     1440px  text overflows parent by 198px  button  "Three"
+  words     ✓ 0 display-text problems at 375px  (3 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (15 compared)
+  names     ✓ 0 missing alt / accessible names  (5 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (3 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  3 sections, entrances: static | fade+y | static → 0 repeat(s); pins 1, WebGL canvases 0, JS 48KB gzipped
+  records    DESIGN.md: none · memory log: /home/user/workspace/repo/.motomation/log.json · stamp fields: {"tier":"4"}
+  critique → C?[no-record] H4[375:1] S?[no-archetype-in-stamp] R?[no-record] M5[t4:pins1/2,webgl0/1,js48/250KB,rm0] V5[entrance-repeats:0]   (axes marked ? have no record to derive from)
+  FAIL  stamp → critique: C?[no-record] H4[375:1] S?[no-archetype-in-stamp] R?[no-record] M5[t4:pins1/2,webgl0/1,js48/250KB,rm0] V5[entrance-repeats:0] · gate: c0 o12 w0 rm0 a0 n0 · gate/2 · b5b910b35d
+
+motion report → /home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-motion/launch/baseline-s6101/motion-report.html (24 frames, 915 KB)

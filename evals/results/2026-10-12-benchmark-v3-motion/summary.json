@@ -1,0 +1,946 @@
+{
+ "generated": "2026-10-12T09:10:32.679Z",
+ "briefs": {
+  "portfolio": {
+   "pair": [
+    "baseline",
+    "skill"
+   ],
+   "pairs": [
+    {
+     "seed": 1101,
+     "baseline": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/portfolio/baseline-s1101",
+      "turns": 6,
+      "seconds": 68,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 4,
+         "Originality": 4,
+         "Typography": 4,
+         "Motion": 4,
+         "Craft": 3,
+         "Access & performance": 4
+        },
+        "total": 77,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 3,
+         "Originality": 3,
+         "Typography": 4,
+         "Motion": 4,
+         "Craft": 4,
+         "Access & performance": 5
+        },
+        "total": 75,
+        "claimedGates": []
+       }
+      ],
+      "raw": 76,
+      "gated": 76,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": ""
+     },
+     "skill": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/portfolio/skill-s1101",
+      "turns": 18,
+      "seconds": 482,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 5,
+         "Originality": 4,
+         "Typography": 5,
+         "Motion": 4,
+         "Craft": 5,
+         "Access & performance": 4
+        },
+        "total": 90,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 5,
+         "Originality": 5,
+         "Typography": 5,
+         "Motion": 5,
+         "Craft": 5,
+         "Access & performance": 5
+        },
+        "total": 100,
+        "claimedGates": []
+       }
+      ],
+      "raw": 95,
+      "gated": 95,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: stage · mutation: reverse-the-reveal · signature: timecode-rail · tier: 4 · critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp19] R5[cuts:3,anim:2] M5[t4:pins0/2,webgl1/1,js49/250KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · "
+     },
+     "delta": 19,
+     "verdict": "skill"
+    },
+    {
+     "seed": 1102,
+     "baseline": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/portfolio/baseline-s1102",
+      "turns": 9,
+      "seconds": 58,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 4,
+         "Originality": 3,
+         "Typography": 3,
+         "Motion": 3,
+         "Craft": 2,
+         "Access & performance": 1
+        },
+        "total": 55,
+        "claimedGates": [
+         "Body text contrast falls under 4.5:1 (6 failing nodes)"
+        ]
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 4,
+         "Originality": 4,
+         "Typography": 4,
+         "Motion": 4,
+         "Craft": 3,
+         "Access & performance": 2
+        },
+        "total": 71,
+        "claimedGates": [
+         "Lorem ipsum, placeholder components or TODOs in the output",
+         "Body text contrast under 4.5:1"
+        ]
+       }
+      ],
+      "raw": 63,
+      "gated": 0,
+      "gates": [
+       "contrast: 6 axe color-contrast node(s)"
+      ],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 1,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": ""
+     },
+     "skill": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/portfolio/skill-s1102",
+      "turns": 19,
+      "seconds": 677,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 5,
+         "Originality": 5,
+         "Typography": 5,
+         "Motion": 4,
+         "Craft": 4,
+         "Access & performance": 2
+        },
+        "total": 85,
+        "claimedGates": [
+         "Placeholder/TODO copy is visible in the contact section: \"[NEEDS COPY: Rafi's email address]\""
+        ]
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 2,
+         "Originality": 3,
+         "Typography": 5,
+         "Motion": 2,
+         "Craft": 4,
+         "Access & performance": 4
+        },
+        "total": 65,
+        "claimedGates": [
+         "Lorem ipsum, placeholder components or TODOs in the output"
+        ]
+       }
+      ],
+      "raw": 75,
+      "gated": 75,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: poster · mutation: single-object · signature: focus-pull · tier: 4 · critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp19] R5[cuts:3,anim:2] M5[t4:pins0/2,webgl1/1,js49/250KB,rm0] V4[entrance-repeats:1] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · ee4cc98"
+     },
+     "delta": 75,
+     "verdict": "skill"
+    },
+    {
+     "seed": 1103,
+     "baseline": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/portfolio/baseline-s1103",
+      "turns": 4,
+      "seconds": 45,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 5,
+         "Originality": 5,
+         "Typography": 5,
+         "Motion": 3,
+         "Craft": 5,
+         "Access & performance": 5
+        },
+        "total": 94,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 3,
+         "Originality": 3,
+         "Typography": 4,
+         "Motion": 2,
+         "Craft": 4,
+         "Access & performance": 2
+        },
+        "total": 60,
+        "claimedGates": [
+         "Invented statistics, logos or testimonials"
+        ]
+       }
+      ],
+      "raw": 77,
+      "gated": 77,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": ""
+     },
+     "skill": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/portfolio/skill-s1103",
+      "turns": 30,
+      "seconds": 860,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 4,
+         "Originality": 4,
+         "Typography": 4,
+         "Motion": 4,
+         "Craft": 4,
+         "Access & performance": 5
+        },
+        "total": 83,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 5,
+         "Originality": 5,
+         "Typography": 5,
+         "Motion": 5,
+         "Craft": 5,
+         "Access & performance": 5
+        },
+        "total": 100,
+        "claimedGates": []
+       }
+      ],
+      "raw": 91.5,
+      "gated": 91.5,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: film-reel · mutation: no nav · signature: projector-lamp · tier: 4 · critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp37] R5[cuts:3,anim:2] M5[t4:pins1/2,webgl1/1,js49/250KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 4db2f38"
+     },
+     "delta": 14.5,
+     "verdict": "skill"
+    }
+   ],
+   "wins": 3,
+   "losses": 0,
+   "ties": 0,
+   "notScored": 0,
+   "outcome": "consistent win"
+  },
+  "launch": {
+   "pair": [
+    "baseline",
+    "skill"
+   ],
+   "pairs": [
+    {
+     "seed": 6101,
+     "baseline": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/launch/baseline-s6101",
+      "turns": 3,
+      "seconds": 48,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 4,
+         "Originality": 3,
+         "Typography": 4,
+         "Motion": 4,
+         "Craft": 2,
+         "Access & performance": 5
+        },
+        "total": 73,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 3,
+         "Originality": 3,
+         "Typography": 4,
+         "Motion": 2,
+         "Craft": 2,
+         "Access & performance": 5
+        },
+        "total": 63,
+        "claimedGates": []
+       }
+      ],
+      "raw": 68,
+      "gated": 68,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 12,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": ""
+     },
+     "skill": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/launch/skill-s6101",
+      "turns": 38,
+      "seconds": 2014,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 5,
+         "Originality": 4,
+         "Typography": 4,
+         "Motion": 5,
+         "Craft": 4,
+         "Access & performance": 5
+        },
+        "total": 90,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 5,
+         "Originality": 4,
+         "Typography": 5,
+         "Motion": 5,
+         "Craft": 5,
+         "Access & performance": 5
+        },
+        "total": 96,
+        "claimedGates": []
+       }
+      ],
+      "raw": 93,
+      "gated": 93,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: catalogue · mutation: remove-the-expected (no nav, no hero image, no grid) · signature: lamp-lit-page · tier: 4 · critique: C5[restraint:kept] H5[375:0] S3[last5:archetype-new,signature-new,fp81] R5[cuts:4,anim:4] M5[t4:pins1/2,webgl1/1,js50/250KB,rm0] V5[entrance-repeats:0] "
+     },
+     "delta": 25,
+     "verdict": "skill"
+    },
+    {
+     "seed": 6102,
+     "baseline": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/launch/baseline-s6102",
+      "turns": 6,
+      "seconds": 58,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 5,
+         "Originality": 4,
+         "Typography": 5,
+         "Motion": 5,
+         "Craft": 4,
+         "Access & performance": 5
+        },
+        "total": 93,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 5,
+         "Originality": 5,
+         "Typography": 5,
+         "Motion": 5,
+         "Craft": 5,
+         "Access & performance": 5
+        },
+        "total": 100,
+        "claimedGates": []
+       }
+      ],
+      "raw": 96.5,
+      "gated": 96.5,
+      "gates": [],
+      "gate": {
+       "contrast": 1,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": ""
+     },
+     "skill": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/launch/skill-s6102",
+      "turns": 51,
+      "seconds": 2587,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 3,
+         "Originality": 4,
+         "Typography": 4,
+         "Motion": 3,
+         "Craft": 4,
+         "Access & performance": 3
+        },
+        "total": 70,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 3,
+         "Originality": 3,
+         "Typography": 3,
+         "Motion": 2,
+         "Craft": 2,
+         "Access & performance": 3
+        },
+        "total": 54,
+        "claimedGates": []
+       }
+      ],
+      "raw": 62,
+      "gated": 62,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: stage · mutation: ui-is-the-content · signature: timecode-rail · tier: 4 · critique: C5[restraint:kept] H5[375:0] S5[last5:none] R5[cuts:3,anim:4] M5[t4:pins0/2,webgl1/1,js50/250KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 740514e27d "
+     },
+     "delta": -34.5,
+     "verdict": "baseline"
+    },
+    {
+     "seed": 6103,
+     "baseline": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/launch/baseline-s6103",
+      "turns": 8,
+      "seconds": 72,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 3,
+         "Originality": 3,
+         "Typography": 5,
+         "Motion": 4,
+         "Craft": 2,
+         "Access & performance": 3
+        },
+        "total": 66,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 3,
+         "Originality": 4,
+         "Typography": 4,
+         "Motion": 2,
+         "Craft": 2,
+         "Access & performance": 5
+        },
+        "total": 67,
+        "claimedGates": []
+       }
+      ],
+      "raw": 66.5,
+      "gated": 66.5,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": ""
+     },
+     "skill": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/launch/skill-s6103",
+      "turns": 33,
+      "seconds": 1516,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 5,
+         "Originality": 5,
+         "Typography": 4,
+         "Motion": 5,
+         "Craft": 4,
+         "Access & performance": 4
+        },
+        "total": 91,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 5,
+         "Originality": 4,
+         "Typography": 5,
+         "Motion": 5,
+         "Craft": 5,
+         "Access & performance": 5
+        },
+        "total": 96,
+        "claimedGates": []
+       }
+      ],
+      "raw": 93.5,
+      "gated": 93.5,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: stage · mutation: print-rule-folios · signature: ring-turn-timecode · tier: 4 · critique: C5[restraint:kept] H5[375:0] S5[last5:none] R5[cuts:2,anim:3] M5[t4:pins0/2,webgl1/1,js50/250KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 6fc7156686 "
+     },
+     "delta": 27,
+     "verdict": "skill"
+    }
+   ],
+   "wins": 2,
+   "losses": 1,
+   "ties": 0,
+   "notScored": 0,
+   "outcome": "mixed"
+  },
+  "festival": {
+   "pair": [
+    "baseline",
+    "skill"
+   ],
+   "pairs": [
+    {
+     "seed": 8101,
+     "baseline": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/festival/baseline-s8101",
+      "turns": 3,
+      "seconds": 39,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 5,
+         "Originality": 5,
+         "Typography": 5,
+         "Motion": 5,
+         "Craft": 2,
+         "Access & performance": 4
+        },
+        "total": 88,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 5,
+         "Originality": 5,
+         "Typography": 5,
+         "Motion": 5,
+         "Craft": 5,
+         "Access & performance": 5
+        },
+        "total": 100,
+        "claimedGates": []
+       }
+      ],
+      "raw": 94,
+      "gated": 94,
+      "gates": [],
+      "gate": {
+       "contrast": 2,
+       "overflow": 0,
+       "words": 1,
+       "motion": 0,
+       "names": 0,
+       "numbers": 1
+      },
+      "stamp": ""
+     },
+     "skill": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/festival/skill-s8101",
+      "turns": 39,
+      "seconds": 1449,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 4,
+         "Originality": 3,
+         "Typography": 4,
+         "Motion": 3,
+         "Craft": 4,
+         "Access & performance": 4
+        },
+        "total": 73,
+        "claimedGates": []
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 4,
+         "Originality": 3,
+         "Typography": 4,
+         "Motion": 4,
+         "Craft": 4,
+         "Access & performance": 5
+        },
+        "total": 79,
+        "claimedGates": []
+       }
+      ],
+      "raw": 76,
+      "gated": 76,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: timeline · mutation: marginalia · signature: stage-light-pair · tier: 4 · critique: C5[restraint:kept] H5[375:0] S1[last5:archetype-new,signature-new,fp100] R5[cuts:2,anim:3] M5[t4:pins0/2,webgl1/1,js49/250KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 9"
+     },
+     "delta": -18,
+     "verdict": "baseline"
+    },
+    {
+     "seed": 8102,
+     "baseline": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/festival/baseline-s8102",
+      "turns": 6,
+      "seconds": 54,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 3,
+         "Originality": 3,
+         "Typography": 4,
+         "Motion": 4,
+         "Craft": 3,
+         "Access & performance": 1
+        },
+        "total": 60,
+        "claimedGates": [
+         "Body text contrast under 4.5:1"
+        ]
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 4,
+         "Originality": 4,
+         "Typography": 5,
+         "Motion": 5,
+         "Craft": 4,
+         "Access & performance": 2
+        },
+        "total": 80,
+        "claimedGates": []
+       }
+      ],
+      "raw": 70,
+      "gated": 0,
+      "gates": [
+       "contrast: 1 axe color-contrast node(s)"
+      ],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 1
+      },
+      "stamp": ""
+     },
+     "skill": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/festival/skill-s8102",
+      "turns": 27,
+      "seconds": 845,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 4,
+         "Originality": 4,
+         "Typography": 4,
+         "Motion": 5,
+         "Craft": 3,
+         "Access & performance": 4
+        },
+        "total": 80,
+        "claimedGates": [
+         "Placeholder lineup content/components ('ARTIST SLOT' repeated)"
+        ]
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 5,
+         "Originality": 5,
+         "Typography": 4,
+         "Motion": 5,
+         "Craft": 4,
+         "Access & performance": 5
+        },
+        "total": 94,
+        "claimedGates": []
+       }
+      ],
+      "raw": 87,
+      "gated": 87,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: film-reel · mutation: no-nav · signature: lighthouse-beam · tier: 4 · critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp37] R5[cuts:3,anim:3] M5[t4:pins0/2,webgl1/1,js49/250KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · c2f69b"
+     },
+     "delta": 87,
+     "verdict": "skill"
+    },
+    {
+     "seed": 8103,
+     "baseline": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/festival/baseline-s8103",
+      "turns": 6,
+      "seconds": 59,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 4,
+         "Originality": 4,
+         "Typography": 4,
+         "Motion": 3,
+         "Craft": 3,
+         "Access & performance": 2
+        },
+        "total": 68,
+        "claimedGates": [
+         "Body text contrast under 4.5:1"
+        ]
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 3,
+         "Originality": 3,
+         "Typography": 4,
+         "Motion": 3,
+         "Craft": 3,
+         "Access & performance": 1
+        },
+        "total": 57,
+        "claimedGates": [
+         "Body text contrast under 4.5:1"
+        ]
+       }
+      ],
+      "raw": 62.5,
+      "gated": 0,
+      "gates": [
+       "contrast: 12 axe color-contrast node(s)"
+      ],
+      "gate": {
+       "contrast": 5,
+       "overflow": 0,
+       "words": 2,
+       "motion": 0,
+       "names": 0,
+       "numbers": 2
+      },
+      "stamp": ""
+     },
+     "skill": {
+      "dir": "evals/results/2026-10-12-benchmark-v3-motion/festival/skill-s8103",
+      "turns": 27,
+      "seconds": 1237,
+      "exit": 0,
+      "judges": [
+       {
+        "model": "gpt_5_4",
+        "scores": {
+         "Concept": 4,
+         "Originality": 5,
+         "Typography": 4,
+         "Motion": 3,
+         "Craft": 2,
+         "Access & performance": 5
+        },
+        "total": 78,
+        "claimedGates": [
+         "Placeholder/TODO copy in output"
+        ]
+       },
+       {
+        "model": "gemini_3_1_pro",
+        "scores": {
+         "Concept": 5,
+         "Originality": 4,
+         "Typography": 4,
+         "Motion": 4,
+         "Craft": 2,
+         "Access & performance": 4
+        },
+        "total": 78,
+        "claimedGates": [
+         "Lorem ipsum, placeholder components or TODOs in the output"
+        ]
+       }
+      ],
+      "raw": 78,
+      "gated": 78,
+      "gates": [],
+      "gate": {
+       "contrast": 0,
+       "overflow": 0,
+       "words": 0,
+       "motion": 0,
+       "names": 0,
+       "numbers": 0
+      },
+      "stamp": "motomation · archetype: atlas · mutation: tempo-shift (the ground moves at film speed, the type stays still) · signature: two-stage-ripple · tier: 4 · critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp37] R5[cuts:2,anim:2] M5[t4:pins1/2,webgl1/1,js49/250KB,rm0] V5[entranc"
+     },
+     "delta": 78,
+     "verdict": "skill"
+    }
+   ],
+   "wins": 2,
+   "losses": 1,
+   "ties": 0,
+   "notScored": 0,
+   "outcome": "mixed"
+  }
+ }
+}

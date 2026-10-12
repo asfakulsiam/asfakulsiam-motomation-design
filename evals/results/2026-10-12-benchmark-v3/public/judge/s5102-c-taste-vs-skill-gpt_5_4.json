@@ -1,0 +1,68 @@
+{
+ "model": "gpt_5_4",
+ "seed": 5102,
+ "pair": [
+  "c-taste",
+  "skill"
+ ],
+ "order": {
+  "A": "c-taste",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 2,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 2,
+    "Craft": 2,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Invented statistics / wrong figure used (captures show 117 and 133 instead of the brief's only allowed figure, 140)"
+   ],
+   "notes": "The core idea is a calm mangrove illustration with simple calls to action, but it thins out into generic sections and large empty areas rather than carrying one strong concept through the page. Measured access is mostly solid, yet there is one contrast violation, and the inconsistent hectare figures across captures badly damage credibility; from the scroll frames, motion looks mostly like basic reveals rather than story-led progression."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B has a clear editorial field-notes/plate system and sustains it across hero, data, process, donate, and volunteer sections. Typography is the identity, the 140-hectare visualization is memorable and on-brief, and the scroll-strip suggests purposeful progression tied to the content, though stills limit certainty about the full motion behavior."
+  },
+  "better": "B",
+  "why": "B is the stronger and more trustworthy design: it carries a distinctive concept throughout, uses the required facts correctly, and passes the measured accessibility checks cleanly."
+ },
+ "c-taste": {
+  "scores": {
+   "Concept": 2,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 2,
+   "Craft": 2,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Invented statistics / wrong figure used (captures show 117 and 133 instead of the brief's only allowed figure, 140)"
+  ],
+  "notes": "The core idea is a calm mangrove illustration with simple calls to action, but it thins out into generic sections and large empty areas rather than carrying one strong concept through the page. Measured access is mostly solid, yet there is one contrast violation, and the inconsistent hectare figures across captures badly damage credibility; from the scroll frames, motion looks mostly like basic reveals rather than story-led progression."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B has a clear editorial field-notes/plate system and sustains it across hero, data, process, donate, and volunteer sections. Typography is the identity, the 140-hectare visualization is memorable and on-brief, and the scroll-strip suggests purposeful progression tied to the content, though stills limit certainty about the full motion behavior."
+ }
+}

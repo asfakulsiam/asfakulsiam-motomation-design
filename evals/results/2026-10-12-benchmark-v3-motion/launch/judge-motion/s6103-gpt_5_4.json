@@ -1,0 +1,55 @@
+{
+ "model": "gpt_5_4",
+ "seed": 6103,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 5,
+    "Choreography": 5,
+    "Mobile motion": 3,
+    "Reduced-motion fallback": 4,
+    "Motion craft": 3
+   },
+   "notes": "Strongest brief-fit motion idea: the lamp image-sequence appears scrubbed/posed as a product storyboard, with clear chapter beats from hero to One touch to Three lights to Warm/Neutral/Cool to price. Consecutive desktop frames read as a coherent pinned sequence rather than unrelated fades. Pre-order and price stay reachable in the header. Mobile keeps the same basic sequence, but it gets crowded: some frames show oversized/cropped type, stacked panels, and awkward in-between states that make the motion system feel less controlled on 375px. Reduced-motion looks like a static fallback of the same chapter, which is acceptable and readable, though it still preserves the long pinned structure instead of simplifying much. Craft is mixed: no blank frames, but several mobile states look half-transitioned or cramped by the motion layout. Stills cannot show easing/timing, only the scroll-state progression."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 3,
+    "Choreography": 4,
+    "Mobile motion": 4,
+    "Reduced-motion fallback": 5,
+    "Motion craft": 5
+   },
+   "notes": "Clear motion idea tied to the product: the ring lamp powers on, changes angle/orientation, and shifts through light temperatures. The frame-to-frame progression is coherent and polished, with a long pinned hero sequence that transforms the lamp cleanly and ends in pricing/pre-order. Mobile preserves that transformation surprisingly well and stays legible. Reduced-motion is the best of the two: it collapses into a straightforward readable layout with the content present without depending on motion. Main weakness is concept/storyboard depth versus the brief: across the full-motion strips, the sequence spends many frames repeating the same hero message while the lamp changes state, so it feels more like a beautiful ambient transform than a richer motomation chapter with explicit product-story reveals. Craft is very clean: no blank captures, broken overlaps, or ugly half-reveals. Stills cannot show easing/timing, only the scroll-state progression."
+  },
+  "winner": "A"
+ },
+ "served": "{\"requested\": \"gpt_5_4\", \"served\": \"gpt_5_4\", \"in\": 6218, \"cached\": 0, \"out\": 435, \"reasoning\": 3105, \"secs\": 59.3}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 3,
+   "Choreography": 4,
+   "Mobile motion": 4,
+   "Reduced-motion fallback": 5,
+   "Motion craft": 5
+  },
+  "notes": "Clear motion idea tied to the product: the ring lamp powers on, changes angle/orientation, and shifts through light temperatures. The frame-to-frame progression is coherent and polished, with a long pinned hero sequence that transforms the lamp cleanly and ends in pricing/pre-order. Mobile preserves that transformation surprisingly well and stays legible. Reduced-motion is the best of the two: it collapses into a straightforward readable layout with the content present without depending on motion. Main weakness is concept/storyboard depth versus the brief: across the full-motion strips, the sequence spends many frames repeating the same hero message while the lamp changes state, so it feels more like a beautiful ambient transform than a richer motomation chapter with explicit product-story reveals. Craft is very clean: no blank captures, broken overlaps, or ugly half-reveals. Stills cannot show easing/timing, only the scroll-state progression.",
+  "total": 84.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 5,
+   "Choreography": 5,
+   "Mobile motion": 3,
+   "Reduced-motion fallback": 4,
+   "Motion craft": 3
+  },
+  "notes": "Strongest brief-fit motion idea: the lamp image-sequence appears scrubbed/posed as a product storyboard, with clear chapter beats from hero to One touch to Three lights to Warm/Neutral/Cool to price. Consecutive desktop frames read as a coherent pinned sequence rather than unrelated fades. Pre-order and price stay reachable in the header. Mobile keeps the same basic sequence, but it gets crowded: some frames show oversized/cropped type, stacked panels, and awkward in-between states that make the motion system feel less controlled on 375px. Reduced-motion looks like a static fallback of the same chapter, which is acceptable and readable, though it still preserves the long pinned structure instead of simplifying much. Craft is mixed: no blank frames, but several mobile states look half-transitioned or cramped by the motion layout. Stills cannot show easing/timing, only the scroll-state progression.",
+  "total": 80.0
+ },
+ "winner": "skill"
+}

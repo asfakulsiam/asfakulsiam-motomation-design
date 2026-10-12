@@ -1,0 +1,12 @@
+{
+ "slug": "hotel",
+ "seed": 4103,
+ "cond": "c-uiux",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/hotel/c-uiux-s4103",
+ "exit": 0,
+ "seconds": 95,
+ "turns": 6,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

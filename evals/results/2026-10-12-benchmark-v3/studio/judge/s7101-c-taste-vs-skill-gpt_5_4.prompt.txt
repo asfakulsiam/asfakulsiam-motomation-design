@@ -1,0 +1,93 @@
+You are a strict, blind design reviewer. Two websites (Site A and Site B) were built for the same brief by different processes. You don't know how either was made; judge only what you see and the measured checks.
+
+BRIEF:
+# Brief 07: Architecture studio (benchmark: studio portfolio)
+Website for **Ittaghor Studio**, a three-partner architecture practice in Dhaka known for brick and courtyard houses. Partners: Nusrat Jahan, Tanvir Ahmed, Farhan Kabir. Founded 2011.
+
+## Content
+- Positioning: "Houses built around light, brick and an open courtyard."
+- Five featured projects (name · place · year · one line):
+  1. Courtyard House · Bashundhara, Dhaka · 2019 · A family home wrapped around a single neem tree.
+  2. Jali House · Rajshahi · 2021 · Perforated brick screens that cool the rooms by shading them.
+  3. River Room · Sirajganj · 2022 · A weekend house raised above the monsoon line.
+  4. Brick Library · Khulna · 2023 · A school library lit only from above.
+  5. Twin Courts · Chattogram · 2024 · Two households, two courtyards, one shared wall.
+- Each project shows a simple plan (draw it in SVG) and an "image" (CSS or SVG).
+- Studio, process (site visit → sketch → brick sample → build) and contact: studio@ittaghor.studio.
+
+**Expect:** Quiet mood, large imagery, plans viewable, a signature tied to light, brick or courtyards.
+
+## Benchmark conditions (identical for baseline and skill runs)
+- Deliver **one self-contained `index.html`** (inline CSS and JS). Allowed external resources: Google Fonts or Fontshare CSS, and GSAP 3 + ScrollTrigger from a CDN. No other libraries, no image URLs: draw imagery with CSS, SVG or canvas.
+- Use only the facts in this brief. Don't invent clients, logos, testimonials or statistics; leave them out.
+- It must work at 375px and 1440px wide, by keyboard, and with `prefers-reduced-motion: reduce`.
+
+
+RUBRIC (score each axis 1-5 using its anchors; use the whole scale):
+# Rubric
+
+Score each axis 1–5. The weighted total is out of 100.
+
+| Axis | Weight | 1 | 3 | 5 |
+|---|---|---|---|---|
+| **Concept** | 20 | No idea, just sections | An idea exists but isn't carried through | One clear idea, felt in every section |
+| **Originality** | 20 | Indistinguishable from a template | Some fresh choices | Structure, type and signature are unexpected yet right |
+| **Typography** | 15 | Default fonts and timid scale | Good choices, uneven craft | Type is the identity; details are perfect |
+| **Motion** | 15 | Decorative or broken | Purposeful but generic | Motion tells the story; tier matches the concept |
+| **Craft** | 15 | Visual bugs, misalignment | Mostly clean | Pixel-tight on desktop and mobile |
+| **Access & performance** | 15 | Fails reduced motion, keyboard or contrast | Passes basics | Designed fallbacks; fast; nothing hidden from assistive tech |
+
+Weighted total = Σ(score × weight) / 5.
+
+**Evidence for Motion.** Stills can't show motion, so when a scroll-frame strip is available (8 viewport frames at even scroll steps, from the benchmark's `measure` step or `gate.mjs --report`), score Motion from it first: what changes between frames, whether the sequence progresses with scroll, and whether that serves the concept. Use the reduced-motion capture for the fallback. Easing and timing can't be judged from frames, so don't reward or punish them without a recording. The axes, anchors and weights above are unchanged.
+
+## Hard gates (any failure = 0 for that run)
+- Lorem ipsum, placeholder components or `TODO`s in the output
+- Any animation without a reduced-motion path
+- Body text contrast under 4.5:1
+- Keyboard users can't reach the primary action
+- Invented statistics, logos or testimonials
+
+
+IMAGES: Image 1: Site A, 1440px, first screen; Image 2: Site A, 1440px, page (up to 6 screens); Image 3: Site A, 375px phone, page; Image 4: Site A, 1440px with prefers-reduced-motion; Image 5: Site A, 1440px scroll-frame strip: 8 viewport frames at even scroll steps, read left to right then the second row; each frame is labelled with its scroll position; Image 6: Site B, 1440px, first screen; Image 7: Site B, 1440px, page (up to 6 screens); Image 8: Site B, 375px phone, page; Image 9: Site B, 1440px with prefers-reduced-motion; Image 10: Site B, 1440px scroll-frame strip: 8 viewport frames at even scroll steps, read left to right then the second row; each frame is labelled with its scroll position. Score Motion mainly from the scroll-frame strips: compare consecutive frames for what moves (pinning, scrubbing, reveals, a sequence that progresses) and whether it serves the brief, then use the reduced-motion screenshot and the checks for the fallback. Stills can't show easing or timing; say when you're unsure.
+
+MEASURED CHECKS (automated, Playwright + axe-core):
+{
+ "A": {
+  "axe_wcag_violations_1440": [],
+  "contrast_failing_nodes": 0,
+  "keyboard_primary_action": {
+   "step": 6,
+   "text": "Contact",
+   "href": "#contact",
+   "ring": true
+  },
+  "focus_ring_visible_steps": "37/40",
+  "text_hidden_under_reduced_motion": 0,
+  "horizontal_overflow_px_375": 0,
+  "js_errors": [],
+  "has_reduced_motion_query": true,
+  "placeholder_strings": 0,
+  "html_bytes": 29189
+ },
+ "B": {
+  "axe_wcag_violations_1440": [],
+  "contrast_failing_nodes": 0,
+  "keyboard_primary_action": {
+   "step": 6,
+   "text": "Write to us",
+   "href": "mailto:studio@ittaghor.studio",
+   "ring": true
+  },
+  "focus_ring_visible_steps": "38/40",
+  "text_hidden_under_reduced_motion": 0,
+  "horizontal_overflow_px_375": 0,
+  "js_errors": [],
+  "has_reduced_motion_query": true,
+  "placeholder_strings": 0,
+  "html_bytes": 26821
+ }
+}
+
+Return ONLY JSON:
+{"A": {"scores": {"Concept": n, "Originality": n, "Typography": n, "Motion": n, "Craft": n, "Access & performance": n}, "hard_gate_failures": ["..."], "notes": "2-3 sentences"}, "B": {...same...}, "better": "A|B|tie", "why": "one sentence"}

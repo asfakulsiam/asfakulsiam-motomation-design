@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 4101,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A presents a clean, quiet layout that matches the brief's desired mood. The line-drawn arch motif provides a subtle signature, and the layout is executed with solid craft across breakpoints. Motion is purposeful but relies on standard scroll-triggered fades and simple line drawing."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 2,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B introduces a strong visual signature with architectural line drawings that pin and overlap elegantly during scroll. However, it suffers from severe layout bugs in the 'Rooms' section, where text columns collide and become illegible over the background elements."
+  },
+  "better": "A",
+  "why": "While Site B has a slightly more ambitious illustrative concept, severe text overlapping issues in its room pricing section ruin the reading experience, making Site A's dependably clean execution the better outcome."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 2,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B introduces a strong visual signature with architectural line drawings that pin and overlap elegantly during scroll. However, it suffers from severe layout bugs in the 'Rooms' section, where text columns collide and become illegible over the background elements."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A presents a clean, quiet layout that matches the brief's desired mood. The line-drawn arch motif provides a subtle signature, and the layout is executed with solid craft across breakpoints. Motion is purposeful but relies on standard scroll-triggered fades and simple line drawing."
+ }
+}

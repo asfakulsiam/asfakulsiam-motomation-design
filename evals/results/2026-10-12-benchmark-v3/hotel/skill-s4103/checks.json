@@ -1,0 +1,71 @@
+{
+ "375": {
+  "pageHeight": 4340,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 6128,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 8,
+    "text": "Check availability",
+    "href": "https://book.example-hotel.com",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 18320,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": "motomation · archetype: atlas · mutation: remove the expected (no hero image, no grid; one line is the layout) · signature: the-line (a transit line that is drawn as you scroll, one station per chapter) · tier: 2 · critique: C?[no-record] H5[375:0] S5[last5:no-log] R?[no-record] M5[t2:pins0/2,webgl0"
+  },
+  "strip": {
+   "frames": [
+    0,
+    747,
+    1494,
+    2241,
+    2987,
+    3734,
+    4481,
+    5228
+   ],
+   "maxScroll": 5228
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 6128,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4340,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 9f2afde86f",
+  "critique": "C?[no-record] H5[375:0] S5[last5:no-log] R?[no-record] M5[t2:pins0/2,webgl0/1,js47/80KB,rm0] V1[entrance-repeats:4]",
+  "contrast": [],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

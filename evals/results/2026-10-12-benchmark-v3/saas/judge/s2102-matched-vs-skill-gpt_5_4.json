@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 2102,
+ "pair": [
+  "matched",
+  "skill"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "The page is clear, credible, and shows the product working with a strong hero and solid terminal/result mockups, but the idea is mostly expressed as a polished SaaS layout rather than a more distinctive system. The scroll-strip suggests mostly standard reveal behavior rather than motion that advances the story, and the 375px capture has obvious horizontal overflow/cropping that materially hurts mobile craft."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "This has a sharper point of view: the dark console-like system, the highlighted log line, and the restrained amber accents all reinforce the core promise of finding the one line that matters. The scroll-strip shows a more purposeful progression than A, and the measured checks are clean; the only visible reservation is that one stitched desktop view makes the product section look sparse/fragile before its content appears elsewhere."
+  },
+  "better": "B",
+  "why": "B carries a clearer concept more consistently, feels more original for the audience, and avoids A’s mobile overflow while using motion more meaningfully."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "The page is clear, credible, and shows the product working with a strong hero and solid terminal/result mockups, but the idea is mostly expressed as a polished SaaS layout rather than a more distinctive system. The scroll-strip suggests mostly standard reveal behavior rather than motion that advances the story, and the 375px capture has obvious horizontal overflow/cropping that materially hurts mobile craft."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "This has a sharper point of view: the dark console-like system, the highlighted log line, and the restrained amber accents all reinforce the core promise of finding the one line that matters. The scroll-strip shows a more purposeful progression than A, and the measured checks are clean; the only visible reservation is that one stitched desktop view makes the product section look sparse/fragile before its content appears elsewhere."
+ }
+}

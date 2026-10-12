@@ -1,0 +1,55 @@
+{
+ "model": "gpt_5_4",
+ "seed": 6102,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 5,
+    "Choreography": 5,
+    "Mobile motion": 5,
+    "Reduced-motion fallback": 4,
+    "Motion craft": 4
+   },
+   "notes": "Clear motion idea tied to the brief: the lamp image sequence rotates from thin profile to angled view to full ring, then the story moves through touch control and the three temperatures before pricing. The consecutive frames read like a scrubbed storyboard, which is exactly what the Motomation chapter asked for. Mobile keeps the same arc and remains understandable; the pre-order CTA stays reachable. Reduced motion looks meaningfully simplified and much shorter, with content readable in static stacked form rather than relying on the sequence. Minor craft deductions: a few reduced-motion captures show the lamp cropped near the top edge, and some full-motion frames are very dark, though not broken. Stills cannot confirm easing/timing."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 3,
+    "Choreography": 3,
+    "Mobile motion": 3,
+    "Reduced-motion fallback": 1,
+    "Motion craft": 3
+   },
+   "notes": "There is a product-led motion presentation, but it reads more like a generic pinned cinematic hero with text panels than a distinct image-sequence storyboard built from the lamp frames. Consecutive frames do progress, but much of the change is text cards appearing around a mostly persistent lamp pose, so the choreography feels repetitive rather than clearly scrubbed through key product states. Mobile still works, but the lamp is often heavily cropped and some section transitions feel cramped. Biggest issue: the reduced-motion strip appears essentially the same structure and length as full motion, so it does not look like a true static/softened fallback for motion-sensitive users. Craft is acceptable overall, but some frames catch panels half-revealed or clipped. Stills cannot confirm easing/timing."
+  },
+  "winner": "A"
+ },
+ "served": "{\"requested\": \"gpt_5_4\", \"served\": \"gpt_5_4\", \"in\": 6218, \"cached\": 0, \"out\": 367, \"reasoning\": 1674, \"secs\": 33.4}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 5,
+   "Choreography": 5,
+   "Mobile motion": 5,
+   "Reduced-motion fallback": 4,
+   "Motion craft": 4
+  },
+  "notes": "Clear motion idea tied to the brief: the lamp image sequence rotates from thin profile to angled view to full ring, then the story moves through touch control and the three temperatures before pricing. The consecutive frames read like a scrubbed storyboard, which is exactly what the Motomation chapter asked for. Mobile keeps the same arc and remains understandable; the pre-order CTA stays reachable. Reduced motion looks meaningfully simplified and much shorter, with content readable in static stacked form rather than relying on the sequence. Minor craft deductions: a few reduced-motion captures show the lamp cropped near the top edge, and some full-motion frames are very dark, though not broken. Stills cannot confirm easing/timing.",
+  "total": 92.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 3,
+   "Choreography": 3,
+   "Mobile motion": 3,
+   "Reduced-motion fallback": 1,
+   "Motion craft": 3
+  },
+  "notes": "There is a product-led motion presentation, but it reads more like a generic pinned cinematic hero with text panels than a distinct image-sequence storyboard built from the lamp frames. Consecutive frames do progress, but much of the change is text cards appearing around a mostly persistent lamp pose, so the choreography feels repetitive rather than clearly scrubbed through key product states. Mobile still works, but the lamp is often heavily cropped and some section transitions feel cramped. Biggest issue: the reduced-motion strip appears essentially the same structure and length as full motion, so it does not look like a true static/softened fallback for motion-sensitive users. Craft is acceptable overall, but some frames catch panels half-revealed or clipped. Stills cannot confirm easing/timing.",
+  "total": 52.0
+ },
+ "winner": "baseline"
+}

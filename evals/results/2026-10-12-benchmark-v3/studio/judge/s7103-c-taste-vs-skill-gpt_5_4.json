@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 7103,
+ "pair": [
+  "c-taste",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-taste"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 2,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a clear architectural idea from the first screen onward: brick-toned field, courtyard framing, large quiet type, and project cards that pair plans with drawn elevations consistently. Typography and layout craft are excellent on both desktop and mobile, and the measured checks are clean. From the scroll frames, though, motion appears minimal or mostly standard section-to-section movement rather than a story-bearing sequence, so I can't score that highly."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 4,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B is competent and accessible, with strong measured results and a clearer motion sequence in the scroll strip: projects seem to progress one by one, and the reduced-motion desktop fallback looks properly laid out. But the overall design feels more familiar and product-site-like, with less of the quiet architectural signature the brief asks for. Craft is decent rather than refined, especially where the scrolling composition creates large empty stretches and looser page rhythm."
+  },
+  "better": "A",
+  "why": "A is the more distinctive and fully resolved response to the brief, with a stronger architectural identity in its typography, mood, imagery and project presentation."
+ },
+ "c-taste": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 4,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B is competent and accessible, with strong measured results and a clearer motion sequence in the scroll strip: projects seem to progress one by one, and the reduced-motion desktop fallback looks properly laid out. But the overall design feels more familiar and product-site-like, with less of the quiet architectural signature the brief asks for. Craft is decent rather than refined, especially where the scrolling composition creates large empty stretches and looser page rhythm."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 2,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a clear architectural idea from the first screen onward: brick-toned field, courtyard framing, large quiet type, and project cards that pair plans with drawn elevations consistently. Typography and layout craft are excellent on both desktop and mobile, and the measured checks are clean. From the scroll frames, though, motion appears minimal or mostly standard section-to-section movement rather than a story-bearing sequence, so I can't score that highly."
+ }
+}

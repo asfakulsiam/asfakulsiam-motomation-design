@@ -1,0 +1,93 @@
+{
+ "375": {
+  "pageHeight": 5663,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "aria-prohibited-attr",
+    "impact": "serious",
+    "nodes": 1
+   },
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 1
+   }
+  ],
+  "contrastViolations": 1
+ },
+ "1440": {
+  "pageHeight": 6420,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "aria-prohibited-attr",
+    "impact": "serious",
+    "nodes": 1
+   },
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 1
+   }
+  ],
+  "contrastViolations": 1,
+  "keyboard": {
+   "primaryReached": {
+    "step": 1,
+    "text": "Skip to tickets",
+    "href": "#tickets",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "34/40"
+  },
+  "source": {
+   "bytes": 10113,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    789,
+    1577,
+    2366,
+    3154,
+    3943,
+    4731,
+    5520
+   ],
+   "maxScroll": 5520
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3559,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 2799,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 1
+  },
+  "stamp": "gate: c0 o0 w0 rm0 a0 n1 · gate/2 · e4617684e3",
+  "critique": "C?[no-record] H4[375:1] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0]",
+  "contrast": [],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

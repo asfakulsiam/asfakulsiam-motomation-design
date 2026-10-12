@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 4102,
+ "pair": [
+  "baseline",
+  "matched"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a clean, quiet layout that matches the boutique hotel brief nicely. The SVG illustrations are well-crafted and integrated seamlessly into the design without causing visual clutter. Typography is elegant and structurally sound across all breakpoints."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B features richer, more varied SVG illustrations that give it a distinct identity, but it struggles with execution. The typography in the hero section awkwardly overlaps the background graphic, and there is a noticeable JavaScript error regarding an SVG attribute."
+  },
+  "better": "A",
+  "why": "Site A offers a much cleaner execution with flawless visual alignment and zero JavaScript errors, whereas Site B suffers from overlapping elements and technical bugs."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B features richer, more varied SVG illustrations that give it a distinct identity, but it struggles with execution. The typography in the hero section awkwardly overlaps the background graphic, and there is a noticeable JavaScript error regarding an SVG attribute."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a clean, quiet layout that matches the boutique hotel brief nicely. The SVG illustrations are well-crafted and integrated seamlessly into the design without causing visual clutter. Typography is elegant and structurally sound across all breakpoints."
+ }
+}

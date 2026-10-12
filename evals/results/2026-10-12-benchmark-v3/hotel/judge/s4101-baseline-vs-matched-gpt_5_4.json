@@ -1,0 +1,72 @@
+{
+ "model": "gpt_5_4",
+ "seed": 4101,
+ "pair": [
+  "baseline",
+  "matched"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "matched"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "The dusk skyline and house illustration give Site A a coherent mood, and the serif type with the gold 1893 has a fitting boutique-hotel tone. But the concept thins out lower on the page, and both desktop and mobile captures show large empty areas where content appears to depend on motion, which hurts craft. The scroll strip suggests purposeful reveals, not broken animation, yet it feels more sectional than story-led."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 3,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "Site B has the stronger idea: doors, thresholds and arrival shape the hero, copy, illustrations and section titles, so the hotel's signature is memorable and brief-appropriate. The scroll-strip sequence reads as a narrative from portal to rooftop to house interior, which serves the concept better than generic reveals, though the pinned experience creates very large blank spans in the full-page captures and keeps craft from top marks. Typography is distinctive and well-scaled overall, with only some small-text/contrast weaknesses."
+  },
+  "better": "B",
+  "why": "B is the clearer and more original interpretation of the brief, with motion and visual language that reinforce one strong arrival-through-the-door concept."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "The dusk skyline and house illustration give Site A a coherent mood, and the serif type with the gold 1893 has a fitting boutique-hotel tone. But the concept thins out lower on the page, and both desktop and mobile captures show large empty areas where content appears to depend on motion, which hurts craft. The scroll strip suggests purposeful reveals, not broken animation, yet it feels more sectional than story-led."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 3,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "Site B has the stronger idea: doors, thresholds and arrival shape the hero, copy, illustrations and section titles, so the hotel's signature is memorable and brief-appropriate. The scroll-strip sequence reads as a narrative from portal to rooftop to house interior, which serves the concept better than generic reveals, though the pinned experience creates very large blank spans in the full-page captures and keeps craft from top marks. Typography is distinctive and well-scaled overall, with only some small-text/contrast weaknesses."
+ }
+}

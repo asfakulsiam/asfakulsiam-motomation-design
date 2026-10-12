@@ -1,0 +1,68 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 3103,
+ "pair": [
+  "c-uiux",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-uiux"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 3,
+    "Motion": 5,
+    "Craft": 3,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "Site A has a fantastic motion concept: as the user scrolls through the 'One firing' section, the cup stays pinned and transitions into a glowing state, brilliantly telling the story of the kiln. Unfortunately, it suffers from font-loading JS errors and fails the contrast hard gate in its dark section."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 3,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B delivers a highly polished, editorial aesthetic with excellent typography and layout structure. It went above and beyond by illustrating all the products for the shelf grid, and its technical execution is flawless, even if its scroll motion is fairly generic compared to A."
+  },
+  "better": "B",
+  "why": "Site B provides a flawlessly crafted, accessible experience with beautiful typography and extra illustrations, avoiding Site A's fatal contrast failure."
+ },
+ "c-uiux": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 3,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B delivers a highly polished, editorial aesthetic with excellent typography and layout structure. It went above and beyond by illustrating all the products for the shelf grid, and its technical execution is flawless, even if its scroll motion is fairly generic compared to A."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 3,
+   "Motion": 5,
+   "Craft": 3,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "Site A has a fantastic motion concept: as the user scrolls through the 'One firing' section, the cup stays pinned and transitions into a glowing state, brilliantly telling the story of the kiln. Unfortunately, it suffers from font-loading JS errors and fails the contrast hard gate in its dark section."
+ }
+}

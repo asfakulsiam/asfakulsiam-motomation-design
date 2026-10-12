@@ -1,0 +1,55 @@
+{
+ "model": "gpt_5_4",
+ "seed": 1102,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 4,
+    "Choreography": 4,
+    "Mobile motion": 3,
+    "Reduced-motion fallback": 3,
+    "Motion craft": 4
+   },
+   "notes": "Strong type-led motion idea that fits the brief: the hero breaks apart, the 'Studios, hire me for title sequences' statement appears like a scrubbed title card, and projects read as big chapter/title beats rather than thumbnail cards. Desktop full-motion frames show a coherent scroll progression from intro to manifesto to project sequence to contact. Mobile keeps the same structure, but some states are very cropped or mid-transition, especially around the first project, so readability depends a bit more on motion there. Reduced-motion is better than full removal-by-hiding: most content is present and readable, but a few frames still look like transitional overlaps/partial states rather than fully settled layouts. Craft is generally solid with no blanks, though some oversized/cropped type moments ride close to half-revealed. Stills cannot show easing/timing, only state changes."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 5,
+    "Choreography": 3,
+    "Mobile motion": 4,
+    "Reduced-motion fallback": 1,
+    "Motion craft": 3
+   },
+   "notes": "The motion concept is more distinctive and more directly tied to film/title-sequence language: serif title cards, frame lines, circular reel/leader-like forms, and scratch-like vertical marks create a clear cinematic signature. That said, from the strips the choreography reads more like section-to-section transitions than a strongly scrubbed or pinned sequence; the idea is good, but the progression between consecutive frames is less legible than Site A's. Mobile holds up well: projects and contact remain readable and the sequence still makes sense. The major failure is reduced motion: the reduced strip appears to preserve transitional clipping/half-revealed states, with chopped type and masked fragments still visible, so content does not feel safely readable without motion. Craft in full motion looks mostly polished, but the recurring clipped/partially visible type states weaken confidence. Stills cannot show easing/timing, only state changes."
+  },
+  "winner": "A"
+ },
+ "served": "{\"requested\": \"gpt_5_4\", \"served\": \"gpt_5_4\", \"in\": 6260, \"cached\": 0, \"out\": 426, \"reasoning\": 1887, \"secs\": 35.9}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 4,
+   "Choreography": 4,
+   "Mobile motion": 3,
+   "Reduced-motion fallback": 3,
+   "Motion craft": 4
+  },
+  "notes": "Strong type-led motion idea that fits the brief: the hero breaks apart, the 'Studios, hire me for title sequences' statement appears like a scrubbed title card, and projects read as big chapter/title beats rather than thumbnail cards. Desktop full-motion frames show a coherent scroll progression from intro to manifesto to project sequence to contact. Mobile keeps the same structure, but some states are very cropped or mid-transition, especially around the first project, so readability depends a bit more on motion there. Reduced-motion is better than full removal-by-hiding: most content is present and readable, but a few frames still look like transitional overlaps/partial states rather than fully settled layouts. Craft is generally solid with no blanks, though some oversized/cropped type moments ride close to half-revealed. Stills cannot show easing/timing, only state changes.",
+  "total": 72.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 5,
+   "Choreography": 3,
+   "Mobile motion": 4,
+   "Reduced-motion fallback": 1,
+   "Motion craft": 3
+  },
+  "notes": "The motion concept is more distinctive and more directly tied to film/title-sequence language: serif title cards, frame lines, circular reel/leader-like forms, and scratch-like vertical marks create a clear cinematic signature. That said, from the strips the choreography reads more like section-to-section transitions than a strongly scrubbed or pinned sequence; the idea is good, but the progression between consecutive frames is less legible than Site A's. Mobile holds up well: projects and contact remain readable and the sequence still makes sense. The major failure is reduced motion: the reduced strip appears to preserve transitional clipping/half-revealed states, with chopped type and masked fragments still visible, so content does not feel safely readable without motion. Craft in full motion looks mostly polished, but the recurring clipped/partially visible type states weaken confidence. Stills cannot show easing/timing, only state changes.",
+  "total": 64.0
+ },
+ "winner": "baseline"
+}

@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 1101,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a single, legible idea: the portfolio behaves like a reel of title cards, and that concept carries from hero to project chapters to contact. The typography does most of the heavy lifting and fits the brief well, with the amber glow, timecode and giant condensed names giving it a film-title signature without relying on thumbnails. From the scroll strip the motion appears to be chaptered reveals and pinned progression rather than especially novel animation, so it serves the concept strongly but I can't fully verify Tier-5 sophistication from frames alone."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 3,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "B has a refined editorial idea with a cinematic serif/italic pairing, and the scroll strip shows a clear narrative progression through disciplines toward title sequences and contact. However, the project section leans on thumbnail-like graphic blocks, which cuts against the brief, and the long empty stretches on desktop and especially mobile weaken the sense of control. The motion reads purposeful in the strip, but as stills I can only credit the sequencing and pin/reveal structure, not timing or finesse."
+  },
+  "better": "A",
+  "why": "A answers the brief more directly and cohesively, with stronger type-led identity, a clearer title-sequence signature, and no drift into thumbnail-based portfolio patterns."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 3,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "B has a refined editorial idea with a cinematic serif/italic pairing, and the scroll strip shows a clear narrative progression through disciplines toward title sequences and contact. However, the project section leans on thumbnail-like graphic blocks, which cuts against the brief, and the long empty stretches on desktop and especially mobile weaken the sense of control. The motion reads purposeful in the strip, but as stills I can only credit the sequencing and pin/reveal structure, not timing or finesse."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a single, legible idea: the portfolio behaves like a reel of title cards, and that concept carries from hero to project chapters to contact. The typography does most of the heavy lifting and fits the brief well, with the amber glow, timecode and giant condensed names giving it a film-title signature without relying on thumbnails. From the scroll strip the motion appears to be chaptered reveals and pinned progression rather than especially novel animation, so it serves the concept strongly but I can't fully verify Tier-5 sophistication from frames alone."
+ }
+}

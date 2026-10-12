@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 7102,
+ "pair": [
+  "c-uiux",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-uiux"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a strong, coherent idea: brick surfaces, light cuts and courtyard plans shape the whole site, and the oversized serif typography gives it a clear studio identity. The scroll-strip suggests project-specific reveals that support the brief, though from frames alone I can't fully verify how rich the transitions are. Craft is very high on desktop and mobile, with only minor reservations about some very small supporting text and the hero's extreme scale."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 2,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "B starts with a solid hero and a clear courtyard/diagram motif, but the idea weakens as the page continues and feels closer to a polished template. The scroll-strip mostly reads as straightforward section reveals, and the full-page/mobile captures show large blank areas or hidden content states, which hurts both motion confidence and craft. Typography is good, but the overall experience feels less resolved and less distinctive than A."
+  },
+  "better": "A",
+  "why": "A is more conceptually unified, more distinctive typographically, and its imagery, plans and motion appear to serve the architecture brief far more convincingly."
+ },
+ "c-uiux": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 2,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "B starts with a solid hero and a clear courtyard/diagram motif, but the idea weakens as the page continues and feels closer to a polished template. The scroll-strip mostly reads as straightforward section reveals, and the full-page/mobile captures show large blank areas or hidden content states, which hurts both motion confidence and craft. Typography is good, but the overall experience feels less resolved and less distinctive than A."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a strong, coherent idea: brick surfaces, light cuts and courtyard plans shape the whole site, and the oversized serif typography gives it a clear studio identity. The scroll-strip suggests project-specific reveals that support the brief, though from frames alone I can't fully verify how rich the transitions are. Craft is very high on desktop and mobile, with only minor reservations about some very small supporting text and the hero's extreme scale."
+ }
+}

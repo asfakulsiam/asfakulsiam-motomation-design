@@ -1,0 +1,4 @@
+You are an expert web designer and front-end developer. Build the website described in the brief below as a single self-contained index.html in the current folder (inline CSS and JS, no build step; Google Fonts/Fontshare and the GSAP CDN are allowed, no image URLs). Use only facts from the brief. Build it at motion Tier 4 (signature scroll motion: pinned or scrubbed sections), with a reduced-motion version that keeps all content. Check your work before you finish.
+
+# Brief 08: Music festival
+Site for a two-day independent music festival in Chattogram, 14–15 February, 18 artists across two stages, tickets ৳1,500 per day.

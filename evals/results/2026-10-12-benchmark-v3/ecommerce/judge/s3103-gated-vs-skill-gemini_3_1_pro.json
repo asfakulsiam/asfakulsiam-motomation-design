@@ -1,0 +1,68 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 3103,
+ "pair": [
+  "gated",
+  "skill"
+ ],
+ "order": {
+  "A": "gated",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a highly polished, clean e-commerce experience that feels appropriate for a modern ceramics studio. The horizontal scroll for the product shelf adds a nice touch of interaction, though it's a bit generic. Accessibility and performance are flawless with zero measured violations."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "Site B leans heavily into an editorial aesthetic that suits the brief beautifully, particularly with its list-based shop layout and intricate CSS/SVG cup illustrations. The scroll-triggered animation in the firing story is exceptionally well thought out, visually demonstrating the clay transforming into a glazed piece. Unfortunately, it fails the contrast hard gate, heavily impacting its usability."
+  },
+  "better": "A",
+  "why": "While Site B has a brilliant, narrative-driven scroll animation, Site A wins by delivering a complete, highly accessible, and technically sound experience without triggering any hard gate failures."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a highly polished, clean e-commerce experience that feels appropriate for a modern ceramics studio. The horizontal scroll for the product shelf adds a nice touch of interaction, though it's a bit generic. Accessibility and performance are flawless with zero measured violations."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "Site B leans heavily into an editorial aesthetic that suits the brief beautifully, particularly with its list-based shop layout and intricate CSS/SVG cup illustrations. The scroll-triggered animation in the firing story is exceptionally well thought out, visually demonstrating the clay transforming into a glazed piece. Unfortunately, it fails the contrast hard gate, heavily impacting its usability."
+ }
+}

@@ -1,0 +1,55 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 6101,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 5,
+    "Choreography": 4,
+    "Mobile motion": 2,
+    "Reduced-motion fallback": 5,
+    "Motion craft": 3
+   },
+   "notes": "Concept perfectly executes the brief's request for an image-sequence scrub, showing the lamp turning on and cycling through temperatures while pinned. The reduced-motion fallback is excellent, translating the scrubbing storyboard into a clean, readable static stack. However, the mobile full-motion execution is severely flawed, with paragraph text scrolling directly over the primary product visual, ruining legibility and craft."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 3,
+    "Choreography": 3,
+    "Mobile motion": 4,
+    "Reduced-motion fallback": 1,
+    "Motion craft": 2
+   },
+   "notes": "Motion concept uses a spinning 3D render rather than focusing on the product's functional sequence (touch/temperature) as strongly as A. Choreography is okay, and mobile scaling works better than A with less overlap. Unfortunately, the reduced-motion fallback is completely broken, with giant typography ('Warm', 'Neutral', 'Cool') crashing into each other and becoming unreadable, indicating poor motion craft and lack of care for accessibility."
+  },
+  "winner": "A"
+ },
+ "served": "{\"requested\": \"gemini_3_1_pro\", \"served\": \"gemini_3_1_pro\", \"in\": 7167, \"cached\": 0, \"out\": 322, \"reasoning\": 887, \"secs\": 15.2}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 5,
+   "Choreography": 4,
+   "Mobile motion": 2,
+   "Reduced-motion fallback": 5,
+   "Motion craft": 3
+  },
+  "notes": "Concept perfectly executes the brief's request for an image-sequence scrub, showing the lamp turning on and cycling through temperatures while pinned. The reduced-motion fallback is excellent, translating the scrubbing storyboard into a clean, readable static stack. However, the mobile full-motion execution is severely flawed, with paragraph text scrolling directly over the primary product visual, ruining legibility and craft.",
+  "total": 76.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 3,
+   "Choreography": 3,
+   "Mobile motion": 4,
+   "Reduced-motion fallback": 1,
+   "Motion craft": 2
+  },
+  "notes": "Motion concept uses a spinning 3D render rather than focusing on the product's functional sequence (touch/temperature) as strongly as A. Choreography is okay, and mobile scaling works better than A with less overlap. Unfortunately, the reduced-motion fallback is completely broken, with giant typography ('Warm', 'Neutral', 'Cool') crashing into each other and becoming unreadable, indicating poor motion craft and lack of care for accessibility.",
+  "total": 52.0
+ },
+ "winner": "baseline"
+}

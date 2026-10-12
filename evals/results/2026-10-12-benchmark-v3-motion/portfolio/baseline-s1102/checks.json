@@ -1,0 +1,89 @@
+{
+ "375": {
+  "pageHeight": 5636,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 6
+   }
+  ],
+  "contrastViolations": 6
+ },
+ "1440": {
+  "pageHeight": 8374,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 6
+   }
+  ],
+  "contrastViolations": 6,
+  "keyboard": {
+   "primaryReached": {
+    "step": 1,
+    "text": "Skip to contact",
+    "href": "#contact",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "32/40"
+  },
+  "source": {
+   "bytes": 10052,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    1068,
+    2135,
+    3203,
+    4271,
+    5339,
+    6406,
+    7474
+   ],
+   "maxScroll": 7474
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 4792,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4314,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 0,
+   "words": 1,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c0 o0 w1 rm0 a0 n0 · gate/2 · 3ce30893d3",
+  "critique": "C?[no-record] H4[375:1] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V4[entrance-repeats:1]",
+  "contrast": [],
+  "overflow": [],
+  "words": [
+   {
+    "el": "h3.display",
+    "text": "Monsoon Idents",
+    "problem": "leaves the viewport by 223px"
+   }
+  ],
+  "motion": [],
+  "names": []
+ }
+}

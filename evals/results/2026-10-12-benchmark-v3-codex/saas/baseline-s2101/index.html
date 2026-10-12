@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tracewell — From 4 million log lines to the one that matters.</title>
+  <meta name="description" content="Tracewell helps on-call backend engineers go from 4 million log lines to the one that matters.">
+  <meta name="theme-color" content="#09111a">
+  <meta property="og:title" content="Tracewell">
+  <meta property="og:description" content="From 4 million log lines to the one that matters.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* motomation · archetype: console · mutation: collapse-to-one · signature: trace-rail · tier: 2 */
+    :root {
+      color-scheme: dark;
+      --bg: #09111a;
+      --bg-soft: #0e1824;
+      --panel: rgba(15, 24, 36, 0.88);
+      --panel-strong: #101c29;
+      --line: rgba(139, 173, 209, 0.18);
+      --line-strong: rgba(139, 173, 209, 0.32);
+      --text: #f4f8fb;
+      --muted: #a6b7ca;
+      --accent: #89f7c8;
+      --accent-strong: #5ef0bd;
+      --accent-soft: rgba(137, 247, 200, 0.16);
+      --warm: #cfe2ff;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --max: 1200px;
+      --gutter: clamp(1rem, 2vw, 1.5rem);
+      --section-space: clamp(4.5rem, 8vw, 8rem);
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(94, 240, 189, 0.12), transparent 30%),
+        linear-gradient(180deg, #0a121c 0%, #09111a 52%, #0a1218 100%);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(155, 183, 210, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(155, 183, 210, 0.05) 1px, transparent 1px);
+      background-size: 100% 56px, 56px 100%;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.56), transparent 95%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    code,
+    pre,
+    .mono {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-variant-numeric: tabular-nums;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 10px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      transform: translateY(-200%);
+      background: var(--text);
+      color: var(--bg);
+      padding: 0.8rem 1rem;
+      border-radius: 999px;
+      z-index: 100;
+      transition: transform 180ms var(--ease-out);
+    }
+
+    .skip-link:focus-visible { transform: translateY(0); }
+
+    .shell {
+      width: min(calc(100% - 2rem), var(--max));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: rgba(9, 17, 26, 0.76);
+      border-bottom: 1px solid rgba(137, 247, 200, 0.08);
+    }
+
+    .site-header .shell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-mark {
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent) 0%, rgba(137, 247, 200, 0.2) 100%);
+      box-shadow: 0 0 0 8px rgba(137, 247, 200, 0.08);
+      position: relative;
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid rgba(137, 247, 200, 0.4);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      color: var(--muted);
+      padding: 0.55rem 0.85rem;
+      border-radius: 999px;
+      transition: color 160ms var(--ease-out), background-color 160ms var(--ease-out);
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      color: var(--text);
+      background: rgba(137, 247, 200, 0.08);
+    }
+
+    main { overflow: clip; }
+
+    section {
+      padding: var(--section-space) 0;
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.45rem 0.8rem;
+      border: 1px solid rgba(137, 247, 200, 0.16);
+      background: rgba(137, 247, 200, 0.05);
+      color: var(--warm);
+      border-radius: 999px;
+      font-size: 0.92rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(137, 247, 200, 0.7);
+    }
+
+    .hero {
+      padding-top: clamp(3rem, 7vw, 6rem);
+      min-height: calc(100vh - 4.5rem);
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: center;
+    }
+
+    .hero-copy {
+      max-width: 37rem;
+    }
+
+    h1,
+    h2,
+    h3,
+    p { margin: 0; }
+
+    h1,
+    h2,
+    h3 {
+      text-wrap: balance;
+      letter-spacing: -0.03em;
+      line-height: 0.98;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 5.75rem);
+      max-width: 12ch;
+    }
+
+    .lede {
+      margin-top: 1.35rem;
+      max-width: 33rem;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+    }
+
+    .action-row,
+    .install-row {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .button,
+    .ghost-button,
+    .copy-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      min-height: 3rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      padding: 0.82rem 1.2rem;
+      transition: transform 140ms var(--ease-out), background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), color 160ms var(--ease-out);
+    }
+
+    .button:active,
+    .ghost-button:active,
+    .copy-button:active { transform: scale(0.98); }
+
+    .button {
+      background: var(--accent);
+      color: #04110c;
+      font-weight: 700;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      background: var(--accent-strong);
+    }
+
+    .ghost-button,
+    .copy-button {
+      border-color: rgba(137, 247, 200, 0.14);
+      background: rgba(137, 247, 200, 0.04);
+      color: var(--text);
+    }
+
+    .ghost-button:hover,
+    .ghost-button:focus-visible,
+    .copy-button:hover,
+    .copy-button:focus-visible {
+      border-color: rgba(137, 247, 200, 0.28);
+      background: rgba(137, 247, 200, 0.09);
+    }
+
+    .install-command {
+      flex: 1 1 18rem;
+      min-width: min(100%, 18rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 18px;
+      background: rgba(9, 17, 26, 0.6);
+      border: 1px solid rgba(139, 173, 209, 0.18);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    }
+
+    .install-command code {
+      color: var(--warm);
+      font-size: 0.95rem;
+      overflow-wrap: anywhere;
+    }
+
+    .copy-button {
+      flex: 0 0 auto;
+      min-height: 2.45rem;
+      padding-inline: 0.9rem;
+      font-size: 0.92rem;
+    }
+
+    .hero-stage {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .stage-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 22px minmax(0, 0.92fr);
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .trace-column {
+      position: relative;
+      align-self: stretch;
+      display: flex;
+      justify-content: center;
+    }
+
+    .trace-column::before,
+    .trace-column::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 999px;
+    }
+
+    .trace-column::before {
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(137, 247, 200, 0.12);
+    }
+
+    .trace-column::after {
+      top: 0;
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      box-shadow: 0 0 22px rgba(137, 247, 200, 0.9);
+      transform-origin: top center;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(16, 28, 41, 0.96), rgba(11, 20, 31, 0.92));
+      border: 1px solid rgba(139, 173, 209, 0.16);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: clip;
+      position: relative;
+      min-width: 0;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 12%, transparent 84%, rgba(137, 247, 200, 0.03));
+    }
+
+    .panel-header {
+      padding: 0.95rem 1rem;
+      border-bottom: 1px solid rgba(139, 173, 209, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .panel-title {
+      font-size: 0.94rem;
+      color: var(--warm);
+    }
+
+    .window-dots {
+      display: inline-flex;
+      gap: 0.35rem;
+    }
+
+    .window-dots span {
+      width: 0.62rem;
+      height: 0.62rem;
+      border-radius: 50%;
+      background: rgba(166, 183, 202, 0.45);
+    }
+
+    .terminal-body {
+      padding: 1.1rem 1rem 1rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .terminal-command,
+    .result-block,
+    .detail-card,
+    .price-card,
+    .install-card {
+      border: 1px solid rgba(139, 173, 209, 0.14);
+      background: rgba(8, 15, 23, 0.55);
+      border-radius: 18px;
+    }
+
+    .terminal-command {
+      padding: 0.9rem;
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .prompt {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .prompt .token {
+      color: var(--accent);
+    }
+
+    .terminal-note,
+    .card-copy,
+    .metric-copy,
+    .section-lede,
+    .price-copy,
+    .install-note,
+    .footer-copy {
+      color: var(--muted);
+    }
+
+    .row-cluster {
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .log-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 0.85rem;
+      align-items: center;
+      padding: 0.7rem 0.75rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--muted);
+      border: 1px solid transparent;
+      min-width: 0;
+    }
+
+    .log-row strong {
+      color: var(--warm);
+      font-weight: 500;
+    }
+
+    .log-row span:last-child {
+      justify-self: end;
+      color: rgba(166, 183, 202, 0.8);
+    }
+
+    .log-row.is-focus {
+      background: linear-gradient(90deg, rgba(137, 247, 200, 0.16), rgba(137, 247, 200, 0.03));
+      border-color: rgba(137, 247, 200, 0.28);
+      color: var(--text);
+      box-shadow: inset 3px 0 0 var(--accent);
+    }
+
+    .terminal-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(137, 247, 200, 0.08);
+      border: 1px solid rgba(137, 247, 200, 0.16);
+      color: var(--warm);
+      font-size: 0.86rem;
+      white-space: nowrap;
+    }
+
+    .result-body {
+      padding: 1.1rem 1rem 1rem;
+      display: grid;
+      gap: 0.9rem;
+      min-height: 100%;
+    }
+
+    .result-block {
+      padding: 1rem;
+      position: relative;
+      overflow: clip;
+    }
+
+    .result-block::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(137, 247, 200, 0.6);
+    }
+
+    .result-rank {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.78rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .result-line {
+      color: var(--text);
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      line-height: 1.2;
+    }
+
+    .result-meta {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      margin-top: 0.9rem;
+    }
+
+    .detail-card {
+      padding: 0.95rem 1rem;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .detail-card strong {
+      font-size: 0.95rem;
+      color: var(--warm);
+    }
+
+    .detail-card code {
+      color: var(--accent);
+      font-size: 0.93rem;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 0.9rem;
+      max-width: 42rem;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      max-width: 12ch;
+    }
+
+    .section-lede {
+      font-size: 1.02rem;
+      max-width: 65ch;
+      line-height: 1.65;
+    }
+
+    .flow-grid,
+    .pricing-grid,
+    .install-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .flow-card,
+    .price-card,
+    .install-card {
+      min-width: 0;
+      padding: 1.2rem;
+      display: grid;
+      gap: 0.9rem;
+      position: relative;
+      overflow: clip;
+    }
+
+    .flow-card::before,
+    .price-card::before,
+    .install-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(137, 247, 200, 0.4), transparent);
+    }
+
+    .flow-index,
+    .card-label,
+    .price-name,
+    .install-label {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+    }
+
+    .flow-card h3,
+    .price-card h3,
+    .install-card h3 {
+      font-size: 1.3rem;
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+    }
+
+    .flow-card code,
+    .install-card code {
+      color: var(--warm);
+      font-size: 0.94rem;
+      padding: 0.7rem 0.8rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      overflow-wrap: anywhere;
+    }
+
+    .workflow-rail {
+      position: absolute;
+      inset: 0 auto 0 calc(50% - 1px);
+      width: 2px;
+      background: linear-gradient(180deg, rgba(137, 247, 200, 0), rgba(137, 247, 200, 0.4), rgba(137, 247, 200, 0));
+      opacity: 0.35;
+      pointer-events: none;
+      display: none;
+    }
+
+    .price-tag {
+      display: flex;
+      align-items: baseline;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    .price-tag strong {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1;
+      color: var(--text);
+      letter-spacing: -0.04em;
+    }
+
+    .price-list,
+    .install-list {
+      display: grid;
+      gap: 0.7rem;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      color: var(--muted);
+    }
+
+    .price-list li,
+    .install-list li {
+      display: flex;
+      gap: 0.65rem;
+      align-items: flex-start;
+    }
+
+    .price-list li::before,
+    .install-list li::before {
+      content: "";
+      width: 0.52rem;
+      height: 0.52rem;
+      margin-top: 0.42rem;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: rgba(137, 247, 200, 0.9);
+      box-shadow: 0 0 0 5px rgba(137, 247, 200, 0.08);
+    }
+
+    .install-card .copy-button {
+      justify-self: start;
+    }
+
+    .site-footer {
+      padding: 1.8rem 0 3rem;
+      border-top: 1px solid rgba(139, 173, 209, 0.12);
+    }
+
+    .site-footer .shell {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      font-size: 0.95rem;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (min-width: 900px) {
+      .workflow-rail { display: block; }
+      .flow-card:nth-child(2) { transform: translateY(2.2rem); }
+      .flow-card:nth-child(3) { transform: translateY(4.4rem); }
+      .price-card.is-featured { transform: translateY(-1.1rem); }
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .stage-grid,
+      .flow-grid,
+      .pricing-grid,
+      .install-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .trace-column {
+        min-height: 72px;
+      }
+
+      .trace-column::before {
+        top: 50%;
+        bottom: auto;
+        width: 100%;
+        height: 1px;
+        transform: translate(-50%, -50%);
+      }
+
+      .trace-column::after {
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .site-header .shell,
+      .site-footer .shell {
+        align-items: flex-start;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .nav {
+        gap: 0.35rem;
+      }
+
+      .nav a {
+        padding-inline: 0.6rem;
+      }
+
+      .panel,
+      .terminal-command,
+      .result-block,
+      .detail-card,
+      .flow-card,
+      .price-card,
+      .install-card {
+        border-radius: 20px;
+      }
+
+      .install-command {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .copy-button {
+        width: 100%;
+      }
+
+      .log-row {
+        grid-template-columns: 1fr;
+      }
+
+      .log-row span:last-child {
+        justify-self: start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="shell">
+      <a class="brand" href="#top" aria-label="Tracewell home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Tracewell</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#demo">Demo</a>
+        <a href="#workflow">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#install">Install</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="shell hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">For on-call backend engineers</p>
+          <h1>From 4 million log lines to the one that matters.</h1>
+          <p class="lede">Stream logs from files, Docker or Kubernetes with <code>tracewell ingest</code>, run <code>tracewell why --since 15m</code>, then share the explanation link with the team.</p>
+          <div class="action-row">
+            <a class="button" href="#install">Install Tracewell</a>
+            <a class="ghost-button" href="#demo">See the product work</a>
+          </div>
+          <div class="install-row" aria-label="Install commands">
+            <div class="install-command">
+              <code>brew install tracewell</code>
+              <button class="copy-button" type="button" data-copy="brew install tracewell">Copy</button>
+            </div>
+            <div class="install-command">
+              <code>curl -fsSL https://tracewell.dev/install.sh | sh</code>
+              <button class="copy-button" type="button" data-copy="curl -fsSL https://tracewell.dev/install.sh | sh">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-stage reveal" id="demo" aria-label="Tracewell product demonstration">
+          <div class="stage-grid">
+            <section class="panel terminal-panel" aria-labelledby="terminal-title">
+              <div class="panel-header">
+                <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <div class="panel-title" id="terminal-title">Terminal session</div>
+              </div>
+              <div class="terminal-body">
+                <div class="terminal-command">
+                  <div class="prompt mono"><span class="token">$</span><span>tracewell ingest</span></div>
+                  <p class="terminal-note">Stream logs from files, Docker or Kubernetes.</p>
+                  <div class="row-cluster" aria-hidden="true">
+                    <div class="log-row"><strong>files</strong><span>log lines</span><span>live</span></div>
+                    <div class="log-row"><strong>Docker</strong><span>log lines</span><span>live</span></div>
+                    <div class="log-row"><strong>Kubernetes</strong><span>log lines</span><span>live</span></div>
+                    <div class="log-row"><strong>4,000,000</strong><span>log lines</span><span>ready</span></div>
+                  </div>
+                </div>
+
+                <div class="terminal-command">
+                  <div class="prompt mono"><span class="token">$</span><span>tracewell why --since 15m</span></div>
+                  <p class="terminal-note">Rank lines by how unusual they are compared with the last 7 days.</p>
+                  <div class="row-cluster" aria-label="Ranked incident lines">
+                    <div class="log-row"><strong>rank 4</strong><span>usual line</span><span>last 7 days</span></div>
+                    <div class="log-row"><strong>rank 3</strong><span>usual line</span><span>last 7 days</span></div>
+                    <div class="log-row"><strong>rank 2</strong><span>less usual line</span><span>last 7 days</span></div>
+                    <div class="log-row is-focus"><strong>rank 1</strong><span>the one that matters</span><span>since 15m</span></div>
+                  </div>
+                </div>
+
+                <div class="terminal-footer mono">
+                  <span class="pill">last 7 days baseline</span>
+                  <span class="pill">since 15m window</span>
+                  <span class="pill">shareable explanation</span>
+                </div>
+              </div>
+            </section>
+
+            <div class="trace-column" aria-hidden="true"></div>
+
+            <section class="panel result-panel" aria-labelledby="result-title">
+              <div class="panel-header">
+                <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <div class="panel-title" id="result-title">Result view</div>
+              </div>
+              <div class="result-body">
+                <div class="result-block">
+                  <div class="result-rank mono">Rank 1</div>
+                  <p class="result-line">The unusual line rises to the top, with the same 15 minute window measured against the last 7 days.</p>
+                  <div class="result-meta mono">
+                    <span class="pill">since 15m</span>
+                    <span class="pill">vs last 7 days</span>
+                  </div>
+                </div>
+                <div class="detail-card">
+                  <strong>What happened</strong>
+                  <p class="card-copy">Tracewell reduces the incident from a flood of log lines to one explanation you can send around.</p>
+                </div>
+                <div class="detail-card">
+                  <strong>Share</strong>
+                  <p class="card-copy">Share the explanation link with the team.</p>
+                </div>
+                <div class="detail-card">
+                  <strong>Command path</strong>
+                  <code>tracewell ingest → tracewell why --since 15m → explanation link</code>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <div class="shell">
+        <div class="section-head reveal">
+          <p class="eyebrow">How it works</p>
+          <h2>One incident loop, shown end to end.</h2>
+          <p class="section-lede">The page follows the same path the product does: ingest a live stream, ask why for the last 15 minutes, then hand the explanation over without dragging the team through raw logs.</p>
+        </div>
+
+        <div class="workflow-rail" aria-hidden="true"></div>
+        <div class="flow-grid">
+          <article class="flow-card reveal">
+            <span class="flow-index mono">01</span>
+            <h3>Bring every source into one stream.</h3>
+            <code>tracewell ingest</code>
+            <p class="card-copy">Use files, Docker or Kubernetes as the input.</p>
+          </article>
+          <article class="flow-card reveal">
+            <span class="flow-index mono">02</span>
+            <h3>Ask which line is genuinely unusual.</h3>
+            <code>tracewell why --since 15m</code>
+            <p class="card-copy">Tracewell ranks lines by how unusual they are compared with the last 7 days.</p>
+          </article>
+          <article class="flow-card reveal">
+            <span class="flow-index mono">03</span>
+            <h3>Share the explanation, not the noise.</h3>
+            <code>explanation link</code>
+            <p class="card-copy">Hand the result to the rest of the team with one link.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="shell">
+        <div class="section-head reveal">
+          <p class="eyebrow">Pricing</p>
+          <h2>Two plans, with retention called out plainly.</h2>
+          <p class="section-lede">No made-up savings claims. Just the free plan for solo investigation and the team plan for shared incidents and SSO.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="price-card reveal">
+            <span class="price-name mono">Free</span>
+            <div class="price-tag"><strong>Free</strong><span>1 user</span></div>
+            <p class="price-copy">A personal incident loop with short retention.</p>
+            <ul class="price-list">
+              <li>1 user</li>
+              <li>3 days of retention</li>
+            </ul>
+          </article>
+
+          <article class="price-card is-featured reveal">
+            <span class="price-name mono">Team</span>
+            <div class="price-tag"><strong>$12</strong><span>per seat per month</span></div>
+            <p class="price-copy">Built for the handoff when the incident is shared.</p>
+            <ul class="price-list">
+              <li>30 days retention</li>
+              <li>Shared incidents</li>
+              <li>SSO</li>
+            </ul>
+          </article>
+
+          <article class="price-card reveal">
+            <span class="price-name mono">Fit</span>
+            <div class="price-tag"><strong>CLI + web app</strong></div>
+            <p class="price-copy">The workflow stays the same whether the incident starts in the terminal or ends in a shareable result view.</p>
+            <ul class="price-list">
+              <li>CLI for ingest and why</li>
+              <li>Web app for the result view</li>
+              <li>One explanation link for the team</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="install">
+      <div class="shell">
+        <div class="section-head reveal">
+          <p class="eyebrow">Install</p>
+          <h2>Use the path your shell already expects.</h2>
+          <p class="section-lede">Both install options are here in full, with copy buttons so you can move from page to terminal immediately.</p>
+        </div>
+
+        <div class="install-grid">
+          <article class="install-card reveal">
+            <span class="install-label mono">Homebrew</span>
+            <h3>Install Tracewell with Homebrew.</h3>
+            <code>brew install tracewell</code>
+            <p class="install-note">A direct path for local CLI setup.</p>
+            <button class="copy-button" type="button" data-copy="brew install tracewell">Copy command</button>
+          </article>
+
+          <article class="install-card reveal">
+            <span class="install-label mono">Shell</span>
+            <h3>Install Tracewell from the shell script.</h3>
+            <code>curl -fsSL https://tracewell.dev/install.sh | sh</code>
+            <p class="install-note">Use the provided installer URL directly.</p>
+            <button class="copy-button" type="button" data-copy="curl -fsSL https://tracewell.dev/install.sh | sh">Copy command</button>
+          </article>
+
+          <article class="install-card reveal">
+            <span class="install-label mono">Workflow</span>
+            <h3>Run the two commands that matter after install.</h3>
+            <ul class="install-list">
+              <li><code>tracewell ingest</code> to stream logs from files, Docker or Kubernetes</li>
+              <li><code>tracewell why --since 15m</code> to rank unusual lines against the last 7 days</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Tracewell</span>
+      </a>
+      <p class="footer-copy">From 4 million log lines to the one that matters.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" defer></script>
+  <script>
+    document.documentElement.classList.add('js');
+
+    const copyButtons = document.querySelectorAll('[data-copy]');
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+
+      const field = document.createElement('textarea');
+      field.value = text;
+      field.setAttribute('readonly', '');
+      field.style.position = 'absolute';
+      field.style.left = '-9999px';
+      document.body.appendChild(field);
+      field.select();
+
+      let copied = false;
+      try {
+        copied = document.execCommand('copy');
+      } finally {
+        document.body.removeChild(field);
+      }
+      return copied;
+    }
+
+    copyButtons.forEach((button) => {
+      button.addEventListener('click', async () => {
+        const label = button.textContent;
+        try {
+          const ok = await copyText(button.dataset.copy || '');
+          button.textContent = ok ? 'Copied' : 'Press Ctrl+C';
+        } catch (error) {
+          button.textContent = 'Press Ctrl+C';
+        }
+        window.setTimeout(() => {
+          button.textContent = label;
+        }, 1600);
+      });
+    });
+
+    window.addEventListener('load', () => {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced || !window.gsap || !window.ScrollTrigger) {
+        return;
+      }
+
+      const gsap = window.gsap;
+      const ScrollTrigger = window.ScrollTrigger;
+      gsap.registerPlugin(ScrollTrigger);
+
+      const mm = gsap.matchMedia();
+      mm.add({
+        motion: '(prefers-reduced-motion: no-preference)',
+        desktop: '(min-width: 900px)',
+        hover: '(hover: hover) and (pointer: fine)'
+      }, (context) => {
+        if (!context.conditions.motion) {
+          return;
+        }
+        gsap.from('.hero-copy > *', {
+          y: 22,
+          opacity: 0,
+          duration: 0.72,
+          ease: 'power3.out',
+          stagger: 0.08
+        });
+
+        gsap.from('.terminal-panel, .result-panel', {
+          y: 32,
+          opacity: 0,
+          duration: 0.9,
+          ease: 'power3.out',
+          stagger: 0.14,
+          delay: 0.15
+        });
+
+        gsap.from('.trace-column', {
+          opacity: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+          delay: 0.2
+        });
+        gsap.from('.log-row', {
+          y: 16,
+          opacity: 0,
+          duration: 0.45,
+          ease: 'power3.out',
+          stagger: 0.05,
+          delay: 0.35
+        });
+
+        gsap.from('.result-block, .detail-card', {
+          y: 18,
+          opacity: 0,
+          duration: 0.48,
+          ease: 'power3.out',
+          stagger: 0.08,
+          delay: 0.45
+        });
+
+        ScrollTrigger.batch('.reveal', {
+          start: 'top 88%',
+          once: true,
+          onEnter(elements) {
+            gsap.from(elements, {
+              y: 28,
+              opacity: 0,
+              duration: 0.75,
+              ease: 'power3.out',
+              stagger: 0.1
+            });
+          }
+        });
+
+        const focusedRow = document.querySelector('.log-row.is-focus');
+        if (focusedRow) {
+          gsap.fromTo(focusedRow, { boxShadow: 'inset 3px 0 0 rgba(137,247,200,0.5), 0 0 0 rgba(94,240,189,0)' }, {
+            boxShadow: 'inset 3px 0 0 rgba(137,247,200,1), 0 0 24px rgba(94,240,189,0.18)',
+            repeat: -1,
+            yoyo: true,
+            duration: 1.6,
+            ease: 'sine.inOut'
+          });
+        }
+
+        document.fonts.ready.then(() => ScrollTrigger.refresh());
+      });
+    });
+  </script>
+</body>
+</html>

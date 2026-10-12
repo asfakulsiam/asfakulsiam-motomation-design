@@ -1,0 +1,55 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 6103,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 5,
+    "Choreography": 5,
+    "Mobile motion": 5,
+    "Reduced-motion fallback": 1,
+    "Motion craft": 5
+   },
+   "notes": "Excellent motion concept and choreography. The 3D render sequence is perfectly tied to scroll, pinning the lamp while smoothly fading text in and out to match the lamp's state. Mobile translates this flawlessly. However, the reduced-motion strip is completely identical to the full-motion strip, meaning accessibility requirements were completely ignored."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 3,
+    "Choreography": 1,
+    "Mobile motion": 1,
+    "Reduced-motion fallback": 4,
+    "Motion craft": 1
+   },
+   "notes": "The full-motion implementation is severely broken. Text elements overlap each other in both desktop and mobile views as the scroll progresses, showing a lack of basic motion craft and choreography. The only redeeming quality is the reduced-motion fallback, which correctly abandons the broken scroll-jacking for a standard, readable static layout."
+  },
+  "winner": "A"
+ },
+ "served": "{\"requested\": \"gemini_3_1_pro\", \"served\": \"gemini_3_1_pro\", \"in\": 7167, \"cached\": 0, \"out\": 286, \"reasoning\": 1087, \"secs\": 16.6}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 3,
+   "Choreography": 1,
+   "Mobile motion": 1,
+   "Reduced-motion fallback": 4,
+   "Motion craft": 1
+  },
+  "notes": "The full-motion implementation is severely broken. Text elements overlap each other in both desktop and mobile views as the scroll progresses, showing a lack of basic motion craft and choreography. The only redeeming quality is the reduced-motion fallback, which correctly abandons the broken scroll-jacking for a standard, readable static layout.",
+  "total": 40.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 5,
+   "Choreography": 5,
+   "Mobile motion": 5,
+   "Reduced-motion fallback": 1,
+   "Motion craft": 5
+  },
+  "notes": "Excellent motion concept and choreography. The 3D render sequence is perfectly tied to scroll, pinning the lamp while smoothly fading text in and out to match the lamp's state. Mobile translates this flawlessly. However, the reduced-motion strip is completely identical to the full-motion strip, meaning accessibility requirements were completely ignored.",
+  "total": 84.0
+ },
+ "winner": "skill"
+}

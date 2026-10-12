@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 1103,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a clear cinematic idea: oversized title-card typography under a moving spotlight, and that signature carries from hero to project chapters and CTA. The scroll frames show purposeful progression with the light and chapter reveals, though I cannot judge timing from stills and the mobile compositions feel less controlled, with some sections reading overly sparse or awkwardly cropped."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 3,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B is the stronger type-led concept: the editorial serif hook, chapter numbering, and abstract title-sequence shapes all support one coherent idea about opening titles. Craft and typography are excellent across desktop and mobile, while the scroll-strip motion looks competent but mostly sectional and reveal-based rather than clearly story-driving from frames alone."
+  },
+  "better": "B",
+  "why": "B answers the brief more completely with a more distinctive type-led chapter concept and higher overall craft, even though A shows slightly stronger motion in the frame strip."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 3,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B is the stronger type-led concept: the editorial serif hook, chapter numbering, and abstract title-sequence shapes all support one coherent idea about opening titles. Craft and typography are excellent across desktop and mobile, while the scroll-strip motion looks competent but mostly sectional and reveal-based rather than clearly story-driving from frames alone."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a clear cinematic idea: oversized title-card typography under a moving spotlight, and that signature carries from hero to project chapters and CTA. The scroll frames show purposeful progression with the light and chapter reveals, though I cannot judge timing from stills and the mobile compositions feel less controlled, with some sections reading overly sparse or awkwardly cropped."
+ }
+}

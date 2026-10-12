@@ -1,0 +1,68 @@
+{
+ "model": "gpt_5_4",
+ "seed": 5102,
+ "pair": [
+  "baseline",
+  "gated"
+ ],
+ "order": {
+  "A": "gated",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a coherent restoration idea carried by the sapling motif, restrained palette, and consistent Bangla/English titling. The page is complete, calm, and usable on desktop and mobile, with the required 140-hectare figure and source clearly present. Motion appears very light from the scroll strip—mostly standard progression rather than story-led animation—but the reduced-motion fallback and keyboard/access checks are strong."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1 (2 contrast failures reported)"
+   ],
+   "notes": "B is more ambitious and distinctive, with a stronger editorial concept and a richer mangrove/roots visual language across hero, donate, and volunteer sections. But the default full-page desktop and mobile captures show large blank bands, which suggests brittle pinned/fixed behavior and weakens craft despite a solid reduced-motion fallback. It also fails the contrast gate, so this run is disqualified."
+  },
+  "better": "A",
+  "why": "A is the stronger submission because it fully satisfies the brief and checks cleanly, while B is more inventive but fails the hard contrast gate and shows fragility in its default presentation."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1 (2 contrast failures reported)"
+  ],
+  "notes": "B is more ambitious and distinctive, with a stronger editorial concept and a richer mangrove/roots visual language across hero, donate, and volunteer sections. But the default full-page desktop and mobile captures show large blank bands, which suggests brittle pinned/fixed behavior and weakens craft despite a solid reduced-motion fallback. It also fails the contrast gate, so this run is disqualified."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a coherent restoration idea carried by the sapling motif, restrained palette, and consistent Bangla/English titling. The page is complete, calm, and usable on desktop and mobile, with the required 140-hectare figure and source clearly present. Motion appears very light from the scroll strip—mostly standard progression rather than story-led animation—but the reduced-motion fallback and keyboard/access checks are strong."
+ }
+}

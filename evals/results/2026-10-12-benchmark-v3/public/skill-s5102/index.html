@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sundari Trust · সুন্দরী ট্রাস্ট — Bringing the mangroves back</title>
+<meta name="description" content="Sundari Trust restores mangroves in the Sundarbans buffer zone with local communities. 140 hectares replanted since 2019. Donate or volunteer. বাংলা ও English।">
+<meta name="theme-color" content="#F2EEE3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@300..800&family=Fraunces:opsz,wght@9..144,300..700&family=Hind+Siliguri:wght@400;500;600&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+<style>
+/* motomation · archetype: field-guide · mutation: wrong room (a seed-catalogue order form inside a field guide) · signature: hectare-grid develops on scroll · tier: 2 · critique: C5[restraint:kept] H5[375:0] S1[last5:archetype-new,signature-new,fp100] R5[cuts:3,anim:2] M5[t2:pins2/2,webgl0/1,js48/80KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 3df305c584 */
+
+:root{
+  --paper:#F2EEE3; --ink:#12261D; --muted:#4A5B52; --leaf:#1E5B3E;
+  --water:#DCE6D8; --clay:#A8431A; --rule:rgba(18,38,29,.28);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --display:"Fraunces","Anek Bangla",Georgia,serif;
+  --text:"Instrument Sans","Hind Siliguri",system-ui,sans-serif;
+  --pad:clamp(1.25rem,5vw,4.5rem);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--text);overflow-x:clip}
+:lang(bn){font-family:"Anek Bangla","Hind Siliguri",sans-serif}
+.t :lang(bn),.t:lang(bn),p:lang(bn),label :lang(bn){font-family:"Hind Siliguri","Anek Bangla",sans-serif;line-height:1.75}
+h1,h2,h3{margin:0;font-weight:500;text-wrap:balance}
+p{margin:0;max-width:62ch}
+a{color:inherit}
+::selection{background:var(--clay);color:var(--paper)}
+:focus-visible{outline:3px solid var(--clay);outline-offset:3px;border-radius:2px}
+.skip{position:absolute;left:var(--pad);top:-4rem;background:var(--ink);color:var(--paper);padding:.7rem 1rem;z-index:20;transition:top .2s var(--ease)}
+.skip:focus{top:.75rem}
+
+/* language: titles are always bilingual, body copy follows the toggle */
+html[data-lang="en"] .bn-only,html[data-lang="en"] [lang="bn"].t{display:none}
+html[data-lang="bn"] [lang="en"].t{display:none}
+
+/* masthead */
+.mast{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem var(--pad);border-bottom:1px solid var(--rule);position:sticky;top:0;background:var(--paper);z-index:10}
+.mark{font:600 1.15rem/1 var(--display);text-decoration:none;letter-spacing:-.01em;display:flex;flex-direction:column;gap:.15rem}
+.mark small{font:500 .8rem/1 "Anek Bangla",sans-serif;color:var(--muted)}
+.mast nav{display:flex;align-items:center;gap:clamp(.6rem,2.5vw,1.6rem);font-size:.95rem}
+.mast nav a{text-decoration:none;padding:.5rem .1rem;border-bottom:1px solid transparent;transition:border-color .2s}
+.mast nav a:hover{border-color:currentColor}
+.lang{font:600 .9rem/1 var(--text);background:none;color:var(--ink);border:1px solid var(--ink);padding:.6rem .85rem;cursor:pointer;min-height:44px;transition:background .2s,color .2s}
+.lang:hover{background:var(--ink);color:var(--paper)}
+@media(max-width:560px){.mast nav a.opt{display:none}}
+
+/* shared plate furniture */
+.plate{padding:clamp(3.5rem,9vw,8rem) var(--pad);border-bottom:1px solid var(--rule);position:relative}
+.folio{font:500 .85rem/1 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;gap:.8rem;align-items:center;margin-bottom:1.6rem}
+.folio::after{content:"";height:1px;width:3.5rem;background:var(--rule)}
+.title{font:500 clamp(1.9rem,5.2vw,3.9rem)/1.08 var(--display);letter-spacing:-.02em}
+.title .bn{display:block;font:600 1em/1.25 "Anek Bangla",sans-serif;letter-spacing:0}
+.title .en{display:block;color:var(--leaf);font-size:.62em;margin-top:.35em;font-weight:450}
+
+/* 01 hero */
+.hero{padding-top:clamp(2.5rem,6vw,5rem);display:grid;gap:2.5rem;grid-template-columns:1fr}
+.hero h1{display:flex;flex-direction:column;gap:.5rem}
+.hero h1 .bn{font:700 clamp(2.9rem,10.5vw,8.6rem)/1.12 "Anek Bangla",sans-serif;letter-spacing:-.01em}
+.hero h1 .en{font:400 clamp(1.7rem,4.6vw,3.6rem)/1.1 var(--display);color:var(--leaf);letter-spacing:-.02em;font-style:italic}
+.hero .lede{font-size:clamp(1.1rem,1.6vw,1.35rem);margin-top:1.6rem}
+.ctas{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.85rem 1.5rem;font:600 1rem/1.2 var(--text);text-decoration:none;border:2px solid var(--ink);background:none;color:var(--ink);cursor:pointer;transition:transform .2s var(--ease),background .2s,color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn.solid{background:var(--clay);border-color:var(--clay);color:#fff}
+.btn.solid:hover{background:var(--ink);border-color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+.scene{width:100%;max-width:640px;justify-self:end;align-self:end}
+.scene svg{width:100%;height:auto;display:block}
+@media(min-width:960px){.hero{grid-template-columns:1.25fr .75fr;align-items:end}}
+
+/* 02 hectare grid */
+.grid-plate{background:var(--water)}
+.stage{display:grid;gap:2rem;grid-template-columns:1fr}
+.stage .title .en{color:var(--ink)}
+.big{font:300 clamp(5.5rem,22vw,15rem)/.85 var(--display);letter-spacing:-.05em;color:var(--leaf);display:flex;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin:1.5rem 0 1rem}
+.big small{font:500 clamp(1rem,2vw,1.4rem)/1.3 var(--text);letter-spacing:0;color:var(--ink);padding-bottom:.6rem}
+.postmark{position:absolute;right:var(--pad);top:clamp(1.5rem,4vw,3rem);width:clamp(86px,13vw,130px);color:var(--clay);transform:rotate(-12deg);opacity:.95}
+.src{font-size:.9rem;color:var(--muted);margin-top:1rem}
+.hect{--cols:10;display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:clamp(3px,.7vw,7px);align-self:start}
+@media(min-width:700px){.hect{--cols:14}}
+.cell{aspect-ratio:1;border:1px solid rgba(18,38,29,.4);background:rgba(242,238,227,.55);position:relative;overflow:hidden}
+.cell i{position:absolute;inset:0;background:var(--leaf);transform-origin:50% 100%;display:block}
+.cell i::after{content:"";position:absolute;left:50%;bottom:18%;width:2px;height:48%;background:var(--paper);transform:translateX(-50%);box-shadow:-5px -10px 0 -0.5px var(--paper),5px -14px 0 -0.5px var(--paper)}
+.legend{display:flex;gap:1.2rem;flex-wrap:wrap;font-size:.92rem;margin-top:1rem}
+.legend span::before{content:"";display:inline-block;width:.9rem;height:.9rem;margin-right:.45rem;vertical-align:-.1rem;border:1px solid var(--ink);background:var(--leaf)}
+.legend span.o::before{background:var(--paper)}
+@media(min-width:960px){
+  .grid-plate.live{padding:0;height:240vh}
+  .grid-plate.live .stage{position:sticky;top:3.6rem;min-height:calc(100vh - 3.6rem);padding:clamp(2rem,4vw,3.5rem) var(--pad);grid-template-columns:1fr 1fr;align-items:center;gap:4rem}
+}
+
+/* 03 entries */
+.entries{list-style:none;margin:3rem 0 0;padding:0;border-top:2px solid var(--ink)}
+.entry{display:grid;gap:.5rem 2rem;grid-template-columns:3.2rem 1fr;padding:1.6rem 0;border-bottom:1px solid var(--rule)}
+.entry .no{font:300 2.6rem/1 var(--display);color:var(--clay)}
+.entry h3{font:500 1.5rem/1.2 var(--display)}
+.entry h3 .bn{display:block;font:600 1rem/1.6 "Anek Bangla",sans-serif;color:var(--leaf)}
+.entry p{grid-column:2}
+@media(min-width:900px){
+  .entry{grid-template-columns:5rem 1fr 1.2fr;align-items:baseline}
+  .entry p{grid-column:3}
+}
+
+/* 04 donate: seed-catalogue order form */
+.donate{background:var(--ink);color:var(--paper)}
+.donate .folio,.donate .src{color:#C9D3CB}
+.donate .folio::after{background:rgba(242,238,227,.4)}
+.donate .title .en{color:#A9D3B8}
+.donate :focus-visible{outline-color:#F2B089}
+form{margin-top:2.5rem;display:grid;gap:2rem;max-width:1100px}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{font:600 .85rem/1 var(--text);letter-spacing:.14em;text-transform:uppercase;padding:0;margin-bottom:1rem}
+.tiers{display:grid;gap:.9rem;grid-template-columns:1fr}
+@media(min-width:760px){.tiers{grid-template-columns:repeat(3,1fr)}}
+.tier,.freq label{position:relative;display:block}
+.tier input,.freq input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.tier span.card{display:grid;gap:.35rem;padding:1.3rem 1.3rem 1.4rem;border:1px solid rgba(242,238,227,.55);transition:background .2s,color .2s,border-color .2s,transform .2s var(--ease);height:100%}
+.tier .nm{font:600 .8rem/1 var(--text);letter-spacing:.14em;text-transform:uppercase;color:#C9D3CB}
+.tier .pr{font:400 clamp(2.4rem,4vw,3.2rem)/1 var(--display);letter-spacing:-.02em}
+.tier .ds{font-size:1rem}
+.tier:hover .card{border-color:var(--paper);transform:translateY(-2px)}
+.tier input:checked + .card{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.tier input:checked + .card .nm{color:var(--clay)}
+.tier input:focus-visible + .card,.freq input:focus-visible + span{outline:3px solid #F2B089;outline-offset:3px}
+.freq{display:flex;gap:.8rem;flex-wrap:wrap}
+.freq label{flex:0 0 auto}
+.freq span{display:inline-flex;align-items:center;min-height:48px;padding:.6rem 1.3rem;border:1px solid rgba(242,238,227,.55);font-weight:500;transition:background .2s,color .2s}
+.freq input:checked + span{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.donate .btn.solid{width:max-content;max-width:100%}
+.donate .btn.solid:hover{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+.note{min-height:1.6em}
+.donate .note{color:#F2B089}
+
+/* 05 volunteer */
+.fields{display:grid;gap:1.4rem;grid-template-columns:1fr}
+@media(min-width:760px){.fields{grid-template-columns:1fr 1fr}.fields .wide{grid-column:1/-1}}
+.f label,.f .lab{display:block;font-weight:600;font-size:.95rem;margin-bottom:.4rem}
+.f label small,.f .lab small{font:500 .95rem/1 "Hind Siliguri",sans-serif;color:var(--muted);margin-left:.4rem}
+input[type=text],input[type=email],input[type=tel],select{width:100%;min-height:50px;padding:.7rem .9rem;font:400 1.0625rem/1.3 var(--text);color:var(--ink);background:#FBF9F3;border:1px solid var(--ink);border-radius:0;appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 20px) 55%,calc(100% - 14px) 55%;background-size:6px 6px;background-repeat:no-repeat;padding-right:2.4rem}
+.vol .note{color:var(--leaf);font-weight:600}
+
+/* footer */
+footer{padding:clamp(3rem,8vw,6rem) var(--pad) 2.5rem;display:grid;gap:2rem}
+.foot-big{font:500 clamp(1.4rem,4.6vw,3.6rem)/1.1 var(--display);letter-spacing:-.02em;overflow-wrap:anywhere}
+.foot-big a{text-decoration-thickness:2px;text-underline-offset:.2em;color:var(--leaf)}
+.foot-big a:hover{color:var(--clay)}
+.small{font-size:.9rem;color:var(--muted)}
+
+/* entrance: hidden state only exists when JS + GSAP are present and motion is allowed */
+.js-motion .rise{opacity:0;transform:translateY(24px)}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="mast">
+  <a class="mark" href="#top" aria-label="Sundari Trust, home">Sundari Trust <small lang="bn">সুন্দরী ট্রাস্ট</small></a>
+  <nav aria-label="Primary">
+    <a class="opt" href="#work"><span lang="en">Work</span> · <span lang="bn">কাজ</span></a>
+    <a href="#donate"><span lang="en">Donate</span> · <span lang="bn">দান</span></a>
+    <a href="#volunteer"><span lang="en">Volunteer</span> · <span lang="bn">স্বেচ্ছাসেবা</span></a>
+    <button class="lang" id="langBtn" type="button" aria-pressed="false" aria-label="Show body text in Bangla. বাংলায় পড়ুন">বাংলা</button>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- Plate 01 -->
+<section class="plate hero" id="top" aria-labelledby="h1">
+  <div>
+    <p class="folio">Plate 01 · Sundarbans buffer zone</p>
+    <h1 id="h1"><span class="bn rise" lang="bn">ম্যানগ্রোভ ফিরিয়ে আনি</span><span class="en rise" lang="en">Bringing the mangroves back</span></h1>
+    <p class="lede t rise" lang="en">Sundari Trust restores mangroves in the Sundarbans buffer zone, working with local communities.</p>
+    <p class="lede t rise" lang="bn">সুন্দরী ট্রাস্ট স্থানীয় সম্প্রদায়ের সঙ্গে সুন্দরবনের বাফার অঞ্চলে ম্যানগ্রোভ ফিরিয়ে আনছে।</p>
+    <div class="ctas rise">
+      <a class="btn solid" href="#donate"><span lang="en">Donate</span>&nbsp;·&nbsp;<span lang="bn">দান করুন</span></a>
+      <a class="btn ghost" href="#volunteer"><span lang="en">Volunteer</span>&nbsp;·&nbsp;<span lang="bn">স্বেচ্ছাসেবক হোন</span></a>
+    </div>
+  </div>
+  <div class="scene" role="img" aria-label="Line drawing of a mangrove tree standing on arched prop roots in water, with young seedlings beside it.">
+    <svg viewBox="0 0 600 440" fill="none" stroke="#12261D" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+      <g fill="#1E5B3E" stroke="none">
+        <ellipse cx="300" cy="120" rx="130" ry="62"/><ellipse cx="215" cy="150" rx="70" ry="42"/><ellipse cx="385" cy="148" rx="74" ry="44"/><ellipse cx="300" cy="70" rx="72" ry="38"/>
+      </g>
+      <g stroke="#F2EEE3" stroke-width="2" opacity=".8"><path d="M240 110q20-14 44-8M320 84q22-10 46 2M330 140q22-10 48 0M190 156q16-12 38-6"/></g>
+      <path d="M300 180V250"/><path d="M300 250C270 262 236 290 222 352"/><path d="M300 250C286 276 270 310 266 356"/><path d="M300 250C314 276 334 312 336 356"/><path d="M300 250C334 262 368 292 384 352"/><path d="M300 250C250 250 190 280 168 350"/><path d="M300 250C350 250 410 280 432 350"/>
+      <path d="M40 352H560"/><path d="M70 378H250M310 378H530" stroke-width="1.5" opacity=".6"/><path d="M120 404H220M360 404H470" stroke-width="1.2" opacity=".4"/>
+      <g stroke="#A8431A" stroke-width="3"><path d="M492 352V318"/><path d="M492 328q-16-4-20-18M492 322q14-2 20-16"/><path d="M528 352V330"/><path d="M528 338q-12-2-14-14M528 334q10-2 14-12"/></g>
+    </svg>
+  </div>
+</section>
+
+<!-- Plate 02: the hectare grid (signature) -->
+<section class="plate grid-plate" id="figure" aria-labelledby="h-figure">
+  <div class="stage">
+    <div>
+      <p class="folio">Plate 02 · Replanted</p>
+      <svg class="postmark" viewBox="0 0 120 120" fill="none" stroke="currentColor" aria-hidden="true">
+        <circle cx="60" cy="60" r="55" stroke-width="3"/><circle cx="60" cy="60" r="38" stroke-width="1.5"/>
+        <path id="pm" d="M60 60m-47 0a47 47 0 1 1 94 0a47 47 0 1 1-94 0" stroke="none"/>
+        <text font-family="Instrument Sans, sans-serif" font-size="10.5" font-weight="700" letter-spacing="2.2" fill="currentColor" stroke="none"><textPath href="#pm" startOffset="0">SUNDARI TRUST · SINCE 2019 ·</textPath></text>
+        <text x="60" y="68" text-anchor="middle" font-family="Fraunces, serif" font-size="24" font-weight="600" fill="currentColor" stroke="none">2019</text>
+      </svg>
+      <h2 class="title" id="h-figure"><span class="bn" lang="bn">২০১৯ থেকে আবার সবুজ</span><span class="en" lang="en">Replanted since 2019</span></h2>
+      <p class="big" aria-label="140 hectares">140 <small><span lang="en">hectares<br>replanted</span><span lang="bn" style="display:block">হেক্টর পুনরায় রোপণ</span></small></p>
+      <p class="t" lang="en">One square is one hectare. Scroll, and the plots fill in.</p>
+      <p class="t" lang="bn">প্রতিটি ঘর এক হেক্টর। স্ক্রল করুন, ঘরগুলো ভরে উঠবে।</p>
+      <p class="src"><span lang="en">Source: Sundari Trust annual report 2025.</span> <span lang="bn">সূত্র: সুন্দরী ট্রাস্টের বার্ষিক প্রতিবেদন ২০২৫।</span></p>
+    </div>
+    <div>
+      <div class="hect" id="hect" role="img" aria-label="A grid of 140 squares, one per hectare, all planted: 140 hectares replanted since 2019."></div>
+      <div class="legend" aria-hidden="true"><span><span lang="en">Planted</span> · <span lang="bn">রোপিত</span></span><span class="o"><span lang="en">Not yet</span> · <span lang="bn">এখনও নয়</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Plate 03 -->
+<section class="plate" id="work" aria-labelledby="h-work">
+  <p class="folio">Plate 03 · Field notes</p>
+  <h2 class="title" id="h-work"><span class="bn" lang="bn">নার্সারি থেকে রোপণ</span><span class="en" lang="en">From nursery to planting</span></h2>
+  <ol class="entries">
+    <li class="entry">
+      <span class="no" aria-hidden="true">1</span>
+      <h3><span lang="en">Community nurseries</span><span class="bn" lang="bn">কমিউনিটি নার্সারি</span></h3>
+      <p class="t" lang="en">Women’s groups in Shyamnagar and Koyra run the nurseries.</p>
+      <p class="t" lang="bn">শ্যামনগর ও কয়রায় নারী দলগুলো নার্সারি চালায়।</p>
+    </li>
+    <li class="entry">
+      <span class="no" aria-hidden="true">2</span>
+      <h3><span lang="en">Planting in the monsoon</span><span class="bn" lang="bn">বর্ষায় রোপণ</span></h3>
+      <p class="t" lang="en">Planting happens in the monsoon.</p>
+      <p class="t" lang="bn">রোপণ হয় বর্ষা মৌসুমে।</p>
+    </li>
+    <li class="entry">
+      <span class="no" aria-hidden="true">3</span>
+      <h3><span lang="en">Three years of care</span><span class="bn" lang="bn">তিন বছরের যত্ন</span></h3>
+      <p class="t" lang="en">Every plot is looked after for three years.</p>
+      <p class="t" lang="bn">প্রতিটি রোপণ-জমির যত্ন নেওয়া হয় তিন বছর ধরে।</p>
+    </li>
+  </ol>
+</section>
+
+<!-- Plate 04 -->
+<section class="plate donate" id="donate" aria-labelledby="h-donate">
+  <p class="folio">Plate 04 · Order form</p>
+  <h2 class="title" id="h-donate"><span class="bn" lang="bn">দান করুন</span><span class="en" lang="en">Donate</span></h2>
+  <p class="t" style="margin-top:1.4rem" lang="en">Choose what to fund. Give once, or every month.</p>
+  <p class="t" style="margin-top:1.4rem" lang="bn">কী দিয়ে সাহায্য করবেন বেছে নিন। একবার, অথবা প্রতি মাসে।</p>
+  <form id="donateForm" novalidate>
+    <fieldset>
+      <legend><span lang="en">Amount</span> · <span lang="bn">পরিমাণ</span></legend>
+      <div class="tiers">
+        <label class="tier"><input type="radio" name="tier" value="500" data-bn="৫০০" checked><span class="card"><span class="nm"><span lang="en">Tray</span> · <span lang="bn">ট্রে</span></span><span class="pr">৳500</span><span class="ds"><span lang="en">grows a nursery tray</span><br><span lang="bn">একটি নার্সারি ট্রে তৈরি</span></span></span></label>
+        <label class="tier"><input type="radio" name="tier" value="2,000" data-bn="২,০০০"><span class="card"><span class="nm"><span lang="en">Row</span> · <span lang="bn">সারি</span></span><span class="pr">৳2,000</span><span class="ds"><span lang="en">plants a plot row</span><br><span lang="bn">একটি সারি রোপণ</span></span></span></label>
+        <label class="tier"><input type="radio" name="tier" value="10,000" data-bn="১০,০০০"><span class="card"><span class="nm"><span lang="en">Season</span> · <span lang="bn">মৌসুম</span></span><span class="pr">৳10,000</span><span class="ds"><span lang="en">funds a season of care</span><br><span lang="bn">এক মৌসুমের পরিচর্যা</span></span></span></label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend><span lang="en">How often</span> · <span lang="bn">কতবার</span></legend>
+      <div class="freq">
+        <label><input type="radio" name="freq" value="one-time" checked><span><span lang="en">One-time</span>&nbsp;·&nbsp;<span lang="bn">একবার</span></span></label>
+        <label><input type="radio" name="freq" value="monthly"><span><span lang="en">Monthly</span>&nbsp;·&nbsp;<span lang="bn">প্রতি মাসে</span></span></label>
+      </div>
+    </fieldset>
+    <button class="btn solid" type="submit" id="giveBtn">Give ৳500 one-time</button>
+    <p class="note" id="donateNote" role="status"></p>
+  </form>
+</section>
+
+<!-- Plate 05 -->
+<section class="plate vol" id="volunteer" aria-labelledby="h-vol">
+  <p class="folio">Plate 05 · Planting season, July–September</p>
+  <h2 class="title" id="h-vol"><span class="bn" lang="bn">রোপণে আসুন</span><span class="en" lang="en">Volunteer</span></h2>
+  <p class="t" style="margin-top:1.4rem" lang="en">Planting season runs from July to September. Tell us which month suits you.</p>
+  <p class="t" style="margin-top:1.4rem" lang="bn">রোপণের মৌসুম জুলাই থেকে সেপ্টেম্বর। কোন মাস আপনার সুবিধা, জানান।</p>
+  <form id="volForm" novalidate>
+    <div class="fields">
+      <div class="f"><label for="vn"><span lang="en">Name</span><small lang="bn">নাম</small></label><input id="vn" name="name" type="text" autocomplete="name" required></div>
+      <div class="f"><label for="ve"><span lang="en">Email</span><small lang="bn">ইমেইল</small></label><input id="ve" name="email" type="email" autocomplete="email" required></div>
+      <div class="f"><label for="vp"><span lang="en">Phone</span><small lang="bn">ফোন</small></label><input id="vp" name="phone" type="tel" autocomplete="tel" inputmode="tel" required></div>
+      <div class="f"><label for="vm"><span lang="en">Preferred month</span><small lang="bn">পছন্দের মাস</small></label>
+        <select id="vm" name="month" required>
+          <option value="">Choose · বেছে নিন</option>
+          <option value="July">July · জুলাই</option>
+          <option value="August">August · আগস্ট</option>
+          <option value="September">September · সেপ্টেম্বর</option>
+        </select></div>
+    </div>
+    <button class="btn solid" type="submit"><span lang="en">Sign up</span>&nbsp;·&nbsp;<span lang="bn">নাম লেখান</span></button>
+    <p class="note" id="volNote" role="status"></p>
+  </form>
+</section>
+</main>
+
+<footer>
+  <p class="folio" style="margin:0">Contact · যোগাযোগ</p>
+  <p class="foot-big"><a href="mailto:hello@sundaritrust.org">hello@sundaritrust.org</a></p>
+  <p class="small">Sundari Trust · সুন্দরী ট্রাস্ট. <span lang="en">140 hectares replanted since 2019 (source: Sundari Trust annual report 2025). The donation and sign-up forms on this page are a front-end demo: nothing is sent or charged.</span></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script>
+(function(){
+  var root=document.documentElement;
+
+  /* build the 140 hectare cells (planted by default, so no-JS/reduced-motion shows the true state) */
+  var hect=document.getElementById('hect'),i,c;
+  for(i=0;i<140;i++){c=document.createElement('div');c.className='cell';c.appendChild(document.createElement('i'));hect.appendChild(c);}
+
+  /* language toggle: titles stay bilingual, body copy swaps */
+  var btn=document.getElementById('langBtn');
+  btn.addEventListener('click',function(){
+    var bn=root.getAttribute('data-lang')!=='bn';
+    root.setAttribute('data-lang',bn?'bn':'en');
+    btn.setAttribute('aria-pressed',bn);
+    btn.textContent=bn?'English':'বাংলা';
+    btn.setAttribute('aria-label',bn?'Show body text in English. ইংরেজিতে পড়ুন':'Show body text in Bangla. বাংলায় পড়ুন');
+    syncGive();
+    if(window.ScrollTrigger)ScrollTrigger.refresh();
+  });
+
+  /* donation form (front-end mock) */
+  var form=document.getElementById('donateForm'),give=document.getElementById('giveBtn'),dn=document.getElementById('donateNote');
+  function val(n){return form.querySelector('input[name='+n+']:checked');}
+  function syncGive(){
+    var t=val('tier'),f=val('freq'),bn=root.getAttribute('data-lang')==='bn';
+    give.textContent=bn?('দিন ৳'+t.getAttribute('data-bn')+(f.value==='monthly'?' প্রতি মাসে':' একবার')):('Give ৳'+t.value+(f.value==='monthly'?' every month':' one-time'));
+  }
+  form.addEventListener('change',syncGive);
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var t=val('tier'),f=val('freq'),bn=root.getAttribute('data-lang')==='bn';
+    dn.textContent=bn?'ধন্যবাদ। এটি একটি ডেমো ফর্ম: কোনো অর্থ নেওয়া হয়নি।':'Thank you. This form is a demo: ৳'+t.value+' ('+(f.value==='monthly'?'monthly':'one-time')+') was not charged.';
+  });
+
+  /* volunteer form (front-end mock) */
+  var vf=document.getElementById('volForm'),vn=document.getElementById('volNote');
+  vf.addEventListener('submit',function(e){
+    e.preventDefault();
+    var bn=root.getAttribute('data-lang')==='bn',els=vf.elements,bad=null,k;
+    for(k=0;k<els.length;k++){var el=els[k];if(el.willValidate&&!el.checkValidity()&&!bad)bad=el;}
+    vn.style.color='';
+    if(bad){vn.textContent=bn?'অনুগ্রহ করে সব ঘর পূরণ করুন।':'Please complete every field.';vn.style.color='#A8431A';bad.focus();return;}
+    vn.textContent=bn?('ধন্যবাদ, '+els.name.value+'। এটি একটি ডেমো ফর্ম: কিছু পাঠানো হয়নি।'):('Thank you, '+els.name.value+'. This form is a demo: nothing was sent. Preferred month: '+els.month.value+'.');
+  });
+
+  /* motion: tier 2. GSAP only when present and motion is allowed */
+  function start(){
+    if(!window.gsap||!window.ScrollTrigger)return;
+    gsap.registerPlugin(ScrollTrigger);
+    var mm=gsap.matchMedia();
+    mm.add('(prefers-reduced-motion: no-preference)',function(){
+      root.classList.add('js-motion');
+      gsap.to('.rise',{opacity:1,y:0,duration:.8,ease:'power3.out',stagger:.09,delay:.1,clearProps:'transform'});
+
+      var plate=document.querySelector('.grid-plate'),cells=gsap.utils.toArray('#hect .cell i');
+      var big=window.matchMedia('(min-width:960px)').matches;
+      if(big)plate.classList.add('live');
+      gsap.fromTo(cells,{scaleY:0},{scaleY:1,ease:'none',stagger:{each:1,from:'start'},duration:cells.length,
+        scrollTrigger:{trigger:plate,start:big?'top top':'top 60%',end:big?'bottom bottom':'bottom 70%',scrub:.6}});
+      ScrollTrigger.refresh();
+      return function(){root.classList.remove('js-motion');plate.classList.remove('live');};
+    });
+  }
+  if(document.readyState==='complete')start();else window.addEventListener('load',start);
+})();
+</script>
+</body>
+</html>

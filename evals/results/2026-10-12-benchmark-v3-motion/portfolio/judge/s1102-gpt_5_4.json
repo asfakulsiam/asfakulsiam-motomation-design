@@ -1,0 +1,72 @@
+{
+ "model": "gpt_5_4",
+ "seed": 1102,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Placeholder/TODO copy is visible in the contact section: \"[NEEDS COPY: Rafi's email address]\""
+   ],
+   "notes": "A has the clearer Tier 5 chapter idea: a type-led title-sequence portfolio carried by cinematic frame marks, restrained line motifs and project names treated like opening titles. The scroll-strip shows meaningful progression tied to sections and projects, and the reduced-motion version preserves content, but the visible placeholder copy in contact is a hard failure and the email CTA appears unfinished."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast falls under 4.5:1 (6 failing nodes)"
+   ],
+   "notes": "B has a coherent bold-poster concept and does aim at title-sequence work, but it feels more like a strong template language than a singular signature for this brief. The scroll-strip suggests purposeful section-to-section motion, yet the mobile layout shows overlap/cropping and the measured contrast failure is a hard stop."
+  },
+  "better": "A",
+  "why": "A is the stronger and more original response to the brief, with typography and motion language that more convincingly evoke title design."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast falls under 4.5:1 (6 failing nodes)"
+  ],
+  "notes": "B has a coherent bold-poster concept and does aim at title-sequence work, but it feels more like a strong template language than a singular signature for this brief. The scroll-strip suggests purposeful section-to-section motion, yet the mobile layout shows overlap/cropping and the measured contrast failure is a hard stop."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Placeholder/TODO copy is visible in the contact section: \"[NEEDS COPY: Rafi's email address]\""
+  ],
+  "notes": "A has the clearer Tier 5 chapter idea: a type-led title-sequence portfolio carried by cinematic frame marks, restrained line motifs and project names treated like opening titles. The scroll-strip shows meaningful progression tied to sections and projects, and the reduced-motion version preserves content, but the visible placeholder copy in contact is a hard failure and the email CTA appears unfinished."
+ }
+}

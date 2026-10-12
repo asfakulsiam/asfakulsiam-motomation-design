@@ -1,0 +1,98 @@
+{
+ "375": {
+  "pageHeight": 9802,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 9781,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 2,
+    "text": "TICKETS",
+    "href": "#tickets",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "32/40"
+  },
+  "source": {
+   "bytes": 9244,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    1269,
+    2537,
+    3806,
+    5075,
+    6344,
+    7612,
+    8881
+   ],
+   "maxScroll": 8881
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 4786,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 5597,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 2,
+   "overflow": 0,
+   "words": 1,
+   "motion": 0,
+   "names": 0,
+   "numbers": 1
+  },
+  "stamp": "gate: c2 o0 w1 rm0 a0 n1 · gate/2 · b0b00ee18a",
+  "critique": "C?[no-record] H3[375:2] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V4[entrance-repeats:1]",
+  "contrast": [
+   {
+    "width": 768,
+    "el": "span.num",
+    "text": "2",
+    "ratio": 2.28,
+    "need": 3,
+    "fg": "#14110f",
+    "bg": "#ae3723",
+    "size": 138.24
+   },
+   {
+    "width": 768,
+    "el": "span.num",
+    "text": "2",
+    "ratio": 1.1,
+    "need": 3,
+    "fg": "#14110f",
+    "bg": "#15342f",
+    "size": 138.24
+   }
+  ],
+  "overflow": [],
+  "words": [
+   {
+    "el": "span.n",
+    "text": "02",
+    "problem": "leaves the viewport by 168px"
+   }
+  ],
+  "motion": [],
+  "names": []
+ }
+}

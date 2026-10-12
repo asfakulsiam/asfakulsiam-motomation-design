@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 4102,
+ "pair": [
+  "c-uiux",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-uiux"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A is a masterpiece of conceptual execution. The hero section physically opening like a set of grand doors as the user scrolls perfectly fulfills the brief's request for a signature tied to doors and arrival. The typography is exquisite, and the architectural CSS illustrations for the rooms are both elegant and informative."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B is a clean, competent, and highly accessible layout with nice SVG illustrations. However, it feels much closer to a high-end template than a bespoke boutique experience, as the motion is entirely passive and the structural choices lack the architectural integration seen in the benchmark."
+  },
+  "better": "A",
+  "why": "Site A elevates the hotel's narrative through an unforgettable scroll-driven door reveal, flawless typography, and deeply integrated architectural motifs."
+ },
+ "c-uiux": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B is a clean, competent, and highly accessible layout with nice SVG illustrations. However, it feels much closer to a high-end template than a bespoke boutique experience, as the motion is entirely passive and the structural choices lack the architectural integration seen in the benchmark."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A is a masterpiece of conceptual execution. The hero section physically opening like a set of grand doors as the user scrolls perfectly fulfills the brief's request for a signature tied to doors and arrival. The typography is exquisite, and the architectural CSS illustrations for the rooms are both elegant and informative."
+ }
+}

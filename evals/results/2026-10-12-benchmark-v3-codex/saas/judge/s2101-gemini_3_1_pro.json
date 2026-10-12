@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 2101,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a clean, professional execution of the brief with a clear terminal aesthetic that suits the target audience. The scroll-driven pinning motion effectively highlights the product's workflow without being overwhelming. The craft is solid across both viewport sizes."
+  },
+  "B": {
+   "scores": {
+    "Concept": 2,
+    "Originality": 2,
+    "Typography": 2,
+    "Motion": 1,
+    "Craft": 1,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B suffers from fundamental layout failures, with severe overlapping elements making the content nearly illegible on both desktop and mobile. The motion implementation is chaotic and exacerbates the visual bugs, and the mobile view has significant horizontal overflow."
+  },
+  "better": "A",
+  "why": "Site A provides a polished, accessible, and effectively animated experience, while Site B is rendered unusable by severe layout and overlapping bugs."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a clean, professional execution of the brief with a clear terminal aesthetic that suits the target audience. The scroll-driven pinning motion effectively highlights the product's workflow without being overwhelming. The craft is solid across both viewport sizes."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 2,
+   "Originality": 2,
+   "Typography": 2,
+   "Motion": 1,
+   "Craft": 1,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B suffers from fundamental layout failures, with severe overlapping elements making the content nearly illegible on both desktop and mobile. The motion implementation is chaotic and exacerbates the visual bugs, and the mobile view has significant horizontal overflow."
+ }
+}

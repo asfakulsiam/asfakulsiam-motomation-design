@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 5101,
+ "pair": [
+  "matched",
+  "skill"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A solid, standard non-profit layout with a clear structure. The CSS illustration in the hero is pleasant, and the number counter adds some basic engagement, but the overall design language feels a bit safe and repetitive."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Beautifully executes the bilingual requirement with elegant typography and excellent information hierarchy. The scroll-triggered growth of the line-art seedlings perfectly reinforces the narrative of the brief without being overly complex."
+  },
+  "better": "B",
+  "why": "Site B offers a much more cohesive concept where the typography, layout, and meaningful motion (growing seedlings) work together to tell the story."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A solid, standard non-profit layout with a clear structure. The CSS illustration in the hero is pleasant, and the number counter adds some basic engagement, but the overall design language feels a bit safe and repetitive."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Beautifully executes the bilingual requirement with elegant typography and excellent information hierarchy. The scroll-triggered growth of the line-art seedlings perfectly reinforces the narrative of the brief without being overly complex."
+ }
+}

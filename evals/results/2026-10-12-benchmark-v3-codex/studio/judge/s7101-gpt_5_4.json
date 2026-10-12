@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 7101,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 3,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a coherent architectural idea: the courtyard diagram, brick accent, and restrained light-toned framing carry through the hero, project plans, and contact sections. Typography is the strongest asset, giving the studio a distinct quiet identity, and the mobile/reduced-motion versions remain intact. From the scroll-strip, motion reads as orderly section progression and some sticky/reveal behavior, useful but not especially expressive beyond supporting navigation."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 2,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [],
+   "notes": "B has the bolder concept and the more unexpected structure: the split hero, numbered rail, arched courtyard motif, and oversized 'Light. Brick. Courtyard.' headline create a strong signature. The scroll-strip shows a clear narrative progression through projects, studio, process, and contact, so the motion appears purposeful, though still hard to judge beyond the captured frames. But the 375px capture and measured 192px horizontal overflow show a serious mobile break, with content effectively pushed off-canvas and large blank areas, which heavily damages craft and practical accessibility."
+  },
+  "better": "A",
+  "why": "A is the more reliable and complete execution overall, with strong design quality and none of B’s major mobile layout failure."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 2,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [],
+  "notes": "B has the bolder concept and the more unexpected structure: the split hero, numbered rail, arched courtyard motif, and oversized 'Light. Brick. Courtyard.' headline create a strong signature. The scroll-strip shows a clear narrative progression through projects, studio, process, and contact, so the motion appears purposeful, though still hard to judge beyond the captured frames. But the 375px capture and measured 192px horizontal overflow show a serious mobile break, with content effectively pushed off-canvas and large blank areas, which heavily damages craft and practical accessibility."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 3,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a coherent architectural idea: the courtyard diagram, brick accent, and restrained light-toned framing carry through the hero, project plans, and contact sections. Typography is the strongest asset, giving the studio a distinct quiet identity, and the mobile/reduced-motion versions remain intact. From the scroll-strip, motion reads as orderly section progression and some sticky/reveal behavior, useful but not especially expressive beyond supporting navigation."
+ }
+}

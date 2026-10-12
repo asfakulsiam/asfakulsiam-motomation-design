@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 3102,
+ "pair": [
+  "gated",
+  "skill"
+ ],
+ "order": {
+  "A": "gated",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a clean, elegant layout that hits the brief's requirements with a pleasant, earthy color palette. The typography is well-chosen and the hierarchy is clear, but the layout feels somewhat standard and the motion is limited to basic scrolling. It's a solid, functional execution, though it lacks a standout interactive or conceptual hook."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B brilliantly interprets the brief with a highly editorial, bespoke structure. The concept of generating 'Another cup' perfectly highlights the unique nature of the product, and the circular, scroll-animated timeline is a masterful way to tell the firing story. Typography, layout, and CSS artistry are all executed with exceptional precision."
+  },
+  "better": "B",
+  "why": "Site B elevates the brief with a highly original layout, beautiful CSS art, and purposeful scroll animations that directly support the storytelling."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a clean, elegant layout that hits the brief's requirements with a pleasant, earthy color palette. The typography is well-chosen and the hierarchy is clear, but the layout feels somewhat standard and the motion is limited to basic scrolling. It's a solid, functional execution, though it lacks a standout interactive or conceptual hook."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B brilliantly interprets the brief with a highly editorial, bespoke structure. The concept of generating 'Another cup' perfectly highlights the unique nature of the product, and the circular, scroll-animated timeline is a masterful way to tell the firing story. Typography, layout, and CSS artistry are all executed with exceptional precision."
+ }
+}

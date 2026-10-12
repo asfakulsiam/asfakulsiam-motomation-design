@@ -1,0 +1,12 @@
+{
+ "slug": "hotel",
+ "seed": 4101,
+ "cond": "matched",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/hotel/matched-s4101",
+ "exit": 0,
+ "seconds": 88,
+ "turns": 9,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

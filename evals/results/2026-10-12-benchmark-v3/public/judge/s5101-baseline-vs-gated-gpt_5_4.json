@@ -1,0 +1,70 @@
+{
+ "model": "gpt_5_4",
+ "seed": 5101,
+ "pair": [
+  "baseline",
+  "gated"
+ ],
+ "order": {
+  "A": "gated",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A is disciplined and coherent: the seedling motif, dark estuary palette, and bilingual hierarchy all support one calm public-interest idea. Typography is strong and the forms are complete and usable on desktop and mobile. Motion appears very light from the scroll strip—mostly straightforward section-to-section progression rather than story-carrying animation."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 2,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1",
+    "Invented statistics shown in captures (105 ha / 127 ha instead of the brief's 140 hectares)"
+   ],
+   "notes": "B has the more distinctive visual concept and the scroll strip suggests a clearer motion-led narrative from landscape to impact to action. But the execution is unreliable: the normal-page captures show large empty spans, and the measured contrast failures are a hard-gate miss. Most seriously, multiple captures show incorrect impact figures, which violates the brief's factual constraint."
+  },
+  "better": "A",
+  "why": "A is the stronger submission because it satisfies the brief cleanly and accessibly, while B fails hard gates on contrast and factual accuracy."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 2,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1",
+   "Invented statistics shown in captures (105 ha / 127 ha instead of the brief's 140 hectares)"
+  ],
+  "notes": "B has the more distinctive visual concept and the scroll strip suggests a clearer motion-led narrative from landscape to impact to action. But the execution is unreliable: the normal-page captures show large empty spans, and the measured contrast failures are a hard-gate miss. Most seriously, multiple captures show incorrect impact figures, which violates the brief's factual constraint."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A is disciplined and coherent: the seedling motif, dark estuary palette, and bilingual hierarchy all support one calm public-interest idea. Typography is strong and the forms are complete and usable on desktop and mobile. Motion appears very light from the scroll strip—mostly straightforward section-to-section progression rather than story-carrying animation."
+ }
+}

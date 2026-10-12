@@ -1,0 +1,124 @@
+{
+ "375": {
+  "pageHeight": 4821,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 1
+   }
+  ],
+  "contrastViolations": 1
+ },
+ "1440": {
+  "pageHeight": 3953,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 1
+   }
+  ],
+  "contrastViolations": 1,
+  "keyboard": {
+   "primaryReached": {
+    "step": 6,
+    "text": "Donate",
+    "href": "#donate",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 23690,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    2,
+    455,
+    909,
+    1362,
+    1815,
+    2268,
+    2722,
+    3173
+   ],
+   "maxScroll": 3173
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3953,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4821,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 4,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c4 o0 w0 rm0 a0 n0 · gate/2 · c076da1790",
+  "critique": "C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V3[entrance-repeats:2]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "a.btn.sm",
+    "text": "Donate",
+    "ratio": 1.26,
+    "need": 4.5,
+    "fg": "#42584f",
+    "bg": "#17704e",
+    "size": 17
+   },
+   {
+    "width": 390,
+    "el": "a.btn.sm",
+    "text": "Donate",
+    "ratio": 1.26,
+    "need": 4.5,
+    "fg": "#42584f",
+    "bg": "#17704e",
+    "size": 17
+   },
+   {
+    "width": 768,
+    "el": "a.btn.sm",
+    "text": "Donate",
+    "ratio": 1.26,
+    "need": 4.5,
+    "fg": "#42584f",
+    "bg": "#17704e",
+    "size": 17
+   },
+   {
+    "width": 1440,
+    "el": "a.btn.sm",
+    "text": "Donate",
+    "ratio": 1.26,
+    "need": 4.5,
+    "fg": "#42584f",
+    "bg": "#17704e",
+    "size": 17
+   }
+  ],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

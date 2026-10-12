@@ -1,0 +1,68 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 3103,
+ "pair": [
+  "c-taste",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-taste"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 3,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "Site A delivers a fantastic conceptual divide between the light storefront and the dark, atmospheric kiln section. The scroll-linked animation of the cup physically changing as it 'fires' is a perfect realization of the brief. Unfortunately, technical flaws hold it back: severe CORS errors block the custom typography, and there are multiple contrast violations."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B is a very clean, functional e-commerce layout with excellent CSS illustrations that capture the organic nature of the ceramics. While the design and typography feel slightly generic and the motion is limited to basic progress bars, it executes everything flawlessly with perfect accessibility and no technical errors."
+  },
+  "better": "B",
+  "why": "While A has a vastly superior concept and motion design, it fails a hard gate for contrast and has broken font imports, leaving B as the technically sound winner."
+ },
+ "c-taste": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B is a very clean, functional e-commerce layout with excellent CSS illustrations that capture the organic nature of the ceramics. While the design and typography feel slightly generic and the motion is limited to basic progress bars, it executes everything flawlessly with perfect accessibility and no technical errors."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 3,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "Site A delivers a fantastic conceptual divide between the light storefront and the dark, atmospheric kiln section. The scroll-linked animation of the cup physically changing as it 'fires' is a perfect realization of the brief. Unfortunately, technical flaws hold it back: severe CORS errors block the custom typography, and there are multiple contrast violations."
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 3101,
+ "pair": [
+  "gated",
+  "skill"
+ ],
+ "order": {
+  "A": "gated",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 2,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A is a functional but generic e-commerce layout. The CSS illustrations are a bit simplistic, and there is no real narrative or conceptual depth beyond fulfilling the basic requirements of the brief. The lack of purposeful motion also leaves the experience feeling static."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B brilliantly leans into the 'each one is marked differently' brief by providing a 32-cup 'contact sheet' where users can select their specific piece. The CSS craft required to draw 32 variations is impressive. The scroll-linked progress bar in the firing timeline is a smart, narrative-driven use of motion."
+  },
+  "better": "B",
+  "why": "Site B transforms a simple brief into a highly original, editorial experience with the contact sheet concept and excellent CSS craft."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 2,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A is a functional but generic e-commerce layout. The CSS illustrations are a bit simplistic, and there is no real narrative or conceptual depth beyond fulfilling the basic requirements of the brief. The lack of purposeful motion also leaves the experience feeling static."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B brilliantly leans into the 'each one is marked differently' brief by providing a 32-cup 'contact sheet' where users can select their specific piece. The CSS craft required to draw 32 variations is impressive. The scroll-linked progress bar in the firing timeline is a smart, narrative-driven use of motion."
+ }
+}

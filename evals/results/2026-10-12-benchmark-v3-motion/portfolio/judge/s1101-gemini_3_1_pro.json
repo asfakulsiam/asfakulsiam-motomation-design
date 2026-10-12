@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 1101,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A perfectly captures the brief. The credit-roll motion and timecode signature create a strong filmic identity, while the completely type-led approach boldly skips thumbnails altogether. Flawless execution across desktop and mobile."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B is an elegant editorial experience, but it misses the specific constraints of the brief. It lacks a clear signature tied to film or titles, and relies on abstract graphic thumbnails rather than committing to a purely type-led structure."
+  },
+  "better": "A",
+  "why": "Site A nails the brief's constraints with a brilliant cinematic concept, using credit-style motion and timecodes instead of relying on generic thumbnails."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B is an elegant editorial experience, but it misses the specific constraints of the brief. It lacks a clear signature tied to film or titles, and relies on abstract graphic thumbnails rather than committing to a purely type-led structure."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A perfectly captures the brief. The credit-roll motion and timecode signature create a strong filmic identity, while the completely type-led approach boldly skips thumbnails altogether. Flawless execution across desktop and mobile."
+ }
+}

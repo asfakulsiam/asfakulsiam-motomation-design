@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 7103,
+ "pair": [
+  "baseline",
+  "gated"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "gated"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "A has the stronger architectural signature: the oversized serif headline, highlighted “light,” and courtyard diagram make one coherent idea that carries into the project imagery and plans. The scroll-strip suggests mostly restrained reveal-based motion with a more interesting process treatment near the end, but not a deeply motion-led narrative. Craft is strong overall, though the mobile flow leaves some oversized gaps and a few labels feel very tiny."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B is calm, legible, and well-structured, with a clear brick-and-courtyard mood and consistently viewable plans, but its row-based portfolio layout feels much closer to a polished template. The motion evidence is minimal in the scroll frames and reads mostly as simple reveal/progression rather than storytelling. Accessibility and performance checks are excellent, and the reduced-motion fallback appears intact."
+  },
+  "better": "A",
+  "why": "A expresses the brief with a more distinctive and unified idea across type, imagery, and layout, whereas B is competent but comparatively conventional and less compelling in motion."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "A has the stronger architectural signature: the oversized serif headline, highlighted “light,” and courtyard diagram make one coherent idea that carries into the project imagery and plans. The scroll-strip suggests mostly restrained reveal-based motion with a more interesting process treatment near the end, but not a deeply motion-led narrative. Craft is strong overall, though the mobile flow leaves some oversized gaps and a few labels feel very tiny."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B is calm, legible, and well-structured, with a clear brick-and-courtyard mood and consistently viewable plans, but its row-based portfolio layout feels much closer to a polished template. The motion evidence is minimal in the scroll frames and reads mostly as simple reveal/progression rather than storytelling. Accessibility and performance checks are excellent, and the reduced-motion fallback appears intact."
+ }
+}

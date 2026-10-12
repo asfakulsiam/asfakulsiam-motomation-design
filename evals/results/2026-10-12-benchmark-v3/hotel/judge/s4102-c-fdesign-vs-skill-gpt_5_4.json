@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 4102,
+ "pair": [
+  "c-fdesign",
+  "skill"
+ ],
+ "order": {
+  "A": "c-fdesign",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a coherent quiet idea: the arched view, muted palette and railing motif give the hotel a calm identity, and the room facts are clear. Typography is strong and the page is clean on desktop and mobile, but the motion strip shows little more than normal scrolling and a few state changes, so the animation does not meaningfully deepen the story. Accessibility and performance checks are excellent, with the booking link easy to reach."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B has the clearest signature by far: doors, thresholds and arrival shape the whole site, which fits the brief exactly and carries through hero, room illustrations, house history and contact. The typography feels like the brand, and the scroll-strip suggests a purposeful transition from closed doors to revealed arches and content; I cannot judge timing from stills, but the motion appears concept-led rather than decorative. Craft is high, though the mobile hero/nav feels tighter and less effortless than the desktop."
+  },
+  "better": "B",
+  "why": "B turns the brief into a distinctive, fully carried concept with stronger typographic identity and more meaningful motion while still passing the hard checks."
+ },
+ "c-fdesign": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a coherent quiet idea: the arched view, muted palette and railing motif give the hotel a calm identity, and the room facts are clear. Typography is strong and the page is clean on desktop and mobile, but the motion strip shows little more than normal scrolling and a few state changes, so the animation does not meaningfully deepen the story. Accessibility and performance checks are excellent, with the booking link easy to reach."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B has the clearest signature by far: doors, thresholds and arrival shape the whole site, which fits the brief exactly and carries through hero, room illustrations, house history and contact. The typography feels like the brand, and the scroll-strip suggests a purposeful transition from closed doors to revealed arches and content; I cannot judge timing from stills, but the motion appears concept-led rather than decorative. Craft is high, though the mobile hero/nav feels tighter and less effortless than the desktop."
+ }
+}

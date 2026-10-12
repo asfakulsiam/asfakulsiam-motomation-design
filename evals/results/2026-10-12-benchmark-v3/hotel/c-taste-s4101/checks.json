@@ -1,0 +1,172 @@
+{
+ "375": {
+  "pageHeight": 5340,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 6115,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 8,
+    "text": "Check availability",
+    "href": "https://book.example-hotel.com",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 18904,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    745,
+    1490,
+    2235,
+    2980,
+    3725,
+    4470,
+    5215
+   ],
+   "maxScroll": 5215
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 5053,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 5340,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 10,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c10 o0 w0 rm0 a0 n0 · gate/2 · 926b9a9a7d",
+  "critique": "C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V1[entrance-repeats:5]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "p",
+    "text": "Served on the rooftop with a view over the roofs o",
+    "ratio": 1.1,
+    "need": 4.5,
+    "fg": "#14191c",
+    "bg": "#1b2226",
+    "size": 17
+   },
+   {
+    "width": 375,
+    "el": "span.hours",
+    "text": "7-10am",
+    "ratio": 2.68,
+    "need": 3,
+    "fg": "#a8431f",
+    "bg": "#1b2226",
+    "size": 35.2
+   },
+   {
+    "width": 390,
+    "el": "h2",
+    "text": "Breakfast above the old city",
+    "ratio": 1.1,
+    "need": 3,
+    "fg": "#14191c",
+    "bg": "#1b2226",
+    "size": 35.2
+   },
+   {
+    "width": 390,
+    "el": "p",
+    "text": "Served on the rooftop with a view over the roofs o",
+    "ratio": 1.1,
+    "need": 4.5,
+    "fg": "#14191c",
+    "bg": "#1b2226",
+    "size": 17
+   },
+   {
+    "width": 390,
+    "el": "span.hours",
+    "text": "7-10am",
+    "ratio": 2.68,
+    "need": 3,
+    "fg": "#a8431f",
+    "bg": "#1b2226",
+    "size": 35.2
+   },
+   {
+    "width": 768,
+    "el": "p",
+    "text": "Served on the rooftop with a view over the roofs o",
+    "ratio": 1.1,
+    "need": 4.5,
+    "fg": "#14191c",
+    "bg": "#1b2226",
+    "size": 17
+   },
+   {
+    "width": 768,
+    "el": "span.hours",
+    "text": "7-10am",
+    "ratio": 2.68,
+    "need": 3,
+    "fg": "#a8431f",
+    "bg": "#1b2226",
+    "size": 35.2
+   },
+   {
+    "width": 1440,
+    "el": "h2",
+    "text": "Breakfast above the old city",
+    "ratio": 1.1,
+    "need": 3,
+    "fg": "#14191c",
+    "bg": "#1b2226",
+    "size": 60.8
+   },
+   {
+    "width": 1440,
+    "el": "p",
+    "text": "Served on the rooftop with a view over the roofs o",
+    "ratio": 1.1,
+    "need": 4.5,
+    "fg": "#14191c",
+    "bg": "#1b2226",
+    "size": 17
+   },
+   {
+    "width": 1440,
+    "el": "span.hours",
+    "text": "7-10am",
+    "ratio": 2.68,
+    "need": 3,
+    "fg": "#a8431f",
+    "bg": "#1b2226",
+    "size": 35.2
+   }
+  ],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

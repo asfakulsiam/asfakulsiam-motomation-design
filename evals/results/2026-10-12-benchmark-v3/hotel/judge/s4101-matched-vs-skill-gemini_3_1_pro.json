@@ -1,0 +1,68 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 4101,
+ "pair": [
+  "matched",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "matched"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A is a functional, clean execution with a literal interpretation of the building architecture. The scroll animations (coloring the building, sun rising) add some interest but feel a bit disconnected from the overall flow. It passes all accessibility checks flawlessly."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "Site B presents a gorgeous, cohesive vision that perfectly captures the boutique heritage feel. The opening door sequence on scroll is a masterful touch that directly ties into the concept. Unfortunately, it suffers from contrast failures (likely the white text on the terracotta footer or small gray text), triggering a hard gate failure."
+  },
+  "better": "A",
+  "why": "Site B is a significantly better design in every visual and conceptual aspect, but it fails a hard accessibility gate (contrast), leaving Site A as the winner by default for delivering a fully compliant, bug-free build."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "Site B presents a gorgeous, cohesive vision that perfectly captures the boutique heritage feel. The opening door sequence on scroll is a masterful touch that directly ties into the concept. Unfortunately, it suffers from contrast failures (likely the white text on the terracotta footer or small gray text), triggering a hard gate failure."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A is a functional, clean execution with a literal interpretation of the building architecture. The scroll animations (coloring the building, sun rising) add some interest but feel a bit disconnected from the overall flow. It passes all accessibility checks flawlessly."
+ }
+}

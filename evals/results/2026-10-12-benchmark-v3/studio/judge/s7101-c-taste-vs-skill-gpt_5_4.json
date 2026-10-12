@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 7101,
+ "pair": [
+  "c-taste",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-taste"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 2,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a clear architectural idea—plan, courtyard, brick, and light—and carries it through the hero, project modules, studio section, and contact. Typography and layout feel authored rather than templated, with excellent restraint and strong mobile craft. Motion is the weak axis: from the scroll-strip it reads mostly as ordinary reveals, and the animated hero appears less communicative than the reduced-motion fallback."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B is competent and accessible, with clean illustrations and a straightforward portfolio structure, but the idea is less distinctive and the overall composition feels much closer to a polished template. The type system is solid but generic, and the spacing/cadence is less refined than A. From the scroll-strip, motion seems limited to standard scroll progression rather than a concept-bearing sequence."
+  },
+  "better": "A",
+  "why": "A is more coherent, more distinctive, and more typographically assured, while B is serviceable but conventional."
+ },
+ "c-taste": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B is competent and accessible, with clean illustrations and a straightforward portfolio structure, but the idea is less distinctive and the overall composition feels much closer to a polished template. The type system is solid but generic, and the spacing/cadence is less refined than A. From the scroll-strip, motion seems limited to standard scroll progression rather than a concept-bearing sequence."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 2,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a clear architectural idea—plan, courtyard, brick, and light—and carries it through the hero, project modules, studio section, and contact. Typography and layout feel authored rather than templated, with excellent restraint and strong mobile craft. Motion is the weak axis: from the scroll-strip it reads mostly as ordinary reveals, and the animated hero appears less communicative than the reduced-motion fallback."
+ }
+}

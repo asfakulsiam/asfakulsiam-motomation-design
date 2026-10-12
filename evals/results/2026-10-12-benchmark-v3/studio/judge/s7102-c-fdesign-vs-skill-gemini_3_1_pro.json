@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 7102,
+ "pair": [
+  "c-fdesign",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-fdesign"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a deeply original and cohesive concept centered around a continuous brick wall that opens up to reveal the projects as the user scrolls. The typography is elegant and dramatic, matching the quiet but structural mood of the brief. The scroll-linked animations are perfectly tied to the concept and fall back gracefully when reduced motion is requested."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B offers a clean, straightforward interpretation of the brief with charming flat illustrations. However, the layout and typography feel much safer and more template-like compared to the benchmark. The interactive sunlight element in the hero is a nice touch, but overall the site lacks the unified architectural impact requested by the brief."
+  },
+  "better": "A",
+  "why": "Site A's continuous brick wall scrolling experience is a highly original, beautiful execution that deeply embodies the architectural themes of the brief, whereas Site B relies on a more conventional layout."
+ },
+ "c-fdesign": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B offers a clean, straightforward interpretation of the brief with charming flat illustrations. However, the layout and typography feel much safer and more template-like compared to the benchmark. The interactive sunlight element in the hero is a nice touch, but overall the site lacks the unified architectural impact requested by the brief."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a deeply original and cohesive concept centered around a continuous brick wall that opens up to reveal the projects as the user scrolls. The typography is elegant and dramatic, matching the quiet but structural mood of the brief. The scroll-linked animations are perfectly tied to the concept and fall back gracefully when reduced motion is requested."
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 1102,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 2,
+    "Originality": 3,
+    "Typography": 5,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [
+    "Lorem ipsum, placeholder components or TODOs in the output"
+   ],
+   "notes": "Site A delivers a gorgeous, classic title-sequence aesthetic through its typography. However, it completely ignores the Tier 5 motion brief, relying entirely on a standard vertical scroll without any scroll-bound storytelling or sequence progression."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 3,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Lorem ipsum, placeholder components or TODOs in the output",
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "Site B answers the brief by implementing a horizontal-scroll pinning section that effectively mimics a film strip or title sequence. The bold typography is impactful, though marred by several contrast accessibility failures on the body text and dark red headings."
+  },
+  "better": "B",
+  "why": "Despite both sites leaving placeholder text in the footer, Site B actually attempted and succeeded at the Tier 5 motion brief, using a horizontal pinning sequence that conceptually fits a title designer."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 3,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Lorem ipsum, placeholder components or TODOs in the output",
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "Site B answers the brief by implementing a horizontal-scroll pinning section that effectively mimics a film strip or title sequence. The bold typography is impactful, though marred by several contrast accessibility failures on the body text and dark red headings."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 2,
+   "Originality": 3,
+   "Typography": 5,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [
+   "Lorem ipsum, placeholder components or TODOs in the output"
+  ],
+  "notes": "Site A delivers a gorgeous, classic title-sequence aesthetic through its typography. However, it completely ignores the Tier 5 motion brief, relying entirely on a standard vertical scroll without any scroll-bound storytelling or sequence progression."
+ }
+}

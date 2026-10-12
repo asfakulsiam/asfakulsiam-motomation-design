@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 2101,
+ "pair": [
+  "baseline",
+  "matched"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a distinct, confident brand identity with excellent typographic details, like the staggered underlines in the hero. The motion sequence in the hero terminal—fading out the noise to highlight the one critical log line—perfectly illustrates the product's core value proposition."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B provides a competent but highly generic dark-mode SaaS design that feels indistinguishable from a standard template. While clean and functional, it lacks the strong personality and conceptual depth needed to stand out to the target developer audience."
+  },
+  "better": "A",
+  "why": "Site A combines exceptional typography with a clever, narrative-driven hero animation that directly communicates the product's purpose, far outpacing Site B's generic template look."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B provides a competent but highly generic dark-mode SaaS design that feels indistinguishable from a standard template. While clean and functional, it lacks the strong personality and conceptual depth needed to stand out to the target developer audience."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a distinct, confident brand identity with excellent typographic details, like the staggered underlines in the hero. The motion sequence in the hero terminal—fading out the noise to highlight the one critical log line—perfectly illustrates the product's core value proposition."
+ }
+}

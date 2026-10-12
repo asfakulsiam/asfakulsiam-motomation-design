@@ -1,0 +1,22 @@
+DELIVERY GATE · /home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-motion/launch/baseline-s6103/index.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (11 measured; 9 skipped; 6 not visible at scan time)
+     ⚠ 375px coverage: 9 of 20 text elements (45%) were skipped (moving, occluded or never fully on screen) — more than 30%, so this width is not a full measurement. Check the skipped text by hand or make it measurable.
+      390px  ✓ 0 below AA  (11 measured; 9 skipped; 6 not visible at scan time)
+     ⚠ 390px coverage: 9 of 20 text elements (45%) were skipped (moving, occluded or never fully on screen) — more than 30%, so this width is not a full measurement. Check the skipped text by hand or make it measurable.
+      768px  ✓ 0 below AA  (13 measured; 7 skipped; 6 not visible at scan time)
+     ⚠ 768px coverage: 7 of 20 text elements (35%) were skipped (moving, occluded or never fully on screen) — more than 30%, so this width is not a full measurement. Check the skipped text by hand or make it measurable.
+     1440px  ✓ 0 below AA  (6 measured; 14 skipped; 6 not visible at scan time)
+     ⚠ 1440px coverage: 14 of 20 text elements (70%) were skipped (moving, occluded or never fully on screen) — more than 30%, so this width is not a full measurement. Check the skipped text by hand or make it measurable.
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (5 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (20 compared)
+  names     ✓ 0 missing alt / accessible names  (4 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (3 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  4 sections, entrances: static | static | fade | static → 0 repeat(s); pins 1, WebGL canvases 0, JS 48KB gzipped
+  records    DESIGN.md: none · memory log: /home/user/workspace/repo/.motomation/log.json · stamp fields: {"tier":"4"}
+  critique → C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M5[t4:pins1/2,webgl0/1,js48/250KB,rm0] V5[entrance-repeats:0]   (axes marked ? have no record to derive from)
+  PASS  stamp → critique: C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M5[t4:pins1/2,webgl0/1,js48/250KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 13514aeb5e
+
+motion report → /home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-motion/launch/baseline-s6103/motion-report.html (24 frames, 991 KB)

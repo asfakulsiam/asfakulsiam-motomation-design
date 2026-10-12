@@ -1,0 +1,108 @@
+{
+ "375": {
+  "pageHeight": 4597,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "scrollable-region-focusable",
+    "impact": "serious",
+    "nodes": 3
+   }
+  ],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 3217,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 5,
+    "text": "Pricing",
+    "href": "#pricing",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "37/40"
+  },
+  "source": {
+   "bytes": 19345,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": "motomation · archetype: poster · mutation: paper→terminal glass (haystack collapses to one line) · signature: haystack-collapse · tier: 2 · type mode: SERVICE "
+  },
+  "strip": {
+   "frames": [
+    0,
+    331,
+    662,
+    993,
+    1324,
+    1655,
+    1986,
+    2317
+   ],
+   "maxScroll": 2317
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3217,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4597,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 3,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c3 o0 w0 rm0 a0 n0 · gate/2 · 242306c329",
+  "critique": "C?[no-record] H5[375:0] S5[last5:no-log] R?[no-record] M5[t2:pins0/2,webgl0/1,js48/80KB,rm0] V4[entrance-repeats:1]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "em",
+    "text": "the one that matters.",
+    "ratio": 2.32,
+    "need": 3,
+    "fg": "#b92d08",
+    "bg": "#d68e78",
+    "size": 38
+   },
+   {
+    "width": 390,
+    "el": "em",
+    "text": "the one that matters.",
+    "ratio": 2.32,
+    "need": 3,
+    "fg": "#b92d08",
+    "bg": "#d68e78",
+    "size": 38
+   },
+   {
+    "width": 768,
+    "el": "em",
+    "text": "the one that matters.",
+    "ratio": 1.47,
+    "need": 3,
+    "fg": "#b92d08",
+    "bg": "#c75d40",
+    "size": 39.936
+   }
+  ],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

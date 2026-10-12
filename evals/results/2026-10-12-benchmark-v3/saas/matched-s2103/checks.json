@@ -1,0 +1,118 @@
+{
+ "375": {
+  "pageHeight": 4457,
+  "errors": [],
+  "hOverflow": 149,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 3
+   },
+   {
+    "id": "scrollable-region-focusable",
+    "impact": "serious",
+    "nodes": 1
+   }
+  ],
+  "contrastViolations": 3
+ },
+ "1440": {
+  "pageHeight": 3806,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 10
+   }
+  ],
+  "contrastViolations": 10,
+  "keyboard": {
+   "primaryReached": {
+    "step": 5,
+    "text": "Pricing",
+    "href": "#pricing",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 20179,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": "motomation · archetype: workbench · mutation: log-wall-collapse · signature: needle-dim · tier: 2 "
+  },
+  "strip": {
+   "frames": [
+    0,
+    415,
+    830,
+    1245,
+    1661,
+    2076,
+    2491,
+    2906
+   ],
+   "maxScroll": 2906
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3806,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4457,
+  "errors": [],
+  "hOverflow": 149
+ },
+ "gate": {
+  "counts": {
+   "contrast": 1,
+   "overflow": 2,
+   "words": 1,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c1 o2 w1 rm0 a0 n0 · gate/2 · c877278724",
+  "critique": "C?[no-record] H3[375:2] S5[last5:no-log] R?[no-record] M5[t2:pins0/2,webgl0/1,js47/80KB,rm0] V2[entrance-repeats:3]",
+  "contrast": [
+   {
+    "width": 390,
+    "el": "a.btn",
+    "text": "Get started",
+    "ratio": 1.06,
+    "need": 4.5,
+    "fg": "#1a1200",
+    "bg": "#181a15",
+    "size": 17
+   }
+  ],
+  "overflow": [
+   {
+    "width": 375,
+    "el": "page",
+    "kind": "horizontal scroll",
+    "px": 149
+   },
+   {
+    "width": 390,
+    "el": "page",
+    "kind": "horizontal scroll",
+    "px": 134
+   }
+  ],
+  "words": [
+   {
+    "el": "h2#inst-h",
+    "text": "Two ways to get it running.",
+    "problem": "leaves the viewport by 125px"
+   }
+  ],
+  "motion": [],
+  "names": []
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 6102,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A masterclass in product launch design. The image sequence is perfectly choreographed to match the storyboard steps, moving from a dramatic flat angle to a full ring, while cycling through light temperatures. Typography and layout are exquisitely crafted, resulting in a premium, highly cohesive feel."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 2,
+    "Craft": 2,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "The site attempts to fulfill the brief but falters in its execution. The scrolling text awkwardly overlaps the primary product visual, and the motion lacks the dramatic progression necessary to tell the product's story. Typography feels uneven, particularly with the jarring, oversized price section."
+  },
+  "better": "A",
+  "why": "Site A delivers a flawless, premium experience with a perfectly choreographed scroll animation and exquisite typography, whereas Site B suffers from visual overlaps and uneven craft."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A masterclass in product launch design. The image sequence is perfectly choreographed to match the storyboard steps, moving from a dramatic flat angle to a full ring, while cycling through light temperatures. Typography and layout are exquisitely crafted, resulting in a premium, highly cohesive feel."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 2,
+   "Craft": 2,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "The site attempts to fulfill the brief but falters in its execution. The scrolling text awkwardly overlaps the primary product visual, and the motion lacks the dramatic progression necessary to tell the product's story. Typography feels uneven, particularly with the jarring, oversized price section."
+ }
+}

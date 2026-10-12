@@ -1,0 +1,71 @@
+{
+ "375": {
+  "pageHeight": 4513,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 5855,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 6,
+    "text": "Write to us",
+    "href": "mailto:studio@ittaghor.studio",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 26821,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    708,
+    1416,
+    2124,
+    2831,
+    3539,
+    4247,
+    4955
+   ],
+   "maxScroll": 4955
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 5855,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4505,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 0b141f1747",
+  "critique": "C?[no-record] H4[375:1] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V3[entrance-repeats:2]",
+  "contrast": [],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

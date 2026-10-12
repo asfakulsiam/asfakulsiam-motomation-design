@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 8102,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [],
+   "notes": "The bold, oversized typography makes a strong initial impact, and the scroll-triggered counting sequence in the lineup is visually engaging. However, the site suffers from an ARIA accessibility violation and a contrast issue, bringing down its technical quality."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A brilliant execution of a lighting concept, where sweeping spotlights interact with the content as you scroll. The thematic connection between the festival stages and the visual presentation is excellent, backed by flawless automated accessibility scores."
+  },
+  "better": "B",
+  "why": "Site B executes a highly original and interactive concept flawlessly while maintaining perfect accessibility scores, whereas Site A introduces WCAG violations."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [],
+  "notes": "The bold, oversized typography makes a strong initial impact, and the scroll-triggered counting sequence in the lineup is visually engaging. However, the site suffers from an ARIA accessibility violation and a contrast issue, bringing down its technical quality."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A brilliant execution of a lighting concept, where sweeping spotlights interact with the content as you scroll. The thematic connection between the festival stages and the visual presentation is excellent, backed by flawless automated accessibility scores."
+ }
+}

@@ -1,0 +1,71 @@
+{
+ "375": {
+  "pageHeight": 7554,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 8198,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 8,
+    "text": "Check availability\n(opens the booking engine in a new tab)",
+    "href": "https://book.example-hotel.com",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "37/40"
+  },
+  "source": {
+   "bytes": 22804,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": "motomation · archetype: room · mutation: swap-the-material (the hero is a door) · signature: doorway · tier: 2 · critique: C5[restraint:kept] H4[375:1] S5[last5:no-log] R5[cuts:2,anim:2] M5[t2:pins1/2,webgl0/1,js47/80KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · a3c87d55e9 "
+  },
+  "strip": {
+   "frames": [
+    0,
+    1043,
+    2085,
+    3128,
+    4170,
+    5213,
+    6255,
+    7298
+   ],
+   "maxScroll": 7298
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 7478,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 6904,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c0 o0 w0 rm0 a0 n0 · gate/2 · a3c87d55e9",
+  "critique": "C?[no-record] H4[375:1] S5[last5:no-log] R?[no-record] M5[t2:pins1/2,webgl0/1,js47/80KB,rm0] V5[entrance-repeats:0]",
+  "contrast": [],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

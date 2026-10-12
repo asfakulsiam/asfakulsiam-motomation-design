@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 6103,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a masterclass in the technical product launch aesthetic. The storyboard scroll-sequence is executed flawlessly, with the lamp's light temperature changing precisely as the user scrolls past the corresponding features. The typography is crisp, and the addition of frame counters and figure numbers gives the design a distinct, engineered identity."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 2,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B opts for an elegant, editorial aesthetic with lovely serif typography that feels fresh for a hardware product. However, the scroll-linked motion implementation is fundamentally broken, causing severe overlapping of text elements at the end of the sequence (visible in frame 8 of the scroll strip). This significantly undermines an otherwise beautiful design."
+  },
+  "better": "A",
+  "why": "Site A executes a flawless, engaging scroll-sequence that perfectly matches the brief, whereas Site B suffers from severe layout breakage during its animation."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 2,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B opts for an elegant, editorial aesthetic with lovely serif typography that feels fresh for a hardware product. However, the scroll-linked motion implementation is fundamentally broken, causing severe overlapping of text elements at the end of the sequence (visible in frame 8 of the scroll strip). This significantly undermines an otherwise beautiful design."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a masterclass in the technical product launch aesthetic. The storyboard scroll-sequence is executed flawlessly, with the lamp's light temperature changing precisely as the user scrolls past the corresponding features. The typography is crisp, and the addition of frame counters and figure numbers gives the design a distinct, engineered identity."
+ }
+}

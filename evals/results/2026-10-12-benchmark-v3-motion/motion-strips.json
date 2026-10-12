@@ -1,0 +1,417 @@
+{
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "axes": [
+  "Motion concept",
+  "Choreography",
+  "Mobile motion",
+  "Reduced-motion fallback",
+  "Motion craft"
+ ],
+ "briefs": {
+  "festival": {
+   "8101": {
+    "gpt_5_4": {
+     "baseline": 80.0,
+     "skill": 76.0,
+     "winner": "baseline",
+     "scores": {
+      "baseline": {
+       "Motion concept": 5,
+       "Choreography": 4,
+       "Mobile motion": 3,
+       "Reduced-motion fallback": 5,
+       "Motion craft": 3
+      },
+      "skill": {
+       "Motion concept": 3,
+       "Choreography": 3,
+       "Mobile motion": 4,
+       "Reduced-motion fallback": 4,
+       "Motion craft": 5
+      }
+     }
+    },
+    "gemini_3_1_pro": {
+     "baseline": 84.0,
+     "skill": 44.0,
+     "winner": "baseline",
+     "scores": {
+      "baseline": {
+       "Motion concept": 4,
+       "Choreography": 4,
+       "Mobile motion": 4,
+       "Reduced-motion fallback": 5,
+       "Motion craft": 4
+      },
+      "skill": {
+       "Motion concept": 2,
+       "Choreography": 2,
+       "Mobile motion": 2,
+       "Reduced-motion fallback": 2,
+       "Motion craft": 3
+      }
+     }
+    }
+   },
+   "8102": {
+    "gpt_5_4": {
+     "baseline": 68.0,
+     "skill": 92.0,
+     "winner": "skill",
+     "scores": {
+      "baseline": {
+       "Motion concept": 4,
+       "Choreography": 3,
+       "Mobile motion": 3,
+       "Reduced-motion fallback": 5,
+       "Motion craft": 2
+      },
+      "skill": {
+       "Motion concept": 5,
+       "Choreography": 4,
+       "Mobile motion": 5,
+       "Reduced-motion fallback": 4,
+       "Motion craft": 5
+      }
+     }
+    },
+    "gemini_3_1_pro": {
+     "baseline": 60.0,
+     "skill": 96.0,
+     "winner": "skill",
+     "scores": {
+      "baseline": {
+       "Motion concept": 3,
+       "Choreography": 3,
+       "Mobile motion": 3,
+       "Reduced-motion fallback": 4,
+       "Motion craft": 2
+      },
+      "skill": {
+       "Motion concept": 5,
+       "Choreography": 5,
+       "Mobile motion": 4,
+       "Reduced-motion fallback": 5,
+       "Motion craft": 5
+      }
+     }
+    }
+   },
+   "8103": {
+    "gpt_5_4": {
+     "baseline": 72.0,
+     "skill": 64.0,
+     "winner": "baseline",
+     "scores": {
+      "baseline": {
+       "Motion concept": 4,
+       "Choreography": 4,
+       "Mobile motion": 3,
+       "Reduced-motion fallback": 4,
+       "Motion craft": 3
+      },
+      "skill": {
+       "Motion concept": 4,
+       "Choreography": 3,
+       "Mobile motion": 4,
+       "Reduced-motion fallback": 1,
+       "Motion craft": 4
+      }
+     }
+    },
+    "gemini_3_1_pro": {
+     "baseline": 100.0,
+     "skill": 48.0,
+     "winner": "baseline",
+     "scores": {
+      "baseline": {
+       "Motion concept": 5,
+       "Choreography": 5,
+       "Mobile motion": 5,
+       "Reduced-motion fallback": 5,
+       "Motion craft": 5
+      },
+      "skill": {
+       "Motion concept": 2,
+       "Choreography": 1,
+       "Mobile motion": 1,
+       "Reduced-motion fallback": 5,
+       "Motion craft": 3
+      }
+     }
+    }
+   }
+  },
+  "launch": {
+   "6101": {
+    "gpt_5_4": {
+     "baseline": 88.0,
+     "skill": 64.0,
+     "winner": "baseline",
+     "scores": {
+      "baseline": {
+       "Motion concept": 5,
+       "Choreography": 5,
+       "Mobile motion": 4,
+       "Reduced-motion fallback": 4,
+       "Motion craft": 4
+      },
+      "skill": {
+       "Motion concept": 4,
+       "Choreography": 3,
+       "Mobile motion": 4,
+       "Reduced-motion fallback": 2,
+       "Motion craft": 3
+      }
+     }
+    },
+    "gemini_3_1_pro": {
+     "baseline": 76.0,
+     "skill": 52.0,
+     "winner": "baseline",
+     "scores": {
+      "baseline": {
+       "Motion concept": 5,
+       "Choreography": 4,
+       "Mobile motion": 2,
+       "Reduced-motion fallback": 5,
+       "Motion craft": 3
+      },
+      "skill": {
+       "Motion concept": 3,
+       "Choreography": 3,
+       "Mobile motion": 4,
+       "Reduced-motion fallback": 1,
+       "Motion craft": 2
+      }
+     }
+    }
+   },
+   "6102": {
+    "gpt_5_4": {
+     "baseline": 92.0,
+     "skill": 52.0,
+     "winner": "baseline",
+     "scores": {
+      "baseline": {
+       "Motion concept": 5,
+       "Choreography": 5,
+       "Mobile motion": 5,
+       "Reduced-motion fallback": 4,
+       "Motion craft": 4
+      },
+      "skill": {
+       "Motion concept": 3,
+       "Choreography": 3,
+       "Mobile motion": 3,
+       "Reduced-motion fallback": 1,
+       "Motion craft": 3
+      }
+     }
+    },
+    "gemini_3_1_pro": {
+     "baseline": 100.0,
+     "skill": 28.0,
+     "winner": "baseline",
+     "scores": {
+      "baseline": {
+       "Motion concept": 5,
+       "Choreography": 5,
+       "Mobile motion": 5,
+       "Reduced-motion fallback": 5,
+       "Motion craft": 5
+      },
+      "skill": {
+       "Motion concept": 2,
+       "Choreography": 2,
+       "Mobile motion": 1,
+       "Reduced-motion fallback": 1,
+       "Motion craft": 1
+      }
+     }
+    }
+   },
+   "6103": {
+    "gpt_5_4": {
+     "baseline": 84.0,
+     "skill": 80.0,
+     "winner": "skill",
+     "scores": {
+      "baseline": {
+       "Motion concept": 3,
+       "Choreography": 4,
+       "Mobile motion": 4,
+       "Reduced-motion fallback": 5,
+       "Motion craft": 5
+      },
+      "skill": {
+       "Motion concept": 5,
+       "Choreography": 5,
+       "Mobile motion": 3,
+       "Reduced-motion fallback": 4,
+       "Motion craft": 3
+      }
+     }
+    },
+    "gemini_3_1_pro": {
+     "baseline": 40.0,
+     "skill": 84.0,
+     "winner": "skill",
+     "scores": {
+      "baseline": {
+       "Motion concept": 3,
+       "Choreography": 1,
+       "Mobile motion": 1,
+       "Reduced-motion fallback": 4,
+       "Motion craft": 1
+      },
+      "skill": {
+       "Motion concept": 5,
+       "Choreography": 5,
+       "Mobile motion": 5,
+       "Reduced-motion fallback": 1,
+       "Motion craft": 5
+      }
+     }
+    }
+   }
+  },
+  "portfolio": {
+   "1101": {
+    "gpt_5_4": {
+     "baseline": 76.0,
+     "skill": 80.0,
+     "winner": "skill",
+     "scores": {
+      "baseline": {
+       "Motion concept": 4,
+       "Choreography": 4,
+       "Mobile motion": 3,
+       "Reduced-motion fallback": 5,
+       "Motion craft": 3
+      },
+      "skill": {
+       "Motion concept": 5,
+       "Choreography": 4,
+       "Mobile motion": 4,
+       "Reduced-motion fallback": 3,
+       "Motion craft": 4
+      }
+     }
+    },
+    "gemini_3_1_pro": {
+     "baseline": 100.0,
+     "skill": 36.0,
+     "winner": "baseline",
+     "scores": {
+      "baseline": {
+       "Motion concept": 5,
+       "Choreography": 5,
+       "Mobile motion": 5,
+       "Reduced-motion fallback": 5,
+       "Motion craft": 5
+      },
+      "skill": {
+       "Motion concept": 3,
+       "Choreography": 2,
+       "Mobile motion": 2,
+       "Reduced-motion fallback": 1,
+       "Motion craft": 1
+      }
+     }
+    }
+   },
+   "1102": {
+    "gpt_5_4": {
+     "baseline": 72.0,
+     "skill": 64.0,
+     "winner": "baseline",
+     "scores": {
+      "baseline": {
+       "Motion concept": 4,
+       "Choreography": 4,
+       "Mobile motion": 3,
+       "Reduced-motion fallback": 3,
+       "Motion craft": 4
+      },
+      "skill": {
+       "Motion concept": 5,
+       "Choreography": 3,
+       "Mobile motion": 4,
+       "Reduced-motion fallback": 1,
+       "Motion craft": 3
+      }
+     }
+    },
+    "gemini_3_1_pro": {
+     "baseline": 84.0,
+     "skill": 36.0,
+     "winner": "baseline",
+     "scores": {
+      "baseline": {
+       "Motion concept": 4,
+       "Choreography": 4,
+       "Mobile motion": 4,
+       "Reduced-motion fallback": 5,
+       "Motion craft": 4
+      },
+      "skill": {
+       "Motion concept": 3,
+       "Choreography": 2,
+       "Mobile motion": 2,
+       "Reduced-motion fallback": 1,
+       "Motion craft": 1
+      }
+     }
+    }
+   },
+   "1103": {
+    "gpt_5_4": {
+     "baseline": 80.0,
+     "skill": 64.0,
+     "winner": "baseline",
+     "scores": {
+      "baseline": {
+       "Motion concept": 4,
+       "Choreography": 4,
+       "Mobile motion": 4,
+       "Reduced-motion fallback": 4,
+       "Motion craft": 4
+      },
+      "skill": {
+       "Motion concept": 4,
+       "Choreography": 3,
+       "Mobile motion": 3,
+       "Reduced-motion fallback": 3,
+       "Motion craft": 3
+      }
+     }
+    },
+    "gemini_3_1_pro": {
+     "baseline": 36.0,
+     "skill": 100.0,
+     "winner": "skill",
+     "scores": {
+      "baseline": {
+       "Motion concept": 2,
+       "Choreography": 2,
+       "Mobile motion": 2,
+       "Reduced-motion fallback": 2,
+       "Motion craft": 1
+      },
+      "skill": {
+       "Motion concept": 5,
+       "Choreography": 5,
+       "Mobile motion": 5,
+       "Reduced-motion fallback": 5,
+       "Motion craft": 5
+      }
+     }
+    }
+   }
+  }
+ }
+}

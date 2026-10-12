@@ -1,0 +1,18 @@
+DELIVERY GATE · /home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-motion/festival/skill-s8101/index.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (90 measured; 4 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (90 measured; 4 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (93 measured; 1 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (86 measured; 8 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (8 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (94 compared)
+  names     ✓ 0 missing alt / accessible names  (5 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (52 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  6 sections, entrances: static | y | fade | static | clip | static → 0 repeat(s); pins 0, WebGL canvases 1, JS 49KB gzipped
+  records    DESIGN.md: /home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-motion/festival/skill-s8101/DESIGN.md · memory log: /home/user/workspace/repo/.motomation/log.json · stamp fields: {"archetype":"timeline","mutation":"marginalia","signature":"stage-light-pair","tier":"4"}
+  critique → C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp17] R5[cuts:2,anim:3] M5[t4:pins0/2,webgl1/1,js49/250KB,rm0] V5[entrance-repeats:0]
+  PASS  stamp → critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp17] R5[cuts:2,anim:3] M5[t4:pins0/2,webgl1/1,js49/250KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 913b93dc60
+
+motion report → /home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-motion/festival/skill-s8101/motion-report.html (24 frames, 1532 KB)

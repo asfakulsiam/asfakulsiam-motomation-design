@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 4101,
+ "pair": [
+  "c-taste",
+  "skill"
+ ],
+ "order": {
+  "A": "c-taste",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a clear signature in the arched door, balcony and roofline motifs, and the quiet palette suits the brief. The typography is refined and the booking action is easy to reach, but the long pinned/horizontal sequences create awkward empty space and weaker clarity on mobile. From the scroll frames, motion is purposeful yet only moderately integrated into the story."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B builds the whole site around one strong architectural idea: arriving at and moving up through the house, from courtyard to balcony to roof. The type does much more identity work here, and the line-drawn facade plus restrained palette feel distinctive without inventing facts. Motion appears to support the floor-by-floor narrative and rooftop moment, though still frames limit certainty about nuance."
+  },
+  "better": "B",
+  "why": "B is the stronger design because it carries one precise concept through structure, type, imagery and scroll progression with more coherence and polish."
+ },
+ "c-taste": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a clear signature in the arched door, balcony and roofline motifs, and the quiet palette suits the brief. The typography is refined and the booking action is easy to reach, but the long pinned/horizontal sequences create awkward empty space and weaker clarity on mobile. From the scroll frames, motion is purposeful yet only moderately integrated into the story."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B builds the whole site around one strong architectural idea: arriving at and moving up through the house, from courtyard to balcony to roof. The type does much more identity work here, and the line-drawn facade plus restrained palette feel distinctive without inventing facts. Motion appears to support the floor-by-floor narrative and rooftop moment, though still frames limit certainty about nuance."
+ }
+}

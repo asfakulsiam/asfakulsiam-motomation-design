@@ -1,0 +1,72 @@
+{
+ "model": "gpt_5_4",
+ "seed": 8103,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "The hero is immediate and memorable: mood, date and ticket price all land in the first screen, and the poster-scale type gives the festival a clear signature. But the page weakens below the fold: some sections feel sparse, the line-up/schedule information is not meaningfully accessible from what is shown, and the measured contrast failures are disqualifying. From the scroll-strip, motion seems to be mostly sectional reveals/progression rather than a richer narrative, so I can't reward it beyond competent."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [
+    "Placeholder/TODO copy in output"
+   ],
+   "notes": "This has the more distinctive idea: the concentric-ring 'beat' motif, compressed display type, and dark palette create a coherent identity across sections. However, it is visibly unfinished in the provided run, with placeholder '[NEEDS COPY]' text and missing real line-up/schedule content, which is a hard fail and also hurts craft. The scroll-strip suggests orderly scroll progression, but not enough visible motion behavior to call it concept-defining from still frames alone."
+  },
+  "better": "tie",
+  "why": "Both runs fail a hard gate—A for contrast and B for placeholder/TODO content—so neither can be the winner."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "The hero is immediate and memorable: mood, date and ticket price all land in the first screen, and the poster-scale type gives the festival a clear signature. But the page weakens below the fold: some sections feel sparse, the line-up/schedule information is not meaningfully accessible from what is shown, and the measured contrast failures are disqualifying. From the scroll-strip, motion seems to be mostly sectional reveals/progression rather than a richer narrative, so I can't reward it beyond competent."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [
+   "Placeholder/TODO copy in output"
+  ],
+  "notes": "This has the more distinctive idea: the concentric-ring 'beat' motif, compressed display type, and dark palette create a coherent identity across sections. However, it is visibly unfinished in the provided run, with placeholder '[NEEDS COPY]' text and missing real line-up/schedule content, which is a hard fail and also hurts craft. The scroll-strip suggests orderly scroll progression, but not enough visible motion behavior to call it concept-defining from still frames alone."
+ }
+}

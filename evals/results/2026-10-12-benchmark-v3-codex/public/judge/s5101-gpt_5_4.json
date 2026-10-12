@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 5101,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a coherent calm editorial idea, and the bilingual hero, verified 140-hectare figure, donation options, volunteer form, and source are all present without invented claims. The typography is strong and the page is clean on desktop and mobile, but the system feels closer to a refined template than a singular identity, and the scroll-strip shows little motion progression beyond straightforward scrolling, so motion impact is limited."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 2,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B has the clearest governing concept: the whole site reads as field notes/specimen sheets, and that idea carries through hero, data, process, forms, and contact. Typography and layout feel authored rather than assembled, with excellent bilingual hierarchy and very tight mobile/desktop craft; however, the scroll-strip still shows only minimal motion evidence, so I can't score motion higher from the frames alone."
+  },
+  "better": "B",
+  "why": "B is the more distinctive and fully realized design system, with stronger concept carry-through, typography, and overall craft while still meeting the brief and checks."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a coherent calm editorial idea, and the bilingual hero, verified 140-hectare figure, donation options, volunteer form, and source are all present without invented claims. The typography is strong and the page is clean on desktop and mobile, but the system feels closer to a refined template than a singular identity, and the scroll-strip shows little motion progression beyond straightforward scrolling, so motion impact is limited."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 2,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B has the clearest governing concept: the whole site reads as field notes/specimen sheets, and that idea carries through hero, data, process, forms, and contact. Typography and layout feel authored rather than assembled, with excellent bilingual hierarchy and very tight mobile/desktop craft; however, the scroll-strip still shows only minimal motion evidence, so I can't score motion higher from the frames alone."
+ }
+}

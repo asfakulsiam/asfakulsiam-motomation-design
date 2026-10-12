@@ -1,0 +1,55 @@
+{
+ "model": "gpt_5_4",
+ "seed": 8102,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 5,
+    "Choreography": 4,
+    "Mobile motion": 5,
+    "Reduced-motion fallback": 4,
+    "Motion craft": 5
+   },
+   "notes": "Clear motion idea tied to the brief: stage-light beams drive the page, with copy explicitly matching the motion. Consecutive frames suggest a coherent scroll progression from date hero to stage explanation to lineup to tickets, with large type likely pinning/scrubbing against the moving light. Mobile keeps the same idea without collapsing into chaos; content remains readable at each sampled step. Reduced-motion appears readable and complete in every frame, though from stills I cannot confirm how much motion was actually removed versus simply frozen/softened. Craft is strong: no blank states, no obvious overlap bugs, and no content stuck awkwardly half-revealed."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 4,
+    "Choreography": 3,
+    "Mobile motion": 3,
+    "Reduced-motion fallback": 5,
+    "Motion craft": 2
+   },
+   "notes": "There is a real motion concept here: date/calendar shifts, artist count builds, stage dots fill, then ticket choice. That progression serves the festival brief better than generic fades. However, the full-motion strips show messy in-between states: oversized numbers cropped awkwardly, text collisions like the lineup/tickets overlap, and intermediate frames that read as broken rather than intentionally scrubbed. The desktop sequence is understandable overall, but not cleanly choreographed frame to frame. Mobile preserves the basic sequence, yet the sticky/overlay behavior at the top and some cramped transitions make it feel less stable. Reduced-motion is the best part: it looks substantially cleaner and keeps the content readable without relying on motion. Stills cannot show easing/timing, but the visible sampled states already expose craft issues."
+  },
+  "winner": "A"
+ },
+ "served": "{\"requested\": \"gpt_5_4\", \"served\": \"gpt_5_4\", \"in\": 6207, \"cached\": 0, \"out\": 363, \"reasoning\": 1440, \"secs\": 27.7}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 4,
+   "Choreography": 3,
+   "Mobile motion": 3,
+   "Reduced-motion fallback": 5,
+   "Motion craft": 2
+  },
+  "notes": "There is a real motion concept here: date/calendar shifts, artist count builds, stage dots fill, then ticket choice. That progression serves the festival brief better than generic fades. However, the full-motion strips show messy in-between states: oversized numbers cropped awkwardly, text collisions like the lineup/tickets overlap, and intermediate frames that read as broken rather than intentionally scrubbed. The desktop sequence is understandable overall, but not cleanly choreographed frame to frame. Mobile preserves the basic sequence, yet the sticky/overlay behavior at the top and some cramped transitions make it feel less stable. Reduced-motion is the best part: it looks substantially cleaner and keeps the content readable without relying on motion. Stills cannot show easing/timing, but the visible sampled states already expose craft issues.",
+  "total": 68.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 5,
+   "Choreography": 4,
+   "Mobile motion": 5,
+   "Reduced-motion fallback": 4,
+   "Motion craft": 5
+  },
+  "notes": "Clear motion idea tied to the brief: stage-light beams drive the page, with copy explicitly matching the motion. Consecutive frames suggest a coherent scroll progression from date hero to stage explanation to lineup to tickets, with large type likely pinning/scrubbing against the moving light. Mobile keeps the same idea without collapsing into chaos; content remains readable at each sampled step. Reduced-motion appears readable and complete in every frame, though from stills I cannot confirm how much motion was actually removed versus simply frozen/softened. Craft is strong: no blank states, no obvious overlap bugs, and no content stuck awkwardly half-revealed.",
+  "total": 92.0
+ },
+ "winner": "skill"
+}

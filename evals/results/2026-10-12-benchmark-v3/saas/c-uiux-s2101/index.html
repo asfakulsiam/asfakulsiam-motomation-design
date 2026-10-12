@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tracewell: from 4 million log lines to the one that matters</title>
+<meta name="description" content="Tracewell is a CLI and web app that finds the one log line that explains an incident.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0F172A;--card:#1B2336;--muted:#272F42;--fg:#F8FAFC;--mute-fg:#A3B1C6;
+  --border:#475569;--line:#334155;--accent:#22C55E;--on-accent:#0F172A;--warn:#F59E0B;--bad:#F87171;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,Segoe UI,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:400 1rem/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid #fff;outline-offset:3px;border-radius:4px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:var(--on-accent);padding:.6rem 1rem;border-radius:6px;z-index:99}
+.skip:focus{left:8px}
+.wrap{width:min(1120px,100% - 2.5rem);margin-inline:auto}
+header.nav{position:sticky;top:0;z-index:20;background:rgba(15,23,42,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;min-height:60px;gap:1rem}
+.logo{font:700 1.1rem var(--mono);text-decoration:none;display:flex;align-items:center;gap:.5rem}
+.logo svg{width:22px;height:22px}
+.nav nav{display:flex;gap:.25rem;align-items:center}
+.nav nav a{font-size:.95rem;color:var(--mute-fg);text-decoration:none;padding:.7rem .8rem;min-height:44px;display:inline-flex;align-items:center;border-radius:6px;transition:color .2s}
+.nav nav a:hover{color:var(--fg)}
+@media(max-width:620px){.nav nav a:not(.btn){display:none}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:44px;padding:.65rem 1.2rem;border-radius:8px;font:600 .95rem var(--sans);text-decoration:none;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--fg);transition:transform .2s,background .2s,border-color .2s}
+.btn:hover{border-color:var(--fg);transform:translateY(-1px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.primary:hover{background:#4ade80;border-color:#4ade80}
+.eyebrow{font:500 .8rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font:600 clamp(2.2rem,6vw,4.2rem)/1.08 var(--sans);letter-spacing:-.02em;max-width:16ch;text-wrap:balance}
+h1 em{font-style:normal;color:var(--accent)}
+h2{font:600 clamp(1.7rem,3.6vw,2.5rem)/1.15 var(--sans);letter-spacing:-.015em;text-wrap:balance}
+section{padding:clamp(3.5rem,8vw,6.5rem) 0}
+.hero{padding-top:clamp(3rem,7vw,5.5rem)}
+.hero p.lead{font-size:clamp(1.05rem,2vw,1.25rem);color:var(--mute-fg);max-width:52ch;margin:1.4rem 0 2rem}
+.cta{display:flex;flex-wrap:wrap;gap:.8rem}
+.hero-grid{display:grid;gap:3rem}
+code,.mono{font-family:var(--mono)}
+.inline{background:var(--muted);border:1px solid var(--line);padding:.1em .45em;border-radius:5px;font-size:.88em}
+
+/* terminal */
+.term{background:#0B1220;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 20px 60px -20px rgba(0,0,0,.6)}
+.term-bar{display:flex;align-items:center;gap:.4rem;padding:.65rem .9rem;border-bottom:1px solid var(--line);background:var(--card)}
+.term-bar i{width:10px;height:10px;border-radius:50%;background:var(--border)}
+.term-bar span{margin-left:.6rem;font:400 .78rem var(--mono);color:var(--mute-fg)}
+.term pre{font:400 .82rem/1.75 var(--mono);padding:1.1rem 1.2rem;overflow-x:auto;white-space:pre;color:#CBD5E1;min-height:19em}
+.term .p{color:var(--accent)}.term .d{color:#8795AB}.term .w{color:var(--warn)}.term .b{color:var(--fg);font-weight:700}
+.cursor{display:inline-block;width:.55em;height:1.05em;background:var(--accent);vertical-align:text-bottom;animation:blink 1.1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* steps */
+.steps{display:grid;gap:1.2rem;margin-top:2.5rem;counter-reset:s;list-style:none;padding:0}
+.step{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.5rem;position:relative}
+.step::before{counter-increment:s;content:"0" counter(s);font:500 .8rem var(--mono);color:var(--accent)}
+.step h3{font:600 1.15rem var(--sans);margin:.4rem 0 .7rem}
+.step p{color:var(--mute-fg);font-size:.97rem}
+.step code.cmd{display:block;margin-top:1rem;background:#0B1220;border:1px solid var(--line);border-radius:8px;padding:.7rem .9rem;font-size:.82rem;overflow-x:auto;white-space:nowrap}
+.step code .p{color:var(--accent)}
+
+/* result view */
+.result{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:2.5rem}
+.result-head{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;justify-content:space-between;align-items:center;padding:1rem 1.3rem;border-bottom:1px solid var(--line)}
+.result-head b{font-weight:600}
+.pill{font:500 .75rem var(--mono);padding:.25rem .6rem;border-radius:99px;border:1px solid var(--border);color:var(--mute-fg)}
+.pill.g{border-color:var(--accent);color:var(--accent)}
+.hit{padding:1.3rem;border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(34,197,94,.1),transparent 70%)}
+.hit .lbl{font:500 .75rem var(--mono);color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+.hit pre{font:400 .84rem/1.6 var(--mono);white-space:pre-wrap;word-break:break-word;margin:.6rem 0 1rem;color:var(--fg)}
+.hit pre .w{color:var(--warn)}
+.hit p{color:var(--mute-fg);max-width:70ch;font-size:.97rem}
+.rows{list-style:none;padding:0}
+.rows li{display:grid;grid-template-columns:2rem 1fr;gap:.2rem .8rem;padding:.8rem 1.3rem;border-bottom:1px solid var(--line);font:400 .8rem/1.5 var(--mono);color:var(--mute-fg)}
+.rows li:last-child{border:0}
+.rows .n{color:var(--fg)}
+.rows .t{overflow-wrap:anywhere}
+.bar{grid-column:2;height:4px;background:var(--muted);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:var(--w);background:var(--accent);border-radius:4px;transform-origin:left}
+.note{margin-top:1rem;font-size:.85rem;color:var(--mute-fg)}
+
+/* pricing */
+.plans{display:grid;gap:1.2rem;margin-top:2.5rem}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.8rem;display:flex;flex-direction:column}
+.plan.hl{border-color:var(--accent)}
+.plan h3{font:600 1.1rem var(--sans)}
+.price{font:600 2.6rem/1.1 var(--sans);margin:.8rem 0 .2rem;letter-spacing:-.02em}
+.price small{font-size:.95rem;font-weight:400;color:var(--mute-fg);letter-spacing:0}
+.plan ul{list-style:none;padding:0;margin:1.2rem 0 1.6rem;display:grid;gap:.6rem;flex:1}
+.plan li{display:flex;gap:.6rem;color:var(--mute-fg)}
+.plan li svg{flex:none;width:18px;height:18px;margin-top:.2rem;color:var(--accent)}
+
+/* install */
+.install{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(1.5rem,4vw,3rem)}
+.cmds{display:grid;gap:1rem;margin-top:1.8rem}
+.cmdrow{display:flex;align-items:center;gap:.6rem;background:#0B1220;border:1px solid var(--line);border-radius:10px;padding:.4rem .4rem .4rem 1rem}
+.cmdrow code{flex:1;font-size:.85rem;overflow-x:auto;white-space:nowrap;padding:.5rem 0}
+.cmdrow code .p{color:var(--accent)}
+.copy{min-height:44px;min-width:44px;padding:0 .9rem;border-radius:8px;border:1px solid var(--border);background:var(--muted);color:var(--fg);font:500 .85rem var(--sans);cursor:pointer;transition:border-color .2s}
+.copy:hover{border-color:var(--fg)}
+.label{font:500 .8rem var(--mono);color:var(--mute-fg);margin-bottom:.4rem}
+footer{border-top:1px solid var(--line);padding:2rem 0;color:var(--mute-fg);font-size:.9rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
+
+@media(min-width:860px){
+  .hero-grid{grid-template-columns:1fr 1.1fr;align-items:center}
+  .steps{grid-template-columns:repeat(3,1fr)}
+  .plans{grid-template-columns:repeat(2,minmax(0,1fr));max-width:820px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Tracewell home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 6h8M2 12h5M2 18h8"/><path d="M13 12h3l2-6 2 12 2-6h0"/></svg>
+      tracewell
+    </a>
+    <nav aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#demo">Demo</a>
+      <a href="#pricing">Pricing</a>
+      <a class="btn primary" href="#install">Install</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">For on-call backend engineers</p>
+      <h1 style="margin-top:1rem">From 4 million log lines to <em>the one that matters.</em></h1>
+      <p class="lead">Tracewell is a CLI and web app that finds the one log line that explains an incident. Stop scrolling. Start fixing.</p>
+      <div class="cta">
+        <a class="btn primary" href="#install">Install Tracewell</a>
+        <a class="btn" href="#demo">See it work</a>
+      </div>
+    </div>
+    <div class="term" role="img" aria-label="Terminal session: tracewell ingest streams logs, then tracewell why --since 15m prints the most unusual line">
+      <div class="term-bar"><i></i><i></i><i></i><span>~/on-call: zsh</span></div>
+      <pre id="termOut" aria-hidden="true"></pre>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <p class="eyebrow">How it works</p>
+    <h2 style="margin-top:.8rem">Three steps from page to explanation.</h2>
+    <ol class="steps">
+      <li class="step">
+        <h3>Ingest your logs</h3>
+        <p>Stream logs from files, Docker or Kubernetes.</p>
+        <code class="cmd"><span class="p">$</span> tracewell ingest</code>
+      </li>
+      <li class="step">
+        <h3>Ask why</h3>
+        <p>Tracewell ranks lines by how unusual they are compared with the last 7 days.</p>
+        <code class="cmd"><span class="p">$</span> tracewell why --since 15m</code>
+      </li>
+      <li class="step">
+        <h3>Share the link</h3>
+        <p>Send the explanation link to the team, so everyone looks at the same line.</p>
+        <code class="cmd"><span class="p">→</span> explanation link</code>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="demo" style="padding-top:0">
+  <div class="wrap">
+    <p class="eyebrow">The result view</p>
+    <h2 style="margin-top:.8rem">One line on top. The rest ranked below.</h2>
+    <div class="result" id="result">
+      <div class="result-head">
+        <span><b>Incident explanation</b> <span class="pill" style="margin-left:.5rem">--since 15m</span></span>
+        <span class="pill g">compared with last 7 days</span>
+      </div>
+      <div class="hit">
+        <p class="lbl">Most unusual line</p>
+        <pre>2026-10-12T09:41:07Z <span class="w">ERROR</span> payments-api pool exhausted: 0 of 20 connections free, waiting=87</pre>
+        <p>This message has not appeared in the previous 7 days, and it shows up just as the errors begin. Start here.</p>
+      </div>
+      <ol class="rows" aria-label="Next most unusual lines">
+        <li><span class="n">2</span><span class="t">WARN payments-api retrying upstream call, attempt=3</span><span class="bar" aria-hidden="true"><i style="--w:62%"></i></span></li>
+        <li><span class="n">3</span><span class="t">WARN gateway upstream timeout after 30s</span><span class="bar" aria-hidden="true"><i style="--w:41%"></i></span></li>
+        <li><span class="n">4</span><span class="t">INFO worker-7 job queue depth above normal</span><span class="bar" aria-hidden="true"><i style="--w:22%"></i></span></li>
+      </ol>
+    </div>
+    <p class="note">Illustrative session. Log lines and bars are example data.</p>
+  </div>
+</section>
+
+<section id="pricing" style="padding-top:0">
+  <div class="wrap">
+    <p class="eyebrow">Pricing</p>
+    <h2 style="margin-top:.8rem">Start free. Add your team when you need to.</h2>
+    <div class="plans">
+      <article class="plan">
+        <h3>Free</h3>
+        <p class="price">$0</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>1 user</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>3 days of retention</li>
+        </ul>
+        <a class="btn" href="#install">Install free</a>
+      </article>
+      <article class="plan hl">
+        <h3>Team</h3>
+        <p class="price">$12 <small>per seat per month</small></p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>30 days of retention</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>Shared incidents</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>SSO</li>
+        </ul>
+        <a class="btn primary" href="#install">Get started</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="install" style="padding-top:0">
+  <div class="wrap">
+    <div class="install">
+      <p class="eyebrow">Install</p>
+      <h2 style="margin-top:.8rem">Find your first line in minutes.</h2>
+      <div class="cmds">
+        <div>
+          <p class="label">Homebrew</p>
+          <div class="cmdrow"><code><span class="p">$</span> <span data-copy>brew install tracewell</span></code><button class="copy" type="button" aria-label="Copy Homebrew install command">Copy</button></div>
+        </div>
+        <div>
+          <p class="label">Install script</p>
+          <div class="cmdrow"><code><span class="p">$</span> <span data-copy>curl -fsSL https://tracewell.dev/install.sh | sh</span></code><button class="copy" type="button" aria-label="Copy install script command">Copy</button></div>
+        </div>
+      </div>
+      <p class="sr-only" id="live" role="status" aria-live="polite" style="position:absolute;left:-999px"></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="mono">tracewell</span>
+    <span>Find the one log line that explains an incident.</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var out = document.getElementById('termOut');
+  var script = [
+    '<span class="p">$</span> <span class="b">tracewell ingest</span>',
+    '<span class="d">streaming from kubernetes… ok</span>',
+    '',
+    '<span class="p">$</span> <span class="b">tracewell why --since 15m</span>',
+    '<span class="d">ranking against the last 7 days…</span>',
+    '',
+    '<span class="w">1  ERROR payments-api pool exhausted:</span>',
+    '<span class="w">   0 of 20 connections free, waiting=87</span>',
+    '',
+    '<span class="d">share → explanation link</span>',
+    '<span class="p">$</span> <span class="cursor"></span>'
+  ];
+  var lines = script.slice();
+  if (reduce || !window.gsap) { out.innerHTML = lines.join('\n'); }
+  else {
+    var i = 0;
+    (function tick(){
+      out.innerHTML = lines.slice(0, ++i).join('\n');
+      if (i < lines.length) setTimeout(tick, i === 3 || i === 5 ? 700 : 280);
+    })();
+  }
+
+  // copy buttons
+  var live = document.getElementById('live');
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click', function(){
+      var t = b.parentNode.querySelector('[data-copy]').textContent;
+      var done = function(ok){ b.textContent = ok ? 'Copied' : 'Press Ctrl+C'; live.textContent = ok ? 'Copied to clipboard' : 'Copy failed'; setTimeout(function(){b.textContent='Copy'},1800); };
+      if (navigator.clipboard) navigator.clipboard.writeText(t).then(function(){done(true)},function(){done(false)});
+      else done(false);
+    });
+  });
+
+  // scroll reveals
+  if (!reduce && window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.from('.step', {y:24, opacity:0, duration:.6, ease:'power2.out', stagger:.1,
+      scrollTrigger:{trigger:'.steps', start:'top 85%'}});
+    gsap.from('.plan', {y:24, opacity:0, duration:.6, stagger:.1, scrollTrigger:{trigger:'.plans', start:'top 88%'}});
+    gsap.from('.result', {y:24, opacity:0, duration:.6, scrollTrigger:{trigger:'.result', start:'top 88%'}});
+    gsap.from('.bar i', {scaleX:0, duration:.8, ease:'power2.out', stagger:.12,
+      scrollTrigger:{trigger:'.rows', start:'top 90%'}});
+  }
+})();
+</script>
+</body>
+</html>

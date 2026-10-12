@@ -1,0 +1,71 @@
+{
+ "375": {
+  "pageHeight": 6987,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 7189,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 6,
+    "text": "Contact",
+    "href": "#contact",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "37/40"
+  },
+  "source": {
+   "bytes": 25462,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": "motomation · archetype: field-guide · mutation: reverse-reveal · signature: brick-removal · tier: 2 · critique: C5[restraint:kept] H5[375:0] S5[last5:no-log] R5[cuts:3,anim:2] M5[t2:pins0/2,webgl0/1,js47/80KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 5a2219020f "
+  },
+  "strip": {
+   "frames": [
+    0,
+    898,
+    1797,
+    2695,
+    3594,
+    4492,
+    5391,
+    6289
+   ],
+   "maxScroll": 6289
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 7189,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 6987,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 5a2219020f",
+  "critique": "C?[no-record] H5[375:0] S5[last5:no-log] R?[no-record] M5[t2:pins0/2,webgl0/1,js47/80KB,rm0] V5[entrance-repeats:0]",
+  "contrast": [],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

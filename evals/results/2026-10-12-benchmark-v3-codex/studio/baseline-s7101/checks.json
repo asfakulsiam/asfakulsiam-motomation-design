@@ -1,0 +1,302 @@
+{
+ "375": {
+  "pageHeight": 10272,
+  "errors": [],
+  "hOverflow": 192,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 5089,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 10,
+    "text": "08\nContact",
+    "href": "#contact",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 40098,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": "motomation · archetype: atlas · mutation: elevator-panel-lit-rail · signature: numbered-chapter-rail · tier: 1 · critique: not-run-in-cli · gate: memory-logged; static-check-only "
+  },
+  "strip": {
+   "frames": [
+    0,
+    600,
+    1199,
+    1799,
+    2399,
+    2999,
+    3598,
+    4198
+   ],
+   "maxScroll": 4198
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 5089,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 10272,
+  "errors": [],
+  "hOverflow": 192
+ },
+ "gate": {
+  "counts": {
+   "contrast": 12,
+   "overflow": 141,
+   "words": 5,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c12 o141 w5 rm0 a0 n0 · gate/2 · 308c2685e9",
+  "critique": "C?[no-record] H1[375:6] S5[last5:no-log] R?[no-record] M5[t1:pins1/2,webgl0/1,js2/30KB,rm0] V2[entrance-repeats:3]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "p.section-label",
+    "text": "Featured projects",
+    "ratio": 4.44,
+    "need": 4.5,
+    "fg": "#5f564d",
+    "bg": "#d8c9bb",
+    "size": 12.16
+   },
+   {
+    "width": 375,
+    "el": "small",
+    "text": "01",
+    "ratio": 4.44,
+    "need": 4.5,
+    "fg": "#5f564d",
+    "bg": "#d8c9bc",
+    "size": 11.52
+   },
+   {
+    "width": 375,
+    "el": "small",
+    "text": "02",
+    "ratio": 4.44,
+    "need": 4.5,
+    "fg": "#5f564d",
+    "bg": "#d8c9bc",
+    "size": 11.52
+   },
+   {
+    "width": 375,
+    "el": "small",
+    "text": "03",
+    "ratio": 4.44,
+    "need": 4.5,
+    "fg": "#5f564d",
+    "bg": "#d8c9bc",
+    "size": 11.52
+   },
+   {
+    "width": 375,
+    "el": "small",
+    "text": "04",
+    "ratio": 4.44,
+    "need": 4.5,
+    "fg": "#5f564d",
+    "bg": "#d8c9bc",
+    "size": 11.52
+   },
+   {
+    "width": 375,
+    "el": "small",
+    "text": "05",
+    "ratio": 4.44,
+    "need": 4.5,
+    "fg": "#5f564d",
+    "bg": "#d8c9bc",
+    "size": 11.52
+   },
+   {
+    "width": 390,
+    "el": "p.section-label",
+    "text": "Featured projects",
+    "ratio": 4.46,
+    "need": 4.5,
+    "fg": "#5f564d",
+    "bg": "#d9c9bc",
+    "size": 12.16
+   },
+   {
+    "width": 390,
+    "el": "small",
+    "text": "01",
+    "ratio": 4.44,
+    "need": 4.5,
+    "fg": "#5f564d",
+    "bg": "#d8c9bc",
+    "size": 11.52
+   },
+   {
+    "width": 390,
+    "el": "small",
+    "text": "02",
+    "ratio": 4.44,
+    "need": 4.5,
+    "fg": "#5f564d",
+    "bg": "#d8c9bc",
+    "size": 11.52
+   },
+   {
+    "width": 390,
+    "el": "small",
+    "text": "03",
+    "ratio": 4.44,
+    "need": 4.5,
+    "fg": "#5f564d",
+    "bg": "#d8c9bc",
+    "size": 11.52
+   },
+   {
+    "width": 390,
+    "el": "small",
+    "text": "04",
+    "ratio": 4.44,
+    "need": 4.5,
+    "fg": "#5f564d",
+    "bg": "#d8c9bc",
+    "size": 11.52
+   },
+   {
+    "width": 390,
+    "el": "small",
+    "text": "05",
+    "ratio": 4.44,
+    "need": 4.5,
+    "fg": "#5f564d",
+    "bg": "#d8c9bc",
+    "size": 11.52
+   }
+  ],
+  "overflow": [
+   {
+    "width": 375,
+    "el": "page",
+    "kind": "horizontal scroll",
+    "px": 193
+   },
+   {
+    "width": 375,
+    "el": "aside.rail",
+    "kind": "escapes viewport",
+    "px": 192,
+    "text": ""
+   },
+   {
+    "width": 375,
+    "el": "a.rail-link",
+    "kind": "escapes viewport",
+    "px": 5,
+    "text": "05Twin Courts"
+   },
+   {
+    "width": 375,
+    "el": "p.eyebrow",
+    "kind": "escapes viewport",
+    "px": 185,
+    "text": "Ittaghor Studio · Dhaka · Founded 2011"
+   },
+   {
+    "width": 375,
+    "el": "p",
+    "kind": "escapes viewport",
+    "px": 185,
+    "text": "Houses built around light, brick and an "
+   },
+   {
+    "width": 375,
+    "el": "p.meta",
+    "kind": "escapes viewport",
+    "px": 185,
+    "text": "Partners: Nusrat Jahan · Tanvir Ahmed · "
+   },
+   {
+    "width": 375,
+    "el": "div.meta",
+    "kind": "escapes viewport",
+    "px": 171,
+    "text": "Dhaka · Founded 2011"
+   },
+   {
+    "width": 375,
+    "el": "p.section-label",
+    "kind": "escapes viewport",
+    "px": 175,
+    "text": "Featured projects"
+   },
+   {
+    "width": 375,
+    "el": "ol.index-list",
+    "kind": "escapes viewport",
+    "px": 175,
+    "text": ""
+   },
+   {
+    "width": 375,
+    "el": "strong",
+    "kind": "escapes viewport",
+    "px": 128,
+    "text": "Courtyard House"
+   },
+   {
+    "width": 375,
+    "el": "strong",
+    "kind": "escapes viewport",
+    "px": 128,
+    "text": "Jali House"
+   },
+   {
+    "width": 375,
+    "el": "strong",
+    "kind": "escapes viewport",
+    "px": 128,
+    "text": "River Room"
+   }
+  ],
+  "words": [
+   {
+    "el": "h3#project-01-title.project-name",
+    "text": "Courtyard House",
+    "problem": "leaves the viewport by 177px"
+   },
+   {
+    "el": "h3#project-02-title.project-name",
+    "text": "Jali House",
+    "problem": "leaves the viewport by 177px"
+   },
+   {
+    "el": "h3#project-03-title.project-name",
+    "text": "River Room",
+    "problem": "leaves the viewport by 177px"
+   },
+   {
+    "el": "h3#project-04-title.project-name",
+    "text": "Brick Library",
+    "problem": "leaves the viewport by 177px"
+   },
+   {
+    "el": "h3#project-05-title.project-name",
+    "text": "Twin Courts",
+    "problem": "leaves the viewport by 177px"
+   }
+  ],
+  "motion": [],
+  "names": []
+ }
+}

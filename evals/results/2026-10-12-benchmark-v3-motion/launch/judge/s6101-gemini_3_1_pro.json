@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 6101,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A uses bold typography and stark contrast to create a strong, unified identity. The motion sequence effectively ties the scroll progress to the product features (temperature changes) while keeping the layout pristine. The reduced-motion fallback is elegantly handled."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 2,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B pursues a classic, elegant aesthetic with nice serif typography, but fails in execution during the scroll sequence. Pinned text elements are heavily clipped off the left side of the screen as seen in the scroll-frame strip, severely impacting readability and craft. The static layout is decent, but the motion implementation breaks the experience."
+  },
+  "better": "A",
+  "why": "Site A delivers a bold, flawless scroll-driven experience, whereas Site B suffers from severe layout clipping during its motion sequence."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 2,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B pursues a classic, elegant aesthetic with nice serif typography, but fails in execution during the scroll sequence. Pinned text elements are heavily clipped off the left side of the screen as seen in the scroll-frame strip, severely impacting readability and craft. The static layout is decent, but the motion implementation breaks the experience."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A uses bold typography and stark contrast to create a strong, unified identity. The motion sequence effectively ties the scroll progress to the product features (temperature changes) while keeping the layout pristine. The reduced-motion fallback is elegantly handled."
+ }
+}

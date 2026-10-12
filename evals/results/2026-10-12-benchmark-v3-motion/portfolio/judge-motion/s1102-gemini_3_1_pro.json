@@ -1,0 +1,55 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 1102,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 4,
+    "Choreography": 4,
+    "Mobile motion": 4,
+    "Reduced-motion fallback": 5,
+    "Motion craft": 4
+   },
+   "notes": "Uses a bold, type-led approach with a horizontal 'filmstrip' scroll for the projects, which fits the title sequence/film brief nicely. The intro animation scatters the letters of 'RAFI' in a somewhat messy but deliberate title-card style. The mobile translation keeps the horizontal scroll intact. Most importantly, the reduced-motion version perfectly stacks the content vertically, ensuring full legibility."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 3,
+    "Choreography": 2,
+    "Mobile motion": 2,
+    "Reduced-motion fallback": 1,
+    "Motion craft": 1
+   },
+   "notes": "Attempts an elegant, cinematic fading and morphing typography concept. However, the execution is deeply flawed. Consecutive frames show text crashing into each other, creating illegible overlaps. This is most egregious in the reduced-motion fallback, where frames are frozen with overlapping text (e.g., 'Rboot' formed by 'Rafi' and 'Bhoot' colliding), making the fallback entirely broken."
+  },
+  "winner": "A"
+ },
+ "served": "{\"requested\": \"gemini_3_1_pro\", \"served\": \"gemini_3_1_pro\", \"in\": 7205, \"cached\": 0, \"out\": 319, \"reasoning\": 1297, \"secs\": 19.8}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 4,
+   "Choreography": 4,
+   "Mobile motion": 4,
+   "Reduced-motion fallback": 5,
+   "Motion craft": 4
+  },
+  "notes": "Uses a bold, type-led approach with a horizontal 'filmstrip' scroll for the projects, which fits the title sequence/film brief nicely. The intro animation scatters the letters of 'RAFI' in a somewhat messy but deliberate title-card style. The mobile translation keeps the horizontal scroll intact. Most importantly, the reduced-motion version perfectly stacks the content vertically, ensuring full legibility.",
+  "total": 84.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 3,
+   "Choreography": 2,
+   "Mobile motion": 2,
+   "Reduced-motion fallback": 1,
+   "Motion craft": 1
+  },
+  "notes": "Attempts an elegant, cinematic fading and morphing typography concept. However, the execution is deeply flawed. Consecutive frames show text crashing into each other, creating illegible overlaps. This is most egregious in the reduced-motion fallback, where frames are frozen with overlapping text (e.g., 'Rboot' formed by 'Rafi' and 'Bhoot' colliding), making the fallback entirely broken.",
+  "total": 36.0
+ },
+ "winner": "baseline"
+}

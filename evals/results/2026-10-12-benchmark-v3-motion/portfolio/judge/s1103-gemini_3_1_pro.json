@@ -1,0 +1,68 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 1103,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A completely nails the brief by turning the portfolio itself into a cinematic title sequence. The massive, bold typography and credit-roll scrolling motion are perfectly aligned with the motion designer's goal to work in film titles. It feels highly original, expertly crafted, and fully accessible."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Invented statistics, logos or testimonials"
+   ],
+   "notes": "Site B has a very elegant, editorial feel with lovely typography, but it misses the cinematic essence of the brief, relying instead on generic geometric shape animations. Critically, it fails the hard gate for accessibility/invented stats: the years of experience counter defaults to '0' in the reduced motion fallback, presenting incorrect information to users."
+  },
+  "better": "A",
+  "why": "Site A delivers a deeply conceptual, highly original execution that acts as a live proof-of-concept for the designer's title sequence skills, whereas Site B is a generic editorial layout with a broken accessibility fallback."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Invented statistics, logos or testimonials"
+  ],
+  "notes": "Site B has a very elegant, editorial feel with lovely typography, but it misses the cinematic essence of the brief, relying instead on generic geometric shape animations. Critically, it fails the hard gate for accessibility/invented stats: the years of experience counter defaults to '0' in the reduced motion fallback, presenting incorrect information to users."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A completely nails the brief by turning the portfolio itself into a cinematic title sequence. The massive, bold typography and credit-roll scrolling motion are perfectly aligned with the motion designer's goal to work in film titles. It feels highly original, expertly crafted, and fully accessible."
+ }
+}

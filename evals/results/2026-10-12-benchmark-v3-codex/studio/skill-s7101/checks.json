@@ -1,0 +1,71 @@
+{
+ "375": {
+  "pageHeight": 6844,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 6391,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 5,
+    "text": "Contact",
+    "href": "#contact",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "37/40"
+  },
+  "source": {
+   "bytes": 36561,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": "motomation · archetype: stage · mutation: remove-expected · signature: line-curtain · tier: 1 --"
+  },
+  "strip": {
+   "frames": [
+    0,
+    784,
+    1569,
+    2353,
+    3138,
+    3922,
+    4707,
+    5491
+   ],
+   "maxScroll": 5491
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 6391,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 6844,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 87f0103f9e",
+  "critique": "C?[no-record] H4[375:1] S5[last5:no-log] R?[no-record] M5[t1:pins2/2,webgl0/1,js2/30KB,rm0] V5[entrance-repeats:0]",
+  "contrast": [],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

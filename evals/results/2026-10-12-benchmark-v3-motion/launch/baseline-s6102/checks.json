@@ -1,0 +1,82 @@
+{
+ "375": {
+  "pageHeight": 5770,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 6371,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 1,
+    "text": "Skip to pre-order",
+    "href": "#order",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "32/40"
+  },
+  "source": {
+   "bytes": 11666,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    782,
+    1563,
+    2345,
+    3126,
+    3908,
+    4689,
+    5471
+   ],
+   "maxScroll": 5471
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 2712,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 2242,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 1,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c1 o0 w0 rm0 a0 n0 · gate/2 · de7167d931",
+  "critique": "C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0]",
+  "contrast": [
+   {
+    "width": 768,
+    "el": "span#tlabel.eyebrow",
+    "text": "Three light temperatures",
+    "ratio": 4.46,
+    "need": 4.5,
+    "fg": "#ffb766",
+    "bg": "#6a4e2c",
+    "size": 12
+   }
+  ],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

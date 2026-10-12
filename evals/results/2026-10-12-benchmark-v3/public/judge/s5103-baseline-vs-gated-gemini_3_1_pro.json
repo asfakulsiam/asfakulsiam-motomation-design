@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 5103,
+ "pair": [
+  "baseline",
+  "gated"
+ ],
+ "order": {
+  "A": "gated",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A clean, functional implementation with elegant bilingual typography and a serene, appropriate color palette. The simple SVG mangrove roots add a nice touch without feeling overbearing. Motion is virtually nonexistent, but the layout is solidly crafted and passes all accessibility checks."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [],
+   "notes": "The layout and typography are generally strong, and the abstract tree illustrations provide a nice visual identity. However, the number counter animation fails under reduced motion, pausing at '128' rather than jumping to the final '140' required by the brief. Combined with a contrast violation, this brings down its technical scores."
+  },
+  "better": "A",
+  "why": "Site A delivers a more robust, accessible experience with flawless execution of the brief's content, avoiding the broken fallback states seen in Site B."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [],
+  "notes": "The layout and typography are generally strong, and the abstract tree illustrations provide a nice visual identity. However, the number counter animation fails under reduced motion, pausing at '128' rather than jumping to the final '140' required by the brief. Combined with a contrast violation, this brings down its technical scores."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A clean, functional implementation with elegant bilingual typography and a serene, appropriate color palette. The simple SVG mangrove roots add a nice touch without feeling overbearing. Motion is virtually nonexistent, but the layout is solidly crafted and passes all accessibility checks."
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "model": "gpt_5_4",
+ "seed": 2103,
+ "pair": [
+  "baseline",
+  "matched"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 2,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "A has a clear, brief-faithful idea: the page visually moves from a wall of logs to the singled-out line, and that concept carries into the demo and pricing. The scroll-strip suggests purposeful staged reveals that support the story, though stills make the exact interaction hard to judge. It is let down by serious contrast failures and obvious mobile overflow/cropping, especially in the lower sections."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "B is clean and competent but reads much more like a standard SaaS template, with a weaker central idea and a less distinctive first screen. The scroll-strip shows some useful progression into the product demo and pricing, but the motion appears generic rather than concept-defining. Like A, it fails contrast, and the mobile view shows severe horizontal overflow and sections that feel missing or pushed off-canvas."
+  },
+  "better": "A",
+  "why": "A expresses the product promise much more directly and memorably, with stronger concept, originality, and story-led motion, despite both entries failing the contrast gate."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "B is clean and competent but reads much more like a standard SaaS template, with a weaker central idea and a less distinctive first screen. The scroll-strip shows some useful progression into the product demo and pricing, but the motion appears generic rather than concept-defining. Like A, it fails contrast, and the mobile view shows severe horizontal overflow and sections that feel missing or pushed off-canvas."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 2,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "A has a clear, brief-faithful idea: the page visually moves from a wall of logs to the singled-out line, and that concept carries into the demo and pricing. The scroll-strip suggests purposeful staged reveals that support the story, though stills make the exact interaction hard to judge. It is let down by serious contrast failures and obvious mobile overflow/cropping, especially in the lower sections."
+ }
+}

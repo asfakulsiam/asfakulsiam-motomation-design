@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 7101,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a stunning, quiet aesthetic perfectly aligned with the brief. The massive, elegant typography in the hero creates a striking identity, while the sticky sidebar and full-height project scrolls are executed flawlessly. The minimalist SVG plans and images are highly refined."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B adopts a card-based UI with drop shadows and rounded corners that feels too generic and app-like for an architecture studio. While it attempts to organize the content clearly, it lacks the requested quiet mood and suffers from a significant 192px horizontal overflow bug on mobile."
+  },
+  "better": "A",
+  "why": "Site A perfectly captures the quiet, architectural mood with stunning typography and elegant sticky scrolling, whereas Site B relies on a generic card UI and suffers from severe mobile layout breakage."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B adopts a card-based UI with drop shadows and rounded corners that feels too generic and app-like for an architecture studio. While it attempts to organize the content clearly, it lacks the requested quiet mood and suffers from a significant 192px horizontal overflow bug on mobile."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a stunning, quiet aesthetic perfectly aligned with the brief. The massive, elegant typography in the hero creates a striking identity, while the sticky sidebar and full-height project scrolls are executed flawlessly. The minimalist SVG plans and images are highly refined."
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 7103,
+ "pair": [
+  "c-taste",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-taste"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 3,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a highly sophisticated, editorial layout that perfectly matches the quiet, architectural mood requested in the brief. The typography is exceptional, and the use of grid lines and subtle borders reinforces the 'blueprint' feel. While motion is minimal, the overall craft is pixel-perfect."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B successfully implements a horizontal scroll sequence for the projects and provides a functional vertical fallback for reduced motion. However, its oversized sans-serif typography and standard two-column sections feel like a generic tech template rather than a quiet architecture studio portfolio."
+  },
+  "better": "A",
+  "why": "Site A offers a vastly superior, highly original architectural aesthetic with beautiful typography, whereas Site B feels generic and template-driven despite its motion efforts."
+ },
+ "c-taste": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B successfully implements a horizontal scroll sequence for the projects and provides a functional vertical fallback for reduced motion. However, its oversized sans-serif typography and standard two-column sections feel like a generic tech template rather than a quiet architecture studio portfolio."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 3,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a highly sophisticated, editorial layout that perfectly matches the quiet, architectural mood requested in the brief. The typography is exceptional, and the use of grid lines and subtle borders reinforces the 'blueprint' feel. While motion is minimal, the overall craft is pixel-perfect."
+ }
+}

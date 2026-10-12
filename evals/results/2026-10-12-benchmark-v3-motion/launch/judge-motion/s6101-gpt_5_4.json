@@ -1,0 +1,55 @@
+{
+ "model": "gpt_5_4",
+ "seed": 6101,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 5,
+    "Choreography": 5,
+    "Mobile motion": 4,
+    "Reduced-motion fallback": 4,
+    "Motion craft": 4
+   },
+   "notes": "Clear motion idea matched to the brief: a pinned/scrubbed lamp image-sequence chapter that rotates the ring, brings it forward, then uses the same object to demonstrate the one-touch control and the three temperatures. Consecutive frames read as a coherent storyboard rather than generic fades. Desktop strip shows a strong progression from hero to feature beats to temperature change to price, with the pre-order CTA staying reachable. Mobile keeps the same chapter in a workable form; it is text-heavy and tighter, but the sequence still reads. Reduced-motion strip appears to replace the long scrub with stacked static sections, and the core content remains readable without needing motion. Minor craft deductions: a few frames feel cramped or partly caught between pinned states/crops, and reduced motion still has some large empty areas/awkward partial lamp crops. Stills cannot confirm easing/timing quality."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 4,
+    "Choreography": 3,
+    "Mobile motion": 4,
+    "Reduced-motion fallback": 2,
+    "Motion craft": 3
+   },
+   "notes": "There is a real motion concept here too: the ring rotates through different orientations while the light temperature changes from warm to neutral to cool, which suits the product. However, the frame-to-frame progression feels more like a series of bold slides than one well-paced scrubbed chapter. The lamp orientation and text blocks jump between states, so the choreography is less clearly sequenced than A. Mobile adapts reasonably well and keeps the product motion legible, though the oversized type competes with the motion and some captures feel more like layout swaps than motion storytelling. The reduced-motion version is the weak point: it still looks dependent on the animated layout, with oversized cropped text and sections appearing half-caught between states, so it is less clean as a fully readable static fallback. Craft is acceptable overall\u2014no obvious blank failures\u2014but there are several chopped/half-revealed compositions that read as rough motion-state handling. Stills cannot confirm easing/timing quality."
+  },
+  "winner": "A"
+ },
+ "served": "{\"requested\": \"gpt_5_4\", \"served\": \"gpt_5_4\", \"in\": 6218, \"cached\": 0, \"out\": 442, \"reasoning\": 1486, \"secs\": 32.0}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 5,
+   "Choreography": 5,
+   "Mobile motion": 4,
+   "Reduced-motion fallback": 4,
+   "Motion craft": 4
+  },
+  "notes": "Clear motion idea matched to the brief: a pinned/scrubbed lamp image-sequence chapter that rotates the ring, brings it forward, then uses the same object to demonstrate the one-touch control and the three temperatures. Consecutive frames read as a coherent storyboard rather than generic fades. Desktop strip shows a strong progression from hero to feature beats to temperature change to price, with the pre-order CTA staying reachable. Mobile keeps the same chapter in a workable form; it is text-heavy and tighter, but the sequence still reads. Reduced-motion strip appears to replace the long scrub with stacked static sections, and the core content remains readable without needing motion. Minor craft deductions: a few frames feel cramped or partly caught between pinned states/crops, and reduced motion still has some large empty areas/awkward partial lamp crops. Stills cannot confirm easing/timing quality.",
+  "total": 88.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 4,
+   "Choreography": 3,
+   "Mobile motion": 4,
+   "Reduced-motion fallback": 2,
+   "Motion craft": 3
+  },
+  "notes": "There is a real motion concept here too: the ring rotates through different orientations while the light temperature changes from warm to neutral to cool, which suits the product. However, the frame-to-frame progression feels more like a series of bold slides than one well-paced scrubbed chapter. The lamp orientation and text blocks jump between states, so the choreography is less clearly sequenced than A. Mobile adapts reasonably well and keeps the product motion legible, though the oversized type competes with the motion and some captures feel more like layout swaps than motion storytelling. The reduced-motion version is the weak point: it still looks dependent on the animated layout, with oversized cropped text and sections appearing half-caught between states, so it is less clean as a fully readable static fallback. Craft is acceptable overall\u2014no obvious blank failures\u2014but there are several chopped/half-revealed compositions that read as rough motion-state handling. Stills cannot confirm easing/timing quality.",
+  "total": 64.0
+ },
+ "winner": "baseline"
+}

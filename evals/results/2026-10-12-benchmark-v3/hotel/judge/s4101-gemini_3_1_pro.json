@@ -1,0 +1,68 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 4101,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a masterclass in scroll-triggered storytelling; as the user scrolls past the room types, the corresponding levels of the adjacent architectural drawing illuminate, perfectly matching the 'climb from courtyard to roof' copy. The typography is elegant and highly legible, and the execution is polished across all breakpoints without any accessibility errors."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "Site B presents a moody, atmospheric palette that attempts to capture the dawn/dusk vibe of the tours, but it falls back on a fairly standard stacked-section layout. The motion is generic compared to A, and it fails the accessibility hard gate due to contrast violations, likely on the darker background sections."
+  },
+  "better": "A",
+  "why": "Site A's brilliant, brief-aligned scroll motion and flawless execution make it significantly stronger, while Site B suffers from layout rigidity and contrast failures."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "Site B presents a moody, atmospheric palette that attempts to capture the dawn/dusk vibe of the tours, but it falls back on a fairly standard stacked-section layout. The motion is generic compared to A, and it fails the accessibility hard gate due to contrast violations, likely on the darker background sections."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a masterclass in scroll-triggered storytelling; as the user scrolls past the room types, the corresponding levels of the adjacent architectural drawing illuminate, perfectly matching the 'climb from courtyard to roof' copy. The typography is elegant and highly legible, and the execution is polished across all breakpoints without any accessibility errors."
+ }
+}

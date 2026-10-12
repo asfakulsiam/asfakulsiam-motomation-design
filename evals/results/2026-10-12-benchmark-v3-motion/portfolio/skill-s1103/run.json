@@ -1,0 +1,12 @@
+{
+ "slug": "portfolio",
+ "seed": 1103,
+ "cond": "skill",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-motion/portfolio/skill-s1103",
+ "exit": 0,
+ "seconds": 860,
+ "turns": 30,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

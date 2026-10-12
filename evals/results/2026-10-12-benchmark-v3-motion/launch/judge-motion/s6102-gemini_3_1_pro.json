@@ -1,0 +1,55 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 6102,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 5,
+    "Choreography": 5,
+    "Mobile motion": 5,
+    "Reduced-motion fallback": 5,
+    "Motion craft": 5
+   },
+   "notes": "Site A expertly fulfills the brief by utilizing the 180-frame render sequence for a smooth, scrubbed 3D animation of the lamp. The choreography is highly effective, pinning the product centrally while gracefully revealing textual features. The mobile execution perfectly adapts this sequence without breaking, and the reduced-motion fallback provides a flawless, fully readable static layout that removes the complex scrolljacking."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 2,
+    "Choreography": 2,
+    "Mobile motion": 1,
+    "Reduced-motion fallback": 1,
+    "Motion craft": 1
+   },
+   "notes": "Site B ignores the 180-frame sequence requirement, instead relying on a static pinned background image while text scrolls past. The choreography is poorly paced, leading to severe overlaps between sections. The mobile version is completely broken, with text illegibly stacked on top of itself and the product image. Furthermore, the reduced-motion strip is identical to the full-motion strip, failing to provide an accessible static fallback."
+  },
+  "winner": "A"
+ },
+ "served": "{\"requested\": \"gemini_3_1_pro\", \"served\": \"gemini_3_1_pro\", \"in\": 7167, \"cached\": 0, \"out\": 315, \"reasoning\": 1036, \"secs\": 16.5}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 5,
+   "Choreography": 5,
+   "Mobile motion": 5,
+   "Reduced-motion fallback": 5,
+   "Motion craft": 5
+  },
+  "notes": "Site A expertly fulfills the brief by utilizing the 180-frame render sequence for a smooth, scrubbed 3D animation of the lamp. The choreography is highly effective, pinning the product centrally while gracefully revealing textual features. The mobile execution perfectly adapts this sequence without breaking, and the reduced-motion fallback provides a flawless, fully readable static layout that removes the complex scrolljacking.",
+  "total": 100.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 2,
+   "Choreography": 2,
+   "Mobile motion": 1,
+   "Reduced-motion fallback": 1,
+   "Motion craft": 1
+  },
+  "notes": "Site B ignores the 180-frame sequence requirement, instead relying on a static pinned background image while text scrolls past. The choreography is poorly paced, leading to severe overlaps between sections. The mobile version is completely broken, with text illegibly stacked on top of itself and the product image. Furthermore, the reduced-motion strip is identical to the full-motion strip, failing to provide an accessible static fallback.",
+  "total": 28.0
+ },
+ "winner": "baseline"
+}

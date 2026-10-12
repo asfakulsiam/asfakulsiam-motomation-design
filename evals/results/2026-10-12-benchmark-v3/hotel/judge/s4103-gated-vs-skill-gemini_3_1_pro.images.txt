@@ -1,0 +1,10 @@
+/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/hotel/skill-s4103/shot-1440-fold.png
+/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/hotel/skill-s4103/shot-1440-full.png
+/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/hotel/skill-s4103/shot-375-full.png
+/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/hotel/skill-s4103/shot-1440-reduced-full.png
+/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/hotel/skill-s4103/shot-1440-strip.png
+/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/hotel/gated-s4103/shot-1440-fold.png
+/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/hotel/gated-s4103/shot-1440-full.png
+/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/hotel/gated-s4103/shot-375-full.png
+/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/hotel/gated-s4103/shot-1440-reduced-full.png
+/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/hotel/gated-s4103/shot-1440-strip.png

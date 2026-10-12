@@ -1,0 +1,55 @@
+{
+ "model": "gpt_5_4",
+ "seed": 1103,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 4,
+    "Choreography": 3,
+    "Mobile motion": 3,
+    "Reduced-motion fallback": 3,
+    "Motion craft": 3
+   },
+   "notes": "Clear motion idea: oversized title-card typography under stage/spotlight beams, which fits a motion designer aiming for title-sequence work. The frame-to-frame progression reads as chapters: hero -> capability/type hook -> individual projects -> contact. That is more brief-specific than generic fade work. But the choreography looks fairly sectional rather than richly scrubbed; several steps feel like simple handoffs between full-screen cards, and a few intermediate frames are sparse enough to suggest dead travel/pin space. On mobile, the same system survives, but some frames show awkward cropping and empty transitional areas, so the motion language feels less controlled. Reduced-motion still appears to preserve most content, but it does not fully simplify into clean static readability: some frames still show oversized type partly entering/leaving or overlapping the reading flow, so the fallback seems only partially softened. Craft is decent but not pristine: there are half-revealed/cropped headline moments and some in-between states that look under-resolved. Stills cannot show easing/timing, so this judgment is based only on visible state changes."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 4,
+    "Choreography": 4,
+    "Mobile motion": 4,
+    "Reduced-motion fallback": 4,
+    "Motion craft": 4
+   },
+   "notes": "Strong type-led hook and a visible chapter system. The motion concept appears to pair editorial serif typography with outlined geometric forms that move/morph between selected-work chapters; that gives the page a signature beyond simple fades, though the shape motif is somewhat more abstract and less explicitly film/title-specific than Site A's spotlight/title-card approach. Choreography is more coherent than A: consecutive frames suggest a controlled sequence from hero to intro to numbered work chapters, with shapes relocating/transforming as anchors while project titles take over. The strip reads like a deliberate scroll narrative rather than isolated cards. Mobile keeps a workable version of that system; shapes are simplified/clipped at times, but content remains readable and the chapter progression still makes sense. Reduced-motion appears serviceable: all major content stays present and legible without depending on the transforms, and the decorative forms seem non-blocking. Craft is stronger overall: no obvious broken blanks, fewer half-revealed text states, and the motion artifacts visible in the strip feel intentional rather than accidental. Stills cannot show easing/timing, so this judgment is based only on visible state changes."
+  },
+  "winner": "B"
+ },
+ "served": "{\"requested\": \"gpt_5_4\", \"served\": \"gpt_5_4\", \"in\": 6260, \"cached\": 0, \"out\": 519, \"reasoning\": 1142, \"secs\": 30.6}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 4,
+   "Choreography": 4,
+   "Mobile motion": 4,
+   "Reduced-motion fallback": 4,
+   "Motion craft": 4
+  },
+  "notes": "Strong type-led hook and a visible chapter system. The motion concept appears to pair editorial serif typography with outlined geometric forms that move/morph between selected-work chapters; that gives the page a signature beyond simple fades, though the shape motif is somewhat more abstract and less explicitly film/title-specific than Site A's spotlight/title-card approach. Choreography is more coherent than A: consecutive frames suggest a controlled sequence from hero to intro to numbered work chapters, with shapes relocating/transforming as anchors while project titles take over. The strip reads like a deliberate scroll narrative rather than isolated cards. Mobile keeps a workable version of that system; shapes are simplified/clipped at times, but content remains readable and the chapter progression still makes sense. Reduced-motion appears serviceable: all major content stays present and legible without depending on the transforms, and the decorative forms seem non-blocking. Craft is stronger overall: no obvious broken blanks, fewer half-revealed text states, and the motion artifacts visible in the strip feel intentional rather than accidental. Stills cannot show easing/timing, so this judgment is based only on visible state changes.",
+  "total": 80.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 4,
+   "Choreography": 3,
+   "Mobile motion": 3,
+   "Reduced-motion fallback": 3,
+   "Motion craft": 3
+  },
+  "notes": "Clear motion idea: oversized title-card typography under stage/spotlight beams, which fits a motion designer aiming for title-sequence work. The frame-to-frame progression reads as chapters: hero -> capability/type hook -> individual projects -> contact. That is more brief-specific than generic fade work. But the choreography looks fairly sectional rather than richly scrubbed; several steps feel like simple handoffs between full-screen cards, and a few intermediate frames are sparse enough to suggest dead travel/pin space. On mobile, the same system survives, but some frames show awkward cropping and empty transitional areas, so the motion language feels less controlled. Reduced-motion still appears to preserve most content, but it does not fully simplify into clean static readability: some frames still show oversized type partly entering/leaving or overlapping the reading flow, so the fallback seems only partially softened. Craft is decent but not pristine: there are half-revealed/cropped headline moments and some in-between states that look under-resolved. Stills cannot show easing/timing, so this judgment is based only on visible state changes.",
+  "total": 64.0
+ },
+ "winner": "baseline"
+}

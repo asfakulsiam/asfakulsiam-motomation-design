@@ -1,0 +1,72 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 8103,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "Site A relies on a bold, color-blocked poster aesthetic that effectively communicates the festival's scale. The pinned sun graphic adds some mild scroll interest, but the light grey body text on the beige background severely fails contrast requirements."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 2,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [
+    "Lorem ipsum, placeholder components or TODOs in the output"
+   ],
+   "notes": "Site B executes a strong 'two stages, one beat' concept, translating it into the motion design with overlapping concentric rings that close in on scroll. The stretched typography fits the independent music vibe perfectly, but the explicit '[NEEDS COPY]' text violates the placeholder hard gate."
+  },
+  "better": "tie",
+  "why": "Both sites fail a hard gate, with Site A missing fundamental accessibility contrast and Site B leaving explicit copy placeholders in the final build."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "Site A relies on a bold, color-blocked poster aesthetic that effectively communicates the festival's scale. The pinned sun graphic adds some mild scroll interest, but the light grey body text on the beige background severely fails contrast requirements."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 2,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [
+   "Lorem ipsum, placeholder components or TODOs in the output"
+  ],
+  "notes": "Site B executes a strong 'two stages, one beat' concept, translating it into the motion design with overlapping concentric rings that close in on scroll. The stretched typography fits the independent music vibe perfectly, but the explicit '[NEEDS COPY]' text violates the placeholder hard gate."
+ }
+}

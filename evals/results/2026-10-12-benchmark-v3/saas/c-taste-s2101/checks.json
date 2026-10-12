@@ -1,0 +1,584 @@
+{
+ "375": {
+  "pageHeight": 3860,
+  "errors": [],
+  "hOverflow": 203,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 12
+   }
+  ],
+  "contrastViolations": 12
+ },
+ "1440": {
+  "pageHeight": 3556,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 12
+   }
+  ],
+  "contrastViolations": 12,
+  "keyboard": {
+   "primaryReached": {
+    "step": 5,
+    "text": "Pricing",
+    "href": "#pricing",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "37/40"
+  },
+  "source": {
+   "bytes": 15973,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    379,
+    759,
+    1138,
+    1518,
+    1897,
+    2277,
+    2656
+   ],
+   "maxScroll": 2656
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3556,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 3860,
+  "errors": [],
+  "hOverflow": 203
+ },
+ "gate": {
+  "counts": {
+   "contrast": 41,
+   "overflow": 35,
+   "words": 1,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c41 o35 w1 rm0 a0 n0 · gate/2 · d359c299c3",
+  "critique": "C?[no-record] H3[375:2] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V3[entrance-repeats:2]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "div.row.hit",
+    "text": "14:02:07 ERROR payments-api connection pool exhaus",
+    "ratio": 1.32,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#19191b",
+    "size": 12.5
+   },
+   {
+    "width": 375,
+    "el": "b",
+    "text": "14:02:07 ERROR payments-api",
+    "ratio": 1.07,
+    "need": 4.5,
+    "fg": "#a8470a",
+    "bg": "#19191b",
+    "size": 12.5
+   },
+   {
+    "width": 375,
+    "el": "div.pbar",
+    "text": "terminal",
+    "ratio": 2.81,
+    "need": 4.5,
+    "fg": "#8c959f",
+    "bg": "#f6f6f4",
+    "size": 12.5
+   },
+   {
+    "width": 375,
+    "el": "div.pbar",
+    "text": "web app: incident view",
+    "ratio": 2.57,
+    "need": 4.5,
+    "fg": "#8c959f",
+    "bg": "#ecece9",
+    "size": 12.5
+   },
+   {
+    "width": 375,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 2.99,
+    "need": 4.5,
+    "fg": "#a8470a",
+    "bg": "#17191c",
+    "size": 13.5
+   },
+   {
+    "width": 375,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 2.99,
+    "need": 4.5,
+    "fg": "#a8470a",
+    "bg": "#17191c",
+    "size": 13.5
+   },
+   {
+    "width": 375,
+    "el": "h3",
+    "text": "Why this incident happened",
+    "ratio": 1.06,
+    "need": 4.5,
+    "fg": "#f1f3f5",
+    "bg": "#ecece9",
+    "size": 18
+   },
+   {
+    "width": 375,
+    "el": "div.top",
+    "text": "Most unusual line14:02:07 ERROR payments-api conne",
+    "ratio": 1.18,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#ecece9",
+    "size": 13
+   },
+   {
+    "width": 375,
+    "el": "b",
+    "text": "Next most unusual",
+    "ratio": 1.18,
+    "need": 4.5,
+    "fg": "#d7dbe0",
+    "bg": "#ecece9",
+    "size": 12.5
+   },
+   {
+    "width": 375,
+    "el": "span",
+    "text": "14:01:52 WARN payments-api slow query on orders ta",
+    "ratio": 2.57,
+    "need": 4.5,
+    "fg": "#8c959f",
+    "bg": "#ecece9",
+    "size": 12.5
+   },
+   {
+    "width": 375,
+    "el": "span",
+    "text": "14:01:40 WARN checkout-web upstream timeout from p",
+    "ratio": 2.57,
+    "need": 4.5,
+    "fg": "#8c959f",
+    "bg": "#ecece9",
+    "size": 12.5
+   },
+   {
+    "width": 375,
+    "el": "div.share",
+    "text": "Share explanation link",
+    "ratio": 1.18,
+    "need": 4.5,
+    "fg": "#d7dbe0",
+    "bg": "#ecece9",
+    "size": 14
+   },
+   {
+    "width": 375,
+    "el": "p.note",
+    "text": "Sample output for illustration.",
+    "ratio": 2.26,
+    "need": 4.5,
+    "fg": "#51585f",
+    "bg": "#281e19",
+    "size": 13
+   },
+   {
+    "width": 375,
+    "el": "h2",
+    "text": "Pricing.",
+    "ratio": 1,
+    "need": 3,
+    "fg": "#17191c",
+    "bg": "#17191c",
+    "size": 30
+   },
+   {
+    "width": 375,
+    "el": "code",
+    "text": "brew install tracewell",
+    "ratio": 1.02,
+    "need": 4.5,
+    "fg": "#e8eaed",
+    "bg": "#ecece9",
+    "size": 14.5
+   },
+   {
+    "width": 375,
+    "el": "button",
+    "text": "Copy",
+    "ratio": 1.11,
+    "need": 4.5,
+    "fg": "#e8eaed",
+    "bg": "#f6f6f4",
+    "size": 14
+   },
+   {
+    "width": 375,
+    "el": "code",
+    "text": "curl -fsSL https://tracewell.dev/install.sh | sh",
+    "ratio": 1.02,
+    "need": 4.5,
+    "fg": "#e8eaed",
+    "bg": "#ecece9",
+    "size": 14.5
+   },
+   {
+    "width": 375,
+    "el": "button",
+    "text": "Copy",
+    "ratio": 1.11,
+    "need": 4.5,
+    "fg": "#e8eaed",
+    "bg": "#f6f6f4",
+    "size": 14
+   },
+   {
+    "width": 390,
+    "el": "div.row.hit",
+    "text": "14:02:07 ERROR payments-api connection pool exhaus",
+    "ratio": 1.32,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#19191b",
+    "size": 12.5
+   },
+   {
+    "width": 390,
+    "el": "b",
+    "text": "14:02:07 ERROR payments-api",
+    "ratio": 1.07,
+    "need": 4.5,
+    "fg": "#a8470a",
+    "bg": "#19191b",
+    "size": 12.5
+   },
+   {
+    "width": 390,
+    "el": "div.pbar",
+    "text": "terminal",
+    "ratio": 2.81,
+    "need": 4.5,
+    "fg": "#8c959f",
+    "bg": "#f6f6f4",
+    "size": 12.5
+   },
+   {
+    "width": 390,
+    "el": "div.pbar",
+    "text": "web app: incident view",
+    "ratio": 2.57,
+    "need": 4.5,
+    "fg": "#8c959f",
+    "bg": "#ecece9",
+    "size": 12.5
+   },
+   {
+    "width": 390,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 2.99,
+    "need": 4.5,
+    "fg": "#a8470a",
+    "bg": "#17191c",
+    "size": 13.5
+   },
+   {
+    "width": 390,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 2.99,
+    "need": 4.5,
+    "fg": "#a8470a",
+    "bg": "#17191c",
+    "size": 13.5
+   },
+   {
+    "width": 390,
+    "el": "small",
+    "text": "Most unusual line",
+    "ratio": 2.99,
+    "need": 4.5,
+    "fg": "#a8470a",
+    "bg": "#17191c",
+    "size": 12
+   },
+   {
+    "width": 390,
+    "el": "p.note",
+    "text": "Sample output for illustration.",
+    "ratio": 2.26,
+    "need": 4.5,
+    "fg": "#51585f",
+    "bg": "#281e19",
+    "size": 13
+   },
+   {
+    "width": 390,
+    "el": "h2",
+    "text": "Pricing.",
+    "ratio": 1,
+    "need": 3,
+    "fg": "#17191c",
+    "bg": "#17191c",
+    "size": 30
+   },
+   {
+    "width": 390,
+    "el": "code",
+    "text": "brew install tracewell",
+    "ratio": 1.02,
+    "need": 4.5,
+    "fg": "#e8eaed",
+    "bg": "#ecece9",
+    "size": 14.5
+   },
+   {
+    "width": 390,
+    "el": "button",
+    "text": "Copy",
+    "ratio": 1.11,
+    "need": 4.5,
+    "fg": "#e8eaed",
+    "bg": "#f6f6f4",
+    "size": 14
+   },
+   {
+    "width": 390,
+    "el": "code",
+    "text": "curl -fsSL https://tracewell.dev/install.sh | sh",
+    "ratio": 1.02,
+    "need": 4.5,
+    "fg": "#e8eaed",
+    "bg": "#ecece9",
+    "size": 14.5
+   },
+   {
+    "width": 390,
+    "el": "button",
+    "text": "Copy",
+    "ratio": 1.11,
+    "need": 4.5,
+    "fg": "#e8eaed",
+    "bg": "#f6f6f4",
+    "size": 14
+   },
+   {
+    "width": 768,
+    "el": "div.row.hit",
+    "text": "14:02:07 ERROR payments-api connection pool exhaus",
+    "ratio": 1.25,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#18191b",
+    "size": 12.5
+   },
+   {
+    "width": 768,
+    "el": "b",
+    "text": "14:02:07 ERROR payments-api",
+    "ratio": 1.06,
+    "need": 4.5,
+    "fg": "#a8470a",
+    "bg": "#18191b",
+    "size": 12.5
+   },
+   {
+    "width": 768,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 2.99,
+    "need": 4.5,
+    "fg": "#a8470a",
+    "bg": "#17191c",
+    "size": 13.5
+   },
+   {
+    "width": 768,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 2.99,
+    "need": 4.5,
+    "fg": "#a8470a",
+    "bg": "#17191c",
+    "size": 13.5
+   },
+   {
+    "width": 768,
+    "el": "small",
+    "text": "Most unusual line",
+    "ratio": 2.77,
+    "need": 4.5,
+    "fg": "#a8470a",
+    "bg": "#281e19",
+    "size": 12
+   },
+   {
+    "width": 1440,
+    "el": "div.row.hit",
+    "text": "14:02:07 ERROR payments-api connection pool exhaus",
+    "ratio": 1.25,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#18191b",
+    "size": 12.5
+   },
+   {
+    "width": 1440,
+    "el": "b",
+    "text": "14:02:07 ERROR payments-api",
+    "ratio": 1.06,
+    "need": 4.5,
+    "fg": "#a8470a",
+    "bg": "#18191b",
+    "size": 12.5
+   },
+   {
+    "width": 1440,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 2.99,
+    "need": 4.5,
+    "fg": "#a8470a",
+    "bg": "#17191c",
+    "size": 13.5
+   },
+   {
+    "width": 1440,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 2.99,
+    "need": 4.5,
+    "fg": "#a8470a",
+    "bg": "#17191c",
+    "size": 13.5
+   },
+   {
+    "width": 1440,
+    "el": "small",
+    "text": "Most unusual line",
+    "ratio": 2.77,
+    "need": 4.5,
+    "fg": "#a8470a",
+    "bg": "#281e19",
+    "size": 12
+   }
+  ],
+  "overflow": [
+   {
+    "width": 375,
+    "el": "page",
+    "kind": "horizontal scroll",
+    "px": 203
+   },
+   {
+    "width": 375,
+    "el": "div",
+    "kind": "escapes viewport",
+    "px": 27,
+    "text": ""
+   },
+   {
+    "width": 375,
+    "el": "h1",
+    "kind": "escapes viewport",
+    "px": 9,
+    "text": "From 4 million log lines to the one that"
+   },
+   {
+    "width": 375,
+    "el": "p",
+    "kind": "escapes viewport",
+    "px": 27,
+    "text": "Tracewell ranks your logs by how unusual"
+   },
+   {
+    "width": 375,
+    "el": "div.row",
+    "kind": "escapes viewport",
+    "px": 26,
+    "text": "14:02:03 INFO  gateway cache hit for ses"
+   },
+   {
+    "width": 375,
+    "el": "div.row",
+    "kind": "escapes viewport",
+    "px": 26,
+    "text": "14:02:10 INFO  search-api request comple"
+   },
+   {
+    "width": 375,
+    "el": "div.row",
+    "kind": "escapes viewport",
+    "px": 26,
+    "text": "14:02:17 INFO  worker heartbeat ok"
+   },
+   {
+    "width": 375,
+    "el": "div.row",
+    "kind": "escapes viewport",
+    "px": 26,
+    "text": "14:02:24 INFO  auth-api job finished"
+   },
+   {
+    "width": 375,
+    "el": "div.row",
+    "kind": "escapes viewport",
+    "px": 26,
+    "text": "14:02:31 INFO  orders-api GET /v1/items "
+   },
+   {
+    "width": 375,
+    "el": "div.row.hit",
+    "kind": "escapes viewport",
+    "px": 26,
+    "text": "14:02:07 ERROR payments-api connection p"
+   },
+   {
+    "width": 375,
+    "el": "div.row",
+    "kind": "escapes viewport",
+    "px": 26,
+    "text": "14:02:11 INFO  worker cache hit for sess"
+   },
+   {
+    "width": 375,
+    "el": "div.row",
+    "kind": "escapes viewport",
+    "px": 26,
+    "text": "14:02:18 INFO  auth-api request complete"
+   }
+  ],
+  "words": [
+   {
+    "el": "h1",
+    "text": "From 4 million log lines to the one that matters",
+    "problem": "leaves the viewport by 9px"
+   }
+  ],
+  "motion": [],
+  "names": []
+ }
+}

@@ -1,0 +1,55 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 8101,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 4,
+    "Choreography": 4,
+    "Mobile motion": 4,
+    "Reduced-motion fallback": 5,
+    "Motion craft": 4
+   },
+   "notes": "Strong motion concept with a pinned horizontal scroll section for the artist lineup, creating a memorable 'line-up signature' as requested by the brief. The choreography transitions cleanly between the intro, the lineup, and the tickets. Mobile translates the horizontal scrub perfectly. The reduced-motion fallback is exceptional, abandoning the complex scroll-jacking in favor of a clean, static CSS grid, making all content immediately accessible."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 2,
+    "Choreography": 2,
+    "Mobile motion": 2,
+    "Reduced-motion fallback": 2,
+    "Motion craft": 3
+   },
+   "notes": "The motion concept relies entirely on a background spotlight effect that shifts during scroll. While visually okay, it lacks a conceptual tie to the brief's structural needs. The choreography is simply a standard vertical document scroll with no pinning, sequencing, or reveal states. The reduced-motion version appears largely identical in structure to the full-motion version, missing an opportunity to adapt the layout. No glaring broken frames, but very little motion craft to evaluate."
+  },
+  "winner": "A"
+ },
+ "served": "{\"requested\": \"gemini_3_1_pro\", \"served\": \"gemini_3_1_pro\", \"in\": 7154, \"cached\": 0, \"out\": 328, \"reasoning\": 1159, \"secs\": 18.0}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 4,
+   "Choreography": 4,
+   "Mobile motion": 4,
+   "Reduced-motion fallback": 5,
+   "Motion craft": 4
+  },
+  "notes": "Strong motion concept with a pinned horizontal scroll section for the artist lineup, creating a memorable 'line-up signature' as requested by the brief. The choreography transitions cleanly between the intro, the lineup, and the tickets. Mobile translates the horizontal scrub perfectly. The reduced-motion fallback is exceptional, abandoning the complex scroll-jacking in favor of a clean, static CSS grid, making all content immediately accessible.",
+  "total": 84.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 2,
+   "Choreography": 2,
+   "Mobile motion": 2,
+   "Reduced-motion fallback": 2,
+   "Motion craft": 3
+  },
+  "notes": "The motion concept relies entirely on a background spotlight effect that shifts during scroll. While visually okay, it lacks a conceptual tie to the brief's structural needs. The choreography is simply a standard vertical document scroll with no pinning, sequencing, or reveal states. The reduced-motion version appears largely identical in structure to the full-motion version, missing an opportunity to adapt the layout. No glaring broken frames, but very little motion craft to evaluate.",
+  "total": 44.0
+ },
+ "winner": "baseline"
+}

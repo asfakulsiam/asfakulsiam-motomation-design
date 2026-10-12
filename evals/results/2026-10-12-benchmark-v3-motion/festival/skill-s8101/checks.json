@@ -1,0 +1,71 @@
+{
+ "375": {
+  "pageHeight": 3764,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 3064,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 3,
+    "text": "TICKETS",
+    "href": "#tickets",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "34/40"
+  },
+  "source": {
+   "bytes": 21029,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": "motomation · archetype: timeline · mutation: marginalia · signature: stage-light-pair · tier: 4 · critique: C5[restraint:kept] H5[375:0] S1[last5:archetype-new,signature-new,fp100] R5[cuts:2,anim:3] M5[t4:pins0/2,webgl1/1,js49/250KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 9"
+  },
+  "strip": {
+   "frames": [
+    0,
+    309,
+    618,
+    927,
+    1237,
+    1546,
+    1855,
+    2164
+   ],
+   "maxScroll": 2164
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3064,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 3764,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 913b93dc60",
+  "critique": "C?[no-record] H5[375:0] S5[last5:no-log] R?[no-record] M5[t4:pins0/2,webgl1/1,js49/250KB,rm0] V5[entrance-repeats:0]",
+  "contrast": [],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

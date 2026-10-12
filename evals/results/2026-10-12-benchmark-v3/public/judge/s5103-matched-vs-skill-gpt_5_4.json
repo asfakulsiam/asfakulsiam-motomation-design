@@ -1,0 +1,68 @@
+{
+ "model": "gpt_5_4",
+ "seed": 5103,
+ "pair": [
+  "matched",
+  "skill"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 3,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "A has the stronger art direction: the oversized Bangla headline, restrained palette, and sapling-growth sequence create one coherent idea carried across the hero and work story. The motion strip shows purposeful scroll-linked growth that supports the nursery-to-forest narrative, and the reduced-motion capture keeps content available. But the automated contrast failures trigger a hard gate, and the full-page captures suggest some sections feel fragile or visually empty in the default experience."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "B is more complete and reliable as a public-interest site: the mangrove belt illustration, clear sectioning, and visible donation and volunteer forms make the brief easy to use on desktop and mobile. The scroll frames suggest modest but meaningful progression, especially in the forest/stats sequence, and the reduced-motion version preserves content cleanly. It is less distinctive typographically than A, and the listitem violations point to semantic sloppiness, but it clears the hard gates."
+  },
+  "better": "B",
+  "why": "B wins because it delivers a cleaner, fully usable bilingual nonprofit site without hard-gate failures, while A is disqualified by contrast."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 3,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "A has the stronger art direction: the oversized Bangla headline, restrained palette, and sapling-growth sequence create one coherent idea carried across the hero and work story. The motion strip shows purposeful scroll-linked growth that supports the nursery-to-forest narrative, and the reduced-motion capture keeps content available. But the automated contrast failures trigger a hard gate, and the full-page captures suggest some sections feel fragile or visually empty in the default experience."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "B is more complete and reliable as a public-interest site: the mangrove belt illustration, clear sectioning, and visible donation and volunteer forms make the brief easy to use on desktop and mobile. The scroll frames suggest modest but meaningful progression, especially in the forest/stats sequence, and the reduced-motion version preserves content cleanly. It is less distinctive typographically than A, and the listitem violations point to semantic sloppiness, but it clears the hard gates."
+ }
+}

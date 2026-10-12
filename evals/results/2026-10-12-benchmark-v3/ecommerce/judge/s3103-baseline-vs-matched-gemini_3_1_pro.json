@@ -1,0 +1,68 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 3103,
+ "pair": [
+  "baseline",
+  "matched"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "matched"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 4,
+    "Craft": 3,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "Features an ambitious scroll transition where the hero cup scales and pins to become the product image, which is a great idea. However, the site suffers from layout repetition (the hero and featured product sections feel redundant) and fails the accessibility hard gate due to low-contrast body text in the dark bands."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 3,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Executes the brief flawlessly with a highly polished editorial design. The typography is elegant and establishes a strong identity, while the CSS/SVG illustrations are beautifully crafted. Motion is subtle (mainly the timeline filling on scroll), but the overall execution is flawless and accessible."
+  },
+  "better": "B",
+  "why": "Site B offers a pixel-perfect, highly accessible editorial layout with excellent typography, whereas Site A fails the contrast hard gate."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 4,
+   "Craft": 3,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "Features an ambitious scroll transition where the hero cup scales and pins to become the product image, which is a great idea. However, the site suffers from layout repetition (the hero and featured product sections feel redundant) and fails the accessibility hard gate due to low-contrast body text in the dark bands."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 3,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Executes the brief flawlessly with a highly polished editorial design. The typography is elegant and establishes a strong identity, while the CSS/SVG illustrations are beautifully crafted. Motion is subtle (mainly the timeline filling on scroll), but the overall execution is flawless and accessible."
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 2102,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a strong console-first idea that stays consistent: the single highlighted log line becomes the visual and narrative throughline from hero to demo. The scroll-strip shows meaningful progression in the product section and step line rather than empty decoration, though from stills alone I can't fully verify timing nuance. Craft and accessibility are notably solid on both desktop and mobile."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "B is clean and readable, but it feels much closer to a standard SaaS template and the concept weakens below the hero. The scroll-strip suggests mostly generic reveal/stagger behavior; it serves the page but doesn't deepen the product story much. The 375px overflow is a significant craft and usability miss, and the full-page capture showing large empty sections hurts confidence in the implementation."
+  },
+  "better": "A",
+  "why": "A is more distinctive, more conceptually coherent, and materially better executed on motion, mobile craft, and overall product storytelling."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "B is clean and readable, but it feels much closer to a standard SaaS template and the concept weakens below the hero. The scroll-strip suggests mostly generic reveal/stagger behavior; it serves the page but doesn't deepen the product story much. The 375px overflow is a significant craft and usability miss, and the full-page capture showing large empty sections hurts confidence in the implementation."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a strong console-first idea that stays consistent: the single highlighted log line becomes the visual and narrative throughline from hero to demo. The scroll-strip shows meaningful progression in the product section and step line rather than empty decoration, though from stills alone I can't fully verify timing nuance. Craft and accessibility are notably solid on both desktop and mobile."
+ }
+}

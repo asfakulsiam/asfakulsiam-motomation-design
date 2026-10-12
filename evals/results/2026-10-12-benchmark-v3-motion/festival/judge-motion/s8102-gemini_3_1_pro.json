@@ -1,0 +1,55 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 8102,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 5,
+    "Choreography": 5,
+    "Mobile motion": 4,
+    "Reduced-motion fallback": 5,
+    "Motion craft": 5
+   },
+   "notes": "Brilliant motion concept directly tied to the brief: stage lighting beams that track scroll, illuminating content as it's reached. The choreography follows a logical left-to-right panning progression that matches the 'Left Stage / Right Stage' copy perfectly. On mobile, the vertical translation works smoothly. The reduced-motion fallback is excellent, freezing the beams in a crossed position so all text is illuminated and legible without relying on scroll events. Craft is pristine with no clipping or stuck states."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 3,
+    "Choreography": 3,
+    "Mobile motion": 3,
+    "Reduced-motion fallback": 4,
+    "Motion craft": 2
+   },
+   "notes": "Relies on generic brutalist pinning and scroll-bound counting. The choreography leaves massive, awkward blank spaces during the date pinning sequence, particularly noticeable on both desktop and mobile. The reduced-motion version thankfully collapses these huge gaps, making it much more readable. However, the motion craft fails significantly during the transition between the lineup and tickets sections: the '18 ARTISTS' heading collides and overlaps with the 'ONE DAY OR BOTH' heading, creating a broken '0 ARTISTS, OR BOTH' lockup mid-scroll."
+  },
+  "winner": "A"
+ },
+ "served": "{\"requested\": \"gemini_3_1_pro\", \"served\": \"gemini_3_1_pro\", \"in\": 7154, \"cached\": 0, \"out\": 363, \"reasoning\": 886, \"secs\": 13.5}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 3,
+   "Choreography": 3,
+   "Mobile motion": 3,
+   "Reduced-motion fallback": 4,
+   "Motion craft": 2
+  },
+  "notes": "Relies on generic brutalist pinning and scroll-bound counting. The choreography leaves massive, awkward blank spaces during the date pinning sequence, particularly noticeable on both desktop and mobile. The reduced-motion version thankfully collapses these huge gaps, making it much more readable. However, the motion craft fails significantly during the transition between the lineup and tickets sections: the '18 ARTISTS' heading collides and overlaps with the 'ONE DAY OR BOTH' heading, creating a broken '0 ARTISTS, OR BOTH' lockup mid-scroll.",
+  "total": 60.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 5,
+   "Choreography": 5,
+   "Mobile motion": 4,
+   "Reduced-motion fallback": 5,
+   "Motion craft": 5
+  },
+  "notes": "Brilliant motion concept directly tied to the brief: stage lighting beams that track scroll, illuminating content as it's reached. The choreography follows a logical left-to-right panning progression that matches the 'Left Stage / Right Stage' copy perfectly. On mobile, the vertical translation works smoothly. The reduced-motion fallback is excellent, freezing the beams in a crossed position so all text is illuminated and legible without relying on scroll events. Craft is pristine with no clipping or stuck states.",
+  "total": 96.0
+ },
+ "winner": "skill"
+}

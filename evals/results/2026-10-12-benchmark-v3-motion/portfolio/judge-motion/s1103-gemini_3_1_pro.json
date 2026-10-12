@@ -1,0 +1,55 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 1103,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 5,
+    "Choreography": 5,
+    "Mobile motion": 5,
+    "Reduced-motion fallback": 5,
+    "Motion craft": 5
+   },
+   "notes": "Executes the brief perfectly with a cinematic, credit-roll motion concept enhanced by volumetric spotlight effects that shift as you scroll. The choreography is a seamless, continuous upward scroll that mirrors film end-titles. Mobile translates this flawlessly. The reduced-motion version removes the dynamic lighting shifts but keeps the typography completely legible and structured. Excellent craft with no overlaps or cut-offs."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 2,
+    "Choreography": 2,
+    "Mobile motion": 2,
+    "Reduced-motion fallback": 2,
+    "Motion craft": 1
+   },
+   "notes": "Fails to capture the 'title sequence' signature requested in the brief, relying instead on generic pinned sections and scaling geometric shapes. The choreography is messy, with a central pinned line that elements awkwardly cross over. Mobile motion is broken, with typography ('move before') immediately clipping into the header. The reduced-motion version still suffers from overlapping issues. Poor motion craft overall, with large geometric outlines colliding with and obstructing project titles, and it incorrectly states '7 years' instead of 8."
+  },
+  "winner": "A"
+ },
+ "served": "{\"requested\": \"gemini_3_1_pro\", \"served\": \"gemini_3_1_pro\", \"in\": 7205, \"cached\": 0, \"out\": 332, \"reasoning\": 772, \"secs\": 13.9}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 2,
+   "Choreography": 2,
+   "Mobile motion": 2,
+   "Reduced-motion fallback": 2,
+   "Motion craft": 1
+  },
+  "notes": "Fails to capture the 'title sequence' signature requested in the brief, relying instead on generic pinned sections and scaling geometric shapes. The choreography is messy, with a central pinned line that elements awkwardly cross over. Mobile motion is broken, with typography ('move before') immediately clipping into the header. The reduced-motion version still suffers from overlapping issues. Poor motion craft overall, with large geometric outlines colliding with and obstructing project titles, and it incorrectly states '7 years' instead of 8.",
+  "total": 36.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 5,
+   "Choreography": 5,
+   "Mobile motion": 5,
+   "Reduced-motion fallback": 5,
+   "Motion craft": 5
+  },
+  "notes": "Executes the brief perfectly with a cinematic, credit-roll motion concept enhanced by volumetric spotlight effects that shift as you scroll. The choreography is a seamless, continuous upward scroll that mirrors film end-titles. Mobile translates this flawlessly. The reduced-motion version removes the dynamic lighting shifts but keeps the typography completely legible and structured. Excellent craft with no overlaps or cut-offs.",
+  "total": 100.0
+ },
+ "winner": "skill"
+}

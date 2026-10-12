@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 2101,
+ "pair": [
+  "c-taste",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-taste"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Outstanding execution of the 'Console or Workbench' prompt. The rigid, grid-based layout and sophisticated pairing of serif and monospace typography create a highly distinct, appropriate identity. The hero animation directly and elegantly communicates the product's core value proposition."
+  },
+  "B": {
+   "scores": {
+    "Concept": 2,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [],
+   "notes": "A safe but ultimately generic SaaS layout that misses the opportunity to build a unique aesthetic for a developer tool. The execution suffers from a significant horizontal overflow bug on mobile and multiple accessibility failures due to poor contrast in the terminal visualizations."
+  },
+  "better": "A",
+  "why": "Site A delivers a deeply original, flawlessly crafted, and highly accessible design that perfectly captures the requested aesthetic, while Site B relies on generic tropes and ships with layout bugs."
+ },
+ "c-taste": {
+  "scores": {
+   "Concept": 2,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [],
+  "notes": "A safe but ultimately generic SaaS layout that misses the opportunity to build a unique aesthetic for a developer tool. The execution suffers from a significant horizontal overflow bug on mobile and multiple accessibility failures due to poor contrast in the terminal visualizations."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Outstanding execution of the 'Console or Workbench' prompt. The rigid, grid-based layout and sophisticated pairing of serif and monospace typography create a highly distinct, appropriate identity. The hero animation directly and elegantly communicates the product's core value proposition."
+ }
+}

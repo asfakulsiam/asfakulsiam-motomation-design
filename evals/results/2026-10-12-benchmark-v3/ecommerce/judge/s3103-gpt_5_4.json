@@ -1,0 +1,72 @@
+{
+ "model": "gpt_5_4",
+ "seed": 3103,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1 (axe color-contrast; 4 failing nodes)."
+   ],
+   "notes": "A has a clear editorial idea built around flame-marking and the warm, soft illustration style supports it well on desktop. Typography is the strongest part, but the mobile page shows large empty stretches and incomplete-feeling pacing that hurt craft and shopping clarity. From the scroll frames, motion reads as light reveal/parallax at most rather than a story-driven sequence, though reduced-motion fallback appears intact."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1 (axe color-contrast; 4 failing nodes)."
+   ],
+   "notes": "B presents a stronger product-sheet/catalog concept, and the shelf list plus firing-process section give it a distinctive structure that still fits the brief. Craft is more consistent across desktop and mobile, and the scroll-strip shows a meaningful progression in the firing story with the cup and step states changing as you move down the page. Accessibility/performance is still pulled down hard by contrast failure, and the font-loading errors are a reliability blemish even if the screenshots remain usable."
+  },
+  "better": "B",
+  "why": "B is the stronger design because it combines a more distinctive structure with clearer mobile execution and motion that actually advances the firing story."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1 (axe color-contrast; 4 failing nodes)."
+  ],
+  "notes": "A has a clear editorial idea built around flame-marking and the warm, soft illustration style supports it well on desktop. Typography is the strongest part, but the mobile page shows large empty stretches and incomplete-feeling pacing that hurt craft and shopping clarity. From the scroll frames, motion reads as light reveal/parallax at most rather than a story-driven sequence, though reduced-motion fallback appears intact."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1 (axe color-contrast; 4 failing nodes)."
+  ],
+  "notes": "B presents a stronger product-sheet/catalog concept, and the shelf list plus firing-process section give it a distinctive structure that still fits the brief. Craft is more consistent across desktop and mobile, and the scroll-strip shows a meaningful progression in the firing story with the cup and step states changing as you move down the page. Accessibility/performance is still pulled down hard by contrast failure, and the font-loading errors are a reliability blemish even if the screenshots remain usable."
+ }
+}

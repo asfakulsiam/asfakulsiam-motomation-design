@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 6101,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has one strong idea: a dark stage, a glowing ring, and oversized type that turns the product’s simplicity into the page’s identity. The scroll-frame strip shows real storyboarded progression—rotation, temperature shifts, then spec and price beats—and the reduced-motion version preserves the content cleanly. It is not flawless in spacing, but it feels deliberate and complete on both desktop and mobile."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 2,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B is elegant and restrained, with a more editorial serif-led tone, and the frame strip does show a genuine image-sequence chapter with changing lamp angles and temperatures. But the idea is less fully carried through the whole page, and the mobile page appears severely under-resolved, with most of the lower-page content effectively absent or stranded in empty space. I cannot judge timing from stills, but the motion concept reads as purposeful rather than exceptional."
+  },
+  "better": "A",
+  "why": "A better satisfies the brief with a clearer all-page concept, stronger motion storytelling, and more reliable mobile execution."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 2,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B is elegant and restrained, with a more editorial serif-led tone, and the frame strip does show a genuine image-sequence chapter with changing lamp angles and temperatures. But the idea is less fully carried through the whole page, and the mobile page appears severely under-resolved, with most of the lower-page content effectively absent or stranded in empty space. I cannot judge timing from stills, but the motion concept reads as purposeful rather than exceptional."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has one strong idea: a dark stage, a glowing ring, and oversized type that turns the product’s simplicity into the page’s identity. The scroll-frame strip shows real storyboarded progression—rotation, temperature shifts, then spec and price beats—and the reduced-motion version preserves the content cleanly. It is not flawless in spacing, but it feels deliberate and complete on both desktop and mobile."
+ }
+}

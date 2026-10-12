@@ -1,0 +1,55 @@
+{
+ "model": "gpt_5_4",
+ "seed": 8101,
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 5,
+    "Choreography": 4,
+    "Mobile motion": 3,
+    "Reduced-motion fallback": 5,
+    "Motion craft": 3
+   },
+   "notes": "Strong scroll idea tied to the brief: bold hero, oversized date transition, then a scrubbed/pinned line-up reveal that counts through all 18 artists before moving to stages/tickets. Consecutive desktop frames show a coherent progression rather than isolated fades. Mobile keeps the same idea, but the narrow viewport makes the line-up motion feel cramped: several cards are clipped mid-entry/mid-exit, and some frames show awkward partial reveals that hurt legibility. Reduced-motion is clearly reworked: much shorter page, line-up becomes a readable static grid, and the content does not depend on animation. Craft is mixed: no blank states, but there are repeated half-revealed cards and edge clipping, especially on mobile. Stills cannot confirm easing/timing quality."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 3,
+    "Choreography": 3,
+    "Mobile motion": 4,
+    "Reduced-motion fallback": 4,
+    "Motion craft": 5
+   },
+   "notes": "The motion idea appears lighter and more conventional. Frames suggest mostly vertical section-to-section progression with some headline swaps/scale changes and a card-catalogue reveal, but not a strong festival-specific scroll mechanic. The sequence is coherent and readable, yet less authored than Site A: fewer clear pinned or scrubbed moments are evident from the strip. Mobile holds together well; the simpler motion survives the small viewport without obvious clipping or broken transitions. Reduced-motion appears almost identical to full-motion, which suggests limited adaptation, but all content remains readable and does not seem to rely on motion to make sense. Craft is clean from the strips: no blank frames, no overlap failures, no obvious half-stuck elements. Stills cannot confirm easing/timing or any subtle background animation."
+  },
+  "winner": "A"
+ },
+ "served": "{\"requested\": \"gpt_5_4\", \"served\": \"gpt_5_4\", \"in\": 6207, \"cached\": 0, \"out\": 387, \"reasoning\": 1644, \"secs\": 35.3}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 5,
+   "Choreography": 4,
+   "Mobile motion": 3,
+   "Reduced-motion fallback": 5,
+   "Motion craft": 3
+  },
+  "notes": "Strong scroll idea tied to the brief: bold hero, oversized date transition, then a scrubbed/pinned line-up reveal that counts through all 18 artists before moving to stages/tickets. Consecutive desktop frames show a coherent progression rather than isolated fades. Mobile keeps the same idea, but the narrow viewport makes the line-up motion feel cramped: several cards are clipped mid-entry/mid-exit, and some frames show awkward partial reveals that hurt legibility. Reduced-motion is clearly reworked: much shorter page, line-up becomes a readable static grid, and the content does not depend on animation. Craft is mixed: no blank states, but there are repeated half-revealed cards and edge clipping, especially on mobile. Stills cannot confirm easing/timing quality.",
+  "total": 80.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 3,
+   "Choreography": 3,
+   "Mobile motion": 4,
+   "Reduced-motion fallback": 4,
+   "Motion craft": 5
+  },
+  "notes": "The motion idea appears lighter and more conventional. Frames suggest mostly vertical section-to-section progression with some headline swaps/scale changes and a card-catalogue reveal, but not a strong festival-specific scroll mechanic. The sequence is coherent and readable, yet less authored than Site A: fewer clear pinned or scrubbed moments are evident from the strip. Mobile holds together well; the simpler motion survives the small viewport without obvious clipping or broken transitions. Reduced-motion appears almost identical to full-motion, which suggests limited adaptation, but all content remains readable and does not seem to rely on motion to make sense. Craft is clean from the strips: no blank frames, no overlap failures, no obvious half-stuck elements. Stills cannot confirm easing/timing or any subtle background animation.",
+  "total": 76.0
+ },
+ "winner": "baseline"
+}

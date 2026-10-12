@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 7101,
+ "pair": [
+  "c-uiux",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-uiux"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "The project language of plans, brick tones and alternating case-study layouts is thoughtful and mostly coherent, but the default first screen feels conspicuously empty and weakens the core idea. Typography and drawings are refined, and mobile holds together well, but the scroll-strip suggests mostly ordinary reveals/section changes rather than motion that meaningfully develops the light/courtyard concept; the reduced-motion version actually reads more clearly."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "This has the clearest architectural identity: the headline, brick-and-arch image language, project elevations/plans, and warm material palette all reinforce one strong idea. Desktop typography and composition are excellent, but the phone capture looks materially less resolved, with large empty stretches and weaker responsive continuity; from the scroll frames, motion appears mostly generic section reveal/scroll progression rather than concept-driven storytelling."
+  },
+  "better": "B",
+  "why": "B delivers the brief more immediately and completely through a stronger first impression, clearer concept, and more authoritative typography, despite weaker mobile craft."
+ },
+ "c-uiux": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "This has the clearest architectural identity: the headline, brick-and-arch image language, project elevations/plans, and warm material palette all reinforce one strong idea. Desktop typography and composition are excellent, but the phone capture looks materially less resolved, with large empty stretches and weaker responsive continuity; from the scroll frames, motion appears mostly generic section reveal/scroll progression rather than concept-driven storytelling."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "The project language of plans, brick tones and alternating case-study layouts is thoughtful and mostly coherent, but the default first screen feels conspicuously empty and weakens the core idea. Typography and drawings are refined, and mobile holds together well, but the scroll-strip suggests mostly ordinary reveals/section changes rather than motion that meaningfully develops the light/courtyard concept; the reduced-motion version actually reads more clearly."
+ }
+}

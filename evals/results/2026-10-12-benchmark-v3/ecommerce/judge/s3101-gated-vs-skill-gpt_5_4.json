@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 3101,
+ "pair": [
+  "gated",
+  "skill"
+ ],
+ "order": {
+  "A": "gated",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a coherent warm, earthy shop look, and the wood-fired palette plus simple pottery drawings fit the brief. But the structure is very standard, with little signature beyond the hero illustration, and the scroll-strip shows almost no meaningful motion beyond ordinary page progression. Craft and accessibility look solid, though the layout feels less refined on mobile and the product grid resolves awkwardly."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "B has a clear central idea: each cup is an individual piece from a numbered firing, and that concept drives the hero, selection grid, list styling, and firing story. The contact-sheet product chooser is distinctive and well matched to the brief, and the typography carries an editorial product-sheet tone with strong hierarchy. Motion is not fully judgeable from stills, but the scroll sequence suggests purposeful progression, especially in the firing section, and the reduced-motion fallback preserves the content cleanly."
+  },
+  "better": "B",
+  "why": "B is more conceptually specific, more original in its product presentation, and better turns the brief’s small-batch individuality into the site’s organizing idea."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a coherent warm, earthy shop look, and the wood-fired palette plus simple pottery drawings fit the brief. But the structure is very standard, with little signature beyond the hero illustration, and the scroll-strip shows almost no meaningful motion beyond ordinary page progression. Craft and accessibility look solid, though the layout feels less refined on mobile and the product grid resolves awkwardly."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "B has a clear central idea: each cup is an individual piece from a numbered firing, and that concept drives the hero, selection grid, list styling, and firing story. The contact-sheet product chooser is distinctive and well matched to the brief, and the typography carries an editorial product-sheet tone with strong hierarchy. Motion is not fully judgeable from stills, but the scroll sequence suggests purposeful progression, especially in the firing section, and the reduced-motion fallback preserves the content cleanly."
+ }
+}

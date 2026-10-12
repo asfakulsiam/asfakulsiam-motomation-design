@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 2101,
+ "pair": [
+  "gated",
+  "skill"
+ ],
+ "order": {
+  "A": "gated",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 2,
+    "Originality": 1,
+    "Typography": 2,
+    "Motion": 1,
+    "Craft": 3,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A is a functional but completely generic implementation that feels indistinguishable from a basic template. The typography relies on timid defaults, and there is no motion or storytelling to demonstrate the product in action. While it passes accessibility checks, it lacks any design point of view."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B brilliantly executes the 'Workbench' brief with a highly original, editorial-meets-CLI visual language. The typography is exceptional, utilizing distinct typefaces to establish clear hierarchy and identity. The motion is purposeful and narrative-driven, using scroll to sequence the terminal session and log analysis perfectly, with an excellent static fallback."
+  },
+  "better": "B",
+  "why": "Site B delivers a highly original, pixel-perfect workbench aesthetic with purposeful scroll animations that tell the product's story, whereas Site A is a static, generic template."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 2,
+   "Originality": 1,
+   "Typography": 2,
+   "Motion": 1,
+   "Craft": 3,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A is a functional but completely generic implementation that feels indistinguishable from a basic template. The typography relies on timid defaults, and there is no motion or storytelling to demonstrate the product in action. While it passes accessibility checks, it lacks any design point of view."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B brilliantly executes the 'Workbench' brief with a highly original, editorial-meets-CLI visual language. The typography is exceptional, utilizing distinct typefaces to establish clear hierarchy and identity. The motion is purposeful and narrative-driven, using scroll to sequence the terminal session and log analysis perfectly, with an excellent static fallback."
+ }
+}

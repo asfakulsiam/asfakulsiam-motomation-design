@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 7101,
+ "pair": [
+  "c-fdesign",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-fdesign"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a strong architectural editorial language: restrained palette, elegant serif typography, brick-and-plan drawings, and a quiet mood that fits the brief. But the normal 1440 first screen is conspicuously empty while the reduced-motion capture shows the missing hero statement, so the motion behavior appears to be hiding core content or staging it awkwardly; from the scroll strip, motion reads more like reveal mechanics than storytelling. Craft is mostly refined, but that hero-state issue keeps it from feeling fully resolved."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B has the clearest central idea: light and courtyard are made tangible in the hero through the sun-position diagram, and that signature carries well into the project imagery and plans. Typography is less distinctive and luxurious than A, and the scroll-frame strip suggests mostly straightforward section-to-section movement rather than a richer scroll narrative, though the interactive hero likely does some of the conceptual work. It is clean, legible, responsive, and the measured checks plus visible keyboard guidance make it the more robust overall solution."
+  },
+  "better": "B",
+  "why": "B expresses the brief more clearly and consistently while avoiding A’s compromised hero behavior and matching it with stronger robustness."
+ },
+ "c-fdesign": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B has the clearest central idea: light and courtyard are made tangible in the hero through the sun-position diagram, and that signature carries well into the project imagery and plans. Typography is less distinctive and luxurious than A, and the scroll-frame strip suggests mostly straightforward section-to-section movement rather than a richer scroll narrative, though the interactive hero likely does some of the conceptual work. It is clean, legible, responsive, and the measured checks plus visible keyboard guidance make it the more robust overall solution."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a strong architectural editorial language: restrained palette, elegant serif typography, brick-and-plan drawings, and a quiet mood that fits the brief. But the normal 1440 first screen is conspicuously empty while the reduced-motion capture shows the missing hero statement, so the motion behavior appears to be hiding core content or staging it awkwardly; from the scroll strip, motion reads more like reveal mechanics than storytelling. Craft is mostly refined, but that hero-state issue keeps it from feeling fully resolved."
+ }
+}

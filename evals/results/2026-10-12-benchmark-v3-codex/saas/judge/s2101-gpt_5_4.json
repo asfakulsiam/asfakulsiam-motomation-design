@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 2101,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has one clear idea: an end-to-end incident loop from ingest to ranking to sharing, and the product demo is integrated into that story rather than tacked on. Typography and layout are polished and very readable on both desktop and mobile, with strong accessibility evidence from the checks. From the scroll-strip, motion looks minimal and mostly sectional/reveal-based; it supports the page but does not materially deepen the concept."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 4,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 1,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [],
+   "notes": "B attempts a more distinctive workbench-like, pinned narrative structure, and the scroll-strip suggests a real motion sequence tied to the ingest/rank/share story. But the desktop layout is badly broken, with most content compressed into a narrow left rail, vast empty space, and measured mobile overflow, so craft collapses despite some fresh ideas. Accessibility is also weaker due to the serious axe issue and the overflow, even though the primary action and reduced-motion path exist."
+  },
+  "better": "A",
+  "why": "A is far more complete, legible, and reliable while still expressing the brief clearly, whereas B’s more original idea is undermined by major layout and usability failures."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has one clear idea: an end-to-end incident loop from ingest to ranking to sharing, and the product demo is integrated into that story rather than tacked on. Typography and layout are polished and very readable on both desktop and mobile, with strong accessibility evidence from the checks. From the scroll-strip, motion looks minimal and mostly sectional/reveal-based; it supports the page but does not materially deepen the concept."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 4,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 1,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [],
+  "notes": "B attempts a more distinctive workbench-like, pinned narrative structure, and the scroll-strip suggests a real motion sequence tied to the ingest/rank/share story. But the desktop layout is badly broken, with most content compressed into a narrow left rail, vast empty space, and measured mobile overflow, so craft collapses despite some fresh ideas. Accessibility is also weaker due to the serious axe issue and the overflow, even though the primary action and reduced-motion path exist."
+ }
+}

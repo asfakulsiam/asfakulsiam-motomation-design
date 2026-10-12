@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 8101,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A introduces a clever 'stage lighting' concept where spotlights track across the background on scroll. The typography is bold and the layout is highly functional, though the dark theme feels slightly too serious for the requested 'play mood'."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B nails the 'play mood' with vibrant color blocking and massive, characterful typography. The motion is purposeful, featuring a horizontal-scroll lineup that elegantly degrades to a standard grid for reduced-motion users, showing deep care for both craft and accessibility."
+  },
+  "better": "B",
+  "why": "Site B fully embraces the playful mood required by the brief with outstanding typography, energetic colors, and a brilliant horizontal scroll section that features a perfectly designed reduced-motion fallback."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B nails the 'play mood' with vibrant color blocking and massive, characterful typography. The motion is purposeful, featuring a horizontal-scroll lineup that elegantly degrades to a standard grid for reduced-motion users, showing deep care for both craft and accessibility."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A introduces a clever 'stage lighting' concept where spotlights track across the background on scroll. The typography is bold and the layout is highly functional, though the dark theme feels slightly too serious for the requested 'play mood'."
+ }
+}

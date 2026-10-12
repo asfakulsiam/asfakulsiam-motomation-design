@@ -9,7 +9,7 @@ At the top tier, scrolling plays like a film.
 **New here? [Start here → what it is, who it's for, and what a session looks like](ABOUT.md)** · **[See it in action → worked examples](#see-it-in-action)**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.3.0-E0442B?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2.4.0-E0442B?style=flat-square)](CHANGELOG.md)
 [![Agent Skill](https://img.shields.io/badge/agent%20skill-npx%20skills%20add-111111?style=flat-square)](#install)
 [![Zero dependencies (gate: Playwright, optional)](https://img.shields.io/badge/scripts-zero%20dependencies%20%28gate%3A%20Playwright%2C%20optional%29-111111?style=flat-square)](skills/asfakulsiam-motomation-design/scripts)
 
@@ -76,7 +76,57 @@ Motomation Design changes the thinking:
 
 ## Results
 
-Benchmark v2, run inside a real coding agent ([full report](evals/results/2026-10-11-benchmark-v2.md) · [summary](docs/benchmark-summary.md)). Five briefs, three seeds each, built in Claude Code by the same model (`claude_sonnet_5_5`) with and without the skill: 30 runs, 15 blind pairs. Two judges from other model families (GPT-5.4, Gemini 3.1 Pro) scored every pair against [`evals/rubric.md`](evals/rubric.md) without knowing which was which. Hard gates (contrast, keyboard, reduced motion, placeholders) come from Playwright + axe-core and `gate.mjs` measurements.
+### Benchmark v3 (2026-10-12)
+
+**Commit tested: [`6f2724f`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/commit/6f2724f5299a19cd55cb94cbad886c1c6af38fd6)** (`6f2724f5299a19cd55cb94cbad886c1c6af38fd6`). Five briefs × three seeds, built in Claude Code 2.1.286 by `claude_sonnet_5_5` in four arms (baseline, baseline + `gate.mjs`, skill, matched-effort baseline) plus three competitor skills, a Tier 4 motion run and a Codex CLI run: 133 builds. Measured on GitHub Actions (Chromium 147, axe-core 4.14.0), judged blind in pairs by GPT-5.4 and Gemini 3.1 Pro. Reports: [main](evals/results/2026-10-12-benchmark-v3.md) · [motion](evals/results/2026-10-12-benchmark-v3-motion.md) · [competitors](evals/results/2026-10-12-benchmark-v3-competitors.md) · [Codex](evals/results/2026-10-12-benchmark-v3-codex.md).
+
+| Skill vs… (15 blind pairs each) | Skill W–L–T | Mean gated (other → skill) | Mean raw (other → skill) |
+|---|---|---|---|
+| Baseline (no skill) | **12–2–1** | 43.4 → 83.7 | 62.8 → 88.9 |
+| Baseline + `gate.mjs` | **14–1–0** | 65.5 → 86.4 | 65.5 → 91.4 |
+| Matched-effort baseline | **10–5–0** | 63.7 → 80.4 | 77.3 → 85.5 |
+| taste-skill | **14–1–0** | 47.2 → 87.2 | 56.1 → 92.2 |
+| ui-ux-pro-max | **14–1–0** | 66.1 → 86.2 | 66.1 → 90.8 |
+| frontend-design (Anthropic) | **11–3–1** | 55.5 → 81.6 | 72.4 → 87.0 |
+| Tier 4 motion, full rubric (9 pairs) | 7–2–0 | 53.1 → 83.4 | 74.8 → 83.4 |
+| Tier 4 motion, motion only from `gate.mjs --report` strips (9) | **3–6–0** | 77.3 → 64.4 | — |
+| Codex CLI + `gpt_5_4` (5 pairs, 1 seed) | 3–2–0 | 77.0 → 76.2 | 77.0 → 76.2 |
+
+| Brief (mean gated of 3 seeds) | Baseline → skill | Gated baseline → skill | Matched → skill |
+|---|---|---|---|
+| 07 Architecture studio | 83.8 → 78.7 | 67.0 → 90.8 | 84.7 → 84.0 |
+| 04 Boutique hotel | 49.0 → 96.3 | 73.2 → 95.5 | 53.8 → 82.2 |
+| 03 Ceramics shop | 49.5 → 61.5 | 67.7 → 61.5 | 86.0 → 56.2 |
+| 02 Developer tool (SaaS) | 34.7 → 90.3 | 57.5 → 92.7 | 44.8 → 91.8 |
+| 05 Climate non-profit | 0.0 → 91.7 | 62.2 → 91.3 | 49.0 → 87.8 |
+
+What v3 found, including where the skill lost:
+- **The gate is about half the win.** A baseline that only runs `gate.mjs` has no hard-gate failures (0 of 15, against 6 for the plain baseline) but isn't better designed (raw 73.0 → 68.3 against the plain baseline), and the skill still beats it 14–1.
+- **Effort explains part of v2's 15–0.** A baseline told to work about as long as the skill beats the plain baseline 12–0–3 and takes 5 of 15 pairs from the skill, including all three ceramics-shop seeds. 10–5 is not significant with 15 pairs (sign test p≈0.30).
+- **On motion alone the skill lost.** At Tier 4, judged only from the gate's scroll-frame strips, the baseline won 6 of 9 seeds. The weakest axis was the reduced-motion fallback (2.50 vs 4.39 of 5). Every skill page reached for WebGL.
+- **In Codex the gate often couldn't run** (the headless browser crashed or timed out in a loaded sandbox). 3 of 5 skill runs shipped without a verified pass, and the SaaS page broke.
+- **One skill page failed a hard gate** (ceramics s3103: dimmed scroll-sequence steps at 2.1:1 that `gate.mjs` measured only in their active state).
+
+#### Before and after (v3)
+
+**Public interest (brief 05), s5102: won, 0 vs 98.5.** The baseline fails axe contrast; the skill sets the Bangla line as the headline.
+<img src="docs/benchmark-images/v3-public-5102.webp" alt="Public-interest brief, v3 seed 5102: without the skill a two-colour hero that fails contrast (gated 0, raw 47.0); with the skill a large Bangla headline on cream with a mangrove-root drawing (98.5)" width="100%">
+
+**Ceramics shop (brief 03), s3102: lost to the matched-effort baseline, 89.5 vs 77.5.** A baseline told to keep refining built a clearer product page.
+<img src="docs/benchmark-images/v3-ecommerce-3102-matched.webp" alt="Ceramics brief, v3 seed 3102: the matched-effort baseline with a large serif headline and a cup card (89.5); the skill with a product-sheet layout (77.5)" width="100%">
+
+**Studio (brief 07), s7101: lost to Anthropic's frontend-design skill, 89.0 vs 65.0.**
+<img src="docs/benchmark-images/v3-studio-7101-frontend-design.webp" alt="Studio brief, v3 seed 7101: the frontend-design skill's page (89.0) and the Motomation skill's page (65.0)" width="100%">
+
+**Festival (brief 08), s8102, Tier 4 runner strip: won on the full rubric (0 vs 87.0) and on motion alone (64 vs 94).**
+<img src="docs/benchmark-images/v3-festival-8102-strip.webp" alt="Festival brief, v3 seed 8102: eight scroll frames for each site at Tier 4" width="100%">
+
+**Launch (brief 06), s6102, Tier 4 runner strip: lost on both (96.5 vs 62.0; motion only 96 vs 40).** The skill's frames overlap mid-transition, and its reduced-motion strip barely differs from full motion.
+<img src="docs/benchmark-images/v3-launch-6102-strip.webp" alt="Launch brief, v3 seed 6102: eight scroll frames for each site at Tier 4; the baseline's ring changes colour per section, the skill's pinned lamp stays while text overlaps" width="100%">
+
+### Benchmark v2 (2026-10-11)
+
+Run inside a real coding agent ([full report](evals/results/2026-10-11-benchmark-v2.md) · [summary](docs/benchmark-summary.md)). Five briefs, three seeds each, built in Claude Code by the same model (`claude_sonnet_5_5`) with and without the skill: 30 runs, 15 blind pairs. Two judges from other model families (GPT-5.4, Gemini 3.1 Pro) scored every pair against [`evals/rubric.md`](evals/rubric.md) without knowing which was which. Hard gates (contrast, keyboard, reduced motion, placeholders) come from Playwright + axe-core and `gate.mjs` measurements.
 
 | | Without skill | With skill |
 |---|---|---|
@@ -93,9 +143,9 @@ Benchmark v2, run inside a real coding agent ([full report](evals/results/2026-1
 | 02 Developer tool (SaaS) | 2101–2103 | 40.0 | 93.2 |
 | 05 Climate non-profit | 5101–5103 | 67.3 | 88.0 |
 
-The skill wins every pair before the gates too, so the gates only widen the margin. The two briefs the skill lost in v1 (studio contrast, hotel mobile overflow) were won on every seed, and `gate.mjs` measured c0 o0 on all six of those skill pages.
+The skill won every v2 pair before the gates too. v3 tested what v2 couldn't (matched effort, a gate-only baseline, motion from strips, competitors, a second agent), and the margin shrank on each of those tests.
 
-### Before and after
+#### Before and after (v1, v2)
 
 Same brief, same model, same seed: without the skill on the left, with it on the right. Losses are included.
 
@@ -117,14 +167,7 @@ Same brief, same model, same seed: without the skill on the left, with it on the
 **Public interest (brief 05), v1: won.** A conventional layout against a bilingual manifesto that keeps the one real figure with its source.
 <img src="docs/benchmark-images/public-before-after.webp" alt="Public-interest brief, v1: a conventional layout without the skill; a bilingual manifesto with the skill" width="100%">
 
-**What this doesn't show yet:**
-- Effort isn't matched: skill runs used 19–66 turns, the baseline 3–12.
-- The judges saw the measured checks.
-- Motion was judged from stills.
-- Only one agent and one model were tested.
-- One skill page (public 5102) shows a scrubbed counter at 0 mid-scroll.
-
-All of these are listed in the report's "Fails" and "Why this may overstate the skill" sections. The v1 single-prompt benchmark (3 of 5 won) is kept in the [CHANGELOG](CHANGELOG.md) and its [report](evals/results/2026-10-11-benchmark.md).
+**What v2 didn't show, and what v3 did about it:** effort wasn't matched (v3: matched-effort arm, skill 10–5); the judges saw the measured checks (still true in v3); motion was judged from stills (v3: motion-only judging from strips, skill 3–6); one agent and one model (v3: a one-seed Codex run, 3–2). The v1 single-prompt benchmark (3 of 5 won) is kept in the [CHANGELOG](CHANGELOG.md) and its [report](evals/results/2026-10-11-benchmark.md).
 
 ## Install
 
@@ -394,7 +437,7 @@ No. It picks the lowest tier that delivers the concept. A government service get
 Yes. Use `dist/motomation-design.md`. The agent picks from the included data tables instead of running scripts.
 
 **Will two sites made with it look the same?**
-It actively detects and reduces repetition, but it can't guarantee two sites will never look alike. What exists: the collision engine never repeats an archetype or signature inside one run and reports when a pool runs out; `memory.mjs check` flags archetypes, signatures, fonts, palettes and tiers already used in this project's last five runs; and the Thinking Sequence's anti-sameness step compares structure, type, colour, motion, signature and imagery against the obvious version. Limits: memory only sees the project it lives in, and the no-terminal edition relies on the agent following the rules. The 5-brief benchmark has been run twice ([v2 results](evals/results/2026-10-11-benchmark-v2.md), [v1](evals/results/2026-10-11-benchmark.md)); the 3-run variety test in `evals/` has not.
+It actively detects and reduces repetition, but it can't guarantee two sites will never look alike. What exists: the collision engine never repeats an archetype or signature inside one run and reports when a pool runs out; `memory.mjs check` flags archetypes, signatures, fonts, palettes and tiers already used in this project's last five runs; and the Thinking Sequence's anti-sameness step compares structure, type, colour, motion, signature and imagery against the obvious version. Limits: memory only sees the project it lives in, and the no-terminal edition relies on the agent following the rules. The 5-brief benchmark has been run three times ([v3 results](evals/results/2026-10-12-benchmark-v3.md), [v2](evals/results/2026-10-11-benchmark-v2.md), [v1](evals/results/2026-10-11-benchmark.md)); the 3-run variety test in `evals/` has not.
 
 **Which stack does it target?**
 It detects your stack, and defaults to Next.js App Router + Tailwind. Adapters cover React + Vite, plain HTML and Astro.

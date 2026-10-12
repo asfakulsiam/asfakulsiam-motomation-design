@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 3101,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a clear editorial/catalog idea built around firing 'frames' and a strong hero, and its typography gives it a distinct identity. The desktop composition is memorable, but the long empty stretches and weaker mobile flow make it feel less resolved. From the scroll frames, motion seems mostly pinned/progressive sectioning rather than a story-rich sequence, so I can't justify a higher motion score from stills alone."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B is less surprising, but it is more complete as a shop page: the featured product, firing story, other products, shipping, care and cart are integrated into one coherent system. Typography and card design are polished, and buying is very direct from the first screen. The motion reads as purposeful sectional reveal in the scroll strip, but still fairly generic, and the mobile version also shows too much empty vertical space to reach top craft marks."
+  },
+  "better": "B",
+  "why": "B is the stronger overall e-commerce response because it delivers the brief more completely and cleanly, with a faster purchase path and steadier craft, while A is more distinctive but less resolved."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B is less surprising, but it is more complete as a shop page: the featured product, firing story, other products, shipping, care and cart are integrated into one coherent system. Typography and card design are polished, and buying is very direct from the first screen. The motion reads as purposeful sectional reveal in the scroll strip, but still fairly generic, and the mobile version also shows too much empty vertical space to reach top craft marks."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a clear editorial/catalog idea built around firing 'frames' and a strong hero, and its typography gives it a distinct identity. The desktop composition is memorable, but the long empty stretches and weaker mobile flow make it feel less resolved. From the scroll frames, motion seems mostly pinned/progressive sectioning rather than a story-rich sequence, so I can't justify a higher motion score from stills alone."
+ }
+}

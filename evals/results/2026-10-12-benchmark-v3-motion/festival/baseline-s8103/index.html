@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Two Days, Two Stages — Independent Music Festival, Chattogram · 14–15 February</title>
+<meta name="description" content="A two-day independent music festival in Chattogram. 14–15 February, 18 artists across two stages, tickets ৳1,500 per day.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,800&family=Hind+Siliguri:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14110f;--paper:#f4ecdd;--hot:#ff4a1c;--sea:#0f6b73;--sun:#ffc52e;
+--f:'Bricolage Grotesque','Hind Siliguri',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--f);background:var(--paper);color:var(--ink);line-height:1.5;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:0;background:var(--ink);color:var(--paper);padding:.6rem 1rem;z-index:99}
+.skip:focus{left:0}
+header.nav{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:1rem clamp(1rem,4vw,3rem);mix-blend-mode:difference;color:#fff;font-weight:800;letter-spacing:.04em;text-transform:uppercase;font-size:.85rem}
+.nav a{text-decoration:none}
+.prog{position:fixed;left:0;top:0;height:4px;background:var(--hot);width:100%;transform-origin:0 50%;transform:scaleX(0);z-index:30}
+
+/* HERO */
+.hero{min-height:100svh;display:grid;align-content:end;padding:clamp(1rem,4vw,3rem);padding-top:6rem;background:var(--ink);color:var(--paper);position:relative;overflow:hidden}
+.sun{position:absolute;right:-12vmin;top:8vh;width:60vmin;height:60vmin;border-radius:50%;background:var(--hot);}
+.sun::after{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-linear-gradient(0deg,transparent 0 14px,var(--ink) 14px 18px);-webkit-mask:linear-gradient(transparent 35%,#000);mask:linear-gradient(transparent 35%,#000)}
+.hero h1{font-size:clamp(3.5rem,16vw,15rem);line-height:.82;font-weight:800;letter-spacing:-.04em;text-transform:uppercase;position:relative}
+.hero h1 span{display:block;overflow:hidden}
+.hero h1 span i{display:block;font-style:normal}
+.hero h1 .o{color:var(--sun)}
+.meta{position:relative;display:flex;flex-wrap:wrap;gap:1rem 3rem;margin-top:2rem;font-size:clamp(1rem,2vw,1.4rem);font-weight:700}
+.meta b{color:var(--sun)}
+.btn{display:inline-block;background:var(--sun);color:var(--ink);padding:.9rem 1.6rem;font-weight:800;text-decoration:none;text-transform:uppercase;letter-spacing:.04em;border-radius:99px;transition:transform .2s}
+.btn:hover{transform:translateY(-3px) rotate(-1deg)}
+.cue{margin-top:2rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.2em;opacity:.7}
+
+/* MARQUEE-LIKE STATEMENT */
+.statement{padding:clamp(4rem,12vw,10rem) clamp(1rem,4vw,3rem);font-size:clamp(1.8rem,5.5vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-.02em;max-width:22ch}
+.statement .w{opacity:.15}
+
+/* PINNED DAYS (horizontal) */
+.days{background:var(--sea);color:var(--paper);overflow:hidden}
+.track{display:flex;width:200vw;height:100svh}
+.day{width:100vw;height:100svh;flex:none;padding:6rem clamp(1rem,4vw,3rem) 3rem;display:flex;flex-direction:column;justify-content:space-between}
+.day:nth-child(2){background:var(--hot);color:var(--ink)}
+.day .lab{font-size:.9rem;text-transform:uppercase;letter-spacing:.2em;font-weight:700}
+.day .big{font-size:clamp(8rem,34vw,32rem);line-height:.8;font-weight:800;letter-spacing:-.06em}
+.day .big small{font-size:.18em;letter-spacing:0;margin-left:.2em}
+.day p{font-size:clamp(1rem,2vw,1.5rem);max-width:34ch;font-weight:500}
+.dots{position:absolute;right:clamp(1rem,4vw,3rem);bottom:2rem;display:flex;gap:.5rem;z-index:2}
+.dots i{width:.8rem;height:.8rem;border-radius:50%;border:2px solid currentColor}
+.dots i.on{background:currentColor}
+
+/* PINNED COUNTER / STAGES */
+.stages{background:var(--sun);position:relative}
+.stage-pin{min-height:100svh;display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
+.stage-pin>div{padding:6rem clamp(1rem,4vw,3rem) 3rem;display:flex;flex-direction:column;justify-content:space-between;gap:2rem}
+.stage-pin .count{font-size:clamp(9rem,30vw,28rem);line-height:.8;font-weight:800;letter-spacing:-.06em}
+.stage-pin h2{font-size:clamp(1.6rem,4vw,3.4rem);line-height:1;text-transform:uppercase}
+.stage-pin .s2{background:var(--ink);color:var(--sun)}
+.stage-pin .stg{font-size:clamp(3rem,9vw,9rem);font-weight:800;line-height:.9;text-transform:uppercase;letter-spacing:-.03em}
+.stage-pin .s2 .stg{color:var(--paper)}
+.note{font-size:1.05rem;max-width:34ch}
+
+/* LINEUP slots */
+.lineup{padding:clamp(4rem,10vw,8rem) clamp(1rem,4vw,3rem);background:var(--paper)}
+.lineup h2{font-size:clamp(2rem,7vw,6rem);letter-spacing:-.03em;text-transform:uppercase;line-height:.9;margin-bottom:2rem}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.6rem}
+.slot{aspect-ratio:1;border:2px solid var(--ink);border-radius:.6rem;display:grid;place-items:center;font-weight:800;font-size:clamp(1.2rem,3vw,2.4rem);background:transparent}
+.slot:nth-child(3n+1){background:var(--sun)}
+.slot:nth-child(3n+2){background:var(--hot)}
+.slot:nth-child(3n){background:var(--sea);color:var(--paper)}
+.lineup p{margin-top:1.5rem;max-width:50ch}
+
+/* TICKETS */
+.tix{background:var(--ink);color:var(--paper);padding:clamp(4rem,10vw,8rem) clamp(1rem,4vw,3rem)}
+.tix h2{font-size:clamp(2rem,7vw,6rem);text-transform:uppercase;line-height:.9;letter-spacing:-.03em}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin:2.5rem 0}
+.card{border:2px solid var(--paper);border-radius:1rem;padding:1.6rem;display:flex;flex-direction:column;gap:.6rem}
+.card .pr{font-size:clamp(3rem,7vw,5.5rem);font-weight:800;line-height:1;color:var(--sun)}
+.card .pr small{font-size:.3em;color:var(--paper);font-weight:500}
+.card h3{text-transform:uppercase;letter-spacing:.1em;font-size:.9rem}
+footer{padding:2rem clamp(1rem,4vw,3rem);background:var(--ink);color:var(--paper);border-top:1px solid #fff3;font-size:.9rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+
+/* Small screens: stack days vertically, no horizontal pin */
+@media (max-width:760px){
+ .stage-pin{grid-template-columns:1fr}
+ .grid{grid-template-columns:repeat(3,1fr)}
+}
+/* Reduced motion & no-JS fallback: everything static, all content visible */
+.rm .track,.nojs .track{display:block;width:auto;height:auto}
+.rm .day,.nojs .day{width:auto;height:auto;min-height:80svh}
+.rm .statement .w,.nojs .statement .w{opacity:1}
+.rm .dots,.nojs .dots{display:none}
+.rm html,html.rm{scroll-behavior:auto}
+</style>
+</head>
+<body class="nojs">
+<a class="skip" href="#tickets">Skip to tickets</a>
+<div class="prog" aria-hidden="true"></div>
+<header class="nav">
+  <a href="#top">Chattogram · 14–15 Feb</a>
+  <a href="#tickets">Tickets ৳1,500</a>
+</header>
+
+<main id="top">
+<section class="hero" aria-label="Festival introduction">
+  <div class="sun" aria-hidden="true"></div>
+  <h1 aria-label="Two days. Two stages.">
+    <span><i>Two</i></span>
+    <span><i class="o">Days.</i></span>
+    <span><i>Two Stages.</i></span>
+  </h1>
+  <div class="meta">
+    <div><b>When</b><br>14–15 February</div>
+    <div><b>Where</b><br>Chattogram</div>
+    <div><b>Who</b><br>18 artists</div>
+    <div><a class="btn" href="#tickets">Get tickets · ৳1,500 / day</a></div>
+  </div>
+  <p class="cue" aria-hidden="true">Scroll ↓</p>
+</section>
+
+<section class="statement" aria-label="About">
+  <p id="stmt">An independent music festival. Eighteen artists, two stages, two days in Chattogram.</p>
+</section>
+
+<section class="days" aria-label="The two days">
+  <div class="track">
+    <article class="day">
+      <span class="lab">Day one</span>
+      <div class="big">14<small>Feb</small></div>
+      <p>The first day of the festival. Artists on both stages. One day ticket: ৳1,500.</p>
+    </article>
+    <article class="day">
+      <span class="lab">Day two</span>
+      <div class="big">15<small>Feb</small></div>
+      <p>The second day of the festival. Artists on both stages. One day ticket: ৳1,500.</p>
+    </article>
+  </div>
+  <div class="dots" aria-hidden="true"><i class="on"></i><i></i></div>
+</section>
+
+<section class="stages" aria-label="Stages">
+  <div class="stage-pin">
+    <div>
+      <h2>Artists in total</h2>
+      <div class="count" id="count" aria-label="18">18</div>
+      <p class="note">Eighteen artists across the two days.</p>
+    </div>
+    <div class="s2">
+      <h2>On two stages</h2>
+      <div class="stg"><span>Stage<br>One</span><br><span style="color:var(--hot)">Stage<br>Two</span></div>
+      <p class="note">Two stages, shared across both days.</p>
+    </div>
+  </div>
+</section>
+
+<section class="lineup" aria-label="Line-up">
+  <h2>The line-up</h2>
+  <div class="grid" aria-hidden="true">
+    <div class="slot">1</div><div class="slot">2</div><div class="slot">3</div><div class="slot">4</div><div class="slot">5</div><div class="slot">6</div>
+    <div class="slot">7</div><div class="slot">8</div><div class="slot">9</div><div class="slot">10</div><div class="slot">11</div><div class="slot">12</div>
+    <div class="slot">13</div><div class="slot">14</div><div class="slot">15</div><div class="slot">16</div><div class="slot">17</div><div class="slot">18</div>
+  </div>
+  <p>18 artists across two stages over 14–15 February.</p>
+</section>
+
+<section class="tix" id="tickets" aria-label="Tickets">
+  <h2>Tickets</h2>
+  <div class="cards">
+    <div class="card"><h3>Day one · 14 Feb</h3><div class="pr">৳1,500<small> / day</small></div><p>Entry for 14 February, both stages.</p></div>
+    <div class="card"><h3>Day two · 15 Feb</h3><div class="pr">৳1,500<small> / day</small></div><p>Entry for 15 February, both stages.</p></div>
+  </div>
+  <p>Tickets are ৳1,500 per day. Come for one day or both.</p>
+</section>
+</main>
+<footer><span>Independent music festival · Chattogram</span><span>14–15 February</span></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  var b=document.body, root=document.documentElement;
+  var mq=window.matchMedia('(prefers-reduced-motion: reduce)');
+  function still(){b.classList.remove('nojs');b.classList.add('rm');}
+  if(mq.matches||!window.gsap||!window.ScrollTrigger){still();return;}
+  b.classList.remove('nojs');
+  gsap.registerPlugin(ScrollTrigger);
+
+  // split statement into words (text stays intact for screen readers via the <p>)
+  var p=document.getElementById('stmt'), words=p.textContent.split(' ');
+  p.setAttribute('aria-label',p.textContent);
+  p.innerHTML=words.map(function(w){return '<span class="w" aria-hidden="true">'+w+'</span>'}).join(' ');
+
+  var mm=gsap.matchMedia();
+  mm.add('(min-width:761px)',function(){
+    // 1. pinned horizontal days
+    var track=document.querySelector('.track'), dots=document.querySelectorAll('.dots i');
+    gsap.to(track,{xPercent:-50,ease:'none',scrollTrigger:{trigger:'.days',start:'top top',end:'+=100%',pin:true,scrub:.6,
+      onUpdate:function(s){dots[0].classList.toggle('on',s.progress<.5);dots[1].classList.toggle('on',s.progress>=.5)}}});
+    gsap.fromTo('.day .big',{scale:.85},{scale:1,ease:'none',scrollTrigger:{trigger:'.days',start:'top top',end:'+=100%',scrub:true}});
+  });
+  mm.add('(max-width:760px)',function(){
+    // mobile: days stack, each scrubbed in
+    document.querySelector('.track').style.cssText='display:block;width:auto;height:auto';
+    document.querySelectorAll('.day').forEach(function(d){d.style.cssText='width:auto;height:auto;min-height:80svh';
+      gsap.from(d.querySelector('.big'),{y:80,opacity:0,scrollTrigger:{trigger:d,start:'top 80%',end:'top 30%',scrub:true}});});
+    document.querySelector('.dots').style.display='none';
+  });
+
+  // 2. hero intro + parallax sun
+  gsap.from('.hero h1 i',{yPercent:110,duration:1,ease:'power4.out',stagger:.12});
+  gsap.from('.meta > *',{y:20,opacity:0,delay:.7,stagger:.08,duration:.6});
+  gsap.to('.sun',{yPercent:40,scale:1.2,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+
+  // 3. scrubbed word reveal
+  gsap.to('.statement .w',{opacity:1,stagger:.1,ease:'none',scrollTrigger:{trigger:'.statement',start:'top 75%',end:'bottom 55%',scrub:true}});
+
+  // 4. pinned count-up 0 → 18, stages slide in
+  var c=document.getElementById('count'),o={v:0};
+  c.textContent='0';
+  ScrollTrigger.create({trigger:'.stages',start:'top top',end:'+=70%',pin:true,scrub:true,
+    animation:gsap.timeline()
+      .to(o,{v:18,ease:'none',onUpdate:function(){c.textContent=Math.round(o.v)}},0)
+      .from('.stg span',{xPercent:40,opacity:0,stagger:.3,ease:'none'},0)});
+
+  // 5. lineup slots pop in, scrubbed
+  gsap.from('.slot',{scale:.2,opacity:0,stagger:.05,ease:'back.out(2)',scrollTrigger:{trigger:'.grid',start:'top 85%',end:'bottom 60%',scrub:true}});
+  // tickets
+  gsap.from('.card',{y:60,opacity:0,stagger:.15,scrollTrigger:{trigger:'.cards',start:'top 85%',end:'top 50%',scrub:true}});
+
+  // progress bar
+  gsap.to('.prog',{scaleX:1,ease:'none',scrollTrigger:{start:0,end:'max',scrub:true}});
+
+  window.addEventListener('load',function(){ScrollTrigger.refresh()});
+})();
+</script>
+</body>
+</html>

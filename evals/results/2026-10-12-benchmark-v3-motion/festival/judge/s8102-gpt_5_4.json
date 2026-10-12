@@ -1,0 +1,72 @@
+{
+ "model": "gpt_5_4",
+ "seed": 8102,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 3,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "The first screen delivers mood, date and price fast, and the oversized type gives the festival a strong poster-like identity. The scroll sequence usefully progresses from dates to lineup counts to tickets, but the page never shows an actual schedule and the long empty spans weaken function. Measured contrast failure triggers the hard gate."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 3,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [
+    "Placeholder lineup content/components ('ARTIST SLOT' repeated)"
+   ],
+   "notes": "The beam/light concept is coherent across hero, stage story and scroll progression, and the motion strip clearly supports that idea. Typography is confident and the CTA is easy to find, but there is still no accessible schedule and the lineup reads as placeholder content rather than finished information; mobile also looks sparse in the ticket section. Because of the placeholder lineup content, this run fails the hard gate."
+  },
+  "better": "tie",
+  "why": "Both runs fail hard gates: Site A on contrast, Site B on placeholder lineup content."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 3,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "The first screen delivers mood, date and price fast, and the oversized type gives the festival a strong poster-like identity. The scroll sequence usefully progresses from dates to lineup counts to tickets, but the page never shows an actual schedule and the long empty spans weaken function. Measured contrast failure triggers the hard gate."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 3,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [
+   "Placeholder lineup content/components ('ARTIST SLOT' repeated)"
+  ],
+  "notes": "The beam/light concept is coherent across hero, stage story and scroll progression, and the motion strip clearly supports that idea. Typography is confident and the CTA is easy to find, but there is still no accessible schedule and the lineup reads as placeholder content rather than finished information; mobile also looks sparse in the ticket section. Because of the placeholder lineup content, this run fails the hard gate."
+ }
+}

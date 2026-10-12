@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 6103,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a strong, coherent concept: the page behaves like a product storyboard, and the frame counter, figure labels, temperature states and pinned lamp all reinforce that idea. The scroll-frame strip clearly shows meaningful progression tied to the brief’s image-sequence chapter, and reduced motion keeps content visible. Craft is generally very clean on desktop and mobile, though the typography and interaction polish are not quite immaculate enough for perfect scores."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 2,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "B’s strongest asset is typography: the page has a refined editorial voice, and the large serif headlines carry the brand well. The motion strip shows a useful story from unlit ring to warm/neutral/cool states, but it feels less structurally integral than A’s explicit sequence chapter, and I’m not fully sure how much is animation versus staged states from stills alone. Desktop looks polished, but the mobile page capture appears largely empty below the hero, which significantly hurts craft and confidence in responsiveness."
+  },
+  "better": "A",
+  "why": "A fulfills the brief more directly and completely, especially with the storyboard-like image-sequence chapter, always-reachable pricing/pre-order, and more reliable cross-screen execution."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 2,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "B’s strongest asset is typography: the page has a refined editorial voice, and the large serif headlines carry the brand well. The motion strip shows a useful story from unlit ring to warm/neutral/cool states, but it feels less structurally integral than A’s explicit sequence chapter, and I’m not fully sure how much is animation versus staged states from stills alone. Desktop looks polished, but the mobile page capture appears largely empty below the hero, which significantly hurts craft and confidence in responsiveness."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a strong, coherent concept: the page behaves like a product storyboard, and the frame counter, figure labels, temperature states and pinned lamp all reinforce that idea. The scroll-frame strip clearly shows meaningful progression tied to the brief’s image-sequence chapter, and reduced motion keeps content visible. Craft is generally very clean on desktop and mobile, though the typography and interaction polish are not quite immaculate enough for perfect scores."
+ }
+}

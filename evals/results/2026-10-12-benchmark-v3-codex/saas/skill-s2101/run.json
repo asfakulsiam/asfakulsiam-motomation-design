@@ -1,0 +1,12 @@
+{
+ "slug": "saas",
+ "seed": 2101,
+ "cond": "skill",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-codex/saas/skill-s2101",
+ "exit": 0,
+ "seconds": 532,
+ "turns": 29,
+ "agent": "codex-cli 0.130.0",
+ "output": true,
+ "stderr": "Reading additional input from stdin...\n2026-10-12T08:38:52.754682Z ERROR codex_core::tools::router: error=write_stdin failed: stdin is closed for this session; rerun exec_command with tty=true to keep stdin open\n"
+}

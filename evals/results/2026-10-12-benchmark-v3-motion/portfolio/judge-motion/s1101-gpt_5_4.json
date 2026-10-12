@@ -1,0 +1,55 @@
+{
+ "model": "gpt_5_4",
+ "seed": 1101,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 5,
+    "Choreography": 4,
+    "Mobile motion": 4,
+    "Reduced-motion fallback": 3,
+    "Motion craft": 4
+   },
+   "notes": "Clear motion idea tied to the brief: oversized condensed type behaves like title cards, with project names and the closing line taking over the viewport in sequence. Consecutive desktop frames suggest a pinned/scrubbed chapter structure rather than generic fade-ins: hero, list, project title states, then CTA. Mobile keeps the same idea and remains understandable, though a couple of sampled frames catch text mid-transition/cropped at the viewport edge, especially around the Bhoot/Your Titles Next handoff. Craft is mostly solid: no blank states, no obvious broken overlaps, and the cropped giant type reads as intentional motion language. Reduced-motion is the weak point only because the strip looks almost identical to full motion; all content is readable, but from stills it is unclear whether motion was truly removed/softened or simply preserved. Stills cannot confirm easing/timing."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 4,
+    "Choreography": 4,
+    "Mobile motion": 3,
+    "Reduced-motion fallback": 5,
+    "Motion craft": 3
+   },
+   "notes": "There is a real motion concept here, not just fades: the page appears to run through a long type chapter of disciplines, then project reveals with abstract circular forms that could relate to idents/film masking. The sequence is coherent in broad strokes, but frame-to-frame changes feel less tightly focused on title-sequence hiring than Site A; the motion energy is spread across category words, project cards, and graphics. Desktop suggests a long scrubbed chapter, but some sampled states feel sparse or disconnected, and project transitions show ghosted/overlapping text and objects caught mid-state. Mobile keeps the structure, yet the mid-sequence frames are more awkward: overlapping project labels and floating graphics make the motion adaptation feel less controlled. Reduced-motion is strong: content appears reorganized into readable static sections, with all key information present without needing animation. Craft is mixed: no blanks, but several frames show transitional overlap/half-revealed elements that look messier than intentional. Stills cannot confirm easing/timing."
+  },
+  "winner": "A"
+ },
+ "served": "{\"requested\": \"gpt_5_4\", \"served\": \"gpt_5_4\", \"in\": 6260, \"cached\": 0, \"out\": 454, \"reasoning\": 1645, \"secs\": 36.6}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 4,
+   "Choreography": 4,
+   "Mobile motion": 3,
+   "Reduced-motion fallback": 5,
+   "Motion craft": 3
+  },
+  "notes": "There is a real motion concept here, not just fades: the page appears to run through a long type chapter of disciplines, then project reveals with abstract circular forms that could relate to idents/film masking. The sequence is coherent in broad strokes, but frame-to-frame changes feel less tightly focused on title-sequence hiring than Site A; the motion energy is spread across category words, project cards, and graphics. Desktop suggests a long scrubbed chapter, but some sampled states feel sparse or disconnected, and project transitions show ghosted/overlapping text and objects caught mid-state. Mobile keeps the structure, yet the mid-sequence frames are more awkward: overlapping project labels and floating graphics make the motion adaptation feel less controlled. Reduced-motion is strong: content appears reorganized into readable static sections, with all key information present without needing animation. Craft is mixed: no blanks, but several frames show transitional overlap/half-revealed elements that look messier than intentional. Stills cannot confirm easing/timing.",
+  "total": 76.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 5,
+   "Choreography": 4,
+   "Mobile motion": 4,
+   "Reduced-motion fallback": 3,
+   "Motion craft": 4
+  },
+  "notes": "Clear motion idea tied to the brief: oversized condensed type behaves like title cards, with project names and the closing line taking over the viewport in sequence. Consecutive desktop frames suggest a pinned/scrubbed chapter structure rather than generic fade-ins: hero, list, project title states, then CTA. Mobile keeps the same idea and remains understandable, though a couple of sampled frames catch text mid-transition/cropped at the viewport edge, especially around the Bhoot/Your Titles Next handoff. Craft is mostly solid: no blank states, no obvious broken overlaps, and the cropped giant type reads as intentional motion language. Reduced-motion is the weak point only because the strip looks almost identical to full motion; all content is readable, but from stills it is unclear whether motion was truly removed/softened or simply preserved. Stills cannot confirm easing/timing.",
+  "total": 80.0
+ },
+ "winner": "skill"
+}

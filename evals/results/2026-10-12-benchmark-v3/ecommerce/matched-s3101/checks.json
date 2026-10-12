@@ -1,0 +1,112 @@
+{
+ "375": {
+  "pageHeight": 7397,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 4975,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 13,
+    "text": "Add to cart — ৳1,200",
+    "href": "",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 25639,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    582,
+    1164,
+    1746,
+    2329,
+    2911,
+    3493,
+    4075
+   ],
+   "maxScroll": 4075
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 4975,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 7397,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 4,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c4 o0 w0 rm0 a0 n0 · gate/2 · 9e703ae3a1",
+  "critique": "C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "p.tag",
+    "text": "Mango wood · 36 hours",
+    "ratio": 1.03,
+    "need": 4.5,
+    "fg": "#d9cdb9",
+    "bg": "#f6c36a",
+    "size": 13
+   },
+   {
+    "width": 390,
+    "el": "p.tag",
+    "text": "Mango wood · 36 hours",
+    "ratio": 1.03,
+    "need": 4.5,
+    "fg": "#d9cdb9",
+    "bg": "#f6c36a",
+    "size": 13
+   },
+   {
+    "width": 768,
+    "el": "p.tag",
+    "text": "Mango wood · 36 hours",
+    "ratio": 3.36,
+    "need": 4.5,
+    "fg": "#d9cdb9",
+    "bg": "#b8481a",
+    "size": 13
+   },
+   {
+    "width": 1440,
+    "el": "p.tag",
+    "text": "Mango wood · 36 hours",
+    "ratio": 3.36,
+    "need": 4.5,
+    "fg": "#d9cdb9",
+    "bg": "#b8481a",
+    "size": 13
+   }
+  ],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

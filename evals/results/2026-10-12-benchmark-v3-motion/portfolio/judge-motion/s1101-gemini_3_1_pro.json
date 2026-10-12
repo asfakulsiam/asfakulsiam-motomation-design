@@ -1,0 +1,55 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 1101,
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Motion concept": 3,
+    "Choreography": 2,
+    "Mobile motion": 2,
+    "Reduced-motion fallback": 1,
+    "Motion craft": 1
+   },
+   "notes": "Site A incorporates a timecode UI tying into the film/titles brief, but the scroll choreography is heavily flawed. The strips reveal blank frames (2 and 4) and text stuck half-revealed (5 and 7). Furthermore, the reduced-motion strip is identical to the full-motion strip, meaning no accessibility fallback has been implemented to remove these disruptive pinning/scrubbing effects."
+  },
+  "B": {
+   "scores": {
+    "Motion concept": 5,
+    "Choreography": 5,
+    "Mobile motion": 5,
+    "Reduced-motion fallback": 5,
+    "Motion craft": 5
+   },
+   "notes": "Site B answers the brief perfectly with a sophisticated, type-led hook that scrubs smoothly through the designer's focus areas, followed by elegant, filmic geometric reveals for the projects instead of standard thumbnails. The choreography is pristine with no awkward overlaps or blank frames. The mobile layout translates the motion beautifully, and the reduced-motion fallback correctly disables the tall scroll-pinning (cutting scroll length almost in half) to present a clean, accessible standard document flow."
+  },
+  "winner": "B"
+ },
+ "served": "{\"requested\": \"gemini_3_1_pro\", \"served\": \"gemini_3_1_pro\", \"in\": 7205, \"cached\": 0, \"out\": 332, \"reasoning\": 1577, \"secs\": 22.8}",
+ "baseline": {
+  "scores": {
+   "Motion concept": 5,
+   "Choreography": 5,
+   "Mobile motion": 5,
+   "Reduced-motion fallback": 5,
+   "Motion craft": 5
+  },
+  "notes": "Site B answers the brief perfectly with a sophisticated, type-led hook that scrubs smoothly through the designer's focus areas, followed by elegant, filmic geometric reveals for the projects instead of standard thumbnails. The choreography is pristine with no awkward overlaps or blank frames. The mobile layout translates the motion beautifully, and the reduced-motion fallback correctly disables the tall scroll-pinning (cutting scroll length almost in half) to present a clean, accessible standard document flow.",
+  "total": 100.0
+ },
+ "skill": {
+  "scores": {
+   "Motion concept": 3,
+   "Choreography": 2,
+   "Mobile motion": 2,
+   "Reduced-motion fallback": 1,
+   "Motion craft": 1
+  },
+  "notes": "Site A incorporates a timecode UI tying into the film/titles brief, but the scroll choreography is heavily flawed. The strips reveal blank frames (2 and 4) and text stuck half-revealed (5 and 7). Furthermore, the reduced-motion strip is identical to the full-motion strip, meaning no accessibility fallback has been implemented to remove these disruptive pinning/scrubbing effects.",
+  "total": 36.0
+ },
+ "winner": "baseline"
+}

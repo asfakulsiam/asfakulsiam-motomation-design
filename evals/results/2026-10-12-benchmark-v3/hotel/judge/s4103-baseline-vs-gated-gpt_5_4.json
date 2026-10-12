@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 4103,
+ "pair": [
+  "baseline",
+  "gated"
+ ],
+ "order": {
+  "A": "gated",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A carries one quiet idea well: arrival through old-city roofs to a specific door, and that signature repeats in the house illustration, room cards and closing address section. Type and palette fit the brief, room facts are clear, and the reduced-motion capture stays intact; from the scroll strip the motion reads mostly as orderly reveal/progression rather than a stronger story-driven sequence."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "B has the more singular hero, with the arched door and balcony motif giving the hotel a memorable identity that feels right for the brief. But across the page, phone and reduced-motion captures there are very long empty bands and weaker pacing, so despite passing the measured checks the experience looks less resolved and dependable than A; the scroll strip again suggests mostly section-by-section reveals, and I can't verify finer motion quality from stills."
+  },
+  "better": "A",
+  "why": "A is slightly less dramatic, but it feels more complete and reliable across desktop, mobile and reduced motion while still expressing a clear Haveli-specific idea."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "B has the more singular hero, with the arched door and balcony motif giving the hotel a memorable identity that feels right for the brief. But across the page, phone and reduced-motion captures there are very long empty bands and weaker pacing, so despite passing the measured checks the experience looks less resolved and dependable than A; the scroll strip again suggests mostly section-by-section reveals, and I can't verify finer motion quality from stills."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A carries one quiet idea well: arrival through old-city roofs to a specific door, and that signature repeats in the house illustration, room cards and closing address section. Type and palette fit the brief, room facts are clear, and the reduced-motion capture stays intact; from the scroll strip the motion reads mostly as orderly reveal/progression rather than a stronger story-driven sequence."
+ }
+}

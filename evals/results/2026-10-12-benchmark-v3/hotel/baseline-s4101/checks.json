@@ -1,0 +1,384 @@
+{
+ "375": {
+  "pageHeight": 4695,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 2
+   }
+  ],
+  "contrastViolations": 2
+ },
+ "1440": {
+  "pageHeight": 4311,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 2
+   }
+  ],
+  "contrastViolations": 2,
+  "keyboard": {
+   "primaryReached": {
+    "step": 7,
+    "text": "CHECK AVAILABILITY",
+    "href": "https://book.example-hotel.com",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "37/40"
+  },
+  "source": {
+   "bytes": 11950,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    487,
+    975,
+    1462,
+    1949,
+    2436,
+    2924,
+    3411
+   ],
+   "maxScroll": 3411
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 4311,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4695,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 30,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c30 o0 w0 rm0 a0 n0 · gate/2 · 247deff31a",
+  "critique": "C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V2[entrance-repeats:3]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "a.btn",
+    "text": "Check availability",
+    "ratio": 3.51,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#ba7869",
+    "size": 13.6
+   },
+   {
+    "width": 375,
+    "el": "p.eyebrow",
+    "text": "Shankhari Bazar · Puran Dhaka",
+    "ratio": 2.73,
+    "need": 4.5,
+    "fg": "#c58a2b",
+    "bg": "#7b3f22",
+    "size": 18.4
+   },
+   {
+    "width": 375,
+    "el": "em",
+    "text": "1893",
+    "ratio": 1.91,
+    "need": 3,
+    "fg": "#c58a2b",
+    "bg": "#945825",
+    "size": 54.4
+   },
+   {
+    "width": 375,
+    "el": "a.btn",
+    "text": "Check availability",
+    "ratio": 1.24,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#efe6d4",
+    "size": 13.6
+   },
+   {
+    "width": 375,
+    "el": "p.eyebrow",
+    "text": "The house",
+    "ratio": 2.4,
+    "need": 4.5,
+    "fg": "#c58a2b",
+    "bg": "#efe6d4",
+    "size": 12.48
+   },
+   {
+    "width": 375,
+    "el": "p.eyebrow",
+    "text": "Rooftop breakfast",
+    "ratio": 2.4,
+    "need": 4.5,
+    "fg": "#c58a2b",
+    "bg": "#efe6d4",
+    "size": 12.48
+   },
+   {
+    "width": 375,
+    "el": "p.eyebrow",
+    "text": "Walking tours",
+    "ratio": 2.11,
+    "need": 4.5,
+    "fg": "#c58a2b",
+    "bg": "#e5d8bd",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "a.btn",
+    "text": "Check availability",
+    "ratio": 3.51,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#ba7869",
+    "size": 13.6
+   },
+   {
+    "width": 390,
+    "el": "p.eyebrow",
+    "text": "Shankhari Bazar · Puran Dhaka",
+    "ratio": 2.73,
+    "need": 4.5,
+    "fg": "#c58a2b",
+    "bg": "#7b3f22",
+    "size": 18.4
+   },
+   {
+    "width": 390,
+    "el": "em",
+    "text": "1893",
+    "ratio": 1.91,
+    "need": 3,
+    "fg": "#c58a2b",
+    "bg": "#945825",
+    "size": 54.4
+   },
+   {
+    "width": 390,
+    "el": "a.btn",
+    "text": "Check availability",
+    "ratio": 1.24,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#efe6d4",
+    "size": 13.6
+   },
+   {
+    "width": 390,
+    "el": "p.eyebrow",
+    "text": "The house",
+    "ratio": 2.4,
+    "need": 4.5,
+    "fg": "#c58a2b",
+    "bg": "#efe6d4",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "p.eyebrow",
+    "text": "Rooftop breakfast",
+    "ratio": 2.4,
+    "need": 4.5,
+    "fg": "#c58a2b",
+    "bg": "#efe6d4",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "p.eyebrow",
+    "text": "Walking tours",
+    "ratio": 2.11,
+    "need": 4.5,
+    "fg": "#c58a2b",
+    "bg": "#e5d8bd",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "a.btn",
+    "text": "Check availability",
+    "ratio": 3.15,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#bf8274",
+    "size": 13.6
+   },
+   {
+    "width": 768,
+    "el": "p.eyebrow",
+    "text": "Shankhari Bazar · Puran Dhaka",
+    "ratio": 3.29,
+    "need": 4.5,
+    "fg": "#c58a2b",
+    "bg": "#6e3221",
+    "size": 18.4
+   },
+   {
+    "width": 768,
+    "el": "em",
+    "text": "1893",
+    "ratio": 2.11,
+    "need": 3,
+    "fg": "#c58a2b",
+    "bg": "#8d5124",
+    "size": 84.48
+   },
+   {
+    "width": 768,
+    "el": "p",
+    "text": "Twelve rooms in a restored merchant house, in the ",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#efe6d4",
+    "bg": "#985c26",
+    "size": 18.4
+   },
+   {
+    "width": 768,
+    "el": "a.btn",
+    "text": "Check availability",
+    "ratio": 2.92,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#df7e39",
+    "size": 13.6
+   },
+   {
+    "width": 768,
+    "el": "p.eyebrow",
+    "text": "The house",
+    "ratio": 2.4,
+    "need": 4.5,
+    "fg": "#c58a2b",
+    "bg": "#efe6d4",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "p.eyebrow",
+    "text": "Rooftop breakfast",
+    "ratio": 2.4,
+    "need": 4.5,
+    "fg": "#c58a2b",
+    "bg": "#efe6d4",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "p.eyebrow",
+    "text": "Walking tours",
+    "ratio": 2.11,
+    "need": 4.5,
+    "fg": "#c58a2b",
+    "bg": "#e5d8bd",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "a.btn",
+    "text": "Check availability",
+    "ratio": 3.51,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#ba7869",
+    "size": 13.6
+   },
+   {
+    "width": 1440,
+    "el": "p.eyebrow",
+    "text": "Shankhari Bazar · Puran Dhaka",
+    "ratio": 3.52,
+    "need": 4.5,
+    "fg": "#c58a2b",
+    "bg": "#682e20",
+    "size": 18.4
+   },
+   {
+    "width": 1440,
+    "el": "em",
+    "text": "1893",
+    "ratio": 2.17,
+    "need": 3,
+    "fg": "#c58a2b",
+    "bg": "#8b4f24",
+    "size": 128
+   },
+   {
+    "width": 1440,
+    "el": "p",
+    "text": "Twelve rooms in a restored merchant house, in the ",
+    "ratio": 3.92,
+    "need": 4.5,
+    "fg": "#efe6d4",
+    "bg": "#9f6426",
+    "size": 18.4
+   },
+   {
+    "width": 1440,
+    "el": "a.btn",
+    "text": "Check availability",
+    "ratio": 2.64,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#e28a47",
+    "size": 13.6
+   },
+   {
+    "width": 1440,
+    "el": "p.eyebrow",
+    "text": "The house",
+    "ratio": 2.4,
+    "need": 4.5,
+    "fg": "#c58a2b",
+    "bg": "#efe6d4",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "p.eyebrow",
+    "text": "Rooftop breakfast",
+    "ratio": 2.4,
+    "need": 4.5,
+    "fg": "#c58a2b",
+    "bg": "#efe6d4",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "p.eyebrow",
+    "text": "Walking tours",
+    "ratio": 2.11,
+    "need": 4.5,
+    "fg": "#c58a2b",
+    "bg": "#e5d8bd",
+    "size": 12.48
+   }
+  ],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

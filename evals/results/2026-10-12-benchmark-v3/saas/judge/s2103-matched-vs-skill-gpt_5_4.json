@@ -1,0 +1,68 @@
+{
+ "model": "gpt_5_4",
+ "seed": 2103,
+ "pair": [
+  "matched",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "matched"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a clear governing idea: isolate the single meaningful line from surrounding noise, and that idea carries from the hero through the session/result pair. The scroll-strip evidence shows motion serving that story by progressively surfacing the anomalous line rather than adding generic reveals. Craft and accessibility are both very strong across desktop, mobile, keyboard, and reduced-motion."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "B has a stronger poster-like first impression and a bolder typographic voice, but the execution is uneven against the brief and checks. From the scroll frames, motion is mostly standard sectional reveals; it is purposeful but less specifically tied to the 'find the one line' story than A. The measured contrast failures and 375px horizontal overflow materially hurt both accessibility and craft."
+  },
+  "better": "A",
+  "why": "A is the stronger run because it fulfills the brief more completely, uses motion to explain the product itself, and passes the hard gates that B fails."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "B has a stronger poster-like first impression and a bolder typographic voice, but the execution is uneven against the brief and checks. From the scroll frames, motion is mostly standard sectional reveals; it is purposeful but less specifically tied to the 'find the one line' story than A. The measured contrast failures and 375px horizontal overflow materially hurt both accessibility and craft."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a clear governing idea: isolate the single meaningful line from surrounding noise, and that idea carries from the hero through the session/result pair. The scroll-strip evidence shows motion serving that story by progressively surfacing the anomalous line rather than adding generic reveals. Craft and accessibility are both very strong across desktop, mobile, keyboard, and reduced-motion."
+ }
+}

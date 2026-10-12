@@ -1,0 +1,12 @@
+{
+ "slug": "portfolio",
+ "seed": 1102,
+ "cond": "baseline",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-motion/portfolio/baseline-s1102",
+ "exit": 0,
+ "seconds": 58,
+ "turns": 9,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}
