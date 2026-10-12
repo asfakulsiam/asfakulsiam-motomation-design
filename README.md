@@ -387,6 +387,8 @@ Each component is one strict-TypeScript React file with no dependencies beyond R
 node skills/asfakulsiam-motomation-design/scripts/search.mjs components "photo reveal on scroll"
 ```
 
+**React-first.** The library is React-first. Plain variants exist for the 5 most-used components. For other components, use the React version. The five ([`vendor/plain/`](vendor/plain/): count-up, split-flap, copy-button, ink-fill, typewriter) each ship a CSS + HTML and a Tailwind variant; they are the components the most page sections and templates import, and a variant that every component carries is a second library to keep in step with the first.
+
 Install one into a project (the file plus the shared helper):
 
 ```bash
@@ -421,6 +423,7 @@ skills/asfakulsiam-motomation-design/   ← the installable skill
     components/       43-component library (catalogue README, one file each)
     gallery/          live demo page for every component
 registry/                    ← one JSON per component for `npx shadcn add`
+vendor/plain/                ← CSS + HTML and Tailwind variants of the 5 most-used components (React-first)
 dist/motomation-design.md   ← single-file edition for chat tools
 evals/                       ← test briefs, rubric, release gate
 .claude-plugin/ .cursor-plugin/ .codex-plugin/ gemini-extension.json rules/

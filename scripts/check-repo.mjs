@@ -141,7 +141,7 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
         if (/\.js$/.test(f)) for (const m of src.matchAll(/^\s*import\b[^"']*["']([^"']+)["']/gm)) if (!m[1].startsWith("./") && !m[1].startsWith("../")) fail(`${rel}: imports "${m[1]}"; vendor/plain has no dependencies (relative imports only)`);
         if (/\.html$/.test(f)) for (const m of src.matchAll(/<(?:script|link)\b[^>]*(?:src|href)="(https?:)?\/\//g)) fail(`${rel}: loads a remote script or stylesheet; the variants are self-contained`);
       }
-      // the top 20 by usage: how many D5 sections import the component, then how many D6 templates reach it, then name
+      // the top 5 by usage (v2.5.0: the library is React-first; plain variants only for the 5 most-used): how many D5 sections import the component, then how many D6 templates reach it, then name
       const secDir = join(SKILL, "examples/sections"), tplDir = join(SKILL, "examples/templates");
       const compOf = (src) => new Set([...src.matchAll(/from "\.\.\/components\/[a-z]+\/([a-z0-9-]+)"/g)].map((m) => m[1]));
       const secComps = Object.fromEntries(readdirSync(secDir).filter((f) => f.endsWith(".tsx") && !f.startsWith("_")).map((f) => [f.replace(/\.tsx$/, ""), compOf(readFileSync(join(secDir, f), "utf8"))]));
@@ -150,10 +150,11 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
       for (const d of readdirSync(tplDir).filter((d) => existsSync(join(tplDir, d, "page.tsx")))) {
         const secs = [...readFileSync(join(tplDir, d, "page.tsx"), "utf8").matchAll(/from "\.\.\/\.\.\/sections\/([a-z0-9-]+)"/g)].map((m) => m[1]);
         for (const c of new Set(secs.flatMap((s) => [...(secComps[s] || [])]))) bump(c, "t"); }
-      const want = Object.keys(use).sort((a, b) => use[b].s - use[a].s || use[b].t - use[a].t || a.localeCompare(b)).slice(0, 20);
-      const listed = JSON.parse(readFileSync(join(P, "top20.json"), "utf8")).components.map((c) => c.id);
-      if (JSON.stringify([...listed].sort()) !== JSON.stringify([...want].sort())) fail(`vendor/plain/top20.json lists ${listed.join(", ")}; the top 20 by usage are now ${want.join(", ")}`);
-      for (const id of listed) for (const f of [`${id}.js`, `${id}.css`, "plain.html", "tailwind.html"]) if (!existsSync(join(P, id, f))) fail(`vendor/plain/${id}/${f} missing: each top-20 component ships React + CSS/HTML + Tailwind`);
+      const want = Object.keys(use).sort((a, b) => use[b].s - use[a].s || use[b].t - use[a].t || a.localeCompare(b)).slice(0, 5);
+      const listed = JSON.parse(readFileSync(join(P, "top5.json"), "utf8")).components.map((c) => c.id);
+      if (JSON.stringify([...listed].sort()) !== JSON.stringify([...want].sort())) fail(`vendor/plain/top5.json lists ${listed.join(", ")}; the top 5 by usage are now ${want.join(", ")}`);
+      for (const id of listed) for (const f of [`${id}.js`, `${id}.css`, "plain.html", "tailwind.html"]) if (!existsSync(join(P, id, f))) fail(`vendor/plain/${id}/${f} missing: each top-5 component ships React + CSS/HTML + Tailwind`);
+      for (const d of readdirSync(P).filter((d) => d !== "_lib" && statSync(join(P, d)).isDirectory())) if (!listed.includes(d)) fail(`vendor/plain/${d}/: only the top 5 by usage keep plain variants (React-first); use the React version of ${d}`);
       if (!existsSync(join(P, "README.md"))) fail("vendor/plain/README.md missing");
     }
   }

@@ -1,3 +1,0 @@
-/* @motomation-variant · id: beams · react: skills/asfakulsiam-motomation-design/examples/components/backgrounds/beams.tsx */
-/* beams.js sets the layer and shafts inline (they depend on count/angle/light); the parent needs position: relative. */
-.mm-beams { position: absolute; inset: 0; }

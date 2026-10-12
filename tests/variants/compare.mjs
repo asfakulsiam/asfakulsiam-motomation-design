@@ -17,8 +17,8 @@ const esbuild = require("esbuild");
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../..");
 const args = process.argv.slice(2), opt = (k) => { const i = args.indexOf(k); return i < 0 ? null : args[i + 1]; };
-const TOP20 = JSON.parse(readFileSync(join(ROOT, "vendor/plain/top20.json"), "utf8")).components.map((c) => c.id);
-const only = opt("--only")?.split(","), ids = only || TOP20, shots = opt("--shots"), jsonOut = opt("--json");
+const TOP = JSON.parse(readFileSync(join(ROOT, "vendor/plain/top5.json"), "utf8")).components.map((c) => c.id);
+const only = opt("--only")?.split(","), ids = only || TOP, shots = opt("--shots"), jsonOut = opt("--json");
 
 if (opt("--tailwind")) { // the CLI resolves "tailwindcss" from the input file's folder, so the input sits in the toolchain
   const cli = opt("--tailwind"), tc = dirname(dirname(dirname(cli))), tmp = join(tc, ".mm-tw-in.css");

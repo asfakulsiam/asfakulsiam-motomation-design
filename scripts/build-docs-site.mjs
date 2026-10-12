@@ -51,7 +51,7 @@ export function sourceHash() {
   const h = createHash("sha256"); h.update(gallerySourceHash());
   for (const f of readdirSync(SRC).sort()) { h.update(f); h.update(readFileSync(join(SRC, f))); }
   h.update(readFileSync(fileURLToPath(import.meta.url)));
-  const plain = join(ROOT, "vendor/plain/top20.json"); if (existsSync(plain)) h.update(readFileSync(plain));
+  const plain = join(ROOT, "vendor/plain/top5.json"); if (existsSync(plain)) h.update(readFileSync(plain));
   return h.digest("hex").slice(0, 16);
 }
 
@@ -81,7 +81,7 @@ ${source !== null ? `<script type="application/json" id="source">${JSON.stringif
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const { components } = collect();
-  const plain = existsSync(join(ROOT, "vendor/plain/top20.json")) ? new Set(JSON.parse(readFileSync(join(ROOT, "vendor/plain/top20.json"), "utf8")).components.map((c) => c.id)) : new Set();
+  const plain = existsSync(join(ROOT, "vendor/plain/top5.json")) ? new Set(JSON.parse(readFileSync(join(ROOT, "vendor/plain/top5.json"), "utf8")).components.map((c) => c.id)) : new Set();
   const entries = components.map((c) => ({ id: c.id, name: c.name, family: c.family, tier: c.tier, what: c.what, use_when: c["use-when"], avoid_when: c["avoid-when"], reduced_motion: c["reduced-motion"], touch: c.touch || "", a11y: c.a11y || "", file: c.file, props: parseProps(c.src, c.export), plain: plain.has(c.id) }));
   if (process.argv.includes("--props")) { for (const e of entries) console.log(`${e.id.padEnd(20)} ${e.props.map((p) => `${p.name}${p.control ? `[${p.control}]` : ""}${p.def ? `=${p.def}` : ""}`).join(" ")}`); process.exit(0); }
   const req = createRequire(join(process.cwd(), "noop.js")); let esbuild;

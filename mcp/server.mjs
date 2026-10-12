@@ -28,7 +28,7 @@ const PROTOCOLS = ["2025-06-18", "2025-03-26", "2024-11-05"];
 
 const lib = () => collect().components;
 const find = (id) => { const c = lib().find((x) => x.id === id); if (!c) throw new UserError(`No component "${id}". Use search_components to find ids.`); return c; };
-const plainIds = () => { const f = join(ROOT, "vendor/plain/top20.json"); return existsSync(f) ? JSON.parse(readFileSync(f, "utf8")).components.map((c) => c.id) : []; };
+const plainIds = () => { const f = join(ROOT, "vendor/plain/top5.json"); return existsSync(f) ? JSON.parse(readFileSync(f, "utf8")).components.map((c) => c.id) : []; };
 class UserError extends Error {}
 const libsOf = (src, seen = new Set(["motion"])) => { for (const m of src.matchAll(/from "(?:\.\.\/_lib|\.)\/(\w+)"/g)) if (!seen.has(m[1])) { seen.add(m[1]); libsOf(readFileSync(join(LIB, `_lib/${m[1]}.ts`), "utf8"), seen); } return [...seen]; };
 const datasets = () => readdirSync(join(SKILL, "data")).filter((f) => f.endsWith(".csv")).map((f) => f.replace(/\.csv$/, ""));
@@ -96,7 +96,7 @@ async function callTool(name, a = {}) {
     const base = resolve(a.project_dir, a.components_dir || "src/components/motomation"); if (relative(a.project_dir, base).startsWith("..")) throw new UserError("components_dir must stay inside project_dir");
     let files;
     if ((a.variant || "react") === "plain") {
-      if (!plainIds().includes(c.id)) throw new UserError(`${c.id} has no plain variant; the top 20 do: ${plainIds().join(", ")}`);
+      if (!plainIds().includes(c.id)) throw new UserError(`${c.id} has no plain variant; only the 5 most-used components have one (the library is React-first; use the React variant): ${plainIds().join(", ")}`);
       const dir = join(ROOT, "vendor/plain"); files = [...readdirSync(join(dir, c.id)).map((f) => [`${c.id}/${f}`, join(dir, c.id, f)]), ["_lib/motion.js", join(dir, "_lib/motion.js")]].map(([to, from]) => [join(base, to), readFileSync(from, "utf8")]);
     } else files = [[join(base, c.family, `${c.id}.tsx`), c.src], ...libsOf(c.src).map((n) => [join(base, "_lib", `${n}.ts`), readFileSync(join(LIB, `_lib/${n}.ts`), "utf8")])];
     const written = [], kept = [];

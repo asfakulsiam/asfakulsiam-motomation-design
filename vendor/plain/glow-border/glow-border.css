@@ -1,4 +1,0 @@
-/* @motomation-variant · id: glow-border · react: skills/asfakulsiam-motomation-design/examples/components/ui/glow-border.tsx */
-.mm-glow-border { position: relative; padding: 1px; border-radius: 14px; background: var(--mm-glow-base, rgba(255,255,255,.12)); overflow: hidden; isolation: isolate; }
-.mm-glow-border__lamp { position: absolute; left: 0; top: 0; border-radius: 50%; z-index: -1; pointer-events: none; }
-.mm-glow-border__surface { position: relative; border-radius: 13px; background: var(--mm-glow-surface, #17140f); height: 100%; }

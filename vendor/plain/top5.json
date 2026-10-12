@@ -1,0 +1,25 @@
+{
+  "@motomation-variant": "top 5 components by usage (D5 sections, then D6 templates, then name); see README.md",
+  "components": [
+    {
+      "id": "count-up",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/micro/count-up.tsx"
+    },
+    {
+      "id": "split-flap",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/type/split-flap.tsx"
+    },
+    {
+      "id": "copy-button",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/micro/copy-button.tsx"
+    },
+    {
+      "id": "ink-fill",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/type/ink-fill.tsx"
+    },
+    {
+      "id": "typewriter",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/text/typewriter.tsx"
+    }
+  ]
+}
