@@ -265,6 +265,7 @@ export function hardGates(c) {
 // A judged pair is two arms. baseline-vs-skill keeps v2's file names (s<seed>-<model>.json); other pairs add the pair.
 const PAIRS = String(flags.pairs || "baseline:skill").split(",").map((p) => p.split(":"));
 const pairTag = ([a, b]) => (a === "baseline" && b === "skill" ? "" : `${a}-vs-${b}-`);
+const sh = (cmd) => new Promise((ok) => { const p = spawn("bash", ["-c", cmd], { stdio: ["ignore", "pipe", "pipe"] }); let stdout = "", stderr = ""; p.stdout.on("data", (d) => (stdout += d)); p.stderr.on("data", (d) => (stderr += d)); p.on("close", () => ok({ stdout, stderr })); });
 async function judgePair(slug, seed, model, pair = ["baseline", "skill"]) {
   const dirs = { [pair[0]]: join(OUT, slug, `${pair[0]}-s${seed}`), [pair[1]]: join(OUT, slug, `${pair[1]}-s${seed}`) };
   const order = [...pair]; if (parseInt(createHash("sha256").update(`${slug}-${seed}${pairTag(pair)}`).digest("hex").slice(0, 8), 16) % 2) order.reverse();
@@ -282,7 +283,7 @@ async function judgePair(slug, seed, model, pair = ["baseline", "skill"]) {
   const base = `s${seed}-${pairTag(pair)}${model}`; const pf = join(jd, `${base}.prompt.txt`), imf = join(jd, `${base}.images.txt`); writeFileSync(pf, prompt); writeFileSync(imf, imgs.join("\n"));
   const cmd = String(flags["judge-cmd"]).replaceAll("{model}", model).replaceAll("{prompt}", pf).replaceAll("{images}", imf);
   for (let a = 0; a < 3; a++) {
-    const r = spawnSync("bash", ["-c", cmd], { encoding: "utf8", maxBuffer: 64 << 20 });
+    const r = await sh(cmd); // async: --parallel judges really run side by side (v2.4.0; spawnSync serialised them)
     try { const j = JSON.parse(r.stdout.match(/\{[\s\S]*\}/)[0]); const res = { model, seed, pair, order: { A: order[0], B: order[1] }, raw: j, [pair[0]]: j[order.indexOf(pair[0]) ? "B" : "A"], [pair[1]]: j[order.indexOf(pair[1]) ? "B" : "A"] };
       writeFileSync(join(jd, `${base}.json`), JSON.stringify(res, null, 1)); console.log(`judged ${slug} s${seed} ${pair.join(" vs ")} ${model}`); return res; } catch { console.log(`judge retry ${slug} s${seed} ${model}: ${(r.stderr || r.stdout).slice(0, 200)}`); }
   }
@@ -294,7 +295,7 @@ async function main() {
   if (phase === "generate") { mkdirSync(OUT, { recursive: true }); const todo = runs().filter((r) => flags.force || !existsSync(join(r.dir, "run.json"))); await pool(todo, +(flags.parallel || 4), flags.agent === "raw-api" ? runRawAgent : runAgent); return; }
   if (phase === "measure") {
     const req = createRequire(join(process.cwd(), "noop.js")); let pw; try { pw = await import(req.resolve("playwright")); pw = pw.chromium ? pw : pw.default; } catch { console.log("not verified — no browser (Playwright not found from the current folder)"); process.exit(3); }
-    await pool(runs().filter((r) => existsSync(join(r.dir, "run.json")) && (flags.force || !existsSync(join(r.dir, "checks.json")))), +(flags.parallel || 3), async (r) => { await measure(r, pw); console.log(`measured ${r.slug} ${r.cond} s${r.seed}`); }); return;
+    await pool(runs().filter((r) => existsSync(join(r.dir, "run.json")) && (flags.force || !existsSync(join(r.dir, "checks.json")))), +(flags.parallel || 3), async (r) => { try { await measure(r, pw); console.log(`measured ${r.slug} ${r.cond} s${r.seed}`); } catch (e) { console.log(`MEASURE FAILED ${r.slug} ${r.cond} s${r.seed}: ${String(e).split("\n")[0]} (no checks.json; the pair stays not scored)`); process.exitCode = 1; } }); return;
   }
   if (phase === "judge") {
     if (!flags["judge-cmd"]) { console.error("--judge-cmd is required"); process.exit(1); }
