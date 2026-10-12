@@ -1,0 +1,80 @@
+name: Components
+# Per-component tests (v2.4.0, C1). Every component in data/components.csv, sharded by family, gets:
+#   screenshot comparison at 1440 and 375 (against tests/components/baselines.json), the measured gate on its own demo
+#   page, a gzipped size budget, a reduced-motion stillness check, and mount/unmount with no console errors and no
+#   animation frames left pending. Any regression fails its family's job. The interaction suites (hold-to-commit,
+#   reduced-motion first render, confetti) and the whole-gallery harness (layout shift, all demos on one page) run too.
+on:
+  push:
+    branches: [main]
+    paths: [skills/asfakulsiam-motomation-design/examples/components/**, skills/asfakulsiam-motomation-design/examples/gallery/**, skills/asfakulsiam-motomation-design/data/components.csv, skills/asfakulsiam-motomation-design/scripts/gate.mjs, tests/components/**, .github/workflows/components.yml]
+  pull_request:
+    paths: [skills/asfakulsiam-motomation-design/examples/components/**, skills/asfakulsiam-motomation-design/examples/gallery/**, skills/asfakulsiam-motomation-design/data/components.csv, skills/asfakulsiam-motomation-design/scripts/gate.mjs, tests/components/**, .github/workflows/components.yml]
+  workflow_dispatch:
+env:
+  # the gallery's pinned toolchain (scripts/build-gallery.mjs PINNED) + the Playwright the gate-fixtures job uses
+  TOOLCHAIN: esbuild@0.28.2 react@19.2.6 react-dom@19.2.6 playwright@1.59.0
+jobs:
+  coverage:
+    name: every component has a baseline and a family shard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - name: Baselines cover the catalogue; the matrix below covers every family
+        run: |
+          node -e '
+            const fs = require("fs"); const csv = fs.readFileSync("skills/asfakulsiam-motomation-design/data/components.csv", "utf8").trim().split("\n").slice(1);
+            const ids = csv.map((l) => l.split(",")[0]); const fams = [...new Set(csv.map((l) => l.split(",")[2]))].sort();
+            const base = JSON.parse(fs.readFileSync("tests/components/baselines.json", "utf8"));
+            const missing = ids.flatMap((id) => [1440, 375].filter((w) => !base[`${id}@${w}`]).map((w) => `${id}@${w}`));
+            const wf = fs.readFileSync(".github/workflows/components.yml", "utf8"); const m = wf.match(/family: \[([^\]]+)\]/);
+            const shard = m ? m[1].split(",").map((s) => s.trim()).sort() : [];
+            const unshard = fams.filter((f) => !shard.includes(f));
+            console.log(`${ids.length} components, ${fams.length} families (${fams.join(", ")})`);
+            if (missing.length) { console.error("no baseline: " + missing.join(", ")); process.exit(1); }
+            if (unshard.length) { console.error("families not in the matrix: " + unshard.join(", ")); process.exit(1); }'
+  per-component:
+    name: components (${{ matrix.family }})
+    needs: coverage
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        family: [backgrounds, cursor, layout, micro, scroll, text, type, ui]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - name: Install toolchain (pinned) + Chromium
+        run: |
+          npm i --no-save --no-package-lock --silent $TOOLCHAIN
+          npx playwright install --with-deps chromium
+      - name: Screenshot, gate, size, reduced motion, mount/unmount
+        run: NODE_PATH=$PWD/node_modules node tests/components/per-component.mjs --family ${{ matrix.family }} --out /tmp/pc --json /tmp/pc/report.json
+      - name: Keep the evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: "components-${{ matrix.family }}", path: /tmp/pc/, if-no-files-found: ignore, retention-days: 14 }
+  interaction:
+    name: interaction suites + gallery harness
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - name: Install toolchain (pinned) + Chromium
+        run: |
+          npm i --no-save --no-package-lock --silent $TOOLCHAIN
+          npx playwright install --with-deps chromium
+      - name: Hold to Commit (pointer, keyboard, screen reader, cancel, navigate away)
+        run: NODE_PATH=$PWD/node_modules node tests/components/hold-to-commit.test.mjs
+      - name: Reduced motion is right on the first render
+        run: NODE_PATH=$PWD/node_modules node tests/components/reduced-motion.test.mjs
+      - name: Confetti
+        run: NODE_PATH=$PWD/node_modules node tests/components/confetti.test.mjs
+      - name: Whole gallery (layout shift, console errors, every demo on one page)
+        run: NODE_PATH=$PWD/node_modules node tests/components/gallery-harness.mjs --out /tmp/gh
