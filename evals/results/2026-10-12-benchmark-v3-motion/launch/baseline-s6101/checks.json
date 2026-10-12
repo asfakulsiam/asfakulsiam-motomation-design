@@ -1,0 +1,156 @@
+{
+ "375": {
+  "pageHeight": 5762,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 6378,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 1,
+    "text": "Pre-order · $189",
+    "href": "#order",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "34/40"
+  },
+  "source": {
+   "bytes": 10345,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    783,
+    1565,
+    2348,
+    3130,
+    3913,
+    4695,
+    5478
+   ],
+   "maxScroll": 5478
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 2910,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 2632,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 12,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c0 o12 w0 rm0 a0 n0 · gate/2 · 69152cb729",
+  "critique": "C?[no-record] H4[375:1] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0]",
+  "contrast": [],
+  "overflow": [
+   {
+    "width": 375,
+    "el": "button",
+    "kind": "text overflows parent",
+    "px": 55,
+    "text": "One"
+   },
+   {
+    "width": 375,
+    "el": "button",
+    "kind": "text overflows parent",
+    "px": 121,
+    "text": "Two"
+   },
+   {
+    "width": 375,
+    "el": "button",
+    "kind": "text overflows parent",
+    "px": 200,
+    "text": "Three"
+   },
+   {
+    "width": 390,
+    "el": "button",
+    "kind": "text overflows parent",
+    "px": 55,
+    "text": "One"
+   },
+   {
+    "width": 390,
+    "el": "button",
+    "kind": "text overflows parent",
+    "px": 121,
+    "text": "Two"
+   },
+   {
+    "width": 390,
+    "el": "button",
+    "kind": "text overflows parent",
+    "px": 200,
+    "text": "Three"
+   },
+   {
+    "width": 768,
+    "el": "button",
+    "kind": "text overflows parent",
+    "px": 55,
+    "text": "One"
+   },
+   {
+    "width": 768,
+    "el": "button",
+    "kind": "text overflows parent",
+    "px": 121,
+    "text": "Two"
+   },
+   {
+    "width": 768,
+    "el": "button",
+    "kind": "text overflows parent",
+    "px": 200,
+    "text": "Three"
+   },
+   {
+    "width": 1440,
+    "el": "button",
+    "kind": "text overflows parent",
+    "px": 55,
+    "text": "One"
+   },
+   {
+    "width": 1440,
+    "el": "button",
+    "kind": "text overflows parent",
+    "px": 121,
+    "text": "Two"
+   },
+   {
+    "width": 1440,
+    "el": "button",
+    "kind": "text overflows parent",
+    "px": 200,
+    "text": "Three"
+   }
+  ],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

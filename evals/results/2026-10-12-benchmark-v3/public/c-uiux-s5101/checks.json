@@ -1,0 +1,122 @@
+{
+ "375": {
+  "pageHeight": 3972,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 3574,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 6,
+    "text": "Donate ·\nদান",
+    "href": "#donate",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 19527,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    382,
+    764,
+    1146,
+    1528,
+    1910,
+    2292,
+    2674
+   ],
+   "maxScroll": 2674
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3574,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 3972,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 5,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c5 o0 w0 rm0 a0 n0 · gate/2 · 4a0ad4e418",
+  "critique": "C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V3[entrance-repeats:2]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "a.btn.ghost",
+    "text": "Volunteer · স্বেচ্ছাসেবক",
+    "ratio": 2.45,
+    "need": 4.5,
+    "fg": "#0e2a1b",
+    "bg": "#2f6c43",
+    "size": 16
+   },
+   {
+    "width": 375,
+    "el": "span",
+    "text": "· স্বেচ্ছাসেবক",
+    "ratio": 1.89,
+    "need": 4.5,
+    "fg": "#0e2a1b",
+    "bg": "#1f5a3a",
+    "size": 16
+   },
+   {
+    "width": 390,
+    "el": "a.btn.ghost",
+    "text": "Volunteer · স্বেচ্ছাসেবক",
+    "ratio": 2.61,
+    "need": 4.5,
+    "fg": "#0e2a1b",
+    "bg": "#3a6f4f",
+    "size": 16
+   },
+   {
+    "width": 390,
+    "el": "span",
+    "text": "· স্বেচ্ছাসেবক",
+    "ratio": 1.89,
+    "need": 4.5,
+    "fg": "#0e2a1b",
+    "bg": "#1f5a3a",
+    "size": 16
+   },
+   {
+    "width": 768,
+    "el": "span",
+    "text": "· স্বেচ্ছাসেবক",
+    "ratio": 1.89,
+    "need": 4.5,
+    "fg": "#0e2a1b",
+    "bg": "#1f5a3a",
+    "size": 16
+   }
+  ],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

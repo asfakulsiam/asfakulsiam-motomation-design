@@ -1,0 +1,20 @@
+DELIVERY GATE · /home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-motion/portfolio/baseline-s1102/index.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (24 measured; 7 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (22 measured; 9 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (21 measured; 10 skipped; 0 not visible at scan time)
+     ⚠ 768px coverage: 10 of 31 text elements (32%) were skipped (moving, occluded or never fully on screen) — more than 30%, so this width is not a full measurement. Check the skipped text by hand or make it measurable.
+     1440px  ✓ 0 below AA  (22 measured; 9 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✗ 1 display-text problems at 375px  (5 display elements checked)
+     h3.display  leaves the viewport by 222px  "Monsoon Idents"
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (31 compared)
+  names     ✓ 0 missing alt / accessible names  (4 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (8 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  6 sections, entrances: static | fade+y | static | static | fade+y | static → 1 repeat(s); pins 3, WebGL canvases 0, JS 47KB gzipped
+  records    DESIGN.md: none · memory log: /home/user/workspace/repo/.motomation/log.json · stamp fields: {"tier":"4"}
+  critique → C?[no-record] H4[375:1] S?[no-archetype-in-stamp] R?[no-record] M4[t4:pins3/2,webgl0/1,js47/250KB,rm0] V4[entrance-repeats:1]   (axes marked ? have no record to derive from)
+  FAIL  stamp → critique: C?[no-record] H4[375:1] S?[no-archetype-in-stamp] R?[no-record] M4[t4:pins3/2,webgl0/1,js47/250KB,rm0] V4[entrance-repeats:1] · gate: c0 o0 w1 rm0 a0 n0 · gate/2 · 61307f290d
+
+motion report → /home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-motion/portfolio/baseline-s1102/motion-report.html (24 frames, 763 KB)

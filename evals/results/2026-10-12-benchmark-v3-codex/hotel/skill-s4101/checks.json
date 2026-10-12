@@ -1,0 +1,71 @@
+{
+ "375": {
+  "pageHeight": 6683,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 4744,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 6,
+    "text": "BOOK",
+    "href": "#book",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "37/40"
+  },
+  "source": {
+   "bytes": 35093,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": "motomation · archetype: room · mutation: print-rule marginalia · signature: stitched-threshold · tier: 2 · critique: C5[restraint:kept] H4[375:1] S5[last5:none] R4[cuts:2,anim:1] M5[t2:pins0/2,webgl0/1,js48/80KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 9a4f8cd05c "
+  },
+  "strip": {
+   "frames": [
+    0,
+    549,
+    1098,
+    1647,
+    2197,
+    2746,
+    3295,
+    3844
+   ],
+   "maxScroll": 3844
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 4744,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 6683,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 9a4f8cd05c",
+  "critique": "C?[no-record] H4[375:1] S5[last5:no-log] R?[no-record] M5[t2:pins0/2,webgl0/1,js48/80KB,rm0] V5[entrance-repeats:0]",
+  "contrast": [],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

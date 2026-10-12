@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tracewell: from 4 million log lines to the one that matters</title>
+<meta name="description" content="Tracewell is a CLI and web app that finds the one log line that explains an incident. Built for on-call backend engineers.">
+<meta name="theme-color" content="#F3F1EC">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400&family=Instrument+Sans:wght@400&display=swap" rel="stylesheet">
+<style>
+/* motomation · archetype: ledger · mutation: one font weight (400) only · signature: the-collapse · tier: 2 · critique: C5[restraint:kept] H5[375:0] S5[last5:no-log] R5[cuts:3,anim:2] M5[t2:pins2/2,webgl0/1,js48/80KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · dff3a08156 */
+:root{
+  --ground:#F3F1EC; --ink:#16150F; --muted:#5C584D; --accent:#B4400A;
+  --rule:rgba(22,21,15,.2);
+  --term:#14130F; --term-ink:#E9E6DC; --term-muted:#9D998C; --term-accent:#FF8F55;
+  --ui--1:.75rem; --ui-0:.875rem; --ui-1:1rem; --ui-2:1.25rem;
+  --ui-3:clamp(1.75rem,1.2rem + 2.4vw,3.25rem);
+  --pad:clamp(16px,4vw,56px);
+  --ease-out-strong:cubic-bezier(.16,1,.3,1);
+  --sans:"Instrument Sans",ui-sans-serif,sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --head:56px;
+}
+*,*::before,*::after{box-sizing:border-box;font-weight:400}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--head) + 8px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font:var(--ui-1)/1.55 var(--sans);overflow-x:hidden}
+h1,h2,h3,p,figure,table{margin:0}
+h1,h2{text-wrap:balance;line-height:1.1;letter-spacing:-.02em}
+code,.mono{font-family:var(--mono)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.dark :focus-visible,.term :focus-visible{outline-color:var(--term-accent)}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip{position:absolute;left:var(--pad);top:-60px;background:var(--ink);color:var(--ground);padding:10px 14px;z-index:10;transition:top .15s var(--ease-out-strong)}
+.skip:focus{top:8px}
+
+/* header */
+.head{position:sticky;top:0;z-index:5;height:var(--head);background:var(--ground);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);gap:12px}
+.mark{font:var(--ui-1) var(--mono);text-decoration:none;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;min-height:44px}
+.mark i{width:8px;height:8px;background:var(--accent);display:block}
+.head nav{display:flex;gap:clamp(12px,3vw,28px)}
+.head nav a{font-size:var(--ui-0);text-decoration:none;color:var(--muted);min-height:44px;display:flex;align-items:center;transition:color .15s}
+.head nav a:hover{color:var(--ink)}
+
+/* hero + collapse */
+.track{height:240vh;position:relative}
+.stage{position:sticky;top:var(--head);height:calc(100vh - var(--head));height:calc(100svh - var(--head));min-height:520px;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);padding:clamp(20px,4vh,48px) var(--pad);align-items:stretch}
+.lede{display:flex;flex-direction:column;justify-content:center;gap:clamp(14px,2.5vh,24px)}
+.kicker{font:var(--ui--1)/1.3 var(--mono);color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+h1{font-size:var(--ui-3);max-width:15ch}
+.lede p{color:var(--muted);max-width:42ch}
+.actions{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center}
+.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;background:var(--accent);color:var(--ground);text-decoration:none;font:var(--ui-0) var(--mono);border-radius:3px;transition:transform .12s var(--ease-out-strong),background-color .15s}
+.btn:hover{background:#963508}
+.btn:active{transform:translateY(1px)}
+.textlink{font:var(--ui-0) var(--mono);min-height:44px;display:inline-flex;align-items:center;text-underline-offset:4px}
+.wall{background:var(--term);color:var(--term-ink);border-radius:6px;padding:14px 0 10px;overflow:hidden;display:flex;flex-direction:column;min-height:0;position:relative}
+.wall-cap{font:var(--ui--1)/1 var(--mono);color:var(--term-muted);padding:0 16px 12px;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid rgba(233,230,220,.14);margin-bottom:6px}
+.rows{flex:1;min-height:0;overflow:hidden}
+.ln{display:block;position:relative;font:var(--ui--1)/24px var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 16px;color:var(--term-muted);opacity:.32}
+.ln b{color:var(--term-muted)}
+.ln.hit{opacity:1;color:var(--term-ink);padding-left:16px}
+.ln.hit b{color:var(--term-accent)}
+.hl{position:absolute;inset:0;background:rgba(255,143,85,.14);opacity:1;pointer-events:none}
+.mk{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--term-accent);transform-origin:50% 0}
+.verdict{display:block;font:var(--ui--1)/1.5 var(--mono);color:var(--term-accent);padding:6px 16px 10px 16px;white-space:normal}
+
+/* sections */
+section{padding:clamp(64px,10vw,112px) var(--pad) 0}
+.sec-head{display:grid;grid-template-columns:minmax(48px,1fr) minmax(0,11fr);gap:16px;margin-bottom:clamp(24px,4vw,40px)}
+.num{font:var(--ui--1)/2.2 var(--mono);color:var(--muted)}
+h2{font-size:clamp(1.5rem,1.2rem + 1.4vw,2.25rem);max-width:24ch}
+.row{position:relative;display:grid;grid-template-columns:minmax(48px,1fr) minmax(0,4fr) minmax(0,7fr);gap:8px 16px;padding:22px 0}
+.rule{position:absolute;left:0;right:0;top:0;height:1px;background:var(--ink);transform-origin:0 50%}
+.row .n{font:var(--ui--1)/1.9 var(--mono);color:var(--muted)}
+.row code{font-size:var(--ui-0);line-height:1.6;overflow-wrap:anywhere}
+.row p{color:var(--muted);max-width:52ch}
+.ledger{border-bottom:1px solid var(--ink)}
+
+/* demo */
+.demo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,2.5vw,32px);align-items:start}
+.term{background:var(--term);color:var(--term-ink);border-radius:6px;padding:0 0 18px;font:var(--ui-0)/1.65 var(--mono)}
+.bar{display:flex;gap:8px;align-items:center;padding:12px 16px;border-bottom:1px solid rgba(233,230,220,.14);margin-bottom:14px;font-size:var(--ui--1);color:var(--term-muted);letter-spacing:.04em;text-transform:uppercase}
+.tl{padding:0 16px;overflow-wrap:anywhere}
+.tl.cmd{margin-top:10px}
+.tl .p{color:var(--term-accent)}
+.tl.out{color:var(--term-muted)}
+.tl.rk{display:grid;grid-template-columns:2ch minmax(0,1fr);gap:0 1ch;color:var(--term-ink)}
+.tl.rk.top{color:var(--term-accent)}
+.tl.rk span:first-child{color:var(--term-muted)}
+.tl.rk.top span:first-child{color:var(--term-accent)}
+.card{background:#FBFAF7;border:1px solid var(--rule);border-radius:6px}
+.card-h{display:flex;justify-content:space-between;gap:12px;padding:12px 18px;border-bottom:1px solid var(--rule);font:var(--ui--1)/1.4 var(--mono);color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.card-b{padding:20px 18px 22px;display:grid;gap:18px}
+.top-line{font:var(--ui-0)/1.6 var(--mono);border-left:3px solid var(--accent);padding:4px 0 4px 14px;overflow-wrap:anywhere}
+.top-line b{color:var(--accent)}
+.why{max-width:46ch}
+.why strong{display:block;font:var(--ui--1)/1.4 var(--mono);color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}
+.rank{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.rank li{display:grid;grid-template-columns:2ch minmax(0,1fr);gap:0 1ch;font:var(--ui--1)/1.5 var(--mono);color:var(--muted)}
+.rank li span:last-child{overflow-wrap:anywhere}
+.rank i{grid-column:2;display:block;height:3px;background:var(--rule);position:relative;margin-top:6px}
+.rank i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--w);background:var(--accent)}
+.share{font:var(--ui--1)/1.5 var(--mono);border-top:1px dashed var(--rule);padding-top:14px;color:var(--ink)}
+.note{font:var(--ui--1)/1.5 var(--mono);color:var(--muted);margin-top:14px}
+
+/* pricing */
+.tbl{width:100%;border-collapse:collapse;font-size:var(--ui-0)}
+.tbl caption{text-align:left}
+.tbl th,.tbl td{text-align:left;vertical-align:top;padding:16px 12px 16px 0;border-top:1px solid var(--rule)}
+.tbl thead th{border-top:1px solid var(--ink);font-size:var(--ui-2);letter-spacing:-.01em;padding-bottom:6px}
+.tbl thead td{border-top:1px solid var(--ink)}
+.tbl .price th,.tbl .price td{border-top:0;padding-top:0;color:var(--muted);font-family:var(--mono);font-size:var(--ui--1);line-height:1.5}
+.tbl tbody th{color:var(--muted);font:var(--ui--1)/1.7 var(--mono);width:28%;letter-spacing:.02em}
+.tbl tbody tr:last-child th,.tbl tbody tr:last-child td{border-bottom:1px solid var(--ink)}
+.tbl td{font-family:var(--mono)}
+.tbl .team{color:var(--ink)}
+
+/* install */
+.cmds{display:grid;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.cmd-box{background:var(--term);color:var(--term-ink);border-radius:6px;padding:16px 16px 14px;display:grid;gap:12px;align-content:start}
+.cmd-box .lab{font:var(--ui--1)/1 var(--mono);color:var(--term-muted);letter-spacing:.04em;text-transform:uppercase}
+.cmd-box code{font-size:var(--ui-0);line-height:1.6;overflow-wrap:anywhere;white-space:pre-wrap}
+.cmd-box code span{color:var(--term-accent)}
+.copy{justify-self:start;min-height:44px;padding:0 16px;background:transparent;color:var(--term-ink);border:1px solid rgba(233,230,220,.4);border-radius:3px;font:var(--ui-0) var(--mono);cursor:pointer;transition:background-color .15s,border-color .15s,transform .12s var(--ease-out-strong)}
+.copy:hover{border-color:var(--term-ink);background:rgba(233,230,220,.08)}
+.copy:active{transform:translateY(1px)}
+footer{margin-top:clamp(64px,10vw,112px);padding:20px var(--pad) 32px;border-top:1px solid var(--ink);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;font:var(--ui--1)/1.6 var(--mono);color:var(--muted)}
+
+/* narrow */
+@media (max-width:860px){
+  .stage{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:16px;padding-top:16px;padding-bottom:16px}
+  .lede{justify-content:flex-start;gap:12px}
+  .lede p{font-size:var(--ui-0);line-height:1.5}
+  .kicker{display:none}
+  .demo,.cmds{grid-template-columns:minmax(0,1fr)}
+  .row{grid-template-columns:32px minmax(0,1fr)}
+  .row p{grid-column:2}
+  .sec-head{grid-template-columns:32px minmax(0,1fr);gap:0 0}
+  .tbl thead th{font-size:var(--ui-1)}
+  .tbl tbody th{width:30%}
+  .track{height:200vh}
+}
+@media (max-width:860px) and (max-height:700px){
+  .lede p{display:none}
+}
+
+/* reduced motion: the finished state, no extra scroll length, no animation */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .track{height:auto}
+  .stage{position:static;height:auto;min-height:0}
+  .wall{min-height:420px}
+  *{transition-duration:.01ms!important}
+}
+@media (prefers-reduced-motion:reduce) and (max-width:860px){
+  .stage{display:flex;flex-direction:column}
+  .lede p{display:block}
+  .kicker{display:block}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="head">
+  <a class="mark" href="#top" aria-label="Tracewell, top of page"><i aria-hidden="true"></i>tracewell</a>
+  <nav aria-label="Primary">
+    <a href="#how">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#install">Install</a>
+  </nav>
+</header>
+
+<main id="main">
+  <div class="track" id="top">
+    <div class="stage">
+      <div class="lede">
+        <p class="kicker">CLI and web app · for on-call backend engineers</p>
+        <h1>From 4 million log lines to the one that matters.</h1>
+        <p>Tracewell finds the one log line that explains an incident. Scroll and watch the noise step back.</p>
+        <div class="actions">
+          <a class="btn" href="#install">Install Tracewell</a>
+          <a class="textlink" href="#demo">See a session</a>
+        </div>
+      </div>
+      <div class="wall" role="img" aria-label="Sample log stream: many routine lines fade back, and one unusual error line stays lit. The connection pool is exhausted, and it was not seen in the previous 7 days.">
+        <div class="wall-cap" aria-hidden="true">Sample log stream</div>
+        <div class="rows" id="rows" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="how" aria-labelledby="how-h">
+    <div class="sec-head"><span class="num" aria-hidden="true">01</span><h2 id="how-h">Three steps from stream to answer</h2></div>
+    <div class="ledger" role="list">
+      <div class="row" role="listitem"><span class="rule" aria-hidden="true"></span><span class="n" aria-hidden="true">1</span><code>tracewell ingest</code><p>Stream logs from files, Docker or Kubernetes.</p></div>
+      <div class="row" role="listitem"><span class="rule" aria-hidden="true"></span><span class="n" aria-hidden="true">2</span><code>tracewell why --since 15m</code><p>Ranks lines by how unusual they are compared with the last 7 days.</p></div>
+      <div class="row" role="listitem"><span class="rule" aria-hidden="true"></span><span class="n" aria-hidden="true">3</span><code>explanation link</code><p>Share the explanation link with the team.</p></div>
+    </div>
+  </section>
+
+  <section id="demo" aria-labelledby="demo-h">
+    <div class="sec-head"><span class="num" aria-hidden="true">02</span><h2 id="demo-h">A session, start to finish</h2></div>
+    <div class="demo">
+      <figure class="term" id="term">
+        <div class="bar" aria-hidden="true">terminal</div>
+        <figcaption class="vh">Terminal session: tracewell ingest, then tracewell why --since 15m, with ranked output.</figcaption>
+        <div class="tl cmd"><span class="p">$</span> tracewell ingest</div>
+        <div class="tl out">streaming logs…</div>
+        <div class="tl cmd"><span class="p">$</span> tracewell why --since 15m</div>
+        <div class="tl out">ranked by how unusual, against the last 7 days</div>
+        <div class="tl rk top"><span>1</span><span>02:14:07 ERROR payments-api connection pool exhausted: 0 of 20 free</span></div>
+        <div class="tl rk"><span>2</span><span>02:14:07 WARN payments-api retrying upstream call attempt=2</span></div>
+        <div class="tl rk"><span>3</span><span>02:14:05 WARN worker-queue job waited longer than usual</span></div>
+        <div class="tl out">explanation link ready to share</div>
+      </figure>
+      <div class="card" id="result">
+        <div class="card-h"><span>Why · last 15 minutes</span><span>web app</span></div>
+        <div class="card-b">
+          <p class="top-line"><b>ERROR</b> 02:14:07 payments-api connection pool exhausted: 0 of 20 free, waiting on db-primary</p>
+          <p class="why"><strong>Why this line</strong>It has no match in the previous 7 days. The lines around it are routine.</p>
+          <ol class="rank" aria-label="Next most unusual lines">
+            <li><span>2</span><span>WARN payments-api retrying upstream call attempt=2</span><i style="--w:46%" aria-hidden="true"></i></li>
+            <li><span>3</span><span>WARN worker-queue job waited longer than usual</span><i style="--w:28%" aria-hidden="true"></i></li>
+          </ol>
+          <p class="share">Explanation link: send it to the team and everyone sees this view.</p>
+        </div>
+      </div>
+    </div>
+    <p class="note">Sample session with illustrative log lines.</p>
+  </section>
+
+  <section id="pricing" aria-labelledby="pr-h">
+    <div class="sec-head"><span class="num" aria-hidden="true">03</span><h2 id="pr-h">Free for one, Team by the seat</h2></div>
+    <table class="tbl">
+      <caption class="vh">Tracewell plans compared</caption>
+      <thead>
+        <tr><td><span class="vh">Plan</span></td><th scope="col">Free</th><th scope="col" class="team">Team</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Price</th><td>No charge</td><td class="team">$12 per seat per month</td></tr>
+        <tr><th scope="row">Users</th><td>1</td><td class="team">Per seat</td></tr>
+        <tr><th scope="row">Retention</th><td>3 days</td><td class="team">30 days</td></tr>
+        <tr><th scope="row">Shared incidents</th><td><span aria-hidden="true">—</span><span class="vh">Not included</span></td><td class="team">Included</td></tr>
+        <tr><th scope="row">SSO</th><td><span aria-hidden="true">—</span><span class="vh">Not included</span></td><td class="team">Included</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="install" aria-labelledby="in-h">
+    <div class="sec-head"><span class="num" aria-hidden="true">04</span><h2 id="in-h">Install it in one line</h2></div>
+    <div class="cmds">
+      <div class="cmd-box">
+        <span class="lab">Homebrew</span>
+        <code><span aria-hidden="true">$ </span>brew install tracewell</code>
+        <button class="copy" type="button" data-copy="brew install tracewell" aria-label="Copy the Homebrew command">Copy</button>
+      </div>
+      <div class="cmd-box">
+        <span class="lab">Shell script</span>
+        <code><span aria-hidden="true">$ </span>curl -fsSL https://tracewell.dev/install.sh | sh</code>
+        <button class="copy" type="button" data-copy="curl -fsSL https://tracewell.dev/install.sh | sh" aria-label="Copy the curl command">Copy</button>
+      </div>
+    </div>
+    <p class="vh" role="status" aria-live="polite" id="status"></p>
+  </section>
+</main>
+
+<footer>
+  <span>Tracewell · tracewell.dev</span>
+  <span>A CLI and web app for on-call backend engineers</span>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script>
+(function(){
+  // The wall: sample lines, index 5 is the one that matters.
+  var LINES=[
+    ["02:13:52","INFO ","api-gateway GET /v1/charges 200"],
+    ["02:13:53","INFO ","worker-queue job picked up queue=receipts"],
+    ["02:13:55","DEBUG","cache hit namespace=sessions"],
+    ["02:13:57","INFO ","payments-api charge authorised"],
+    ["02:14:03","INFO ","api-gateway POST /v1/refunds 200"],
+    ["02:14:07","ERROR","payments-api connection pool exhausted: 0 of 20 free, waiting on db-primary"],
+    ["02:14:08","INFO ","api-gateway GET /healthz 200"],
+    ["02:14:08","DEBUG","cache hit namespace=catalogue"],
+    ["02:14:09","INFO ","worker-queue job finished queue=receipts"],
+    ["02:14:11","INFO ","api-gateway GET /v1/charges 200"],
+    ["02:14:12","DEBUG","scheduler tick"],
+    ["02:14:14","INFO ","payments-api charge authorised"],
+    ["02:14:15","INFO ","api-gateway GET /healthz 200"],
+    ["02:14:17","DEBUG","cache hit namespace=sessions"],
+    ["02:14:18","INFO ","worker-queue job picked up queue=emails"],
+    ["02:14:20","INFO ","api-gateway POST /v1/charges 200"],
+    ["02:14:22","DEBUG","scheduler tick"],
+    ["02:14:23","INFO ","api-gateway GET /healthz 200"],
+    ["02:14:25","INFO ","worker-queue job finished queue=emails"],
+    ["02:14:26","DEBUG","cache hit namespace=catalogue"]
+  ];
+  var HIT=5, rows=document.getElementById("rows");
+  LINES.forEach(function(l,i){
+    var d=document.createElement("span"); d.className="ln"+(i===HIT?" hit":"");
+    if(i===HIT){
+      d.innerHTML='<span class="hl"></span><span class="mk"></span>';
+    }
+    var t=document.createElement("span"); t.textContent=l[0]+" "; d.appendChild(t);
+    var b=document.createElement("b"); b.textContent=l[1]+" "; d.appendChild(b);
+    var m=document.createElement("span"); m.textContent=l[2]; d.appendChild(m);
+    rows.appendChild(d);
+    if(i===HIT){
+      var v=document.createElement("span"); v.className="verdict"; v.id="verdict";
+      v.textContent="← the one line: no match in the previous 7 days";
+      rows.appendChild(v);
+    }
+  });
+
+  // Copy buttons
+  var status=document.getElementById("status");
+  document.querySelectorAll(".copy").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var text=btn.getAttribute("data-copy");
+      function done(ok){
+        btn.textContent=ok?"Copied":"Press Ctrl+C";
+        status.textContent=ok?"Command copied to clipboard":"Select the command and copy it";
+        setTimeout(function(){btn.textContent="Copy";},1800);
+      }
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(function(){done(true);},function(){done(false);});
+      }else{done(false);}
+    });
+  });
+
+  // Motion (Tier 2). Everything above is already in its finished state; motion only plays the way there.
+  function init(){
+    if(!window.gsap||!window.ScrollTrigger)return;
+    gsap.registerPlugin(ScrollTrigger);
+    var mm=gsap.matchMedia();
+    mm.add("(prefers-reduced-motion: no-preference)",function(){
+      // The Collapse: every routine line starts bright, then steps back with distance from the one that matters.
+      var others=[].slice.call(rows.querySelectorAll(".ln:not(.hit)"));
+      var tl=gsap.timeline({defaults:{ease:"none"},scrollTrigger:{trigger:".track",start:"top top+="+56,end:"bottom bottom",scrub:true,invalidateOnRefresh:true}});
+      tl.fromTo(others,{opacity:1},{opacity:.32,stagger:{each:.04,from:HIT>0?HIT:0},duration:.4},0)
+        .fromTo(".hl",{opacity:0},{opacity:1,duration:.3},.45)
+        .fromTo(".mk",{scaleY:0},{scaleY:1,duration:.3},.45)
+        .fromTo(".verdict",{opacity:0,y:6},{opacity:1,y:0,duration:.25},.7)
+        .to({},{duration:.15});
+
+      // Ledger rules draw in, in order.
+      gsap.utils.toArray(".ledger").forEach(function(l){
+        gsap.fromTo(l.querySelectorAll(".rule"),{scaleX:0},{scaleX:1,duration:.9,ease:"expo.out",stagger:.14,scrollTrigger:{trigger:l,start:"top 80%",once:true}});
+      });
+
+      // Terminal lines appear in the order the commands run.
+      gsap.fromTo("#term .tl",{opacity:0},{opacity:1,duration:.35,ease:"power3.out",stagger:.22,scrollTrigger:{trigger:"#term",start:"top 75%",once:true}});
+    });
+    if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){ScrollTrigger.refresh();});}
+    window.addEventListener("load",function(){ScrollTrigger.refresh();});
+  }
+  if(document.readyState==="complete"){init();}else{window.addEventListener("load",init);}
+})();
+</script>
+</body>
+</html>

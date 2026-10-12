@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sundari Trust | Bringing the mangroves back</title>
+<meta name="description" content="Sundari Trust restores mangroves in the Sundarbans buffer zone with local communities. Donate or volunteer for the planting season.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Tokens. One theme per user preference (light or dark), one accent, one radius. */
+:root{
+  --bg:#f1f5f1; --surface:#e4ece4; --raise:#f8faf7; --ink:#13201a; --muted:#44554b;
+  --line:#b7c6bb; --accent:#1d6a49; --accent-ink:#f8faf7; --accent-soft:#c9dfd0; --err:#a3261c;
+  --water:#cfe0da; --sky:#e3eee6;
+  --r:10px; --max:1240px; --pad:clamp(1.25rem,4vw,3rem);
+  --font:"Outfit","Noto Sans Bengali",system-ui,sans-serif;
+  --bn:"Noto Sans Bengali","Outfit",system-ui,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0e1612; --surface:#15221b; --raise:#1a2a21; --ink:#e6eee8; --muted:#a6b8ac;
+    --line:#2f4437; --accent:#63c692; --accent-ink:#08130d; --accent-soft:#1f3a2c; --err:#ff9d93;
+    --water:#14281f; --sky:#12201a;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:1.0625rem;line-height:1.6}
+h1,h2,h3,p{margin:0}
+.bn{font-family:var(--bn)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:var(--r)}
+.skip{position:absolute;left:1rem;top:-4rem;background:var(--accent);color:var(--accent-ink);padding:.6rem 1rem;border-radius:var(--r);z-index:100;transition:top .2s var(--ease)}
+.skip:focus{top:1rem}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--pad)}
+section{padding-block:clamp(4rem,9vw,8rem)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:.7rem 1.4rem;border-radius:var(--r);border:2px solid var(--accent);background:var(--accent);color:var(--accent-ink);font:600 1rem/1 var(--font);text-decoration:none;white-space:nowrap;cursor:pointer;transition:transform .3s var(--ease),background-color .3s var(--ease),color .3s var(--ease)}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(1px) scale(.98)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--bg)}
+.btn[disabled]{opacity:.7;cursor:progress}
+
+/* Nav */
+header.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+.nav .wrap{display:flex;align-items:center;gap:1rem;height:68px}
+.brand{display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:1.2rem;text-decoration:none;margin-right:auto}
+.brand svg{width:30px;height:30px;color:var(--accent)}
+.links{display:none;gap:1.75rem;align-items:center}
+.links a{text-decoration:none;font-weight:500;padding:.4rem 0;border-bottom:2px solid transparent;transition:border-color .3s var(--ease)}
+.links a:hover{border-color:var(--accent)}
+.menu-btn{min-height:44px;min-width:44px;border:2px solid var(--line);background:transparent;color:var(--ink);border-radius:var(--r);font:600 .95rem var(--font);padding:0 .9rem;cursor:pointer}
+.mobile{display:none;border-top:1px solid var(--line);background:var(--bg)}
+.mobile.open{display:block}
+.mobile a{display:block;padding:1rem var(--pad);text-decoration:none;font-weight:500;border-bottom:1px solid var(--line)}
+@media(min-width:900px){.links{display:flex}.menu-btn,.mobile{display:none!important}}
+@media(max-width:899px){.nav .btn{padding-inline:1rem}}
+
+/* Hero */
+.hero{padding-block:2rem 3rem;min-height:calc(100dvh - 68px);display:flex;align-items:center}
+.hero .wrap{display:grid;gap:2.5rem;align-items:center;width:100%}
+@media(min-width:900px){.hero .wrap{grid-template-columns:7fr 5fr;gap:4rem}}
+.eyebrow{font-size:.8rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem}
+h1 .b{display:block;font-family:var(--bn);font-weight:700;font-size:clamp(2.3rem,5.4vw,4.1rem);line-height:1.3;letter-spacing:0}
+h1 .e{display:block;font-weight:500;font-size:clamp(1.4rem,2.8vw,2.1rem);line-height:1.2;letter-spacing:-.02em;color:var(--accent);margin-top:.4rem}
+.lede{max-width:46ch;margin-top:1.5rem;color:var(--muted);font-size:1.15rem}
+.cta{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2rem}
+.art{width:100%;max-height:68dvh;aspect-ratio:600/660;border-radius:var(--r);overflow:hidden;background:var(--sky)}
+.art svg{display:block;width:100%;height:100%}
+@media(max-width:899px){.art{aspect-ratio:4/3;max-height:none}}
+.s-sky{fill:var(--sky)} .s-sun{fill:var(--accent-soft)} .s-water{fill:var(--water)}
+.s-leaf{fill:var(--accent)} .s-leaf2{fill:var(--accent);opacity:.7}
+.s-root{fill:none;stroke:var(--ink);stroke-width:5;stroke-linecap:round;opacity:.8}
+.s-wave{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;opacity:.5}
+.s-stem{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round}
+
+/* Section titles: Bangla over English, stacked */
+.title .b{display:block;font-family:var(--bn);font-weight:700;font-size:clamp(1.9rem,4vw,3rem);line-height:1.35}
+.title .e{display:block;font-weight:500;font-size:clamp(1.15rem,2.2vw,1.6rem);color:var(--accent);letter-spacing:-.01em;line-height:1.3}
+.sub{max-width:62ch;margin-top:1rem;color:var(--muted)}
+
+/* Figure */
+.figure{background:var(--surface)}
+.fig-grid{display:grid;gap:2.5rem;margin-top:2.5rem;align-items:end}
+@media(min-width:900px){.fig-grid{grid-template-columns:5fr 7fr;gap:5rem}}
+.big{font-weight:700;font-size:clamp(5.5rem,16vw,11rem);line-height:.9;letter-spacing:-.05em;color:var(--accent);font-variant-numeric:tabular-nums}
+.big small{display:block;font-size:clamp(1.1rem,2vw,1.4rem);letter-spacing:0;font-weight:500;color:var(--ink);line-height:1.3;margin-top:1rem}
+.cells{display:grid;grid-template-columns:repeat(14,1fr);gap:4px}
+.cells i{aspect-ratio:1;background:var(--accent);border-radius:2px;display:block}
+.cells-cap{margin-top:.9rem;color:var(--muted);font-size:.95rem}
+.source{margin-top:1.5rem;font-size:.9rem;color:var(--muted)}
+@media(max-width:560px){.cells{grid-template-columns:repeat(10,1fr)}}
+
+/* Work */
+.work-list{list-style:none;margin:3rem 0 0;padding:0;display:grid;gap:0}
+.work-list li{display:grid;gap:.6rem;padding-block:2rem;border-top:1px solid var(--line)}
+.work-list li:last-child{border-bottom:1px solid var(--line)}
+@media(min-width:900px){
+  .work-list li{grid-template-columns:4fr 6fr;gap:3rem;align-items:baseline}
+  .work-list li:nth-child(2){padding-left:8%}
+  .work-list li:nth-child(3){padding-left:16%}
+}
+.work-list h3{font-weight:700;font-size:clamp(1.8rem,3.4vw,2.8rem);line-height:1.2;letter-spacing:-.02em}
+.work-list h3 span{display:block;font-family:var(--bn);font-size:.62em;color:var(--accent);font-weight:600;line-height:1.5;letter-spacing:0}
+.work-list p{color:var(--muted);max-width:50ch}
+
+/* Donate */
+.donate{background:var(--surface)}
+.d-grid{display:grid;gap:2.5rem;margin-top:2.5rem}
+@media(min-width:900px){.d-grid{grid-template-columns:7fr 5fr;gap:4rem;align-items:start}}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{font-weight:600;margin-bottom:.75rem;padding:0}
+.seg{display:inline-grid;grid-template-columns:1fr 1fr;border:2px solid var(--ink);border-radius:var(--r);overflow:hidden;margin-bottom:2rem;max-width:100%}
+.seg label{position:relative;display:block}
+.seg input,.tier input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.seg span{display:block;padding:.8rem 1.6rem;font-weight:600;text-align:center;transition:background-color .3s var(--ease),color .3s var(--ease)}
+.seg input:checked+span{background:var(--ink);color:var(--bg)}
+.seg label:has(input:focus-visible),.tier:has(input:focus-visible){outline:3px solid var(--accent);outline-offset:3px}
+.tiers{display:grid;gap:.9rem}
+.tier{position:relative;display:grid;grid-template-columns:auto 1fr;gap:.2rem 1.5rem;align-items:baseline;padding:1.25rem 1.5rem;border:2px solid var(--line);border-radius:var(--r);background:var(--raise);transition:border-color .3s var(--ease),transform .3s var(--ease),background-color .3s var(--ease)}
+.tier:hover{transform:translateX(4px);border-color:var(--accent)}
+.tier:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.tier b{font-size:clamp(1.7rem,3vw,2.2rem);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.tier span{color:var(--ink);font-size:1.1rem}
+.panel{background:var(--raise);border:2px solid var(--line);border-radius:var(--r);padding:1.75rem}
+.panel h3{font-size:1.25rem;font-weight:600}
+.pick{margin:.75rem 0 1.5rem;font-size:1.15rem;line-height:1.4}
+.pick strong{color:var(--accent)}
+
+/* Forms */
+.field{display:grid;gap:.45rem;margin-bottom:1.25rem}
+.field label{font-weight:600;font-size:.98rem}
+.field .hint{font-size:.88rem;color:var(--muted)}
+input[type=text],input[type=email],input[type=tel],select{width:100%;min-height:50px;padding:.7rem .9rem;border:2px solid var(--muted);border-radius:var(--r);background:var(--bg);color:var(--ink);font:400 1rem var(--font)}
+input::placeholder{color:var(--muted);opacity:1}
+input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-color:var(--accent)}
+input[aria-invalid=true],select[aria-invalid=true]{border-color:var(--err)}
+.err{color:var(--err);font-size:.9rem;font-weight:500;min-height:0}
+.err:empty{display:none}
+.done{border:2px solid var(--accent);background:var(--accent-soft);border-radius:var(--r);padding:1.5rem}
+.done h3{font-size:1.3rem;font-weight:600}
+.done p{margin-top:.5rem}
+.done .btn{margin-top:1rem}
+[hidden]{display:none!important}
+
+/* Volunteer */
+.v-form{display:grid;gap:0 2rem;margin-top:2.5rem;max-width:900px}
+@media(min-width:700px){.v-form{grid-template-columns:1fr 1fr}.v-form .full{grid-column:1/-1}}
+.season{display:inline-block;margin-top:1.5rem;padding:.6rem 1rem;border-radius:var(--r);background:var(--accent-soft);font-weight:600}
+
+/* Contact / footer */
+.contact{background:var(--surface);padding-block:clamp(3.5rem,8vw,6rem)}
+.mail{display:inline-block;margin-top:1.25rem;font-weight:700;font-size:clamp(1.4rem,5.2vw,4rem);letter-spacing:-.03em;line-height:1.2;color:var(--accent);overflow-wrap:anywhere;text-decoration-thickness:3px;text-underline-offset:.15em;transition:transform .3s var(--ease)}
+.mail:hover{transform:translateX(6px)}
+footer{padding-block:2rem;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-between}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms!important;animation:none!important}
+  .btn:hover,.tier:hover,.mail:hover{transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Sundari Trust, home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="currentColor"/><path d="M16 26V12M16 17c-4 0-6-3-6-6 4 0 6 2 6 6zm0-2c0-3 2-5 6-5 0 3-2 5-6 5z" fill="none" stroke="var(--bg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Sundari Trust
+    </a>
+    <nav class="links" aria-label="Main">
+      <a href="#work">Our work</a>
+      <a href="#volunteer">Volunteer</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn" href="#donate">Donate</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileNav">Menu</button>
+  </div>
+  <nav class="mobile" id="mobileNav" aria-label="Mobile">
+    <a href="#work">Our work</a>
+    <a href="#volunteer">Volunteer</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+  <!-- Hero: asymmetric split -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow" data-hero>Sundarbans buffer zone</p>
+        <h1 data-hero>
+          <span class="b" lang="bn">ম্যানগ্রোভ ফিরিয়ে আনি</span>
+          <span class="e">Bringing the mangroves back</span>
+        </h1>
+        <p class="lede" data-hero>Community nurseries in Shyamnagar and Koyra grow the seedlings. We care for every plot for three years.</p>
+        <div class="cta" data-hero>
+          <a class="btn" href="#donate">Donate</a>
+          <a class="btn ghost" href="#volunteer">Volunteer</a>
+        </div>
+      </div>
+      <div class="art" role="img" aria-label="Illustration of mangrove trees with arching roots standing in tidal water, with young seedlings in the foreground">
+        <svg viewBox="0 0 600 660" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <symbol id="tree" viewBox="0 0 200 260">
+              <circle class="s-leaf" cx="100" cy="62" r="50"/>
+              <circle class="s-leaf2" cx="58" cy="90" r="36"/>
+              <circle class="s-leaf2" cx="144" cy="88" r="38"/>
+              <path class="s-root" d="M100 100V150M100 140C70 160 50 205 38 255M100 140C86 175 80 215 78 255M100 140C114 175 120 215 122 255M100 140C132 160 150 205 162 255"/>
+            </symbol>
+            <symbol id="seed" viewBox="0 0 40 60">
+              <path class="s-stem" d="M20 58V24"/>
+              <path class="s-leaf" d="M20 28C8 28 4 18 4 10c10 0 16 6 16 18z"/>
+              <path class="s-leaf2" d="M20 24c0-10 6-16 16-16 0 8-4 16-16 16z"/>
+            </symbol>
+          </defs>
+          <rect class="s-sky" width="600" height="660"/>
+          <circle class="s-sun" cx="450" cy="150" r="90"/>
+          <rect class="s-water" y="360" width="600" height="300"/>
+          <g class="trees">
+            <use href="#tree" x="-10" y="150" width="260" height="338" class="t"/>
+            <use href="#tree" x="300" y="110" width="320" height="416" class="t"/>
+            <use href="#tree" x="190" y="230" width="190" height="247" class="t"/>
+          </g>
+          <path class="s-wave" d="M20 520q30-12 60 0t60 0 60 0 60 0 60 0 60 0 60 0 60 0"/>
+          <path class="s-wave" d="M-20 560q30-12 60 0t60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0"/>
+          <g class="seeds">
+            <use href="#seed" x="60" y="560" width="48" height="72" class="sd"/>
+            <use href="#seed" x="170" y="580" width="40" height="60" class="sd"/>
+            <use href="#seed" x="290" y="565" width="48" height="72" class="sd"/>
+            <use href="#seed" x="410" y="585" width="40" height="60" class="sd"/>
+            <use href="#seed" x="500" y="560" width="48" height="72" class="sd"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Figure: one real number, drawn as 140 squares -->
+  <section class="figure" aria-labelledby="fig-t">
+    <div class="wrap">
+      <h2 class="title" id="fig-t">
+        <span class="b" lang="bn">২০১৯ সাল থেকে রোপণ</span>
+        <span class="e">Replanted since 2019</span>
+      </h2>
+      <div class="fig-grid">
+        <p class="big"><span id="count">140</span><small>hectares replanted since 2019</small></p>
+        <div>
+          <div class="cells" id="cells" aria-hidden="true"></div>
+          <p class="cells-cap">Each square is one hectare.</p>
+        </div>
+      </div>
+      <p class="source">Source: Sundari Trust annual report 2025.</p>
+    </div>
+  </section>
+
+  <!-- Work: stacked, stepped rows -->
+  <section id="work" aria-labelledby="work-t">
+    <div class="wrap">
+      <h2 class="title" id="work-t">
+        <span class="b" lang="bn">আমাদের কাজ</span>
+        <span class="e">Our work</span>
+      </h2>
+      <ol class="work-list">
+        <li data-reveal>
+          <h3><span lang="bn">নার্সারি</span>Grow</h3>
+          <p>Women's groups run community nurseries in Shyamnagar and Koyra, raising the seedlings that restore the buffer zone.</p>
+        </li>
+        <li data-reveal>
+          <h3><span lang="bn">রোপণ</span>Plant</h3>
+          <p>Seedlings go into the ground in the monsoon, planted with the communities who live beside the forest.</p>
+        </li>
+        <li data-reveal>
+          <h3><span lang="bn">যত্ন</span>Care</h3>
+          <p>Each plot is looked after for three years, so the young mangroves have time to take hold.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Donate -->
+  <section class="donate" id="donate" aria-labelledby="don-t">
+    <div class="wrap">
+      <h2 class="title" id="don-t">
+        <span class="b" lang="bn">দান করুন</span>
+        <span class="e">Donate</span>
+      </h2>
+      <form class="d-grid" id="donateForm" novalidate>
+        <div data-reveal>
+          <fieldset>
+            <legend>How often</legend>
+            <div class="seg">
+              <label><input type="radio" name="freq" value="one-time" checked><span>One-time</span></label>
+              <label><input type="radio" name="freq" value="monthly"><span>Monthly</span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Choose an amount</legend>
+            <div class="tiers">
+              <label class="tier"><input type="radio" name="amt" value="500" data-what="grows a nursery tray"><b>৳500</b><span>grows a nursery tray</span></label>
+              <label class="tier"><input type="radio" name="amt" value="2,000" data-what="plants a plot row" checked><b>৳2,000</b><span>plants a plot row</span></label>
+              <label class="tier"><input type="radio" name="amt" value="10,000" data-what="funds a season of care"><b>৳10,000</b><span>funds a season of care</span></label>
+            </div>
+          </fieldset>
+        </div>
+        <div class="panel" data-reveal>
+          <div id="donateBody">
+            <h3>Your gift</h3>
+            <p class="pick" id="pick" aria-live="polite"></p>
+            <div class="field">
+              <label for="d-email">Email for your receipt</label>
+              <input type="email" id="d-email" name="email" autocomplete="email" placeholder="name@example.com" aria-describedby="d-email-err" required>
+              <p class="err" id="d-email-err"></p>
+            </div>
+            <button class="btn" type="submit" id="donateBtn" style="width:100%">Donate</button>
+          </div>
+          <div class="done" id="donateDone" role="status" hidden>
+            <h3>Thank you.</h3>
+            <p id="donateMsg"></p>
+            <button class="btn ghost" type="button" id="donateReset">Change my gift</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Volunteer -->
+  <section id="volunteer" aria-labelledby="vol-t">
+    <div class="wrap">
+      <h2 class="title" id="vol-t">
+        <span class="b" lang="bn">স্বেচ্ছাসেবক হোন</span>
+        <span class="e">Volunteer</span>
+      </h2>
+      <p class="sub">Join the planting. Tell us which month suits you best and we will write back.</p>
+      <p class="season">Planting season: July-September</p>
+      <form class="v-form" id="volForm" novalidate>
+        <div class="field">
+          <label for="v-name">Name</label>
+          <input type="text" id="v-name" name="name" autocomplete="name" aria-describedby="v-name-err" required>
+          <p class="err" id="v-name-err"></p>
+        </div>
+        <div class="field">
+          <label for="v-email">Email</label>
+          <input type="email" id="v-email" name="email" autocomplete="email" aria-describedby="v-email-err" required>
+          <p class="err" id="v-email-err"></p>
+        </div>
+        <div class="field">
+          <label for="v-phone">Phone</label>
+          <input type="tel" id="v-phone" name="phone" autocomplete="tel" inputmode="tel" aria-describedby="v-phone-hint v-phone-err" required>
+          <p class="hint" id="v-phone-hint">Digits, with country code if outside Bangladesh.</p>
+          <p class="err" id="v-phone-err"></p>
+        </div>
+        <div class="field">
+          <label for="v-month">Preferred month</label>
+          <select id="v-month" name="month" aria-describedby="v-month-err" required>
+            <option value="">Select a month</option>
+            <option>July</option>
+            <option>August</option>
+            <option>September</option>
+          </select>
+          <p class="err" id="v-month-err"></p>
+        </div>
+        <div class="full">
+          <button class="btn" type="submit" id="volBtn">Sign up</button>
+        </div>
+        <div class="done full" id="volDone" role="status" hidden>
+          <h3>You are on the list.</h3>
+          <p id="volMsg"></p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact" aria-labelledby="con-t">
+    <div class="wrap">
+      <h2 class="title" id="con-t">
+        <span class="b" lang="bn">যোগাযোগ</span>
+        <span class="e">Contact</span>
+      </h2>
+      <a class="mail" href="mailto:hello@sundaritrust.org">hello@sundaritrust.org</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Sundari Trust. Restoring mangroves in the Sundarbans buffer zone with local communities.</p>
+    <p>The donation and sign-up forms are a front-end demo. Nothing is sent or charged.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+
+  /* Mobile menu */
+  var mb = $('#menuBtn'), mn = $('#mobileNav');
+  function setMenu(open) { mn.classList.toggle('open', open); mb.setAttribute('aria-expanded', open); mb.textContent = open ? 'Close' : 'Menu'; }
+  mb.addEventListener('click', function () { setMenu(!mn.classList.contains('open')); });
+  mn.addEventListener('click', function (e) { if (e.target.tagName === 'A') setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && mn.classList.contains('open')) { setMenu(false); mb.focus(); } });
+
+  /* 140 squares: one per hectare, from the brief's figure */
+  var cells = $('#cells'), html = '';
+  for (var i = 0; i < 140; i++) html += '<i></i>';
+  cells.innerHTML = html;
+
+  /* Donate */
+  var form = $('#donateForm'), pick = $('#pick');
+  function freq() { return form.freq.value; }
+  function amtEl() { return form.querySelector('input[name=amt]:checked'); }
+  function updatePick() {
+    var a = amtEl();
+    pick.innerHTML = '<strong>৳' + a.value + '</strong> ' + (freq() === 'monthly' ? 'every month ' : 'once ') + a.dataset.what + '.';
+  }
+  form.addEventListener('change', updatePick); updatePick();
+
+  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function setErr(input, errId, msg) {
+    var el = document.getElementById(errId);
+    el.textContent = msg || '';
+    if (msg) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid');
+    return !msg;
+  }
+  var dEmail = $('#d-email');
+  dEmail.addEventListener('input', function () { if (dEmail.hasAttribute('aria-invalid')) setErr(dEmail, 'd-email-err', emailRe.test(dEmail.value.trim()) ? '' : 'Enter a valid email address, like name@example.com.'); });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = dEmail.value.trim();
+    if (!v) { setErr(dEmail, 'd-email-err', 'Enter your email so we can send a receipt.'); dEmail.focus(); return; }
+    if (!emailRe.test(v)) { setErr(dEmail, 'd-email-err', 'Enter a valid email address, like name@example.com.'); dEmail.focus(); return; }
+    setErr(dEmail, 'd-email-err', '');
+    var btn = $('#donateBtn'); btn.disabled = true; btn.textContent = 'Processing...';
+    setTimeout(function () {
+      var a = amtEl();
+      $('#donateMsg').textContent = '৳' + a.value + ' ' + (freq() === 'monthly' ? 'monthly' : 'one-time') + ' ' + a.dataset.what + '. This is a demo, so nothing was charged and no email was sent.';
+      $('#donateBody').hidden = true; $('#donateDone').hidden = false;
+      btn.disabled = false; btn.textContent = 'Donate';
+      $('#donateDone h3').setAttribute('tabindex', '-1'); $('#donateDone h3').focus();
+    }, 700);
+  });
+  $('#donateReset').addEventListener('click', function () { $('#donateDone').hidden = true; $('#donateBody').hidden = false; dEmail.focus(); });
+
+  /* Volunteer */
+  var vf = $('#volForm');
+  var checks = [
+    ['v-name', 'v-name-err', function (v) { return v.trim().length < 2 ? 'Enter your name.' : ''; }],
+    ['v-email', 'v-email-err', function (v) { return !v.trim() ? 'Enter your email.' : (emailRe.test(v.trim()) ? '' : 'Enter a valid email address, like name@example.com.'); }],
+    ['v-phone', 'v-phone-err', function (v) { var d = v.replace(/\D/g, ''); return !v.trim() ? 'Enter a phone number.' : ((d.length < 7 || /[^\d\s+()-]/.test(v)) ? 'Enter a valid phone number with at least 7 digits.' : ''); }],
+    ['v-month', 'v-month-err', function (v) { return v ? '' : 'Choose a month.'; }]
+  ];
+  checks.forEach(function (c) {
+    var el = document.getElementById(c[0]);
+    el.addEventListener('blur', function () { if (el.value || el.hasAttribute('aria-invalid')) setErr(el, c[1], c[2](el.value)); });
+    el.addEventListener('input', function () { if (el.hasAttribute('aria-invalid')) setErr(el, c[1], c[2](el.value)); });
+  });
+  vf.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var first = null;
+    checks.forEach(function (c) { var el = document.getElementById(c[0]); if (!setErr(el, c[1], c[2](el.value)) && !first) first = el; });
+    if (first) { first.focus(); return; }
+    var btn = $('#volBtn'); btn.disabled = true; btn.textContent = 'Sending...';
+    setTimeout(function () {
+      $('#volMsg').textContent = 'Thank you, ' + $('#v-name').value.trim() + '. We have noted ' + $('#v-month').value + ' as your preferred month. This is a demo, so nothing was sent.';
+      $('#volDone').hidden = false; btn.disabled = false; btn.textContent = 'Sign up';
+      $('#volDone h3').setAttribute('tabindex', '-1'); $('#volDone h3').focus();
+      vf.reset();
+    }, 700);
+  });
+
+  /* Motion: hero entrance (hierarchy), hectare fill (the figure is the story), row reveals (sequence).
+     Skipped entirely under reduced motion, and if GSAP fails to load the page simply stays visible. */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.addEventListener('load', function () {
+    if (reduce || !window.gsap || !window.ScrollTrigger) return;
+    gsap.registerPlugin(ScrollTrigger);
+    var ctx = gsap.context(function () {
+      gsap.from('[data-hero]', { y: 24, opacity: 0, duration: .9, ease: 'power3.out', stagger: .1 });
+      gsap.from('.art .t', { y: 40, opacity: 0, duration: 1.1, ease: 'power3.out', stagger: .15, delay: .2 });
+      gsap.from('.art .sd', { scale: 0, transformOrigin: '50% 100%', opacity: 0, duration: .6, ease: 'back.out(2)', stagger: .1, delay: .9 });
+
+      gsap.utils.toArray('[data-reveal]').forEach(function (el) {
+        gsap.from(el, { y: 32, opacity: 0, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+      });
+
+      var cnt = { n: 0 }, out = document.getElementById('count');
+      gsap.set('#cells i', { opacity: 0, scale: .4 });
+      out.textContent = '0';
+      ScrollTrigger.create({
+        trigger: '#cells', start: 'top 85%', once: true,
+        onEnter: function () {
+          gsap.to('#cells i', { opacity: 1, scale: 1, duration: .35, ease: 'power2.out', stagger: { each: .012 } });
+          gsap.to(cnt, { n: 140, duration: 1.8, ease: 'power2.out', onUpdate: function () { out.textContent = Math.round(cnt.n); }, onComplete: function () { out.textContent = '140'; } });
+        }
+      });
+    });
+    window.addEventListener('pagehide', function () { ctx.revert(); });
+  });
+});
+</script>
+</body>
+</html>

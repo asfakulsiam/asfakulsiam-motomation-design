@@ -1,0 +1,4 @@
+Use the asfakulsiam-motomation-design skill: /build this brief. When you run the collision engine, use --seed 6101. Force the motion tier: --tier=4. Build the website described in the brief below as a single self-contained index.html in the current folder (inline CSS and JS, no build step; Google Fonts/Fontshare and the GSAP CDN are allowed, no image URLs). Use only facts from the brief. Follow the skill end to end, including its Delivery Gate, and finish with the handoff.
+
+# Brief 06: Hardware product launch
+Launch page for "Halo", a ring-shaped desk lamp with a single touch control and three light temperatures. Price $189, pre-orders ship in March. Rendered animation frames of the lamp are available (180 frames).

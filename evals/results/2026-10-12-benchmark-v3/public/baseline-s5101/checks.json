@@ -1,0 +1,364 @@
+{
+ "375": {
+  "pageHeight": 5114,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 2
+   }
+  ],
+  "contrastViolations": 2
+ },
+ "1440": {
+  "pageHeight": 3901,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 2
+   }
+  ],
+  "contrastViolations": 2,
+  "keyboard": {
+   "primaryReached": {
+    "step": 5,
+    "text": "Donate",
+    "href": "#donate",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "39/40"
+  },
+  "source": {
+   "bytes": 20213,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    429,
+    857,
+    1286,
+    1715,
+    2144,
+    2572,
+    3001
+   ],
+   "maxScroll": 3001
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3901,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 5114,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 28,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 1
+  },
+  "stamp": "gate: c28 o0 w0 rm0 a0 n1 · gate/2 · 430290d738",
+  "critique": "C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V2[entrance-repeats:3]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "a.btn.clay",
+    "text": "Donate · দান করুন",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 375,
+    "el": "span",
+    "text": "দান করুন",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 375,
+    "el": "a.btn.ghost",
+    "text": "Volunteer · স্বেচ্ছাসেবক হোন",
+    "ratio": 4.25,
+    "need": 4.5,
+    "fg": "#0e3b2e",
+    "bg": "#a49579",
+    "size": 16
+   },
+   {
+    "width": 375,
+    "el": "span",
+    "text": "স্বেচ্ছাসেবক হোন",
+    "ratio": 4.46,
+    "need": 4.5,
+    "fg": "#0e3b2e",
+    "bg": "#a8997d",
+    "size": 16
+   },
+   {
+    "width": 375,
+    "el": "button.btn.clay",
+    "text": "Give ৳500 one-time",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 375,
+    "el": "span#sum",
+    "text": "৳500",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 375,
+    "el": "span#sumf",
+    "text": "one-time",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 375,
+    "el": "span",
+    "text": "July",
+    "ratio": 3.89,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#6d877a",
+    "size": 17
+   },
+   {
+    "width": 390,
+    "el": "a.btn.clay",
+    "text": "Donate · দান করুন",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 390,
+    "el": "span",
+    "text": "দান করুন",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 390,
+    "el": "a.btn.ghost",
+    "text": "Volunteer · স্বেচ্ছাসেবক হোন",
+    "ratio": 4.25,
+    "need": 4.5,
+    "fg": "#0e3b2e",
+    "bg": "#a49579",
+    "size": 16
+   },
+   {
+    "width": 390,
+    "el": "span",
+    "text": "স্বেচ্ছাসেবক হোন",
+    "ratio": 4.46,
+    "need": 4.5,
+    "fg": "#0e3b2e",
+    "bg": "#a8997d",
+    "size": 16
+   },
+   {
+    "width": 390,
+    "el": "button.btn.clay",
+    "text": "Give ৳500 one-time",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 390,
+    "el": "span#sum",
+    "text": "৳500",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 390,
+    "el": "span#sumf",
+    "text": "one-time",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 390,
+    "el": "span",
+    "text": "July",
+    "ratio": 3.89,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#6d877a",
+    "size": 17
+   },
+   {
+    "width": 768,
+    "el": "a.btn.clay",
+    "text": "Donate · দান করুন",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 768,
+    "el": "span",
+    "text": "দান করুন",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 768,
+    "el": "button.btn.clay",
+    "text": "Give ৳500 one-time",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 768,
+    "el": "span#sum",
+    "text": "৳500",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 768,
+    "el": "span#sumf",
+    "text": "one-time",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 768,
+    "el": "span",
+    "text": "July",
+    "ratio": 3.89,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#6d877a",
+    "size": 17
+   },
+   {
+    "width": 1440,
+    "el": "a.btn.clay",
+    "text": "Donate · দান করুন",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 1440,
+    "el": "span",
+    "text": "দান করুন",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 1440,
+    "el": "span#sumf",
+    "text": "one-time",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 1440,
+    "el": "button.btn.clay",
+    "text": "Give ৳500 one-time",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 1440,
+    "el": "span#sum",
+    "text": "৳500",
+    "ratio": 4.35,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#c8553d",
+    "size": 16
+   },
+   {
+    "width": 1440,
+    "el": "span",
+    "text": "July",
+    "ratio": 2.38,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#9caca0",
+    "size": 17
+   }
+  ],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

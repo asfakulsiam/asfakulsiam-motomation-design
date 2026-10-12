@@ -1,0 +1,254 @@
+{
+ "375": {
+  "pageHeight": 6495,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 3709,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 4
+   }
+  ],
+  "contrastViolations": 4,
+  "keyboard": {
+   "primaryReached": {
+    "step": 10,
+    "text": "Add to cart — ৳1,200",
+    "href": "",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 24590,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    401,
+    803,
+    1204,
+    1605,
+    2006,
+    2408,
+    2809
+   ],
+   "maxScroll": 2809
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3709,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 6495,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 16,
+   "overflow": 0,
+   "words": 3,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c16 o0 w3 rm0 a0 n0 · gate/2 · 99928851eb",
+  "critique": "C?[no-record] H2[375:3] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V2[entrance-repeats:3]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "span",
+    "text": "Size",
+    "ratio": 3.3,
+    "need": 4.5,
+    "fg": "#8a8174",
+    "bg": "#f4ede1",
+    "size": 15.2
+   },
+   {
+    "width": 375,
+    "el": "span",
+    "text": "Body",
+    "ratio": 3.3,
+    "need": 4.5,
+    "fg": "#8a8174",
+    "bg": "#f4ede1",
+    "size": 15.2
+   },
+   {
+    "width": 375,
+    "el": "span",
+    "text": "Glaze",
+    "ratio": 3.3,
+    "need": 4.5,
+    "fg": "#8a8174",
+    "bg": "#f4ede1",
+    "size": 15.2
+   },
+   {
+    "width": 375,
+    "el": "span",
+    "text": "Care",
+    "ratio": 3.3,
+    "need": 4.5,
+    "fg": "#8a8174",
+    "bg": "#f4ede1",
+    "size": 15.2
+   },
+   {
+    "width": 390,
+    "el": "span",
+    "text": "Size",
+    "ratio": 3.3,
+    "need": 4.5,
+    "fg": "#8a8174",
+    "bg": "#f4ede1",
+    "size": 15.2
+   },
+   {
+    "width": 390,
+    "el": "span",
+    "text": "Body",
+    "ratio": 3.3,
+    "need": 4.5,
+    "fg": "#8a8174",
+    "bg": "#f4ede1",
+    "size": 15.2
+   },
+   {
+    "width": 390,
+    "el": "span",
+    "text": "Glaze",
+    "ratio": 3.3,
+    "need": 4.5,
+    "fg": "#8a8174",
+    "bg": "#f4ede1",
+    "size": 15.2
+   },
+   {
+    "width": 390,
+    "el": "span",
+    "text": "Care",
+    "ratio": 3.3,
+    "need": 4.5,
+    "fg": "#8a8174",
+    "bg": "#f4ede1",
+    "size": 15.2
+   },
+   {
+    "width": 768,
+    "el": "span",
+    "text": "Size",
+    "ratio": 3.3,
+    "need": 4.5,
+    "fg": "#8a8174",
+    "bg": "#f4ede1",
+    "size": 15.2
+   },
+   {
+    "width": 768,
+    "el": "span",
+    "text": "Body",
+    "ratio": 3.3,
+    "need": 4.5,
+    "fg": "#8a8174",
+    "bg": "#f4ede1",
+    "size": 15.2
+   },
+   {
+    "width": 768,
+    "el": "span",
+    "text": "Glaze",
+    "ratio": 3.3,
+    "need": 4.5,
+    "fg": "#8a8174",
+    "bg": "#f4ede1",
+    "size": 15.2
+   },
+   {
+    "width": 768,
+    "el": "span",
+    "text": "Care",
+    "ratio": 3.3,
+    "need": 4.5,
+    "fg": "#8a8174",
+    "bg": "#f4ede1",
+    "size": 15.2
+   },
+   {
+    "width": 1440,
+    "el": "span",
+    "text": "Size",
+    "ratio": 3.3,
+    "need": 4.5,
+    "fg": "#8a8174",
+    "bg": "#f4ede1",
+    "size": 15.2
+   },
+   {
+    "width": 1440,
+    "el": "span",
+    "text": "Body",
+    "ratio": 3.3,
+    "need": 4.5,
+    "fg": "#8a8174",
+    "bg": "#f4ede1",
+    "size": 15.2
+   },
+   {
+    "width": 1440,
+    "el": "span",
+    "text": "Glaze",
+    "ratio": 3.3,
+    "need": 4.5,
+    "fg": "#8a8174",
+    "bg": "#f4ede1",
+    "size": 15.2
+   },
+   {
+    "width": 1440,
+    "el": "span",
+    "text": "Care",
+    "ratio": 3.3,
+    "need": 4.5,
+    "fg": "#8a8174",
+    "bg": "#f4ede1",
+    "size": 15.2
+   }
+  ],
+  "overflow": [],
+  "words": [
+   {
+    "el": "div.big",
+    "text": "3DAYS",
+    "problem": "word \"3DAYS\" breaks across lines"
+   },
+   {
+    "el": "div.big",
+    "text": "36HOURS",
+    "problem": "word \"36HOURS\" breaks across lines"
+   },
+   {
+    "el": "div.big",
+    "text": "4DAYS",
+    "problem": "word \"4DAYS\" breaks across lines"
+   }
+  ],
+  "motion": [],
+  "names": []
+ }
+}

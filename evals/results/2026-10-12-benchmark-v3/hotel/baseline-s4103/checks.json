@@ -1,0 +1,202 @@
+{
+ "375": {
+  "pageHeight": 5724,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 4975,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 8,
+    "text": "Check availability",
+    "href": "https://book.example-hotel.com",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 14864,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    582,
+    1164,
+    1746,
+    2329,
+    2911,
+    3493,
+    4075
+   ],
+   "maxScroll": 4075
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 4975,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 5724,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 13,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c13 o0 w0 rm0 a0 n0 · gate/2 · a3503e9785",
+  "critique": "C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V1[entrance-repeats:5]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "i",
+    "text": "i",
+    "ratio": 2.99,
+    "need": 3,
+    "fg": "#b07a2a",
+    "bg": "#efe6d4",
+    "size": 41.6
+   },
+   {
+    "width": 375,
+    "el": "i",
+    "text": "ii",
+    "ratio": 2.99,
+    "need": 3,
+    "fg": "#b07a2a",
+    "bg": "#efe6d4",
+    "size": 41.6
+   },
+   {
+    "width": 375,
+    "el": "i",
+    "text": "iii",
+    "ratio": 2.99,
+    "need": 3,
+    "fg": "#b07a2a",
+    "bg": "#efe6d4",
+    "size": 41.6
+   },
+   {
+    "width": 390,
+    "el": "i",
+    "text": "i",
+    "ratio": 2.99,
+    "need": 3,
+    "fg": "#b07a2a",
+    "bg": "#efe6d4",
+    "size": 41.6
+   },
+   {
+    "width": 390,
+    "el": "i",
+    "text": "ii",
+    "ratio": 2.99,
+    "need": 3,
+    "fg": "#b07a2a",
+    "bg": "#efe6d4",
+    "size": 41.6
+   },
+   {
+    "width": 390,
+    "el": "i",
+    "text": "iii",
+    "ratio": 2.99,
+    "need": 3,
+    "fg": "#b07a2a",
+    "bg": "#efe6d4",
+    "size": 41.6
+   },
+   {
+    "width": 768,
+    "el": "p",
+    "text": "A restored 1890s merchant house in Shankhari Bazar",
+    "ratio": 1.57,
+    "need": 4.5,
+    "fg": "#e6dac3",
+    "bg": "#cfab67",
+    "size": 17
+   },
+   {
+    "width": 768,
+    "el": "i",
+    "text": "i",
+    "ratio": 2.99,
+    "need": 3,
+    "fg": "#b07a2a",
+    "bg": "#efe6d4",
+    "size": 41.6
+   },
+   {
+    "width": 768,
+    "el": "i",
+    "text": "ii",
+    "ratio": 2.99,
+    "need": 3,
+    "fg": "#b07a2a",
+    "bg": "#efe6d4",
+    "size": 41.6
+   },
+   {
+    "width": 768,
+    "el": "i",
+    "text": "iii",
+    "ratio": 2.99,
+    "need": 3,
+    "fg": "#b07a2a",
+    "bg": "#efe6d4",
+    "size": 41.6
+   },
+   {
+    "width": 1440,
+    "el": "i",
+    "text": "i",
+    "ratio": 2.99,
+    "need": 3,
+    "fg": "#b07a2a",
+    "bg": "#efe6d4",
+    "size": 41.6
+   },
+   {
+    "width": 1440,
+    "el": "i",
+    "text": "ii",
+    "ratio": 2.99,
+    "need": 3,
+    "fg": "#b07a2a",
+    "bg": "#efe6d4",
+    "size": 41.6
+   },
+   {
+    "width": 1440,
+    "el": "i",
+    "text": "iii",
+    "ratio": 2.99,
+    "need": 3,
+    "fg": "#b07a2a",
+    "bg": "#efe6d4",
+    "size": 41.6
+   }
+  ],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

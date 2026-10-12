@@ -1,0 +1,166 @@
+{
+ "375": {
+  "pageHeight": 4994,
+  "errors": [],
+  "hOverflow": 299,
+  "axe": [
+   {
+    "id": "scrollable-region-focusable",
+    "impact": "serious",
+    "nodes": 1
+   }
+  ],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 4142,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "scrollable-region-focusable",
+    "impact": "serious",
+    "nodes": 2
+   }
+  ],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 4,
+    "text": "Pricing",
+    "href": "#pricing",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 40286,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": "motomation · archetype: ledger · mutation: folio-evidence · signature: thread · tier: 2 · critique: not verified — browser failed during the scan · gate: not verified — browser failed during the scan --"
+  },
+  "strip": {
+   "frames": [
+    0,
+    463,
+    926,
+    1389,
+    1853,
+    2316,
+    2779,
+    3242
+   ],
+   "maxScroll": 3242
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 4142,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4994,
+  "errors": [],
+  "hOverflow": 299
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 33,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c0 o33 w0 rm0 a0 n0 · gate/2 · 520656cf27",
+  "critique": "C?[no-record] H4[375:1] S5[last5:no-log] R?[no-record] M5[t2:pins1/2,webgl0/1,js48/80KB,rm0] V5[entrance-repeats:0]",
+  "contrast": [],
+  "overflow": [
+   {
+    "width": 375,
+    "el": "page",
+    "kind": "horizontal scroll",
+    "px": 300
+   },
+   {
+    "width": 375,
+    "el": "article.panel.install-card",
+    "kind": "escapes viewport",
+    "px": 299,
+    "text": ""
+   },
+   {
+    "width": 375,
+    "el": "div.panel-head",
+    "kind": "escapes viewport",
+    "px": 298,
+    "text": ""
+   },
+   {
+    "width": 375,
+    "el": "span.panel-title",
+    "kind": "escapes viewport",
+    "px": 39,
+    "text": "Option 02"
+   },
+   {
+    "width": 375,
+    "el": "div.command-card",
+    "kind": "escapes viewport",
+    "px": 282,
+    "text": ""
+   },
+   {
+    "width": 375,
+    "el": "div.command-row",
+    "kind": "escapes viewport",
+    "px": 265,
+    "text": ""
+   },
+   {
+    "width": 375,
+    "el": "code#curl-command",
+    "kind": "escapes viewport",
+    "px": 265,
+    "text": "curl -fsSL https://tracewell.dev/install"
+   },
+   {
+    "width": 375,
+    "el": "button.copy-button.mono",
+    "kind": "escapes viewport",
+    "px": 54,
+    "text": "Copy"
+   },
+   {
+    "width": 390,
+    "el": "page",
+    "kind": "horizontal scroll",
+    "px": 300
+   },
+   {
+    "width": 390,
+    "el": "article.panel.install-card",
+    "kind": "escapes viewport",
+    "px": 299,
+    "text": ""
+   },
+   {
+    "width": 390,
+    "el": "div.panel-head",
+    "kind": "escapes viewport",
+    "px": 298,
+    "text": ""
+   },
+   {
+    "width": 390,
+    "el": "span.panel-title",
+    "kind": "escapes viewport",
+    "px": 24,
+    "text": "Option 02"
+   }
+  ],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

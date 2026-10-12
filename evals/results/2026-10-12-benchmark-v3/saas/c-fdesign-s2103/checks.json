@@ -1,0 +1,108 @@
+{
+ "375": {
+  "pageHeight": 3321,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "scrollable-region-focusable",
+    "impact": "serious",
+    "nodes": 2
+   }
+  ],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 3051,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 5,
+    "text": "Pricing",
+    "href": "#pricing",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "36/40"
+  },
+  "source": {
+   "bytes": 12393,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    307,
+    615,
+    922,
+    1229,
+    1536,
+    1844,
+    2151
+   ],
+   "maxScroll": 2151
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3051,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 3321,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 3,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c3 o0 w0 rm0 a0 n0 · gate/2 · 3f7b655ce5",
+  "critique": "C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "pre",
+    "text": "$ tracewell ingest --kubernetes streaming from pod",
+    "ratio": 1.03,
+    "need": 4.5,
+    "fg": "#d5e0ea",
+    "bg": "#ffe14d",
+    "size": 12.8
+   },
+   {
+    "width": 390,
+    "el": "pre",
+    "text": "$ tracewell ingest --kubernetes streaming from pod",
+    "ratio": 1.03,
+    "need": 4.5,
+    "fg": "#d5e0ea",
+    "bg": "#ffe14d",
+    "size": 12.8
+   },
+   {
+    "width": 1440,
+    "el": "pre",
+    "text": "$ tracewell ingest --kubernetes streaming from pod",
+    "ratio": 1.03,
+    "need": 4.5,
+    "fg": "#d5e0ea",
+    "bg": "#ffe14d",
+    "size": 12.8
+   }
+  ],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

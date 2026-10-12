@@ -1,0 +1,12 @@
+{
+ "slug": "ecommerce",
+ "seed": 3101,
+ "cond": "c-fdesign",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/ecommerce/c-fdesign-s3101",
+ "exit": 0,
+ "seconds": 72,
+ "turns": 4,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

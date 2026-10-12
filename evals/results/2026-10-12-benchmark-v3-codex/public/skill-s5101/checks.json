@@ -1,0 +1,71 @@
+{
+ "375": {
+  "pageHeight": 6332,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 4244,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 3,
+    "text": "দান করুন / DONATE",
+    "href": "#donate",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 34648,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": "motomation · archetype: diptych · mutation: remove-the-expected · signature: herbarium-labels · tier: 1 · critique: C4[restraint:changed1] H5[375:0] S5[last5:archetype-new,signature-new,fp34] R4[cuts:1,anim:2] M5[t1:pins1/2,webgl0/1,js2/30KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · g"
+  },
+  "strip": {
+   "frames": [
+    0,
+    478,
+    955,
+    1433,
+    1911,
+    2389,
+    2866,
+    3344
+   ],
+   "maxScroll": 3344
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 4244,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 6332,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 265325d6a7",
+  "critique": "C?[no-record] H5[375:0] S5[last5:no-log] R?[no-record] M5[t1:pins1/2,webgl0/1,js2/30KB,rm0] V5[entrance-repeats:0]",
+  "contrast": [],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

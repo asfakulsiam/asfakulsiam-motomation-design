@@ -1,0 +1,170 @@
+{
+ "375": {
+  "pageHeight": 7259,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 5702,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 5,
+    "text": "Donate",
+    "href": "#donate",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "39/40"
+  },
+  "source": {
+   "bytes": 39111,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": "motomation · archetype: ledger · mutation: shoreline-thread-through-sections · signature: tidal-rootline-progress · tier: 1 · critique: not-verified-no-browser · gate: not-verified-no-browser "
+  },
+  "strip": {
+   "frames": [
+    9,
+    695,
+    1381,
+    2067,
+    2753,
+    3439,
+    4125,
+    4802
+   ],
+   "maxScroll": 4802
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 5702,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 7259,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 9,
+   "overflow": 1,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 1
+  },
+  "stamp": "gate: c9 o1 w0 rm0 a0 n1 · gate/2 · fb6bb4186c",
+  "critique": "C?[no-record] H4[375:1] S5[last5:no-log] R?[no-record] M4[t1:pins1/2,webgl0/1,js48/30KB,rm0] V5[entrance-repeats:0]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "text",
+    "text": "Monsoon planting",
+    "ratio": 2.67,
+    "need": 4.5,
+    "fg": "#1d2218",
+    "bg": "#57674f",
+    "size": 15
+   },
+   {
+    "width": 375,
+    "el": "text",
+    "text": "Care",
+    "ratio": 3.44,
+    "need": 4.5,
+    "fg": "#1d2218",
+    "bg": "#6d775f",
+    "size": 15
+   },
+   {
+    "width": 390,
+    "el": "text",
+    "text": "Nursery",
+    "ratio": 3.6,
+    "need": 4.5,
+    "fg": "#1d2218",
+    "bg": "#6d7b63",
+    "size": 15
+   },
+   {
+    "width": 390,
+    "el": "text",
+    "text": "Care",
+    "ratio": 2.9,
+    "need": 4.5,
+    "fg": "#1d2218",
+    "bg": "#5f6c54",
+    "size": 15
+   },
+   {
+    "width": 768,
+    "el": "text",
+    "text": "Monsoon planting",
+    "ratio": 2.97,
+    "need": 4.5,
+    "fg": "#1d2218",
+    "bg": "#5e6e55",
+    "size": 15
+   },
+   {
+    "width": 768,
+    "el": "text",
+    "text": "Care",
+    "ratio": 2.1,
+    "need": 4.5,
+    "fg": "#1d2218",
+    "bg": "#455840",
+    "size": 15
+   },
+   {
+    "width": 1440,
+    "el": "text",
+    "text": "Nursery",
+    "ratio": 3.9,
+    "need": 4.5,
+    "fg": "#1d2218",
+    "bg": "#75806a",
+    "size": 15
+   },
+   {
+    "width": 1440,
+    "el": "text",
+    "text": "Monsoon planting",
+    "ratio": 3.9,
+    "need": 4.5,
+    "fg": "#1d2218",
+    "bg": "#758068",
+    "size": 15
+   },
+   {
+    "width": 1440,
+    "el": "text",
+    "text": "Care",
+    "ratio": 2.51,
+    "need": 4.5,
+    "fg": "#1d2218",
+    "bg": "#52634a",
+    "size": 15
+   }
+  ],
+  "overflow": [
+   {
+    "width": 1440,
+    "el": "span",
+    "kind": "text overflows parent",
+    "px": 4,
+    "text": "Bringing the mangroves back"
+   }
+  ],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

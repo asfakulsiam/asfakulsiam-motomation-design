@@ -1,0 +1,146 @@
+{
+ "375": {
+  "pageHeight": 3819,
+  "errors": [],
+  "hOverflow": 151,
+  "axe": [
+   {
+    "id": "scrollable-region-focusable",
+    "impact": "serious",
+    "nodes": 1
+   }
+  ],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 2757,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 5,
+    "text": "Pricing",
+    "href": "#pricing",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "37/40"
+  },
+  "source": {
+   "bytes": 11741,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    265,
+    531,
+    796,
+    1061,
+    1326,
+    1592,
+    1857
+   ],
+   "maxScroll": 1857
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 2757,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 3819,
+  "errors": [],
+  "hOverflow": 151
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 10,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c0 o10 w0 rm0 a0 n0 · gate/2 · d7ec2b7a93",
+  "critique": "C?[no-record] H4[375:1] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V2[entrance-repeats:3]",
+  "contrast": [],
+  "overflow": [
+   {
+    "width": 375,
+    "el": "page",
+    "kind": "horizontal scroll",
+    "px": 153
+   },
+   {
+    "width": 375,
+    "el": "div.cmd",
+    "kind": "escapes viewport",
+    "px": 153,
+    "text": ""
+   },
+   {
+    "width": 375,
+    "el": "code",
+    "kind": "escapes viewport",
+    "px": 71,
+    "text": "brew install tracewell"
+   },
+   {
+    "width": 375,
+    "el": "div.or",
+    "kind": "escapes viewport",
+    "px": 153,
+    "text": "or"
+   },
+   {
+    "width": 375,
+    "el": "code",
+    "kind": "escapes viewport",
+    "px": 71,
+    "text": "curl -fsSL https://tracewell.dev/install"
+   },
+   {
+    "width": 390,
+    "el": "page",
+    "kind": "horizontal scroll",
+    "px": 138
+   },
+   {
+    "width": 390,
+    "el": "div.cmd",
+    "kind": "escapes viewport",
+    "px": 138,
+    "text": ""
+   },
+   {
+    "width": 390,
+    "el": "code",
+    "kind": "escapes viewport",
+    "px": 56,
+    "text": "brew install tracewell"
+   },
+   {
+    "width": 390,
+    "el": "div.or",
+    "kind": "escapes viewport",
+    "px": 138,
+    "text": "or"
+   },
+   {
+    "width": 390,
+    "el": "code",
+    "kind": "escapes viewport",
+    "px": 56,
+    "text": "curl -fsSL https://tracewell.dev/install"
+   }
+  ],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

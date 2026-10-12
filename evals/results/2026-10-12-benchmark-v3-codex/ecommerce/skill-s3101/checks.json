@@ -1,0 +1,712 @@
+{
+ "375": {
+  "pageHeight": 5268,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 3764,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 7,
+    "text": "Add to cart",
+    "href": "",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 34239,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": "motomation · archetype: diptych · mutation: single-object · signature: kiln-ledger · tier: 2 "
+  },
+  "strip": {
+   "frames": [
+    0,
+    409,
+    818,
+    1227,
+    1637,
+    2046,
+    2455,
+    2864
+   ],
+   "maxScroll": 2864
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3764,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 5268,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 64,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c64 o0 w0 rm0 a0 n0 · gate/2 · ad97146a77",
+  "critique": "C?[no-record] H5[375:0] S5[last5:no-log] R?[no-record] M5[t2:pins1/2,webgl0/1,js2/80KB,rm0] V2[entrance-repeats:3]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "span.cart-pill__count",
+    "text": "0",
+    "ratio": 1.14,
+    "need": 4.5,
+    "fg": "#f3ede6",
+    "bg": "#e6ded6",
+    "size": 12.8
+   },
+   {
+    "width": 375,
+    "el": "span.eyebrow",
+    "text": "Featured product",
+    "ratio": 4.03,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf7f1",
+    "size": 12.48
+   },
+   {
+    "width": 375,
+    "el": "div.section-index",
+    "text": "01 · Current firing",
+    "ratio": 3.57,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f1e9e1",
+    "size": 12.48
+   },
+   {
+    "width": 375,
+    "el": "p.product-card__meta",
+    "text": "৳1,800",
+    "ratio": 4.07,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fdf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 375,
+    "el": "p.product-card__meta",
+    "text": "৳6,500",
+    "ratio": 4.06,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 375,
+    "el": "p.product-card__meta",
+    "text": "৳3,200",
+    "ratio": 4.03,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fbf7f2",
+    "size": 12.48
+   },
+   {
+    "width": 375,
+    "el": "p.product-card__meta",
+    "text": "৳800",
+    "ratio": 4.03,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fbf7f2",
+    "size": 12.48
+   },
+   {
+    "width": 375,
+    "el": "p.product-card__meta",
+    "text": "৳1,400",
+    "ratio": 4.06,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 375,
+    "el": "div.section-index",
+    "text": "02 · Purchase panel",
+    "ratio": 3.87,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f6f3ec",
+    "size": 12.48
+   },
+   {
+    "width": 375,
+    "el": "p.product-card__meta",
+    "text": "Wood-fired stoneware · Ash glaze",
+    "ratio": 4.07,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fdf8f3",
+    "size": 12.48
+   },
+   {
+    "width": 375,
+    "el": "div.section-index",
+    "text": "03 · Firing story",
+    "ratio": 4.11,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcfaf4",
+    "size": 12.48
+   },
+   {
+    "width": 375,
+    "el": "div.story-step__meta",
+    "text": "Frame 01",
+    "ratio": 3.75,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f3efe9",
+    "size": 12.48
+   },
+   {
+    "width": 375,
+    "el": "div.story-step__meta",
+    "text": "Frame 02",
+    "ratio": 3.72,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f2eee8",
+    "size": 12.48
+   },
+   {
+    "width": 375,
+    "el": "div.story-step__meta",
+    "text": "Frame 03",
+    "ratio": 3.69,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f2ede6",
+    "size": 12.48
+   },
+   {
+    "width": 375,
+    "el": "span.meta-chip",
+    "text": "Flame ledger",
+    "ratio": 3.62,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f8e9de",
+    "size": 12.48
+   },
+   {
+    "width": 375,
+    "el": "div.section-index",
+    "text": "04 · Shipping & care",
+    "ratio": 3.76,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f4efea",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "span.cart-pill__count",
+    "text": "0",
+    "ratio": 1.15,
+    "need": 4.5,
+    "fg": "#f3ede6",
+    "bg": "#e6ded5",
+    "size": 12.8
+   },
+   {
+    "width": 390,
+    "el": "span.eyebrow",
+    "text": "Featured product",
+    "ratio": 4.02,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fbf7f1",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "div.section-index",
+    "text": "01 · Current firing",
+    "ratio": 3.55,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f1e8e1",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "p.product-card__meta",
+    "text": "৳1,800",
+    "ratio": 4.07,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fdf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "p.product-card__meta",
+    "text": "৳6,500",
+    "ratio": 4.06,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "p.product-card__meta",
+    "text": "৳3,200",
+    "ratio": 4.06,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "p.product-card__meta",
+    "text": "৳800",
+    "ratio": 4.06,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "p.product-card__meta",
+    "text": "৳1,400",
+    "ratio": 4.06,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "div.section-index",
+    "text": "02 · Purchase panel",
+    "ratio": 3.88,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f7f3ed",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "p.product-card__meta",
+    "text": "Wood-fired stoneware · Ash glaze",
+    "ratio": 4.06,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "div.section-index",
+    "text": "03 · Firing story",
+    "ratio": 4.09,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf9f5",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "div.story-step__meta",
+    "text": "Frame 01",
+    "ratio": 3.75,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f3efe9",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "div.story-step__meta",
+    "text": "Frame 02",
+    "ratio": 3.72,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f3eee8",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "div.story-step__meta",
+    "text": "Frame 03",
+    "ratio": 3.69,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f3ede6",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "span.meta-chip",
+    "text": "Flame ledger",
+    "ratio": 3.61,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f7e9df",
+    "size": 12.48
+   },
+   {
+    "width": 390,
+    "el": "div.section-index",
+    "text": "04 · Shipping & care",
+    "ratio": 3.76,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f4efea",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "span.cart-pill__count",
+    "text": "0",
+    "ratio": 1.13,
+    "need": 4.5,
+    "fg": "#f3ede6",
+    "bg": "#e7dfd7",
+    "size": 12.8
+   },
+   {
+    "width": 768,
+    "el": "span.eyebrow",
+    "text": "Featured product",
+    "ratio": 4.04,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fdf7f2",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "div.section-index",
+    "text": "01 · Current firing",
+    "ratio": 3.6,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f1eae3",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "p.product-card__meta",
+    "text": "৳1,800",
+    "ratio": 4.07,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fdf8f3",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "p.product-card__meta",
+    "text": "৳6,500",
+    "ratio": 4.06,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf8f3",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "p.product-card__meta",
+    "text": "৳3,200",
+    "ratio": 4.06,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "p.product-card__meta",
+    "text": "৳800",
+    "ratio": 4.06,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "p.product-card__meta",
+    "text": "৳1,400",
+    "ratio": 4.06,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "div.section-index",
+    "text": "02 · Purchase panel",
+    "ratio": 3.95,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f9f5ef",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "p.product-card__meta",
+    "text": "Wood-fired stoneware · Ash glaze",
+    "ratio": 4.07,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fdf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "div.section-index",
+    "text": "03 · Firing story",
+    "ratio": 4.1,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fdf9f4",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "div.story-step__meta",
+    "text": "Frame 01",
+    "ratio": 3.72,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f2eee9",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "div.story-step__meta",
+    "text": "Frame 02",
+    "ratio": 3.72,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f2eee9",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "div.story-step__meta",
+    "text": "Frame 03",
+    "ratio": 3.69,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f2ede6",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "span.meta-chip",
+    "text": "Flame ledger",
+    "ratio": 3.61,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f7e9dd",
+    "size": 12.48
+   },
+   {
+    "width": 768,
+    "el": "div.section-index",
+    "text": "04 · Shipping & care",
+    "ratio": 3.76,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f4efea",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "span.cart-pill__count",
+    "text": "0",
+    "ratio": 1.12,
+    "need": 4.5,
+    "fg": "#f3ede6",
+    "bg": "#e7e1da",
+    "size": 12.8
+   },
+   {
+    "width": 1440,
+    "el": "span.eyebrow",
+    "text": "Featured product",
+    "ratio": 4.07,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fdf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "div.section-index",
+    "text": "01 · Current firing",
+    "ratio": 3.61,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f3eae2",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "div.section-index",
+    "text": "02 · Purchase panel",
+    "ratio": 4.1,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fdf9f4",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "p.product-card__meta",
+    "text": "Wood-fired stoneware · Ash glaze",
+    "ratio": 4.06,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf8f1",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "p.product-card__meta",
+    "text": "৳1,800",
+    "ratio": 4.07,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fdf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "p.product-card__meta",
+    "text": "৳6,500",
+    "ratio": 4.06,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "p.product-card__meta",
+    "text": "৳3,200",
+    "ratio": 4.06,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "p.product-card__meta",
+    "text": "৳800",
+    "ratio": 4.06,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf8f1",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "p.product-card__meta",
+    "text": "৳1,400",
+    "ratio": 4.06,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fcf8f2",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "div.section-index",
+    "text": "03 · Firing story",
+    "ratio": 4.12,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#fdfaf5",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "span.meta-chip",
+    "text": "Flame ledger",
+    "ratio": 3.65,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f9eadf",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "div.story-step__meta",
+    "text": "Frame 01",
+    "ratio": 3.71,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f2eee7",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "div.story-step__meta",
+    "text": "Frame 02",
+    "ratio": 3.71,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f2eee7",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "div.story-step__meta",
+    "text": "Frame 03",
+    "ratio": 3.71,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f2eee7",
+    "size": 12.48
+   },
+   {
+    "width": 1440,
+    "el": "div.section-index",
+    "text": "04 · Shipping & care",
+    "ratio": 3.82,
+    "need": 4.5,
+    "fg": "#aa6b42",
+    "bg": "#f5f1eb",
+    "size": 12.48
+   }
+  ],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

@@ -1,0 +1,155 @@
+{
+ "375": {
+  "pageHeight": 5459,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "aria-prohibited-attr",
+    "impact": "serious",
+    "nodes": 1
+   },
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 12
+   }
+  ],
+  "contrastViolations": 12
+ },
+ "1440": {
+  "pageHeight": 6713,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "aria-prohibited-attr",
+    "impact": "serious",
+    "nodes": 1
+   },
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 12
+   }
+  ],
+  "contrastViolations": 12,
+  "keyboard": {
+   "primaryReached": {
+    "step": 1,
+    "text": "Skip to tickets",
+    "href": "#tickets",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "32/40"
+  },
+  "source": {
+   "bytes": 13535,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    830,
+    1661,
+    2491,
+    3322,
+    4152,
+    4983,
+    5813
+   ],
+   "maxScroll": 5813
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 5723,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4890,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 5,
+   "overflow": 0,
+   "words": 2,
+   "motion": 0,
+   "names": 0,
+   "numbers": 2
+  },
+  "stamp": "gate: c5 o0 w2 rm0 a0 n2 · gate/2 · 9e731e4a0a",
+  "critique": "C?[no-record] H2[375:3] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V3[entrance-repeats:2]",
+  "contrast": [
+   {
+    "width": 768,
+    "el": "i",
+    "text": "Two",
+    "ratio": 2.86,
+    "need": 3,
+    "fg": "#f4ecdd",
+    "bg": "#ff4a1c",
+    "size": 122.88
+   },
+   {
+    "width": 768,
+    "el": "i.o",
+    "text": "Days.",
+    "ratio": 2.13,
+    "need": 3,
+    "fg": "#ffc52e",
+    "bg": "#ff4a1c",
+    "size": 122.88
+   },
+   {
+    "width": 1440,
+    "el": "i",
+    "text": "Two",
+    "ratio": 2.86,
+    "need": 3,
+    "fg": "#f4ecdd",
+    "bg": "#ff4a1c",
+    "size": 230.4
+   },
+   {
+    "width": 1440,
+    "el": "i.o",
+    "text": "Days.",
+    "ratio": 2.13,
+    "need": 3,
+    "fg": "#ffc52e",
+    "bg": "#ff4a1c",
+    "size": 230.4
+   },
+   {
+    "width": 1440,
+    "el": "i",
+    "text": "Two Stages.",
+    "ratio": 2.86,
+    "need": 3,
+    "fg": "#f4ecdd",
+    "bg": "#ff4a1c",
+    "size": 230.4
+   }
+  ],
+  "overflow": [],
+  "words": [
+   {
+    "el": "div.big",
+    "text": "14Feb",
+    "problem": "word \"14Feb\" breaks across lines"
+   },
+   {
+    "el": "div.big",
+    "text": "15Feb",
+    "problem": "word \"15Feb\" breaks across lines"
+   }
+  ],
+  "motion": [],
+  "names": []
+ }
+}

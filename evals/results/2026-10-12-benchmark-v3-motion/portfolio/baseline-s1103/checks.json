@@ -1,0 +1,71 @@
+{
+ "375": {
+  "pageHeight": 4546,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 6236,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 2,
+    "text": "CONTACT",
+    "href": "#contact",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "30/40"
+  },
+  "source": {
+   "bytes": 10683,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    762,
+    1525,
+    2287,
+    3049,
+    3811,
+    4574,
+    5336
+   ],
+   "maxScroll": 5336
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 4733,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4546,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 1ed5c5215f",
+  "critique": "C?[no-record] H4[375:1] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V4[entrance-repeats:1]",
+  "contrast": [],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

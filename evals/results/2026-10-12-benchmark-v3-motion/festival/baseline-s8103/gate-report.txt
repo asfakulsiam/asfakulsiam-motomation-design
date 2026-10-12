@@ -1,0 +1,27 @@
+DELIVERY GATE · /home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-motion/festival/baseline-s8103/index.html
+  contrast  ✗ 5 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (39 measured; 3 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (39 measured; 3 skipped; 0 not visible at scan time)
+      768px  ✗ 2 below AA  (40 measured; 2 skipped; 0 not visible at scan time)
+        2.86:1 < 3:1  #f4ecdd on #ff4a1c  122.88px  i  "Two"
+        2.13:1 < 3:1  #ffc52e on #ff4a1c  122.88px  i.o  "Days."
+     1440px  ✗ 3 below AA  (39 measured; 3 skipped; 0 not visible at scan time)
+        2.86:1 < 3:1  #f4ecdd on #ff4a1c  230.4px  i  "Two"
+        2.13:1 < 3:1  #ffc52e on #ff4a1c  230.4px  i.o  "Days."
+        2.86:1 < 3:1  #f4ecdd on #ff4a1c  230.4px  i  "Two Stages."
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✗ 2 display-text problems at 375px  (14 display elements checked)
+     div.big  word "14Feb" breaks across lines  "14Feb"
+     div.big  word "15Feb" breaks across lines  "15Feb"
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (42 compared)
+  names     ✓ 0 missing alt / accessible names  (4 interactive elements checked)
+  numbers   ✗ 2 values shown wrong before they settle  (19 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+     div#count.count  shows "0" at scroll 0, settles on "18"
+     div.pr  shows "18" under reduced motion, settles on "৳1,500"
+  hierarchy  h1×1, 0 skipped heading levels, 3 element(s) tied for largest on the first 375px screen
+  structure  8 sections, entrances: static | fade | fade | static | static | fade+scale | fade | static → 2 repeat(s); pins 2, WebGL canvases 0, JS 47KB gzipped
+  records    DESIGN.md: none · memory log: /home/user/workspace/repo/.motomation/log.json · stamp fields: {"tier":"4"}
+  critique → C?[no-record] H2[375:3] S?[no-archetype-in-stamp] R?[no-record] M5[t4:pins2/2,webgl0/1,js47/250KB,rm0] V3[entrance-repeats:2]   (axes marked ? have no record to derive from)
+  FAIL  stamp → critique: C?[no-record] H2[375:3] S?[no-archetype-in-stamp] R?[no-record] M5[t4:pins2/2,webgl0/1,js47/250KB,rm0] V3[entrance-repeats:2] · gate: c5 o0 w2 rm0 a0 n2 · gate/2 · 9e731e4a0a
+
+motion report → /home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-motion/festival/baseline-s8103/motion-report.html (24 frames, 1115 KB)

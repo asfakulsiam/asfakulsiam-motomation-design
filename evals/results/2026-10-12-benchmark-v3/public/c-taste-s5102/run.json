@@ -1,0 +1,12 @@
+{
+ "slug": "public",
+ "seed": 5102,
+ "cond": "c-taste",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/public/c-taste-s5102",
+ "exit": 0,
+ "seconds": 106,
+ "turns": 9,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

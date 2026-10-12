@@ -1,0 +1,12 @@
+{
+ "slug": "saas",
+ "seed": 2102,
+ "cond": "c-uiux",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/saas/c-uiux-s2102",
+ "exit": 0,
+ "seconds": 53,
+ "turns": 6,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

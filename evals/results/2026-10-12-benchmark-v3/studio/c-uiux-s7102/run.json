@@ -1,0 +1,12 @@
+{
+ "slug": "studio",
+ "seed": 7102,
+ "cond": "c-uiux",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3/studio/c-uiux-s7102",
+ "exit": 0,
+ "seconds": 91,
+ "turns": 7,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

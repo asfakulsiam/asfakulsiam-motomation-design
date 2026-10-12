@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Haveli 1893 | Boutique hotel in Puran Dhaka</title>
+<meta name="description" content="Haveli 1893 is a 12-room boutique hotel in a restored 1890s merchant house in Shankhari Bazar, Puran Dhaka.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Design read: boutique heritage hotel for design-conscious travellers, editorial language.
+   Palette: cool lime-plaster greys + verdigris (iron balcony) accent. Serif is used because the brand is heritage (1893).
+   Shape rule: everything is square-cornered; the only curve is the arch, which is the house's own motif. */
+:root{
+  --bg:#e8ebe6; --bg2:#dce1da; --ink:#15191c; --mute:#4a5450; --line:#b9c1b9;
+  --accent:#1f5f53; --on-accent:#f2f5f1; --iron:#1b2226; --sun:#d9c9a0;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --pad:clamp(20px,5vw,72px);
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#14181b; --bg2:#1c2226; --ink:#e6eae5; --mute:#a3aea8; --line:#34403f;
+    --accent:#7cc2b0; --on-accent:#0f1513; --iron:#0d1113; --sun:#c9b98f}
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.skip{position:absolute;left:12px;top:-60px;background:var(--ink);color:var(--bg);padding:10px 16px;z-index:100}
+.skip:focus{top:12px}
+.wrap{max-width:1360px;margin:0 auto;padding:0 var(--pad)}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spacing:-.01em}
+h2{font-size:clamp(2.2rem,5vw,4rem);max-width:16ch}
+p{max-width:62ch;color:var(--mute)}
+.eyebrow{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:18px;display:block}
+em{font-style:italic;padding-bottom:.06em}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;min-height:48px;padding:0 28px;background:var(--accent);color:var(--on-accent);text-decoration:none;font-weight:600;font-size:.95rem;border:1px solid var(--accent);transition:transform .3s cubic-bezier(.16,1,.3,1),background-color .3s,color .3s}
+.btn:hover{background:transparent;color:var(--accent)}
+.btn:active{transform:translateY(1px) scale(.98)}
+.btn.sm{min-height:40px;padding:0 20px;font-size:.88rem}
+
+/* nav */
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{font-family:var(--serif);font-size:1.7rem;font-weight:600;text-decoration:none;letter-spacing:.01em;white-space:nowrap}
+.nav ul{display:none;list-style:none;padding:0;gap:32px}
+.nav ul a{text-decoration:none;font-size:.92rem;color:var(--mute);transition:color .2s}
+.nav ul a:hover{color:var(--ink)}
+@media(min-width:820px){.nav ul{display:flex}}
+
+/* hero */
+.hero{min-height:calc(100dvh - 68px);display:grid;align-items:center;padding:32px 0 48px}
+.hero .wrap{display:grid;gap:36px;grid-template-columns:1fr;align-items:center;width:100%}
+.hero h1{font-size:clamp(2.6rem,6.2vw,5.6rem);max-width:12ch}
+.hero p{margin:22px 0 32px;font-size:1.1rem}
+.art{justify-self:center;width:min(100%,380px)}
+.art svg{display:block;width:100%;height:auto}
+@media(min-width:900px){.hero .wrap{grid-template-columns:1.25fr .75fr;gap:72px}.art{justify-self:end;width:min(100%,400px)}.hero{padding-top:24px}}
+@media(max-width:899px){.art{width:min(70%,260px);justify-self:start}.hero{min-height:auto}}
+
+/* rooms */
+section{padding:clamp(72px,11vw,150px) 0}
+.rooms h2{margin-bottom:12px}
+.rooms .lede{margin-bottom:56px}
+.room{display:grid;grid-template-columns:1fr;gap:20px;padding:36px 0;border-top:1px solid var(--line);align-items:center}
+.room:last-of-type{border-bottom:1px solid var(--line)}
+.swatch{aspect-ratio:16/9;background:var(--bg2);position:relative;overflow:hidden}
+.swatch svg{position:absolute;inset:0;width:100%;height:100%}
+.room h3{font-size:clamp(1.9rem,3.4vw,2.8rem)}
+.room .count{color:var(--accent);font-weight:600;font-size:.9rem;margin-bottom:6px;display:block}
+.price{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.4rem);line-height:1;color:var(--ink)}
+.price small{display:block;font-family:var(--sans);font-size:.85rem;color:var(--mute);margin-top:8px}
+.note{margin-top:28px;color:var(--ink);font-weight:500}
+@media(min-width:900px){
+  .room{grid-template-columns:5fr 4fr 3fr;gap:48px}
+  .room:nth-of-type(2){grid-template-columns:3fr 5fr 4fr;margin-left:8vw}
+  .room:nth-of-type(3){grid-template-columns:4fr 4fr 3fr;margin-left:16vw}
+  .room:nth-of-type(2) .swatch{order:3}
+  .room:nth-of-type(2) .price{order:1}
+}
+
+/* rooftop */
+.roof{padding:0;position:relative;background:var(--iron);color:#e9ece7;overflow:hidden;min-height:max(560px,80dvh);display:flex;align-items:flex-end}
+.roof .sky{position:absolute;inset:0;background:linear-gradient(180deg,#232d33 0%,#3b4a4c 55%,#5b6a62 100%)}
+@media(prefers-color-scheme:dark){.roof .sky{background:linear-gradient(180deg,#0f1517 0%,#1c2a2b 60%,#2c3b37 100%)}}
+.roof svg{position:absolute;left:0;bottom:0;width:100%;height:62%}
+.sun{position:absolute;right:14%;top:14%;width:clamp(70px,12vw,150px);aspect-ratio:1;border-radius:50%;background:var(--sun);opacity:.92}
+.roof .wrap{position:relative;padding-top:80px;padding-bottom:48px;width:100%}
+.roof h2{color:#f0f2ee;max-width:14ch}
+.roof p{color:#d3dad4;margin-top:20px;max-width:46ch}
+.roof .eyebrow{color:#a8d9cb}
+.hours{display:inline-block;margin-top:24px;font-family:var(--serif);font-size:2.2rem;color:#f0f2ee}
+
+/* walks */
+.walks h2{margin-bottom:12px}
+.walks .lede{margin-bottom:64px}
+.tours{display:grid;gap:48px;grid-template-columns:1fr}
+.tour{border-top:2px solid var(--ink);padding-top:22px}
+.tour h3{font-size:clamp(1.8rem,3vw,2.5rem);margin-bottom:12px}
+.tour .when{font-weight:600;color:var(--accent);margin-bottom:10px;display:block}
+@media(min-width:900px){
+  .tours{grid-template-columns:1.2fr 1fr 1.2fr;gap:40px;align-items:start}
+  .tour:nth-child(2){margin-top:90px}
+  .tour:nth-child(3){margin-top:36px}
+}
+.facts{margin-top:56px;display:flex;flex-wrap:wrap;gap:12px 40px;font-weight:500}
+
+/* house */
+.house{background:var(--bg2)}
+.house .grid{display:grid;gap:48px;grid-template-columns:1fr}
+.keeps{display:grid;gap:0;align-content:start}
+.keeps div{padding:22px 0;border-top:1px solid var(--line)}
+.keeps div:first-child{border-top:0;padding-top:0}
+.keeps h3{font-size:1.9rem;margin-bottom:4px}
+.big{font-family:var(--serif);font-size:clamp(5rem,16vw,12rem);line-height:.9;color:var(--accent);margin-bottom:20px;display:block}
+@media(min-width:900px){.house .grid{grid-template-columns:1fr 1fr;gap:96px;align-items:center}}
+
+/* contact */
+.contact h2{max-width:18ch}
+.contact .row{display:grid;gap:40px;margin-top:48px;grid-template-columns:1fr}
+.contact address{font-style:normal;display:grid;gap:14px}
+.contact address a{text-decoration-thickness:1px;text-underline-offset:4px;width:fit-content}
+.contact address a:hover{color:var(--accent)}
+.contact dt{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+@media(min-width:900px){.contact .row{grid-template-columns:1fr 1fr;align-items:end}}
+footer{border-top:1px solid var(--line);padding:28px 0;font-size:.9rem;color:var(--mute)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Haveli 1893, home">Haveli 1893</a>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="#rooms">Rooms</a></li>
+        <li><a href="#breakfast">Breakfast</a></li>
+        <li><a href="#walks">Walks</a></li>
+        <li><a href="#house">The house</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="btn sm" href="https://book.example-hotel.com">Check availability</a>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top" style="padding-block:32px 48px">
+  <div class="wrap">
+    <div class="hero-copy">
+      <h1>Sleep inside an 1893 merchant house.</h1>
+      <p>Twelve rooms in a restored 1890s house in Puran Dhaka, with rooftop breakfast and walking tours.</p>
+      <a class="btn" href="https://book.example-hotel.com">Check availability</a>
+    </div>
+    <div class="art" aria-hidden="true">
+      <!-- Drawn facade: arched door, iron balcony railing, shuttered window. -->
+      <svg viewBox="0 0 400 520" fill="none" focusable="false">
+        <defs>
+          <pattern id="bars" width="10" height="46" patternUnits="userSpaceOnUse"><rect x="4" width="2" height="46" fill="var(--iron)"/></pattern>
+          <pattern id="plank" width="16" height="10" patternUnits="userSpaceOnUse"><rect width="1.5" height="10" fill="var(--bg)" opacity=".35"/></pattern>
+        </defs>
+        <rect width="400" height="520" fill="var(--bg2)"/>
+        <rect x="20" y="20" width="360" height="480" fill="none" stroke="var(--line)" stroke-width="1.5"/>
+        <!-- upper window -->
+        <path d="M120 70h160v110H120z" fill="var(--iron)"/>
+        <path class="draw" d="M120 70h160v110H120zM200 70v110M120 125h160" stroke="var(--accent)" stroke-width="3"/>
+        <!-- balcony -->
+        <rect x="70" y="188" width="260" height="10" fill="var(--iron)"/>
+        <rect x="70" y="198" width="260" height="46" fill="url(#bars)"/>
+        <rect x="70" y="240" width="260" height="6" fill="var(--iron)"/>
+        <path class="draw" d="M70 198h260" stroke="var(--accent)" stroke-width="3"/>
+        <!-- arched door -->
+        <path d="M110 500V340a90 90 0 0 1 180 0v160z" fill="var(--iron)"/>
+        <path d="M122 500V342a78 78 0 0 1 156 0v158z" fill="var(--accent)"/>
+        <path d="M122 500V342a78 78 0 0 1 156 0v158z" fill="url(#plank)"/>
+        <path class="draw" d="M200 264v236M110 500V340a90 90 0 0 1 180 0v160" stroke="var(--iron)" stroke-width="3"/>
+        <circle cx="186" cy="420" r="5" fill="var(--iron)"/><circle cx="214" cy="420" r="5" fill="var(--iron)"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="rooms" id="rooms">
+  <div class="wrap">
+    <h2 class="reveal">Twelve rooms, three ways to wake up.</h2>
+    <p class="lede reveal">Breakfast is included with every room.</p>
+
+    <article class="room reveal">
+      <div class="swatch" aria-hidden="true">
+        <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"><rect width="320" height="180" fill="var(--bg2)"/><rect x="110" y="40" width="100" height="140" fill="var(--iron)"/><rect x="122" y="52" width="76" height="128" fill="var(--bg)"/><path d="M0 150h320v30H0z" fill="var(--accent)" opacity=".85"/></svg>
+      </div>
+      <div><span class="count">4 rooms</span><h3>Courtyard</h3></div>
+      <div class="price">From ৳9,500<small>per night</small></div>
+    </article>
+
+    <article class="room reveal">
+      <div class="swatch" aria-hidden="true">
+        <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"><rect width="320" height="180" fill="var(--bg2)"/><rect x="40" y="96" width="240" height="8" fill="var(--iron)"/><g fill="var(--iron)"><rect x="46" y="104" width="3" height="40"/><rect x="66" y="104" width="3" height="40"/><rect x="86" y="104" width="3" height="40"/><rect x="106" y="104" width="3" height="40"/><rect x="126" y="104" width="3" height="40"/><rect x="146" y="104" width="3" height="40"/><rect x="166" y="104" width="3" height="40"/><rect x="186" y="104" width="3" height="40"/><rect x="206" y="104" width="3" height="40"/><rect x="226" y="104" width="3" height="40"/><rect x="246" y="104" width="3" height="40"/><rect x="266" y="104" width="3" height="40"/></g><rect x="40" y="144" width="240" height="6" fill="var(--iron)"/><rect x="120" y="20" width="80" height="70" fill="var(--accent)" opacity=".85"/></svg>
+      </div>
+      <div><span class="count">6 rooms</span><h3>Balcony</h3></div>
+      <div class="price">From ৳12,000<small>per night</small></div>
+    </article>
+
+    <article class="room reveal">
+      <div class="swatch" aria-hidden="true">
+        <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"><rect width="320" height="180" fill="var(--bg2)"/><circle cx="236" cy="52" r="26" fill="var(--accent)" opacity=".85"/><path d="M0 180V130h60v-20h50v30h40v-40h60v50h40v-26h70v76z" fill="var(--iron)"/></svg>
+      </div>
+      <div><span class="count">2 suites</span><h3>Rooftop</h3></div>
+      <div class="price">From ৳18,500<small>per night</small></div>
+    </article>
+    <p class="note reveal">Breakfast included in every rate.</p>
+  </div>
+</section>
+
+<section class="roof" id="breakfast" aria-labelledby="bk">
+  <div class="sky" aria-hidden="true"></div>
+  <div class="sun" aria-hidden="true"></div>
+  <svg viewBox="0 0 1200 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+    <path fill="#0f1416" opacity=".55" d="M0 400V250h90v-30h60v30h80v-50h70v50h110v-40h60v40h90v-60h80v60h120v-30h70v30h100v-45h90v45h110v-30h70v30h70v150z"/>
+    <path fill="#0b0f11" d="M0 400V320h70v-24h50v24h60v-40a30 30 0 0 1 60 0v40h90v-30h70v30h60v-52h20v-14h30v14h20v52h110v-26h80v26h60v-44a36 36 0 0 1 72 0v44h80v-28h60v28h90v-34h60v34h120z"/>
+  </svg>
+  <div class="wrap">
+    <span class="eyebrow">Rooftop breakfast</span>
+    <h2 id="bk" class="reveal">Breakfast above the old city's roofs.</h2>
+    <p class="reveal">Served on the roof, with a view over Old Dhaka. Included with your stay.</p>
+    <span class="hours reveal">7-10am</span>
+  </div>
+</section>
+
+<section class="walks" id="walks">
+  <div class="wrap">
+    <h2 class="reveal">Walk the old city with us.</h2>
+    <p class="lede reveal">The hotel leads three walks through the neighbourhood.</p>
+    <div class="tours">
+      <article class="tour reveal"><span class="when">At dawn</span><h3>Shankhari Bazar</h3><p>A walk through the bazar at dawn.</p></article>
+      <article class="tour reveal"><h3>Armanitola and the Star Mosque</h3><p>A walk through Armanitola to the Star Mosque.</p></article>
+      <article class="tour reveal"><h3>The river at Sadarghat</h3><p>Finish at the river, at Sadarghat.</p></article>
+    </div>
+    <div class="facts reveal"><span>2-3 hours</span><span>Small groups</span><span>Led by the hotel</span></div>
+  </div>
+</section>
+
+<section class="house" id="house">
+  <div class="wrap grid">
+    <div class="reveal">
+      <span class="big" aria-hidden="true">1893</span>
+      <span class="eyebrow">The house</span>
+      <h2>Built by a conch-shell merchant family.</h2>
+      <p style="margin-top:20px">The merchant house was built in 1893 and restored in 2022. The restoration kept what was already there.</p>
+    </div>
+    <div class="keeps reveal">
+      <div><h3>Original doors</h3><p>Kept through the 2022 restoration.</p></div>
+      <div><h3>Iron balconies</h3><p>Kept through the 2022 restoration.</p></div>
+      <div><h3>Lime plaster</h3><p>Kept through the 2022 restoration.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2 class="reveal">Book your room in Shankhari Bazar.</h2>
+    <div class="row">
+      <div class="reveal"><a class="btn" href="https://book.example-hotel.com">Check availability</a></div>
+      <address class="reveal">
+        <div><dt>Address</dt><dd>31 Shankhari Bazar, Old Dhaka</dd></div>
+        <div><dt>Phone</dt><dd><a href="tel:+8801700000000">+880 1700 000000</a></dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:stay@haveli1893.com">stay@haveli1893.com</a></dd></div>
+      </address>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">Haveli 1893. 31 Shankhari Bazar, Old Dhaka.</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+/* Motion, each with a job:
+   hero entry = hierarchy; reveals = sequence of reading; line draw = the iron work "assembling";
+   sun rise on scrub = tells the breakfast hours (morning). All off under reduced motion. */
+(function(){
+  if(!window.gsap||!window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+  var mm=gsap.matchMedia();
+  mm.add("(prefers-reduced-motion: no-preference)",function(){
+    gsap.from(".hero-copy > *",{y:28,opacity:0,duration:.9,ease:"power3.out",stagger:.12});
+    gsap.from(".art svg",{opacity:0,y:20,duration:1,ease:"power3.out",delay:.2});
+    document.querySelectorAll(".draw").forEach(function(p){
+      var l=p.getTotalLength?p.getTotalLength():0; if(!l) return;
+      gsap.fromTo(p,{strokeDasharray:l,strokeDashoffset:l},{strokeDashoffset:0,duration:1.6,ease:"power2.inOut",delay:.5,onComplete:function(){p.style.strokeDasharray="none"}});
+    });
+    gsap.utils.toArray(".reveal").forEach(function(el){
+      gsap.from(el,{y:32,opacity:0,duration:.8,ease:"power3.out",scrollTrigger:{trigger:el,start:"top 88%",once:true}});
+    });
+    gsap.fromTo(".sun",{y:140},{y:-20,ease:"none",scrollTrigger:{trigger:".roof",start:"top bottom",end:"bottom 40%",scrub:true}});
+  });
+})();
+</script>
+</body>
+</html>

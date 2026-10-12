@@ -1,0 +1,439 @@
+{
+ "375": {
+  "pageHeight": 4483,
+  "errors": [],
+  "hOverflow": 91,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 1
+   },
+   {
+    "id": "scrollable-region-focusable",
+    "impact": "serious",
+    "nodes": 2
+   }
+  ],
+  "contrastViolations": 1
+ },
+ "1440": {
+  "pageHeight": 3670,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "nodes": 1
+   }
+  ],
+  "contrastViolations": 1,
+  "keyboard": {
+   "primaryReached": {
+    "step": 5,
+    "text": "Pricing",
+    "href": "#pricing",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 18096,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    396,
+    791,
+    1187,
+    1583,
+    1979,
+    2374,
+    2770
+   ],
+   "maxScroll": 2770
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3670,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4483,
+  "errors": [],
+  "hOverflow": 91
+ },
+ "gate": {
+  "counts": {
+   "contrast": 26,
+   "overflow": 32,
+   "words": 1,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c26 o32 w1 rm0 a0 n0 · gate/2 · 75b0f34c89",
+  "critique": "C?[no-record] H3[375:2] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V1[entrance-repeats:4]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "span.tag",
+    "text": "MOST UNUSUAL",
+    "ratio": 3.96,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#f5e4d6",
+    "size": 12
+   },
+   {
+    "width": 375,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 3.66,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#15171a",
+    "size": 15
+   },
+   {
+    "width": 375,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 3.66,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#15171a",
+    "size": 15
+   },
+   {
+    "width": 375,
+    "el": "div.cmd",
+    "text": ">Paste the explanation link in chat",
+    "ratio": 1.24,
+    "need": 4.5,
+    "fg": "#dcdee2",
+    "bg": "#f6f6f4",
+    "size": 15
+   },
+   {
+    "width": 375,
+    "el": "a.btn",
+    "text": "Install for your team",
+    "ratio": 1.14,
+    "need": 4.5,
+    "fg": "#fffaf5",
+    "bg": "#ecece9",
+    "size": 15
+   },
+   {
+    "width": 375,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 3.66,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#15171a",
+    "size": 15
+   },
+   {
+    "width": 375,
+    "el": "div#c2.cmd",
+    "text": "$curl -fsSL https://tracewell.dev/install.sh | sh",
+    "ratio": 1.24,
+    "need": 4.5,
+    "fg": "#dcdee2",
+    "bg": "#f6f6f4",
+    "size": 15
+   },
+   {
+    "width": 390,
+    "el": "span.tag",
+    "text": "MOST UNUSUAL",
+    "ratio": 3.96,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#f5e4d6",
+    "size": 12
+   },
+   {
+    "width": 390,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 3.66,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#15171a",
+    "size": 15
+   },
+   {
+    "width": 390,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 3.66,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#15171a",
+    "size": 15
+   },
+   {
+    "width": 390,
+    "el": "div.cmd",
+    "text": ">Paste the explanation link in chat",
+    "ratio": 1.24,
+    "need": 4.5,
+    "fg": "#dcdee2",
+    "bg": "#f6f6f4",
+    "size": 15
+   },
+   {
+    "width": 390,
+    "el": "a.btn",
+    "text": "Install for your team",
+    "ratio": 1.14,
+    "need": 4.5,
+    "fg": "#fffaf5",
+    "bg": "#ecece9",
+    "size": 15
+   },
+   {
+    "width": 390,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 3.66,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#15171a",
+    "size": 15
+   },
+   {
+    "width": 390,
+    "el": "div#c2.cmd",
+    "text": "$curl -fsSL https://tracewell.dev/install.sh | sh",
+    "ratio": 1.24,
+    "need": 4.5,
+    "fg": "#dcdee2",
+    "bg": "#f6f6f4",
+    "size": 15
+   },
+   {
+    "width": 768,
+    "el": "span.tag",
+    "text": "MOST UNUSUAL",
+    "ratio": 3.96,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#f5e4d6",
+    "size": 12
+   },
+   {
+    "width": 768,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 3.66,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#15171a",
+    "size": 15
+   },
+   {
+    "width": 768,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 3.66,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#15171a",
+    "size": 15
+   },
+   {
+    "width": 768,
+    "el": "span.p",
+    "text": ">",
+    "ratio": 3.66,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#15171a",
+    "size": 15
+   },
+   {
+    "width": 768,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 3.66,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#15171a",
+    "size": 15
+   },
+   {
+    "width": 768,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 3.66,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#15171a",
+    "size": 15
+   },
+   {
+    "width": 1440,
+    "el": "span.tag",
+    "text": "MOST UNUSUAL",
+    "ratio": 3.96,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#f5e4d6",
+    "size": 12
+   },
+   {
+    "width": 1440,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 3.66,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#15171a",
+    "size": 15
+   },
+   {
+    "width": 1440,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 3.66,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#15171a",
+    "size": 15
+   },
+   {
+    "width": 1440,
+    "el": "span.p",
+    "text": ">",
+    "ratio": 3.66,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#15171a",
+    "size": 15
+   },
+   {
+    "width": 1440,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 3.66,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#15171a",
+    "size": 15
+   },
+   {
+    "width": 1440,
+    "el": "span.p",
+    "text": "$",
+    "ratio": 3.66,
+    "need": 4.5,
+    "fg": "#b8530f",
+    "bg": "#15171a",
+    "size": 15
+   }
+  ],
+  "overflow": [
+   {
+    "width": 375,
+    "el": "page",
+    "kind": "horizontal scroll",
+    "px": 91
+   },
+   {
+    "width": 375,
+    "el": "div.wrap",
+    "kind": "escapes viewport",
+    "px": 51,
+    "text": ""
+   },
+   {
+    "width": 375,
+    "el": "div.hero-copy",
+    "kind": "escapes viewport",
+    "px": 91,
+    "text": ""
+   },
+   {
+    "width": 375,
+    "el": "p.lede.rv",
+    "kind": "escapes viewport",
+    "px": 91,
+    "text": "Tracewell ranks your logs by how unusual"
+   },
+   {
+    "width": 375,
+    "el": "div.term-bar",
+    "kind": "escapes viewport",
+    "px": 90,
+    "text": ""
+   },
+   {
+    "width": 375,
+    "el": "span",
+    "kind": "escapes viewport",
+    "px": 76,
+    "text": "sample session"
+   },
+   {
+    "width": 375,
+    "el": "span.l",
+    "kind": "escapes viewport",
+    "px": 72,
+    "text": "$ tracewell ingest"
+   },
+   {
+    "width": 375,
+    "el": "span.l.dim",
+    "kind": "escapes viewport",
+    "px": 72,
+    "text": "reading from files, Docker and Kubernete"
+   },
+   {
+    "width": 375,
+    "el": "span.l.dim",
+    "kind": "escapes viewport",
+    "px": 72,
+    "text": "streaming. 7 days of history kept for co"
+   },
+   {
+    "width": 375,
+    "el": "span.l",
+    "kind": "escapes viewport",
+    "px": 72,
+    "text": "$ tracewell why --since 15m"
+   },
+   {
+    "width": 375,
+    "el": "span.l.dim",
+    "kind": "escapes viewport",
+    "px": 72,
+    "text": "ranking lines against the last 7 days"
+   },
+   {
+    "width": 375,
+    "el": "span.l.hit",
+    "kind": "escapes viewport",
+    "px": 90,
+    "text": "1  ERROR payment-worker: timeout waiting"
+   }
+  ],
+  "words": [
+   {
+    "el": "div.price",
+    "text": "$12per seat per month",
+    "problem": "word \"$12per\" breaks across lines"
+   }
+  ],
+  "motion": [],
+  "names": []
+ }
+}

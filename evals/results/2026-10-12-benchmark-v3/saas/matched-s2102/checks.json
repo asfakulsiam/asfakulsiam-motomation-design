@@ -1,0 +1,213 @@
+{
+ "375": {
+  "pageHeight": 4650,
+  "errors": [],
+  "hOverflow": 65,
+  "axe": [
+   {
+    "id": "scrollable-region-focusable",
+    "impact": "serious",
+    "nodes": 1
+   }
+  ],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 3070,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 5,
+    "text": "Pricing",
+    "href": "#pricing",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "37/40"
+  },
+  "source": {
+   "bytes": 17568,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    310,
+    620,
+    930,
+    1240,
+    1550,
+    1860,
+    2170
+   ],
+   "maxScroll": 2170
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3070,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4650,
+  "errors": [],
+  "hOverflow": 65
+ },
+ "gate": {
+  "counts": {
+   "contrast": 4,
+   "overflow": 109,
+   "words": 2,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c4 o109 w2 rm0 a0 n0 · gate/2 · 5a9e74a0ad",
+  "critique": "C?[no-record] H2[375:3] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "code.c",
+    "text": "tracewell why --since 15m",
+    "ratio": 1.17,
+    "need": 4.5,
+    "fg": "#ece7d9",
+    "bg": "#fbf9f4",
+    "size": 13
+   },
+   {
+    "width": 375,
+    "el": "h3",
+    "text": "Team",
+    "ratio": 1.08,
+    "need": 4.5,
+    "fg": "#f3f0e8",
+    "bg": "#fbf9f4",
+    "size": 14
+   },
+   {
+    "width": 390,
+    "el": "code.c",
+    "text": "tracewell why --since 15m",
+    "ratio": 1.17,
+    "need": 4.5,
+    "fg": "#ece7d9",
+    "bg": "#fbf9f4",
+    "size": 13
+   },
+   {
+    "width": 390,
+    "el": "h3",
+    "text": "Team",
+    "ratio": 1.08,
+    "need": 4.5,
+    "fg": "#f3f0e8",
+    "bg": "#fbf9f4",
+    "size": 14
+   }
+  ],
+  "overflow": [
+   {
+    "width": 375,
+    "el": "page",
+    "kind": "horizontal scroll",
+    "px": 65
+   },
+   {
+    "width": 375,
+    "el": "nav",
+    "kind": "escapes viewport",
+    "px": 8,
+    "text": ""
+   },
+   {
+    "width": 375,
+    "el": "a",
+    "kind": "escapes viewport",
+    "px": 8,
+    "text": "Install"
+   },
+   {
+    "width": 375,
+    "el": "div",
+    "kind": "escapes viewport",
+    "px": 65,
+    "text": ""
+   },
+   {
+    "width": 375,
+    "el": "p.eyebrow",
+    "kind": "escapes viewport",
+    "px": 65,
+    "text": "CLI + web app for on-call engineers"
+   },
+   {
+    "width": 375,
+    "el": "h1",
+    "kind": "escapes viewport",
+    "px": 65,
+    "text": "From 4 million log lines to the one that"
+   },
+   {
+    "width": 375,
+    "el": "em",
+    "kind": "escapes viewport",
+    "px": 27,
+    "text": "the one that matters."
+   },
+   {
+    "width": 375,
+    "el": "p.lede",
+    "kind": "escapes viewport",
+    "px": 65,
+    "text": "Tracewell finds the one log line that ex"
+   },
+   {
+    "width": 375,
+    "el": "small",
+    "kind": "escapes viewport",
+    "px": 65,
+    "text": "Or use the install script."
+   },
+   {
+    "width": 375,
+    "el": "div",
+    "kind": "escapes viewport",
+    "px": 47,
+    "text": "03:00:00 INFO  worker: job dequeued"
+   },
+   {
+    "width": 375,
+    "el": "div",
+    "kind": "escapes viewport",
+    "px": 47,
+    "text": "03:00:02 INFO  api: request completed in"
+   },
+   {
+    "width": 375,
+    "el": "div",
+    "kind": "escapes viewport",
+    "px": 47,
+    "text": "03:00:04 INFO  worker: job dequeued"
+   }
+  ],
+  "words": [
+   {
+    "el": "h1",
+    "text": "From 4 million log lines to the one that matters",
+    "problem": "leaves the viewport by 65px"
+   },
+   {
+    "el": "p.price",
+    "text": "$12per seat per month",
+    "problem": "word \"$12per\" breaks across lines"
+   }
+  ],
+  "motion": [],
+  "names": []
+ }
+}

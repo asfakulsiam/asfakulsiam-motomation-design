@@ -1,0 +1,168 @@
+{
+ "375": {
+  "pageHeight": 5405,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 3045,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 8,
+    "text": "Add to cart",
+    "href": "",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 21855,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    306,
+    613,
+    919,
+    1226,
+    1532,
+    1839,
+    2145
+   ],
+   "maxScroll": 2145
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3045,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 5405,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 8,
+   "overflow": 0,
+   "words": 3,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c8 o0 w3 rm0 a0 n0 · gate/2 · 002f8b1a46",
+  "critique": "C?[no-record] H1[375:4] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V4[entrance-repeats:1]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "button#open.cartbtn",
+    "text": "Cart 0",
+    "ratio": 3.08,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#d47e29",
+    "size": 16
+   },
+   {
+    "width": 375,
+    "el": "span#count.n",
+    "text": "0",
+    "ratio": 1,
+    "need": 4.5,
+    "fg": "#221c17",
+    "bg": "#221c17",
+    "size": 12.8
+   },
+   {
+    "width": 390,
+    "el": "button#open.cartbtn",
+    "text": "Cart 0",
+    "ratio": 3.08,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#d47e29",
+    "size": 16
+   },
+   {
+    "width": 390,
+    "el": "span#count.n",
+    "text": "0",
+    "ratio": 1,
+    "need": 4.5,
+    "fg": "#221c17",
+    "bg": "#221c17",
+    "size": 12.8
+   },
+   {
+    "width": 768,
+    "el": "button#open.cartbtn",
+    "text": "Cart 0",
+    "ratio": 3.08,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#d47e29",
+    "size": 16
+   },
+   {
+    "width": 768,
+    "el": "span#count.n",
+    "text": "0",
+    "ratio": 1,
+    "need": 4.5,
+    "fg": "#221c17",
+    "bg": "#221c17",
+    "size": 12.8
+   },
+   {
+    "width": 1440,
+    "el": "button#open.cartbtn",
+    "text": "Cart 0",
+    "ratio": 3.08,
+    "need": 4.5,
+    "fg": "#ffffff",
+    "bg": "#d47e29",
+    "size": 16
+   },
+   {
+    "width": 1440,
+    "el": "span#count.n",
+    "text": "0",
+    "ratio": 1,
+    "need": 4.5,
+    "fg": "#221c17",
+    "bg": "#221c17",
+    "size": 12.8
+   }
+  ],
+  "overflow": [],
+  "words": [
+   {
+    "el": "div.big",
+    "text": "3days",
+    "problem": "word \"3days\" breaks across lines"
+   },
+   {
+    "el": "div.big",
+    "text": "36hours",
+    "problem": "word \"36hours\" breaks across lines"
+   },
+   {
+    "el": "div.big",
+    "text": "4days",
+    "problem": "word \"4days\" breaks across lines"
+   }
+  ],
+  "motion": [],
+  "names": []
+ }
+}

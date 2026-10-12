@@ -1,0 +1,92 @@
+{
+ "375": {
+  "pageHeight": 4773,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 4878,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 4,
+    "text": "দান / Donate",
+    "href": "#donate",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 17254,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    568,
+    1137,
+    1705,
+    2273,
+    2841,
+    3410,
+    3978
+   ],
+   "maxScroll": 3978
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 4878,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4773,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 2,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c2 o0 w0 rm0 a0 n0 · gate/2 · 61c621aa44",
+  "critique": "C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0]",
+  "contrast": [
+   {
+    "width": 768,
+    "el": "a.btn.alt",
+    "text": "Volunteer this season",
+    "ratio": 1.37,
+    "need": 4.5,
+    "fg": "#10332e",
+    "bg": "#1a4a42",
+    "size": 16
+   },
+   {
+    "width": 1440,
+    "el": "a.btn.alt",
+    "text": "Volunteer this season",
+    "ratio": 1.37,
+    "need": 4.5,
+    "fg": "#10332e",
+    "bg": "#1a4a42",
+    "size": 16
+   }
+  ],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

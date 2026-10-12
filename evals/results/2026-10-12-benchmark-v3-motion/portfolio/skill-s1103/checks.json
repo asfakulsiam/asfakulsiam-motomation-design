@@ -1,0 +1,71 @@
+{
+ "375": {
+  "pageHeight": 4691,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 5576,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 2,
+    "text": "HIRE FOR TITLES",
+    "href": "#contact",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "30/40"
+  },
+  "source": {
+   "bytes": 13579,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": "motomation · archetype: film-reel · mutation: no nav · signature: projector-lamp · tier: 4 · critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp37] R5[cuts:3,anim:2] M5[t4:pins1/2,webgl1/1,js49/250KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 4db2f38"
+  },
+  "strip": {
+   "frames": [
+    0,
+    668,
+    1336,
+    2004,
+    2672,
+    3340,
+    4008,
+    4676
+   ],
+   "maxScroll": 4676
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 5396,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4691,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 0,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 4db2f387a6",
+  "critique": "C?[no-record] H5[375:0] S5[last5:no-log] R?[no-record] M5[t4:pins1/2,webgl1/1,js49/250KB,rm0] V5[entrance-repeats:0]",
+  "contrast": [],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

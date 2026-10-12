@@ -1,0 +1,112 @@
+{
+ "375": {
+  "pageHeight": 3322,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 3050,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 7,
+    "text": "Add to cart",
+    "href": "",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 24694,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    307,
+    614,
+    921,
+    1229,
+    1536,
+    1843,
+    2150
+   ],
+   "maxScroll": 2150
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 3050,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 3322,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 4,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c4 o0 w0 rm0 a0 n0 · gate/2 · 415cab749a",
+  "critique": "C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V3[entrance-repeats:2]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "button#open.cartbtn",
+    "text": "Cart 00 items",
+    "ratio": 1.06,
+    "need": 4.5,
+    "fg": "#f7f3ea",
+    "bg": "#f0ece3",
+    "size": 16
+   },
+   {
+    "width": 390,
+    "el": "button#open.cartbtn",
+    "text": "Cart 00 items",
+    "ratio": 1.06,
+    "need": 4.5,
+    "fg": "#f7f3ea",
+    "bg": "#f0ece3",
+    "size": 16
+   },
+   {
+    "width": 768,
+    "el": "button#open.cartbtn",
+    "text": "Cart 00 items",
+    "ratio": 1.06,
+    "need": 4.5,
+    "fg": "#f7f3ea",
+    "bg": "#f0ece3",
+    "size": 16
+   },
+   {
+    "width": 1440,
+    "el": "button#open.cartbtn",
+    "text": "Cart 00 items",
+    "ratio": 1.06,
+    "need": 4.5,
+    "fg": "#f7f3ea",
+    "bg": "#f0ece3",
+    "size": 16
+   }
+  ],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}

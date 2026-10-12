@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ittaghor Studio, architects in Dhaka</title>
+<meta name="description" content="Houses built around light, brick and an open courtyard. Architecture practice in Dhaka, founded 2011.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --plaster:#DEDDD5; --paper:#EDECE6; --brick:#8A3324; --ink:#2A1713; --light:#F0C24B; --neem:#44603F;
+  --line:rgba(42,23,19,.28);
+  --display:"Familjen Grotesk",system-ui,sans-serif; --text:"Literata",Georgia,serif;
+  --pad:clamp(20px,5vw,72px);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--plaster);color:var(--ink);font-family:var(--text);font-size:1.0625rem;line-height:1.65}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--brick);outline-offset:3px}
+.skip{position:absolute;left:12px;top:-60px;background:var(--ink);color:var(--paper);padding:10px 14px;z-index:9}
+.skip:focus{top:12px}
+h1,h2,h3{font-family:var(--display);line-height:1.02;letter-spacing:-.02em;font-weight:600}
+header.bar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;padding:18px var(--pad);font-family:var(--display);font-weight:600}
+header.bar nav{display:flex;gap:22px}
+header.bar a{text-decoration:none;padding:4px 0;border-bottom:2px solid transparent}
+header.bar a:hover{border-color:var(--brick)}
+section{padding:clamp(56px,9vw,120px) var(--pad)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,5vw,72px);align-items:center;padding-top:clamp(24px,4vw,48px)}
+.hero h1{font-size:clamp(2.6rem,6.4vw,6rem);font-weight:700}
+.hero p.lede{margin-top:24px;max-width:34ch;font-size:1.2rem}
+.hero .by{margin-top:32px;font-size:.95rem;max-width:44ch}
+.court{background:var(--paper);padding:clamp(12px,2vw,24px);border:2px solid var(--ink)}
+.court svg{display:block;width:100%;height:auto}
+.sun{display:flex;align-items:center;gap:14px;margin-top:14px;font-family:var(--display);font-weight:600;flex-wrap:wrap}
+.sun input{flex:1;min-width:160px;accent-color:var(--brick);height:32px}
+.sun output{min-width:5ch}
+.hint{font-size:.85rem;margin-top:4px;font-weight:400;font-family:var(--text)}
+
+/* projects */
+.projects h2,.studio h2,.process h2,.contact h2{font-size:clamp(2rem,4.5vw,3.6rem);max-width:16ch}
+.proj{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px;padding:clamp(32px,5vw,64px) 0;border-top:2px solid var(--ink);align-items:end}
+.projects .proj:first-of-type{margin-top:48px}
+.proj .info{grid-column:1/5;align-self:start}
+.proj h3{font-size:clamp(1.7rem,3vw,2.6rem)}
+.proj .meta{font-family:var(--display);font-weight:500;margin-top:8px;color:var(--brick)}
+.proj p{margin-top:14px;max-width:30ch}
+.proj .img{grid-column:5/10}
+.proj .plan{grid-column:10/13}
+.proj figure{background:var(--paper);border:1px solid var(--line)}
+.proj figure svg{display:block;width:100%;height:auto}
+.proj figcaption{font-size:.85rem;padding:8px 10px;border-top:1px solid var(--line)}
+.proj:nth-of-type(even) .info{grid-column:9/13;grid-row:1}
+.proj:nth-of-type(even) .img{grid-column:1/6;grid-row:1}
+.proj:nth-of-type(even) .plan{grid-column:6/9;grid-row:1}
+.pl *{vector-effect:non-scaling-stroke}
+
+/* studio */
+.studio{background:var(--ink);color:var(--paper)}
+.studio .cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,80px);margin-top:36px}
+.studio p{max-width:46ch}
+.partners{list-style:none;padding:0;font-family:var(--display);font-size:clamp(1.5rem,3vw,2.4rem);font-weight:600;line-height:1.3}
+.partners li{border-bottom:1px solid rgba(237,236,230,.3);padding:10px 0}
+.studio .small{font-size:.95rem;margin-top:20px}
+
+/* process */
+.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;counter-reset:s}
+.steps li{counter-increment:s;padding:20px 20px 0 0;border-top:2px solid var(--ink);position:relative}
+.steps li::before{content:counter(s);display:block;font-family:var(--display);font-weight:700;font-size:3.4rem;color:var(--brick);line-height:1}
+.steps h3{font-size:1.6rem;margin-top:10px}
+
+/* contact */
+.contact{background:var(--brick);color:var(--paper)}
+.contact a.mail{display:inline-block;margin-top:28px;font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,5.2vw,4rem);letter-spacing:-.02em;text-decoration-thickness:3px;text-underline-offset:8px;overflow-wrap:anywhere}
+.contact :focus-visible{outline-color:var(--light)}
+footer{padding:20px var(--pad);font-size:.9rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr}
+  .proj{grid-template-columns:1fr 1fr}
+  .proj .info,.proj:nth-of-type(even) .info{grid-column:1/-1;grid-row:auto}
+  .proj .img,.proj:nth-of-type(even) .img{grid-column:1/-1;grid-row:auto}
+  .proj .plan,.proj:nth-of-type(even) .plan{grid-column:1/-1;grid-row:auto;max-width:360px}
+  .studio .cols{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr;row-gap:32px}
+}
+@media (max-width:480px){.steps{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#projects">Skip to projects</a>
+<header class="bar">
+  <a href="#top" id="top">Ittaghor Studio</a>
+  <nav aria-label="Main"><a href="#projects">Projects</a><a href="#studio">Studio</a><a href="#process">Process</a><a href="#contact">Contact</a></nav>
+</header>
+<main>
+<section class="hero" aria-labelledby="h1">
+  <div>
+    <h1 id="h1">Houses built around light, brick and an open courtyard.</h1>
+    <p class="lede">Ittaghor Studio is an architecture practice in Dhaka.</p>
+    <p class="by">Nusrat Jahan, Tanvir Ahmed and Farhan Kabir, working together since 2011.</p>
+  </div>
+  <div>
+    <div class="court">
+      <svg id="heroPlan" viewBox="0 0 600 600" role="img" aria-label="Plan of a courtyard house. A neem tree stands in the open courtyard and the wall shadow moves with the sun slider.">
+        <defs><clipPath id="cc"><rect x="190" y="190" width="220" height="220"/></clipPath>
+        <pattern id="brk" width="24" height="12" patternUnits="userSpaceOnUse"><rect width="24" height="12" fill="#8A3324"/><path d="M0 .5H24M0 6.5H24M6 0V6M18 6V12" stroke="#EDECE6" stroke-opacity=".35" stroke-width="1"/></pattern></defs>
+        <rect x="190" y="190" width="220" height="220" fill="#F0C24B"/>
+        <g clip-path="url(#cc)"><rect id="shade" x="190" y="190" width="0" height="220" fill="#2A1713" opacity=".55"/></g>
+        <circle cx="300" cy="300" r="40" fill="#44603F"/><circle cx="300" cy="300" r="6" fill="#2A1713"/>
+        <g fill="none" stroke="#2A1713" stroke-width="2.5" class="draw">
+          <rect x="40" y="40" width="520" height="520"/>
+          <rect x="190" y="190" width="220" height="220"/>
+          <path d="M40 190H190M410 190H560M40 410H190M410 410H560M190 40V190M410 40V190M190 410V560M410 410V560"/>
+          <path d="M250 560v-30M350 560v-30M40 300h-0" />
+        </g>
+        <rect x="40" y="40" width="520" height="14" fill="url(#brk)"/><rect x="40" y="546" width="520" height="14" fill="url(#brk)"/>
+        <rect x="40" y="40" width="14" height="520" fill="url(#brk)"/><rect x="546" y="40" width="14" height="520" fill="url(#brk)"/>
+        <rect x="250" y="190" width="100" height="0" />
+      </svg>
+    </div>
+    <div class="sun"><label for="hr">Sun position</label><input id="hr" type="range" min="7" max="17" step="0.25" value="9"><output id="hrOut" for="hr">9 am</output></div>
+    <p class="hint">Drag, or use the arrow keys, to move the sun across the courtyard.</p>
+  </div>
+</section>
+
+<section class="projects" id="projects" aria-labelledby="ph">
+  <h2 id="ph">Five houses</h2>
+  <div id="list"></div>
+</section>
+
+<section class="studio" id="studio" aria-labelledby="sh">
+  <h2 id="sh">A three-partner practice</h2>
+  <div class="cols">
+    <div>
+      <p>Ittaghor Studio was founded in Dhaka in 2011. We are known for brick and courtyard houses.</p>
+      <p class="small">Every house starts from the same question: where does the light come in, and what does the brick do with it?</p>
+    </div>
+    <ul class="partners"><li>Nusrat Jahan</li><li>Tanvir Ahmed</li><li>Farhan Kabir</li></ul>
+  </div>
+</section>
+
+<section class="process" id="process" aria-labelledby="prh">
+  <h2 id="prh">How a house gets built</h2>
+  <ol class="steps">
+    <li><h3>Site visit</h3></li>
+    <li><h3>Sketch</h3></li>
+    <li><h3>Brick sample</h3></li>
+    <li><h3>Build</h3></li>
+  </ol>
+</section>
+
+<section class="contact" id="contact" aria-labelledby="ch">
+  <h2 id="ch">Tell us about your site</h2>
+  <a class="mail" href="mailto:studio@ittaghor.studio">studio@ittaghor.studio</a>
+</section>
+</main>
+<footer><span>Ittaghor Studio, Dhaka</span><span>Founded 2011</span></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  var B='#8A3324',I='#2A1713',L='#F0C24B',G='#44603F',P='#EDECE6';
+  var brick='<pattern id="bk{n}" width="16" height="8" patternUnits="userSpaceOnUse"><rect width="16" height="8" fill="'+B+'"/><path d="M0 .5H16M0 4.5H16M4 0V4M12 4V8" stroke="'+P+'" stroke-opacity=".35"/></pattern>';
+  var D=[
+   {n:'Courtyard House',pl:'Bashundhara, Dhaka',y:2019,t:'A family home wrapped around a single neem tree.',
+    img:'<rect width="300" height="200" fill="#C9D3D6"/><rect x="0" y="150" width="300" height="50" fill="#B9B4A6"/><rect x="20" y="70" width="80" height="85" fill="url(#bk{n})"/><rect x="200" y="70" width="80" height="85" fill="url(#bk{n})"/><rect x="100" y="150" width="100" height="6" fill="'+I+'"/><rect x="100" y="70" width="100" height="0" fill="none"/><path d="M148 156V105" stroke="'+I+'" stroke-width="6"/><circle cx="148" cy="85" r="34" fill="'+G+'"/><circle cx="130" cy="98" r="20" fill="'+G+'"/><circle cx="168" cy="98" r="20" fill="'+G+'"/>',
+    plan:'<rect x="10" y="10" width="180" height="180"/><rect x="60" y="60" width="80" height="80"/><circle cx="100" cy="100" r="17" fill="'+G+'" fill-opacity=".6"/><path d="M10 60H60M140 60H190M10 140H60M140 140H190M60 10V60M140 10V60M60 140V190M140 140V190"/>'},
+   {n:'Jali House',pl:'Rajshahi',y:2021,t:'Perforated brick screens that cool the rooms by shading them.',
+    img:'<rect width="300" height="200" fill="url(#bk{n})"/><g fill="'+L+'">'+(function(){var s='';for(var r=0;r<5;r++)for(var c=0;c<10;c++){var x=26+c*26+(r%2?13:0),y=30+r*30;if(x<280)s+='<path d="M'+x+' '+(y-9)+'L'+(x+9)+' '+y+'L'+x+' '+(y+9)+'L'+(x-9)+' '+y+'Z"/>';}return s})()+'</g>',
+    plan:'<rect x="10" y="40" width="180" height="120"/><path d="M10 100H110M110 40V100"/><path d="M10 160H190" stroke-width="7" stroke-dasharray="3 5"/><path d="M10 40H190" stroke-width="7" stroke-dasharray="3 5"/>'},
+   {n:'River Room',pl:'Sirajganj',y:2022,t:'A weekend house raised above the monsoon line.',
+    img:'<rect width="300" height="200" fill="#C9D3D6"/><rect y="130" width="300" height="70" fill="#6F8F96"/><g stroke="#EDECE6" stroke-width="2" opacity=".7"><path d="M10 150H120M160 165H290M40 182H180"/></g><rect x="60" y="50" width="180" height="50" fill="url(#bk{n})"/><path d="M50 50H250L240 38H60Z" fill="'+I+'"/><g fill="'+I+'"><rect x="72" y="100" width="7" height="90"/><rect x="130" y="100" width="7" height="90"/><rect x="190" y="100" width="7" height="90"/><rect x="222" y="100" width="7" height="90"/></g><path d="M0 100H300" stroke="'+B+'" stroke-dasharray="4 4" opacity=".0"/>',
+    plan:'<rect x="30" y="50" width="140" height="100"/><path d="M110 50V150"/><path d="M170 130h20v0M170 100h20" /><g fill="'+I+'"><circle cx="30" cy="50" r="5"/><circle cx="100" cy="50" r="5"/><circle cx="170" cy="50" r="5"/><circle cx="30" cy="150" r="5"/><circle cx="100" cy="150" r="5"/><circle cx="170" cy="150" r="5"/></g><path d="M170 80h24M170 90h24M170 100h24M170 110h24"/>'},
+   {n:'Brick Library',pl:'Khulna',y:2023,t:'A school library lit only from above.',
+    img:'<rect width="300" height="200" fill="'+I+'"/><rect x="30" y="0" width="240" height="200" fill="url(#bk{n})"/><path d="M60 0H100L150 200H40Z" fill="'+L+'" opacity=".55"/><path d="M170 0H210L270 200H160Z" fill="'+L+'" opacity=".4"/><rect x="0" y="170" width="300" height="30" fill="'+I+'"/>',
+    plan:'<rect x="10" y="30" width="180" height="140"/><g stroke-dasharray="5 4" fill="'+L+'" fill-opacity=".6"><rect x="30" y="50" width="40" height="40"/><rect x="80" y="50" width="40" height="40"/><rect x="130" y="50" width="40" height="40"/><rect x="30" y="110" width="40" height="40"/><rect x="80" y="110" width="40" height="40"/><rect x="130" y="110" width="40" height="40"/></g>'},
+   {n:'Twin Courts',pl:'Chattogram',y:2024,t:'Two households, two courtyards, one shared wall.',
+    img:'<rect width="300" height="200" fill="#C9D3D6"/><rect y="150" width="300" height="50" fill="#B9B4A6"/><rect x="20" y="70" width="110" height="80" fill="url(#bk{n})"/><rect x="170" y="70" width="110" height="80" fill="url(#bk{n})"/><rect x="132" y="50" width="36" height="105" fill="'+I+'"/><rect x="48" y="100" width="54" height="50" fill="'+L+'"/><rect x="198" y="100" width="54" height="50" fill="'+L+'"/>',
+    plan:'<rect x="10" y="40" width="85" height="120"/><rect x="105" y="40" width="85" height="120"/><rect x="28" y="70" width="50" height="50" fill="'+L+'" fill-opacity=".6"/><rect x="122" y="70" width="50" height="50" fill="'+L+'" fill-opacity=".6"/><path d="M100 30V170" stroke-width="7"/>'}
+  ];
+  var list=document.getElementById('list'),h='';
+  D.forEach(function(d,i){
+    h+='<article class="proj" aria-labelledby="p'+i+'"><div class="info"><h3 id="p'+i+'">'+d.n+'</h3><p class="meta">'+d.pl+', '+d.y+'</p><p>'+d.t+'</p></div>'+
+    '<figure class="img"><svg viewBox="0 0 300 200" role="img" aria-label="Illustration of '+d.n+'"><defs>'+brick.replace(/\{n\}/g,i)+'</defs>'+d.img.replace(/\{n\}/g,i)+'</svg><figcaption>Image</figcaption></figure>'+
+    '<figure class="plan"><svg class="pl" viewBox="0 0 200 200" role="img" aria-label="Plan of '+d.n+'"><g fill="none" stroke="'+I+'" stroke-width="2.5">'+d.plan+'</g></svg><figcaption>Plan</figcaption></figure></article>';
+  });
+  list.innerHTML=h;
+
+  var hr=document.getElementById('hr'),out=document.getElementById('hrOut'),sh=document.getElementById('shade');
+  function sun(){
+    var v=parseFloat(hr.value),k=(v-12)/5,w=Math.abs(k)*190;
+    sh.setAttribute('width',w);sh.setAttribute('x',k<0?190:410-w);
+    var hh=Math.floor(v),m=Math.round((v-hh)*60),ap=hh>=12?'pm':'am',h12=hh>12?hh-12:hh;
+    out.textContent=h12+(m?':'+(m<10?'0':'')+m:'')+' '+ap;
+  }
+  hr.addEventListener('input',sun);sun();
+
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce&&window.gsap){
+    gsap.registerPlugin(window.ScrollTrigger);
+    document.querySelectorAll('.draw>*').forEach(function(p){
+      var l=p.getTotalLength?p.getTotalLength():0;if(!l)return;
+      gsap.fromTo(p,{strokeDasharray:l,strokeDashoffset:l},{strokeDashoffset:0,duration:1.6,ease:'power2.out',delay:.2});
+    });
+    document.querySelectorAll('.pl g>*').forEach(function(p){
+      if(!p.getTotalLength||p.hasAttribute('stroke-dasharray'))return;var l=p.getTotalLength();if(!l)return;
+      gsap.fromTo(p,{strokeDasharray:l,strokeDashoffset:l},{strokeDashoffset:0,duration:1.2,ease:'power2.out',
+        scrollTrigger:{trigger:p.closest('article'),start:'top 75%',once:true},
+        onComplete:function(){p.style.strokeDasharray='none'}});
+    });
+  }
+})();
+</script>
+</body>
+</html>

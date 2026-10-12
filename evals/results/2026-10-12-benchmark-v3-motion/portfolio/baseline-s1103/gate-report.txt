@@ -1,0 +1,18 @@
+DELIVERY GATE · /home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-motion/portfolio/baseline-s1103/index.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (25 measured; 1 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (25 measured; 1 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (20 measured; 6 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (24 measured; 2 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (10 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (26 compared)
+  names     ✓ 0 missing alt / accessible names  (3 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (4 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  hierarchy  h1×1, 0 skipped heading levels, 3 element(s) tied for largest on the first 375px screen
+  structure  6 sections, entrances: static | y | fade+y | static | fade+y | static → 1 repeat(s); pins 1, WebGL canvases 0, JS 47KB gzipped
+  records    DESIGN.md: none · memory log: /home/user/workspace/repo/.motomation/log.json · stamp fields: {"tier":"4"}
+  critique → C?[no-record] H4[375:1] S?[no-archetype-in-stamp] R?[no-record] M5[t4:pins1/2,webgl0/1,js47/250KB,rm0] V4[entrance-repeats:1]   (axes marked ? have no record to derive from)
+  PASS  stamp → critique: C?[no-record] H4[375:1] S?[no-archetype-in-stamp] R?[no-record] M5[t4:pins1/2,webgl0/1,js47/250KB,rm0] V4[entrance-repeats:1] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 1ed5c5215f
+
+motion report → /home/user/workspace/repo/evals/results/2026-10-12-benchmark-v3-motion/portfolio/baseline-s1103/motion-report.html (24 frames, 831 KB)

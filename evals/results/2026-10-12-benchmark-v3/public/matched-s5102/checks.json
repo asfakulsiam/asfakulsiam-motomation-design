@@ -1,0 +1,112 @@
+{
+ "375": {
+  "pageHeight": 4841,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0
+ },
+ "1440": {
+  "pageHeight": 4431,
+  "errors": [],
+  "hOverflow": 0,
+  "axe": [],
+  "contrastViolations": 0,
+  "keyboard": {
+   "primaryReached": {
+    "step": 4,
+    "text": "Donate",
+    "href": "#donate",
+    "ring": true
+   },
+   "focusStepsWithVisibleRing": "38/40"
+  },
+  "source": {
+   "bytes": 24215,
+   "reducedMotionQuery": true,
+   "placeholders": 0,
+   "stamp": ""
+  },
+  "strip": {
+   "frames": [
+    0,
+    504,
+    1009,
+    1513,
+    2018,
+    2522,
+    3027,
+    3531
+   ],
+   "maxScroll": 3531
+  }
+ },
+ "1440-reduced": {
+  "pageHeight": 4431,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "375-reduced": {
+  "pageHeight": 4841,
+  "errors": [],
+  "hOverflow": 0
+ },
+ "gate": {
+  "counts": {
+   "contrast": 4,
+   "overflow": 0,
+   "words": 0,
+   "motion": 0,
+   "names": 0,
+   "numbers": 0
+  },
+  "stamp": "gate: c4 o0 w0 rm0 a0 n0 · gate/2 · d824a2d1f3",
+  "critique": "C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0]",
+  "contrast": [
+   {
+    "width": 375,
+    "el": "a.logo",
+    "text": "Sundari Trust",
+    "ratio": 1,
+    "need": 4.5,
+    "fg": "#10291f",
+    "bg": "#10291f",
+    "size": 20
+   },
+   {
+    "width": 390,
+    "el": "a.logo",
+    "text": "Sundari Trust",
+    "ratio": 1,
+    "need": 4.5,
+    "fg": "#10291f",
+    "bg": "#10291f",
+    "size": 20
+   },
+   {
+    "width": 768,
+    "el": "a.logo",
+    "text": "Sundari Trust",
+    "ratio": 1,
+    "need": 4.5,
+    "fg": "#10291f",
+    "bg": "#10291f",
+    "size": 20
+   },
+   {
+    "width": 1440,
+    "el": "a.logo",
+    "text": "Sundari Trust",
+    "ratio": 1,
+    "need": 4.5,
+    "fg": "#10291f",
+    "bg": "#10291f",
+    "size": 20
+   }
+  ],
+  "overflow": [],
+  "words": [],
+  "motion": [],
+  "names": []
+ }
+}
