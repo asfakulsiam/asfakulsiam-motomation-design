@@ -9,6 +9,13 @@
 //   --arms baseline,gated,skill   third arm "gated": the baseline prompt + scripts/gate.mjs (tool only, no skill docs)
 //   --pairs baseline:skill,gated:skill,baseline:gated   which pairs judge/score compare (default baseline:skill)
 //   --only portfolio,launch,festival --tier 4|5          the motion-heavy briefs at a forced tier
+//   --n 6   (v2.5.0) six seeds per brief for the five main briefs; seeds 4-6 were added for the extended matched-effort
+//           arm (benchmark v4, 30 pairs). The first three seeds are v3's, so --n 3 reproduces v3's run list.
+//   matched arm (v2.5.0): the turn budget is enforced, per pair. Budget = the turns the skill run of the same brief and
+//           seed used (skill-s<seed>/run.json; generate the skill arm first), else --match-turns. Claude Code gets
+//           --max-turns <budget> as a hard cap; if it stops before 90% of the budget, the same session is resumed
+//           (--resume <session>) with a "look, critique, revise" turn until it reaches 90% or 4 resumes. run.json
+//           records { effort: { budget, used, resumes, floor, enforced } }. The raw-API agent gets the same cap and floor.
 //
 // generate: each run gets a fresh folder. Skill runs get the skill copied into .claude/skills/ (how Claude Code installs
 // project skills) and are asked to use it with a per-brief seed for the collision engine. Baseline runs get the same
@@ -27,11 +34,11 @@ const ROOT = resolve(dirname(new URL(import.meta.url).pathname), "..");
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");
 export const generatorBrief = (slug) => readFileSync(join(ROOT, "evals/briefs", BRIEFS[slug].file), "utf8").replace(/^\*\*Expect:\*\*.*$\n?/m, "").trimEnd() + "\n";
 export const BRIEFS = {
-  studio: { file: "07-architecture-studio.md", seeds: [7101, 7102, 7103], primary: /contact|enquir|email|studio@/i },
-  hotel: { file: "04-boutique-hotel.md", seeds: [4101, 4102, 4103], primary: /availab|book/i },
-  ecommerce: { file: "03-ceramics-shop.md", seeds: [3101, 3102, 3103], primary: /\badd\b|buy/i },
-  saas: { file: "02-dev-tool-landing.md", seeds: [2101, 2102, 2103], primary: /install|get started|start free|try|pricing/i },
-  public: { file: "05-climate-nonprofit.md", seeds: [5101, 5102, 5103], primary: /donat|দান/i },
+  studio: { file: "07-architecture-studio.md", seeds: [7101, 7102, 7103, 7104, 7105, 7106], primary: /contact|enquir|email|studio@/i },
+  hotel: { file: "04-boutique-hotel.md", seeds: [4101, 4102, 4103, 4104, 4105, 4106], primary: /availab|book/i },
+  ecommerce: { file: "03-ceramics-shop.md", seeds: [3101, 3102, 3103, 3104, 3105, 3106], primary: /\badd\b|buy/i },
+  saas: { file: "02-dev-tool-landing.md", seeds: [2101, 2102, 2103, 2104, 2105, 2106], primary: /install|get started|start free|try|pricing/i },
+  public: { file: "05-climate-nonprofit.md", seeds: [5101, 5102, 5103, 5104, 5105, 5106], primary: /donat|দান/i },
   // motion-heavy briefs, run with --tier 4 or 5 (never run before v2.2.0)
   portfolio: { file: "01-motion-designer-portfolio.md", seeds: [1101, 1102, 1103], primary: /contact|email|mailto|hire/i, motion: true },
   launch: { file: "06-product-launch.md", seeds: [6101, 6102, 6103], primary: /pre-?order|buy|reserve/i, motion: true },
@@ -52,11 +59,18 @@ export const ARMS = ["baseline", "matched", "gated", "skill"];
 export const COMPETITORS = Object.fromEntries(String(flags.competitors || "").split(",").filter(Boolean).map((x) => { const [k, v] = x.split("="); const i = v.lastIndexOf(":"); return [`c-${k}`, { dir: v.slice(0, i), name: v.slice(i + 1) }]; }));
 const arms = String(flags.arms || "baseline,skill").split(",").filter((a) => ARMS.includes(a) || COMPETITORS[a]);
 const TIER = flags.tier !== undefined ? +flags.tier : null; // force a motion tier (all arms are told the same tier)
-const MATCH_TURNS = +(flags["match-turns"] || 24); // matched arm: the skill arm's median turn count, passed in after the skill arm has run
+const MATCH_TURNS = +(flags["match-turns"] || 24); // matched arm fallback budget, when the paired skill run has no run.json
+// matched arm (v2.5.0): the budget is the paired skill run's turn count (same brief, same seed), enforced as a cap and a floor
+export function matchBudget(r) {
+  try { const t = JSON.parse(readFileSync(join(OUT, r.slug, `skill-s${r.seed}`, "run.json"), "utf8")).turns; if (t > 0) return { budget: t, from: `skill-s${r.seed}/run.json` }; } catch {}
+  return { budget: MATCH_TURNS, from: "--match-turns" };
+}
+const FLOOR = 0.9, MAX_RESUMES = 4;
+const CONTINUE = (used, budget) => `You have used ${used} of your ${budget} turns; keep working, the budget is there to be used. Look at index.html again at 1440px and 375px, write a short critique of what is still weak, generic or broken (concept, type, layout, motion, contrast, keyboard, reduced motion), and revise the file. Stop only when the critique finds nothing worth fixing.`;
 const runs = () => only.flatMap((slug) => BRIEFS[slug].seeds.slice(0, N).flatMap((seed) => arms.map((cond) => ({ slug, seed, cond, dir: join(OUT, slug, `${cond}-s${seed}`) }))));
 
 const TASK = "Build the website described in the brief below as a single self-contained index.html in the current folder (inline CSS and JS, no build step; Google Fonts/Fontshare and the GSAP CDN are allowed, no image URLs). Use only facts from the brief.";
-export function promptFor({ slug, seed, cond }) {
+export function promptFor({ slug, seed, cond, budget }) {
   // The **Expect:** line is the evaluator's note, not part of the client's brief. Before v2.4.0 it was sent to the
   // agent too ("Console or Workbench thinking", "a signature tied to doors"), which steered every arm toward the
   // same archetype and signature: the cause of the v2 SaaS console collision. Generators never see it now.
@@ -66,7 +80,7 @@ export function promptFor({ slug, seed, cond }) {
   if (cond === "baseline") return `You are an expert web designer and front-end developer. ${TASK}${tier} Check your work before you finish.\n\n${brief}`;
   // matched = the baseline prompt with the skill arm's effort: the same turn budget, told to plan, look, critique and revise.
   // If the skill only wins because it works longer, this arm closes the gap (v2.4.0, benchmark v3).
-  if (cond === "matched") return `You are an expert web designer and front-end developer. ${TASK}${tier} Take the time a careful designer would: you have about ${MATCH_TURNS} turns, and you should use most of them. Work in stages: (1) write down the concept and the design system (type, colour, layout, motion) before any code; (2) build; (3) look at the page at 1440px and 375px; (4) write a critique of what is weak, generic or broken; (5) revise; repeat looking, critiquing and revising at least twice. Check accessibility (contrast, keyboard, reduced motion) yourself before you finish.\n\n${brief}`;
+  if (cond === "matched") return `You are an expert web designer and front-end developer. ${TASK}${tier} Take the time a careful designer would: you have ${budget ?? MATCH_TURNS} turns, and you should use most of them. Work in stages: (1) write down the concept and the design system (type, colour, layout, motion) before any code; (2) build; (3) look at the page at 1440px and 375px; (4) write a critique of what is weak, generic or broken; (5) revise; repeat looking, critiquing and revising at least twice. Check accessibility (contrast, keyboard, reduced motion) yourself before you finish.\n\n${brief}`;
   // gated = the baseline prompt plus the same measured gate the skill uses, without any of the skill's knowledge
   if (cond === "gated") return `You are an expert web designer and front-end developer. ${TASK}${tier} Before you finish, run \`node gate/gate.mjs index.html\` and fix every failure it reports until it prints PASS (if it prints "not verified", say so).\n\n${brief}`;
   return `Use the asfakulsiam-motomation-design skill: /build this brief. When you run the collision engine, use --seed ${seed}.${tier ? ` Force the motion tier: --tier=${TIER}.` : ""} ${TASK} Follow the skill end to end, including its Delivery Gate, and finish with the handoff.\n\n${brief}`;
@@ -85,7 +99,9 @@ function runCodex(r) {
     if (r.cond === "gated") { mkdirSync(join(r.dir, "gate")); for (const f of ["gate.mjs", "memory.mjs", "lib.mjs"]) cpSync(join(SKILL, "scripts", f), join(r.dir, "gate", f)); }
     if (COMPETITORS[r.cond]) cpSync(COMPETITORS[r.cond].dir, join(r.dir, ".agents/skills", COMPETITORS[r.cond].name), { recursive: true });
     const prompt = promptFor(r); writeFileSync(join(r.dir, "prompt.txt"), prompt);
-    const t0 = Date.now(); const env = { ...process.env, ...(flags["codex-home"] ? { CODEX_HOME: flags["codex-home"] } : {}) };
+    // MOTOMATION_SANDBOX tells gate.mjs it runs inside Codex's sandbox, so it reports the machine it found and retries in
+    // its light footprint if Chromium fails (v2.5.0, task A3). Nothing else about the run changes.
+    const t0 = Date.now(); const env = { ...process.env, MOTOMATION_SANDBOX: "codex", ...(flags["codex-home"] ? { CODEX_HOME: flags["codex-home"] } : {}) };
     const p = spawn(flags.codex || "codex", ["exec", "--skip-git-repo-check", "--sandbox", "danger-full-access", "--json", "-C", r.dir, prompt], { cwd: r.dir, env, stdio: ["ignore", "pipe", "pipe"] });
     const chunks = []; p.stdout.on("data", (d) => chunks.push(d)); let err = ""; p.stderr.on("data", (d) => (err += d));
     const kill = setTimeout(() => p.kill("SIGTERM"), +(flags.timeout || 3000) * 1000);
@@ -107,21 +123,42 @@ function runAgent(r) {
     if (r.cond === "skill") cpSync(SKILL, join(r.dir, ".claude/skills/asfakulsiam-motomation-design"), { recursive: true });
     if (r.cond === "gated") { mkdirSync(join(r.dir, "gate")); for (const f of ["gate.mjs", "memory.mjs", "lib.mjs"]) cpSync(join(SKILL, "scripts", f), join(r.dir, "gate", f)); } // the tool, not the docs
     if (COMPETITORS[r.cond]) cpSync(COMPETITORS[r.cond].dir, join(r.dir, ".claude/skills", COMPETITORS[r.cond].name), { recursive: true });
+    const eff = r.cond === "matched" ? matchBudget(r) : null; if (eff) r = { ...r, budget: eff.budget };
     const prompt = promptFor(r); writeFileSync(join(r.dir, "prompt.txt"), prompt);
     const t0 = Date.now();
-    const p = spawn(flags.claude || "claude", ["-p", prompt, "--output-format", "stream-json", "--verbose", "--max-turns", String(flags["max-turns"] || 80), "--permission-mode", "acceptEdits", "--allowedTools", ...ALLOWED, ...(COMPETITORS[r.cond] ? ["Bash(python3:*)"] : [])], // ui-ux-pro-max searches its data with python3
+    const p = spawn(flags.claude || "claude", ["-p", prompt, "--output-format", "stream-json", "--verbose", "--max-turns", String(eff ? eff.budget : flags["max-turns"] || 80), "--permission-mode", "acceptEdits", "--allowedTools", ...ALLOWED, ...(COMPETITORS[r.cond] ? ["Bash(python3:*)"] : [])], // ui-ux-pro-max searches its data with python3
       { cwd: r.dir, env: { ...process.env, CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC: "1", DISABLE_TELEMETRY: "1" }, stdio: ["ignore", "pipe", "pipe"] });
     const chunks = []; p.stdout.on("data", (d) => chunks.push(d)); let err = ""; p.stderr.on("data", (d) => (err += d));
     const kill = setTimeout(() => p.kill("SIGTERM"), +(flags.timeout || 3000) * 1000);
-    p.on("close", (code) => {
-      clearTimeout(kill); const tr = Buffer.concat(chunks).toString(); writeFileSync(join(r.dir, "transcript.jsonl"), tr);
+    p.on("close", async (code) => {
+      clearTimeout(kill); let tr = Buffer.concat(chunks).toString(); writeFileSync(join(r.dir, "transcript.jsonl"), tr);
       let result = null; for (const l of tr.split("\n")) { try { const j = JSON.parse(l); if (j.type === "result") result = j; } catch {} }
-      const meta = { ...r, exit: code, seconds: Math.round((Date.now() - t0) / 1000), turns: result?.num_turns ?? null, agent: "claude-code " + (spawnSync(flags.claude || "claude", ["--version"]).stdout?.toString().trim() || "?"),
+      let effort = null;
+      if (eff) { // enforce the floor: resume the same session until 90% of the budget is used (the cap is --max-turns)
+        let used = result?.num_turns ?? 0, resumes = 0; const floor = Math.ceil(eff.budget * FLOOR);
+        while (used < floor && resumes < MAX_RESUMES && result?.session_id && Date.now() - t0 < +(flags.timeout || 3000) * 1000) {
+          resumes++; const more = await claudeResume(r, result.session_id, CONTINUE(used, eff.budget), eff.budget - used);
+          tr += more.tr; writeFileSync(join(r.dir, "transcript.jsonl"), tr); if (!more.result) break; result = { ...more.result, session_id: more.result.session_id || result.session_id }; used += more.result.num_turns ?? 0;
+        }
+        effort = { budget: eff.budget, budgetFrom: eff.from, floor, used, resumes, enforced: used >= floor && used <= eff.budget };
+        result = { ...(result || {}), num_turns: used };
+      }
+      const meta = { ...r, exit: code, seconds: Math.round((Date.now() - t0) / 1000), turns: result?.num_turns ?? null, ...(effort ? { effort } : {}), agent: "claude-code " + (spawnSync(flags.claude || "claude", ["--version"]).stdout?.toString().trim() || "?"),
         output: existsSync(join(r.dir, "index.html")), stderr: err.slice(-400) };
       if (r.cond === "skill" || COMPETITORS[r.cond]) rmSync(join(r.dir, ".claude"), { recursive: true, force: true }); // keep the output folder small; the skill copy is the commit under test
       if (r.cond === "gated") rmSync(join(r.dir, "gate"), { recursive: true, force: true });
       writeFileSync(join(r.dir, "run.json"), JSON.stringify(meta, null, 1)); console.log(`${r.slug} ${r.cond} s${r.seed}: exit ${code}, ${meta.turns} turns, ${meta.seconds}s, index.html ${meta.output ? "yes" : "MISSING"}`); ok(meta);
     });
+  });
+}
+// one more `claude -p` turn group in an existing session (matched arm floor)
+function claudeResume(r, session, text, maxTurns) {
+  return new Promise((ok) => {
+    const p = spawn(flags.claude || "claude", ["-p", text, "--resume", session, "--output-format", "stream-json", "--verbose", "--max-turns", String(Math.max(1, maxTurns)), "--permission-mode", "acceptEdits", "--allowedTools", ...ALLOWED],
+      { cwd: r.dir, env: { ...process.env, CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC: "1", DISABLE_TELEMETRY: "1" }, stdio: ["ignore", "pipe", "pipe"] });
+    const chunks = []; p.stdout.on("data", (d) => chunks.push(d)); p.stderr.on("data", () => {});
+    const kill = setTimeout(() => p.kill("SIGTERM"), 1800 * 1000);
+    p.on("close", () => { clearTimeout(kill); const tr = Buffer.concat(chunks).toString(); let result = null; for (const l of tr.split("\n")) { try { const j = JSON.parse(l); if (j.type === "result") result = j; } catch {} } ok({ tr, result }); });
   });
 }
 // ── raw-API agent (v2.4.0) ────────────────────────────────────────────────────────────────────────────────────────
@@ -168,11 +205,12 @@ async function runRawAgent(r) {
   if (r.cond === "skill") cpSync(SKILL, join(r.dir, "skill"), { recursive: true });
   if (r.cond === "gated") { mkdirSync(join(r.dir, "gate")); for (const f of ["gate.mjs", "memory.mjs", "lib.mjs"]) cpSync(join(SKILL, "scripts", f), join(r.dir, "gate", f)); }
   writeFileSync(join(r.dir, "package.json"), JSON.stringify({ name: "run", private: true })); // a project root, so the skill's memory log lands here
+  const eff = r.cond === "matched" ? matchBudget(r) : null; if (eff) r = { ...r, budget: eff.budget };
   let prompt = promptFor(r); if (r.cond === "skill") prompt = prompt.replace("Use the asfakulsiam-motomation-design skill:", "Use the asfakulsiam-motomation-design skill (it is your system prompt; its files are in ./skill, its scripts in ./skill/scripts):");
   writeFileSync(join(r.dir, "prompt.txt"), prompt);
   const system = (r.cond === "skill" ? "The asfakulsiam-motomation-design skill is installed. Its SKILL.md follows; every path it names is inside ./skill (e.g. ./skill/thinking/sequence.md, ./skill/scripts/gate.mjs). Read the files it routes you to.\n\n" + readFileSync(join(SKILL, "SKILL.md"), "utf8") + "\n\n---\n\n" : "") + TOOLS_DOC;
   const msgs = [{ role: "user", content: prompt }]; const tr = []; const t0 = Date.now(); let turns = 0, done = false, tin = 0, tout = 0, served = new Set(), fail = null;
-  const cap = +(flags["max-turns"] || 40);
+  const cap = eff ? eff.budget : +(flags["max-turns"] || 40); const floor = eff ? Math.ceil(eff.budget * FLOOR) : 0;
   while (turns < cap && !done) {
     // keep the context bounded without making the agent re-read: documents it read stay whole; only file bodies it wrote
     // more than 4 turns ago shrink to their size (the file is on disk), and only the latest screenshots stay
@@ -187,7 +225,7 @@ async function runRawAgent(r) {
     msgs.push({ role: "assistant", content: res.text }); const acts = rawTools(res.text); const outs = []; const imgs = [];
     for (const a of acts) {
       try {
-        if (a.t === "done") { done = true; break; }
+        if (a.t === "done") { if (turns < floor) { outs.push(CONTINUE(turns, cap)); continue; } done = true; break; }
         if (a.t === "read") { const f = inside(r.dir, a.path); outs.push(`<read ${a.path}>\n` + (existsSync(f) && statSync(f).isDirectory() ? readdirSync(f).join("\n") : readFileSync(f, "utf8").slice(0, 60000))); }
         if (a.t === "write") { const f = inside(r.dir, a.path); mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, a.body); outs.push(`<write ${a.path}> ${a.body.length} bytes written`); }
         if (a.t === "run") { if (!/^(node|ls|cat|wc|mkdir)\b/.test(a.cmd) || /[;&|`$<>]/.test(a.cmd.replace(/"[^"]*"|'[^']*'/g, ""))) { outs.push(`<run> refused: only node, ls, cat, wc, mkdir, one command, no shell operators`); continue; }
@@ -203,10 +241,13 @@ async function runRawAgent(r) {
   }
   writeFileSync(join(r.dir, "transcript.jsonl"), tr.map((x) => JSON.stringify(x)).join("\n") + "\n");
   const meta = { ...r, exit: fail ? 1 : 0, seconds: Math.round((Date.now() - t0) / 1000), turns, finished: done ? "done" : fail ? "error" : "turn cap", agent: `raw API (scripted tool loop in run-agent-benchmark.mjs), model ${flags.model || "claude_sonnet_5_5"}`,
-    served: [...served], tokens: { in: tin, out: tout }, output: existsSync(join(r.dir, "index.html")), error: fail };
+    served: [...served], tokens: { in: tin, out: tout }, output: existsSync(join(r.dir, "index.html")), error: fail,
+    ...(eff ? { effort: { budget: cap, budgetFrom: eff.from, floor, used: turns, resumes: 0, enforced: turns >= floor && turns <= cap } } : {}) };
   for (const d of ["skill", "gate", ".look"]) rmSync(join(r.dir, d), { recursive: true, force: true });
   writeFileSync(join(r.dir, "run.json"), JSON.stringify(meta, null, 1)); console.log(`${r.slug} ${r.cond} s${r.seed}: ${meta.finished}, ${turns} turns, ${meta.seconds}s, index.html ${meta.output ? "yes" : "MISSING"}`); return meta;
 }
+// exact two-sided sign test: P(X ≤ min(w,l)) * 2 for X ~ Binomial(w + l, 0.5), capped at 1
+export function signTest(w, l) { const n = w + l; if (!n) return 1; const k = Math.min(w, l); let c = 1, s = 0; for (let i = 0; i <= k; i++) { s += c; c = (c * (n - i)) / (i + 1); } return Math.min(1, (2 * s) / 2 ** n); }
 async function pool(items, n, fn) { const out = []; let i = 0; await Promise.all(Array.from({ length: n }, async () => { while (i < items.length) { const k = i++; out[k] = await fn(items[k]); } })); return out; }
 
 async function measure(r, pw) {
@@ -329,6 +370,12 @@ async function main() {
       if (key) (out.briefs[slug] ||= {})[key] = entry; else out.briefs[slug] = { ...(out.briefs[slug] || {}), ...entry }; // v2 shape for baseline:skill
       }
     }
+    // totals per pair across briefs, with an exact two-sided sign test on wins vs losses (ties dropped) (v2.5.0, A4)
+    out.totals = {};
+    for (const pair of PAIRS) { const k = pair.join("-vs-"); const es = Object.values(out.briefs).map((b) => (pairTag(pair) ? b[k] : b)).filter((e) => e && e.pair && e.pair.join() === pair.join());
+      const w = es.reduce((n, e) => n + e.wins, 0), l = es.reduce((n, e) => n + e.losses, 0), t = es.reduce((n, e) => n + e.ties, 0), ns = es.reduce((n, e) => n + e.notScored, 0);
+      out.totals[k] = { pair, pairs: w + l + t + ns, wins: w, losses: l, ties: t, notScored: ns, signTestP: signTest(w, l) };
+      console.log(`TOTAL ${k}: ${pair[1]} ${w}–${l}–${t} (wins–losses–ties), not scored ${ns}, sign test p=${signTest(w, l).toPrecision(3)}`); }
     writeFileSync(join(OUT, "summary.json"), JSON.stringify(out, null, 1));
     for (const [s, b] of Object.entries(out.briefs)) for (const e of [b, ...Object.values(b).filter((x) => x && x.pair)]) if (e.pair) console.log(`${s.padEnd(10)} ${e.pair.join(" vs ").padEnd(18)} ${e.outcome.padEnd(16)} ${e.pair[1]} wins ${e.wins}, losses ${e.losses}, ties ${e.ties}, not scored ${e.notScored} · ` + e.pairs.map((p) => `s${p.seed}: ${p[e.pair[0]].gated?.toFixed(1)} vs ${p[e.pair[1]].gated?.toFixed(1)}`).join(" · "));
     return;

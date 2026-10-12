@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Halo — a ring-shaped desk lamp</title>
+<meta name="description" content="Halo is a ring-shaped desk lamp with a single touch control and three light temperatures. $189. Pre-orders ship in March.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0c0b;--fg:#f3ece2;--mute:#9b9186;--glow:255,196,120;--line:rgba(243,236,226,.14)}
+*{box-sizing:border-box;margin:0}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--fg);font:400 1.0625rem/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.serif{font-family:Fraunces,Georgia,serif;font-weight:300;letter-spacing:-.02em}
+header{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:1.1rem clamp(1.2rem,4vw,3rem);mix-blend-mode:difference}
+header b{font:500 1.25rem Fraunces,serif;letter-spacing:.04em}
+.btn{display:inline-block;padding:.8rem 1.5rem;border:1px solid var(--fg);border-radius:99px;text-decoration:none;font-weight:500;transition:background .25s,color .25s}
+.btn:hover,.btn:focus-visible{background:var(--fg);color:var(--bg)}
+.btn.solid{background:var(--fg);color:var(--bg)}
+.btn.solid:hover{background:rgb(var(--glow));border-color:rgb(var(--glow))}
+:focus-visible{outline:2px solid rgb(var(--glow));outline-offset:3px}
+
+/* stage */
+.stage{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:2rem;padding:6rem clamp(1.2rem,5vw,5rem) 3rem;overflow:hidden}
+.glow{position:absolute;left:68%;top:50%;width:90vmin;height:90vmin;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(var(--glow),.28),transparent 62%);pointer-events:none}
+.copy{position:relative;z-index:2}
+.step{padding:2rem 0}
+.step h1,.step h2{font-size:clamp(2.6rem,6.5vw,5.8rem);line-height:1;margin:.6rem 0 1.2rem}
+.step p{max-width:30rem;color:var(--mute)}
+.eyebrow{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:rgb(var(--glow))}
+.lampwrap{position:relative;z-index:1;display:grid;place-items:center}
+.lampwrap svg{width:min(100%,560px);height:auto;overflow:visible}
+.hud{position:absolute;right:clamp(1.2rem,4vw,3rem);bottom:1.6rem;font:500 .78rem/1 Inter;letter-spacing:.14em;color:var(--mute);font-variant-numeric:tabular-nums}
+.temps{display:flex;gap:1.2rem;margin-top:1.6rem;flex-wrap:wrap}
+.temps span{display:flex;align-items:center;gap:.5rem;font-size:.9rem;color:var(--mute)}
+.temps i{width:.9rem;height:.9rem;border-radius:50%;display:block}
+
+/* js-pinned mode: steps overlap in the same cell */
+.pin .stage{height:100vh;min-height:0}
+.pin .copy{display:grid}
+.pin .step{grid-area:1/1;opacity:0;visibility:hidden}
+.pin .step:first-child{opacity:1;visibility:visible}
+.static-temps{display:none}
+
+section.buy{padding:8rem clamp(1.2rem,5vw,5rem);display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:end;border-top:1px solid var(--line)}
+.price{font-size:clamp(4rem,12vw,9rem);line-height:.9}
+.facts{list-style:none;padding:0;margin:2rem 0}
+.facts li{display:flex;justify-content:space-between;padding:.85rem 0;border-bottom:1px solid var(--line)}
+.facts li span:first-child{color:var(--mute)}
+footer{padding:2rem clamp(1.2rem,5vw,5rem);color:var(--mute);font-size:.85rem;border-top:1px solid var(--line)}
+
+@media(max-width:760px){
+ .stage{grid-template-columns:1fr;grid-template-rows:auto auto;align-content:center;gap:0;padding-top:5rem}
+ .lampwrap{order:-1}.lampwrap svg{width:min(78vw,340px)}
+ .glow{left:50%;top:32%}
+ section.buy{grid-template-columns:1fr}
+ .step{padding:1rem 0}
+}
+/* reduced motion: everything visible, stacked, no pinning */
+@media(prefers-reduced-motion:reduce){
+ .stage{min-height:0}
+ .static-temps{display:flex}
+ .hud{display:none}
+ html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<header><b>Halo</b><a class="btn" href="#preorder">Pre-order</a></header>
+
+<main>
+<div class="stage" id="stage">
+ <div class="glow" id="glow" aria-hidden="true"></div>
+ <div class="copy">
+  <div class="step" data-step="0">
+   <p class="eyebrow">Introducing Halo</p>
+   <h1 class="serif">A lamp shaped like a ring.</h1>
+   <p>Halo is a ring-shaped desk lamp with a single touch control and three light temperatures.</p>
+  </div>
+  <div class="step" data-step="1">
+   <p class="eyebrow">One control</p>
+   <h2 class="serif">One touch.</h2>
+   <p>Halo has a single touch control. Touch the lamp to change how it lights your desk.</p>
+  </div>
+  <div class="step" data-step="2">
+   <p class="eyebrow">Three light temperatures</p>
+   <h2 class="serif">Three ways to light a desk.</h2>
+   <p>Pick from three light temperatures, all from the same single touch.</p>
+   <div class="temps static-temps" aria-hidden="true">
+    <span><i style="background:#ffb86b"></i>Temperature 1</span>
+    <span><i style="background:#ffe6c4"></i>Temperature 2</span>
+    <span><i style="background:#cfe3ff"></i>Temperature 3</span>
+   </div>
+  </div>
+ </div>
+ <div class="lampwrap">
+  <svg viewBox="0 0 400 480" role="img" aria-label="Illustration of the Halo ring-shaped desk lamp">
+   <defs>
+    <radialGradient id="disc" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff" stop-opacity=".0"/><stop offset=".7" stop-color="rgb(var(--glow))" stop-opacity=".0"/><stop offset="1" stop-color="rgb(var(--glow))" stop-opacity=".35"/></radialGradient>
+    <linearGradient id="metal" x1="0" x2="1"><stop offset="0" stop-color="#3a3632"/><stop offset=".5" stop-color="#6d665e"/><stop offset="1" stop-color="#2a2724"/></linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="9"/></filter>
+   </defs>
+   <ellipse cx="200" cy="448" rx="110" ry="14" fill="url(#metal)"/>
+   <rect x="193" y="270" width="14" height="178" rx="7" fill="url(#metal)"/>
+   <circle id="touch" cx="200" cy="440" r="5" fill="rgb(var(--glow))"/>
+   <circle id="pulse" cx="200" cy="440" r="5" fill="none" stroke="rgb(var(--glow))" stroke-width="2" opacity="0"/>
+   <g id="ring" style="transform-origin:200px 190px;transform-box:view-box">
+    <circle cx="200" cy="190" r="132" fill="url(#disc)"/>
+    <circle cx="200" cy="190" r="128" fill="none" stroke="rgb(var(--glow))" stroke-width="22" opacity=".75" filter="url(#blur)"/>
+    <circle cx="200" cy="190" r="128" fill="none" stroke="rgb(var(--glow))" stroke-width="14"/>
+    <circle cx="200" cy="190" r="128" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3"/>
+   </g>
+  </svg>
+ </div>
+ <div class="hud" id="hud" aria-hidden="true">FRAME 000 / 179</div>
+</div>
+
+<section class="buy" id="preorder">
+ <div>
+  <p class="eyebrow">Pre-order</p>
+  <p class="price serif">$189</p>
+  <p style="color:var(--mute)">Pre-orders ship in March.</p>
+ </div>
+ <div>
+  <ul class="facts">
+   <li><span>Form</span><span>Ring-shaped desk lamp</span></li>
+   <li><span>Control</span><span>Single touch</span></li>
+   <li><span>Light</span><span>Three temperatures</span></li>
+   <li><span>Price</span><span>$189</span></li>
+   <li><span>Ships</span><span>March (pre-order)</span></li>
+  </ul>
+  <a class="btn solid" href="#preorder">Pre-order Halo — $189</a>
+ </div>
+</section>
+</main>
+<footer>Halo. Ring-shaped desk lamp. Pre-orders ship in March.</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+ var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ var root=document.documentElement;
+ var cols=['255,184,107','255,230,196','207,227,255'];
+ var temps=['255,184,107','255,230,196','207,227,255'];
+ if(reduce||!window.gsap||!window.ScrollTrigger){
+  // static: ring slightly tilted, all copy visible
+  document.getElementById('ring').style.transform='rotateX(0)';
+  return;
+ }
+ gsap.registerPlugin(ScrollTrigger);
+ document.body.classList.add('pin');
+ var steps=gsap.utils.toArray('.step'),ring=document.getElementById('ring'),
+     hud=document.getElementById('hud'),pulse=document.getElementById('pulse'),
+     st={f:0,scale:1,glow:0};
+ var mm=gsap.matchMedia();
+ // the lamp "plays" through 180 frames: ring turns from face-on to edge-on and back
+ function render(){
+  var f=Math.round(st.f);
+  hud.textContent='FRAME '+String(f).padStart(3,'0')+' / 179';
+  var a=f/179*Math.PI*2; // one full turn
+  var sy=Math.max(.18,Math.abs(Math.cos(a/2)));
+  ring.style.transform='scale(1,'+sy.toFixed(3)+') rotate('+(Math.sin(a)*6).toFixed(2)+'deg)';
+ }
+ var tl=gsap.timeline({scrollTrigger:{trigger:'#stage',start:'top top',end:'+=300%',pin:true,scrub:.6,anticipatePin:1}});
+ tl.to(st,{f:179,ease:'none',duration:6,onUpdate:render},0);
+ // step 0 -> 1
+ tl.to(steps[0],{opacity:0,y:-30,duration:.5},1.6).set(steps[0],{visibility:'hidden'},2.1)
+   .set(steps[1],{visibility:'visible'},1.9).fromTo(steps[1],{opacity:0,y:30},{opacity:1,y:0,duration:.5},1.9)
+   .fromTo(pulse,{opacity:.9,attr:{r:5}},{opacity:0,attr:{r:34},duration:.8,ease:'power1.out'},2.4);
+ // step 1 -> 2, light temperature changes
+ tl.to(steps[1],{opacity:0,y:-30,duration:.5},3.6).set(steps[1],{visibility:'hidden'},4.1)
+   .set(steps[2],{visibility:'visible'},3.9).fromTo(steps[2],{opacity:0,y:30},{opacity:1,y:0,duration:.5},3.9);
+ [[4.2,1],[5,2]].forEach(function(p){
+  tl.add(function(){root.style.setProperty('--glow',temps[p[1]])},p[0]);
+  tl.fromTo(pulse,{opacity:.9,attr:{r:5}},{opacity:0,attr:{r:34},duration:.6,ease:'power1.out'},p[0]);
+ });
+ // scrubbing back up must restore temperatures
+ tl.eventCallback('onUpdate',function(){
+  var t=tl.time(),i=t>=5?2:t>=4.2?1:0;
+  root.style.setProperty('--glow',temps[i]);
+ });
+ render();
+})();
+</script>
+</body>
+</html>

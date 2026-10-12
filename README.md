@@ -207,7 +207,7 @@ These tools can't run `npx`, so use the single-file edition: **[`dist/motomation
 
 Without a shell, the skill uses the data tables included at the end of the file instead of its scripts.
 
-**Small context?** Custom instructions, rules files and prompt boxes often cap out at a few thousand tokens. Use **[`dist/motomation-lite.md`](dist/motomation-lite.md)** there: <!-- lite-tokens -->about 7.8k tokens<!-- /lite-tokens --> (estimated by the build script) with the five laws, flow, tiers, bans, the seven-step Thinking Sequence, the AI-default scan, the craft checklist and short lists of archetypes, mutations and signatures. `node scripts/build-lite.mjs` regenerates it, and `check-repo` fails if it goes stale or over 8k tokens.
+**Small context?** Custom instructions, rules files and prompt boxes often cap out at a few thousand tokens. Use **[`dist/motomation-lite.md`](dist/motomation-lite.md)** there: <!-- lite-tokens -->about 8.0k tokens<!-- /lite-tokens --> (estimated by the build script) with the five laws, flow, tiers, bans, the seven-step Thinking Sequence, the AI-default scan, the craft checklist and short lists of archetypes, mutations and signatures. `node scripts/build-lite.mjs` regenerates it, and `check-repo` fails if it goes stale or over 8k tokens.
 
 ### Update
 

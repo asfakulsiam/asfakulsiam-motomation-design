@@ -1,0 +1,21 @@
+{
+ "slug": "studio",
+ "seed": 7104,
+ "cond": "matched",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v4/studio/matched-s7104",
+ "budget": 19,
+ "exit": 1,
+ "seconds": 197,
+ "turns": 20,
+ "effort": {
+  "budget": 19,
+  "budgetFrom": "skill-s7104/run.json",
+  "floor": 18,
+  "used": 20,
+  "resumes": 0,
+  "enforced": false
+ },
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

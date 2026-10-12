@@ -1,0 +1,12 @@
+{
+ "slug": "public",
+ "seed": 5105,
+ "cond": "skill",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v4/public/skill-s5105",
+ "exit": 0,
+ "seconds": 363,
+ "turns": 13,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Haveli 1893 · Boutique hotel in Shankhari Bazar, Old Dhaka</title>
+<meta name="description" content="Haveli 1893 is a 12-room boutique hotel in a restored 1890s merchant house in Puran Dhaka. Courtyard, balcony and rooftop rooms from ৳9,500 a night, breakfast included.">
+<meta property="og:title" content="Haveli 1893 · Boutique hotel in Old Dhaka">
+<meta property="og:description" content="Twelve rooms in a conch-shell merchant's house in Shankhari Bazar, restored in 2022.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#EFE6D6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Hind+Siliguri:wght@500&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Hotel","name":"Haveli 1893","description":"A 12-room boutique hotel in a restored 1890s merchant house in Puran Dhaka.","numberOfRooms":12,"telephone":"+880 1700 000000","email":"stay@haveli1893.com","address":{"@type":"PostalAddress","streetAddress":"31 Shankhari Bazar","addressLocality":"Old Dhaka","addressCountry":"BD"},"amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Breakfast included","value":true},{"@type":"LocationFeatureSpecification","name":"Rooftop breakfast 7–10am","value":true}]}
+</script>
+<style>
+/* motomation · archetype: lookbook · mutation: remove the expected (no hero image, no nav menu) · signature: running-stitch · tier: 2 · critique: C5[restraint:kept] H5[375:0] S5[last5:no-log] R5[cuts:3,anim:3] M5[t2:pins0/2,webgl0/1,js48/80KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · b6ae96211f */
+:root{
+  --ground:#EFE6D6; --plate:#E4D8C3; --ink:#1F1A15; --muted:#5E5348; --accent:#A8391F;
+  --dark:#1D1B22; --dark-ink:#EFE6D6; --dark-muted:#BDB4C4; --dark-accent:#E0694A;
+  --display:"Gloock","Hind Siliguri",Georgia,serif;
+  --text:"Karla","Hind Siliguri",system-ui,sans-serif;
+  --rail:40px;           /* left margin that carries the thread */
+  --pad:clamp(20px,5vw,72px);
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --step--1:.875rem; --step-0:1.0625rem; --step-1:1.3rem;
+  --step-2:clamp(1.9rem,4.2vw,3.2rem); --step-3:clamp(2.4rem,6vw,5rem);
+  --step-5:clamp(4rem,19vw,17rem);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--ground);color:var(--ink);font:400 var(--step-0)/1.6 var(--text);position:relative;overflow-x:clip}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+.dark :focus-visible{outline-color:var(--dark-accent)}
+.skip{position:absolute;left:12px;top:-60px;background:var(--ink);color:var(--ground);padding:10px 14px;z-index:30;text-decoration:none}
+.skip:focus{top:8px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.02;text-wrap:balance}
+p{max-width:62ch;text-wrap:pretty}
+.tn{font-variant-numeric:tabular-nums lining-nums}
+.label{font-size:var(--step--1);letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+
+/* header: wordmark and the one thing a guest came to do */
+header.bar{position:fixed;inset:0 0 auto 0;z-index:20;height:56px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--pad) 0 calc(var(--rail) + 12px);background:var(--ground);border-bottom:1px solid rgba(31,26,21,.18)}
+.mark{font-family:var(--display);font-size:1.25rem;text-decoration:none;letter-spacing:.01em}
+.btn{display:inline-flex;align-items:center;gap:.6em;min-height:44px;padding:0 22px;background:var(--ink);color:var(--ground);
+  font-weight:700;font-size:var(--step--1);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;
+  transition:transform 180ms var(--ease),background-color 180ms var(--ease)}
+.btn:hover{background:var(--accent);transform:translateX(3px)}
+.btn:active{transform:translateX(0)}
+.bar .btn{min-height:40px;padding:0 16px}
+.dark .btn{background:var(--dark-ink);color:var(--dark)}
+.dark .btn:hover{background:var(--dark-accent);color:var(--dark)}
+
+main{padding-left:calc(var(--rail) + var(--pad) * .4)}
+section{position:relative;padding:clamp(72px,12vw,160px) var(--pad) clamp(72px,12vw,160px) 0}
+
+/* the thread */
+#thread{position:absolute;left:0;top:0;width:60px;height:100%;pointer-events:none;z-index:10;overflow:visible}
+#thread path{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round}
+#thread .knot{fill:var(--ground);stroke:var(--accent);stroke-width:2.5}
+#thread .tip{fill:var(--accent);stroke:var(--ground);stroke-width:2}
+
+/* hero: type only */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:120px;padding-bottom:clamp(40px,7vw,88px)}
+.hero h1{font-size:var(--step-5);line-height:.86;letter-spacing:-.02em}
+.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.08em}
+.hero h1 .ln>span{display:block}
+.hero h1 .ln:last-child{color:var(--accent);margin-left:.5em;font-size:.8em}
+.hero .row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px 64px;align-items:end;margin-top:clamp(32px,5vw,64px)}
+.hero .lede{font-size:var(--step-1);line-height:1.45;max-width:34ch}
+.hero .act{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.hero .act small{color:var(--muted);font-size:var(--step--1)}
+
+/* the house */
+.house{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:48px clamp(32px,7vw,120px)}
+.house h2{font-size:var(--step-3)}
+.years{display:grid;gap:36px}
+.year{display:grid;grid-template-columns:auto 1fr;gap:4px 24px;align-items:baseline;border-top:1px solid var(--ink);padding-top:14px}
+.year b{font-family:var(--display);font-weight:400;font-size:clamp(2.6rem,7vw,5.5rem);line-height:1}
+.year p{grid-column:2}
+.kept{display:flex;flex-wrap:wrap;gap:8px 10px;list-style:none;padding:0;margin-top:8px}
+.kept li{border:1px solid var(--ink);padding:4px 12px;font-size:var(--step--1);font-weight:500}
+
+/* rooms: three spreads */
+.rooms-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px 32px;margin-bottom:clamp(40px,6vw,80px)}
+.rooms-head h2{font-size:var(--step-3)}
+.spread{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:stretch;padding:clamp(28px,4vw,56px) 0;border-top:1px solid var(--ink)}
+.spread:nth-of-type(even) .plate{order:2}
+.plate{background:var(--plate);aspect-ratio:5/4;display:grid;place-items:center;color:var(--ink)}
+.plate svg{width:76%;height:auto;overflow:visible}
+.plate path,.plate line,.plate rect,.plate circle{fill:none;stroke:currentColor;stroke-width:2;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+.plate .thin{stroke-width:1.2}
+.info{display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.count{display:flex;align-items:baseline;gap:14px}
+.count b{font-family:var(--display);font-weight:400;font-size:clamp(5rem,13vw,10rem);line-height:.8;color:var(--accent)}
+.info h3{font-size:var(--step-2)}
+.price{font-size:var(--step-1);font-weight:500}
+.price b{font-family:var(--display);font-weight:400;font-size:clamp(2rem,4vw,3rem)}
+.incl{color:var(--muted);font-size:var(--step--1);font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+
+/* rooftop: the one dark chapter */
+.dark{background:var(--dark);color:var(--dark-ink);margin-left:calc(-1 * (var(--rail) + var(--pad) * .4));padding-left:calc(var(--rail) + var(--pad) * .4);overflow:hidden}
+.dark .label{color:var(--dark-muted)}
+.roof{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px clamp(32px,6vw,96px);align-items:center;min-height:80svh}
+.roof h2{font-size:var(--step-3);margin:14px 0 24px}
+.roof .hours{font-family:var(--display);font-size:clamp(2.6rem,7vw,5.5rem);line-height:1;margin-top:28px;color:var(--dark-accent)}
+.skyline{position:relative;aspect-ratio:1/1;max-width:560px;width:100%;justify-self:end;overflow:hidden}
+.skyline svg{position:absolute;inset:0;width:100%;height:100%}
+.sun{fill:var(--dark-accent)}
+.roofs{fill:var(--dark);stroke:var(--dark-muted);stroke-width:1.6;vector-effect:non-scaling-stroke}
+.roofs-far{fill:none;stroke:var(--dark-muted);stroke-width:1.2;opacity:.8;vector-effect:non-scaling-stroke}
+
+/* walks */
+.walks h2{font-size:var(--step-3);max-width:14ch;margin-bottom:12px}
+.walks .sub{color:var(--muted);margin-bottom:clamp(32px,5vw,64px)}
+.walk-list{list-style:none;padding:0;border-bottom:1px solid var(--ink)}
+.walk{display:grid;grid-template-columns:3.5rem minmax(0,1fr) auto;gap:8px 24px;align-items:baseline;padding:26px 0;border-top:1px solid var(--ink);transition:padding-left 220ms var(--ease)}
+.walk:hover{padding-left:12px}
+.walk .n{font-family:var(--display);font-size:var(--step-1);color:var(--accent)}
+.walk h3{font-size:var(--step-2)}
+.walk .meta{font-size:var(--step--1);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.walks .ask{margin-top:28px}
+.walks .ask a{font-weight:700;text-underline-offset:4px;text-decoration-thickness:2px}
+
+/* visit */
+.visit{padding-bottom:clamp(48px,8vw,96px)}
+.visit h2{font-size:clamp(2.6rem,9vw,8rem);line-height:.95;letter-spacing:-.02em;margin-bottom:clamp(32px,5vw,64px)}
+.visit .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;border-top:1px solid var(--ink);padding-top:24px}
+.visit address{font-style:normal}
+.visit .grid a{text-underline-offset:4px;text-decoration-thickness:1.5px;overflow-wrap:anywhere}
+.visit .go{margin-top:clamp(32px,5vw,56px)}
+footer{padding:20px var(--pad) 28px calc(var(--rail) + var(--pad) * .4);font-size:var(--step--1);color:var(--muted);border-top:1px solid rgba(31,26,21,.25)}
+
+@media (max-width:820px){
+  :root{--rail:30px}
+  .hero .row,.house,.spread,.roof,.visit .grid{grid-template-columns:minmax(0,1fr)}
+  .spread:nth-of-type(even) .plate{order:0}
+  .walk{grid-template-columns:2.2rem minmax(0,1fr)}
+  .walk .meta{grid-column:2;white-space:normal}
+  .skyline{justify-self:start}
+  .hero{padding-top:96px}
+  header.bar{padding-left:calc(var(--rail) + 8px)}
+}
+@media (max-width:420px){ .bar .mark{font-size:1.1rem} .bar .btn{padding:0 12px} }
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *{transition:none!important} }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <a class="mark" href="#top" aria-label="Haveli 1893, back to the top">Haveli 1893</a>
+  <a class="btn" href="https://book.example-hotel.com">Check availability</a>
+</header>
+
+<main id="main">
+<svg id="thread" aria-hidden="true" focusable="false">
+  <defs><mask id="thread-mask" maskUnits="userSpaceOnUse"><path id="reveal" stroke="#fff" stroke-width="8" fill="none"/></mask></defs>
+  <g mask="url(#thread-mask)"><path id="stitch" stroke-dasharray="11 9"/></g>
+  <g id="knots"></g>
+  <circle class="tip" id="tip" r="6" cx="-20" cy="-20"/>
+</svg>
+
+<section class="hero" id="top">
+  <p class="label">31 Shankhari Bazar, Old Dhaka</p>
+  <h1 aria-label="Haveli 1893"><span class="ln"><span>Haveli</span></span><span class="ln"><span>1893</span></span></h1>
+  <div class="row">
+    <p class="lede">Twelve rooms in a restored merchant house in Puran Dhaka, with the original doors, iron balconies and lime plaster.</p>
+    <div class="act">
+      <a class="btn" href="https://book.example-hotel.com" data-stitch>Check availability</a>
+      <small>Breakfast included with every room.</small>
+    </div>
+  </div>
+</section>
+
+<section class="house" id="house" aria-labelledby="house-h">
+  <div>
+    <p class="label">The house</p>
+    <h2 id="house-h" style="margin-top:14px">A conch-shell merchant’s house</h2>
+  </div>
+  <div class="years">
+    <div class="year" data-stitch>
+      <b class="tn">1893</b><span class="label">Built</span>
+      <p>By a conch-shell merchant family, in Shankhari Bazar.</p>
+    </div>
+    <div class="year" data-stitch>
+      <b class="tn">2022</b><span class="label">Restored</span>
+      <p>The restoration kept what the house was made of.</p>
+      <ul class="kept" aria-label="Kept in the restoration"><li>Original doors</li><li>Iron balconies</li><li>Lime plaster</li></ul>
+    </div>
+  </div>
+</section>
+
+<section id="rooms" aria-labelledby="rooms-h">
+  <div class="rooms-head">
+    <div><p class="label">Rooms</p><h2 id="rooms-h" style="margin-top:14px">Twelve rooms, three kinds</h2></div>
+    <p class="incl">Breakfast included</p>
+  </div>
+
+  <article class="spread" data-stitch>
+    <div class="plate" role="img" aria-label="Line drawing of an arched courtyard doorway">
+      <svg viewBox="0 0 200 160" class="draw">
+        <path pathLength="1" d="M60 150V70a40 40 0 0 1 80 0v80"/>
+        <path pathLength="1" class="thin" d="M72 150V72a28 28 0 0 1 56 0v78"/>
+        <line pathLength="1" x1="100" y1="44" x2="100" y2="150" class="thin"/>
+        <path pathLength="1" d="M20 150h160"/>
+        <circle pathLength="1" cx="93" cy="104" r="2.2"/><circle pathLength="1" cx="107" cy="104" r="2.2"/>
+      </svg>
+    </div>
+    <div class="info">
+      <div class="count"><b class="tn">4</b><span class="label">rooms</span></div>
+      <div><h3>Courtyard rooms</h3></div>
+      <p class="price tn">From <b><span>৳</span>9,500</b> / night</p>
+    </div>
+  </article>
+
+  <article class="spread" data-stitch>
+    <div class="plate" role="img" aria-label="Line drawing of an iron balcony railing">
+      <svg viewBox="0 0 200 160" class="draw">
+        <path pathLength="1" d="M20 50h160"/>
+        <path pathLength="1" d="M20 108h160"/>
+        <path pathLength="1" class="thin" d="M20 50v58M180 50v58"/>
+        <path pathLength="1" class="thin" d="M40 108V50M60 108V50M80 108V50M100 108V50M120 108V50M140 108V50M160 108V50"/>
+        <path pathLength="1" d="M20 108q20 24 40 0t40 0 40 0 40 0"/>
+        <path pathLength="1" d="M10 118h180v8H10z"/>
+      </svg>
+    </div>
+    <div class="info">
+      <div class="count"><b class="tn">6</b><span class="label">rooms</span></div>
+      <div><h3>Balcony rooms</h3></div>
+      <p class="price tn">From <b><span>৳</span>12,000</b> / night</p>
+    </div>
+  </article>
+
+  <article class="spread" data-stitch>
+    <div class="plate" role="img" aria-label="Line drawing of rooftops under the sky">
+      <svg viewBox="0 0 200 160" class="draw">
+        <path pathLength="1" d="M10 130h30V104h22v26h18V86h26v44h20V110h24v20h40"/>
+        <path pathLength="1" class="thin" d="M10 146h180"/>
+        <circle pathLength="1" cx="150" cy="48" r="16"/>
+        <path pathLength="1" class="thin" d="M38 70h30M52 58h40"/>
+      </svg>
+    </div>
+    <div class="info">
+      <div class="count"><b class="tn">2</b><span class="label">suites</span></div>
+      <div><h3>Rooftop suites</h3></div>
+      <p class="price tn">From <b><span>৳</span>18,500</b> / night</p>
+    </div>
+  </article>
+</section>
+
+<section class="dark" id="rooftop" aria-labelledby="roof-h">
+  <div class="roof">
+    <div>
+      <p class="label">Rooftop breakfast</p>
+      <h2 id="roof-h">Breakfast above the roofs</h2>
+      <p>The view runs over the roofs of the old city. Breakfast is included in every room.</p>
+      <p class="hours tn" data-stitch aria-label="Served 7 to 10am">7–10am</p>
+    </div>
+    <div class="skyline" role="img" aria-label="The old city’s roofs at sunrise, drawn in line">
+      <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+        <circle class="sun" id="sun" cx="270" cy="210" r="54"/>
+        <path class="roofs-far" d="M0 290h40v-26h30v26h36v-40h28v40h44v-22h26v22h50v-34h30v34h40v-18h30v18h46"/>
+        <path class="roofs" d="M0 400V330h50v-30h34v30h20v-52h40v52h30v-24h44v24h26v-44h36v44h30v-30h40v30h50v-20h-0v90z"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="walks" id="walks" aria-labelledby="walks-h">
+  <p class="label">Walking tours</p>
+  <h2 id="walks-h" style="margin-top:14px">Three walks, led by the hotel</h2>
+  <p class="sub">Two to three hours, in small groups.</p>
+  <ol class="walk-list">
+    <li class="walk" data-stitch><span class="n tn">01</span><h3>Shankhari Bazar at dawn</h3><span class="meta">2–3 hours · small group</span></li>
+    <li class="walk"><span class="n tn">02</span><h3>Armanitola and the Star Mosque</h3><span class="meta">2–3 hours · small group</span></li>
+    <li class="walk"><span class="n tn">03</span><h3>The river at Sadarghat</h3><span class="meta">2–3 hours · small group</span></li>
+  </ol>
+  <p class="ask"><a href="mailto:stay@haveli1893.com?subject=Walking%20tour">Ask about a walk by email</a></p>
+</section>
+
+<section class="visit" id="visit" aria-labelledby="visit-h">
+  <h2 id="visit-h" data-stitch>Come to Shankhari Bazar</h2>
+  <div class="grid">
+    <div><p class="label">Address</p><address>31 Shankhari Bazar,<br>Old Dhaka</address></div>
+    <div><p class="label">Phone</p><p><a class="tn" href="tel:+8801700000000">+880 1700 000000</a></p></div>
+    <div><p class="label">Email</p><p><a href="mailto:stay@haveli1893.com">stay@haveli1893.com</a></p></div>
+  </div>
+  <p class="go"><a class="btn" href="https://book.example-hotel.com">Check availability</a></p>
+</section>
+</main>
+
+<footer>Haveli 1893 · 31 Shankhari Bazar, Old Dhaka</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  var main=document.getElementById('main');
+  var svg=document.getElementById('thread');
+  var stitch=document.getElementById('stitch');
+  var reveal=document.getElementById('reveal');
+  var knotsG=document.getElementById('knots');
+  var tip=document.getElementById('tip');
+  var anchors=[].slice.call(document.querySelectorAll('[data-stitch]'));
+  var samples=[],total=0,knotEls=[],knotLen=[];
+
+  /* Build one thread down the left margin; it loops out to a knot at each anchor. */
+  function build(){
+    var H=main.offsetHeight, mr=main.getBoundingClientRect(), top=mr.top+window.scrollY;
+    var narrow=window.innerWidth<=820;
+    var x0=narrow?14:24, amp=narrow?5:10;
+    svg.setAttribute('height',H); svg.style.height=H+'px';
+    var d='M'+x0+' 0', y=0, flip=1;
+    var ys=anchors.map(function(a){return a.getBoundingClientRect().top+window.scrollY-top+14}).sort(function(a,b){return a-b});
+    ys.forEach(function(ay){
+      var mid=(y+ay)/2;
+      d+=' C'+(x0+amp*flip)+' '+(y+(mid-y)*.6)+' '+(x0-amp*flip)+' '+(mid+(ay-mid)*.4)+' '+x0+' '+ay;
+      y=ay; flip*=-1;
+    });
+    d+=' C'+(x0+amp*flip)+' '+(y+(H-y)*.5)+' '+(x0-amp*flip)+' '+(y+(H-y)*.8)+' '+x0+' '+H;
+    stitch.setAttribute('d',d); reveal.setAttribute('d',d);
+    total=reveal.getTotalLength();
+    reveal.style.strokeDasharray=total;
+    samples=[]; for(var i=0;i<=500;i++){var p=reveal.getPointAtLength(total*i/500);samples.push([p.x,p.y,total*i/500]);}
+    knotsG.textContent=''; knotEls=[]; knotLen=[];
+    ys.forEach(function(ay){
+      var c=document.createElementNS(NS,'circle'); c.setAttribute('class','knot'); c.setAttribute('cx',x0); c.setAttribute('cy',ay); c.setAttribute('r',6);
+      knotsG.appendChild(c); knotEls.push(c);
+      var best=samples[0],bd=1e9; samples.forEach(function(s){var dd=Math.abs(s[1]-ay);if(dd<bd){bd=dd;best=s;}});
+      knotLen.push(best[2]);
+    });
+  }
+
+  function lengthAtY(y){
+    var lo=0,hi=samples.length-1;
+    while(lo<hi){var m=(lo+hi)>>1; if(samples[m][1]<y)lo=m+1; else hi=m;}
+    return samples[lo][2];
+  }
+
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  build();
+
+  /* Still state: the whole thread, every knot, no needle. This is also what reduced motion gets. */
+  reveal.style.strokeDashoffset=0; tip.style.display='none';
+
+  function update(){
+    var top=main.getBoundingClientRect().top+window.scrollY;
+    var y=window.scrollY+window.innerHeight*.62-top;
+    var L=Math.max(0,Math.min(total,lengthAtY(y)));
+    reveal.style.strokeDashoffset=total-L;
+    var i=Math.min(samples.length-1,Math.round(L/total*500)); tip.setAttribute('cx',samples[i][0]); tip.setAttribute('cy',samples[i][1]);
+    tip.style.display=(L>0&&L<total-1)?'':'none';
+    knotEls.forEach(function(k,j){k.style.fill=(L>=knotLen[j])?'var(--accent)':'var(--ground)';});
+  }
+
+  function live(){
+    if(!window.gsap||!window.ScrollTrigger||reduce) return;
+    gsap.registerPlugin(ScrollTrigger);
+    update();
+    ScrollTrigger.create({trigger:main,start:'top top',end:'bottom bottom',onUpdate:update,onRefresh:function(){build();update();}});
+
+    // Hero: the two lines rise out of their masks, once.
+    gsap.from('.hero h1 .ln>span',{yPercent:105,duration:1,ease:'power3.out',stagger:.12,delay:.15});
+
+    // Rooms: each drawing is stitched in as its spread arrives.
+    gsap.utils.toArray('.draw').forEach(function(s){
+      var parts=s.querySelectorAll('path,line,circle');
+      gsap.set(parts,{strokeDasharray:1,strokeDashoffset:1});
+      gsap.to(parts,{strokeDashoffset:0,duration:1.4,ease:'power2.out',stagger:.08,
+        scrollTrigger:{trigger:s,start:'top 80%',once:true}});
+    });
+
+    // Rooftop: the sun climbs behind the roofs as you pass.
+    gsap.fromTo('#sun',{y:110},{y:-30,ease:'none',scrollTrigger:{trigger:'#rooftop',start:'top 80%',end:'bottom 30%',scrub:true}});
+  }
+
+  var rt; window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){build();if(!reduce)update();else reveal.style.strokeDashoffset=0;},150);});
+  window.addEventListener('load',function(){build();live();if(window.ScrollTrigger&&!reduce)ScrollTrigger.refresh();});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){build();if(!reduce&&window.ScrollTrigger){update();}});
+})();
+</script>
+</body>
+</html>

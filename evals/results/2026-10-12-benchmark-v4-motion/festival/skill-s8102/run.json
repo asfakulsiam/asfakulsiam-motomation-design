@@ -1,0 +1,12 @@
+{
+ "slug": "festival",
+ "seed": 8102,
+ "cond": "skill",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v4-motion/festival/skill-s8102",
+ "exit": 0,
+ "seconds": 588,
+ "turns": 40,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

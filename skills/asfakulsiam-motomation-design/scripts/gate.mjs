@@ -9,6 +9,10 @@
 //              viewport screenshotted, sampled; judged by the 10th-percentile sample; warns when > 30% of text elements
 //              could not be measured). Reported per viewport, so a mobile-only crop, overlay or background is caught.
 //              → fails below 4.5:1 (body) or 3:1 (large: ≥24px, or ≥18.66px bold)
+//              Scroll sequences (v2.5.0): every element is measured at every sampled scroll position (every 0.7 viewport,
+//              every 0.15 viewport inside pinned/sticky zones, plus 0/25/50/75/100% of the page and of each zone). An
+//              element that settles at several opacities is a sequence step: its active (most visible) state and every
+//              inactive state it rests in (seen at ≥2 positions) must meet AA. A dimmed inactive step fails.
 //   overflow   at 375, 390, 768, 1440: page scroll width, and elements escaping the viewport or pushing text out of
 //              their parent by >1px with no clipping ancestor
 //   words      at 375: display text (h1–h3 or ≥32px) that overflows its box, leaves the viewport, or breaks a word
@@ -23,6 +27,18 @@
 //
 //   --timeout <s>  give up on a target after s seconds (default 600) and print "not verified — timed out"; exit 3.
 //                  Very tall pages (the 36,000px gallery) would otherwise run for a very long time.
+//   --timeout-ms <ms>  the same budget in milliseconds (wins over --timeout).
+//   --light        start in the light footprint (see below) instead of trying the standard browser first.
+//
+// Constrained sandboxes (v2.5.0): Codex CLI, CI containers, 2-CPU or low-memory machines. The gate probes the machine
+// first (CPUs, load, free memory, cgroup memory limit, /dev/shm, MOTOMATION_SANDBOX / CODEX_* variables) and prints
+// what it found. If the browser fails to start, crashes or times out on an operation, it retries the target once in a
+// light footprint: one renderer process (--renderer-process-limit=1 --no-zygote), no GPU
+// (--disable-gpu), no /dev/shm (--disable-dev-shm-usage), a capped JS heap, and every operation timeout ×3. The checks
+// are the same in both footprints; only the browser is lighter and more patient. If the retry also fails it prints
+//   not verified — sandbox too constrained: <reason>  (attempt 1 …; attempt 2 …; machine …)
+// and exits 3. Every exit path prints one verdict line: PASS, FAIL, STAMP …, or "not verified — <reason>". A kill
+// signal (SIGTERM/SIGINT from an agent's tool timeout) prints "not verified — interrupted" before exiting.
 //
 // Needs Playwright (npm i -D playwright && npx playwright install chromium). Without a browser it prints
 // "not verified — no browser" and exits 3. It never prints a pass it didn't measure.
@@ -32,10 +48,41 @@ import { readFileSync, existsSync, statSync, writeFileSync } from "node:fs";
 import { resolve, dirname, basename, extname, join } from "node:path";
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
+import os from "node:os";
+import { statfsSync } from "node:fs";
 import { projectRoot } from "./memory.mjs";
 
 export const WIDTHS = [375, 390, 768, 1440];
 export const GATE_VERSION = "gate/2"; // gate/2: contrast measured per viewport; numbers check (n)
+
+// ── constrained sandboxes (v2.5.0) ────────────────────────────────────────────
+// T(ms): every Playwright operation timeout goes through this, so the light footprint can be more patient (×3)
+// without touching what is measured.
+let OPS_SCALE = 1; const T = (ms) => Math.round(ms * OPS_SCALE);
+// --single-process is not used: on Chromium 147 it kills the browser at Playwright's second context (tested, v2.5.0);
+// --renderer-process-limit=1 gives the same one-renderer footprint without that crash.
+export const LIGHT_ARGS = ["--no-zygote", "--renderer-process-limit=1", "--disable-gpu", "--disable-dev-shm-usage", "--disable-extensions", "--disable-background-networking", "--js-flags=--max-old-space-size=768"];
+export function sandboxProbe(env = process.env) {
+  const cpus = os.availableParallelism ? os.availableParallelism() : os.cpus().length, load = os.loadavg()[0], freeMB = Math.round(os.freemem() / 1048576);
+  let cgroupMB = null; for (const f of ["/sys/fs/cgroup/memory.max", "/sys/fs/cgroup/memory/memory.limit_in_bytes"]) { try { const v = readFileSync(f, "utf8").trim(); if (/^\d+$/.test(v) && +v < 2 ** 50) { cgroupMB = Math.round(+v / 1048576); break; } } catch {} }
+  let shmMB = null; try { const st = statfsSync("/dev/shm"); shmMB = Math.round((st.bavail * st.bsize) / 1048576); } catch {}
+  let asMB = null; try { const m = readFileSync("/proc/self/limits", "utf8").match(/Max address space\s+(\d+)/); if (m) asMB = Math.round(+m[1] / 1048576); } catch {}
+  const agent = env.MOTOMATION_SANDBOX || (env.CODEX_SANDBOX ? `codex (${env.CODEX_SANDBOX})` : env.CODEX_SANDBOX_NETWORK_DISABLED ? "codex (network disabled)" : null);
+  const why = [];
+  if (cpus <= 2) why.push(`${cpus} CPU${cpus > 1 ? "s" : ""}`);
+  if (load > cpus * 1.5) why.push(`load ${load.toFixed(1)} on ${cpus} CPU${cpus > 1 ? "s" : ""}`);
+  if (freeMB < 1500) why.push(`${freeMB} MB free memory`);
+  if (cgroupMB !== null && cgroupMB < 2048) why.push(`cgroup memory limit ${cgroupMB} MB`);
+  if (shmMB !== null && shmMB < 128) why.push(`/dev/shm ${shmMB} MB`);
+  if (asMB !== null && asMB < 8192) why.push(`address space capped at ${asMB} MB (ulimit -v)`);
+  if (agent) why.push(`sandbox: ${agent}`);
+  return { cpus, load: +load.toFixed(2), freeMB, cgroupMB, shmMB, asMB, agent, constrained: why.length > 0, why };
+}
+const machineLine = (p) => `${p.cpus} CPU, load ${p.load}, ${p.freeMB} MB free${p.cgroupMB !== null ? `, cgroup ${p.cgroupMB} MB` : ""}${p.shmMB !== null ? `, /dev/shm ${p.shmMB} MB` : ""}${p.asMB !== null ? `, address space ${p.asMB} MB` : ""}${p.agent ? `, ${p.agent}` : ""}`;
+const firstLine = (e) => String(e?.message || e).split("\n")[0].replace(/\s+/g, " ").slice(0, 160);
+// failures that say something about the machine, not the page: the browser died, an operation ran out of time, or the
+// sandbox refused a process. These earn a retry in the light footprint.
+const browserTrouble = (e) => /Target (page, context or browser )?(has been )?closed|browser has been closed|Browser closed|crash|Timeout|timed out|ECONNRESET|EPIPE|ENOMEM|out of memory|Failed to launch|spawn|zygote|sandbox|SIGKILL|SIGTRAP|Protocol error|Navigation failed because page crashed|Target crashed|disconnected/i.test(String(e?.stack || e?.message || e));
 
 // ── args ──────────────────────────────────────────────────────────────────────
 const argv = process.argv.slice(2);
@@ -116,13 +163,14 @@ async function open(browser, url, opts) {
   const ctx = await browser.newContext({ deviceScaleFactor: 1, ...opts });
   const page = await ctx.newPage(); const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto(url, { waitUntil: "networkidle", timeout: 60000 }).catch(() => page.waitForTimeout(3000));
+  await page.goto(url, { waitUntil: "networkidle", timeout: T(60000) }).catch(() => page.waitForTimeout(3000));
   await page.addScriptTag({ content: PAGE_LIB }); await settle(page);
   return { ctx, page, errors };
 }
 
 // ── checks ───────────────────────────────────────────────────────────────────
 const SKIP_WARN_PCT = 30; // warn when more than this share of text elements could not be measured
+const STATE_TOL = 0.03; // two readings of one element within this opacity are the same state (scroll-sequence check)
 async function contrast(browser, url, VW = 1440) {
   // Measure each text element in the scroll position where a visitor sees it: scroll a viewport at a time, hide all
   // text, screenshot the viewport, and sample the pixels behind every element that is fully on screen.
@@ -131,17 +179,21 @@ async function contrast(browser, url, VW = 1440) {
   const { ctx, page } = await open(browser, url, { viewport: { width: VW, height: VH }, hasTouch: mobile, isMobile: mobile });
   await page.evaluate(() => __g.textEls().forEach((e, i) => e.setAttribute("data-g-id", i)));
   const H = Math.min(await page.evaluate(() => document.documentElement.scrollHeight), 40000);
-  const done = new Map(); const seenHidden = new Set();
+  const done = new Map(); const seenHidden = new Set(); const states = new Map(); // states: element → [{ op, at:Set<scrollY>, best }]
   const HIDE = "*,*::before,*::after{color:transparent!important;text-shadow:none!important;-webkit-text-stroke:0!important;caret-color:transparent!important;text-decoration-color:transparent!important;border-color:transparent!important;outline-color:transparent!important}"; // borders and outlines are never the background behind text: a badge outline inside a heading must not be sampled as its ground
   // pinned / sticky sequences change while the page "stands still": sample them every 0.15 viewport, the rest every 0.7
   const zones = await page.evaluate(() => [...document.querySelectorAll(".pin-spacer, *")].filter((e) => e.classList.contains("pin-spacer") || getComputedStyle(e).position === "sticky")
     .map((e) => { const z = e.classList.contains("pin-spacer") ? e : e.parentElement; const r = z.getBoundingClientRect(); return [r.top + scrollY, r.top + scrollY + r.height - innerHeight]; }).filter(([a, b]) => b > a));
   const steps = new Set(); for (let y = 0; y <= Math.max(0, H - VH) + 1; y += Math.round(VH * 0.7)) steps.add(y);
   for (const [a, b] of zones.slice(0, 12)) for (let y = Math.max(0, a); y <= b; y += Math.round(VH * 0.15)) steps.add(Math.round(y));
+  // fixed checkpoints (v2.5.0): scroll 0, 25/50/75 % and the end of the page, and the same five points inside every
+  // pinned or sticky zone, so a sequence is always seen at its start, middle and end whatever its length
+  const QS = [0, 0.25, 0.5, 0.75, 1]; for (const q of QS) steps.add(Math.round(Math.max(0, H - VH) * q));
+  for (const [a, b] of zones.slice(0, 12)) for (const q of QS) steps.add(Math.round(Math.max(0, a) + (b - Math.max(0, a)) * q));
   for (const y of [...steps].sort((p, q) => p - q)) {
     await page.evaluate((v) => scrollTo(0, v), y);
     // let entrances finish: wait for CSS/WAAPI animations, then only measure elements whose opacity and position are stable
-    await page.waitForFunction(() => !document.getAnimations().some((a) => a.playState === "running" && a.effect?.getComputedTiming().iterations !== Infinity), null, { timeout: 4000 }).catch(() => {});
+    await page.waitForFunction(() => !document.getAnimations().some((a) => a.playState === "running" && a.effect?.getComputedTiming().iterations !== Infinity), null, { timeout: T(4000) }).catch(() => {});
     await page.waitForTimeout(350);
     const read = () => page.evaluate(() => { const pe = document.createElement("style"); pe.textContent = "*{pointer-events:auto!important}"; document.head.append(pe); try { return [...document.querySelectorAll("[data-g-id]")].filter((e) => !__g.decorative(e) && !__g.srOnly(e)).map((e) => {
       const s = getComputedStyle(e); const r = e.getBoundingClientRect();
@@ -168,13 +220,14 @@ async function contrast(browser, url, VW = 1440) {
       if (process.env.GATE_DEBUG) console.error("y", y, "k", k, "now", now.length, "stable", now.filter(stable).length, "occluded", now.filter((c) => c.occluded).length);
       if (now.every(stable)) break;
     }
-    // re-measure an element whenever it is more visible than before: scrubbed sequences dim inactive beats on purpose,
-    // so each element is judged at its most visible state across the scroll, not at whatever frame it was first seen
-    const todo = cands.filter((c) => !done.has(c.i) || c.op > done.get(c.i).op + 0.01);
-    for (const c of todo) if (c.op <= 0.05) seenHidden.add(c.i);
-    const vis = todo.filter((c) => c.op > 0.05); if (!vis.length) continue;
+    // every visible, settled, unoccluded element is measured at every scroll position (v2.5.0). Before v2.5.0 an element
+    // was re-measured only when it became more visible, so it was judged at its most visible state only, and a scroll
+    // sequence that dims its inactive steps (opacity .4 → 2.1:1) passed while the step was unreadable for most of the scroll.
+    for (const c of cands) if (c.op <= 0.05) seenHidden.add(c.i);
+    const vis = cands.filter((c) => c.op > 0.05); if (!vis.length) continue;
+    const atY = await page.evaluate(() => Math.round(scrollY));
     const snap = async () => { const st = await page.addStyleTag({ content: HIDE }); await page.waitForTimeout(60);
-      const shot = (await page.screenshot({ animations: "disabled", timeout: 120000 })).toString("base64"); await st.evaluate((n) => n.remove()); return shot; };
+      const shot = (await page.screenshot({ animations: "disabled", timeout: T(120000) })).toString("base64"); await st.evaluate((n) => n.remove()); return shot; };
     const sampleShot = (shot, vis) => page.evaluate(async ({ shot, vis }) => {
       const img = new Image(); img.src = "data:image/png;base64," + shot; await img.decode();
       const cv = document.createElement("canvas"); cv.width = img.width; cv.height = img.height; const cx = cv.getContext("2d", { willReadFrequently: true }); cx.drawImage(img, 0, 0);
@@ -201,7 +254,20 @@ async function contrast(browser, url, VW = 1440) {
     const failing = res.filter((r) => r.ratio < ((r.size >= 24 || (r.size >= 18.66 && r.weight >= 700)) ? 3 : 4.5));
     if (failing.length) { await page.waitForTimeout(400); const again = new Map((await sampleShot(await snap(), failing)).map((r) => [r.i, r]));
       res = res.map((r) => (again.get(r.i)?.ratio ?? -1) > r.ratio ? again.get(r.i) : r); }
-    for (const r of res) done.set(r.i, r);
+    // resting or passing through? nudge the scroll by 40px and read the opacities again. A step dimmed by a class
+    // (.step:not(.on)) keeps its opacity; a scrubbed crossfade caught halfway changes with the scroll.
+    const ids = res.map((r) => r.i);
+    await page.evaluate((v) => scrollTo(0, v), atY + 40); await page.waitForTimeout(350);
+    const nudged = await page.evaluate((ids) => Object.fromEntries(ids.map((i) => { const e = document.querySelector(`[data-g-id="${i}"]`); return [i, e ? __g.opacity(e) : -1]; })), ids);
+    for (const r of res) {
+      const resting = Math.abs((nudged[r.i] ?? -1) - r.op) <= 0.01;
+      if (!done.has(r.i) || r.op > done.get(r.i).op + 0.01 || (Math.abs(r.op - done.get(r.i).op) <= 0.01 && r.ratio > done.get(r.i).ratio)) done.set(r.i, r);
+      // states: one bucket per opacity level the element settles at; each bucket keeps its best reading (a real failure
+      // is in every frame) and the scroll positions where it was seen
+      const list = states.get(r.i) || []; let b = list.find((x) => Math.abs(x.op - r.op) <= STATE_TOL);
+      if (!b) { b = { op: r.op, at: new Set(), rest: 0, best: r }; list.push(b); states.set(r.i, list); }
+      b.at.add(atY); if (resting) b.rest++; if (r.ratio > b.best.ratio) b.best = r;
+    }
   }
   // total = every text element counted at the end of the scan, plus any measured or seen earlier: a scrubbed sequence can
   // hide its credits (visibility:hidden) by the last frame, and counting only the end left "measured" above "total" (v2.4.0 fix)
@@ -210,15 +276,32 @@ async function contrast(browser, url, VW = 1440) {
   await ctx.close();
   const measured = [...done.values()];
   const large = (r) => r.size >= 24 || (r.size >= 18.66 && r.weight >= 700);
-  const fails = measured.filter((r) => r.ratio < (large(r) ? 3 : 4.5)).map((r) => ({ width: VW, el: r.label, text: r.text, ratio: r.ratio, need: large(r) ? 3 : 4.5, fg: r.fgHex, bg: r.bgHex, size: r.size }));
+  const need = (r) => (large(r) ? 3 : 4.5);
+  const fails = measured.filter((r) => r.ratio < need(r)).map((r) => ({ width: VW, el: r.label, text: r.text, ratio: r.ratio, need: need(r), fg: r.fgHex, bg: r.bgHex, size: r.size, state: "active", op: +r.op.toFixed(2) }));
+  // Scroll-sequence steps (v2.5.0): an element that settles at more than one opacity is a step in a sequence (a pinned
+  // chapter, a scrubbed timeline, a list whose current item is lit). Its most visible state is the "active" one, judged
+  // above as before. Every other state it rests in (its opacity holds when the scroll is nudged 40px, or it was seen
+  // at two or more positions) is an "inactive" state a visitor reads while another step is lit, and it must meet AA
+  // too. A state that moves with the scroll and was seen once is a scrubbed crossfade caught halfway: reported, not judged.
+  const sequence = [];
+  for (const [i, list] of states) {
+    if (list.length < 2) continue;
+    const top = list.reduce((a, b) => (b.op > a.op ? b : a));
+    const st = list.sort((a, b) => b.op - a.op).map((b) => ({ state: b === top ? "active" : b.rest > 0 || b.at.size >= 2 ? "inactive" : "transition", op: +b.op.toFixed(2), ratio: b.best.ratio, need: need(b.best), fg: b.best.fgHex, bg: b.best.bgHex, at: [...b.at].sort((p, q) => p - q).slice(0, 6) }));
+    const r0 = top.best; sequence.push({ el: r0.label, text: r0.text, size: r0.size, states: st });
+    if (fails.some((f) => f.el === r0.label && f.text === r0.text)) continue; // already failing in its active state: one failure per element
+    const worst = st.filter((x) => x.state === "inactive" && x.ratio < x.need).sort((a, b) => a.ratio - b.ratio)[0];
+    if (worst) fails.push({ width: VW, el: r0.label, text: r0.text, ratio: worst.ratio, need: worst.need, fg: worst.fg, bg: worst.bg, size: r0.size, state: "inactive", op: worst.op, at: worst.at });
+  }
   const skipped = total - measured.length, skippedPct = total ? Math.round((skipped / total) * 100) : 0;
-  return { width: VW, measured: measured.length, skipped, total, skippedPct, lowCoverage: skippedPct > SKIP_WARN_PCT, notVisibleAtScan: [...seenHidden].filter((i) => !done.has(i)).length, fails };
+  return { width: VW, measured: measured.length, skipped, total, skippedPct, lowCoverage: skippedPct > SKIP_WARN_PCT, notVisibleAtScan: [...seenHidden].filter((i) => !done.has(i)).length, sequence, fails };
 }
 async function contrastAll(browser, url) {
   const byWidth = []; for (const w of WIDTHS) byWidth.push(await contrast(browser, url, w));
   const sum = (k) => byWidth.reduce((n, x) => n + x[k], 0);
   return { byWidth, measured: sum("measured"), skipped: sum("skipped"), total: sum("total"), notVisibleAtScan: sum("notVisibleAtScan"),
-    skippedPct: sum("total") ? Math.round((sum("skipped") / sum("total")) * 100) : 0, lowCoverage: byWidth.some((x) => x.lowCoverage), fails: byWidth.flatMap((x) => x.fails) };
+    skippedPct: sum("total") ? Math.round((sum("skipped") / sum("total")) * 100) : 0, lowCoverage: byWidth.some((x) => x.lowCoverage), fails: byWidth.flatMap((x) => x.fails),
+    sequenceSteps: byWidth.reduce((n, x) => n + x.sequence.length, 0), inactiveFails: byWidth.reduce((n, x) => n + x.fails.filter((f) => f.state === "inactive").length, 0) };
 }
 
 async function overflowAt(browser, url, width) {
@@ -327,7 +410,7 @@ async function motion(browser, url) {
     })));
     let still = null;
     if (reduced) { // a still page under reduced motion should not keep changing
-      const a = (await page.screenshot({ timeout: 120000 })).toString("base64"); await page.waitForTimeout(900); const b = (await page.screenshot({ timeout: 120000 })).toString("base64");
+      const a = (await page.screenshot({ timeout: T(120000) })).toString("base64"); await page.waitForTimeout(900); const b = (await page.screenshot({ timeout: T(120000) })).toString("base64");
       still = a === b ? 0 : await page.evaluate(async ({ a, b }) => {
         const load = async (s) => { const i = new Image(); i.src = "data:image/png;base64," + s; await i.decode(); const c = document.createElement("canvas"); c.width = i.width; c.height = i.height; const x = c.getContext("2d"); x.drawImage(i, 0, 0); return x.getImageData(0, 0, c.width, c.height).data; };
         const [p, q] = [await load(a), await load(b)]; let d = 0; for (let i = 0; i < p.length; i += 16) if (Math.abs(p[i] - q[i]) + Math.abs(p[i + 1] - q[i + 1]) + Math.abs(p[i + 2] - q[i + 2]) > 24) d++;
@@ -385,7 +468,7 @@ async function numbers(browser, url) {
   const sample = async (reduced) => {
     const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, reducedMotion: reduced ? "reduce" : "no-preference" });
     const page = await ctx.newPage();
-    await page.goto(url, { waitUntil: "load", timeout: 60000 }).catch(() => {});
+    await page.goto(url, { waitUntil: "load", timeout: T(60000) }).catch(() => {});
     await page.addScriptTag({ content: PAGE_LIB }).catch(() => {}); await page.waitForTimeout(700);
     const top = await page.evaluate(READ).catch(() => ({}));
     await page.evaluate(() => scrollTo(0, document.documentElement.scrollHeight)); await page.waitForTimeout(900);
@@ -419,7 +502,7 @@ async function numbers(browser, url) {
 async function structure(browser, url) {
   // entrance pattern per top-level section, and the measurable motion budget (pins, WebGL canvases, JS weight)
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 }); const page = await ctx.newPage();
-  await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 }).catch(() => {});
+  await page.goto(url, { waitUntil: "domcontentloaded", timeout: T(60000) }).catch(() => {});
   await page.addScriptTag({ content: PAGE_LIB }).catch(() => {});
   const SNAP = () => { window.__secs = window.__secs || [...document.querySelectorAll("section, main > *, body > header, body > footer")].filter((e, i, a) => !a.some((o) => o !== e && o.contains(e)) && e.getBoundingClientRect().height > 40);
     return __secs.map((sec) => [...sec.querySelectorAll("*")].filter((e) => __g.hasText(e) || ["IMG", "svg", "CANVAS", "VIDEO", "FIGURE", "PICTURE"].includes(e.tagName)).slice(0, 10).map((e) => {
@@ -544,7 +627,11 @@ function print(r) {
   for (const x of r.contrast.byWidth) {
     L(`     ${String(x.width).padStart(4)}px  ${x.fails.length === 0 ? "✓" : "✗"} ${x.fails.length} below AA  (${x.measured} measured; ${x.skipped} skipped; ${x.notVisibleAtScan} not visible at scan time)`);
     if (x.lowCoverage) L(`     ⚠ ${x.width}px coverage: ${x.skipped} of ${x.total} text elements (${x.skippedPct}%) were skipped (moving, occluded or never fully on screen) — more than ${SKIP_WARN_PCT}%, so this width is not a full measurement. Check the skipped text by hand or make it measurable.`);
-    for (const f of x.fails.slice(0, 8)) L(`        ${f.ratio}:1 < ${f.need}:1  ${f.fg} on ${f.bg}  ${f.size}px  ${f.el}  "${f.text}"`);
+    for (const f of x.fails.slice(0, 8)) L(`        ${f.ratio}:1 < ${f.need}:1  ${f.fg} on ${f.bg}  ${f.size}px  ${f.el}  "${f.text}"${f.state === "inactive" ? `  (inactive scroll step, opacity ${f.op}, at scroll ${f.at.join("/")}px)` : ""}`);
+    if (x.sequence.length) {
+      L(`            scroll-sequence steps: ${x.sequence.length} element(s) settle at more than one opacity; every inactive state judged`);
+      for (const q of x.sequence.slice(0, 10)) L(`              ${q.el}  "${q.text.slice(0, 32)}"  ` + q.states.map((t) => `${t.state} op ${t.op}: ${t.ratio}:1${t.state === "transition" ? "" : t.ratio < t.need ? " ✗" : " ✓"}`).join(" · "));
+    }
   }
   L(`  overflow  ${r.counts.overflow === 0 ? "✓" : "✗"} ${r.counts.overflow} at ${WIDTHS.join("/")}px`);
   for (const f of r.overflow.fails.slice(0, 12)) L(`     ${f.width}px  ${f.kind} by ${f.px}px  ${f.el}${f.text ? `  "${f.text}"` : ""}`);
@@ -570,7 +657,7 @@ function print(r) {
 async function frameStrip(browser, url, viewport, reducedMotion, steps = 8) {
   const ctx = await browser.newContext({ viewport, reducedMotion }); const page = await ctx.newPage();
   try {
-    await page.goto(url, { waitUntil: "load", timeout: 30000 }).catch(() => {}); await page.waitForTimeout(800);
+    await page.goto(url, { waitUntil: "load", timeout: T(30000) }).catch(() => {}); await page.waitForTimeout(800);
     const max = await page.evaluate(() => Math.max(0, document.documentElement.scrollHeight - innerHeight));
     const frames = []; let at = 0;
     for (let i = 0; i < steps; i++) {
@@ -579,7 +666,7 @@ async function frameStrip(browser, url, viewport, reducedMotion, steps = 8) {
       while (at < target) { const d = Math.min(240, target - at); await page.mouse.wheel(0, d); at += d; await page.waitForTimeout(16); }
       await page.waitForTimeout(450);
       const y = await page.evaluate(() => Math.round(scrollY));
-      const img = await page.screenshot({ type: "jpeg", quality: 55, timeout: 120000 });
+      const img = await page.screenshot({ type: "jpeg", quality: 55, timeout: T(120000) });
       frames.push({ y, pct: max ? Math.round((y / max) * 100) : 0, src: `data:image/jpeg;base64,${img.toString("base64")}` });
     }
     return { viewport, reducedMotion, max, frames };
@@ -603,48 +690,102 @@ ${strips.map(strip).join("\n")}
   } finally { await close?.(); }
 }
 
-// a scan that runs past --timeout seconds is not a measurement: say so and exit 3, like a missing browser
-const TIMEOUT_S = flags.timeout !== undefined ? +flags.timeout : 600;
-function withTimeout(p, target) {
-  if (!(TIMEOUT_S > 0)) return p;
-  let t; const timer = new Promise((_, no) => { t = setTimeout(() => no(Object.assign(new Error("timeout"), { gateTimeout: true })), TIMEOUT_S * 1000); });
-  return Promise.race([p, timer]).finally(() => clearTimeout(t)).catch((e) => {
-    if (!e.gateTimeout) throw e;
-    console.log(`not verified — timed out after ${TIMEOUT_S}s scanning ${target} (raise --timeout, or gate a shorter page)`); process.exit(3);
-  });
+// ── run: budget, retry in the light footprint, one verdict line on every exit path ──
+// a scan that runs past its budget is not a measurement: say so and exit 3, like a missing browser
+const TIMEOUT_MS = flags["timeout-ms"] !== undefined ? +flags["timeout-ms"] : flags.timeout !== undefined ? +flags.timeout * 1000 : 600000;
+const PROBE = sandboxProbe();
+const T0 = Date.now();
+let verdictPrinted = false;
+const verdict = (line, code) => { if (!verdictPrinted) { verdictPrinted = true; console.log(line); } process.exit(code); };
+const notVerified = (why, extra) => {
+  if (flags.out) { try { writeFileSync(String(flags.out), JSON.stringify({ verified: false, reason: why, ...extra, machine: PROBE }, null, 2)); } catch {} }
+  if (flags.json) console.log(JSON.stringify({ verified: false, reason: why, ...extra, machine: PROBE }, null, 2));
+  verdict(`not verified — ${why}`, 3);
+};
+for (const sig of ["SIGTERM", "SIGINT", "SIGHUP"]) process.on(sig, () => notVerified(`interrupted (${sig} after ${Math.round((Date.now() - T0) / 1000)}s; machine: ${machineLine(PROBE)}). The agent's tool timeout is probably shorter than the scan: run the gate with a longer tool timeout, or --timeout-ms below it`));
+process.on("unhandledRejection", (e) => notVerified(`the browser failed during the scan (${firstLine(e)}); machine: ${machineLine(PROBE)}`));
+
+function budget(p, ms, target) {
+  if (!(ms > 0)) return p;
+  let t; const timer = new Promise((_, no) => { t = setTimeout(() => no(Object.assign(new Error(`timed out after ${Math.round(ms / 1000)}s scanning ${target}`), { gateTimeout: true })), ms); });
+  return Promise.race([p, timer]).finally(() => clearTimeout(t));
+}
+async function launch(pw, light) {
+  const args = light ? LIGHT_ARGS : PROBE.shmMB !== null && PROBE.shmMB < 128 ? ["--disable-dev-shm-usage"] : [];
+  return pw.chromium.launch({ args, timeout: light ? 180000 : 60000 });
+}
+// run(browser) once in the standard footprint and, if the browser (not the page) fails, once more in the light one.
+// Resolves { value, browser, footprint, attempts } with the browser still open; throws { gateVerdict } when both fail.
+async function withRetry(pw, target, run) {
+  const plan = flags.light ? ["light"] : ["standard", "light"]; const attempts = [];
+  for (const fp of plan) {
+    const light = fp === "light"; OPS_SCALE = light ? 3 : 1;
+    const label = light ? "light footprint (one renderer, no GPU, no /dev/shm, timeouts ×3)" : "standard footprint";
+    let browser; try { browser = await launch(pw, light); } catch (e) { attempts.push(`${label}: browser did not start (${firstLine(e)})`); continue; }
+    let gone = false; browser.on("disconnected", () => { gone = true; });
+    try {
+      const value = await budget(run(browser), TIMEOUT_MS, target);
+      return { value, browser, footprint: fp, attempts };
+    } catch (e) {
+      await browser.close().catch(() => {});
+      const why = e.gateTimeout ? e.message : gone ? `the browser process exited mid-scan (${firstLine(e)})` : firstLine(e);
+      attempts.push(`${label}: ${why}`);
+      // a long page on a healthy machine is the page, not the sandbox: a bigger browser won't help, report the timeout
+      if (e.gateTimeout && !PROBE.constrained && !light) throw Object.assign(new Error(why), { gateVerdict: `${why} (raise --timeout, or gate a shorter page)` });
+      if (!e.gateTimeout && !browserTrouble(e)) throw e; // a usage error (missing file, bad URL): not a sandbox problem
+      if (!light) console.error(`gate: ${label} failed (${why}); retrying in the light footprint · machine: ${machineLine(PROBE)}`);
+    }
+  }
+  const head = PROBE.constrained ? `sandbox too constrained: ${PROBE.why.join(", ")}` : "the browser failed in both footprints";
+  throw Object.assign(new Error(head), { gateVerdict: `${head} (${attempts.map((a, i) => `attempt ${i + 1}, ${a}`).join("; ")}; machine: ${machineLine(PROBE)})` });
 }
 
 async function main() {
   if (typeof flags.report === "string" && !targets.length) { targets.push(flags.report); flags.report = true; } // `--report file.html` alone: the file is the target
-  if (flags.help || (!targets.length && !flags.verify)) { console.log("Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]] [--timeout s]   |   --report <file.html>   |   --verify <file.html> [--url u]"); process.exit(targets.length ? 0 : 1); }
+  if (flags.help || (!targets.length && !flags.verify)) { console.log("Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]] [--timeout s | --timeout-ms ms] [--light]   |   --report <file.html>   |   --verify <file.html> [--url u]"); process.exit(targets.length ? 0 : 1); }
   const pw = await loadPlaywright();
-  if (!pw) { console.log("not verified — no browser (install Playwright: npm i -D playwright && npx playwright install chromium)"); process.exit(3); }
-  let browser; try { browser = await pw.chromium.launch(); } catch (e) { console.log(`not verified — no browser (${String(e.message).split("\n")[0]})`); process.exit(3); }
+  if (!pw) notVerified("no browser (install Playwright: npm i -D playwright && npx playwright install chromium)");
+  if (PROBE.constrained) console.error(`gate: constrained machine (${PROBE.why.join(", ")}); a failed scan is retried once in the light footprint`);
+  if (PROBE.constrained && TIMEOUT_MS < 240000) console.error(`gate: warning: a ${Math.round(TIMEOUT_MS / 1000)}s budget is shorter than a scan usually takes on a machine like this (2–5 min per page at 4 widths); a timeout here says nothing about the page. Prefer the default (600s) and a tool timeout above it.`);
   const opts = { design: flags.design ? resolve(String(flags.design)) : undefined, log: flags.log ? resolve(String(flags.log)) : undefined, tier: flags.tier !== undefined ? String(flags.tier) : undefined, archetype: flags.archetype, signature: flags.signature };
+  const note = (x) => { if (x.attempts.length) console.error(`gate: measured in the ${x.footprint} footprint after: ${x.attempts.join("; ")}`); };
   try {
     if (flags.verify) {
       const file = String(flags.verify); const st = readStamp(readFileSync(file, "utf8"));
-      if (!st) { console.log(`STAMP REJECTED · ${file}: no motomation stamp comment found`); process.exit(2); }
-      if (!st.gate) { console.log(`STAMP REJECTED · ${file}: the stamp has no measured gate values (a hand-written or copied stamp). Run node scripts/gate.mjs and paste its stamp.\n  found: ${st.raw.slice(0, 160)}`); process.exit(2); }
-      if (!st.critique) { console.log(`STAMP REJECTED · ${file}: no critique segment. Paste the full "critique: … · gate: …" line gate.mjs printed.`); process.exit(2); }
-      if (!/^C\d\[[^\]]+\] H\d\[[^\]]+\] S\d\[[^\]]+\] R\d\[[^\]]+\] M\d\[[^\]]+\] V\d\[[^\]]+\]$/.test(st.critique)) { console.log(`STAMP REJECTED · ${file}: critique "${st.critique}" is not traced. Every axis needs its number and the check it came from, e.g. H4[375:1]. Unmeasured scores are rejected.`); process.exit(2); }
-      const r = await withTimeout(scan(flags.url ? String(flags.url) : file, browser, opts), file); print(r);
-      if (st.critique !== r.critique) { console.log(`STAMP REJECTED · critique says "${st.critique}" but the checks give "${r.critique}"`); process.exit(2); }
+      if (!st) verdict(`STAMP REJECTED · ${file}: no motomation stamp comment found`, 2);
+      if (!st.gate) verdict(`STAMP REJECTED · ${file}: the stamp has no measured gate values (a hand-written or copied stamp). Run node scripts/gate.mjs and paste its stamp.\n  found: ${st.raw.slice(0, 160)}`, 2);
+      if (!st.critique) verdict(`STAMP REJECTED · ${file}: no critique segment. Paste the full "critique: … · gate: …" line gate.mjs printed.`, 2);
+      if (!/^C\d\[[^\]]+\] H\d\[[^\]]+\] S\d\[[^\]]+\] R\d\[[^\]]+\] M\d\[[^\]]+\] V\d\[[^\]]+\]$/.test(st.critique)) verdict(`STAMP REJECTED · ${file}: critique "${st.critique}" is not traced. Every axis needs its number and the check it came from, e.g. H4[375:1]. Unmeasured scores are rejected.`, 2);
+      const x = await withRetry(pw, file, (b) => scan(flags.url ? String(flags.url) : file, b, opts)); note(x); const r = x.value; await x.browser.close().catch(() => {}); print(r);
+      if (st.critique !== r.critique) verdict(`STAMP REJECTED · critique says "${st.critique}" but the checks give "${r.critique}"`, 2);
       for (const g of [st.gate, ...st.others.map((o) => o.gate)]) {
         const same = JSON.stringify(g.counts) === JSON.stringify(r.counts) && g.id === r.id && g.version === r.version;
-        if (!same) { console.log(`STAMP REJECTED · stamp says "${stampOf(g.counts, g.id)}" but a fresh scan measures "${r.stamp}"`); process.exit(2); }
+        if (!same) verdict(`STAMP REJECTED · stamp says "${stampOf(g.counts, g.id)}" but a fresh scan measures "${r.stamp}"`, 2);
       }
-      console.log(`STAMP VERIFIED · critique and gate numbers match a fresh scan${r.pass ? " · gate PASS" : " · but the gate FAILS (the stamp honestly records failures)"}`); process.exit(r.pass ? 0 : 1);
+      verdict(`STAMP VERIFIED · critique and gate numbers match a fresh scan${r.pass ? " · gate PASS" : " · but the gate FAILS (the stamp honestly records failures)"}`, r.pass ? 0 : 1);
     }
-    const all = []; for (const t of targets) { const r = await withTimeout(scan(t, browser, opts), t); all.push(r); if (!flags.json) print(r); }
-    if (flags.report) for (const [i, t] of targets.entries()) {
-      const out = typeof flags.report === "string" ? resolve(flags.report) : join(/^https?:/.test(t) ? process.cwd() : (statSync(resolve(t)).isDirectory() ? resolve(t) : dirname(resolve(t))), `${/^https?:/.test(t) ? "page" : basename(resolve(t)).replace(/\.html?$/, "")}.motion-report.html`);
-      const rep = await motionReport(t, browser, all[i], out); console.error(`motion report → ${rep.outFile} (${rep.frames} frames, ${(rep.bytes / 1024).toFixed(0)} KB)`);
+    const all = [];
+    for (const t of targets) {
+      // the motion report (--report) runs inside the same attempt, so a retry re-takes it in the light footprint too
+      const x = await withRetry(pw, t, async (b) => {
+        const r = await scan(t, b, opts);
+        if (flags.report) {
+          const out = typeof flags.report === "string" ? resolve(flags.report) : join(/^https?:/.test(t) ? process.cwd() : (statSync(resolve(t)).isDirectory() ? resolve(t) : dirname(resolve(t))), `${/^https?:/.test(t) ? "page" : basename(resolve(t)).replace(/\.html?$/, "")}.motion-report.html`);
+          const rep = await motionReport(t, b, r, out); console.error(`motion report → ${rep.outFile} (${rep.frames} frames, ${(rep.bytes / 1024).toFixed(0)} KB)`);
+        }
+        return r;
+      });
+      note(x); await x.browser.close().catch(() => {});
+      x.value.footprint = x.footprint; if (x.attempts.length) x.value.retried = x.attempts;
+      all.push(x.value); if (!flags.json) print(x.value);
     }
     if (flags.json) console.log(JSON.stringify(all.length === 1 ? all[0] : all, null, 2));
     if (flags.out) writeFileSync(String(flags.out), JSON.stringify(all.length === 1 ? all[0] : all, null, 2));
-    process.exit(all.every((r) => r.pass) ? 0 : 1);
-  } finally { await browser.close(); }
+    verdictPrinted = true; process.exit(all.every((r) => r.pass) ? 0 : 1);
+  } catch (e) {
+    if (e?.gateVerdict) notVerified(e.gateVerdict);
+    throw e;
+  }
 }
-// a crash in the browser (a timeout on a loaded machine, a closed page) is not a verdict on the page: exit 3, not verified
-main().catch((e) => { console.error(e); console.log("not verified — the browser failed during the scan (" + String(e?.name || e).slice(0, 60) + "); run again"); process.exit(3); });
+// any other crash is not a verdict on the page: exit 3, not verified, with the reason
+main().catch((e) => { console.error(e); notVerified(`the browser failed during the scan (${firstLine(e)}); machine: ${machineLine(PROBE)}; run again`); });

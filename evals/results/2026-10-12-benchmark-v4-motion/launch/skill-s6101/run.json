@@ -1,0 +1,12 @@
+{
+ "slug": "launch",
+ "seed": 6101,
+ "cond": "skill",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v4-motion/launch/skill-s6101",
+ "exit": 0,
+ "seconds": 1768,
+ "turns": 19,
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}

@@ -1,0 +1,21 @@
+{
+ "slug": "public",
+ "seed": 5105,
+ "cond": "matched",
+ "dir": "/home/user/workspace/repo/evals/results/2026-10-12-benchmark-v4/public/matched-s5105",
+ "budget": 13,
+ "exit": 1,
+ "seconds": 92,
+ "turns": 14,
+ "effort": {
+  "budget": 13,
+  "budgetFrom": "skill-s5105/run.json",
+  "floor": 12,
+  "used": 14,
+  "resumes": 0,
+  "enforced": false
+ },
+ "agent": "claude-code 2.1.286 (Claude Code)",
+ "output": true,
+ "stderr": ""
+}
