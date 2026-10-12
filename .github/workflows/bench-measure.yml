@@ -68,7 +68,7 @@ jobs:
           npx playwright --version; node -e "console.log('axe-core', require('axe-core/package.json').version)"
       - name: Measure
         run: |
-          node evals/run-agent-benchmark.mjs measure --out "$PWD/evals/results/${{ matrix.out }}" --n 3 --only ${{ matrix.slug }} --arms ${{ matrix.arm }} --parallel 2 --force \
+          node evals/run-agent-benchmark.mjs measure --out "$PWD/evals/results/${{ matrix.out }}" --n 3 --only ${{ matrix.slug }} --arms ${{ matrix.arm }} --parallel 1 --force \
             --competitors "taste=/x:design-taste-frontend,uiux=/x:ui-ux-pro-max,fdesign=/x:frontend-design"
           ls evals/results/${{ matrix.out }}/${{ matrix.slug }}/${{ matrix.arm }}-s*/checks.json
       - uses: actions/upload-artifact@v4
