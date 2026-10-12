@@ -73,7 +73,35 @@ export function promptFor({ slug, seed, cond }) {
 }
 const ALLOWED = ["Skill", "Read", "Write", "Edit", "Glob", "Grep", "TodoWrite", "Bash(node:*)", "Bash(ls:*)", "Bash(cat:*)", "Bash(mkdir:*)", "Bash(wc:*)"];
 
+// Codex CLI agent (v2.4.0, benchmark v3 multi-agent): --agent codex [--codex-home dir]. Skills are installed where Codex
+// discovers project skills (.agents/skills/<name>, as the open `skills` CLI does). Codex has no turn cap flag; the
+// timeout is the cap, and "turns" counts its tool calls (commands + patches). Runs with --sandbox danger-full-access
+// because the gate starts Chromium and a localhost server, which Codex's workspace sandbox blocks; the run folder is
+// disposable and outside the repository.
+function runCodex(r) {
+  return new Promise((ok) => {
+    rmSync(r.dir, { recursive: true, force: true }); mkdirSync(r.dir, { recursive: true });
+    if (r.cond === "skill") cpSync(SKILL, join(r.dir, ".agents/skills/asfakulsiam-motomation-design"), { recursive: true });
+    if (r.cond === "gated") { mkdirSync(join(r.dir, "gate")); for (const f of ["gate.mjs", "memory.mjs", "lib.mjs"]) cpSync(join(SKILL, "scripts", f), join(r.dir, "gate", f)); }
+    if (COMPETITORS[r.cond]) cpSync(COMPETITORS[r.cond].dir, join(r.dir, ".agents/skills", COMPETITORS[r.cond].name), { recursive: true });
+    const prompt = promptFor(r); writeFileSync(join(r.dir, "prompt.txt"), prompt);
+    const t0 = Date.now(); const env = { ...process.env, ...(flags["codex-home"] ? { CODEX_HOME: flags["codex-home"] } : {}) };
+    const p = spawn(flags.codex || "codex", ["exec", "--skip-git-repo-check", "--sandbox", "danger-full-access", "--json", "-C", r.dir, prompt], { cwd: r.dir, env, stdio: ["ignore", "pipe", "pipe"] });
+    const chunks = []; p.stdout.on("data", (d) => chunks.push(d)); let err = ""; p.stderr.on("data", (d) => (err += d));
+    const kill = setTimeout(() => p.kill("SIGTERM"), +(flags.timeout || 3000) * 1000);
+    p.on("close", (code) => {
+      clearTimeout(kill); const tr = Buffer.concat(chunks).toString(); writeFileSync(join(r.dir, "transcript.jsonl"), tr);
+      let calls = 0; for (const l of tr.split("\n")) { try { const j = JSON.parse(l); if (j.type === "item.completed" && /command_execution|file_change|mcp_tool_call/.test(j.item?.type || "")) calls++; } catch {} }
+      const meta = { ...r, exit: code, seconds: Math.round((Date.now() - t0) / 1000), turns: calls, agent: (spawnSync(flags.codex || "codex", ["--version"]).stdout?.toString().trim() || "codex ?"),
+        output: existsSync(join(r.dir, "index.html")), stderr: err.slice(-400) };
+      rmSync(join(r.dir, ".agents"), { recursive: true, force: true }); if (r.cond === "gated") rmSync(join(r.dir, "gate"), { recursive: true, force: true });
+      writeFileSync(join(r.dir, "run.json"), JSON.stringify(meta, null, 1)); console.log(`${r.slug} ${r.cond} s${r.seed} [codex]: exit ${code}, ${calls} tool calls, ${meta.seconds}s, index.html ${meta.output ? "yes" : "MISSING"}`); ok(meta);
+    });
+  });
+}
+
 function runAgent(r) {
+  if (flags.agent === "codex") return runCodex(r);
   return new Promise((ok) => {
     rmSync(r.dir, { recursive: true, force: true }); mkdirSync(r.dir, { recursive: true });
     if (r.cond === "skill") cpSync(SKILL, join(r.dir, ".claude/skills/asfakulsiam-motomation-design"), { recursive: true });

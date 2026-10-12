@@ -53,7 +53,7 @@ def to_blocks(content, role):
             if k in SIG: out.append(SIG[k])
         elif t == "tool_use":
             prev = SIG.get(b["id"])
-            out.append(prev if prev is not None else ToolUseBlock(id=b["id"], name=b["name"], input=b.get("input") or {}))
+            out.append(prev if prev is not None else ToolUseBlock(id=b["id"], name=b["name"], input=json.dumps(b.get("input") or {})))
         elif t == "tool_result":
             c = b.get("content", "")
             if isinstance(c, list):
@@ -117,8 +117,11 @@ async def handle(req):
             SIG[k] = ThinkingBlock(thinking=b.thinking or "", signature=getattr(b, "signature", None), reasoning_item_id=getattr(b, "reasoning_item_id", None), endpoint_signature=getattr(b, "endpoint_signature", None))
             content.append({"type": "thinking", "thinking": b.thinking or "", "signature": k})
         elif t == "tool_use":
-            SIG[b.id] = ToolUseBlock(id=b.id, name=b.name, input=b.input or {}, thought_signature=getattr(b, "thought_signature", None), endpoint_signature=getattr(b, "endpoint_signature", None))
-            content.append({"type": "tool_use", "id": b.id, "name": b.name, "input": b.input or {}})
+            raw = b.input if isinstance(b.input, str) else json.dumps(b.input or {})  # the SDK carries arguments as a JSON string
+            try: inp = json.loads(raw) if raw.strip() else {}
+            except Exception: inp = {}
+            SIG[b.id] = ToolUseBlock(id=b.id, name=b.name, input=raw, thought_signature=getattr(b, "thought_signature", None), endpoint_signature=getattr(b, "endpoint_signature", None))
+            content.append({"type": "tool_use", "id": b.id, "name": b.name, "input": inp or {}})
     stop = "tool_use" if any(c["type"] == "tool_use" for c in content) else "end_turn"
     u = ev.usage
     tin = (u.uncached_input_tokens or 0) + (u.cached_input_tokens or 0) + (u.cache_write_tokens or 0) + (getattr(u, "cache_write_1h_tokens", 0) or 0)
