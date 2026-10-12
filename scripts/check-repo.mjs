@@ -238,6 +238,28 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   }
 }
 
+// 11. One rule for what to animate (motion/tokens.md "What to animate"), and the library agrees with it.
+//     Prefer transform/opacity; clip-path when it is the concept; paint-heavy only with a perf check + static fallback.
+//     No doc may state the old "transform/opacity only" rule, every motion doc points to the one rule, and the
+//     components that animate clip-path (Aperture, PinnedChapter) are named by the rule and open fully under reduced motion.
+{
+  const tokens = readFileSync(join(SKILL, "motion/tokens.md"), "utf8");
+  if (!/^#+ What to animate/m.test(tokens)) fail("motion/tokens.md: the \"What to animate\" rule is missing");
+  for (const want of [/transform.{0,12}opacity[^\n]*Prefer/i, /clip-path[^\n]*serves the concept/i, /Paint-heavy[^\n]*performance check[^\n]*static fallback/i])
+    if (!want.test(tokens)) fail(`motion/tokens.md "What to animate": missing ${want}`);
+  const docs = ["principles/restraint.md", ...readdirSync(join(SKILL, "motion")).filter((f) => /^tier-\d/.test(f)).map((f) => `motion/${f}`)];
+  for (const d of docs) { const s = readFileSync(join(SKILL, d), "utf8");
+    if (!s.includes("motion/tokens.md") || !/clip-path/.test(s)) fail(`${d}: must point to motion/tokens.md ("What to animate") and say when clip-path is allowed`); }
+  const banned = /(animate|animating|motion uses?)\s+(only\s+)?transform\s*(\/|and|&)\s*opacity\s+only|only\s+(ever\s+)?animate\s+transform\s*(\/|and|&)\s*opacity|never animate clip-?path/i;
+  for (const f of mdFiles) { const s = readFileSync(f, "utf8"); if (banned.test(s)) fail(`${relative(ROOT, f)}: states the old "transform/opacity only" rule; use motion/tokens.md "What to animate"`); }
+  for (const [file, name, rm] of [["examples/components/scroll/aperture.tsx", "aperture", /clipPath:\s*reduce\s*\?\s*"none"/], ["examples/scroll/pinned-chapter.tsx", "pinned-chapter", /if \(!motion\) return;/]]) {
+    const s = readFileSync(join(SKILL, file), "utf8");
+    if (!/clip-?path/i.test(s)) fail(`${file}: expected to animate clip-path (named in motion/tokens.md)`);
+    if (!rm.test(s)) fail(`${file}: animates clip-path but has no unclipped reduced-motion path`);
+    if (!tokens.includes(file)) fail(`motion/tokens.md: names the clip-path components; ${file} (${name}) is missing`);
+  }
+}
+
 warn.forEach((w) => console.warn(`warn: ${w}`));
 if (errors.length) { errors.forEach((e) => console.error(`✗ ${e}`)); console.error(`\n${errors.length} problem(s).`); process.exit(1); }
 console.log(`✓ repository OK (skill v${v}, ${mdFiles.length} docs, ${Object.keys(ids).length} data sets)`);
