@@ -11,7 +11,7 @@
 // reduced-motion: The lens jumps to the cursor without easing; a "Show the other layer" toggle shows the second layer at full size.
 // touch: Press and drag to move the lens; the toggle works everywhere.
 // a11y: Both layers are in the DOM; the toggle is a real button with aria-pressed; give images alt text.
-import { useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { useReducedMotion, lerp } from "../_lib/motion";
 
 type Props = { base: ReactNode; reveal: ReactNode; radius?: number; toggleLabel?: string; className?: string; style?: CSSProperties };
@@ -28,6 +28,7 @@ export function Lens({ base, reveal, radius = 120, toggleLabel = "Show the other
     if (top.current) top.current.style.clipPath = `circle(${s.r}px at ${s.x}px ${s.y}px)`;
     s.raf = Math.abs(s.tx - s.x) + Math.abs(s.ty - s.y) + Math.abs(s.tr - s.r) > 0.5 ? requestAnimationFrame(paint) : 0;
   };
+  useEffect(() => () => { cancelAnimationFrame(pos.current.raf); pos.current.raf = 0; }, []);
   const kick = () => { if (!pos.current.raf) pos.current.raf = requestAnimationFrame(paint); };
   const move = (e: React.PointerEvent) => { const r = box.current!.getBoundingClientRect(); const s = pos.current; s.tx = e.clientX - r.left; s.ty = e.clientY - r.top; if (s.x < -900) { s.x = s.tx; s.y = s.ty; } s.tr = radius; kick(); };
   const leave = () => { pos.current.tr = 0; kick(); };

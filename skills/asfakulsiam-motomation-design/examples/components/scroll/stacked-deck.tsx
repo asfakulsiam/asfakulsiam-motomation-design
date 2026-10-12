@@ -29,7 +29,7 @@ export function StackedDeck({ cards, offset = 56, top = 80, className, style, ca
     <ol ref={ref} className={className} style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: 24, ...style }}>
       {cards.map((c, i) => (
         <li key={i} data-card style={{ position: "sticky", top: top + i * offset, minHeight: "min(70svh, 560px)", padding: "28px 32px", borderRadius: 18, background: "var(--surface, #fff)", color: "var(--ink, #111)", border: "1px solid var(--line, rgba(0,0,0,.12))", transformOrigin: "50% 0", ...cardStyle }}>
-          <h3 style={{ margin: "0 0 12px", fontSize: "clamp(1.25rem, 2.5vw, 2rem)" }}><span style={{ opacity: 0.55 }}>{String(i + 1).padStart(2, "0")}</span>{" "}{c.title}</h3>
+          <h3 style={{ margin: "0 0 12px", fontSize: "clamp(1.25rem, 2.5vw, 2rem)" }}><span style={{ opacity: 0.75 }}>{String(i + 1).padStart(2, "0")}</span>{" "}{c.title}</h3>
           <div>{c.body}</div>
         </li>
       ))}
