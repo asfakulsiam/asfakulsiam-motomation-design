@@ -47,7 +47,10 @@ const N = +(flags.n || 3);
 const only = flags.only ? String(flags.only).split(",") : Object.keys(BRIEFS).filter((k) => !BRIEFS[k].motion); // the v2 set by default
 // Arms: baseline (no skill), gated (baseline + the measured gate script only, no skill docs), skill. Default keeps v2's two arms.
 export const ARMS = ["baseline", "matched", "gated", "skill"];
-const arms = String(flags.arms || "baseline,skill").split(",").filter((a) => ARMS.includes(a));
+// Competitor arms (v2.4.0, benchmark v3): --competitors taste=<dir>:<skill-name>,uiux=<dir>:<skill-name>. Arm "c-taste" gets that
+// skill installed the way ours is (.claude/skills/<skill-name>) and the same brief, tools and turn cap. Judged blind like any pair.
+export const COMPETITORS = Object.fromEntries(String(flags.competitors || "").split(",").filter(Boolean).map((x) => { const [k, v] = x.split("="); const i = v.lastIndexOf(":"); return [`c-${k}`, { dir: v.slice(0, i), name: v.slice(i + 1) }]; }));
+const arms = String(flags.arms || "baseline,skill").split(",").filter((a) => ARMS.includes(a) || COMPETITORS[a]);
 const TIER = flags.tier !== undefined ? +flags.tier : null; // force a motion tier (all arms are told the same tier)
 const MATCH_TURNS = +(flags["match-turns"] || 24); // matched arm: the skill arm's median turn count, passed in after the skill arm has run
 const runs = () => only.flatMap((slug) => BRIEFS[slug].seeds.slice(0, N).flatMap((seed) => arms.map((cond) => ({ slug, seed, cond, dir: join(OUT, slug, `${cond}-s${seed}`) }))));
@@ -59,6 +62,7 @@ export function promptFor({ slug, seed, cond }) {
   // same archetype and signature: the cause of the v2 SaaS console collision. Generators never see it now.
   const brief = generatorBrief(slug);
   const tier = TIER === null ? "" : ` Build it at motion Tier ${TIER} (${TIER >= 5 ? "scroll-driven film: pinned, scrubbed sequences; WebGL allowed" : "signature scroll motion: pinned or scrubbed sections"}), with a reduced-motion version that keeps all content.`;
+  if (COMPETITORS[cond]) return `Use the ${COMPETITORS[cond].name} skill to build this brief. ${TASK}${tier} Follow the skill end to end and check your work before you finish.\n\n${brief}`;
   if (cond === "baseline") return `You are an expert web designer and front-end developer. ${TASK}${tier} Check your work before you finish.\n\n${brief}`;
   // matched = the baseline prompt with the skill arm's effort: the same turn budget, told to plan, look, critique and revise.
   // If the skill only wins because it works longer, this arm closes the gap (v2.4.0, benchmark v3).
@@ -74,9 +78,10 @@ function runAgent(r) {
     rmSync(r.dir, { recursive: true, force: true }); mkdirSync(r.dir, { recursive: true });
     if (r.cond === "skill") cpSync(SKILL, join(r.dir, ".claude/skills/asfakulsiam-motomation-design"), { recursive: true });
     if (r.cond === "gated") { mkdirSync(join(r.dir, "gate")); for (const f of ["gate.mjs", "memory.mjs", "lib.mjs"]) cpSync(join(SKILL, "scripts", f), join(r.dir, "gate", f)); } // the tool, not the docs
+    if (COMPETITORS[r.cond]) cpSync(COMPETITORS[r.cond].dir, join(r.dir, ".claude/skills", COMPETITORS[r.cond].name), { recursive: true });
     const prompt = promptFor(r); writeFileSync(join(r.dir, "prompt.txt"), prompt);
     const t0 = Date.now();
-    const p = spawn(flags.claude || "claude", ["-p", prompt, "--output-format", "stream-json", "--verbose", "--max-turns", String(flags["max-turns"] || 80), "--permission-mode", "acceptEdits", "--allowedTools", ...ALLOWED],
+    const p = spawn(flags.claude || "claude", ["-p", prompt, "--output-format", "stream-json", "--verbose", "--max-turns", String(flags["max-turns"] || 80), "--permission-mode", "acceptEdits", "--allowedTools", ...ALLOWED, ...(COMPETITORS[r.cond] ? ["Bash(python3:*)"] : [])], // ui-ux-pro-max searches its data with python3
       { cwd: r.dir, env: { ...process.env, CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC: "1", DISABLE_TELEMETRY: "1" }, stdio: ["ignore", "pipe", "pipe"] });
     const chunks = []; p.stdout.on("data", (d) => chunks.push(d)); let err = ""; p.stderr.on("data", (d) => (err += d));
     const kill = setTimeout(() => p.kill("SIGTERM"), +(flags.timeout || 3000) * 1000);
@@ -85,7 +90,7 @@ function runAgent(r) {
       let result = null; for (const l of tr.split("\n")) { try { const j = JSON.parse(l); if (j.type === "result") result = j; } catch {} }
       const meta = { ...r, exit: code, seconds: Math.round((Date.now() - t0) / 1000), turns: result?.num_turns ?? null, agent: "claude-code " + (spawnSync(flags.claude || "claude", ["--version"]).stdout?.toString().trim() || "?"),
         output: existsSync(join(r.dir, "index.html")), stderr: err.slice(-400) };
-      if (r.cond === "skill") rmSync(join(r.dir, ".claude"), { recursive: true, force: true }); // keep the output folder small; the skill copy is the commit under test
+      if (r.cond === "skill" || COMPETITORS[r.cond]) rmSync(join(r.dir, ".claude"), { recursive: true, force: true }); // keep the output folder small; the skill copy is the commit under test
       if (r.cond === "gated") rmSync(join(r.dir, "gate"), { recursive: true, force: true });
       writeFileSync(join(r.dir, "run.json"), JSON.stringify(meta, null, 1)); console.log(`${r.slug} ${r.cond} s${r.seed}: exit ${code}, ${meta.turns} turns, ${meta.seconds}s, index.html ${meta.output ? "yes" : "MISSING"}`); ok(meta);
     });
