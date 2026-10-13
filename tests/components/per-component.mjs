@@ -127,23 +127,29 @@ await browser.close();
 // 2. quality check: the measured gate on every demo page
 if (!has("--no-gate")) {
   // in chunks of 6 pages (one gate process each) so a slow page shows progress and a crash costs one chunk
-  const results = []; let last = "";
+  // why: each page's own reason for having no gate result. One shared "last reason" variable used to be overwritten by
+  // every failing page, so every failure in a run carried the last page's reason (all three Components CI failures
+  // were reported as icon-cloud's coverage; fixed with the demos, see docs/ci-status.md)
+  const results = []; const why = new Map();
   for (let i = 0; i < list.length; i += 6) {
     const chunk = list.slice(i, i + 6);
     const gate = (pages) => { const g = spawnSync(process.execPath, [join(SKILL, "scripts/gate.mjs"), ...pages.map((c) => join(OUT, "pages", `${c.id}.html`)), "--json", "--timeout", "300"], { encoding: "utf8", maxBuffer: 256 << 20, cwd: process.cwd(), env: process.env });
-      let parsed = null; try { parsed = JSON.parse(g.stdout); } catch {}
+      // on exit 3 the gate prints its JSON and then a "not verified — <reason>" line, so stdout alone is not JSON: parse
+      // the part before that line, and take the reason from the JSON or that line, never from stderr's progress notes
+      const out = g.stdout || ""; let parsed = null; try { parsed = JSON.parse(out); } catch { try { parsed = JSON.parse(out.slice(0, out.lastIndexOf("\nnot verified"))); } catch {} }
       const rows = parsed && parsed.verified !== false ? (Array.isArray(parsed) ? parsed : parsed.results || [parsed]) : [];
-      return { rows, why: rows.length ? "" : `exit ${g.status} ${(parsed?.reason || g.stderr || g.stdout || "").slice(0, 200)}` }; };
+      const nv = `${out}\n${g.stderr || ""}`.match(/not verified — (.+)/);
+      return { rows, why: rows.length ? "" : `exit ${g.status} ${(parsed?.reason || nv?.[1] || g.stderr || out || "").trim().slice(0, 200)}` }; };
     // one page the gate cannot verify (exit 3, e.g. low coverage) withholds the results of the whole run; gate the
     // chunk's pages one by one then, so each page gets its own result and only the unverifiable one fails
     let got = gate(chunk);
-    if (!got.rows.length && chunk.length > 1) { for (const c of chunk) { const one = gate([c]); results.push(...one.rows); if (!one.rows.length) last = `${c.id}: ${one.why}`; } }
-    else { results.push(...got.rows); if (!got.rows.length) last = got.why; }
+    if (!got.rows.length && chunk.length > 1) { for (const c of chunk) { const one = gate([c]); results.push(...one.rows); if (!one.rows.length) why.set(c.id, one.why); } }
+    else { results.push(...got.rows); if (!got.rows.length) for (const c of chunk) why.set(c.id, got.why); }
     console.error(`gate ${Math.min(i + 6, list.length)}/${list.length}`);
   }
   for (const r of report) {
     const hit = results.find((x) => String(x.target || x.file || x.url || "").includes(`/${r.id}.html`));
-    if (!hit) { r.fails.push(`gate: no result (${last})`); continue; }
+    if (!hit) { r.fails.push(`gate: no result (${why.get(r.id) || "the gate ran but its output has no row for this page"})`); continue; }
     // a component demo page is not a delivered page: it is judged on the core counts (c o w rm a n q k), not on the
     // gate/4 rule sets (copy, SEO, performance, security), which belong to whole pages
     const core = hit.counts && Object.fromEntries(Object.entries(hit.counts).filter(([k]) => !["copy", "seo", "perf", "sec"].includes(k)));
