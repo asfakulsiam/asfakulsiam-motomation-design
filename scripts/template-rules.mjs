@@ -5,7 +5,8 @@
 //   pins(stampedHtml)             measured pins (stamp M trace) within the budget of 2
 //   imagery(designMd)             an Imagery block with a Mode line, a stand-in when images are used, no boilerplate
 //   noPlaceholderArt(src, file)   no section calls the old abstract art() placeholder
-//   tier5Assets(tier, files, manifest)  a Tier 5 template ships frames/, poster.webp and MOTION.md (and frames.json lists them)
+//   tier5Assets(tier, files, manifest, lock, fetch)  a Tier 5 template ships poster.webp, MOTION.md, frames.json and a fetch
+//                                   script for its frames (frames.lock.json + scripts/fetch-frames.mjs that knows the template)
 
 // a timing sheet: at least one chapter header and one table with the sheet's columns and a beat row
 export function timingSheet(tier, motionMd) {
@@ -67,9 +68,12 @@ export function noPlaceholderArt(sourceText, file) {
 // disk (fetched or rebuilt), their count must match frames.json. `files` is the template folder's file list (relative
 // paths, "/" separators), `manifest` the text of frames.json and `lock` the text of frames.lock.json, or null.
 export const TIER5_MIN_FRAMES = 24;
-export function tier5Assets(tier, files, manifest = null, lock = null) {
+export function tier5Assets(tier, files, manifest = null, lock = null, fetch = null) {
   if (+tier !== 5) return [];
   const p = [], has = (f) => files.includes(f);
+  // fetch = { script: true if scripts/fetch-frames.mjs exists, knows: true if it lists this template } (null: not checked)
+  if (fetch && !fetch.script) p.push("Tier 5 template has no fetch script (scripts/fetch-frames.mjs restores frames/ from frames.lock.json)");
+  else if (fetch && !fetch.knows) p.push("scripts/fetch-frames.mjs does not list this template (lockedTemplates() reads frames.lock.json)");
   const frames = files.filter((f) => /^frames\/[^/]+\.(webp|avif|jpe?g|png)$/.test(f));
   if (!has("poster.webp")) p.push("Tier 5 template has no poster.webp (the first paint before frames load, and the no-JS image)");
   if (!has("MOTION.md")) p.push("Tier 5 template has no MOTION.md (timing sheet, motion/choreography.md)");

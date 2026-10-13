@@ -273,11 +273,16 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   for (const f of readdirSync(join(SKILL, "examples/sections")).filter((f) => f.endsWith(".tsx"))) rules.noPlaceholderArt(readFileSync(join(SKILL, "examples/sections", f), "utf8"), `examples/sections/${f}`).forEach((p) => fail(p));
   // Tier 5 film templates (standalone index.html + frames): same records and rules, plus their frames
   const films = collectFilms();
+  const fetchScript = join(SKILL, "scripts/fetch-frames.mjs");
+  const fetchKnows = existsSync(fetchScript) ? (await import("../skills/asfakulsiam-motomation-design/scripts/fetch-frames.mjs")).lockedTemplates() : [];
+  // every folder under examples/templates/ is registered: a section template (page.tsx) or a film (index.html)
+  for (const d of readdirSync(join(SKILL, "examples/templates"), { withFileTypes: true }).filter((e) => e.isDirectory() && e.name !== "fonts"))
+    if (!templates.some((t) => t.id === d.name) && !films.some((f) => f.id === d.name)) fail(`examples/templates/${d.name}/ is not a registered template (no page.tsx with a template header, no film index.html)`);
   for (const f of films) {
     const own = join(SKILL, "examples/templates", f.id); const read = (x) => (existsSync(join(own, x)) ? readFileSync(join(own, x), "utf8") : null);
     const html = read("index.html");
     if (!f.archetype) fail(`${f.html}: no "/* motomation · archetype: … · mutation: … · signature: … · tier: n" stamp comment`);
-    rules.tier5Assets(f.tier, f.files, f.manifest, read("frames.lock.json")).forEach((p) => fail(`examples/templates/${f.id}: ${p}`));
+    rules.tier5Assets(f.tier, f.files, f.manifest, read("frames.lock.json"), { script: existsSync(fetchScript), knows: fetchKnows.includes(f.id) }).forEach((p) => fail(`examples/templates/${f.id}: ${p}`));
     rules.timingSheet(f.tier, read("MOTION.md")).forEach((p) => fail(`examples/templates/${f.id}: ${p}`));
     rules.dials(read("DESIGN.md"), f.tier).forEach((p) => fail(`examples/templates/${f.id}/DESIGN.md: ${p}`));
     rules.imagery(read("DESIGN.md")).forEach((p) => fail(`examples/templates/${f.id}/DESIGN.md: ${p}`));

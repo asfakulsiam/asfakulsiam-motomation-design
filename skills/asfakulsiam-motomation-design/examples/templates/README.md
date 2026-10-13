@@ -28,10 +28,10 @@
 
 2 scroll-as-film pages. Each folder holds the page, its `scene.mjs`, the frames rendered from it by `scripts/build-frames.mjs` (`poster.webp`, `storyboard/`, `frames.json`; `frames/`, `frames-mobile/` and `film.mp4` are not on main: `node scripts/fetch-frames.mjs` restores them from the tarball named in `frames.lock.json`, sha256-checked), `DESIGN.md`, `MOTION.md` and `log.json`. Reduced motion is the storyboard: stills in normal flow, no canvas mounted.
 
-| Page | Archetype · mutation · signature | Tier | Frames (desktop · mobile) | Fonts | Motion |
-|---|---|---|---|---|---|
-| [Noor Haque · titles and motion for film](motion-portfolio/index.html) | film-reel · tempo-shift · timecode-rail | 5 | 180 × 1920×1080 · 90 × 828×1472 | Bricolage Grotesque / Hanken Grotesk / JetBrains Mono | [MOTION.md](motion-portfolio/MOTION.md) |
-| [Shapla R1 · a kitchen radio you tune by hand](product-launch/index.html) | stage · single-object · aperture | 5 | 180 × 1920×1440 · 90 × 828×1036 | Fraunces / Schibsted Grotesk / JetBrains Mono | [MOTION.md](product-launch/MOTION.md) |
+| Page | Archetype · mutation · signature | Tier | Frames (desktop · mobile) | Fonts | Motion | Tier 5 assets |
+|---|---|---|---|---|---|---|
+| [Noor Haque · titles and motion for film](motion-portfolio/index.html) | film-reel · tempo-shift · timecode-rail | 5 | 180 × 1920×1080 · 90 × 828×1472 | Bricolage Grotesque / Hanken Grotesk / JetBrains Mono | [MOTION.md](motion-portfolio/MOTION.md) | `MOTION.md` · `poster.webp` · `frames.lock.json` · `fetch-frames.mjs motion-portfolio` |
+| [Shapla R1 · a kitchen radio you tune by hand](product-launch/index.html) | stage · single-object · aperture | 5 | 180 × 1920×1440 · 90 × 828×1036 | Fraunces / Schibsted Grotesk / JetBrains Mono | [MOTION.md](product-launch/MOTION.md) | `MOTION.md` · `poster.webp` · `frames.lock.json` · `fetch-frames.mjs product-launch` |
 
 - **motion-portfolio**: Noor Haque designs title sequences in Dhaka. The reel on this page is a film you play by scrolling: four shots, four commissions.
 - **product-launch**: Shapla R1 is an FM radio in a folded aluminium shell, with a dial you turn by hand. Pre-orders ship in March 2027.
