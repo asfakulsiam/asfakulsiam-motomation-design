@@ -5,7 +5,7 @@
 // it is not.
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { load, args } from "./lib.mjs";
+import { load, args, cli } from "./lib.mjs";
 
 const hex = (h) => {
   let s = String(h).trim().replace(/^#/, "");
@@ -25,7 +25,7 @@ export const accentTextClass = (p) => (ratio(p.accent, p.ground) >= 4.5 ? "body"
 
 const isMain = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
-  const a = args();
+  const a = cli("contrast", 'Usage: node scripts/contrast.mjs "<foreground>" "<background>"  |  --palettes', { palettes: "bool" }, null, { pos: [0, 2] });
   if (a.palettes) {
     let bad = 0;
     for (const p of load("palettes")) {
@@ -42,8 +42,9 @@ if (isMain) {
     process.exit(bad ? 1 : 0);
   }
   const [fg, bg] = a._;
-  if (!fg || !bg) { console.log('Usage: node scripts/contrast.mjs "<foreground>" "<background>"  |  --palettes'); process.exit(1); }
-  const r = ratio(fg, bg);
+  const USAGE = 'Usage: node scripts/contrast.mjs "<foreground>" "<background>"  |  --palettes';
+  if (!fg || !bg) { console.error(`contrast: ${fg ? "missing the background colour" : "missing both colours"}\n${USAGE}`); process.exit(2); }
+  let r; try { r = ratio(fg, bg); } catch (e) { console.error(`contrast: ${e.message} (use #rgb or #rrggbb)\n${USAGE}`); process.exit(2); }
   console.log(`${fg} on ${bg}: ${verdict(r)}`);
   process.exit(r >= 4.5 ? 0 : 1);
 }

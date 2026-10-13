@@ -52,6 +52,16 @@ const W = { Concept: 20, Originality: 20, Typography: 15, Motion: 15, Craft: 15,
 
 const argv = process.argv.slice(2); const phase = argv[0]; const flags = {};
 for (let i = 1; i < argv.length; i++) if (argv[i].startsWith("--")) flags[argv[i].slice(2)] = argv[i + 1] && !argv[i + 1].startsWith("--") ? argv[++i] : true;
+// v2.5.0 (C9): unknown phases and flags are one friendly line plus the usage, exit 2, before anything runs
+const BENCH_USAGE = "usage: node evals/run-agent-benchmark.mjs <generate|measure|judge|score> --out <dir> [--n 3] [--only studio,hotel] [--arms baseline,gated,skill] [--pairs baseline:skill,gated:skill] [--tier 4] [--parallel 4] [--judge-cmd …] [--model m] [--cache-dir d | --no-cache]";
+const BENCH_FLAGS = new Set(["agent", "arms", "claude", "codex", "competitors", "force", "model", "models", "n", "only", "out", "pairs", "parallel", "reasoning", "tier", "timeout", "cache-dir", "cache-unpinned", "claude-model", "codex-home", "judge-cmd", "match-turns", "max-turns", "model-cmd", "no-cache", "node-path", "help"]);
+const benchDie = (m) => { console.error(`run-agent-benchmark: ${m}\n${BENCH_USAGE}`); process.exit(2); };
+if (process.argv[1] && resolve(process.argv[1]) === resolve(new URL(import.meta.url).pathname)) {
+  if (flags.help || phase === "--help" || phase === "-h") { console.log(BENCH_USAGE); process.exit(0); }
+  for (const k of Object.keys(flags)) if (!BENCH_FLAGS.has(k)) benchDie(`unknown flag --${k}`);
+  if (phase && !["generate", "measure", "judge", "score"].includes(phase)) benchDie(`unknown phase "${phase}"`);
+  for (const k of ["out", "n", "only", "arms", "pairs", "tier", "parallel", "judge-cmd", "model", "cache-dir", "match-turns", "max-turns", "timeout"]) if (flags[k] === true) benchDie(`--${k} needs a value`);
+}
 const OUT = resolve(flags.out || join(ROOT, `evals/results/${new Date().toISOString().slice(0, 10)}-benchmark-v2`));
 const N = +(flags.n || 3);
 const only = flags.only ? String(flags.only).split(",") : Object.keys(BRIEFS).filter((k) => !BRIEFS[k].motion); // the v2 set by default

@@ -18,6 +18,11 @@ import { load, fingerprint, similarity } from "../skills/asfakulsiam-motomation-
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");
 const argv = process.argv.slice(2); const flag = (k, d) => { const i = argv.indexOf(`--${k}`); return i >= 0 ? argv[i + 1] : d; };
+{ const USAGE = "Usage: node evals/variety.mjs [--category ecommerce] [--seeds 3101,3102,…] [--results evals/results/<run>]";
+  for (let i = 0; i < argv.length; i++) { const k = argv[i];
+    if (k === "--help" || k === "-h") { console.log(USAGE); process.exit(0); }
+    if (!["--category", "--seeds", "--results"].includes(k)) { console.error(`variety: ${k.startsWith("-") ? `unknown flag ${k}` : `unexpected argument "${k}"`}\n${USAGE}`); process.exit(2); }
+    if (!argv[i + 1] || argv[i + 1].startsWith("--")) { console.error(`variety: ${k} needs a value\n${USAGE}`); process.exit(2); } i++; } }
 const category = flag("category", "ecommerce");
 const seeds = String(flag("seeds", "3101,3102,3103,3104,3105")).split(",").map(Number);
 const results = resolve(ROOT, flag("results", "evals/results/2026-10-11-benchmark-v2"));

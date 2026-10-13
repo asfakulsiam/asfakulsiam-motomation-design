@@ -4,11 +4,13 @@
 // Diversity: draws are taken WITHOUT replacement. Archetypes and signature seeds never repeat inside one run;
 // mutations and collision worlds (with --spread) don't repeat either until their pool runs out, and the output
 // says exactly when that happened. Nothing overlaps silently.
-import { load, args, rng, pick, fingerprint, similarity, fpText, LAYOUT_FAMILY } from "./lib.mjs";
+import { load, args, cli, rng, pick, fingerprint, similarity, fpText, LAYOUT_FAMILY } from "./lib.mjs";
 const layoutFamily = (id) => LAYOUT_FAMILY[id] || id;
 import { recent } from "./memory.mjs";
 
-const a = args();
+const a = cli("collide", "Usage: node scripts/collide.mjs [--n 3 | --count 3] [--spread] [--category hotel] [--seed 42] [--exclude-recent] [--json]",
+  { n: "value", count: "value", spread: "bool", category: "value", seed: "value", "exclude-recent": "bool", json: "bool" }, null, { pos: [0, 0] });
+if ([a.n, a.count].some((v) => v !== undefined && !(Number(v) >= 1))) { console.error(`collide: --n must be a number from 1 to 50, got "${a.n ?? a.count}"\nUsage: node scripts/collide.mjs [--n 3 | --count 3] [--spread] [--category hotel] [--seed 42] [--exclude-recent] [--json]`); process.exit(2); }
 const n = Math.max(1, Math.min(50, Number(a.count || a.n || 1)));
 const r = rng(a.seed === undefined ? undefined : Number.isNaN(Number(a.seed)) ? a.seed : Number(a.seed));
 

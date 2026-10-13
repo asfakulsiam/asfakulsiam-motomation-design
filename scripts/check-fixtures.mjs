@@ -17,6 +17,8 @@ import { spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { cli } from "../skills/asfakulsiam-motomation-design/scripts/lib.mjs";
+if (process.argv[1] && process.argv[1].endsWith("check-fixtures.mjs")) cli("check-fixtures", "Usage: node scripts/check-fixtures.mjs   (no arguments; REQUIRE_BROWSER=1 makes a missing browser an error)", {}, null, { pos: [0, 0] });
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const GATE = join(ROOT, "skills/asfakulsiam-motomation-design/scripts/gate.mjs");

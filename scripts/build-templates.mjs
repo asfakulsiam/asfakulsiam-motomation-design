@@ -12,6 +12,7 @@ import { join, dirname } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
+import { cli } from "../skills/asfakulsiam-motomation-design/scripts/lib.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");
@@ -196,6 +197,10 @@ export function renderReadme(templates, films = collectFilms()) {
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  const T_USAGE = 'Usage: node scripts/build-templates.mjs [--only <id,id,…>]   |   --stamp <id> "<line the gate printed>"';
+  const ta = cli("build-templates", T_USAGE, { only: "value", stamp: "value" }, null, { pos: [0, 1] });
+  if (ta.stamp && ta._.length !== 1) { console.error(`build-templates: --stamp needs <id> and the gate's stamp line\n${T_USAGE}`); process.exit(2); }
+  if (!ta.stamp && ta._.length) { console.error(`build-templates: unexpected argument "${ta._[0]}"\n${T_USAGE}`); process.exit(2); }
   const { templates, problems } = await collect();
   if (problems.length) { for (const p of problems) console.error(`✗ ${p}`); process.exit(1); }
   const si = process.argv.indexOf("--stamp");

@@ -2,9 +2,9 @@
 // Search the curated design data with BM25 ranking.
 // Usage: node scripts/search.mjs <dataset> "<query>" [--n 5] [--tier 2] [--json]
 // Datasets: fonts palettes motion imagery signatures archetypes mutations collisions styles categories kinetics
-import { load, args } from "./lib.mjs";
+import { load, args, cli } from "./lib.mjs";
 
-const a = args();
+const a = cli("search", "Usage: node scripts/search.mjs <dataset> \"<query>\" [--n 5] [--tier N] [--json]", { n: "value", tier: "value", json: "bool" });
 const [dataset, ...rest] = a._;
 const query = rest.join(" ").trim();
 if (!dataset || dataset === "help") {
@@ -13,6 +13,8 @@ Datasets: fonts palettes motion imagery signatures archetypes mutations collisio
   process.exit(dataset ? 0 : 1);
 }
 
+const DATASETS = "fonts palettes motion imagery signatures archetypes mutations collisions styles categories kinetics".split(" ");
+if (!DATASETS.includes(dataset)) { console.error(`search: unknown dataset "${dataset}" (one of: ${DATASETS.join(", ")})\nUsage: node scripts/search.mjs <dataset> "<query>" [--n 5] [--tier N] [--json]`); process.exit(2); }
 let rows = load(dataset);
 if (a.tier) rows = rows.filter((r) => !r.tier || r.tier.split(/[^0-9]/).includes(String(a.tier)));
 

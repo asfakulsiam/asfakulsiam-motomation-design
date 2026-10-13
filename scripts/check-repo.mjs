@@ -7,6 +7,8 @@ import { parseCSV } from "../skills/asfakulsiam-motomation-design/scripts/lib.mj
 import { renderRule, rules as loadRules, bannedDisplayFonts } from "../skills/asfakulsiam-motomation-design/scripts/rules.mjs";
 import { fileURLToPath } from "node:url";
 import { SIZE, sizeProblems } from "./repo-rules.mjs";
+import { cli } from "../skills/asfakulsiam-motomation-design/scripts/lib.mjs";
+if (process.argv[1] && process.argv[1].endsWith("check-repo.mjs")) cli("check-repo", "Usage: node scripts/check-repo.mjs   (no arguments)", {}, null, { pos: [0, 0] });
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url)); // decoded and OS-native (Windows drive letters, spaces)
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");

@@ -98,9 +98,23 @@ const browserTrouble = (e) => /Target (page, context or browser )?(has been )?cl
 // ── args ──────────────────────────────────────────────────────────────────────
 const argv = process.argv.slice(2);
 const flags = {}; const targets = [];
+// v2.5.0 (C9): unknown flags and missing values are one friendly line plus the usage, exit 2; boolean flags never
+// swallow the word after them (`--json page.html` used to lose the target).
+const GATE_USAGE = "Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]] [--timeout s | --timeout-ms ms] [--light] [--rules]   |   --report <file.html>   |   --verify <file.html> [--url u]";
+const GATE_FLAGS = { json: "bool", light: "bool", rules: "bool", help: "bool", report: "optional", verify: "value", url: "value", out: "value", design: "value", log: "value", tier: "value", archetype: "value", signature: "value", timeout: "value", "timeout-ms": "value" };
+const gateDie = (m) => { console.error(`gate: ${m}\n${GATE_USAGE}`); process.exit(2); };
 for (let i = 0; i < argv.length; i++) {
   const t = argv[i];
-  if (t.startsWith("--")) { const k = t.slice(2); const v = argv[i + 1] && !argv[i + 1].startsWith("--") ? argv[++i] : true; flags[k] = v; }
+  if (t === "-h") { flags.help = true; continue; }
+  if (t.startsWith("--")) {
+    const eq = t.indexOf("="); const k = eq < 0 ? t.slice(2) : t.slice(2, eq); const kind = GATE_FLAGS[k];
+    if (!kind) gateDie(`unknown flag --${k}`);
+    if (eq >= 0) { flags[k] = t.slice(eq + 1); continue; }
+    if (kind === "bool") { flags[k] = true; continue; }
+    const v = argv[i + 1] && !argv[i + 1].startsWith("--") ? argv[++i] : true;
+    if (v === true && kind === "value") gateDie(`--${k} needs a value`);
+    flags[k] = v;
+  } else if (/^-[^-]/.test(t)) gateDie(`unknown flag ${t} (flags start with --)`);
   else targets.push(t);
 }
 
@@ -1067,7 +1081,8 @@ async function withRetry(pw, target, run) {
 
 async function main() {
   if (typeof flags.report === "string" && !targets.length) { targets.push(flags.report); flags.report = true; } // `--report file.html` alone: the file is the target
-  if (flags.help || (!targets.length && !flags.verify)) { console.log("Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]] [--timeout s | --timeout-ms ms] [--light] [--rules]   |   --report <file.html>   |   --verify <file.html> [--url u]"); process.exit(targets.length ? 0 : 1); }
+  if (flags.help) { console.log(GATE_USAGE); process.exit(0); }
+  if (!targets.length && !flags.verify) gateDie("missing argument: a page, folder or URL to check");
   const pw = await loadPlaywright();
   if (!pw) notVerified("no browser (install Playwright: npm i -D playwright && npx playwright install chromium)");
   if (PROBE.constrained) console.error(`gate: constrained machine (${PROBE.why.join(", ")}); a failed scan is retried once in the light footprint`);

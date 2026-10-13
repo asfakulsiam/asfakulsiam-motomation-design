@@ -13,7 +13,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join, resolve, dirname, sep } from "node:path";
 import { fileURLToPath } from "node:url";
-import { args, load, fingerprint, similarity, mutationFor, fpText } from "./lib.mjs";
+import { args, cli, load, fingerprint, similarity, mutationFor, fpText } from "./lib.mjs";
 
 const SKILL_DIR = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 /** The project that owns the memory log: nearest ancestor of `start` with package.json or .git, outside the skill folder. */
@@ -54,7 +54,8 @@ function write(runs) { mkdirSync(DIR, { recursive: true }); writeFileSync(FILE, 
 
 const isMain = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
-  const a = args(); const cmd = a._[0];
+  const a = cli("memory", "Usage: node scripts/memory.mjs <log|recent|check|fingerprint> [--archetype x] [--signature y] [--fonts a/b] [--palette p] [--tier n] [--page p] [--sections a,b,c] [--type-scale 1.333] [--layout family] [--threshold 0.7] [--project <dir>]",
+    Object.fromEntries([...FIELDS, "sections", "type-scale", "layout", "threshold", "project", "n", "url"].map((k) => [k, "value"]).concat([["json", "bool"]])), null, { pos: [0, 1] }); const cmd = a._[0];
   if (cmd === "log") {
     const entry = { date: new Date().toISOString() };
     for (const f of FIELDS) if (a[f] !== undefined && a[f] !== true) entry[f] = String(a[f]);

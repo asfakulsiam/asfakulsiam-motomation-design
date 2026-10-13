@@ -6,6 +6,8 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseCSV } from "../skills/asfakulsiam-motomation-design/scripts/lib.mjs";
+import { cli } from "../skills/asfakulsiam-motomation-design/scripts/lib.mjs";
+cli("build-lite", "Usage: node scripts/build-lite.mjs [--check]", { check: "bool" }, null, { pos: [0, 0] });
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");

@@ -12,6 +12,7 @@ import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import { collect } from "./build-components.mjs";
+import { cli } from "../skills/asfakulsiam-motomation-design/scripts/lib.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");
@@ -28,6 +29,7 @@ export function sourceHash() {
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  cli("build-gallery", "Usage: node scripts/build-gallery.mjs   (needs the pinned esbuild and React; see the header)", {}, null, { pos: [0, 0] });
   const req = createRequire(join(process.cwd(), "noop.js"));
   const INSTALL = `npm i --no-save ${Object.entries(PINNED).map(([m, v]) => `${m}@${v}`).join(" ")}`;
   let esbuild; try { esbuild = req("esbuild"); } catch { console.error(`esbuild not found. Run: ${INSTALL}`); process.exit(1); }

@@ -52,6 +52,33 @@ export function args(argv = process.argv.slice(2)) {
   return out;
 }
 
+/** Friendly CLI errors (v2.5.0, C9): one line saying what is wrong, then the usage line, on stderr, exit 2; never a
+ *  stack trace. `known` maps each flag to "bool" (takes no value: a word after it is a positional again), "value"
+ *  (needs one) or "optional" (may take one). `--help` / `-h` print the usage and exit 0. `pos` = [min, max] positionals.
+ *  Returns the args object, with bool flags normalised to true.  cli("search", USAGE, { n: "value", json: "bool" }, args()) */
+export function cliDie(name, usage, msg) { console.error(`${name}: ${msg}\n${usage}`); process.exit(2); }
+export function cli(name, usage, known, _ignored = null, { pos = [0, Infinity], argv = process.argv.slice(2) } = {}) {
+  if (argv.includes("--help") || argv.includes("-h")) { console.log(usage); process.exit(0); }
+  const out = { _: [] };
+  for (let i = 0; i < argv.length; i++) {
+    const x = argv[i];
+    if (x === "--") { out._.push(...argv.slice(i + 1)); break; }
+    if (/^-[^-\d]/.test(x)) cliDie(name, usage, `unknown flag ${x} (flags start with --)`);
+    if (!x.startsWith("--")) { out._.push(x); continue; }
+    const eq = x.indexOf("="); const k = eq < 0 ? x.slice(2) : x.slice(2, eq); const kind = known[k];
+    if (!kind) cliDie(name, usage, `unknown flag --${k}`);
+    if (eq >= 0) { out[k] = kind === "bool" ? !/^(false|0|no)$/i.test(x.slice(eq + 1)) : x.slice(eq + 1); continue; }
+    if (kind === "bool") { out[k] = true; continue; }
+    const next = argv[i + 1];
+    if (next !== undefined && !next.startsWith("--")) { out[k] = next; i++; }
+    else if (kind === "value") cliDie(name, usage, `--${k} needs a value`);
+    else out[k] = true;
+  }
+  if (out._.length < pos[0]) cliDie(name, usage, pos[0] === 1 ? "missing argument" : `needs ${pos[0]} argument(s), got ${out._.length}`);
+  if (out._.length > pos[1]) cliDie(name, usage, `unexpected argument "${out._[pos[1]]}"`);
+  return out;
+}
+
 /** Seeded PRNG (mulberry32). Without a seed, uses crypto-strength randomness. */
 export function rng(seed) {
   if (seed === undefined || seed === true) {

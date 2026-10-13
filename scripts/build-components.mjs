@@ -9,6 +9,7 @@
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync, rmSync } from "node:fs";
 import { join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
+import { cli } from "../skills/asfakulsiam-motomation-design/scripts/lib.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");
@@ -97,6 +98,7 @@ export function render(components) {
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  cli("build-components", "Usage: node scripts/build-components.mjs [--check]", { check: "bool" }, null, { pos: [0, 0] });
   const { components, problems } = collect();
   if (problems.length) { problems.forEach((p) => console.error(`✗ ${p}`)); process.exit(1); }
   const files = render(components);

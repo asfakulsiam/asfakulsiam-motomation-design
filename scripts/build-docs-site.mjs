@@ -13,6 +13,7 @@ import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import { collect } from "./build-components.mjs";
 import { PINNED, sourceHash as gallerySourceHash } from "./build-gallery.mjs";
+import { cli } from "../skills/asfakulsiam-motomation-design/scripts/lib.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");
@@ -80,6 +81,7 @@ ${source !== null ? `<script type="application/json" id="source">${JSON.stringif
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  cli("build-docs-site", "Usage: node scripts/build-docs-site.mjs [--props]", { props: "bool" }, null, { pos: [0, 0] });
   const { components } = collect();
   const plain = existsSync(join(ROOT, "vendor/plain/top5.json")) ? new Set(JSON.parse(readFileSync(join(ROOT, "vendor/plain/top5.json"), "utf8")).components.map((c) => c.id)) : new Set();
   const entries = components.map((c) => ({ id: c.id, name: c.name, family: c.family, tier: c.tier, what: c.what, use_when: c["use-when"], avoid_when: c["avoid-when"], reduced_motion: c["reduced-motion"], touch: c.touch || "", a11y: c.a11y || "", file: c.file, props: parseProps(c.src, c.export), plain: plain.has(c.id) }));

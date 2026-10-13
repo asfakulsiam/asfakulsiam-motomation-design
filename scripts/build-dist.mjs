@@ -4,6 +4,8 @@
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
+import { cli } from "../skills/asfakulsiam-motomation-design/scripts/lib.mjs";
+cli("build-dist", "Usage: node scripts/build-dist.mjs [--check]", { check: "bool" }, null, { pos: [0, 0] });
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url)); // decoded and OS-native (Windows drive letters, spaces)
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");

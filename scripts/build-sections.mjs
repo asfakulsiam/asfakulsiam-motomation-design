@@ -9,6 +9,7 @@ import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from 
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
+import { cli } from "../skills/asfakulsiam-motomation-design/scripts/lib.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");
@@ -91,6 +92,7 @@ async function preview(out, order) {
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  cli("build-sections", "Usage: node scripts/build-sections.mjs [--preview <out-dir> [<id,id,…>]]", { preview: "value" }, null, { pos: [0, 1] });
   const { sections, problems } = collect();
   if (problems.length) { for (const p of problems) console.error(`✗ ${p}`); process.exit(1); }
   writeFileSync(join(DIR, "README.md"), renderReadme(sections));
