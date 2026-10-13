@@ -21,16 +21,22 @@ const stars = Array.from({ length: 40 }, (_, i) => `radial-gradient(1px 1px at $
 // Reduced motion: the photograph an astronomer would take of this sky: an hour of star trails and the one meteor that
 // crossed it. A composition of its own, so the still isn't the animation with the streaks frozen mid-flight.
 function MeteorsStill({ angle, color, sky }: { angle: number; color: string; sky: string }) {
-  const trails = Array.from({ length: 22 }, (_, i) => { const r = 60 + i * 34, a0 = (i * 0.83) % 6.28, a1 = a0 + 0.5 + (i % 4) * 0.12;
+  // an hour of exposure: concentric arcs round the pole, brighter and longer near it, fainter toward the horizon
+  const trails = Array.from({ length: 40 }, (_, i) => { const r = 40 + i * 22, a0 = (i * 0.83) % 6.28, a1 = a0 + 0.55 + (i % 5) * 0.11;
     return `M${360 + r * Math.cos(a0)} ${140 + r * Math.sin(a0)}A${r} ${r} 0 0 1 ${360 + r * Math.cos(a1)} ${140 + r * Math.sin(a1)}`; }).join("");
   const t = ((90 - angle) * Math.PI) / 180, x0 = 1180, y0 = 160, len = 520;
   return (
     <svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" }}>
       <defs><linearGradient id="me-m" x1={x0} y1={y0} x2={x0 - Math.cos(t) * len} y2={y0 + Math.sin(t) * len} gradientUnits="userSpaceOnUse"><stop offset="0" stopColor={color} stopOpacity="0" /><stop offset="1" stopColor={color} /></linearGradient></defs>
       <rect width="1600" height="1000" fill={sky} />
-      <path d={trails} fill="none" stroke="#fff" strokeOpacity=".26" strokeWidth="1.2" strokeLinecap="round" />
+      {/* sky glow over the horizon, the light pollution of the nearest town */}
+      <defs><linearGradient id="me-g" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stopColor={color} stopOpacity="0" /><stop offset="1" stopColor={color} stopOpacity=".16" /></linearGradient></defs>
+      <rect width="1600" height="1000" fill="url(#me-g)" />
+      <path d={trails} fill="none" stroke="#fff" strokeOpacity=".5" strokeWidth="1.6" strokeLinecap="round" />
+      <circle cx="360" cy="140" r="3" fill="#fff" />
       <line x1={x0} y1={y0} x2={x0 - Math.cos(t) * len} y2={y0 + Math.sin(t) * len} stroke="url(#me-m)" strokeWidth="3" strokeLinecap="round" />
-      <path d="M0 930Q400 900 800 918T1600 906V1000H0Z" fill="#000" fillOpacity=".55" />
+      {/* the ridge the camera stood on: a hard silhouette, so the plate reads as a photograph, not a frozen frame */}
+      <path d="M0 860L120 822L260 846L380 790L520 832L700 808L860 850L1040 796L1180 830L1340 812L1480 842L1600 820V1000H0Z" fill="#000" fillOpacity=".86" />
     </svg>
   );
 }

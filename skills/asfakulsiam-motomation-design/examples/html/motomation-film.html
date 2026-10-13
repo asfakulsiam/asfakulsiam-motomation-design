@@ -27,6 +27,7 @@
   .skip { position: absolute; left: -9999px; } .skip:focus { left: 1rem; top: 1rem; z-index: 10; background: var(--ink); color: var(--ground); padding: .5rem 1rem; }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .mono { font: 500 0.75rem/1.4 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  header a.mono { display: inline-block; padding: 0.5rem 0; } /* a 24px+ target (WCAG 2.5.8) */
 
   header { position: fixed; inset: 0 0 auto; display: flex; justify-content: space-between; padding: 1.25rem 5vw; z-index: 5; mix-blend-mode: difference; }
   header a { text-decoration: none; }
@@ -43,12 +44,13 @@
   .statement p { grid-column: 4 / 12; font: 500 clamp(1.75rem, 1.2rem + 2.6vw, 3.75rem)/1.12 var(--text); letter-spacing: -0.02em; text-wrap: balance; }
 
   /* film: one set of scene captions. Without motion (reduced motion, no JavaScript) the stage is a storyboard of
-     stills; while the film runs, the same figures are the captions over the canvas, so every caption is real,
+     stills: four plates in normal flow, each an <img> painted once from the film's own render (no canvas is mounted,
+     nothing pins), with its caption set beside it like a contact sheet; while the film runs, the same figures are the captions over the canvas, so every caption is real,
      readable, focusable text (no aria-hidden mirror). */
   .film__canvas, .rail { display: none; }
   .film__static { display: grid; gap: 14vh; padding: 10vh 5vw 20vh; }
   .film__static figure { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; align-items: end; }
-  .film__static canvas, .film__static img { grid-column: 1 / 9; width: 100%; aspect-ratio: 16 / 10; background: var(--surface); }
+  .film__static canvas, .film__static img { grid-column: 1 / 9; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; background: var(--surface); }
   .film__static figcaption { grid-column: 9 / 13; }
   .film__static figcaption p:first-child { font: 800 clamp(2rem, 4vw, 4rem)/0.95 var(--display); font-variation-settings: "wdth" 70; text-transform: uppercase; }
   .film__static a { text-decoration: none; }
@@ -60,7 +62,7 @@
   .film-on .rail { display: flex; }
   .film-on .film__static { display: block; padding: 0; }
   .film-on .film__static figure { position: absolute; left: 5vw; bottom: 14vh; display: block; max-width: 90vw; margin: 0; opacity: 0; }
-  .film-on .film__static figure canvas { display: none; }
+  .film-on .film__static figure img { display: none; }
   .film-on .film__static figcaption p:first-child { font: 800 clamp(2.75rem, 8vw, 9rem)/0.88 var(--display); font-variation-settings: "wdth" 66; letter-spacing: -0.02em; }
   .film-on .film__static figcaption p + p { margin-top: 1rem; max-width: 36ch; color: var(--muted); font-size: 1rem; }
   /* a focused scene link shows its caption at once; the film scrubs to that scene (script below) */
@@ -103,10 +105,10 @@
     <div class="film__stage">
       <canvas class="film__canvas" aria-hidden="true"></canvas>
       <div class="film__static">
-      <figure id="scene-1"><canvas data-still="0.05" aria-hidden="true"></canvas><figcaption><p><a href="#scene-1" data-jump="0"><span class="sr-only">Scene 1 of 4: </span>Darkness</a></p><p>A single ring waits in an empty room.</p></figcaption></figure>
-      <figure id="scene-2"><canvas data-still="0.35" aria-hidden="true"></canvas><figcaption><p><a href="#scene-2" data-jump="1"><span class="sr-only">Scene 2 of 4: </span>Orbit</a></p><p>The camera circles; the ring turns to show its depth.</p></figcaption></figure>
-      <figure id="scene-3"><canvas data-still="0.62" aria-hidden="true"></canvas><figcaption><p><a href="#scene-3" data-jump="2"><span class="sr-only">Scene 3 of 4: </span>Exploded</a></p><p>Every strand separates so you can see how it's made.</p></figcaption></figure>
-      <figure id="scene-4"><canvas data-still="0.95" aria-hidden="true"></canvas><figcaption><p><a href="#scene-4" data-jump="3"><span class="sr-only">Scene 4 of 4: </span>Whole</a></p><p>It closes into one form, the frame holds, and the page lets go.</p></figcaption></figure>
+      <figure id="scene-1"><img data-still="0.05" alt="" width="1600" height="1000"><figcaption><p><a href="#scene-1" data-jump="0"><span class="sr-only">Scene 1 of 4: </span>Darkness</a></p><p>A single ring waits in an empty room.</p></figcaption></figure>
+      <figure id="scene-2"><img data-still="0.35" alt="" width="1600" height="1000"><figcaption><p><a href="#scene-2" data-jump="1"><span class="sr-only">Scene 2 of 4: </span>Orbit</a></p><p>The camera circles; the ring turns to show its depth.</p></figcaption></figure>
+      <figure id="scene-3"><img data-still="0.62" alt="" width="1600" height="1000"><figcaption><p><a href="#scene-3" data-jump="2"><span class="sr-only">Scene 3 of 4: </span>Exploded</a></p><p>Every strand separates so you can see how it's made.</p></figcaption></figure>
+      <figure id="scene-4"><img data-still="0.95" alt="" width="1600" height="1000"><figcaption><p><a href="#scene-4" data-jump="3"><span class="sr-only">Scene 4 of 4: </span>Whole</a></p><p>It closes into one form, the frame holds, and the page lets go.</p></figcaption></figure>
       </div>
       <div class="rail" aria-hidden="true"><span data-code>00:00:00</span><i><b data-bar></b></i><span>00:24:00</span></div>
     </div>
@@ -127,10 +129,10 @@
 (() => {
   // ---- The "render": a procedural ring of strands drawn for any progress p in [0,1].
   // In a real project this is replaced by image-sequence frames from Blender/C4D/After Effects.
-  function render(canvas, p) {
+  function render(canvas, p, size) {
     const c = canvas.getContext("2d");
     const dpr = Math.min(devicePixelRatio || 1, 2);
-    const w = canvas.clientWidth * dpr, h = canvas.clientHeight * dpr;
+    const w = (size ? size.w : canvas.clientWidth) * dpr, h = (size ? size.h : canvas.clientHeight) * dpr;
     if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
     c.fillStyle = "#0E0D0B"; c.fillRect(0, 0, w, h);
     const light = Math.min(1, p / 0.12);                                   // scene 1: lights up
@@ -159,8 +161,13 @@
     }
   }
 
-  const stills = [...document.querySelectorAll("[data-still]")];
-  const paintStills = () => stills.forEach((cv) => render(cv, parseFloat(cv.dataset.still)));
+  // storyboard plates: each still is drawn once into a detached canvas (never in the document) and shown as an image
+  const stills = [...document.querySelectorAll("img[data-still]")];
+  const paintStills = () => stills.forEach((img) => {
+    const w = Math.max(320, Math.round(img.clientWidth || 800)), h = Math.round(w * 10 / 16);
+    const cv = document.createElement("canvas"); render(cv, parseFloat(img.dataset.still), { w, h });
+    img.src = cv.toDataURL("image/webp", 0.86);
+  });
   paintStills(); addEventListener("resize", paintStills);
 
   if (!window.gsap) return; // CDN blocked: the static storyboard is already designed

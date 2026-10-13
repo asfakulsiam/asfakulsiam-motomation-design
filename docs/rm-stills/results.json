@@ -1,0 +1,83 @@
+[
+ {
+  "id": "aurora",
+  "kind": "Tier 4 background",
+  "canvasesFull": 0,
+  "canvasesRM": 0,
+  "rmChangesPct": 0,
+  "differsFromFullPct": 52.9,
+  "ok": true
+ },
+ {
+  "id": "beams",
+  "kind": "Tier 4 background",
+  "canvasesFull": 0,
+  "canvasesRM": 0,
+  "rmChangesPct": 0,
+  "differsFromFullPct": 44.2,
+  "ok": true
+ },
+ {
+  "id": "globe",
+  "kind": "Tier 4 background",
+  "canvasesFull": 0,
+  "canvasesRM": 0,
+  "rmChangesPct": 0,
+  "differsFromFullPct": 15.1,
+  "ok": true
+ },
+ {
+  "id": "liquid-field",
+  "kind": "Tier 4 background",
+  "canvasesFull": 1,
+  "canvasesRM": 0,
+  "rmChangesPct": 0,
+  "differsFromFullPct": 65,
+  "ok": true
+ },
+ {
+  "id": "mesh-gradient",
+  "kind": "Tier 4 background",
+  "canvasesFull": 0,
+  "canvasesRM": 0,
+  "rmChangesPct": 0,
+  "differsFromFullPct": 69.9,
+  "ok": true
+ },
+ {
+  "id": "meteors",
+  "kind": "Tier 4 background",
+  "canvasesFull": 0,
+  "canvasesRM": 0,
+  "rmChangesPct": 0,
+  "differsFromFullPct": 17.5,
+  "ok": true
+ },
+ {
+  "id": "particle-field",
+  "kind": "Tier 4 background",
+  "canvasesFull": 0,
+  "canvasesRM": 0,
+  "rmChangesPct": 0,
+  "differsFromFullPct": 15.4,
+  "ok": true
+ },
+ {
+  "id": "event",
+  "kind": "Tier 4 template",
+  "canvasesFull": 0,
+  "canvasesRM": 0,
+  "rmChangesPct": 0,
+  "differsFromFullPct": 47.1,
+  "ok": true
+ },
+ {
+  "id": "motomation-film",
+  "kind": "Tier 5 film",
+  "canvasesFull": 1,
+  "canvasesRM": 0,
+  "rmChangesPct": 0,
+  "differsFromFullPct": 8.5,
+  "ok": true
+ }
+]
