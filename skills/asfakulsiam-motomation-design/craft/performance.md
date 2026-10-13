@@ -100,3 +100,36 @@ canvas.width = canvas.clientWidth * Math.min(1.5, devicePixelRatio);
 ```
 
 Reading alone catches all four failures. The Delivery Gate measures the result in a browser; these rules are what you check before it runs.
+
+## The twenty-item checklist
+
+Loaded on every build and redesign (SKILL.md), next to `craft/copy.md`, `craft/seo.md` and the security checklist. Tags:
+**[FE]** frontend, **[BE]** backend, **[IN]** infrastructure, **[H]** a human records it. Items marked **gate P** are
+measured on every page by `scripts/gate.mjs` (axis P, gate/4); the rest are ticked in `gates/delivery-gate.md`
+"Performance" with the file, config or measurement that proves them. A static page with no backend writes "n/a (no
+backend)" for the [BE] items, never a tick.
+
+| ID | Tag | Item | How it is decided |
+|---|---|---|---|
+| perf-01 | [FE] | Images compressed; AVIF or WebP, with a fallback where needed | **gate P**: a raster `<img>` (JPEG, PNG, GIF) with no AVIF/WebP `<source>` fails |
+| perf-02 | [FE] | Below-the-fold images use `loading="lazy"` | **gate P**: an `<img>` whose top is below the first 1440 × 900 screen without `loading="lazy"` fails |
+| perf-03 | [FE] | The LCP image is not lazy-loaded | **gate P**: the largest image in the first screen with `loading="lazy"` fails |
+| perf-04 | [FE] | Code-split: no single script over the tier's budget | **gate P**: total gzipped JS over the tier budget above fails; no tier known → the Tier 4–5 budget |
+| perf-05 | [FE] | API responses cached (SWR, React Query, or `Cache-Control`) | read the data layer; "n/a (no API)" on a static page |
+| perf-06 | [FE] | A CDN fronts static assets | the deploy target (Pages, Vercel, Netlify, Cloudflare) or the CDN config |
+| perf-07 | [FE] | JS and CSS minified in production | **gate P** warns when a script over 2 KB looks unminified (long comments, short lines); the build config decides |
+| perf-08 | [FE] | No extra re-renders (memo only where the profiler showed a cost) | React Profiler, recorded when used; never `memo` everything by default |
+| perf-09 | [FE] | Input handlers debounced (search, resize) | read the handlers; `requestAnimationFrame` or a debounce on every resize/scroll/input listener |
+| perf-10 | [FE] | Large lists paginated or virtualised | any list over ~100 items |
+| perf-11 | [FE] | Unused packages and dead scripts removed | **gate P**: an inline `<script>` with no code (empty or comments only) fails; packages: `npx depcheck` or reading `package.json` |
+| perf-12 | [FE] | Non-critical scripts deferred (analytics, chat) | **gate P**: an external classic `<script>` in `<head>` without `defer`, `async` or `type="module"` fails |
+| perf-13 | [FE] | Loading skeletons for async content | read the async views; a skeleton sized like the final content (no layout shift) |
+| perf-14 | [IN] | A load balancer when traffic justifies one, and the reason written down | hosting notes |
+| perf-15 | [BE] | API payloads trimmed to what the client uses | read the handlers or the GraphQL selection |
+| perf-16 | [BE] | Database connections pooled | the DB client config |
+| perf-17 | [BE] | Costly query results cached (Redis or in-memory) | the cache layer, with its invalidation rule |
+| perf-18 | [BE] | N+1 queries fixed | query log on the slowest route |
+| perf-19 | [BE] | Server-side caching on expensive routes | response headers or the framework's route cache |
+| perf-20 | [H] | A Lighthouse run recorded with its real numbers | the report file, or "not measured"; never a number from memory |
+
+Each failing gate P item adds one to the P count in the stamp (`rules: C0 S0 P0 K0`); the page passes P at 0.
