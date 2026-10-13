@@ -284,6 +284,19 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   }
 }
 
+// 13. docs/benchmark-summary.md names the newest main benchmark report as current.
+//     Main reports are evals/results/<date>-benchmark[-v<N>].md (companion reports have a suffix after the version).
+{
+  const files = readdirSync(join(ROOT, "evals/results")).filter((f) => /^\d{4}-\d{2}-\d{2}-benchmark(-v\d+)?\.md$/.test(f));
+  const ver = (f) => +((f.match(/-v(\d+)\.md$/) || [0, 1])[1]);
+  const newest = files.sort((a, b) => ver(a) - ver(b) || a.localeCompare(b)).at(-1);
+  const sum = readFileSync(join(ROOT, "docs/benchmark-summary.md"), "utf8");
+  const m = sum.match(/<!-- current-report -->[\s\S]*?evals\/results\/([^)`\]\s]+\.md)[\s\S]*?<!-- \/current-report -->/);
+  if (!m) fail("docs/benchmark-summary.md has no <!-- current-report --> marker naming the current report");
+  else if (m[1] !== newest) fail(`docs/benchmark-summary.md names ${m[1]} as current, but the newest main report is ${newest}`);
+  if (/v2 is the current result/i.test(sum)) fail("docs/benchmark-summary.md still says v2 is the current result");
+}
+
 warn.forEach((w) => console.warn(`warn: ${w}`));
 if (errors.length) { errors.forEach((e) => console.error(`✗ ${e}`)); console.error(`\n${errors.length} problem(s).`); process.exit(1); }
 console.log(`✓ repository OK (skill v${v}, ${mdFiles.length} docs, ${Object.keys(ids).length} data sets)`);
