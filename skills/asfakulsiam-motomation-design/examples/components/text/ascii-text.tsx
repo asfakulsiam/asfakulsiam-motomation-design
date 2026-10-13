@@ -12,16 +12,16 @@
 // touch: Same as desktop (settles when in view).
 // a11y: The element has the word as its accessible name (role="img" + aria-label); the character grid is aria-hidden. The grid is sized from its container width, so it never overflows.
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import { useInView, useReducedMotion, graphemes } from "../_lib/motion";
+import { useDirection, useInView, useReducedMotion, graphemes } from "../_lib/motion";
 
 type Props = { text: string; cols?: number; ramp?: string; fontFamily?: string; fontWeight?: number; className?: string; style?: CSSProperties };
 
 /** Sample the word into rows of characters. Each character cell is 0.6 wide by 1 tall, so the word is drawn on a canvas
  *  of cols×6 by rows×10 pixels and every 6×10 block is averaged into one cell: darker blocks take denser characters. */
-function sample(text: string, cols: number, ramp: string, family: string, weight: number): string[] {
+function sample(text: string, cols: number, ramp: string, family: string, weight: number, rtl = false): string[] {
   if (typeof document === "undefined") return [];
   const c = document.createElement("canvas"), g = c.getContext("2d", { willReadFrequently: true }); if (!g) return [];
-  g.font = `${weight} 100px ${family}`; const w100 = Math.max(1, g.measureText(text).width);
+  g.direction = rtl ? "rtl" : "ltr"; g.font = `${weight} 100px ${family}`; const w100 = Math.max(1, g.measureText(text).width);
   const W = cols * 6, size = (W * 0.94) / (w100 / 100), rows = Math.max(3, Math.ceil((size * 1.2) / 10)), H = rows * 10;
   c.width = W; c.height = H; g.fillStyle = "#fff"; g.fillRect(0, 0, W, H); g.fillStyle = "#000"; g.font = `${weight} ${size}px ${family}`; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(text, W / 2, H / 2);
   const d = g.getImageData(0, 0, W, H).data, out: string[] = [], R = graphemes(ramp);
@@ -39,7 +39,8 @@ export function AsciiText({ text, cols = 90, ramp = " .:-=+*#%@", fontFamily = "
   const reduce = useReducedMotion();
   const [ready, setReady] = useState(false);
   useEffect(() => setReady(true), []);
-  const rows = useMemo(() => (ready ? sample(text, cols, ramp, fontFamily, fontWeight) : []), [ready, text, cols, ramp, fontFamily, fontWeight]);
+  const dir = useDirection(ref);
+  const rows = useMemo(() => (ready ? sample(text, cols, ramp, fontFamily, fontWeight, dir === "rtl") : []), [ready, text, cols, ramp, fontFamily, fontWeight, dir]);
   const [k, setK] = useState(0); // 0 = noise, 1 = settled
   useEffect(() => {
     if (reduce || !seen || !rows.length) return;
@@ -49,11 +50,11 @@ export function AsciiText({ text, cols = 90, ramp = " .:-=+*#%@", fontFamily = "
   }, [seen, reduce, rows]);
   const p = reduce ? 1 : k;
   const rampG = graphemes(ramp);
-  // noise: each cell holds its final glyph once a left-to-right, row-skewed front passes it
-  const out = p >= 1 ? rows : rows.map((r, y) => graphemes(r).map((ch, x) => ((x / cols) + (y % 3) * 0.04 < p * 1.15 ? ch : ch === " " ? " " : rampG[(x * 7 + y * 13 + Math.floor(p * 40)) % rampG.length])).join(""));
+  // noise: each cell holds its final glyph once a row-skewed front passes it, from the reading start (right on RTL)
+  const out = p >= 1 ? rows : rows.map((r, y) => graphemes(r).map((ch, x) => (((dir === "rtl" ? cols - 1 - x : x) / cols) + (y % 3) * 0.04 < p * 1.15 ? ch : ch === " " ? " " : rampG[(x * 7 + y * 13 + Math.floor(p * 40)) % rampG.length])).join(""));
   return (
     <div ref={ref} role="img" aria-label={text} className={className} style={{ containerType: "inline-size", width: "100%", ...style }}>
-      <pre aria-hidden="true" style={{ margin: 0, fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace", fontSize: `calc(100cqw / ${cols} / 0.6)`, lineHeight: 1, letterSpacing: 0, whiteSpace: "pre", overflow: "hidden" }}>
+      <pre aria-hidden="true" dir="ltr" style={{ margin: 0, fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace", fontSize: `calc(100cqw / ${cols} / 0.6)`, lineHeight: 1, letterSpacing: 0, whiteSpace: "pre", overflow: "hidden" }}>
         {out.join("\n") || text}
       </pre>
     </div>

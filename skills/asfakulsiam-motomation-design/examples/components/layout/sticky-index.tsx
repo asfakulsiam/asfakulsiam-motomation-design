@@ -29,8 +29,8 @@ export function StickyIndex({ sections, label = "On this page", className, style
   return (
     <nav aria-label={label} className={className} style={{ position: "sticky", top: 96, alignSelf: "start", ...style }}>
       <p style={{ fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase", margin: "0 0 12px", opacity: 0.7 }}>{label}</p>
-      <ol style={{ listStyle: "none", margin: 0, padding: "0 0 0 14px", position: "relative", borderLeft: "1px solid var(--line, rgba(0,0,0,.15))" }}>
-        <span aria-hidden="true" style={{ position: "absolute", left: -1, top: 0, width: 2, height: 28, background: "var(--accent, #e0442b)", transform: `translateY(${active * 32 + 2}px)`, transition: reduce ? "none" : `transform 260ms ${EASE.out}` }} />
+      <ol style={{ listStyle: "none", margin: 0, padding: 0, paddingInlineStart: 14, position: "relative", borderInlineStart: "1px solid var(--line, rgba(0,0,0,.15))" }}>
+        <span aria-hidden="true" style={{ position: "absolute", insetInlineStart: -1, top: 0, width: 2, height: 28, background: "var(--accent, #e0442b)", transform: `translateY(${active * 32 + 2}px)`, transition: reduce ? "none" : `transform 260ms ${EASE.out}` }} />
         {sections.map((s, i) => <li key={s.id} style={{ height: 32, display: "flex", alignItems: "center" }}>
           <a href={`#${s.id}`} aria-current={i === active ? "location" : undefined} style={{ color: "inherit", textDecoration: "none", fontWeight: i === active ? 600 : 400, opacity: i === active ? 1 : 0.7 }}>{s.label}</a></li>)}
       </ol>

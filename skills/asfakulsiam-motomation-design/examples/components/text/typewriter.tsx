@@ -15,7 +15,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useInView, useReducedMotion, graphemes } from "../_lib/motion";
 
 type Props = { text: string; speed?: number; delay?: number; caret?: boolean; as?: "p" | "h1" | "h2" | "h3" | "span"; className?: string; style?: CSSProperties };
-const bar: CSSProperties = { position: "absolute", top: "0.1em", bottom: "0.05em", width: "0.08em", marginLeft: "0.03em", background: "currentColor" };
+const bar: CSSProperties = { position: "absolute", top: "0.1em", bottom: "0.05em", width: "0.08em", marginInlineStart: "0.03em", background: "currentColor" };
 const SR: CSSProperties = { position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0 0 0 0)", whiteSpace: "nowrap" };
 
 export function Typewriter({ text, speed = 38, delay = 200, caret = true, as: Tag = "p", className, style }: Props) {
@@ -37,12 +37,12 @@ export function Typewriter({ text, speed = 38, delay = 200, caret = true, as: Ta
     <Tag ref={ref as never} className={className} style={{ position: "relative", ...style }}>
       <span style={SR}>{text}</span>
       <span aria-hidden="true">
-        {caret && !reduce && shown === 0 && <span style={{ position: "relative" }}><span style={{ ...bar, left: 0 }} /></span>}
+        {caret && !reduce && shown === 0 && <span style={{ position: "relative" }}><span style={{ ...bar, insetInlineStart: 0 }} /></span>}
         {units.map((ch, i) => (
           <span key={i} style={{ opacity: i < shown ? 1 : 0, position: "relative" }}>
             {ch}
             {/* the caret rides on the last typed (visible) character as a zero-width absolute bar, so it moves without reflow */}
-            {caret && !reduce && i === shown - 1 && <span style={{ ...bar, left: "100%", opacity: done ? 0 : 1, transition: "opacity 400ms 600ms" }} />}
+            {caret && !reduce && i === shown - 1 && <span style={{ ...bar, insetInlineStart: "100%", opacity: done ? 0 : 1, transition: "opacity 400ms 600ms" }} />}
           </span>
         ))}
       </span>

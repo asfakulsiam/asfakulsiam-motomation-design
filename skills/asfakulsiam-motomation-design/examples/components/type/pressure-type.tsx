@@ -34,7 +34,7 @@ export function PressureType({ word, radius = 220, wdth = [75, 125], wght = [300
     return () => { window.removeEventListener("pointermove", move); window.removeEventListener("resize", measure); ro.disconnect(); cancelAnimationFrame(raf); letters.forEach((l) => (l.style.fontVariationSettings = "")); };
   }, [reduce, fine, radius, wdth, wght, word]);
   return (
-    <span ref={ref} aria-label={word} className={className} style={{ display: "inline-flex", fontVariationSettings: `"wdth" ${wdth[0]}, "wght" ${wght[0]}`, ...style }}>
+    <span ref={ref} aria-label={word} dir="auto" className={className} style={{ display: "inline-flex", fontVariationSettings: `"wdth" ${wdth[0]}, "wght" ${wght[0]}`, ...style }}>
       {graphemes(word).map((c, i) => <span key={i} data-l aria-hidden="true" style={{ display: "inline-block", fontVariationSettings: `"wdth" ${wdth[0]}, "wght" ${wght[0]}` }}>{c === " " ? "\u00a0" : c}</span>)}
     </span>
   );

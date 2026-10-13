@@ -1,7 +1,7 @@
 "use client";
 // Motomation component helpers: the shared motion rules every component in examples/components follows.
 // No dependencies beyond React. Each hook cleans up after itself and respects reduced motion.
-import { useEffect, useRef, useState, useSyncExternalStore, type RefObject } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, type RefObject } from "react";
 
 export const clamp = (v: number, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, v));
 export const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
@@ -122,6 +122,20 @@ export function graphemes(text: string): string[] {
   const out: string[] = [];
   for (const u of units) { const prev = out[out.length - 1]; if (prev !== undefined && JOINING.test(u) && JOINING.test(prev.slice(-1))) out[out.length - 1] = prev + u; else out.push(u); }
   return out;
+}
+
+/** Writing direction. Components read it from the page (dir="rtl" on <html> or any ancestor, or CSS direction), never
+ *  from a prop, so an Arabic, Hebrew or Urdu page needs no extra wiring. Layout uses logical properties
+ *  (inset-inline-start, padding-inline-end…) and follows on its own; these are for what layout cannot do: pointer x to
+ *  letter index, swipe and arrow-key meaning, the direction a sweep or marquee travels. */
+export const isRtl = (el: Element | null | undefined) => !!el && typeof getComputedStyle !== "undefined" && getComputedStyle(el).direction === "rtl";
+const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
+/** "rtl" or "ltr" for an element, read before the browser paints (so nothing is drawn the wrong way first). The server
+ *  render and the hydration render say "ltr", so the markup always matches; the correction lands before first paint. */
+export function useDirection<T extends Element>(ref: RefObject<T | null>): "ltr" | "rtl" {
+  const [d, setD] = useState<"ltr" | "rtl">("ltr");
+  useIsoLayoutEffect(() => { setD(isRtl(ref.current) ? "rtl" : "ltr"); });
+  return d;
 }
 
 export const EASE = { out: "cubic-bezier(0.22, 1, 0.36, 1)", outStrong: "cubic-bezier(0.16, 1, 0.3, 1)", inOut: "cubic-bezier(0.65, 0, 0.35, 1)", drawer: "cubic-bezier(0.32, 0.72, 0, 1)" } as const;

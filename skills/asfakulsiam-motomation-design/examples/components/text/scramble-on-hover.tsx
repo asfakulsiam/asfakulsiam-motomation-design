@@ -12,7 +12,7 @@
 // touch: Tap scrambles the whole word once, settling left to right.
 // a11y: The word is plain text for assistive tech (the scrambled letters are an aria-hidden copy). At rest the word is set in its own glyph widths; while it scrambles each letter is held at the width its real glyph measured, so the word never reflows. Keyboard focus plays the tap version.
 import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from "react";
-import { useReducedMotion, useFinePointer, graphemes } from "../_lib/motion";
+import { useReducedMotion, useFinePointer, graphemes, isRtl } from "../_lib/motion";
 
 type Props = { text: string; glyphs?: string; radius?: number; as?: "span" | "a" | "p" | "h3"; href?: string; className?: string; style?: CSSProperties };
 // the fixed 0.62em cell grid is for Latin-width glyphs; text with a Bangla cluster, an emoji or an Arabic word keeps its own widths
@@ -41,15 +41,15 @@ export function ScrambleOnHover({ text, glyphs = "!<>-_\\/[]{}=+*^?#", radius = 
   };
   const start = () => { if (!raf.current) { lock(true); raf.current = requestAnimationFrame(tick); } };
   useEffect(() => () => cancelAnimationFrame(raf.current), []);
-  const move = (e: PointerEvent) => { if (reduce || !fine || !ref.current) return; const r = ref.current.getBoundingClientRect(); pointer.current = ((e.clientX - r.left) / r.width) * units.length - 0.5; start(); };
+  const move = (e: PointerEvent) => { if (reduce || !fine || !ref.current) return; const r = ref.current.getBoundingClientRect(); pointer.current = ((isRtl(cells.current[0]?.parentElement) ? r.right - e.clientX : e.clientX - r.left) / r.width) * units.length - 0.5; start(); };
   const leave = () => { pointer.current = null; };
-  // tap / focus: the whole word scrambles, settling left to right
+  // tap / focus: the whole word scrambles, settling in reading order (right to left for RTL text)
   const sweep = () => { if (reduce) return; heat.current = heat.current.map((_, i) => 1 + i * 0.06); pointer.current = null; start(); };
   return (
     <Tag ref={ref as never} href={href} className={className} onPointerMove={move} onPointerLeave={leave} onPointerDown={(e) => { if (e.pointerType !== "mouse") sweep(); }} onFocus={sweep}
       style={{ position: "relative", display: "inline-block", fontVariantNumeric: "tabular-nums", ...style }}>
       <span style={SR}>{text}</span>
-      <span aria-hidden="true" style={{ display: "inline-flex" }}>
+      <span aria-hidden="true" dir="auto" style={{ display: "inline-flex" }}>
         {chars.map((c, i) => <span key={i} ref={(el) => { cells.current[i] = el; }} style={{ display: "inline-block", whiteSpace: "pre", textAlign: "center", overflow: "visible" }}>{c}</span>)}
       </span>
     </Tag>

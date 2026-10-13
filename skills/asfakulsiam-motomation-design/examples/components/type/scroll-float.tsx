@@ -31,8 +31,9 @@ export function ScrollFloat({ text, rise = 0.6, spread = 0.5, as: Tag = "h2", cl
   }, !reduce);
   return (
     <Tag ref={ref as never} aria-label={text} className={className} style={{ overflow: "hidden", ...style }}>
-      {/* letters are grouped into no-wrap words with real spaces between, so lines only break between words */}
-      {text.split(" ").map((word, w, words) => {
+      {/* letters are grouped into no-wrap words with real spaces between, so lines only break between words; the
+          dir="auto" run gives the split letters the text's own direction (they are bidi-neutral boxes otherwise) */}
+      <span dir="auto">{text.split(" ").map((word, w, words) => {
         const offset = words.slice(0, w).reduce((n, x) => n + graphemes(x).length + 1, 0);
         return (
           <Fragment key={w}>
@@ -42,7 +43,7 @@ export function ScrollFloat({ text, rise = 0.6, spread = 0.5, as: Tag = "h2", cl
             {w < words.length - 1 ? " " : null}
           </Fragment>
         );
-      })}
+      })}</span>
     </Tag>
   );
 }

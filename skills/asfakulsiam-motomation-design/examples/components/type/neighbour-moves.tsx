@@ -21,7 +21,7 @@ export function NeighbourMoves({ word, moves = MOVES, className, style }: Props)
   const reduce = useReducedMotion();
   const [hot, setHot] = useState<number | null>(null);
   return (
-    <span aria-label={word} className={className} style={{ display: "inline-flex", ...style }} onPointerLeave={() => setHot(null)}>
+    <span aria-label={word} dir="auto" className={className} style={{ display: "inline-flex", ...style }} onPointerLeave={() => setHot(null)}>
       {graphemes(word).map((c, i) => (
         <span key={i} aria-hidden="true" onPointerEnter={() => !reduce && setHot(i)} onPointerDown={() => !reduce && setHot(i)}
           style={{ display: "inline-block", transition: `transform 220ms ${EASE.out}`, transform: hot === i ? moves[i % moves.length] : "none" }}>{c === " " ? "\u00a0" : c}</span>

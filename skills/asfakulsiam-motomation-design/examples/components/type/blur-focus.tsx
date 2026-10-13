@@ -23,12 +23,13 @@ export function BlurFocus({ text, stagger = 70, duration = 800, blur = 12, as: T
   const on = seen || reduce;
   return (
     <Tag ref={ref as never} className={className} style={style}>
-      {text.split(" ").map((w, i) => (
+      {/* dir="auto": the words are inline-blocks (bidi-neutral boxes), so they take the text's own direction from here */}
+      <span dir="auto">{text.split(" ").map((w, i) => (
         <span key={i} style={{ display: "inline-block", whiteSpace: "pre", filter: on ? "none" : `blur(${blur}px)`, opacity: on ? 1 : 0.15,
           transition: reduce ? "none" : `filter ${duration}ms ${EASE.outStrong} ${i * stagger}ms, opacity ${duration}ms ${EASE.outStrong} ${i * stagger}ms` }}>
           {w}{i < text.split(" ").length - 1 ? " " : ""}
         </span>
-      ))}
+      ))}</span>
     </Tag>
   );
 }

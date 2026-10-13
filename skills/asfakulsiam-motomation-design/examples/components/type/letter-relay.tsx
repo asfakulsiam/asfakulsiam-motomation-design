@@ -12,7 +12,7 @@
 // touch: Same as desktop.
 // a11y: The h1 keeps the real text; the travelling letters are aria-hidden; the header name is a normal link.
 import { useRef, type CSSProperties } from "react";
-import { useReducedMotion, useScrollProgress, clamp, lerp, graphemes } from "../_lib/motion";
+import { isRtl, useReducedMotion, useScrollProgress, clamp, lerp, graphemes } from "../_lib/motion";
 
 type Props = { name: string; heroSize?: string; headerSize?: number; href?: string; className?: string; style?: CSSProperties };
 
@@ -29,11 +29,11 @@ export function LetterRelay({ name, heroSize = "clamp(3rem, 14vw, 12rem)", heade
     // batch: reset, read every rect, then write, so the frame has one layout pass
     letters.forEach((l) => (l.style.transform = "none"));
     const rects = letters.map((l) => l.getBoundingClientRect());
-    const fs = parseFloat(getComputedStyle(w).fontSize) || 1;
+    const fs = parseFloat(getComputedStyle(w).fontSize) || 1; const rtl = isRtl(w);
     letters.forEach((l, i) => {
       const t = clamp(k * 1.35 - (i / letters.length) * 0.35); const r = rects[i]; // small stagger: the word stays legible while it travels
       const scale = lerp(1, headerSize / fs, t);
-      const tx = lerp(0, sr.left + (i / letters.length) * sr.width - r.left, t), ty = lerp(0, sr.top - r.top, t);
+      const tx = lerp(0, sr.left + (rtl ? 1 - (i + 1) / letters.length : i / letters.length) * sr.width - r.left, t), ty = lerp(0, sr.top - r.top, t);
       l.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`; l.style.opacity = t >= 1 ? "0" : "1";
     });
     s.style.opacity = k >= 1 ? "1" : "0";
@@ -45,7 +45,7 @@ export function LetterRelay({ name, heroSize = "clamp(3rem, 14vw, 12rem)", heade
       </header>
       <div ref={hero} style={{ minHeight: "100svh", display: "grid", alignContent: "end", padding: "0 24px 8vh" }}>
         <h1 aria-label={name} style={{ fontSize: heroSize, lineHeight: 0.9, margin: 0 }}>
-          <span ref={word} aria-hidden="true" style={{ display: "inline-block", whiteSpace: "nowrap", position: "relative", zIndex: 11 }}>
+          <span ref={word} aria-hidden="true" dir="auto" style={{ display: "inline-block", whiteSpace: "nowrap", position: "relative", zIndex: 11 }}>
             {graphemes(name).map((c, i) => <span key={i} data-l style={{ display: "inline-block", transformOrigin: "0 0", willChange: reduce ? undefined : "transform" }}>{c === " " ? "\u00a0" : c}</span>)}
           </span>
         </h1>

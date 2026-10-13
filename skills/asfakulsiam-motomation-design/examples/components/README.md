@@ -144,3 +144,12 @@ Every file starts with the same header, which this catalogue, `data/components.c
 ```
 
 Rules for new components: one exported function component, props with defaults, no dependency beyond React unless the tier needs it, a reduced-motion path in code, cleanup of every listener and frame loop, decorative layers `aria-hidden` and `pointer-events: none`, and original code only.
+
+## Right-to-left
+
+Every text, type and layout component works on a right-to-left page (`<html dir="rtl">` or any ancestor with `dir`/`direction`), with nothing to configure; `tests/components/rtl.test.mjs` checks each one against an LTR control. The rules, for new components too:
+
+- Layout uses logical properties (`inset-inline-start`, `padding-inline-end`, `border-inline-start`), never `left`/`right` for something that belongs to the reading start or end.
+- Text split into letters or words (inline-blocks or flex items) sits inside a `dir="auto"` wrapper: split boxes are bidi-neutral, so without it a Latin word on an Arabic page shows reversed and a Hebrew phrase on an English page shows its words in the wrong order. A string that mixes directions inside one split run is ordered by its first strong letter; keep mixed strings in plain text.
+- What layout cannot mirror is read from `useDirection(ref)` or `isRtl(el)` (`_lib/motion.ts`): pointer x to letter index, the meaning of ← → and of a swipe, the direction a sweep, marquee or relay travels.
+- Pictures stay pictures: an ASCII drawing, a canvas or a map is laid out left to right (`dir="ltr"`) whatever the page.
