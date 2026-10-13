@@ -3,6 +3,7 @@
 //   node scripts/build-templates.mjs                       validate, build every examples/templates/<id>.html, write the README
 //   node scripts/build-templates.mjs --only saas-landing   build one
 //   node scripts/build-templates.mjs --stamp <id> "<critique: … · gate: …>"   paste the line gate.mjs printed into the page's stamp
+//                                                          (also for a Tier 5 film template: examples/templates/<id>/index.html)
 // Each page is server-rendered (react-dom/server) and hydrated, so the HTML is complete before any script runs.
 // A rebuild that produces the same page (stamp aside) keeps the existing file, and with it the measured stamp.
 // Source of a template: examples/templates/<id>/page.tsx with a "// @motomation-template" header (see the README).
@@ -137,13 +138,41 @@ ${BASE}
   } finally { rmSync(tmp, { recursive: true, force: true }); }
 }
 
-export function renderReadme(templates) {
+// Tier 5 film templates: standalone folders (examples/templates/<id>/index.html, no page.tsx) whose film is a frame
+// sequence from scripts/build-frames.mjs. They are not built from sections; the README lists them from their stamp
+// comment, <title>, meta description and frames.json, and check-repo holds them to the same rules (tier5Assets etc.).
+export function collectFilms() {
+  const films = [];
+  if (!existsSync(DIR)) return films;
+  const walk = (d, base = "") => readdirSync(join(d, base), { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(d, `${base}${e.name}/`) : [`${base}${e.name}`]));
+  for (const id of readdirSync(DIR).filter((d) => existsSync(join(DIR, d, "index.html")) && !existsSync(join(DIR, d, "page.tsx"))).sort()) {
+    const html = readFileSync(join(DIR, id, "index.html"), "utf8");
+    const st = html.match(/motomation · archetype: ([a-z-]+) · mutation: ([a-z-]+) · signature: ([a-z-]+) · tier: (\d)/);
+    const man = existsSync(join(DIR, id, "frames.json")) ? readFileSync(join(DIR, id, "frames.json"), "utf8") : null;
+    let frames = null; try { frames = man && JSON.parse(man); } catch {}
+    films.push({ id, html: `examples/templates/${id}/index.html`, name: (html.match(/<title>([^<]+)<\/title>/) || [])[1] || id,
+      what: (html.match(/<meta name="description" content="([^"]+)"/) || [])[1] || "", archetype: st?.[1], mutation: st?.[2], signature: st?.[3], tier: st ? +st[4] : null,
+      families: [...new Set([...html.matchAll(/font-family:"([^"]+)"/g)].map((m) => m[1]))], frames, manifest: man, files: walk(join(DIR, id)) });
+  }
+  return films;
+}
+
+export function renderReadme(templates, films = collectFilms()) {
   const L = ["# Page templates", "",
     `${templates.length} whole pages, each composed only from the sections in \`examples/sections/\` (a template imports sections and nothing else; \`node scripts/build-templates.mjs\` checks this). Each sets its brand once: colours and fonts as CSS variables, so the same sections change voice per page. Each built page is server-rendered HTML with its own stamp, measured by the Delivery Gate (\`scripts/gate.mjs\`) and checked with \`gate.mjs --verify\`.`, "",
     "| Page | Kind | Archetype · mutation · signature | Tier | Sections (in order) | Fonts |", "|---|---|---|---|---|---|"];
   for (const t of templates) L.push(`| [${t.name}](${t.id}.html) ([source](${t.id}/page.tsx)) | ${t.kind} | ${t.archetype} · ${t.mutation} · ${t.signature} | ${t.tier} | ${t.list.map((s) => `\`${s}\``).join(" → ")} | ${t.fonts.display} / ${t.fonts.text} / ${t.fonts.mono} |`);
   L.push("", "**What each page is**", "");
   for (const t of templates) L.push(`- **${t.name}** (${t.kind}): ${t.what}`);
+  if (films.length) {
+    L.push("", "**Tier 5 film templates** (standalone: `index.html` + a frame sequence, not built from sections)", "",
+      `${films.length} scroll-as-film pages. Each folder holds the page, its \`scene.mjs\`, the frames rendered from it by \`scripts/build-frames.mjs\` (\`frames/\`, \`frames-mobile/\`, \`poster.webp\`, \`storyboard/\`, \`film.mp4\`, \`frames.json\`), \`DESIGN.md\`, \`MOTION.md\` and \`log.json\`. Reduced motion is the storyboard: stills in normal flow, no canvas mounted.`, "",
+      "| Page | Archetype · mutation · signature | Tier | Frames (desktop · mobile) | Fonts | Motion |", "|---|---|---|---|---|---|");
+    for (const f of films) L.push(`| [${f.name}](${f.id}/index.html) | ${f.archetype} · ${f.mutation} · ${f.signature} | ${f.tier} | ${f.frames ? `${f.frames.desktop.frames} × ${f.frames.desktop.width}×${f.frames.desktop.height} · ${f.frames.mobile.frames} × ${f.frames.mobile.width}×${f.frames.mobile.height}` : "none"} | ${f.families.filter((x) => x !== "Hind Siliguri").join(" / ")} | [MOTION.md](${f.id}/MOTION.md) |`);
+    L.push("");
+    for (const f of films) L.push(`- **${f.id}**: ${f.what}`);
+    L.push("", "Rebuild a film's frames and check they are byte-identical (from the skill folder):", "", "```sh", "node scripts/build-frames.mjs --scene examples/templates/<id>/scene.mjs --out examples/templates/<id>", "node scripts/build-frames.mjs --scene examples/templates/<id>/scene.mjs --out examples/templates/<id> --check", "node scripts/gate.mjs examples/templates/<id>/index.html", "```");
+  }
   L.push("", "**Build and check one**", "", "```sh", "node scripts/build-templates.mjs --only <id>          # from the repository root", "node skills/asfakulsiam-motomation-design/scripts/gate.mjs skills/asfakulsiam-motomation-design/examples/templates/<id>.html", "node scripts/build-templates.mjs --stamp <id> \"critique: … · gate: …\"   # paste the line the gate printed", "node skills/asfakulsiam-motomation-design/scripts/gate.mjs --verify skills/asfakulsiam-motomation-design/examples/templates/<id>.html", "```", "",
     "Fonts are self-hosted from `fonts/` (SIL Open Font License 1.1; see `fonts/LICENSES.md`). Every page also loads Hind Siliguri for Bangla text and the taka sign, limited by `unicode-range` so it downloads only when Bengali characters are on the page.", "");
   return L.join("\n");
@@ -156,12 +185,12 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   if (si > 0) {
     const id = process.argv[si + 1], line = (process.argv[si + 2] || "").trim().replace(/^PASS\s+stamp →\s*/, "");
     if (!/^critique: .+ · gate: c\d+ o\d+ w\d+ rm\d+ a\d+ n\d+ q\d+ k\d+ · gate\/\d+ · [0-9a-f]{10}(?: · skipped \d+\/\d+@\d+)?$/.test(line)) { console.error(`✗ paste the whole "critique: … · gate: …" line gate.mjs printed (got: ${line})`); process.exit(1); }
-    const f = join(DIR, `${id}.html`), html = readFileSync(f, "utf8");
+    const f = existsSync(join(DIR, id, "index.html")) && !existsSync(join(DIR, id, "page.tsx")) ? join(DIR, id, "index.html") : join(DIR, `${id}.html`), html = readFileSync(f, "utf8");
     writeFileSync(f, html.replace(/\/\* motomation · ([\s\S]*?) \*\//, (_, inner) => `/* motomation · ${inner.split(" · critique:")[0]} · ${line} */`));
-    console.log(`Stamped ${id}.html: ${line}`); process.exit(0);
+    console.log(`Stamped ${f.slice(DIR.length + 1)}: ${line}`); process.exit(0);
   }
   const oi = process.argv.indexOf("--only"); const only = oi > 0 ? process.argv[oi + 1].split(",") : null;
   for (const t of templates.filter((t) => !only || only.includes(t.id))) { const r = await build(t); console.log(`${r.kept ? "kept " : "wrote"} examples/templates/${t.id}.html (${r.kb} KB${r.jsKB ? `, script ${r.jsKB} KB` : ""}, tier ${t.tier}, ${t.list.length} sections)`); }
   writeFileSync(join(DIR, "README.md"), renderReadme(templates));
-  console.log(`Wrote examples/templates/README.md (${templates.length} templates)`);
+  console.log(`Wrote examples/templates/README.md (${templates.length} templates + ${collectFilms().length} Tier 5 film templates)`);
 }

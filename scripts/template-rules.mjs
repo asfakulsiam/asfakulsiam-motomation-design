@@ -5,6 +5,7 @@
 //   pins(stampedHtml)             measured pins (stamp M trace) within the budget of 2
 //   imagery(designMd)             an Imagery block with a Mode line, a stand-in when images are used, no boilerplate
 //   noPlaceholderArt(src, file)   no section calls the old abstract art() placeholder
+//   tier5Assets(tier, files, manifest)  a Tier 5 template ships frames/, poster.webp and MOTION.md (and frames.json lists them)
 
 // a timing sheet: at least one chapter header and one table with the sheet's columns and a beat row
 export function timingSheet(tier, motionMd) {
@@ -57,4 +58,24 @@ export function imagery(designMd) {
 }
 export function noPlaceholderArt(sourceText, file) {
   return /\bart\(/.test(sourceText.replace(/\/\/.*$/gm, "")) ? [`${file} still calls art(); draw the real subject (examples/sections/_imagery.tsx) or use no imagery`] : [];
+}
+
+// Tier 5 (scroll-as-film, motion/tier-5-motomation.md): the film is real frames, not a promise. A Tier 5 template ships
+// frames/ (the desktop sequence, scripts/build-frames.mjs), poster.webp (first paint and no-JS) and MOTION.md (the
+// timing sheet), and when frames.json is present its frame count matches frames/. \`files\` is the template folder's
+// file list (relative paths, "/" separators), \`manifest\` the text of frames.json or null, so the test can feed it lists.
+export const TIER5_MIN_FRAMES = 24;
+export function tier5Assets(tier, files, manifest = null) {
+  if (+tier !== 5) return [];
+  const p = [], has = (f) => files.includes(f);
+  const frames = files.filter((f) => /^frames\/[^/]+\.(webp|avif|jpe?g|png)$/.test(f));
+  if (!frames.length) p.push("Tier 5 template has no frames/ sequence (render one with scripts/build-frames.mjs)");
+  else if (frames.length < TIER5_MIN_FRAMES) p.push(`frames/ has ${frames.length} frames; a scrubbed film needs at least ${TIER5_MIN_FRAMES}`);
+  if (!has("poster.webp")) p.push("Tier 5 template has no poster.webp (the first paint before frames load, and the no-JS image)");
+  if (!has("MOTION.md")) p.push("Tier 5 template has no MOTION.md (timing sheet, motion/choreography.md)");
+  if (manifest !== null) {
+    let m = null; try { m = JSON.parse(manifest); } catch { p.push("frames.json is not valid JSON"); }
+    if (m && m.desktop?.frames !== frames.length) p.push(`frames.json says ${m.desktop?.frames} desktop frames, frames/ has ${frames.length}; rebuild with scripts/build-frames.mjs`);
+  }
+  return p;
 }

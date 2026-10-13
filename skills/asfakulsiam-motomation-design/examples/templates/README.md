@@ -24,6 +24,26 @@
 - **Mati — No. 14-07, Ash celadon plate** (e-commerce product): One plate from a small firing, sold like a catalogue lot: the object, its making in four steps, buyers' notes, a deliberate hold to reserve, then the rest of the shelf.
 - **Hawa Studio — design for public institutions, Dhaka** (portfolio (studio)): A design studio's site kept as its account book: projects as ledger entries, services with fixed shapes, the team at the table, and the wait time for a new start.
 
+**Tier 5 film templates** (standalone: `index.html` + a frame sequence, not built from sections)
+
+2 scroll-as-film pages. Each folder holds the page, its `scene.mjs`, the frames rendered from it by `scripts/build-frames.mjs` (`frames/`, `frames-mobile/`, `poster.webp`, `storyboard/`, `film.mp4`, `frames.json`), `DESIGN.md`, `MOTION.md` and `log.json`. Reduced motion is the storyboard: stills in normal flow, no canvas mounted.
+
+| Page | Archetype · mutation · signature | Tier | Frames (desktop · mobile) | Fonts | Motion |
+|---|---|---|---|---|---|
+| [Noor Haque · titles and motion for film](motion-portfolio/index.html) | film-reel · tempo-shift · timecode-rail | 5 | 180 × 1920×1080 · 90 × 828×1472 | Bricolage Grotesque / Hanken Grotesk / JetBrains Mono | [MOTION.md](motion-portfolio/MOTION.md) |
+| [Shapla R1 · a kitchen radio you tune by hand](product-launch/index.html) | stage · single-object · aperture | 5 | 180 × 1920×1440 · 90 × 828×1036 | Fraunces / Schibsted Grotesk / JetBrains Mono | [MOTION.md](product-launch/MOTION.md) |
+
+- **motion-portfolio**: Noor Haque designs title sequences in Dhaka. The reel on this page is a film you play by scrolling: four shots, four commissions.
+- **product-launch**: Shapla R1 is an FM radio in a folded aluminium shell, with a dial you turn by hand. Pre-orders ship in March 2027.
+
+Rebuild a film's frames and check they are byte-identical (from the skill folder):
+
+```sh
+node scripts/build-frames.mjs --scene examples/templates/<id>/scene.mjs --out examples/templates/<id>
+node scripts/build-frames.mjs --scene examples/templates/<id>/scene.mjs --out examples/templates/<id> --check
+node scripts/gate.mjs examples/templates/<id>/index.html
+```
+
 **Build and check one**
 
 ```sh
