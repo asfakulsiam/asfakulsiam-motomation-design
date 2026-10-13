@@ -2969,7 +2969,7 @@ The older notes in `craft/seo-performance.md` (content in the HTML, JSON-LD type
 | seo-17 | [M] | URL slugs: lowercase, hyphens, no IDs, no query parameters | **gate S** (internal `href`s and the canonical) |
 | seo-18 | [M] | `og:image` present, 1200 × 630 | **gate S** (`og:image` present; `og:image:width`/`height` = 1200/630 when stated) |
 | seo-19 | [H] | Search Console verified and the sitemap submitted | owner |
-| seo-20 | [M] | `llms.txt` current: names the version and the latest report | site-level; for this repository, `scripts/check-repo.mjs` |
+| seo-20 | [M] | `llms.txt` current: names the version and the latest report | site-level; for this repository, the root check-repo script |
 
 ### What gate S counts
 
