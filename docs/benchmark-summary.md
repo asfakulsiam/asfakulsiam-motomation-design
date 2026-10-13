@@ -1,8 +1,12 @@
 # Benchmark summary
 
-Current result: <!-- current-report -->[`evals/results/2026-10-12-benchmark-v3.md`](../evals/results/2026-10-12-benchmark-v3.md)<!-- /current-report --> (benchmark v3, 2026-10-12). v2 and v1 are kept below as history, failures included. `scripts/check-repo.mjs` fails if the current report named here is not the newest main report in `evals/results/`.
+Current report: <!-- current-report -->[`evals/results/2026-10-12-benchmark-v4.md`](../evals/results/2026-10-12-benchmark-v4.md)<!-- /current-report --> (benchmark v4, 2026-10-12): **builds only, not scored**, because its measurements were never committed. **The latest scored result is v3**, below. v2 and v1 are kept below as history, failures included. `scripts/check-repo.mjs` fails if the current report named here is not the newest main report in `evals/results/`.
 
-## v3 (inside Claude Code, 2026-10-12) — current
+## v4 (extended matched effort + Tier 4 motion, 2026-10-12) — not scored
+
+Full report: [`evals/results/2026-10-12-benchmark-v4.md`](../evals/results/2026-10-12-benchmark-v4.md). 78 builds were generated in Claude Code 2.1.286 at `6f15d45`: 30 matched-vs-skill pairs over 5 briefs × 6 seeds, and 9 baseline-vs-skill Tier 4 motion pairs. The measurement step ran on GitHub Actions, but its `checks.json` files were never committed, so **0 pairs are measured or judged**. No gated scores, no wins or losses and no sign test exist for v4. What the build data does show: matched-effort enforcement held in 10 of 30 pairs (19 runs went 1–2 turns over budget, 1 finished under the floor), and 17 of 30 matched transcripts end on the turn cap.
+
+## v3 (inside Claude Code, 2026-10-12) — latest scored result
 
 Full report: [`evals/results/2026-10-12-benchmark-v3.md`](../evals/results/2026-10-12-benchmark-v3.md). Runner output: `evals/results/2026-10-12-benchmark-v3/summary.json`. Companion reports: [motion briefs](../evals/results/2026-10-12-benchmark-v3-motion.md) · [competitor skills](../evals/results/2026-10-12-benchmark-v3-competitors.md) · [Codex](../evals/results/2026-10-12-benchmark-v3-codex.md). Commit tested: `6f2724f`.
 

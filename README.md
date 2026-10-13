@@ -76,6 +76,10 @@ Motomation Design changes the thinking:
 
 ## Results
 
+### Benchmark v4 (2026-10-12) — builds only, not scored
+
+78 builds were generated at `6f15d45` in Claude Code 2.1.286: 30 matched-effort-vs-skill pairs (5 briefs × 6 seeds) and 9 Tier 4 motion pairs (baseline vs skill). The measurement step ran on GitHub Actions, but its output was never committed. **No v4 pair has been measured or judged, so there are no v4 scores, wins or p-values.** The table below is still v3. Build data that v4 does support: matched-effort enforcement held in 10 of 30 pairs, and 17 of 30 matched runs ended on the turn cap. Report: [`evals/results/2026-10-12-benchmark-v4.md`](evals/results/2026-10-12-benchmark-v4.md).
+
 ### Benchmark v3 (2026-10-12)
 
 **Commit tested: [`6f2724f`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/commit/6f2724f5299a19cd55cb94cbad886c1c6af38fd6)** (`6f2724f5299a19cd55cb94cbad886c1c6af38fd6`). Five briefs × three seeds, built in Claude Code 2.1.286 by `claude_sonnet_5_5` in four arms (baseline, baseline + `gate.mjs`, skill, matched-effort baseline) plus three competitor skills, a Tier 4 motion run and a Codex CLI run: 133 builds. Measured on GitHub Actions (Chromium 147, axe-core 4.14.0), judged blind in pairs by GPT-5.4 and Gemini 3.1 Pro. Reports: [main](evals/results/2026-10-12-benchmark-v3.md) · [motion](evals/results/2026-10-12-benchmark-v3-motion.md) · [competitors](evals/results/2026-10-12-benchmark-v3-competitors.md) · [Codex](evals/results/2026-10-12-benchmark-v3-codex.md).
