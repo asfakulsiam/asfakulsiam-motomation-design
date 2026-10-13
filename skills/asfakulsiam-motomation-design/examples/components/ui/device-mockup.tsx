@@ -8,25 +8,38 @@
 // what: A phone, browser or laptop frame drawn in CSS around real content (a screenshot or live markup). For a tall screenshot, pointing at the screen scrolls it slowly to the bottom, like someone reading.
 // use-when: Showing the actual product screen (an app, a site you built) where the device tells the visitor where it runs.
 // avoid-when: Stock "phone with a gradient" decoration; floating several devices at angles; screens with fake data; when the screen alone, unframed, reads better.
-// reduced-motion: The screen stays at the top; it can still be scrolled with the wheel or keyboard.
-// touch: The screen is a normal scroll area (swipe inside it).
-// a11y: The frame is decoration; the screen is a focusable, labelled scroll region (tabindex 0), so keyboard users can scroll it. The hover scroll moves the content with transform and returns when the pointer leaves. Sizes come from aspect-ratio, so no layout shift.
-import { useRef, type CSSProperties, type ReactNode } from "react";
-import { useReducedMotion, useFinePointer, EASE } from "../_lib/motion";
+// reduced-motion: A tall screen shows its whole page, still; any other screen can be scrolled with the wheel or keyboard.
+// touch: A tall screen shows its whole page (there is no hover to glide it); any other screen is a normal scroll area (swipe inside it).
+// a11y: The frame is decoration; the screen is a labelled region, focusable (tabindex 0) whenever it scrolls, so keyboard users can scroll it; a tall screen without the hover glide (touch, reduced motion) shows its whole page. The hover glide scrolls the screen (so the wheel, keyboard and zoom still reach every line), stops when the visitor scrolls it themselves, and returns when the pointer leaves. Sizes come from aspect-ratio, so no layout shift.
+import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
+import { useReducedMotion, useFinePointer } from "../_lib/motion";
+
+const EASE_OUT = (k: number) => 1 - (1 - k) ** 3;
 
 type Props = { kind?: "phone" | "browser" | "laptop"; children: ReactNode; label: string; url?: string; tall?: boolean; frame?: string; className?: string; style?: CSSProperties };
 const RATIO = { phone: "9 / 19.5", browser: "16 / 10", laptop: "16 / 10" } as const;
 
 export function DeviceMockup({ kind = "browser", children, label, url, tall = false, frame = "#1d1b18", className, style }: Props) {
-  const inner = useRef<HTMLDivElement>(null), screen = useRef<HTMLDivElement>(null);
+  const screen = useRef<HTMLDivElement>(null), anim = useRef(0);
   const reduce = useReducedMotion(), fine = useFinePointer();
-  const glide = (down: boolean) => { const s = screen.current, i = inner.current; if (!tall || reduce || !fine || !s || !i) return;
-    const dist = Math.max(0, i.scrollHeight - s.clientHeight);
-    i.style.transition = `transform ${down ? Math.min(9000, 1500 + dist * 6) : 900}ms ${down ? "linear" : EASE.out}`; i.style.transform = down ? `translateY(${-dist}px)` : "none"; };
+  // the glide scrolls the screen itself (scrollTop, one rAF loop), so wheel, keyboard and 200% zoom reach every line.
+  // Before, it moved the content with transform inside an overflow: hidden screen, which nothing else could scroll.
+  const stop = () => { cancelAnimationFrame(anim.current); anim.current = 0; };
+  const glide = (down: boolean) => { const s = screen.current; if (!tall || reduce || !fine || !s) return; stop();
+    const from = s.scrollTop, to = down ? Math.max(0, s.scrollHeight - s.clientHeight) : 0, dur = down ? Math.min(9000, 1500 + (to - from) * 6) : 900, t0 = performance.now();
+    const step = (t: number) => { const k = Math.min(1, (t - t0) / dur); s.scrollTop = from + (to - from) * (down ? k : EASE_OUT(k)); anim.current = k < 1 ? requestAnimationFrame(step) : 0; };
+    anim.current = requestAnimationFrame(step); };
+  useEffect(() => stop, []);
+  // a tall screen glides on hover with a fine pointer; with touch or reduced motion there is no glide, so it shows the
+  // whole page instead of an inner scroll area (overflow: clip keeps the corners and lets aspect-ratio grow to the
+  // content). Before, a tall browser frame on a phone hid most of its page below the frame's fold.
+  const glides = tall && fine && !reduce, full = tall && !glides;
   const screenEl = (
-    <div ref={screen} role="region" aria-label={label} tabIndex={0} onPointerEnter={() => glide(true)} onPointerLeave={() => glide(false)}
-      style={{ position: "relative", aspectRatio: RATIO[kind], overflow: tall && fine && !reduce ? "hidden" : "auto", background: "#fff", borderRadius: kind === "phone" ? 30 : kind === "browser" ? "0 0 10px 10px" : 4 }}>
-      <div ref={inner}>{children}</div>
+    <div ref={screen} role="region" aria-label={label} tabIndex={full ? undefined : 0} onPointerEnter={() => glide(true)} onPointerLeave={() => glide(false)} onWheel={stop} onTouchStart={stop}
+      style={{ position: "relative", aspectRatio: RATIO[kind], overflow: full ? "clip" : "auto", background: "#fff", borderRadius: kind === "phone" ? 30 : kind === "browser" ? "0 0 10px 10px" : 4,
+        // the phone's notch covers the top of the screen: content starts below it, as on a real phone (a safe area)
+        paddingTop: kind === "phone" ? 34 : undefined, boxSizing: "border-box" }}>
+      <div>{children}</div>
     </div>
   );
   if (kind === "phone") return (
