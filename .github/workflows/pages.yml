@@ -9,7 +9,7 @@ name: Pages
 on:
   push:
     branches: [main]
-    paths: [docs/site/**, skills/asfakulsiam-motomation-design/examples/gallery/**, skills/asfakulsiam-motomation-design/examples/templates/**, vendor/plain/**, .github/workflows/pages.yml]
+    paths: [docs/site/**, docs/templates/**, docs/plain/**, skills/asfakulsiam-motomation-design/examples/gallery/**, skills/asfakulsiam-motomation-design/examples/templates/**, vendor/plain/**, .github/workflows/pages.yml]
   workflow_dispatch:
 permissions:
   contents: read
@@ -43,6 +43,7 @@ jobs:
           for f in motion-portfolio product-launch; do mkdir -p _site/templates/$f && cp -r $S/templates/$f/index.html $S/templates/$f/poster.webp $S/templates/$f/frames.json $S/templates/$f/frames $S/templates/$f/frames-mobile _site/templates/$f/; done
           for d in $S/templates/*/; do id=$(basename $d); if [ -f $d/og.jpg ]; then mkdir -p _site/templates/$id && cp $d/og.jpg _site/templates/$id/og.jpg; fi; done   # share images (seo-18)
           cp -r vendor/plain/. _site/plain/
+          cp docs/templates/index.html _site/templates/index.html && cp docs/plain/index.html _site/plain/index.html   # folder indexes (C11): /templates/ and /plain/ no longer 404
           touch _site/.nojekyll
           test "$(ls _site/c/*.html | wc -l)" -eq "$(ls -d $S/components/*/*.tsx | wc -l)"   # a page per component
           grep -q 'motomation-gallery' _site/gallery/index.html
