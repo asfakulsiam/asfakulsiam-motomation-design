@@ -18,3 +18,5 @@
 **Signature menu:** Ink Fill manifesto · Stacked Deck case studies · Velocity Skew client marquee · Aperture into case studies
 **Must-haves:** case-study pages with real process images, credits, year and outcome.
 **Pitfalls:** "We craft digital experiences" copy, awards badges as the hero, three service icons.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/lusion-v3.md` · `references/teardowns/messenger.md` · `references/teardowns/active-theory.md`

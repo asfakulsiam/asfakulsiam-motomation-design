@@ -11,3 +11,5 @@
 **Signature menu:** an image-sequence product film · Timecode Rail · Aperture reveal · Decode on spec labels
 **Must-haves:** the price and buy action reachable at every moment (sticky after the hook), real specs, the static storyboard fallback, preloading strategy for frames.
 **Pitfalls:** 1,000% pins that trap people, frames that load after the user has scrolled past, specs only inside the animation.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/prometheus-fuels.md`

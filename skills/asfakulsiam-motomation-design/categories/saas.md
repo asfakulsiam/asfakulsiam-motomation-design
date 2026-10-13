@@ -18,3 +18,5 @@
 **Signature menu:** a scrubbed product demo (Workbench) · Decode for technical labels · Timecode Rail for a workflow film · Diptych split for before/after
 **Must-haves:** a real product UI (not a fake dashboard), docs link, a keyboard-friendly pricing toggle, performance under 2.5s LCP.
 **Pitfalls:** hero + logos + 3 features + testimonials + pricing + CTA in that exact order, purple gradients, glowing orbs, invented "10x faster" claims.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/terminal-industries.md`

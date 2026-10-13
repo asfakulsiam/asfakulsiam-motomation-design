@@ -12,3 +12,5 @@
 - **Motion:** Tier 1–2. Line reveals, slow image fades, precise hover states. Motion is felt, not watched.
 - **Signature ideas:** Line Curtain, Proximity Weight on one word, Remembered List.
 - **Pitfall:** minimal ≠ empty. Every empty area must frame something. If the page feels unfinished, add precision (captions, numbers, alignment), not decoration.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/lusion-v3.md`

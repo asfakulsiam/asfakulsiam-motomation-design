@@ -12,3 +12,5 @@
 - **Motion:** Tier 1–3. Lottie or Rive illustrations that explain, SVG line drawing (Thread).
 - **Signature ideas:** a mascot or shape built in Rive that reacts to form states.
 - **Pitfall:** stock "corporate blob people" illustrations. Commission or build a specific visual system.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/messenger.md` · `references/teardowns/bruno-simon.md`

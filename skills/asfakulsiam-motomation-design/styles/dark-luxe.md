@@ -12,3 +12,5 @@
 - **Motion:** Tier 2–5. Light sweeps, slow push-ins, product turntables via image sequence (Motomation).
 - **Signature ideas:** a Motomation product film, Aperture transitions, a cursor torch that lights the scene.
 - **Pitfall:** grey-on-black contrast failures and "gold gradient" clichés.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/siena-film-foundation.md` · `references/teardowns/cartier-watches-wonders-2025.md`

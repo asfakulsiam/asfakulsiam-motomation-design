@@ -12,3 +12,5 @@
 - **Motion:** Tier 2–3. Panels move in parallax relative to the background; light sweeps across on hover.
 - **Signature ideas:** a lens (Cursor Signatures #2) that sharpens the blurred layer, a glass panel that follows the scroll like a viewfinder.
 - **Pitfall:** contrast failure on busy backgrounds. Test every text-on-glass pair at the worst point of the background.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/igloo-inc.md`

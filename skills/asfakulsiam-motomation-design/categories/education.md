@@ -11,3 +11,5 @@
 **Signature menu:** an interactive mini-lesson as the hero · Thread connecting modules · Field Guide annotations
 **Must-haves:** WCAG 2.2 AA, readable on low-end phones, clear pricing, `Course` structured data.
 **Pitfalls:** stock "students laughing at laptops" photos.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/prometheus-fuels.md`

@@ -2027,6 +2027,8 @@ Search them: `node scripts/search.mjs styles "<words>"`. A style is a language, 
 - **Signature ideas:** a Motomation product film, Aperture transitions, a cursor torch that lights the scene.
 - **Pitfall:** grey-on-black contrast failures and "gold gradient" clichés.
 
+**Award-site teardowns** (principles, no code): `references/teardowns/siena-film-foundation.md` · `references/teardowns/cartier-watches-wonders-2025.md`
+
 
 ---
 
@@ -2046,6 +2048,8 @@ Search them: `node scripts/search.mjs styles "<words>"`. A style is a language, 
 - **Motion:** Tier 2. Line reveals, ink fills, Stacked Deck for features, cross-document page transitions (Tier 3).
 - **Signature ideas:** Ink Fill manifesto, Broadsheet archetype, Darkroom Develop images.
 - **Pitfall:** fake magazine clichés (random "Issue No. 07" labels). Use editorial devices only where they organise real content.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/scout-motors.md`
 
 
 ---
@@ -2067,6 +2071,8 @@ Search them: `node scripts/search.mjs styles "<words>"`. A style is a language, 
 - **Signature ideas:** a mascot or shape built in Rive that reacts to form states.
 - **Pitfall:** stock "corporate blob people" illustrations. Commission or build a specific visual system.
 
+**Award-site teardowns** (principles, no code): `references/teardowns/messenger.md` · `references/teardowns/bruno-simon.md`
+
 
 ---
 
@@ -2086,6 +2092,8 @@ Search them: `node scripts/search.mjs styles "<words>"`. A style is a language, 
 - **Motion:** Tier 2–3. Panels move in parallax relative to the background; light sweeps across on hover.
 - **Signature ideas:** a lens (Cursor Signatures #2) that sharpens the blurred layer, a glass panel that follows the scroll like a viewfinder.
 - **Pitfall:** contrast failure on busy backgrounds. Test every text-on-glass pair at the worst point of the background.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/igloo-inc.md`
 
 
 ---
@@ -2107,6 +2115,8 @@ Search them: `node scripts/search.mjs styles "<words>"`. A style is a language, 
 - **Signature ideas:** Proximity Weight, Width Sprint, Letter Relay, Neighbour Moves.
 - **Pitfall:** readability. Each word must be readable when still, and every mid-animation frame must be readable within 300ms.
 
+**Award-site teardowns** (principles, no code): `references/teardowns/lando-norris.md`
+
 
 ---
 
@@ -2126,6 +2136,8 @@ Search them: `node scripts/search.mjs styles "<words>"`. A style is a language, 
 - **Motion:** Tier 1–2. Line reveals, slow image fades, precise hover states. Motion is felt, not watched.
 - **Signature ideas:** Line Curtain, Proximity Weight on one word, Remembered List.
 - **Pitfall:** minimal ≠ empty. Every empty area must frame something. If the page feels unfinished, add precision (captions, numbers, alignment), not decoration.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/lusion-v3.md`
 
 
 ---
@@ -2207,6 +2219,8 @@ Search them: `node scripts/search.mjs styles "<words>"`. A style is a language, 
 - **Signature ideas:** a grid that draws itself on load, index numbers that count to their value, Ledger archetype.
 - **Pitfall:** copying 1960s poster clichés (rotated type at 45° for no reason).
 
+**Award-site teardowns** (principles, no code): `references/teardowns/terminal-industries.md`
+
 
 ---
 
@@ -2263,6 +2277,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 **Must-haves:** fast LCP (product image ≤ 2.5s), real stock and prices, accessible variant pickers, a visible currency (৳, $, €), structured data (`Product`, `Offer`).
 **Pitfalls:** animation that delays the purchase, carousels as the main navigation, fake scarcity timers.
 
+**Award-site teardowns** (principles, no code): `references/teardowns/scout-motors.md`
+
 
 ---
 
@@ -2282,6 +2298,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 **Must-haves:** WCAG 2.2 AA, readable on low-end phones, clear pricing, `Course` structured data.
 **Pitfalls:** stock "students laughing at laptops" photos.
 
+**Award-site teardowns** (principles, no code): `references/teardowns/prometheus-fuels.md`
+
 
 ---
 
@@ -2300,6 +2318,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 **Signature menu:** a Velocity Skew line-up marquee · Width Sprint on the event name · a Motomation poster film · Sticker Scatter on the logo
 **Must-haves:** add-to-calendar, ticket links that work on mobile, an accessible schedule table, `Event` structured data.
 **Pitfalls:** the date hidden under the animation, countdown timers as the only content.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/cartier-watches-wonders-2025.md`
 
 
 ---
@@ -2346,6 +2366,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 **Must-haves:** WCAG 2.2 AA throughout, plain language, multiple languages if the audience needs them (e.g. Bangla + English), low-bandwidth performance, transparent finances.
 **Pitfalls:** guilt-driven imagery, unverifiable statistics, motion that harms people with vestibular disorders. Keep MOTION at 1–2.
 
+**Award-site teardowns** (principles, no code): `references/teardowns/siena-film-foundation.md`
+
 
 ---
 
@@ -2364,6 +2386,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 **Signature menu:** Letter archetype with a signature that draws on scroll · Remembered List for read articles · Brand Selection colour
 **Must-haves:** fast reading pages, RSS, good typography for long-form, newsletter that works without JS.
 **Pitfalls:** a "creator template" look with social icons as the hero.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/lando-norris.md`
 
 
 ---
@@ -2392,6 +2416,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 **Must-haves:** fast case-study loading, real project outcomes, keyboard-navigable work list, `llms.txt` and good meta for sharing.
 **Pitfalls:** a bento grid of thumbnails, skill bars and percentages, a tools logo wall, "passionate about" copy.
 
+**Award-site teardowns** (principles, no code): `references/teardowns/igloo-inc.md` · `references/teardowns/bruno-simon.md`
+
 
 ---
 
@@ -2410,6 +2436,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 **Signature menu:** an image-sequence product film · Timecode Rail · Aperture reveal · Decode on spec labels
 **Must-haves:** the price and buy action reachable at every moment (sticky after the hook), real specs, the static storyboard fallback, preloading strategy for frames.
 **Pitfalls:** 1,000% pins that trap people, frames that load after the user has scrolled past, specs only inside the animation.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/prometheus-fuels.md`
 
 
 ---
@@ -2456,6 +2484,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 **Must-haves:** a real product UI (not a fake dashboard), docs link, a keyboard-friendly pricing toggle, performance under 2.5s LCP.
 **Pitfalls:** hero + logos + 3 features + testimonials + pricing + CTA in that exact order, purple gradients, glowing orbs, invented "10x faster" claims.
 
+**Award-site teardowns** (principles, no code): `references/teardowns/terminal-industries.md`
+
 
 ---
 
@@ -2481,6 +2511,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 **Signature menu:** Ink Fill manifesto · Stacked Deck case studies · Velocity Skew client marquee · Aperture into case studies
 **Must-haves:** case-study pages with real process images, credits, year and outcome.
 **Pitfalls:** "We craft digital experiences" copy, awards badges as the hero, three service icons.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/lusion-v3.md` · `references/teardowns/messenger.md` · `references/teardowns/active-theory.md`
 
 
 ---
@@ -3866,6 +3898,361 @@ Use these to **study**, not to copy. Run `/study <url>` to extract principles.
 1. Collect three references from **outside** the category (a hotel brief studies a bookshop, a film title and a museum).
 2. Extract principles: what is the structure, the type logic, the motion language?
 3. Never copy a layout, illustration or code wholesale. Check the license before using any asset or code.
+
+
+---
+
+<!-- file: references/teardowns/README.md -->
+
+## Award-site teardowns
+
+Written analyses of award-winning sites: structure, type, motion beats, and what made each one memorable. **Principles only, no code**: nothing here is copied from the sites, and nothing should be. Read a teardown for the reasoning, then design your own page with the skill's own method (`thinking/`, `invention/`).
+
+Facts (awards, dates, what the page does) are linked to their source in each file. Where a source only records a behaviour, the teardown says only that.
+
+| Site | Award | Category · style | Teardown |
+|---|---|---|---|
+| Lando Norris | Awwwards Site of the Year 2025 | personal brand · kinetic type | `references/teardowns/lando-norris.md` |
+| Messenger | Awwwards Developer Site of the Year 2025 | studio · flat | `references/teardowns/messenger.md` |
+| Scout Motors | Awwwards E-commerce of the Year 2025 | e-commerce · editorial | `references/teardowns/scout-motors.md` |
+| Igloo Inc | Awwwards Site of the Year 2024 | portfolio · glassmorphism | `references/teardowns/igloo-inc.md` |
+| Lusion v3 | Awwwards Site of the Year 2023 | studio · minimal | `references/teardowns/lusion-v3.md` |
+| Prometheus Fuels | Awwwards Site of the Year 2021 | education · product launch | `references/teardowns/prometheus-fuels.md` |
+| Siena Film Foundation | Awwwards Site of the Month, Mar 2025 | organisation · dark luxe | `references/teardowns/siena-film-foundation.md` |
+| Cartier Watches & Wonders 2025 | Awwwards Site of the Month, Aug 2025 | event · dark luxe | `references/teardowns/cartier-watches-wonders-2025.md` |
+| Terminal Industries | Awwwards Site of the Month, Sep 2025 | SaaS · Swiss | `references/teardowns/terminal-industries.md` |
+| Bruno Simon | Awwwards Site of the Month, Jan 2026 | portfolio · flat | `references/teardowns/bruno-simon.md` |
+| Active Theory | Sites of the Day (earlier versions) | studio | `references/teardowns/active-theory.md` |
+
+### What they share
+
+1. **The concept comes from the subject's own name or object** (an igloo in ice, a messenger delivering, a ticket for a film foundation).
+2. **One reveal shape, one material, one art direction**, held across the page.
+3. **The first screen holds the claim and its proof.**
+4. **Motion has a meaning** (a transition that explains, a pointer that scrubs film), never decoration.
+
+### Where this skill differs
+
+These sites often put text inside a canvas, gate content behind an intro, or run dozens of scroll-scrubbed channels. This skill does not: text stays in the DOM, every page passes the delivery gate (`gates/delivery-gate.md`), and motion is budgeted by the dials. Take the principle; leave the excess.
+
+
+---
+
+<!-- file: references/teardowns/active-theory.md -->
+
+## Teardown: Active Theory (studio site)
+
+**Award:** earlier versions of the site were Awwwards Sites of the Day; an award for the current version is unverified ([observed teardown](https://github.com/coroboros/research/blob/main/articles/award-winning-websites-2025-2030/archetypes/immersive-cinematic.md)). The studio made Prometheus Fuels, Site of the Year 2021 ([Awwwards](https://www.awwwards.com/annual-awards-2021/site-of-the-year)).
+**Relevant to:** `categories/studio.md` · archetype `stage`
+
+### Structure
+One continuous WebGL scene is the site. A full-screen intro boots into navigation; the nav lists what the studio makes (games, multiplayer, XR, installations, websites) next to a sound toggle and a track player.
+
+### What made it memorable
+Sound is part of the identity: the audio toggle is a deliberate gate, and the player names the song.
+
+### Principles to take
+- **The nav is the capability list.** A studio's menu can say what it does in five words.
+- **Sound is opt-in and named.** If a site has music, show the control and the track, and start muted.
+- **The portfolio can be the demo.** For a studio that sells real-time 3D, the site itself is a case study.
+
+### What not to take
+Headings that are empty in the DOM because the words live on a canvas. Screen readers and search see nothing. Keep the words in HTML.
+
+
+---
+
+<!-- file: references/teardowns/bruno-simon.md -->
+
+## Teardown: Bruno Simon (portfolio)
+
+**Award:** Awwwards Site of the Month, Jan 2026 ([observed teardown](https://github.com/coroboros/research/blob/main/articles/award-winning-websites-2025-2030/archetypes/immersive-cinematic.md); [Futurists' 2026 list](https://futurists.in/10-best-award-winning-websites-of-2026/)).
+**Relevant to:** `categories/portfolio.md` · `styles/flat.md` · archetype `field-guide`
+
+### Structure
+A drivable 3D world: the visitor steers a small vehicle around a landscape where the work and the contact points are places to drive to ([observed teardown](https://github.com/coroboros/research/blob/main/articles/award-winning-websites-2025-2030/archetypes/immersive-cinematic.md)).
+
+### What made it memorable
+The portfolio proves the skill it sells. Nobody forgets driving into a project.
+
+### Principles to take
+- **Proof over description.** A creative developer's portfolio can be its own best project; a designer's can be its best layout.
+- **Play has rules.** A world needs edges, a map and a way out; give the visitor all three.
+- **Offer the fast path.** Keep a plain list of projects and contact for people who came to hire, not to play.
+
+### What not to take
+A world where finding the contact details is the game.
+
+
+---
+
+<!-- file: references/teardowns/cartier-watches-wonders-2025.md -->
+
+## Teardown: Cartier Watches & Wonders 2025 (Immersive Garden)
+
+**Award:** Awwwards Site of the Day 18 Aug 2025 and Site of the Month Aug 2025; CSSDA Website of the Day 16 Jul 2025 ([observed teardown](https://github.com/coroboros/research/blob/main/articles/award-winning-websites-2025-2030/archetypes/immersive-cinematic.md); [WebGPU showcase](https://www.webgpu.com/showcase/cartier-watches-and-wonders-immersive-garden/)).
+**Relevant to:** `categories/event.md` · `styles/dark-luxe.md` · archetype `room`
+
+### Structure
+Six 3D rooms that the visitor moves between by scrolling, for a trade-fair launch, with a Web Audio score.
+
+### Motion beats
+1. Scroll is travel from room to room: one collection or idea per room.
+2. A score accompanies the walk.
+
+### What made it memorable
+A fair stand translated into a place: the visitor tours the booth the way they would on the fair floor, at home.
+
+### Principles to take
+- **One room, one idea.** Six rooms means six things to remember, no more. This is the room archetype at full scale.
+- **Luxury is pace.** Long, slow transitions and few elements read as expensive; quick cuts read as retail.
+- **Translate the physical event.** For an event site, ask what walking the venue feels like, then build that walk.
+
+### What not to take
+Six WebGL rooms for a single-night event. Scale the number of rooms to the content: `categories/event.md` asks for the date, the line-up and the tickets first.
+
+
+---
+
+<!-- file: references/teardowns/igloo-inc.md -->
+
+## Teardown: Igloo Inc (abeto with Bureaux)
+
+**Award:** Awwwards Site of the Year 2024 and Developer Site of the Year 2024 ([Awwwards announcement](https://www.linkedin.com/posts/awwwards_we-are-thrilled-to-announce-that-the-winners-activity-7307431367728861187-ED07); [Awwwards case study](https://www.awwwards.com/igloo-inc-case-study.html)).
+**Relevant to:** `categories/portfolio.md` · `styles/glassmorphism.md` · archetype `gallery-wall`
+
+### Structure
+A three-section landing page for a parent company: an outdoor opening scene, its portfolio companies each frozen inside a block of ice, and a links section where particles form a different model for each external link ([case study](https://www.awwwards.com/igloo-inc-case-study.html)).
+
+### Type
+The interface itself is drawn in WebGL so that glitches and text scrambles are cheap; type behaves like the material around it.
+
+### Motion beats
+1. An intro gives the outdoor scene a "tech" turn.
+2. Scrolling moves between ice blocks; each project's block has its own form.
+3. Transitions use chromatic aberration on selected materials.
+4. In the links section, particles swirl into shapes, change colour with speed and glow; music and sound effects follow the particles.
+
+### What made it memorable
+The name is the concept: an igloo company shows its companies in ice. Every visual decision follows from that one word.
+
+### Principles to take
+- **Take the concept from the name.** Before choosing a style, ask what the brand's name already is (`thinking/`, collision method in `invention/mad-artist.md`).
+- **One material, many objects.** Ice for every project gives variety inside one system.
+- **Sound follows motion, never leads it.** If you add audio, tie it to something the visitor caused, and keep it off until asked.
+- **Performance is part of the brief.** The team designed for smooth scrolling on low-end devices from the start.
+
+### What not to take
+UI text rendered only in WebGL. In this skill, text stays in the DOM and passes the gate's contrast and forced-colors checks.
+
+
+---
+
+<!-- file: references/teardowns/lando-norris.md -->
+
+## Teardown: Lando Norris (OFF+BRAND)
+
+**Award:** Awwwards Site of the Year 2025 and Site of the Year Users' Choice 2025 ([Digidop's summary of the 2025 annual awards](https://www.digidop.com/blog/5-web-design-trends-2025); [observed teardown](https://github.com/coroboros/research/blob/main/articles/award-winning-websites-2025-2030/archetypes/immersive-cinematic.md)).
+**Relevant to:** `categories/personal-brand.md` · `styles/kinetic-type.md` · archetype `stage`
+
+### Structure
+A long single page of about twelve sections: a full-bleed portrait on a cream ground, an "on track" horizontal gallery, an on-track/off-track split, a helmets gallery, the championship honour, partners, and a designed footer that returns to the portrait.
+
+### Type
+Two-line name locked to a corner, set in one variable grotesk; nav labels roll between two copies of the word. The name does the work a logo would.
+
+### Motion beats
+1. An intro assembles a brand mark while assets load, then hands to the hero through an elliptical reveal.
+2. Headline lines rise through masks without fading.
+3. Images reveal through the same ellipse and scale inside it, so every image arrives the same way.
+4. One shared ease and one shared duration for nav and menu motion.
+
+### What made it memorable
+The ellipse is one shape used everywhere (intro, images, footer), so the page feels authored by one hand. The lime accent is the driver's colour and appears only where action is (store, call to action, footer strip). The loading state is a pun on the name.
+
+### Principles to take
+- **One reveal shape per page.** Pick the shape from the subject (a visor, a lens, a door) and use it for every entrance. See the Aperture signature in `signatures/scroll-signatures.md`.
+- **The accent marks action.** If the brand colour is loud, spend it only on things you can press.
+- **Close on the opening image, changed.** The footer recontextualises the hero; the visitor feels the page end.
+- **A personal brand is a person, not a CV.** Portrait first, facts as chapters.
+
+### What not to take
+Dozens of simultaneous scroll-scrubbed channels. Motion budget in this skill is set by the dials (`principles/dials.md`), not by what a studio with a racing budget shipped.
+
+
+---
+
+<!-- file: references/teardowns/lusion-v3.md -->
+
+## Teardown: Lusion v3
+
+**Award:** Awwwards Site of the Year 2023 and Developer Site of the Year 2023; CSSDA Website of the Year 2023; FWA of the Year 2023 ([observed teardown](https://github.com/coroboros/research/blob/main/articles/award-winning-websites-2025-2030/archetypes/immersive-cinematic.md)).
+**Relevant to:** `categories/studio.md` · `styles/minimal.md` · archetype `gallery-wall`
+
+### Structure
+A statement headline over a live 3D scene, a short manifesto, a reel of project cards tagged by discipline, a link to all projects, and a contact-first footer with a real street address.
+
+### Type
+One grotesk throughout. The headline is a full sentence saying exactly what the studio does; small uppercase microcopy carries the scroll cue.
+
+### Motion beats
+1. The claim and the 3D proof share the first screen.
+2. Project cards split their discipline tags letter by letter on hover or scroll while the 3D object changes.
+3. A custom smooth scroll with two dominant easing curves used across the site.
+
+### What made it memorable
+It is a light-key site in a genre that defaults to black. The headline is plain language, so the 3D does the showing and the words do the telling.
+
+### Principles to take
+- **Claim and proof on the same screen.** A studio that says "3D storytelling" shows 3D in the first viewport, not on page four.
+- **Plain sentence, rich medium.** The richer the motion, the plainer the headline. See `craft/copy.md`.
+- **Two eases for a whole site.** A small easing vocabulary is a house style (`motion/tokens.md`).
+- **Address in the footer.** A real place builds more trust than another animation.
+
+### What not to take
+A canvas as the only carrier of content. Keep project titles and links in the DOM.
+
+
+---
+
+<!-- file: references/teardowns/messenger.md -->
+
+## Teardown: Messenger (abeto)
+
+**Award:** Awwwards Developer Site of the Year 2025 ([Digidop's summary of the 2025 annual awards](https://www.digidop.com/blog/5-web-design-trends-2025); [observed teardown](https://github.com/coroboros/research/blob/main/articles/award-winning-websites-2025-2030/archetypes/immersive-cinematic.md)).
+**Relevant to:** `categories/studio.md` · `styles/flat.md` · archetype `stage`
+
+### Structure
+No sections and no routes: one small planet rendered in the browser, where the visitor makes deliveries. The world is the page.
+
+### Motion beats
+1. Camera and scene motion replace scrolling.
+2. The visitor drives the loop: pick up, travel, deliver.
+3. Physics, light and animation run continuously; the site is replayable.
+
+### What made it memorable
+Agency. The visitor is not shown a showcase, they do a job inside it, and the job (delivering messages) is the name.
+
+### Principles to take
+- **A verb beats a gallery.** If the brand's name is a verb or a role, let the visitor perform it.
+- **Small world, finished edges.** A tiny planet can be complete; a big one can't. Scope the experience to what can be polished.
+- **Experiences are a separate deliverable.** This skill's Tier 4 and 5 (`motion/tier-4-max.md`, `motion/tier-5-motomation.md`) stop at scroll-driven pages; a game-like world needs its own accessible alternative page.
+
+### What not to take
+Navigation that exists only in a 3D world. Any site in this skill keeps a plain-HTML route to every piece of content.
+
+
+---
+
+<!-- file: references/teardowns/prometheus-fuels.md -->
+
+## Teardown: Prometheus Fuels (Active Theory)
+
+**Award:** Awwwards Site of the Year 2021 ([Awwwards Annual Awards 2021](https://www.awwwards.com/annual-awards-2021/site-of-the-year)); FWA of the Year 2021 ([FWA announcement](https://www.linkedin.com/posts/nick-mountford_after-9-years-in-the-biz-we-finally-get-activity-6889646337080614912-OZ4h)).
+**Relevant to:** `categories/education.md` · `categories/product-launch.md` · archetype `timeline`
+
+### Structure
+A stylised interactive story about making fuel from the air ([Awwwards](https://www.awwwards.com/sites/prometheus-fuels)). The art lead describes turning a technical process into a retro-futurist road-trip sequence of dramatic scenes, vehicles, mountains and planets, with storyboards set first ([Rafael Dante](https://rafaeldante.com/project/prometheus)).
+
+### Motion beats
+1. Each scene is one step of the process, told as a stop on the road trip.
+2. Scroll moves the camera through the story like chapters of a film.
+3. New chapters were released later ("The Need for Speed"), so the site grew like a series ([Prometheus Fuels' founder](https://www.linkedin.com/posts/gmcgurgan_awwwards-thefwa-fuelfromtheair-activity-6915450420928675840-l7tP)).
+
+### What made it memorable
+A jury member called it "a literal showcase of the art of Storytelling and Art Direction" that "felt like a movie" ([Awwwards](https://www.awwwards.com/annual-awards-2021/site-of-the-year)). The science was not simplified into icons; it was turned into a journey with a destination.
+
+### Principles to take
+- **Explain a process as a journey.** Each step becomes a place. This is the timeline archetype with a camera.
+- **Storyboard before you build.** The art direction and script came first; this skill's Tier 5 timing sheet (`motion/choreography.md`) is the same discipline.
+- **Chapters can ship later.** A story site can be episodic; plan the chapter slots.
+- **One art direction, held.** Retro-futurism across every scene is what makes it feel like one film.
+
+### What not to take
+Scene length that hides the facts. A visitor who wants the numbers needs them in text, one tap away.
+
+
+---
+
+<!-- file: references/teardowns/scout-motors.md -->
+
+## Teardown: Scout Motors (Locomotive)
+
+**Award:** Awwwards E-commerce of the Year 2025 ([Awwwards announcement](https://www.linkedin.com/posts/awwwards_the-e-commerce-of-the-year-award-goes-to-activity-7436441178805518336-25xm)); Site of the Day, Mar 2025 ([Awwwards](https://www.awwwards.com/sites/scout-motors)).
+**Relevant to:** `categories/ecommerce.md` · `styles/editorial.md` · archetype `catalogue`
+
+### Structure
+A commerce platform for a revived vehicle brand, "born from an American legend, retooled for a new era" ([Awwwards](https://www.awwwards.com/sites/scout-motors)): brand storytelling and product exploration sit inside the actual purchase and configuration path ([Metabole's review](https://metabole.studio/en/blog/immersive-website-examples)).
+
+### What made it memorable
+The agency describes the brief as carrying a heritage forward under tight deadlines with shared standards ([Locomotive](https://www.linkedin.com/posts/locomotive-mtl_scout-motors-inc-just-won-e-commerce-of-activity-7434609007316770817-HHF7)). The award went to a store, not a campaign page: the storytelling survives into the funnel.
+
+### Principles to take
+- **Story inside the funnel, not before it.** Motion that explains the product belongs on the product and configurator pages, where the decision happens.
+- **Heritage is a material, not a filter.** Use the brand's own history (badges, colours, drawings) rather than a sepia grade.
+- **High-consideration products earn depth.** A vehicle can carry a 3D look-around; a plate cannot. Match depth to price and doubt (`categories/ecommerce.md`).
+- **Configurator paths stay plain.** The spec-and-buy steps are fast, keyboard-friendly and free of scroll tricks.
+
+### What not to take
+Immersion that slows the "add to basket" step. In this skill the purchase controls stay at Tier 1 motion.
+
+
+---
+
+<!-- file: references/teardowns/siena-film-foundation.md -->
+
+## Teardown: Siena Film Foundation
+
+**Award:** Awwwards Site of the Day 18 Mar 2025 and Site of the Month Mar 2025 ([observed teardown](https://github.com/coroboros/research/blob/main/articles/award-winning-websites-2025-2030/archetypes/immersive-cinematic.md)).
+**Relevant to:** `categories/organisation.md` · `styles/dark-luxe.md` · archetype `index`
+
+### Structure
+A black entry gate (wordmark, a ticket stub reading "admit one" with a ticket number, an Enter control), then an index of eight films as cards, then a thin credits footer.
+
+### Type
+A vintage high-contrast serif wordmark over a plain grotesk for everything else. Film titles are the only display type after the gate.
+
+### Motion beats
+1. The gate dismisses on Enter: the first interaction is buying a ticket.
+2. Titles rise as masked lines.
+3. Calls to action swap between two copies of the label and invert.
+4. Dragging across a trailer scrubs it: the pointer is the playhead.
+
+### What made it memorable
+The metaphor (a cinema ticket) is the navigation, not decoration. Even the footer stays in the film lexicon.
+
+### Principles to take
+- **Let the first click be the concept.** An entry ritual is earned only when it says what the place is; otherwise it is a cookie wall.
+- **Index archetypes need one strong row.** Eight items, one treatment, no exceptions. See `structures/` for the index archetype.
+- **Give the pointer a job from the subject.** Scrubbing film with the pointer is the medium; a magnetic button would not be.
+- **Two typefaces, strict roles.** A historical display face for the name, a quiet sans for the rest.
+
+### What not to take
+A gate that blocks content for search engines and for keyboard users. If you add a threshold, the content behind it must be in the HTML and the Enter control must be a real button.
+
+
+---
+
+<!-- file: references/teardowns/terminal-industries.md -->
+
+## Teardown: Terminal Industries
+
+**Award:** Awwwards Site of the Day 3 Sep 2025 and Site of the Month Sep 2025; CSSDA Website of the Day 4 Aug 2025 ([observed teardown](https://github.com/coroboros/research/blob/main/articles/award-winning-websites-2025-2030/archetypes/immersive-cinematic.md)).
+**Relevant to:** `categories/saas.md` · `styles/swiss.md` · archetype `console`
+
+### Motion beats
+Scroll turns 3D visuals into wireframe: the rendered object is stripped back to its structure as the visitor reads on ([observed teardown](https://github.com/coroboros/research/blob/main/articles/award-winning-websites-2025-2030/archetypes/immersive-cinematic.md)).
+
+### What made it memorable
+The transition is an argument: from the thing you see to the system underneath, which is what an infrastructure product sells.
+
+### Principles to take
+- **Use a transition to explain.** Render to wireframe says "here is how it works" without a diagram. Pick the transition whose meaning matches the next section.
+- **Technical products can be beautiful without stock.** Show the system (`data/imagery.csv`, saas row: the product's own UI or structure, never stock).
+- **One big transition, not ten.** A single meaningful state change is remembered; ten are noise.
+
+### What not to take
+Wireframe as decoration on a product that has no structure to show.
 
 
 ---

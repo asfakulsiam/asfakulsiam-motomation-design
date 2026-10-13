@@ -11,3 +11,5 @@
 **Signature menu:** Letter archetype with a signature that draws on scroll · Remembered List for read articles · Brand Selection colour
 **Must-haves:** fast reading pages, RSS, good typography for long-form, newsletter that works without JS.
 **Pitfalls:** a "creator template" look with social icons as the hero.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/lando-norris.md`

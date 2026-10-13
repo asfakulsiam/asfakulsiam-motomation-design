@@ -12,3 +12,5 @@
 - **Motion:** Tier 2–5. SplitText choreography, variable-axis animation, scroll-velocity width, scrubbed type films.
 - **Signature ideas:** Proximity Weight, Width Sprint, Letter Relay, Neighbour Moves.
 - **Pitfall:** readability. Each word must be readable when still, and every mid-animation frame must be readable within 300ms.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/lando-norris.md`

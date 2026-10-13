@@ -16,3 +16,5 @@
 **Signature menu:** a Motomation turntable for the hero product · Darkroom Develop for lookbook images · Lens on materials · Hold to Commit only for high-value pre-orders
 **Must-haves:** fast LCP (product image ≤ 2.5s), real stock and prices, accessible variant pickers, a visible currency (৳, $, €), structured data (`Product`, `Offer`).
 **Pitfalls:** animation that delays the purchase, carousels as the main navigation, fake scarcity timers.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/scout-motors.md`

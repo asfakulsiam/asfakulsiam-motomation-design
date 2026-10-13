@@ -12,3 +12,5 @@
 - **Motion:** Tier 2. Line reveals, ink fills, Stacked Deck for features, cross-document page transitions (Tier 3).
 - **Signature ideas:** Ink Fill manifesto, Broadsheet archetype, Darkroom Develop images.
 - **Pitfall:** fake magazine clichés (random "Issue No. 07" labels). Use editorial devices only where they organise real content.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/scout-motors.md`

@@ -11,3 +11,5 @@
 **Signature menu:** Ink Fill for the mission · a Timeline of real milestones · Thread linking the problem to the action · a counter of verified figures (with a source link)
 **Must-haves:** WCAG 2.2 AA throughout, plain language, multiple languages if the audience needs them (e.g. Bangla + English), low-bandwidth performance, transparent finances.
 **Pitfalls:** guilt-driven imagery, unverifiable statistics, motion that harms people with vestibular disorders. Keep MOTION at 1–2.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/siena-film-foundation.md`

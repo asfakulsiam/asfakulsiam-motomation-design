@@ -12,3 +12,5 @@
 - **Motion:** Tier 1–2. Elements slide along grid lines only (x or y, never diagonals), with hard ease-out.
 - **Signature ideas:** a grid that draws itself on load, index numbers that count to their value, Ledger archetype.
 - **Pitfall:** copying 1960s poster clichés (rotated type at 45° for no reason).
+
+**Award-site teardowns** (principles, no code): `references/teardowns/terminal-industries.md`

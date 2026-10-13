@@ -11,3 +11,5 @@
 **Signature menu:** a Velocity Skew line-up marquee · Width Sprint on the event name · a Motomation poster film · Sticker Scatter on the logo
 **Must-haves:** add-to-calendar, ticket links that work on mobile, an accessible schedule table, `Event` structured data.
 **Pitfalls:** the date hidden under the animation, countdown timers as the only content.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/cartier-watches-wonders-2025.md`

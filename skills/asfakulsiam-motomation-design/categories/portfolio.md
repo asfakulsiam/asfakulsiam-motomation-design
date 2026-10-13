@@ -19,3 +19,5 @@
 
 **Must-haves:** fast case-study loading, real project outcomes, keyboard-navigable work list, `llms.txt` and good meta for sharing.
 **Pitfalls:** a bento grid of thumbnails, skill bars and percentages, a tools logo wall, "passionate about" copy.
+
+**Award-site teardowns** (principles, no code): `references/teardowns/igloo-inc.md` · `references/teardowns/bruno-simon.md`
