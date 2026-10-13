@@ -12,7 +12,7 @@
 // touch: Runs on enter; hover replay is mouse-only.
 // a11y: The real text is the accessible name; the cycling glyphs are aria-hidden.
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { useInView, useReducedMotion, useFinePointer } from "../_lib/motion";
+import { useInView, useReducedMotion, useFinePointer, graphemes } from "../_lib/motion";
 
 type Props = { text: string; glyphs?: string; duration?: number; replayOnHover?: boolean; as?: "span" | "p" | "h2" | "h3"; className?: string; style?: CSSProperties };
 
@@ -29,8 +29,8 @@ export function Decode({ text, glyphs = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789#%&/<
     const id = ++run.current; const t0 = performance.now();
     const step = (t: number) => {
       if (id !== run.current) return;
-      const p = Math.min(1, (t - t0) / duration); const fixed = Math.floor(p * text.length);
-      setShown(text.split("").map((c, i) => (i < fixed || c === " " ? c : glyphs[(Math.random() * glyphs.length) | 0])).join(""));
+      const p = Math.min(1, (t - t0) / duration); const g = graphemes(text); const fixed = Math.floor(p * g.length);
+      setShown(g.map((c, i) => (i < fixed || c === " " ? c : glyphs[(Math.random() * glyphs.length) | 0])).join(""));
       if (p < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);

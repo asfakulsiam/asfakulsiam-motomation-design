@@ -12,7 +12,7 @@
 // touch: Same as desktop.
 // a11y: The h1 keeps the real text; the travelling letters are aria-hidden; the header name is a normal link.
 import { useRef, type CSSProperties } from "react";
-import { useReducedMotion, useScrollProgress, clamp, lerp } from "../_lib/motion";
+import { useReducedMotion, useScrollProgress, clamp, lerp, graphemes } from "../_lib/motion";
 
 type Props = { name: string; heroSize?: string; headerSize?: number; href?: string; className?: string; style?: CSSProperties };
 
@@ -46,7 +46,7 @@ export function LetterRelay({ name, heroSize = "clamp(3rem, 14vw, 12rem)", heade
       <div ref={hero} style={{ minHeight: "100svh", display: "grid", alignContent: "end", padding: "0 24px 8vh" }}>
         <h1 aria-label={name} style={{ fontSize: heroSize, lineHeight: 0.9, margin: 0 }}>
           <span ref={word} aria-hidden="true" style={{ display: "inline-block", whiteSpace: "nowrap", position: "relative", zIndex: 11 }}>
-            {name.split("").map((c, i) => <span key={i} data-l style={{ display: "inline-block", transformOrigin: "0 0", willChange: reduce ? undefined : "transform" }}>{c === " " ? "\u00a0" : c}</span>)}
+            {graphemes(name).map((c, i) => <span key={i} data-l style={{ display: "inline-block", transformOrigin: "0 0", willChange: reduce ? undefined : "transform" }}>{c === " " ? "\u00a0" : c}</span>)}
           </span>
         </h1>
       </div>

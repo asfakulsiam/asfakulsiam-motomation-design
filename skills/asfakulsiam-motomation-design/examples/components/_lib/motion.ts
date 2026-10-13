@@ -108,5 +108,21 @@ export function useFrameLoop<T extends Element>(ref: RefObject<T | null>, frame:
 }
 
 /** Shared timing tokens (motion/tokens.md). UI feedback stays at or under 250ms. */
+/** Split text into the units a reader sees as one character (grapheme clusters), for per-letter effects.
+ *  `"কালো".split("")` gives 4 code units and a lone vowel sign renders as a dotted circle (◌া); `graphemes("কালো")` gives
+ *  ["কা", "লো"]. Emoji ZWJ sequences, flags and combining accents stay whole. Uses Intl.Segmenter, with Array.from (code
+ *  points) as the fallback where Segmenter is missing. Cursive scripts (Arabic, Syriac, Thaana, N'Ko, Mongolian…) join each
+ *  letter to the next, so a run of them is kept as one unit: split into spans they would lose their joined forms. */
+const JOINING = /[\u0600-\u06FF\u0700-\u074F\u0750-\u077F\u0780-\u07BF\u07C0-\u07FF\u0860-\u089F\u08A0-\u08FF\u1800-\u18AF\uFB50-\uFDFF\uFE70-\uFEFF\u200C\u200D]/;
+type Seg = { segment(input: string): Iterable<{ segment: string }> };
+let seg: Seg | null | undefined;
+export function graphemes(text: string): string[] {
+  if (seg === undefined) { const S = (Intl as unknown as { Segmenter?: new (l?: string, o?: { granularity: "grapheme" }) => Seg }).Segmenter; seg = S ? new S(undefined, { granularity: "grapheme" }) : null; }
+  const units = seg ? Array.from(seg.segment(text), (x) => x.segment) : Array.from(text);
+  const out: string[] = [];
+  for (const u of units) { const prev = out[out.length - 1]; if (prev !== undefined && JOINING.test(u) && JOINING.test(prev.slice(-1))) out[out.length - 1] = prev + u; else out.push(u); }
+  return out;
+}
+
 export const EASE = { out: "cubic-bezier(0.22, 1, 0.36, 1)", outStrong: "cubic-bezier(0.16, 1, 0.3, 1)", inOut: "cubic-bezier(0.65, 0, 0.35, 1)", drawer: "cubic-bezier(0.32, 0.72, 0, 1)" } as const;
 export const DUR = { press: 120, ui: 180, reveal: 800, stagger: 80 } as const;

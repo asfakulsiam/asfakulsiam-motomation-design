@@ -8,21 +8,25 @@
 // reduced-motion: Shows the new value at once.  touch: Same as desktop.
 import { reduced, srOnly, partClass, mountAll } from "../_lib/motion.js";
 const ABC = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789:.-";
+// cells are graphemes (Intl.Segmenter, code points as the fallback), so a Bangla cluster or an emoji is one cell
+const SEG = typeof Intl !== "undefined" && Intl.Segmenter ? new Intl.Segmenter(undefined, { granularity: "grapheme" }) : null;
+const graphemes = (s) => (SEG ? Array.from(SEG.segment(s), (x) => x.segment) : Array.from(s));
 
 export function mount(el) {
-  const alphabet = el.dataset.alphabet || ABC, stepMs = +(el.dataset.stepMs ?? 45), cls = partClass(el, "cell", "mm-split-flap__cell");
+  const alphabet = graphemes(el.dataset.alphabet || ABC), stepMs = +(el.dataset.stepMs ?? 45), cls = partClass(el, "cell", "mm-split-flap__cell");
   const live = srOnly(el.dataset.value || el.textContent.trim()); live.setAttribute("aria-live", "polite");
   const cellsBox = document.createElement("span"); cellsBox.setAttribute("aria-hidden", "true"); cellsBox.style.display = "contents";
   el.textContent = ""; el.append(live, cellsBox);
   let cells = (el.dataset.value || "").toUpperCase(), timer = 0;
-  const paint = (s) => { cellsBox.replaceChildren(...s.split("").map((c) => { const x = document.createElement("span"); x.className = cls; x.textContent = c === " " ? "\u00a0" : c; return x; })); };
+  const paint = (s) => { cellsBox.replaceChildren(...graphemes(s).map((c) => { const x = document.createElement("span"); x.className = cls; x.textContent = c === " " ? "\u00a0" : c; return x; })); };
   const go = (value) => {
     const target = value.toUpperCase(); live.textContent = value; clearInterval(timer);
     if (reduced()) { cells = target; paint(cells); return; }
-    let cur = cells.padEnd(target.length, " ").slice(0, target.length).split(""), tick = 0;
+    const want = graphemes(target), have = graphemes(cells); let cur = want.map((_, i) => have[i] ?? " "), tick = 0;
     timer = setInterval(() => {
       tick++; let done = true;
-      cur = cur.map((c, i) => { if (c === target[i] || tick < i * 2) { if (c !== target[i]) done = false; return c; } done = false; const at = alphabet.indexOf(c); return alphabet[(at + 1) % alphabet.length] ?? target[i]; });
+      // a glyph the alphabet can't reach ("/", "ক", an emoji) lands directly; so does a cell starting from one
+      cur = cur.map((c, i) => { if (c === want[i] || tick < i * 2) { if (c !== want[i]) done = false; return c; } const at = alphabet.indexOf(c); if (at < 0 || !alphabet.includes(want[i])) return want[i]; done = false; return alphabet[(at + 1) % alphabet.length]; });
       cells = cur.join(""); paint(cells); if (done) clearInterval(timer);
     }, stepMs);
   };

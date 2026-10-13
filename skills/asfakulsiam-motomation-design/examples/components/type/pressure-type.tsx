@@ -12,7 +12,7 @@
 // touch: Static on touch screens (no hover).
 // a11y: The word is the accessible name; letter spans are aria-hidden.
 import { useEffect, useRef, type CSSProperties } from "react";
-import { useReducedMotion, useFinePointer, clamp } from "../_lib/motion";
+import { useReducedMotion, useFinePointer, clamp, graphemes } from "../_lib/motion";
 
 type Props = { word: string; radius?: number; wdth?: [number, number]; wght?: [number, number]; className?: string; style?: CSSProperties };
 
@@ -35,7 +35,7 @@ export function PressureType({ word, radius = 220, wdth = [75, 125], wght = [300
   }, [reduce, fine, radius, wdth, wght, word]);
   return (
     <span ref={ref} aria-label={word} className={className} style={{ display: "inline-flex", fontVariationSettings: `"wdth" ${wdth[0]}, "wght" ${wght[0]}`, ...style }}>
-      {word.split("").map((c, i) => <span key={i} data-l aria-hidden="true" style={{ display: "inline-block", fontVariationSettings: `"wdth" ${wdth[0]}, "wght" ${wght[0]}` }}>{c === " " ? "\u00a0" : c}</span>)}
+      {graphemes(word).map((c, i) => <span key={i} data-l aria-hidden="true" style={{ display: "inline-block", fontVariationSettings: `"wdth" ${wdth[0]}, "wght" ${wght[0]}` }}>{c === " " ? "\u00a0" : c}</span>)}
     </span>
   );
 }

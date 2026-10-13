@@ -12,14 +12,14 @@
 // touch: Same as desktop.
 // a11y: The line is the accessible name; letter spans are aria-hidden.
 import { Fragment, useRef, type CSSProperties } from "react";
-import { useReducedMotion, useScrollProgress, clamp } from "../_lib/motion";
+import { useReducedMotion, useScrollProgress, clamp, graphemes } from "../_lib/motion";
 
 type Props = { text: string; rise?: number; spread?: number; as?: "h2" | "h3" | "p"; className?: string; style?: CSSProperties };
 
 export function ScrollFloat({ text, rise = 0.6, spread = 0.5, as: Tag = "h2", className, style }: Props) {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
-  const chars = text.split("");
+  const chars = graphemes(text);
   useScrollProgress(ref, (p) => {
     const el = ref.current; if (!el) return;
     // settle between 10% and 45% of the element's trip through the viewport
@@ -33,11 +33,11 @@ export function ScrollFloat({ text, rise = 0.6, spread = 0.5, as: Tag = "h2", cl
     <Tag ref={ref as never} aria-label={text} className={className} style={{ overflow: "hidden", ...style }}>
       {/* letters are grouped into no-wrap words with real spaces between, so lines only break between words */}
       {text.split(" ").map((word, w, words) => {
-        const offset = words.slice(0, w).reduce((n, x) => n + x.length + 1, 0);
+        const offset = words.slice(0, w).reduce((n, x) => n + graphemes(x).length + 1, 0);
         return (
           <Fragment key={w}>
             <span aria-hidden="true" style={{ whiteSpace: "nowrap" }}>
-              {word.split("").map((c, i) => <span key={i} data-c data-i={offset + i} style={{ display: "inline-block", transformOrigin: "50% 100%", willChange: reduce ? undefined : "transform" }}>{c}</span>)}
+              {graphemes(word).map((c, i) => <span key={i} data-c data-i={offset + i} style={{ display: "inline-block", transformOrigin: "50% 100%", willChange: reduce ? undefined : "transform" }}>{c}</span>)}
             </span>
             {w < words.length - 1 ? " " : null}
           </Fragment>

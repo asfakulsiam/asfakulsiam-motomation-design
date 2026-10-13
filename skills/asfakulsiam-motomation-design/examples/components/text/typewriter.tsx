@@ -12,7 +12,7 @@
 // touch: Same as desktop (starts when in view).
 // a11y: The full text is in the DOM for assistive tech from the first render; the typed copy is aria-hidden. Every character holds its final place, so the line never reflows (no layout shift).
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { useInView, useReducedMotion } from "../_lib/motion";
+import { useInView, useReducedMotion, graphemes } from "../_lib/motion";
 
 type Props = { text: string; speed?: number; delay?: number; caret?: boolean; as?: "p" | "h1" | "h2" | "h3" | "span"; className?: string; style?: CSSProperties };
 const bar: CSSProperties = { position: "absolute", top: "0.1em", bottom: "0.05em", width: "0.08em", marginLeft: "0.03em", background: "currentColor" };
@@ -23,21 +23,22 @@ export function Typewriter({ text, speed = 38, delay = 200, caret = true, as: Ta
   const seen = useInView(ref);
   const reduce = useReducedMotion();
   const [n, setN] = useState(0);
+  const units = graphemes(text);
   useEffect(() => {
     if (reduce || !seen) return;
     let i = 0, timer = 0;
     // a small, seeded unevenness so it reads as typing, not a progress bar: spaces and punctuation take longer
-    const next = () => { i++; setN(i); if (i < text.length) timer = window.setTimeout(next, speed * (/[\s,.;:!?]/.test(text[i - 1]) ? 2.6 : 0.7 + ((i * 7) % 5) / 8)); };
+    const next = () => { i++; setN(i); if (i < units.length) timer = window.setTimeout(next, speed * (/[\s,.;:!?]/.test(units[i - 1]) ? 2.6 : 0.7 + ((i * 7) % 5) / 8)); };
     timer = window.setTimeout(next, delay);
     return () => window.clearTimeout(timer);
   }, [seen, reduce, text, speed, delay]);
-  const shown = reduce ? text.length : n, done = shown >= text.length;
+  const shown = reduce ? units.length : n, done = shown >= units.length;
   return (
     <Tag ref={ref as never} className={className} style={{ position: "relative", ...style }}>
       <span style={SR}>{text}</span>
       <span aria-hidden="true">
         {caret && !reduce && shown === 0 && <span style={{ position: "relative" }}><span style={{ ...bar, left: 0 }} /></span>}
-        {text.split("").map((ch, i) => (
+        {units.map((ch, i) => (
           <span key={i} style={{ opacity: i < shown ? 1 : 0, position: "relative" }}>
             {ch}
             {/* the caret rides on the last typed (visible) character as a zero-width absolute bar, so it moves without reflow */}
