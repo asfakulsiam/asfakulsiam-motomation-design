@@ -19,6 +19,8 @@ jobs:
         run: node tests/templates/template-rules.test.mjs
       - name: Matched-arm turn cap is exact (fake claude)
         run: node tests/evals/turn-cap.test.mjs
+      - name: Generate writes run provenance meta.json (fake claude)
+        run: node tests/evals/run-meta.test.mjs
       - name: MCP server answers the protocol (raw stdio session)
         run: node tests/mcp/session.mjs
       - name: Smoke-test skill scripts

@@ -61,6 +61,30 @@ const arms = String(flags.arms || "baseline,skill").split(",").filter((a) => ARM
 const TIER = flags.tier !== undefined ? +flags.tier : null; // force a motion tier (all arms are told the same tier)
 const MATCH_TURNS = +(flags["match-turns"] || 24); // matched arm fallback budget, when the paired skill run has no run.json
 // matched arm (v2.5.0): the budget is the paired skill run's turn count (same brief, same seed), enforced as a cap and a floor
+// Run provenance (v2.5.0, P1 T13): generate writes <out>/meta.json before any run starts, so every result folder says
+// exactly what produced it: the repo commit (and whether the tree was dirty), the skill version, the adapter and its
+// version, the model, the browser the measure phase will use, the runner's own hash, the run list and the time.
+export async function runMeta(todo = []) {
+  const git = (...a) => { const r = spawnSync("git", a, { cwd: ROOT, encoding: "utf8" }); return r.status === 0 ? r.stdout.trim() : null; };
+  const ver = (cmd, args = ["--version"]) => { try { const r = spawnSync(cmd, args, { encoding: "utf8", timeout: 20000 }); return r.status === 0 ? (r.stdout || r.stderr).trim().split("\n")[0] : null; } catch { return null; } };
+  const adapter = flags.agent === "raw-api" ? "raw-api" : flags.agent === "codex" ? "codex" : "claude-code";
+  const cli = adapter === "codex" ? flags.codex || "codex" : adapter === "claude-code" ? flags.claude || "claude" : null;
+  let browser = null;
+  try { const req = createRequire(join(process.cwd(), "noop.js")); let pw = await import(req.resolve("playwright")); pw = pw.chromium ? pw : pw.default; const b = await pw.chromium.launch(); browser = { name: "chromium", version: b.version(), playwright: JSON.parse(readFileSync(req.resolve("playwright/package.json"), "utf8")).version }; await b.close(); }
+  catch (e) { browser = { name: "chromium", version: null, note: `not available at generate (${String(e.message || e).split("\n")[0].slice(0, 120)}); the measure phase records its own` }; }
+  return {
+    schema: "motomation-run-meta/1", phase: "generate", started: new Date().toISOString(),
+    repo: { sha: git("rev-parse", "HEAD"), short: git("rev-parse", "--short", "HEAD"), branch: git("rev-parse", "--abbrev-ref", "HEAD"), dirty: (git("status", "--porcelain") ?? "") !== "", remote: git("config", "--get", "remote.origin.url") },
+    skill_version: JSON.parse(readFileSync(join(ROOT, "package.json"), "utf8")).version,
+    adapter: { name: adapter, cli, version: cli ? ver(cli) : null },
+    model: { pinned: flags.model || flags["claude-model"] || null, note: flags.model || flags["claude-model"] ? undefined : "not pinned by flag: the adapter's default; models_reported (filled in after the runs) lists what the agents said they were" },
+    browser, node: process.version, platform: `${process.platform}-${process.arch}`,
+    runner: { file: "evals/run-agent-benchmark.mjs", sha256: createHash("sha256").update(readFileSync(new URL(import.meta.url))).digest("hex").slice(0, 16) },
+    argv: process.argv.slice(2), ci: process.env.GITHUB_ACTIONS ? { run_id: process.env.GITHUB_RUN_ID, run_attempt: process.env.GITHUB_RUN_ATTEMPT, workflow: process.env.GITHUB_WORKFLOW, url: `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}` } : null,
+    runs: todo.map((r) => `${r.slug}/${r.cond}-s${r.seed}`),
+  };
+}
+
 export function matchBudget(r) {
   try { const t = JSON.parse(readFileSync(join(OUT, r.slug, `skill-s${r.seed}`, "run.json"), "utf8")).turns; if (t > 0) return { budget: t, from: `skill-s${r.seed}/run.json` }; } catch {}
   return { budget: MATCH_TURNS, from: "--match-turns" };
@@ -340,7 +364,16 @@ async function judgePair(slug, seed, model, pair = ["baseline", "skill"]) {
 const total = (s) => AX.reduce((a, k) => a + (s[k] || 0) * W[k], 0) / 5;
 
 async function main() {
-  if (phase === "generate") { mkdirSync(OUT, { recursive: true }); const todo = runs().filter((r) => flags.force || !existsSync(join(r.dir, "run.json"))); await pool(todo, +(flags.parallel || 4), flags.agent === "raw-api" ? runRawAgent : runAgent); return; }
+  if (phase === "generate") {
+    mkdirSync(OUT, { recursive: true }); const todo = runs().filter((r) => flags.force || !existsSync(join(r.dir, "run.json")));
+    const meta = await runMeta(todo); const mf = join(OUT, "meta.json");
+    if (existsSync(mf)) { try { const old = JSON.parse(readFileSync(mf, "utf8")); const { previous = [], ...last } = old; meta.previous = [...previous, last]; } catch {} } // one folder, several generate calls (skill, then matched): keep each
+    writeFileSync(mf, JSON.stringify(meta, null, 1));
+    await pool(todo, +(flags.parallel || 4), flags.agent === "raw-api" ? runRawAgent : runAgent);
+    // after the runs: the models the agents actually reported (Claude Code's stream-json init event), next to the pinned one
+    meta.finished = new Date().toISOString(); meta.models_reported = [...new Set(todo.flatMap((r) => { try { return readFileSync(join(r.dir, "transcript.jsonl"), "utf8").split("\n").filter((l) => l.includes('"model"')).map((l) => { try { const j = JSON.parse(l); return j.model || j.message?.model; } catch { return null; } }).filter(Boolean); } catch { return []; } }))];
+    writeFileSync(join(OUT, "meta.json"), JSON.stringify(meta, null, 1)); return;
+  }
   if (phase === "measure") {
     const req = createRequire(join(process.cwd(), "noop.js")); let pw; try { pw = await import(req.resolve("playwright")); pw = pw.chromium ? pw : pw.default; } catch { console.log("not verified — no browser (Playwright not found from the current folder)"); process.exit(3); }
     await pool(runs().filter((r) => existsSync(join(r.dir, "run.json")) && (flags.force || !existsSync(join(r.dir, "checks.json")))), +(flags.parallel || 3), async (r) => { try { await measure(r, pw); console.log(`measured ${r.slug} ${r.cond} s${r.seed}`); } catch (e) { console.log(`MEASURE FAILED ${r.slug} ${r.cond} s${r.seed}: ${String(e).split("\n")[0]} (no checks.json; the pair stays not scored)`); process.exitCode = 1; } }); return;

@@ -13,6 +13,7 @@ const n = existsSync(".fake-calls") ? +readFileSync(".fake-calls", "utf8") : 0; 
 appendFileSync(".fake-log", JSON.stringify({ call: n, maxTurns: M, resume: a.includes("--resume") }) + "\n");
 const W = wants[Math.min(n, wants.length - 1)];
 const calls = Math.min(W, M);
+console.log(JSON.stringify({ type: "system", subtype: "init", model: process.env.FAKE_MODEL || "fake-model-1", session_id: "fake-session" })); // what Claude Code prints first
 for (let i = 0; i < calls; i++) console.log(JSON.stringify({ type: "assistant", message: { id: `m${n}-${i}`, content: [{ type: "tool_use", name: "Write" }] } }));
 writeFileSync("index.html", "<!doctype html><title>x</title>");
 const capped = W > M;
