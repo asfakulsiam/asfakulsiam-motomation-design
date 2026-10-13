@@ -41,6 +41,14 @@ Exit codes: `0` pass · `1` fail · `2` stamp rejected · `3` not verified (no b
 
 **Constrained sandboxes** (Codex CLI, small CI containers, 2-CPU machines): the gate probes the machine, and if Chromium fails to start, crashes or times out it retries once in a light footprint (one renderer process via `--renderer-process-limit=1 --no-zygote`, `--disable-gpu --disable-dev-shm-usage`, operation timeouts ×3; the checks are identical). If that fails too it prints `not verified — sandbox too constrained: <reason> (attempt 1 …; attempt 2 …; machine …)` and exits 3. Report that line verbatim; don't call the page verified. `--light` starts in the light footprint; `--timeout-ms` sets the budget. Details: `docs/adapters/codex.md`.
 
+**Composition heuristics (advisory, v2.5.0).** After the axes the gate prints a `composition (advisory …)` block with three measurements at 1440×900. They never fail the gate, are not in the counts, the stamp or its id, and a page passes or fails exactly as without them. Read them as prompts for a second look, not verdicts:
+
+- **pin fill**: the share of the viewport covered by content (text boxes, images, video, canvas, SVG, and backgrounds that are not the page ground or a full-bleed flat colour) at 25, 50 and 75% through each pinned zone. Warns below 60%: a pinned screen that holds the reader for several scrolls with most of it empty.
+- **focal**: for each screen of scroll (every 900px, up to 14), the text mass of each block (characters × font size², visually hidden text excluded). Warns on screens where the heaviest block does not outweigh the next by 1.5×: no single thing to look at first. A screen of body paragraphs with no heading will warn; that can be deliberate.
+- **scale**: the largest text size on the page against the body size (the size carrying the most characters in runs of 40 or more). Warns below 1:6, the display:body contrast typography-led pages usually need.
+
+Exit code `2` also covers usage errors (an unknown flag, a missing value or no target), printed as one line plus the usage.
+
 **Optional motion report.** `node scripts/gate.mjs --report dist/index.html` (or `--report out.html` after a target) also writes a self-contained HTML file with scroll-frame strips: 8 frames at 1440px, 8 at 375px and 8 at 1440px under reduced motion. Use it to review motion by eye, show a client, or give judges something better than one screenshot. It's off by default, doesn't change the text output, and adds nothing to the gate's numbers.
 
 ---

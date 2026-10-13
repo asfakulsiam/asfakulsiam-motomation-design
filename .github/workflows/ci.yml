@@ -98,6 +98,9 @@ jobs:
             echo "::warning::Playwright could not be installed; gate fixtures not verified"
             node scripts/check-fixtures.mjs
           fi
+      - name: Composition heuristics measure and stay advisory (C4)
+        if: steps.pw.outcome == 'success'
+        run: node tests/gate/composition.test.mjs
       - name: Tier 4 reduced-motion stills (no canvas, still, own composition)
         if: steps.pw.outcome == 'success'
         run: node tests/components/rm-stills.test.mjs

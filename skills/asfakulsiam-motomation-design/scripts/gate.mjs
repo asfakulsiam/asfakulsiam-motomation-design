@@ -891,6 +891,63 @@ export function critiqueOf({ hier, words375, overflow375, motionFails, st, tier,
 }
 
 // ── run ──────────────────────────────────────────────────────────────────────
+// ── composition heuristics (v2.5.0, C4): advisory only ─────────────────────────────────────────────────────────
+// Three measurements of how a page is composed, printed under "composition (advisory)". They never fail the gate and
+// are not part of the counts, the stamp or its id: a page passes or fails exactly as before. Heuristics, not rules:
+//   pin fill  share of the 1440×900 viewport covered by content (text boxes, media, backgrounds that aren't the ground)
+//             at 25/50/75% through each pinned zone; warn below COMP_FILL_MIN
+//   focal     per screen (every 900px of scroll, up to COMP_SCREENS): text mass = characters × font size², per element;
+//             one clear focal point = the heaviest element outweighs the next by COMP_FOCAL_LEAD; warn on screens without
+//   scale     largest display size : body size (the font size carrying the most characters in runs of 40+); warn below 1:COMP_SCALE_MIN
+export const COMP_FILL_MIN = 0.6, COMP_FOCAL_LEAD = 1.5, COMP_SCALE_MIN = 6, COMP_SCREENS = 14;
+const COMP_PAGE = () => {
+  const W = innerWidth, H = innerHeight, GX = 32, GY = 20;
+  const shown = (e) => (e.checkVisibility ? e.checkVisibility({ opacityProperty: true, visibilityProperty: true }) : getComputedStyle(e).visibility !== "hidden");
+  const ground = getComputedStyle(document.body).backgroundColor;
+  // visually hidden text (sr-only: clipped to a pixel) is for screen readers, not part of the composition
+  const hiddenText = (e) => { for (let n = e, i = 0; n && i < 4; n = n.parentElement, i++) { const cs = getComputedStyle(n); const r = n.getBoundingClientRect(); if (r.width <= 2 || r.height <= 2 || (cs.clip && cs.clip !== "auto") || /inset\(50%\)|inset\(100%\)/.test(cs.clipPath)) return true; } return false; };
+  // text mass belongs to the block it reads as: a headline split into per-character spans is one headline
+  const block = (e) => { for (let n = e; n && n !== document.body; n = n.parentElement) if (!/^inline/.test(getComputedStyle(n).display)) return n; return e; };
+  const texts = []; const tw = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  for (let n = tw.nextNode(); n; n = tw.nextNode()) {
+    const t = n.textContent.replace(/\s+/g, " ").trim(); const e = n.parentElement; if (!t || !e || /^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE)$/.test(e.tagName) || !shown(e) || hiddenText(e)) continue;
+    const r = document.createRange(); r.selectNodeContents(n); const rects = [...r.getClientRects()].filter((b) => b.width > 1 && b.height > 1);
+    if (rects.length) texts.push({ e, chars: t.length, size: parseFloat(getComputedStyle(e).fontSize) || 16, rects });
+  }
+  const boxes = texts.flatMap((x) => x.rects);
+  for (const e of document.body.querySelectorAll("img,svg,canvas,video,picture,iframe,*")) {
+    if (!shown(e)) continue; const cs = getComputedStyle(e); const media = /^(IMG|SVG|CANVAS|VIDEO|PICTURE|IFRAME)$/i.test(e.tagName);
+    const bgImg = cs.backgroundImage && cs.backgroundImage !== "none";
+    const bgCol = cs.backgroundColor && !/rgba\(0, 0, 0, 0\)|transparent/.test(cs.backgroundColor) && cs.backgroundColor !== ground;
+    if (!media && !bgImg && !bgCol) continue;
+    const r = e.getBoundingClientRect(); if (r.width < 2 || r.height < 2 || r.bottom <= 0 || r.top >= H) continue;
+    if (!media && !bgImg && r.width * r.height > W * H * 0.6) continue; // a full-bleed flat colour is the ground of that screen, not content
+    boxes.push(r);
+  }
+  let hit = 0;
+  for (let gy = 0; gy < GY; gy++) for (let gx = 0; gx < GX; gx++) { const x = (gx + 0.5) * W / GX, y = (gy + 0.5) * H / GY; if (boxes.some((b) => x >= b.left && x <= b.right && y >= b.top && y <= b.bottom)) hit++; }
+  const mass = new Map(); for (const x of texts) { if (!x.rects.some((b) => b.bottom > 0 && b.top < H)) continue; const k = block(x.e); mass.set(k, (mass.get(k) || 0) + x.chars * x.size * x.size); }
+  const ranked = [...mass.entries()].sort((a, b) => b[1] - a[1]);
+  return { fill: hit / (GX * GY), focal: ranked.length ? { lead: ranked.length > 1 ? +(ranked[0][1] / ranked[1][1]).toFixed(2) : null, top: __g.label(ranked[0][0]) } : null,
+    sizes: texts.map((x) => [x.size, x.chars]) };
+};
+export async function composition(browser, url) {
+  const { ctx, page } = await open(browser, url, { viewport: { width: 1440, height: 900 } });
+  try {
+    const at = async (y) => { await page.evaluate((v) => scrollTo(0, v), y); await page.waitForTimeout(T(260)); return page.evaluate(COMP_PAGE); };
+    const zones = (await page.evaluate(ZONES)).filter((z) => z.kind !== "scroll-timeline").slice(0, MAX_ZONES);
+    const pin = []; for (const z of zones) { const f = []; for (const p of [0.25, 0.5, 0.75]) f.push((await at(Math.round(z.top + z.len * p))).fill); const fill = f.reduce((a, b) => a + b, 0) / f.length; pin.push({ kind: z.kind, label: z.label, fill: Math.round(fill * 100), ok: fill >= COMP_FILL_MIN }); }
+    const h = await page.evaluate(() => document.documentElement.scrollHeight); const screens = []; const sizes = new Map(); let display = 0;
+    for (let i = 0, y = 0; y < h - 1 && i < COMP_SCREENS; i++, y += 900) {
+      const r = await at(y); for (const [sz, ch] of r.sizes) { display = Math.max(display, sz); if (ch >= 40) sizes.set(sz, (sizes.get(sz) || 0) + ch); }
+      screens.push({ n: i + 1, top: r.focal?.top || null, lead: r.focal ? r.focal.lead : null, ok: !r.focal || r.focal.lead === null || r.focal.lead >= COMP_FOCAL_LEAD, text: !!r.focal });
+    }
+    const body = [...sizes.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] || null;
+    const ratio = body ? +(display / body).toFixed(1) : null;
+    return { pin, screens, scale: { display, body, ratio, ok: ratio === null || ratio >= COMP_SCALE_MIN } };
+  } finally { await ctx.close(); }
+}
+
 export async function scan(target, browser, opts = {}) {
   const { url, close } = await toUrl(target);
   try {
@@ -898,6 +955,8 @@ export async function scan(target, browser, opts = {}) {
     const o = []; for (const w of WIDTHS) o.push(await overflowAt(browser, url, w));
     const w = await words(browser, url); const m = await motion(browser, url); const n = await names(browser, url); const nu = await numbers(browser, url); const st = await structure(browser, url);
     const mq = await motionQuality(browser, url); const ax = await a11y(browser, url); const rf = await ruleFacts(browser, url);
+    // advisory (C4): never fails, never in counts, stamp or id; a failure to measure is reported, not raised
+    const comp = await composition(browser, url).catch((e) => ({ error: firstLine(e) }));
     // fingerprint of the served HTML with stamp comments removed: same page → same id, any other page → a different id
     const html = await fetch(url).then((r) => r.text()).catch(() => "");
     const pageHash = createHash("sha256").update(html.replace(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g, "")).digest("hex").slice(0, 16);
@@ -921,7 +980,7 @@ export async function scan(target, browser, opts = {}) {
     // coverage: the worst width decides; more than SKIP_WARN_PCT skipped at any width means the page was not measured, not passed
     const worstW = c.byWidth.reduce((a, x) => (x.skippedPct > a.skippedPct ? x : a), c.byWidth[0]);
     const coverage = { ok: !c.lowCoverage, skipped: worstW.skipped, total: worstW.total, pct: worstW.skippedPct, width: worstW.width, low: c.byWidth.filter((x) => x.lowCoverage).map((x) => x.width) };
-    return { target, url, version: GATE_VERSION, pass, verified: coverage.ok, coverage, counts, id, stamp: stampOf(counts, id, coverage), critique: critiqueFull, sources: { design: designFile || null, log: logFile || null, meta }, rules, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu, quality: mq, access: ax };
+    return { target, url, version: GATE_VERSION, pass, verified: coverage.ok, coverage, counts, id, stamp: stampOf(counts, id, coverage), critique: critiqueFull, sources: { design: designFile || null, log: logFile || null, meta }, rules, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu, quality: mq, access: ax, composition: comp };
   } finally { close(); }
 }
 export const stampOf = (k, id, cov, version = GATE_VERSION) => `gate: c${k.contrast} o${k.overflow} w${k.words} rm${k.motion} a${k.names} n${k.numbers ?? 0}${k.quality !== undefined ? ` q${k.quality} k${k.access}` : ""}${k.copy !== undefined ? ` · rules: C${k.copy} S${k.seo} P${k.perf} K${k.sec}` : ""} · ${version} · ${id}${cov ? ` · skipped ${cov.skipped}/${cov.total}@${cov.width}` : ""}`;
@@ -980,6 +1039,18 @@ function print(r) {
     L(`  ${name.padEnd(10)} ${ids.length === 0 ? "✓" : "✗"} ${ids.length} rule(s) failing${ids.length ? `: ${ids.join(" ")}` : ""}  (${file}; ${x.warns.length} warning(s))`);
     for (const f of x.fails.slice(0, 8)) L(`     ✗ ${f.id}  ${f.why}${f.at ? `  ${f.at}` : ""}`);
     for (const f of x.warns.slice(0, 4)) L(`     ⚠ ${f.id}  ${f.why}${f.at ? `  ${f.at}` : ""}`);
+  }
+  const cp = r.composition;
+  if (cp) {
+    L(`  composition (advisory: heuristics, never fail the gate, not in the stamp)`);
+    if (cp.error) L(`     – not measured (${cp.error})`);
+    else {
+      const lowPin = cp.pin.filter((z) => !z.ok);
+      L(`     pin fill  ${!cp.pin.length ? "– no pinned zone" : `${lowPin.length ? "⚠" : "✓"} ${cp.pin.length - lowPin.length} of ${cp.pin.length} pinned zone(s) at least ${COMP_FILL_MIN * 100}% filled  (${cp.pin.map((z) => `${z.kind} ${z.label} ${z.fill}%`).join(" · ")})`}`);
+      const txt = cp.screens.filter((x) => x.text), weak = txt.filter((x) => !x.ok);
+      L(`     focal     ${weak.length ? "⚠" : "✓"} ${txt.length - weak.length} of ${txt.length} screen(s) with text have one clear focal point (heaviest text mass ≥ ${COMP_FOCAL_LEAD}× the next)${weak.length ? `; no clear lead on screen ${weak.map((x) => `${x.n} (${x.lead}×)`).join(", ")}` : ""}`);
+      L(`     scale     ${cp.scale.ratio === null ? "– no body text found" : `${cp.scale.ok ? "✓" : "⚠"} display:body 1:${cp.scale.ratio}  (${cp.scale.display}px / ${cp.scale.body}px; warn below 1:${COMP_SCALE_MIN})`}`);
+    }
   }
   const st = r.structure;
   L(`  hierarchy  h1×${r.words.hier.h1}, ${r.words.hier.skips} skipped heading levels, ${r.words.hier.focalTies} element(s) tied for largest on the first 375px screen`);
@@ -1148,4 +1219,5 @@ async function main() {
   }
 }
 // any other crash is not a verdict on the page: exit 3, not verified, with the reason
-main().catch((e) => { console.error(e); notVerified(`the browser failed during the scan (${firstLine(e)}); machine: ${machineLine(PROBE)}; run again`); });
+// run as a script only: tests import scan() and composition() without starting a gate run
+if (process.argv[1] && resolve(process.argv[1]) === new URL(import.meta.url).pathname) main().catch((e) => { console.error(e); notVerified(`the browser failed during the scan (${firstLine(e)}); machine: ${machineLine(PROBE)}; run again`); });
