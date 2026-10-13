@@ -86,5 +86,7 @@ jobs:
         run: NODE_PATH=$PWD/node_modules node tests/components/rtl.test.mjs --out /tmp/rtl
       - name: Server render + hydrate every component (renderToString, hydrateRoot; any hydration warning fails; mismatch control)
         run: NODE_PATH=$PWD/node_modules node tests/components/ssr.test.mjs --out /tmp/ssr
+      - name: Interaction, cursor/layout/micro/ui (keyboard, pointer, touch, unmount mid-animation; no console errors, no leaks; leak control)
+        run: NODE_PATH=$PWD/node_modules node tests/components/interaction.test.mjs --out /tmp/int
       - name: Whole gallery (layout shift, console errors, every demo on one page)
         run: NODE_PATH=$PWD/node_modules node tests/components/gallery-harness.mjs --out /tmp/gh
