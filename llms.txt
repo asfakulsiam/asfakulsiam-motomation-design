@@ -2,6 +2,8 @@
 
 > An agent skill by asfakulsiam for original, award-level websites that are minimal, modern and typography-led, with motion as the signature, up to "Motomation": scrolling that plays like a film. MIT licensed.
 
+- Version: 2.5.0
+- Newest benchmark report: [evals/results/2026-10-12-benchmark-v4.md](evals/results/2026-10-12-benchmark-v4.md) (78 builds, not scored: measurement never committed). Latest scored: [benchmark v3](evals/results/2026-10-12-benchmark-v3.md). Summary: [docs/benchmark-summary.md](docs/benchmark-summary.md)
 - [Skill entry point](skills/asfakulsiam-motomation-design/SKILL.md): router, five laws, default flow, tiers, commands
 - [Thinking Sequence](skills/asfakulsiam-motomation-design/thinking/sequence.md): tension, concept, archetype + mutation, collision, signature, anti-sameness, restraint
 - [Motomation (Tier 5)](skills/asfakulsiam-motomation-design/motion/tier-5-motomation.md): scroll-as-film method and code

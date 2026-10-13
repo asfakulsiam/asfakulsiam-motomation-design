@@ -387,6 +387,11 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   const m = sum.match(/<!-- current-report -->[\s\S]*?evals\/results\/([^)`\]\s]+\.md)[\s\S]*?<!-- \/current-report -->/);
   if (!m) fail("docs/benchmark-summary.md has no <!-- current-report --> marker naming the current report");
   else if (m[1] !== newest) fail(`docs/benchmark-summary.md names ${m[1]} as current, but the newest main report is ${newest}`);
+  // llms.txt (v2.5.0, C12): states the skill version and links the newest main report; fails if either drifts
+  const llms = readFileSync(join(ROOT, "llms.txt"), "utf8");
+  const lv = llms.match(/^- Version: (\S+)$/m); if (!lv) fail("llms.txt has no \"- Version: x.y.z\" line"); else if (lv[1] !== v) fail(`llms.txt says version ${lv[1]}, VERSION is ${v}`);
+  const lr = llms.match(/^- Newest benchmark report: \[[^\]]*\]\(evals\/results\/([^)]+\.md)\)/m);
+  if (!lr) fail("llms.txt has no \"- Newest benchmark report: [..](evals/results/<report>.md)\" line"); else if (lr[1] !== newest) fail(`llms.txt links ${lr[1]} as the newest benchmark report, but the newest main report is ${newest}`);
   if (/v2 is the current result/i.test(sum)) fail("docs/benchmark-summary.md still says v2 is the current result");
 }
 
