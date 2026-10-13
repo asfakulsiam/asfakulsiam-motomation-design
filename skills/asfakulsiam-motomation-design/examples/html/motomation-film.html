@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Motomation · a scroll film in one file</title>
-<meta name="description" content="A single-file Motomation demo: scroll plays a film. Line reveals, proximity weight type, a pinned canvas film with timecode, and a designed reduced-motion version.">
+<meta name="description" content="A single-file Motomation demo: scroll plays a film. Proximity weight type, a pinned canvas film with timecode, and a designed reduced-motion version.">
 <script>document.documentElement.classList.add("js")</script>
 <!-- self-hosted (v2.4.0): the page and its stamp work offline; fonts are OFL, see lib/LICENSES.md -->
 <link href="lib/fonts.css" rel="stylesheet">
 <style>
-  /* motomation · archetype: film-reel · mutation: tempo-shift · signature: timecode-rail · tier: 5 · critique: C5[restraint:kept] H4[375:1] S5[last5:no-log] R2[cuts:1,anim:0] M5[t5:pins1/2,webgl0/1,js58/250KB,rm0] V3[entrance-repeats:2] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 40db7ef209 */
+  /* motomation · archetype: film-reel · mutation: tempo-shift · signature: timecode-rail · tier: 5 · critique: C5[restraint:kept] H5[375:0] S5[last5:no-log] R5[cuts:4,anim:0] M5[t5:pins1/2,webgl0/1,js59/250KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 87033b15f1 · skipped 1/21@375 */
   :root {
     --ground: #0E0D0B; --surface: #1A1814; --ink: #F2EEE6; --muted: #A8A196; --accent: #E0442B;
     --line: color-mix(in oklab, var(--ink) 16%, transparent);
@@ -42,30 +42,29 @@
   .statement .mono { grid-column: 1 / 4; }
   .statement p { grid-column: 4 / 12; font: 500 clamp(1.75rem, 1.2rem + 2.6vw, 3.75rem)/1.12 var(--text); letter-spacing: -0.02em; text-wrap: balance; }
 
-  /* film */
+  /* film: one set of scene captions. Without motion (reduced motion, no JavaScript) the stage is a storyboard of
+     stills; while the film runs, the same figures are the captions over the canvas, so every caption is real,
+     readable, focusable text (no aria-hidden mirror). */
+  .film__canvas, .rail { display: none; }
   .film__static { display: grid; gap: 14vh; padding: 10vh 5vw 20vh; }
   .film__static figure { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; align-items: end; }
   .film__static canvas, .film__static img { grid-column: 1 / 9; width: 100%; aspect-ratio: 16 / 10; background: var(--surface); }
   .film__static figcaption { grid-column: 9 / 13; }
   .film__static figcaption p:first-child { font: 800 clamp(2rem, 4vw, 4rem)/0.95 var(--display); font-variation-settings: "wdth" 70; text-transform: uppercase; }
-  .film__stage { display: none; position: relative; height: 100svh; overflow: hidden; }
-  .film__stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .scene { position: absolute; left: 5vw; bottom: 14vh; max-width: 16ch; visibility: hidden; }
-  .scene p:first-child { font: 800 clamp(2.75rem, 8vw, 9rem)/0.88 var(--display); font-variation-settings: "wdth" 66; letter-spacing: -0.02em; text-transform: uppercase; }
-  .scene p + p { margin-top: 1rem; max-width: 36ch; color: var(--muted); font-size: 1rem; }
-  .rail { position: absolute; left: 5vw; right: 5vw; bottom: 5vh; display: flex; gap: 1rem; align-items: center; font: 500 0.75rem var(--mono); font-variant-numeric: tabular-nums; letter-spacing: 0.08em; }
+  .film__static a { text-decoration: none; }
+  .rail { position: absolute; left: 5vw; right: 5vw; bottom: 5vh; gap: 1rem; align-items: center; font: 500 0.75rem var(--mono); font-variant-numeric: tabular-nums; letter-spacing: 0.08em; }
   .rail i { position: relative; flex: 1; height: 1px; background: var(--line); }
   .rail i b { position: absolute; inset: 0; background: var(--accent); transform-origin: left; transform: scaleX(0); }
-  .film__static a { text-decoration: none; }
-  /* Film mode: the storyboard stays in the accessibility tree (never display:none). Each figure is visually
-     hidden; a focused scene link turns its figure into a visible caption card over the stage. */
-  .film-on .film__static { padding: 0; gap: 0; }
-  .film-on .film__static figure { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  .film-on .film__static figure:focus-within { position: fixed; left: 5vw; bottom: 14vh; z-index: 6; display: block; width: auto; height: auto; max-width: min(36ch, 90vw); overflow: visible; clip-path: none; white-space: normal; }
-  .film-on .film__static figure:focus-within canvas { display: none; }
-  .film-on .film__static figure:focus-within figcaption p:first-child { font-size: clamp(2.75rem, 8vw, 9rem); line-height: .88; }
-  .film-on .film:has(figure:focus-within) .scene { opacity: 0 !important; }
-  .film-on .film__stage { display: block; }
+  .film-on .film__stage { position: relative; height: 100svh; overflow: hidden; }
+  .film-on .film__canvas { display: block; position: absolute; inset: 0; width: 100%; height: 100%; }
+  .film-on .rail { display: flex; }
+  .film-on .film__static { display: block; padding: 0; }
+  .film-on .film__static figure { position: absolute; left: 5vw; bottom: 14vh; display: block; max-width: 90vw; margin: 0; opacity: 0; }
+  .film-on .film__static figure canvas { display: none; }
+  .film-on .film__static figcaption p:first-child { font: 800 clamp(2.75rem, 8vw, 9rem)/0.88 var(--display); font-variation-settings: "wdth" 66; letter-spacing: -0.02em; }
+  .film-on .film__static figcaption p + p { margin-top: 1rem; max-width: 36ch; color: var(--muted); font-size: 1rem; }
+  /* a focused scene link shows its caption at once; the film scrubs to that scene (script below) */
+  .film-on .film__static figure:focus-within { opacity: 1 !important; }
 
   .ask { min-height: 90svh; display: grid; align-content: center; justify-items: start; gap: 2rem; padding: 0 5vw; }
   .ask h2 { font: 800 clamp(3rem, 10vw, 11rem)/0.86 var(--display); font-variation-settings: "wdth" 60; text-transform: uppercase; letter-spacing: -0.02em; }
@@ -95,30 +94,26 @@
 
   <section class="statement" aria-label="Statement">
     <p class="mono">(01) Idea</p>
-    <p data-lines>Most animated sites add motion to pages. Motomation does the reverse: it directs one sequence, then lets the reader hold the remote.</p>
+    <p>Most animated sites add motion to pages. Motomation does the reverse: it directs one sequence, then lets the reader hold the remote.</p>
   </section>
 
   <section class="film" aria-label="The film, in four scenes">
-    <!-- Storyboard: shown for reduced motion and without JavaScript; while the film runs it is the accessible narrative -->
-    <div class="film__static">
+    <!-- The stage: pinned and scrubbed while the film runs; a storyboard of stills for reduced motion and without JavaScript.
+         The four figures are the scene captions in both modes. -->
+    <div class="film__stage">
+      <canvas class="film__canvas" aria-hidden="true"></canvas>
+      <div class="film__static">
       <figure id="scene-1"><canvas data-still="0.05" aria-hidden="true"></canvas><figcaption><p><a href="#scene-1" data-jump="0"><span class="sr-only">Scene 1 of 4: </span>Darkness</a></p><p>A single ring waits in an empty room.</p></figcaption></figure>
       <figure id="scene-2"><canvas data-still="0.35" aria-hidden="true"></canvas><figcaption><p><a href="#scene-2" data-jump="1"><span class="sr-only">Scene 2 of 4: </span>Orbit</a></p><p>The camera circles; the ring turns to show its depth.</p></figcaption></figure>
       <figure id="scene-3"><canvas data-still="0.62" aria-hidden="true"></canvas><figcaption><p><a href="#scene-3" data-jump="2"><span class="sr-only">Scene 3 of 4: </span>Exploded</a></p><p>Every strand separates so you can see how it's made.</p></figcaption></figure>
       <figure id="scene-4"><canvas data-still="0.95" aria-hidden="true"></canvas><figcaption><p><a href="#scene-4" data-jump="3"><span class="sr-only">Scene 4 of 4: </span>Whole</a></p><p>It closes into one form, the frame holds, and the page lets go.</p></figcaption></figure>
-    </div>
-    <!-- Film stage: pinned and scrubbed -->
-    <div class="film__stage" aria-hidden="true"><!-- visual mirror of the storyboard above -->
-      <canvas aria-hidden="true"></canvas>
-      <div class="scene" data-scene><p>Darkness</p><p>A single ring waits in an empty room.</p></div>
-      <div class="scene" data-scene><p>Orbit</p><p>The camera circles; the ring turns to show its depth.</p></div>
-      <div class="scene" data-scene><p>Exploded</p><p>Every strand separates so you can see how it's made.</p></div>
-      <div class="scene" data-scene><p>Whole</p><p>It closes into one form, the frame holds, and the page lets go.</p></div>
+      </div>
       <div class="rail" aria-hidden="true"><span data-code>00:00:00</span><i><b data-bar></b></i><span>00:24:00</span></div>
     </div>
   </section>
 
   <section class="ask" aria-labelledby="ask">
-    <h2 id="ask" data-lines>Direct your own</h2>
+    <h2 id="ask">Direct your own</h2>
     <a class="btn" href="https://github.com/asfakulsiam/asfakulsiam-motomation-design">Get the skill <span aria-hidden="true">→</span></a>
   </section>
 </main>
@@ -185,21 +180,13 @@
     if (!motion) return;
     document.documentElement.classList.add("film-on"); // CSS swaps the visible storyboard for the stage
 
-    // Line Curtain on headings and statements
-    document.querySelectorAll("[data-lines]").forEach((el) => SplitText.create(el, {
-      type: "lines", mask: "lines", autoSplit: true,
-      onSplit: (self) => gsap.from(self.lines, { yPercent: 110, duration: 1, ease: "expo.out", stagger: 0.08,
-        scrollTrigger: { trigger: el, start: "top 85%", once: true } }),
-    }));
-
-    // Hook: letters rise, then Proximity Weight follows the cursor
-    const h1 = document.querySelector("[data-pw]");
-    const split = SplitText.create(h1, { type: "chars,words", charsClass: "pw-char", mask: "words" });
-    split.chars.forEach((ch) => ch.setAttribute("data-l", ""));
-    gsap.from(split.chars, { yPercent: 105, duration: 1.1, ease: "expo.out", stagger: 0.025, delay: 0.15 });
-    gsap.from("[data-fade]", { opacity: 0, y: 12, duration: 0.9, ease: "power3.out", delay: 0.7, stagger: 0.1 });
-    let onMove;
+    // Hook: the copy settles in once (the page's one entrance); the title holds still. Proximity Weight follows a fine
+    // pointer only, so the title is split into letters only where that detail exists (no split on touch)
+    gsap.from("[data-fade]", { opacity: 0, y: 12, duration: 0.9, ease: "power3.out", delay: 0.3, stagger: 0.1 });
+    let onMove, split;
     if (fine) {
+      split = SplitText.create(document.querySelector("[data-pw]"), { type: "chars,words", charsClass: "pw-char" });
+      split.chars.forEach((ch) => ch.setAttribute("data-l", ""));
       let raf = 0, px = -1e4, py = -1e4;
       const paint = () => { raf = 0;
         for (const ch of split.chars) {
@@ -215,7 +202,7 @@
 
     // The film: duration 1 so positions are storyboard timecodes
     const stage = document.querySelector(".film__stage");
-    const canvas = stage.querySelector("canvas");
+    const canvas = stage.querySelector(".film__canvas");
     const state = { p: 0 };
     const draw = () => render(canvas, state.p);
     const code = stage.querySelector("[data-code]"), bar = stage.querySelector("[data-bar]");
@@ -226,11 +213,15 @@
     }});
     tl.to(state, { p: 1, duration: 1, onUpdate: draw }, 0);
     const scenes = [[0, 0.25], [0.25, 0.5], [0.5, 0.75], [0.75, 1]];
-    stage.querySelectorAll("[data-scene]").forEach((el, i) => {
-      const [a, b] = scenes[i];
-      tl.fromTo(el, { autoAlpha: 0, yPercent: 30 }, { autoAlpha: 1, yPercent: 0, duration: 0.05 }, a + 0.01);
-      if (i < scenes.length - 1) tl.to(el, { autoAlpha: 0, yPercent: -30, duration: 0.05 }, b - 0.05);
-    });
+    // Captions follow the scene the playhead is in, on their own clock: scrubbing the canvas is fine, but a caption
+    // scrubbed with it rests half-faded (unreadable) wherever the reader stops. Each change is a short timed fade, so a
+    // caption is either fully on or off. Opacity, not visibility: a scene link that is not on screen stays focusable.
+    const figs = [...stage.querySelectorAll(".film__static figure")]; let active = -1;
+    const sceneAt = (p) => (p < 0.01 ? -1 : Math.min(scenes.length - 1, Math.floor(p * scenes.length)));
+    tl.eventCallback("onUpdate", () => { const i = sceneAt(tl.progress()); if (i === active) return;
+      if (active >= 0) gsap.to(figs[active], { opacity: 0, yPercent: -30, duration: 0.3, ease: "power2.in", overwrite: true });
+      if (i >= 0) gsap.fromTo(figs[i], { opacity: 0, yPercent: 30 }, { opacity: 1, yPercent: 0, duration: 0.45, ease: "power3.out", overwrite: true, delay: active >= 0 ? 0.15 : 0 });
+      active = i; });
     draw(); addEventListener("resize", draw);
 
     // Keyboard + screen reader: focusing a scene link scrubs the film to the middle of that scene
@@ -242,7 +233,7 @@
     jumps.forEach((a) => { a.addEventListener("focus", jump); a.addEventListener("click", click); });
 
     document.fonts?.ready.then(() => ScrollTrigger.refresh());
-    return () => { removeEventListener("resize", draw); if (onMove) removeEventListener("pointermove", onMove); split.revert();
+    return () => { removeEventListener("resize", draw); if (onMove) removeEventListener("pointermove", onMove); split?.revert();
       jumps.forEach((a) => { a.removeEventListener("focus", jump); a.removeEventListener("click", click); });
       document.documentElement.classList.remove("film-on"); };
   });
