@@ -60,7 +60,7 @@ jobs:
     # Playwright is installed, the fixtures are enforced: good must pass, bad must fail with the expected errors.
     name: gate fixtures (Playwright)
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

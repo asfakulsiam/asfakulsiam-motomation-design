@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fixture: pinned but static</title>
+<!-- Gate fixture (gate/3, Q axis): a section pins for three screens and nothing on it changes while it is pinned. The
+     progression check must fail it (median change between scroll samples ≤ 0.5%). -->
+<style>
+body{margin:0;font:18px/1.5 system-ui,sans-serif;color:#111;background:#fff}
+section{padding:15vh 8vw}
+.film{height:400vh;position:relative;padding:0}
+.stage{position:sticky;top:0;height:100vh;display:grid;place-items:center;background:#f3efe6}
+@media (prefers-reduced-motion: reduce){.film{height:auto}.stage{position:static;height:auto;padding:15vh 8vw}}
+</style></head><body>
+<header><section><h1>A pinned chapter that never moves</h1><p>Scroll down: the next chapter holds the screen for three screens.</p></section></header>
+<main><div class="film"><div class="stage"><h2>The same frame, the whole way down</h2></div></div>
+<section><h2>After the pin</h2><p>Normal flow again.</p></section></main></body></html>

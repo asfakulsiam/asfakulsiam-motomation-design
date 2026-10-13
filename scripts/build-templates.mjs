@@ -155,7 +155,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const si = process.argv.indexOf("--stamp");
   if (si > 0) {
     const id = process.argv[si + 1], line = (process.argv[si + 2] || "").trim().replace(/^PASS\s+stamp →\s*/, "");
-    if (!/^critique: .+ · gate: c\d+ o\d+ w\d+ rm\d+ a\d+ n\d+ · gate\/\d+ · [0-9a-f]{10}(?: · skipped \d+\/\d+@\d+)?$/.test(line)) { console.error(`✗ paste the whole "critique: … · gate: …" line gate.mjs printed (got: ${line})`); process.exit(1); }
+    if (!/^critique: .+ · gate: c\d+ o\d+ w\d+ rm\d+ a\d+ n\d+ q\d+ k\d+ · gate\/\d+ · [0-9a-f]{10}(?: · skipped \d+\/\d+@\d+)?$/.test(line)) { console.error(`✗ paste the whole "critique: … · gate: …" line gate.mjs printed (got: ${line})`); process.exit(1); }
     const f = join(DIR, `${id}.html`), html = readFileSync(f, "utf8");
     writeFileSync(f, html.replace(/\/\* motomation · ([\s\S]*?) \*\//, (_, inner) => `/* motomation · ${inner.split(" · critique:")[0]} · ${line} */`));
     console.log(`Stamped ${id}.html: ${line}`); process.exit(0);

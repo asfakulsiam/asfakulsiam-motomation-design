@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 // Runs the Delivery Gate on the fixtures and checks it still tells good from bad.
 //
-//   node scripts/check-fixtures.mjs            fixtures/good must pass, fixtures/bad must fail with ≥ the counts in
+//   node scripts/check-fixtures.mjs            fixtures/good must pass; gate/3 Q and A fixtures (pin-static,
+//                                              pin-progress, rm-pinned, a11y-bad, a11y-good) and the film's progression;
+//                                              fixtures/good must pass, fixtures/bad must fail with ≥ the counts in
 //                                              fixtures/bad/expected.json; the scroll-step fixtures must fail
 //                                              (dimmed) and pass (legible)
 //   REQUIRE_BROWSER=1 node scripts/check-fixtures.mjs   a missing browser is an error, not a skip (CI sets this
@@ -47,4 +49,22 @@ const inactive = (dim.json?.contrast?.fails || []).filter((f) => f.state === "in
 say(dim.code === 1 && inactive > 0, `fixtures/synthetic/scroll-steps-dimmed fails on inactive steps (exit ${dim.code}, ${inactive} inactive-step contrast failure(s))`);
 const leg = run("fixtures/synthetic/scroll-steps-legible.html");
 say(leg.code === 0, `fixtures/synthetic/scroll-steps-legible passes (exit ${leg.code}${leg.json ? ` · ${leg.json.stamp}` : ""})`);
+// gate/3 Q axis (motion quality): a pin that never changes fails progression; the same pin with motion passes; a
+// reduced-motion fallback that stays pinned fails rm-distinctness; the real film's pinned chapters progress
+const zonesOk = (r) => (r.json?.quality?.zones || []).every((z) => z.ok);
+const ps = run("fixtures/synthetic/pin-static.html");
+say(ps.code === 1 && ps.json?.quality?.zones?.length > 0 && !zonesOk(ps) && /Q\d\[prog:Δ/.test(ps.json?.critique || ""), `fixtures/synthetic/pin-static fails progression (exit ${ps.code}, ${(ps.json?.critique || "").match(/Q\d\[[^\]]+\]/)?.[0] || "no Q axis"})`);
+const pp = run("fixtures/synthetic/pin-progress.html");
+say(pp.code === 0 && zonesOk(pp) && pp.json?.quality?.rm?.ok, `fixtures/synthetic/pin-progress passes progression and rm (exit ${pp.code}, ${(pp.json?.critique || "").match(/Q\d\[[^\]]+\]/)?.[0] || "no Q axis"})`);
+const rp = run("fixtures/synthetic/rm-pinned.html");
+say(rp.code === 1 && zonesOk(rp) && rp.json?.quality?.rm?.pinned?.length > 0, `fixtures/synthetic/rm-pinned fails rm-distinctness: still pinned under reduced motion (exit ${rp.code}, ${(rp.json?.critique || "").match(/Q\d\[[^\]]+\]/)?.[0] || "no Q axis"})`);
+// gate/3 A axis (accessibility): each deliberate failure in a11y-bad is caught; a11y-good passes every A check
+const ab = run("fixtures/synthetic/a11y-bad.html"); const cat = ab.json?.access?.cat || {};
+for (const k of ["focus", "target", "zoom", "forced", "trap"]) say(cat[k] > 0, `fixtures/synthetic/a11y-bad: ${k} caught (${cat[k] ?? "?"})`);
+say(ab.json?.access?.reflow?.px > 1, `fixtures/synthetic/a11y-bad: 320px reflow caught (${ab.json?.access?.reflow?.px ?? "?"}px sideways)`);
+const ag = run("fixtures/synthetic/a11y-good.html");
+say(ag.json?.access?.fails === 0, `fixtures/synthetic/a11y-good passes every A check (${(ag.json?.critique || "").match(/A\d\[[^\]]+\]/)?.[0] || "no A axis"})`);
+// the real film: every pinned chapter progresses (its other axes are judged by its own stamp and --verify)
+const film = run("skills/asfakulsiam-motomation-design/examples/html/motomation-film.html");
+say(film.json?.quality?.zones?.length > 0 && zonesOk(film), `examples/html/motomation-film: ${film.json?.quality?.zones?.length ?? 0} pinned zone(s), all progress (${(film.json?.critique || "").match(/Q\d\[[^\]]+\]/)?.[0] || "no Q axis"})`);
 process.exit(failed ? 1 : 0);

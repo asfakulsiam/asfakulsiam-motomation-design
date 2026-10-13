@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fixture: accessibility passes</title>
+<!-- Gate fixture (gate/3, A axis): the same content as a11y-bad.html done right. Visible focus rings, 44px targets,
+     text that grows instead of clipping, fluid widths, a solid heading colour, no trap. Must pass every A check. -->
+<style>
+body{margin:0;font:18px/1.5 system-ui,sans-serif;color:#111;background:#fff}
+main{padding:6vh 6vw;max-width:72ch}
+:focus-visible{outline:3px solid #c0461b;outline-offset:3px}
+.btn{border:0;background:#1d3b6a;color:#fff;padding:12px 20px;font:inherit;min-height:44px}
+.x{min-width:44px;min-height:44px;border:0;background:#c0461b;color:#fff;font-size:20px}
+.card{background:#f3efe6;padding:4px 12px}
+.wide{max-width:100%;background:#eee;padding:8px}
+h1{font-size:clamp(32px,6vw,48px);margin:0;color:#1d3b6a}
+nav a{display:inline-block;padding:10px 4px;margin-right:12px;color:#1d3b6a}
+</style></head><body><main>
+<h1>Accessibility passes</h1>
+<nav aria-label="Chooser"><a href="#a">First</a><a href="#b">Second</a><a href="#c">Third</a></nav>
+<p><button class="btn" type="button">Book a table</button> <button class="btn" type="button">See the menu</button> <button class="x" type="button" aria-label="Close">×</button></p>
+<div class="card"><h2>Opening hours</h2><p>Monday to Friday, eight in the morning until ten at night; weekends from nine until midnight, kitchen closes an hour earlier, last orders at the bar thirty minutes before close.</p></div>
+<div class="wide"><p>A strip that reflows with the page.</p></div>
+<p>Read <a href="#after">the house rules</a> before you book.</p>
+<p><button class="btn" type="button">A button after the chooser</button></p>
+</main></body></html>

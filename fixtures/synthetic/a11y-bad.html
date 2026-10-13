@@ -1,0 +1,35 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fixture: accessibility failures</title>
+<!-- Gate fixture (gate/3, A axis). Each failure is deliberate:
+     focus   – .ghost buttons remove the outline and add nothing on focus
+     target  – .x is a 16×16 icon button
+     zoom    – .card clips its text at a fixed height once the viewport narrows to 720px (200% of 1440)
+     reflow  – .wide is a fixed 1200px block, so 320px scrolls sideways
+     forced  – the "Sold out" badge keeps its white text (forced-color-adjust: none) while its parent's navy
+               background is forced to the system Canvas colour: white on white in High Contrast only
+     trap    – Tab inside the "chooser" wraps back to its first link, so the rest of the page is never reached -->
+<style>
+body{margin:0;font:18px/1.5 system-ui,sans-serif;color:#111;background:#fff}
+main{padding:6vh 6vw}
+.ghost{border:0;background:#1d3b6a;color:#fff;padding:12px 20px;font:inherit;outline:none}
+.ghost:focus,.ghost:focus-visible{outline:none}
+.x{width:16px;height:16px;padding:0;border:0;background:#c0461b;color:#fff;font-size:10px;line-height:16px}
+.card{height:210px;overflow:hidden;width:40vw;background:#f3efe6;padding:0 12px}
+.wide{width:1200px;background:#eee;padding:8px}
+.grad{font-size:48px;margin:0;background:linear-gradient(90deg,#1d3b6a,#c0461b);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;forced-color-adjust:none}
+.strip{background:#1d3b6a;padding:8px 12px}.badge{color:#fff;forced-color-adjust:none;font-weight:700}
+.chooser a{margin-right:12px;color:#1d3b6a}
+</style></head><body><main>
+<h1 class="grad">Accessibility failures</h1>
+<p><button class="ghost" type="button">Book a table</button> <button class="ghost" type="button">See the menu</button> <button class="x" type="button" aria-label="Close">×</button></p>
+<nav class="chooser" aria-label="Chooser"><a href="#a" id="c1">First</a><a href="#b">Second</a><a href="#c" id="c3">Third</a></nav>
+<div class="card"><h2>Opening hours</h2><p>Monday to Friday, eight in the morning until ten at night; weekends from nine until midnight, kitchen closes an hour earlier, last orders at the bar thirty minutes before close.</p></div>
+<div class="strip"><span class="badge">Sold out tonight</span></div>
+<div class="wide"><p>A fixed-width strip that never reflows.</p></div>
+<p><a href="#after">A link after the chooser</a> · <button type="button">A button after the chooser</button></p>
+</main>
+<script>
+// the trap: Tab on the chooser's last link goes back to its first, Shift+Tab on the first goes to the last
+document.getElementById("c3").addEventListener("keydown",(e)=>{if(e.key==="Tab"&&!e.shiftKey){e.preventDefault();document.getElementById("c1").focus();}});
+document.getElementById("c1").addEventListener("keydown",(e)=>{if(e.key==="Tab"&&e.shiftKey){e.preventDefault();document.getElementById("c3").focus();}});
+</script></body></html>

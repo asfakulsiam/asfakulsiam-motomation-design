@@ -208,7 +208,7 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
     if (!existsSync(at)) { fail(`${t.html} is missing; run node scripts/build-templates.mjs`); continue; }
     const html = readFileSync(at, "utf8"); const meta = html.match(/<meta name="motomation-template" content="source:([0-9a-f]+)/);
     if (!meta || meta[1] !== sourceHash(t)) fail(`${t.html} is stale (its sections or components changed); run node scripts/build-templates.mjs, then gate and stamp it again`);
-    if (!/motomation · [^*]*critique: [^*]+ · gate: c\d+ o\d+ w\d+ rm\d+ a\d+ n\d+ · gate\/\d+ · [0-9a-f]{10}/.test(html)) fail(`${t.html} has no measured gate stamp; run scripts/gate.mjs on it and paste the stamp with build-templates.mjs --stamp`);
+    if (!/motomation · [^*]*critique: [^*]+ · gate: c\d+ o\d+ w\d+ rm\d+ a\d+ n\d+(?: q\d+ k\d+)? · gate\/\d+ · [0-9a-f]{10}/.test(html)) fail(`${t.html} has no measured gate stamp; run scripts/gate.mjs on it and paste the stamp with build-templates.mjs --stamp`);
   }
   const readme = join(SKILL, "examples/templates/README.md");
   if (templates.length && (!existsSync(readme) || readFileSync(readme, "utf8") !== renderReadme(templates))) fail("examples/templates/README.md is stale; run node scripts/build-templates.mjs");

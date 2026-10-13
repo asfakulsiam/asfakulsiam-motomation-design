@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fixture: reduced motion keeps the pin</title>
+<!-- Gate fixture (gate/3, Q axis): the same pin as pin-static.html, but a bar and a panel move with scroll progress.
+     Under reduced motion it stays pinned and shows one frozen frame (the "animation stopped" fallback). Progression passes; the rm-distinctness check must fail it. -->
+<style>
+body{margin:0;font:18px/1.5 system-ui,sans-serif;color:#111;background:#fff}
+section{padding:15vh 8vw}
+.film{height:400vh;position:relative}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;background:#f3efe6}
+.stage h2{position:absolute;left:8vw;top:12vh;margin:0}
+.panel{position:absolute;left:0;top:30vh;width:60vw;height:50vh;background:#1d3b6a;transform:translateX(calc(var(--p,0) * 70vw - 50vw))}
+.bar{position:absolute;left:0;bottom:0;height:12px;width:100%;background:#c0461b;transform-origin:0 50%;transform:scaleX(var(--p,0))}
+@media (prefers-reduced-motion: reduce){.panel{transform:none}.bar{transform:none}}
+</style></head><body>
+<header><section><h1>A pinned chapter that moves</h1><p>Scroll down: the panel crosses the screen while the chapter holds.</p></section></header>
+<main><div class="film"><div class="stage"><h2>The frame changes with every screen</h2><div class="panel" aria-hidden="true"></div><div class="bar" aria-hidden="true"></div></div></div>
+<section><h2>After the pin</h2><p>Normal flow again.</p></section></main>
+<script>
+const f=document.querySelector(".film"),s=document.querySelector(".stage");
+const u=()=>{const r=f.getBoundingClientRect();const p=Math.min(1,Math.max(0,-r.top/(r.height-innerHeight)));s.style.setProperty("--p",p.toFixed(4));};
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches){addEventListener("scroll",u,{passive:true});u();}
+</script></body></html>

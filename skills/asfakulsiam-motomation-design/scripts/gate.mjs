@@ -53,7 +53,7 @@ import { statfsSync } from "node:fs";
 import { projectRoot } from "./memory.mjs";
 
 export const WIDTHS = [375, 390, 768, 1440];
-export const GATE_VERSION = "gate/2"; // gate/2: contrast measured per viewport; numbers check (n)
+export const GATE_VERSION = "gate/3"; // gate/2: contrast measured per viewport; numbers check (n). gate/3: Q motion axis (progression, smoothness, reduced-motion distinctness; count q) and A accessibility axis (focus-visible, target size, 200% zoom, 320px reflow, forced colors, keyboard trap; count k)
 
 // ── constrained sandboxes (v2.5.0) ────────────────────────────────────────────
 // T(ms): every Playwright operation timeout goes through this, so the light footprint can be more patient (×3)
@@ -568,6 +568,214 @@ async function memoryAxis(logFile, stamp, sectionIds) {
   const sc = worst >= 0.999 ? 1 : reusedA && reusedS ? 2 : reusedA || reusedS || worst >= 0.7 ? 3 : worst >= 0.5 ? 4 : 5;
   return { s: sc, trace: `last5:${reusedA ? "archetype-reused" : "archetype-new"},${reusedS ? "signature-reused" : "signature-new"},fp${pct}` };
 }
+// ── motion quality (gate/3): progression in pinned zones, smoothness, reduced-motion distinctness → Q axis, count q ──
+const PROG_MIN_PCT = 0.5;   // a zone "moves" between two scroll samples when more than this % of its pixels changes
+const PROG_SAMPLES = 8;     // scroll positions sampled across each zone
+const MAX_ZONES = 6;
+export const SMOOTH_P95_MS = { desktop: 20, mobile: 25 }; // p95 rAF interval while scrolling: 1440 unthrottled, 375 at CPU ×4
+// zones that hold the screen while the page scrolls: GSAP pin spacers, position: sticky inside a parent ≥ 1.5 screens
+// tall, and elements driven by a CSS scroll/view timeline
+const ZONES = () => {
+  const z = [];
+  for (const s of document.querySelectorAll(".pin-spacer")) { const r = s.getBoundingClientRect(); z.push({ kind: "pin", label: __g.label(s.firstElementChild || s), top: Math.round(r.top + scrollY), len: Math.round(r.height - innerHeight) }); }
+  for (const e of document.body.querySelectorAll("*")) {
+    const cs = getComputedStyle(e); if (cs.display === "none") continue;
+    if (cs.position === "sticky" && e.parentElement) { const p = e.parentElement.getBoundingClientRect(); if (p.height >= innerHeight * 1.5) z.push({ kind: "sticky", label: __g.label(e), top: Math.round(p.top + scrollY), len: Math.round(p.height - innerHeight) }); }
+    const tl = cs.animationTimeline || ""; if (/scroll\(|view\(|^--/.test(tl)) { const r = e.getBoundingClientRect(); z.push({ kind: "scroll-timeline", label: __g.label(e), top: Math.max(0, Math.round(r.top + scrollY - innerHeight)), len: Math.round(r.height + innerHeight) }); }
+  }
+  return z.filter((a, i) => a.len > 40 && !z.slice(0, i).some((b) => Math.abs(b.top - a.top) < 4 && Math.abs(b.len - a.len) < 4));
+};
+// % of pixels that change between consecutive images (downscaled to 360px wide; channel sum difference > 24)
+async function pixelDiffs(browser, shots) {
+  if (shots.length < 2) return [];
+  const ctx = await browser.newContext(); const p = await ctx.newPage();
+  const out = await p.evaluate(async (shots) => {
+    const load = async (s) => { const i = new Image(); i.src = "data:image/jpeg;base64," + s; await i.decode(); const w = Math.min(360, i.width), h = Math.max(1, Math.round(i.height * w / i.width)); const c = document.createElement("canvas"); c.width = w; c.height = h; const x = c.getContext("2d"); x.drawImage(i, 0, 0, w, h); return x.getImageData(0, 0, w, h).data; };
+    const res = []; let prev = null;
+    for (const s of shots) { const d = await load(s); if (prev && prev.length === d.length) { let n = 0; for (let i = 0; i < d.length; i += 4) if (Math.abs(d[i] - prev[i]) + Math.abs(d[i + 1] - prev[i + 1]) + Math.abs(d[i + 2] - prev[i + 2]) > 24) n++; res.push(+(n / (d.length / 4) * 100).toFixed(2)); } prev = d; }
+    return res;
+  }, shots);
+  await ctx.close(); return out;
+}
+const pctl = (a, q) => { const s = [...a].sort((x, y) => x - y); return s.length ? +s[Math.min(s.length - 1, Math.floor(q * s.length))].toFixed(1) : null; };
+async function frameTimes(page, from, len) {
+  await page.evaluate((y) => scrollTo(0, y), Math.max(0, from - 200)); await page.waitForTimeout(400);
+  await page.evaluate(() => { window.__ft = []; window.__ftStop = false; let last = performance.now(); const tick = (t) => { window.__ft.push(t - last); last = t; if (!window.__ftStop) requestAnimationFrame(tick); }; requestAnimationFrame(tick); });
+  const steps = 120; for (let i = 0; i < steps; i++) { await page.evaluate((d) => scrollBy(0, d), (len + 400) / steps); await page.waitForTimeout(1000 / 30); }
+  await page.waitForTimeout(300); const ft = await page.evaluate(() => { window.__ftStop = true; return window.__ft.slice(2); });
+  return { frames: ft.length, p50: pctl(ft, 0.5), p95: pctl(ft, 0.95), max: ft.length ? +Math.max(...ft).toFixed(1) : null };
+}
+async function motionQuality(browser, url) {
+  // 1. progression: sample each zone at PROG_SAMPLES scroll positions; a zone whose median change is under PROG_MIN_PCT
+  //    holds the screen without showing anything happen
+  const { ctx, page } = await open(browser, url, { viewport: { width: 1440, height: 900 } });
+  const zones = (await page.evaluate(ZONES)).slice(0, MAX_ZONES); const texts = await page.evaluate(() => __g.textEls().filter((e) => !__g.decorative(e) && !__g.srOnly(e)).map((e) => e.textContent.replace(/\s+/g, " ").trim()).filter((t) => t.length > 1));
+  const prog = [];
+  for (const z of zones) {
+    const shots = [];
+    for (let i = 0; i < PROG_SAMPLES; i++) { await page.evaluate((y) => scrollTo(0, y), z.top + Math.round((z.len * i) / (PROG_SAMPLES - 1))); await page.waitForTimeout(T(800)); shots.push((await page.screenshot({ type: "jpeg", quality: 70, timeout: T(60000) })).toString("base64")); }
+    const d = await pixelDiffs(browser, shots); const med = pctl(d, 0.5) ?? 0;
+    prog.push({ ...z, diffs: d, medianPct: med, moving: d.filter((x) => x > PROG_MIN_PCT).length, ok: med > PROG_MIN_PCT });
+  }
+  // 2. smoothness: p95 frame interval while scrolling through the first zone (or the first 3 screens), 1440 unthrottled
+  //    and 375 touch at CPU ×4. On a constrained machine (docs/adapters/sandbox.md) it is reported, never judged.
+  const span = zones[0] ? { from: zones[0].top, len: zones[0].len } : { from: 0, len: 2700 };
+  const smooth = { judged: !PROBE.constrained, why: PROBE.constrained ? "sandbox: " + PROBE.why.join(", ") : null, desktop: null, mobile: null };
+  if (zones.length) {
+    smooth.desktop = await frameTimes(page, span.from, span.len);
+    const m = await open(browser, url, { viewport: { width: 375, height: 812 }, hasTouch: true, isMobile: true });
+    const cdp = await m.ctx.newCDPSession(m.page); await cdp.send("Emulation.setCPUThrottlingRate", { rate: 4 });
+    const mz = (await m.page.evaluate(ZONES))[0]; smooth.mobile = await frameTimes(m.page, mz ? mz.top : 0, mz ? mz.len : 2400); await m.ctx.close();
+    smooth.desktop.ok = smooth.desktop.p95 <= SMOOTH_P95_MS.desktop; smooth.mobile.ok = smooth.mobile.p95 <= SMOOTH_P95_MS.mobile;
+  }
+  await ctx.close();
+  // 3. reduced-motion distinctness: where the page pins, reduced motion must be normal flow (no pin, no sticky film,
+  //    no scroll timeline) with every text still in the document; a pinned "same frames" fallback fails
+  let rm = null;
+  if (zones.length) {
+    const r = await open(browser, url, { viewport: { width: 1440, height: 900 }, reducedMotion: "reduce" });
+    const got = await r.page.evaluate(ZONES); const body = await r.page.evaluate(() => document.body.textContent.replace(/\s+/g, " "));
+    const canvases = await r.page.evaluate(() => [...document.querySelectorAll("canvas")].filter((c) => { const b = c.getBoundingClientRect(); return b.width > 0 && b.height > 0 && getComputedStyle(c).display !== "none" && getComputedStyle(c).visibility !== "hidden"; }).length);
+    const missing = texts.filter((t) => !body.includes(t.slice(0, 60)));
+    rm = { pinned: got.map((z) => `${z.kind} ${z.label}`), missing: missing.slice(0, 10), missingCount: missing.length, canvases, ok: got.length === 0 && missing.length === 0 };
+    await r.ctx.close();
+  }
+  const fails = prog.filter((z) => !z.ok).length + (rm && !rm.ok ? 1 : 0) + (smooth.judged && zones.length ? (smooth.desktop.ok ? 0 : 1) + (smooth.mobile.ok ? 0 : 1) : 0);
+  return { zones: prog, smooth, rm, fails };
+}
+export function qAxis(q) {
+  if (!q) return "Q?[not-measured]";
+  const cats = (q.zones.some((z) => !z.ok) ? 1 : 0) + (q.rm && !q.rm.ok ? 1 : 0) + (q.smooth.judged && q.smooth.desktop && !(q.smooth.desktop.ok && q.smooth.mobile.ok) ? 1 : 0);
+  // Δ: the least-moving zone's median change between samples, in % of pixels. Raw frame times stay out of the stamp
+  // (they vary run to run); the stamp records only whether smoothness was judged and met
+  const prog = q.zones.length ? `Δ${Math.min(...q.zones.map((z) => z.medianPct))}%` : "n/a";
+  const sm = !q.smooth.desktop ? "n/a" : !q.smooth.judged ? "sandbox" : q.smooth.desktop.ok && q.smooth.mobile.ok ? "ok" : "slow";
+  const rm = !q.rm ? "n/a" : q.rm.ok ? "flow" : q.rm.pinned.length ? "pinned" : "text-missing";
+  return `Q${Math.max(1, 5 - 2 * cats)}[prog:${prog},smooth:${sm},rm:${rm}]`;
+}
+
+// ── accessibility axes (gate/3): focus-visible, target size, 200% zoom, 320px reflow, forced colors, keyboard trap → A, count k ──
+const FOCUS_MAX = 40;        // focusable elements checked for a visible focus indicator (in Tab order)
+const TARGET_MIN = 24, TARGET_TOUCH = 44; // WCAG 2.2 2.5.8 (AA) minimum; 2.5.5 (AAA) size, a warning on touch
+const TABBABLE = 'a[href], button:not([disabled]), input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]';
+async function a11y(browser, url) {
+  const out = { focus: { checked: 0, fails: [] }, target: { checked: 0, fails: [], warns: [] }, zoom: { fails: [] }, reflow: { px: 0 }, forced: { checked: 0, fails: [] }, trap: null };
+  // focus-visible: Tab to each element, then compare the pixels around it focused and blurred
+  {
+    const { ctx, page } = await open(browser, url, { viewport: { width: 1440, height: 900 } });
+    const total = await page.evaluate((sel) => [...document.querySelectorAll(sel)].filter((e) => !__g.decorative(e) && getComputedStyle(e).visibility !== "hidden" && e.getClientRects().length).length, TABBABLE);
+    const seen = new Set(); const pairs = [];
+    for (let i = 0; i < Math.min(total + 2, FOCUS_MAX + 10) && pairs.length < FOCUS_MAX; i++) {
+      await page.keyboard.press("Tab"); await page.waitForTimeout(260);
+      const info = await page.evaluate(() => { const e = document.activeElement; if (!e || e === document.body) return null; const r = e.getBoundingClientRect(); return { key: __g.key(e), label: __g.label(e), text: (e.textContent || e.getAttribute("aria-label") || "").trim().slice(0, 30), r: { x: r.left, y: r.top, w: r.width, h: r.height }, vw: innerWidth, vh: innerHeight }; });
+      if (!info || seen.has(info.key)) { if (info) break; continue; } seen.add(info.key);
+      const pad = 6; const x = Math.max(0, info.r.x - pad), y = Math.max(0, info.r.y - pad); const w = Math.min(info.vw - x, info.r.w + 2 * pad), h = Math.min(info.vh - y, info.r.h + 2 * pad);
+      if (w < 2 || h < 2) continue; const clip = { x, y, width: w, height: h };
+      const on = (await page.screenshot({ type: "jpeg", quality: 90, clip })).toString("base64");
+      await page.evaluate(() => document.activeElement.blur()); await page.waitForTimeout(260);
+      const off = (await page.screenshot({ type: "jpeg", quality: 90, clip })).toString("base64");
+      // put focus back so the next Tab continues from here
+      await page.evaluate((k) => { const e = [...document.querySelectorAll("*")].find((n) => __g.key(n) === k); e?.focus({ preventScroll: true }); }, info.key);
+      pairs.push({ info, shots: [on, off], area: w * h });
+    }
+    for (const p of pairs) { const [d] = await pixelDiffs(browser, p.shots); out.focus.checked++; if (!(d >= 1.0)) out.focus.fails.push({ el: p.info.label, text: p.info.text, changedPct: d }); }
+    out.focus.tabbables = total; await ctx.close();
+  }
+  // keyboard trap: Tab twice round the page; focus that keeps cycling inside one region while other controls are never reached is a trap
+  {
+    const { ctx, page } = await open(browser, url, { viewport: { width: 1440, height: 900 } });
+    const all = await page.evaluate((sel) => [...document.querySelectorAll(sel)].filter((e) => !__g.decorative(e) && getComputedStyle(e).visibility !== "hidden" && e.getClientRects().length).map((e) => __g.key(e)), TABBABLE);
+    const seq = []; const n = Math.min(160, all.length * 2 + 6);
+    for (let i = 0; i < n; i++) { await page.keyboard.press("Tab"); seq.push(await page.evaluate(() => (document.activeElement && document.activeElement !== document.body ? __g.key(document.activeElement) : "body"))); }
+    const visited = new Set(seq.filter((k) => k !== "body")); const tail = seq.slice(-Math.min(20, Math.floor(n / 2))); const cycle = new Set(tail);
+    const unreached = all.filter((k) => !visited.has(k));
+    const trapped = all.length > 2 && unreached.length > 0 && cycle.size <= Math.max(2, Math.floor(all.length / 2)) && !cycle.has("body") && [...cycle].every((k) => !k.startsWith("html:1>body:1>a:")) && unreached.length >= all.length - visited.size;
+    let region = null; if (trapped) region = await page.evaluate((ks) => { const els = ks.map((k) => [...document.querySelectorAll("*")].find((n) => __g.key(n) === k)).filter(Boolean); let a = els[0]?.parentElement; while (a && !els.every((e) => a.contains(e))) a = a.parentElement; return a ? __g.label(a) : "?"; }, [...cycle]);
+    out.trap = { tabbables: all.length, presses: n, visited: visited.size, unreached: unreached.length, trapped, region };
+    await ctx.close();
+  }
+  // target size at 375 on touch: < 24px fails (inline links inside a sentence are exempt, as in WCAG 2.5.8); < 44px warns
+  {
+    const { ctx, page } = await open(browser, url, { viewport: { width: 375, height: 812 }, hasTouch: true, isMobile: true });
+    const r = await page.evaluate(({ sel, min, touch }) => {
+      const res = { checked: 0, fails: [], warns: [] };
+      for (const e of document.querySelectorAll(sel + ', [role="button"], [role="link"], [role="tab"], [role="switch"]')) {
+        if (__g.decorative(e) || __g.srOnly(e)) continue; const cs = getComputedStyle(e); if (cs.visibility === "hidden" || cs.display === "none" || parseFloat(cs.opacity) === 0) continue;
+        const b = e.getBoundingClientRect(); if (b.width === 0 || b.height === 0) continue;
+        const inline = e.tagName === "A" && cs.display === "inline" && [...(e.parentElement?.childNodes || [])].some((n) => n.nodeType === 3 && n.textContent.trim().length > 1);
+        if (inline) continue; res.checked++;
+        const s = { el: __g.label(e), text: (e.textContent || e.getAttribute("aria-label") || "").trim().slice(0, 30), w: Math.round(b.width), h: Math.round(b.height) };
+        if (b.width < min - 0.5 || b.height < min - 0.5) res.fails.push(s); else if (b.width < touch - 0.5 || b.height < touch - 0.5) res.warns.push(s);
+      }
+      return res;
+    }, { sel: TABBABLE, min: TARGET_MIN, touch: TARGET_TOUCH });
+    out.target = r; await ctx.close();
+  }
+  // 200% zoom: 1440×900 at 200% is a 720×450 CSS viewport. Anything readable or usable at 1440 must still be at 720:
+  // text not cut off by an overflow: hidden/clip box (its own or an ancestor's), every control on screen after
+  // scrolling to it and not covered. Only losses at 720 that don't already exist at 1440 count.
+  {
+    const lost = (sel) => {
+      const f = [];
+      const clipper = (e) => { for (let a = e; a && a !== document.body; a = a.parentElement) { const cs = getComputedStyle(a); if (/hidden|clip/.test(cs.overflowY + cs.overflowX) && a.clientHeight > 0) { const r = a.getBoundingClientRect(), b = e.getBoundingClientRect(); if (b.bottom > r.bottom + 2 || b.right > r.right + 2 || (a === e && (e.scrollHeight > e.clientHeight + 2 && cs.webkitLineClamp === "none" && cs.textOverflow !== "ellipsis"))) return a; } } return null; };
+      for (const e of __g.textEls()) { if (__g.decorative(e) || __g.srOnly(e)) continue; const cs = getComputedStyle(e); if (cs.display === "none" || cs.visibility === "hidden" || !e.getClientRects().length) continue; const c = clipper(e); if (c) f.push({ key: __g.key(e), kind: "text clipped", el: __g.label(e), text: e.textContent.trim().slice(0, 30), by: __g.label(c) }); }
+      for (const e of document.querySelectorAll(sel)) { if (__g.decorative(e) || __g.srOnly(e)) continue; const cs = getComputedStyle(e); if (cs.visibility === "hidden" || !e.getClientRects().length) continue;
+        e.scrollIntoView({ block: "center", inline: "center", behavior: "instant" }); const b = e.getBoundingClientRect(); if (b.width < 1 || b.height < 1) continue;
+        const cx = Math.min(innerWidth - 1, Math.max(0, b.left + b.width / 2)), cy = Math.min(innerHeight - 1, Math.max(0, b.top + b.height / 2));
+        const top = document.elementFromPoint(cx, cy); const off = b.right < 0 || b.left > innerWidth || b.bottom < 0 || b.top > innerHeight;
+        if (off || (top && top !== e && !e.contains(top) && !top.contains(e))) f.push({ key: __g.key(e), kind: off ? "control off screen" : "control covered", el: __g.label(e), text: (e.textContent || "").trim().slice(0, 30), by: top ? __g.label(top) : null }); }
+      scrollTo(0, 0); return f;
+    };
+    const { ctx, page } = await open(browser, url, { viewport: { width: 1440, height: 900 } });
+    const at100 = new Set((await page.evaluate(lost, TABBABLE)).map((x) => x.key + x.kind));
+    await page.setViewportSize({ width: 720, height: 450 }); await page.waitForTimeout(T(900)); await settle(page);
+    out.zoom.fails = (await page.evaluate(lost, TABBABLE)).filter((x) => !at100.has(x.key + x.kind)).map(({ key, ...r }) => r);
+    await ctx.close();
+  }
+  // 320px reflow (WCAG 1.4.10): no horizontal scrolling at a 320 CSS px viewport
+  { // a 320px window (1280px at 400%), not mobile emulation: a mobile layout viewport grows to fit wide content and hides the scroll
+    const { ctx, page } = await open(browser, url, { viewport: { width: 320, height: 640 } });
+    out.reflow.px = await page.evaluate(() => Math.max(0, document.documentElement.scrollWidth - innerWidth)); await ctx.close(); }
+  // forced colors (Windows High Contrast), judged on rendered pixels: computed styles under forced colors still report
+  // author values for some properties (-webkit-text-fill-color), so each text box is screenshotted and its ink is
+  // measured against the box's dominant colour. Invisible text (a transparent fill that survives) reads as 1:1.
+  {
+    const { ctx, page } = await open(browser, url, { viewport: { width: 1440, height: 900 }, forcedColors: "active" });
+    const items = await page.evaluate(() => __g.textEls().filter((e) => !__g.decorative(e) && !__g.srOnly(e) && e.getClientRects().length && getComputedStyle(e).visibility !== "hidden" && __g.opacity(e) > 0.05 /* a resting, faded-out caption is not on screen to read */).slice(0, 80).map((e) => ({ key: __g.key(e), el: __g.label(e), text: e.textContent.trim().slice(0, 30), adjust: getComputedStyle(e).forcedColorAdjust })));
+    const shots = [];
+    for (const it of items) {
+      const box = await page.evaluate((k) => { const e = [...document.querySelectorAll("*")].find((n) => __g.key(n) === k); if (!e) return null; e.scrollIntoView({ block: "center", behavior: "instant" }); const r = e.getClientRects()[0]; return r && r.width >= 4 && r.height >= 4 && r.top >= 0 && r.bottom <= innerHeight ? { x: Math.max(0, r.left), y: r.top, width: Math.min(innerWidth - Math.max(0, r.left), r.width), height: r.height } : null; }, it.key);
+      if (!box || box.width < 4) continue; await page.waitForTimeout(60);
+      shots.push({ it, img: (await page.screenshot({ type: "png", clip: box })).toString("base64") });
+    }
+    await ctx.close();
+    const c2 = await browser.newContext(); const p2 = await c2.newPage();
+    const ratios = await p2.evaluate(async (imgs) => {
+      const lum = ([r, g, b]) => { const f = (x) => { x /= 255; return x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
+      const out = [];
+      for (const s of imgs) { const i = new Image(); i.src = "data:image/png;base64," + s; await i.decode(); const c = document.createElement("canvas"); c.width = i.width; c.height = i.height; const x = c.getContext("2d"); x.drawImage(i, 0, 0); const d = x.getImageData(0, 0, c.width, c.height).data;
+        const hist = new Map(); for (let k = 0; k < d.length; k += 4) { const q = (d[k] >> 3) << 10 | (d[k + 1] >> 3) << 5 | (d[k + 2] >> 3); hist.set(q, (hist.get(q) || 0) + 1); }
+        const bgq = [...hist.entries()].sort((a, b) => b[1] - a[1])[0][0]; const bg = [(bgq >> 10 & 31) * 8 + 4, (bgq >> 5 & 31) * 8 + 4, (bgq & 31) * 8 + 4];
+        // ink: the pixel farthest in luminance from the background among those clearly different from it (≥ 0.3% of the box)
+        const L = lum(bg); const far = []; for (let k = 0; k < d.length; k += 4) { const px = [d[k], d[k + 1], d[k + 2]]; if (Math.abs(px[0] - bg[0]) + Math.abs(px[1] - bg[1]) + Math.abs(px[2] - bg[2]) > 60) far.push(lum(px)); }
+        if (far.length < (d.length / 4) * 0.003) { out.push(1); continue; }
+        far.sort((a, b) => Math.abs(b - L) - Math.abs(a - L)); const ink = far[Math.floor(far.length * 0.1)];
+        out.push(+((Math.max(ink, L) + 0.05) / (Math.min(ink, L) + 0.05)).toFixed(2)); }
+      return out;
+    }, shots.map((x) => x.img));
+    await c2.close();
+    out.forced = { checked: shots.length, fails: shots.map((x, n) => ({ ...x.it, ratio: ratios[n] })).filter((x) => x.ratio < 3).map(({ key, ...r }) => r) };
+  }
+  const cat = { focus: out.focus.fails.length, target: out.target.fails.length, zoom: out.zoom.fails.length, reflow: out.reflow.px > 1 ? 1 : 0, forced: out.forced.fails.length, trap: out.trap.trapped ? 1 : 0 };
+  out.fails = Object.values(cat).reduce((a, b) => a + b, 0); out.cat = cat;
+  return out;
+}
+export function aAxis(a) {
+  if (!a) return "A?[not-measured]";
+  const failing = Object.values(a.cat).filter((v) => v > 0).length;
+  return `A${Math.max(1, 5 - failing)}[focus:${a.focus.checked - a.focus.fails.length}/${a.focus.checked},tgt:${a.target.fails.length}f${a.target.warns.length}w,zoom:${a.zoom.fails.length},reflow:${a.reflow.px},fc:${a.forced.fails.length},trap:${a.trap.trapped ? 1 : 0}]`;
+}
+
 export function critiqueOf({ hier, words375, overflow375, motionFails, st, tier, record, mem }) {
   const issues = words375 + (overflow375 ? 1 : 0) + (hier.h1 === 1 ? 0 : 1) + hier.skips + (hier.focalTies > 1 ? 1 : 0);
   const H = `H${Math.max(1, 5 - issues)}[375:${issues}]`;
@@ -589,11 +797,12 @@ export async function scan(target, browser, opts = {}) {
     const c = await contrastAll(browser, url);
     const o = []; for (const w of WIDTHS) o.push(await overflowAt(browser, url, w));
     const w = await words(browser, url); const m = await motion(browser, url); const n = await names(browser, url); const nu = await numbers(browser, url); const st = await structure(browser, url);
+    const mq = await motionQuality(browser, url); const ax = await a11y(browser, url);
     // fingerprint of the served HTML with stamp comments removed: same page → same id, any other page → a different id
     const html = await fetch(url).then((r) => r.text()).catch(() => "");
     const pageHash = createHash("sha256").update(html.replace(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g, "")).digest("hex").slice(0, 16);
     const overflowFails = o.flatMap((x) => [...(x.pageScroll > 1 ? [{ width: x.width, el: "page", kind: "horizontal scroll", px: x.pageScroll }] : []), ...x.items.map((i) => ({ width: x.width, ...i }))]);
-    const counts = { contrast: c.fails.length, overflow: overflowFails.length, words: w.fails.length, motion: m.hiddenUnderReducedMotion.length + (m.pixelsChangingWhenStillPct > 0.5 ? 1 : 0), names: n.fails.length, numbers: nu.fails.length };
+    const counts = { contrast: c.fails.length, overflow: overflowFails.length, words: w.fails.length, motion: m.hiddenUnderReducedMotion.length + (m.pixelsChangingWhenStillPct > 0.5 ? 1 : 0), names: n.fails.length, numbers: nu.fails.length, quality: mq.fails, access: ax.fails };
     const id = createHash("sha256").update(JSON.stringify({ v: GATE_VERSION, counts, sizes: [w.checked, m.compared, n.checked, nu.checked], page: pageHash, c: c.fails.map((x) => x.width + x.el + x.ratio), nu: nu.fails.map((x) => x.el + x.when + x.truth) /* not the shown value: a mid-count frame is timing-dependent */, o: overflowFails.map((x) => x.width + x.el + x.px), w: w.fails.map((x) => x.el + x.problem), m: m.hiddenUnderReducedMotion.map((x) => x.el), n: n.fails.map((x) => x.el) })).digest("hex").slice(0, 10);
     const pass = Object.values(counts).every((v) => v === 0);
     // the critique axes, each derived from a named check (gates/delivery-gate.md, Part 1)
@@ -606,19 +815,19 @@ export async function scan(target, browser, opts = {}) {
     const designFile = opts.design || [join(local, "DESIGN.md"), ...(own ? [join(own, "DESIGN.md")] : []), join(process.cwd(), "DESIGN.md")].find((f) => existsSync(f));
     const logFile = opts.log || [join(local, ".motomation/log.json"), join(local, "log.json"), ...(own ? [join(own, "log.json"), join(own, ".motomation/log.json")] : []), join(projectRoot(local), ".motomation/log.json"), join(projectRoot(), ".motomation/log.json")].find((f) => existsSync(f));
     const record = readRecord(designFile); const mem = await memoryAxis(logFile, meta, st.sectionIds);
-    const critique = critiqueOf({ hier: w.hier, words375: w.fails.length, overflow375: overflowFails.filter((x) => x.width === 375).length, motionFails: counts.motion, st, tier: meta.tier, record, mem });
+    const critique = critiqueOf({ hier: w.hier, words375: w.fails.length, overflow375: overflowFails.filter((x) => x.width === 375).length, motionFails: counts.motion, st, tier: meta.tier, record, mem }); const critique6 = critique; const critiqueFull = `${critique6} ${qAxis(mq)} ${aAxis(ax)}`;
     // coverage: the worst width decides; more than SKIP_WARN_PCT skipped at any width means the page was not measured, not passed
     const worstW = c.byWidth.reduce((a, x) => (x.skippedPct > a.skippedPct ? x : a), c.byWidth[0]);
     const coverage = { ok: !c.lowCoverage, skipped: worstW.skipped, total: worstW.total, pct: worstW.skippedPct, width: worstW.width, low: c.byWidth.filter((x) => x.lowCoverage).map((x) => x.width) };
-    return { target, url, version: GATE_VERSION, pass, verified: coverage.ok, coverage, counts, id, stamp: stampOf(counts, id, coverage), critique, sources: { design: designFile || null, log: logFile || null, meta }, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu };
+    return { target, url, version: GATE_VERSION, pass, verified: coverage.ok, coverage, counts, id, stamp: stampOf(counts, id, coverage), critique: critiqueFull, sources: { design: designFile || null, log: logFile || null, meta }, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu, quality: mq, access: ax };
   } finally { close(); }
 }
-export const stampOf = (k, id, cov) => `gate: c${k.contrast} o${k.overflow} w${k.words} rm${k.motion} a${k.names} n${k.numbers ?? 0} · ${GATE_VERSION} · ${id}${cov ? ` · skipped ${cov.skipped}/${cov.total}@${cov.width}` : ""}`;
+export const stampOf = (k, id, cov) => `gate: c${k.contrast} o${k.overflow} w${k.words} rm${k.motion} a${k.names} n${k.numbers ?? 0}${k.quality !== undefined ? ` q${k.quality} k${k.access}` : ""} · ${GATE_VERSION} · ${id}${cov ? ` · skipped ${cov.skipped}/${cov.total}@${cov.width}` : ""}`;
 export function readStamp(html) {
   // a page may carry the stamp in an HTML comment and in the stylesheet; every stamp that carries a gate segment must hold up
   const all = [...html.matchAll(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g)].map((m) => m[0]);
   if (!all.length) return null;
-  const parse = (raw) => { const g = raw.match(/gate: c(\d+) o(\d+) w(\d+) rm(\d+) a(\d+)(?: n(\d+))? · (gate\/\d+) · ([0-9a-f]{10})(?: · skipped (\d+)\/(\d+)@(\d+))?/); return g ? { counts: { contrast: +g[1], overflow: +g[2], words: +g[3], motion: +g[4], names: +g[5], ...(g[6] !== undefined ? { numbers: +g[6] } : {}) }, version: g[7], id: g[8], ...(g[9] !== undefined ? { skipped: { skipped: +g[9], total: +g[10], width: +g[11] } } : {}) } : null; };
+  const parse = (raw) => { const g = raw.match(/gate: c(\d+) o(\d+) w(\d+) rm(\d+) a(\d+)(?: n(\d+))?(?: q(\d+) k(\d+))? · (gate\/\d+) · ([0-9a-f]{10})(?: · skipped (\d+)\/(\d+)@(\d+))?/); return g ? { counts: { contrast: +g[1], overflow: +g[2], words: +g[3], motion: +g[4], names: +g[5], ...(g[6] !== undefined ? { numbers: +g[6] } : {}), ...(g[7] !== undefined ? { quality: +g[7], access: +g[8] } : {}) }, version: g[9], id: g[10], ...(g[11] !== undefined ? { skipped: { skipped: +g[11], total: +g[12], width: +g[13] } } : {}) } : null; };
   const fieldsOf = (raw) => { const f = {}; for (const k of ["archetype", "mutation", "signature", "tier"]) { const m = raw.match(new RegExp(k + ":\\s*([^·*\\n]+?)\\s*(?:·|\\*/|-->)")); if (m) f[k] = m[1].trim(); } return f; };
   const critOf = (raw) => raw.match(/critique:\s*(.+?)\s*(?:·\s*gate:|\*\/|-->)/)?.[1].trim() || null;
   const withGate = all.map((raw) => ({ raw, gate: parse(raw), critique: critOf(raw) })).filter((x) => x.gate);
@@ -649,6 +858,21 @@ function print(r) {
   for (const f of r.names.fails.slice(0, 12)) L(`     ${f.problem}  ${f.el}  ${f.html || f.src || ""}`);
   L(`  numbers   ${r.counts.numbers === 0 ? "✓" : "✗"} ${r.counts.numbers} values shown wrong before they settle  (${r.numbers.checked} numbers checked at scroll 0, scroll end and reduced motion; ${r.numbers.live} live values skipped)`);
   for (const f of r.numbers.fails.slice(0, 12)) L(`     ${f.el}  shows "${f.shown}" ${f.when}, settles on "${f.truth}"`);
+  const q = r.quality, a = r.access;
+  L(`  progress  ${q.zones.every((z) => z.ok) ? "✓" : "✗"} ${q.zones.filter((z) => !z.ok).length} of ${q.zones.length} pinned/scrubbed zone(s) static (median change between ${PROG_SAMPLES} scroll samples ≤ ${PROG_MIN_PCT}% of pixels)`);
+  for (const z of q.zones) L(`     ${z.ok ? "✓" : "✗"} ${z.kind} ${z.label}  ${z.len}px  Δ median ${z.medianPct}% · ${z.moving}/${z.diffs.length} transitions change  [${z.diffs.join(" ")}]`);
+  L(`  smooth    ${!q.smooth.desktop ? "– no pinned zone, not measured" : !q.smooth.judged ? `– not verified — sandbox (${q.smooth.why}); measured p95 ${q.smooth.desktop.p95}ms @1440, ${q.smooth.mobile.p95}ms @375 CPU×4 (budgets ${SMOOTH_P95_MS.desktop}/${SMOOTH_P95_MS.mobile}ms) — see docs/adapters/sandbox.md` : `${q.smooth.desktop.ok && q.smooth.mobile.ok ? "✓" : "✗"} p95 ${q.smooth.desktop.p95}ms @1440 (≤ ${SMOOTH_P95_MS.desktop}) · ${q.smooth.mobile.p95}ms @375 CPU×4 (≤ ${SMOOTH_P95_MS.mobile})`}`);
+  L(`  rm-flow   ${!q.rm ? "– no pinned zone" : q.rm.ok ? "✓ reduced motion is normal flow, all text present" : `✗ under reduced motion: ${q.rm.pinned.length} zone(s) still pinned${q.rm.pinned.length ? ` (${q.rm.pinned.slice(0, 3).join("; ")})` : ""}, ${q.rm.missingCount} text(s) missing${q.rm.missing.length ? ` ("${q.rm.missing.slice(0, 2).join('", "').slice(0, 80)}")` : ""}`}${q.rm ? ` · ${q.rm.canvases} visible canvas(es)` : ""}`);
+  L(`  focus     ${a.focus.fails.length === 0 ? "✓" : "✗"} ${a.focus.fails.length} of ${a.focus.checked} focused elements show no visible focus indicator  (${a.focus.tabbables} tabbable)`);
+  for (const f of a.focus.fails.slice(0, 8)) L(`     no ring  ${f.el}  "${f.text}"  (${f.changedPct}% of pixels change on focus)`);
+  L(`  targets   ${a.target.fails.length === 0 ? "✓" : "✗"} ${a.target.fails.length} under ${TARGET_MIN}px, ${a.target.warns.length} under ${TARGET_TOUCH}px (warning) at 375 touch  (${a.target.checked} checked; inline links exempt)`);
+  for (const f of [...a.target.fails, ...a.target.warns.slice(0, 4)].slice(0, 10)) L(`     ${f.w}×${f.h}  ${f.el}  "${f.text}"`);
+  L(`  zoom200   ${a.zoom.fails.length === 0 ? "✓" : "✗"} ${a.zoom.fails.length} lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%`);
+  for (const f of a.zoom.fails.slice(0, 8)) L(`     ${f.kind}  ${f.el}  "${f.text}"${f.by ? `  by ${f.by}` : ""}`);
+  L(`  reflow    ${a.reflow.px > 1 ? "✗" : "✓"} ${a.reflow.px}px horizontal scroll at 320px`);
+  L(`  forced    ${a.forced.fails.length === 0 ? "✓" : "✗"} ${a.forced.fails.length} of ${a.forced.checked} texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)`);
+  for (const f of a.forced.fails.slice(0, 8)) L(`     ${f.ratio}:1  ${f.el}  "${f.text}"  forced-color-adjust: ${f.adjust}`);
+  L(`  kbd-trap  ${a.trap.trapped ? `✗ focus cycles inside ${a.trap.region}; ${a.trap.unreached} of ${a.trap.tabbables} tabbable never reached in ${a.trap.presses} Tabs` : `✓ ${a.trap.visited} of ${a.trap.tabbables} tabbable reached in ${a.trap.presses} Tabs, no cycle`}`);
   const st = r.structure;
   L(`  hierarchy  h1×${r.words.hier.h1}, ${r.words.hier.skips} skipped heading levels, ${r.words.hier.focalTies} element(s) tied for largest on the first 375px screen`);
   L(`  structure  ${st.sections} sections, entrances: ${st.patterns.join(" | ")} → ${st.repeats} repeat(s); pins ${st.pins}, WebGL canvases ${st.webgl}, JS ${st.jsKB}KB gzipped${st.jsUnknown ? ` (+${st.jsUnknown} script(s) not fetched)` : ""}`);
@@ -762,11 +986,15 @@ async function main() {
       if (!st) verdict(`STAMP REJECTED · ${file}: no motomation stamp comment found`, 2);
       if (!st.gate) verdict(`STAMP REJECTED · ${file}: the stamp has no measured gate values (a hand-written or copied stamp). Run node scripts/gate.mjs and paste its stamp.\n  found: ${st.raw.slice(0, 160)}`, 2);
       if (!st.critique) verdict(`STAMP REJECTED · ${file}: no critique segment. Paste the full "critique: … · gate: …" line gate.mjs printed.`, 2);
-      if (!/^C\d\[[^\]]+\] H\d\[[^\]]+\] S\d\[[^\]]+\] R\d\[[^\]]+\] M\d\[[^\]]+\] V\d\[[^\]]+\]$/.test(st.critique)) verdict(`STAMP REJECTED · ${file}: critique "${st.critique}" is not traced. Every axis needs its number and the check it came from, e.g. H4[375:1]. Unmeasured scores are rejected.`, 2);
+      if (st.gate.version !== GATE_VERSION) verdict(`STAMP REJECTED · ${file}: stamp is ${st.gate.version}; this gate is ${GATE_VERSION} (adds the Q motion and A accessibility axes, counts q and k). Re-gate the page and paste the new line.`, 2);
+      if (!/^C\d\[[^\]]+\] H\d\[[^\]]+\] S\d\[[^\]]+\] R\d\[[^\]]+\] M\d\[[^\]]+\] V\d\[[^\]]+\] Q\d\[[^\]]+\] A\d\[[^\]]+\]$/.test(st.critique)) verdict(`STAMP REJECTED · ${file}: critique "${st.critique}" is not traced. Every axis needs its number and the check it came from, e.g. H4[375:1]. Unmeasured scores are rejected.`, 2);
       const x = await withRetry(pw, file, (b) => scan(flags.url ? String(flags.url) : file, b, opts)); note(x); const r = x.value; await x.browser.close().catch(() => {}); print(r);
       console.log(`  stamp skips: ${st.gate.skipped ? `${st.gate.skipped.skipped}/${st.gate.skipped.total}@${st.gate.skipped.width}` : "not recorded (stamp predates the coverage field)"} · fresh scan: ${r.coverage.skipped}/${r.coverage.total}@${r.coverage.width} (${r.coverage.pct}%)`);
       if (!r.coverage.ok) notVerified(`coverage: ${r.coverage.skipped} of ${r.coverage.total} text elements (${r.coverage.pct}%) skipped at ${r.coverage.width}px; more than ${SKIP_WARN_PCT}% at ${r.coverage.low.join("/")}px, so the stamp cannot be checked`);
-      if (st.critique !== r.critique) verdict(`STAMP REJECTED · critique says "${st.critique}" but the checks give "${r.critique}"`, 2);
+      // the progression Δ is a pixel measurement that varies slightly between scans; it must agree on pass/fail
+      // (the Q score), not to the decimal
+      const norm = (c) => c.replace(/prog:Δ[\d.]+%/, "prog:Δ");
+      if (norm(st.critique) !== norm(r.critique)) verdict(`STAMP REJECTED · critique says "${st.critique}" but the checks give "${r.critique}"`, 2);
       for (const g of [st.gate, ...st.others.map((o) => o.gate)]) {
         const same = JSON.stringify(g.counts) === JSON.stringify(r.counts) && g.id === r.id && g.version === r.version;
         if (!same) verdict(`STAMP REJECTED · stamp says "${stampOf(g.counts, g.id)}" but a fresh scan measures "${r.stamp}"`, 2);
