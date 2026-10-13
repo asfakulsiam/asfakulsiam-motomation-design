@@ -21,12 +21,14 @@ await t.test("reduce: Decode never shows anything but the final text", async () 
   const r = await open("reduce"); const bad = r.shown.filter((s) => s && s !== "SIGNAL FOUND");
   assert(bad.length === 0, `animated frames: ${JSON.stringify(bad.slice(0, 4))} (of ${r.shown.length} texts)`);
 });
+// The computed filter and opacity are read (not the inline style): since v2.5.0 settled BlurFocus text carries no
+// filter at all (a lingering blur(0) re-rasterised it), so "none 1" and "blur(0px) 1" are both the unblurred, opaque state.
 await t.test("reduce: BlurFocus is never committed blurred or faded (no animated first frame)", async () => {
-  const r = await open("reduce"); const bad = r.blur.filter((v) => !/^blur\(0(px)?\) 1$/.test(v));
+  const r = await open("reduce"); const bad = r.blur.filter((v) => !/^(none|blur\(0(px)?\)) 1$/.test(v));
   assert(r.blur.length > 0 && bad.length === 0, `styles committed: ${JSON.stringify(r.blur)}`);
 });
 await t.test("reduce: no painted frame shows BlurFocus blurred (sampled every animation frame)", async () => {
-  const r = await open("reduce"); const bad = r.painted.filter((v) => v !== "(not mounted)" && !/^blur\(0(px)?\) 1$/.test(v));
+  const r = await open("reduce"); const bad = r.painted.filter((v) => v !== "(not mounted)" && !/^(none|blur\(0(px)?\)) 1$/.test(v));
   if (process.env.SHOW) console.log("painted frames:", JSON.stringify(r.painted.slice(0, 8)));
   assert(bad.length === 0, `${bad.length} painted frame(s) blurred: ${JSON.stringify(r.painted.slice(0, 6))}`);
 });

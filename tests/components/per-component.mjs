@@ -130,10 +130,15 @@ if (!has("--no-gate")) {
   const results = []; let last = "";
   for (let i = 0; i < list.length; i += 6) {
     const chunk = list.slice(i, i + 6);
-    const g = spawnSync(process.execPath, [join(SKILL, "scripts/gate.mjs"), ...chunk.map((c) => join(OUT, "pages", `${c.id}.html`)), "--json", "--timeout", "300"], { encoding: "utf8", maxBuffer: 256 << 20, cwd: process.cwd(), env: process.env });
-    let parsed = null; try { parsed = JSON.parse(g.stdout); } catch {}
-    results.push(...(parsed ? (Array.isArray(parsed) ? parsed : parsed.results || [parsed]) : []));
-    if (!parsed) last = `exit ${g.status} ${(g.stderr || g.stdout || "").slice(0, 160)}`;
+    const gate = (pages) => { const g = spawnSync(process.execPath, [join(SKILL, "scripts/gate.mjs"), ...pages.map((c) => join(OUT, "pages", `${c.id}.html`)), "--json", "--timeout", "300"], { encoding: "utf8", maxBuffer: 256 << 20, cwd: process.cwd(), env: process.env });
+      let parsed = null; try { parsed = JSON.parse(g.stdout); } catch {}
+      const rows = parsed && parsed.verified !== false ? (Array.isArray(parsed) ? parsed : parsed.results || [parsed]) : [];
+      return { rows, why: rows.length ? "" : `exit ${g.status} ${(parsed?.reason || g.stderr || g.stdout || "").slice(0, 200)}` }; };
+    // one page the gate cannot verify (exit 3, e.g. low coverage) withholds the results of the whole run; gate the
+    // chunk's pages one by one then, so each page gets its own result and only the unverifiable one fails
+    let got = gate(chunk);
+    if (!got.rows.length && chunk.length > 1) { for (const c of chunk) { const one = gate([c]); results.push(...one.rows); if (!one.rows.length) last = `${c.id}: ${one.why}`; } }
+    else { results.push(...got.rows); if (!got.rows.length) last = got.why; }
     console.error(`gate ${Math.min(i + 6, list.length)}/${list.length}`);
   }
   for (const r of report) {

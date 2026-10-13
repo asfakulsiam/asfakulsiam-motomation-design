@@ -206,11 +206,19 @@ async function contrast(browser, url, VW = 1440) {
   // pinned or sticky zone, so a sequence is always seen at its start, middle and end whatever its length
   const QS = [0, 0.25, 0.5, 0.75, 1]; for (const q of QS) steps.add(Math.round(Math.max(0, H - VH) * q));
   for (const [a, b] of zones.slice(0, 12)) for (const q of QS) steps.add(Math.round(Math.max(0, a) + (b - Math.max(0, a)) * q));
-  for (const y of [...steps].sort((p, q) => p - q)) {
+  const pass = async (positions) => { for (const pos of positions) {
+    const y = typeof pos === "number" ? pos : pos.y;
     await page.evaluate((v) => scrollTo(0, v), y);
+    // a swipe row (v2.5.0): bring the text into view inside its horizontal scroller, as a visitor swiping would
+    if (typeof pos !== "number") await page.evaluate((id) => { const e = document.querySelector(`[data-g-id="${id}"]`); for (let n = e?.parentElement; n; n = n.parentElement) { const cs = getComputedStyle(n);
+      if (/(auto|scroll)/.test(cs.overflowX) && n.scrollWidth > n.clientWidth + 1) { const er = e.getBoundingClientRect(), nr = n.getBoundingClientRect(); n.style.scrollSnapType = "none"; n.style.scrollBehavior = "auto"; n.scrollLeft += er.left - nr.left - Math.max(0, (nr.width - er.width) / 2); break; } } }, pos.id);
     // let entrances finish: wait for CSS/WAAPI animations, then only measure elements whose opacity and position are stable
     await page.waitForFunction(() => !document.getAnimations().some((a) => a.playState === "running" && a.effect?.getComputedTiming().iterations !== Infinity), null, { timeout: T(4000) }).catch(() => {});
     await page.waitForTimeout(350);
+    // ambient loops (an orbit, a marquee: Web Animations with infinite iterations) never settle, so their text was always
+    // skipped as moving. Hold each at its first frame (v2.5.0): that is the frame the screenshot below shows
+    // (animations: "disabled" cancels infinite animations to their start), and it is a frame the visitor sees.
+    await page.evaluate(() => document.getAnimations().forEach((a) => { if (a.effect?.getComputedTiming().iterations === Infinity) { a.pause(); a.currentTime = 0; } }));
     const read = () => page.evaluate(() => { const pe = document.createElement("style"); pe.textContent = "*{pointer-events:auto!important}"; document.head.append(pe); try { return [...document.querySelectorAll("[data-g-id]")].filter((e) => !__g.decorative(e) && !__g.srOnly(e)).map((e) => {
       const s = getComputedStyle(e); const r = e.getBoundingClientRect();
       // occluded? the topmost element at the text's centre must be the element itself, a descendant, or an ancestor
@@ -284,7 +292,15 @@ async function contrast(browser, url, VW = 1440) {
       if (!b) { b = { op: r.op, at: new Set(), rest: 0, best: r }; list.push(b); states.set(r.i, list); }
       b.at.add(atY); if (resting) b.rest++; if (r.ratio > b.best.ratio) b.best = r;
     }
-  }
+  } };
+  await pass([...steps].sort((p, q) => p - q));
+  // Text inside a horizontal scroller (a swipe row on a phone) is never on screen at any vertical scroll position. It
+  // is reachable, so it is measured: scroll its row to it, at the vertical position where the row is in view. Before
+  // v2.5.0 it was counted as skipped, and a page with a swipe row could not reach full coverage at 375px.
+  const swipe = await page.evaluate((seen) => [...document.querySelectorAll("[data-g-id]")].filter((e) => !seen.includes(+e.dataset.gId) && !__g.decorative(e) && !__g.srOnly(e)).map((e) => {
+    for (let n = e.parentElement; n; n = n.parentElement) { const cs = getComputedStyle(n); if (/(auto|scroll)/.test(cs.overflowX) && n.scrollWidth > n.clientWidth + 1) { const r = n.getBoundingClientRect(); return { id: +e.dataset.gId, y: Math.max(0, Math.round(r.top + scrollY - Math.max(0, (innerHeight - r.height) / 2))) }; } }
+    return null; }).filter(Boolean).slice(0, 40), [...done.keys()]);
+  if (swipe.length) await pass(swipe);
   // total = every text element counted at the end of the scan, plus any measured or seen earlier: a scrubbed sequence can
   // hide its credits (visibility:hidden) by the last frame, and counting only the end left "measured" above "total" (v2.4.0 fix)
   const endIds = await page.evaluate(() => [...document.querySelectorAll("[data-g-id]")].filter((e) => !__g.decorative(e) && !__g.srOnly(e)).map((e) => +e.dataset.gId));
@@ -806,7 +822,15 @@ async function a11y(browser, url) {
     const items = await page.evaluate(() => __g.textEls().filter((e) => !__g.decorative(e) && !__g.srOnly(e) && e.getClientRects().length && getComputedStyle(e).visibility !== "hidden" && __g.opacity(e) > 0.05 /* a resting, faded-out caption is not on screen to read */ && !__g.clippedAway(e)).slice(0, 80).map((e) => ({ key: __g.key(e), el: __g.label(e), text: e.textContent.trim().slice(0, 30), adjust: getComputedStyle(e).forcedColorAdjust })));
     const shots = [];
     for (const it of items) {
-      const box = await page.evaluate(async (k) => { const e = [...document.querySelectorAll("*")].find((n) => __g.key(n) === k); if (!e) return null; e.scrollIntoView({ block: "center", behavior: "instant" }); await new Promise((ok) => requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(ok, 80)))); /* scroll-driven layers (a pinned reel) move on the next frame: measure where the text ended up */ const r = e.getClientRects()[0]; return r && r.width >= 4 && r.height >= 4 && r.top >= 0 && r.bottom <= innerHeight && r.left >= 0 && r.right <= innerWidth + 2 ? { x: Math.max(0, r.left), y: r.top, width: Math.min(innerWidth - Math.max(0, r.left), r.width), height: r.height } : null; }, it.key);
+      const box = await page.evaluate(async (k) => { const e = [...document.querySelectorAll("*")].find((n) => __g.key(n) === k); if (!e) return null; e.scrollIntoView({ block: "center", behavior: "instant" }); const frame = () => new Promise((ok) => requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(ok, 80)))); await frame(); /* scroll-driven layers (a pinned reel) move on the next frame: measure where the text ended up */
+        // v2.5.0: inside a pinned reel the scroll that centres the text can also slide it out of its frame (an ancestor with
+        // overflow hidden/clip), and the screenshot then held no ink (a false 1:1). Find a scroll position, within the
+        // pinned zone, where the text is inside every clipping ancestor; if there is none it is not on screen to read.
+        const inClip = (r) => { for (let n = e.parentElement; n && n !== document.body && n !== document.documentElement; n = n.parentElement) { const cs = getComputedStyle(n); if (cs.overflowX !== "visible" || cs.overflowY !== "visible") { const c = n.getBoundingClientRect(); if (r.left < c.left - 1 || r.right > c.right + 1 || r.top < c.top - 1 || r.bottom > c.bottom + 1) return false; } } return true; };
+        const onScreen = (r) => r && r.width >= 4 && r.height >= 4 && r.top >= 0 && r.bottom <= innerHeight && r.left >= 0 && r.right <= innerWidth + 2;
+        if (!(onScreen(e.getClientRects()[0]) && inClip(e.getClientRects()[0]))) { let z = null; for (let n = e.parentElement; n; n = n.parentElement) if (getComputedStyle(n).position === "sticky") { z = n.parentElement; break; }
+          if (z) { const zr = z.getBoundingClientRect(), a = zr.top + scrollY, b = a + zr.height - innerHeight; for (let y = a; y <= b; y += Math.max(20, innerHeight * 0.1)) { scrollTo(0, y); await frame(); const q = e.getClientRects()[0]; if (onScreen(q) && inClip(q)) break; } } }
+        const r = e.getClientRects()[0]; return onScreen(r) && inClip(r) ? { x: Math.max(0, r.left), y: r.top, width: Math.min(innerWidth - Math.max(0, r.left), r.width), height: r.height } : null; }, it.key);
       if (!box || box.width < 4) continue; await page.waitForTimeout(60);
       shots.push({ it, img: (await page.screenshot({ type: "png", clip: box })).toString("base64") });
     }
