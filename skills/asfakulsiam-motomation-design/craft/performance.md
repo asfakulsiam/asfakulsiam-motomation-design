@@ -103,7 +103,7 @@ Reading alone catches all four failures. The Delivery Gate measures the result i
 
 ## The twenty-item checklist
 
-Loaded on every build and redesign (SKILL.md), next to `craft/copy.md`, `craft/seo.md` and the security checklist. Tags:
+Loaded on every build and redesign (SKILL.md), next to `craft/copy.md`, `craft/seo.md` and `craft/security.md`. Tags:
 **[FE]** frontend, **[BE]** backend, **[IN]** infrastructure, **[H]** a human records it. Items marked **gate P** are
 measured on every page by `scripts/gate.mjs` (axis P, gate/4); the rest are ticked in `gates/delivery-gate.md`
 "Performance" with the file, config or measurement that proves them. A static page with no backend writes "n/a (no
