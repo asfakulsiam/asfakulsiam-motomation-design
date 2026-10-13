@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mati — wood-fired ceramics from Rajshahi</title>
+<meta name="description" content="Mati is a two-person ceramics studio in Rajshahi making wood-fired cups, plates and vases in small batches. Ships within Bangladesh.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Instrument+Sans:wght@400;500;600&family=Noto+Sans+Bengali:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EFE7DA; --paper2:#E4D9C8; --char:#1D1A17; --char2:#2A2622; --ash:#6B635A;
+  --ember:#B33C16; --ember-hi:#E2682F; --line:rgba(29,26,23,.18);
+  --serif:"Fraunces","Noto Sans Bengali",Georgia,serif; --sans:"Instrument Sans","Noto Sans Bengali",system-ui,sans-serif;
+}
+section[id],#top{scroll-margin-top:72px}
+.cartbtn.bump b{animation:bump .4s ease}
+@keyframes bump{40%{transform:scale(1.35);background:var(--ember-hi)}}
+.card svg{transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.card:hover svg{transform:translateY(-6px) rotate(-1.5deg)}
+@media(max-width:860px){.stage{aspect-ratio:1/.8!important}}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--char);font:400 1.0625rem/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ember);outline-offset:3px;border-radius:2px}
+.dark :focus-visible{outline-color:var(--ember-hi)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(1.1rem,4vw,2.5rem)}
+.skip{position:absolute;left:-999px;top:0;background:var(--char);color:var(--paper);padding:.7rem 1rem;z-index:100}
+.skip:focus{left:0}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.02;letter-spacing:-.02em}
+.eyebrow{font:600 .78rem/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ember)}
+.dark .eyebrow{color:var(--ember-hi)}
+
+/* header */
+header.top{position:sticky;top:0;z-index:20;background:rgba(239,231,218,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font:800 1.7rem var(--serif);text-decoration:none;letter-spacing:-.03em}
+.logo i{color:var(--ember);font-style:normal}
+nav{display:flex;gap:1.6rem;align-items:center}
+nav a.l{text-decoration:none;font-weight:500;font-size:.95rem;padding:.6rem 0}
+nav a.l:hover{color:var(--ember)}
+.cartbtn{font:600 .95rem var(--sans);background:var(--char);color:var(--paper);border:0;border-radius:99px;padding:.65rem 1.1rem;cursor:pointer;min-height:44px;display:flex;gap:.6rem;align-items:center}
+.cartbtn:hover{background:var(--ember)}
+.cartbtn b{background:var(--paper);color:var(--char);border-radius:99px;min-width:1.5rem;height:1.5rem;display:grid;place-items:center;font-size:.8rem;padding:0 .35rem}
+@media(max-width:640px){nav a.l{display:none}}
+
+/* hero */
+.hero{padding:clamp(2rem,6vw,5rem) 0 clamp(3rem,7vw,6rem)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(1.5rem,5vw,4.5rem);align-items:center}
+.stage{position:relative;aspect-ratio:1/1.05;background:radial-gradient(120% 90% at 50% 30%,#F6F0E6 0%,var(--paper2) 70%);border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.stage svg{width:100%;height:100%;display:block}
+.stage .tag{position:absolute;left:1rem;bottom:1rem;font-size:.8rem;color:var(--ash);max-width:70%}
+.hero h1{font-size:clamp(3rem,7.5vw,6.2rem);margin:1rem 0 1.2rem}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--ember)}
+.lede{max-width:30rem;color:#3d372f}
+.buy{margin-top:1.8rem;border-top:1px solid var(--char);padding-top:1.3rem}
+.buy .row{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
+.price{font:600 2rem var(--serif)}
+.spec{font-size:.92rem;color:var(--ash)}
+.btn{font:600 1rem var(--sans);background:var(--ember);color:#fff;border:0;border-radius:3px;padding:.95rem 1.6rem;min-height:48px;cursor:pointer;transition:background .2s,transform .2s}
+.btn:hover{background:var(--char)}
+.btn:active{transform:translateY(1px)}
+.btn.ok{background:var(--char)}
+.next{display:flex;gap:.7rem;align-items:center;margin-top:1.1rem;font-size:.95rem}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--ember);flex:none;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(179,60,22,.0);opacity:.5}}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.stage{aspect-ratio:1/.85}}
+
+/* about strip */
+.strip{background:var(--char);color:var(--paper);padding:clamp(2.5rem,6vw,4.5rem) 0}
+.strip p{font:400 clamp(1.5rem,3.4vw,2.6rem)/1.25 var(--serif);max-width:40ch;letter-spacing:-.01em}
+.strip p span{color:var(--ember-hi)}
+.strip small{display:block;margin-top:1.2rem;font-size:.95rem;color:#C9BFB0}
+
+/* shop */
+section{padding:clamp(3rem,7vw,6rem) 0}
+.head{display:flex;justify-content:space-between;align-items:end;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+.head h2{font-size:clamp(2rem,4.5vw,3.4rem);margin-top:.6rem}
+.head p{max-width:24rem;color:var(--ash)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2vw,1.8rem);list-style:none;padding:0}
+.card{display:flex;flex-direction:column}
+.card .img{aspect-ratio:1/1.1;background:var(--paper2);border-radius:4px;overflow:hidden;border:1px solid var(--line);transition:background .3s}
+.card:hover .img{background:#DDD0BC}
+.card svg{width:100%;height:100%;display:block}
+.card .meta{display:flex;justify-content:space-between;align-items:baseline;margin:.9rem 0 .7rem;gap:1rem}
+.card h3{font-size:1.4rem;font-weight:600}
+.card .p{font-weight:600;font-variant-numeric:tabular-nums}
+.add{font:600 .95rem var(--sans);background:transparent;border:1.5px solid var(--char);border-radius:3px;padding:.7rem 1rem;min-height:46px;cursor:pointer;transition:all .2s;margin-top:auto}
+.add:hover{background:var(--char);color:var(--paper)}
+.add.ok{background:var(--char);color:var(--paper)}
+@media(max-width:860px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.grid{gap:.8rem}.card h3{font-size:1.15rem}.card .meta{flex-direction:column;gap:0}}
+
+/* firing */
+.dark{background:var(--char);color:var(--paper)}
+.dark .head p{color:#C9BFB0}
+.bar{display:flex;height:84px;border-radius:3px;overflow:hidden;margin:1rem 0 1.6rem}
+.bar div{display:flex;align-items:flex-end;padding:.6rem .8rem;font:600 .85rem var(--sans);transform-origin:left}
+.b1{flex:72;background:#4a4137}
+.b2{flex:36;background:linear-gradient(180deg,var(--ember-hi),var(--ember));color:#1D1A17}
+.b3{flex:96;background:#332d27}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,3vw,2.5rem);list-style:none;padding:0}
+.steps li{border-top:1px solid rgba(239,231,218,.35);padding-top:1rem}
+.steps .n{font:600 clamp(2.6rem,5vw,4rem)/1 var(--serif);color:var(--ember-hi)}
+.steps .n small{font-size:.35em;color:var(--paper);margin-left:.3rem;font-family:var(--sans);letter-spacing:.05em;text-transform:uppercase}
+.steps h3{font-size:1.3rem;margin:.6rem 0 .3rem}
+.steps p{color:#C9BFB0;font-size:.98rem}
+.scale{font-size:.82rem;color:#C9BFB0}
+@media(max-width:700px){.steps{grid-template-columns:1fr}.bar{height:64px}.bar div{font-size:.7rem;padding:.4rem .5rem}}
+
+/* info */
+.info{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,4vw,3rem)}
+.info div{border-top:2px solid var(--char);padding-top:1rem}
+.info h3{font-size:1.5rem;margin-bottom:.5rem}
+.info p{color:#3d372f}
+@media(max-width:800px){.info{grid-template-columns:1fr}}
+footer{border-top:1px solid var(--line);padding:2rem 0 3rem;font-size:.95rem;color:var(--ash)}
+footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+
+/* cart drawer */
+.veil{position:fixed;inset:0;background:rgba(29,26,23,.5);opacity:0;pointer-events:none;transition:opacity .3s;z-index:40}
+.veil.on{opacity:1;pointer-events:auto}
+aside.drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:var(--paper);z-index:50;transform:translateX(105%);transition:transform .35s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;padding:1.4rem;visibility:hidden}
+aside.drawer.on{transform:none;visibility:visible}
+.drawer header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.drawer h2{font-size:1.8rem}
+.x{background:none;border:1.5px solid var(--char);border-radius:50%;width:44px;height:44px;font-size:1.2rem;cursor:pointer}
+.x:hover{background:var(--char);color:var(--paper)}
+.lines{list-style:none;padding:0;flex:1;overflow:auto;border-top:1px solid var(--line)}
+.lines li{display:grid;grid-template-columns:1fr auto;gap:.2rem .8rem;padding:.9rem 0;border-bottom:1px solid var(--line);align-items:center}
+.lines .q{display:flex;gap:.5rem;align-items:center;grid-column:1/-1}
+.q button{width:36px;height:36px;border:1.5px solid var(--char);background:none;border-radius:50%;cursor:pointer;font-size:1.1rem}
+.q button:hover{background:var(--char);color:var(--paper)}
+.q .rm{width:auto;border-radius:3px;padding:0 .7rem;font-size:.85rem;margin-left:auto;border-color:var(--ash);color:var(--ash)}
+.empty{color:var(--ash);padding:1.2rem 0}
+.sum{padding-top:1rem;font-size:.95rem}
+.sum div{display:flex;justify-content:space-between;padding:.2rem 0}
+.sum .t{font:600 1.3rem var(--serif);border-top:1px solid var(--char);margin-top:.5rem;padding-top:.6rem}
+.sum small{display:block;color:var(--ash);margin-top:.6rem}
+.sum .btn{width:100%;margin-top:.8rem}
+
+.rv{opacity:1}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#shop">Skip to the shop</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Mati, home">Mati<i>.</i></a>
+    <nav aria-label="Main">
+      <a class="l" href="#shop">Shop</a>
+      <a class="l" href="#firing">The firing</a>
+      <a class="l" href="#shipping">Shipping &amp; care</a>
+      <button class="cartbtn" id="openCart" aria-haspopup="dialog">Cart <b id="count" aria-live="polite" aria-label="0 items in cart">0</b></button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <div class="wrap">
+    <div class="stage" role="img" aria-label="Illustration of The Firing Cup, a small stoneware cup with pale ash glaze and orange flame marks">
+      <svg viewBox="0 0 500 525" aria-hidden="true">
+        <defs>
+          <linearGradient id="glz" x1="0" x2="1"><stop offset="0" stop-color="#B8A98F"/><stop offset=".35" stop-color="#E6DCC8"/><stop offset=".7" stop-color="#CDBFA5"/><stop offset="1" stop-color="#8E7F69"/></linearGradient>
+          <linearGradient id="flame" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#B33C16" stop-opacity=".0"/><stop offset=".5" stop-color="#C2501F" stop-opacity=".75"/><stop offset="1" stop-color="#E2682F" stop-opacity=".0"/></linearGradient>
+          <clipPath id="cupclip"><path d="M115 170 C115 330 150 410 250 410 C350 410 385 330 385 170 Z"/></clipPath>
+          <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 .2  0 0 0 0 .15  0 0 0 0 .1  0 0 0 .5 0"/></filter>
+        </defs>
+        <ellipse cx="250" cy="430" rx="165" ry="18" fill="#1D1A17" opacity=".18"/>
+        <path d="M115 170 C115 330 150 410 250 410 C350 410 385 330 385 170 Z" fill="url(#glz)"/>
+        <g clip-path="url(#cupclip)">
+          <path d="M80 380 C170 330 190 250 330 190 L420 230 C300 290 280 380 230 440 Z" fill="url(#flame)"/>
+          <path d="M200 440 C230 360 300 330 420 300 L440 340 C340 370 300 420 280 450 Z" fill="url(#flame)" opacity=".7"/>
+          <circle cx="170" cy="250" r="3" fill="#5a4a38" opacity=".6"/><circle cx="310" cy="300" r="2.5" fill="#5a4a38" opacity=".6"/><circle cx="235" cy="350" r="2" fill="#5a4a38" opacity=".5"/><circle cx="345" cy="220" r="2" fill="#5a4a38" opacity=".5"/><circle cx="150" cy="320" r="2" fill="#5a4a38" opacity=".5"/>
+          <rect width="500" height="525" filter="url(#grain)" opacity=".5"/>
+          <path d="M115 170 C115 330 150 410 250 410" fill="none" stroke="#000" stroke-opacity=".12" stroke-width="30"/>
+        </g>
+        <ellipse cx="250" cy="170" rx="135" ry="26" fill="#2b231b"/>
+        <ellipse cx="250" cy="170" rx="135" ry="26" fill="none" stroke="#EDE3D0" stroke-width="5"/>
+        <ellipse cx="250" cy="176" rx="118" ry="19" fill="#120e0a" opacity=".6"/>
+        <path d="M205 436 h90" stroke="#1D1A17" stroke-opacity=".2" stroke-width="2"/>
+      </svg>
+      <p class="tag">Each one marked differently by the flame.</p>
+    </div>
+
+    <div>
+      <p class="eyebrow">Mati · Rajshahi · Small batches</p>
+      <h1>The <em>Firing</em> Cup</h1>
+      <p class="lede">250 ml, wood-fired stoneware with an ash glaze. Every cup is marked differently by the flame, so no two are the same.</p>
+      <div class="buy">
+        <div class="row"><span class="price">৳1,200</span><span class="spec">250 ml · wood-fired stoneware · ash glaze</span></div>
+        <div style="margin-top:1.1rem"><button class="btn add-btn" data-id="firing-cup">Add to cart</button></div>
+        <p class="next"><span class="dot" aria-hidden="true"></span><span><strong>Next firing: 18 November</strong> · 32 pieces</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="strip dark">
+  <div class="wrap">
+    <p>Rina and Sohel make cups, plates and vases in batches of <span>20–40 pieces</span> per firing.</p>
+    <small>Two people, wood-fired, Rajshahi.</small>
+  </div>
+</div>
+
+<section id="shop" aria-labelledby="shop-h">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="eyebrow">The shop</p><h2 id="shop-h">From the current batch</h2></div>
+      <p>Wood-fired, glazed with ash, made in small numbers. Ships within Bangladesh.</p>
+    </div>
+    <ul class="grid" id="grid"></ul>
+  </div>
+</section>
+
+<section id="firing" class="dark" aria-labelledby="fire-h">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="eyebrow">The firing story</p><h2 id="fire-h">Most of the work is waiting</h2></div>
+      <p>The work is mostly waiting. Bar drawn to scale by hours.</p>
+    </div>
+    <div class="bar" role="img" aria-label="Timeline to scale: 3 days stacking, 36 hours firing, 4 days cooling">
+      <div class="b1">Stacking</div><div class="b2">Firing</div><div class="b3">Cooling</div>
+    </div>
+    <ol class="steps">
+      <li><div class="n">3<small>days</small></div><h3>Stacking</h3><p>Three days of stacking the kiln before a single flame is lit.</p></li>
+      <li><div class="n">36<small>hours</small></div><h3>Firing</h3><p>Thirty-six hours of firing with mango wood. The ash is what glazes the work.</p></li>
+      <li><div class="n">4<small>days</small></div><h3>Cooling</h3><p>Four days of cooling before the kiln is opened.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="shipping" aria-labelledby="ship-h">
+  <div class="wrap">
+    <div class="head"><div><p class="eyebrow">Good to know</p><h2 id="ship-h">Shipping &amp; care</h2></div></div>
+    <div class="info">
+      <div><h3>Delivery</h3><p>3–5 days inside Bangladesh.</p></div>
+      <div><h3>Cost</h3><p>৳150 flat. Free over ৳5,000.</p></div>
+      <div><h3>Care</h3><p>Dishwasher safe. Not for the microwave.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span><strong>Mati</strong> · Ceramics studio, Rajshahi</span><span>Rina &amp; Sohel</span></div></footer>
+
+<div class="veil" id="veil"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="cart-h" aria-hidden="true">
+  <header><h2 id="cart-h">Your cart</h2><button class="x" id="closeCart" aria-label="Close cart">✕</button></header>
+  <ul class="lines" id="lines"></ul>
+  <div class="sum" id="sum"></div>
+</aside>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  const taka = n => '৳' + n.toLocaleString('en-US');
+  const P = [
+    {id:'morning-plate', name:'Morning Plate', price:1800, kind:'plate'},
+    {id:'tall-vase', name:'Tall Vase', price:6500, kind:'vase'},
+    {id:'pour-jug', name:'Pour Jug', price:3200, kind:'jug'},
+    {id:'small-bowl', name:'Small Bowl', price:800, kind:'bowl'},
+    {id:'rice-bowl', name:'Rice Bowl', price:1400, kind:'rice'},
+    {id:'firing-cup', name:'The Firing Cup', price:1200, kind:'cup'}
+  ];
+  const byId = Object.fromEntries(P.map(p=>[p.id,p]));
+  const body = {
+    plate:'<ellipse cx="150" cy="190" rx="112" ry="40" fill="#D8CBB3"/><ellipse cx="150" cy="186" rx="112" ry="38" fill="#E6DCC8"/><ellipse cx="150" cy="188" rx="76" ry="22" fill="#CDBFA5"/><path d="M60 175 C110 150 190 200 245 180" stroke="#B33C16" stroke-opacity=".5" stroke-width="10" fill="none" stroke-linecap="round"/>',
+    vase:'<path d="M130 70 h40 v22 C170 120 220 150 220 230 C220 285 195 310 150 310 C105 310 80 285 80 230 C80 150 130 120 130 92 Z" fill="#DCCFB8"/><path d="M95 200 C140 215 170 190 215 150 L220 240 C190 270 130 270 85 260 Z" fill="#B33C16" fill-opacity=".38"/><ellipse cx="150" cy="70" rx="20" ry="5" fill="#2b231b"/>',
+    jug:'<path d="M95 95 h110 C205 130 220 150 220 215 C220 270 195 300 150 300 C105 300 80 270 80 215 C80 150 95 130 95 95Z" fill="#DCCFB8"/><path d="M205 125 C260 120 265 215 212 232" stroke="#CDBFA5" stroke-width="16" fill="none"/><path d="M92 100 L70 88 L98 84Z" fill="#DCCFB8"/><path d="M95 230 C130 190 170 190 218 150 L220 215 C200 250 150 270 95 262Z" fill="#B33C16" fill-opacity=".38"/><ellipse cx="150" cy="95" rx="55" ry="8" fill="#2b231b"/>',
+    bowl:'<path d="M90 160 h120 C210 220 190 255 150 255 C110 255 90 220 90 160Z" fill="#DCCFB8"/><ellipse cx="150" cy="160" rx="60" ry="11" fill="#2b231b"/><path d="M100 200 C140 220 180 190 205 175 C200 230 185 245 150 247 C120 247 103 230 100 200Z" fill="#B33C16" fill-opacity=".38"/>',
+    rice:'<path d="M70 150 h160 C230 235 205 275 150 275 C95 275 70 235 70 150Z" fill="#DCCFB8"/><ellipse cx="150" cy="150" rx="80" ry="14" fill="#2b231b"/><path d="M80 215 C130 240 200 190 224 170 C218 245 195 268 150 268 C112 268 88 250 80 215Z" fill="#B33C16" fill-opacity=".38"/>',
+    cup:'<path d="M105 140 h90 C195 220 180 260 150 260 C120 260 105 220 105 140Z" fill="#E0D4BD"/><ellipse cx="150" cy="140" rx="45" ry="9" fill="#2b231b"/><path d="M108 215 C140 230 175 190 195 170 C190 235 178 255 150 257 C128 257 112 245 108 215Z" fill="#B33C16" fill-opacity=".45"/>'
+  };
+  const art = k => '<svg viewBox="0 0 300 330" aria-hidden="true"><ellipse cx="150" cy="'+(k==='plate'?236:k==='vase'||k==='jug'?312:k==='rice'?280:k==='cup'?264:258)+'" rx="'+(k==='plate'?118:70)+'" ry="8" fill="#1D1A17" opacity=".15"/>'+body[k]+'</svg>';
+
+  const grid = document.getElementById('grid');
+  grid.innerHTML = P.filter(p=>p.id!=='firing-cup').map(p=>
+    '<li class="card rv"><div class="img">'+art(p.kind)+'</div><div class="meta"><h3>'+p.name+'</h3><span class="p">'+taka(p.price)+'</span></div><button class="add add-btn" data-id="'+p.id+'" aria-label="Add '+p.name+' to cart">Add to cart</button></li>'
+  ).join('');
+
+  let cart = {};
+  const $ = id => document.getElementById(id);
+  const drawer=$('drawer'), veil=$('veil'), openB=$('openCart');
+
+  function render(){
+    const items = Object.keys(cart);
+    const n = items.reduce((s,k)=>s+cart[k],0);
+    $('count').textContent = n;
+    $('count').setAttribute('aria-label', n+(n===1?' item':' items')+' in cart');
+    const sub = items.reduce((s,k)=>s+cart[k]*byId[k].price,0);
+    const ship = n===0?0:(sub>5000?0:150);
+    $('lines').innerHTML = n===0 ? '<li class="empty" style="display:block">Your cart is empty.</li>' : items.map(k=>{
+      const p=byId[k];
+      return '<li><strong>'+p.name+'</strong><span>'+taka(p.price*cart[k])+'</span><div class="q"><button data-d="-1" data-id="'+k+'" aria-label="Decrease '+p.name+'">−</button><span aria-live="polite">'+cart[k]+'</span><button data-d="1" data-id="'+k+'" aria-label="Increase '+p.name+'">+</button><button class="rm" data-d="0" data-id="'+k+'">Remove</button></div></li>';
+    }).join('');
+    $('sum').innerHTML = n===0 ? '' :
+      '<div><span>Subtotal</span><span>'+taka(sub)+'</span></div><div><span>Shipping</span><span>'+(ship?taka(ship):'Free')+'</span></div><div class="t"><span>Total</span><span>'+taka(sub+ship)+'</span></div><small>Shipping inside Bangladesh: 3–5 days, ৳150 flat, free over ৳5,000.</small><button class="btn" id="co">Checkout</button><small id="coMsg" role="status"></small>';
+    const co=$('co'); if(co) co.onclick=()=>{$('coMsg').textContent='This is a demo: there is no real checkout.'};
+  }
+  const bg = [document.querySelector('header.top'), document.querySelector('main'), document.querySelector('footer')];
+  const setInert = v => bg.forEach(el => el && (v ? el.setAttribute('inert','') : el.removeAttribute('inert')));
+  function open(){ setInert(true); drawer.classList.add('on'); veil.classList.add('on'); drawer.setAttribute('aria-hidden','false'); $('closeCart').focus(); }
+  function close(){ setInert(false); drawer.classList.remove('on'); veil.classList.remove('on'); drawer.setAttribute('aria-hidden','true'); openB.focus(); }
+  openB.onclick=open; $('closeCart').onclick=close; veil.onclick=close;
+  document.addEventListener('keydown',e=>{
+    if(!drawer.classList.contains('on')) return;
+    if(e.key==='Escape') close();
+    if(e.key==='Tab'){
+      const f=[...drawer.querySelectorAll('button')].filter(b=>b.offsetParent!==null);
+      if(!f.length) return;
+      const a=f[0], z=f[f.length-1];
+      if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}
+      else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}
+    }
+  });
+  document.addEventListener('click',e=>{
+    const b=e.target.closest('.add-btn');
+    if(b){
+      cart[b.dataset.id]=(cart[b.dataset.id]||0)+1; render();
+      openB.classList.remove('bump'); void openB.offsetWidth; openB.classList.add('bump');
+      const t=b.textContent; b.textContent='Added ✓'; b.classList.add('ok');
+      clearTimeout(b._t); b._t=setTimeout(()=>{b.textContent=t==='Added ✓'?'Add to cart':t;b.classList.remove('ok')},1400);
+      return;
+    }
+    const q=e.target.closest('.q button');
+    if(q){
+      const id=q.dataset.id, d=+q.dataset.d;
+      if(d===0) delete cart[id]; else { cart[id]+=d; if(cart[id]<1) delete cart[id]; }
+      render();
+      const nf=drawer.querySelector('.q button'); (nf||$('closeCart')).focus();
+    }
+  });
+  render();
+
+  // motion: only when allowed and GSAP loaded
+  const rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!rm && window.gsap && window.ScrollTrigger){
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.from('.hero .stage',{opacity:0,y:30,duration:.9,ease:'power3.out'});
+    gsap.from('.hero .wrap > div:last-child > *',{opacity:0,y:24,duration:.7,stagger:.1,delay:.2,ease:'power3.out'});
+    gsap.from('.card',{opacity:0,y:36,duration:.7,stagger:.08,ease:'power2.out',scrollTrigger:{trigger:'#grid',start:'top 85%'}});
+    gsap.from('.bar div',{scaleX:0,duration:1.1,stagger:.25,ease:'power2.inOut',scrollTrigger:{trigger:'.bar',start:'top 85%'}});
+    gsap.from('.steps li',{opacity:0,y:24,duration:.7,stagger:.15,scrollTrigger:{trigger:'.steps',start:'top 88%'}});
+  }
+})();
+</script>
+</body>
+</html>

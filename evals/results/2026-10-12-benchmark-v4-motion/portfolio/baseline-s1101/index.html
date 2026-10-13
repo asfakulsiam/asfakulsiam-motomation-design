@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rafi — Motion designer, Dhaka. Title sequences.</title>
+<meta name="description" content="Rafi is a motion designer in Dhaka with 8 years of work in music videos, broadcast idents and product launches. Available for title sequences.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0e0d0c;--paper:#ece6da;--dim:#9a9488;--hot:#ff4a1c;
+--serif:"Instrument Serif",Georgia,serif;--sans:"Space Grotesk",system-ui,sans-serif;
+--pad:clamp(20px,4vw,56px)}
+*{box-sizing:border-box;margin:0}
+html{background:var(--ink)}
+body{background:var(--ink);color:var(--paper);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--hot);outline-offset:4px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--paper);color:var(--ink);padding:8px 12px;z-index:99}
+.skip:focus{left:8px}
+.bar{position:fixed;inset:0 0 auto 0;display:flex;justify-content:space-between;padding:18px var(--pad);font-size:14px;letter-spacing:.08em;text-transform:uppercase;z-index:10;mix-blend-mode:difference;color:#fff}
+.bar a{text-decoration:none}
+.prog{position:fixed;left:0;top:0;height:2px;width:100%;background:var(--hot);transform-origin:left;transform:scaleX(0);z-index:11}
+
+/* HERO */
+.hero{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:var(--pad);position:relative;overflow:hidden}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(88px,26vw,420px);line-height:.8;letter-spacing:-.03em}
+.hero h1 span{display:inline-block}
+.hero .sub{display:flex;flex-wrap:wrap;gap:12px 48px;justify-content:space-between;margin-top:32px;border-top:1px solid #3a3733;padding-top:18px;max-width:1400px}
+.hero .sub p{max-width:34ch;color:var(--paper)}
+.hero .sub p.k{color:var(--dim);font-size:14px;letter-spacing:.08em;text-transform:uppercase}
+.hero .scroll{position:absolute;right:var(--pad);top:50%;writing-mode:vertical-rl;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.hero .tc{position:absolute;left:var(--pad);top:84px;font-size:13px;letter-spacing:.12em;color:var(--hot);font-variant-numeric:tabular-nums}
+
+/* CLAIM */
+.claim{padding:clamp(100px,18vh,220px) var(--pad);max-width:1500px}
+.claim p{font-family:var(--serif);font-size:clamp(34px,6vw,92px);line-height:1.02;letter-spacing:-.01em}
+.claim em{color:var(--hot)}
+.claim .w{opacity:1}
+
+/* REEL — pinned scenes */
+.reel{position:relative}
+.stage{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;background:var(--ink)}
+.scene{padding:calc(var(--pad) + 40px) var(--pad) var(--pad);display:grid;grid-template-rows:auto 1fr auto;min-height:100svh;position:relative;border-top:1px solid #2a2724}
+.scene .meta{display:flex;justify-content:space-between;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.scene .meta b{color:var(--hot);font-weight:500}
+.scene h2{font-family:var(--serif);font-weight:400;font-size:clamp(72px,18vw,300px);line-height:.85;letter-spacing:-.03em;align-self:center;position:relative;z-index:2;mix-blend-mode:difference;color:#fff}
+.scene .cap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;position:relative;z-index:2}
+.scene .cap p{max-width:36ch}
+.art{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+/* Monsoon: falling lines */
+.a1 i{position:absolute;top:-30%;width:2px;height:40%;background:linear-gradient(transparent,var(--paper));opacity:.55}
+/* Bhoot: eclipse */
+.a2 .disc{position:absolute;left:62%;top:46%;width:46vmin;height:46vmin;margin:-23vmin;border-radius:50%;background:var(--paper)}
+.a2 .cut{position:absolute;left:62%;top:46%;width:46vmin;height:46vmin;margin:-23vmin;border-radius:50%;background:var(--ink);transform:translateX(-30%)}
+/* Koi: orbit rings */
+.a3 .r{position:absolute;left:66%;top:46%;border:1.5px solid var(--hot);border-radius:50%;transform:translate(-50%,-50%)}
+.a3 .dot{position:absolute;left:66%;top:46%;width:5vmin;height:5vmin;margin:-2.5vmin;background:var(--hot);border-radius:50%}
+
+/* ABOUT / CONTACT */
+.about{display:grid;grid-template-columns:1fr 2fr;gap:var(--pad);padding:clamp(80px,14vh,180px) var(--pad);border-top:1px solid #2a2724}
+.about h3{font-size:14px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.about ul{list-style:none;padding:0;font-family:var(--serif);font-size:clamp(34px,5vw,76px);line-height:1.05}
+.about li{border-bottom:1px solid #2a2724;padding:.15em 0}
+.contact{padding:clamp(100px,20vh,240px) var(--pad) var(--pad);background:var(--hot);color:var(--ink)}
+.contact p.k{font-size:14px;letter-spacing:.1em;text-transform:uppercase}
+.contact h2{font-family:var(--serif);font-weight:400;font-size:clamp(56px,13vw,220px);line-height:.88;letter-spacing:-.03em;margin:20px 0 40px}
+.contact a.mail{display:inline-block;font-size:clamp(20px,2.4vw,32px);border-bottom:2px solid var(--ink);text-decoration:none;padding-bottom:4px}
+.contact a.mail:hover{background:var(--ink);color:var(--hot)}
+.contact small{display:block;margin-top:80px;font-size:14px}
+
+@media(max-width:760px){.about{grid-template-columns:1fr}.hero .scroll{display:none}.scene .cap{flex-direction:column}}
+
+/* Reduced motion / no-JS: everything stacked, visible, static */
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.a1 i{top:20%}}
+</style>
+</head>
+<body>
+<a class="skip" href="#work">Skip to work</a>
+<div class="prog" aria-hidden="true"></div>
+<header class="bar"><a href="#top">Rafi</a><a href="#contact">Email</a></header>
+
+<main id="top">
+<section class="hero" aria-label="Introduction">
+  <div class="tc" aria-hidden="true">TC <span id="tc">00:00:00</span></div>
+  <h1 aria-label="Rafi"><span>R</span><span>a</span><span>f</span><span>i</span></h1>
+  <div class="sub">
+    <p class="k">Motion designer — Dhaka</p>
+    <p>8 years of motion for music videos, broadcast idents and product launches.</p>
+    <p class="k">Open for title sequences</p>
+  </div>
+  <div class="scroll" aria-hidden="true">Scroll to play</div>
+</section>
+
+<section class="claim" aria-label="Statement">
+  <p id="claim">Every film begins with a few seconds that tell you <em>how to feel</em>. I design those seconds.</p>
+</section>
+
+<section class="reel" id="work" aria-label="Selected work">
+  <div class="stage" id="stage">
+    <article class="scene" data-i="0">
+      <div class="art a1" aria-hidden="true"></div>
+      <div class="meta"><span><b>01</b> / 03</span><span>Channel rebrand</span><span>2024</span></div>
+      <h2>Monsoon Idents</h2>
+      <div class="cap"><p>Broadcast idents for a channel rebrand.</p><p class="k">Role: motion design</p></div>
+    </article>
+    <article class="scene" data-i="1">
+      <div class="art a2" aria-hidden="true"><div class="disc"></div><div class="cut"></div></div>
+      <div class="meta"><span><b>02</b> / 03</span><span>Title sequence</span><span>2023</span></div>
+      <h2>Bhoot</h2>
+      <div class="cap"><p>The opening title sequence for Bhoot.</p><p class="k">Role: motion design</p></div>
+    </article>
+    <article class="scene" data-i="2">
+      <div class="art a3" aria-hidden="true"><div class="r" style="width:30vmin;height:30vmin"></div><div class="r" style="width:50vmin;height:50vmin"></div><div class="r" style="width:72vmin;height:72vmin"></div><div class="dot"></div></div>
+      <div class="meta"><span><b>03</b> / 03</span><span>Product launch film</span><span>2025</span></div>
+      <h2>Koi</h2>
+      <div class="cap"><p>A launch film for the Koi product.</p><p class="k">Role: motion design</p></div>
+    </article>
+  </div>
+</section>
+
+<section class="about" aria-label="Disciplines">
+  <h3>Eight years in</h3>
+  <ul><li>Music videos</li><li>Broadcast idents</li><li>Product launches</li><li><em style="color:var(--hot)">Title sequences</em> — next</li></ul>
+</section>
+</main>
+
+<footer class="contact" id="contact">
+  <p class="k">Rafi — Dhaka</p>
+  <h2>Have a title sequence to make?</h2>
+  <a class="mail" href="mailto:?subject=Title%20sequence">Write to Rafi by email</a>
+  <small>Email is the only way to get in touch.</small>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !window.gsap || !window.ScrollTrigger) return; // static, all content visible
+  gsap.registerPlugin(ScrollTrigger);
+
+  // progress bar
+  gsap.to('.prog',{scaleX:1,ease:'none',scrollTrigger:{trigger:document.body,start:'top top',end:'bottom bottom',scrub:true}});
+
+  // hero: letters intro, then scrub apart on scroll; timecode runs
+  var letters = gsap.utils.toArray('.hero h1 span');
+  gsap.from(letters,{yPercent:110,duration:1,ease:'power4.out',stagger:.08});
+  gsap.to(letters,{yPercent:(i)=>-30-i*18,opacity:.0,ease:'none',stagger:0,
+    scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom 20%',scrub:true}});
+  var tc = document.getElementById('tc'), o={f:0};
+  gsap.to(o,{f:24*30,ease:'none',onUpdate:function(){
+    var f=Math.floor(o.f),s=Math.floor(f/24),m=Math.floor(s/60);
+    var p=function(n){return String(n).padStart(2,'0')};
+    tc.textContent=p(m)+':'+p(s%60)+':'+p(f%24);
+  },scrollTrigger:{trigger:document.body,start:'top top',end:'bottom bottom',scrub:true}});
+
+  // claim: words light up as you scroll
+  var claim=document.getElementById('claim'), nodes=[];
+  (function split(el){
+    Array.from(el.childNodes).forEach(function(n){
+      if(n.nodeType===3){
+        var frag=document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(function(t){
+          if(!t.trim()){frag.appendChild(document.createTextNode(t));return}
+          var s=document.createElement('span');s.className='w';s.textContent=t;frag.appendChild(s);nodes.push(s)});
+        el.replaceChild(frag,n);
+      } else if(n.nodeType===1){ n.classList.add('w'); nodes.push(n); }
+    });
+  })(claim);
+  gsap.fromTo(nodes,{opacity:.15},{opacity:1,stagger:.1,ease:'none',
+    scrollTrigger:{trigger:claim,start:'top 80%',end:'bottom 45%',scrub:true}});
+
+  // reel: pin the stage, scenes cut over each other under scrub
+  var mm = gsap.matchMedia();
+  mm.add('(min-width: 1px)',function(){
+    var stage=document.getElementById('stage');
+    var scenes=gsap.utils.toArray('.scene');
+    stage.style.height='100svh';
+    scenes.forEach(function(s,i){gsap.set(s,{position:'absolute',inset:0,autoAlpha:i?0:1,zIndex:i})});
+    // art setup
+    var a1=document.querySelector('.a1');
+    for(var k=0;k<28;k++){var l=document.createElement('i');l.style.left=(k*3.7+((k*37)%11)/3)+'%';l.style.height=(25+(k*13)%30)+'%';a1.appendChild(l)}
+    var lines=a1.querySelectorAll('i');
+    var tl=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:stage,start:'top top',end:'+=300%',scrub:.6,pin:true,anticipatePin:1}});
+    // scene 1
+    tl.fromTo(scenes[0].querySelector('h2'),{xPercent:8,opacity:0},{xPercent:0,opacity:1,duration:.4},0)
+      .fromTo(lines,{yPercent:-20},{yPercent:420,duration:2,stagger:{each:.02,from:'random'}},0)
+      .to(scenes[0].querySelector('h2'),{xPercent:-12,duration:.6},1.4)
+      .to(scenes[0],{autoAlpha:0,duration:.2},2);
+    // scene 2
+    tl.to(scenes[1],{autoAlpha:1,duration:.2},1.9)
+      .fromTo(scenes[1].querySelector('h2'),{xPercent:8,opacity:0},{xPercent:0,opacity:1,duration:.4},2)
+      .fromTo('.a2 .cut',{xPercent:-30},{xPercent:110,duration:1.6},2)
+      .to(scenes[1].querySelector('h2'),{xPercent:-12,duration:.6},3.4)
+      .to(scenes[1],{autoAlpha:0,duration:.2},4);
+    // scene 3
+    tl.to(scenes[2],{autoAlpha:1,duration:.2},3.9)
+      .fromTo(scenes[2].querySelector('h2'),{xPercent:8,opacity:0},{xPercent:0,opacity:1,duration:.4},4)
+      .fromTo('.a3 .r',{scale:.2,opacity:0},{scale:1,opacity:1,duration:1.4,stagger:.3},4)
+      .fromTo('.a3 .dot',{scale:0},{scale:1,duration:.6},4.6);
+    tl.to({},{duration:.8},5.4);
+    return function(){stage.style.height='';};
+  });
+
+  // about list reveal
+  gsap.from('.about li',{yPercent:60,opacity:0,stagger:.12,ease:'none',
+    scrollTrigger:{trigger:'.about',start:'top 75%',end:'top 25%',scrub:true}});
+  // contact headline
+  gsap.from('.contact h2',{yPercent:30,opacity:0,ease:'none',
+    scrollTrigger:{trigger:'.contact',start:'top 85%',end:'top 35%',scrub:true}});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Independent music festival · Chattogram · 14–15 February</title>
+<meta name="description" content="A two-day independent music festival in Chattogram, 14–15 February. Eighteen artists on two stages. Tickets ৳1,500 per day.">
+<meta property="og:title" content="Independent music festival · Chattogram · 14–15 February">
+<meta property="og:description" content="Two days, two stages, eighteen artists. Tickets ৳1,500 per day.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0B0A10">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;600&family=Noto+Sans+Bengali:wght@600&display=swap" rel="stylesheet">
+<style>
+/* motomation · archetype: film-reel · mutation: remove-the-expected-no-imagery · signature: two-beam-lineup · tier: 4 · critique: C5[restraint:kept] H5[375:0] S4[last5:archetype-new,signature-new,fp69] R5[cuts:3,anim:2] M5[t4:pins0/2,webgl1/1,js49/250KB,rm0] V5[entrance-repeats:0] · gate: c0 o0 w0 rm0 a0 n0 · gate/2 · 5b35ec0f73 */
+:root{
+  --ground:#0B0A10; --ink:#F2EDE3; --muted:#C4BEB3; --accent:#FFB020; --rule:#3A3745;
+  --pad:clamp(1.25rem,4vw,3.5rem);
+  --display:"Anton","Noto Sans Bengali","Arial Narrow",sans-serif;
+  --text:"Hanken Grotesk","Noto Sans Bengali",sans-serif;
+  --out:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0}
+html{background:var(--ground);color-scheme:dark}
+body{font:400 1.0625rem/1.6 var(--text);color:var(--ink);background:var(--ground);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.skip{position:absolute;left:var(--pad);top:-4rem;background:var(--accent);color:#0B0A10;padding:.6rem 1rem;font-weight:600;z-index:10;transition:top .15s var(--out)}
+.skip:focus{top:1rem}
+
+/* light layer: canvas when WebGL2 + motion allowed, otherwise the designed still */
+#beams,.still{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block}
+.still{background:var(--ground)}
+html.gl .still{display:none}
+#beams{display:none}
+html.gl #beams{display:block}
+main,header.top,footer{position:relative;z-index:1}
+
+header.top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:1.25rem var(--pad);z-index:3}
+.mark{font:600 .8125rem/1.3 var(--text);letter-spacing:.14em;text-transform:uppercase;max-width:15rem}
+nav{display:flex;gap:1.5rem}
+nav a{font:600 .8125rem/1 var(--text);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:.7rem 0;background:linear-gradient(var(--accent),var(--accent)) 0 100%/0 2px no-repeat;transition:background-size .2s var(--out)}
+nav a:hover,nav a:focus-visible{background-size:100% 2px}
+
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:7rem var(--pad) clamp(2rem,6vh,4rem)}
+h1{display:flex;flex-direction:column;font-weight:400}
+h1 .d{font:400 clamp(7rem,34vw,26rem)/.8 var(--display);letter-spacing:-.01em;white-space:nowrap}
+h1 .m{font:400 clamp(1.6rem,5vw,3.6rem)/1 var(--display);text-transform:uppercase;letter-spacing:.04em;color:var(--accent);margin-top:1.2rem}
+.lede{max-width:34rem;margin-top:1.6rem;font-size:clamp(1.0625rem,1.6vw,1.25rem);color:var(--ink)}
+.btn{display:inline-block;margin-top:1.8rem;align-self:flex-start;padding:.95rem 1.6rem;border:2px solid var(--accent);color:var(--accent);font:600 .875rem/1 var(--text);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:background-color .15s var(--out),color .15s var(--out)}
+.btn:hover,.btn:focus-visible{background:var(--accent);color:#0B0A10}
+
+section{padding:18vh var(--pad) 0}
+.label{font:600 .8125rem/1 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:1.1rem}
+h2{font:400 clamp(2.4rem,7vw,5.2rem)/.95 var(--display);text-transform:uppercase;text-wrap:balance;max-width:16ch}
+.note{max-width:34rem;color:var(--muted);margin-top:1.2rem}
+
+.slots{list-style:none;padding:0;margin-top:3.5rem;display:block}
+.slot{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;padding:.6rem 0 .8rem;border-top:1px solid var(--rule);position:relative}
+.slot::after{content:"";position:absolute;left:0;right:0;top:-1px;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .2s var(--out)}
+.slot .n{font:400 clamp(3rem,9vw,7rem)/1 var(--display);color:var(--muted);min-width:2ch;transition:color .2s var(--out)}
+.slot .t{font-size:.9375rem;line-height:1.35;color:var(--muted);transition:color .2s var(--out)}
+.slot.lit::after{transform:scaleX(1)}
+.slot.lit .n{color:var(--accent)}
+.slot.lit .t{color:var(--ink)}
+
+.prices{margin-top:3.5rem;max-width:56rem}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:1.3rem 0;border-top:1px solid var(--rule)}
+.row:last-child{border-bottom:1px solid var(--rule)}
+.row dt{font:400 clamp(1.6rem,4vw,2.8rem)/1 var(--display);text-transform:uppercase}
+.row dt small{display:block;font:400 1rem/1.4 var(--text);text-transform:none;color:var(--muted);margin-top:.35rem;letter-spacing:0}
+.row dd{font:400 clamp(2rem,6vw,4.4rem)/1 var(--display);color:var(--accent);white-space:nowrap}
+.row.both dd{color:var(--ink)}
+
+footer{padding:18vh var(--pad) 2.5rem}
+footer .big{font:400 clamp(2rem,6vw,4.4rem)/1 var(--display);text-transform:uppercase}
+footer p{color:var(--muted);margin-top:.8rem}
+
+@media (max-width:760px){
+  nav{gap:1rem}
+  .mark{display:none}
+  header.top{justify-content:flex-end}
+}
+@media (max-width:400px){
+  .slot{gap:.6rem}
+  nav a{font-size:.75rem;letter-spacing:.1em}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:.01ms!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#lineup">Skip to the lineup</a>
+
+<!-- Designed still: shown under reduced motion, without WebGL2, and before scripts run. Two fixed beams, same palette, no animation. -->
+<svg class="still" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB020" stop-opacity=".24"/><stop offset="1" stop-color="#FFB020" stop-opacity="0"/></linearGradient>
+    <linearGradient id="gB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2EDE3" stop-opacity=".2"/><stop offset="1" stop-color="#F2EDE3" stop-opacity="0"/></linearGradient>
+  </defs>
+  <polygon points="10,-6 18,100 52,100" fill="url(#gA)"/>
+  <polygon points="90,-6 46,100 82,100" fill="url(#gB)"/>
+</svg>
+<canvas id="beams" aria-hidden="true"></canvas>
+
+<header class="top">
+  <div class="mark">Independent music festival</div>
+  <nav aria-label="Primary">
+    <a href="#tickets">Tickets</a>
+    <a href="#lineup">Lineup</a>
+  </nav>
+</header>
+
+<main id="main">
+  <div class="hero">
+    <h1><span class="d">14–15</span><span class="m">February · Chattogram</span></h1>
+    <p class="lede">A two-day independent music festival. Eighteen artists on two stages. Tickets are ৳1,500 per day.</p>
+    <a class="btn" href="#tickets">See tickets</a>
+  </div>
+
+  <section id="tickets" aria-labelledby="tickets-h">
+    <p class="label">Tickets</p>
+    <h2 id="tickets-h">৳1,500 for each day</h2>
+    <dl class="prices">
+      <div class="row"><dt>Day one<small>14 February, Chattogram</small></dt><dd>৳1,500</dd></div>
+      <div class="row"><dt>Day two<small>15 February, Chattogram</small></dt><dd>৳1,500</dd></div>
+      <div class="row both"><dt>Both days<small>14 and 15 February</small></dt><dd>৳3,000</dd></div>
+    </dl>
+  </section>
+
+  <section id="lineup" aria-labelledby="lineup-h">
+    <p class="label">The lineup</p>
+    <h2 id="lineup-h">Eighteen artists on two stages</h2>
+    <p class="note">Two beams sweep the page. Whoever they cross is lit. Artist names will appear in these slots.</p>
+    <ol class="slots">
+      <li class="slot"><span class="n">01</span><span class="t">Name to be announced</span></li>
+      <li class="slot"><span class="n">02</span><span class="t">Name to be announced</span></li>
+      <li class="slot"><span class="n">03</span><span class="t">Name to be announced</span></li>
+      <li class="slot"><span class="n">04</span><span class="t">Name to be announced</span></li>
+      <li class="slot"><span class="n">05</span><span class="t">Name to be announced</span></li>
+      <li class="slot"><span class="n">06</span><span class="t">Name to be announced</span></li>
+      <li class="slot"><span class="n">07</span><span class="t">Name to be announced</span></li>
+      <li class="slot"><span class="n">08</span><span class="t">Name to be announced</span></li>
+      <li class="slot"><span class="n">09</span><span class="t">Name to be announced</span></li>
+      <li class="slot"><span class="n">10</span><span class="t">Name to be announced</span></li>
+      <li class="slot"><span class="n">11</span><span class="t">Name to be announced</span></li>
+      <li class="slot"><span class="n">12</span><span class="t">Name to be announced</span></li>
+      <li class="slot"><span class="n">13</span><span class="t">Name to be announced</span></li>
+      <li class="slot"><span class="n">14</span><span class="t">Name to be announced</span></li>
+      <li class="slot"><span class="n">15</span><span class="t">Name to be announced</span></li>
+      <li class="slot"><span class="n">16</span><span class="t">Name to be announced</span></li>
+      <li class="slot"><span class="n">17</span><span class="t">Name to be announced</span></li>
+      <li class="slot"><span class="n">18</span><span class="t">Name to be announced</span></li>
+    </ol>
+  </section>
+
+</main>
+
+<footer>
+  <p class="big">14–15 February · Chattogram</p>
+  <p>Two days. Two stages. Eighteen artists. Independent music.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script>
+window.addEventListener("load", function () {
+  var root = document.documentElement;
+  var mqReduce = matchMedia("(prefers-reduced-motion: reduce)");
+  var slots = Array.prototype.slice.call(document.querySelectorAll(".slot"));
+  var rows = Array.prototype.slice.call(document.querySelectorAll(".row"));
+
+  /* ---- Tier 2: reveals, only when motion is allowed ---- */
+  if (window.gsap && window.ScrollTrigger && !mqReduce.matches) {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.set(slots, { clipPath: "inset(100% 0% 0% 0%)" });
+    gsap.set(rows, { x: -40, opacity: 0 });
+    ScrollTrigger.batch(slots, {
+      start: "top 94%", once: true,
+      onEnter: function (els) {
+        gsap.to(els, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.8, ease: "power3.out", stagger: 0.05, clearProps: "clipPath" });
+      }
+    });
+    ScrollTrigger.batch(rows, {
+      start: "top 94%", once: true,
+      onEnter: function (els) {
+        gsap.to(els, { x: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.1, clearProps: "transform,opacity" });
+      }
+    });
+    ScrollTrigger.refresh();
+  }
+
+  /* ---- Tier 4: two beams, one canvas ---- */
+  if (mqReduce.matches) return;
+  var canvas = document.getElementById("beams");
+  var gl = null;
+  try { gl = canvas.getContext("webgl2", { antialias: false, alpha: false, powerPreference: "low-power" }); } catch (e) {}
+  if (!gl) return;
+
+  var VS = "#version 300 es\nin vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
+  var FS = "#version 300 es\nprecision mediump float;\n" +
+    "uniform vec2 uRes,uCss,uO0,uO1,uAx;uniform float uHw,uT;out vec4 o;\n" +
+    "float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}\n" +
+    "float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}\n" +
+    "float beam(vec2 p,vec2 org,float ax){vec2 v=p-org;float ang=atan(v.x,v.y);float d=abs(ang-ax);\n" +
+    " float c=1.-smoothstep(0.,uHw,d);c*=c;float dist=length(v)/(uCss.y*1.25);\n" +
+    " float f=1.-smoothstep(.15,1.,dist);float hz=.75+.25*n(vec2(ang*18.,dist*5.-uT*.15));return c*f*hz;}\n" +
+    "void main(){vec2 p=vec2(gl_FragCoord.x,uRes.y-gl_FragCoord.y)/uRes*uCss;\n" +
+    " float a=beam(p,uO0,uAx.x),b=beam(p,uO1,uAx.y);\n" +
+    " vec3 L=max(vec3(1.,.69,.125)*a,vec3(.95,.93,.89)*b)*.24;\n" +
+    " o=vec4(vec3(.043,.039,.063)+L,1.);}";
+
+  function sh(type, src) {
+    var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+    return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null;
+  }
+  var vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);
+  if (!vs || !fs) return;
+  var prog = gl.createProgram();
+  gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+  gl.useProgram(prog);
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+  var loc = gl.getAttribLocation(prog, "p");
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  var U = {};
+  ["uRes","uCss","uO0","uO1","uAx","uHw","uT"].forEach(function (k) { U[k] = gl.getUniformLocation(prog, k); });
+
+  var W = innerWidth, H = innerHeight;
+  function resize() {
+    W = innerWidth; H = innerHeight;
+    /* beams are soft: render at half resolution, DPR capped (1.5 on touch screens too) */
+    var s = Math.min(devicePixelRatio || 1, 1.5) * 0.5;
+    canvas.width = Math.max(2, Math.round(W * s));
+    canvas.height = Math.max(2, Math.round(H * s));
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  resize();
+  addEventListener("resize", resize);
+
+  /* One beam model, read by the shader and by the DOM */
+  var BEAMS = [
+    { ox: 0.10, a0: 0.34, amp: 0.30, sp: 0.42, ph: 0.0 },
+    { ox: 0.90, a0: -0.34, amp: 0.30, sp: 0.33, ph: 2.1 }
+  ];
+  function scrollPhase() {
+    var max = Math.max(1, document.documentElement.scrollHeight - H);
+    return scrollY / max;
+  }
+  function axis(b, t, s) { return b.a0 + b.amp * Math.sin(t * b.sp + b.ph + s * 5.0); }
+  function halfWidth() { return H > W ? 0.13 : 0.085; }
+
+  function crossed(x, y, t, s) {
+    var hw = halfWidth();
+    for (var i = 0; i < BEAMS.length; i++) {
+      var b = BEAMS[i], ox = b.ox * W, oy = -0.06 * H;
+      var dx = x - ox, dy = y - oy;
+      var d = Math.abs(Math.atan2(dx, dy) - axis(b, t, s));
+      var dist = Math.sqrt(dx * dx + dy * dy) / (H * 1.25);
+      if (d < hw * 0.7 && dist > 0.1 && dist < 0.95) return true;
+    }
+    return false;
+  }
+
+  var running = true, t0 = performance.now(), lastLit = 0;
+  function frame(now) {
+    if (!running) return;
+    var t = (now - t0) / 1000, s = scrollPhase();
+    var a0 = axis(BEAMS[0], t, s), a1 = axis(BEAMS[1], t, s);
+    gl.uniform2f(U.uRes, canvas.width, canvas.height);
+    gl.uniform2f(U.uCss, W, H);
+    gl.uniform2f(U.uO0, BEAMS[0].ox * W, -0.06 * H);
+    gl.uniform2f(U.uO1, BEAMS[1].ox * W, -0.06 * H);
+    gl.uniform2f(U.uAx, a0, a1);
+    gl.uniform1f(U.uHw, halfWidth());
+    gl.uniform1f(U.uT, t);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    if (now - lastLit > 100) {
+      lastLit = now;
+      for (var i = 0; i < slots.length; i++) {
+        var r = slots[i].getBoundingClientRect();
+        var on = r.bottom > 0 && r.top < H && crossed(r.left + r.width * 0.5, r.top + r.height / 2, t, s);
+        if (on !== slots[i].classList.contains("lit")) slots[i].classList.toggle("lit", on);
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  function stop() { running = false; }
+
+  root.classList.add("gl");
+  requestAnimationFrame(frame);
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) stop(); else { running = true; requestAnimationFrame(frame); }
+  });
+  mqReduce.addEventListener("change", function () {
+    if (mqReduce.matches) {
+      stop(); root.classList.remove("gl");
+      slots.forEach(function (el) { el.classList.remove("lit"); });
+    }
+  });
+});
+</script>
+</body>
+</html>
