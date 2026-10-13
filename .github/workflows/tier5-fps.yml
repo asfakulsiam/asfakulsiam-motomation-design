@@ -1,0 +1,93 @@
+name: Tier 5 fps
+# Frame-time measurement for Tier 5 (scroll-film) pages on GitHub's runners. The agent sandbox (2 shared CPUs, no GPU)
+# cannot measure 60fps honestly: see docs/adapters/sandbox.md. This job runs the same probe on a clean runner, three
+# times per page, and publishes the numbers; nothing in the repo claims an fps figure until a run of this workflow has
+# produced it.
+#   Budgets (p95 of requestAnimationFrame intervals while scrolling top → bottom):
+#     desktop 1440×900, no throttle ........ p95 ≤ 20 ms   (60fps with headroom)
+#     mobile 375×812 touch, CPU ×4 ......... p95 ≤ 25 ms   (≥ 40fps sustained; ≥55fps median expected)
+#   Trigger: Actions → "Tier 5 fps" → Run workflow (pages = space-separated paths), or push to the tier5-fps branch.
+#   Output: artifact tier5-fps (fps-<run>.json per pass) and a table in the job summary.
+on:
+  workflow_dispatch:
+    inputs:
+      pages:
+        description: "Space-separated HTML paths (repo-relative)"
+        required: false
+        default: "skills/asfakulsiam-motomation-design/examples/html/motomation-film.html"
+      enforce:
+        description: "Fail the job when a page misses its p95 budget"
+        required: false
+        default: "true"
+  push:
+    branches: [tier5-fps]
+permissions:
+  contents: read
+jobs:
+  fps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      PAGES: ${{ github.event.inputs.pages || 'skills/asfakulsiam-motomation-design/examples/html/motomation-film.html' }}
+      ENFORCE: ${{ github.event.inputs.enforce || 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - name: Toolchain (pinned) + Chromium
+        run: |
+          npm i --no-save --no-package-lock --silent playwright@1.59.0
+          npx playwright install --with-deps chromium
+          npx playwright --version; nproc; free -m; lscpu | grep -E "Model name|^CPU\(s\)"
+          # Tier 5 templates may expand their frame sets in a build step; harmless when none exist
+          for p in $PAGES; do d=$(dirname "$p"); [ -f "$d/build.mjs" ] && node "$d/build.mjs" || true; done
+      - name: Write the probe
+        run: |
+          mkdir -p .fps && cat > .fps/fps.mjs <<'PROBE'
+          // Tier 5 frame-time probe: scrolls a page top → bottom at a steady pace and records every requestAnimationFrame
+          // interval. Desktop 1440×900 unthrottled; mobile 375×812 touch with CDP CPU throttling ×4. Prints JSON per page.
+          //   node fps.mjs <page.html> [more pages…]   (playwright resolvable from the cwd)
+          import { createRequire } from "node:module"; import { createServer } from "node:http"; import { readFileSync, statSync } from "node:fs"; import { resolve, dirname, join, extname, basename } from "node:path"; import os from "node:os";
+          const req = createRequire(join(process.cwd(), "noop.js")); let pw = await import(req.resolve("playwright")); pw = pw.chromium ? pw : pw.default;
+          const T = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".webp": "image/webp", ".avif": "image/avif", ".mp4": "video/mp4", ".woff2": "font/woff2", ".json": "application/json", ".png": "image/png", ".jpg": "image/jpeg" };
+          const pct = (a, p) => { const s = [...a].sort((x, y) => x - y); return s.length ? +s[Math.min(s.length - 1, Math.floor(p * s.length))].toFixed(1) : null; };
+          const browser = await pw.chromium.launch(); const results = [];
+          for (const page of process.argv.slice(2)) {
+            const root = dirname(resolve(page)); const srv = createServer((q, r) => { const f = join(root, decodeURIComponent(q.url.split("?")[0])); let d; try { if (!statSync(f).isFile()) throw 0; d = readFileSync(f); } catch { r.writeHead(404); return r.end(); } r.writeHead(200, { "content-type": T[extname(f)] || "application/octet-stream" }); r.end(d); });
+            await new Promise((ok) => srv.listen(0, ok)); const url = `http://127.0.0.1:${srv.address().port}/${basename(page)}`;
+            for (const [label, vp, mobile, throttle] of [["desktop-1440", { width: 1440, height: 900 }, false, 1], ["mobile-375-cpu4x", { width: 375, height: 812 }, true, 4]]) {
+              const ctx = await browser.newContext({ viewport: vp, hasTouch: mobile, isMobile: mobile, deviceScaleFactor: mobile ? 2 : 1 }); const p = await ctx.newPage();
+              const cdp = await ctx.newCDPSession(p); if (throttle > 1) await cdp.send("Emulation.setCPUThrottlingRate", { rate: throttle });
+              await p.goto(url, { waitUntil: "networkidle", timeout: 90000 }).catch(() => {}); await p.waitForTimeout(1500);
+              const H = await p.evaluate(() => document.documentElement.scrollHeight - innerHeight);
+              await p.evaluate(() => { window.__ft = []; let last = performance.now(); const tick = (t) => { window.__ft.push(t - last); last = t; if (!window.__stop) requestAnimationFrame(tick); }; requestAnimationFrame(tick); });
+              const secs = Math.min(20, Math.max(6, H / 600)); const steps = Math.round(secs * 30);
+              for (let i = 1; i <= steps; i++) { await p.mouse.wheel(0, H / steps); await p.waitForTimeout(1000 / 30); }
+              await p.waitForTimeout(500); const ft = await p.evaluate(() => { window.__stop = true; return window.__ft.slice(2); });
+              const budget = label.startsWith("desktop") ? 20 : 25;
+              results.push({ page, run: label, frames: ft.length, p50: pct(ft, 0.5), p95: pct(ft, 0.95), max: +Math.max(...ft).toFixed(1), over33ms: ft.filter((x) => x > 33.4).length, budgetP95: budget, pass: pct(ft, 0.95) <= budget, scrolledPx: H, seconds: secs });
+              await ctx.close();
+            }
+            srv.close();
+          }
+          await browser.close();
+          console.log(JSON.stringify({ machine: { cpus: os.cpus().length, model: os.cpus()[0]?.model, loadavg: os.loadavg().map((x) => +x.toFixed(2)), memMB: Math.round(os.totalmem() / 2 ** 20) }, chromium: (await (async () => { try { return pw.chromium.name() + " " + (await (await pw.chromium.launch()).version()); } catch { return "?"; } })()), results }, null, 1));
+
+          PROBE
+      - name: Measure (3 passes per page, nothing else running)
+        run: |
+          for i in 1 2 3; do node .fps/fps.mjs $PAGES > .fps/fps-$i.json; done
+          node -e '
+            const fs = require("fs"); const runs = [1, 2, 3].map((i) => JSON.parse(fs.readFileSync(`.fps/fps-${i}.json`, "utf8")));
+            const rows = {}; for (const r of runs) for (const x of r.results) (rows[x.page + " · " + x.run] ||= []).push(x);
+            let md = `### Tier 5 fps (${runs[0].machine.cpus} CPUs, ${runs[0].machine.model}, ${runs[0].chromium})\n\n| page · run | p50 ms | p95 ms (3 passes) | worst p95 | budget | frames >33 ms | result |\n|---|---|---|---|---|---|---|\n`;
+            let fail = 0; for (const [k, v] of Object.entries(rows)) { const worst = Math.max(...v.map((x) => x.p95)); const ok = worst <= v[0].budgetP95; if (!ok) fail++;
+              md += `| ${k} | ${v.map((x) => x.p50).join(" / ")} | ${v.map((x) => x.p95).join(" / ")} | ${worst} | ≤ ${v[0].budgetP95} | ${v.map((x) => x.over33ms).join(" / ")} | ${ok ? "PASS" : "FAIL"} |\n`; }
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, md); console.log(md);
+            if (fail && process.env.ENFORCE === "true") { console.log(fail + " page run(s) over budget"); process.exit(1); }'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tier5-fps
+          path: .fps/fps-*.json
+          retention-days: 30
