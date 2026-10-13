@@ -66,6 +66,13 @@ export function matchBudget(r) {
   return { budget: MATCH_TURNS, from: "--match-turns" };
 }
 const FLOOR = 0.9, MAX_RESUMES = 4;
+// Claude Code's --max-turns N lets the agent take N turns and then reports num_turns N + 1 on error_max_turns (it
+// counts the turn it refused); on success num_turns is also one more than the model calls made. Budgets come from the
+// skill run's num_turns, so passing the budget straight through allowed budget + 1 (benchmark v4: 19 of 30 matched runs
+// over by one). The flag for `remaining` turns of num_turns is therefore remaining - 1; with fewer than 2 left there is
+// no room for another session.
+export const claudeMaxTurns = (remaining) => remaining - 1;
+export const canResume = (remaining) => remaining >= 2;
 const CONTINUE = (used, budget) => `You have used ${used} of your ${budget} turns; keep working, the budget is there to be used. Look at index.html again at 1440px and 375px, write a short critique of what is still weak, generic or broken (concept, type, layout, motion, contrast, keyboard, reduced motion), and revise the file. Stop only when the critique finds nothing worth fixing.`;
 const runs = () => only.flatMap((slug) => BRIEFS[slug].seeds.slice(0, N).flatMap((seed) => arms.map((cond) => ({ slug, seed, cond, dir: join(OUT, slug, `${cond}-s${seed}`) }))));
 
@@ -126,7 +133,7 @@ function runAgent(r) {
     const eff = r.cond === "matched" ? matchBudget(r) : null; if (eff) r = { ...r, budget: eff.budget };
     const prompt = promptFor(r); writeFileSync(join(r.dir, "prompt.txt"), prompt);
     const t0 = Date.now();
-    const p = spawn(flags.claude || "claude", ["-p", prompt, "--output-format", "stream-json", "--verbose", "--max-turns", String(eff ? eff.budget : flags["max-turns"] || 80), "--permission-mode", "acceptEdits", "--allowedTools", ...ALLOWED, ...(COMPETITORS[r.cond] ? ["Bash(python3:*)"] : [])], // ui-ux-pro-max searches its data with python3
+    const p = spawn(flags.claude || "claude", ["-p", prompt, "--output-format", "stream-json", "--verbose", "--max-turns", String(eff ? claudeMaxTurns(eff.budget) : flags["max-turns"] || 80), "--permission-mode", "acceptEdits", "--allowedTools", ...ALLOWED, ...(COMPETITORS[r.cond] ? ["Bash(python3:*)"] : [])], // ui-ux-pro-max searches its data with python3
       { cwd: r.dir, env: { ...process.env, CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC: "1", DISABLE_TELEMETRY: "1" }, stdio: ["ignore", "pipe", "pipe"] });
     const chunks = []; p.stdout.on("data", (d) => chunks.push(d)); let err = ""; p.stderr.on("data", (d) => (err += d));
     const kill = setTimeout(() => p.kill("SIGTERM"), +(flags.timeout || 3000) * 1000);
@@ -136,7 +143,7 @@ function runAgent(r) {
       let effort = null;
       if (eff) { // enforce the floor: resume the same session until 90% of the budget is used (the cap is --max-turns)
         let used = result?.num_turns ?? 0, resumes = 0; const floor = Math.ceil(eff.budget * FLOOR);
-        while (used < floor && resumes < MAX_RESUMES && result?.session_id && Date.now() - t0 < +(flags.timeout || 3000) * 1000) {
+        while (used < floor && canResume(eff.budget - used) && resumes < MAX_RESUMES && result?.session_id && Date.now() - t0 < +(flags.timeout || 3000) * 1000) {
           resumes++; const more = await claudeResume(r, result.session_id, CONTINUE(used, eff.budget), eff.budget - used);
           tr += more.tr; writeFileSync(join(r.dir, "transcript.jsonl"), tr); if (!more.result) break; result = { ...more.result, session_id: more.result.session_id || result.session_id }; used += more.result.num_turns ?? 0;
         }
@@ -154,7 +161,7 @@ function runAgent(r) {
 // one more `claude -p` turn group in an existing session (matched arm floor)
 function claudeResume(r, session, text, maxTurns) {
   return new Promise((ok) => {
-    const p = spawn(flags.claude || "claude", ["-p", text, "--resume", session, "--output-format", "stream-json", "--verbose", "--max-turns", String(Math.max(1, maxTurns)), "--permission-mode", "acceptEdits", "--allowedTools", ...ALLOWED],
+    const p = spawn(flags.claude || "claude", ["-p", text, "--resume", session, "--output-format", "stream-json", "--verbose", "--max-turns", String(claudeMaxTurns(maxTurns)), "--permission-mode", "acceptEdits", "--allowedTools", ...ALLOWED],
       { cwd: r.dir, env: { ...process.env, CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC: "1", DISABLE_TELEMETRY: "1" }, stdio: ["ignore", "pipe", "pipe"] });
     const chunks = []; p.stdout.on("data", (d) => chunks.push(d)); p.stderr.on("data", () => {});
     const kill = setTimeout(() => p.kill("SIGTERM"), 1800 * 1000);
