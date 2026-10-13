@@ -6,7 +6,7 @@ import { execFileSync } from "node:child_process";
 import { parseCSV } from "../skills/asfakulsiam-motomation-design/scripts/lib.mjs";
 import { renderRule, rules as loadRules, bannedDisplayFonts } from "../skills/asfakulsiam-motomation-design/scripts/rules.mjs";
 import { fileURLToPath } from "node:url";
-import { SIZE, sizeProblems } from "./repo-rules.mjs";
+import { SIZE, sizeProblems, workflowProblems } from "./repo-rules.mjs";
 import { cli } from "../skills/asfakulsiam-motomation-design/scripts/lib.mjs";
 if (process.argv[1] && process.argv[1].endsWith("check-repo.mjs")) cli("check-repo", "Usage: node scripts/check-repo.mjs   (no arguments)", {}, null, { pos: [0, 0] });
 
@@ -390,5 +390,8 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
 }
 
 warn.forEach((w) => console.warn(`warn: ${w}`));
+// workflow hygiene (v2.5.0, C10): timeouts on every job, npm and Playwright caches where they are used
+{ const W = join(ROOT, ".github/workflows"); if (existsSync(W)) for (const f of readdirSync(W).filter((f) => /\.ya?ml$/.test(f))) workflowProblems(`.github/workflows/${f}`, readFileSync(join(W, f), "utf8")).forEach(fail); }
+
 if (errors.length) { errors.forEach((e) => console.error(`✗ ${e}`)); console.error(`\n${errors.length} problem(s).`); process.exit(1); }
 console.log(`✓ repository OK (skill v${v}, ${mdFiles.length} docs, ${Object.keys(ids).length} data sets${globalThis.__mainBytes ? `, main ${(globalThis.__mainBytes / 1048576).toFixed(2)} MB tracked of ${SIZE.maxTotalBytes / 1048576} MB` : ""})`);

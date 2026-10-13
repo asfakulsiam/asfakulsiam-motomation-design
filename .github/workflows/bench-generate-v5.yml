@@ -15,6 +15,7 @@ on:
 jobs:
   preflight:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Model access
         env: { ANTHROPIC_API_KEY: "${{ secrets.ANTHROPIC_API_KEY }}" }
@@ -40,7 +41,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: "20" }
+        with: { node-version: "20", cache: npm, cache-dependency-path: .github/workflows/bench-generate-v5.yml }
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with: { path: ~/.cache/ms-playwright, key: "ms-playwright-${{ runner.os }}-1.59.0" }
       - name: Toolchain (pinned) + Chromium + Claude Code
         run: |
           npm i --no-save --no-package-lock --silent playwright@1.59.0 axe-core@4.14.0 esbuild react react-dom

@@ -15,3 +15,18 @@ export function sizeProblems(entries) { // entries: [{ path, bytes }] for every 
   if (total > SIZE.maxTotalBytes) p.push(`main is ${(total / 1048576).toFixed(2)} MB of tracked files; the budget is ${SIZE.maxTotalBytes / 1048576} MB`);
   return { problems: p, total };
 }
+
+/** Workflow hygiene (v2.5.0, C10), on the text of one workflow file: every job sets timeout-minutes; a job that runs
+ *  npm or npx sets up Node with `cache: npm`; a job that installs Playwright browsers caches ~/.cache/ms-playwright.
+ *  Line-based (jobs are the two-space keys under `jobs:`), so it needs no YAML parser. Returns problem strings. */
+export function workflowProblems(name, text) {
+  const out = []; const lines = text.split("\n"); const j = lines.indexOf("jobs:"); if (j < 0) return [`${name}: no jobs: block`];
+  const jobs = []; for (const l of lines.slice(j + 1)) { const m = l.match(/^  ([A-Za-z0-9_-]+):\s*$/); if (m) jobs.push({ id: m[1], body: [] }); else if (/^\S/.test(l)) break; else if (jobs.length) jobs.at(-1).body.push(l); }
+  for (const { id, body } of jobs) {
+    const t = body.join("\n");
+    if (!/^    timeout-minutes:\s*\d+/m.test(t)) out.push(`${name} job ${id}: no timeout-minutes`);
+    if (/(^|[\s;&|(])(npm|npx) /m.test(t.replace(/#.*$/gm, "")) && !/setup-node@[\s\S]*?cache:\s*npm/.test(t)) out.push(`${name} job ${id}: runs npm but actions/setup-node has no cache: npm`);
+    if (/playwright install/.test(t) && !/actions\/cache@[\s\S]*?~\/\.cache\/ms-playwright/.test(t)) out.push(`${name} job ${id}: installs Playwright but does not cache ~/.cache/ms-playwright`);
+  }
+  return out;
+}
