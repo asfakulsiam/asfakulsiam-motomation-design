@@ -1,6 +1,6 @@
 # Inspiration review (v2.4.0)
 
-Reviewed 2026-10-12 for the v2.4.0 run. 39 repositories, read through the GitHub API (metadata, file tree, README, licence). Nothing was cloned into this repository, vendored, pasted or adapted. Nothing from any of them was executed while writing this review.
+Reviewed 2026-10-12 for the v2.4.0 run; React Bits, Magic UI and Aceternity UI added 2026-10-13 as component-concept sources. 40 repositories plus one component site (Aceternity UI), read through the GitHub API (metadata, file tree, README, licence). Nothing was cloned into this repository, vendored, pasted or adapted. Nothing from any of them was executed while writing this review.
 
 **The rule.** We borrow concepts, never code. Every idea in the table at the end is rebuilt in Motomation's own words and code. `scripts/check-repo.mjs` section 8 ("Original work only") already fails the build on vendored third-party component code; that guard stays.
 
@@ -130,6 +130,25 @@ What Motomation already is, for the "Gap" lines: a single skill with a seven-ste
 - **Gap:** Components without a concept stage: pasting them is how pages start looking alike; no reduced-motion contract per component.
 - **Borrow:** Already done in our own code (D7: CSS + HTML and Tailwind variants of the top 20). Nothing more.
 - **Do not borrow:** Any code. v2.3.0 removed React Bits entirely and check-repo guards against it returning; the Commons Clause is not compatible with how Motomation is distributed.
+- **Concept lineage:** 35 of our components share a concept with a React Bits component (for example ShinyText, ScrollFloat, SplitFlapText, Dock, TargetCursor). Each is an independent implementation; every one is listed in the Concept lineage table in `ACKNOWLEDGEMENTS.md`.
+
+### magicuidesign/magicui
+- **Repo:** https://github.com/magicuidesign/magicui (MIT)
+- **Purpose:** About 80 animated React + Tailwind components distributed through a shadcn registry.
+- **Structure:** Monorepo; components in `apps/www/registry/magicui/<name>.tsx`, one file each, installed with the shadcn CLI.
+- **Best idea:** One file per component, installed by name from a registry, so a project takes only what it uses.
+- **Gap:** No concept stage, no tier or "avoid when" guidance, reduced motion left to each component.
+- **Borrow:** Concepts only, already done: globe, meteors, lens, dock, animated list, confetti, icon cloud, orbiting circles, shimmer button, terminal and others (listed in `ACKNOWLEDGEMENTS.md`, Concept lineage). Our registry (`registry.json`) is our own.
+- **Do not borrow:** Any code. MIT would allow it with attribution, but the skill's rule is concepts only, code written here.
+
+### Aceternity UI (ui.aceternity.com)
+- **Site:** https://ui.aceternity.com/components (Aceternity licence: end products allowed, redistributing the source or derivatives as components is not)
+- **Purpose:** Copy-paste animated React + Tailwind + Motion components and blocks; free and paid tiers.
+- **Structure:** A website catalogue, not a public repository; each component page shows its source.
+- **Best idea:** Pairing each effect with a full-page context (hero, section) so you see it at scale.
+- **Gap:** Effects are shown at full intensity with no restraint guidance; no reduced-motion contract.
+- **Borrow:** Concepts only, already done: meteors, glare card, lens, terminal, typewriter, aurora, beams, globe, dock, card spotlight, bento grid and others (listed in `ACKNOWLEDGEMENTS.md`, Concept lineage).
+- **Do not borrow:** Any code. The licence forbids redistributing the components or derivatives in a library like this one.
 
 ### 21st-dev/skill
 - **Repo:** https://github.com/21st-dev/skill (Apache-2.0)
@@ -392,6 +411,8 @@ The nine repos share one form: a single `index.html` with no libraries, a README
 | Topic appendices loaded on demand | CloudAI-X/threejs-skills | Tier-5 WebGL guidance stays decision-first with on-demand detail |
 | A one-page "why" | darkroomengineering/lenis | ABOUT.md (already ours) |
 | Plain CSS and Tailwind variants | DavidHDev/react-bits | D7 variants, written from our own components (already shipped) |
+| One-file components installed by name from a registry | magicuidesign/magicui | `registry.json` (already ours) |
+| Show an effect in context, live | Aceternity UI | `examples/gallery/index.html` live demos (already ours) |
 | Export a project's design as a theme | 21st-dev/skill | Future: DESIGN.md → portable theme from our MCP server |
 | Never ask users to open archives | (lesson from) Deuxz32/CreativeAgencyStyle | Defensive only: no archives in the repo; nothing borrowed from that repo |
 | Calm motion test (does it read at half speed?) | flohoeller/affectui | A line in the motion critique |
@@ -415,6 +436,6 @@ The nine repos share one form: a single `index.html` with no libraries, a README
 | Motion audit mode | kylezantos/design-motion-principles | `/critique` lists each animation against the four questions |
 | Token + rule + rationale together | VoltAgent/awesome-claude-design | Reasons for every DESIGN.md token |
 
-Counted: 39 repositories reviewed. 35 concepts borrowed (the rows above, CreativeAgencyStyle's row is a defensive lesson, not a borrowed concept, so 34 are design or process concepts). Concepts rejected (the "Do not borrow" lines): 39, one per repository, plus everything from CreativeAgencyStyle. Code copied: none.
+Counted: 40 repositories and one component site reviewed (React Bits, Magic UI and Aceternity UI are also the concept sources for the 45 components in the Concept lineage table in `ACKNOWLEDGEMENTS.md`). 37 concepts borrowed (the rows above, CreativeAgencyStyle's row is a defensive lesson, not a borrowed concept, so 36 are design or process concepts). Concepts rejected (the "Do not borrow" lines): 41, one per repository or site, plus everything from CreativeAgencyStyle. Code copied: none.
 
 Most rows are ideas for later releases. v2.4.0 itself lands only the tasks in its own list; where a v2.4.0 task already implements a borrowed concept (one test per component in D2, the v2 → v3 comparison in the benchmark reports, the unverified-number rule in the reports), that is noted above.
