@@ -261,6 +261,29 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   }
 }
 
+// 12. Component counts in prose agree with data/components.csv (rows = components, distinct `family` = families).
+//     Every "<n> components", "<n>-component", "<n> families" / "<word> families" in the current docs must match.
+//     CHANGELOG.md is history (each entry is true for its version) and is not scanned.
+{
+  const comps = parseCSV(readFileSync(join(SKILL, "data/components.csv"), "utf8"));
+  const nComp = comps.length, nFam = new Set(comps.map((r) => r.family)).size;
+  const WORDS = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10 };
+  const docs = ["README.md", "ABOUT.md", "llms.txt", "AGENTS.md", "mcp/README.md", "dist/motomation-design.md", "dist/motomation-lite.md",
+    "skills/asfakulsiam-motomation-design/SKILL.md", "skills/asfakulsiam-motomation-design/examples/README.md",
+    "skills/asfakulsiam-motomation-design/examples/components/README.md"];
+  for (const d of docs) {
+    const f = join(ROOT, d); if (!existsSync(f)) continue;
+    readFileSync(f, "utf8").split("\n").forEach((line, i) => {
+      for (const m of line.matchAll(/\b(\d+)(?:-component\b| (?:original |effect |more original |motion )*components\b)/g))
+        if (+m[1] !== nComp) fail(`${d}:${i + 1} says "${m[0]}" but data/components.csv has ${nComp} components`);
+      if (/component/i.test(line)) for (const m of line.matchAll(/\b(\d+|one|two|three|four|five|six|seven|eight|nine|ten) families\b/gi)) { // font "families" lines are not about the library
+        const n = /\d/.test(m[1]) ? +m[1] : WORDS[m[1].toLowerCase()];
+        if (n !== nFam) fail(`${d}:${i + 1} says "${m[0]}" but data/components.csv has ${nFam} families`);
+      }
+    });
+  }
+}
+
 warn.forEach((w) => console.warn(`warn: ${w}`));
 if (errors.length) { errors.forEach((e) => console.error(`✗ ${e}`)); console.error(`\n${errors.length} problem(s).`); process.exit(1); }
 console.log(`✓ repository OK (skill v${v}, ${mdFiles.length} docs, ${Object.keys(ids).length} data sets)`);

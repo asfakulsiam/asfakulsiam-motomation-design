@@ -48,7 +48,7 @@ Standard UI gets found, not invented. Signature moments get invented, not found.
 
 - **Standard UI** means forms, inputs, menus, dialogs, tabs, accordions, toasts, tables, pagination, date pickers, carousels and any effect in the component library (`examples/components/README.md`). Before writing one from scratch, check in this order and stop at the first fit:
   1. what the project already has (its components folder, its UI kit, its design system);
-  2. this skill: `examples/` and, for effects, the component library in `examples/components/` (43 original components, one file each, with tier, reduced-motion and touch behaviour in the header; search with `node scripts/search.mjs components "<effect>"`, or copy from the catalogue);
+  2. this skill: `examples/` and, for effects, the component library in `examples/components/` (68 original components in 8 families, one file each, with tier, reduced-motion and touch behaviour in the header; search with `node scripts/search.mjs components "<effect>"`, or copy from the catalogue);
   3. an accessible headless or registry component that fits the stack (for example the project's existing shadcn/ui, Radix or React Aria setup).
 
   Only then write it custom, and say which of the three had nothing.

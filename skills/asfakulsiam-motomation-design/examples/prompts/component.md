@@ -40,7 +40,7 @@ From its reply:
 
 > **Why Hold to Commit.** The fill happens in the button itself, so there's no modal and no second click. You have to keep pressing for 1.5 s, and letting go early drains the fill back and cancels. The skill lists it for irreversible actions like delete. … It's a real button and Space or Enter held works like a press, so keyboard users can still delete.
 >
-> **Rejected.** I only looked at the top five results … so this is not a review of all 43 components.
+> **Rejected.** I only looked at the top five results … so this is not a review of the whole component library.
 > - **Copy Confirm**: a copy-to-clipboard confirmation, not a guard for a destructive action.
 > - **Squish Switch**: a toggle rather than a one-way action. I didn't open the file.
 > - **Click Spark**, **Brand Selection** and **Remembered List**: they add feedback or decoration. None of them slows the user down before an irreversible action.

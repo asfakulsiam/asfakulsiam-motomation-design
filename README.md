@@ -66,9 +66,9 @@ Motomation Design changes the thinking:
 - **A house style:** minimal canvas, maximal type, one accent, editorial grid, motion with weight.
 - **3 dials** (Energy, Rhythm, Motion, each 1–3) and 3 moods (Quiet, Editorial, Play).
 - **12 site categories** and **10 visual styles**, each with its own guidance.
-- **Searchable data:** 43 components, 44 fonts (with axes and licences), 22 contrast-verified palettes, 29 motion recipes, 20 archetypes, 12 mutations, 40 collision sources.
+- **Searchable data:** 68 components, 44 fonts (with axes and licences), 22 contrast-verified palettes, 29 motion recipes, 20 archetypes, 12 mutations, 40 collision sources.
 - **A Delivery Gate:** a self-critique score, a 25-point AI-default scan and a craft checklist.
-- **A component library:** 43 original effect components in 6 families (type, scroll, cursor, backgrounds, layout, micro-interactions), each one file with props, a reduced-motion path and touch behaviour, a live gallery and a shadcn-style registry. See [Component library](#component-library).
+- **A component library:** 68 original effect components in 8 families (type, text, scroll, cursor, backgrounds, layout, ui, micro-interactions), each one file with props, a reduced-motion path and touch behaviour, a live gallery and a shadcn-style registry. See [Component library](#component-library).
 - **Production examples:** 9 strict-TypeScript React components, a shared GSAP setup module (`lib/gsap.ts`) and a single-file HTML Motomation demo.
 - **Evals:** 8 test briefs, a weighted rubric and a release gate against a no-skill baseline.
 
@@ -370,16 +370,18 @@ Each has its own file with default dials, archetypes, section order, a signature
 
 ## Component library
 
-43 components, all written for this skill, in six families:
+68 components, all written for this skill, in 8 families:
 
 | Family | Components |
 |---|---|
-| Type (10) | Blur Focus, Curved Text, Decode, Ink Fill, Letter Relay, Neighbour Moves, Pressure Type, Scroll Float, Split-Flap, Width Sprint |
+| Type (10) | Blur Focus, Curved Text, Decode, Ink Fill, Letter Relay, Neighbour Moves, Pressure Type, Scroll Float, Split Flap, Width Sprint |
+| Text (6) | ASCII Text, Glitch, Rotating Words, Scramble on Hover, Shiny Text, Typewriter |
 | Scroll (7) | Aperture, Darkroom Develop, Horizontal Reel, Reading Rail, Stacked Deck, Thread, Velocity Marquee |
 | Cursor (6) | Image Trail, Lens, Pixel Wake, Seismograph Line, Target Cursor, Tilt Card |
-| Backgrounds (6) | Contour Lines, Dot Field, Grain, Halftone, Light Sweep, Liquid Field (WebGL) |
+| Backgrounds (12) | Aurora, Beams, Contour Lines, Dot Field, Globe, Grain, Halftone, Light Sweep, Liquid Field, Mesh Gradient, Meteors, Particle Field |
 | Layout (6) | Bento Reveal, Curve Carousel, Dock, Flowing Menu, Infinite Canvas, Sticky Index |
-| Micro-interactions (8) | Brand Selection, Click Spark, Copy Button, Count-Up, Hold to Commit, Remembered List, Squish Switch, Sticker Scatter |
+| UI (13) | Animated List, Confetti, Device Mockup, Glare Card, Glow Border, Icon Cloud, Loader Skeleton, Loader Spinner, Orbiting Circles, Rainbow Border, Shimmer Button, Spotlight Card, Terminal |
+| Micro-interactions (8) | Brand Selection, Click Spark, Copy Confirm, Count Up, Hold to Commit, Remembered List, Squish Switch, Sticker Scatter |
 
 Each component is one strict-TypeScript React file with no dependencies beyond React and a small shared helper (`_lib/motion.ts`). Its header records the tier, when to use it, when it's slop, and its reduced-motion, touch and accessibility behaviour. The catalogue in [`examples/components/README.md`](skills/asfakulsiam-motomation-design/examples/components/README.md) and `data/components.csv` are generated from those headers, so agents can search them:
 
@@ -420,7 +422,7 @@ skills/asfakulsiam-motomation-design/   ← the installable skill
   data/               searchable CSVs
   scripts/            collide, search, memory, contrast
   examples/           React components + single-file HTML demo
-    components/       43-component library (catalogue README, one file each)
+    components/       68-component library (catalogue README, one file each)
     gallery/          live demo page for every component
 registry/                    ← one JSON per component for `npx shadcn add`
 vendor/plain/                ← CSS + HTML and Tailwind variants of the 5 most-used components (React-first)
@@ -449,7 +451,7 @@ It detects your stack, and defaults to Next.js App Router + Tailwind. Adapters c
 Yes. GSAP and all its plugins (SplitText, ScrollTrigger, MorphSVG and more) are free, including for commercial use, under GSAP's own Standard License.
 
 **Can I use effects from component libraries?**
-You don't need one. The skill ships its own library of 43 components (see [Component library](#component-library)), all written for this project. If your project already uses another library, the skill checks it first and uses it under that library's licence.
+You don't need one. The skill ships its own library of 68 components (see [Component library](#component-library)), all written for this project. If your project already uses another library, the skill checks it first and uses it under that library's licence.
 
 ---
 

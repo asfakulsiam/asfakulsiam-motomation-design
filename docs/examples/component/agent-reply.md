@@ -28,7 +28,7 @@ The `?` axes only mean the project has no DESIGN.md, memory log or stamp for the
 - It's a real button and Space or Enter held works like a press, so keyboard users can still delete. Touch long-press works, and under reduced motion the fill still shows progress but drains linearly.
 
 **Rejected**
-I only looked at the top five results of the skill's component search for "hold to confirm delete press", so this is not a review of all 43 components.
+I only looked at the top five results of the skill's component search for "hold to confirm delete press", so this is not a review of the whole component library.
 - **Copy Confirm**: it's a copy-to-clipboard confirmation, not a guard for a destructive action.
 - **Squish Switch**: I judged it a toggle rather than a one-way action, going by its name. I didn't open the file.
 - **Click Spark**, **Brand Selection** and **Remembered List**: they add feedback or decoration. None of them slows the user down before an irreversible action. I judged these by name only.
