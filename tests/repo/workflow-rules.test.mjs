@@ -14,6 +14,7 @@ say(workflowProblems("n", job("    timeout-minutes: 5\n", "      - uses: actions
 say(workflowProblems("p", job("    timeout-minutes: 5\n", NODE + PW)).some((p) => /ms-playwright/.test(p)), "playwright install without the browser cache fails");
 say(workflowProblems("c", job("    timeout-minutes: 5\n", "      - run: node x.mjs   # not npm \n")).length === 0, "a job without npm needs no npm cache");
 say(workflowProblems("s", job("    timeout-minutes: 5\n", "      - name: npm cache and playwright install, in prose\n        run: node x.mjs\n")).length === 0, "step names are prose: npm or playwright in a name is not a command");
+say(workflowProblems("e", job("    timeout-minutes: 5\n", "      - uses: actions/setup-node@v4\n        with: { node-version: \"${{ matrix.node, cache: npm }}\", cache: npm }\n")).some((p) => /swallows a YAML key/.test(p)), "an expression that swallows a YAML key fails (the C10 ci.yml break)");
 const W = join(ROOT, ".github/workflows"); const real = readdirSync(W).filter((f) => f.endsWith(".yml")).flatMap((f) => workflowProblems(f, readFileSync(join(W, f), "utf8")));
 say(real.length === 0, `every real workflow is clean${real.length ? ": " + real.join("; ") : ""}`);
 console.log(fails ? `\n${fails} failure(s)` : "\nworkflow rules bite"); process.exit(fails ? 1 : 0);

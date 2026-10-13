@@ -58,7 +58,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: "${{ matrix.node, cache: npm, cache-dependency-path: .github/workflows/ci.yml }}", cache: npm, cache-dependency-path: .github/workflows/ci.yml }
+        with: { node-version: "${{ matrix.node }}", cache: npm, cache-dependency-path: .github/workflows/ci.yml }
       - name: Type-check React examples (strict)
         run: |
           mkdir -p /tmp/tc && cp -r skills/asfakulsiam-motomation-design/examples /tmp/tc/ex && cd /tmp/tc

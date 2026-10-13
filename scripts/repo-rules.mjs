@@ -22,6 +22,9 @@ export function sizeProblems(entries) { // entries: [{ path, bytes }] for every 
 export function workflowProblems(name, text) {
   const out = []; const lines = text.split("\n"); const j = lines.indexOf("jobs:"); if (j < 0) return [`${name}: no jobs: block`];
   const jobs = []; for (const l of lines.slice(j + 1)) { const m = l.match(/^  ([A-Za-z0-9_-]+):\s*$/); if (m) jobs.push({ id: m[1], body: [] }); else if (/^\S/.test(l)) break; else if (jobs.length) jobs.at(-1).body.push(l); }
+  // an expression must close before the next key: `${{ matrix.node, cache: npm }}` is a broken edit, and GitHub
+  // rejects the whole file (0 jobs, the run named after the path). Found in C10's ci.yml, closed in the closeout.
+  lines.forEach((l, i) => { for (const m of l.matchAll(/\$\{\{([^}]*)\}\}/g)) if (/,\s*[a-z][a-z-]*\s*:/.test(m[1])) out.push(`${name}:${i + 1}: expression \${{${m[1]}}} swallows a YAML key`); if ((l.match(/\$\{\{/g) || []).length !== (l.match(/\}\}/g) || []).length) out.push(`${name}:${i + 1}: unbalanced \${{ … }}`); });
   for (const { id, body } of jobs) {
     const t = body.join("\n");
     if (!/^    timeout-minutes:\s*\d+/m.test(t)) out.push(`${name} job ${id}: no timeout-minutes`);
