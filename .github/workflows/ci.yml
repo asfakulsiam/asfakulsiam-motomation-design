@@ -15,6 +15,8 @@ jobs:
         with: { node-version: "${{ matrix.node }}" }
       - name: Lint repository, data, versions and dist
         run: node scripts/check-repo.mjs
+      - name: Size guard bites (heavy artifacts, files over 1 MB, main over 15 MB)
+        run: node tests/repo/size-guard.test.mjs
       - name: Template rules bite and templates don't drift (dials 1–3, tier in range, pins ≤ 2, timing sheets)
         run: node tests/templates/template-rules.test.mjs
       - name: Matched-arm turn cap is exact (fake claude)

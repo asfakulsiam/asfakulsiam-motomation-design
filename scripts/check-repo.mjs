@@ -6,11 +6,42 @@ import { execFileSync } from "node:child_process";
 import { parseCSV } from "../skills/asfakulsiam-motomation-design/scripts/lib.mjs";
 import { renderRule, rules as loadRules, bannedDisplayFonts } from "../skills/asfakulsiam-motomation-design/scripts/rules.mjs";
 import { fileURLToPath } from "node:url";
+import { SIZE, sizeProblems } from "./repo-rules.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url)); // decoded and OS-native (Windows drive letters, spaces)
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");
 const errors = []; const warn = [];
 const fail = (m) => errors.push(m);
+
+// 0. Size guard: the skill must stay small enough to install in seconds. Heavy artifacts live on the evals branch
+//    (evals/README.md "Screenshots live on evals branch"); Tier 5 frames are fetched (scripts/fetch-frames.mjs).
+//    Sizes are the tracked files' bytes, the number git, GitHub and a tarball download count. `du -sh` on a 4 KB-block
+//    filesystem reads higher (every small file takes at least one block), so the report line states both.
+{
+  let tracked = null;
+  try { tracked = execFileSync("git", ["ls-files", "-z"], { cwd: ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).split("\0").filter(Boolean); } catch {}
+  if (tracked) {
+    const entries = tracked.filter((f) => existsSync(join(ROOT, f))).map((f) => ({ path: f, bytes: statSync(join(ROOT, f)).size }));
+    const { problems, total } = sizeProblems(entries); problems.forEach(fail);
+    globalThis.__mainBytes = total;
+  }
+}
+
+// 0b. No broken relative links in any tracked Markdown file (links to moved artifacts point at the evals branch)
+{
+  let md = [];
+  try { md = execFileSync("git", ["ls-files", "-z", "*.md"], { cwd: ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).split("\0").filter(Boolean); } catch {}
+  for (const f of md) {
+    if (!existsSync(join(ROOT, f))) continue;
+    const text = readFileSync(join(ROOT, f), "utf8").replace(/```[\s\S]*?```/g, "");
+    for (const m of text.matchAll(/!?\[[^\]]*\]\(([^)\s]+)\)|<(?:img|a)\b[^>]*\b(?:src|href)="([^"]+)"/g)) {
+      const u = m[1] || m[2];
+      if (/^(https?:|mailto:|#|data:)/.test(u) || u.includes("<")) continue;
+      let target; try { target = join(ROOT, f, "..", decodeURI(u.split(/[#?]/)[0])); } catch { target = join(ROOT, f, "..", u.split(/[#?]/)[0]); }
+      if (!existsSync(target)) fail(`${f}: broken link ${u}`);
+    }
+  }
+}
 
 // 1. Structure
 if (existsSync(join(ROOT, "SKILL.md"))) fail("Root SKILL.md exists: it would shadow the nested skill for `npx skills add`.");
@@ -321,4 +352,4 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
 
 warn.forEach((w) => console.warn(`warn: ${w}`));
 if (errors.length) { errors.forEach((e) => console.error(`✗ ${e}`)); console.error(`\n${errors.length} problem(s).`); process.exit(1); }
-console.log(`✓ repository OK (skill v${v}, ${mdFiles.length} docs, ${Object.keys(ids).length} data sets)`);
+console.log(`✓ repository OK (skill v${v}, ${mdFiles.length} docs, ${Object.keys(ids).length} data sets${globalThis.__mainBytes ? `, main ${(globalThis.__mainBytes / 1048576).toFixed(2)} MB tracked of ${SIZE.maxTotalBytes / 1048576} MB` : ""})`);
