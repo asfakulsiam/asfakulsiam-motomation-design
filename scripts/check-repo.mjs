@@ -246,7 +246,7 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
     if (!existsSync(at)) { fail(`${t.html} is missing; run node scripts/build-templates.mjs`); continue; }
     const html = readFileSync(at, "utf8"); const meta = html.match(/<meta name="motomation-template" content="source:([0-9a-f]+)/);
     if (!meta || meta[1] !== sourceHash(t)) fail(`${t.html} is stale (its sections or components changed); run node scripts/build-templates.mjs, then gate and stamp it again`);
-    if (!/motomation · [^*]*critique: [^*]+ · gate: c\d+ o\d+ w\d+ rm\d+ a\d+ n\d+ q\d+ k\d+ · gate\/3 · [0-9a-f]{10}/.test(html)) fail(`${t.html} has no measured gate/3 stamp (with q and k); run scripts/gate.mjs on it and paste the stamp with build-templates.mjs --stamp`);
+    if (!/motomation · [^*]*critique: [^*]+ · gate: c\d+ o\d+ w\d+ rm\d+ a\d+ n\d+ q\d+ k\d+ (?:· gate\/3|· rules: C\d+ S\d+ P\d+ K\d+ · gate\/4) · [0-9a-f]{10}/.test(html)) fail(`${t.html} has no measured gate/3 or gate/4 stamp (q and k; gate/4 adds rules: C S P K); run scripts/gate.mjs on it and paste the stamp with build-templates.mjs --stamp`);
   }
   for (const f of readdirSync(join(SKILL, "examples/sections")).filter((f) => f.endsWith(".tsx"))) rules.noPlaceholderArt(readFileSync(join(SKILL, "examples/sections", f), "utf8"), `examples/sections/${f}`).forEach((p) => fail(p));
   // Tier 5 film templates (standalone index.html + frames): same records and rules, plus their frames
@@ -261,7 +261,7 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
     rules.imagery(read("DESIGN.md")).forEach((p) => fail(`examples/templates/${f.id}/DESIGN.md: ${p}`));
     rules.pins(html).forEach((p) => fail(`${f.html}: ${p}`));
     if (!read("log.json")) fail(`examples/templates/${f.id}: no log.json (the gate's memory axis reads it)`);
-    if (!/motomation · [^*]*critique: [^*]+ · gate: c\d+ o\d+ w\d+ rm\d+ a\d+ n\d+ q\d+ k\d+ · gate\/3 · [0-9a-f]{10}/.test(html || "")) fail(`${f.html} has no measured gate/3 stamp (with q and k); run scripts/gate.mjs on it and paste the stamp with build-templates.mjs --stamp ${f.id}`);
+    if (!/motomation · [^*]*critique: [^*]+ · gate: c\d+ o\d+ w\d+ rm\d+ a\d+ n\d+ q\d+ k\d+ (?:· gate\/3|· rules: C\d+ S\d+ P\d+ K\d+ · gate\/4) · [0-9a-f]{10}/.test(html || "")) fail(`${f.html} has no measured gate/3 or gate/4 stamp (q and k; gate/4 adds rules: C S P K); run scripts/gate.mjs on it and paste the stamp with build-templates.mjs --stamp ${f.id}`);
   }
   const readme = join(SKILL, "examples/templates/README.md");
   if ((templates.length || films.length) && (!existsSync(readme) || readFileSync(readme, "utf8") !== renderReadme(templates, films))) fail("examples/templates/README.md is stale; run node scripts/build-templates.mjs");

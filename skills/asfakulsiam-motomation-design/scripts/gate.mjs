@@ -25,6 +25,16 @@
 //              corrected ("0 hectares" before a count-up runs, a price that flips after load) fails. Values that keep
 //              changing on their own (clocks, live tickers) are listed as live and not judged.
 //
+//   rules      (gate/4) the four rule sets, one count each in the stamp's "rules: C<n> S<n> P<n> K<n>" segment, each the
+//              number of distinct rule IDs that fail (scripts/rulesets.mjs; craft/copy.md, seo.md, performance.md, security.md):
+//              C copy: em dashes, aphorism formulas, two-beat antithesis, warm-up openers, vague CTA labels
+//              S SEO: noindex, one canonical, title ≤ 60, description ≤ 160, one h1, heading order, JSON-LD parses,
+//                ≥ 3 internal links, slugs, mixed content, og:image (1200×630 when stated)
+//              P performance: AVIF/WebP, lazy below the fold, LCP image not lazy, JS gzipped ≤ tier budget, empty
+//                inline scripts, render-blocking head scripts
+//              K security: cookie flags, secret-shaped strings, URL → innerHTML, CORS wildcard, CSP, nosniff,
+//                Referrer-Policy (local files: headers from a _headers file next to the page)
+//
 //   --timeout <s>  give up on a target after s seconds (default 600) and print "not verified — timed out"; exit 3.
 //                  Very tall pages (the 36,000px gallery) would otherwise run for a very long time.
 //   --timeout-ms <ms>  the same budget in milliseconds (wins over --timeout).
@@ -51,9 +61,10 @@ import { createHash } from "node:crypto";
 import os from "node:os";
 import { statfsSync } from "node:fs";
 import { projectRoot } from "./memory.mjs";
+import { copyRules, seoRules, perfRules, secRules, parseHeadersFile, rulesAxes } from "./rulesets.mjs";
 
 export const WIDTHS = [375, 390, 768, 1440];
-export const GATE_VERSION = "gate/3"; // gate/2: contrast measured per viewport; numbers check (n). gate/3: Q motion axis (progression, smoothness, reduced-motion distinctness; count q) and A accessibility axis (focus-visible, target size, 200% zoom, 320px reflow, forced colors, keyboard trap; count k)
+export const GATE_VERSION = "gate/4"; // gate/4: the four rule sets as counted axes, rules: C (copy) S (SEO) P (performance) K (security), scripts/rulesets.mjs. gate/2: contrast measured per viewport; numbers check (n). gate/3: Q motion axis (progression, smoothness, reduced-motion distinctness; count q) and A accessibility axis (focus-visible, target size, 200% zoom, 320px reflow, forced colors, keyboard trap; count k)
 
 // ── constrained sandboxes (v2.5.0) ────────────────────────────────────────────
 // T(ms): every Playwright operation timeout goes through this, so the light footprint can be more patient (×3)
@@ -112,7 +123,9 @@ function serve(root) {
       let p = decodeURIComponent(new URL(req.url, "http://x").pathname);
       let f = join(root, p); if (existsSync(f) && statSync(f).isDirectory()) f = join(f, "index.html");
       if (!f.startsWith(root) || !existsSync(f)) { res.writeHead(404); return res.end(); }
-      res.writeHead(200, { "content-type": MIME[extname(f)] || "application/octet-stream" }); res.end(readFileSync(f));
+      // a _headers file next to the page (Netlify / Cloudflare Pages format) supplies the response headers it would ship with
+      const hf = join(root, "_headers"); const extra = existsSync(hf) ? parseHeadersFile(readFileSync(hf, "utf8"), p) : {};
+      res.writeHead(200, { ...extra, "content-type": MIME[extname(f)] || "application/octet-stream" }); res.end(readFileSync(f));
     }).listen(0, "127.0.0.1", () => ok({ srv, port: srv.address().port }));
   });
 }
@@ -539,6 +552,51 @@ async function structure(browser, url) {
   return { sections: patterns.length, patterns, repeats, pins: bud.pins, webgl: bud.webgl, jsKB: Math.round(js / 1024), jsUnknown: unknown, sectionIds: bud.ids };
 }
 
+// ── the four rule sets (gate/4): facts from the page, judged by scripts/rulesets.mjs → C S P K ──
+async function ruleFacts(browser, url) {
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 }); const page = await ctx.newPage();
+  let headers = {}, cookies = [];
+  try {
+    const res = await page.goto(url, { waitUntil: "load", timeout: T(60000) }).catch(() => null);
+    if (res) { headers = await res.allHeaders().catch(() => res.headers()); const arr = await res.headersArray().catch(() => []); cookies = arr.filter((h) => h.name.toLowerCase() === "set-cookie").map((h) => h.value); }
+    await page.waitForTimeout(T(600));
+    const facts = await page.evaluate(() => {
+      const vis = (e) => { for (let n = e; n && n.nodeType === 1; n = n.parentElement) { const cs = getComputedStyle(n); if (cs.display === "none" || cs.visibility === "hidden") return false; } return true; };
+      const SKIPT = new Set(["SCRIPT", "STYLE", "NOSCRIPT", "TEMPLATE", "PRE", "CODE", "KBD", "SAMP", "TEXTAREA"]);
+      const inSkip = (e) => { for (let n = e; n && n.nodeType === 1; n = n.parentElement) if (SKIPT.has(n.tagName)) return true; return false; };
+      const BLOCK = "p, h1, h2, h3, h4, h5, h6, li, blockquote, figcaption, dd, dt, td, th, caption, legend, label, summary";
+      const blocks = [...document.body.querySelectorAll(BLOCK)].filter((e) => !inSkip(e) && vis(e) && !e.querySelector(BLOCK)).map((e) => ({ tag: e.tagName.toLowerCase(), text: e.innerText.replace(/\s+/g, " ").trim() })).filter((b) => b.text);
+      // loose text not inside any block element (spans and divs used as copy)
+      const loose = []; const tw = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      for (let n = tw.nextNode(); n; n = tw.nextNode()) { const e = n.parentElement; if (!e || inSkip(e) || e.closest(BLOCK) || e.closest("a, button") || !n.textContent.trim() || !vis(e)) continue; loose.push({ tag: e.tagName.toLowerCase(), text: n.textContent.replace(/\s+/g, " ").trim() }); }
+      const ctas = [...document.querySelectorAll('a[href], button, input[type="submit"], input[type="button"], [role="button"]')].filter((e) => vis(e) && !inSkip(e)).map((e) => ({ tag: e.tagName.toLowerCase(), text: (e.tagName === "INPUT" ? e.value : e.innerText || e.getAttribute("aria-label") || "").replace(/\s+/g, " ").trim() })).filter((c) => c.text);
+      const meta = (sel) => document.querySelector(sel)?.getAttribute("content") ?? null;
+      const extras = [...document.querySelectorAll("img[alt]")].map((i) => ({ where: "img alt", text: i.getAttribute("alt") })).filter((x) => x.text);
+      if (document.title) extras.push({ where: "title", text: document.title }); if (meta('meta[name="description"]')) extras.push({ where: "meta description", text: meta('meta[name="description"]') });
+      const imgs = [...document.images].map((i) => { const b = i.getBoundingClientRect(); const pic = i.parentElement?.tagName === "PICTURE" ? [...i.parentElement.querySelectorAll("source")] : [];
+        return { src: i.currentSrc || i.getAttribute("src") || "", top: b.top + scrollY, area: vis(i) ? b.width * b.height : 0, loading: i.getAttribute("loading"), inPictureModern: pic.some((s) => /image\/(avif|webp)/.test(s.type || "") || /\.(avif|webp)(\s|\?|$)/.test(s.srcset || "")) }; });
+      const scripts = [...document.scripts].map((sc) => ({ src: sc.src || null, inline: !sc.src, inHead: !!sc.closest("head"), defer: sc.defer, async: sc.async, type: sc.getAttribute("type"), text: sc.src ? "" : sc.textContent }));
+      const sub = [...document.querySelectorAll("img[src], script[src], link[rel~=stylesheet][href], iframe[src], source[src], video[src], audio[src]")].map((e) => e.getAttribute("src") || e.getAttribute("href"));
+      return { blocks: [...blocks, ...loose], ctas, extras, images: imgs, scripts,
+        seo: { title: document.title || null, description: meta('meta[name="description"]'), robots: [...document.querySelectorAll('meta[name="robots"], meta[name="googlebot"]')].map((m) => m.getAttribute("content") || ""),
+          canonicals: [...document.querySelectorAll('link[rel="canonical"]')].map((l) => l.getAttribute("href") || ""), headings: [...document.querySelectorAll("h1, h2, h3, h4, h5, h6")].filter(vis).map((h) => +h.tagName[1]),
+          links: [...document.querySelectorAll("a[href]")].map((a) => a.getAttribute("href")), jsonld: [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => s.textContent),
+          ogImage: meta('meta[property="og:image"]'), ogWidth: meta('meta[property="og:image:width"]'), ogHeight: meta('meta[property="og:image:height"]'), subresources: sub },
+        metaCsp: document.querySelector('meta[http-equiv="Content-Security-Policy" i]')?.getAttribute("content") ?? null, metaReferrer: meta('meta[name="referrer"]') };
+    });
+    const html = await fetch(url).then((r) => r.text()).catch(() => "");
+    const origin = new URL(url).origin; const scriptTexts = [];
+    for (const sc of facts.scripts) { if (sc.inline) { scriptTexts.push(sc.text || ""); continue; } try { if (new URL(sc.src).origin === origin) { sc.text = await fetch(sc.src).then((r) => r.text()); scriptTexts.push(sc.text); } } catch {} }
+    return { ...facts, html, scriptTexts, headers, cookies };
+  } finally { await ctx.close(); }
+}
+export function judgeRules(facts, url, jsKB, tier) {
+  const budgetKB = JS_BUDGET_KB[tier !== undefined && tier !== null && tier !== "" ? +tier : 5] ?? JS_BUDGET_KB[5];
+  const r = { copy: copyRules(facts), seo: seoRules({ pageUrl: url, ...facts.seo }), perf: perfRules({ images: facts.images, scripts: facts.scripts, jsKB, budgetKB }),
+    sec: secRules({ pageUrl: url, html: facts.html, scriptTexts: facts.scriptTexts, headers: facts.headers, cookies: facts.cookies, metaCsp: facts.metaCsp, metaReferrer: facts.metaReferrer }) };
+  return { ...r, ...rulesAxes(r) };
+}
+
 // Tier budgets: craft/performance.md (JS, gzipped) and principles/restraint.md (pins, WebGL)
 export const JS_BUDGET_KB = { 0: 30, 1: 30, 2: 80, 3: 140, 4: 250, 5: 250 };
 function readRecord(file) {
@@ -799,13 +857,15 @@ export async function scan(target, browser, opts = {}) {
     const c = await contrastAll(browser, url);
     const o = []; for (const w of WIDTHS) o.push(await overflowAt(browser, url, w));
     const w = await words(browser, url); const m = await motion(browser, url); const n = await names(browser, url); const nu = await numbers(browser, url); const st = await structure(browser, url);
-    const mq = await motionQuality(browser, url); const ax = await a11y(browser, url);
+    const mq = await motionQuality(browser, url); const ax = await a11y(browser, url); const rf = await ruleFacts(browser, url);
     // fingerprint of the served HTML with stamp comments removed: same page → same id, any other page → a different id
     const html = await fetch(url).then((r) => r.text()).catch(() => "");
     const pageHash = createHash("sha256").update(html.replace(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g, "")).digest("hex").slice(0, 16);
     const overflowFails = o.flatMap((x) => [...(x.pageScroll > 1 ? [{ width: x.width, el: "page", kind: "horizontal scroll", px: x.pageScroll }] : []), ...x.items.map((i) => ({ width: x.width, ...i }))]);
-    const counts = { contrast: c.fails.length, overflow: overflowFails.length, words: w.fails.length, motion: m.hiddenUnderReducedMotion.length + (m.pixelsChangingWhenStillPct > 0.5 ? 1 : 0), names: n.fails.length, numbers: nu.fails.length, quality: mq.fails, access: ax.fails };
-    const id = createHash("sha256").update(JSON.stringify({ v: GATE_VERSION, counts, sizes: [w.checked, m.compared, n.checked, nu.checked], page: pageHash, c: c.fails.map((x) => x.width + x.el + x.ratio), nu: nu.fails.map((x) => x.el + x.when + x.truth) /* not the shown value: a mid-count frame is timing-dependent */, o: overflowFails.map((x) => x.width + x.el + x.px), w: w.fails.map((x) => x.el + x.problem), m: m.hiddenUnderReducedMotion.map((x) => x.el), n: n.fails.map((x) => x.el) })).digest("hex").slice(0, 10);
+    const counts = { contrast: c.fails.length, overflow: overflowFails.length, words: w.fails.length, motion: m.hiddenUnderReducedMotion.length + (m.pixelsChangingWhenStillPct > 0.5 ? 1 : 0), names: n.fails.length, numbers: nu.fails.length, quality: mq.fails, access: ax.fails, copy: 0, seo: 0, perf: 0, sec: 0 };
+    const pageTier = (() => { try { return !/^https?:/.test(target) ? readStamp(readFileSync(statSync(resolve(target)).isDirectory() ? join(resolve(target), "index.html") : resolve(target), "utf8"))?.fields?.tier : undefined; } catch { return undefined; } })();
+    const rules = judgeRules(rf, url, st.jsKB, opts.tier !== undefined ? opts.tier : pageTier); Object.assign(counts, rules.counts);
+    const id = createHash("sha256").update(JSON.stringify({ v: GATE_VERSION, rules: ["copy", "seo", "perf", "sec"].map((k) => rules[k].fails.map((x) => x.id).sort()), counts, sizes: [w.checked, m.compared, n.checked, nu.checked], page: pageHash, c: c.fails.map((x) => x.width + x.el + x.ratio), nu: nu.fails.map((x) => x.el + x.when + x.truth) /* not the shown value: a mid-count frame is timing-dependent */, o: overflowFails.map((x) => x.width + x.el + x.px), w: w.fails.map((x) => x.el + x.problem), m: m.hiddenUnderReducedMotion.map((x) => x.el), n: n.fails.map((x) => x.el) })).digest("hex").slice(0, 10);
     const pass = Object.values(counts).every((v) => v === 0);
     // the critique axes, each derived from a named check (gates/delivery-gate.md, Part 1)
     const local = !/^https?:/.test(target) ? (statSync(resolve(target)).isDirectory() ? resolve(target) : dirname(resolve(target))) : process.cwd();
@@ -821,15 +881,15 @@ export async function scan(target, browser, opts = {}) {
     // coverage: the worst width decides; more than SKIP_WARN_PCT skipped at any width means the page was not measured, not passed
     const worstW = c.byWidth.reduce((a, x) => (x.skippedPct > a.skippedPct ? x : a), c.byWidth[0]);
     const coverage = { ok: !c.lowCoverage, skipped: worstW.skipped, total: worstW.total, pct: worstW.skippedPct, width: worstW.width, low: c.byWidth.filter((x) => x.lowCoverage).map((x) => x.width) };
-    return { target, url, version: GATE_VERSION, pass, verified: coverage.ok, coverage, counts, id, stamp: stampOf(counts, id, coverage), critique: critiqueFull, sources: { design: designFile || null, log: logFile || null, meta }, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu, quality: mq, access: ax };
+    return { target, url, version: GATE_VERSION, pass, verified: coverage.ok, coverage, counts, id, stamp: stampOf(counts, id, coverage), critique: critiqueFull, sources: { design: designFile || null, log: logFile || null, meta }, rules, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu, quality: mq, access: ax };
   } finally { close(); }
 }
-export const stampOf = (k, id, cov) => `gate: c${k.contrast} o${k.overflow} w${k.words} rm${k.motion} a${k.names} n${k.numbers ?? 0}${k.quality !== undefined ? ` q${k.quality} k${k.access}` : ""} · ${GATE_VERSION} · ${id}${cov ? ` · skipped ${cov.skipped}/${cov.total}@${cov.width}` : ""}`;
+export const stampOf = (k, id, cov, version = GATE_VERSION) => `gate: c${k.contrast} o${k.overflow} w${k.words} rm${k.motion} a${k.names} n${k.numbers ?? 0}${k.quality !== undefined ? ` q${k.quality} k${k.access}` : ""}${k.copy !== undefined ? ` · rules: C${k.copy} S${k.seo} P${k.perf} K${k.sec}` : ""} · ${version} · ${id}${cov ? ` · skipped ${cov.skipped}/${cov.total}@${cov.width}` : ""}`;
 export function readStamp(html) {
   // a page may carry the stamp in an HTML comment and in the stylesheet; every stamp that carries a gate segment must hold up
   const all = [...html.matchAll(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g)].map((m) => m[0]);
   if (!all.length) return null;
-  const parse = (raw) => { const g = raw.match(/gate: c(\d+) o(\d+) w(\d+) rm(\d+) a(\d+)(?: n(\d+))?(?: q(\d+) k(\d+))? · (gate\/\d+) · ([0-9a-f]{10})(?: · skipped (\d+)\/(\d+)@(\d+))?/); return g ? { counts: { contrast: +g[1], overflow: +g[2], words: +g[3], motion: +g[4], names: +g[5], ...(g[6] !== undefined ? { numbers: +g[6] } : {}), ...(g[7] !== undefined ? { quality: +g[7], access: +g[8] } : {}) }, version: g[9], id: g[10], ...(g[11] !== undefined ? { skipped: { skipped: +g[11], total: +g[12], width: +g[13] } } : {}) } : null; };
+  const parse = (raw) => { const g = raw.match(/gate: c(\d+) o(\d+) w(\d+) rm(\d+) a(\d+)(?: n(\d+))?(?: q(\d+) k(\d+))?(?: · rules: C(\d+) S(\d+) P(\d+) K(\d+))? · (gate\/\d+) · ([0-9a-f]{10})(?: · skipped (\d+)\/(\d+)@(\d+))?/); if (g) g.splice(9, 4).forEach((v, i) => { (g.rules ||= [])[i] = v; }); return g ? { counts: { contrast: +g[1], overflow: +g[2], words: +g[3], motion: +g[4], names: +g[5], ...(g[6] !== undefined ? { numbers: +g[6] } : {}), ...(g[7] !== undefined ? { quality: +g[7], access: +g[8] } : {}), ...(g.rules[0] !== undefined ? { copy: +g.rules[0], seo: +g.rules[1], perf: +g.rules[2], sec: +g.rules[3] } : {}) }, version: g[9], id: g[10], ...(g[11] !== undefined ? { skipped: { skipped: +g[11], total: +g[12], width: +g[13] } } : {}) } : null; };
   const fieldsOf = (raw) => { const f = {}; for (const k of ["archetype", "mutation", "signature", "tier"]) { const m = raw.match(new RegExp(k + ":\\s*([^·*\\n]+?)\\s*(?:·|\\*/|-->)")); if (m) f[k] = m[1].trim(); } return f; };
   const critOf = (raw) => raw.match(/critique:\s*(.+?)\s*(?:·\s*gate:|\*\/|-->)/)?.[1].trim() || null;
   const withGate = all.map((raw) => ({ raw, gate: parse(raw), critique: critOf(raw) })).filter((x) => x.gate);
@@ -875,6 +935,12 @@ function print(r) {
   L(`  forced    ${a.forced.fails.length === 0 ? "✓" : "✗"} ${a.forced.fails.length} of ${a.forced.checked} texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)`);
   for (const f of a.forced.fails.slice(0, 8)) L(`     ${f.ratio}:1  ${f.el}  "${f.text}"  forced-color-adjust: ${f.adjust}`);
   L(`  kbd-trap  ${a.trap.trapped ? `✗ focus cycles inside ${a.trap.region}; ${a.trap.unreached} of ${a.trap.tabbables} tabbable never reached in ${a.trap.presses} Tabs` : `✓ ${a.trap.visited} of ${a.trap.tabbables} tabbable reached in ${a.trap.presses} Tabs, no cycle`}`);
+  for (const [k, name, file] of [["copy", "C copy", "craft/copy.md"], ["seo", "S SEO", "craft/seo.md"], ["perf", "P perf", "craft/performance.md"], ["sec", "K security", "craft/security.md"]]) {
+    const x = r.rules[k]; const ids = [...new Set(x.fails.map((f) => f.id))];
+    L(`  ${name.padEnd(10)} ${ids.length === 0 ? "✓" : "✗"} ${ids.length} rule(s) failing${ids.length ? `: ${ids.join(" ")}` : ""}  (${file}; ${x.warns.length} warning(s))`);
+    for (const f of x.fails.slice(0, 8)) L(`     ✗ ${f.id}  ${f.why}${f.at ? `  ${f.at}` : ""}`);
+    for (const f of x.warns.slice(0, 4)) L(`     ⚠ ${f.id}  ${f.why}${f.at ? `  ${f.at}` : ""}`);
+  }
   const st = r.structure;
   L(`  hierarchy  h1×${r.words.hier.h1}, ${r.words.hier.skips} skipped heading levels, ${r.words.hier.focalTies} element(s) tied for largest on the first 375px screen`);
   L(`  structure  ${st.sections} sections, entrances: ${st.patterns.join(" | ")} → ${st.repeats} repeat(s); pins ${st.pins}, WebGL canvases ${st.webgl}, JS ${st.jsKB}KB gzipped${st.jsUnknown ? ` (+${st.jsUnknown} script(s) not fetched)` : ""}`);
@@ -988,7 +1054,7 @@ async function main() {
       if (!st) verdict(`STAMP REJECTED · ${file}: no motomation stamp comment found`, 2);
       if (!st.gate) verdict(`STAMP REJECTED · ${file}: the stamp has no measured gate values (a hand-written or copied stamp). Run node scripts/gate.mjs and paste its stamp.\n  found: ${st.raw.slice(0, 160)}`, 2);
       if (!st.critique) verdict(`STAMP REJECTED · ${file}: no critique segment. Paste the full "critique: … · gate: …" line gate.mjs printed.`, 2);
-      if (st.gate.version !== GATE_VERSION) verdict(`STAMP REJECTED · ${file}: stamp is ${st.gate.version}; this gate is ${GATE_VERSION} (adds the Q motion and A accessibility axes, counts q and k). Re-gate the page and paste the new line.`, 2);
+      if (st.gate.version !== GATE_VERSION) verdict(`STAMP REJECTED · ${file}: stamp is ${st.gate.version}; this gate is ${GATE_VERSION} (gate/4 adds the four rule sets, rules: C copy · S SEO · P performance · K security; gate/3 added Q and A). Re-gate the page and paste the new line.`, 2);
       if (!/^C\d\[[^\]]+\] H\d\[[^\]]+\] S\d\[[^\]]+\] R\d\[[^\]]+\] M\d\[[^\]]+\] V\d\[[^\]]+\] Q\d\[[^\]]+\] A\d\[[^\]]+\]$/.test(st.critique)) verdict(`STAMP REJECTED · ${file}: critique "${st.critique}" is not traced. Every axis needs its number and the check it came from, e.g. H4[375:1]. Unmeasured scores are rejected.`, 2);
       const x = await withRetry(pw, file, (b) => scan(flags.url ? String(flags.url) : file, b, opts)); note(x); const r = x.value; await x.browser.close().catch(() => {}); print(r);
       console.log(`  stamp skips: ${st.gate.skipped ? `${st.gate.skipped.skipped}/${st.gate.skipped.total}@${st.gate.skipped.width}` : "not recorded (stamp predates the coverage field)"} · fresh scan: ${r.coverage.skipped}/${r.coverage.total}@${r.coverage.width} (${r.coverage.pct}%)`);
@@ -999,7 +1065,7 @@ async function main() {
       if (norm(st.critique) !== norm(r.critique)) verdict(`STAMP REJECTED · critique says "${st.critique}" but the checks give "${r.critique}"`, 2);
       for (const g of [st.gate, ...st.others.map((o) => o.gate)]) {
         const same = JSON.stringify(g.counts) === JSON.stringify(r.counts) && g.id === r.id && g.version === r.version;
-        if (!same) verdict(`STAMP REJECTED · stamp says "${stampOf(g.counts, g.id)}" but a fresh scan measures "${r.stamp}"`, 2);
+        if (!same) verdict(`STAMP REJECTED · stamp says "${stampOf(g.counts, g.id, null, g.version)}" but a fresh scan measures "${r.stamp}"`, 2);
       }
       verdict(`STAMP VERIFIED · critique and gate numbers match a fresh scan${r.pass ? " · gate PASS" : " · but the gate FAILS (the stamp honestly records failures)"}`, r.pass ? 0 : 1);
     }

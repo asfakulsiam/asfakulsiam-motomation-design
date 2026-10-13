@@ -26,6 +26,10 @@ const run = (target, timeout = process.env.GATE_TIMEOUT || "300") => {
 };
 
 let failed = 0;
+// the synthetic fixtures each test one measured axis; since gate/4 they are judged on the core counts (c o w rm a n q k)
+// so a single-concern page doesn't need a canonical and a CSP to prove its contrast. fixtures/good passes everything.
+const RULES = ["copy", "seo", "perf", "sec"];
+const coreOk = (r) => !!r.json && Object.entries(r.json.counts).every(([k, v]) => RULES.includes(k) || v === 0);
 const say = (ok, msg) => { console.log(`${ok ? "✓" : "✗"} ${msg}`); if (!ok) failed++; };
 
 const good = run("fixtures/good/index.html");
@@ -46,18 +50,18 @@ for (const [k, n] of Object.entries(want.atLeast)) {
 // scroll sequences (v2.5.0): a dimmed inactive step at 2.1:1 must fail, the same sequence at 8.3:1 must pass
 const dim = run("fixtures/synthetic/scroll-steps-dimmed.html");
 const inactive = (dim.json?.contrast?.fails || []).filter((f) => f.state === "inactive").length;
-say(dim.code === 1 && inactive > 0, `fixtures/synthetic/scroll-steps-dimmed fails on inactive steps (exit ${dim.code}, ${inactive} inactive-step contrast failure(s))`);
+say(dim.json?.counts?.contrast > 0 && inactive > 0, `fixtures/synthetic/scroll-steps-dimmed fails on inactive steps (exit ${dim.code}, ${inactive} inactive-step contrast failure(s))`);
 const leg = run("fixtures/synthetic/scroll-steps-legible.html");
-say(leg.code === 0, `fixtures/synthetic/scroll-steps-legible passes (exit ${leg.code}${leg.json ? ` · ${leg.json.stamp}` : ""})`);
+say(coreOk(leg), `fixtures/synthetic/scroll-steps-legible passes the core axes (exit ${leg.code}${leg.json ? ` · ${leg.json.stamp}` : ""})`);
 // gate/3 Q axis (motion quality): a pin that never changes fails progression; the same pin with motion passes; a
 // reduced-motion fallback that stays pinned fails rm-distinctness; the real film's pinned chapters progress
 const zonesOk = (r) => (r.json?.quality?.zones || []).every((z) => z.ok);
 const ps = run("fixtures/synthetic/pin-static.html");
-say(ps.code === 1 && ps.json?.quality?.zones?.length > 0 && !zonesOk(ps) && /Q\d\[prog:Δ/.test(ps.json?.critique || ""), `fixtures/synthetic/pin-static fails progression (exit ${ps.code}, ${(ps.json?.critique || "").match(/Q\d\[[^\]]+\]/)?.[0] || "no Q axis"})`);
+say(ps.json?.counts?.quality > 0 && ps.json?.quality?.zones?.length > 0 && !zonesOk(ps) && /Q\d\[prog:Δ/.test(ps.json?.critique || ""), `fixtures/synthetic/pin-static fails progression (exit ${ps.code}, ${(ps.json?.critique || "").match(/Q\d\[[^\]]+\]/)?.[0] || "no Q axis"})`);
 const pp = run("fixtures/synthetic/pin-progress.html");
-say(pp.code === 0 && zonesOk(pp) && pp.json?.quality?.rm?.ok, `fixtures/synthetic/pin-progress passes progression and rm (exit ${pp.code}, ${(pp.json?.critique || "").match(/Q\d\[[^\]]+\]/)?.[0] || "no Q axis"})`);
+say(coreOk(pp) && zonesOk(pp) && pp.json?.quality?.rm?.ok, `fixtures/synthetic/pin-progress passes progression and rm (exit ${pp.code}, ${(pp.json?.critique || "").match(/Q\d\[[^\]]+\]/)?.[0] || "no Q axis"})`);
 const rp = run("fixtures/synthetic/rm-pinned.html");
-say(rp.code === 1 && zonesOk(rp) && rp.json?.quality?.rm?.pinned?.length > 0, `fixtures/synthetic/rm-pinned fails rm-distinctness: still pinned under reduced motion (exit ${rp.code}, ${(rp.json?.critique || "").match(/Q\d\[[^\]]+\]/)?.[0] || "no Q axis"})`);
+say(rp.json?.counts?.quality > 0 && zonesOk(rp) && rp.json?.quality?.rm?.pinned?.length > 0, `fixtures/synthetic/rm-pinned fails rm-distinctness: still pinned under reduced motion (exit ${rp.code}, ${(rp.json?.critique || "").match(/Q\d\[[^\]]+\]/)?.[0] || "no Q axis"})`);
 // gate/3 A axis (accessibility): each deliberate failure in a11y-bad is caught; a11y-good passes every A check
 const ab = run("fixtures/synthetic/a11y-bad.html"); const cat = ab.json?.access?.cat || {};
 for (const k of ["focus", "target", "zoom", "forced", "trap"]) say(cat[k] > 0, `fixtures/synthetic/a11y-bad: ${k} caught (${cat[k] ?? "?"})`);
