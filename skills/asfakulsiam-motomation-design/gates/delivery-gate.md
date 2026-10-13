@@ -148,6 +148,110 @@ The placeholders are deliberate. There are no numbers to copy. Write the archety
 
 ---
 
+## Part 4: Rule-set checklists (copy, SEO, performance, security)
+
+One line per item from the four rule sets. Lines marked **measured by the gate** are counted by `scripts/gate.mjs`
+(gate/4: the `rules: C<n> S<n> P<n> K<n>` segment of the stamp); paste the stamp and tick them only when the count
+is 0. Every other line is ticked by reading, or written as "n/a (<why>)" or "owner to do". Never tick what you did
+not check. Full rules, with why and examples: `craft/copy.md`, `craft/seo.md`, `craft/performance.md`, `craft/security.md`.
+
+### Copy
+
+- [ ] copy-01 Headlines are specific · check by reading
+- [ ] copy-02 Write for someone in a hurry · check by reading
+- [ ] copy-03 Sell above the fold · check by reading
+- [ ] copy-04 No em dashes in visible copy · **measured by the gate (C)**
+- [ ] copy-05 Benefit first, then the feature · check by reading
+- [ ] copy-06 Break up blocks of text · gate C warns; check by reading
+- [ ] copy-07 Cut padding · check by reading
+- [ ] copy-08 Make it scannable · check by reading
+- [ ] copy-09 No aphorism formulas · **measured by the gate (C)**
+- [ ] copy-10 The body backs the headline · check by reading
+- [ ] copy-11 No warm-up openers · **measured by the gate (C)**
+- [ ] copy-12 Remove what doesn't move the reader · check by reading
+- [ ] copy-13 Answer objections before the CTA · check by reading
+- [ ] copy-14 One to three key points per section · check by reading
+- [ ] copy-15 No two-beat antithesis · **measured by the gate (C)**
+- [ ] copy-16 No claims you can't prove · gate C warns; check by reading
+- [ ] copy-17 CTAs: a clear verb and its outcome · **measured by the gate (C)**
+- [ ] copy-18 Talk to one buyer · check by reading
+- [ ] copy-19 One idea per section · check by reading
+- [ ] copy-20 Proof sits next to the claim · check by reading
+
+### SEO
+
+- [ ] seo-01 [M] `sitemap.xml` exists and lists every public route · check: site-level: compare the sitemap with the route list
+- [ ] seo-02 [M] `robots.txt` exists, with no accidental `Disallow: /` · check: site-level: read the file
+- [ ] seo-03 [M] No `noindex` on public pages · **measured by the gate (S)**
+- [ ] seo-04 [M] A canonical tag on every route · **measured by the gate (S)**
+- [ ] seo-05 [M] Meta title unique per page, 60 characters or fewer · **measured by the gate (S)**
+- [ ] seo-06 [M] Meta description unique per page, 160 characters or fewer · **measured by the gate (S)**
+- [ ] seo-07 [M] Exactly one `<h1>` per page · **measured by the gate (S)**
+- [ ] seo-08 [M] Heading order skips no levels (no `h2` → `h4`) · **measured by the gate (S)**
+- [ ] seo-09 [M] Alt text on every meaningful image; decorative images use `alt=""` · measured by the gate (`a` count)
+- [ ] seo-10 [M] Schema markup where the page is eligible (Product, Article, FAQ, Event, Organization) · gate S warns; decide by reading
+- [ ] seo-11 [M] At least 3 internal links per page · **measured by the gate (S)**
+- [ ] seo-12 [M] Zero broken links · check: site-level: a link checker over the built site
+- [ ] seo-13 [M] Images compressed: WebP or AVIF, responsive sizes (`srcset`/`sizes` or `<picture>`) · measured by the gate (axis P)
+- [ ] seo-14 [M] Core Web Vitals targets: LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1 · check: field data or Lighthouse; never claimed unmeasured (`craft/performance.md`)
+- [ ] seo-15 [M] Mobile layout works at 375 px with no overflow · measured by the gate (`o` and `w` counts)
+- [ ] seo-16 [M] HTTPS enforced; no mixed content · **measured by the gate (S)**
+- [ ] seo-17 [M] URL slugs: lowercase, hyphens, no IDs, no query parameters · **measured by the gate (S)**
+- [ ] seo-18 [M] `og:image` present, 1200 × 630 · **measured by the gate (S)**
+- [ ] seo-19 [H] Search Console verified and the sitemap submitted · owner to do, or the record that proves it
+- [ ] seo-20 [M] `llms.txt` current: names the version and the latest report · check: site-level; for this repository, the root check-repo script
+
+### Performance
+
+- [ ] perf-01 [FE] Images compressed; AVIF or WebP, with a fallback where needed · **measured by the gate (P)**
+- [ ] perf-02 [FE] Below-the-fold images use `loading="lazy"` · **measured by the gate (P)**
+- [ ] perf-03 [FE] The LCP image is not lazy-loaded · **measured by the gate (P)**
+- [ ] perf-04 [FE] Code-split: no single script over the tier's budget · **measured by the gate (P)**
+- [ ] perf-05 [FE] API responses cached (SWR, React Query, or `Cache-Control`) · check: read the data layer; "n/a (no API)" on a static page
+- [ ] perf-06 [FE] A CDN fronts static assets · check: the deploy target (Pages, Vercel, Netlify, Cloudflare) or the CDN config
+- [ ] perf-07 [FE] JS and CSS minified in production · gate P warns; decide by reading
+- [ ] perf-08 [FE] No extra re-renders (memo only where the profiler showed a cost) · check: React Profiler, recorded when used; never `memo` everything by default
+- [ ] perf-09 [FE] Input handlers debounced (search, resize) · check: read the handlers; `requestAnimationFrame` or a debounce on every resize/scroll/input listener
+- [ ] perf-10 [FE] Large lists paginated or virtualised · check: any list over ~100 items
+- [ ] perf-11 [FE] Unused packages and dead scripts removed · **measured by the gate (P)**
+- [ ] perf-12 [FE] Non-critical scripts deferred (analytics, chat) · **measured by the gate (P)**
+- [ ] perf-13 [FE] Loading skeletons for async content · check: read the async views; a skeleton sized like the final content (no layout shift)
+- [ ] perf-14 [IN] A load balancer when traffic justifies one, and the reason written down · check: hosting notes
+- [ ] perf-15 [BE] API payloads trimmed to what the client uses · check: read the handlers or the GraphQL selection
+- [ ] perf-16 [BE] Database connections pooled · check: the DB client config
+- [ ] perf-17 [BE] Costly query results cached (Redis or in-memory) · check: the cache layer, with its invalidation rule
+- [ ] perf-18 [BE] N+1 queries fixed · check: query log on the slowest route
+- [ ] perf-19 [BE] Server-side caching on expensive routes · check: response headers or the framework's route cache
+- [ ] perf-20 [H] A Lighthouse run recorded with its real numbers · owner to do, or the record that proves it
+
+### Security
+
+- [ ] sec-01 [M] Admin routes require auth and carry `noindex` · check: route list + middleware; a request without a session gets 401/redirect
+- [ ] sec-02 [M] Access checks run on the server, not only in the client · check: read each protected handler; hiding a button is not a check
+- [ ] sec-03 [H] Row-level security where the database supports it · owner to do, or the record that proves it
+- [ ] sec-04 [H] Email verification on signup · owner to do, or the record that proves it
+- [ ] sec-05 [H] Passwords hashed with bcrypt or argon2 · owner to do, or the record that proves it
+- [ ] sec-06 [M] Auth cookies are `HttpOnly`, `Secure` and `SameSite` · **measured by the gate (K)**
+- [ ] sec-07 [M] No secrets in client bundles · **measured by the gate (K)**
+- [ ] sec-08 [M] `.env` is gitignored; `.env.example` holds placeholders only · check: `git check-ignore .env`; read `.env.example`
+- [ ] sec-09 [M] No secrets in logs · check: grep the log output for the same secret patterns gate K uses
+- [ ] sec-10 [H] Every SQL query is parameterised · owner to do, or the record that proves it
+- [ ] sec-11 [M] Form inputs validated on the server (Zod or equivalent) · check: every mutation handler parses its input before use
+- [ ] sec-12 [M] Output escaped; no raw `innerHTML` with user input · **measured by the gate (K)**
+- [ ] sec-13 [M] File uploads validated by MIME type and size · check: the upload handler
+- [ ] sec-14 [H] Webhooks verify their signature · owner to do, or the record that proves it
+- [ ] sec-15 [M] Rate limits on auth, contact forms and every mutation · check: the middleware or edge config
+- [ ] sec-16 [M] CORS is narrow; no wildcard in production · **measured by the gate (K)**
+- [ ] sec-17 [M] Debug mode off in production · gate K warns; decide by reading
+- [ ] sec-18 [H] Dependencies patched (`npm audit` clean, or each finding written down) · owner to do, or the record that proves it
+- [ ] sec-19 [H] A security scan run and its results recorded · owner to do, or the record that proves it
+- [ ] sec-20 [M] No client-supplied value is trusted for authorisation · check: read the handlers: role, user id and price come from the session or the database, never the request body
+- [ ] sec-h1 `Content-Security-Policy` sent · **measured by the gate (K)**
+- [ ] sec-h2 `X-Content-Type-Options: nosniff` sent · **measured by the gate (K)**
+- [ ] sec-h3 `Referrer-Policy` sent · **measured by the gate (K)**
+
+---
+
 ## Handoff note (end every delivery with this)
 
 ```
