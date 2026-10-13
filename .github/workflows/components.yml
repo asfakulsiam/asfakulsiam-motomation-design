@@ -84,5 +84,7 @@ jobs:
         with: { name: "adversarial", path: /tmp/adv/, if-no-files-found: ignore, retention-days: 14 }
       - name: Right-to-left (text, type, layout on an RTL page; LTR control)
         run: NODE_PATH=$PWD/node_modules node tests/components/rtl.test.mjs --out /tmp/rtl
+      - name: Server render + hydrate every component (renderToString, hydrateRoot; any hydration warning fails; mismatch control)
+        run: NODE_PATH=$PWD/node_modules node tests/components/ssr.test.mjs --out /tmp/ssr
       - name: Whole gallery (layout shift, console errors, every demo on one page)
         run: NODE_PATH=$PWD/node_modules node tests/components/gallery-harness.mjs --out /tmp/gh

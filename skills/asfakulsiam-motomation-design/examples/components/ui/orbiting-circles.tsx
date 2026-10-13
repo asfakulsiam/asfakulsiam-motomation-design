@@ -37,9 +37,10 @@ export function OrbitingCircles({ center, rings, label, size = 360, line = "rgba
       {rings.map((ring, r) => (
         <div key={r} data-ring="" style={{ position: "absolute", inset: `${50 - ring.radius * 50}%`, borderRadius: "50%", border: `1px solid ${line}` }}>
           {ring.items.map((it, i) => {
+            // rounded: a raw float (24.99999999999998%) is normalised by the browser to 25%, which React reports as a hydration mismatch
             const a = (i / ring.items.length) * Math.PI * 2;
             return (
-              <div key={i} role="listitem" aria-label={it.label} style={{ position: "absolute", left: `${50 + 50 * Math.cos(a)}%`, top: `${50 + 50 * Math.sin(a)}%`, transform: "translate(-50%, -50%)" }}>
+              <div key={i} role="listitem" aria-label={it.label} style={{ position: "absolute", left: `${+(50 + 50 * Math.cos(a)).toFixed(3)}%`, top: `${+(50 + 50 * Math.sin(a)).toFixed(3)}%`, transform: "translate(-50%, -50%)" }}>
                 <div data-upright="">{it.node}</div>
               </div>
             );
