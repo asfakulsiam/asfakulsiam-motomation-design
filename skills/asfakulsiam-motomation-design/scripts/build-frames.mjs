@@ -55,6 +55,14 @@ if (!args.scene) die("missing --scene");
 if (!args.out) die("missing --out");
 const scenePath = resolve(args.scene);
 if (!existsSync(scenePath)) die(`scene not found: ${args.scene}`);
+// --check renders with the settings the manifest records (v2.5.0): a page built with --quality 64 is checked at 64, not
+// at the default 70, so `--check` with no other flags compares like with like. A flag given on the command line wins.
+if (args.check) {
+  const ref = join(resolve(args.out), "frames.json");
+  if (existsSync(ref)) { try { const m = JSON.parse(readFileSync(ref, "utf8")); const from = { frames: m.desktop?.frames, "mobile-frames": m.mobile?.frames, width: m.desktop?.width, "mobile-width": m.mobile?.width, quality: m.quality, format: m.format };
+    for (const [k, v] of Object.entries(from)) if (args[k] === undefined && v !== undefined && v !== null) args[k] = String(v);
+    if (args["no-mp4"] === undefined && m.mp4 === null) args["no-mp4"] = true; } catch { die(`${ref} is not valid JSON`); } }
+}
 const int = (k, d) => { const n = args[k] === undefined ? d : Number(args[k]); if (!Number.isInteger(n) || n < 1) die(`--${k} must be a positive integer`); return n; };
 const N = int("frames", 180), NM = int("mobile-frames", 90), W = int("width", 1920), WM = int("mobile-width", 828), Q = int("quality", 70);
 const FORMAT = args.format || "webp";

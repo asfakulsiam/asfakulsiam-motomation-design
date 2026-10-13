@@ -5,6 +5,7 @@ Each example is a real session: the prompt, the commands that ran, their output,
 | Example | Use it when you want to… | Route | Agent | Tier | Gate result |
 |---|---|---|---|---|---|
 | [Flagship: one prompt, the whole skill](showcase.md) | See every step of the full route once, including an Anti-Sameness Check that fails and a stamp traced field by field | Full | Perplexity Computer (Claude Opus 5.5), by hand | 2 | PASS, stamp verified (`93085a8d44`) |
+| [Tier 5 showcase: one film page, every step](showcase-tier5.md) | Follow a scroll-as-film page through storyboard, timing sheet, frames, gate (Q and A axes), stamp and verification | Full (Tier 5 pipeline) | Perplexity Computer (Claude Opus 5.5), commands run in a 2-CPU sandbox | 5 | PASS, stamp verified (`99f3f9d14b`); smoothness not verified in the sandbox |
 | [Hero section](hero.md) | Build one viewport: a hero for a real craft | Full | Claude Code 2.1.286, `claude_sonnet_5_5` | 1 | PASS, stamp verified |
 | [Four-page site](full-site.md) | Build a small multi-page site with one signature across pages and a memory log per site | Full | Perplexity Computer (Claude Opus 5.5), by hand | 1 | 4 pages PASS, 4 stamps verified |
 | [Fix an existing page](fix-existing.md) | Fix something small on a page that exists, without redesigning it | Short | Perplexity Computer (Claude Opus 5.5), by hand | — (unchanged) | before FAIL (32 contrast), after PASS |
