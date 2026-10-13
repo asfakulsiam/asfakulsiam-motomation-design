@@ -115,13 +115,13 @@ Mean axis scores over the five briefs (1–5, before gates):
 
 ### Before and after
 
-![SaaS](benchmark-images/saas-before-after.webp)
+![SaaS](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/saas-before-after.webp?raw=true)
 SaaS: a generic template that overflows on a phone, vs the Console archetype, where the terminal session is the page.
 
-![Public-interest](benchmark-images/public-before-after.webp)
+![Public-interest](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/public-before-after.webp?raw=true)
 Public-interest: a conventional layout vs a bilingual manifesto that keeps the single real figure with its source.
 
-![Hotel](benchmark-images/hotel-before-after.webp)
+![Hotel](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/hotel-before-after.webp?raw=true)
 Hotel, where the skill lost: the door-split hero breaks the name into "Have li", the page overflows the phone by 105px, and room prices flip through wrong digits.
 
 ### What it means

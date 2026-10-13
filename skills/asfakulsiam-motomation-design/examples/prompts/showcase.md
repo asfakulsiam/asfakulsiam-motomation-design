@@ -9,7 +9,7 @@ One page, built with every step of the full route: the brief read, the Thinking 
 | Result | [`index.html`](../../../../docs/examples/showcase/index.html), one file, 3 KB of JS gzipped, no libraries |
 | Records | [`prompt.txt`](../../../../docs/examples/showcase/prompt.txt) · [`collide.txt`](../../../../docs/examples/showcase/collide.txt) · [`search.txt`](../../../../docs/examples/showcase/search.txt) · [`search2.txt`](../../../../docs/examples/showcase/search2.txt) · [`contrast.txt`](../../../../docs/examples/showcase/contrast.txt) · [`thinking.md`](../../../../docs/examples/showcase/thinking.md) · [`DESIGN.md`](../../../../docs/examples/showcase/DESIGN.md) · [`memory-log.txt`](../../../../docs/examples/showcase/memory-log.txt) · [`gate.txt`](../../../../docs/examples/showcase/gate.txt) · [`verify.txt`](../../../../docs/examples/showcase/verify.txt) |
 
-![The page at 1440px: the Bangla title কালো ঘর large in serif on black, "Kalo Ghor, the dark room" in italic beneath, and a brass rail at the right edge with a timecode and a wave-shaped tide line](../../../../docs/examples/showcase/frame-1440-00.webp)
+![The page at 1440px: the Bangla title কালো ঘর large in serif on black, "Kalo Ghor, the dark room" in italic beneath, and a brass rail at the right edge with a timecode and a wave-shaped tide line](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/showcase/frame-1440-00.webp?raw=true)
 
 ## The prompt
 
@@ -158,16 +158,16 @@ Dials: ENERGY 2 · RHYTHM 3 · MOTION 2 → **Tier 2.** One pinned, scroll-scrub
 
 ## The build
 
-![Four frames at 1440px: the studio statement, Across the River, The City and the contact address, each with the tide rail filling as the sequence plays](../../../../docs/examples/showcase/frame-1440-36.webp)
+![Four frames at 1440px: the studio statement, Across the River, The City and the contact address, each with the tide rail filling as the sequence plays](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/showcase/frame-1440-36.webp?raw=true)
 
 - **The reel:** a 700svh section with one sticky stage. Seven credits share it; each rises over 35% of its slot, holds for 30% and falls over 35% (a smoothstep tide). The first credit is on screen from the first frame, so the page never opens on black.
 - **The rail:** the sum of the seven tide curves, sampled 160 times, drawn as one path; the played part is filled; the playhead and timecode follow scroll. Three real buttons (`Jump to Across the River` …) scroll to each film. Credits below half opacity are `inert`, so the keyboard never lands on an invisible link.
 - **The index:** after the reel, the same facts as a plain list, and a skip link at the top goes straight to it. Nobody has to sit through the sequence to read the work.
 - **Reduced motion and no script:** the stage stops being sticky, every credit is shown in order, and the rail is removed: it describes a motion that no longer happens.
 
-![At 375px, four frames of the sequence with the tide rail along the bottom edge](../../../../docs/examples/showcase/frames-375.webp)
+![At 375px, four frames of the sequence with the tide rail along the bottom edge](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/showcase/frames-375.webp?raw=true)
 
-![Reduced motion at 375px: the credits as a plain stack, the rail removed, then the index](../../../../docs/examples/showcase/reduced-motion-375.webp)
+![Reduced motion at 375px: the credits as a plain stack, the rail removed, then the index](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/showcase/reduced-motion-375.webp?raw=true)
 
 ## Memory log (real output)
 

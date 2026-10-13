@@ -15,7 +15,7 @@ Full motion: one pinned stage, a canvas scrubbed by scroll through four scenes (
 
 Reduced motion: **a contact sheet**. The stage is unpinned and the four scenes are laid out as plates in normal flow, 14vh apart. Each plate is an `<img>` painted once from the film's own render at the scene's key moment (p = 0.05, 0.35, 0.62, 0.95) into a detached canvas that is never put in the document. The caption sits beside each plate in an 8 + 4 column split, set larger and uppercase like a storyboard slug. There is no rail and no timecode: there is nothing to scrub. The scene links still jump to each plate.
 
-![Film: full motion vs reduced motion](motomation-film.webp)
+![Film: full motion vs reduced motion](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/rm-stills/motomation-film.webp?raw=true)
 
 ## Worked example: the Tier 4 template (`examples/templates/event.html`)
 
@@ -23,7 +23,7 @@ Full motion: the hero is the poster under moving stage light (Beams): soft shaft
 
 Reduced motion: **the poster as printed**. The shafts stop being light and become graphic: hard-edged bars at the same angle, landing as pools on a stage floor, with the dust motes fixed as a dot pattern. The split-flap shows the date at once, in its tiles. It is the same poster, composed for paper.
 
-![Event: full motion vs reduced motion](event.webp)
+![Event: full motion vs reduced motion](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/rm-stills/event.webp?raw=true)
 
 ## Tier 4 backgrounds
 
@@ -37,7 +37,7 @@ Reduced motion: **the poster as printed**. The shafts stop being light and becom
 | [meteors](../site/c/meteors.html) | The photograph an astronomer would take: an hour of star trails round the pole, the one meteor that crossed them, the sky glow of the nearest town and the ridge the camera stood on. | 0 → 0 | 0% | 17.5% |
 | [particle-field](../site/c/particle-field.html) | A star chart: the motes keep their density and depth, and a few are joined into constellations. | 0 → 0 | 0% | 15.4% |
 
-Each pair: `aurora.webp`, `beams.webp`, `globe.webp`, `liquid-field.webp`, `mesh-gradient.webp`, `meteors.webp`, `particle-field.webp`.
+Each pair: [`aurora.webp`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/rm-stills/aurora.webp), [`beams.webp`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/rm-stills/beams.webp), [`globe.webp`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/rm-stills/globe.webp), [`liquid-field.webp`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/rm-stills/liquid-field.webp), [`mesh-gradient.webp`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/rm-stills/mesh-gradient.webp), [`meteors.webp`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/rm-stills/meteors.webp), [`particle-field.webp`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/rm-stills/particle-field.webp).
 
 **Caveat about the left-hand images.** In the 2-CPU sandbox where these were taken, the WebGL backgrounds' own capability probe (≤ 2 cores, or software WebGL → poster only) shows their CSS poster in full motion, so for aurora, beams, globe, mesh-gradient, meteors and particle-field the comparison is poster vs reduced-motion still, not live frame vs still. On a 4+ core machine with hardware WebGL the left side is the live shader; the reduced-motion side is the same either way.
 

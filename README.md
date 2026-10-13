@@ -17,8 +17,8 @@ At the top tier, scrolling plays like a film.
 npx skills add asfakulsiam/asfakulsiam-motomation-design
 ```
 
-<img src="docs/demo-hook.png" alt="Demo page: the words SCROLL IS THE PLAYHEAD in a huge condensed typeface on near-black, letters thinning where the cursor passes" width="100%">
-<img src="docs/demo-film.png" alt="Demo page mid-scroll: a ring of strands orbiting in 3D beside the word ORBIT, with a timecode rail reading 00:10:19 of 00:24:00" width="100%">
+<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/demo-hook.png?raw=true" alt="Demo page: the words SCROLL IS THE PLAYHEAD in a huge condensed typeface on near-black, letters thinning where the cursor passes" width="100%">
+<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/demo-film.png?raw=true" alt="Demo page mid-scroll: a ring of strands orbiting in 3D beside the word ORBIT, with a timecode rail reading 00:10:19 of 00:24:00" width="100%">
 
 <sub>Above: <a href="skills/asfakulsiam-motomation-design/examples/html/motomation-film.html">examples/html/motomation-film.html</a>, a complete Tier 5 Motomation page in one HTML file with no build step.</sub>
 
@@ -114,19 +114,19 @@ What v3 found, including where the skill lost:
 #### Before and after (v3)
 
 **Public interest (brief 05), s5102: won, 0 vs 98.5.** The baseline fails axe contrast; the skill sets the Bangla line as the headline.
-<img src="docs/benchmark-images/v3-public-5102.webp" alt="Public-interest brief, v3 seed 5102: without the skill a two-colour hero that fails contrast (gated 0, raw 47.0); with the skill a large Bangla headline on cream with a mangrove-root drawing (98.5)" width="100%">
+<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/v3-public-5102.webp?raw=true" alt="Public-interest brief, v3 seed 5102: without the skill a two-colour hero that fails contrast (gated 0, raw 47.0); with the skill a large Bangla headline on cream with a mangrove-root drawing (98.5)" width="100%">
 
 **Ceramics shop (brief 03), s3102: lost to the matched-effort baseline, 89.5 vs 77.5.** A baseline told to keep refining built a clearer product page.
-<img src="docs/benchmark-images/v3-ecommerce-3102-matched.webp" alt="Ceramics brief, v3 seed 3102: the matched-effort baseline with a large serif headline and a cup card (89.5); the skill with a product-sheet layout (77.5)" width="100%">
+<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/v3-ecommerce-3102-matched.webp?raw=true" alt="Ceramics brief, v3 seed 3102: the matched-effort baseline with a large serif headline and a cup card (89.5); the skill with a product-sheet layout (77.5)" width="100%">
 
 **Studio (brief 07), s7101: lost to Anthropic's frontend-design skill, 89.0 vs 65.0.**
-<img src="docs/benchmark-images/v3-studio-7101-frontend-design.webp" alt="Studio brief, v3 seed 7101: the frontend-design skill's page (89.0) and the Motomation skill's page (65.0)" width="100%">
+<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/v3-studio-7101-frontend-design.webp?raw=true" alt="Studio brief, v3 seed 7101: the frontend-design skill's page (89.0) and the Motomation skill's page (65.0)" width="100%">
 
 **Festival (brief 08), s8102, Tier 4 runner strip: won on the full rubric (0 vs 87.0) and on motion alone (64 vs 94).**
-<img src="docs/benchmark-images/v3-festival-8102-strip.webp" alt="Festival brief, v3 seed 8102: eight scroll frames for each site at Tier 4" width="100%">
+<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/v3-festival-8102-strip.webp?raw=true" alt="Festival brief, v3 seed 8102: eight scroll frames for each site at Tier 4" width="100%">
 
 **Launch (brief 06), s6102, Tier 4 runner strip: lost on both (96.5 vs 62.0; motion only 96 vs 40).** The skill's frames overlap mid-transition, and its reduced-motion strip barely differs from full motion.
-<img src="docs/benchmark-images/v3-launch-6102-strip.webp" alt="Launch brief, v3 seed 6102: eight scroll frames for each site at Tier 4; the baseline's ring changes colour per section, the skill's pinned lamp stays while text overlaps" width="100%">
+<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/v3-launch-6102-strip.webp?raw=true" alt="Launch brief, v3 seed 6102: eight scroll frames for each site at Tier 4; the baseline's ring changes colour per section, the skill's pinned lamp stays while text overlaps" width="100%">
 
 ### Benchmark v2 (2026-10-11)
 
@@ -154,22 +154,22 @@ The skill won every v2 pair before the gates too. v3 tested what v2 couldn't (ma
 Same brief, same model, same seed: without the skill on the left, with it on the right. Losses are included.
 
 **Hotel (brief 04), v2: won.** Without the skill the page fails contrast (gated 0); with it, a full-height door with the name set large (98.5).
-<img src="docs/benchmark-images/v2-hotel-4102.webp" alt="Hotel brief, seed 4102: without the skill a conventional page that fails contrast (gated 0); with the skill a full-height door with the name set large (98.5)" width="100%">
+<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/v2-hotel-4102.webp?raw=true" alt="Hotel brief, seed 4102: without the skill a conventional page that fails contrast (gated 0); with the skill a full-height door with the name set large (98.5)" width="100%">
 
 **Hotel (brief 04), v1: lost, 54.5 vs 88.5.** The door-split hero breaks the name into "Have li", the page overflows a phone by 105px, and room prices flip through wrong digits. The gate that now catches all three (`words`, `overflow`, `numbers`) was built because of this page.
-<img src="docs/benchmark-images/hotel-before-after.webp" alt="Hotel brief, v1: without the skill a clean cream page with a small door (88.5); with the skill a dark riveted door filling the screen with the name split as 'Have li' (54.5)" width="100%">
+<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/hotel-before-after.webp?raw=true" alt="Hotel brief, v1: without the skill a clean cream page with a small door (88.5); with the skill a dark riveted door filling the screen with the name split as 'Have li' (54.5)" width="100%">
 
 **SaaS (brief 02), v2: won every pair, lost on variety.** Three seeds, three wins (94, 93.5, 92), and three versions of the same page: a big serif headline on the left, a log panel on the right. The cause (the evaluator's note leaking into the prompt) is fixed in v2.4.0; see the [variety report](evals/results/2026-10-11-variety.md).
-<img src="docs/benchmark-images/v2-saas-sameness.webp" alt="SaaS brief, v2: the three skill pages for seeds 2101, 2102 and 2103 side by side, each a large headline left and a log panel right" width="100%">
+<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/v2-saas-sameness.webp?raw=true" alt="SaaS brief, v2: the three skill pages for seeds 2101, 2102 and 2103 side by side, each a large headline left and a log panel right" width="100%">
 
 **SaaS (brief 02), v1: won, 95.5 vs 44.5.** A generic dark template that overflows a phone, against a page where the log stream is the hero.
-<img src="docs/benchmark-images/saas-before-after.webp" alt="SaaS brief, v1: without the skill a generic dark landing page (44.5); with the skill a serif headline over a scrolling log stream (95.5)" width="100%">
+<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/saas-before-after.webp?raw=true" alt="SaaS brief, v1: without the skill a generic dark landing page (44.5); with the skill a serif headline over a scrolling log stream (95.5)" width="100%">
 
 **Studio (brief 07), v2: won, 74.5 vs 96.5.**
-<img src="docs/benchmark-images/v2-studio-7101.webp" alt="Studio brief, seed 7101: without the skill 74.5, with the skill 96.5" width="100%">
+<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/v2-studio-7101.webp?raw=true" alt="Studio brief, seed 7101: without the skill 74.5, with the skill 96.5" width="100%">
 
 **Public interest (brief 05), v1: won.** A conventional layout against a bilingual manifesto that keeps the one real figure with its source.
-<img src="docs/benchmark-images/public-before-after.webp" alt="Public-interest brief, v1: a conventional layout without the skill; a bilingual manifesto with the skill" width="100%">
+<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/public-before-after.webp?raw=true" alt="Public-interest brief, v1: a conventional layout without the skill; a bilingual manifesto with the skill" width="100%">
 
 **What v2 didn't show, and what v3 did about it:** effort wasn't matched (v3: matched-effort arm, skill 10–5); the judges saw the measured checks (still true in v3); motion was judged from stills (v3: motion-only judging from strips, skill 3–6); one agent and one model (v3: a one-seed Codex run, 3–2). The v1 single-prompt benchmark (3 of 5 won) is kept in the [CHANGELOG](CHANGELOG.md) and its [report](evals/results/2026-10-11-benchmark.md).
 

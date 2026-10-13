@@ -45,56 +45,56 @@ The five benchmark briefs were run inside Claude Code (the CLI agent, not a sing
 
 | Run | Seed | Generator | Turns / time | Judge scores (gpt_5_4 · gemini_3_1_pro) | Gated | gate.mjs | Transcript |
 |---|---|---|---|---|---|---|---|
-| baseline | 7101 | claude-code → claude_sonnet_5_5 | 8 / 112s | 77 · 72 | 74.5 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/studio/baseline-s7101/transcript.jsonl.gz` |
-| skill | 7101 | claude-code → claude_sonnet_5_5 | 37 / 506s | 93 · 100 | 96.5 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/studio/skill-s7101/transcript.jsonl.gz` |
-| baseline | 7102 | claude-code → claude_sonnet_5_5 | 6 / 108s | 80 · 72 | 76.0 | c0 o0 w5 rm0 a0 | `2026-10-11-benchmark-v2/studio/baseline-s7102/transcript.jsonl.gz` |
-| skill | 7102 | claude-code → claude_sonnet_5_5 | 20 / 308s | 93 · 100 | 96.5 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/studio/skill-s7102/transcript.jsonl.gz` |
-| baseline | 7103 | claude-code → claude_sonnet_5_5 | 6 / 69s | 86 · 62 | 74.0 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/studio/baseline-s7103/transcript.jsonl.gz` |
-| skill | 7103 | claude-code → claude_sonnet_5_5 | 23 / 391s | 90 · 100 | 95.0 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/studio/skill-s7103/transcript.jsonl.gz` |
+| baseline | 7101 | claude-code → claude_sonnet_5_5 | 8 / 112s | 77 · 72 | 74.5 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/studio/baseline-s7101/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/studio/baseline-s7101/transcript.jsonl.gz) |
+| skill | 7101 | claude-code → claude_sonnet_5_5 | 37 / 506s | 93 · 100 | 96.5 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/studio/skill-s7101/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/studio/skill-s7101/transcript.jsonl.gz) |
+| baseline | 7102 | claude-code → claude_sonnet_5_5 | 6 / 108s | 80 · 72 | 76.0 | c0 o0 w5 rm0 a0 | [`2026-10-11-benchmark-v2/studio/baseline-s7102/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/studio/baseline-s7102/transcript.jsonl.gz) |
+| skill | 7102 | claude-code → claude_sonnet_5_5 | 20 / 308s | 93 · 100 | 96.5 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/studio/skill-s7102/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/studio/skill-s7102/transcript.jsonl.gz) |
+| baseline | 7103 | claude-code → claude_sonnet_5_5 | 6 / 69s | 86 · 62 | 74.0 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/studio/baseline-s7103/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/studio/baseline-s7103/transcript.jsonl.gz) |
+| skill | 7103 | claude-code → claude_sonnet_5_5 | 23 / 391s | 90 · 100 | 95.0 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/studio/skill-s7103/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/studio/skill-s7103/transcript.jsonl.gz) |
 
 ### 04 Boutique hotel — consistent win (3/3)
 
 | Run | Seed | Generator | Turns / time | Judge scores (gpt_5_4 · gemini_3_1_pro) | Gated | gate.mjs | Transcript |
 |---|---|---|---|---|---|---|---|
-| baseline | 4101 | claude-code → claude_sonnet_5_5 | 3 / 50s | 68 · 63 | 0.0 | c2 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/hotel/baseline-s4101/transcript.jsonl.gz` |
-| skill | 4101 | claude-code → claude_sonnet_5_5 | 25 / 285s | 90 · 90 | 90.0 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/hotel/skill-s4101/transcript.jsonl.gz` |
-| baseline | 4102 | claude-code → claude_sonnet_5_5 | 3 / 54s | 64 · 57 | 0.0 | c1 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/hotel/baseline-s4102/transcript.jsonl.gz` |
-| skill | 4102 | claude-code → claude_sonnet_5_5 | 31 / 357s | 97 · 100 | 98.5 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/hotel/skill-s4102/transcript.jsonl.gz` |
-| baseline | 4103 | claude-code → claude_sonnet_5_5 | 3 / 47s | 65 · 84 | 0.0 | c8 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/hotel/baseline-s4103/transcript.jsonl.gz` |
-| skill | 4103 | claude-code → claude_sonnet_5_5 | 43 / 494s | 97 · 76 | 86.5 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/hotel/skill-s4103/transcript.jsonl.gz` |
+| baseline | 4101 | claude-code → claude_sonnet_5_5 | 3 / 50s | 68 · 63 | 0.0 | c2 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/hotel/baseline-s4101/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/hotel/baseline-s4101/transcript.jsonl.gz) |
+| skill | 4101 | claude-code → claude_sonnet_5_5 | 25 / 285s | 90 · 90 | 90.0 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/hotel/skill-s4101/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/hotel/skill-s4101/transcript.jsonl.gz) |
+| baseline | 4102 | claude-code → claude_sonnet_5_5 | 3 / 54s | 64 · 57 | 0.0 | c1 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/hotel/baseline-s4102/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/hotel/baseline-s4102/transcript.jsonl.gz) |
+| skill | 4102 | claude-code → claude_sonnet_5_5 | 31 / 357s | 97 · 100 | 98.5 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/hotel/skill-s4102/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/hotel/skill-s4102/transcript.jsonl.gz) |
+| baseline | 4103 | claude-code → claude_sonnet_5_5 | 3 / 47s | 65 · 84 | 0.0 | c8 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/hotel/baseline-s4103/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/hotel/baseline-s4103/transcript.jsonl.gz) |
+| skill | 4103 | claude-code → claude_sonnet_5_5 | 43 / 494s | 97 · 76 | 86.5 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/hotel/skill-s4103/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/hotel/skill-s4103/transcript.jsonl.gz) |
 
 ### 03 Ceramics shop (e-commerce) — consistent win (3/3)
 
 | Run | Seed | Generator | Turns / time | Judge scores (gpt_5_4 · gemini_3_1_pro) | Gated | gate.mjs | Transcript |
 |---|---|---|---|---|---|---|---|
-| baseline | 3101 | claude-code → claude_sonnet_5_5 | 10 / 86s | 69 · 59 | 64.0 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/ecommerce/baseline-s3101/transcript.jsonl.gz` |
-| skill | 3101 | claude-code → claude_sonnet_5_5 | 47 / 531s | 89 · 93 | 91.0 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/ecommerce/skill-s3101/transcript.jsonl.gz` |
-| baseline | 3102 | claude-code → claude_sonnet_5_5 | 12 / 109s | 80 · 76 | 78.0 | c0 o0 w3 rm0 a0 | `2026-10-11-benchmark-v2/ecommerce/baseline-s3102/transcript.jsonl.gz` |
-| skill | 3102 | claude-code → claude_sonnet_5_5 | 31 / 295s | 90 · 94 | 92.0 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/ecommerce/skill-s3102/transcript.jsonl.gz` |
-| baseline | 3103 | claude-code → claude_sonnet_5_5 | 5 / 65s | 57 · 63 | 0.0 | c3 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/ecommerce/baseline-s3103/transcript.jsonl.gz` |
-| skill | 3103 | claude-code → claude_sonnet_5_5 | 61 / 663s | 93 · 100 | 96.5 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/ecommerce/skill-s3103/transcript.jsonl.gz` |
+| baseline | 3101 | claude-code → claude_sonnet_5_5 | 10 / 86s | 69 · 59 | 64.0 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/ecommerce/baseline-s3101/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/ecommerce/baseline-s3101/transcript.jsonl.gz) |
+| skill | 3101 | claude-code → claude_sonnet_5_5 | 47 / 531s | 89 · 93 | 91.0 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/ecommerce/skill-s3101/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/ecommerce/skill-s3101/transcript.jsonl.gz) |
+| baseline | 3102 | claude-code → claude_sonnet_5_5 | 12 / 109s | 80 · 76 | 78.0 | c0 o0 w3 rm0 a0 | [`2026-10-11-benchmark-v2/ecommerce/baseline-s3102/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/ecommerce/baseline-s3102/transcript.jsonl.gz) |
+| skill | 3102 | claude-code → claude_sonnet_5_5 | 31 / 295s | 90 · 94 | 92.0 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/ecommerce/skill-s3102/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/ecommerce/skill-s3102/transcript.jsonl.gz) |
+| baseline | 3103 | claude-code → claude_sonnet_5_5 | 5 / 65s | 57 · 63 | 0.0 | c3 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/ecommerce/baseline-s3103/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/ecommerce/baseline-s3103/transcript.jsonl.gz) |
+| skill | 3103 | claude-code → claude_sonnet_5_5 | 61 / 663s | 93 · 100 | 96.5 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/ecommerce/skill-s3103/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/ecommerce/skill-s3103/transcript.jsonl.gz) |
 
 ### 02 Developer tool (SaaS) — consistent win (3/3)
 
 | Run | Seed | Generator | Turns / time | Judge scores (gpt_5_4 · gemini_3_1_pro) | Gated | gate.mjs | Transcript |
 |---|---|---|---|---|---|---|---|
-| baseline | 2101 | claude-code → claude_sonnet_5_5 | 5 / 51s | 76 · 72 | 74.0 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/saas/baseline-s2101/transcript.jsonl.gz` |
-| skill | 2101 | claude-code → claude_sonnet_5_5 | 24 / 281s | 94 · 94 | 94.0 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/saas/skill-s2101/transcript.jsonl.gz` |
-| baseline | 2102 | claude-code → claude_sonnet_5_5 | 6 / 58s | 64 · 50 | 0.0 | c14 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/saas/baseline-s2102/transcript.jsonl.gz` |
-| skill | 2102 | claude-code → claude_sonnet_5_5 | 66 / 721s | 90 · 97 | 93.5 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/saas/skill-s2102/transcript.jsonl.gz` |
-| baseline | 2103 | claude-code → claude_sonnet_5_5 | 4 / 41s | 53 · 39 | 46.0 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/saas/baseline-s2103/transcript.jsonl.gz` |
-| skill | 2103 | claude-code → claude_sonnet_5_5 | 25 / 239s | 93 · 91 | 92.0 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/saas/skill-s2103/transcript.jsonl.gz` |
+| baseline | 2101 | claude-code → claude_sonnet_5_5 | 5 / 51s | 76 · 72 | 74.0 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/saas/baseline-s2101/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/saas/baseline-s2101/transcript.jsonl.gz) |
+| skill | 2101 | claude-code → claude_sonnet_5_5 | 24 / 281s | 94 · 94 | 94.0 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/saas/skill-s2101/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/saas/skill-s2101/transcript.jsonl.gz) |
+| baseline | 2102 | claude-code → claude_sonnet_5_5 | 6 / 58s | 64 · 50 | 0.0 | c14 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/saas/baseline-s2102/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/saas/baseline-s2102/transcript.jsonl.gz) |
+| skill | 2102 | claude-code → claude_sonnet_5_5 | 66 / 721s | 90 · 97 | 93.5 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/saas/skill-s2102/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/saas/skill-s2102/transcript.jsonl.gz) |
+| baseline | 2103 | claude-code → claude_sonnet_5_5 | 4 / 41s | 53 · 39 | 46.0 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/saas/baseline-s2103/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/saas/baseline-s2103/transcript.jsonl.gz) |
+| skill | 2103 | claude-code → claude_sonnet_5_5 | 25 / 239s | 93 · 91 | 92.0 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/saas/skill-s2103/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/saas/skill-s2103/transcript.jsonl.gz) |
 
 ### 05 Climate non-profit (public) — consistent win (3/3)
 
 | Run | Seed | Generator | Turns / time | Judge scores (gpt_5_4 · gemini_3_1_pro) | Gated | gate.mjs | Transcript |
 |---|---|---|---|---|---|---|---|
-| baseline | 5101 | claude-code → claude_sonnet_5_5 | 6 / 71s | 80 · 65 | 72.5 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/public/baseline-s5101/transcript.jsonl.gz` |
-| skill | 5101 | claude-code → claude_sonnet_5_5 | 26 / 312s | 91 · 71 | 81.0 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/public/skill-s5101/transcript.jsonl.gz` |
-| baseline | 5102 | claude-code → claude_sonnet_5_5 | 4 / 73s | 76 · 46 | 61.0 | c0 o0 w1 rm0 a0 | `2026-10-11-benchmark-v2/public/baseline-s5102/transcript.jsonl.gz` |
-| skill | 5102 | claude-code → claude_sonnet_5_5 | 25 / 280s | 94 · 75 | 84.5 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/public/skill-s5102/transcript.jsonl.gz` |
-| baseline | 5103 | claude-code → claude_sonnet_5_5 | 4 / 94s | 72 · 65 | 68.5 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/public/baseline-s5103/transcript.jsonl.gz` |
-| skill | 5103 | claude-code → claude_sonnet_5_5 | 19 / 224s | 97 · 100 | 98.5 | c0 o0 w0 rm0 a0 | `2026-10-11-benchmark-v2/public/skill-s5103/transcript.jsonl.gz` |
+| baseline | 5101 | claude-code → claude_sonnet_5_5 | 6 / 71s | 80 · 65 | 72.5 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/public/baseline-s5101/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/public/baseline-s5101/transcript.jsonl.gz) |
+| skill | 5101 | claude-code → claude_sonnet_5_5 | 26 / 312s | 91 · 71 | 81.0 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/public/skill-s5101/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/public/skill-s5101/transcript.jsonl.gz) |
+| baseline | 5102 | claude-code → claude_sonnet_5_5 | 4 / 73s | 76 · 46 | 61.0 | c0 o0 w1 rm0 a0 | [`2026-10-11-benchmark-v2/public/baseline-s5102/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/public/baseline-s5102/transcript.jsonl.gz) |
+| skill | 5102 | claude-code → claude_sonnet_5_5 | 25 / 280s | 94 · 75 | 84.5 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/public/skill-s5102/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/public/skill-s5102/transcript.jsonl.gz) |
+| baseline | 5103 | claude-code → claude_sonnet_5_5 | 4 / 94s | 72 · 65 | 68.5 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/public/baseline-s5103/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/public/baseline-s5103/transcript.jsonl.gz) |
+| skill | 5103 | claude-code → claude_sonnet_5_5 | 19 / 224s | 97 · 100 | 98.5 | c0 o0 w0 rm0 a0 | [`2026-10-11-benchmark-v2/public/skill-s5103/transcript.jsonl.gz`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark-v2/public/skill-s5103/transcript.jsonl.gz) |
 
 Skill stamps (each measured by the agent itself with `scripts/gate.mjs` and pasted, per Task 4) are in each `skill-s*/index.html`. All 15 skill pages measured c0 o0 w0 rm0 a0. Every skill run chose tier 2.
 

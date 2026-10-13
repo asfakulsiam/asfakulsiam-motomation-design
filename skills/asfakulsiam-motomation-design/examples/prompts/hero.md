@@ -75,7 +75,7 @@ Type: Fraunces (display), Hanken Grotesk (text), Noto Serif Bengali for শী�
 
 | Desktop, 1440 × 900 | Phone, 375 × 812 |
 |---|---|
-| ![Murta hero at 1440px: a three-line serif headline on cane-paper, left; a woven twill pattern of cane strips with madder-red bands, right](../../../../docs/examples/hero/hero-desktop.png) | ![Murta hero at 375px: the weave becomes a band above the headline](../../../../docs/examples/hero/hero-mobile.png) |
+| ![Murta hero at 1440px: a three-line serif headline on cane-paper, left; a woven twill pattern of cane strips with madder-red bands, right](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/hero/hero-desktop.png?raw=true) | ![Murta hero at 375px: the weave becomes a band above the headline](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/hero/hero-mobile.png?raw=true) |
 
 The weave is the picture. There is no photo, so the agent drew one in SVG. The signature move is 12 lines of CSS:
 

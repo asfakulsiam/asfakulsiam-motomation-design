@@ -70,7 +70,7 @@ and three CSS rules so the button matches the page's red danger style. Nothing e
 
 | Before | After, at rest | After, 0.7 s into a hold |
 |---|---|---|
-| ![Settings page with a solid red Delete workspace button](../../../../docs/examples/component/before.png) | ![The same page; the button now reads Hold to delete workspace, with a hint line under it](../../../../docs/examples/component/after-rest.png) | ![The button half filled with light red from the left](../../../../docs/examples/component/after-mid-hold.png) |
+| ![Settings page with a solid red Delete workspace button](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/component/before.png?raw=true) | ![The same page; the button now reads Hold to delete workspace, with a hint line under it](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/component/after-rest.png?raw=true) | ![The button half filled with light red from the left](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/component/after-mid-hold.png?raw=true) |
 
 ## Build, types and gate
 

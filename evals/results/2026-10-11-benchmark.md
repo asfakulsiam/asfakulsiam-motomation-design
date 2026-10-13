@@ -38,7 +38,7 @@ Axis means (both judges), baseline → skill:
 
 ## Studio portfolio · brief 07
 
-Brief: [`evals/briefs/07-architecture-studio.md`](../briefs/07-architecture-studio.md) · outputs: [`baseline`](2026-10-11-benchmark/studio/baseline/index.html), [`skill`](2026-10-11-benchmark/studio/skill/index.html)
+Brief: [`evals/briefs/07-architecture-studio.md`](../briefs/07-architecture-studio.md) · outputs: [`baseline`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark/studio/baseline/index.html), [`skill`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark/studio/skill/index.html)
 
 | | Baseline | Skill |
 |---|---|---|
@@ -67,7 +67,7 @@ Brief: [`evals/briefs/07-architecture-studio.md`](../briefs/07-architecture-stud
 
 ## Boutique hotel · brief 04
 
-Brief: [`evals/briefs/04-boutique-hotel.md`](../briefs/04-boutique-hotel.md) · outputs: [`baseline`](2026-10-11-benchmark/hotel/baseline/index.html), [`skill`](2026-10-11-benchmark/hotel/skill/index.html)
+Brief: [`evals/briefs/04-boutique-hotel.md`](../briefs/04-boutique-hotel.md) · outputs: [`baseline`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark/hotel/baseline/index.html), [`skill`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark/hotel/skill/index.html)
 
 | | Baseline | Skill |
 |---|---|---|
@@ -96,7 +96,7 @@ Brief: [`evals/briefs/04-boutique-hotel.md`](../briefs/04-boutique-hotel.md) · 
 
 ## E-commerce product · brief 03
 
-Brief: [`evals/briefs/03-ceramics-shop.md`](../briefs/03-ceramics-shop.md) · outputs: [`baseline`](2026-10-11-benchmark/ecommerce/baseline/index.html), [`skill`](2026-10-11-benchmark/ecommerce/skill/index.html)
+Brief: [`evals/briefs/03-ceramics-shop.md`](../briefs/03-ceramics-shop.md) · outputs: [`baseline`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark/ecommerce/baseline/index.html), [`skill`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark/ecommerce/skill/index.html)
 
 | | Baseline | Skill |
 |---|---|---|
@@ -125,7 +125,7 @@ Brief: [`evals/briefs/03-ceramics-shop.md`](../briefs/03-ceramics-shop.md) · ou
 
 ## SaaS product · brief 02
 
-Brief: [`evals/briefs/02-dev-tool-landing.md`](../briefs/02-dev-tool-landing.md) · outputs: [`baseline`](2026-10-11-benchmark/saas/baseline/index.html), [`skill`](2026-10-11-benchmark/saas/skill/index.html)
+Brief: [`evals/briefs/02-dev-tool-landing.md`](../briefs/02-dev-tool-landing.md) · outputs: [`baseline`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark/saas/baseline/index.html), [`skill`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark/saas/skill/index.html)
 
 | | Baseline | Skill |
 |---|---|---|
@@ -154,7 +154,7 @@ Brief: [`evals/briefs/02-dev-tool-landing.md`](../briefs/02-dev-tool-landing.md)
 
 ## Public-interest website · brief 05
 
-Brief: [`evals/briefs/05-climate-nonprofit.md`](../briefs/05-climate-nonprofit.md) · outputs: [`baseline`](2026-10-11-benchmark/public/baseline/index.html), [`skill`](2026-10-11-benchmark/public/skill/index.html)
+Brief: [`evals/briefs/05-climate-nonprofit.md`](../briefs/05-climate-nonprofit.md) · outputs: [`baseline`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark/public/baseline/index.html), [`skill`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-11-benchmark/public/skill/index.html)
 
 | | Baseline | Skill |
 |---|---|---|

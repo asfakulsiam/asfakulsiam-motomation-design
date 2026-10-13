@@ -145,7 +145,7 @@ const io = new IntersectionObserver((es) => { if (!es.some((e) => e.isIntersecti
 
 The date sits in a `<time>` element, so the gate's numbers check lists it as live rather than judging it.
 
-![The issue card at 0, 120, 210 and 340 ms: empty, the stamp arriving large, the impact with the card nudged down 2px, the stamp at rest reading "Opened 11 OCT 2026"](../../../../docs/examples/full-site/screens/stamp-frames.webp)
+![The issue card at 0, 120, 210 and 340 ms: empty, the stamp arriving large, the impact with the card nudged down 2px, the stamp at rest reading "Opened 11 OCT 2026"](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/full-site/screens/stamp-frames.webp?raw=true)
 
 ## What the Restraint Gate rejected
 
@@ -206,12 +206,12 @@ STAMP VERIFIED · critique and gate numbers match a fresh scan · gate PASS
 
 | Page | Desktop, 1440 | Phone, 375 |
 |---|---|---|
-| Home | ![Home at 1440: the Bangla word খেয়া set huge on the left page of a spread, the press described on the right](../../../../docs/examples/full-site/screens/index-1440.webp) | ![Home at 375: the spreads stacked, খেয়া across the first screen](../../../../docs/examples/full-site/screens/index-375.webp) |
-| Books | ![Books at 1440: "Six books." on the left, a register of six titles with translator, year and price on the right](../../../../docs/examples/full-site/screens/books-1440.webp) | ![Books at 375: the register as a single column, prices on the title row](../../../../docs/examples/full-site/screens/books-375.webp) |
-| Book | ![Book page at 1440: the Bangla title huge on the left, the issue card with the vermilion "Opened 11 OCT 2026" stamp on the right](../../../../docs/examples/full-site/screens/ekti-nodir-naam-1440.webp) | ![Book page at 375: title, then the issue card and stamp, then the first line](../../../../docs/examples/full-site/screens/ekti-nodir-naam-375.webp) |
-| Visit | ![Visit at 1440: "Banglabazar." with the address on the left, hours and email ordering on the right](../../../../docs/examples/full-site/screens/visit-1440.webp) | ![Visit at 375: address, hours, ordering, book fair](../../../../docs/examples/full-site/screens/visit-375.webp) |
+| Home | ![Home at 1440: the Bangla word খেয়া set huge on the left page of a spread, the press described on the right](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/full-site/screens/index-1440.webp?raw=true) | ![Home at 375: the spreads stacked, খেয়া across the first screen](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/full-site/screens/index-375.webp?raw=true) |
+| Books | ![Books at 1440: "Six books." on the left, a register of six titles with translator, year and price on the right](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/full-site/screens/books-1440.webp?raw=true) | ![Books at 375: the register as a single column, prices on the title row](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/full-site/screens/books-375.webp?raw=true) |
+| Book | ![Book page at 1440: the Bangla title huge on the left, the issue card with the vermilion "Opened 11 OCT 2026" stamp on the right](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/full-site/screens/ekti-nodir-naam-1440.webp?raw=true) | ![Book page at 375: title, then the issue card and stamp, then the first line](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/full-site/screens/ekti-nodir-naam-375.webp?raw=true) |
+| Visit | ![Visit at 1440: "Banglabazar." with the address on the left, hours and email ordering on the right](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/full-site/screens/visit-1440.webp?raw=true) | ![Visit at 375: address, hours, ordering, book fair](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/full-site/screens/visit-375.webp?raw=true) |
 
-After opening the book page, the register keeps its stamp ([books, remembered](../../../../docs/examples/full-site/screens/books-1440-remembered.webp)). Under reduced motion the book page shows the stamp at rest from the first frame ([screenshot](../../../../docs/examples/full-site/screens/ekti-nodir-naam-1440-reduced.webp)).
+After opening the book page, the register keeps its stamp ([books, remembered](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/full-site/screens/books-1440-remembered.webp?raw=true)). Under reduced motion the book page shows the stamp at rest from the first frame ([screenshot](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/full-site/screens/ekti-nodir-naam-1440-reduced.webp?raw=true)).
 
 ## Run it yourself
 

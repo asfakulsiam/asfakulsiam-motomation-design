@@ -60,7 +60,11 @@ To run inside Claude Code instead of the raw-API loop (the agent the published r
 Results land in `$OUT/studio/` (`baseline-s7101/`, `skill-s7101/`, `judge/`) and `$OUT/summary.json`. The published runs judged with models from a family other than the generator's. With one key you get a single-family judge, so say so when you report it.
 
 ## Where the screenshots are
-Since v2.2.0, benchmark screenshots (`shot-*.webp`, about 15 MB) live on the [`evals` branch](https://github.com/asfakulsiam/asfakulsiam-motomation-design/tree/evals/evals/results), so installing the skill doesn't download them. Main keeps every report, `summary.json`, `checks.json`, judge file, prompt, transcript and built `index.html`. The report images link to the `evals` branch. To re-judge an old run, check out its screenshots first: `git checkout origin/evals -- evals/results/<run>`.
+### Screenshots live on evals branch
+
+Since v2.2.0, benchmark screenshots have lived on the [`evals` branch](https://github.com/asfakulsiam/asfakulsiam-motomation-design/tree/evals/evals/results), and since 2026-10-13 every heavy artifact does: screenshots (`shot-*.webp`, `*.png`, `*.jpg`), built pages (`index.html`), `motion-report.html`, transcripts (`transcript.jsonl`, `transcript.jsonl.gz`), the docs screenshots under `docs/`, and the Tier 5 frame sequences (`evals/frames/`, restored by `node scripts/fetch-frames.mjs`). The full list is [`evals/MOVED-FROM-MAIN.txt`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/MOVED-FROM-MAIN.txt) on that branch. Installing the skill doesn't download any of it.
+
+Main keeps every report, `summary.json`, `run.json`, `meta.json`, `checks.json`, judge file and prompt. Report links to moved files point at the `evals` branch. To re-judge or re-measure an old run, check out its artifacts first: `git checkout origin/evals -- evals/results/<run>` (then `git restore --staged evals/results/<run>` so they are not committed back; `.gitignore` also blocks them).
 
 ## Agents tested so far
 | Agent | Benchmarked | Notes |

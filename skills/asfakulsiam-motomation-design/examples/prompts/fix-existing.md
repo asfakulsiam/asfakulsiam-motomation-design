@@ -11,7 +11,7 @@ A real failing page, fixed with the short route from `SKILL.md` ("When to use th
 
 ## The broken page
 
-![The hotel homepage at 1440px: small brass capitals "SHANKHARI BAZAR · PURAN DHAKA" above a large serif headline, an arched green door, and a dark booking bar fixed to the bottom of the window](../../../../docs/examples/fix-existing/before-1440.webp)
+![The hotel homepage at 1440px: small brass capitals "SHANKHARI BAZAR · PURAN DHAKA" above a large serif headline, an arched green door, and a dark booking bar fixed to the bottom of the window](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/fix-existing/before-1440.webp?raw=true)
 
 It looks finished. The gate disagrees: every small brass label on the page is below WCAG AA.
 
@@ -80,7 +80,7 @@ The whole fix, three lines ([`fix.diff`](../../../../docs/examples/fix-existing/
 +.walks li span{font:600 13px var(--sans);letter-spacing:.1em;color:var(--brass-text);padding-top:8px}
 ```
 
-![The numbered walks list before (brass numbers, 3.07:1) and after (darker brass, 5.11:1); the list is otherwise identical](../../../../docs/examples/fix-existing/walks-before-after.webp)
+![The numbered walks list before (brass numbers, 3.07:1) and after (darker brass, 5.11:1); the list is otherwise identical](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/examples/fix-existing/walks-before-after.webp?raw=true)
 
 **Restraint Gate (short route):** what the fix did *not* add. The labels were not enlarged, made bold or turned into ink: any of those also passes, but changes the design. No second accent was introduced. The large brass time and the focus ring keep the original brass because they already pass. **Reduced motion:** no motion was touched. **Accessibility:** contrast fixed; accessible names were already at 0 missing and stay at 0; the focus ring is unchanged.
 
