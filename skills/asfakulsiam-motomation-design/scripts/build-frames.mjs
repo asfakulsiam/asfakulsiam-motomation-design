@@ -3,6 +3,7 @@
 // storyboard stills and an all-intra MP4. No Blender, no After Effects: the scene is a plain JS module drawn with the
 // Canvas 2D API in headless Chromium (Playwright), encoded with ffmpeg (libwebp / libaom-av1 / libx264).
 //
+// Run from the skill folder (skills/asfakulsiam-motomation-design); paths are relative to where you run it.
 //   node scripts/build-frames.mjs --scene <scene.mjs> --out <dir>                   desktop + mobile + poster + stills + mp4
 //   node scripts/build-frames.mjs --scene <scene.mjs> --out <dir> --format avif     AVIF frames instead of WebP
 //   node scripts/build-frames.mjs --scene <scene.mjs> --out <dir> --check           render again into a temp folder and

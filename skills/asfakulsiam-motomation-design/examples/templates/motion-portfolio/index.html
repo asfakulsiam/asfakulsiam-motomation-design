@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Noor Haque · titles and motion for film</title>
+<meta name="description" content="Noor Haque designs title sequences in Dhaka. The reel on this page is a film you play by scrolling: four shots, four commissions.">
+<link rel="preload" as="image" href="poster.webp">
+<style>
+@font-face{font-family:"Bricolage Grotesque";font-style:normal;font-weight:300 700;font-display:swap;src:url(../fonts/BricolageGrotesque-300-700-normal-latin.woff2) format("woff2")}
+@font-face{font-family:"Hanken Grotesk";font-style:normal;font-weight:400 700;font-display:swap;src:url(../fonts/HankenGrotesk-400-700-normal-latin.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/JetBrainsMono-400-normal-latin.woff2) format("woff2")}
+  /* motomation · archetype: film-reel · mutation: tempo-shift · signature: timecode-rail · tier: 5 · critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp28] R5[cuts:3,anim:2] M5[t5:pins1/2,webgl0/1,js3/250KB,rm0] V5[entrance-repeats:0] Q5[prog:Δ15.4%,smooth:sandbox,rm:flow] A5[focus:7/7,tgt:0f6w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · gate/3 · 1e2ee08ccc · skipped 2/45@1440 */
+  :root {
+    --ground: #0A0D12; --surface: #141922; --ink: #EEE8DC; --muted: #A39D90; --accent: #F2A541;
+    --line: rgba(238, 232, 220, 0.16);
+    --display: "Bricolage Grotesque", "Arial Narrow", sans-serif;
+    --text: "Hanken Grotesk", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--ground); color: var(--ink); }
+  body { font: 400 clamp(1rem, 0.96rem + 0.2vw, 1.125rem)/1.6 var(--text); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .skip { position: absolute; left: -9999px; } .skip:focus { left: 1rem; top: 1rem; z-index: 20; background: var(--ink); color: var(--ground); padding: .6rem 1rem; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .mono { font: 400 0.75rem/1.5 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+  header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5vw; border-bottom: 1px solid var(--line); }
+  header a { display: inline-block; padding: 0.5rem 0; text-decoration: none; }
+
+  .hook { min-height: 88svh; display: grid; align-content: end; gap: 2.5rem; padding: 12vh 5vw 8vh; }
+  .hook h1 { font: 300 clamp(3.25rem, 11.5vw, 13rem)/0.86 var(--display); letter-spacing: -0.045em; max-width: 12ch; }
+  .hook h1 em { font-style: normal; font-weight: 700; color: var(--accent); }
+  .hook .row { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; align-items: end; }
+  .hook .lead { grid-column: 1 / 7; max-width: 44ch; color: var(--muted); }
+  .hook .lead strong { color: var(--ink); font-weight: 600; }
+  .hook .row .mono { grid-column: 9 / 13; justify-self: end; text-align: right; }
+
+  /* The reel. Without motion (reduced motion, no JavaScript) it is a storyboard: four stills from the film's own
+     frames, in normal flow, each with its caption beside it, like the pages of a treatment. No canvas is mounted.
+     With motion, the script adds .reel-on: the section grows to 520vh, the stage sticks for the whole pass, a canvas
+     is created and draws the frame sequence for the scroll position, and the same four figures become the captions
+     over the film (one visible at a time; focusing a caption link moves the film to that shot). */
+  .reel { border-top: 1px solid var(--line); }
+  .reel__head { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; padding: 9vh 5vw 6vh; }
+  .reel__head h2 { grid-column: 1 / 8; font: 600 clamp(1.75rem, 1.2rem + 2.4vw, 3.5rem)/1.05 var(--display); letter-spacing: -0.02em; }
+  .reel__head p { grid-column: 9 / 13; color: var(--muted); align-self: end; }
+  .shots { list-style: none; display: grid; gap: 12vh; padding: 0 5vw 16vh; }
+  .shot { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; align-items: end; }
+  .shot img { grid-column: 1 / 9; width: 100%; height: auto; aspect-ratio: 16 / 9; background: var(--surface); display: block; }
+  .shot .cap { grid-column: 9 / 13; display: grid; gap: 0.6rem; }
+  .shot .tc { color: var(--accent); }
+  .shot h3 { font: 600 clamp(1.75rem, 1.1rem + 2vw, 3rem)/1 var(--display); letter-spacing: -0.02em; }
+  .shot h3 a { text-decoration: none; display: inline-block; padding: 0.15rem 0; }
+  .shot .cap p { color: var(--muted); max-width: 34ch; }
+  .rail { display: none; }
+
+  .reel-on .reel { height: 520vh; position: relative; }
+  .reel-on .reel__head { display: none; }
+  .reel-on .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: #000; }
+  .reel-on .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .reel-on .shots { position: absolute; left: 5vw; right: 5vw; bottom: 13vh; padding: 0; display: block; }
+  .reel-on .shot { position: absolute; left: 0; bottom: 0; display: block; max-width: min(40rem, 90vw); opacity: 0; transform: translateY(14px);
+    transition: opacity 360ms var(--ease), transform 480ms var(--ease); pointer-events: none; }
+  .reel-on .shot.on, .reel-on .shot:focus-within { opacity: 1; transform: none; pointer-events: auto; }
+  .reel-on .shot img { display: none; }
+  .reel-on .shot .cap { padding: 1rem 1.25rem 1.1rem; background: rgba(10, 13, 18, 0.82); border-left: 2px solid var(--accent); }
+  .reel-on .shot h3 { font-size: clamp(2.25rem, 1.2rem + 4vw, 5.5rem); }
+  .reel-on .rail { position: absolute; left: 5vw; right: 5vw; bottom: 5vh; display: flex; gap: 1rem; align-items: center; font: 400 0.75rem/1 var(--mono);
+    letter-spacing: 0.08em; font-variant-numeric: tabular-nums; color: var(--ink); background: rgba(10, 13, 18, 0.82); padding: 0.6rem 0.8rem; }
+  .rail i { position: relative; flex: 1; height: 1px; background: var(--line); }
+  .rail i b { position: absolute; inset: 0; background: var(--accent); transform-origin: left; transform: scaleX(0); }
+  .rail .chap { min-width: 7.5em; }
+
+  .credits { padding: 14vh 5vw; border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
+  .credits h2 { grid-column: 1 / 4; font: 600 clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem)/1.1 var(--display); }
+  .credits ol { grid-column: 4 / 13; list-style: none; }
+  .credits li { display: grid; grid-template-columns: 4.5rem 1fr 1fr; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .credits li:first-child { border-top: 1px solid var(--line); }
+  .credits .t { font: 600 1.25rem/1.2 var(--display); }
+  .credits .r { color: var(--muted); }
+
+  .ask { min-height: 80svh; display: grid; align-content: center; gap: 2rem; padding: 10vh 5vw; border-top: 1px solid var(--line); }
+  .ask h2 { font: 300 clamp(2.75rem, 8.5vw, 9.5rem)/0.9 var(--display); letter-spacing: -0.04em; max-width: 14ch; }
+  .ask h2 em { font-style: normal; font-weight: 700; color: var(--accent); }
+  .ask p { color: var(--muted); max-width: 44ch; }
+  .btn { justify-self: start; display: inline-flex; gap: 0.75rem; align-items: center; padding: 1.05rem 1.6rem; border: 1px solid var(--ink); color: var(--ink); text-decoration: none; font-weight: 600;
+    transition: background-color 160ms var(--ease), color 160ms var(--ease); }
+  .btn:hover { background: var(--accent); border-color: var(--accent); color: var(--ground); }
+  footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding: 2rem 5vw 3rem; border-top: 1px solid var(--line); }
+
+  @media (max-width: 767px) {
+    .hook .lead, .hook .row .mono, .reel__head h2, .reel__head p, .credits h2, .credits ol { grid-column: 1 / -1; }
+    .hook .row .mono { justify-self: start; text-align: left; }
+    .shot > * { grid-column: 1 / -1 !important; }
+    .credits li { grid-template-columns: 3.5rem 1fr; }
+    .credits .r { grid-column: 2; }
+    .reel-on .reel { height: 340vh; }
+    .reel-on .shots { bottom: 16vh; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header><a class="mono" href="#main">Noor Haque · titles</a><span class="mono">Dhaka · since 2014</span></header>
+
+<main id="main">
+  <section class="hook" aria-labelledby="t">
+    <h1 id="t">Titles that <em>hold</em> the frame</h1>
+    <div class="row">
+      <p class="lead"><strong>I design the first ninety seconds of a film:</strong> the opening titles, the cast cards, the end crawl. Below is the 2026 reel. Scroll to play it; stop, and it holds the frame.</p>
+      <p class="mono">Reel 2026 · 4 shots · 00:06:00</p>
+    </div>
+  </section>
+
+  <section class="reel" aria-labelledby="reel-t">
+    <div class="stage">
+      <div class="reel__head">
+        <h2 id="reel-t">The 2026 reel, as a storyboard</h2>
+        <p>Four shots, one commission each. With motion on, this is a film you scrub by scrolling.</p>
+      </div>
+      <ol class="shots">
+        <li class="shot" id="shot-1"><img src="storyboard/1.webp" width="1600" height="900" alt="A single horizontal slit of amber light across a dark frame." loading="lazy">
+          <div class="cap"><p class="mono tc">Shot 01 · 00:00:00</p><h3><a href="#shot-1" data-jump="0">Nodir Opar</a></h3><p>Main titles for a river drama. One line of light opens, and the cast arrives on it.</p></div></li>
+        <li class="shot" id="shot-2"><img src="storyboard/2.webp" width="1600" height="900" alt="The slit has lifted into a twisting ribbon, amber on one face and white on the other." loading="lazy">
+          <div class="cap"><p class="mono tc">Shot 02 · 00:01:12</p><h3><a href="#shot-2" data-jump="1">Kantha</a></h3><p>Series titles. The stitch is the title card; each name rides a turn of the thread.</p></div></li>
+        <li class="shot" id="shot-3"><img src="storyboard/3.webp" width="1600" height="900" alt="Rectangular film gates recede to a vanishing point while the ribbon passes through them." loading="lazy">
+          <div class="cap"><p class="mono tc">Shot 03 · 00:03:00</p><h3><a href="#shot-3" data-jump="2">Projectionist</a></h3><p>A festival trailer. The camera pushes through every gate a print passes on its way to the screen.</p></div></li>
+        <li class="shot" id="shot-4"><img src="storyboard/4.webp" width="1600" height="900" alt="The gates have closed into one frame filled with warm light." loading="lazy">
+          <div class="cap"><p class="mono tc">Shot 04 · 00:04:12</p><h3><a href="#shot-4" data-jump="3">End card</a></h3><p>An ident for a cinema chain: every door closes into one lit screen, then the light cuts.</p></div></li>
+      </ol>
+      <div class="rail" aria-hidden="true"><span data-code>00:00:00</span><span class="chap" data-chap>Shot 01</span><i><b data-bar></b></i><span>00:06:00</span></div>
+    </div>
+  </section>
+
+  <section class="credits" aria-labelledby="cr">
+    <h2 id="cr">Credits</h2>
+    <ol>
+      <li><span class="mono">2026</span><span class="t">Projectionist</span><span class="r">Festival trailer · design and animation</span></li>
+      <li><span class="mono">2025</span><span class="t">Nodir Opar</span><span class="r">Main and end titles · feature</span></li>
+      <li><span class="mono">2025</span><span class="t">End card</span><span class="r">Cinema ident · direction</span></li>
+      <li><span class="mono">2024</span><span class="t">Kantha</span><span class="r">Series titles · 8 episodes</span></li>
+      <li><span class="mono">2023</span><span class="t">Monsoon Ledger</span><span class="r">Documentary titles and maps</span></li>
+      <li><span class="mono">2021</span><span class="t">The Ferry at Four</span><span class="r">Short film · titles and grade notes</span></li>
+    </ol>
+  </section>
+
+  <section class="ask" aria-labelledby="ask">
+    <h2 id="ask">Booking titles for <em>2027</em></h2>
+    <p>Send the cut, the runtime and the date you lock picture. I reply within two working days with a treatment and a fee.</p>
+    <a class="btn" href="mailto:titles@noorhaque.film">titles@noorhaque.film <span aria-hidden="true">→</span></a>
+  </section>
+</main>
+<footer><span class="mono">Noor Haque · title design</span><span class="mono">Reduced motion shows the storyboard</span></footer>
+
+<script>
+(() => {
+  const rm = matchMedia("(prefers-reduced-motion: reduce)");
+  if (rm.matches) return; // the storyboard is the reduced-motion page: no canvas, no pin, nothing loads
+  const root = document.documentElement, reel = document.querySelector(".reel"), stage = reel.querySelector(".stage");
+  const mobile = matchMedia("(max-width: 767px)").matches;
+  const N = mobile ? 90 : 180, dir = mobile ? "frames-mobile" : "frames";
+  const frames = new Array(N); let loaded = 0;
+  const canvas = document.createElement("canvas"); canvas.setAttribute("aria-hidden", "true");
+  const ctx = canvas.getContext("2d");
+  const figs = [...reel.querySelectorAll(".shot")], code = reel.querySelector("[data-code]"), chap = reel.querySelector("[data-chap]"), bar = reel.querySelector("[data-bar]");
+  const shots = [[0, 0.25], [0.25, 0.5], [0.5, 0.75], [0.75, 1]];
+  let p = 0, drawn = -1, active = -1, raf = 0;
+
+  root.classList.add("reel-on"); stage.prepend(canvas);
+  for (let i = 0; i < N; i++) { const im = new Image(); im.decoding = "async"; im.onload = () => { frames[i] = im; loaded++; if (Math.abs(i - Math.round(p * (N - 1))) < 3) { drawn = -1; tick(); } }; im.src = `${dir}/${String(i + 1).padStart(4, "0")}.webp`; }
+
+  const size = () => { const d = Math.min(devicePixelRatio || 1, 2); const w = Math.round(canvas.clientWidth * d), h = Math.round(canvas.clientHeight * d); if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; drawn = -1; } };
+  const nearest = (i) => { for (let k = 0; k < N; k++) { if (frames[i - k]) return frames[i - k]; if (frames[i + k]) return frames[i + k]; } return null; };
+  const tc = (s) => [Math.floor(s / 60), Math.floor(s) % 60, Math.floor((s % 1) * 24)].map((n) => String(n).padStart(2, "0")).join(":");
+  function draw() {
+    const i = Math.round(p * (N - 1)); if (i === drawn && frames[i]) return;
+    const im = nearest(i); if (!im) return; drawn = frames[i] ? i : -1;
+    const cw = canvas.width, ch = canvas.height, s = Math.max(cw / im.naturalWidth, ch / im.naturalHeight); // cover
+    const w = im.naturalWidth * s, h = im.naturalHeight * s;
+    ctx.fillStyle = "#000"; ctx.fillRect(0, 0, cw, ch); ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h);
+  }
+  function tick() {
+    raf = 0; size();
+    const r = reel.getBoundingClientRect(); p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight)));
+    draw();
+    bar.style.transform = `scaleX(${p})`; code.textContent = tc(p * 6); // a 6-second reel at 24 fps: mm:ss:ff
+    const s = p <= 0 ? -1 : Math.min(3, Math.floor(p * 4));
+    const now = s < 0 ? 0 : s;
+    if (now !== active) { figs.forEach((f, k) => f.classList.toggle("on", k === now)); chap.textContent = `Shot 0${now + 1}`; active = now; }
+  }
+  const req = () => { if (!raf) raf = requestAnimationFrame(tick); };
+  addEventListener("scroll", req, { passive: true }); addEventListener("resize", req);
+  // keyboard and screen reader: a focused or clicked shot link moves the film to the middle of that shot
+  const jump = (e) => { const [a, b] = shots[+e.currentTarget.dataset.jump]; const top = reel.getBoundingClientRect().top + scrollY;
+    scrollTo({ top: top + (reel.offsetHeight - innerHeight) * (a + b) / 2, behavior: "instant" }); };
+  reel.querySelectorAll("[data-jump]").forEach((a) => { a.addEventListener("focus", jump); a.addEventListener("click", (e) => { e.preventDefault(); jump(e); }); });
+  // a reader who turns reduced motion on mid-visit gets the storyboard back
+  rm.addEventListener?.("change", (e) => { if (e.matches) location.reload(); });
+  tick();
+})();
+</script>
+</body>
+</html>
