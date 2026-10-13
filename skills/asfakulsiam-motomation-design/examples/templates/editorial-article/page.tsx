@@ -1,6 +1,6 @@
 // @motomation-template
 // id: editorial-article
-// name: The river took the school — The Delta Review
+// name: The river took the school · The Delta Review
 // kind: editorial article
 // archetype: broadsheet
 // mutation: print-rule

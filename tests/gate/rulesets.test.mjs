@@ -43,6 +43,7 @@ const P = (o) => ids(perfRules({ ...goodPerf, ...o }));
 say(P({ images: [{ src: "/hero.jpg", top: 100, area: 5e5, loading: null }] }) === "perf-01", "perf-01: JPEG without a modern source caught");
 say(P({ images: [{ src: "/hero.jpg", top: 100, area: 5e5, loading: null, inPictureModern: true }] }) === "", "perf-01: JPEG inside <picture> with AVIF passes");
 say(P({ images: [{ src: "/b.webp", top: 1800, area: 1e5, loading: null }] }) === "perf-02", "perf-02: eager below-the-fold image caught");
+say(P({ images: [{ src: "data:image/svg+xml,%3Csvg%3E", top: 1800, area: 1e5, loading: null }] }) === "", "perf-02: an inline data: image below the fold needs no lazy loading");
 say(P({ images: [{ src: "/hero.webp", top: 0, area: 9e5, loading: "lazy" }] }) === "perf-03", "perf-03: lazy LCP image caught");
 say(P({ jsKB: 120 }) === "perf-04", "perf-04: JS over budget caught");
 say(P({ scripts: [{ inline: true, type: null, text: "  /* nothing */ " }] }) === "perf-11", "perf-11: empty inline script caught");

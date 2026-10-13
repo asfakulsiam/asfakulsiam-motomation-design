@@ -15,6 +15,8 @@ import { createHash } from "node:crypto";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");
+// where GitHub Pages serves the templates (.github/workflows/pages.yml copies them to /templates/)
+export const PAGES = "https://asfakulsiam.github.io/asfakulsiam-motomation-design/templates/";
 const DIR = join(SKILL, "examples/templates");
 const FIELDS = ["id", "name", "kind", "archetype", "mutation", "signature", "sections", "fonts", "theme", "what"];
 const STAMP_RE = /<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g;
@@ -85,12 +87,16 @@ export function sourceHash(t) {
   return h.digest("hex").slice(0, 16);
 }
 
+// Kit links (seo-11: a page links to at least three others). Outside #root so hydration never sees it. These are
+// links into the Motomation Design site on GitHub Pages; when a template becomes a real site, replace this nav with
+// the site's own links (its other pages), and keep at least three.
+export const KIT = (next) => `<nav class="kit" aria-label="Motomation Design"><p>A Motomation Design page template. <a href="${next.id}.html">Next template: ${next.name}</a> · <a href="./">Browse all templates</a> · <a href="../gallery/">Open the component gallery</a> · <a href="../">Read the docs</a></p></nav>`;
 const BASE = `*,*::before,*::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font-text);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-img,svg,canvas{max-width:100%}a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+img,svg,canvas{max-width:100%}a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3px}\n.kit{padding:20px 24px 28px;background:var(--ground);color:var(--ink);font:15px/1.5 var(--font-text)}.kit p{margin:0;max-width:72ch}
 .skip{position:absolute;left:12px;top:-60px;z-index:100;padding:10px 16px;background:var(--ink);color:var(--ground);border-radius:6px;text-decoration:none}.skip:focus{top:12px}`;
 
-async function build(t) {
+async function build(t, next) {
   const req = createRequire(join(ROOT, "noop.js")); const esbuild = req("esbuild");
   const nodePaths = [join(ROOT, "node_modules"), ...(process.env.NODE_PATH || "").split(":").filter(Boolean)];
   const tmp = join(DIR, t.id, ".build"); mkdirSync(tmp, { recursive: true });
@@ -108,6 +114,13 @@ async function build(t) {
     const stack = (fam, fallback) => `"${fam}","Hind Siliguri",${fallback}`;
     const root = `:root{${t.theme};--font-display:${stack(t.fonts.display, "Georgia,serif")};--font-text:${stack(t.fonts.text, "sans-serif")};--font-mono:${stack(t.fonts.mono, "ui-monospace,monospace")}}`;
     const stamp = `/* motomation · archetype: ${t.archetype} · mutation: ${t.mutation} · signature: ${t.signature} · tier: ${t.tier} */`;
+    // gate/4 head (craft/seo.md, craft/security.md): canonical on the Pages URL, a CSP whose script-src is the hash of the
+    // one inline script, a referrer policy; og:image and JSON-LD when the template folder ships og.jpg (scripts/build-og.mjs) / schema.json
+    const js = client.outputFiles[0].text.replace(/<\/script/gi, "<\\/script");
+    const csp = `default-src 'self'; script-src 'sha256-${createHash("sha256").update(js).digest("base64")}'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self' mailto:`;
+    const own = (f) => existsSync(join(DIR, t.id, f));
+    const og = own("og.jpg") ? `\n<meta property="og:type" content="website">\n<meta property="og:title" content="${t.name.replace(/"/g, "&quot;")}">\n<meta property="og:description" content="${t.what.replace(/"/g, "&quot;")}">\n<meta property="og:url" content="${PAGES}${t.id}.html">\n<meta property="og:image" content="${PAGES}${t.id}/og.jpg">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">` : "";
+    const ld = own("schema.json") ? `\n<script type="application/ld+json">${JSON.stringify(JSON.parse(readFileSync(join(DIR, t.id, "schema.json"), "utf8")))}</script>` : "";
     const html = `<!doctype html>
 <html lang="en">
 <head>
@@ -116,6 +129,9 @@ async function build(t) {
 <title>${t.name}</title>
 <link rel="icon" href="data:,">
 <meta name="description" content="${t.what.replace(/"/g, "&quot;")}">
+<link rel="canonical" href="${PAGES}${t.id}.html">
+<meta http-equiv="Content-Security-Policy" content="${csp}">
+<meta name="referrer" content="strict-origin-when-cross-origin">${og}${ld}
 <meta name="motomation-template" content="source:${sourceHash(t)} sections:${t.list.join(",")}">
 ${preload}
 <style>
@@ -128,7 +144,8 @@ ${BASE}
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div id="root">${body}</div>
-<script>${client.outputFiles[0].text.replace(/<\/script/gi, "<\\/script")}</script>
+${KIT(next)}
+<script>${js}</script>
 </body>
 </html>
 `;
@@ -190,7 +207,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     console.log(`Stamped ${f.slice(DIR.length + 1)}: ${line}`); process.exit(0);
   }
   const oi = process.argv.indexOf("--only"); const only = oi > 0 ? process.argv[oi + 1].split(",") : null;
-  for (const t of templates.filter((t) => !only || only.includes(t.id))) { const r = await build(t); console.log(`${r.kept ? "kept " : "wrote"} examples/templates/${t.id}.html (${r.kb} KB${r.jsKB ? `, script ${r.jsKB} KB` : ""}, tier ${t.tier}, ${t.list.length} sections)`); }
+  for (const t of templates.filter((t) => !only || only.includes(t.id))) { const r = await build(t, templates[(templates.indexOf(t) + 1) % templates.length]); console.log(`${r.kept ? "kept " : "wrote"} examples/templates/${t.id}.html (${r.kb} KB${r.jsKB ? `, script ${r.jsKB} KB` : ""}, tier ${t.tier}, ${t.list.length} sections)`); }
   writeFileSync(join(DIR, "README.md"), renderReadme(templates));
   console.log(`Wrote examples/templates/README.md (${templates.length} templates + ${collectFilms().length} Tier 5 film templates)`);
 }

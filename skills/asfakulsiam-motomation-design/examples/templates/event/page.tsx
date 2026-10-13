@@ -1,6 +1,6 @@
 // @motomation-template
 // id: event
-// name: Monsoon Jazz Night — National Theatre Hall, 14 November
+// name: Monsoon Jazz Night · National Theatre Hall, 14 November
 // kind: event landing
 // archetype: poster
 // mutation: scale-abuse

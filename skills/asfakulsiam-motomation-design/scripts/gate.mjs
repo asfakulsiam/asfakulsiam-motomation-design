@@ -137,7 +137,9 @@ async function toUrl(target) {
   return { url: `http://127.0.0.1:${port}/${isDir ? "" : basename(abs)}`, close: () => srv.close() };
 }
 
-// ── in-page helpers (serialised into the page) ────────────────────────────────
+// ── in-page helpers (serialised into the page) ─
+// Every context is opened with bypassCSP: the helpers below (and axe-core) are injected as inline scripts, which a
+// page's own Content-Security-Policy would block. Axis K reads the policy from the page; it is not weakened by this.───────────────────────────────
 const PAGE_LIB = `
 window.__g = {
   key(e) { const p = []; for (let n = e; n && n.nodeType === 1 && n !== document.documentElement; n = n.parentElement) { let i = 1, s = n; while ((s = s.previousElementSibling)) if (s.tagName === n.tagName) i++; p.unshift(n.tagName.toLowerCase() + ":" + i); } return p.join(">"); },
@@ -174,7 +176,7 @@ async function settle(page) {
   await page.evaluate(() => scrollTo(0, 0)); await page.waitForTimeout(700);
 }
 async function open(browser, url, opts) {
-  const ctx = await browser.newContext({ deviceScaleFactor: 1, ...opts });
+  const ctx = await browser.newContext({ bypassCSP: true, deviceScaleFactor: 1, ...opts });
   const page = await ctx.newPage(); const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(url, { waitUntil: "networkidle", timeout: T(60000) }).catch(() => page.waitForTimeout(3000));
@@ -480,7 +482,7 @@ async function numbers(browser, url) {
     return out;
   };
   const sample = async (reduced) => {
-    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, reducedMotion: reduced ? "reduce" : "no-preference" });
+    const ctx = await browser.newContext({ bypassCSP: true, viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, reducedMotion: reduced ? "reduce" : "no-preference" });
     const page = await ctx.newPage();
     await page.goto(url, { waitUntil: "load", timeout: T(60000) }).catch(() => {});
     await page.addScriptTag({ content: PAGE_LIB }).catch(() => {}); await page.waitForTimeout(700);
@@ -515,7 +517,7 @@ async function numbers(browser, url) {
 
 async function structure(browser, url) {
   // entrance pattern per top-level section, and the measurable motion budget (pins, WebGL canvases, JS weight)
-  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 }); const page = await ctx.newPage();
+  const ctx = await browser.newContext({ bypassCSP: true, viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 }); const page = await ctx.newPage();
   await page.goto(url, { waitUntil: "domcontentloaded", timeout: T(60000) }).catch(() => {});
   await page.addScriptTag({ content: PAGE_LIB }).catch(() => {});
   const SNAP = () => { window.__secs = window.__secs || [...document.querySelectorAll("section, main > *, body > header, body > footer")].filter((e, i, a) => !a.some((o) => o !== e && o.contains(e)) && e.getBoundingClientRect().height > 40);
@@ -554,7 +556,7 @@ async function structure(browser, url) {
 
 // ── the four rule sets (gate/4): facts from the page, judged by scripts/rulesets.mjs → C S P K ──
 async function ruleFacts(browser, url) {
-  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 }); const page = await ctx.newPage();
+  const ctx = await browser.newContext({ bypassCSP: true, viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 }); const page = await ctx.newPage();
   let headers = {}, cookies = [];
   try {
     const res = await page.goto(url, { waitUntil: "load", timeout: T(60000) }).catch(() => null);
@@ -579,7 +581,7 @@ async function ruleFacts(browser, url) {
       const sub = [...document.querySelectorAll("img[src], script[src], link[rel~=stylesheet][href], iframe[src], source[src], video[src], audio[src]")].map((e) => e.getAttribute("src") || e.getAttribute("href"));
       return { blocks: [...blocks, ...loose], ctas, extras, images: imgs, scripts,
         seo: { title: document.title || null, description: meta('meta[name="description"]'), robots: [...document.querySelectorAll('meta[name="robots"], meta[name="googlebot"]')].map((m) => m.getAttribute("content") || ""),
-          canonicals: [...document.querySelectorAll('link[rel="canonical"]')].map((l) => l.getAttribute("href") || ""), headings: [...document.querySelectorAll("h1, h2, h3, h4, h5, h6")].filter(vis).map((h) => +h.tagName[1]),
+          canonicals: [...document.querySelectorAll('link[rel="canonical"]')].map((l) => l.getAttribute("href") || ""), headings: [...document.querySelectorAll("h1, h2, h3, h4, h5, h6")].map((h) => +h.tagName[1]), // the outline a crawler reads: hidden headings count
           links: [...document.querySelectorAll("a[href]")].map((a) => a.getAttribute("href")), jsonld: [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => s.textContent),
           ogImage: meta('meta[property="og:image"]'), ogWidth: meta('meta[property="og:image:width"]'), ogHeight: meta('meta[property="og:image:height"]'), subresources: sub },
         metaCsp: document.querySelector('meta[http-equiv="Content-Security-Policy" i]')?.getAttribute("content") ?? null, metaReferrer: meta('meta[name="referrer"]') };
@@ -647,7 +649,7 @@ const ZONES = () => {
 // % of pixels that change between consecutive images (downscaled to 360px wide; channel sum difference > 24)
 async function pixelDiffs(browser, shots) {
   if (shots.length < 2) return [];
-  const ctx = await browser.newContext(); const p = await ctx.newPage();
+  const ctx = await browser.newContext({ bypassCSP: true }); const p = await ctx.newPage();
   const out = await p.evaluate(async (shots) => {
     const load = async (s) => { const i = new Image(); i.src = "data:image/jpeg;base64," + s; await i.decode(); const w = Math.min(360, i.width), h = Math.max(1, Math.round(i.height * w / i.width)); const c = document.createElement("canvas"); c.width = w; c.height = h; const x = c.getContext("2d"); x.drawImage(i, 0, 0, w, h); return x.getImageData(0, 0, w, h).data; };
     const res = []; let prev = null;
@@ -809,7 +811,7 @@ async function a11y(browser, url) {
       shots.push({ it, img: (await page.screenshot({ type: "png", clip: box })).toString("base64") });
     }
     await ctx.close();
-    const c2 = await browser.newContext(); const p2 = await c2.newPage();
+    const c2 = await browser.newContext({ bypassCSP: true }); const p2 = await c2.newPage();
     const ratios = await p2.evaluate(async (imgs) => {
       const lum = ([r, g, b]) => { const f = (x) => { x /= 255; return x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
       const out = [];
@@ -954,7 +956,7 @@ function print(r) {
 
 // ── optional motion report (--report): scroll-frame strips, not part of the gate's numbers ──
 async function frameStrip(browser, url, viewport, reducedMotion, steps = 8) {
-  const ctx = await browser.newContext({ viewport, reducedMotion }); const page = await ctx.newPage();
+  const ctx = await browser.newContext({ bypassCSP: true, viewport, reducedMotion }); const page = await ctx.newPage();
   try {
     await page.goto(url, { waitUntil: "load", timeout: T(30000) }).catch(() => {}); await page.waitForTimeout(800);
     const max = await page.evaluate(() => Math.max(0, document.documentElement.scrollHeight - innerHeight));
@@ -1041,7 +1043,7 @@ async function withRetry(pw, target, run) {
 
 async function main() {
   if (typeof flags.report === "string" && !targets.length) { targets.push(flags.report); flags.report = true; } // `--report file.html` alone: the file is the target
-  if (flags.help || (!targets.length && !flags.verify)) { console.log("Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]] [--timeout s | --timeout-ms ms] [--light]   |   --report <file.html>   |   --verify <file.html> [--url u]"); process.exit(targets.length ? 0 : 1); }
+  if (flags.help || (!targets.length && !flags.verify)) { console.log("Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]] [--timeout s | --timeout-ms ms] [--light] [--rules]   |   --report <file.html>   |   --verify <file.html> [--url u]"); process.exit(targets.length ? 0 : 1); }
   const pw = await loadPlaywright();
   if (!pw) notVerified("no browser (install Playwright: npm i -D playwright && npx playwright install chromium)");
   if (PROBE.constrained) console.error(`gate: constrained machine (${PROBE.why.join(", ")}); a failed scan is retried once in the light footprint`);
@@ -1049,6 +1051,18 @@ async function main() {
   const opts = { design: flags.design ? resolve(String(flags.design)) : undefined, log: flags.log ? resolve(String(flags.log)) : undefined, tier: flags.tier !== undefined ? String(flags.tier) : undefined, archetype: flags.archetype, signature: flags.signature };
   const note = (x) => { if (x.attempts.length) console.error(`gate: measured in the ${x.footprint} footprint after: ${x.attempts.join("; ")}`); };
   try {
+    // --rules: only the four rule sets (C S P K) and the JS weight they need; no stamp (a stamp needs every axis).
+    // For rule fixtures (scripts/check-fixtures.mjs) and a quick look while fixing copy, head tags or headers.
+    if (flags.rules) {
+      const out = []; const b = await launch(pw, !!flags.light);
+      try { for (const t of targets) { const { url, close } = await toUrl(t); try { const st = await structure(b, url); const rf = await ruleFacts(b, url);
+        const pageTier = (() => { try { return !/^https?:/.test(t) ? readStamp(readFileSync(statSync(resolve(t)).isDirectory() ? join(resolve(t), "index.html") : resolve(t), "utf8"))?.fields?.tier : undefined; } catch { return undefined; } })();
+        const r = judgeRules(rf, url, st.jsKB, opts.tier !== undefined ? opts.tier : pageTier); out.push({ target: t, jsKB: st.jsKB, ...r });
+        if (!flags.json) { console.log(`\n${t}\n  ${r.segment}  (rule sets only; no stamp)`); for (const k of ["copy", "seo", "perf", "sec"]) for (const f of r[k].fails) console.log(`     ✗ ${f.id}  ${f.why}${f.at ? `  ${f.at}` : ""}`); }
+      } finally { await close?.(); } } } finally { await b.close().catch(() => {}); }
+      if (flags.json) console.log(JSON.stringify(out.length === 1 ? out[0] : out, null, 2));
+      process.exit(out.every((r) => Object.values(r.counts).every((n) => !n)) ? 0 : 1);
+    }
     if (flags.verify) {
       const file = String(flags.verify); const st = readStamp(readFileSync(file, "utf8"));
       if (!st) verdict(`STAMP REJECTED · ${file}: no motomation stamp comment found`, 2);

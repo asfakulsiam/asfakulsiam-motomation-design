@@ -263,8 +263,18 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
     if (!read("log.json")) fail(`examples/templates/${f.id}: no log.json (the gate's memory axis reads it)`);
     if (!/motomation · [^*]*critique: [^*]+ · gate: c\d+ o\d+ w\d+ rm\d+ a\d+ n\d+ q\d+ k\d+ (?:· gate\/3|· rules: C\d+ S\d+ P\d+ K\d+ · gate\/4) · [0-9a-f]{10}/.test(html || "")) fail(`${f.html} has no measured gate/3 or gate/4 stamp (q and k; gate/4 adds rules: C S P K); run scripts/gate.mjs on it and paste the stamp with build-templates.mjs --stamp ${f.id}`);
   }
+  // v2.5.0 rule sets: every template page carries them in its markup (one h1, description, canonical, no em dash)
+  for (const t of templates) rules.templatePage(existsSync(join(SKILL, t.html)) ? readFileSync(join(SKILL, t.html), "utf8") : null, t.html).forEach(fail);
+  for (const f of films) rules.templatePage(existsSync(join(SKILL, f.html)) ? readFileSync(join(SKILL, f.html), "utf8") : null, f.html).forEach(fail);
   const readme = join(SKILL, "examples/templates/README.md");
   if ((templates.length || films.length) && (!existsSync(readme) || readFileSync(readme, "utf8") !== renderReadme(templates, films))) fail("examples/templates/README.md is stale; run node scripts/build-templates.mjs");
+}
+
+// 9c2. The four rule sets: craft docs hold 20 rules each with their reasoning; the delivery gate lists every one
+{
+  const rules = await import("./template-rules.mjs"); const rd = (f) => (existsSync(join(SKILL, f)) ? readFileSync(join(SKILL, f), "utf8") : null);
+  for (const f of Object.keys(rules.CRAFT_RULES)) rules.craftDoc(f, rd(f)).forEach(fail);
+  rules.gateListsRules(rd("gates/delivery-gate.md")).forEach(fail);
 }
 
 // 9d. Docs site: one page per component, built from the current sources (scripts/build-docs-site.mjs)

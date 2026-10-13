@@ -14,7 +14,7 @@ import { Section, h, label } from "./_shared";
 export function TeamEventLineup() {
   return (
     <Section id="team-event-lineup" title="Lineup">
-      <VelocityMarquee items={["Shayan Chowdhury Arnob", "Armeen Musa", "Rafa Quartet", "Bunty Bhai", "Sumi Akand", "Dhaka Big Band"]} style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(2rem, 6vw, 4.6rem)" }} />
+      <VelocityMarquee separator=" · " items={["Shayan Chowdhury Arnob", "Armeen Musa", "Rafa Quartet", "Bunty Bhai", "Sumi Akand", "Dhaka Big Band"]} style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(2rem, 6vw, 4.6rem)" }} />
       <p style={{ ...label, margin: "48px 0 12px" }}>Running order</p>
       <h2 id="team-event-lineup-title" style={h("clamp(1.8rem, 4vw, 3rem)", { marginBottom: 20 })}>Four sets, one interval.</h2>
       <FlowingMenu label="Running order" items={[{ label: "19:30 · Rafa Quartet", href: "#tickets", marquee: "piano · double bass · drums · tenor sax" }, { label: "20:20 · Sumi Akand", href: "#tickets", marquee: "voice · harmonium · tabla" }, { label: "21:30 · Armeen Musa & guests", href: "#tickets", marquee: "voice · guitar · cello" }, { label: "22:20 · Dhaka Big Band", href: "#tickets", marquee: "seventeen players" }]} />

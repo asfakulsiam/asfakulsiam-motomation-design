@@ -1,6 +1,6 @@
 // @motomation-template
 // id: saas-landing
-// name: Tally — bookkeeping in Bangla and English for small shops
+// name: Tally · bookkeeping in Bangla and English for small shops
 // kind: SaaS landing
 // archetype: workbench
 // mutation: ui-is-content

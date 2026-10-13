@@ -1,6 +1,6 @@
 // @motomation-template
 // id: personal
-// name: Letters from Nusrat — one letter a month
+// name: Letters from Nusrat · one letter a month
 // kind: personal brand
 // archetype: letter
 // mutation: second-person

@@ -1,0 +1,8 @@
+# Response headers for the templates when deployed on a host that reads this file (Netlify, Cloudflare Pages), and
+# for scripts/gate.mjs when it serves these files locally (gate/4 axis K, craft/security.md). GitHub Pages ignores it
+# and cannot set custom headers: gating the live Pages URL reports sec-h2 (no nosniff) until the site moves to a host
+# that can. The CSP and referrer policy are also in each page's <meta>, which works everywhere.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

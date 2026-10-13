@@ -14,7 +14,7 @@ export function FooterStudioMarquee() {
   return (
     <Section id="footer-studio-marquee" title="Hawa Studio footer" hideTitle style={{ borderTop: `1px solid ${LINE}` }}>
       <p style={label}>Clients since 2011</p>
-      <VelocityMarquee items={["Bangladesh Bank Museum", "Sonargaon Archive", "Ministry of Water", "Old Dhaka Trust", "BRAC University Press", "Liberation War Museum", "Bengal Foundation", "Chhayanaut"]} style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(1.6rem, 4vw, 3rem)", margin: "18px 0 40px" }} />
+      <VelocityMarquee separator=" · " items={["Bangladesh Bank Museum", "Sonargaon Archive", "Ministry of Water", "Old Dhaka Trust", "BRAC University Press", "Liberation War Museum", "Bengal Foundation", "Chhayanaut"]} style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(1.6rem, 4vw, 3rem)", margin: "18px 0 40px" }} />
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 16, borderTop: "2px solid currentColor", paddingTop: 14, fontFamily: MONO, fontSize: 13 }}>
         <span>Total · 312 projects · 15 years</span><span style={{ color: MUTED }}>© 2026 Hawa Studio Ltd · Dhaka</span><a href="#hero-studio-ledger" style={{ color: "inherit", display: "inline-block", padding: "4px 0" }}>Back to the first page</a>
       </div>

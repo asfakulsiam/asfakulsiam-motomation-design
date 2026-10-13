@@ -3,7 +3,8 @@ name: Pages
 # (scripts/build-*.mjs); check-repo fails the job if any of them is stale, so Pages never serves an old build.
 #   /            docs site (docs/site): search, a page per component, playground, reduced-motion toggle, mobile preview
 #   /gallery/    the full gallery (every component live on one page), with search, reduced-motion toggle, Mobile 375
-#   /templates/  the 8 gated page templates
+#   /templates/  the 8 gated page templates, plus the two Tier 5 films (frames fetched from the evals branch,
+#                checked against frames.lock.json, so each canonical URL resolves)
 #   /plain/      the CSS + HTML and Tailwind variants of the top 20 components
 on:
   push:
@@ -37,6 +38,9 @@ jobs:
           cp -r docs/site/index.html docs/site/c docs/site/assets _site/
           cp $S/gallery/index.html _site/gallery/index.html
           cp $S/templates/*.html _site/templates/ && cp -r $S/templates/fonts _site/templates/fonts
+          node scripts/fetch-frames.mjs
+          for f in motion-portfolio product-launch; do mkdir -p _site/templates/$f && cp -r $S/templates/$f/index.html $S/templates/$f/poster.webp $S/templates/$f/frames.json $S/templates/$f/frames $S/templates/$f/frames-mobile _site/templates/$f/; done
+          for d in $S/templates/*/; do id=$(basename $d); if [ -f $d/og.jpg ]; then mkdir -p _site/templates/$id && cp $d/og.jpg _site/templates/$id/og.jpg; fi; done   # share images (seo-18)
           cp -r vendor/plain/. _site/plain/
           touch _site/.nojekyll
           test "$(ls _site/c/*.html | wc -l)" -eq "$(ls -d $S/components/*/*.tsx | wc -l)"   # a page per component

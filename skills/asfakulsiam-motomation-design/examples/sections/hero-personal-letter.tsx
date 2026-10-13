@@ -27,7 +27,7 @@ export function HeroPersonalLetter() {
           <p style={body}>This month: a bookbinder in Banglabazar who has bound every edition of one poet since 1974, and won't read any of them.</p>
           <p style={body}>If you'd like the next letter, there's a box at the bottom of this one.</p>
         </div>
-        <p style={{ fontFamily: DISPLAY, fontSize: "2rem", fontStyle: "italic", marginTop: 36 }}>— Nusrat</p>
+        <p style={{ fontFamily: DISPLAY, fontSize: "2rem", fontStyle: "italic", marginTop: 36 }}>Nusrat</p>
       </div>
       </div>
     </Section>

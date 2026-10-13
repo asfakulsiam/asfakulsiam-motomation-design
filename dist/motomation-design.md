@@ -2994,6 +2994,12 @@ A static page sets headers through its host. For local files the gate reads a `_
 format Netlify and Cloudflare Pages use: a path line, then indented `Name: value` lines), so a template proves its
 headers the same way it would ship them.
 
+GitHub Pages cannot set response headers. The templates there carry the CSP and referrer policy as `<meta>` tags (both
+work from a meta tag), but `nosniff` has no meta equivalent: gating a live GitHub Pages URL reports sec-h2 until the
+site moves to a host that reads `_headers` (or sets headers another way). Say so in the hand-off; don't hide it.
+The gate's own browser contexts bypass the page's CSP so its measuring scripts can run; axis K reads the policy, it
+doesn't depend on it being enforced.
+
 ### Secret patterns gate K looks for
 
 Private key blocks (`-----BEGIN … PRIVATE KEY-----`), AWS access key IDs, Stripe live secret keys, GitHub tokens,
@@ -3114,7 +3120,7 @@ It runs six bounded checks in a real browser and prints numbers:
 | `rules` | **The four rule sets** (gate/4, `scripts/rulesets.mjs`), one count per set: the number of distinct rule IDs that fail on the page. **C** copy (`craft/copy.md`): em dashes, aphorism formulas, two-beat antithesis, warm-up openers, vague CTA labels in visible text, alt text, title and meta description. **S** SEO (`craft/seo.md`): noindex, exactly one canonical, title ≤ 60, description ≤ 160, one `h1`, no skipped heading level, JSON-LD parses, ≥ 3 internal links to other pages, clean slugs, no mixed content, `og:image` (1200 × 630 when stated). **P** performance (`craft/performance.md`): AVIF/WebP for raster images, `loading="lazy"` below the fold, the LCP image not lazy, JS gzipped within the tier budget, no empty inline scripts, no render-blocking head scripts. **K** security (`craft/security.md`): cookie flags, secret-shaped strings, URL values written as HTML, CORS wildcard, Content-Security-Policy, `nosniff`, Referrer-Policy (for local files, headers come from a `_headers` file next to the page). | any rule in the set fails; warnings (unsourced claims, long paragraphs, missing JSON-LD, unstated og:image size, unminified scripts, dev builds) are printed and not counted |
 
 The output ends with a stamp line built only from those numbers:
-`gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · <id>`. The id is a hash of what was measured on this page, so the same page gives the same id and a different page does not. `c` is the total of the per-width contrast failures. A stamp from an older gate (`gate/1`: five checks; `gate/2`: no `q`/`k`, no Q/A axes; `gate/3`: no `rules:` segment) is rejected by `--verify`: re-run the gate and paste the new line. The rule-set letters live in their own `rules:` segment because the critique already uses C (concept) and S (sameness).
+`gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · <id>`. The id is a hash of what was measured on this page, so the same page gives the same id and a different page does not. `c` is the total of the per-width contrast failures. A stamp from an older gate (`gate/1`: five checks; `gate/2`: no `q`/`k`, no Q/A axes; `gate/3`: no `rules:` segment) is rejected by `--verify`: re-run the gate and paste the new line. The rule-set letters live in their own `rules:` segment because the critique already uses C (concept) and S (sameness). While fixing copy, head tags or headers, `node scripts/gate.mjs <page> --rules` runs only the four rule sets in a few seconds; it prints no stamp, because a stamp needs every axis.
 
 **Rule: a stamp is only valid if it contains numbers produced by `scripts/gate.mjs` in the same run. A hand-written stamp is rejected.** Paste the line the script printed. Never type the numbers yourself and never copy them from an example or an earlier page. `--verify` re-scans the page and rejects any stamp whose numbers or id differ from the fresh scan, or that has no `gate:` segment at all.
 

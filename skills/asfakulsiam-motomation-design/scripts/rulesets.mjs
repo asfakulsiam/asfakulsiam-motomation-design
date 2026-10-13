@@ -92,7 +92,8 @@ export function perfRules({ images = [], scripts = [], jsKB = 0, budgetKB = 250,
   const fails = [], warns = [], f = (id, why, at = "") => fails.push({ id, why, at });
   const vis = images.filter((i) => i.area > 0);
   for (const i of vis) if (/\.(jpe?g|png|gif)(\?|#|$)|^data:image\/(jpe?g|png|gif)/i.test(i.src || "") && !i.inPictureModern) f("perf-01", "raster image with no AVIF/WebP source", clip(i.src || "", 50));
-  for (const i of vis) if (i.top >= foldPx && i.loading !== "lazy") f("perf-02", `below-the-fold image (top ${Math.round(i.top)}px) without loading="lazy"`, clip(i.src || "", 50));
+  // a data: URI is already in the document, so lazy-loading it saves no request; perf-02 is about network images
+  for (const i of vis) if (i.top >= foldPx && i.loading !== "lazy" && !/^data:/i.test(i.src || "")) f("perf-02", `below-the-fold image (top ${Math.round(i.top)}px) without loading="lazy"`, clip(i.src || "", 50));
   const lcp = vis.filter((i) => i.top < foldPx).sort((a, b) => b.area - a.area)[0];
   if (lcp && lcp.loading === "lazy") f("perf-03", "the largest first-screen image is lazy-loaded", clip(lcp.src || "", 50));
   if (jsKB > budgetKB) f("perf-04", `${jsKB} KB of JS gzipped (budget ${budgetKB} KB)`);
@@ -100,7 +101,7 @@ export function perfRules({ images = [], scripts = [], jsKB = 0, budgetKB = 250,
   for (const s of scripts) {
     if (s.inline && JS(s.type) && !(s.text || "").replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*|<!--|-->/g, "").trim()) f("perf-11", "inline script with no code (empty or comments only)");
     if (!s.inline && s.inHead && (!s.type || /javascript/i.test(s.type)) && !s.defer && !s.async) f("perf-12", "render-blocking script in <head> (add defer or async)", clip(s.src || "", 50));
-    const t = s.text || ""; if (t.length > 2048) { const lines = t.split("\n"); const comments = (t.match(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g) || []).join("").length;
+    const t = s.text || ""; if (t.length > 2048) { const lines = t.split("\n"); const comments = (t.match(/^\s*\/\*[\s\S]*?\*\/|^\s*\/\/[^\n]*/gm) || []).join("").length; // comments that start a line (a "//" inside a URL string is not one)
       if (comments / t.length > 0.25 || (lines.length > 80 && t.length / lines.length < 40)) warns.push({ id: "perf-07", why: "a script over 2 KB that looks unminified", at: s.src ? clip(s.src, 50) : "inline" }); }
   }
   return { fails, warns, checked: vis.length + scripts.length };

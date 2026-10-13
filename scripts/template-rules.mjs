@@ -84,3 +84,46 @@ export function tier5Assets(tier, files, manifest = null, lock = null) {
   if (frames.length && m && m.desktop?.frames !== frames.length) p.push(`frames.json says ${m.desktop?.frames} desktop frames, frames/ has ${frames.length}; fetch again (scripts/fetch-frames.mjs --force) or rebuild with scripts/build-frames.mjs`);
   return p;
 }
+
+// ── v2.5.0 rule sets in the repo check (craft/copy.md, seo.md, performance.md, security.md; gates/delivery-gate.md Part 4)
+// The four craft docs each hold 20 numbered rules; a doc that lost rules, or a rule that lost its reasoning, fails.
+export const CRAFT_RULES = {
+  "craft/copy.md": { prefix: "copy", n: 20, tags: null, minWords: 1200 }, // what, why, good, bad per rule
+  "craft/seo.md": { prefix: "seo", n: 20, tags: ["M", "H"], minWords: 500 }, // checklist: item and how it is decided
+  "craft/performance.md": { prefix: "perf", n: 20, tags: ["FE", "BE", "IN", "H"], minWords: 500 },
+  "craft/security.md": { prefix: "sec", n: 20, tags: ["M", "H"], extra: ["sec-h1", "sec-h2", "sec-h3"], minWords: 500 },
+};
+export const ruleIds = (spec) => [...Array.from({ length: spec.n }, (_, i) => `${spec.prefix}-${String(i + 1).padStart(2, "0")}`), ...(spec.extra || [])];
+export function craftDoc(file, text) {
+  const spec = CRAFT_RULES[file]; if (!spec) return [];
+  if (!text) return [`${file} is missing (one of the four rule sets)`];
+  const out = []; const words = text.split(/\s+/).length;
+  if (words < spec.minWords) out.push(`${file} is ${words} words; too thin for 20 rules with their reasoning (≥ ${spec.minWords})`);
+  for (const id of ruleIds(spec).slice(0, spec.n)) {
+    const line = text.split("\n").find((l) => new RegExp(`\\b${id}\\b`).test(l) && /^\s*(\||#{2,4}\s)/.test(l));
+    if (!line) { out.push(`${file}: rule ${id} is missing`); continue; }
+    if (spec.tags && !spec.tags.some((t) => line.includes(`[${t}]`))) out.push(`${file}: rule ${id} has no ${spec.tags.map((t) => `[${t}]`).join("/")} tag`);
+    if (line.startsWith("|")) { const cells = line.split("|").slice(1, -1).map((c) => c.trim()); if (cells.length < 4 || cells.some((c) => c.length < 3)) out.push(`${file}: rule ${id} has an empty cell (what, why, good, bad)`); }
+  }
+  return out;
+}
+// The delivery gate lists every rule of the four sets (Part 4), so a rule added to a craft doc reaches the checklist.
+export function gateListsRules(gateText, craftTexts) {
+  const out = [];
+  for (const [file, spec] of Object.entries(CRAFT_RULES)) for (const id of ruleIds(spec)) if (!new RegExp(`\\b${id}\\b`).test(gateText || "")) out.push(`gates/delivery-gate.md does not list ${id} (${file})`);
+  return out;
+}
+// Every shipped template page: no em dash in body text, title or description; exactly one h1; a meta description; a canonical.
+export function templatePage(html, file) {
+  const out = []; if (!html) return [`${file} is missing`];
+  const head = (html.match(/<head>([\s\S]*?)<\/head>/i) || [, ""])[1];
+  const title = (head.match(/<title>([^<]*)<\/title>/i) || [, ""])[1];
+  const desc = (head.match(/<meta name="description" content="([^"]*)"/i) || [, null])[1];
+  const body = (html.match(/<body[^>]*>([\s\S]*)<\/body>/i) || [, ""])[1].replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<!--[\s\S]*?-->/gi, "").replace(/<[^>]+>/g, " ");
+  const n = (body.match(/\u2014/g) || []).length; if (n) out.push(`${file}: ${n} em dash(es) in body text (copy-04)`);
+  if (/\u2014/.test(title)) out.push(`${file}: em dash in <title> (copy-04)`);
+  if (desc === null) out.push(`${file}: no meta description (seo-06)`); else if (/\u2014/.test(desc)) out.push(`${file}: em dash in the meta description (copy-04)`);
+  const h1 = (html.replace(/<script[\s\S]*?<\/script>/gi, "").match(/<h1[\s>]/gi) || []).length; if (h1 !== 1) out.push(`${file}: ${h1} h1 elements, needs exactly 1 (seo-07)`);
+  const can = (head.match(/<link rel="canonical" href="([^"]+)"/gi) || []).length; if (can !== 1) out.push(`${file}: ${can} canonical links, needs exactly 1 (seo-04)`);
+  return out;
+}

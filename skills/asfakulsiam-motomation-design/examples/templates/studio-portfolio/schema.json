@@ -1,0 +1,10 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Hawa Studio",
+  "description": "A design studio in Dhaka working for public institutions: exhibitions, identity, data design and wayfinding.",
+  "url": "https://asfakulsiam.github.io/asfakulsiam-motomation-design/templates/studio-portfolio.html",
+  "email": "work@hawa.studio",
+  "foundingDate": "2011",
+  "address": { "@type": "PostalAddress", "streetAddress": "House 9, Road 4", "addressLocality": "Dhanmondi, Dhaka", "postalCode": "1205", "addressCountry": "BD" }
+}

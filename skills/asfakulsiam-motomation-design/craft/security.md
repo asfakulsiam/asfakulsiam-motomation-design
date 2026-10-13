@@ -43,6 +43,12 @@ A static page sets headers through its host. For local files the gate reads a `_
 format Netlify and Cloudflare Pages use: a path line, then indented `Name: value` lines), so a template proves its
 headers the same way it would ship them.
 
+GitHub Pages cannot set response headers. The templates there carry the CSP and referrer policy as `<meta>` tags (both
+work from a meta tag), but `nosniff` has no meta equivalent: gating a live GitHub Pages URL reports sec-h2 until the
+site moves to a host that reads `_headers` (or sets headers another way). Say so in the hand-off; don't hide it.
+The gate's own browser contexts bypass the page's CSP so its measuring scripts can run; axis K reads the policy, it
+doesn't depend on it being enforced.
+
 ## Secret patterns gate K looks for
 
 Private key blocks (`-----BEGIN … PRIVATE KEY-----`), AWS access key IDs, Stripe live secret keys, GitHub tokens,
