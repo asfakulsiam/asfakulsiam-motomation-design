@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "runs": [
+    {
+      "date": "2026-10-13T02:44:24.107Z",
+      "page": "editorial-article",
+      "archetype": "broadsheet",
+      "mutation": "print-rule",
+      "signature": "decode",
+      "tier": "2",
+      "notes": "template editorial-article (examples/templates/editorial-article.html); runs before it are the templates listed before it in examples/templates/README.md",
+      "fingerprint": {
+        "layout": "columns",
+        "sections": [
+          "hero-editorial-broadsheet",
+          "feature-editorial-pullquote",
+          "footer-editorial-folio"
+        ],
+        "tier": 2,
+        "signature_type": "type"
+      }
+    }
+  ]
+}

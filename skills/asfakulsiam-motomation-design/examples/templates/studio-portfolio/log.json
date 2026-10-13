@@ -1,0 +1,170 @@
+{
+  "version": 2,
+  "runs": [
+    {
+      "date": "2026-10-13T02:44:26.395Z",
+      "page": "editorial-article",
+      "archetype": "broadsheet",
+      "mutation": "print-rule",
+      "signature": "decode",
+      "tier": "2",
+      "notes": "template editorial-article (examples/templates/editorial-article.html); runs before it are the templates listed before it in examples/templates/README.md",
+      "fingerprint": {
+        "layout": "columns",
+        "sections": [
+          "hero-editorial-broadsheet",
+          "feature-editorial-pullquote",
+          "footer-editorial-folio"
+        ],
+        "tier": 2,
+        "signature_type": "type"
+      }
+    },
+    {
+      "date": "2026-10-13T02:44:26.472Z",
+      "page": "event",
+      "archetype": "poster",
+      "mutation": "scale-abuse",
+      "signature": "velocity-skew",
+      "tier": "4",
+      "notes": "template event (examples/templates/event.html); runs before it are the templates listed before it in examples/templates/README.md",
+      "fingerprint": {
+        "layout": "statement",
+        "sections": [
+          "hero-event-poster",
+          "team-event-lineup",
+          "pricing-event-tickets",
+          "contact-event-venue"
+        ],
+        "tier": 4,
+        "signature_type": "scroll"
+      }
+    },
+    {
+      "date": "2026-10-13T02:44:26.553Z",
+      "page": "hotel",
+      "archetype": "room",
+      "mutation": "reverse-reveal",
+      "signature": "aperture",
+      "tier": "2",
+      "notes": "template hotel (examples/templates/hotel.html); runs before it are the templates listed before it in examples/templates/README.md",
+      "fingerprint": {
+        "layout": "sequence",
+        "sections": [
+          "hero-hotel-room",
+          "features-hotel-rooms",
+          "pricing-hotel-seasons",
+          "testimonial-hotel-guestbook",
+          "contact-hotel-atlas"
+        ],
+        "tier": 2,
+        "signature_type": "scroll"
+      }
+    },
+    {
+      "date": "2026-10-13T02:44:26.632Z",
+      "page": "org",
+      "archetype": "manifesto",
+      "mutation": "constraint",
+      "signature": "seismograph-line",
+      "tier": "2",
+      "notes": "template org (examples/templates/org.html); runs before it are the templates listed before it in examples/templates/README.md",
+      "fingerprint": {
+        "layout": "statement",
+        "sections": [
+          "hero-org-manifesto",
+          "features-org-impact",
+          "team-org-field-guide",
+          "cta-org-donate",
+          "footer-org-seismograph"
+        ],
+        "tier": 2,
+        "signature_type": "cursor"
+      }
+    },
+    {
+      "date": "2026-10-13T02:44:26.708Z",
+      "page": "personal",
+      "archetype": "letter",
+      "mutation": "second-person",
+      "signature": "thread",
+      "tier": "2",
+      "notes": "template personal (examples/templates/personal.html); runs before it are the templates listed before it in examples/templates/README.md",
+      "fingerprint": {
+        "layout": "statement",
+        "sections": [
+          "hero-personal-letter",
+          "testimonial-personal-replies",
+          "cta-personal-subscribe"
+        ],
+        "tier": 2,
+        "signature_type": "scroll"
+      }
+    },
+    {
+      "date": "2026-10-13T02:44:26.786Z",
+      "page": "saas-landing",
+      "archetype": "workbench",
+      "mutation": "ui-is-content",
+      "signature": "ink-fill",
+      "tier": "2",
+      "notes": "template saas-landing (examples/templates/saas-landing.html); runs before it are the templates listed before it in examples/templates/README.md",
+      "fingerprint": {
+        "layout": "product",
+        "sections": [
+          "hero-saas-workbench",
+          "features-saas-bento",
+          "features-saas-console",
+          "testimonial-saas-ink",
+          "pricing-saas-switch",
+          "cta-saas-trial"
+        ],
+        "tier": 2,
+        "signature_type": "type"
+      }
+    },
+    {
+      "date": "2026-10-13T02:44:26.865Z",
+      "page": "shop-product",
+      "archetype": "catalogue",
+      "mutation": "single-object",
+      "signature": "hold-to-commit",
+      "tier": "2",
+      "notes": "template shop-product (examples/templates/shop-product.html); runs before it are the templates listed before it in examples/templates/README.md",
+      "fingerprint": {
+        "layout": "rows",
+        "sections": [
+          "hero-shop-catalogue",
+          "features-shop-specs",
+          "testimonial-shop-notes",
+          "cta-shop-hold",
+          "gallery-shop-carousel",
+          "pricing-shop-glazes"
+        ],
+        "tier": 2,
+        "signature_type": "micro"
+      }
+    },
+    {
+      "date": "2026-10-13T02:44:26.971Z",
+      "page": "studio-portfolio",
+      "archetype": "ledger",
+      "mutation": "swap-material",
+      "signature": "lens",
+      "tier": "2",
+      "notes": "template studio-portfolio (examples/templates/studio-portfolio.html); runs before it are the templates listed before it in examples/templates/README.md",
+      "fingerprint": {
+        "layout": "rows",
+        "sections": [
+          "hero-studio-ledger",
+          "features-studio-services",
+          "team-studio-rows",
+          "contact-studio-copy",
+          "footer-studio-marquee"
+        ],
+        "tier": 2,
+        "signature_type": "cursor"
+      }
+    }
+  ]
+}
