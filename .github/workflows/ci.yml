@@ -15,6 +15,10 @@ jobs:
         with: { node-version: "${{ matrix.node }}" }
       - name: Lint repository, data, versions and dist
         run: node scripts/check-repo.mjs
+      - name: Template rules bite and templates don't drift (dials 1–3, tier in range, pins ≤ 2, timing sheets)
+        run: node tests/templates/template-rules.test.mjs
+      - name: Matched-arm turn cap is exact (fake claude)
+        run: node tests/evals/turn-cap.test.mjs
       - name: MCP server answers the protocol (raw stdio session)
         run: node tests/mcp/session.mjs
       - name: Smoke-test skill scripts

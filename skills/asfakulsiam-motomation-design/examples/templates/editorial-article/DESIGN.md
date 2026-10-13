@@ -8,7 +8,7 @@
 - **Archetype + mutation:** broadsheet + print-rule
 - **Collision:** newspaper front page × reading progress
 - **Signature move:** decode
-- **Dials:** ENERGY 1 · RHYTHM 2 · MOTION 1 → Tier 2
+- **Dials:** ENERGY 1 · RHYTHM 2 · MOTION 2 → Tier 2 (Decode, BlurFocus and InkFill are Tier 2 reveals; MOTION 1 would allow hover and focus only)
 - **Rejected:** Full-bleed hero photo with the headline over it; sticky share bar.
 
 ## Typography

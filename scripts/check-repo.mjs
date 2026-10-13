@@ -208,6 +208,8 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
     const at = join(SKILL, t.html);
     const own = join(SKILL, "examples/templates", t.id); const read = (f) => (existsSync(join(own, f)) ? readFileSync(join(own, f), "utf8") : null);
     rules.timingSheet(t.tier, read("MOTION.md")).forEach((p) => fail(`examples/templates/${t.id}: ${p}`));
+    rules.dials(read("DESIGN.md"), t.tier).forEach((p) => fail(`examples/templates/${t.id}/DESIGN.md: ${p}`));
+    if (existsSync(at)) rules.pins(readFileSync(at, "utf8")).forEach((p) => fail(`${t.html}: ${p}`));
     if (!existsSync(at)) { fail(`${t.html} is missing; run node scripts/build-templates.mjs`); continue; }
     const html = readFileSync(at, "utf8"); const meta = html.match(/<meta name="motomation-template" content="source:([0-9a-f]+)/);
     if (!meta || meta[1] !== sourceHash(t)) fail(`${t.html} is stale (its sections or components changed); run node scripts/build-templates.mjs, then gate and stamp it again`);

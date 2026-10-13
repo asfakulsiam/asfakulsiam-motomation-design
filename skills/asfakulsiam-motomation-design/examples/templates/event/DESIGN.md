@@ -8,7 +8,7 @@
 - **Archetype + mutation:** poster + scale-abuse
 - **Collision:** concert poster × theatre ticket
 - **Signature move:** velocity-skew
-- **Dials:** ENERGY 4 · RHYTHM 3 · MOTION 4 → Tier 4
+- **Dials:** ENERGY 3 · RHYTHM 3 · MOTION 3 → Tier 4 (MOTION 3 allows Tier 2–5, Tier 4 only for a spatial concept: here the concept is a room, the theatre hall, with light falling through it; Beams draws that space, and nothing else on the page goes past Tier 2)
 - **Rejected:** Artist photo collage; a countdown timer.
 
 ## Typography

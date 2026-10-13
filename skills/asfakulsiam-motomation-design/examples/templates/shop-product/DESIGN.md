@@ -51,5 +51,6 @@ Type mode: HOUSE STYLE (typography-led), because the object and its story sell i
 - Concept survived: yes
 - Cut: star ratings — buyers' mailed notes replace them, each tied to an object number
 - Cut: an add-to-cart button — there are nine of these plates; a press-and-hold reservation matches the stakes
+- Cut: the stacked deck of making steps — its four sticky cards measured as four pins against the Tier 2 budget of 2 (principles/restraint.md); the record of the making now reads as one ruled lot card, at a glance
 - Rejected animation: zoom-on-hover on the product image — the plate's surface is not detailed enough in a placeholder to reward it, and tilt already responds
 - Rejected animation: animating the glaze-set prices in — the numbers check forbids a price that settles after load

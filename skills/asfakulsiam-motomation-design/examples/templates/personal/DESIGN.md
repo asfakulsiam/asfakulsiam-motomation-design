@@ -8,7 +8,7 @@
 - **Archetype + mutation:** letter + second-person
 - **Collision:** letter × post
 - **Signature move:** thread
-- **Dials:** ENERGY 1 · RHYTHM 1 · MOTION 1 → Tier 2
+- **Dials:** ENERGY 1 · RHYTHM 1 · MOTION 2 → Tier 2 (Thread is a Tier 2 component; MOTION 1 would allow hover and focus only)
 - **Rejected:** Headshot hero with a bio; a grid of past issues.
 
 ## Typography
