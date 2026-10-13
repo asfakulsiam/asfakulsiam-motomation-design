@@ -49,13 +49,15 @@ If there is even a small chance this skill applies to a web design task, use it.
 | Signature moves and effects | `signatures/` + `references/effects-vocabulary.md` |
 | A visual style (glass, brutalist, swiss…) | `styles/<style>.md` |
 | A site category (hotel, SaaS, studio…) | `categories/<category>.md` |
-| Copy and microcopy | `craft/copy.md` |
-| Accessibility, performance, responsive, mobile motion, SEO | `craft/*.md` |
+| **Any build or redesign (always, before step 6 Build)** | `craft/copy.md` + `craft/seo.md` + `craft/performance.md` + `craft/security.md` |
+| Accessibility, responsive, mobile motion, scroll sequences | `craft/*.md` |
 | Before handing anything back | `gates/delivery-gate.md` (always) |
 | Framework specifics | `adapters/<stack>.md` |
 | Commands and flags | `commands/overview.md` |
 
-Files are short on purpose. Load them as you need them, not all at once.
+Files are short on purpose. Load them as you need them, not all at once. The one exception: the four rule sets
+(copy, SEO, performance, security) are always loaded for a build or a redesign, because the gate measures them
+(axes C, S, P, K in gate/4) and the Delivery Gate ticks the rest by hand.
 
 ---
 
