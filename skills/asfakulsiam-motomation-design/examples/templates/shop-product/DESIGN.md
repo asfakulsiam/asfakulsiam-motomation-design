@@ -43,9 +43,14 @@ Type mode: HOUSE STYLE (typography-led), because the object and its story sell i
 - Forms: only where the page asks for something (email, amount)
 
 ## Imagery
-- Source: Photographs of No. 14-07 and batch 14 [NEEDS ASSET]; generated SVG placeholders in the repo
-- Treatment: none beyond what the section does
-- `[NEEDS ASSET]` list: see Source
+- Mode: photography (illustration as the template stand-in)
+- Subject: No. 14-07 itself, alone on the linen it was photographed on; then each other piece of batch 14 the same way
+- Direction: one north window camera-left, soft, no fill, the far side falling to shadow; about 25° above the table, 50 mm equivalent (no wide-angle distortion on round ware); the object fills two thirds of the frame and never touches the edge; graded to the page's ground (#efe9df), the glaze colour as the only accent; no props, no hands
+- Illustration style: organic / minimal (§2) for the stand-ins: the ware in three-quarter view, glaze pooling in the well, ash specks, unglazed foot, on a fine linen weave
+- Texture: grain only, static, ≤ 0.05, on the lot card of the making record; the linen is part of the image, not a page texture
+- Interplay: the plate sits in its own tile beside the lot details; no type over the image; the carousel's captions sit under each piece
+- Template stand-in: `ceramic(kind, glaze, { ground, seed })` in `examples/sections/_imagery.tsx`, one per piece in the order of the carousel
+- `[NEEDS ASSET]`: (1) No. 14-07 square, alt "Ash celadon plate, batch 14, on linen"; (2–7) dinner plate, rice bowl, serving dish, tea cup, pitcher, side plate, 520×470, alt "<name>, No. <no>", all in the same light
 
 ## Restraint Gate record
 - Concept survived: yes

@@ -43,9 +43,14 @@ Type mode: SERVICE STYLE (information-led), because donors check what money buys
 - Forms: only where the page asks for something (email, amount)
 
 ## Imagery
-- Source: Portraits of the three river watchers [NEEDS ASSET]; generated SVG placeholders in the repo
-- Treatment: none beyond what the section does
-- `[NEEDS ASSET]` list: see Source
+- Mode: illustration (a survey plate, screened by Halftone)
+- Subject: the three river reaches the watchers cover (Turag, Buriganga, Karatoya), as a survey print
+- Direction: no photography of people in distress and no stock river shots; if portraits of the watchers are added, each at their own bank, in daylight, looking at the river, not the lens, shot the same way all three
+- Illustration style: editorial (§2): survey-plate line, channels and contours in two inks, screened by Halftone like a printed field guide
+- Texture: the halftone screen only, on the survey plate, never behind the entries' text
+- Interplay: the plate sits beside the entries, its caption below it ("Survey print · three reaches, 2025"); no type over the plate
+- Template stand-in: `survey({ paper, water, land })` in `examples/sections/_imagery.tsx`, screened by Halftone in team-org-field-guide
+- `[NEEDS ASSET]`: the organisation's own survey of the three reaches (vector or a scan of the print), same 3:2 crop; optional: three portraits as above
 
 ## Restraint Gate record
 - Concept survived: yes, after 1 change

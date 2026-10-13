@@ -43,9 +43,14 @@ Type mode: SERVICE STYLE (information-led), because clients come to check scope,
 - Forms: only where the page asks for something (email, amount)
 
 ## Imagery
-- Source: Studio photograph at the long table; generated SVG placeholder in the repo
-- Treatment: none beyond what the section does
-- `[NEEDS ASSET]` list: see Source
+- Mode: photography for one image (illustration as the template stand-in); the rest of the page is type
+- Subject: the studio at its long table, the four partners mid-work under the pendant lamps
+- Direction: overhead pendants as the only light, windows behind falling to soft white; camera at seated eye height, 35 mm, the table's long edge level across the frame; nobody looking at the lens; graded neutral (the page's greys), with the brand colours appearing only when the Lens shows the labelled version
+- Illustration style: flat (§2) for the stand-in: four figures, table, lamps and papers in flat shapes, three colours
+- Texture: none
+- Interplay: the image runs full width under the partner rows; the Lens reveals the labelled version over it; no other type on the image
+- Template stand-in: `longTable(palette)` in `examples/sections/_imagery.tsx` (neutral and labelled palettes)
+- `[NEEDS ASSET]`: one photograph, 2:1, alt "The studio at its long table, four people at work", and the same frame with the partners' names placed for the Lens
 
 ## Restraint Gate record
 - Concept survived: yes

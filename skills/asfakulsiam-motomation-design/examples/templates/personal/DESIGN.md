@@ -43,9 +43,14 @@ Type mode: HOUSE STYLE (typography-led), because the voice is the product
 - Forms: only where the page asks for something (email, amount)
 
 ## Imagery
-- Source: None needed
-- Treatment: none beyond what the section does
-- `[NEEDS ASSET]` list: see Source
+- Mode: none. A letter is words addressed to one reader; a picture would decorate it (principles/imagery.md §5)
+- Subject: the letter's type, the drawn thread down its margin, the replies
+- Direction: none; if the writer ever adds one image, a single small photograph inside the letter like a print tucked into an envelope, their own, captioned in their voice
+- Illustration style: minimal (§2), only the Thread line
+- Texture: none
+- Interplay: none
+- Template stand-in: none; there is no image slot
+- `[NEEDS ASSET]`: none
 
 ## Restraint Gate record
 - Concept survived: yes, after 1 change

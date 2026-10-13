@@ -43,9 +43,14 @@ Type mode: SERVICE STYLE (information-led), because the reader is deciding wheth
 - Forms: only where the page asks for something (email, amount)
 
 ## Imagery
-- Source: Real app screenshots replace the coded DeviceMockup contents when the product exists
-- Treatment: none beyond what the section does
-- `[NEEDS ASSET]` list: see Source
+- Mode: none (the UI is the image). The product is shown as its own coded interface in DeviceMockup, the console and the bento, never as a stock photo of someone at a laptop (principles/imagery.md §5)
+- Subject: today's ledger, the command line, the numbers the shop will use
+- Direction: when the product exists, real screenshots at 2× of the same screens, same data, same theme as the page, no browser chrome beyond the mockup's
+- Illustration style: swiss (§2) if a diagram is needed: geometric, uniform line, the palette's colours
+- Texture: none (glow borders are UI, not texture)
+- Interplay: the mockup sits beside the headline at 1440 and below it at 375; type never overlaps the screen
+- Template stand-in: the coded mockup contents (they are the real UI's layout)
+- `[NEEDS ASSET]`: screenshots of the ledger, console and pricing screens, 2×, matching the mockups' aspect
 
 ## Restraint Gate record
 - Concept survived: yes

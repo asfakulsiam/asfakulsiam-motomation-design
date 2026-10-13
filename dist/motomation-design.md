@@ -686,6 +686,108 @@ Start monochrome. Add the accent last. Example grounds:
 
 ---
 
+<!-- file: principles/imagery.md -->
+
+## Imagery: photo direction, illustration, texture, and when to use none
+
+Every page decides its imagery the way it decides its type: on purpose, written down in `DESIGN.md` under `## Imagery`, before anything is built. An image that depicts nothing (abstract bands, a gradient blob, a stock "team at laptop") is worse than no image: it spends the reader's attention and tells them nothing about the subject. The shipped templates hold to this: none uses a generic placeholder. Each one either draws its real subject (`examples/sections/_imagery.tsx`) or has no imagery and says why.
+
+### The Imagery block in DESIGN.md
+
+```
+### Imagery
+- Mode: photography | illustration | texture only | none   (one primary mode per page)
+- Subject: what the images show, concretely (the object, the place, the people, the work)
+- Direction: light · angle and lens · crop · colour · people   (photography)  or  style · line · fill · palette (illustration)
+- Texture: none | grain | paper | halftone, with its opacity and where it sits
+- Interplay: how type and image meet (over, beside, under; what never overlaps)
+- Template stand-in: what the template draws until the project's own images exist
+- [NEEDS ASSET]: the shot list or illustration list, one line each, with the alt text
+```
+
+### 1. Photo direction
+
+Write the direction so a photographer could shoot it without asking a question.
+
+| Axis | Decide | Bad (vague) | Good (direct) |
+|---|---|---|---|
+| **Subject** | the specific thing, in its own place | "lifestyle shots" | "No. 14-07 on the linen it was photographed on in the studio, nothing else in frame" |
+| **Light** | source, direction, hardness, time | "natural light" | "one north window, camera-left, soft; no fill, let the far side fall to shadow" |
+| **Angle and lens** | height, angle, focal length | "nice angle" | "about 25° above the table, 50 mm equivalent, no wide-angle distortion on round ware" |
+| **Crop** | what is cut and where the subject sits | "centred" | "the plate fills two thirds of the width, the rim never touches the edge" |
+| **Colour** | how it is graded against the palette | "warm" | "graded to the page's ground (#efe9df); no added saturation; the glaze colour is the one accent" |
+| **People** | who, doing what, aware of camera or not | "diverse team smiling" | "the four of them at the long table mid-work, nobody looking at the lens" |
+| **Authenticity** | real or staged, and why | — | "the guest book's own pages, not a reshoot" |
+
+Rules:
+
+1. **One light per page.** Every photograph on a page shares a light direction and temperature, or the page reads as collected rather than made.
+2. **No stock unless the subject is generic.** A hotel, a product, a team, a place is never stock. If the project can't shoot yet, use the template's drawn stand-in, not stock.
+3. **The subject is the hero, not the photograph.** No vignettes, lens flares, tilt-shift or "cinematic" grades the brand doesn't own.
+4. **Alt text says what's in the picture and why it's there**, in the page's own voice ("The courtyard at Haveli Panam in the late afternoon, with the well and the neem tree"). Decorative images have `alt=""` and are never the only carrier of meaning.
+
+### 2. Illustration, per style
+
+Illustration is drawn for the page, in the style the page already uses. Pick the row for the style (`styles/`):
+
+| Style | Illustration | Line | Fill | Avoid |
+|---|---|---|---|---|
+| `editorial` | engraving-like line, cross-hatching, archival plates | fine, even, ink colour | none or one flat tone | glossy 3D, gradients |
+| `swiss` | geometric marks, diagrams, maps | uniform weight on a grid | flat, the palette's primaries | hand-drawn wobble |
+| `minimal` | one object or one mark, a lot of space | thin, or none | one tone, low contrast | scenes, detail |
+| `organic` | hand-drawn plants, objects, people, irregular edges | varying, brush or pencil | soft flat fills, paper showing | perfect geometry, outlines on everything |
+| `dark-luxe` | object studies lit from one side, metallic accents | none, form by light | deep tones, one warm highlight | bright flat cartoon colour |
+| `flat` | simple figures and objects in flat shapes | none | flat, 3–4 colours from the palette | drop shadows, gradients |
+| `neobrutalism` | bold cut-out shapes, sticker-like objects | thick black outline | saturated flat fills, hard offset shadow | delicate line, gradients |
+| `kinetic-type` | type is the image: letterforms, numbers as shapes | — | the palette | adding pictures that compete with the type |
+| `glassmorphism` | blurred colour fields behind frosted panels | none | soft gradients, kept behind content | detailed illustration under glass (it smears) |
+| `neumorphism` | soft extruded icons and objects | none | the surface colour, light and shadow only | colourful scenes |
+
+One illustration style per page. A page that mixes an engraving with a flat cartoon has two art directors.
+
+### 3. Texture rules
+
+Texture is a surface, not a picture: grain, paper, halftone screens, weave.
+
+1. **One kind of texture per page** (grain, paper, halftone or weave, not two), on as few surfaces as the concept needs: the whole ground, or the surfaces that are that material.
+2. **Under text, keep it faint**: grain or paper ≤ 0.08 opacity behind body text, and the gate's contrast check is against the rendered pixels, so a texture that drops text under AA fails. Heavier texture (halftone, visible weave) only behind display type or no type.
+3. **Texture is still by default.** An animated grain is a motion choice and counts against the tier; a static grain counts as nothing.
+4. **Texture has a reason**: the paper of a catalogue card, the screen of a printed survey, the linen under a plate. If you can't say what material it is, cut it.
+5. **No texture under forced colors**: it should disappear, not turn into noise (the gate's forced-colors check reads the text over it).
+
+### 4. How image types meet
+
+- **One primary mode.** Photography, illustration, or texture only; a second mode may appear only in a supporting role (e.g. a photographed product page with a drawn diagram of its parts).
+- **Type over image** only where the image has a quiet zone the type sits in; never over a face, a product edge or a busy area. Check it at 375px, where the crop moves.
+- **Image and type never compete at the same size.** If the image is full-bleed, the headline is small or beside it. If the headline is the hero, images are small and few.
+- **The same subject keeps the same treatment** across the page: if one plate is shot from 25° above, all plates are.
+- **Screens, halftones and duotones apply to all images in a set**, or to none.
+
+### 5. When to use no imagery
+
+No imagery is a decision, written as `Mode: none` with the reason. It is right when:
+
+- **The words are the product**: an essay, a letter, a manifesto, a changelog. Images would decorate a text that is already the subject (`editorial-article`, `personal`).
+- **The type already is the image**: a poster, a lineup, a kinetic headline (`event`: the stage light is a background effect, not a picture of anything).
+- **The thing has no honest picture**: software whose UI is the subject is shown as its UI, in a device frame or as live components, not as a stock photo of someone using a laptop (`saas-landing`).
+- **You don't have the real images yet and a stand-in would mislead**: say so with `[NEEDS ASSET]` and keep the space structural.
+
+A page with no imagery still has a visual subject: its type, its rules, its numbers, its one background. The `## Imagery` block says which.
+
+### 6. Template stand-ins
+
+A template can't ship a project's photographs. It ships a drawn stand-in of the real subject, in the page's illustration style, with the alt text the real photograph will have, so the layout, crop and contrast are tested against something that looks like the subject. `examples/sections/_imagery.tsx` draws them (`ceramic`, `haveli`, `cover`, `survey`, `longTable`). Replace a stand-in with the photograph that the `[NEEDS ASSET]` list names; keep the same width, height and alt.
+
+### Related
+
+- `principles/color.md`: grading images to the palette
+- `principles/restraint.md`: an image is a component; it has to earn its place
+- `styles/`: the style the illustration follows
+- `gates/delivery-gate.md`: contrast is measured on rendered pixels, so texture and type-over-image are checked
+
+
+---
+
 <!-- file: principles/layout.md -->
 
 ## Layout and Space
@@ -2828,7 +2930,7 @@ It runs six bounded checks in a real browser and prints numbers:
 | `n` | **Numbers**: every number (counters, prices, `progress`/`meter`, `aria-valuenow`) read at scroll 0, after jumping to the end, and under reduced motion, then compared with the value it settles on once scrolled into view. A value that changes by itself between two settled reads (a live ticker), or that reads as a clock (`9:02`) or sits in `<time>`, `role=timer`/`status`/`log` or `aria-live`, is listed as live and not judged. | an element is visible with a value that is later corrected: "0 hectares" before a count-up runs, a price replaced after load, a counter that never runs under reduced motion |
 
 | `q` | **Motion quality** (gate/3), at 1440 unless noted. *Progression*: every pinned zone (GSAP `.pin-spacer`, `position: sticky` in a parent ≥ 1.5 screens tall, CSS scroll/view timeline) is screenshotted at 8 scroll positions across its length, and consecutive frames are compared. *Smoothness*: p95 `requestAnimationFrame` interval while scrolling the first zone, at 1440 unthrottled and at 375 touch with CPU ×4. *Reduced-motion distinctness*: the page is reloaded under `prefers-reduced-motion: reduce`. | a zone whose median change between samples is ≤ 0.5% of pixels (pinned but static) · p95 over 20 ms at 1440 or over 25 ms at 375 ×4, **judged only on an unconstrained machine**: in a sandbox it prints `not verified — sandbox` with the measured numbers and counts nothing (`docs/adapters/sandbox.md`) · under reduced motion any zone is still pinned (the "animation stopped" fallback) or any text from the full-motion page is missing |
-| `k` | **Accessibility** (gate/3). *Focus-visible*: Tab to each of the first 40 focusable elements; the pixels around it focused and blurred are compared. *Target size* at 375 touch. *200% zoom*: the page at 1440×900, then at a 720×450 CSS viewport (1440×900 at 200%); only losses that appear at 720 count. *Reflow* at 320px. *Forced colors*: the page in `forced-colors: active`. *Keyboard trap*: Tab twice round the page. | focus changes < 1% of the pixels around the element (no visible ring) · a target under 24×24px (WCAG 2.5.8; inline links in a sentence exempt; under 44px is a warning, not counted) · text clipped by an `overflow: hidden` box, or a control off screen or covered, at 200% · any horizontal scroll at 320px · rendered text ink under 3:1 against its box in forced colors, or no visible ink (a transparent fill that survives) · focus cycles inside one region while tabbable elements elsewhere are never reached |
+| `k` | **Accessibility** (gate/3). *Focus-visible*: Tab to each of the first 40 focusable elements; the pixels around it focused and blurred are compared. *Target size* at 375 touch. *200% zoom*: the page at 1440×900, then at a 720×450 CSS viewport (1440×900 at 200%); only losses that appear at 720 count. *Reflow* at 320px. *Forced colors*: the page in `forced-colors: active`; text not on screen at rest is skipped (opacity ≤ 0.05, or an ancestor clipped to nothing, such as a Lens reveal layer at `circle(0px)`). *Keyboard trap*: Tab twice round the page. | focus changes < 1% of the pixels around the element (no visible ring) · a target under 24×24px (WCAG 2.5.8; inline links in a sentence exempt; under 44px is a warning, not counted) · text clipped by an `overflow: hidden` box, or a control off screen or covered, at 200% · any horizontal scroll at 320px · rendered text ink under 3:1 against its box in forced colors, or no visible ink (a transparent fill that survives) · focus cycles inside one region while tabbable elements elsewhere are never reached |
 The output ends with a stamp line built only from those numbers:
 `gate: c0 o0 w0 rm0 a0 n0 q0 k0 · gate/3 · <id>`. The id is a hash of what was measured on this page, so the same page gives the same id and a different page does not. `c` is the total of the per-width contrast failures. A stamp from an older gate (`gate/1`: five checks; `gate/2`: no `q`/`k`, no Q/A axes) is rejected by `--verify`: re-run the gate and paste the new line.
 
@@ -3701,7 +3803,7 @@ shiny-text,Shiny Text,text,1,examples/components/text/shiny-text.tsx,ShinyText,"
 typewriter,Typewriter,text,1,examples/components/text/typewriter.tsx,Typewriter,"A line types itself out, character by character, when it scrolls into view, with a caret that fades once the line is complete.","The concept is a terminal, a typed letter, a dispatch or a confession; one line, read once.",Headlines the visitor needs at once; more than one per screen; long paragraphs; anything repeated on every visit.,"The whole line is there from the start, with no caret.",Same as desktop (starts when in view).,"The full text is in the DOM for assistive tech from the first render; the typed copy is aria-hidden. Every character holds its final place, so the line never reflows (no layout shift)."
 aperture,Aperture,scroll,2,examples/components/scroll/aperture.tsx,Aperture,"The next section opens through a growing circle (an iris) as you scroll into it, from a small porthole to full bleed.","A chapter change that is a real threshold: entering a room, a lens, a window, a reveal of the product.",Every section; content that must be readable at the edges before the iris opens.,The section is fully open from the start.,Same as desktop.,Content is always in the DOM and readable by assistive tech; only clip-path animates.
 darkroom-develop,Darkroom Develop,scroll,2,examples/components/scroll/darkroom-develop.tsx,DarkroomDevelop,"A photograph develops from blank paper as it scrolls in: pale and flat first, then contrast, then tone, like a print in the tray.","Photography, archives, memory, analogue brands; one image per screen.",Product shots the buyer must inspect; galleries of many small images.,The photo is fully developed from the start.,Same as desktop.,A normal img with alt; only CSS filters change.
-horizontal-reel,Horizontal Reel,scroll,2,examples/components/scroll/horizontal-reel.tsx,HorizontalReel,"A section pins and vertical scroll pulls a strip of frames sideways, like film through a gate; a frame counter follows.","Film, gallery, timeline and process concepts with 4–10 frames.",Content people need to scan quickly; more than one per page; frames that need reading time.,The frames become a normal horizontally scrollable row with snap points.,Below 768px the strip becomes a swipeable row with snap points (no pinning).,A normal list; the counter is aria-hidden; every frame is reachable by keyboard in the fallback.
+horizontal-reel,Horizontal Reel,scroll,2,examples/components/scroll/horizontal-reel.tsx,HorizontalReel,"A section pins and vertical scroll pulls a strip of frames sideways, like film through a gate; a frame counter follows.","Film, gallery, timeline and process concepts with 4–10 frames.",Content people need to scan quickly; more than one per page; frames that need reading time.,The frames become a normal horizontally scrollable row with snap points.,"Below 768px wide, or under 560px tall (200% zoom), the strip becomes a swipeable row with snap points (no pinning).",A normal list; the counter is aria-hidden; every frame is reachable by keyboard in the fallback.
 reading-rail,Reading Rail,scroll,1,examples/components/scroll/reading-rail.tsx,ReadingRail,"A thin rail at the top or edge of the screen fills as you read an article, with an optional chapter label that changes at each heading.","Long reads, case studies and documentation pages.",Short pages; landing pages; next to another progress indicator.,"The rail still reflects progress (it's information, not decoration) but moves in 5% steps instead of continuously.",Same as desktop.,"role progressbar with aria-valuenow, updated at most every 5%."
 stacked-deck,Stacked Deck,scroll,2,examples/components/scroll/stacked-deck.tsx,StackedDeck,"Cards stick one after another and stack like a deck; covered cards step back and dim, leaving their titles as a table of contents.","Sequences, case studies, steps and services with 3–6 items.",More than 6 cards; cards taller than the viewport; content that must be compared side by side.,"A plain ordered list in normal flow: no sticky, no scale, no dim; every card is a full, readable block.",Same as desktop; on short screens the offset per card shrinks.,A normal ordered list; every card is reachable and readable.
 thread,Thread,scroll,2,examples/components/scroll/thread.tsx,Thread,"One line draws itself down the page as you scroll, linking sections like a seam, a route or a timeline.","Journeys, timelines, craft (stitching, drawing), routes and process pages.",As decoration on a page without a journey; together with another scroll signature.,The line is fully drawn and still.,Same as desktop.,The SVG is decorative (aria-hidden); the content sits above it in normal flow.
@@ -3727,7 +3829,7 @@ particle-field,Particle Field,backgrounds,4,examples/components/backgrounds/part
 bento-reveal,Bento Reveal,layout,1,examples/components/layout/bento-reveal.tsx,BentoReveal,A modular grid of mixed-size tiles that enter in reading order with a short stagger the first time the grid scrolls in.,"Content that truly has mixed weights (one big feature, several small facts).",Equal-weight content (use a list); as the default landing layout (it's overused); more than one per page.,Tiles are visible from the start.,Collapses to one column below 640px.,A normal list; order in the DOM matches visual order.
 curve-carousel,Curve Carousel,layout,2,examples/components/layout/curve-carousel.tsx,CurveCarousel,"Cards sit on a shallow arc; the focused card is upright and in front, its neighbours tilt and recede. Arrow keys, buttons, drag and swipe move it.",3–9 case studies or products where one at a time is the point.,Content people need to compare; more than 9 items; as autoplaying decoration.,Cards change position without easing.,Swipe left or right.,"A labelled region with previous/next buttons, aria-live status (""2 of 5""), and arrow-key support; hidden cards are inert."
 dock,Dock,layout,2,examples/components/layout/dock.tsx,Dock,"A row of icon buttons that magnify smoothly as the cursor passes along them, neighbours growing a little less.","App-like tool collections, launchers and playful personal sites with 4–8 actions.",Primary navigation that needs labels; touch-first sites; more than 8 items.,No magnification.,No magnification; normal-size buttons.,"Real buttons or links with visible tooltips on focus and hover, and accessible names."
-flowing-menu,Flowing Menu,layout,2,examples/components/layout/flowing-menu.tsx,FlowingMenu,"A big typographic list of links; hovering an item rolls a band over it from the edge the cursor entered, carrying a marquee of the item's words.",Portfolio and studio navigation or project indexes with 3–8 entries.,Primary site navigation on product sites; long lists; touch-first audiences.,Hover shows the band instantly with still text.,Plain links with a pressed state.,A nav with a normal list of links; the band and marquee are aria-hidden.
+flowing-menu,Flowing Menu,layout,2,examples/components/layout/flowing-menu.tsx,FlowingMenu,"A big typographic list of links; hovering an item rolls a band over it from the edge the cursor entered, carrying a marquee of the item's words.",Portfolio and studio navigation or project indexes with 3–8 entries.,Primary site navigation on product sites; long lists; touch-first audiences.,Hover shows the band instantly with still text.,Plain links with a pressed state.,"A nav with a normal list of links; the band and marquee are aria-hidden. Keyboard focus rolls the band in, so focus is as visible as hover (the row clips an outline)."
 infinite-canvas,Infinite Canvas,layout,2,examples/components/layout/infinite-canvas.tsx,InfiniteCanvas,"Drag (or use arrow keys) to pan an endless wall of tiles that repeats in every direction, with a little momentum when you let go.","The Gallery Wall archetype: archives, mood boards, studios with lots of visual work.",Fewer than ~12 tiles; content that needs order; as the only way to reach the work (also provide a list).,No momentum; panning still works.,One-finger drag pans; the page doesn't scroll while dragging inside.,A focusable region with arrow-key panning and an instruction label; provide a plain list of the same work elsewhere on the page.
 sticky-index,Sticky Index,layout,1,examples/components/layout/sticky-index.tsx,StickyIndex,"A sticky side index lists the page's sections and highlights the one you are reading, with a marker that slides between entries.","Long case studies, reports, documentation, annual reviews.",Short pages; mobile (it collapses to a top select); landing pages.,The marker jumps instead of sliding.,Hidden below 900px; sections stay in normal flow.,A nav of in-page links with aria-current on the active section.
 animated-list,Animated List,ui,1,examples/components/ui/animated-list.tsx,AnimatedList,"Entries arrive one at a time, like orders coming into a kitchen or messages into a log: each slides up into its slot and settles. It plays once, then the list is simply a list.","The content really arrives over time (orders, sign-ups, sensor readings, a changelog), and showing the arrival explains the product.","Fake ""live activity"" or social proof; long lists (over about 8 entries); content the visitor needs to scan at once.",Every entry is there from the start.,Same as desktop (plays when in view).,"All entries are in the DOM from the first render (the hidden ones are opacity 0, which screen readers still read), so nothing is announced late and nothing is missed; slots are laid out from the start, so the list never pushes the page (no layout shift). It pauses off screen."

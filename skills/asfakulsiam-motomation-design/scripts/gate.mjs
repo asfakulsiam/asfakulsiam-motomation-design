@@ -129,6 +129,7 @@ const PAGE_LIB = `
 window.__g = {
   key(e) { const p = []; for (let n = e; n && n.nodeType === 1 && n !== document.documentElement; n = n.parentElement) { let i = 1, s = n; while ((s = s.previousElementSibling)) if (s.tagName === n.tagName) i++; p.unshift(n.tagName.toLowerCase() + ":" + i); } return p.join(">"); },
   label(e) { const id = e.id ? "#" + e.id : ""; const c = (e.getAttribute("class") || "").trim().split(/\\s+/).filter(Boolean).slice(0, 2).map((x) => "." + x).join(""); return e.tagName.toLowerCase() + id + c; },
+  clippedAway(e) { for (let n = e; n && n.nodeType === 1; n = n.parentElement) { const c = getComputedStyle(n).clipPath; if (/^(circle|ellipse)\\(0(px)?[ )]/.test(c) || /^inset\\((5\\d|[6-9]\\d|100)%/.test(c)) return true; } return false; },
   decorative(e) { for (let n = e; n; n = n.parentElement) { if (n.nodeType !== 1) continue; if (n.getAttribute("aria-hidden") === "true" || n.hasAttribute("hidden") || n.hasAttribute("inert") || (n.tagName === "DIALOG" && !n.open)) return true; } return false; },
   srOnly(e) { const r = e.getBoundingClientRect(); const s = getComputedStyle(e); return r.width <= 2 || r.height <= 2 || s.clipPath === "inset(50%)" || s.clip === "rect(0px, 0px, 0px, 0px)" || s.clip === "rect(1px, 1px, 1px, 1px)"; },
   opacity(e) { let o = 1; for (let n = e; n && n.nodeType === 1; n = n.parentElement) { const s = getComputedStyle(n); o *= parseFloat(s.opacity); if (s.visibility === "hidden" && n === e) return 0; } return o; },
@@ -712,12 +713,13 @@ async function a11y(browser, url) {
     out.target = r; await ctx.close();
   }
   // 200% zoom: 1440×900 at 200% is a 720×450 CSS viewport. Anything readable or usable at 1440 must still be at 720:
-  // text not cut off by an overflow: hidden/clip box (its own or an ancestor's), every control on screen after
+  // text not cut off by an overflow: hidden/clip box (its own or an ancestor's, up to the nearest scroller, whose
+  // content is reachable by scrolling it), every control on screen after
   // scrolling to it and not covered. Only losses at 720 that don't already exist at 1440 count.
   {
     const lost = (sel) => {
       const f = [];
-      const clipper = (e) => { for (let a = e; a && a !== document.body; a = a.parentElement) { const cs = getComputedStyle(a); if (/hidden|clip/.test(cs.overflowY + cs.overflowX) && a.clientHeight > 0) { const r = a.getBoundingClientRect(), b = e.getBoundingClientRect(); if (b.bottom > r.bottom + 2 || b.right > r.right + 2 || (a === e && (e.scrollHeight > e.clientHeight + 2 && cs.webkitLineClamp === "none" && cs.textOverflow !== "ellipsis"))) return a; } } return null; };
+      const clipper = (e) => { for (let a = e; a && a !== document.body; a = a.parentElement) { const cs = getComputedStyle(a); if (a !== e && /auto|scroll/.test(cs.overflowX + cs.overflowY)) return null; /* inside a scroller: reachable by scrolling it */ if (/hidden|clip/.test(cs.overflowY + cs.overflowX) && a.clientHeight > 0) { const r = a.getBoundingClientRect(), b = e.getBoundingClientRect(); if (b.bottom > r.bottom + 2 || b.right > r.right + 2 || (a === e && (e.scrollHeight > e.clientHeight + 2 && cs.webkitLineClamp === "none" && cs.textOverflow !== "ellipsis"))) return a; } } return null; };
       for (const e of __g.textEls()) { if (__g.decorative(e) || __g.srOnly(e)) continue; const cs = getComputedStyle(e); if (cs.display === "none" || cs.visibility === "hidden" || !e.getClientRects().length) continue; const c = clipper(e); if (c) f.push({ key: __g.key(e), kind: "text clipped", el: __g.label(e), text: e.textContent.trim().slice(0, 30), by: __g.label(c) }); }
       for (const e of document.querySelectorAll(sel)) { if (__g.decorative(e) || __g.srOnly(e)) continue; const cs = getComputedStyle(e); if (cs.visibility === "hidden" || !e.getClientRects().length) continue;
         e.scrollIntoView({ block: "center", inline: "center", behavior: "instant" }); const b = e.getBoundingClientRect(); if (b.width < 1 || b.height < 1) continue;
@@ -741,10 +743,10 @@ async function a11y(browser, url) {
   // measured against the box's dominant colour. Invisible text (a transparent fill that survives) reads as 1:1.
   {
     const { ctx, page } = await open(browser, url, { viewport: { width: 1440, height: 900 }, forcedColors: "active" });
-    const items = await page.evaluate(() => __g.textEls().filter((e) => !__g.decorative(e) && !__g.srOnly(e) && e.getClientRects().length && getComputedStyle(e).visibility !== "hidden" && __g.opacity(e) > 0.05 /* a resting, faded-out caption is not on screen to read */).slice(0, 80).map((e) => ({ key: __g.key(e), el: __g.label(e), text: e.textContent.trim().slice(0, 30), adjust: getComputedStyle(e).forcedColorAdjust })));
+    const items = await page.evaluate(() => __g.textEls().filter((e) => !__g.decorative(e) && !__g.srOnly(e) && e.getClientRects().length && getComputedStyle(e).visibility !== "hidden" && __g.opacity(e) > 0.05 /* a resting, faded-out caption is not on screen to read */ && !__g.clippedAway(e)).slice(0, 80).map((e) => ({ key: __g.key(e), el: __g.label(e), text: e.textContent.trim().slice(0, 30), adjust: getComputedStyle(e).forcedColorAdjust })));
     const shots = [];
     for (const it of items) {
-      const box = await page.evaluate((k) => { const e = [...document.querySelectorAll("*")].find((n) => __g.key(n) === k); if (!e) return null; e.scrollIntoView({ block: "center", behavior: "instant" }); const r = e.getClientRects()[0]; return r && r.width >= 4 && r.height >= 4 && r.top >= 0 && r.bottom <= innerHeight ? { x: Math.max(0, r.left), y: r.top, width: Math.min(innerWidth - Math.max(0, r.left), r.width), height: r.height } : null; }, it.key);
+      const box = await page.evaluate(async (k) => { const e = [...document.querySelectorAll("*")].find((n) => __g.key(n) === k); if (!e) return null; e.scrollIntoView({ block: "center", behavior: "instant" }); await new Promise((ok) => requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(ok, 80)))); /* scroll-driven layers (a pinned reel) move on the next frame: measure where the text ended up */ const r = e.getClientRects()[0]; return r && r.width >= 4 && r.height >= 4 && r.top >= 0 && r.bottom <= innerHeight && r.left >= 0 && r.right <= innerWidth + 2 ? { x: Math.max(0, r.left), y: r.top, width: Math.min(innerWidth - Math.max(0, r.left), r.width), height: r.height } : null; }, it.key);
       if (!box || box.width < 4) continue; await page.waitForTimeout(60);
       shots.push({ it, img: (await page.screenshot({ type: "png", clip: box })).toString("base64") });
     }

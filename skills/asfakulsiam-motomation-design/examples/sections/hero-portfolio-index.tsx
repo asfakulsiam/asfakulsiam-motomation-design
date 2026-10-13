@@ -9,7 +9,8 @@
 // reduced-motion: Rows invert without the marquee; no trail.
 import { FlowingMenu } from "../components/layout/flowing-menu";
 import { ImageTrail } from "../components/cursor/image-trail";
-import { Section, art, h, label, MUTED } from "./_shared";
+import { Section, h, label, MUTED } from "./_shared";
+import { cover } from "./_imagery";
 
 const WORK = [
   { label: "Kantha Archive", href: "#kantha", marquee: "Identity · 2026 · Dhaka" },
@@ -17,7 +18,7 @@ const WORK = [
   { label: "Salt & Monsoon", href: "#salt", marquee: "Book design · 2025" },
   { label: "Night Market", href: "#night", marquee: "Motion · 2024" },
 ];
-const trail = [1, 2, 3, 4, 5].map((i) => ({ src: art(i * 97, ["#e9dcc6", "#b5401f", "#1d3b4a"], 400, 300), alt: "" }));
+const trail = [1, 2, 3, 4, 5].map((i) => ({ src: cover(i, ["#e9dcc6", "#b5401f", "#1d3b4a"]), alt: "" }));
 
 export function HeroPortfolioIndex() {
   return (

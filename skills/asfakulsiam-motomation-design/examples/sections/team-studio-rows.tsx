@@ -9,12 +9,13 @@
 // reduced-motion: The lens is a toggle; names don't scramble.
 import { Lens } from "../components/cursor/lens";
 import { ScrambleOnHover } from "../components/text/scramble-on-hover";
-import { Section, art, h, label, LINE, MONO, MUTED } from "./_shared";
+import { Section, h, label, LINE, MONO, MUTED } from "./_shared";
+import { longTable } from "./_imagery";
 
 const TEAM = [["Ayesha Siddiqua", "Partner, identity", "2011"], ["Tanvir Hasan", "Partner, exhibitions", "2013"], ["Mithila Das", "Data design", "2019"], ["Rafi Chowdhury", "Typesetting", "2022"]];
 const photo = (labels: boolean) => (
   <div style={{ position: "relative" }}>
-    <img src={art(77, labels ? ["#efe3cf", "#b5401f", "#1d3b4a"] : ["#d8d2c6", "#8f8a82", "#5d5a55"], 1400, 700)} alt={labels ? "" : "The studio at its long table, four people at work"} width={1400} height={700} style={{ display: "block", width: "100%", height: "auto" }} />
+    <img src={longTable(labels ? ["#efe3cf", "#b5401f", "#1d3b4a"] : ["#d8d2c6", "#8f8a82", "#5d5a55"])} alt={labels ? "" : "The studio at its long table, four people at work"} width={1400} height={700} style={{ display: "block", width: "100%", height: "auto" }} />
     {labels && TEAM.map(([n], i) => <span key={n} style={{ position: "absolute", left: `${14 + i * 22}%`, top: `${38 + (i % 2) * 14}%`, padding: "4px 8px", background: "#1d1a16", color: "#f4efe6", fontFamily: "var(--font-mono, monospace)", fontSize: 12 }}>{n}</span>)}
   </div>
 );

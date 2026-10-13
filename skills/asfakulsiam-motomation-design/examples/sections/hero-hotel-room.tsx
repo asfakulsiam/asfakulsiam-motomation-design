@@ -9,14 +9,15 @@
 // reduced-motion: The doorway is fully open from the start.
 import { Aperture } from "../components/scroll/aperture";
 import { Grain } from "../components/backgrounds/grain";
-import { Section, art, h, label } from "./_shared";
+import { Section, h, label } from "./_shared";
+import { haveli } from "./_imagery";
 
 export function HeroHotelRoom() {
   return (
     <Section id="hero-hotel-room" title="Haveli Panam" bleed>
       <div style={{ position: "relative", minHeight: "100svh", display: "grid", justifyItems: "center", alignContent: "center", gap: "4vh", padding: "8vh 20px" }}>
         <Aperture shape="door" style={{ width: "min(92vw, 1100px)", aspectRatio: "16 / 9", maxHeight: "62svh", borderRadius: 4 }}>
-          <img src={art(31, ["#e9d8bd", "#a8643a", "#f2c879"], 1600, 1000)} alt="The courtyard at Haveli Panam in the late afternoon, with the well and the neem tree" width={1600} height={1000} style={{ display: "block", width: "100%", height: "100%", objectFit: "cover" }} />
+          <img src={haveli("courtyard", 31, { wall: "#e9d8bd", ink: "#5a3220", light: "#f2c879" }, 1600, 1000)} alt="The courtyard at Haveli Panam in the late afternoon, with the well and the neem tree" width={1600} height={1000} style={{ display: "block", width: "100%", height: "100%", objectFit: "cover" }} />
         </Aperture>
         <div style={{ position: "relative", textAlign: "center" }}>
           <p style={label}>Sonargaon · seven rooms · since 1898</p>

@@ -10,7 +10,7 @@
 // avoid-when: Primary site navigation on product sites; long lists; touch-first audiences.
 // reduced-motion: Hover shows the band instantly with still text.
 // touch: Plain links with a pressed state.
-// a11y: A nav with a normal list of links; the band and marquee are aria-hidden.
+// a11y: A nav with a normal list of links; the band and marquee are aria-hidden. Keyboard focus rolls the band in, so focus is as visible as hover (the row clips an outline).
 import { useState, type CSSProperties } from "react";
 import { useReducedMotion, useFinePointer, EASE } from "../_lib/motion";
 
@@ -29,7 +29,8 @@ export function FlowingMenu({ items, label = "Projects", className, style }: Pro
           return (
             <li key={i} style={{ position: "relative", overflow: "hidden", borderTop: "1px solid var(--line, rgba(0,0,0,.15))" }}
               onPointerEnter={(e) => { if (!fine) return; const r = e.currentTarget.getBoundingClientRect(); setHot({ i, from: e.clientY - r.top < r.height / 2 ? "top" : "bottom" }); }}
-              onPointerLeave={() => setHot(null)}>
+              onPointerLeave={() => setHot(null)}
+              onFocus={(e) => { if ((e.target as HTMLElement).matches?.(":focus-visible")) setHot({ i, from: "top" }); }} onBlur={() => setHot(null)}>
               <a href={it.href} style={{ display: "block", padding: "0.35em 0", fontSize: "clamp(2rem, 6vw, 4.5rem)", lineHeight: 1, color: "inherit", textDecoration: "none", position: "relative", zIndex: 1 }}>{it.label}</a>
               <span aria-hidden="true" style={{ position: "absolute", inset: 0, zIndex: 2, pointerEvents: "none", background: "var(--ink, #111)", color: "var(--ground, #f4f1ea)", display: "flex", alignItems: "center", overflow: "hidden",
                 transform: on ? "translateY(0)" : `translateY(${hot?.from === "bottom" || (!on && hot?.i !== i) ? "101%" : "-101%"})`, transition: reduce ? "none" : `transform 260ms ${EASE.out}` }}>

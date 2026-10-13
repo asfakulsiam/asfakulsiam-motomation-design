@@ -3,6 +3,8 @@
 //   timingSheet(tier, motionMd)   Tier 3–5 templates ship MOTION.md with a timing sheet (motion/choreography.md)
 //   dials(designMd, builtTier)    dials 1–3, tier inside the MOTION dial's range, DESIGN.md tier = built tier
 //   pins(stampedHtml)             measured pins (stamp M trace) within the budget of 2
+//   imagery(designMd)             an Imagery block with a Mode line, a stand-in when images are used, no boilerplate
+//   noPlaceholderArt(src, file)   no section calls the old abstract art() placeholder
 
 // a timing sheet: at least one chapter header and one table with the sheet's columns and a beat row
 export function timingSheet(tier, motionMd) {
@@ -38,4 +40,21 @@ export function pins(stampedHtml) {
   const m = stampedHtml?.match(/critique: [^·]*?M\d\[t\d:pins(\d+)\/\d+/);
   if (!m) return [];
   return +m[1] > PIN_BUDGET ? [`${m[1]} pins measured against a budget of ${PIN_BUDGET} (principles/restraint.md); reduce the pins or justify the tier`] : [];
+}
+
+// principles/imagery.md: every template decides its imagery (one Mode line), and no section draws the old abstract
+// placeholder art(): imagery is either the real subject drawn (examples/sections/_imagery.tsx) or none, on purpose
+export const IMAGERY_MODES = ["photography", "illustration", "texture only", "none"];
+export function imagery(designMd) {
+  const at = designMd?.indexOf("\n## Imagery\n") ?? -1; const rest = at < 0 ? null : designMd.slice(at + 12); const sec = rest === null ? null : rest.slice(0, (rest.indexOf("\n## ") + 1 || rest.length + 1) - 1);
+  if (!sec) return ["DESIGN.md has no ## Imagery block (principles/imagery.md)"];
+  const mode = sec.match(/^- Mode: (photography|illustration|texture only|none)\b/m);
+  const p = [];
+  if (!mode) p.push(`## Imagery has no Mode line (one of: ${IMAGERY_MODES.join(", ")})`);
+  if (mode && mode[1] !== "none" && !/^- Template stand-in: /m.test(sec)) p.push("## Imagery uses images but names no template stand-in (principles/imagery.md §6)");
+  if (/Treatment: none beyond what the section does/.test(sec)) p.push("## Imagery still has the old boilerplate (no direction written)");
+  return p;
+}
+export function noPlaceholderArt(sourceText, file) {
+  return /\bart\(/.test(sourceText.replace(/\/\/.*$/gm, "")) ? [`${file} still calls art(); draw the real subject (examples/sections/_imagery.tsx) or use no imagery`] : [];
 }

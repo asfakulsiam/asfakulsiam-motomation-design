@@ -43,9 +43,14 @@ Type mode: HOUSE STYLE (typography-led), because the house sells the stay
 - Forms: only where the page asks for something (email, amount)
 
 ## Imagery
-- Source: Courtyard, rooms and guest-book photographs [NEEDS ASSET]
-- Treatment: none beyond what the section does
-- `[NEEDS ASSET]` list: see Source
+- Mode: photography (illustration as the template stand-in)
+- Subject: the house itself: the courtyard with the well and the neem tree, each of the seven rooms from its doorway, the guest book's own pages
+- Direction: late-afternoon light only, the sun low from the west through the arches, hard-edged shafts on lime plaster; camera at standing eye height, 35 mm equivalent, verticals straight (no keystoning on the arches); graded to the page's warm ground, no added saturation; no people posed, at most a figure passing in shadow
+- Illustration style: organic (§2) for the stand-ins: flat line elevations of the cusped arches, jali screens and the charpai, one shaft of light per frame
+- Texture: grain only, static: 0.06 on the hero image, 0.08 on the guest-book paper (one kind of texture, principles/imagery.md §3)
+- Interplay: the hero title sits below the image, never over it; room names are captions under each frame in the reel
+- Template stand-in: `haveli("courtyard" | "room", seed, palette)` in `examples/sections/_imagery.tsx`; same width, height and alt as the photographs that replace them
+- `[NEEDS ASSET]`: (1) courtyard, late afternoon, well and neem in frame (alt as in hero-hotel-room); (2–8) each room from its doorway, window camera-left (alt "<Room> at Haveli Panam"); (9) two guest-book spreads, flat, raking light
 
 ## Restraint Gate record
 - Concept survived: yes, after 1 change

@@ -9,7 +9,8 @@
 // reduced-motion: No tilt; the counter shows the current stock.
 import { TiltCard } from "../components/cursor/tilt-card";
 import { SplitFlap } from "../components/type/split-flap";
-import { Section, art, body, cols, h, label, LINE, MONO, MUTED } from "./_shared";
+import { Section, body, cols, h, label, LINE, MONO, MUTED } from "./_shared";
+import { ceramic } from "./_imagery";
 
 const SPEC = [["Clay", "Bijoypur white, wood-fired"], ["Glaze", "Ash celadon, batch 14"], ["Size", "Ø 21 cm · 4.5 cm deep"], ["Price", "৳ 3,400"]];
 
@@ -18,7 +19,7 @@ export function HeroShopCatalogue() {
     <Section id="hero-shop-catalogue" title="Mati ceramics">
       <div style={{ ...cols(320, 56), alignItems: "center" }}>
         <TiltCard max={8} style={{ borderRadius: 18, overflow: "hidden", boxShadow: "0 30px 60px rgba(0,0,0,.18)" }}>
-          <img src={art(14, ["#d9d3c4", "#7f9a8a", "#efe9dc"], 800, 800)} alt="Ash celadon plate, batch 14, on linen" width={800} height={800} style={{ display: "block", width: "100%", height: "auto" }} />
+          <img src={ceramic("plate", "#7f9a8a", { ground: "#d9d3c4", seed: 14 })} alt="Ash celadon plate, batch 14, on linen" width={800} height={800} style={{ display: "block", width: "100%", height: "auto" }} />
         </TiltCard>
         <div style={{ display: "grid", gap: 20 }}>
           <p style={label}>No. 14-07 · Plates</p>

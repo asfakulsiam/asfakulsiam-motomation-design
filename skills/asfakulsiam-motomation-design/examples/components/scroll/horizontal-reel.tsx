@@ -9,7 +9,7 @@
 // use-when: Film, gallery, timeline and process concepts with 4–10 frames.
 // avoid-when: Content people need to scan quickly; more than one per page; frames that need reading time.
 // reduced-motion: The frames become a normal horizontally scrollable row with snap points.
-// touch: Below 768px the strip becomes a swipeable row with snap points (no pinning).
+// touch: Below 768px wide, or under 560px tall (200% zoom), the strip becomes a swipeable row with snap points (no pinning).
 // a11y: A normal list; the counter is aria-hidden; every frame is reachable by keyboard in the fallback.
 import { useRef, type CSSProperties, type ReactNode } from "react";
 import { useReducedMotion, useMedia, useStickyProgress } from "../_lib/motion";
@@ -22,9 +22,10 @@ export function HorizontalReel({ frames, frameWidth = "min(70vw, 720px)", classN
   const counter = useRef<HTMLSpanElement>(null);
   const reduce = useReducedMotion();
   const desktop = useMedia("(min-width: 768px)");
-  const pinned = desktop && !reduce;
+  const tall = useMedia("(min-height: 560px)"); // a short view (200% zoom, a landscape phone) gets the scroller, not a cramped pin
+  const pinned = desktop && tall && !reduce;
   useStickyProgress(wrap, (p) => {
-    const s = strip.current; if (!s) return; const run = s.scrollWidth - s.clientWidth;
+    const s = strip.current; if (!s) return; const run = Math.max(0, s.scrollWidth - (s.parentElement?.clientWidth ?? s.clientWidth)); // the strip is a grid item that grows to its content, so measure against the frame it moves in
     s.style.transform = `translate3d(${-run * p}px,0,0)`;
     if (counter.current) counter.current.textContent = `${String(Math.min(frames.length, Math.floor(p * frames.length) + 1)).padStart(2, "0")} / ${String(frames.length).padStart(2, "0")}`;
   }, pinned);

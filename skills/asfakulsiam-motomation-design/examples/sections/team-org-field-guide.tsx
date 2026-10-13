@@ -9,7 +9,8 @@
 // reduced-motion: The print is drawn at full size at once; nothing moves.
 // note: Halftone is used for a map-like print, not portraits (its avoid-when: portraits where likeness matters; many on one page).
 import { Halftone } from "../components/backgrounds/halftone";
-import { Section, art, cols, h, label, LINE, MONO, MUTED } from "./_shared";
+import { Section, cols, h, label, LINE, MONO, MUTED } from "./_shared";
+import { survey } from "./_imagery";
 
 const WATCHERS = [["Jahanara Begum", "Turag · Tongi bridge to Ashulia", "“Dyeing water came at 2 am again, purple this time.”"], ["Kamal Uddin", "Buriganga · Sadarghat", "“The new wall is 11 metres inside the 2019 line.”"], ["Mousumi Roy", "Karatoya · Bogura town", "“Otters back below the old ghat. Two.”"]];
 
@@ -20,7 +21,7 @@ export function TeamOrgFieldGuide() {
       <h2 id="team-org-field-guide-title" style={h("clamp(2rem, 4.4vw, 3.4rem)", { margin: "12px 0 36px" })}>The people on the bank.</h2>
       <div style={{ ...cols(300, 40), alignItems: "start" }}>
         <figure style={{ margin: 0 }}>
-          <Halftone src={art(133, ["#e9e2d4", "#3a4a52", "#9aa59c"], 720, 480)} alt="Survey print of the Turag, Buriganga and Karatoya reaches the watchers cover" width={720} height={480} cell={8} ink="#1d3b4a" paper="#efe9dc" style={{ width: "100%", height: "auto" }} />
+          <Halftone src={survey({ paper: "#e9e2d4", water: "#3a4a52", land: "#9aa59c" })} alt="Survey print of the Turag, Buriganga and Karatoya reaches the watchers cover" width={720} height={480} cell={8} ink="#1d3b4a" paper="#efe9dc" style={{ width: "100%", height: "auto" }} />
           <figcaption style={{ marginTop: 10, fontFamily: MONO, fontSize: 12, color: MUTED }}>Survey print · three reaches, 2025</figcaption>
         </figure>
         <ol style={{ listStyle: "none", padding: 0, margin: 0 }}>
