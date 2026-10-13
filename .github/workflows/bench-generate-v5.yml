@@ -1,0 +1,73 @@
+name: Benchmark v5 generate + measure (extended matched effort)
+# P1 T12: the extended matched-effort comparison, generated on GitHub's runners with the fixed turn cap (P1 T1) and
+# run provenance (P1 T13, <out>/meta.json). 5 briefs × 6 seeds × 2 arms (skill, matched) = 60 runs → 30 pairs.
+# One job per brief: the skill arm first (its num_turns is the matched arm's budget, per seed), then the matched arm,
+# then the measure phase on the same runner image. Artifacts: every run folder (index.html, run.json, transcript,
+# checks.json, screenshots) + meta.json, for the judge and score phases, which need other model families and run
+# elsewhere. Needs the repository secret ANTHROPIC_API_KEY; the preflight job stops the run, with a clear message, if
+# it is missing. Trigger: push to bench-v5, or Run workflow.
+on:
+  workflow_dispatch:
+    inputs:
+      n: { description: "seeds per brief", default: "6" }
+  push:
+    branches: [bench-v5]
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Model access
+        env: { ANTHROPIC_API_KEY: "${{ secrets.ANTHROPIC_API_KEY }}" }
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::error::ANTHROPIC_API_KEY is not set as a repository secret, so no agent can be run. Add it (Settings → Secrets and variables → Actions) and re-run; nothing was generated."
+            exit 1
+          fi
+          echo "model access configured"
+  generate:
+    needs: preflight
+    name: ${{ matrix.slug }} (skill + matched, n=${{ inputs.n || '6' }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      matrix:
+        slug: [studio, hotel, ecommerce, saas, public]
+    env:
+      OUT: evals/results/benchmark-v5-${{ github.run_id }}
+      N: ${{ inputs.n || '6' }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - name: Toolchain (pinned) + Chromium + Claude Code
+        run: |
+          npm i --no-save --no-package-lock --silent playwright@1.59.0 axe-core@4.14.0 esbuild react react-dom
+          npx playwright install --with-deps chromium
+          npm i -g @anthropic-ai/claude-code
+          claude --version; npx playwright --version; nproc; free -m
+      - name: Unit tests the run depends on (turn cap exact, provenance written)
+        run: |
+          node tests/evals/turn-cap.test.mjs
+          node tests/evals/run-meta.test.mjs
+      - name: Generate, skill arm (sets each seed's budget)
+        run: node evals/run-agent-benchmark.mjs generate --out "$PWD/$OUT" --n "$N" --only ${{ matrix.slug }} --arms skill --parallel 2
+      - name: Generate, matched arm (same turns as the paired skill run, exact cap)
+        run: node evals/run-agent-benchmark.mjs generate --out "$PWD/$OUT" --n "$N" --only ${{ matrix.slug }} --arms matched --parallel 2
+      - name: Measure (both arms, same runner)
+        run: node evals/run-agent-benchmark.mjs measure --out "$PWD/$OUT" --n "$N" --only ${{ matrix.slug }} --arms skill,matched --parallel 1 --force
+      - name: Effort check (every matched run within its budget)
+        run: |
+          node -e '
+            const fs=require("fs"),p=require("path"); const d=p.join(process.env.OUT,"${{ matrix.slug }}"); let bad=0;
+            for (const f of fs.readdirSync(d).filter(f=>f.startsWith("matched-"))) { const r=JSON.parse(fs.readFileSync(p.join(d,f,"run.json"))); const e=r.effort||{}; const ok=e.used<=e.budget; if(!ok) bad++; console.log(f, "budget", e.budget, "used", e.used, ok?"ok":"OVER"); }
+            process.exit(bad?1:0);'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bench-v5-${{ matrix.slug }}
+          path: |
+            ${{ env.OUT }}/meta.json
+            ${{ env.OUT }}/${{ matrix.slug }}/
+          retention-days: 30
