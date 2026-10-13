@@ -461,7 +461,7 @@ You don't need one. The skill ships its own library of 68 components (see [Compo
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). In short: original work only, short single-purpose files, run `node scripts/check-repo.mjs`, and add an eval brief for new behaviour.
+See [CONTRIBUTING.md](CONTRIBUTING.md). In short: original work only, short single-purpose files, run `node scripts/check-repo.mjs`, and add an eval brief for new behaviour. To add a gate rule set (a new axis next to copy, SEO, performance and security), follow [docs/adding-a-rule-set.md](docs/adding-a-rule-set.md).
 
 ## License
 
