@@ -13,3 +13,5 @@
 **Pitfalls:** a "creator template" look with social icons as the hero.
 
 **Award-site teardowns** (principles, no code): `references/teardowns/lando-norris.md`
+
+**Worked example, brief to concept:** `examples/concepts/personal-brand.md`

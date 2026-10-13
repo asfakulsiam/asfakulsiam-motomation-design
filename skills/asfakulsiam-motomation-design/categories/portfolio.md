@@ -21,3 +21,5 @@
 **Pitfalls:** a bento grid of thumbnails, skill bars and percentages, a tools logo wall, "passionate about" copy.
 
 **Award-site teardowns** (principles, no code): `references/teardowns/igloo-inc.md` · `references/teardowns/bruno-simon.md`
+
+**Worked example, brief to concept:** `examples/concepts/portfolio.md`

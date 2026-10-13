@@ -10,6 +10,8 @@ Each example is a real session: the prompt, the commands that ran, their output,
 | [Fix an existing page](fix-existing.md) | Fix something small on a page that exists, without redesigning it | Short | Perplexity Computer (Claude Opus 5.5), by hand | — (unchanged) | before FAIL (32 contrast), after PASS |
 | [Component swap](component.md) | Drop one Motomation component into an existing React app | Short (component) | Claude Code 2.1.286, `claude_sonnet_5_5` | — | typecheck, gate and interaction test pass |
 
+**Brief to concept only:** ten shorter examples, one per category, that stop at the concept (real collision draw, tension, rejected first idea, concept stamp): `examples/concepts/README.md`.
+
 ## Which route
 
 - **Full route** (all seven Thinking Sequence steps, a collision draw, a signature): new pages, sites, sections or redesigns. Start with the [flagship](showcase.md).

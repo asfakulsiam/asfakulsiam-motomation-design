@@ -13,3 +13,5 @@
 **Pitfalls:** guilt-driven imagery, unverifiable statistics, motion that harms people with vestibular disorders. Keep MOTION at 1–2.
 
 **Award-site teardowns** (principles, no code): `references/teardowns/siena-film-foundation.md`
+
+**Worked example, brief to concept:** `examples/concepts/organisation.md`

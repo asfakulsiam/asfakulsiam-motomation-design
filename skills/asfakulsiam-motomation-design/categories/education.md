@@ -13,3 +13,5 @@
 **Pitfalls:** stock "students laughing at laptops" photos.
 
 **Award-site teardowns** (principles, no code): `references/teardowns/prometheus-fuels.md`
+
+**Worked example, brief to concept:** `examples/concepts/education.md`

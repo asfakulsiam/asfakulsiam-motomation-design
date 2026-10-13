@@ -20,3 +20,5 @@
 **Pitfalls:** hero + logos + 3 features + testimonials + pricing + CTA in that exact order, purple gradients, glowing orbs, invented "10x faster" claims.
 
 **Award-site teardowns** (principles, no code): `references/teardowns/terminal-industries.md`
+
+**Worked example, brief to concept:** `examples/concepts/saas.md`

@@ -11,3 +11,5 @@
 **Signature menu:** a Motomation walkthrough (image sequence from a render) · Lens between drawing and photo · Swiss grid lines that draw on load · Aperture transitions
 **Must-haves:** large, high-quality, optimised imagery; plans and sections viewable; credits.
 **Pitfalls:** tiny thumbnails, generic "luxury living" copy, 3D models that block the page from loading.
+
+**Worked example, brief to concept:** `examples/concepts/architecture.md`

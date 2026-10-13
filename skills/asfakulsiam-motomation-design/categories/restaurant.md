@@ -11,3 +11,5 @@
 **Signature menu:** a Railway-board menu that flips on change · ingredient labels that annotate a dish photo · Ink Fill for the chef's statement
 **Must-haves:** hours visible in under 3 seconds, a tappable phone number, a map link, menu prices, `Restaurant` structured data.
 **Pitfalls:** heavy motion before the hours and menu, menus as images.
+
+**Worked example, brief to concept:** `examples/concepts/restaurant.md`

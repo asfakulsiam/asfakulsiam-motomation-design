@@ -13,3 +13,5 @@
 **Pitfalls:** the date hidden under the animation, countdown timers as the only content.
 
 **Award-site teardowns** (principles, no code): `references/teardowns/cartier-watches-wonders-2025.md`
+
+**Worked example, brief to concept:** `examples/concepts/event.md`

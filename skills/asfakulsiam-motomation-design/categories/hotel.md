@@ -18,3 +18,5 @@
 **Signature menu:** an Aperture "doorway" between sections · a Motomation arrival walk (image sequence) · a day/night Diptych · Darkroom Develop on heritage photos
 **Must-haves:** booking engine integration, real rates or "from" prices, accessibility information, `Hotel` structured data, fast images (AVIF/WebP with sizes).
 **Pitfalls:** autoplay videos with sound, cluttered carousels, stock "luxury" copy ("an oasis of tranquillity").
+
+**Worked example, brief to concept:** `examples/concepts/hotel.md`

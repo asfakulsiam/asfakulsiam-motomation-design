@@ -2253,6 +2253,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 **Must-haves:** large, high-quality, optimised imagery; plans and sections viewable; credits.
 **Pitfalls:** tiny thumbnails, generic "luxury living" copy, 3D models that block the page from loading.
 
+**Worked example, brief to concept:** `examples/concepts/architecture.md`
+
 
 ---
 
@@ -2279,6 +2281,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 
 **Award-site teardowns** (principles, no code): `references/teardowns/scout-motors.md`
 
+**Worked example, brief to concept:** `examples/concepts/ecommerce.md`
+
 
 ---
 
@@ -2300,6 +2304,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 
 **Award-site teardowns** (principles, no code): `references/teardowns/prometheus-fuels.md`
 
+**Worked example, brief to concept:** `examples/concepts/education.md`
+
 
 ---
 
@@ -2320,6 +2326,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 **Pitfalls:** the date hidden under the animation, countdown timers as the only content.
 
 **Award-site teardowns** (principles, no code): `references/teardowns/cartier-watches-wonders-2025.md`
+
+**Worked example, brief to concept:** `examples/concepts/event.md`
 
 
 ---
@@ -2347,6 +2355,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 **Must-haves:** booking engine integration, real rates or "from" prices, accessibility information, `Hotel` structured data, fast images (AVIF/WebP with sizes).
 **Pitfalls:** autoplay videos with sound, cluttered carousels, stock "luxury" copy ("an oasis of tranquillity").
 
+**Worked example, brief to concept:** `examples/concepts/hotel.md`
+
 
 ---
 
@@ -2368,6 +2378,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 
 **Award-site teardowns** (principles, no code): `references/teardowns/siena-film-foundation.md`
 
+**Worked example, brief to concept:** `examples/concepts/organisation.md`
+
 
 ---
 
@@ -2388,6 +2400,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 **Pitfalls:** a "creator template" look with social icons as the hero.
 
 **Award-site teardowns** (principles, no code): `references/teardowns/lando-norris.md`
+
+**Worked example, brief to concept:** `examples/concepts/personal-brand.md`
 
 
 ---
@@ -2417,6 +2431,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 **Pitfalls:** a bento grid of thumbnails, skill bars and percentages, a tools logo wall, "passionate about" copy.
 
 **Award-site teardowns** (principles, no code): `references/teardowns/igloo-inc.md` · `references/teardowns/bruno-simon.md`
+
+**Worked example, brief to concept:** `examples/concepts/portfolio.md`
 
 
 ---
@@ -2458,6 +2474,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 **Must-haves:** hours visible in under 3 seconds, a tappable phone number, a map link, menu prices, `Restaurant` structured data.
 **Pitfalls:** heavy motion before the hours and menu, menus as images.
 
+**Worked example, brief to concept:** `examples/concepts/restaurant.md`
+
 
 ---
 
@@ -2485,6 +2503,8 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 **Pitfalls:** hero + logos + 3 features + testimonials + pricing + CTA in that exact order, purple gradients, glowing orbs, invented "10x faster" claims.
 
 **Award-site teardowns** (principles, no code): `references/teardowns/terminal-industries.md`
+
+**Worked example, brief to concept:** `examples/concepts/saas.md`
 
 
 ---

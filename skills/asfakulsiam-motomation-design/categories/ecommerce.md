@@ -18,3 +18,5 @@
 **Pitfalls:** animation that delays the purchase, carousels as the main navigation, fake scarcity timers.
 
 **Award-site teardowns** (principles, no code): `references/teardowns/scout-motors.md`
+
+**Worked example, brief to concept:** `examples/concepts/ecommerce.md`
