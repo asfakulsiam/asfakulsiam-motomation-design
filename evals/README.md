@@ -15,6 +15,50 @@ Proof that the skill does what it claims. Run them before a release.
 - `--pairs baseline:skill,gated:skill,baseline:gated`: which pairs `judge` and `score` compare. `baseline:skill` keeps v2's file names and summary shape.
 - `--only portfolio,launch,festival --tier 4` (or `5`): the motion-heavy briefs 01, 06 and 08 at a forced tier. Every arm is told the same tier.
 
+## Rerun one brief with your own key
+The adapters in `adapters/` connect the runner to a model. `pplx-llm.py` and the two `*-bridge.py` files are what the published runs used; they need Perplexity's internal SDK and do not run elsewhere. These three are public and use only the Python standard library:
+
+| Adapter | Key (environment only, never in a file) | Model names |
+|---|---|---|
+| `adapters/anthropic.py` | `ANTHROPIC_API_KEY` | Anthropic API ids |
+| `adapters/openai.py` | `OPENAI_API_KEY` (`OPENAI_BASE_URL` for a compatible server) | OpenAI API ids |
+| `adapters/openrouter.py` | `OPENROUTER_API_KEY` | OpenRouter slugs (`vendor/model`) |
+
+All three follow the same contract as `pplx-llm.py`. Agent mode takes a JSON request on stdin (`--model-cmd`). Judge mode takes `<model> <prompt-file> <images-file>` as arguments (`--judge-cmd`). The reply goes to stdout and one JSON usage line goes to stderr. A missing key exits 2 with `{"error": "…_API_KEY is not set"}`. The model names below are examples; use any id your account can call.
+
+Setup (Node 20+, Python 3.8+). `measure` and the raw-API agent's `look` tool need Playwright, installed from the repo root:
+```bash
+git clone https://github.com/asfakulsiam/asfakulsiam-motomation-design.git && cd asfakulsiam-motomation-design
+npm i --no-save playwright axe-core && npx playwright install chromium
+```
+
+**No key: replay the published judgments.** `--replay` makes no network call. In judge mode it prints the judgment recorded next to the prompt file (`<base>.json`, field `raw`), so `judge` and `score` recompute v3's verdicts from the committed files:
+```bash
+cp -r evals/results/2026-10-12-benchmark-v3 /tmp/v3-replay
+node evals/run-agent-benchmark.mjs judge --out /tmp/v3-replay --only studio --n 3 --force \
+  --judge-cmd "python3 evals/adapters/anthropic.py --replay {model} {prompt} {images}"
+node evals/run-agent-benchmark.mjs score --out /tmp/v3-replay --only studio --n 3
+# /tmp/v3-replay/summary.json → briefs.studio has the same wins/losses/ties and scores as the committed summary.json
+```
+In agent mode, a live run with `MOTOMATION_RECORD=calls.jsonl` appends every answer, keyed by a hash of the request. `--replay` with the same variable then answers those requests from the file.
+
+**Anthropic key: one brief end to end** (studio, one seed, baseline vs skill):
+```bash
+export ANTHROPIC_API_KEY=…            # your key; do not commit it
+OUT=/tmp/mm-studio
+node evals/run-agent-benchmark.mjs generate --out $OUT --only studio --n 1 --agent raw-api \
+  --model claude-sonnet-4-5 --model-cmd "python3 evals/adapters/anthropic.py"
+node evals/run-agent-benchmark.mjs measure  --out $OUT --only studio --n 1
+node evals/run-agent-benchmark.mjs judge    --out $OUT --only studio --n 1 --models claude-opus-4-1 \
+  --judge-cmd "python3 evals/adapters/anthropic.py {model} {prompt} {images}"
+node evals/run-agent-benchmark.mjs score    --out $OUT --only studio --n 1 --models claude-opus-4-1
+```
+To run inside Claude Code instead of the raw-API loop (the agent the published runs used), install the `claude` CLI and drop `--agent raw-api --model … --model-cmd …`. Claude Code reads `ANTHROPIC_API_KEY` itself.
+
+**OpenAI key:** the same four commands with `--model gpt-5 --model-cmd "python3 evals/adapters/openai.py"` and `--models gpt-5 --judge-cmd "python3 evals/adapters/openai.py {model} {prompt} {images}"`. **OpenRouter:** use `openrouter.py` with slugs, for example a Claude generator judged by `--models openai/gpt-5,google/gemini-2.5-pro`.
+
+Results land in `$OUT/studio/` (`baseline-s7101/`, `skill-s7101/`, `judge/`) and `$OUT/summary.json`. The published runs judged with models from a family other than the generator's. With one key you get a single-family judge, so say so when you report it.
+
 ## Where the screenshots are
 Since v2.2.0, benchmark screenshots (`shot-*.webp`, about 15 MB) live on the [`evals` branch](https://github.com/asfakulsiam/asfakulsiam-motomation-design/tree/evals/evals/results), so installing the skill doesn't download them. Main keeps every report, `summary.json`, `checks.json`, judge file, prompt, transcript and built `index.html`. The report images link to the `evals` branch. To re-judge an old run, check out its screenshots first: `git checkout origin/evals -- evals/results/<run>`.
 
