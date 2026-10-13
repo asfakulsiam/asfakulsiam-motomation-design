@@ -25,8 +25,9 @@ export function workflowProblems(name, text) {
   for (const { id, body } of jobs) {
     const t = body.join("\n");
     if (!/^    timeout-minutes:\s*\d+/m.test(t)) out.push(`${name} job ${id}: no timeout-minutes`);
-    if (/(^|[\s;&|(])(npm|npx) /m.test(t.replace(/#.*$/gm, "")) && !/setup-node@[\s\S]*?cache:\s*npm/.test(t)) out.push(`${name} job ${id}: runs npm but actions/setup-node has no cache: npm`);
-    if (/playwright install/.test(t) && !/actions\/cache@[\s\S]*?~\/\.cache\/ms-playwright/.test(t)) out.push(`${name} job ${id}: installs Playwright but does not cache ~/.cache/ms-playwright`);
+    const code = t.replace(/^\s*-?\s*name:.*$/gm, "").replace(/#.*$/gm, ""); // step names and comments are prose, not commands
+    if (/(^|[\s;&|(])(npm|npx) /m.test(code) && !/setup-node@[\s\S]*?cache:\s*npm/.test(t)) out.push(`${name} job ${id}: runs npm but actions/setup-node has no cache: npm`);
+    if (/playwright install/.test(code) && !/actions\/cache@[\s\S]*?~\/\.cache\/ms-playwright/.test(t)) out.push(`${name} job ${id}: installs Playwright but does not cache ~/.cache/ms-playwright`);
   }
   return out;
 }
