@@ -6,6 +6,26 @@ All notable changes to this skill. Versions follow [Semantic Versioning](https:/
 
 Release of the v2.5.0 fixes already on `main` (the three known gaps listed under 2.4.0), plus the cut of the plain variants. Newest work first; each bullet names its task and files. The benchmark was not run for this release; its measurement runs on GitHub Actions (`.github/workflows/bench-measure-v4.yml`).
 
+### Master run (2026-10-13): size control, rule sets, depth
+
+The version stays 2.5.0. The benchmark was not run, and no fps figure was added.
+
+- **Repository size (A1–A7):** audit (163 MB working tree, 150.2 MB tracked) in `docs/maintenance/repo-size-audit.md`. Benchmark screenshots and outputs moved to the `evals` branch, and Tier 5 frames moved to tarballs on `evals` (`frames.lock.json` + `scripts/fetch-frames.mjs`). The GitHub Release upload was refused (HTTP 400), so the tarballs are on the branch, not a release. Links were repointed. A size guard in `check-repo` blocks a tracked evals artifact, an unlisted file over 1 MB, and main over 15 MB. Main is now about 13.3 MB of tracked bytes.
+- **Rule sets (B1–B11):** `craft/copy.md`, `seo.md`, `performance.md`, `security.md` (twenty items each). The router loads all four, and Part 4 of the Delivery Gate gives one line per item. Gate `gate/4` adds a stamp segment `rules: C S P K` (pure checks in `scripts/rulesets.mjs`). Every template was re-gated, and there are 8 good/bad rule fixtures. `docs/adding-a-rule-set.md` covers adding a set.
+- **C1:** fixed the failing Components workflow (measuring swipe-row text, infinite WAAPI animations held at frame 0, the forced-colors clip). Thresholds are unchanged.
+- **C2:** every template folder must be registered. The Tier 5 rule requires `MOTION.md`, `poster.webp` and a fetch script.
+- **C3:** data depth. 80 fonts with a `scripts` column (Bengali, Devanagari, Arabic), 40 palettes in light/dark pairs, 50 motion recipes with timings, and a new `imagery.csv`.
+- **C4:** advisory composition heuristics in the gate: pin fill below 60%, a focal point per screen by text mass, and display:body below 1:6. They never fail the gate and are not in the stamp. `tests/gate/composition.test.mjs`.
+- **C5 / C6:** 11 award-site teardowns (principles only, sources linked) and 10 brief-to-concept examples, one per category, from real collision draws.
+- **C7:** `examples/prompts/showcase-tier5.md`, the product-launch film from storyboard to verified stamp. Writing it exposed a bug: `build-frames --check` ignored the manifest's quality. It now reads its settings from `frames.json`.
+- **C8:** content-addressed generate cache in the benchmark runner (`evals/bench-cache.mjs`), keyed on brief, seed, arm, skill tree hash and model. It is tested with a mock agent.
+- **C9:** every CLI prints one line plus usage on unknown flags or missing arguments (exit 2), not a stack trace. Helper: `cli()` in `scripts/lib.mjs`.
+- **C10:** every workflow job has `timeout-minutes`. Jobs that run npm get the setup-node npm cache, and jobs that install Playwright get a browser cache. `check-repo` enforces all three.
+- **C11:** `docs/templates/index.html` and `docs/plain/index.html` (`scripts/build-index-pages.mjs`), so `/templates/` and `/plain/` no longer 404.
+- **C12:** `llms.txt` states the version and links the newest benchmark report. `check-repo` fails on drift.
+
+### Release
+
 - **Release:** version 2.5.0 in `skills/asfakulsiam-motomation-design/VERSION`, `SKILL.md`, `package.json`, every plugin manifest (`.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.cursor-plugin/plugin.json`, `.codex-plugin/plugin.json`, `gemini-extension.json`) and the README badge, enforced by `scripts/check-repo.mjs`; `dist/` rebuilt; tag `v2.5.0`.
 - **Plain HTML variants cut to the top 5:** `vendor/plain/` keeps CSS + HTML and Tailwind variants only for the five components the most sections and templates import: count-up, split-flap (4 sections, 3 templates each), copy-button, ink-fill, typewriter (3 sections, 3 templates each). The other 15 are removed (animated-list, contour-lines, glow-border, rotating-words, squish-switch, tilt-card, velocity-marquee, flowing-menu, grain, scramble-on-hover, shimmer-button, aperture, beams, bento-reveal, blur-focus); their React versions are unchanged. `vendor/plain/top20.json` → `vendor/plain/top5.json`; `scripts/check-repo.mjs` recomputes the top 5 and fails on any other plain folder; `mcp/server.mjs`, `scripts/build-docs-site.mjs` and `tests/variants/compare.mjs` read the new list; docs site rebuilt. README and `vendor/plain/README.md`: the library is React-first. `tests/variants/compare.mjs`: 5/5 match across React, CSS + HTML and Tailwind.
 - **Extended matched-effort arm (60 runs) in the v4 workflow:** `.github/workflows/bench-measure-v4.yml` measures the skill and matched-effort arms at six seeds per brief (5 briefs × 2 arms × 6 = 60 builds), plus the three Tier 4 motion briefs (baseline and skill, 3 seeds each, 18 builds, with `gate.mjs --report` motion reports). The matched arm has an enforced per-pair turn budget (cap + 90% floor via `--resume`) and the score step reports a sign test (`evals/run-agent-benchmark.mjs`, d614161). Builds generated at 6f15d45 are in `evals/results/2026-10-12-benchmark-v4/` and `evals/results/2026-10-12-benchmark-v4-motion/` (a443b99).
