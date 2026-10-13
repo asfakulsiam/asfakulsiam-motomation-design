@@ -22,7 +22,7 @@ Since v2.2.0, benchmark screenshots (`shot-*.webp`, about 15 MB) live on the [`e
 | Agent | Benchmarked | Notes |
 |---|---|---|
 | Claude Code 2.1.286 | yes: v1, v2 (`results/2026-10-11-benchmark*.md`) | the only agent with published runs |
-| Codex CLI 0.130.0 | no | installed in the v2.2.0 run's environment but not authenticated (HTTP 401) |
+| Codex CLI 0.130.0 | yes: v3, n=5 (5 briefs × 1 seed, baseline vs skill, `gpt_5_4`; [`results/2026-10-12-benchmark-v3-codex.md`](results/2026-10-12-benchmark-v3-codex.md)) | skill won 3 of 5 pairs, but mean gated scores are level: baseline 77.0 vs skill 76.2; a portability check, not a replication (not authenticated in the v2.2.0 run) |
 | Cursor (`cursor-agent`), Gemini CLI, Aider | no | not installed in that environment |
 
 Inventory: `which claude cursor-agent codex gemini aider`, then a one-line prompt to each. Until a second agent has a published run, the "works in 60+ agents" claim means "installs in", not "benchmarked in".
