@@ -118,3 +118,20 @@ size-garbage: 0 bytes
 ```
 
 Tracked files: 4832. Tracked files over 100 KB: 223.
+
+## After the trim (A5–A7, measured on a clean export of main at 6e84170)
+
+```
+$ du -sh . --exclude=.git
+20M	.
+$ du -sh --apparent-size . --exclude=.git
+13M	.
+$ git ls-files | wc -l
+2352
+$ node scripts/check-repo.mjs
+✓ repository OK (skill v2.5.0, 95 docs, 12 data sets, main 12.38 MB tracked of 15 MB)
+```
+
+`du -sh` counts 4 KB disk blocks, so each of the ~2,300 small files costs at least 4 KB; the apparent size (the bytes git, GitHub and a tarball download count) is what the size guard in `scripts/check-repo.mjs` budgets: 15 MB. History is not rewritten (no force-push), so a full `git clone` still downloads the old blobs in `.git`; a shallow clone (`git clone --depth 1`) does not: its `.git` measured 4.3 MB.
+
+A7 verification: check-repo PASS; docs site and gallery rebuilt byte-identical (no diff); the benchmark runner `score` step, run on a temp copy of `2026-10-12-benchmark-v3`, found every input it needs on main (judge files, checks.json, run.json) and reproduced the published per-seed scores; `fetch-frames.mjs` restored both Tier 5 sequences byte-identically from the evals branch. CI runs for A1–A6 were in progress when checked (not waited on).
