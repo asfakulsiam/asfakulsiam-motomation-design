@@ -1,5 +1,7 @@
 # SEO and Discoverability
 
+The twenty-item checklist, with what the gate measures, is `craft/seo.md`. This page keeps the reasons behind it.
+
 Animated sites often fail SEO because content hides behind JavaScript. Don't let that happen.
 
 - **Content is in the HTML.** All text exists in server-rendered markup in its final state; animations start *from* it. Pinned chapters keep their text in the DOM.
