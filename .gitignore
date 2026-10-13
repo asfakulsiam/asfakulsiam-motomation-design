@@ -4,3 +4,26 @@ node_modules/
 *.log
 *.motion-report.html
 __pycache__/
+
+# Heavy artifacts live on the evals branch, not main (evals/README.md "Screenshots live on evals branch").
+# scripts/check-repo.mjs also fails on any tracked file over 1 MB and on main over 15 MB.
+evals/results/**/shot-*.webp
+evals/results/**/*.webp
+evals/results/**/*.png
+evals/results/**/*.jpg
+evals/results/**/*.jpeg
+evals/results/**/*.mp4
+evals/results/**/index.html
+evals/results/**/motion-report.html
+evals/results/**/transcript.jsonl
+evals/results/**/transcript.jsonl.gz
+docs/rm-stills/*.webp
+# Tier 5 frame sequences: restore with scripts/fetch-frames.mjs, rebuild with scripts/build-frames.mjs
+skills/asfakulsiam-motomation-design/examples/templates/*/frames/
+skills/asfakulsiam-motomation-design/examples/templates/*/frames-mobile/
+skills/asfakulsiam-motomation-design/examples/templates/*/film.mp4
+examples/templates/*/frames/
+examples/templates/*/frames-mobile/
+.next/
+.turbo/
+dist/cache/

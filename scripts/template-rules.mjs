@@ -61,21 +61,26 @@ export function noPlaceholderArt(sourceText, file) {
 }
 
 // Tier 5 (scroll-as-film, motion/tier-5-motomation.md): the film is real frames, not a promise. A Tier 5 template ships
-// frames/ (the desktop sequence, scripts/build-frames.mjs), poster.webp (first paint and no-JS) and MOTION.md (the
-// timing sheet), and when frames.json is present its frame count matches frames/. \`files\` is the template folder's
-// file list (relative paths, "/" separators), \`manifest\` the text of frames.json or null, so the test can feed it lists.
+// poster.webp (first paint and no-JS), MOTION.md (the timing sheet), frames.json (the manifest from scripts/build-frames.mjs)
+// and frames.lock.json, the fetch step: where the frame tarball lives and its sha256 (scripts/fetch-frames.mjs restores it).
+// The sequences themselves (frames/, frames-mobile/, film.mp4) are not on main, so the skill stays small; when they are on
+// disk (fetched or rebuilt), their count must match frames.json. `files` is the template folder's file list (relative
+// paths, "/" separators), `manifest` the text of frames.json and `lock` the text of frames.lock.json, or null.
 export const TIER5_MIN_FRAMES = 24;
-export function tier5Assets(tier, files, manifest = null) {
+export function tier5Assets(tier, files, manifest = null, lock = null) {
   if (+tier !== 5) return [];
   const p = [], has = (f) => files.includes(f);
   const frames = files.filter((f) => /^frames\/[^/]+\.(webp|avif|jpe?g|png)$/.test(f));
-  if (!frames.length) p.push("Tier 5 template has no frames/ sequence (render one with scripts/build-frames.mjs)");
-  else if (frames.length < TIER5_MIN_FRAMES) p.push(`frames/ has ${frames.length} frames; a scrubbed film needs at least ${TIER5_MIN_FRAMES}`);
   if (!has("poster.webp")) p.push("Tier 5 template has no poster.webp (the first paint before frames load, and the no-JS image)");
   if (!has("MOTION.md")) p.push("Tier 5 template has no MOTION.md (timing sheet, motion/choreography.md)");
-  if (manifest !== null) {
-    let m = null; try { m = JSON.parse(manifest); } catch { p.push("frames.json is not valid JSON"); }
-    if (m && m.desktop?.frames !== frames.length) p.push(`frames.json says ${m.desktop?.frames} desktop frames, frames/ has ${frames.length}; rebuild with scripts/build-frames.mjs`);
-  }
+  let m = null;
+  if (manifest === null) p.push("Tier 5 template has no frames.json (render the sequence with scripts/build-frames.mjs)");
+  else { try { m = JSON.parse(manifest); } catch { p.push("frames.json is not valid JSON"); } }
+  if (m && !(m.desktop?.frames >= TIER5_MIN_FRAMES)) p.push(`frames.json lists ${m.desktop?.frames} desktop frames; a scrubbed film needs at least ${TIER5_MIN_FRAMES}`);
+  if (lock === null) p.push("Tier 5 template has no frames.lock.json (the fetch step: url + sha256 of the frame tarball, scripts/fetch-frames.mjs)");
+  else { let l = null; try { l = JSON.parse(lock); } catch { p.push("frames.lock.json is not valid JSON"); }
+    if (l && !/^https:\/\//.test(l.url || "")) p.push("frames.lock.json has no https url");
+    if (l && !/^[0-9a-f]{64}$/.test(l.sha256 || "")) p.push("frames.lock.json has no sha256"); }
+  if (frames.length && m && m.desktop?.frames !== frames.length) p.push(`frames.json says ${m.desktop?.frames} desktop frames, frames/ has ${frames.length}; fetch again (scripts/fetch-frames.mjs --force) or rebuild with scripts/build-frames.mjs`);
   return p;
 }

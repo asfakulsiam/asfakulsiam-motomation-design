@@ -50,6 +50,7 @@ Type mode: EDITORIAL: a manual set like a good catalogue, a serif for statements
 - Subject: Shapla R1 itself: the front, the profile, the five parts apart, and the dial tuned
 - Direction: one object on paper, soft floor shadow, one key light from the upper left, no environment, no hands
 - Frames: `frames/` 180 × 1920×1440 WebP, `frames-mobile/` 90 × 828×1036 WebP, `poster.webp` (frame 90), `storyboard/1–4.webp` at 1600w, `film.mp4` (H.264, every frame a keyframe), manifest `frames.json`; rebuild (from the skill folder): `node scripts/build-frames.mjs --scene examples/templates/product-launch/scene.mjs --out examples/templates/product-launch --quality 64` (`--check` proves byte identity)
+- Frame storage: `frames/`, `frames-mobile/` and `film.mp4` are not on main (the skill stays small). `frames.lock.json` names the tarball and its sha256; `node scripts/fetch-frames.mjs product-launch` (skill folder) restores them, or rebuild them with the command above. Without them the page shows `poster.webp` and the storyboard.
 - Texture: none
 - Interplay: notes never sit over the render; on desktop they have their own column, on mobile their own band under the film
 - Template stand-in: the procedural render stands in for a studio CGI sequence of the real product

@@ -39,6 +39,8 @@ jobs:
           npm i --no-save --no-package-lock --silent playwright@1.59.0
           npx playwright install --with-deps chromium
           npx playwright --version; nproc; free -m; lscpu | grep -E "Model name|^CPU\(s\)"
+          # Tier 5 template frames are not on main: restore them (sha256-checked) from the tarballs named in frames.lock.json
+          node scripts/fetch-frames.mjs
           # Tier 5 templates may expand their frame sets in a build step; harmless when none exist
           for p in $PAGES; do d=$(dirname "$p"); [ -f "$d/build.mjs" ] && node "$d/build.mjs" || true; done
       - name: Write the probe

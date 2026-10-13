@@ -166,7 +166,7 @@ export function renderReadme(templates, films = collectFilms()) {
   for (const t of templates) L.push(`- **${t.name}** (${t.kind}): ${t.what}`);
   if (films.length) {
     L.push("", "**Tier 5 film templates** (standalone: `index.html` + a frame sequence, not built from sections)", "",
-      `${films.length} scroll-as-film pages. Each folder holds the page, its \`scene.mjs\`, the frames rendered from it by \`scripts/build-frames.mjs\` (\`frames/\`, \`frames-mobile/\`, \`poster.webp\`, \`storyboard/\`, \`film.mp4\`, \`frames.json\`), \`DESIGN.md\`, \`MOTION.md\` and \`log.json\`. Reduced motion is the storyboard: stills in normal flow, no canvas mounted.`, "",
+      `${films.length} scroll-as-film pages. Each folder holds the page, its \`scene.mjs\`, the frames rendered from it by \`scripts/build-frames.mjs\` (\`poster.webp\`, \`storyboard/\`, \`frames.json\`; \`frames/\`, \`frames-mobile/\` and \`film.mp4\` are not on main: \`node scripts/fetch-frames.mjs\` restores them from the tarball named in \`frames.lock.json\`, sha256-checked), \`DESIGN.md\`, \`MOTION.md\` and \`log.json\`. Reduced motion is the storyboard: stills in normal flow, no canvas mounted.`, "",
       "| Page | Archetype · mutation · signature | Tier | Frames (desktop · mobile) | Fonts | Motion |", "|---|---|---|---|---|---|");
     for (const f of films) L.push(`| [${f.name}](${f.id}/index.html) | ${f.archetype} · ${f.mutation} · ${f.signature} | ${f.tier} | ${f.frames ? `${f.frames.desktop.frames} × ${f.frames.desktop.width}×${f.frames.desktop.height} · ${f.frames.mobile.frames} × ${f.frames.mobile.width}×${f.frames.mobile.height}` : "none"} | ${f.families.filter((x) => x !== "Hind Siliguri").join(" / ")} | [MOTION.md](${f.id}/MOTION.md) |`);
     L.push("");

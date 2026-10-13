@@ -1,0 +1,7 @@
+{
+  "note": "frames/, frames-mobile/ and film.mp4 are not on main; restore them with scripts/fetch-frames.mjs or rebuild them with scripts/build-frames.mjs",
+  "url": "https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-motomation-design/evals/evals/frames/product-launch-frames.tar.gz",
+  "sha256": "92feb2bb01f7285cff135f0e493daf7dcc2488c57c3bb378d2cd5e030cf94dbe",
+  "bytes": 5524355,
+  "contains": ["frames/", "frames-mobile/", "film.mp4"]
+}

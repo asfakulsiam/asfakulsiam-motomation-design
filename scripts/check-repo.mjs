@@ -211,7 +211,7 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
     rules.dials(read("DESIGN.md"), t.tier).forEach((p) => fail(`examples/templates/${t.id}/DESIGN.md: ${p}`));
     rules.imagery(read("DESIGN.md")).forEach((p) => fail(`examples/templates/${t.id}/DESIGN.md: ${p}`));
     if (existsSync(at)) rules.pins(readFileSync(at, "utf8")).forEach((p) => fail(`${t.html}: ${p}`));
-    if (+t.tier === 5) rules.tier5Assets(t.tier, existsSync(own) ? readdirSync(own, { recursive: true }).map((f) => String(f).split("\\").join("/")) : [], read("frames.json")).forEach((p) => fail(`examples/templates/${t.id}: ${p}`));
+    if (+t.tier === 5) rules.tier5Assets(t.tier, existsSync(own) ? readdirSync(own, { recursive: true }).map((f) => String(f).split("\\").join("/")) : [], read("frames.json"), read("frames.lock.json")).forEach((p) => fail(`examples/templates/${t.id}: ${p}`));
     if (!existsSync(at)) { fail(`${t.html} is missing; run node scripts/build-templates.mjs`); continue; }
     const html = readFileSync(at, "utf8"); const meta = html.match(/<meta name="motomation-template" content="source:([0-9a-f]+)/);
     if (!meta || meta[1] !== sourceHash(t)) fail(`${t.html} is stale (its sections or components changed); run node scripts/build-templates.mjs, then gate and stamp it again`);
@@ -224,7 +224,7 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
     const own = join(SKILL, "examples/templates", f.id); const read = (x) => (existsSync(join(own, x)) ? readFileSync(join(own, x), "utf8") : null);
     const html = read("index.html");
     if (!f.archetype) fail(`${f.html}: no "/* motomation · archetype: … · mutation: … · signature: … · tier: n" stamp comment`);
-    rules.tier5Assets(f.tier, f.files, f.manifest).forEach((p) => fail(`examples/templates/${f.id}: ${p}`));
+    rules.tier5Assets(f.tier, f.files, f.manifest, read("frames.lock.json")).forEach((p) => fail(`examples/templates/${f.id}: ${p}`));
     rules.timingSheet(f.tier, read("MOTION.md")).forEach((p) => fail(`examples/templates/${f.id}: ${p}`));
     rules.dials(read("DESIGN.md"), f.tier).forEach((p) => fail(`examples/templates/${f.id}/DESIGN.md: ${p}`));
     rules.imagery(read("DESIGN.md")).forEach((p) => fail(`examples/templates/${f.id}/DESIGN.md: ${p}`));

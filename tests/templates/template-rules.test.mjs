@@ -23,22 +23,28 @@ say(noPlaceholderArt('<img src={art(31, ["#e9d8bd", "#a8643a", "#f2c879"], 1600,
 const SEC = join(ROOT, "skills/asfakulsiam-motomation-design/examples/sections");
 const artLeft = readdirSync(SEC).filter((f) => f.endsWith(".tsx")).flatMap((f) => noPlaceholderArt(readFileSync(join(SEC, f), "utf8"), f));
 say(artLeft.length === 0, `no section calls art()${artLeft.length ? ": " + artLeft.join("; ") : ""}`);
-// Tier 5 assets: a film template without its frames, poster or MOTION.md is caught; a full one passes
+// Tier 5 assets: a film template without its poster, MOTION.md, manifest or fetch step is caught; a full one passes,
+// with its frames on disk (fetched or rebuilt) or without them (main ships the lock, not the frames)
 const seq = (n, d = "frames") => Array.from({ length: n }, (_, i) => `${d}/${String(i + 1).padStart(4, "0")}.webp`);
-const FULL = [...seq(180), ...seq(90, "frames-mobile"), "poster.webp", "MOTION.md", "DESIGN.md", "index.html", "frames.json"];
+const SLIM = ["poster.webp", "MOTION.md", "DESIGN.md", "index.html", "frames.json", "frames.lock.json"];
+const FULL = [...seq(180), ...seq(90, "frames-mobile"), ...SLIM];
 const MAN = JSON.stringify({ desktop: { frames: 180 } });
-say(tier5Assets(5, FULL, MAN).length === 0, "Tier 5 with frames/ (180), poster.webp, MOTION.md and a matching frames.json → no problem");
-say(tier5Assets(5, FULL.filter((f) => !f.startsWith("frames/")), MAN).some((p) => /no frames\/ sequence/.test(p)), "Tier 5 without frames/ → caught");
-say(tier5Assets(5, FULL.filter((f) => f !== "poster.webp"), MAN).some((p) => /no poster\.webp/.test(p)), "Tier 5 without poster.webp → caught");
-say(tier5Assets(5, FULL.filter((f) => f !== "MOTION.md"), MAN).some((p) => /no MOTION\.md/.test(p)), "Tier 5 without MOTION.md → caught");
-say(tier5Assets(5, [...seq(6), "poster.webp", "MOTION.md"]).some((p) => /at least 24/.test(p)), "Tier 5 with a 6-frame stub → caught");
-say(tier5Assets(5, FULL, JSON.stringify({ desktop: { frames: 120 } })).some((p) => /says 120/.test(p)), "frames.json count ≠ frames/ → caught");
+const LOCK = JSON.stringify({ url: "https://example.org/f.tar.gz", sha256: "a".repeat(64) });
+say(tier5Assets(5, FULL, MAN, LOCK).length === 0, "Tier 5 with frames/ (180), poster.webp, MOTION.md, a matching frames.json and a lock → no problem");
+say(tier5Assets(5, SLIM, MAN, LOCK).length === 0, "Tier 5 on main (no frames/ on disk, lock present) → no problem");
+say(tier5Assets(5, SLIM, MAN, null).some((p) => /no frames\.lock\.json/.test(p)), "Tier 5 without frames/ and without a fetch step → caught");
+say(tier5Assets(5, SLIM, MAN, JSON.stringify({ url: "http://x", sha256: "zz" })).length === 2, "Tier 5 lock with a plain-http url and no sha256 → both caught");
+say(tier5Assets(5, FULL.filter((f) => f !== "poster.webp"), MAN, LOCK).some((p) => /no poster\.webp/.test(p)), "Tier 5 without poster.webp → caught");
+say(tier5Assets(5, FULL.filter((f) => f !== "MOTION.md"), MAN, LOCK).some((p) => /no MOTION\.md/.test(p)), "Tier 5 without MOTION.md → caught");
+say(tier5Assets(5, SLIM, JSON.stringify({ desktop: { frames: 6 } }), LOCK).some((p) => /at least 24/.test(p)), "Tier 5 with a 6-frame manifest → caught");
+say(tier5Assets(5, SLIM, null, LOCK).some((p) => /no frames\.json/.test(p)), "Tier 5 without frames.json → caught");
+say(tier5Assets(5, FULL, JSON.stringify({ desktop: { frames: 120 } }), LOCK).some((p) => /says 120/.test(p)), "frames.json count ≠ frames/ on disk → caught");
 say(tier5Assets(2, []).length === 0, "Tier 2 template → rule does not apply");
 // the shipped Tier 5 film templates, as committed
 const { collectFilms } = await import("../../scripts/build-templates.mjs");
 for (const f of collectFilms()) {
   const read = (x) => (existsSync(join(T, f.id, x)) ? readFileSync(join(T, f.id, x), "utf8") : null);
-  const p = [...tier5Assets(f.tier, f.files, f.manifest), ...dials(read("DESIGN.md"), f.tier), ...pins(read("index.html")), ...timingSheet(f.tier, read("MOTION.md")), ...imagery(read("DESIGN.md"))];
+  const p = [...tier5Assets(f.tier, f.files, f.manifest, read("frames.lock.json")), ...dials(read("DESIGN.md"), f.tier), ...pins(read("index.html")), ...timingSheet(f.tier, read("MOTION.md")), ...imagery(read("DESIGN.md"))];
   say(f.tier === 5 && p.length === 0, `film template ${f.id} (Tier ${f.tier}) within the rules${p.length ? ": " + p.join("; ") : ""}`);
 }
 // every shipped template, as committed

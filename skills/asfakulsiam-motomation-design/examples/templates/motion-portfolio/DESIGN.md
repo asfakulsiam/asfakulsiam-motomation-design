@@ -53,6 +53,7 @@ Caption panels over the film are `rgba(10, 13, 18, 0.82)`, so caption text keeps
 - Subject: Noor's four commissions as one continuous film: a slit of light, a ribbon, film gates, a lit frame
 - Direction: dark booth, one warm light source (sodium amber) and one cool white; no photography, no faces, letterbox bars from shot 02 on
 - Frames: `frames/` 180 × 1920×1080 WebP, `frames-mobile/` 90 × 828×1472 WebP, `poster.webp` (frame 90), `storyboard/1–4.webp` at 1600w, `film.mp4` (H.264, every frame a keyframe), manifest `frames.json`; rebuild (from the skill folder): `node scripts/build-frames.mjs --scene examples/templates/motion-portfolio/scene.mjs --out examples/templates/motion-portfolio` (`--check` proves the build is byte-identical)
+- Frame storage: `frames/`, `frames-mobile/` and `film.mp4` are not on main (the skill stays small). `frames.lock.json` names the tarball and its sha256; `node scripts/fetch-frames.mjs motion-portfolio` (skill folder) restores them, or rebuild them with the command above. Without them the page shows `poster.webp` and the storyboard.
 - Texture: dust motes in the beam only
 - Interplay: captions sit on their own panel at the bottom-left, never over the light source at frame centre
 - Template stand-in: the procedural reel stands in for the designer's real title sequences

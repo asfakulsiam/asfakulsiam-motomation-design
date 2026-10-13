@@ -26,7 +26,7 @@
 
 **Tier 5 film templates** (standalone: `index.html` + a frame sequence, not built from sections)
 
-2 scroll-as-film pages. Each folder holds the page, its `scene.mjs`, the frames rendered from it by `scripts/build-frames.mjs` (`frames/`, `frames-mobile/`, `poster.webp`, `storyboard/`, `film.mp4`, `frames.json`), `DESIGN.md`, `MOTION.md` and `log.json`. Reduced motion is the storyboard: stills in normal flow, no canvas mounted.
+2 scroll-as-film pages. Each folder holds the page, its `scene.mjs`, the frames rendered from it by `scripts/build-frames.mjs` (`poster.webp`, `storyboard/`, `frames.json`; `frames/`, `frames-mobile/` and `film.mp4` are not on main: `node scripts/fetch-frames.mjs` restores them from the tarball named in `frames.lock.json`, sha256-checked), `DESIGN.md`, `MOTION.md` and `log.json`. Reduced motion is the storyboard: stills in normal flow, no canvas mounted.
 
 | Page | Archetype · mutation · signature | Tier | Frames (desktop · mobile) | Fonts | Motion |
 |---|---|---|---|---|---|
