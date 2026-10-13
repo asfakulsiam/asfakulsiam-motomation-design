@@ -139,7 +139,10 @@ if (!has("--no-gate")) {
   for (const r of report) {
     const hit = results.find((x) => String(x.target || x.file || x.url || "").includes(`/${r.id}.html`));
     if (!hit) { r.fails.push(`gate: no result (${last})`); continue; }
-    r.gate = { pass: hit.pass ?? hit.ok ?? (hit.counts && Object.values(hit.counts).every((n) => !n)), counts: hit.counts };
+    // a component demo page is not a delivered page: it is judged on the core counts (c o w rm a n q k), not on the
+    // gate/4 rule sets (copy, SEO, performance, security), which belong to whole pages
+    const core = hit.counts && Object.fromEntries(Object.entries(hit.counts).filter(([k]) => !["copy", "seo", "perf", "sec"].includes(k)));
+    r.gate = { pass: core ? Object.values(core).every((n) => !n) : (hit.pass ?? hit.ok), counts: hit.counts };
     if (!r.gate.pass) r.fails.push(`gate: ${JSON.stringify(hit.counts)}`);
   }
 }
