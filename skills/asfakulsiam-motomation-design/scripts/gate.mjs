@@ -607,15 +607,18 @@ export async function scan(target, browser, opts = {}) {
     const logFile = opts.log || [join(local, ".motomation/log.json"), join(local, "log.json"), ...(own ? [join(own, "log.json"), join(own, ".motomation/log.json")] : []), join(projectRoot(local), ".motomation/log.json"), join(projectRoot(), ".motomation/log.json")].find((f) => existsSync(f));
     const record = readRecord(designFile); const mem = await memoryAxis(logFile, meta, st.sectionIds);
     const critique = critiqueOf({ hier: w.hier, words375: w.fails.length, overflow375: overflowFails.filter((x) => x.width === 375).length, motionFails: counts.motion, st, tier: meta.tier, record, mem });
-    return { target, url, version: GATE_VERSION, pass, counts, id, stamp: stampOf(counts, id), critique, sources: { design: designFile || null, log: logFile || null, meta }, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu };
+    // coverage: the worst width decides; more than SKIP_WARN_PCT skipped at any width means the page was not measured, not passed
+    const worstW = c.byWidth.reduce((a, x) => (x.skippedPct > a.skippedPct ? x : a), c.byWidth[0]);
+    const coverage = { ok: !c.lowCoverage, skipped: worstW.skipped, total: worstW.total, pct: worstW.skippedPct, width: worstW.width, low: c.byWidth.filter((x) => x.lowCoverage).map((x) => x.width) };
+    return { target, url, version: GATE_VERSION, pass, verified: coverage.ok, coverage, counts, id, stamp: stampOf(counts, id, coverage), critique, sources: { design: designFile || null, log: logFile || null, meta }, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu };
   } finally { close(); }
 }
-export const stampOf = (k, id) => `gate: c${k.contrast} o${k.overflow} w${k.words} rm${k.motion} a${k.names} n${k.numbers ?? 0} · ${GATE_VERSION} · ${id}`;
+export const stampOf = (k, id, cov) => `gate: c${k.contrast} o${k.overflow} w${k.words} rm${k.motion} a${k.names} n${k.numbers ?? 0} · ${GATE_VERSION} · ${id}${cov ? ` · skipped ${cov.skipped}/${cov.total}@${cov.width}` : ""}`;
 export function readStamp(html) {
   // a page may carry the stamp in an HTML comment and in the stylesheet; every stamp that carries a gate segment must hold up
   const all = [...html.matchAll(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g)].map((m) => m[0]);
   if (!all.length) return null;
-  const parse = (raw) => { const g = raw.match(/gate: c(\d+) o(\d+) w(\d+) rm(\d+) a(\d+)(?: n(\d+))? · (gate\/\d+) · ([0-9a-f]{10})/); return g ? { counts: { contrast: +g[1], overflow: +g[2], words: +g[3], motion: +g[4], names: +g[5], ...(g[6] !== undefined ? { numbers: +g[6] } : {}) }, version: g[7], id: g[8] } : null; };
+  const parse = (raw) => { const g = raw.match(/gate: c(\d+) o(\d+) w(\d+) rm(\d+) a(\d+)(?: n(\d+))? · (gate\/\d+) · ([0-9a-f]{10})(?: · skipped (\d+)\/(\d+)@(\d+))?/); return g ? { counts: { contrast: +g[1], overflow: +g[2], words: +g[3], motion: +g[4], names: +g[5], ...(g[6] !== undefined ? { numbers: +g[6] } : {}) }, version: g[7], id: g[8], ...(g[9] !== undefined ? { skipped: { skipped: +g[9], total: +g[10], width: +g[11] } } : {}) } : null; };
   const fieldsOf = (raw) => { const f = {}; for (const k of ["archetype", "mutation", "signature", "tier"]) { const m = raw.match(new RegExp(k + ":\\s*([^·*\\n]+?)\\s*(?:·|\\*/|-->)")); if (m) f[k] = m[1].trim(); } return f; };
   const critOf = (raw) => raw.match(/critique:\s*(.+?)\s*(?:·\s*gate:|\*\/|-->)/)?.[1].trim() || null;
   const withGate = all.map((raw) => ({ raw, gate: parse(raw), critique: critOf(raw) })).filter((x) => x.gate);
@@ -651,7 +654,8 @@ function print(r) {
   L(`  structure  ${st.sections} sections, entrances: ${st.patterns.join(" | ")} → ${st.repeats} repeat(s); pins ${st.pins}, WebGL canvases ${st.webgl}, JS ${st.jsKB}KB gzipped${st.jsUnknown ? ` (+${st.jsUnknown} script(s) not fetched)` : ""}`);
   L(`  records    DESIGN.md: ${r.sources.design || "none"} · memory log: ${r.sources.log || "none"} · stamp fields: ${JSON.stringify(r.sources.meta)}`);
   L(`  critique → ${r.critique}${/\?/.test(r.critique) ? "   (axes marked ? have no record to derive from)" : ""}`);
-  L(`  ${r.pass ? "PASS" : "FAIL"}  stamp → critique: ${r.critique} · ${r.stamp}`);
+  L(`  coverage   ${r.coverage.ok ? "✓" : "✗"} worst width ${r.coverage.width}px: ${r.coverage.skipped} of ${r.coverage.total} text elements skipped (${r.coverage.pct}%; limit ${SKIP_WARN_PCT}% at every width)${r.coverage.low.length ? ` · over the limit at ${r.coverage.low.join("/")}px` : ""}`);
+  L(`  ${!r.coverage.ok ? "NOT VERIFIED (coverage)" : r.pass ? "PASS" : "FAIL"}  stamp → critique: ${r.critique} · ${r.stamp}`);
   L("");
 }
 
@@ -760,6 +764,8 @@ async function main() {
       if (!st.critique) verdict(`STAMP REJECTED · ${file}: no critique segment. Paste the full "critique: … · gate: …" line gate.mjs printed.`, 2);
       if (!/^C\d\[[^\]]+\] H\d\[[^\]]+\] S\d\[[^\]]+\] R\d\[[^\]]+\] M\d\[[^\]]+\] V\d\[[^\]]+\]$/.test(st.critique)) verdict(`STAMP REJECTED · ${file}: critique "${st.critique}" is not traced. Every axis needs its number and the check it came from, e.g. H4[375:1]. Unmeasured scores are rejected.`, 2);
       const x = await withRetry(pw, file, (b) => scan(flags.url ? String(flags.url) : file, b, opts)); note(x); const r = x.value; await x.browser.close().catch(() => {}); print(r);
+      console.log(`  stamp skips: ${st.gate.skipped ? `${st.gate.skipped.skipped}/${st.gate.skipped.total}@${st.gate.skipped.width}` : "not recorded (stamp predates the coverage field)"} · fresh scan: ${r.coverage.skipped}/${r.coverage.total}@${r.coverage.width} (${r.coverage.pct}%)`);
+      if (!r.coverage.ok) notVerified(`coverage: ${r.coverage.skipped} of ${r.coverage.total} text elements (${r.coverage.pct}%) skipped at ${r.coverage.width}px; more than ${SKIP_WARN_PCT}% at ${r.coverage.low.join("/")}px, so the stamp cannot be checked`);
       if (st.critique !== r.critique) verdict(`STAMP REJECTED · critique says "${st.critique}" but the checks give "${r.critique}"`, 2);
       for (const g of [st.gate, ...st.others.map((o) => o.gate)]) {
         const same = JSON.stringify(g.counts) === JSON.stringify(r.counts) && g.id === r.id && g.version === r.version;
@@ -782,6 +788,8 @@ async function main() {
       x.value.footprint = x.footprint; if (x.attempts.length) x.value.retried = x.attempts;
       all.push(x.value); if (!flags.json) print(x.value);
     }
+    const thin = all.filter((r) => !r.coverage.ok);
+    if (thin.length) notVerified(`coverage: ${thin.map((r) => `${r.target}: ${r.coverage.skipped} of ${r.coverage.total} text elements (${r.coverage.pct}%) skipped at ${r.coverage.width}px`).join("; ")} — more than ${SKIP_WARN_PCT}% at any width is not a measurement`, { result: all.length === 1 ? all[0] : all });
     if (flags.json) console.log(JSON.stringify(all.length === 1 ? all[0] : all, null, 2));
     if (flags.out) writeFileSync(String(flags.out), JSON.stringify(all.length === 1 ? all[0] : all, null, 2));
     verdictPrinted = true; process.exit(all.every((r) => r.pass) ? 0 : 1);
