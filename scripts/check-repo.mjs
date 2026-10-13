@@ -201,10 +201,13 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
 // 9c. Page templates: import only sections, built from their current sources, README fresh, stamped by the gate
 {
   const { collect, renderReadme, sourceHash } = await import("./build-templates.mjs");
+  const rules = await import("./template-rules.mjs");
   const { templates, problems } = await collect();
   problems.forEach((p) => fail(`templates: ${p}`));
   for (const t of templates) {
     const at = join(SKILL, t.html);
+    const own = join(SKILL, "examples/templates", t.id); const read = (f) => (existsSync(join(own, f)) ? readFileSync(join(own, f), "utf8") : null);
+    rules.timingSheet(t.tier, read("MOTION.md")).forEach((p) => fail(`examples/templates/${t.id}: ${p}`));
     if (!existsSync(at)) { fail(`${t.html} is missing; run node scripts/build-templates.mjs`); continue; }
     const html = readFileSync(at, "utf8"); const meta = html.match(/<meta name="motomation-template" content="source:([0-9a-f]+)/);
     if (!meta || meta[1] !== sourceHash(t)) fail(`${t.html} is stale (its sections or components changed); run node scripts/build-templates.mjs, then gate and stamp it again`);

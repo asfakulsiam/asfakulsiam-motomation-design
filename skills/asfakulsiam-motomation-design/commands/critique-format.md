@@ -16,6 +16,8 @@ Top 3 problems (most important first)
 
 AI-default scan    <n>/25 failed: <list gate numbers>
 Motion             <passes / list animations failing the four questions>
+Choreography       <n>/5 against MOTION.md's timing sheet · <deviations: drift, grammar, camera, rhythm, reduced motion>
+                   (motion/choreography.md §5; "no timing sheet" on Tier 3–5 is a failure)
 Accessibility      <contrast failures with values, keyboard issues, missing reduced-motion>
 Performance        <measured numbers, or "not measured">
 

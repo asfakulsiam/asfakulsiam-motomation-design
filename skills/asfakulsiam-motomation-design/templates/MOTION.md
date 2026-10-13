@@ -15,6 +15,18 @@
 | Headings | Line Curtain | 2 | 0.9s expo.out, 0.08 stagger | instant |
 | Links/buttons | | 1 | | |
 
+## Timing sheet (required for Tier 3–5; grammar in `motion/choreography.md`)
+Scrubbed rows in % of the chapter's scroll (`12–40%`); triggered rows as `@<% of the section's pass> · <ms>`. Overlap uses the grammar words: `after`, `with`, `over −n%`, `hold n%`. Camera: push, pull, truck, orbit, match cut, or `—`.
+
+### Chapter 1: <name> · <n>vh desktop / <n>vh mobile · <dense | still> · technique <A–D>
+| Beat | Range | Element | Action | Ease | Overlap | Camera | Reduced motion |
+|---|---|---|---|---|---|---|---|
+| 01 | 0–15% | | | none | — | — | |
+| 02 | | | | | | | |
+| 03 | | | | | | | |
+
+Rhythm: <which chapters are dense / still; the breath in every run of three>
+
 ## Chapters (Motomation)
 ### Chapter: <name>  ·  length: <300–600>% viewport  ·  technique: <A/B/C/D>
 | Scene | Timecode | Shot / visual | Type on screen | Camera move | Transition out |

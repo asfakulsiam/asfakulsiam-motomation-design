@@ -36,7 +36,7 @@ If there is even a small chance this skill applies to a web design task, use it.
                                                       restraint gate
 2. Set the dials      principles/dials.md           → ENERGY / RHYTHM / MOTION (1–3) → tier
 3. Design system      typography → colour → layout  → write DESIGN.md (templates/DESIGN.md)
-4. Motion plan        motion/tokens.md + tier file  → write MOTION.md (templates/MOTION.md)
+4. Motion plan        motion/tokens.md + tier file  → write MOTION.md (templates/MOTION.md); Tier 3–5: timing sheet per motion/choreography.md
 5. Preview block      show the plan (below) and wait for approval only if the user asked to review first
 6. Build              find before build (below), then the adapter for the stack; complete code, real copy
 7. Delivery Gate      gates/delivery-gate.md        → score, fix, stamp, log to memory
