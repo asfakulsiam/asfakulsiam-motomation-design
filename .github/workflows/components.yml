@@ -3,7 +3,7 @@ name: Components
 #   screenshot comparison at 1440 and 375 (against tests/components/baselines.json), the measured gate on its own demo
 #   page, a gzipped size budget, a reduced-motion stillness check, and mount/unmount with no console errors and no
 #   animation frames left pending. Any regression fails its family's job. The interaction suites (hold-to-commit,
-#   reduced-motion first render, confetti) and the whole-gallery harness (layout shift, all demos on one page) run too.
+#   reduced-motion first render, confetti, adversarial text inputs) and the whole-gallery harness (layout shift, all demos on one page) run too.
 on:
   push:
     branches: [main]
@@ -76,5 +76,11 @@ jobs:
         run: NODE_PATH=$PWD/node_modules node tests/components/reduced-motion.test.mjs
       - name: Confetti
         run: NODE_PATH=$PWD/node_modules node tests/components/confetti.test.mjs
+      - name: Adversarial inputs, every text and type component (punctuation, taka, accents, Bangla, emoji ZWJ, Arabic, 200 chars, empty)
+        run: NODE_PATH=$PWD/node_modules node tests/components/adversarial.test.mjs --out /tmp/adv
+      - name: Keep the adversarial evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: "adversarial", path: /tmp/adv/, if-no-files-found: ignore, retention-days: 14 }
       - name: Whole gallery (layout shift, console errors, every demo on one page)
         run: NODE_PATH=$PWD/node_modules node tests/components/gallery-harness.mjs --out /tmp/gh

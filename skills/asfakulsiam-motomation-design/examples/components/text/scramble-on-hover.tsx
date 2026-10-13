@@ -10,20 +10,22 @@
 // avoid-when: Words the visitor must read while pointing at them (buttons with actions); long text; for a one-time reveal (use Decode).
 // reduced-motion: Plain text; nothing scrambles.
 // touch: Tap scrambles the whole word once, settling left to right.
-// a11y: The word is plain text for assistive tech (the scrambled letters are an aria-hidden copy). Each letter keeps a fixed width (monospaced slot), so the word never reflows. Keyboard focus plays the tap version.
+// a11y: The word is plain text for assistive tech (the scrambled letters are an aria-hidden copy). At rest the word is set in its own glyph widths; while it scrambles each letter is held at the width its real glyph measured, so the word never reflows. Keyboard focus plays the tap version.
 import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from "react";
 import { useReducedMotion, useFinePointer, graphemes } from "../_lib/motion";
 
 type Props = { text: string; glyphs?: string; radius?: number; as?: "span" | "a" | "p" | "h3"; href?: string; className?: string; style?: CSSProperties };
 // the fixed 0.62em cell grid is for Latin-width glyphs; text with a Bangla cluster, an emoji or an Arabic word keeps its own widths
-const NARROW = /^[\u0021-\u024F]$/;
 const SR: CSSProperties = { position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0 0 0 0)", whiteSpace: "nowrap" };
 
 export function ScrambleOnHover({ text, glyphs = "!<>-_\\/[]{}=+*^?#", radius = 2, as: Tag = "span", href, className, style }: Props) {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion(), fine = useFinePointer();
   const units = graphemes(text);
-  const grid = units.every((u) => u === " " || NARROW.test(u)); // Latin: the fixed cell grid, as before
+  // at rest the word is set in its own widths (kerning aside, exactly the plain text); while it scrambles each cell is
+  // locked to the width its real glyph measured, so a wide "#" or a narrow "i" never shifts the letters after it
+  const cells = useRef<(HTMLSpanElement | null)[]>([]);
+  const lock = (on: boolean) => { for (const c of cells.current) if (c) c.style.width = on ? `${c.getBoundingClientRect().width}px` : ""; };
   const [chars, setChars] = useState(units);
   const heat = useRef<number[]>(units.map(() => 0)), raf = useRef(0), pointer = useRef<number | null>(null);
   useEffect(() => { const g = graphemes(text); setChars(g); heat.current = g.map(() => 0); }, [text]);
@@ -35,8 +37,9 @@ export function ScrambleOnHover({ text, glyphs = "!<>-_\\/[]{}=+*^?#", radius = 
     }
     setChars(graphemes(text).map((c, i) => (c === " " || h[i] < 0.25 ? c : glyphs[(Math.random() * glyphs.length) | 0])));
     raf.current = live || pointer.current !== null ? requestAnimationFrame(tick) : 0;
+    if (!raf.current) lock(false);
   };
-  const start = () => { if (!raf.current) raf.current = requestAnimationFrame(tick); };
+  const start = () => { if (!raf.current) { lock(true); raf.current = requestAnimationFrame(tick); } };
   useEffect(() => () => cancelAnimationFrame(raf.current), []);
   const move = (e: PointerEvent) => { if (reduce || !fine || !ref.current) return; const r = ref.current.getBoundingClientRect(); pointer.current = ((e.clientX - r.left) / r.width) * units.length - 0.5; start(); };
   const leave = () => { pointer.current = null; };
@@ -47,7 +50,7 @@ export function ScrambleOnHover({ text, glyphs = "!<>-_\\/[]{}=+*^?#", radius = 
       style={{ position: "relative", display: "inline-block", fontVariantNumeric: "tabular-nums", ...style }}>
       <span style={SR}>{text}</span>
       <span aria-hidden="true" style={{ display: "inline-flex" }}>
-        {chars.map((c, i) => <span key={i} style={{ display: "inline-block", width: !grid ? "auto" : units[i] === " " ? "0.3em" : "0.62em", whiteSpace: grid ? undefined : "pre", textAlign: "center" }}>{c}</span>)}
+        {chars.map((c, i) => <span key={i} ref={(el) => { cells.current[i] = el; }} style={{ display: "inline-block", whiteSpace: "pre", textAlign: "center", overflow: "visible" }}>{c}</span>)}
       </span>
     </Tag>
   );
