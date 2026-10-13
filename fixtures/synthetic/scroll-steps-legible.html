@@ -23,6 +23,8 @@
   .steps p { margin: 0; max-width: 34ch; }
   .js .steps li:not(.on) { opacity: var(--dim); }
   @media (max-width: 760px) { .seq { grid-template-columns: 1fr; } .stage { height: 60vh; position: sticky; top: 0; z-index: 0; } .steps { position: relative; } }
+  /* gate/3 rm-distinctness: under reduced motion the stage is normal flow, not a pin */
+  @media (prefers-reduced-motion: reduce) { .stage { position: static; height: auto; padding: 48px 0; } }
 </style>
 </head>
 <body>

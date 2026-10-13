@@ -19,8 +19,8 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const GATE = join(ROOT, "skills/asfakulsiam-motomation-design/scripts/gate.mjs");
 const require = process.env.REQUIRE_BROWSER === "1";
-const run = (target) => {
-  const r = spawnSync(process.execPath, [GATE, target, "--json", "--timeout", process.env.GATE_TIMEOUT || "300"], { cwd: ROOT, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+const run = (target, timeout = process.env.GATE_TIMEOUT || "300") => {
+  const r = spawnSync(process.execPath, [GATE, target, "--json", "--timeout", String(timeout)], { cwd: ROOT, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
   let json = null; try { json = JSON.parse(r.stdout); } catch {}
   return { code: r.status, out: r.stdout, json };
 };
@@ -65,6 +65,6 @@ say(ab.json?.access?.reflow?.px > 1, `fixtures/synthetic/a11y-bad: 320px reflow 
 const ag = run("fixtures/synthetic/a11y-good.html");
 say(ag.json?.access?.fails === 0, `fixtures/synthetic/a11y-good passes every A check (${(ag.json?.critique || "").match(/A\d\[[^\]]+\]/)?.[0] || "no A axis"})`);
 // the real film: every pinned chapter progresses (its other axes are judged by its own stamp and --verify)
-const film = run("skills/asfakulsiam-motomation-design/examples/html/motomation-film.html");
+const film = run("skills/asfakulsiam-motomation-design/examples/html/motomation-film.html", process.env.GATE_TIMEOUT_FILM || "1800"); // a 500vh film with Q + A axes runs past 300s on a 2–4 CPU runner
 say(film.json?.quality?.zones?.length > 0 && zonesOk(film), `examples/html/motomation-film: ${film.json?.quality?.zones?.length ?? 0} pinned zone(s), all progress (${(film.json?.critique || "").match(/Q\d\[[^\]]+\]/)?.[0] || "no Q axis"})`);
 process.exit(failed ? 1 : 0);
