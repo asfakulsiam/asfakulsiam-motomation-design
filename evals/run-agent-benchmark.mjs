@@ -6,6 +6,8 @@
 //   node evals/run-agent-benchmark.mjs measure  --out …        screenshots, axe-core, keyboard, scripts/gate.mjs → checks.json
 //   node evals/run-agent-benchmark.mjs judge    --out … --judge-cmd "<cmd {model} {prompt} {images}>" [--models gpt_5_4,gemini_3_1_pro]
 //   node evals/run-agent-benchmark.mjs score    --out …        summary.json (+ per-brief verdicts)
+//   --cache-dir <dir> | --no-cache | --cache-unpinned   generate reuses finished runs keyed by (brief, seed, arm, skill tree
+//           hash, model): evals/bench-cache.mjs. Default dir evals/.cache/runs/ (gitignored). Off unless the model is pinned.
 //   --arms baseline,gated,skill   third arm "gated": the baseline prompt + scripts/gate.mjs (tool only, no skill docs)
 //   --pairs baseline:skill,gated:skill,baseline:gated   which pairs judge/score compare (default baseline:skill)
 //   --only portfolio,launch,festival --tier 4|5          the motion-heavy briefs at a forced tier
@@ -29,6 +31,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync, cpSync, rmSync, rea
 import { join, resolve, dirname } from "node:path";
 import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
+import { skillTreeHash, cacheKey, cacheLookup, cacheStore } from "./bench-cache.mjs";
 
 const ROOT = resolve(dirname(new URL(import.meta.url).pathname), "..");
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");
@@ -369,7 +372,24 @@ async function main() {
     const meta = await runMeta(todo); const mf = join(OUT, "meta.json");
     if (existsSync(mf)) { try { const old = JSON.parse(readFileSync(mf, "utf8")); const { previous = [], ...last } = old; meta.previous = [...previous, last]; } catch {} } // one folder, several generate calls (skill, then matched): keep each
     writeFileSync(mf, JSON.stringify(meta, null, 1));
-    await pool(todo, +(flags.parallel || 4), flags.agent === "raw-api" ? runRawAgent : runAgent);
+    // content-addressed cache (v2.5.0, C8): key = (brief, seed, arm, skill tree hash, model); see evals/bench-cache.mjs
+    const run1 = flags.agent === "raw-api" ? runRawAgent : runAgent;
+    const cacheDir = flags["no-cache"] ? null : resolve(flags["cache-dir"] || join(ROOT, "evals/.cache/runs"));
+    const model = flags.model || flags["claude-model"] || (flags["cache-unpinned"] ? `unpinned:${meta.adapter?.name}:${meta.adapter?.version}` : null);
+    if (cacheDir && !model) console.log("cache: off for this call (model not pinned; pass --model, or --cache-unpinned to key on the adapter's default)");
+    const skillHash = cacheDir && model ? skillTreeHash(SKILL) : null; const cacheStats = { hits: 0, misses: 0, stored: 0 };
+    const cached = async (r) => {
+      if (!skillHash) return run1(r);
+      const arm = r.cond === "matched" ? `matched:budget=${matchBudget(r).budget}` : COMPETITORS[r.cond] ? `${r.cond}:${skillTreeHash(COMPETITORS[r.cond].dir)}` : r.cond;
+      const parts = { brief: generatorBrief(r.slug) + (TIER === null ? "" : `\n[tier ${TIER}]`), seed: r.seed, arm, skillHash, model };
+      const key = cacheKey(parts);
+      const hit = cacheLookup(cacheDir, key, r.dir);
+      if (hit) { cacheStats.hits++; const rj = join(r.dir, "run.json"); const m = JSON.parse(readFileSync(rj, "utf8")); writeFileSync(rj, JSON.stringify({ ...m, cache: { hit: true, key, stored: hit.stored } }, null, 1)); console.log(`${r.slug} ${r.cond} s${r.seed}: cache hit ${key.slice(0, 12)}`); return; }
+      cacheStats.misses++; await run1(r);
+      try { const m = JSON.parse(readFileSync(join(r.dir, "run.json"), "utf8")); if (m.exit === 0 && m.output) { const { brief, ...rest } = parts; if (cacheStore(cacheDir, key, r.dir, parts)) cacheStats.stored++; writeFileSync(join(r.dir, "run.json"), JSON.stringify({ ...m, cache: { hit: false, key, ...rest } }, null, 1)); } } catch {}
+    };
+    await pool(todo, +(flags.parallel || 4), cached);
+    if (skillHash) { meta.cache = { dir: cacheDir.replace(ROOT + "/", ""), skill_tree_sha256: skillHash, model, ...cacheStats }; console.log(`cache: ${cacheStats.hits} hit(s), ${cacheStats.misses} miss(es), ${cacheStats.stored} stored`); }
     // after the runs: the models the agents actually reported (Claude Code's stream-json init event), next to the pinned one
     meta.finished = new Date().toISOString(); meta.models_reported = [...new Set(todo.flatMap((r) => { try { return readFileSync(join(r.dir, "transcript.jsonl"), "utf8").split("\n").filter((l) => l.includes('"model"')).map((l) => { try { const j = JSON.parse(l); return j.model || j.message?.model; } catch { return null; } }).filter(Boolean); } catch { return []; } }))];
     writeFileSync(join(OUT, "meta.json"), JSON.stringify(meta, null, 1)); return;

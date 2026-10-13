@@ -15,6 +15,10 @@ Proof that the skill does what it claims. Run them before a release.
 - `--pairs baseline:skill,gated:skill,baseline:gated`: which pairs `judge` and `score` compare. `baseline:skill` keeps v2's file names and summary shape.
 - `--only portfolio,launch,festival --tier 4` (or `5`): the motion-heavy briefs 01, 06 and 08 at a forced tier. Every arm is told the same tier.
 
+### Cache
+
+`generate` keeps a content-addressed cache of finished runs (`evals/bench-cache.mjs`, default folder `evals/.cache/runs/`, gitignored). The key is sha256 over five things only: the brief as sent, the seed, the arm (the matched arm includes its turn budget), the hash of the skill tree under test, and the pinned model. A rerun with all five unchanged copies the stored run instead of calling the agent; changing any one of them misses. The cache is off when the model is not pinned (`--model`), because an adapter's default model can change underneath the key; `--cache-unpinned` keys on the adapter and its version instead. `--no-cache` turns it off, `--cache-dir` moves it. `run.json` records `cache: { hit, key }` and `meta.json` the hit and miss counts. Tested with a mock agent in `tests/evals/bench-cache.test.mjs`.
+
 ## Rerun one brief with your own key
 The adapters in `adapters/` connect the runner to a model. `pplx-llm.py` and the two `*-bridge.py` files are what the published runs used; they need Perplexity's internal SDK and do not run elsewhere. These three are public and use only the Python standard library:
 

@@ -27,3 +27,5 @@ examples/templates/*/frames-mobile/
 .next/
 .turbo/
 dist/cache/
+# Benchmark generate cache (evals/bench-cache.mjs): local only
+evals/.cache/
