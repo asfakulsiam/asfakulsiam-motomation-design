@@ -86,6 +86,28 @@ for (const f of readdirSync(join(SKILL, "data"))) {
   for (const r of rows) { if (seen.has(r[key])) fail(`data/${f}: duplicate ${key} "${r[key]}"`); seen.add(r[key]); }
   ids[f.replace(".csv", "")] = seen;
 }
+// v2.5.0 data depth: the type, colour, motion and imagery sets are complete rows, with the coverage they promise
+{
+  const D = (f) => parseCSV(readFileSync(join(SKILL, "data", f), "utf8"));
+  for (const f of ["fonts.csv", "palettes.csv", "motion.csv", "imagery.csv"]) {
+    if (!existsSync(join(SKILL, "data", f))) { fail(`data/${f} is missing`); continue; }
+    const rows = D(f); const key = Object.keys(rows[0] || {})[0]; const seen = new Set();
+    rows.forEach((r, i) => { for (const [k, v] of Object.entries(r)) if (!String(v ?? "").trim()) fail(`data/${f} row ${i + 2}: empty ${k}`);
+      const id = String(r[key]).toLowerCase(); if (seen.has(id)) fail(`data/${f}: duplicate ${key} "${r[key]}" (case-insensitive)`); seen.add(id); });
+  }
+  const fonts = D("fonts.csv"), pals = D("palettes.csv"), mot = D("motion.csv"), img = existsSync(join(SKILL, "data/imagery.csv")) ? D("imagery.csv") : [];
+  if (fonts.length < 80) fail(`data/fonts.csv has ${fonts.length} fonts (≥ 80)`);
+  const nonLatin = fonts.filter((f) => /\b(bengali|devanagari|arabic)\b/.test(f.scripts || "")).length; if (nonLatin < 8) fail(`data/fonts.csv: ${nonLatin} fonts cover Bengali, Devanagari or Arabic (≥ 8)`);
+  if (pals.length < 40) fail(`data/palettes.csv has ${pals.length} palettes (≥ 40)`);
+  const names = new Set(pals.map((p) => p.name));
+  for (const p of pals) { if (!["light", "dark"].includes(p.mode)) fail(`data/palettes.csv: ${p.name} mode "${p.mode}" (light or dark)`);
+    if (p.pair !== "none") { const q = pals.find((x) => x.name === p.pair); if (!q) fail(`data/palettes.csv: ${p.name} pairs with unknown "${p.pair}"`); else if (q.mode === p.mode || q.pair !== p.name) fail(`data/palettes.csv: ${p.name} ↔ ${p.pair} is not a light/dark pair both ways`); } }
+  if (mot.length < 50) fail(`data/motion.csv has ${mot.length} recipes (≥ 50)`);
+  for (const m of mot) if (!/\d|scroll-linked|loop|continuous|authored/.test(m.duration)) fail(`data/motion.csv: ${m.id} duration "${m.duration}" has no timing value`);
+  const { IMAGERY_MODES } = await import("./template-rules.mjs"); const cats = new Set(D("categories.csv").map((c) => c.id));
+  for (const r of img) { if (!IMAGERY_MODES.includes(r.mode)) fail(`data/imagery.csv: ${r.id} mode "${r.mode}" (${IMAGERY_MODES.join(", ")})`); if (!cats.has(r.id)) fail(`data/imagery.csv: ${r.id} is not a category`); }
+  for (const c of cats) if (!img.some((r) => r.id === c)) fail(`data/imagery.csv has no row for category ${c}`);
+}
 for (const r of parseCSV(readFileSync(join(SKILL, "data/signatures.csv"), "utf8"))) if (!existsSync(join(SKILL, r.file))) fail(`signatures.csv: ${r.id} → missing ${r.file}`);
 for (const r of parseCSV(readFileSync(join(SKILL, "data/styles.csv"), "utf8"))) if (!existsSync(join(SKILL, r.file))) fail(`styles.csv: ${r.id} → missing ${r.file}`);
 for (const r of parseCSV(readFileSync(join(SKILL, "data/categories.csv"), "utf8"))) {

@@ -28,3 +28,24 @@ film-sequence,Image-sequence film,5,scroll pin + scrub,canvas frames 90-180,scro
 film-video,Video scrub film,5,scroll pin + scrub,video.currentTime from progress (-g 1 encode),scroll-linked,none,long shots,iOS without testing,static storyboard frames
 film-type,Type film,5,scroll pin + scrub,DOM timeline duration 1 with scene positions,scroll-linked,none,typographic Motomation hooks,body text,static stacked type
 timecode-rail,Timecode Rail,5,chapter progress,scaleX + tabular timecode,scroll-linked,none,any Motomation chapter,short pins,hidden
+hover-lift,Hover lift,1,hover/focus,translateY -2px + shadow step,160ms,--ease-out,cards that open something,static info cards,shadow step only
+tap-colour,Tap colour,1,pointerdown,background-color to pressed shade,80ms,--ease-out,"touch buttons, list rows",decorative surfaces,same (colour is not motion)
+toast-in,Toast enter,1,status message,translateY 12px + opacity 0 to rest; exit 160ms,220ms,--ease-out,"save confirmations, undo bars","errors that need reading time (keep them, don't auto-hide)",appear in place
+menu-sheet,Menu sheet,1,open/close,clip-path inset from top + opacity; close 180ms,260ms,--ease-out-strong,"mobile navigation, filter sheets",desktop nav that fits,instant open
+accordion,Accordion height,1,toggle,grid-template-rows 0fr to 1fr + chevron rotate 180deg,240ms,--ease-in-out,"FAQs, specs, long details",primary content people must see,instant open
+skeleton-fade,Skeleton to content,1,data loaded,skeleton opacity 1 to 0 while content opacity 0 to 1,200ms,linear,lists and cards that load over 300ms,loads under 300ms (show nothing),instant swap
+count-up,Count up,2,enter viewport once,"tabular number from 0 to value, final value in the HTML",1200ms,power2.out,one headline statistic per section,"prices, legal figures, every number on the page",final value
+split-flap,Split flap,2,enter viewport or value change,"per-character flip, 60ms per flap, 30ms stagger",60ms per flap + 30ms stagger,steps(1),"timetables, counters, short codes",sentences,final characters
+typewriter,Typewriter,2,enter viewport once,"characters revealed with a caret, 35ms per character, 600ms hold",35ms per character,steps(1),one short line that is spoken,headings people must scan,full text
+rotating-words,Rotating words,2,timer,"one word swapped with yPercent 100 to 0, holds 2400ms",450ms + 2400ms hold,power3.out,one changing noun in a headline,more than 4 words; the key claim,"first word, static"
+stagger-grid,Stagger grid,2,enter viewport once,"items y 16 + opacity, stagger from the start corner",500ms + 40ms stagger (cap 400ms total),power3.out,"galleries, team grids",grids over 24 items (cap the stagger),visible
+magnetic,Magnetic pull,2,pointer near,"translate toward pointer, max 6px, spring back",300ms return,power3.out,one primary CTA,every button; touch devices,none
+tilt-card,Tilt card,2,pointer move,rotateX/rotateY max 6deg with glare,120ms follow + 400ms return,power2.out,"product cards, tickets, passes",text-heavy cards,flat card
+image-trail,Image trail,3,pointer move,"images spawned on pointer path, each fades over 900ms",900ms per image,power2.out,portfolio indexes with real work,pages where the pointer is needed for reading,static contact sheet
+sticky-index,Sticky index,2,scroll,"sticky list, active item by IntersectionObserver, colour change",180ms,--ease-out,"long articles, case-study chapters",pages with fewer than 4 sections,same (colour only)
+scroll-float,Scroll float,2,scroll scrub,letters yPercent 120 to 0 with stagger 0.03 across the scrub,"scroll-linked (start 85%, end 35%)",none,one display heading per page,"body text, more than one per page",static heading
+letter-relay,Letter relay,2,enter viewport once,"letters handed down a line, 25ms stagger",600ms + 25ms stagger,expo.out,"short wordmarks, single-word headings",multi-line headings,instant final state
+page-fade,Page fade,3,navigation,old page opacity to 0 (150ms) then new page in (250ms),150ms out + 250ms in,--ease-out,small sites with no shared elements,apps with frequent navigation,instant navigation
+shared-image,Shared image transition,3,navigation,view-transition-name on the card image and the hero image,450ms,--ease-out-strong,card to detail page,lists where many images share a name,instant navigation
+liquid-hover,Liquid hover,4,pointer move,"fragment shader displacement around the pointer, radius 120px",continuous (decays over 600ms),none,one hero image with a material concept,"text, more than one canvas",static image
+film-chapter-cut,Chapter cut,5,scroll progress crosses a chapter,hard cut between frame ranges with a 2-frame flash,2 frames (~33ms),steps(1),film templates with distinct chapters,continuous single-shot films,storyboard frame of the next chapter

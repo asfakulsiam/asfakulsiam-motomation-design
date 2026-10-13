@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Search the curated design data with BM25 ranking.
 // Usage: node scripts/search.mjs <dataset> "<query>" [--n 5] [--tier 2] [--json]
-// Datasets: fonts palettes motion signatures archetypes mutations collisions styles categories kinetics
+// Datasets: fonts palettes motion imagery signatures archetypes mutations collisions styles categories kinetics
 import { load, args } from "./lib.mjs";
 
 const a = args();
@@ -9,7 +9,7 @@ const [dataset, ...rest] = a._;
 const query = rest.join(" ").trim();
 if (!dataset || dataset === "help") {
   console.log(`Usage: node scripts/search.mjs <dataset> "<query>" [--n 5] [--tier N] [--json]
-Datasets: fonts palettes motion signatures archetypes mutations collisions styles categories kinetics`);
+Datasets: fonts palettes motion imagery signatures archetypes mutations collisions styles categories kinetics`);
   process.exit(dataset ? 0 : 1);
 }
 

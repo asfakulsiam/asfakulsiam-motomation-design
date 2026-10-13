@@ -66,7 +66,7 @@ Motomation Design changes the thinking:
 - **A house style:** minimal canvas, maximal type, one accent, editorial grid, motion with weight.
 - **3 dials** (Energy, Rhythm, Motion, each 1–3) and 3 moods (Quiet, Editorial, Play).
 - **12 site categories** and **10 visual styles**, each with its own guidance.
-- **Searchable data:** 68 components, 44 fonts (with axes and licences), 22 contrast-verified palettes, 29 motion recipes, 20 archetypes, 12 mutations, 40 collision sources.
+- **Searchable data:** 68 components, 80 fonts (with axes, licences and script coverage, 15 of them Bangla, Devanagari or Arabic), 40 contrast-verified palettes (light and dark pairs), 50 motion recipes with timings, 12 imagery directions (one per category), 20 archetypes, 12 mutations, 40 collision sources.
 - **A Delivery Gate:** a self-critique score, a 25-point AI-default scan and a craft checklist.
 - **A component library:** 68 original effect components in 8 families (type, text, scroll, cursor, backgrounds, layout, ui, micro-interactions), each one file with props, a reduced-motion path and touch behaviour, a live gallery and a shadcn-style registry. See [Component library](#component-library).
 - **Production examples:** 9 strict-TypeScript React components, a shared GSAP setup module (`lib/gsap.ts`) and a single-file HTML Motomation demo.

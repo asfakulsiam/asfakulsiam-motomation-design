@@ -4150,51 +4150,105 @@ sticker-scatter,Sticker Scatter,micro,2,examples/components/micro/sticker-scatte
 ### data/fonts.csv
 
 ```csv
-name,source,license,role,axes,personality,pairs_with,use_for,avoid
-Fraunces,Google Fonts,OFL,display serif,opsz wght SOFT WONK,"warm, quirky old-style with soft or wonky details",Switzer; Instrument Sans; Hanken Grotesk,"organic brands, food, editorial, heritage with humour",strict corporate tone
-Instrument Serif,Google Fonts,OFL,display serif,none (regular + italic),"condensed elegant serif, fashion-editorial",Instrument Sans; Geist; Satoshi,"fashion, portfolios, editorial headlines",body text
-Newsreader,Google Fonts,OFL,text serif,opsz wght,calm newspaper serif built for reading,Schibsted Grotesk; Familjen Grotesk,"long-form, publications, organisations",loud play moods
-Bodoni Moda,Google Fonts,OFL,display serif,opsz wght,"high-contrast didone, luxurious",Switzer; General Sans,"dark luxe, fragrance, fashion",small sizes on dark backgrounds
-Gloock,Google Fonts,OFL,display serif,none,heavy high-contrast serif with sharp wedges,Hanken Grotesk; Satoshi,"dark luxe, posters, editorial hooks",body text
-Young Serif,Google Fonts,OFL,display serif,none,friendly heavy old-style serif,Onest; Instrument Sans,"food, organic, children's brands",technical products
-Cormorant Garamond,Google Fonts,OFL,display serif,wght,delicate calligraphic garamond at large sizes,Hanken Grotesk; Switzer,"hotels, weddings, luxury quiet",small text on screens
-EB Garamond,Google Fonts,OFL,text serif,wght,classic book face,Schibsted Grotesk; Geist,"literary, academic, heritage",play moods
-Big Shoulders Display,Google Fonts,OFL,display sans,wght,"condensed American-industrial, cinematic",Switzer; Geist; JetBrains Mono,"film, sport, events, Motomation titles",long headlines in lowercase
-Archivo,Google Fonts,OFL,display/text sans,wdth wght,grotesk with a wide width range,Newsreader; JetBrains Mono,"kinetic width effects, editorial, sport",when you need a soft tone
-Anybody,Google Fonts,OFL,display sans,wdth wght ital,extreme width axis from ultra-condensed to ultra-wide,Inter Tight (text); Space Mono,"Width Sprint, kinetic type, events",quiet moods
-Bricolage Grotesque,Google Fonts,OFL,display sans,opsz wdth wght,characterful grotesk with ink-trap quirks,Newsreader; Geist Mono,"neobrutalism, creative tools, indie products",luxury
-Familjen Grotesk,Google Fonts,OFL,text/display sans,wght,Scandinavian grotesk with distinct shapes,Newsreader; EB Garamond,"studios, editorial, organisations",play moods
-Hanken Grotesk,Google Fonts,OFL,text sans,wght,neutral geometric-humanist sans,Fraunces; Gloock; Cormorant Garamond,body text for serif-led sites,display identity
-Schibsted Grotesk,Google Fonts,OFL,text/display sans,wght,newsroom grotesk with sturdy forms,Newsreader; EB Garamond,"publications, Swiss style, organisations",soft moods
-Instrument Sans,Google Fonts,OFL,text/display sans,wdth wght,precise neo-grotesk with a width axis,Instrument Serif; Fraunces,"SaaS, studios, minimal",when you need warmth
-Onest,Google Fonts,OFL,text sans,wght,friendly open sans with Cyrillic,Young Serif; Bricolage Grotesque,"education, flat style, public services",luxury
-Syne,Google Fonts,OFL,display sans,wght,art-school display that widens with weight,Hanken Grotesk; Space Mono,"galleries, art, festivals",body text
-Unbounded,Google Fonts,OFL,display sans,wght,"wide rounded display, playful and loud",Onest; JetBrains Mono,"play moods, web3-free tech launches, events",quiet moods
-Geist,Google Fonts,OFL,text sans,wght,clean technical grotesk (by Vercel),Instrument Serif; Fraunces; Geist Mono,"dev tools, SaaS, body text",display identity on its own
-Geist Mono,Google Fonts,OFL,mono,wght,technical mono that pairs with Geist,Geist; Bricolage Grotesque,"labels, timecodes, code",long reading
-JetBrains Mono,Google Fonts,OFL,mono,wght,coding mono with tall x-height,Archivo; Big Shoulders Display,"console archetype, timecodes, captions",body text
-Martian Mono,Google Fonts,OFL,mono,wdth wght,wide-able mono with a strong voice,Syne; Unbounded,"technical brands with personality, index numbers",quiet moods
-Space Mono,Google Fonts,OFL,mono,none,retro-futurist mono,Syne; Anybody,"retro, editorial labels",overused as a display
-Climate Crisis,Google Fonts,OFL,display sans,YEAR,weight melts with a YEAR axis (1979-2019) showing ice loss,Hanken Grotesk,climate and data storytelling: the axis is the concept,any brief not about change over time
-Inter Tight,Google Fonts,OFL,text sans,wght,tight neutral sans for UI text,Anybody; Big Shoulders Display,UI text when chosen deliberately,display identity
-Anek Bangla,Google Fonts,OFL,bangla display/text,wdth wght,Bangla + Latin with a width axis,Hind Siliguri; Instrument Sans,"Bangla kinetic headlines, bilingual sites",when conjunct rendering is untested
-Hind Siliguri,Google Fonts,OFL,bangla text,none (5 weights),clear Bangla UI text,Anek Bangla; Hanken Grotesk,Bangla body text and UI,display identity
-Noto Serif Bengali,Google Fonts,OFL,bangla serif,wdth wght,bookish Bangla serif,Noto Sans Bengali; Newsreader,"Bangla long-form, heritage",small UI labels
-Satoshi,Fontshare,ITF Free Font License,text/display sans,wght,"modern geometric grotesk, crisp",Zodiak; Gambetta; Boska,"SaaS, portfolios, soft and minimal styles",when everyone else uses it: vary with pairings
-General Sans,Fontshare,ITF Free Font License,text sans,wght,soft modern grotesk,Bodoni Moda; Zodiak,"soft and neumorphic styles, wellness",brutalism
-Cabinet Grotesk,Fontshare,ITF Free Font License,display sans,wght,punchy grotesk with tight curves,Sentient; Satoshi,"neobrutalism, posters, launches",quiet luxury
-Clash Display,Fontshare,ITF Free Font License,display sans,wght,sharp contemporary display grotesk,Satoshi; Switzer,"studios, launches, play moods",body text
-Switzer,Fontshare,ITF Free Font License,text sans,wght,neutral Swiss-style grotesk,Fraunces; Big Shoulders Display; Bodoni Moda,"body text, Swiss style, minimal",display identity on its own
-Zodiak,Fontshare,ITF Free Font License,display/text serif,wght,contemporary high-contrast serif,Satoshi; General Sans,"dark luxe, editorial, fashion",tiny UI
-Gambetta,Fontshare,ITF Free Font License,text/display serif,wght,warm robust serif,Satoshi; Switzer,"organic, food, publishing",neobrutalism
-Boska,Fontshare,ITF Free Font License,display serif,wght,sharp contemporary serif with calligraphic tension,Satoshi; Switzer,"fashion, portfolios, editorial hooks",body text
-Sentient,Fontshare,ITF Free Font License,text serif,wght,modern reading serif,Cabinet Grotesk; Satoshi,"long-form, organisations",play display
-Panchang,Fontshare,ITF Free Font License,display sans,wght,ultra-wide display,Switzer,"events, sport, kinetic headlines",long lines
-Tanker,Fontshare,ITF Free Font License,display sans,none,ultra-heavy condensed poster face,Switzer; JetBrains Mono,"posters, events, brutalist hooks",anything quiet
-PP Editorial New,Paid foundry,Commercial (trial available),display serif,none (weights + italics),ultralight high-contrast editorial serif,PP Neue Montreal,"fashion, portfolios, luxury editorial",projects without a font budget
-PP Neue Montreal,Paid foundry,Commercial (trial available),text/display sans,none (weights),refined neo-grotesk,PP Editorial New,"studios, Swiss style",projects without a font budget
-ABC Diatype,Paid foundry,Commercial,text/display sans,wght (variable version),precise contemporary grotesk,ABC Diatype Mono,"studios, tech, Swiss style",projects without a font budget
-GT America,Paid foundry,Commercial,display/text sans,wdth wght,American gothic with extended widths,GT Super,"editorial, sport, culture",projects without a font budget
+name,source,license,role,axes,personality,pairs_with,use_for,avoid,scripts
+Fraunces,Google Fonts,OFL,display serif,opsz wght SOFT WONK,"warm, quirky old-style with soft or wonky details",Switzer; Instrument Sans; Hanken Grotesk,"organic brands, food, editorial, heritage with humour",strict corporate tone,latin vietnamese
+Instrument Serif,Google Fonts,OFL,display serif,none (regular + italic),"condensed elegant serif, fashion-editorial",Instrument Sans; Geist; Satoshi,"fashion, portfolios, editorial headlines",body text,latin
+Newsreader,Google Fonts,OFL,text serif,opsz wght,calm newspaper serif built for reading,Schibsted Grotesk; Familjen Grotesk,"long-form, publications, organisations",loud play moods,latin vietnamese
+Bodoni Moda,Google Fonts,OFL,display serif,opsz wght,"high-contrast didone, luxurious",Switzer; General Sans,"dark luxe, fragrance, fashion",small sizes on dark backgrounds,latin
+Gloock,Google Fonts,OFL,display serif,none,heavy high-contrast serif with sharp wedges,Hanken Grotesk; Satoshi,"dark luxe, posters, editorial hooks",body text,latin
+Young Serif,Google Fonts,OFL,display serif,none,friendly heavy old-style serif,Onest; Instrument Sans,"food, organic, children's brands",technical products,latin
+Cormorant Garamond,Google Fonts,OFL,display serif,wght,delicate calligraphic garamond at large sizes,Hanken Grotesk; Switzer,"hotels, weddings, luxury quiet",small text on screens,latin vietnamese cyrillic
+EB Garamond,Google Fonts,OFL,text serif,wght,classic book face,Schibsted Grotesk; Geist,"literary, academic, heritage",play moods,latin vietnamese cyrillic greek
+Big Shoulders Display,Google Fonts,OFL,display sans,wght,"condensed American-industrial, cinematic",Switzer; Geist; JetBrains Mono,"film, sport, events, Motomation titles",long headlines in lowercase,latin vietnamese
+Archivo,Google Fonts,OFL,display/text sans,wdth wght,grotesk with a wide width range,Newsreader; JetBrains Mono,"kinetic width effects, editorial, sport",when you need a soft tone,latin vietnamese
+Anybody,Google Fonts,OFL,display sans,wdth wght ital,extreme width axis from ultra-condensed to ultra-wide,Inter Tight (text); Space Mono,"Width Sprint, kinetic type, events",quiet moods,latin vietnamese
+Bricolage Grotesque,Google Fonts,OFL,display sans,opsz wdth wght,characterful grotesk with ink-trap quirks,Newsreader; Geist Mono,"neobrutalism, creative tools, indie products",luxury,latin vietnamese
+Familjen Grotesk,Google Fonts,OFL,text/display sans,wght,Scandinavian grotesk with distinct shapes,Newsreader; EB Garamond,"studios, editorial, organisations",play moods,latin vietnamese
+Hanken Grotesk,Google Fonts,OFL,text sans,wght,neutral geometric-humanist sans,Fraunces; Gloock; Cormorant Garamond,body text for serif-led sites,display identity,latin vietnamese
+Schibsted Grotesk,Google Fonts,OFL,text/display sans,wght,newsroom grotesk with sturdy forms,Newsreader; EB Garamond,"publications, Swiss style, organisations",soft moods,latin
+Instrument Sans,Google Fonts,OFL,text/display sans,wdth wght,precise neo-grotesk with a width axis,Instrument Serif; Fraunces,"SaaS, studios, minimal",when you need warmth,latin
+Onest,Google Fonts,OFL,text sans,wght,friendly open sans with Cyrillic,Young Serif; Bricolage Grotesque,"education, flat style, public services",luxury,latin vietnamese cyrillic
+Syne,Google Fonts,OFL,display sans,wght,art-school display that widens with weight,Hanken Grotesk; Space Mono,"galleries, art, festivals",body text,latin greek
+Unbounded,Google Fonts,OFL,display sans,wght,"wide rounded display, playful and loud",Onest; JetBrains Mono,"play moods, web3-free tech launches, events",quiet moods,latin vietnamese cyrillic
+Geist,Google Fonts,OFL,text sans,wght,clean technical grotesk (by Vercel),Instrument Serif; Fraunces; Geist Mono,"dev tools, SaaS, body text",display identity on its own,latin vietnamese cyrillic
+Geist Mono,Google Fonts,OFL,mono,wght,technical mono that pairs with Geist,Geist; Bricolage Grotesque,"labels, timecodes, code",long reading,latin vietnamese cyrillic
+JetBrains Mono,Google Fonts,OFL,mono,wght,coding mono with tall x-height,Archivo; Big Shoulders Display,"console archetype, timecodes, captions",body text,latin vietnamese cyrillic greek
+Martian Mono,Google Fonts,OFL,mono,wdth wght,wide-able mono with a strong voice,Syne; Unbounded,"technical brands with personality, index numbers",quiet moods,latin cyrillic
+Space Mono,Google Fonts,OFL,mono,none,retro-futurist mono,Syne; Anybody,"retro, editorial labels",overused as a display,latin vietnamese
+Climate Crisis,Google Fonts,OFL,display sans,YEAR,weight melts with a YEAR axis (1979-2019) showing ice loss,Hanken Grotesk,climate and data storytelling: the axis is the concept,any brief not about change over time,latin cyrillic
+Inter Tight,Google Fonts,OFL,text sans,wght,tight neutral sans for UI text,Anybody; Big Shoulders Display,UI text when chosen deliberately,display identity,latin vietnamese cyrillic greek
+Anek Bangla,Google Fonts,OFL,bangla display/text,wdth wght,Bangla + Latin with a width axis,Hind Siliguri; Instrument Sans,"Bangla kinetic headlines, bilingual sites",when conjunct rendering is untested,latin bengali
+Hind Siliguri,Google Fonts,OFL,bangla text,none (5 weights),clear Bangla UI text,Anek Bangla; Hanken Grotesk,Bangla body text and UI,display identity,latin bengali
+Noto Serif Bengali,Google Fonts,OFL,bangla serif,wdth wght,bookish Bangla serif,Noto Sans Bengali; Newsreader,"Bangla long-form, heritage",small UI labels,latin bengali
+Satoshi,Fontshare,ITF Free Font License,text/display sans,wght,"modern geometric grotesk, crisp",Zodiak; Gambetta; Boska,"SaaS, portfolios, soft and minimal styles",when everyone else uses it: vary with pairings,latin (check the foundry's language list)
+General Sans,Fontshare,ITF Free Font License,text sans,wght,soft modern grotesk,Bodoni Moda; Zodiak,"soft and neumorphic styles, wellness",brutalism,latin (check the foundry's language list)
+Cabinet Grotesk,Fontshare,ITF Free Font License,display sans,wght,punchy grotesk with tight curves,Sentient; Satoshi,"neobrutalism, posters, launches",quiet luxury,latin (check the foundry's language list)
+Clash Display,Fontshare,ITF Free Font License,display sans,wght,sharp contemporary display grotesk,Satoshi; Switzer,"studios, launches, play moods",body text,latin (check the foundry's language list)
+Switzer,Fontshare,ITF Free Font License,text sans,wght,neutral Swiss-style grotesk,Fraunces; Big Shoulders Display; Bodoni Moda,"body text, Swiss style, minimal",display identity on its own,latin (check the foundry's language list)
+Zodiak,Fontshare,ITF Free Font License,display/text serif,wght,contemporary high-contrast serif,Satoshi; General Sans,"dark luxe, editorial, fashion",tiny UI,latin (check the foundry's language list)
+Gambetta,Fontshare,ITF Free Font License,text/display serif,wght,warm robust serif,Satoshi; Switzer,"organic, food, publishing",neobrutalism,latin (check the foundry's language list)
+Boska,Fontshare,ITF Free Font License,display serif,wght,sharp contemporary serif with calligraphic tension,Satoshi; Switzer,"fashion, portfolios, editorial hooks",body text,latin (check the foundry's language list)
+Sentient,Fontshare,ITF Free Font License,text serif,wght,modern reading serif,Cabinet Grotesk; Satoshi,"long-form, organisations",play display,latin (check the foundry's language list)
+Panchang,Fontshare,ITF Free Font License,display sans,wght,ultra-wide display,Switzer,"events, sport, kinetic headlines",long lines,latin (check the foundry's language list)
+Tanker,Fontshare,ITF Free Font License,display sans,none,ultra-heavy condensed poster face,Switzer; JetBrains Mono,"posters, events, brutalist hooks",anything quiet,latin (check the foundry's language list)
+PP Editorial New,Paid foundry,Commercial (trial available),display serif,none (weights + italics),ultralight high-contrast editorial serif,PP Neue Montreal,"fashion, portfolios, luxury editorial",projects without a font budget,latin (check the foundry's language list)
+PP Neue Montreal,Paid foundry,Commercial (trial available),text/display sans,none (weights),refined neo-grotesk,PP Editorial New,"studios, Swiss style",projects without a font budget,latin (check the foundry's language list)
+ABC Diatype,Paid foundry,Commercial,text/display sans,wght (variable version),precise contemporary grotesk,ABC Diatype Mono,"studios, tech, Swiss style",projects without a font budget,latin (check the foundry's language list)
+GT America,Paid foundry,Commercial,display/text sans,wdth wght,American gothic with extended widths,GT Super,"editorial, sport, culture",projects without a font budget,latin (check the foundry's language list)
+Literata,Google Fonts,OFL,text/display serif,opsz wght,"contemporary book serif with an optical-size axis, made for long reading on screens",Manrope; IBM Plex Sans,"long-form reading, journals, publishers",tight UI labels,latin vietnamese cyrillic greek
+Source Serif 4,Google Fonts,OFL,text serif,opsz wght,sturdy transitional serif with optical sizes from captions to display,Source Sans 3; Public Sans,"reports, documentation, institutional long-form",fashion or expressive display,latin vietnamese cyrillic greek
+Spectral,Google Fonts,OFL,text serif,none (7 weights + italics),"sharp, slightly condensed screen serif with a literary voice",Work Sans; Albert Sans,"essays, literary magazines, author sites",dense dashboards,latin vietnamese cyrillic
+Libre Caslon Display,Google Fonts,OFL,display serif,none (1 weight),high-contrast Caslon cut for large sizes only,Libre Franklin; Public Sans,"heritage headlines, invitations, mastheads",anything under 28px,latin
+Crimson Pro,Google Fonts,OFL,text serif,wght,"Garalde book face, quiet and warm in running text",Work Sans; Figtree,"books, poetry, academic writing",bold display shouting,latin vietnamese
+Petrona,Google Fonts,OFL,text/display serif,wght,energetic serif with wide weight range from hairline to black,Albert Sans; DM Sans,"editorial features, food writing, culture sites",formal finance,latin vietnamese
+Brygada 1918,Google Fonts,OFL,text serif,wght,"revival of a 1918 Polish book face, upright and slightly rough",Epilogue; Public Sans,"history, archives, museum and heritage sites",futuristic tech,latin vietnamese cyrillic greek
+Figtree,Google Fonts,OFL,text sans,wght,"friendly geometric sans with clear, open shapes",Fraunces; Literata,"product UI, onboarding, approachable SaaS",when a sharper voice is the concept,latin
+Manrope,Google Fonts,OFL,text/display sans,wght,"semi-condensed modern grotesk, technical but warm",Literata; Newsreader,"fintech, dashboards, product sites",heritage or craft brands,latin vietnamese cyrillic greek
+Public Sans,Google Fonts,OFL,text sans,wght,neutral government-grade sans built for clarity,Source Serif 4; Brygada 1918,"civic services, non-profits, forms",fashion and luxury,latin vietnamese
+Work Sans,Google Fonts,OFL,text/display sans,wght,"grotesk tuned for screens, wider at light weights",Spectral; Crimson Pro,"studios, portfolios, general UI",when it is the only voice on the page,latin vietnamese
+Albert Sans,Google Fonts,OFL,text sans,wght,"Scandinavian geometric sans, calm and even",Petrona; Spectral,"architecture, interiors, calm product pages",loud campaign headlines,latin
+Sora,Google Fonts,OFL,display/text sans,wght,rounded techno-geometric sans from a crypto-era commission,Fragment Mono; Newsreader,"tech launches, web3-adjacent tools that want warmth",literary or heritage tone,latin
+Plus Jakarta Sans,Google Fonts,OFL,text/display sans,wght,"modern geometric sans with tall x-height, crisp at small sizes",Fraunces; DM Mono,"startup marketing, SaaS, app UI",when every competitor already uses it,latin vietnamese
+DM Sans,Google Fonts,OFL,text sans,opsz wght,low-contrast geometric sans with an optical-size axis,DM Serif Display; Fraunces,"UI text, product docs, clean marketing",display identity on its own,latin
+IBM Plex Sans,Google Fonts,OFL,text sans,wdth wght,engineered grotesk with a width axis and a large family,IBM Plex Mono; Source Serif 4,"technical products, research, engineering brands",soft lifestyle brands,latin vietnamese cyrillic greek
+Atkinson Hyperlegible Next,Google Fonts,OFL,text sans,wght,letterforms drawn to stay distinct for low-vision readers,Literata; Public Sans,"health, public services, accessibility-first products",decorative display,latin
+Epilogue,Google Fonts,OFL,display/text sans,wght,grotesk with a strong black weight and quirky italics,Brygada 1918; Fragment Mono,"posters, events, cultural programmes",quiet corporate pages,latin vietnamese
+Tilt Warp,Google Fonts,OFL,display sans,XROT YROT,chunky display face with rotation axes that tilt the letters in 3D,Work Sans; DM Mono,"playful kinetic headlines, children's and game sites","body text, serious finance",latin vietnamese
+Rubik Mono One,Google Fonts,OFL,display sans,none (1 weight),"heavy monospaced caps, blunt and graphic",IBM Plex Sans; Work Sans,"stickers, event posters, arcade or sport energy",anything longer than a headline,latin cyrillic
+IBM Plex Mono,Google Fonts,OFL,mono,none (7 weights + italics),"the mono of the Plex family, readable at length",IBM Plex Sans; Literata,"code, data tables, technical captions",as a display face,latin vietnamese cyrillic
+DM Mono,Google Fonts,OFL,mono,none (3 weights + italics),"light, low-contrast mono that sits quietly beside DM Sans",DM Sans; Fraunces,"labels, timestamps, specs",long code listings,latin
+Fragment Mono,Google Fonts,OFL,mono,none (1 weight + italics),"Helvetica-flavoured mono, neutral and modern",Epilogue; Sora,"UI meta, prices, index numbers",decorative or retro concepts,latin
+Azeret Mono,Google Fonts,OFL,mono,wght,geometric mono with a full weight axis from thin to black,Albert Sans; Manrope,"dashboards, numbers as display, timecodes",warm handmade brands,latin
+Tiro Bangla,Google Fonts,OFL,bangla serif,none (1 weight + italics),Bangla and Latin book serif with traditional stroke contrast,Hind Siliguri; Newsreader,"Bangla literature, journalism, heritage",small UI labels,latin bengali
+Baloo Da 2,Google Fonts,OFL,bangla display/text,wght,rounded Bangla and Latin display face with a weight axis,Hind Siliguri; Figtree,"friendly Bangla headlines, education, children's content",formal institutions,latin vietnamese bengali
+Noto Sans Bengali,Google Fonts,OFL,bangla text,wdth wght,workhorse Bangla sans with width and weight axes and full conjunct coverage,Noto Serif Bengali; Inter Tight,"Bangla UI, forms, long body text",when an expressive voice is needed,latin bengali
+Galada,Google Fonts,OFL,bangla display/text,none (1 weight),calligraphic Bangla and Latin display face with a brush feel,Hind Siliguri; Work Sans,"Bangla festival, food and culture headlines",body text,latin bengali
+Mukta,Google Fonts,OFL,devanagari text,none (7 weights),clear Devanagari and Latin sans in seven weights,Tiro Devanagari Hindi; Public Sans,Hindi and Marathi UI and body text,display identity,latin devanagari
+Tiro Devanagari Hindi,Google Fonts,OFL,devanagari serif,none (1 weight + italics),Devanagari and Latin book serif with traditional stroke modulation,Mukta; Literata,"Hindi literature, news, cultural institutions",small UI labels,latin devanagari
+Rozha One,Google Fonts,OFL,devanagari display/text,none (1 weight),high-contrast Devanagari and Latin display serif,Mukta; Work Sans,"Hindi headlines, posters, wedding and festival pages",body text,latin devanagari
+Anek Devanagari,Google Fonts,OFL,devanagari display/text,wdth wght,Devanagari and Latin sans with width and weight axes,Mukta; Instrument Sans,"Hindi kinetic headlines, bilingual product sites",when conjunct rendering is untested,latin devanagari
+IBM Plex Sans Arabic,Google Fonts,OFL,arabic text,none (7 weights),"Arabic companion to Plex, engineered and even",IBM Plex Sans; IBM Plex Mono,"Arabic UI, technical products, bilingual docs",calligraphic or luxury tone,latin arabic
+Readex Pro,Google Fonts,OFL,arabic text,wght HEXP,"Arabic and Latin sans built for legibility, with an expansion axis",Amiri; Figtree,"Arabic body text, education, public services",decorative display,latin vietnamese arabic
+Amiri,Google Fonts,OFL,arabic serif,none (2 weights + italics),"classical Naskh Arabic revival with Latin, suited to long reading",Readex Pro; Crimson Pro,"Arabic literature, religious and scholarly texts, heritage",dense UI labels,latin arabic
+Noto Kufi Arabic,Google Fonts,OFL,arabic display/text,wght,"geometric Kufi Arabic with a weight axis, square and modern",Readex Pro; IBM Plex Sans,"Arabic headlines, signage, modern brands",long running text,latin arabic
+```
+
+### data/imagery.csv
+
+```csv
+id,mode,subject,direction,texture,stand_in,avoid
+portfolio,photography,"the work itself: finished pieces, in use, at real scale","one light per page; straight-on or 25° above for objects; crop to the work, never the screen bezel","none, or grain ≤ 0.06 on the ground","a drawn cover per project in the page's illustration style, with the alt text the real image will have; [NEEDS ASSET] per project",mockups of work that was never made; stock desks and laptops
+studio,photography,"the team at work and the work on the wall, in the studio's own room","available light, eye height, 35–50 mm; people mid-task, nobody looking at the lens","none, or paper under printed-matter sections",project covers drawn as ledger plates or contact sheets; the studio room drawn once,stock team photos; collage of logos as imagery
+ecommerce,photography,"the product alone, then in use, then in detail (making, material, scale)","one window light camera-left, soft, no fill; same angle for every product in a set; graded to the ground colour",linen or paper only where the product is photographed on it,"a drawn study of the actual object (shape, glaze, material) on the page's ground; real dimensions in the caption",lifestyle stock; 3D renders presented as photographs
+saas,none,"the product's own UI, shown as UI (live components or a device frame)",real screens with real data from the product's domain; never a blurred dashboard,none,the UI built as components with realistic rows and names; [NEEDS ASSET] for real screenshots,stock photos of people at laptops; abstract blobs as 'product'
+hotel,photography,"the rooms, the courtyard, the view, the table: the place as a guest finds it",one time of day per set (late afternoon is common); eye height; doors and windows in frame for scale,"none, or paper on rate cards","the actual architecture drawn (arches, courtyard, rooms) in the page's style, one per room",drone shots of somewhere else; empty-bed stock; HDR grades
+restaurant,photography,"the dishes, the room in service, the kitchen and the people","overhead or 45° for dishes, consistent across the menu; warm practical light for the room",paper on menu sections,"drawn dishes from the real menu, labelled with their real names and prices",stock food; glistening over-styled plates the kitchen doesn't serve
+organisation,photography,"the work in the field: places, people doing it, documents and evidence","documentary, available light, people with consent and names; no posed hand-shaking",halftone or paper for reports and evidence,"drawn survey plates, maps and charts of the real issue; [NEEDS ASSET] with consent notes",poverty imagery without consent or names; stock 'hands holding a seedling'
+event,illustration,"the stage, the line-up, the place: type is often the image","poster logic: one bold mark, the date large; photographs only of the real performers","grain or halftone, still, on the poster surfaces",type as image plus a drawn stage-light or venue mark; performer photos as [NEEDS ASSET],stock crowd shots; festival-generic gradients
+architecture,photography,"buildings in their context, plans and sections, materials close up","straight verticals (shift lens or corrected), one time of day, people small for scale",none; plans drawn on the ground,"line drawings of the real plans, sections and elevations",renders presented as built photographs; skies replaced in post
+personal-brand,none,"the person's words, with one honest portrait if any","a single portrait in available light, looking at the work or the reader, not at a phone",paper for letters and notes,no stand-in image; the text and type carry the page; [NEEDS ASSET] for the portrait,stock 'thought leader' poses; AI portraits
+product-launch,photography,"the product, shot as an object to understand: front, profile, inside, in use","studio light, one key, consistent across the set; turntable or exploded view where it explains",none,a drawn or rendered study of the real product (marked as a render); frame sequence from a storyboard for Tier 5,renders of features the product doesn't have; lifestyle stock
+education,illustration,"the subject being taught: diagrams, worked examples, the classroom or field","diagram style per the page's style; labelled, never decorative; photos of real students only with consent","paper or grid only where it is the material (a workbook, graph paper)",drawn diagrams of real lesson content with real labels; [NEEDS ASSET] for classroom photos,stock graduation caps; cartoon mascots that teach nothing
 ```
 
 ### data/kinetics.csv
@@ -4246,6 +4300,27 @@ film-sequence,Image-sequence film,5,scroll pin + scrub,canvas frames 90-180,scro
 film-video,Video scrub film,5,scroll pin + scrub,video.currentTime from progress (-g 1 encode),scroll-linked,none,long shots,iOS without testing,static storyboard frames
 film-type,Type film,5,scroll pin + scrub,DOM timeline duration 1 with scene positions,scroll-linked,none,typographic Motomation hooks,body text,static stacked type
 timecode-rail,Timecode Rail,5,chapter progress,scaleX + tabular timecode,scroll-linked,none,any Motomation chapter,short pins,hidden
+hover-lift,Hover lift,1,hover/focus,translateY -2px + shadow step,160ms,--ease-out,cards that open something,static info cards,shadow step only
+tap-colour,Tap colour,1,pointerdown,background-color to pressed shade,80ms,--ease-out,"touch buttons, list rows",decorative surfaces,same (colour is not motion)
+toast-in,Toast enter,1,status message,translateY 12px + opacity 0 to rest; exit 160ms,220ms,--ease-out,"save confirmations, undo bars","errors that need reading time (keep them, don't auto-hide)",appear in place
+menu-sheet,Menu sheet,1,open/close,clip-path inset from top + opacity; close 180ms,260ms,--ease-out-strong,"mobile navigation, filter sheets",desktop nav that fits,instant open
+accordion,Accordion height,1,toggle,grid-template-rows 0fr to 1fr + chevron rotate 180deg,240ms,--ease-in-out,"FAQs, specs, long details",primary content people must see,instant open
+skeleton-fade,Skeleton to content,1,data loaded,skeleton opacity 1 to 0 while content opacity 0 to 1,200ms,linear,lists and cards that load over 300ms,loads under 300ms (show nothing),instant swap
+count-up,Count up,2,enter viewport once,"tabular number from 0 to value, final value in the HTML",1200ms,power2.out,one headline statistic per section,"prices, legal figures, every number on the page",final value
+split-flap,Split flap,2,enter viewport or value change,"per-character flip, 60ms per flap, 30ms stagger",60ms per flap + 30ms stagger,steps(1),"timetables, counters, short codes",sentences,final characters
+typewriter,Typewriter,2,enter viewport once,"characters revealed with a caret, 35ms per character, 600ms hold",35ms per character,steps(1),one short line that is spoken,headings people must scan,full text
+rotating-words,Rotating words,2,timer,"one word swapped with yPercent 100 to 0, holds 2400ms",450ms + 2400ms hold,power3.out,one changing noun in a headline,more than 4 words; the key claim,"first word, static"
+stagger-grid,Stagger grid,2,enter viewport once,"items y 16 + opacity, stagger from the start corner",500ms + 40ms stagger (cap 400ms total),power3.out,"galleries, team grids",grids over 24 items (cap the stagger),visible
+magnetic,Magnetic pull,2,pointer near,"translate toward pointer, max 6px, spring back",300ms return,power3.out,one primary CTA,every button; touch devices,none
+tilt-card,Tilt card,2,pointer move,rotateX/rotateY max 6deg with glare,120ms follow + 400ms return,power2.out,"product cards, tickets, passes",text-heavy cards,flat card
+image-trail,Image trail,3,pointer move,"images spawned on pointer path, each fades over 900ms",900ms per image,power2.out,portfolio indexes with real work,pages where the pointer is needed for reading,static contact sheet
+sticky-index,Sticky index,2,scroll,"sticky list, active item by IntersectionObserver, colour change",180ms,--ease-out,"long articles, case-study chapters",pages with fewer than 4 sections,same (colour only)
+scroll-float,Scroll float,2,scroll scrub,letters yPercent 120 to 0 with stagger 0.03 across the scrub,"scroll-linked (start 85%, end 35%)",none,one display heading per page,"body text, more than one per page",static heading
+letter-relay,Letter relay,2,enter viewport once,"letters handed down a line, 25ms stagger",600ms + 25ms stagger,expo.out,"short wordmarks, single-word headings",multi-line headings,instant final state
+page-fade,Page fade,3,navigation,old page opacity to 0 (150ms) then new page in (250ms),150ms out + 250ms in,--ease-out,small sites with no shared elements,apps with frequent navigation,instant navigation
+shared-image,Shared image transition,3,navigation,view-transition-name on the card image and the hero image,450ms,--ease-out-strong,card to detail page,lists where many images share a name,instant navigation
+liquid-hover,Liquid hover,4,pointer move,"fragment shader displacement around the pointer, radius 120px",continuous (decays over 600ms),none,one hero image with a material concept,"text, more than one canvas",static image
+film-chapter-cut,Chapter cut,5,scroll progress crosses a chapter,hard cut between frame ranges with a 2-frame flash,2 frames (~33ms),steps(1),film templates with distinct chapters,continuous single-shot films,storyboard frame of the next chapter
 ```
 
 ### data/mutations.csv
@@ -4269,29 +4344,47 @@ constraint,Self-imposed constraint,"one colour, one size or one font weight only
 ### data/palettes.csv
 
 ```csv
-name,mood,ground,surface,ink,muted,accent,accent_ink,story,accent_text
-Paper & Vermilion,editorial,#F3F0EA,#EAE6DE,#151412,#5E5A53,#C8401C,#FFFFFF,"printed matter, newsrooms, studios",large-only
-Bone & Graphite,quiet,#ECE8E1,#E2DDD4,#1C1C1A,#5A5852,#8A6A3B,#FFFFFF,"architecture, interiors, calm portfolios",large-only
-Darkroom,play,#0E0D0B,#1A1814,#F2EEE6,#A8A196,#E0442B,#0E0D0B,"film, photography, Motomation chapters",body
-Night Brass,quiet,#0D0D0F,#18181B,#EDEBE6,#A3A09A,#C9A15B,#0D0D0F,"hotels at night, fragrance, watches",body
-Signal Green Console,editorial,#0B0F0C,#121A14,#E3F2E6,#8FA894,#3DDC84,#0B0F0C,"dev tools, terminals, technical launches",body
-Swiss Red,editorial,#FAFAF7,#EFEFEA,#111111,#555555,#E30613,#FFFFFF,"Swiss style, engineering, institutions",body
-Ultramarine Press,editorial,#F5F3EE,#EBE8E1,#14161F,#555B6B,#2337C6,#FFFFFF,"publications, culture, galleries",body
-Clay & Moss,quiet,#EFE9E1,#E4DCD1,#2A241E,#6B6157,#5C7A48,#FFFFFF,"ceramics, food, sustainability",large-only
-Safelight,play,#140B0A,#21110F,#F6E9E2,#B89A90,#FF5A3C,#140B0A,"darkroom, music, nightlife",body
-Bauhaus Primaries,play,#F2EFE6,#E7E2D5,#141414,#565452,#1F4FD8,#FFFFFF,"education, design schools, playful systems",body
-Citrus Brutal,play,#FFF6D6,#FFE9A3,#111111,#4A4536,#FF4D00,#111111,"neobrutalism, indie tools, events",large-only
-Lagoon,quiet,#EEF3F2,#E1EAE8,#10201E,#4C5F5C,#0F7C72,#FFFFFF,"wellness, coastal hotels, health",body
-Ink & Rose,editorial,#F7F1EF,#EFE5E2,#1D1517,#655457,#B4325A,#FFFFFF,"beauty, fashion, personal brands",body
-Concrete & Signal,editorial,#E9E9E6,#DCDCD8,#161616,#555553,#C2410C,#FFFFFF,"architecture, urban, industrial products",large-only
-Midnight Ultraviolet,play,#0C0A14,#16122A,#EEEAFB,#A49DC4,#9B7BFF,#0C0A14,"music, games: only when violet is the concept",body
-Oxblood Library,quiet,#F1ECE4,#E6DFD3,#1E1614,#62554F,#7A1F1F,#FFFFFF,"heritage, law, literary brands",body
-Monsoon Dhaka,editorial,#ECEFEA,#DFE5DE,#151A16,#525C54,#1E6B52,#FFFFFF,"Bangladeshi brands, rain, rivers, green heritage",body
-Saffron Market,play,#FBF4E8,#F3E6CF,#1F1610,#64574A,#A8550F,#FFFFFF,"food, festivals, markets",body
-Arctic Lab,quiet,#F4F7F9,#E8EEF2,#0F1820,#4F5D6A,#1E6FD9,#FFFFFF,"science, health tech, precise SaaS",body
-Graphite Mono,quiet,#111111,#1B1B1B,#EDEDED,#9A9A9A,#FFFFFF,#111111,stark minimal portfolios: accent is pure white,body
-Sun-Bleached,quiet,#F6EFE6,#EEE3D4,#2B2118,#6E5E4E,#C2562F,#FFFFFF,"travel, summer hotels, ceramics",large-only
-Pine & Fog,quiet,#E9ECE8,#DCE1DB,#17201B,#526057,#2F5D46,#FFFFFF,"outdoors, cabins, nature non-profits",body
+name,mood,ground,surface,ink,muted,accent,accent_ink,story,accent_text,mode,pair
+Paper & Vermilion,editorial,#F3F0EA,#EAE6DE,#151412,#5E5A53,#C8401C,#FFFFFF,"printed matter, newsrooms, studios",large-only,light,Vermilion After Hours
+Bone & Graphite,quiet,#ECE8E1,#E2DDD4,#1C1C1A,#5A5852,#8A6A3B,#FFFFFF,"architecture, interiors, calm portfolios",large-only,light,Graphite & Bone
+Darkroom,play,#0E0D0B,#1A1814,#F2EEE6,#A8A196,#E0442B,#0E0D0B,"film, photography, Motomation chapters",body,dark,Darkroom Contact Sheet
+Night Brass,quiet,#0D0D0F,#18181B,#EDEBE6,#A3A09A,#C9A15B,#0D0D0F,"hotels at night, fragrance, watches",body,dark,Day Brass
+Signal Green Console,editorial,#0B0F0C,#121A14,#E3F2E6,#8FA894,#3DDC84,#0B0F0C,"dev tools, terminals, technical launches",body,dark,none
+Swiss Red,editorial,#FAFAF7,#EFEFEA,#111111,#555555,#E30613,#FFFFFF,"Swiss style, engineering, institutions",body,light,Swiss Red at Night
+Ultramarine Press,editorial,#F5F3EE,#EBE8E1,#14161F,#555B6B,#2337C6,#FFFFFF,"publications, culture, galleries",body,light,Ultramarine Night Press
+Clay & Moss,quiet,#EFE9E1,#E4DCD1,#2A241E,#6B6157,#5C7A48,#FFFFFF,"ceramics, food, sustainability",large-only,light,Moss After Rain
+Safelight,play,#140B0A,#21110F,#F6E9E2,#B89A90,#FF5A3C,#140B0A,"darkroom, music, nightlife",body,dark,none
+Bauhaus Primaries,play,#F2EFE6,#E7E2D5,#141414,#565452,#1F4FD8,#FFFFFF,"education, design schools, playful systems",body,light,Bauhaus Blackboard
+Citrus Brutal,play,#FFF6D6,#FFE9A3,#111111,#4A4536,#FF4D00,#111111,"neobrutalism, indie tools, events",large-only,light,Citrus Blackout
+Lagoon,quiet,#EEF3F2,#E1EAE8,#10201E,#4C5F5C,#0F7C72,#FFFFFF,"wellness, coastal hotels, health",body,light,Night Lagoon
+Ink & Rose,editorial,#F7F1EF,#EFE5E2,#1D1517,#655457,#B4325A,#FFFFFF,"beauty, fashion, personal brands",body,light,Rose After Dark
+Concrete & Signal,editorial,#E9E9E6,#DCDCD8,#161616,#555553,#C2410C,#FFFFFF,"architecture, urban, industrial products",large-only,light,Wet Concrete
+Midnight Ultraviolet,play,#0C0A14,#16122A,#EEEAFB,#A49DC4,#9B7BFF,#0C0A14,"music, games: only when violet is the concept",body,dark,none
+Oxblood Library,quiet,#F1ECE4,#E6DFD3,#1E1614,#62554F,#7A1F1F,#FFFFFF,"heritage, law, literary brands",body,light,Oxblood Reading Room
+Monsoon Dhaka,editorial,#ECEFEA,#DFE5DE,#151A16,#525C54,#1E6B52,#FFFFFF,"Bangladeshi brands, rain, rivers, green heritage",body,light,Monsoon Night
+Saffron Market,play,#FBF4E8,#F3E6CF,#1F1610,#64574A,#A8550F,#FFFFFF,"food, festivals, markets",body,light,Saffron Night Market
+Arctic Lab,quiet,#F4F7F9,#E8EEF2,#0F1820,#4F5D6A,#1E6FD9,#FFFFFF,"science, health tech, precise SaaS",body,light,Arctic Lab Dark
+Graphite Mono,quiet,#111111,#1B1B1B,#EDEDED,#9A9A9A,#FFFFFF,#111111,stark minimal portfolios: accent is pure white,body,dark,none
+Sun-Bleached,quiet,#F6EFE6,#EEE3D4,#2B2118,#6E5E4E,#C2562F,#FFFFFF,"travel, summer hotels, ceramics",large-only,light,Sun-Bleached Dusk
+Pine & Fog,quiet,#E9ECE8,#DCE1DB,#17201B,#526057,#2F5D46,#FFFFFF,"outdoors, cabins, nature non-profits",body,light,Pine at Night
+Vermilion After Hours,editorial,#15120C,#211D15,#F2EFE8,#B3AC9E,#E04A22,#15120C,"dark-mode pair of Paper & Vermilion: printed matter, newsrooms, studios",body,dark,Paper & Vermilion
+Graphite & Bone,quiet,#14120D,#211C15,#F1EEE9,#B3AB9E,#9F7A44,#14120D,"dark-mode pair of Bone & Graphite: architecture, interiors, calm portfolios",body,dark,Bone & Graphite
+Darkroom Contact Sheet,play,#F3F1EC,#EBE7E0,#191610,#675F51,#C5341D,#FFFFFF,"light-mode pair of Darkroom: film, photography, Motomation chapters",body,light,Darkroom
+Day Brass,quiet,#EDEDF2,#E1E1EA,#111118,#515167,#80602A,#FFFFFF,"light-mode pair of Night Brass: hotels at night, fragrance, watches",body,light,Night Brass
+Swiss Red at Night,editorial,#14140D,#212115,#F1F1E9,#B3B39E,#F9232F,#14140D,"dark-mode pair of Swiss Red: Swiss style, engineering, institutions",body,dark,Swiss Red
+Ultramarine Night Press,editorial,#15120C,#211D15,#F2EFE9,#B3AD9E,#6A79E5,#15120C,"dark-mode pair of Ultramarine Press: publications, culture, galleries",body,dark,Ultramarine Press
+Moss After Rain,quiet,#15110C,#211C15,#F3EEE8,#B3AA9E,#668750,#15110C,"dark-mode pair of Clay & Moss: ceramics, food, sustainability",body,dark,Clay & Moss
+Bauhaus Blackboard,play,#15130C,#211E15,#F3F0E8,#B3AE9E,#577DE7,#15130C,"dark-mode pair of Bauhaus Primaries: education, design schools, playful systems",body,dark,Bauhaus Primaries
+Citrus Blackout,play,#15130C,#211E15,#F3F1E7,#B3AE9E,#FF4D00,#15130C,"dark-mode pair of Citrus Brutal: neobrutalism, indie tools, events",body,dark,Citrus Brutal
+Night Lagoon,quiet,#0E1312,#161F1E,#EAF0EF,#9EB3AF,#118E83,#0E1312,"dark-mode pair of Lagoon: wellness, coastal hotels, health",body,dark,Lagoon
+Rose After Dark,editorial,#150F0C,#211815,#F3EAE7,#B3A39E,#CF547A,#150F0C,"dark-mode pair of Ink & Rose: beauty, fashion, personal brands",body,dark,Ink & Rose
+Wet Concrete,editorial,#121210,#1C1C19,#EEEEEC,#AEAEA3,#E84E0E,#121210,"dark-mode pair of Concrete & Signal: architecture, urban, industrial products",body,dark,Concrete & Signal
+Oxblood Reading Room,quiet,#15120C,#211C15,#F3EEE7,#B3AB9E,#D45454,#15120C,"dark-mode pair of Oxblood Library: heritage, law, literary brands",body,dark,Oxblood Library
+Monsoon Night,editorial,#10130E,#1A1E17,#EDF0EB,#A6B39E,#299371,#10130E,"dark-mode pair of Monsoon Dhaka: Bangladeshi brands, rain, rivers, green heritage",body,dark,Monsoon Dhaka
+Saffron Night Market,play,#15120C,#211C15,#F3EFE7,#B3AB9E,#CD6812,#15120C,"dark-mode pair of Saffron Market: food, festivals, markets",body,dark,Saffron Market
+Arctic Lab Dark,quiet,#0C1115,#151C21,#E8EEF2,#9EAAB3,#337FE3,#0C1115,"dark-mode pair of Arctic Lab: science, health tech, precise SaaS",body,dark,Arctic Lab
+Sun-Bleached Dusk,quiet,#15110C,#211C15,#F3EEE7,#B3AA9E,#CF5F37,#15110C,"dark-mode pair of Sun-Bleached: travel, summer hotels, ceramics",body,dark,Sun-Bleached
+Pine at Night,quiet,#10120F,#191D18,#ECEFEB,#A4B1A0,#478C6A,#10120F,"dark-mode pair of Pine & Fog: outdoors, cabins, nature non-profits",body,dark,Pine & Fog
 ```
 
 ### data/rules.csv
