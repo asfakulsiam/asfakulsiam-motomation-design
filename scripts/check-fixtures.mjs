@@ -6,6 +6,8 @@
 //                                              fixtures/good must pass, fixtures/bad must fail with ≥ the counts in
 //                                              fixtures/bad/expected.json; the scroll-step fixtures must fail
 //                                              (dimmed) and pass (legible)
+//                                              the gate/4 rule fixtures (fixtures/rules): four good pages at
+//                                              rules: C0 S0 P0 K0, four bad pages failing exactly their planted rules
 //   REQUIRE_BROWSER=1 node scripts/check-fixtures.mjs   a missing browser is an error, not a skip (CI sets this
 //                                              once Playwright installed)
 //
@@ -71,4 +73,22 @@ say(ag.json?.access?.fails === 0, `fixtures/synthetic/a11y-good passes every A c
 // the real film: every pinned chapter progresses (its other axes are judged by its own stamp and --verify)
 const film = run("skills/asfakulsiam-motomation-design/examples/html/motomation-film.html", process.env.GATE_TIMEOUT_FILM || "1800"); // a 500vh film with Q + A axes runs past 300s on a 2–4 CPU runner
 say(film.json?.quality?.zones?.length > 0 && zonesOk(film), `examples/html/motomation-film: ${film.json?.quality?.zones?.length ?? 0} pinned zone(s), all progress (${(film.json?.critique || "").match(/Q\d\[[^\]]+\]/)?.[0] || "no Q axis"})`);
+// gate/4 rule sets (fixtures/rules, see its README): each good page is rules: C0 S0 P0 K0; each bad page fails exactly
+// the rules planted in it, in its own set only. Run with --rules (rule sets only, a few seconds per page).
+const RULE_FIXTURES = {
+  copy: ["copy-04", "copy-09", "copy-11", "copy-15", "copy-17"],
+  seo: ["seo-03", "seo-04", "seo-05", "seo-06", "seo-07", "seo-08", "seo-10", "seo-11", "seo-16", "seo-17", "seo-18"],
+  perf: ["perf-01", "perf-02", "perf-03", "perf-04", "perf-11", "perf-12"],
+  sec: ["sec-06", "sec-07", "sec-12", "sec-16", "sec-h1", "sec-h2", "sec-h3"],
+};
+const rulesRun = (target) => { const r = spawnSync(process.execPath, [GATE, target, "--rules", "--tier", "1", "--json"], { cwd: ROOT, encoding: "utf8", maxBuffer: 16 << 20 }); try { return JSON.parse(r.stdout); } catch { return null; } };
+const idsOf = (x) => [...new Set(x.fails.map((f) => f.id))].sort();
+for (const [set, want] of Object.entries(RULE_FIXTURES)) {
+  const good = rulesRun(`fixtures/rules/${set}-good/index.html`);
+  say(good && Object.values(good.counts).every((n) => n === 0), `fixtures/rules/${set}-good: ${good?.segment ?? "no result"}`);
+  const bad = rulesRun(`fixtures/rules/${set}-bad/index.html`);
+  const got = bad ? idsOf(bad[set]) : []; const others = bad ? Object.entries(bad.counts).filter(([k, n]) => k !== set && n > 0).map(([k]) => k) : ["no result"];
+  const missing = want.filter((id) => !got.includes(id)), extra = got.filter((id) => !want.includes(id));
+  say(bad && !missing.length && !extra.length && !others.length, `fixtures/rules/${set}-bad: ${bad?.segment ?? "no result"} fails ${want.length} planted rule(s)${missing.length ? ` · missed ${missing.join(" ")}` : ""}${extra.length ? ` · unexpected ${extra.join(" ")}` : ""}${others.length ? ` · leaks into ${others.join(" ")}` : ""}`);
+}
 process.exit(failed ? 1 : 0);

@@ -4,6 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fixture · good · Tide Table Co-op</title>
+<meta name="description" content="Tide Table Co-op sends tide times for the Meghna ghats by SMS. A gate fixture that must pass every check.">
+<link rel="canonical" href="https://example.org/tide-table/">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-P+8CpSov/nIdebFznxTbcGPgX5GYy0mwqVvTqapFIRE='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta property="og:image" content="https://example.org/tide-table/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Tide Table Co-op"}</script>
 <!-- Gate fixture: a small page that must PASS every check in scripts/gate.mjs. CI runs it (scripts/check-fixtures.mjs). -->
 <style>
   :root { --ink: #16181b; --paper: #f4f1ea; --mute: #4a4d52; --accent: #0b5d4b; }
@@ -13,6 +21,7 @@
   h1 { font-size: clamp(2.4rem, 8vw, 5rem); line-height: 1.02; margin: 0 0 1rem; overflow-wrap: normal; }
   h2 { font-size: 1.6rem; margin: 2.5rem 0 .75rem; }
   .lede { color: var(--mute); max-width: 36rem; }
+  footer a { display: inline-block; padding: 0.4rem 0; }
   .figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1.25rem; padding: 0; list-style: none; }
   .figures li { border-top: 2px solid var(--ink); padding-top: .75rem; }
   .n { font-size: 2.25rem; font-variant-numeric: tabular-nums; display: block; }
@@ -51,7 +60,7 @@
     <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='80'%3E%3Cpath d='M0 40 Q40 10 80 40 T160 40 T240 40 T320 40' stroke='%230b5d4b' stroke-width='4' fill='none'/%3E%3C/svg%3E" width="320" height="80" style="max-width: 100%; height: auto" alt="A drawn line of three waves">
   </section>
 </main>
-<footer><p>Fixture page for the Motomation Delivery Gate. Not a real service.</p></footer>
+<footer><p>Fixture page for the Motomation Delivery Gate. Not a real service.</p><p><a href="ghats/">See the ghats we cover</a> · <a href="sms/">Read how the SMS works</a> · <a href="about/">Meet the co-op</a></p></footer>
 <script>
   document.documentElement.classList.add("js");
   const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && e.target.classList.add("in")), { threshold: 0.1 });
