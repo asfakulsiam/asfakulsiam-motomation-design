@@ -198,7 +198,7 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
         if (/\.html$/.test(f)) for (const m of src.matchAll(/<(?:script|link)\b[^>]*(?:src|href)="(https?:)?\/\//g)) fail(`${rel}: loads a remote script or stylesheet; the variants are self-contained`);
       }
       // the top 5 by usage (v2.5.0: the library is React-first; plain variants only for the 5 most-used): how many D5 sections import the component, then how many D6 templates reach it, then name
-      const secDir = join(SKILL, "examples/sections"), tplDir = join(SKILL, "examples/templates");
+      const secDir = join(SKILL, "examples/sections"), tplDir = join(SKILL, "examples/builds");
       const compOf = (src) => new Set([...src.matchAll(/from "\.\.\/components\/[a-z]+\/([a-z0-9-]+)"/g)].map((m) => m[1]));
       const secComps = Object.fromEntries(readdirSync(secDir).filter((f) => f.endsWith(".tsx") && !f.startsWith("_")).map((f) => [f.replace(/\.tsx$/, ""), compOf(readFileSync(join(secDir, f), "utf8"))]));
       const use = {}; const bump = (c, k) => { use[c] ??= { s: 0, t: 0 }; use[c][k]++; };
@@ -278,9 +278,9 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   const films = collectFilms();
   const fetchScript = join(SKILL, "scripts/fetch-frames.mjs");
   const fetchKnows = existsSync(fetchScript) ? (await import("../skills/asfakulsiam-motomation-design/scripts/fetch-frames.mjs")).lockedTemplates() : [];
-  // every folder under examples/templates/ is registered: a section template (page.tsx) or a film (index.html)
+  // every folder under examples/templates/ is registered: a section template (its build in examples/builds/<id>/page.tsx) or a film (index.html)
   for (const d of readdirSync(join(SKILL, "examples/templates"), { withFileTypes: true }).filter((e) => e.isDirectory() && e.name !== "fonts"))
-    if (!templates.some((t) => t.id === d.name) && !films.some((f) => f.id === d.name)) fail(`examples/templates/${d.name}/ is not a registered template (no page.tsx with a template header, no film index.html)`);
+    if (!templates.some((t) => t.id === d.name) && !films.some((f) => f.id === d.name)) fail(`examples/templates/${d.name}/ is not a registered template (no examples/builds/${d.name}/page.tsx with a template header, no film index.html)`);
   for (const f of films) {
     const own = join(SKILL, "examples/templates", f.id); const read = (x) => (existsSync(join(own, x)) ? readFileSync(join(own, x), "utf8") : null);
     const html = read("index.html");

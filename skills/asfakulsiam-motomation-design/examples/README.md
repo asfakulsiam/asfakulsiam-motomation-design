@@ -1,5 +1,9 @@
 # Examples
 
+> **Templates are design references.** If the brief names Next.js, produce Next.js. If it names plain HTML, produce HTML. Do not copy a template's file structure into a different stack.
+>
+> The stack is chosen in Step 0 (`thinking/sequence.md`), never by an example. `templates/<id>/` holds design only (`DESIGN.md`, `structure.md`, the `og.jpg` screenshot). `builds/<id>/page.tsx` and `templates/<id>.html` are one React build of each design and its gated, rendered preview: evidence the design works, not a layout to reproduce. Decision record: `docs/adr/0001-templates-are-design-references.md` (repository root).
+
 Production-ready reference components. Each one is typed (strict TypeScript), cleans up after itself, and has a reduced-motion and touch path. Copy them into a project and **bend them to the concept**. They are starting points, not finished designs.
 
 **Requirements (React examples):** `react@19`, `gsap@^3.13` (all plugins free), `@gsap/react`, `lenis@^1.3`, Tailwind CSS v4 (utility classes) and CSS variables `--ground --surface --ink --muted --accent --line --font-display`.

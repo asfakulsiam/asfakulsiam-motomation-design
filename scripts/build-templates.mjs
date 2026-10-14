@@ -6,7 +6,9 @@
 //                                                          (also for a Tier 5 film template: examples/templates/<id>/index.html)
 // Each page is server-rendered (react-dom/server) and hydrated, so the HTML is complete before any script runs.
 // A rebuild that produces the same page (stamp aside) keeps the existing file, and with it the measured stamp.
-// Source of a template: examples/templates/<id>/page.tsx with a "// @motomation-template" header (see the README).
+// A template is a design reference: examples/templates/<id>/ holds DESIGN.md, structure.md and the screenshot (og.jpg),
+// no code (docs/adr/0001-templates-are-design-references.md). Its reference build, one React page in one stack, is
+// examples/builds/<id>/page.tsx with a "// @motomation-template" header (see the README); <id>.html is its rendered preview.
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, rmSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -18,7 +20,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");
 // where GitHub Pages serves the templates (.github/workflows/pages.yml copies them to /templates/)
 export const PAGES = "https://asfakulsiam.github.io/asfakulsiam-motomation-design/templates/";
-const DIR = join(SKILL, "examples/templates");
+const DIR = join(SKILL, "examples/templates"), BUILDS = join(SKILL, "examples/builds");
 const FIELDS = ["id", "name", "kind", "archetype", "mutation", "signature", "sections", "fonts", "theme", "what"];
 const STAMP_RE = /<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g;
 const strip = (html) => html.replace(STAMP_RE, "");
@@ -40,8 +42,8 @@ export async function collect() {
   const families = new Set(JSON.parse(readFileSync(join(DIR, "fonts/fonts.json"), "utf8")).map((f) => f.family));
   const templates = [];
   if (!existsSync(DIR)) return { templates, problems };
-  for (const id of readdirSync(DIR).filter((d) => existsSync(join(DIR, d, "page.tsx"))).sort()) {
-    const rel = `examples/templates/${id}/page.tsx`, src = readFileSync(join(DIR, id, "page.tsx"), "utf8");
+  for (const id of (existsSync(BUILDS) ? readdirSync(BUILDS) : []).filter((d) => existsSync(join(BUILDS, d, "page.tsx"))).sort()) {
+    const rel = `examples/builds/${id}/page.tsx`, src = readFileSync(join(BUILDS, id, "page.tsx"), "utf8");
     if (!src.includes("// @motomation-template")) { problems.push(`${rel}: missing // @motomation-template header`); continue; }
     const m = {}; for (const x of src.matchAll(/^\/\/ ([a-z-]+): (.+)$/gm)) if (!(x[1] in m)) m[x[1]] = x[2].trim();
     for (const k of FIELDS) if (!m[k]) problems.push(`${rel}: header is missing "${k}"`);
@@ -71,7 +73,7 @@ export async function collect() {
 // everything a page is built from: its source and every file it reaches through relative imports (sections,
 // components, _lib), plus the font list and this script. An edit elsewhere in the library doesn't invalidate the page.
 export function inputsOf(t) {
-  const seen = new Set(), todo = [join(DIR, t.id, "page.tsx")];
+  const seen = new Set(), todo = [join(BUILDS, t.id, "page.tsx")];
   while (todo.length) {
     const f = todo.pop(); if (seen.has(f)) continue; seen.add(f);
     for (const m of readFileSync(f, "utf8").matchAll(/^import [^;]*? from "(\.{1,2}\/[^"]+)";/gm)) {
@@ -100,7 +102,7 @@ img,svg,canvas{max-width:100%}a{color:inherit}:focus-visible{outline:2px solid v
 async function build(t, next) {
   const req = createRequire(join(ROOT, "noop.js")); const esbuild = req("esbuild");
   const nodePaths = [join(ROOT, "node_modules"), ...(process.env.NODE_PATH || "").split(":").filter(Boolean)];
-  const tmp = join(DIR, t.id, ".build"); mkdirSync(tmp, { recursive: true });
+  const tmp = join(BUILDS, t.id, ".build"); mkdirSync(tmp, { recursive: true });
   try {
     writeFileSync(join(tmp, "ssr.tsx"), `import { renderToString } from "react-dom/server";\nimport { Page } from "../page";\nexport const html = () => renderToString(<Page />);\n`);
     writeFileSync(join(tmp, "client.tsx"), `import { hydrateRoot } from "react-dom/client";\nimport { Page } from "../page";\nhydrateRoot(document.getElementById("root")!, <Page />);\n`);
@@ -163,7 +165,7 @@ export function collectFilms() {
   const films = [];
   if (!existsSync(DIR)) return films;
   const walk = (d, base = "") => readdirSync(join(d, base), { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(d, `${base}${e.name}/`) : [`${base}${e.name}`]));
-  for (const id of readdirSync(DIR).filter((d) => existsSync(join(DIR, d, "index.html")) && !existsSync(join(DIR, d, "page.tsx"))).sort()) {
+  for (const id of readdirSync(DIR).filter((d) => existsSync(join(DIR, d, "index.html")) && !existsSync(join(BUILDS, d, "page.tsx"))).sort()) {
     const html = readFileSync(join(DIR, id, "index.html"), "utf8");
     const st = html.match(/motomation · archetype: ([a-z-]+) · mutation: ([a-z-]+) · signature: ([a-z-]+) · tier: (\d)/);
     const man = existsSync(join(DIR, id, "frames.json")) ? readFileSync(join(DIR, id, "frames.json"), "utf8") : null;
@@ -175,11 +177,33 @@ export function collectFilms() {
   return films;
 }
 
+// structure.md: the stack-neutral half of a template's design reference (sections in order, what each one does, how it
+// behaves on mobile and under reduced motion). Written from the section headers, so it says nothing about files or a stack.
+export function renderStructure(t, sections) {
+  const L = [`# Structure: ${t.name}`, "",
+    "> Design reference, not code. Build this in the stack Step 0 chose (`thinking/sequence.md`); do not copy a file layout from",
+    "> anywhere into a different stack. Screenshot: `og.jpg`. Decisions (concept, type, colour, imagery, restraint): `DESIGN.md`.", "",
+    `- **Kind:** ${t.kind}`, `- **Archetype · mutation · signature:** ${t.archetype} · ${t.mutation} · ${t.signature}`, `- **Tier:** ${t.tier}`,
+    `- **Type roles:** display ${t.fonts.display} · text ${t.fonts.text} · mono ${t.fonts.mono}`, `- **What it is:** ${t.what}`, "",
+    "## Sections, in order", ""];
+  t.list.forEach((id, i) => {
+    const x = sections.get(id) || {};
+    L.push(`### ${i + 1}. ${x.kind || "section"} (\`${id}\`)`, "", x.what || "", "");
+    if (x.signature) L.push(`- **Why it's memorable:** ${x.signature}`);
+    if (x.mobile) L.push(`- **Mobile:** ${x.mobile}`);
+    if (x["reduced-motion"]) L.push(`- **Reduced motion:** ${x["reduced-motion"]}`);
+    L.push("");
+  });
+  return L.join("\n");
+}
+
 export function renderReadme(templates, films = collectFilms()) {
   const L = ["# Page templates", "",
+    "**Templates are design references.** If the brief names Next.js, produce Next.js. If it names plain HTML, produce HTML. Do not copy a template's file structure into a different stack. Each `<id>/` folder is design only: `DESIGN.md` (the decisions), `structure.md` (sections, hierarchy and motion, stack-neutral) and `og.jpg` (the screenshot). The stack comes from Step 0 (`thinking/sequence.md`), never from here. Why: `docs/adr/0001-templates-are-design-references.md`.", "",
+    "The pages are also built once, in one stack, so the Delivery Gate can measure them: the React source is in `examples/builds/<id>/page.tsx` and `<id>.html` is its rendered, gated preview. Both are evidence that the design holds up, not a file layout to reproduce.", "",
     `${templates.length} whole pages, each composed only from the sections in \`examples/sections/\` (a template imports sections and nothing else; \`node scripts/build-templates.mjs\` checks this). Each sets its brand once: colours and fonts as CSS variables, so the same sections change voice per page. Each built page is server-rendered HTML with its own stamp, measured by the Delivery Gate (\`scripts/gate.mjs\`) and checked with \`gate.mjs --verify\`.`, "",
     "| Page | Kind | Archetype · mutation · signature | Tier | Sections (in order) | Fonts |", "|---|---|---|---|---|---|"];
-  for (const t of templates) L.push(`| [${t.name}](${t.id}.html) ([source](${t.id}/page.tsx)) | ${t.kind} | ${t.archetype} · ${t.mutation} · ${t.signature} | ${t.tier} | ${t.list.map((s) => `\`${s}\``).join(" → ")} | ${t.fonts.display} / ${t.fonts.text} / ${t.fonts.mono} |`);
+  for (const t of templates) L.push(`| [${t.name}](${t.id}.html) ([structure](${t.id}/structure.md) · [design](${t.id}/DESIGN.md) · [reference build](../builds/${t.id}/page.tsx)) | ${t.kind} | ${t.archetype} · ${t.mutation} · ${t.signature} | ${t.tier} | ${t.list.map((s) => `\`${s}\``).join(" → ")} | ${t.fonts.display} / ${t.fonts.text} / ${t.fonts.mono} |`);
   L.push("", "**What each page is**", "");
   for (const t of templates) L.push(`- **${t.name}** (${t.kind}): ${t.what}`);
   if (films.length) {
@@ -207,12 +231,14 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   if (si > 0) {
     const id = process.argv[si + 1], line = (process.argv[si + 2] || "").trim().replace(/^PASS\s+stamp →\s*/, "");
     if (!/^critique: .+ · gate: c\d+ o\d+ w\d+ rm\d+ a\d+ n\d+ q\d+ k\d+(?: · rules: C\d+ S\d+ P\d+ K\d+)? · gate\/\d+ · [0-9a-f]{10}(?: · skipped \d+\/\d+@\d+)?$/.test(line)) { console.error(`✗ paste the whole "critique: … · gate: …" line gate.mjs printed (got: ${line})`); process.exit(1); }
-    const f = existsSync(join(DIR, id, "index.html")) && !existsSync(join(DIR, id, "page.tsx")) ? join(DIR, id, "index.html") : join(DIR, `${id}.html`), html = readFileSync(f, "utf8");
+    const f = existsSync(join(DIR, id, "index.html")) && !existsSync(join(BUILDS, id, "page.tsx")) ? join(DIR, id, "index.html") : join(DIR, `${id}.html`), html = readFileSync(f, "utf8");
     writeFileSync(f, html.replace(/\/\* motomation · ([\s\S]*?) \*\//, (_, inner) => `/* motomation · ${inner.split(" · critique:")[0]} · ${line} */`));
     console.log(`Stamped ${f.slice(DIR.length + 1)}: ${line}`); process.exit(0);
   }
   const oi = process.argv.indexOf("--only"); const only = oi > 0 ? process.argv[oi + 1].split(",") : null;
   for (const t of templates.filter((t) => !only || only.includes(t.id))) { const r = await build(t, templates[(templates.indexOf(t) + 1) % templates.length]); console.log(`${r.kept ? "kept " : "wrote"} examples/templates/${t.id}.html (${r.kb} KB${r.jsKB ? `, script ${r.jsKB} KB` : ""}, tier ${t.tier}, ${t.list.length} sections)`); }
   writeFileSync(join(DIR, "README.md"), renderReadme(templates));
+  { const { collect: sectionsOf } = await import("./build-sections.mjs"); const secs = new Map(sectionsOf().sections.map((x) => [x.id, x]));
+    for (const t of templates) writeFileSync(join(DIR, t.id, "structure.md"), renderStructure(t, secs)); }
   console.log(`Wrote examples/templates/README.md (${templates.length} templates + ${collectFilms().length} Tier 5 film templates)`);
 }

@@ -424,11 +424,13 @@ skills/asfakulsiam-motomation-design/   ← the installable skill
   adapters/           Next.js, React + Vite, vanilla, Astro, platform notes
   references/         GSAP + Lenis, effects vocabulary, inspiration libraries
   templates/          DESIGN.md, MOTION.md
-  data/               searchable CSVs
+  data/               searchable CSVs (fuel, not a menu)
   scripts/            collide, search, memory, contrast
   examples/           React components + single-file HTML demo
     components/       68-component library (catalogue README, one file each)
     gallery/          live demo page for every component
+    templates/        page templates as design references (DESIGN.md, structure.md, screenshot; no code)
+    builds/           one React build per template, gated as templates/<id>.html (evidence, not a layout)
 registry/                    ← one JSON per component for `npx shadcn add`
 vendor/plain/                ← CSS + HTML and Tailwind variants of the 5 most-used components (React-first)
 dist/motomation-design.md   ← single-file edition for chat tools
