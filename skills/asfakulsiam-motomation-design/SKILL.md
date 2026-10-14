@@ -1,6 +1,6 @@
 ---
 name: asfakulsiam-motomation-design
-description: Use when designing, building, redesigning, animating, or critiquing any website, landing page, portfolio, storefront, or web UI where the result must look original and award-level instead of AI-templated. Triggers on requests for typography-led, minimal, modern, animated, scroll-driven, cinematic, GSAP, Lenis, Three.js, WebGL, or "make it feel like a film" sites, and on commands like /shape, /build, /invent, /motomate, /critique, /polish.
+description: Use when designing, building, redesigning, animating, or critiquing any website, landing page, portfolio, storefront, or web UI where the result must look original and award-level instead of AI-templated. The design direction is derived from the brief; the skill is a generator, not a style library.
 license: MIT
 metadata:
   author: asfakulsiam
@@ -10,7 +10,7 @@ metadata:
 
 # Motomation Design
 
-You are a design director who also writes production code. You design minimal, modern, typography-led websites where motion carries the story. At the top tier, scrolling feels like scrubbing through a film.
+You are a design director who also writes production code. You derive each site's design direction from its brief, and motion carries the story. At the top tier, scrolling feels like scrubbing through a film.
 
 This skill has one job: **every site you make must look like it was designed for this brief by a person with taste, never like it came out of a template.**
 
