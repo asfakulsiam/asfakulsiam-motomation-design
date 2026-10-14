@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+// v5 uses --tier <n> and --one <slug> to build one site per
+// session. See evals/results/benchmark-v5/HOW-TO-RUN.md.
+//
 // Agent benchmark: the five benchmark briefs, run inside a real coding agent (Claude Code CLI), with and without
 // the skill, n seeds per brief, blind-judged by a model from another family, hard gates applied from measurements.
 //
@@ -11,6 +14,11 @@
 //   --arms baseline,gated,skill   third arm "gated": the baseline prompt + scripts/gate.mjs (tool only, no skill docs)
 //   --pairs baseline:skill,gated:skill,baseline:gated   which pairs judge/score compare (default baseline:skill)
 //   --only portfolio,launch,festival --tier 4|5          the motion-heavy briefs at a forced tier
+//   --one <slug>   (v5) build only that brief; no other brief's folders are read or written. A v5 brief is
+//           evals/briefs/v5/<slug>.md (e.g. tier-3-product-tour) and needs --tier <n> to match its file name: with --one,
+//           --tier loads evals/briefs/v5/tier-<n>-<slug>.md and every arm's prompt states that tier (never inferred).
+//           --one studio (a v2-v4 slug) is the same as --only studio. --tier without --one keeps its old meaning.
+//   --dry-run      print the run list (brief file, tier, arms, seeds, folders) and the first prompt line; write nothing
 //   --n 6   (v2.5.0) six seeds per brief for the five main briefs; seeds 4-6 were added for the extended matched-effort
 //           arm (benchmark v4, 30 pairs). The first three seeds are v3's, so --n 3 reproduces v3's run list.
 //   matched arm (v2.5.0): the turn budget is enforced, per pair. Budget = the turns the skill run of the same brief and
@@ -53,18 +61,27 @@ const W = { Concept: 20, Originality: 20, Typography: 15, Motion: 15, Craft: 15,
 const argv = process.argv.slice(2); const phase = argv[0]; const flags = {};
 for (let i = 1; i < argv.length; i++) if (argv[i].startsWith("--")) flags[argv[i].slice(2)] = argv[i + 1] && !argv[i + 1].startsWith("--") ? argv[++i] : true;
 // v2.5.0 (C9): unknown phases and flags are one friendly line plus the usage, exit 2, before anything runs
-const BENCH_USAGE = "usage: node evals/run-agent-benchmark.mjs <generate|measure|judge|score> --out <dir> [--n 3] [--only studio,hotel] [--arms baseline,gated,skill] [--pairs baseline:skill,gated:skill] [--tier 4] [--parallel 4] [--judge-cmd …] [--model m] [--cache-dir d | --no-cache]";
-const BENCH_FLAGS = new Set(["agent", "arms", "claude", "codex", "competitors", "force", "model", "models", "n", "only", "out", "pairs", "parallel", "reasoning", "tier", "timeout", "cache-dir", "cache-unpinned", "claude-model", "codex-home", "judge-cmd", "match-turns", "max-turns", "model-cmd", "no-cache", "node-path", "help"]);
+const BENCH_USAGE = "usage: node evals/run-agent-benchmark.mjs <generate|measure|judge|score> --out <dir> [--n 3] [--only studio,hotel | --one <slug>] [--arms baseline,gated,skill] [--pairs baseline:skill,gated:skill] [--tier 4] [--parallel 4] [--judge-cmd …] [--model m] [--cache-dir d | --no-cache] [--dry-run]";
+const BENCH_HELP = `${BENCH_USAGE}
+
+  --only a,b        briefs to run (default: the five v2-v4 category briefs)
+  --tier <n>        force motion tier n; every arm is told the same tier. Alone or with --only: the old behaviour
+  --one <slug>      (v5) build only this brief and touch no other brief's folders
+                    v5: --tier <n> --one tier-<n>-<name> (or --one <name>) loads evals/briefs/v5/tier-<n>-<name>.md
+                    and states "Tier <n> — <tier name>" in every arm's prompt; one seed per brief
+  --dry-run         list what would run (brief file, tier, arms, seeds, folders) and exit; nothing is written
+  v5 briefs: ${(() => { try { return readdirSync(join(ROOT, "evals/briefs/v5")).filter((f) => f.endsWith(".md")).map((f) => f.slice(0, -3)).join(", "); } catch { return "none"; } })()}
+  v5 process: evals/results/benchmark-v5/HOW-TO-RUN.md`;
+const BENCH_FLAGS = new Set(["agent", "arms", "claude", "codex", "competitors", "force", "model", "models", "n", "only", "out", "pairs", "parallel", "reasoning", "tier", "timeout", "cache-dir", "cache-unpinned", "claude-model", "codex-home", "judge-cmd", "match-turns", "max-turns", "model-cmd", "no-cache", "node-path", "help", "one", "dry-run"]);
 const benchDie = (m) => { console.error(`run-agent-benchmark: ${m}\n${BENCH_USAGE}`); process.exit(2); };
 if (process.argv[1] && resolve(process.argv[1]) === resolve(new URL(import.meta.url).pathname)) {
-  if (flags.help || phase === "--help" || phase === "-h") { console.log(BENCH_USAGE); process.exit(0); }
+  if (flags.help || phase === "--help" || phase === "-h") { console.log(BENCH_HELP); process.exit(0); }
   for (const k of Object.keys(flags)) if (!BENCH_FLAGS.has(k)) benchDie(`unknown flag --${k}`);
   if (phase && !["generate", "measure", "judge", "score"].includes(phase)) benchDie(`unknown phase "${phase}"`);
-  for (const k of ["out", "n", "only", "arms", "pairs", "tier", "parallel", "judge-cmd", "model", "cache-dir", "match-turns", "max-turns", "timeout"]) if (flags[k] === true) benchDie(`--${k} needs a value`);
+  for (const k of ["out", "n", "only", "one", "arms", "pairs", "tier", "parallel", "judge-cmd", "model", "cache-dir", "match-turns", "max-turns", "timeout"]) if (flags[k] === true) benchDie(`--${k} needs a value`);
 }
 const OUT = resolve(flags.out || join(ROOT, `evals/results/${new Date().toISOString().slice(0, 10)}-benchmark-v2`));
 const N = +(flags.n || 3);
-const only = flags.only ? String(flags.only).split(",") : Object.keys(BRIEFS).filter((k) => !BRIEFS[k].motion); // the v2 set by default
 // Arms: baseline (no skill), gated (baseline + the measured gate script only, no skill docs), skill. Default keeps v2's two arms.
 export const ARMS = ["baseline", "matched", "gated", "skill"];
 // Competitor arms (v2.4.0, benchmark v3): --competitors taste=<dir>:<skill-name>,uiux=<dir>:<skill-name>. Arm "c-taste" gets that
@@ -72,6 +89,30 @@ export const ARMS = ["baseline", "matched", "gated", "skill"];
 export const COMPETITORS = Object.fromEntries(String(flags.competitors || "").split(",").filter(Boolean).map((x) => { const [k, v] = x.split("="); const i = v.lastIndexOf(":"); return [`c-${k}`, { dir: v.slice(0, i), name: v.slice(i + 1) }]; }));
 const arms = String(flags.arms || "baseline,skill").split(",").filter((a) => ARMS.includes(a) || COMPETITORS[a]);
 const TIER = flags.tier !== undefined ? +flags.tier : null; // force a motion tier (all arms are told the same tier)
+// v5 (benchmark v5): one brief per session, the tier stated in every arm's prompt. See evals/results/benchmark-v5/HOW-TO-RUN.md.
+export const V5_TIERS = { 1: "Basic", 2: "Intermediate", 3: "Pro", 4: "Max", 5: "Motomation" };
+const V5_MOTION = {
+  1: "CSS only: hover, focus and press feedback; nothing scroll-driven",
+  2: "GSAP-class section entrances and scroll choreography; no pinned film, no WebGL",
+  3: "transitions between pages (shared elements carried across pages) and Lottie or Rive animation",
+  4: "a real-time WebGL scene and spatial sections, with a static poster fallback on mobile and under reduced motion",
+  5: "scroll as the playhead: a pinned canvas scrubbing frame sequences with a timecode rail",
+};
+const V5_PRIMARY = { 1: /portfolio|prints|workshop|contact|mailto/i, 2: /subscribe|next issue/i, 3: /start|google play|get it/i, 4: /contact|enquir|hello@|mailto/i, 5: /pitch pack|book a call|mailto/i };
+const V5_DIR = join(ROOT, "evals/briefs/v5");
+if (flags.one !== undefined && flags.one !== true) {
+  if (flags.only) benchDie("--one and --only can't be combined: --one builds a single brief");
+  const one = String(flags.one);
+  const named = [one, TIER !== null ? `tier-${TIER}-${one}` : null].filter(Boolean).find((n) => existsSync(join(V5_DIR, `${n}.md`)));
+  if (named) {
+    const fileTier = +(named.match(/^tier-(\d)-/) || [])[1];
+    if (TIER === null) benchDie(`--one ${one} is a v5 brief: pass --tier ${fileTier || "<n>"} as well (the tier is stated, not inferred)`);
+    if (fileTier !== TIER) benchDie(`--tier ${TIER} doesn't match ${named}.md (a Tier ${fileTier} brief)`);
+    BRIEFS[named] = { file: `v5/${named}.md`, seeds: [9001 + TIER * 100], primary: V5_PRIMARY[TIER] || /contact|mailto/i, v5: true, tier: TIER };
+    flags.one = named;
+  } else if (!BRIEFS[one]) benchDie(`--one ${one}: no brief evals/briefs/v5/${TIER !== null ? `tier-${TIER}-${one}` : one}.md and no v2-v4 slug "${one}"`);
+}
+const only = flags.one && flags.one !== true ? [String(flags.one)] : flags.only ? String(flags.only).split(",") : Object.keys(BRIEFS).filter((k) => !BRIEFS[k].motion && !BRIEFS[k].v5); // the v2 set by default; --one: exactly one brief
 const MATCH_TURNS = +(flags["match-turns"] || 24); // matched arm fallback budget, when the paired skill run has no run.json
 // matched arm (v2.5.0): the budget is the paired skill run's turn count (same brief, same seed), enforced as a cap and a floor
 // Run provenance (v2.5.0, P1 T13): generate writes <out>/meta.json before any run starts, so every result folder says
@@ -119,6 +160,7 @@ export function promptFor({ slug, seed, cond, budget }) {
   // agent too ("Console or Workbench thinking", "a signature tied to doors"), which steered every arm toward the
   // same archetype and signature: the cause of the v2 SaaS console collision. Generators never see it now.
   const brief = generatorBrief(slug);
+  if (BRIEFS[slug].v5) return promptV5({ slug, seed, cond, budget }, brief);
   const tier = TIER === null ? "" : ` Build it at motion Tier ${TIER} (${TIER >= 5 ? "scroll-driven film: pinned, scrubbed sequences; WebGL allowed" : "signature scroll motion: pinned or scrubbed sections"}), with a reduced-motion version that keeps all content.`;
   if (COMPETITORS[cond]) return `Use the ${COMPETITORS[cond].name} skill to build this brief. ${TASK}${tier} Follow the skill end to end and check your work before you finish.\n\n${brief}`;
   if (cond === "baseline") return `You are an expert web designer and front-end developer. ${TASK}${tier} Check your work before you finish.\n\n${brief}`;
@@ -128,6 +170,17 @@ export function promptFor({ slug, seed, cond, budget }) {
   // gated = the baseline prompt plus the same measured gate the skill uses, without any of the skill's knowledge
   if (cond === "gated") return `You are an expert web designer and front-end developer. ${TASK}${tier} Before you finish, run \`node gate/gate.mjs index.html\` and fix every failure it reports until it prints PASS (if it prints "not verified", say so).\n\n${brief}`;
   return `Use the asfakulsiam-motomation-design skill: /build this brief. When you run the collision engine, use --seed ${seed}.${tier ? ` Force the motion tier: --tier=${TIER}.` : ""} ${TASK} Follow the skill end to end, including its Delivery Gate, and finish with the handoff.\n\n${brief}`;
+}
+// v5 prompts: the tier is stated, never inferred, and no stack is imposed (Step 0 of the skill would ask; nobody can
+// answer inside a benchmark run, so every arm gets the client's answer "you choose" and must say what it chose and why).
+const V5_TASK = "Build the website described in the brief below in the current folder. The brief names no stack; the client's answer to \"which stack?\" is \"you choose\": choose one, say which and why in one line at the end, and leave the result where a browser can open it (an index.html in this folder, or a built output folder such as out/, dist/ or build/ with its index.html). Use only facts from the brief.";
+export function promptV5({ slug, seed, cond, budget }, brief) {
+  const t = BRIEFS[slug].tier, tier = ` Build it at motion Tier ${t} — ${V5_TIERS[t]} (${V5_MOTION[t]}), with a reduced-motion version that keeps all content. The tier is a requirement, not a suggestion.`;
+  if (COMPETITORS[cond]) return `Use the ${COMPETITORS[cond].name} skill to build this brief. ${V5_TASK}${tier} Follow the skill end to end and check your work before you finish.\n\n${brief}`;
+  if (cond === "baseline") return `You are an expert web designer and front-end developer. ${V5_TASK}${tier} Check your work before you finish.\n\n${brief}`;
+  if (cond === "matched") return `You are an expert web designer and front-end developer. ${V5_TASK}${tier} Take the time a careful designer would: you have ${budget ?? MATCH_TURNS} turns, and you should use most of them: plan, build, look at the result at 1440px and 375px, critique it and revise.\n\n${brief}`;
+  if (cond === "gated") return `You are an expert web designer and front-end developer. ${V5_TASK}${tier} Before you finish, run \`node gate/gate.mjs <your page, folder or URL>\` and fix every failure it reports until it prints PASS (if it prints "not verified", say so).\n\n${brief}`;
+  return `Use the asfakulsiam-motomation-design skill: /build this brief. When you run the collision engine, use --seed ${seed}. Force the motion tier: --tier=${t}. ${V5_TASK}${tier} Follow the skill end to end, including its Delivery Gate, and finish with the handoff.\n\n${brief}`;
 }
 const ALLOWED = ["Skill", "Read", "Write", "Edit", "Glob", "Grep", "TodoWrite", "Bash(node:*)", "Bash(ls:*)", "Bash(cat:*)", "Bash(mkdir:*)", "Bash(wc:*)"];
 
@@ -377,6 +430,15 @@ async function judgePair(slug, seed, model, pair = ["baseline", "skill"]) {
 const total = (s) => AX.reduce((a, k) => a + (s[k] || 0) * W[k], 0) / 5;
 
 async function main() {
+  if (flags["dry-run"]) { // list, write nothing
+    const list = runs(); const b = only.map((s) => BRIEFS[s]);
+    console.log(`dry run · phase ${phase || "(none)"} · out ${OUT} · nothing written`);
+    for (const s of only) console.log(`brief ${s}: evals/briefs/${BRIEFS[s].file}${BRIEFS[s].v5 ? ` · v5 · Tier ${BRIEFS[s].tier} — ${V5_TIERS[BRIEFS[s].tier]} (stated in every prompt)` : TIER !== null ? ` · forced Tier ${TIER}` : ""}`);
+    console.log(`arms ${arms.join(",")} · seeds per brief ${Math.min(N, ...b.map((x) => x.seeds.length))} · ${list.length} run(s):`);
+    for (const r of list) console.log(`  ${r.slug} ${r.cond} s${r.seed} → ${r.dir}`);
+    if (list[0]) console.log(`first prompt (${list[0].cond}): ${promptFor(list[0]).split("\n")[0].slice(0, 400)}`);
+    return;
+  }
   if (phase === "generate") {
     mkdirSync(OUT, { recursive: true }); const todo = runs().filter((r) => flags.force || !existsSync(join(r.dir, "run.json")));
     const meta = await runMeta(todo); const mf = join(OUT, "meta.json");
