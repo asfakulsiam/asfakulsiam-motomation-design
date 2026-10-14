@@ -56,6 +56,11 @@ the client's answer is "you choose" and must say which stack they used and why. 
 - Tier check: did the skill actually build at the tier the brief named? A Tier 5 brief that produced a Tier 2 page
   fails the tier check.
 
+Note: the skill arm runs the gate; the baseline arm does not.
+Part of the gate difference comes from this asymmetry. v5 does
+not include a baseline+gate arm. This is a known limitation
+of the v5 comparison.
+
 Run the gate from the tested skill folder on each arm's output. It takes a single `.html` file, a project folder (its
 `index.html`, else its build output in `out/`, `dist/`, `build/` …) or the URL of a running dev or preview server:
 

@@ -59,6 +59,8 @@ Neither judge found a hard-gate failure in either build. Scores per axis and rea
 
 ## Notes
 
+- The skill's advantage at Tier 1 is entirely on gate rules (SEO, security), not on visual design. Both builds look
+  alike. This is expected at Tier 1 — a link-in-bio has little design space.
 - How the arms were run: the local `claude` CLI returned an API error (not authenticated here), so
   `run-agent-benchmark.mjs` could not drive the arms. Each arm was a fresh delegated agent of this session, same
   default model for both (model id not exposed). Baseline prompt: "You are an expert web designer. Build the site

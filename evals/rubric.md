@@ -1,5 +1,13 @@
 # Rubric
 
+## v5 exception
+For benchmark v5, imagery is out of scope. Placeholders,
+missing images, and text-only stand-ins are not penalised and
+are not an automatic zero. Judges score structure,
+typography, layout, motion, copy, and delivery — not imagery.
+This overrides any rule below that treats placeholders or
+missing images as a zero.
+
 Score each axis 1–5. The weighted total is out of 100.
 
 | Axis | Weight | 1 | 3 | 5 |
