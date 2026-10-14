@@ -2,6 +2,12 @@
 
 > How it looks. Written by `/shape`, read by every later command. If this file exists, it overrides the house defaults.
 
+## Stack
+- **Stack:** <Next.js | Astro | React + Vite | plain HTML/CSS/JS | other>
+- **Source:** <named in the brief | read from the project | user's answer | "you choose">
+- **Reason:** <one line; required for plain HTML and for "you choose">
+- **Adapter:** `adapters/<x>.md`
+
 ## Concept
 - **Tension:** 
 - **Concept sentence:** 

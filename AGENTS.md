@@ -7,7 +7,7 @@ Instructions for AI coding agents, in two parts: **using** the skill, and **work
 For any website, landing page, web UI, animation or design-critique task, follow
 [`skills/asfakulsiam-motomation-design/SKILL.md`](skills/asfakulsiam-motomation-design/SKILL.md). In short:
 
-1. Read the room (`thinking/brief-inference.md`), then run the **Thinking Sequence** (`thinking/sequence.md`) before writing UI code.
+1. Read the room (`thinking/brief-inference.md`), then run the **Thinking Sequence** (`thinking/sequence.md`) before writing UI code. It starts with **Step 0: Stack**: use the stack the brief or project names; if none is named, ask the user (never assume, never fall back to plain HTML without a written reason). On "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. Record the stack in `DESIGN.md` and load `adapters/<stack>.md`.
 2. For new ideas, run `node skills/asfakulsiam-motomation-design/scripts/collide.mjs --n 3 --spread`. It gives real randomness, not imagined randomness.
 3. Set the dials (ENERGY / RHYTHM / MOTION, each 1–3). Choose the **lowest** motion tier that delivers the concept.
 4. Show the preview block, build complete code, then pass `gates/delivery-gate.md`.

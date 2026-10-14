@@ -1,4 +1,4 @@
-# Step 0: Read the Room (Brief Inference)
+# Read the Room (Brief Inference)
 
 Before any design decision, turn the request into a brief. Most requests are one line. Infer the rest. Don't interrogate the user.
 
@@ -10,7 +10,7 @@ Before any design decision, turn the request into a brief. Most requests are one
 | 2 | **What must they do or feel?** One primary job | The verb in the request ("sell", "book", "hire me") |
 | 3 | **What is true and specific?** Real names, places, materials, numbers | Any detail the user gave; never invent numbers |
 | 4 | **What is the mood?** Quiet, Editorial or Play | Category defaults in `categories/` |
-| 5 | **What is the stack?** | Files in the repo; default Next.js App Router + Tailwind |
+| 5 | **What is the stack?** | Files in the repo (`package.json`, framework config). Not inferable otherwise: ask, per Step 0 in `thinking/sequence.md`. Never a default |
 | 6 | **What tier can it afford?** | Audience devices, content weight, timeline |
 | 7 | **What must not happen?** | Brand rules, accessibility needs, legal limits |
 | 8 | **What would the lazy version look like?** | The AI-default list in `gates/delivery-gate.md` |
@@ -25,6 +25,7 @@ Mark anything that would change the design but can't be inferred:
 
 - **One or two gaps:** make a sensible assumption, state it in the preview block, and continue.
 - **Three or more gaps that change the archetype:** ask **once**, in a single short message with options. Then build.
+- **The stack is never a gap to assume past.** If neither the brief nor the project names it, the stack question goes in that same message (or on its own if it is the only gap). See Step 0 in `thinking/sequence.md`.
 
 ## Read the existing project
 

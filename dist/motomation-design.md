@@ -37,7 +37,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 
 | Task | Load |
 |---|---|
-| Any new page or site | `thinking/brief-inference.md` → `thinking/sequence.md` → `principles/house-style.md` |
+| Any new page or site | `thinking/brief-inference.md` → `thinking/sequence.md` (Step 0 Stack first) → `principles/house-style.md` |
 | Need new ideas / "make it different" | `invention/mad-artist.md` + run `scripts/collide.mjs` |
 | Choosing a page structure | `structures/archetypes.md` |
 | Setting intensity | `principles/dials.md` |
@@ -54,7 +54,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 | **Any build or redesign (always, before step 6 Build)** | `craft/copy.md` + `craft/seo.md` + `craft/performance.md` + `craft/security.md` |
 | Accessibility, responsive, mobile motion, scroll sequences | `craft/*.md` |
 | Before handing anything back | `gates/delivery-gate.md` (always) |
-| Framework specifics | `adapters/<stack>.md` |
+| Framework specifics | `adapters/<stack>.md`, chosen by Step 0 (Stack): `next.md`, `astro.md`, `react-vite.md` or `vanilla.md`. Never skipped, never assumed |
 | Commands and flags | `commands/overview.md` |
 
 Files are short on purpose. Load them as you need them, not all at once. The one exception: the four rule sets
@@ -67,14 +67,15 @@ Files are short on purpose. Load them as you need them, not all at once. The one
 
 ```
 0. Read the room      thinking/brief-inference.md   → audience, job, mood, constraints, gaps
-1. Thinking Sequence  thinking/sequence.md          → tension, concept, archetype+mutation,
+1. Thinking Sequence  thinking/sequence.md          → STACK (named, or ask; load the adapter),
+                                                      tension, concept, archetype+mutation,
                                                       collision, signature move, anti-sameness,
                                                       restraint gate
 2. Set the dials      principles/dials.md           → ENERGY / RHYTHM / MOTION (1–3) → tier
 3. Design system      typography → colour → layout  → write DESIGN.md (templates/DESIGN.md)
 4. Motion plan        motion/tokens.md + tier file  → write MOTION.md (templates/MOTION.md); Tier 3–5: timing sheet per motion/choreography.md
 5. Preview block      show the plan (below) and wait for approval only if the user asked to review first
-6. Build              find before build (below), then the adapter for the stack; complete code, real copy
+6. Build              find before build (below), in the stack and adapter from Step 0; complete code, real copy
 7. Delivery Gate      gates/delivery-gate.md        → score, fix, stamp, log to memory
 ```
 
@@ -95,6 +96,7 @@ Standard UI gets found, not invented. Signature moments get invented, not found.
 
 ```
 MOTOMATION PLAN
+Stack       : <stack> (<named in brief | from the project | user's answer | "you choose" + why>) → adapters/<x>.md
 Tension     : <the conflict in the brief, one line>
 Concept     : <the idea, one sentence a client would repeat>
 Archetype   : <structure> mutated by <mutation>
@@ -114,7 +116,7 @@ Two routes. Pick one before you start, and say which in your first line, with th
 | | Full route | Short route |
 |---|---|---|
 | Use for | Design work: a new page, site, section or component; a redesign; anything that changes what the page is or how it moves | Minor work on something that exists: fix spacing, change a colour, fix contrast, adjust or swap a component, fix a reduced-motion or keyboard bug |
-| Thinking Sequence | All 7 steps | Not run. No archetype selection, no collision draw, no new signature move |
+| Thinking Sequence | Step 0 + all 7 steps | Not run. No archetype selection, no collision draw, no new signature move |
 | Restraint Gate | Yes | Yes: the fix adds nothing that isn't needed. Note what you didn't add |
 | Reduced motion | Yes | Yes: every motion you touch keeps its reduced-motion path |
 | Accessibility | Yes | Yes: contrast, names, keyboard, focus for everything you touch |
@@ -132,6 +134,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 
 ### The Thinking Sequence (summary; full version in `thinking/sequence.md`)
 
+0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, ask the user; never assume. On "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 1. **Tension**: find the conflict inside the brief (calm vs. urgent, heritage vs. new, luxury vs. honest).
 2. **Concept**: resolve the tension in one sentence. This is the idea, not a layout.
 3. **Archetype + Mutation**: pick a page structure from `structures/archetypes.md`, then break one of its rules.
@@ -232,7 +235,7 @@ Full behaviour of each command is in `commands/overview.md`. Critique output for
 
 <!-- file: thinking/brief-inference.md -->
 
-## Step 0: Read the Room (Brief Inference)
+## Read the Room (Brief Inference)
 
 Before any design decision, turn the request into a brief. Most requests are one line. Infer the rest. Don't interrogate the user.
 
@@ -244,7 +247,7 @@ Before any design decision, turn the request into a brief. Most requests are one
 | 2 | **What must they do or feel?** One primary job | The verb in the request ("sell", "book", "hire me") |
 | 3 | **What is true and specific?** Real names, places, materials, numbers | Any detail the user gave; never invent numbers |
 | 4 | **What is the mood?** Quiet, Editorial or Play | Category defaults in `categories/` |
-| 5 | **What is the stack?** | Files in the repo; default Next.js App Router + Tailwind |
+| 5 | **What is the stack?** | Files in the repo (`package.json`, framework config). Not inferable otherwise: ask, per Step 0 in `thinking/sequence.md`. Never a default |
 | 6 | **What tier can it afford?** | Audience devices, content weight, timeline |
 | 7 | **What must not happen?** | Brand rules, accessibility needs, legal limits |
 | 8 | **What would the lazy version look like?** | The AI-default list in `gates/delivery-gate.md` |
@@ -259,6 +262,7 @@ Mark anything that would change the design but can't be inferred:
 
 - **One or two gaps:** make a sensible assumption, state it in the preview block, and continue.
 - **Three or more gaps that change the archetype:** ask **once**, in a single short message with options. Then build.
+- **The stack is never a gap to assume past.** If neither the brief nor the project names it, the stack question goes in that same message (or on its own if it is the only gap). See Step 0 in `thinking/sequence.md`.
 
 ### Read the existing project
 
@@ -279,7 +283,32 @@ If the user wrote "brutalist", "soft", "like a magazine" or named a reference si
 
 ## The Thinking Sequence
 
-This is the missing key: it makes an agent think like a designer instead of a template engine. Run all seven steps for every page. Write the results into the preview block. Each step has a test. If the test fails, redo the step.
+This is the missing key: it makes an agent think like a designer instead of a template engine. Run Step 0 and all seven design steps for every page. Write the results into the preview block. Each step has a test. If the test fails, redo the step.
+
+---
+
+### 0. Stack
+
+Before any design step, know what you are building in. The stack changes what the design can be (server rendering, islands, a single file, a build step), so it is decided first and never guessed.
+
+1. **Read the brief.** If it names a stack ("Next.js", "Astro", "a single HTML file", `--stack=<x>`), use that stack. An existing project names its own stack: read `package.json` and the framework config and say what you found.
+2. **If it names none, ask.** One short question, before Step 1. Never assume a stack, and never fill the gap with the last one you used.
+   `Which stack should I build this in: Next.js, Astro, React + Vite, or plain HTML/CSS/JS? If you have no preference, say "you choose".`
+3. **If the user says "you choose",** pick from this small set and give the reason in one line:
+
+   | Stack | Pick it when | Adapter |
+   |---|---|---|
+   | Next.js (App Router) | an app-like site, server data, many routes, or a team already on React | `adapters/next.md` |
+   | Astro | content-first, mostly static, SEO-heavy, little client JS | `adapters/astro.md` |
+   | React + Vite | a client-only interactive piece, a prototype, an embed | `adapters/react-vite.md` |
+   | Plain HTML/CSS/JS | one page, no build step, a host or chat tool that only takes files | `adapters/vanilla.md` |
+
+4. **Record it** in `DESIGN.md` under `Stack` (from `templates/DESIGN.md`): the stack, who chose it (brief, project, user, or you), and the reason.
+5. **Load the adapter** for that stack from the table above. The adapter is chosen here, not at build time, and it is never skipped.
+
+Plain HTML is a real choice, not the default. Use it only with a reason written in `DESIGN.md` (the brief asked for it, the host takes only static files, the tool can only produce one file).
+
+**Test:** can you point to where the stack came from (the brief, the project, the user's answer, or a "you choose" with a written reason)? If the answer is "I assumed", stop and ask.
 
 ---
 
@@ -401,6 +430,7 @@ Now remove things.
 ### Worked example: "Portfolio for a motion designer in Dhaka"
 
 ```
+Stack     : asked; the user said "you choose" → Astro (content-first portfolio, mostly static, one interactive reel as an island)
 Tension   : 10 years of varied work ↔ clients remember one thing
 Concept   : The site is a single film reel; each project is a frame you scrub through
 Archetype : Film Reel (Tier 5 scroll-film) mutated by "invert the axis": the reel runs horizontally while the page scrolls vertically
@@ -3471,7 +3501,7 @@ Type a command at the start of a message. Commands combine with flags. Without a
 | `--energy` `--rhythm` `--motion` | 1–3 | Set a dial (see `principles/dials.md`) |
 | `--mood` | quiet · editorial · play | Set all three dials from a preset |
 | `--style` | a file in `styles/` | Apply a visual language |
-| `--stack` | next · react · vanilla · astro | Target framework (default: detect, else Next.js) |
+| `--stack` | next · react · vanilla · astro | Target framework. Without it: detect from the project, else ask (Step 0 in `thinking/sequence.md`) |
 | `--seed` | any number | Repeatable collision draws |
 | `--review` | — | Stop after the preview block and wait for approval |
 
@@ -4290,6 +4320,12 @@ Wireframe as decoration on a product that has no structure to show.
 ## DESIGN.md: <Project name>
 
 > How it looks. Written by `/shape`, read by every later command. If this file exists, it overrides the house defaults.
+
+### Stack
+- **Stack:** <Next.js | Astro | React + Vite | plain HTML/CSS/JS | other>
+- **Source:** <named in the brief | read from the project | user's answer | "you choose">
+- **Reason:** <one line; required for plain HTML and for "you choose">
+- **Adapter:** `adapters/<x>.md`
 
 ### Concept
 - **Tension:** 

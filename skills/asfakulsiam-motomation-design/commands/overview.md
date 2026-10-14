@@ -10,7 +10,7 @@ Type a command at the start of a message. Commands combine with flags. Without a
 | `--energy` `--rhythm` `--motion` | 1–3 | Set a dial (see `principles/dials.md`) |
 | `--mood` | quiet · editorial · play | Set all three dials from a preset |
 | `--style` | a file in `styles/` | Apply a visual language |
-| `--stack` | next · react · vanilla · astro | Target framework (default: detect, else Next.js) |
+| `--stack` | next · react · vanilla · astro | Target framework. Without it: detect from the project, else ask (Step 0 in `thinking/sequence.md`) |
 | `--seed` | any number | Repeatable collision draws |
 | `--review` | — | Stop after the preview block and wait for approval |
 

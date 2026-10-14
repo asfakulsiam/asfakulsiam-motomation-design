@@ -1,6 +1,31 @@
 # The Thinking Sequence
 
-This is the missing key: it makes an agent think like a designer instead of a template engine. Run all seven steps for every page. Write the results into the preview block. Each step has a test. If the test fails, redo the step.
+This is the missing key: it makes an agent think like a designer instead of a template engine. Run Step 0 and all seven design steps for every page. Write the results into the preview block. Each step has a test. If the test fails, redo the step.
+
+---
+
+## 0. Stack
+
+Before any design step, know what you are building in. The stack changes what the design can be (server rendering, islands, a single file, a build step), so it is decided first and never guessed.
+
+1. **Read the brief.** If it names a stack ("Next.js", "Astro", "a single HTML file", `--stack=<x>`), use that stack. An existing project names its own stack: read `package.json` and the framework config and say what you found.
+2. **If it names none, ask.** One short question, before Step 1. Never assume a stack, and never fill the gap with the last one you used.
+   `Which stack should I build this in: Next.js, Astro, React + Vite, or plain HTML/CSS/JS? If you have no preference, say "you choose".`
+3. **If the user says "you choose",** pick from this small set and give the reason in one line:
+
+   | Stack | Pick it when | Adapter |
+   |---|---|---|
+   | Next.js (App Router) | an app-like site, server data, many routes, or a team already on React | `adapters/next.md` |
+   | Astro | content-first, mostly static, SEO-heavy, little client JS | `adapters/astro.md` |
+   | React + Vite | a client-only interactive piece, a prototype, an embed | `adapters/react-vite.md` |
+   | Plain HTML/CSS/JS | one page, no build step, a host or chat tool that only takes files | `adapters/vanilla.md` |
+
+4. **Record it** in `DESIGN.md` under `Stack` (from `templates/DESIGN.md`): the stack, who chose it (brief, project, user, or you), and the reason.
+5. **Load the adapter** for that stack from the table above. The adapter is chosen here, not at build time, and it is never skipped.
+
+Plain HTML is a real choice, not the default. Use it only with a reason written in `DESIGN.md` (the brief asked for it, the host takes only static files, the tool can only produce one file).
+
+**Test:** can you point to where the stack came from (the brief, the project, the user's answer, or a "you choose" with a written reason)? If the answer is "I assumed", stop and ask.
 
 ---
 
@@ -122,6 +147,7 @@ Now remove things.
 ## Worked example: "Portfolio for a motion designer in Dhaka"
 
 ```
+Stack     : asked; the user said "you choose" → Astro (content-first portfolio, mostly static, one interactive reel as an island)
 Tension   : 10 years of varied work ↔ clients remember one thing
 Concept   : The site is a single film reel; each project is a frame you scrub through
 Archetype : Film Reel (Tier 5 scroll-film) mutated by "invert the axis": the reel runs horizontally while the page scrolls vertically

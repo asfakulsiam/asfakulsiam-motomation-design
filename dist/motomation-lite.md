@@ -31,34 +31,23 @@ If there is even a small chance this skill applies to a web design task, use it.
 
 ```
 0. Read the room      thinking/brief-inference.md   → audience, job, mood, constraints, gaps
-1. Thinking Sequence  thinking/sequence.md          → tension, concept, archetype+mutation,
+1. Thinking Sequence  thinking/sequence.md          → STACK (named, or ask; load the adapter),
+                                                      tension, concept, archetype+mutation,
                                                       collision, signature move, anti-sameness,
                                                       restraint gate
 2. Set the dials      principles/dials.md           → ENERGY / RHYTHM / MOTION (1–3) → tier
 3. Design system      typography → colour → layout  → write DESIGN.md (templates/DESIGN.md)
 4. Motion plan        motion/tokens.md + tier file  → write MOTION.md (templates/MOTION.md); Tier 3–5: timing sheet per motion/choreography.md
 5. Preview block      show the plan (below) and wait for approval only if the user asked to review first
-6. Build              find before build (below), then the adapter for the stack; complete code, real copy
+6. Build              find before build (below), in the stack and adapter from Step 0; complete code, real copy
 7. Delivery Gate      gates/delivery-gate.md        → score, fix, stamp, log to memory
 ```
-
-#### Find before build (step 6)
-
-Standard UI gets found, not invented. Signature moments get invented, not found.
-
-- **Standard UI** means forms, inputs, menus, dialogs, tabs, accordions, toasts, tables, pagination, date pickers, carousels and any effect in the component library (`examples/components/README.md`). Before writing one from scratch, check in this order and stop at the first fit:
-  1. what the project already has (its components folder, its UI kit, its design system);
-  2. this skill: `examples/` and, for effects, the component library in `examples/components/` (68 original components in 8 families, one file each, with tier, reduced-motion and touch behaviour in the header; search with `node scripts/search.mjs components "<effect>"`, or copy from the catalogue);
-  3. an accessible headless or registry component that fits the stack (for example the project's existing shadcn/ui, Radix or React Aria setup).
-
-  Only then write it custom, and say which of the three had nothing.
-- **Signature moments are exempt.** The signature move, the hook and anything the Thinking Sequence calls the concept are designed for this brief. Don't swap them for a library effect because one exists.
-- Whatever you find still passes the Delivery Gate, the tier budget and the reduced-motion rules. Found code isn't trusted code.
 
 #### Preview block (show before building)
 
 ```
 MOTOMATION PLAN
+Stack       : <stack> (<named in brief | from the project | user's answer | "you choose" + why>) → adapters/<x>.md
 Tension     : <the conflict in the brief, one line>
 Concept     : <the idea, one sentence a client would repeat>
 Archetype   : <structure> mutated by <mutation>
@@ -78,7 +67,7 @@ Two routes. Pick one before you start, and say which in your first line, with th
 | | Full route | Short route |
 |---|---|---|
 | Use for | Design work: a new page, site, section or component; a redesign; anything that changes what the page is or how it moves | Minor work on something that exists: fix spacing, change a colour, fix contrast, adjust or swap a component, fix a reduced-motion or keyboard bug |
-| Thinking Sequence | All 7 steps | Not run. No archetype selection, no collision draw, no new signature move |
+| Thinking Sequence | Step 0 + all 7 steps | Not run. No archetype selection, no collision draw, no new signature move |
 | Restraint Gate | Yes | Yes: the fix adds nothing that isn't needed. Note what you didn't add |
 | Reduced motion | Yes | Yes: every motion you touch keeps its reduced-motion path |
 | Accessibility | Yes | Yes: contrast, names, keyboard, focus for everything you touch |
@@ -96,6 +85,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 
 ### The Thinking Sequence (summary; full version in `thinking/sequence.md`)
 
+0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, ask the user; never assume. On "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 1. **Tension**: find the conflict inside the brief (calm vs. urgent, heritage vs. new, luxury vs. honest).
 2. **Concept**: resolve the tension in one sentence. This is the idea, not a layout.
 3. **Archetype + Mutation**: pick a page structure from `structures/archetypes.md`, then break one of its rules.
