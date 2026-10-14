@@ -101,6 +101,9 @@ jobs:
       - name: Composition heuristics measure and stay advisory (C4)
         if: steps.pw.outcome == 'success'
         run: node tests/gate/composition.test.mjs
+      - name: Richness advisory warns on thin pages and never fails the gate (v2.6.0)
+        if: steps.pw.outcome == 'success'
+        run: node tests/gate/richness.test.mjs
       - name: Tier 4 reduced-motion stills (no canvas, still, own composition)
         if: steps.pw.outcome == 'success'
         run: node tests/components/rm-stills.test.mjs

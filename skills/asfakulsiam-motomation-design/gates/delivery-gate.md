@@ -35,7 +35,7 @@ The output ends with a stamp line built only from those numbers:
 
 **No browser, no pass.** If Playwright or Chromium is missing, the script prints `not verified — no browser` and exits with code 3. Report exactly that in the handoff (`Measured: not verified — no browser`) and leave the `gate:` segment out of the stamp. Don't write a pass you didn't measure.
 
-The checks are bounded, and each reports what it skipped (text that was covered or never settled, elements parked off-canvas such as skip links and closed drawers). When more than 30% of text elements are skipped for contrast, the gate prints a coverage warning: the `c` count is then not a full measurement, and the skipped text needs a check by hand. A clean run means these eight things were measured. It doesn't mean the page is accessible. Keyboard paths, focus order and copy still need Parts 1–3.
+The checks are bounded, and each reports what it skipped (text that was covered or never settled, elements parked off-canvas such as skip links and closed drawers). When more than 30% of text elements are skipped for contrast, the gate prints a coverage warning: the `c` count is then not a full measurement, and the skipped text needs a check by hand. A clean run means these eight things were measured (the composition and richness blocks are advisory and never change it). It doesn't mean the page is accessible. Keyboard paths, focus order and copy still need Parts 1–3.
 
 Exit codes: `0` pass · `1` fail · `2` stamp rejected · `3` not verified (no browser, or the scan ran past `--timeout`, default 600 s, which very tall pages such as the 36,000px component gallery can do, or the sandbox is too constrained to run the browser).
 
@@ -46,6 +46,15 @@ Exit codes: `0` pass · `1` fail · `2` stamp rejected · `3` not verified (no b
 - **pin fill**: the share of the viewport covered by content (text boxes, images, video, canvas, SVG, and backgrounds that are not the page ground or a full-bleed flat colour) at 25, 50 and 75% through each pinned zone. Warns below 60%: a pinned screen that holds the reader for several scrolls with most of it empty.
 - **focal**: for each screen of scroll (every 900px, up to 14), the text mass of each block (characters × font size², visually hidden text excluded). Warns on screens where the heaviest block does not outweigh the next by 1.5×: no single thing to look at first. A screen of body paragraphs with no heading will warn; that can be deliberate.
 - **scale**: the largest text size on the page against the body size (the size carrying the most characters in runs of 40 or more). Warns below 1:6, the display:body contrast typography-led pages usually need.
+
+**Richness (advisory, v2.6.0).** The failing checks catch too much; this block catches too little. After composition the gate prints `richness (advisory …)`, measured at 1440×900 at scroll 0. It **never fails the gate**, is not in the counts, the stamp or its id, and only warns (`⚠`):
+
+- **fold** (every page): fewer than 3 meaningful sections above the fold. A meaningful section is what a visitor reads as a separate thing: the navigation (counted once), each heading, each paragraph of 20+ characters, each picture of 48px or more, and the call to action (counted once).
+- **opening** (homepage): no hero or opening statement, meaning no visible `h1` and no display text (≥ 32px, two or more words) in the first screen.
+- **category** (category page): the item grid (4+ same-tag items, each ≥ 80×80 with a link or a picture) has no title (an `h1`/`h2` before it) or no count ("24 pieces", "(24)", "1–12 of 48"). A category page with no grid to judge also warns.
+- **about** (about page): fewer than 2 content blocks (sections outside header, nav and footer with 40+ characters or a picture).
+
+The page kind comes from the path (`/` or `index` → home; `about`, `story`, `team` → about; `shop`, `collection(s)`, `category`, `products`, `catalogue`, `archive`, `work`, `projects` → category; anything else → `page`, where only the fold check applies). Set it with `--page home|category|about|page` when the file name doesn't say (`examples/templates/hotel.html --page home`). A warning is a prompt to re-read the Restraint Gate's "too little" side in `principles/restraint.md`, not a defect: a poster-like hero with one line of type can be the concept, and the gate still passes.
 
 Exit code `2` also covers usage errors (an unknown flag, a missing value or no target), printed as one line plus the usage.
 

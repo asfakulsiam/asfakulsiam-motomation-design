@@ -35,6 +35,14 @@
 //              K security: cookie flags, secret-shaped strings, URL → innerHTML, CORS wildcard, CSP, nosniff,
 //                Referrer-Policy (local files: headers from a _headers file next to the page)
 //
+//   richness   (advisory, v2.6.0) the "too little" side of restraint. Never fails, never in counts, the stamp or its id.
+//              At 1440×900, scroll 0. Warns when: the page has fewer than RICH_FOLD_MIN meaningful sections above the
+//              fold; a homepage has no hero or opening statement (a visible h1, or display text ≥ 32px); a category
+//              page's grid has no title (h1/h2 before it) or no count ("24 pieces", "(24)", "1–12 of 48"); an about page
+//              has fewer than RICH_ABOUT_MIN content blocks. The page kind comes from --page, else from the path
+//              (/ or index → home; about, story, team → about; shop, collection(s), category, products, catalogue,
+//              archive, work, projects → category; anything else → page: only the fold check applies).
+//
 //   --timeout <s>  give up on a target after s seconds (default 600) and print "not verified — timed out"; exit 3.
 //                  Very tall pages (the 36,000px gallery) would otherwise run for a very long time.
 //   --timeout-ms <ms>  the same budget in milliseconds (wins over --timeout).
@@ -100,8 +108,8 @@ const argv = process.argv.slice(2);
 const flags = {}; const targets = [];
 // v2.5.0 (C9): unknown flags and missing values are one friendly line plus the usage, exit 2; boolean flags never
 // swallow the word after them (`--json page.html` used to lose the target).
-const GATE_USAGE = "Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]] [--timeout s | --timeout-ms ms] [--light] [--rules]   |   --report <file.html>   |   --verify <file.html> [--url u]";
-const GATE_FLAGS = { json: "bool", light: "bool", rules: "bool", help: "bool", report: "optional", verify: "value", url: "value", out: "value", design: "value", log: "value", tier: "value", archetype: "value", signature: "value", timeout: "value", "timeout-ms": "value" };
+const GATE_USAGE = "Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]] [--timeout s | --timeout-ms ms] [--light] [--rules] [--page home|category|about|page]   |   --report <file.html>   |   --verify <file.html> [--url u]";
+const GATE_FLAGS = { json: "bool", light: "bool", rules: "bool", help: "bool", report: "optional", verify: "value", url: "value", out: "value", design: "value", log: "value", tier: "value", archetype: "value", signature: "value", timeout: "value", "timeout-ms": "value", page: "value" };
 const gateDie = (m) => { console.error(`gate: ${m}\n${GATE_USAGE}`); process.exit(2); };
 for (let i = 0; i < argv.length; i++) {
   const t = argv[i];
@@ -117,6 +125,7 @@ for (let i = 0; i < argv.length; i++) {
   } else if (/^-[^-]/.test(t)) gateDie(`unknown flag ${t} (flags start with --)`);
   else targets.push(t);
 }
+if (flags.page !== undefined && !/^(home|category|about|page)$/.test(String(flags.page))) gateDie(`--page must be home, category, about or page (got ${flags.page})`);
 
 // ── browser (optional dependency) ─────────────────────────────────────────────
 async function loadPlaywright() {
@@ -948,6 +957,84 @@ export async function composition(browser, url) {
   } finally { await ctx.close(); }
 }
 
+
+// ── richness (v2.6.0): advisory only ────────────────────────────────────────────────────────────────────────────
+// The other half of restraint (principles/restraint.md, "Too little"): the gate's failing checks catch too much; these
+// warnings catch too little. Never part of pass/fail, the counts, the stamp or its id.
+export const RICH_FOLD_MIN = 3, RICH_ABOUT_MIN = 2;
+export function pageKind(url, forced) {
+  if (forced && forced !== true) return { kind: String(forced), from: "--page" };
+  const segs = new URL(url).pathname.split("/").filter(Boolean).map((x) => x.toLowerCase().replace(/\.html?$/, ""));
+  if (segs.length && /^(index|home)$/.test(segs[segs.length - 1])) segs.pop();
+  const last = segs[segs.length - 1] || "";
+  const kind = !last ? "home" : /^(about|about-us|story|our-story|team)$/.test(last) ? "about"
+    : /^(category|categories|collection|collections|shop|store|products|catalog|catalogue|archive|work|projects)$/.test(last) ? "category" : "page";
+  return { kind, from: "path" };
+}
+const RICH_PAGE = () => {
+  const H = innerHeight;
+  const shown = (e) => (e.checkVisibility ? e.checkVisibility({ opacityProperty: true, visibilityProperty: true }) : getComputedStyle(e).visibility !== "hidden");
+  const media = (e) => [...e.querySelectorAll("img,svg,video,canvas,picture,iframe")].some((m) => { const r = m.getBoundingClientRect(); return r.width >= 48 && r.height >= 48; }) || /^(IMG|SVG|VIDEO|CANVAS|PICTURE|IFRAME)$/i.test(e.tagName);
+  const text = (e) => (e.innerText || "").replace(/\s+/g, " ").trim();
+  const skip = /^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE|LINK|META)$/;
+  // candidates: landmarks and blocks, plus the children of a framework root (<body><div id="root">…) and of <main>
+  const set = new Set(document.querySelectorAll("header,nav,main,section,article,aside,footer,form,figure,[role=banner],[role=navigation],[role=main],[role=region],[role=contentinfo],[role=search]"));
+  const kids = (e) => [...e.children].filter((c) => !skip.test(c.tagName));
+  for (const c of kids(document.body)) set.add(c);
+  const top = kids(document.body); if (top.length === 1) for (const c of kids(top[0])) set.add(c);
+  for (const m of document.querySelectorAll("main,[role=main]")) for (const c of kids(m)) set.add(c);
+  const meaningful = [...set].filter((e) => { if (!shown(e) || __g.decorative(e)) return false; const r = e.getBoundingClientRect(); return r.width >= 120 && r.height >= 24 && (text(e).length >= 2 || media(e)); });
+  // a wrapper holds two or more other candidates; a section is the outermost candidate that isn't a wrapper
+  const inner = (e) => meaningful.filter((x) => x !== e && e.contains(x));
+  const leaves = meaningful.filter((e) => inner(e).length < 2);
+  const sections = leaves.filter((e) => !leaves.some((x) => x !== e && x.contains(e)));
+  const inFold = (e) => { const r = e.getBoundingClientRect(); return r.top < H - 1 && r.bottom > 0; };
+  // above the fold, a "meaningful section" is a block a visitor reads as a separate thing: the navigation (once),
+  // each heading, each paragraph of 20+ characters, each picture (≥ 48px), and the call to action (once)
+  const NAVS = "header,nav,[role=banner],[role=navigation]";
+  const vis = (e) => shown(e) && inFold(e) && (() => { const r = e.getBoundingClientRect(); return r.width > 1 && r.height > 1; })();
+  const fold = [];
+  const nav = [...document.querySelectorAll(NAVS)].find((e) => vis(e) && text(e).length >= 2); if (nav) fold.push("nav " + __g.label(nav));
+  for (const e of document.querySelectorAll("h1,h2,h3,[role=heading]")) if (vis(e) && text(e) && !e.closest(NAVS)) fold.push("heading " + __g.label(e));
+  for (const e of document.querySelectorAll("p,blockquote,dd,figcaption")) if (vis(e) && text(e).length >= 20 && !e.closest(NAVS)) fold.push("text " + __g.label(e));
+  for (const e of document.querySelectorAll("img,picture,video,canvas,svg,iframe")) { if (!vis(e) || e.closest(NAVS) || e.parentElement?.closest("svg,picture")) continue; const r = e.getBoundingClientRect(); if (r.width >= 48 && r.height >= 48) fold.push("media " + __g.label(e)); }
+  const cta = [...document.querySelectorAll("button,a[href],input[type=submit]")].find((e) => vis(e) && !e.closest(NAVS) && (text(e) || e.getAttribute("aria-label"))); if (cta) fold.push("action " + __g.label(cta));
+  const chrome = (e) => e.matches("header,nav,footer,[role=banner],[role=navigation],[role=contentinfo]") || !!e.closest("header,nav,footer,[role=banner],[role=navigation],[role=contentinfo]");
+  const blocks = sections.filter((e) => !chrome(e) && (text(e).length >= 40 || media(e)));
+  // opening statement: a visible h1, or display text (≥ 32px, two or more words) in the first screen
+  let opening = null;
+  for (const e of document.querySelectorAll("h1")) if (shown(e) && inFold(e) && text(e)) { opening = "h1 \"" + text(e).slice(0, 40) + "\""; break; }
+  if (!opening) for (const e of __g.textEls()) { if (!shown(e) || !inFold(e)) continue; const t = text(e); if (parseFloat(getComputedStyle(e).fontSize) >= 32 && t.split(" ").length >= 2) { opening = __g.label(e) + " \"" + t.slice(0, 40) + "\""; break; } }
+  // a grid: the element with the most item children (4+, same tag, each at least 80×80 and carrying a link or a picture)
+  let grid = null, most = 0;
+  for (const e of document.body.querySelectorAll("*")) {
+    const c = kids(e); if (c.length < 4) continue; const tag = c[0].tagName;
+    const items = c.filter((x) => { const r = x.getBoundingClientRect(); return x.tagName === tag && r.width >= 80 && r.height >= 80 && (x.matches("a") || x.querySelector("a,img,picture")); });
+    if (items.length >= 4 && items.length >= c.length * 0.8 && items.length > most) { grid = e; most = items.length; }
+  }
+  let title = null, count = null;
+  if (grid) {
+    for (const h of document.querySelectorAll("h1,h2")) if (shown(h) && text(h) && (h.compareDocumentPosition(grid) & Node.DOCUMENT_POSITION_FOLLOWING)) { title = h.tagName.toLowerCase() + " \"" + text(h).slice(0, 40) + "\""; break; }
+    const COUNT = /\b\d[\d,]*\s+(items?|products?|results?|pieces?|works?|projects?|objects?|titles?|styles?|designs?|listings?|rooms?|entries|posts?|articles?|books?|prints?)\b|\(\s*\d+\s*\)|\b\d+\s*[–-]\s*\d+\s+of\s+\d+\b/i;
+    for (const e of __g.textEls()) { if (!shown(e) || grid.contains(e)) continue; const m = text(e).match(COUNT); if (m) { count = m[0]; break; } }
+  }
+  return { fold, opening, grid: grid ? { el: __g.label(grid), items: kids(grid).length } : null, title, count, blocks: blocks.map((e) => __g.label(e)) };
+};
+export async function richness(browser, url, forced) {
+  const { kind, from } = pageKind(url, forced);
+  const { ctx, page } = await open(browser, url, { viewport: { width: 1440, height: 900 } });
+  try {
+    await page.evaluate(() => scrollTo(0, 0)); await page.waitForTimeout(T(260));
+    const r = await page.evaluate(RICH_PAGE); const warns = [];
+    if (r.fold.length < RICH_FOLD_MIN) warns.push({ id: "fold", why: `${r.fold.length} meaningful section(s) above the fold (fewer than ${RICH_FOLD_MIN}): ${r.fold.join(", ") || "none"}` });
+    if (kind === "home" && !r.opening) warns.push({ id: "opening", why: "homepage has no hero or opening statement (no visible h1 or display text in the first screen)" });
+    if (kind === "category" && r.grid && (!r.title || !r.count)) warns.push({ id: "category", why: `category grid ${r.grid.el} (${r.grid.items} items) has ${[!r.title && "no title", !r.count && "no count"].filter(Boolean).join(" and ")}` });
+    if (kind === "category" && !r.grid) warns.push({ id: "category", why: "category page has no product or item grid to judge" });
+    if (kind === "about" && r.blocks.length < RICH_ABOUT_MIN) warns.push({ id: "about", why: `about page has ${r.blocks.length} content block(s) (fewer than ${RICH_ABOUT_MIN})` });
+    return { kind, from, ...r, warns };
+  } finally { await ctx.close(); }
+}
+
 export async function scan(target, browser, opts = {}) {
   const { url, close } = await toUrl(target);
   try {
@@ -957,6 +1044,8 @@ export async function scan(target, browser, opts = {}) {
     const mq = await motionQuality(browser, url); const ax = await a11y(browser, url); const rf = await ruleFacts(browser, url);
     // advisory (C4): never fails, never in counts, stamp or id; a failure to measure is reported, not raised
     const comp = await composition(browser, url).catch((e) => ({ error: firstLine(e) }));
+    // advisory (v2.6.0 richness): never fails, never in counts, stamp or id
+    const rich = await richness(browser, url, opts.page).catch((e) => ({ error: firstLine(e) }));
     // fingerprint of the served HTML with stamp comments removed: same page → same id, any other page → a different id
     const html = await fetch(url).then((r) => r.text()).catch(() => "");
     const pageHash = createHash("sha256").update(html.replace(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g, "")).digest("hex").slice(0, 16);
@@ -980,7 +1069,7 @@ export async function scan(target, browser, opts = {}) {
     // coverage: the worst width decides; more than SKIP_WARN_PCT skipped at any width means the page was not measured, not passed
     const worstW = c.byWidth.reduce((a, x) => (x.skippedPct > a.skippedPct ? x : a), c.byWidth[0]);
     const coverage = { ok: !c.lowCoverage, skipped: worstW.skipped, total: worstW.total, pct: worstW.skippedPct, width: worstW.width, low: c.byWidth.filter((x) => x.lowCoverage).map((x) => x.width) };
-    return { target, url, version: GATE_VERSION, pass, verified: coverage.ok, coverage, counts, id, stamp: stampOf(counts, id, coverage), critique: critiqueFull, sources: { design: designFile || null, log: logFile || null, meta }, rules, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu, quality: mq, access: ax, composition: comp };
+    return { target, url, version: GATE_VERSION, pass, verified: coverage.ok, coverage, counts, id, stamp: stampOf(counts, id, coverage), critique: critiqueFull, sources: { design: designFile || null, log: logFile || null, meta }, rules, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu, quality: mq, access: ax, composition: comp, richness: rich };
   } finally { close(); }
 }
 export const stampOf = (k, id, cov, version = GATE_VERSION) => `gate: c${k.contrast} o${k.overflow} w${k.words} rm${k.motion} a${k.names} n${k.numbers ?? 0}${k.quality !== undefined ? ` q${k.quality} k${k.access}` : ""}${k.copy !== undefined ? ` · rules: C${k.copy} S${k.seo} P${k.perf} K${k.sec}` : ""} · ${version} · ${id}${cov ? ` · skipped ${cov.skipped}/${cov.total}@${cov.width}` : ""}`;
@@ -1050,6 +1139,19 @@ function print(r) {
       const txt = cp.screens.filter((x) => x.text), weak = txt.filter((x) => !x.ok);
       L(`     focal     ${weak.length ? "⚠" : "✓"} ${txt.length - weak.length} of ${txt.length} screen(s) with text have one clear focal point (heaviest text mass ≥ ${COMP_FOCAL_LEAD}× the next)${weak.length ? `; no clear lead on screen ${weak.map((x) => `${x.n} (${x.lead}×)`).join(", ")}` : ""}`);
       L(`     scale     ${cp.scale.ratio === null ? "– no body text found" : `${cp.scale.ok ? "✓" : "⚠"} display:body 1:${cp.scale.ratio}  (${cp.scale.display}px / ${cp.scale.body}px; warn below 1:${COMP_SCALE_MIN})`}`);
+    }
+  }
+  const rc = r.richness;
+  if (rc) {
+    L(`  richness (advisory: "too little" warnings, never fail the gate, not in the stamp)`);
+    if (rc.error) L(`     – not measured (${rc.error})`);
+    else {
+      L(`     page      ${rc.kind} (from ${rc.from}; set with --page home|category|about|page)`);
+      const w = (id) => rc.warns.find((x) => x.id === id);
+      L(`     fold      ${w("fold") ? "⚠" : "✓"} ${rc.fold.length} meaningful section(s) above the fold at 1440×900${rc.fold.length ? `: ${rc.fold.join(", ")}` : ""}  (warn below ${RICH_FOLD_MIN})`);
+      if (rc.kind === "home") L(`     opening   ${w("opening") ? `⚠ ${w("opening").why}` : `✓ ${rc.opening}`}`);
+      if (rc.kind === "category") L(`     category  ${w("category") ? `⚠ ${w("category").why}` : `✓ grid ${rc.grid.el} (${rc.grid.items} items) · title ${rc.title} · count "${rc.count}"`}`);
+      if (rc.kind === "about") L(`     about     ${w("about") ? `⚠ ${w("about").why}` : `✓ ${rc.blocks.length} content blocks: ${rc.blocks.join(", ")}`}`);
     }
   }
   const st = r.structure;
@@ -1158,7 +1260,7 @@ async function main() {
   if (!pw) notVerified("no browser (install Playwright: npm i -D playwright && npx playwright install chromium)");
   if (PROBE.constrained) console.error(`gate: constrained machine (${PROBE.why.join(", ")}); a failed scan is retried once in the light footprint`);
   if (PROBE.constrained && TIMEOUT_MS < 240000) console.error(`gate: warning: a ${Math.round(TIMEOUT_MS / 1000)}s budget is shorter than a scan usually takes on a machine like this (2–5 min per page at 4 widths); a timeout here says nothing about the page. Prefer the default (600s) and a tool timeout above it.`);
-  const opts = { design: flags.design ? resolve(String(flags.design)) : undefined, log: flags.log ? resolve(String(flags.log)) : undefined, tier: flags.tier !== undefined ? String(flags.tier) : undefined, archetype: flags.archetype, signature: flags.signature };
+  const opts = { design: flags.design ? resolve(String(flags.design)) : undefined, log: flags.log ? resolve(String(flags.log)) : undefined, tier: flags.tier !== undefined ? String(flags.tier) : undefined, archetype: flags.archetype, signature: flags.signature, page: flags.page };
   const note = (x) => { if (x.attempts.length) console.error(`gate: measured in the ${x.footprint} footprint after: ${x.attempts.join("; ")}`); };
   try {
     // --rules: only the four rule sets (C S P K) and the JS weight they need; no stamp (a stamp needs every axis).

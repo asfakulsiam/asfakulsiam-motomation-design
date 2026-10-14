@@ -48,6 +48,17 @@ The single-question version ("does it serve hierarchy, feedback or storytelling?
 - Q2: fails. Nothing in the brief (developers, accuracy, an API) asks for soft floating colour; it is the AI-default look the delivery gate bans.
 - Decision: **cut.** `- Cut: gradient blobs behind the hero — fails Q1 and Q2`
 
+## Too little (the richness advisory)
+
+Restraint cuts noise; it is not a licence for an empty page. A page fails its brief from the thin side too: a homepage with no opening statement, a category page that is a bare grid with no title or count, an about page with one paragraph. Before delivery, check the other direction:
+
+- At least 3 meaningful sections above the fold (navigation, heading, text, picture, call to action).
+- A homepage has a hero or an opening statement.
+- A category page's grid has a title and a count.
+- An about page has at least 2 content blocks.
+
+`scripts/gate.mjs` measures these four as an advisory `richness` block (`gates/delivery-gate.md`, Part 0). It only warns and never fails the gate. When it warns, ask question 2 the other way round: does the brief need something here to feel like itself? If the thin version is the concept (a one-line poster hero), keep it and say so in the plan.
+
 ## The four cuts
 
 Before delivery, make four passes through the Restraint Gate and remove what fails both questions:
