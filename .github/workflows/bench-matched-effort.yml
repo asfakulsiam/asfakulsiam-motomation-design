@@ -1,4 +1,4 @@
-name: Benchmark v5 generate + measure (extended matched effort)
+name: "Benchmark — matched effort"
 # P1 T12: the extended matched-effort comparison, generated on GitHub's runners with the fixed turn cap (P1 T1) and
 # run provenance (P1 T13, <out>/meta.json). 5 briefs × 6 seeds × 2 arms (skill, matched) = 60 runs → 30 pairs.
 # One job per brief: the skill arm first (its num_turns is the matched arm's budget, per seed), then the matched arm,
@@ -41,7 +41,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: "20", cache: npm, cache-dependency-path: .github/workflows/bench-generate-v5.yml }
+        with: { node-version: "20", cache: npm, cache-dependency-path: .github/workflows/bench-matched-effort.yml }
       - name: Cache Playwright browsers
         uses: actions/cache@v4
         with: { path: ~/.cache/ms-playwright, key: "ms-playwright-${{ runner.os }}-1.59.0" }
