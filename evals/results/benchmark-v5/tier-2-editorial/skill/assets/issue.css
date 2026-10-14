@@ -1,0 +1,296 @@
+/* Jol · Issue 07 · "The Last Boatbuilders of Sadarghat"
+   Broadsheet, mutated by swap-material: the paper's rules are waterlines. Signature: Draft Marks. Tier 2.
+   The measured stamp lives in index.html (<!-- motomation · … -->), pasted from scripts/gate.mjs. */
+
+@font-face { font-family: "Newsreader"; font-style: normal; font-weight: 200 800; font-display: swap;
+  src: url("../fonts/newsreader-roman.woff2") format("woff2"); }
+@font-face { font-family: "Newsreader"; font-style: italic; font-weight: 200 800; font-display: swap;
+  src: url("../fonts/newsreader-italic.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../fonts/plex-mono-400.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 500; font-display: swap;
+  src: url("../fonts/plex-mono-500.woff2") format("woff2"); }
+@font-face { font-family: "Tiro Bangla"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../fonts/tiro-bangla-jol.woff2") format("woff2"); unicode-range: U+099C, U+09B2; }
+/* metric-near fallback so the swap to Newsreader barely moves the text */
+@font-face { font-family: "Newsreader Fallback"; src: local("Georgia"), local("Times New Roman"); size-adjust: 96%; ascent-override: 94%; descent-override: 26%; }
+
+:root {
+  /* colour · pairs measured with scripts/contrast.mjs
+     --ink on --ground 14.63 · on --surface 13.08
+     --muted on --ground 6.02 · on --surface 5.38
+     --accent on --ground 6.22
+     --ink-on-river on --river 13.36 · --muted-on-river 7.73 · --accent-on-river 7.21 */
+  --ground: #EDE8DE;
+  --surface: #E2DCCF;
+  --ink: #1A1712;
+  --muted: #5C554A;
+  --line: #B9B1A3;
+  --accent: #1F5D57;
+  --river: #16201E;
+  --ink-on-river: #E9E6DD;
+  --muted-on-river: #A9B3AE;
+  --accent-on-river: #7FB5A9;
+  --line-on-river: #3B4B47;
+
+  /* type */
+  --serif: "Newsreader", "Newsreader Fallback", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --bangla: "Tiro Bangla", "Noto Serif Bengali", serif;
+  --step--1: clamp(0.8125rem, 0.78rem + 0.12vw, 0.875rem);
+  --step-0: clamp(1.125rem, 1.07rem + 0.24vw, 1.3rem);
+  --step-1: clamp(1.3rem, 1.15rem + 0.6vw, 1.75rem);
+  --step-2: clamp(1.75rem, 1.3rem + 1.9vw, 3rem);
+  --step-3: clamp(2.6rem, 1.6rem + 4.2vw, 5.5rem);
+  --step-4: clamp(3.5rem, 0.9rem + 8.6vw, 9.5rem);
+
+  /* motion tokens */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-strong: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* layout */
+  --edge: 20px;
+  --edge-left: 20px;
+  --measure: 36rem;
+  --gap-col: 0px;
+  --aside-w: 0px;
+  --content: calc(var(--measure) + var(--gap-col) + var(--aside-w));
+  --sec: 96px;
+}
+@media (min-width: 760px) {
+  :root { --edge: clamp(20px, 5vw, 96px); --edge-left: clamp(20px, 5vw, 96px); --sec: 128px; }
+}
+@media (min-width: 1000px) {
+  :root { --gap-col: 3rem; --aside-w: 17rem; --sec: 160px; }
+}
+@media (min-width: 1200px) {
+  :root { --edge-left: 13rem; }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: var(--step-0);
+  line-height: 1.62;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+html.lenis, html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+
+[lang="bn"] { font-family: var(--bangla); font-style: normal; }
+p { margin: 0; }
+h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
+p, li, figcaption, dd { text-wrap: pretty; }
+i, em { font-style: italic; }
+
+a { color: inherit; text-decoration-line: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em;
+  text-decoration-color: currentColor; transition: text-decoration-thickness 150ms var(--ease-out), color 150ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { a:hover { text-decoration-thickness: 2px; } }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 1px; }
+[tabindex="-1"]:focus { outline: none; }
+
+.skip { position: absolute; left: 12px; top: -200px; z-index: 50; background: var(--ink); color: var(--ground);
+  padding: 12px 16px; font-family: var(--mono); font-size: var(--step--1); text-decoration: none; }
+.skip:focus { top: 12px; }
+
+/* ── the frame every block shares: text column (36rem) + gutter + aside (17rem) ─
+   Wide items take the whole frame; aside items float into the aside next to the text that follows them. */
+.grid {
+  box-sizing: content-box;
+  max-width: var(--content);
+  margin-inline: auto;
+  padding-inline: var(--edge-left) var(--edge);
+}
+.grid > * { max-width: var(--measure); }
+
+/* ── masthead ───────────────────────────────────────────────────────── */
+.masthead {
+  position: relative;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  padding: 18px var(--edge) 14px var(--edge);
+}
+.wordmark { text-decoration: none; display: inline-flex; align-items: baseline; gap: 0.35em; min-height: 44px; align-items: center; }
+.wordmark-en { font-style: italic; font-weight: 500; font-size: 1.9rem; letter-spacing: -0.01em; line-height: 1; }
+.wordmark-bn { font-size: 1.55rem; line-height: 1; }
+.masthead-issue { font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.masthead-issue .dot { padding: 0 0.3em; }
+.masthead-rule { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--ink); transform-origin: 0 50%; }
+
+/* ── cover (the front page) ─────────────────────────────────────────── */
+.cover { padding-top: clamp(40px, 7vw, 96px); display: grid; grid-template-columns: minmax(0, var(--measure)) var(--gap-col) var(--aside-w); }
+.cover > * { grid-column: 1; max-width: none; }
+.kicker { grid-row: 1; font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: clamp(16px, 2vw, 28px); }
+.headline {
+  grid-row: 2; grid-column: 1 / -1;
+  font-size: var(--step-4); font-weight: 300; line-height: 0.92; letter-spacing: -0.03em;
+  max-width: 11ch;
+  margin-bottom: clamp(28px, 4vw, 56px);
+}
+.standfirst { grid-row: 3; font-size: var(--step-1); line-height: 1.4; font-weight: 380; max-width: 30em; }
+.credits { grid-row: 4; margin: 28px 0 0; font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.04em; }
+.credits div { display: flex; gap: 12px; padding: 8px 0; border-top: 1px solid var(--line); }
+.credits div:last-child { border-bottom: 1px solid var(--line); }
+.credits dt { color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; min-width: 9.5em; }
+.credits dd { margin: 0; }
+.cover-rule { grid-row: 6; height: 0; }
+
+@media (min-width: 1000px) {
+  .credits { grid-row: 3; grid-column: 3; margin-top: 0.4em; align-self: start; }
+  .credits dt { min-width: 0; flex: 0 0 8.2em; }
+}
+
+/* ── draft marks: the contents, painted like a hull's draft scale ──── */
+.draft { grid-row: 5; margin-top: 36px; }
+.draft-label { font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.draft-hull { position: relative; }
+.draft-track { display: none; }
+.draft-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; }
+.draft-list a { display: flex; align-items: baseline; gap: 10px; min-height: 44px; padding: 10px 0; text-decoration: none; border-top: 1px solid var(--line); font-size: 1rem; line-height: 1.3; }
+.draft-n { font-family: var(--mono); font-size: var(--step--1); color: var(--muted); letter-spacing: 0.04em; font-variant-numeric: tabular-nums; }
+.draft-list a[aria-current] .draft-n, .draft-list a[aria-current] { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) { .draft-list a:hover .draft-name { text-decoration: underline; text-underline-offset: 0.18em; } }
+
+@media (min-width: 1200px) {
+  .draft {
+    position: fixed; z-index: 20; left: 24px; bottom: 28px; margin: 0;
+    width: 12rem; padding: 14px 14px 10px 14px; background: var(--ground);
+  }
+  .draft-hull { padding-left: 18px; }
+  .draft-track { display: block; position: absolute; left: 0; top: 4px; bottom: 4px; width: 2px; background: var(--line); }
+  .draft-water { position: absolute; inset: 0; background: var(--accent); transform-origin: 50% 100%; transform: scaleY(0); }
+  /* the keel is at the bottom of a hull: 01 sits lowest, 07 highest */
+  .draft-list { display: flex; flex-direction: column-reverse; }
+  .draft-list a { min-height: 32px; padding: 5px 0; border-top: 0; font-size: 0.95rem; }
+  .draft-list li { position: relative; }
+  .draft-list li::before { content: ""; position: absolute; left: -18px; top: 50%; width: 10px; height: 1px; background: var(--muted); }
+}
+
+/* phone waterline: the draft scale reduced to one line across the top */
+.tidebar { position: fixed; z-index: 30; top: 0; left: 0; right: 0; height: 3px; background: transparent; pointer-events: none; display: none; }
+.tidebar-water { display: block; height: 100%; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
+@media (max-width: 1199.98px) and (prefers-reduced-motion: no-preference) { .motion .tidebar { display: block; } }
+
+/* ── movements ───────────────────────────────────────────────────────── */
+.movement { display: flow-root; margin-top: var(--sec); scroll-margin-top: 24px; }
+.opener { max-width: none; clear: both; margin-bottom: clamp(28px, 4vw, 56px); }
+.folio { font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; font-variant-numeric: tabular-nums; }
+.folio-n { color: var(--accent); font-weight: 500; }
+.title { font-size: var(--step-3); font-style: italic; font-weight: 350; line-height: 1.0; letter-spacing: -0.02em; padding-bottom: 0.08em; }
+.waterline { display: block; height: 1px; background: var(--ink); transform-origin: 0 50%; }
+
+.movement > p { margin-bottom: 1.05em; hyphens: manual; }
+.movement > p:last-child { margin-bottom: 0; }
+.lede::first-letter {
+  float: left; font-size: 4.65em; line-height: 0.8; font-weight: 300; margin: 0.08em 0.1em -0.05em -0.04em; color: var(--ink);
+}
+
+/* footnote markers: thumb-sized without breaking the line */
+.fn { position: relative; text-decoration: none; color: var(--accent); font-family: var(--mono); font-weight: 500; padding: 0 0.12em 0 0.08em; }
+.fn sup { font-size: 0.7em; line-height: 0; vertical-align: super; }
+.fn::after { content: ""; position: absolute; left: -8px; right: -8px; top: -14px; bottom: -6px; } /* a thumb-sized hit area that doesn't move the line */
+.fn:hover sup { text-decoration: underline; }
+
+/* ── plates (photographs to come, held at their ratio) ──────────────── */
+.plate { margin: 0.9em 0 2em; }
+.plate-frame {
+  aspect-ratio: var(--ratio, 3 / 2); width: 100%;
+  background-color: var(--surface);
+  background-image: repeating-linear-gradient(135deg, rgb(26 23 18 / 0.035) 0 1px, transparent 1px 14px);
+  display: flex; align-items: flex-end; justify-content: flex-start; padding: 14px;
+}
+.plate-label { font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); background: var(--surface); padding: 4px 8px; }
+.plate figcaption { margin-top: 12px; font-size: 1rem; line-height: 1.45; color: var(--muted); }
+.plate .cap { color: var(--ink); }
+.plate .credit { display: block; margin-top: 4px; font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.04em; }
+.plate--wide { max-width: none; clear: both; }
+@media (min-width: 1000px) {
+  .plate--wide { margin: 1.4em 0 2.6em; }
+  .plate--wide figcaption { max-width: var(--measure); }
+  .plate--tall { float: right; clear: right; width: var(--aside-w); max-width: none; margin: 0.35em 0 1.5em var(--gap-col); }
+}
+
+/* ── pull quotes: fed line by line out of their waterline ──────────── */
+.pull { margin: 1.2em 0 2.2em; }
+.pull blockquote { margin: 0; padding-top: 18px; border-top: 1px solid var(--ink); }
+.pull blockquote p { font-size: var(--step-2); font-style: italic; font-weight: 330; line-height: 1.12; letter-spacing: -0.01em; text-indent: -0.42em; text-wrap: balance; }
+.pull figcaption { margin-top: 16px; font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+@media (min-width: 1000px) {
+  .pull { max-width: none; clear: both; }
+  .pull blockquote p { max-width: 15em; }
+  .pull--right { float: right; clear: right; width: var(--aside-w); padding-left: 0; margin: 0.4em 0 1.5em var(--gap-col); }
+  .pull--right blockquote p { font-size: clamp(1.75rem, 1rem + 1.2vw, 2.3rem); }
+}
+
+/* ── 05 Monsoon: the river has risen over the page ──────────────────── */
+.movement--flood {
+  /* full-bleed river ground without widening the page: a border-image fill pushed out to the viewport edges */
+  border-image: conic-gradient(var(--river) 0 0) fill 0 / / 0 100vw;
+  background: var(--river); color: var(--ink-on-river);
+  padding-block: var(--sec);
+  --accent: var(--accent-on-river);
+}
+.movement--flood .folio { color: var(--muted-on-river); }
+.movement--flood .waterline { background: var(--muted-on-river); }
+.movement--flood :focus-visible { outline-color: var(--accent-on-river); }
+.movement--flood + .movement { margin-top: var(--sec); }
+
+/* ── notes, author ──────────────────────────────────────────────────── */
+.notes { margin-top: var(--sec); }
+.notes-title, .author-title { font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-bottom: 12px; border-bottom: 1px solid var(--ink); margin-bottom: 8px; max-width: none; }
+.notes-list { max-width: none; margin: 0; padding: 0; list-style: none; counter-reset: note; }
+.notes-list li { counter-increment: note; position: relative; padding: 14px 0 12px 2.4rem; border-bottom: 1px solid var(--line); font-size: 1rem; line-height: 1.55; break-inside: avoid; scroll-margin-top: 24px; }
+.notes-list li::before { content: counter(note, decimal-leading-zero); position: absolute; left: 0; top: 17px; font-family: var(--mono); font-size: var(--step--1); color: var(--accent); font-weight: 500; }
+.notes-list li:target { background: var(--surface); box-shadow: -10px 0 0 var(--surface), 10px 0 0 var(--surface); }
+.notes-list li:target::after { content: ""; position: absolute; left: -10px; top: 0; bottom: 0; width: 2px; background: var(--accent); }
+.back { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 2px; font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.04em; color: var(--accent); }
+@media (min-width: 1000px) { .notes-list { column-count: 2; column-gap: 3rem; } }
+
+.author { margin-top: 96px; }
+.author-note { font-size: var(--step-1); line-height: 1.42; margin-top: 16px; }
+.author-credit { margin-top: 12px; font-size: 1rem; color: var(--muted); }
+
+/* ── sign-off ───────────────────────────────────────────────────────── */
+.signoff { margin-top: var(--sec); border-top: 1px solid var(--ink); padding-top: 40px; overflow: hidden; }
+.signoff-inner > * { max-width: none; }
+.signoff-inner > .colophon { max-width: 40em; }
+.next-label { font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.next-title { margin-top: 14px; font-size: var(--step-3); font-weight: 300; line-height: 1; letter-spacing: -0.02em; }
+.next-when { margin-top: 12px; font-size: var(--step-1); font-style: italic; }
+.subscribe { margin-top: 28px; font-size: var(--step-1); }
+.subscribe a { display: inline-block; padding: 6px 0; text-decoration-thickness: 2px; text-underline-offset: 0.22em; text-decoration-color: var(--accent); }
+@media (hover: hover) and (pointer: fine) { .subscribe a:hover { color: var(--accent); text-decoration-thickness: 3px; } }
+.signoff-nav ul { list-style: none; margin: 36px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 28px; font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.06em; text-transform: uppercase; }
+.signoff-nav a { display: inline-flex; align-items: center; min-height: 44px; }
+.colophon { margin-top: 20px; max-width: 40em; font-size: 1rem; line-height: 1.55; color: var(--muted); }
+.signoff-mark { position: relative; margin-top: 48px; line-height: 0.8; }
+.signoff-rule { display: block; height: 1px; background: var(--ink); margin-bottom: -1px; position: relative; z-index: 1; transform-origin: 0 50%; }
+.signoff-mark > * { max-width: none; }
+.signoff-word { display: block; font-size: clamp(9rem, 30vw, 26rem); line-height: 1.05; color: var(--ink); padding-top: 0.04em; }
+
+/* ── motion: initial states only exist while JS runs with motion allowed ─ */
+.motion .headline, .motion .standfirst, .motion .opener .title, .motion .pull blockquote p { visibility: hidden; }
+.motion.ready .headline, .motion.ready .standfirst, .motion.ready .opener .title, .motion.ready .pull blockquote p { visibility: visible; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  .draft-water, .tidebar { display: none !important; }
+}
+
+@media (forced-colors: active) {
+  .draft-water, .tidebar-water, .waterline, .masthead-rule, .signoff-rule { background: CanvasText; }
+  .plate-frame { border: 1px solid CanvasText; }
+}
+@media print {
+  .draft, .tidebar, .skip { display: none; }
+  .movement--flood { background: none; color: inherit; }
+}
+
+.next-title a { display: inline-block; padding-block: 4px; text-decoration-thickness: 1px; text-underline-offset: 0.12em; }
+@media (hover: hover) and (pointer: fine) { .next-title a:hover { text-decoration-thickness: 2px; } }

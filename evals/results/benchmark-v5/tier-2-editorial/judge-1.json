@@ -1,0 +1,28 @@
+{
+ "A": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A coherent river-and-boat motif carries through the seven movements, section folios, flood-darkened passage, and restrained progress cues. Typography and mobile reading measure are especially strong; reduced-motion and script-failure fallbacks are thoughtfully handled, though some of the prose adds observational details beyond the supplied facts."
+ },
+ "B": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "The full-bleed river cover, oversized section numerals, rising monsoon treatment, and endmark form a distinctive, well-paced editorial experience. Mobile typography, thumb-sized footnote targets, and reduced-motion handling are solid, but the copy introduces numerous reported details not supplied in the brief, and the cover can remain hidden if scripts fail after the libraries load."
+ },
+ "better": "A",
+ "why": "A keeps the brief’s editorial identity and factual footing while delivering more refined typography and more dependable fallbacks."
+}

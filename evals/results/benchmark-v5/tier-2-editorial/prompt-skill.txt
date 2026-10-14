@@ -1,0 +1,62 @@
+Use the asfakulsiam-motomation-design skill: /build this brief. The skill lives at /home/user/workspace/repo/skills/asfakulsiam-motomation-design/ — read SKILL.md there first (it is the router) and follow it end to end, reading the files it routes you to; run its scripts from that folder.
+
+Benchmark conditions (follow exactly):
+- Write ONLY inside /home/user/workspace/repo/evals/results/benchmark-v5/tier-2-editorial/work/skill/ . Leave the result as /home/user/workspace/repo/evals/results/benchmark-v5/tier-2-editorial/work/skill/index.html (plus local assets/vendor files in that folder). Do not modify anything in the repository outside that folder (reading the skill folder is expected). Keep the skill's project log at /home/user/workspace/repo/evals/results/benchmark-v5/tier-2-editorial/work/skill/.motomation/ .
+- Step 0 (Stack): the brief names no stack; the client's answer is "you choose". Choose, load the matching adapter, and state the stack and why in one line.
+- Run the full Thinking Sequence (thinking/sequence.md, all steps) before writing any code. When you run the collision engine, use --seed 9201. Force the motion tier: --tier=2.
+- Build it at motion Tier 2 — Intermediate (GSAP + ScrollTrigger + Lenis: section entrances and scroll choreography; no pinned film sequences, no WebGL, no View Transitions, no Lottie/Rive), with a reduced-motion version that keeps all content. The tier is a requirement, not a suggestion.
+- Write DESIGN.md and MOTION.md (from the skill's templates) into /home/user/workspace/repo/evals/results/benchmark-v5/tier-2-editorial/work/skill/ .
+- Use only facts from the brief. Imagery is out of scope: hold image places with aspect-ratio placeholders and captions.
+- Follow the skill's Delivery Gate: run node /home/user/workspace/repo/skills/asfakulsiam-motomation-design/scripts/gate.mjs /home/user/workspace/repo/evals/results/benchmark-v5/tier-2-editorial/work/skill/ and fix failures until it prints PASS; paste the stamp from the gate, never typed.
+- Finish with the skill's handoff. In your reply include: the stack line, the archetype/mutation/signature/collision you used, the final gate stamp line, the files you wrote.
+
+<brief>
+Imagery is out of scope for this benchmark. Placeholders are expected and will not be judged. Focus on structure, typography, layout, and motion.
+
+# Jol · Issue 07: "The Last Boatbuilders of Sadarghat"
+Tier: 2 — Intermediate
+Why this tier: a long read earns section entrances and scroll choreography that pace the story and mark its turns, but it is read, not watched, so pinned film sequences or real-time 3D (Tiers 4–5) would fight the text, and a static page (Tier 1) would waste the issue's rhythm.
+
+## The client
+*Jol* (জল, "water") is an independent online magazine about Bangladesh's rivers, published in quarterly issues of one long feature each. Issue 07 is a 4,000-word reported piece by Farhana Rahman on the wooden-boat builders along the Buriganga at Sadarghat, with photographs by Tanvir Hossain. Readers arrive from newsletters and social posts, most on phones.
+
+## What they need
+- Carry a reader through one long article from first line to author note without losing them.
+- Give the piece's six to eight movements a felt rhythm: each section arrives, pull quotes land, images take their space.
+- Keep the text the hero: comfortable to read for twenty minutes on a 375 px phone.
+- Credit the writer and photographer properly and point to the next issue.
+
+## Pages
+- One page: the article (issue cover opening, the feature, footnotes, author note, issue footer).
+
+## Content
+- Masthead: *Jol*, Issue 07, Monsoon 2026.
+- Headline: "The Last Boatbuilders of Sadarghat". Standfirst: "On the Buriganga's south bank, a dozen families still build wooden cargo boats by eye. The river that made them is the thing ending them."
+- Byline: Farhana Rahman. Photographs: Tanvir Hossain. Reading time: 18 minutes.
+- Seven sections, each with a heading and 450–650 words (the agent may write the body text from the facts below; no invented statistics, quotes are only the ones given):
+  1. "Keel" — the yard at dawn; a keel of sal wood laid on the mud.
+  2. "By Eye" — no drawings; master builder Abdul Karim (62) sets each rib by sight.
+  3. "Teak and Tar" — timber now comes from Myanmar; prices doubled since 2019 (the client's figure).
+  4. "The Steel Yards" — steel launches being welded across the river, faster and cheaper.
+  5. "Monsoon" — work stops when the river rises; families move up the bank.
+  6. "Apprentices" — two apprentices left this year; one, Rubel (19), stayed.
+  7. "Launch" — a finished boat is pushed into the river by forty men.
+- Pull quotes (use exactly): "I don't draw a boat. I see it, then I build what I saw." — Abdul Karim. "The river used to need us. Now it only needs steel." — a builder who asked not to be named.
+- Inline images: six photographs, supplied later as files; the site holds their places with aspect ratios (3:2 ×4, 4:5 ×2) and captions (the agent writes captions from the section facts).
+- Footnotes: five, linked both ways (marker → note → back), e.g. on sal wood, the 2019 price figure, the Sadarghat terminal.
+- Author note: "Farhana Rahman reports on rivers and labour from Dhaka. This piece was reported over four visits between March and June 2026."
+- Issue footer: next issue, "Issue 08: Char Life" (coming December 2026); subscribe link https://jol.example.com/subscribe.
+- Languages: English, with the magazine name also shown in Bangla (জল).
+
+## Constraints
+- Motion: GSAP with ScrollTrigger, and Lenis for smooth scrolling (the client's developer already uses them on the magazine). Section entrances and scroll choreography only; no pinned film, no WebGL.
+- Must read well on mobile at 375 px: body text at a comfortable size and measure, images and pull quotes that don't break the column, footnotes usable by thumb.
+- Reduced motion: everything readable and in order, with no entrance motion and native scrolling.
+- Accessible: semantic article structure, headings in order, footnotes keyboard-reachable, contrast AA.
+- Stack: not specified by the client. Chosen at Step 0.
+
+## Success
+- A phone reader finishes the piece and it felt paced, like a printed feature turned by hand: sections arrive, quotes land, nothing distracts from the words.
+- The motion marks structure (where a section starts, what to look at) and never delays reading.
+- The issue looks like *Jol*, not like a blog template.
+</brief>
