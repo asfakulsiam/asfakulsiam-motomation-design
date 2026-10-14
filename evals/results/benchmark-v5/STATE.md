@@ -5,7 +5,7 @@ Last update: 2026-10-14
 
 | # | Tier | Brief | Status | Agent | Committed |
 |---|------|-------|--------|-------|-----------|
-| 1 | Tier 1 — Basic | link-in-bio photographer | ⬜ not started | — | — |
+| 1 | Tier 1 — Basic | link-in-bio photographer | ✅ done | Perplexity Computer (session ba2f8ac8) | 2026-10-14 |
 | 2 | Tier 2 — Intermediate | editorial magazine issue | ⬜ not started | — | — |
 | 3 | Tier 3 — Pro | product tour | ⬜ not started | — | — |
 | 4 | Tier 4 — Max | design studio site (WebGL) | ⬜ not started | — | — |

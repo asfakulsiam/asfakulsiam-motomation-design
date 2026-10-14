@@ -1,0 +1,84 @@
+{
+ "brief": "tier-1-linkinbio",
+ "tier": 1,
+ "rubric": "evals/rubric.md",
+ "blinding": "labels assigned by random.seed(91014): A=baseline, B=skill; the skill stamp comment (/* motomation ... */) was removed from the copy judges saw; judges saw only brief, rubric, the two index.html files (and, for judge 2, 8 screenshots)",
+ "placeholder_rule": "image placeholders allowed (brief: imagery out of scope), not a hard-gate failure",
+ "judges": [
+  {
+   "judge": "judge-1",
+   "model": "gpt_6_luna (OpenAI family), one structured-output call",
+   "evidence": "HTML/CSS source only, no screenshots",
+   "winner": "skill",
+   "reason": "B's printed-slip concept carries through the layout, typography, and tactile link reveal, making the page feel more particular to this photographer than a conventional link list. A is polished and especially lean, but its visual language and interactions are more familiar. Both meet the listed hard gates.",
+   "baseline": {
+    "blind_label": "A",
+    "scores": {
+     "concept": 4,
+     "originality": 3,
+     "typography": 4,
+     "motion": 4,
+     "craft": 4,
+     "access_performance": 5
+    },
+    "total": 79.0,
+    "hard_gates": [],
+    "notes": "A is a restrained, coherent editorial layout with clear link rows and appropriate hover, focus, and press feedback. It stays lightweight, uses system fonts, includes a visible keyboard focus state, and provides a reduced-motion path. Its visual idea is less distinctive than B's."
+   },
+   "skill": {
+    "blind_label": "B",
+    "scores": {
+     "concept": 5,
+     "originality": 5,
+     "typography": 4,
+     "motion": 5,
+     "craft": 4,
+     "access_performance": 4
+    },
+    "total": 91.0,
+    "hard_gates": [],
+    "notes": "The torn-edge slip and print-reveal interaction create a distinctive, consistent concept that suits the brief's small set of destinations. The display type gives it a strong identity, though the monospaced name may feel cramped at narrow widths. Keyboard focus, touch-sized rows, forced-colors handling, and reduced motion are addressed; extra font and image asset references make its performance less certain than A's."
+   }
+  },
+  {
+   "judge": "judge-2",
+   "model": "default delegated-agent model of this session (not pinned; model id not exposed; may be the same family as the builders)",
+   "evidence": "HTML/CSS source + 8 screenshots (375 full, 375 keyboard focus, 1440, 1440 hover); did not run the pages; saw index.html only, so it read the skill arm font/image preloads as missing files",
+   "winner": "skill",
+   "reason": "B has a clear, ownable concept: the print slip and its print-head reveal run through the structure, the type and the interaction, so the page reads as hers rather than as a link-in-bio template. A is technically excellent and a bit lighter and more accessible, but it looks generic and leaves awkward empty space at 1440px. Neither fails a hard gate. B's lead on concept, originality and typography outweighs A's small edge on performance and brief fidelity.",
+   "baseline": {
+    "blind_label": "A",
+    "scores": {
+     "concept": 3,
+     "originality": 3,
+     "typography": 3,
+     "motion": 4,
+     "craft": 4,
+     "access_performance": 5
+    },
+    "total": 72.0,
+    "hard_gates": [],
+    "notes": "Clean, restrained link page. The 'contact sheet / shutter' idea shows up only in a code comment and in the rust press state; visually it reads as a well-made generic link list. System serif + sans + mono stack with no web font, so it is very light on 3G. Motion: ink plate wipes in from the left, arrow nudges (diagonal for mailto), rust 'shutter' press with a 1px sink. All have a reduced-motion path. Excellent a11y: skip link, focus-visible matches hover, forced-colors and dark-mode support, rows 72px+ tall, absolute URLs as briefed. Finished-looking framed placeholder at 4:5. Weaknesses: at 1440 the link column is bottom-aligned with a large empty area above it; on mobile a tall empty gap before the footer; the rust focus outline on the ink fill has low contrast (the fill change still makes focus clear); preload of portrait.jpg will 404 until the file arrives."
+   },
+   "skill": {
+    "blind_label": "B",
+    "scores": {
+     "concept": 5,
+     "originality": 4,
+     "typography": 4,
+     "motion": 4,
+     "craft": 4,
+     "access_performance": 4
+    },
+    "total": 84.0,
+    "hard_gates": [],
+    "notes": "One clear idea carried throughout: a torn paper print slip/receipt (sawtooth edges on a dark 'table') where each link is a printed line and hover/focus/press runs a 'print head' clip-path reveal of an inverted copy. Contact is printed in rust. Martian Mono display face (font-display: swap, so text is not blocked) paired with a Charter serif bio and mono details. Distinctive and fits a documentary photographer's quiet, exact tone. Motion is purposeful, CSS only, with a reduced-motion path. Strong a11y: skip link, aria-hidden duplicate layer, inset focus ring, forced-colors fallback, real <img> with the correct alt and width/height for 4:5. Deductions: link hrefs are relative (/work, /prints, /workshops) rather than the absolute URLs in the brief, so they break outside that domain; the web font plus font and webp preloads add first-load weight on 3G and point to files that are not present; the arrows are a muted grey and all identical."
+   }
+  }
+ ],
+ "mean_total": {
+  "baseline": 75.5,
+  "skill": 87.5
+ },
+ "winner": "skill"
+}
