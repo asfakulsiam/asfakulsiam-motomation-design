@@ -29,3 +29,5 @@ examples/templates/*/frames-mobile/
 dist/cache/
 # Benchmark generate cache (evals/bench-cache.mjs): local only
 evals/.cache/
+# benchmark v5: the per-brief working folder never goes to main (evals/results/benchmark-v5/HOW-TO-RUN.md)
+evals/results/benchmark-v5/*/work/
