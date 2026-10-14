@@ -81,6 +81,13 @@ on Typography (5 vs 4) and the skill higher on Originality (4 vs 3). Scores per 
 
 ## Notes
 
+- Judge-1 (source only) gave the skill a 10-point lead. Judge-2 (source + screenshots) saw them nearly tied
+  (80 vs 79). This suggests the skill's measured advantage is mostly in source (canonical, meta, security headers,
+  alt text) rather than visible design. Both judges preferred the skill, but the size of the win depends on whether
+  the judge sees the screenshots.
+- Like Tier 1, the skill added page links the brief did not ask for (/, /issues/, /about/, /issues/08-char-life/) to
+  pass its own internal-link SEO rule. This is a pattern: the skill will add things the client did not request to
+  satisfy its own gate. Known behavior, not a bug.
 - Do the two builds look visibly different, or the same? Visibly different: the baseline is a deep river-green cover
   with large rust section numerals and drop caps (a polished long-read), while the skill build is a light silt
   broadsheet with mono metadata, a fixed "draft marks" scale in the margin that fills as you read and a large জল sign-off.

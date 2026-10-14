@@ -61,6 +61,9 @@ Part of the gate difference comes from this asymmetry. v5 does
 not include a baseline+gate arm. This is a known limitation
 of the v5 comparison.
 
+Known pattern: the skill may add links or content the brief does not define in order to pass its own gate. Judges
+should not penalise this, but the summary must record it.
+
 Run the gate from the tested skill folder on each arm's output. It takes a single `.html` file, a project folder (its
 `index.html`, else its build output in `out/`, `dist/`, `build/` …) or the URL of a running dev or preview server:
 
