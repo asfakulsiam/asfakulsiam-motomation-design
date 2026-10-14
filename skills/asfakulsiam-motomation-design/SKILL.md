@@ -4,7 +4,7 @@ description: Use when designing, building, redesigning, animating, or critiquing
 license: MIT
 metadata:
   author: asfakulsiam
-  version: 2.5.0
+  version: 2.6.0
   repository: https://github.com/asfakulsiam/asfakulsiam-motomation-design
 ---
 
