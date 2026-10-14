@@ -106,6 +106,10 @@ and update "Last update".
 The next agent starts that brief fresh. Partial evidence is worse than no evidence, because it forces the next agent to
 reason about a stranger's half-build.
 
+## Decisions
+
+Stack: during a benchmark run, both arms are told the client answered 'you choose.' Each arm must state the stack it chose and why. This keeps the comparison fair. Imagery: placeholders. Not judged in v5.
+
 ## What you do NOT do
 
 - Do not run other briefs.
