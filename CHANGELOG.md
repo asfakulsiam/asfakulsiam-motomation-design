@@ -2,7 +2,9 @@
 
 All notable changes to this skill. Versions follow [Semantic Versioning](https://semver.org).
 
-## [Unreleased] (2.6.0 concept fix, in progress)
+## [2.6.0] - 2026-10-14
+
+Concept fix: the skill generates; it does not choose from a menu. Four concept-level defects fixed (no stack question, a mood system from one portfolio project, a Restraint Gate that only cut, data presented as a menu), plus the templates, the gate and the description brought in line. No new features beyond these. The benchmark was not re-run for this release.
 
 - **T1 Step 0: Stack:** `thinking/sequence.md` starts with Step 0. Use the stack the brief or the project names; if none, ask the user (never assume); on "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. The stack is recorded in `DESIGN.md` (`templates/DESIGN.md` gains a `Stack` section) and picks the adapter. `SKILL.md` and `AGENTS.md` route through it; `brief-inference.md` and `--stack` no longer default to a stack. Traces: `docs/examples/step0-traces.md`.
 - **T2 Moods removed:** Removed the Quiet / Editorial / Play mood system. It came from one portfolio project and did not belong in a general skill. Style is now derived from the brief, informed by styles/. The `--mood` flag, the dial-preset table in `principles/dials.md`, the "Default mood" line in every `categories/*.md` (now "Starting dials", the brief overrides) and the `mood` column of `data/categories.csv`, `data/palettes.csv` and `data/signatures.csv` are gone; mood wording in references, components and eval briefs is rewritten.
@@ -12,6 +14,8 @@ All notable changes to this skill. Versions follow [Semantic Versioning](https:/
 - **T6 Templates are design references:** Option A, recorded in `docs/adr/0001-templates-are-design-references.md`. Each `examples/templates/<id>/` is design only: `DESIGN.md`, a new stack-neutral `structure.md` (written by `build-templates.mjs` from the section headers; hand-written for the two Tier 5 films) and the `og.jpg` screenshot. The React page sources moved to `examples/builds/<id>/page.tsx`; `templates/<id>.html` stays as the gated, rendered preview. `examples/README.md` and the templates README open with: "Templates are design references. If the brief names Next.js, produce Next.js. If it names plain HTML, produce HTML. Do not copy a template's file structure into a different stack." All 8 previews rebuilt (source paths changed), gated again and re-stamped.
 - **T7 Framework-neutral gate:** `scripts/gate.mjs` takes three input forms: an http(s) URL of a running dev or preview server (any framework), a project folder (its `index.html`, else the first of `out/`, `dist/`, `build/`, `.output/public/`, `_site/`, `public/` with one, still reading the project's `DESIGN.md` and `.motomation/log.json`), or a single `.html` file. A server-only build (`.next/` without `out/`) gets a clear message to pass its URL instead. Documented in `gates/delivery-gate.md` Part 0 ("Input"). Checked against a static file, a `next dev` URL, an `astro preview` URL and an Astro project folder.
 - **T8 Description fixed:** the `SKILL.md` description no longer names a house style ("typography-led, minimal, modern") as universal: "Use when designing, building, redesigning, animating, or critiquing any website, landing page, portfolio, storefront, or web UI where the result must look original and award-level instead of AI-templated. The design direction is derived from the brief; the skill is a generator, not a style library." The opening line of the body says the same.
+- **T9 CHANGELOG:** this section, one line per task.
+- **T10 Version 2.6.0:** `VERSION`, `SKILL.md` metadata, `package.json`, the Claude, Cursor and Codex plugin manifests, the marketplace entry, `gemini-extension.json`, `llms.txt` and the README badge all read 2.6.0; `scripts/check-repo.mjs` confirms.
 
 ## [2.5.0] - 2026-10-12
 
