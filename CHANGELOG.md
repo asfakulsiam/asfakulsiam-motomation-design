@@ -2,6 +2,10 @@
 
 All notable changes to this skill. Versions follow [Semantic Versioning](https://semver.org).
 
+## [Unreleased]
+
+- Benchmark v5 setup: five sites, one per tier, sequential. Infrastructure in evals/results/benchmark-v5/. Not yet run.
+
 ## [2.6.0] - 2026-10-14
 
 Concept fix: the skill generates; it does not choose from a menu. Four concept-level defects fixed (no stack question, a mood system from one portfolio project, a Restraint Gate that only cut, data presented as a menu), plus the templates, the gate and the description brought in line. No new features beyond these. The benchmark was not re-run for this release.
