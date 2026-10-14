@@ -1,0 +1,104 @@
+{
+ "brief": "tier-2-editorial",
+ "tier": 2,
+ "rubric": "evals/rubric.md (v5 exception applied: imagery out of scope)",
+ "blinding": "labels assigned by random.seed(92015): A=skill, B=baseline; all HTML comments and CSS/JS block comments were stripped from both arms (this removed the skill's <!-- motomation ... --> stamp and its archetype/signature/tier comments, and the baseline's equivalent comments); vendor libraries omitted; judges saw only the brief, the rubric, the two sources and (judge 2) screenshots",
+ "placeholder_rule": "v5 exception: image placeholders and missing images are not a penalty and not a hard-gate failure",
+ "judges": [
+  {
+   "judge": "judge-1",
+   "model": "gpt_6_luna (OpenAI family), one structured-output call",
+   "evidence": "HTML/CSS/JS source only, no screenshots",
+   "winner": "skill",
+   "reason": "A keeps the brief’s editorial identity and factual footing while delivering more refined typography and more dependable fallbacks.",
+   "baseline": {
+    "blind_label": "B",
+    "scores": {
+     "concept": 5,
+     "originality": 4,
+     "typography": 4,
+     "motion": 4,
+     "craft": 4,
+     "access_performance": 4
+    },
+    "total": 84.0,
+    "hard_gates": [],
+    "notes": "The full-bleed river cover, oversized section numerals, rising monsoon treatment, and endmark form a distinctive, well-paced editorial experience. Mobile typography, thumb-sized footnote targets, and reduced-motion handling are solid, but the copy introduces numerous reported details not supplied in the brief, and the cover can remain hidden if scripts fail after the libraries load."
+   },
+   "skill": {
+    "blind_label": "A",
+    "scores": {
+     "concept": 5,
+     "originality": 5,
+     "typography": 5,
+     "motion": 4,
+     "craft": 4,
+     "access_performance": 5
+    },
+    "total": 94.0,
+    "hard_gates": [],
+    "notes": "A coherent river-and-boat motif carries through the seven movements, section folios, flood-darkened passage, and restrained progress cues. Typography and mobile reading measure are especially strong; reduced-motion and script-failure fallbacks are thoughtfully handled, though some of the prose adds observational details beyond the supplied facts."
+   }
+  },
+  {
+   "judge": "judge-2",
+   "model": "default delegated-agent model of this session (not pinned; model id not exposed; may be the same family as the builders)",
+   "evidence": "source + 10 screenshots: 1440 top, 1440 8-frame wheel-scroll strip, 375 top, 375 8-frame strip, 375 reduced-motion full page sheet; did not run the pages",
+   "winner": "skill",
+   "reason": "Both are clean and accessible, but A's draft-mark/waterline idea makes its structure and motion more specific to Jol, while B is the more conventional, if more lavishly typeset, long-read.",
+   "baseline": {
+    "blind_label": "B",
+    "scores": {
+     "concept": 4,
+     "originality": 3,
+     "typography": 5,
+     "motion": 4,
+     "craft": 4,
+     "access_performance": 4
+    },
+    "total": 79.0,
+    "hard_gates": [],
+    "notes": "A polished magazine treatment: a deep-green cover with an italic 'Sadarghat', a wave rule, big rust numerals, 'Part one' labels and drop caps, set in a well-hyphenated column that reads comfortably on a phone. In the strips the reading bar updates the section name and progress, the Monsoon movement turns dark with a scrubbed water rise, and the reduced-motion page is complete and in order. It is accomplished but closer to a familiar premium long-read template, and the column sits narrow inside wide empty margins at 1440px."
+   },
+   "skill": {
+    "blind_label": "A",
+    "scores": {
+     "concept": 4,
+     "originality": 4,
+     "typography": 4,
+     "motion": 4,
+     "craft": 4,
+     "access_performance": 4
+    },
+    "total": 80.0,
+    "hard_gates": [],
+    "notes": "A hull 'draft marks' idea (seven movements stacked 07-to-01 like waterline marks, a tide bar on mobile, waterlines under each opener, a dark Monsoon movement) is carried through the whole piece. In the strips the draft gauge visibly fills section by section, so the motion marks structure without getting in the way of reading. The Newsreader and IBM Plex Mono pairing is restrained and very readable at 375px, with two-way footnotes, a skip link and a clean reduced-motion page, though the cover and openers are a bit austere and the light nav box on the dark Monsoon section looks slightly out of place."
+   }
+  }
+ ],
+ "result": {
+  "winner": "skill",
+  "judges_for_skill": "2 of 2",
+  "baseline_totals": [
+   84.0,
+   79.0
+  ],
+  "skill_totals": [
+   94.0,
+   80.0
+  ],
+  "baseline_mean": 81.5,
+  "skill_mean": 87.0,
+  "margin_note": "judge-1 +10 for skill; judge-2 +1 for skill (near tie; judge-2 scored the baseline higher on Typography, 5 vs 4)"
+ },
+ "gate": {
+  "baseline": "FAIL",
+  "skill": "PASS (stamp verified)"
+ },
+ "tier_check": {
+  "named": 2,
+  "skill": "pass",
+  "baseline": "pass (informational)",
+  "evidence": "see summary.md, Tier check"
+ }
+}

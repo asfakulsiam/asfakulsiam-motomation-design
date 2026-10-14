@@ -1,0 +1,75 @@
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+DELIVERY GATE · evals/results/benchmark-v5/tier-2-editorial/work/baseline/
+  contrast  ✗ 1 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✗ 1 below AA  (168 measured; 9 skipped; 0 not visible at scan time)
+        1.42:1 < 4.5:1  #eae4d6 on #f0b48f  19px  p  "Then the river rises, and everything stops."
+      390px  ✓ 0 below AA  (170 measured; 7 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (174 measured; 3 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (175 measured; 2 skipped; 0 not visible at scan time)
+  overflow  ✗ 7 at 375/390/768/1440px
+     1440px  text overflows parent by 8px  p.mv-num  "01"
+     1440px  text overflows parent by 8px  p.mv-num  "02"
+     1440px  text overflows parent by 8px  p.mv-num  "03"
+     1440px  text overflows parent by 8px  p.mv-num  "04"
+     1440px  text overflows parent by 8px  p.mv-num  "05"
+     1440px  text overflows parent by 8px  p.mv-num  "06"
+     1440px  text overflows parent by 8px  p.mv-num  "07"
+  words     ✓ 0 display-text problems at 375px  (22 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (177 compared)
+  names     ✓ 0 missing alt / accessible names  (19 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (23 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  progress  ✓ 0 of 0 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
+  smooth    – no pinned zone, not measured
+  rm-flow   – no pinned zone
+  focus     ✓ 0 of 19 focused elements show no visible focus indicator  (19 tabbable)
+  targets   ✗ 5 under 24px, 1 under 44px (warning) at 375 touch  (19 checked; inline links exempt)
+     18×16  a#fnref-1  "1"
+     18×16  a#fnref-2  "2"
+     18×16  a#fnref-3  "3"
+     18×16  a#fnref-4  "4"
+     18×16  a#fnref-5  "5"
+     142×42  a.skip-link  "Skip to the story"
+  zoom200   ✓ 0 lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%
+  reflow    ✓ 0px horizontal scroll at 320px
+  forced    ✓ 0 of 79 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
+  kbd-trap  ✓ 19 of 19 tabbable reached in 44 Tabs, no cycle
+  C copy     ✗ 2 rule(s) failing: copy-04 copy-09  (craft/copy.md; 15 warning(s))
+     ✗ copy-04  em dash in visible copy  figcaption "— ABDUL KARIM, MASTER BUILDER"
+     ✗ copy-09  aphorism formula (it's not X, it's Y)  p "It is easy to romanticise this, and the builders themselves…"
+     ✗ copy-04  em dash in visible copy  figcaption "— A BUILDER WHO ASKED NOT TO BE NAMED"
+     ✗ copy-04  em dash in visible copy  p "The monsoon does not arrive on this bank as weather so much…"
+     ✗ copy-04  em dash in visible copy  p "One apprentice is not a future for a trade. But it is not n…"
+     ✗ copy-04  em dash in visible copy  p "Someone calls out a rhythm, and the push begins. It is not …"
+     ✗ copy-04  em dash in visible copy  p "He does not cheer. He walks to the water’s edge, as he did …"
+     ✗ copy-04  em dash in visible copy  title "The Last Boatbuilders of Sadarghat — Jol (জল) · Issue 07, M…"
+     ⚠ copy-06  108-word paragraph; break it up (2–4 lines)  p "Before the light comes up over the Buri…"
+     ⚠ copy-06  117-word paragraph; break it up (2–4 lines)  p "It is a keel of sal wood,1 and everythi…"
+     ⚠ copy-06  111-word paragraph; break it up (2–4 lines)  p "A dozen families still build wooden car…"
+     ⚠ copy-06  91-word paragraph; break it up (2–4 lines)  p "Abdul Karim is sixty-two, slight, and m…"
+  S SEO      ✗ 5 rule(s) failing: seo-04 seo-05 seo-06 seo-11 seo-18  (craft/seo.md; 1 warning(s))
+     ✗ seo-04  no canonical tag
+     ✗ seo-05  title is 70 characters (≤ 60)  "The Last Boatbuilders of Sadarghat — Jol (জল) · Issue 07, M…"
+     ✗ seo-06  meta description is 187 characters (≤ 160)
+     ✗ seo-11  0 internal link(s) to other pages (≥ 3)
+     ✗ seo-18  no og:image
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible
+  P perf     ✓ 0 rule(s) failing  (craft/performance.md; 0 warning(s))
+  K security ✗ 3 rule(s) failing: sec-h1 sec-h2 sec-h3  (craft/security.md; 0 warning(s))
+     ✗ sec-h1  no Content-Security-Policy (header or meta)
+     ✗ sec-h2  no X-Content-Type-Options: nosniff header
+     ✗ sec-h3  no Referrer-Policy (header or meta referrer)
+  composition (advisory: heuristics, never fail the gate, not in the stamp)
+     pin fill  – no pinned zone
+     focal     ⚠ 3 of 14 screen(s) with text have one clear focal point (heaviest text mass ≥ 1.5× the next); no clear lead on screen 2 (1.09×), 4 (1.42×), 5 (1.04×), 6 (1.03×), 7 (1.15×), 9 (1.26×), 10 (1.05×), 11 (1.02×), 12 (1.12×), 13 (1.26×), 14 (1.05×)
+     scale     ✓ display:body 1:6.5  (136px / 21px; warn below 1:6)
+  richness (advisory: "too little" warnings, never fail the gate, not in the stamp)
+     page      home (from path; set with --page home|category|about|page)
+     fold      ⚠ 1 meaningful section(s) above the fold at 1440×900: nav header.cover  (warn below 3)
+     opening   ✓ h1 "The Last Boatbuilders of Sadarghat"
+  hierarchy  h1×1, 0 skipped heading levels, 5 element(s) tied for largest on the first 375px screen
+  structure  2 sections, entrances: fade+y | fade → 0 repeat(s); pins 0, WebGL canvases 0, JS 55KB gzipped
+  records    DESIGN.md: none · memory log: none · stamp fields: {}
+  critique → C?[no-record] H4[375:1] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A4[focus:19/19,tgt:5f1w,zoom:0,reflow:0,fc:0,trap:0]   (axes marked ? have no record to derive from)
+  coverage   ✓ worst width 375px: 9 of 177 text elements skipped (5%; limit 30% at every width)
+  FAIL  stamp → critique: C?[no-record] H4[375:1] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A4[focus:19/19,tgt:5f1w,zoom:0,reflow:0,fc:0,trap:0] · gate: c1 o7 w0 rm0 a0 n0 q0 k5 · rules: C2 S5 P0 K3 · gate/4 · 99efaf7775 · skipped 9/177@375
+
