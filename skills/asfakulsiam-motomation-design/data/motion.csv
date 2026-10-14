@@ -1,3 +1,4 @@
+# Fuel, not a menu. Use to inform the brief. Do not pick from the list; derive from the brief, using the list as reference and constraint.
 id,name,tier,trigger,technique,duration,ease,use_for,avoid,reduced_fallback
 press,Press scale,1,pointerdown,transform scale 0.97,100ms,--ease-out,buttons and cards,links in body text,none needed (tiny) or colour change
 underline-draw,Underline draw,1,hover/focus,background-size 0 to 100%,220ms,--ease-out,"text links, nav",dense link lists,instant underline

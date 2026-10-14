@@ -1,3 +1,4 @@
+# Fuel, not a menu. Use to inform the brief. Do not pick from the list; derive from the brief, using the list as reference and constraint.
 id,name,family,tier,good_for,file,one_line
 proximity-weight,Proximity Weight,type,2,portfolio studio specimen,signatures/type-signatures.md,letters near the cursor get heavier
 letter-relay,Letter Relay,type,2,portfolio personal-brand,signatures/type-signatures.md,the hero name travels letter by letter into the header

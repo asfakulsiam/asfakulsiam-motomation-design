@@ -137,7 +137,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, ask the user; never assume. On "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 1. **Tension**: find the conflict inside the brief (calm vs. urgent, heritage vs. new, luxury vs. honest).
 2. **Concept**: resolve the tension in one sentence. This is the idea, not a layout.
-3. **Archetype + Mutation**: pick a page structure from `structures/archetypes.md`, then break one of its rules.
+3. **Archetype + Mutation**: derive the page structure from the brief, with `structures/archetypes.md` and `data/archetypes.csv` as reference and constraint (not a menu), then break one of its rules.
 4. **Forced Collision**: bring in something from an unrelated world (a railway board, a tailor's tape, a darkroom) and steal one property from it.
 5. **Signature Move**: invent the one interaction or motion the site will be remembered for.
 6. **Anti-Sameness Check**: compare against the AI-default list and the project memory log. If it matches either, mutate again.
@@ -206,7 +206,7 @@ node scripts/memory.mjs log --archetype ledger --signature letter-relay --fonts 
 node scripts/contrast.mjs "#111111" "#F4F1EA"   # WCAG contrast check
 ```
 
-If you can't run scripts (chat-only tools), pick from the CSV files in `data/` yourself. Pick deliberately, and never take the first row.
+**Data is fuel, not a menu.** The files in `data/` (archetypes, palettes, fonts, mutations, collisions, motion, signatures, styles) inform the brief. Do not pick from a list; derive from the brief, using the list as reference and constraint. The scripts read these files to draw constraints and check contrast; if you can't run them (chat-only tools), read the CSVs yourself the same way: as constraints to bend to the brief, never a row to copy, and never the first row by default.
 
 ---
 
@@ -283,7 +283,9 @@ If the user wrote "brutalist", "soft", "like a magazine" or named a reference si
 
 ## The Thinking Sequence
 
-This is the missing key: it makes an agent think like a designer instead of a template engine. Run Step 0 and all seven design steps for every page. Write the results into the preview block. Each step has a test. If the test fails, redo the step.
+This is the missing key: it makes an agent think like a designer instead of a template engine. Run Step 0 and all seven design steps for every page.
+
+**Data is fuel, not a menu.** The files in `data/` (archetypes, palettes, fonts, mutations, collisions, motion, signatures, styles) inform the brief. Do not pick from a list; derive from the brief, using the list as reference and constraint. A draw from `scripts/collide.mjs` is a constraint to design inside, not a finished answer. Write the results into the preview block. Each step has a test. If the test fails, redo the step.
 
 ---
 
@@ -348,7 +350,7 @@ Formula: **"A site that [does something unexpected] so that [the tension resolve
 
 ### 3. Archetype + Mutation
 
-Pick a structure from `structures/archetypes.md` that suits the concept. Then **mutate** it: break one rule of that structure on purpose.
+Derive the page's structure from the concept. `structures/archetypes.md` and `data/archetypes.csv` are reference and constraint: they tell you what structures exist and what each one demands, not which one to take. Then **mutate** it: break one rule of that structure on purpose.
 
 Mutation operators (or draw one with `node scripts/collide.mjs`):
 - **Invert the axis.** Vertical becomes horizontal, or time runs backwards.
@@ -359,7 +361,12 @@ Mutation operators (or draw one with `node scripts/collide.mjs`):
 - **Slow it down / speed it up.** One section moves at film speed while the rest stay still.
 - **Borrow a rule from print.** Marginalia, footnotes, a folio, a masthead, a colophon.
 
-**Test:** name the original structure, then name the rule you broke. If you can't name the broken rule, you haven't mutated it.
+**WRONG / RIGHT** (brief: "a 1962 family bakery in Old Dhaka; it should feel like the shop"):
+
+- **WRONG:** `Archetype: The Ledger. Mutation: invert-axis.` Two rows copied from the CSVs; it would read the same for a law firm.
+- **RIGHT:** `Structure: the shop's order book (Ledger as reference: dated rows, running totals). Each section is a day's page, bakes as line items. Mutation (invert-axis as the constraint): the book reads back in time, today first, the 1962 opening entry last.` The rows set the constraints; the brief supplied every specific.
+
+**Test:** name the original structure, then name the rule you broke. If you can't name the broken rule, you haven't mutated it. If your plan line could be pasted onto a different brief unchanged, you copied a row instead of deriving.
 
 **When the draw doesn't fit.** If the drawn archetype can't serve the brief, take the draw's seeded fallback (`collide.mjs` prints "If it can't serve the brief, take: …"). Don't swap in the archetype you like best: hand-picked replacements converge. In the v2 benchmark, two SaaS runs drew different archetypes (Lookbook, Gallery Wall), both replaced them with Console, and the two pages came out as the same structure. If the fallback can't serve the brief either, write one line in the plan saying why both failed, then choose.
 
@@ -369,7 +376,7 @@ Mutation operators (or draw one with `node scripts/collide.mjs`):
 
 Take something from a world unrelated to the brief and steal **one property** from it. This is where original patterns come from.
 
-Run `node scripts/collide.mjs --n 3`, or choose from `data/collisions.csv`. Examples:
+Run `node scripts/collide.mjs --n 3`, or read `data/collisions.csv` as fuel: the worlds show the kind of distance that works; steal from a world the brief suggests, not the next row. Examples:
 
 | Source | Property stolen | Becomes |
 |---|---|---|
@@ -3563,7 +3570,7 @@ Type a command at the start of a message. Commands combine with flags. Without a
 **What:** runs the collision engine (`scripts/collide.mjs --n 3 --spread`; `--count N` for more) and proposes **three different concepts**, each with tension, concept, type mode (HOUSE STYLE or SERVICE STYLE, with the reason from the brief), archetype + mutation, collision and signature.
 **Guarantees (enforced by the script, reported in its "Diversity (measured)" block):** the three draws never share an archetype or a signature seed; mutations and collision worlds don't repeat either while their pools last (12 mutations, 20 archetypes, 22 signature seeds). When `--count` asks for more than a pool holds, the script says which pool ran out and from which draw repeats start; it never overlaps silently. Copy that block into the output. Without a shell, draw by hand and state that uniqueness was checked by eye.
 **When:** you're stuck, or the first idea feels familiar.
-**Output:** three concept cards plus the measured diversity line. Pick one and continue with `/build`.
+**Output:** three concept cards plus the measured diversity line. The draws are fuel, not a menu: each card derives its tension, concept and specifics from the brief, using the drawn archetype, mutation and collision as constraints. Choose a card and continue with `/build`.
 
 #### `/signature [section]`
 **What:** invents one signature move for the site or a section, bent from `signatures/` to the concept.
@@ -4478,6 +4485,7 @@ Rhythm: <which chapters are dense / still; the breath in every run of three>
 ### data/archetypes.csv
 
 ```csv
+# Fuel, not a menu. Use to inform the brief. Do not pick from the list; derive from the brief, using the list as reference and constraint.
 id,name,shape,best_for,signature_potential,nav_ideas
 specimen,The Specimen,the page is a type specimen,portfolio studio type-led brands,variable axes reacting to the cursor,folio corner; index of sizes
 ledger,The Ledger,rows and columns like an account book,studio agency archive finance,rows expand into case studies,column headers as nav
@@ -4522,6 +4530,7 @@ education,Education,show the outcome then make enrolling clear,2,1,1-2,field-gui
 ### data/collisions.csv
 
 ```csv
+# Fuel, not a menu. Use to inform the brief. Do not pick from the list; derive from the brief, using the list as reference and constraint.
 source,world,property,becomes
 railway departure board,transport,characters flip into place in rows,menus and prices that flip on change
 tailor's measuring tape,craft,a numbered ruler with tension,a scroll progress bar that stretches
@@ -4642,6 +4651,7 @@ sticker-scatter,Sticker Scatter,micro,2,examples/components/micro/sticker-scatte
 ### data/fonts.csv
 
 ```csv
+# Fuel, not a menu. Use to inform the brief. Do not pick from the list; derive from the brief, using the list as reference and constraint.
 name,source,license,role,axes,personality,pairs_with,use_for,avoid,scripts
 Fraunces,Google Fonts,OFL,display serif,opsz wght SOFT WONK,"warm, quirky old-style with soft or wonky details",Switzer; Instrument Sans; Hanken Grotesk,"organic brands, food, editorial, heritage with humour",strict corporate tone,latin vietnamese
 Instrument Serif,Google Fonts,OFL,display serif,none (regular + italic),"condensed elegant serif, fashion-editorial",Instrument Sans; Geist; Satoshi,"fashion, portfolios, editorial headlines",body text,latin
@@ -4762,6 +4772,7 @@ the whole page,tilts,the visitor's local time
 ### data/motion.csv
 
 ```csv
+# Fuel, not a menu. Use to inform the brief. Do not pick from the list; derive from the brief, using the list as reference and constraint.
 id,name,tier,trigger,technique,duration,ease,use_for,avoid,reduced_fallback
 press,Press scale,1,pointerdown,transform scale 0.97,100ms,--ease-out,buttons and cards,links in body text,none needed (tiny) or colour change
 underline-draw,Underline draw,1,hover/focus,background-size 0 to 100%,220ms,--ease-out,"text links, nav",dense link lists,instant underline
@@ -4818,6 +4829,7 @@ film-chapter-cut,Chapter cut,5,scroll progress crosses a chapter,hard cut betwee
 ### data/mutations.csv
 
 ```csv
+# Fuel, not a menu. Use to inform the brief. Do not pick from the list; derive from the brief, using the list as reference and constraint.
 id,name,operator,example
 invert-axis,Invert the axis,vertical becomes horizontal or time runs backwards,a timeline that starts in the present and scrolls into the past
 scale-abuse,Abuse the scale,one element 10x bigger or smaller than expected,a footer wordmark three screens wide
@@ -4836,6 +4848,7 @@ constraint,Self-imposed constraint,"one colour, one size or one font weight only
 ### data/palettes.csv
 
 ```csv
+# Fuel, not a menu. Use to inform the brief. Do not pick from the list; derive from the brief, using the list as reference and constraint.
 name,ground,surface,ink,muted,accent,accent_ink,story,accent_text,mode,pair
 Paper & Vermilion,#F3F0EA,#EAE6DE,#151412,#5E5A53,#C8401C,#FFFFFF,"printed matter, newsrooms, studios",large-only,light,Vermilion After Hours
 Bone & Graphite,#ECE8E1,#E2DDD4,#1C1C1A,#5A5852,#8A6A3B,#FFFFFF,"architecture, interiors, calm portfolios",large-only,light,Graphite & Bone
@@ -4891,6 +4904,7 @@ caution_fonts,Playfair Display|Space Grotesk,"Not banned, but AI defaults: use o
 ### data/signatures.csv
 
 ```csv
+# Fuel, not a menu. Use to inform the brief. Do not pick from the list; derive from the brief, using the list as reference and constraint.
 id,name,family,tier,good_for,file,one_line
 proximity-weight,Proximity Weight,type,2,portfolio studio specimen,signatures/type-signatures.md,letters near the cursor get heavier
 letter-relay,Letter Relay,type,2,portfolio personal-brand,signatures/type-signatures.md,the hero name travels letter by letter into the header
@@ -4919,6 +4933,7 @@ hold-to-commit,Hold to Commit,micro,2,hotel ecommerce product-launch,signatures/
 ### data/styles.csv
 
 ```csv
+# Fuel, not a menu. Use to inform the brief. Do not pick from the list; derive from the brief, using the list as reference and constraint.
 id,name,keywords,energy,rhythm,motion,type_hint,palette_hint,file
 minimal,Minimal,quiet clean space restraint luxury architecture,1,1-2,1-2,one display + one text; weight contrast,neutrals + one accent,styles/minimal.md
 editorial,Editorial,magazine story columns captions serif,2,2,2,high-contrast serif + book text + mono,paper and ink + print accent,styles/editorial.md

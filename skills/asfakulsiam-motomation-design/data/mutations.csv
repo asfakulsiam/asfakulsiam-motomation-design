@@ -1,3 +1,4 @@
+# Fuel, not a menu. Use to inform the brief. Do not pick from the list; derive from the brief, using the list as reference and constraint.
 id,name,operator,example
 invert-axis,Invert the axis,vertical becomes horizontal or time runs backwards,a timeline that starts in the present and scrolls into the past
 scale-abuse,Abuse the scale,one element 10x bigger or smaller than expected,a footer wordmark three screens wide

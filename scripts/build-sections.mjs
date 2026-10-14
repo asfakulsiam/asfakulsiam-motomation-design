@@ -19,7 +19,7 @@ const FIELDS = ["id", "kind", "archetype", "components", "what", "signature", "m
 const pascal = (id) => id.split("-").map((w) => w[0].toUpperCase() + w.slice(1)).join("");
 
 function csvRows(file) {
-  const [head, ...lines] = readFileSync(file, "utf8").replace(/\r/g, "").trim().split("\n");
+  const [head, ...lines] = readFileSync(file, "utf8").replace(/\r/g, "").trim().split("\n").filter((l) => !l.startsWith("#"));
   const parse = (l) => { const r = []; let cur = "", q = false; for (const ch of l) { if (ch === '"') q = !q; else if (ch === "," && !q) { r.push(cur); cur = ""; } else cur += ch; } r.push(cur); return r; };
   const cols = parse(head); return lines.map((l) => Object.fromEntries(parse(l).map((v, i) => [cols[i], v])));
 }

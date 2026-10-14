@@ -1,3 +1,4 @@
+# Fuel, not a menu. Use to inform the brief. Do not pick from the list; derive from the brief, using the list as reference and constraint.
 name,source,license,role,axes,personality,pairs_with,use_for,avoid,scripts
 Fraunces,Google Fonts,OFL,display serif,opsz wght SOFT WONK,"warm, quirky old-style with soft or wonky details",Switzer; Instrument Sans; Hanken Grotesk,"organic brands, food, editorial, heritage with humour",strict corporate tone,latin vietnamese
 Instrument Serif,Google Fonts,OFL,display serif,none (regular + italic),"condensed elegant serif, fashion-editorial",Instrument Sans; Geist; Satoshi,"fashion, portfolios, editorial headlines",body text,latin

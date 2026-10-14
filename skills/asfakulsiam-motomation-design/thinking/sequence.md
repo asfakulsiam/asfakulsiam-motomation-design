@@ -1,6 +1,8 @@
 # The Thinking Sequence
 
-This is the missing key: it makes an agent think like a designer instead of a template engine. Run Step 0 and all seven design steps for every page. Write the results into the preview block. Each step has a test. If the test fails, redo the step.
+This is the missing key: it makes an agent think like a designer instead of a template engine. Run Step 0 and all seven design steps for every page.
+
+**Data is fuel, not a menu.** The files in `data/` (archetypes, palettes, fonts, mutations, collisions, motion, signatures, styles) inform the brief. Do not pick from a list; derive from the brief, using the list as reference and constraint. A draw from `scripts/collide.mjs` is a constraint to design inside, not a finished answer. Write the results into the preview block. Each step has a test. If the test fails, redo the step.
 
 ---
 
@@ -65,7 +67,7 @@ Formula: **"A site that [does something unexpected] so that [the tension resolve
 
 ## 3. Archetype + Mutation
 
-Pick a structure from `structures/archetypes.md` that suits the concept. Then **mutate** it: break one rule of that structure on purpose.
+Derive the page's structure from the concept. `structures/archetypes.md` and `data/archetypes.csv` are reference and constraint: they tell you what structures exist and what each one demands, not which one to take. Then **mutate** it: break one rule of that structure on purpose.
 
 Mutation operators (or draw one with `node scripts/collide.mjs`):
 - **Invert the axis.** Vertical becomes horizontal, or time runs backwards.
@@ -76,7 +78,12 @@ Mutation operators (or draw one with `node scripts/collide.mjs`):
 - **Slow it down / speed it up.** One section moves at film speed while the rest stay still.
 - **Borrow a rule from print.** Marginalia, footnotes, a folio, a masthead, a colophon.
 
-**Test:** name the original structure, then name the rule you broke. If you can't name the broken rule, you haven't mutated it.
+**WRONG / RIGHT** (brief: "a 1962 family bakery in Old Dhaka; it should feel like the shop"):
+
+- **WRONG:** `Archetype: The Ledger. Mutation: invert-axis.` Two rows copied from the CSVs; it would read the same for a law firm.
+- **RIGHT:** `Structure: the shop's order book (Ledger as reference: dated rows, running totals). Each section is a day's page, bakes as line items. Mutation (invert-axis as the constraint): the book reads back in time, today first, the 1962 opening entry last.` The rows set the constraints; the brief supplied every specific.
+
+**Test:** name the original structure, then name the rule you broke. If you can't name the broken rule, you haven't mutated it. If your plan line could be pasted onto a different brief unchanged, you copied a row instead of deriving.
 
 **When the draw doesn't fit.** If the drawn archetype can't serve the brief, take the draw's seeded fallback (`collide.mjs` prints "If it can't serve the brief, take: …"). Don't swap in the archetype you like best: hand-picked replacements converge. In the v2 benchmark, two SaaS runs drew different archetypes (Lookbook, Gallery Wall), both replaced them with Console, and the two pages came out as the same structure. If the fallback can't serve the brief either, write one line in the plan saying why both failed, then choose.
 
@@ -86,7 +93,7 @@ Mutation operators (or draw one with `node scripts/collide.mjs`):
 
 Take something from a world unrelated to the brief and steal **one property** from it. This is where original patterns come from.
 
-Run `node scripts/collide.mjs --n 3`, or choose from `data/collisions.csv`. Examples:
+Run `node scripts/collide.mjs --n 3`, or read `data/collisions.csv` as fuel: the worlds show the kind of distance that works; steal from a world the brief suggests, not the next row. Examples:
 
 | Source | Property stolen | Becomes |
 |---|---|---|

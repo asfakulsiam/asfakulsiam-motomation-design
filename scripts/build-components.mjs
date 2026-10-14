@@ -46,7 +46,7 @@ const csvCell = (v) => (/[",\n]/.test(v) ? `"${String(v).replace(/"/g, '""')}"` 
 
 export function render(components) {
   const files = {};
-  const sigIds = new Set(readFileSync(join(SKILL, "data/signatures.csv"), "utf8").split(/\r?\n/).slice(1).map((l) => l.split(",")[0]).filter(Boolean));
+  const sigIds = new Set(readFileSync(join(SKILL, "data/signatures.csv"), "utf8").split(/\r?\n/).filter((l) => !l.startsWith("#")).slice(1).map((l) => l.split(",")[0]).filter(Boolean));
   // catalogue
   const L = [
     "# Component library", "",

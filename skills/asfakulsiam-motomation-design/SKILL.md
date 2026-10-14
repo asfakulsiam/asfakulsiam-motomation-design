@@ -135,7 +135,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, ask the user; never assume. On "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 1. **Tension**: find the conflict inside the brief (calm vs. urgent, heritage vs. new, luxury vs. honest).
 2. **Concept**: resolve the tension in one sentence. This is the idea, not a layout.
-3. **Archetype + Mutation**: pick a page structure from `structures/archetypes.md`, then break one of its rules.
+3. **Archetype + Mutation**: derive the page structure from the brief, with `structures/archetypes.md` and `data/archetypes.csv` as reference and constraint (not a menu), then break one of its rules.
 4. **Forced Collision**: bring in something from an unrelated world (a railway board, a tailor's tape, a darkroom) and steal one property from it.
 5. **Signature Move**: invent the one interaction or motion the site will be remembered for.
 6. **Anti-Sameness Check**: compare against the AI-default list and the project memory log. If it matches either, mutate again.
@@ -204,7 +204,7 @@ node scripts/memory.mjs log --archetype ledger --signature letter-relay --fonts 
 node scripts/contrast.mjs "#111111" "#F4F1EA"   # WCAG contrast check
 ```
 
-If you can't run scripts (chat-only tools), pick from the CSV files in `data/` yourself. Pick deliberately, and never take the first row.
+**Data is fuel, not a menu.** The files in `data/` (archetypes, palettes, fonts, mutations, collisions, motion, signatures, styles) inform the brief. Do not pick from a list; derive from the brief, using the list as reference and constraint. The scripts read these files to draw constraints and check contrast; if you can't run them (chat-only tools), read the CSVs yourself the same way: as constraints to bend to the brief, never a row to copy, and never the first row by default.
 
 ---
 

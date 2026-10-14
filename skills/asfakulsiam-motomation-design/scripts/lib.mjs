@@ -9,6 +9,8 @@ export const DATA = join(SKILL_ROOT, "data");
 
 /** Parse RFC 4180 CSV (quotes, escaped quotes, commas and newlines in fields). */
 export function parseCSV(text) {
+  // leading "# …" lines are notes for the reader ("Fuel, not a menu."), not rows
+  text = text.replace(/^(?:#[^\n]*\n)+/, "");
   const rows = []; let row = []; let field = ""; let q = false;
   for (let i = 0; i < text.length; i++) {
     const c = text[i];

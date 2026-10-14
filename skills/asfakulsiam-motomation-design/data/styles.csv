@@ -1,3 +1,4 @@
+# Fuel, not a menu. Use to inform the brief. Do not pick from the list; derive from the brief, using the list as reference and constraint.
 id,name,keywords,energy,rhythm,motion,type_hint,palette_hint,file
 minimal,Minimal,quiet clean space restraint luxury architecture,1,1-2,1-2,one display + one text; weight contrast,neutrals + one accent,styles/minimal.md
 editorial,Editorial,magazine story columns captions serif,2,2,2,high-contrast serif + book text + mono,paper and ink + print accent,styles/editorial.md
