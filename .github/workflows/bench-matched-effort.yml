@@ -5,13 +5,13 @@ name: "Benchmark — matched effort"
 # then the measure phase on the same runner image. Artifacts: every run folder (index.html, run.json, transcript,
 # checks.json, screenshots) + meta.json, for the judge and score phases, which need other model families and run
 # elsewhere. Needs the repository secret ANTHROPIC_API_KEY; the preflight job stops the run, with a clear message, if
-# it is missing. Trigger: push to bench-v5, or Run workflow.
+# it is missing. Trigger: push to bench-matched-effort, or Run workflow.
 on:
   workflow_dispatch:
     inputs:
       n: { description: "seeds per brief", default: "6" }
   push:
-    branches: [bench-v5]
+    branches: [bench-matched-effort]
 jobs:
   preflight:
     runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
       matrix:
         slug: [studio, hotel, ecommerce, saas, public]
     env:
-      OUT: evals/results/benchmark-v5-${{ github.run_id }}
+      OUT: evals/results/benchmark-matched-effort-${{ github.run_id }}
       N: ${{ inputs.n || '6' }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
     steps:
@@ -70,7 +70,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: bench-v5-${{ matrix.slug }}
+          name: bench-matched-effort-${{ matrix.slug }}
           path: |
             ${{ env.OUT }}/meta.json
             ${{ env.OUT }}/${{ matrix.slug }}/
