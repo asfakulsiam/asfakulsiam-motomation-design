@@ -6,7 +6,7 @@
 // tier: 2
 // deps: react
 // what: Letters of a display line rise and settle into place one by one, driven by scroll position, so scrolling back reverses it.
-// use-when: Play-mood display lines that should feel buoyant; one line per section.
+// use-when: Light-hearted display lines that should feel buoyant; one line per section.
 // avoid-when: Serious or institutional briefs; text that must be readable before it settles (prices, dates).
 // reduced-motion: Letters sit in place; no scroll listener runs.
 // touch: Same as desktop.

@@ -12,7 +12,7 @@ Website for **Ittaghor Studio**, a three-partner architecture practice in Dhaka 
 - Each project shows a simple plan (draw it in SVG) and an "image" (CSS or SVG).
 - Studio, process (site visit → sketch → brick sample → build) and contact: studio@ittaghor.studio.
 
-**Expect:** Quiet mood, large imagery, plans viewable, a signature tied to light, brick or courtyards.
+**Expect:** a calm, still register, large imagery, plans viewable, a signature tied to light, brick or courtyards.
 
 ## Benchmark conditions (identical for baseline and skill runs)
 - Deliver **one self-contained `index.html`** (inline CSS and JS). Allowed external resources: Google Fonts or Fontshare CSS, and GSAP 3 + ScrollTrigger from a CDN. No other libraries, no image URLs: draw imagery with CSS, SVG or canvas.

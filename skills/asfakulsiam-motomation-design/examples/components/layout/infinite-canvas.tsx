@@ -6,7 +6,7 @@
 // tier: 2
 // deps: react
 // what: Drag (or use arrow keys) to pan an endless wall of tiles that repeats in every direction, with a little momentum when you let go.
-// use-when: The Gallery Wall archetype: archives, mood boards, studios with lots of visual work.
+// use-when: The Gallery Wall archetype: archives, pin boards, studios with lots of visual work.
 // avoid-when: Fewer than ~12 tiles; content that needs order; as the only way to reach the work (also provide a list).
 // reduced-motion: No momentum; panning still works.
 // touch: One-finger drag pans; the page doesn't scroll while dragging inside.

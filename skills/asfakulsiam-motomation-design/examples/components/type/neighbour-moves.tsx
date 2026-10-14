@@ -6,7 +6,7 @@
 // tier: 2
 // deps: react
 // what: Each letter of a name has its own small move on hover (lift, tilt, stretch, spin, drop), so the word feels like a cast of characters.
-// use-when: Personal names, studio names and play-mood logotypes of 3–12 letters.
+// use-when: Personal names, studio names and light-hearted logotypes of 3–12 letters.
 // avoid-when: Navigation, body text, or brands that must feel calm.
 // reduced-motion: No hover moves.
 // touch: A tap on a letter plays its move once.

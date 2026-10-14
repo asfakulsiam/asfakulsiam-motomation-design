@@ -8,7 +8,6 @@ Type a command at the start of a message. Commands combine with flags. Without a
 |---|---|---|
 | `--tier` | 1–5 | Force a motion tier |
 | `--energy` `--rhythm` `--motion` | 1–3 | Set a dial (see `principles/dials.md`) |
-| `--mood` | quiet · editorial · play | Set all three dials from a preset |
 | `--style` | a file in `styles/` | Apply a visual language |
 | `--stack` | next · react · vanilla · astro | Target framework. Without it: detect from the project, else ask (Step 0 in `thinking/sequence.md`) |
 | `--seed` | any number | Repeatable collision draws |
@@ -109,4 +108,4 @@ The final pass: spacing rhythm, alignment, typographic details (quotes, dashes, 
 - New site: `/shape` → approve → `/build` → `/critique` → `/polish`
 - Stuck on ideas: `/invent` → pick → `/build --review`
 - Existing site feels generic: `/critique` → `/mutate` → `/type` → `/signature`
-- Product launch: `/shape --mood=play` → `/motomate hero-product` → `/audit`
+- Product launch: `/shape --energy=3 --rhythm=3` → `/motomate hero-product` → `/audit`

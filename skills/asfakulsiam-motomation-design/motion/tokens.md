@@ -47,7 +47,7 @@ GSAP equivalents: `"power3.out"` / `"expo.out"` for reveals, `"power2.inOut"` fo
 | Tooltips, small popovers | 140–220ms |
 | Dropdowns, menus | 180–260ms |
 | Modals, drawers | 240–420ms |
-| Editorial text reveals | 600–1000ms (+ stagger 60–120ms) |
+| Long-form text reveals | 600–1000ms (+ stagger 60–120ms) |
 | Page transitions | 400–700ms |
 | Scrubbed scroll | no duration: tied to scroll distance |
 

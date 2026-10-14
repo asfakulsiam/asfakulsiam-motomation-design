@@ -12,7 +12,7 @@ measured by `scripts/gate.mjs` (axis C); the rest are checked by reading, in `ga
 |---|---|---|---|---|---|
 | copy-01 | Headlines are specific | A generic line fits any company, so it sticks to none of them | "Deploys in 90 seconds, on a third of the servers" | "Take your business to the next level" | read |
 | copy-02 | Write for someone in a hurry | People skim. Most words on a page are never read | Short sentences that start with a verb: "Book a room. Pay at the desk." | A sentence with three clauses and two asides before its point | read |
-| copy-03 | Sell above the fold | Many visitors never scroll, so the first screen carries the offer | The first screen says what it is, who it's for and the next step | The offer first appears three screens down, after a mood film | read |
+| copy-03 | Sell above the fold | Many visitors never scroll, so the first screen carries the offer | The first screen says what it is, who it's for and the next step | The offer first appears three screens down, after a brand film | read |
 | copy-04 | No em dashes in visible copy | They have become a tell of generated text. A full stop or a comma reads cleaner | "Fast. Simple. Reliable." | "Fast — simple — reliable" | **C** |
 | copy-05 | Benefit first, then the feature | The feature says what it is; the benefit says why it matters to the reader | "Ship in minutes (one command deploys it)" | "One-command deploy" | read |
 | copy-06 | Break up blocks of text | A wall of text looks like work, so it gets skipped | Paragraphs of 2 to 4 lines | A 12-line paragraph on a landing page | **C** (paragraph length, advisory) |

@@ -6,7 +6,7 @@
 // tier: 1
 // deps: react
 // what: A toggle whose knob stretches while pressed and squashes as it lands on the other side, like a soft rubber key.
-// use-when: Play-mood products and settings panels where a little character is welcome.
+// use-when: Light-hearted products and settings panels where a little character is welcome.
 // avoid-when: Serious financial or medical settings; dense settings tables.
 // reduced-motion: The knob moves without stretching.
 // touch: Same as desktop.

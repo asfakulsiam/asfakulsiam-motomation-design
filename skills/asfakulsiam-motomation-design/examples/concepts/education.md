@@ -19,7 +19,7 @@ Draw 1
   If it can't serve the brief, take: The Field Guide (field-guide), not a favourite
   Mutation   : Reverse the reveal: start complete and take away as you scroll
   Collision  : rickshaw art (Dhaka street culture) → steal "bold painted panels and borders"
-               e.g. a Play-mood frame system for a Bangladeshi brand
+               e.g. a loud painted frame system for a Bangladeshi brand
   Kinetic    : a grid cell travels, driven by scroll position
   Seed move  : Darkroom Develop: photos develop from blank paper
   Fingerprint: layout=sequence · tier=2 · signature_type=scroll

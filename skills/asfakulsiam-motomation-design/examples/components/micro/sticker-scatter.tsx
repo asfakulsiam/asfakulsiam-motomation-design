@@ -6,7 +6,7 @@
 // tier: 2
 // deps: react
 // what: Clicking the logo or name bursts a handful of on-brand stickers (emoji or short glyphs) that fly out, spin, land and fade, like emptying a pocket of stickers.
-// use-when: Play-mood personal sites, festivals, kids' brands and events; the logo only.
+// use-when: Light-hearted personal sites, festivals, kids' brands and events; the logo only.
 // avoid-when: Serious or institutional briefs; buttons that do something else; repeated clicks on every page element.
 // reduced-motion: Stickers appear around the logo and fade without flying or spinning.
 // touch: Works on tap.

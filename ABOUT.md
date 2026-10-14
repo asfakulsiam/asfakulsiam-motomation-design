@@ -29,7 +29,7 @@ A good website has one idea and says it well. Type is chosen first and with a re
 ## A typical session, start to finish
 
 1. **You install it** in your project with one command (`npx skills add asfakulsiam/asfakulsiam-motomation-design`) and give your agent a brief, for example: "/build a site for a 12-room hotel in Sylhet that sells quiet."
-2. **The agent reads the brief** and notes who it's for, what they need to do, the mood, and what's missing.
+2. **The agent reads the brief** and notes who it's for, what they need to do, how it should feel, and what's missing.
 3. **It runs the Thinking Sequence** and shows you a short plan: tension, concept, page structure and how it's broken, the drawn collision, the signature move, the motion tier, the fonts and palette, and what it rejected. If you asked to review first (`--review`), it stops here.
 4. **It writes two short files**, `DESIGN.md` (type, colour, layout) and `MOTION.md` (what moves and why), so later changes stay consistent.
 5. **It builds the page**, using the skill's own component library for standard effects and designing the signature moment for your brief.

@@ -3,7 +3,7 @@
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** excitement, then the facts (date, place, line-up, tickets) in seconds.
-**Default mood:** Play · Dials ENERGY 3 · RHYTHM 3 · MOTION 3
+**Starting dials** (the brief overrides; style is derived from the brief, with `styles/` as reference): ENERGY 3 · RHYTHM 3 · MOTION 3
 
 **Archetypes that work:** Poster · Stage · Timeline (schedule) · Index (line-up)
 

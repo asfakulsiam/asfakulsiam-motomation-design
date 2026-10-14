@@ -6,7 +6,7 @@
 // tier: 1
 // deps: react
 // what: A film-grain layer over a section or the whole page, static by default or gently flickering at a low frame rate.
-// use-when: Analogue, photographic, warm or printed moods; to take the digital edge off flat colour.
+// use-when: Analogue, photographic, warm or printed brands; to take the digital edge off flat colour.
 // avoid-when: Over small text at high opacity; on clinical, technical brands; animated on low-end mobile.
 // reduced-motion: Static grain.
 // touch: Static grain (flicker is skipped on coarse pointers to save battery).

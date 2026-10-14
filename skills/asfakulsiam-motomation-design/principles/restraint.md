@@ -21,7 +21,7 @@ Restraint is what makes a minimal site feel expensive instead of empty. It is al
 |---|---|
 | Minimal canvas (quiet ground, lots of air) | the content is dense by nature: dashboards, data tools, catalogues with filters, timetables |
 | Maximal type (display at 8–28vw) | the data or the product UI is the hero; then type is compact, tabular and legible at a glance (compact scale in `principles/typography.md` §3) |
-| Editorial grid (folios, hairlines, margin captions) | the task is operational; use a functional grid (panels, tables, toolbars) |
+| Folio grid (index numbers, hairlines, margin captions) | the task is operational; use a functional grid (panels, tables, toolbars) |
 | Monochrome base, one accent as the only colour | colour encodes information (status, categories, series). Data colours are information, not accents; the one-brand-accent budget and the Restraint Gate still hold. |
 | Typography as hero ("set it large", Law 2) | imagery, data or the product is what the visitor came for. Type still leads by clarity, and is still chosen first and with a reason. |
 
@@ -52,7 +52,7 @@ Benchmark v3 judged reduced-motion strips on their own: the skill's Tier 4 pages
 
 1. **Don't mount the canvas.** Render a still composed for the purpose, in SVG or CSS. Every Tier 4 background in `examples/components/backgrounds/` ships one (aurora → a long-exposure plate, meteors → star trails, globe → a chart plate, particle-field → a star chart, beams → pools of light on the floor, mesh-gradient → a colour study, liquid-field → a marbled sheet).
 2. **Translate the motion into the picture.** What moved becomes something drawn: time as trails, flow as bands, a path as a line, a sequence as numbered plates. The still says what the motion said.
-3. **Keep the mood, change the frame.** Same palette, same density, same weight of composition; a different arrangement from any frame of the animation. If a screenshot of the still could be mistaken for a paused frame, it's a poster, not a still.
+3. **Keep the feel, change the frame.** Same palette, same density, same weight of composition; a different arrangement from any frame of the animation. If a screenshot of the still could be mistaken for a paused frame, it's a poster, not a still.
 4. **Unpin.** A pinned chapter or scrubbed sequence becomes a stack of plates: each step in normal flow, fully visible, each with its own still. Nothing stays pinned while text scrolls past it.
 5. **Complete on its own.** Judged alone, with no knowledge of the full version, the still must look finished: a focal point, the type set against it with AA contrast, no empty box where the canvas was.
 

@@ -9,7 +9,7 @@ Before any design decision, turn the request into a brief. Most requests are one
 | 1 | **Who is it for?** One real person, not "users" | Category, product, wording |
 | 2 | **What must they do or feel?** One primary job | The verb in the request ("sell", "book", "hire me") |
 | 3 | **What is true and specific?** Real names, places, materials, numbers | Any detail the user gave; never invent numbers |
-| 4 | **What is the mood?** Quiet, Editorial or Play | Category defaults in `categories/` |
+| 4 | **How should it feel?** In the brief's own words ("calm", "loud", "like a magazine") | The brief's wording and the category's job; `styles/` as reference, never a fixed set |
 | 5 | **What is the stack?** | Files in the repo (`package.json`, framework config). Not inferable otherwise: ask, per Step 0 in `thinking/sequence.md`. Never a default |
 | 6 | **What tier can it afford?** | Audience devices, content weight, timeline |
 | 7 | **What must not happen?** | Brand rules, accessibility needs, legal limits |

@@ -4,7 +4,7 @@ Every design sets three dials, each at **1, 2 or 3**. There are three levels, no
 
 | Dial | 1 (Calm) | 2 (Balanced) | 3 (Bold) | What it controls |
 |---|---|---|---|---|
-| **ENERGY** | Quiet, still, lots of air | Confident, clear contrast | Loud, huge type, strong colour moments | Type scale jumps, contrast, accent strength |
+| **ENERGY** | Still, lots of air | Confident, clear contrast | Loud, huge type, strong colour moments | Type scale jumps, contrast, accent strength |
 | **RHYTHM** | Uniform, predictable sections | Consistent with deliberate breaks | Every section a different composition | Layout variation, grid breaks, asymmetry |
 | **MOTION** | Hover/focus/press only | Reveals, pinned moments, kinetic type | Scroll-as-film, choreography, WebGL | Motion tier and quantity |
 
@@ -16,15 +16,11 @@ Every design sets three dials, each at **1, 2 or 3**. There are three levels, no
 | 2 | Tier 2 | 1–3 |
 | 3 | Tier 5 for one chapter, Tier 2–3 elsewhere | 2–5 (Tier 4 only if the concept is spatial) |
 
-## Moods (dial presets)
+## Where the settings come from
 
-| Mood | ENERGY | RHYTHM | MOTION | Feels like | Typical categories |
-|---|---|---|---|---|---|
-| **Quiet** | 1 | 1 | 1–2 | A gallery, a hotel lobby, a museum label | Luxury, hotel, wellness, architecture, organisations |
-| **Editorial** | 2 | 2 | 2 | A great magazine | Studios, publications, SaaS marketing, e-commerce |
-| **Play** | 3 | 3 | 2–3 | A creative festival poster that moves | Portfolios, events, launches, music, youth brands |
+There are no presets. Each dial is set from the brief: what the visitor must do, how the brand should feel in the brief's own words, and what the concept needs. When a visual language helps, `styles/` is the reference: each row of `data/styles.csv` carries the energy, rhythm and motion that language usually runs at. Treat those as a starting point to argue with, not a value to copy.
 
-Set the mood with `--mood=quiet|editorial|play`, or set dials directly with `--energy=3 --rhythm=2 --motion=3`.
+Set dials directly with `--energy=3 --rhythm=2 --motion=3`.
 
 ## Levers (how dials become decisions)
 

@@ -39,15 +39,15 @@ If there is even a small chance this skill applies to a web design task, use it.
 | Need new ideas / "make it different" | `invention/mad-artist.md` + run `scripts/collide.mjs` |
 | Choosing a page structure | `structures/archetypes.md` |
 | Setting intensity | `principles/dials.md` |
-| Typography | `principles/typography.md` + `node scripts/search.mjs fonts "<mood>"` |
-| Colour | `principles/color.md` + `node scripts/search.mjs palettes "<mood>"` |
+| Typography | `principles/typography.md` + `node scripts/search.mjs fonts "<words from the brief>"` |
+| Colour | `principles/color.md` + `node scripts/search.mjs palettes "<words from the brief>"` |
 | Layout and spacing | `principles/layout.md` |
 | Motion of any kind | `motion/tokens.md` first, then the tier file |
 | Tier 1 CSS / Tier 2 GSAP / Tier 3 transitions & Lottie/Rive / Tier 4 WebGL / Tier 5 Motomation | `motion/tier-1-basic.md` … `motion/tier-5-motomation.md` |
 | Scroll-as-film storyboard | `motion/tier-5-motomation.md` + `templates/MOTION.md` |
 | Timing sheet, stagger/overlap, camera moves, chapter rhythm (Tier 3–5) | `motion/choreography.md` |
 | Signature moves and effects | `signatures/` + `references/effects-vocabulary.md` |
-| A visual style (glass, brutalist, swiss…) | `styles/<style>.md` |
+| A visual style (glass, brutalist, swiss…) | `styles/<style>.md`. Style is derived from the brief; `styles/` informs it, there are no presets |
 | A site category (hotel, SaaS, studio…) | `categories/<category>.md` |
 | **Any build or redesign (always, before step 6 Build)** | `craft/copy.md` + `craft/seo.md` + `craft/performance.md` + `craft/security.md` |
 | Accessibility, responsive, mobile motion, scroll sequences | `craft/*.md` |
@@ -64,7 +64,7 @@ Files are short on purpose. Load them as you need them, not all at once. The one
 ## Default flow (`/build`)
 
 ```
-0. Read the room      thinking/brief-inference.md   → audience, job, mood, constraints, gaps
+0. Read the room      thinking/brief-inference.md   → audience, job, feel, constraints, gaps
 1. Thinking Sequence  thinking/sequence.md          → STACK (named, or ask; load the adapter),
                                                       tension, concept, archetype+mutation,
                                                       collision, signature move, anti-sameness,
@@ -148,7 +148,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 | Tier | Name | Tools | When |
 |---|---|---|---|
 | 1 | Basic | CSS transitions, `@keyframes`, View Transitions for same-page state | Every site. Hover, focus, press, reveal |
-| 2 | Intermediate | GSAP core, ScrollTrigger, SplitText, Lenis | Editorial reveals, pinned sections, kinetic type |
+| 2 | Intermediate | GSAP core, ScrollTrigger, SplitText, Lenis | Line reveals, pinned sections, kinetic type |
 | 3 | Pro | Cross-document View Transitions, Flip, Lottie, Rive, MorphSVG | Page-to-page continuity, illustrated product stories |
 | 4 | Max | Three.js / OGL, GLSL shaders, WebGPU where supported | When the concept is spatial, material, or lit |
 | 5 | **Motomation** | Scroll-scrubbed GSAP timelines + image sequence / video scrub + optional WebGL layer, synced by Lenis | When the story should play like After Effects as the user scrolls |
@@ -212,7 +212,7 @@ If you can't run scripts (chat-only tools), pick from the CSV files in `data/` y
 
 `/shape` `/build` `/invent` `/signature` `/motomate` `/animate` `/type` `/bolder` `/quieter` `/distill` `/mutate` `/overdrive` `/critique` `/audit` `/study` `/polish` `/dials` `/help` `/version` `/check-update` `/update-skill`
 
-Flags: `--tier=1..5` `--energy=1..3` `--rhythm=1..3` `--motion=1..3` `--mood=quiet|editorial|play` `--stack=next|react|vanilla|astro` `--seed=<n>` `--review` (stop after the preview block)
+Flags: `--tier=1..5` `--energy=1..3` `--rhythm=1..3` `--motion=1..3` `--stack=next|react|vanilla|astro` `--seed=<n>` `--review` (stop after the preview block)
 
 Full behaviour of each command is in `commands/overview.md`. Critique output format is in `commands/critique-format.md`.
 

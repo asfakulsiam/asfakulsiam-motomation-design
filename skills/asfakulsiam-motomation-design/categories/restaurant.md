@@ -3,7 +3,7 @@
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** appetite, then a table: hours, menu, booking, location.
-**Default mood:** Editorial or Play · Dials ENERGY 2 · RHYTHM 2 · MOTION 2
+**Starting dials** (the brief overrides; style is derived from the brief, with `styles/` as reference): ENERGY 2 · RHYTHM 2 · MOTION 2
 
 **Archetypes that work:** Letter (the chef's note) · Broadsheet (a menu as a newspaper) · Poster · Field Guide (ingredients)
 

@@ -1,41 +1,41 @@
-name,mood,ground,surface,ink,muted,accent,accent_ink,story,accent_text,mode,pair
-Paper & Vermilion,editorial,#F3F0EA,#EAE6DE,#151412,#5E5A53,#C8401C,#FFFFFF,"printed matter, newsrooms, studios",large-only,light,Vermilion After Hours
-Bone & Graphite,quiet,#ECE8E1,#E2DDD4,#1C1C1A,#5A5852,#8A6A3B,#FFFFFF,"architecture, interiors, calm portfolios",large-only,light,Graphite & Bone
-Darkroom,play,#0E0D0B,#1A1814,#F2EEE6,#A8A196,#E0442B,#0E0D0B,"film, photography, Motomation chapters",body,dark,Darkroom Contact Sheet
-Night Brass,quiet,#0D0D0F,#18181B,#EDEBE6,#A3A09A,#C9A15B,#0D0D0F,"hotels at night, fragrance, watches",body,dark,Day Brass
-Signal Green Console,editorial,#0B0F0C,#121A14,#E3F2E6,#8FA894,#3DDC84,#0B0F0C,"dev tools, terminals, technical launches",body,dark,none
-Swiss Red,editorial,#FAFAF7,#EFEFEA,#111111,#555555,#E30613,#FFFFFF,"Swiss style, engineering, institutions",body,light,Swiss Red at Night
-Ultramarine Press,editorial,#F5F3EE,#EBE8E1,#14161F,#555B6B,#2337C6,#FFFFFF,"publications, culture, galleries",body,light,Ultramarine Night Press
-Clay & Moss,quiet,#EFE9E1,#E4DCD1,#2A241E,#6B6157,#5C7A48,#FFFFFF,"ceramics, food, sustainability",large-only,light,Moss After Rain
-Safelight,play,#140B0A,#21110F,#F6E9E2,#B89A90,#FF5A3C,#140B0A,"darkroom, music, nightlife",body,dark,none
-Bauhaus Primaries,play,#F2EFE6,#E7E2D5,#141414,#565452,#1F4FD8,#FFFFFF,"education, design schools, playful systems",body,light,Bauhaus Blackboard
-Citrus Brutal,play,#FFF6D6,#FFE9A3,#111111,#4A4536,#FF4D00,#111111,"neobrutalism, indie tools, events",large-only,light,Citrus Blackout
-Lagoon,quiet,#EEF3F2,#E1EAE8,#10201E,#4C5F5C,#0F7C72,#FFFFFF,"wellness, coastal hotels, health",body,light,Night Lagoon
-Ink & Rose,editorial,#F7F1EF,#EFE5E2,#1D1517,#655457,#B4325A,#FFFFFF,"beauty, fashion, personal brands",body,light,Rose After Dark
-Concrete & Signal,editorial,#E9E9E6,#DCDCD8,#161616,#555553,#C2410C,#FFFFFF,"architecture, urban, industrial products",large-only,light,Wet Concrete
-Midnight Ultraviolet,play,#0C0A14,#16122A,#EEEAFB,#A49DC4,#9B7BFF,#0C0A14,"music, games: only when violet is the concept",body,dark,none
-Oxblood Library,quiet,#F1ECE4,#E6DFD3,#1E1614,#62554F,#7A1F1F,#FFFFFF,"heritage, law, literary brands",body,light,Oxblood Reading Room
-Monsoon Dhaka,editorial,#ECEFEA,#DFE5DE,#151A16,#525C54,#1E6B52,#FFFFFF,"Bangladeshi brands, rain, rivers, green heritage",body,light,Monsoon Night
-Saffron Market,play,#FBF4E8,#F3E6CF,#1F1610,#64574A,#A8550F,#FFFFFF,"food, festivals, markets",body,light,Saffron Night Market
-Arctic Lab,quiet,#F4F7F9,#E8EEF2,#0F1820,#4F5D6A,#1E6FD9,#FFFFFF,"science, health tech, precise SaaS",body,light,Arctic Lab Dark
-Graphite Mono,quiet,#111111,#1B1B1B,#EDEDED,#9A9A9A,#FFFFFF,#111111,stark minimal portfolios: accent is pure white,body,dark,none
-Sun-Bleached,quiet,#F6EFE6,#EEE3D4,#2B2118,#6E5E4E,#C2562F,#FFFFFF,"travel, summer hotels, ceramics",large-only,light,Sun-Bleached Dusk
-Pine & Fog,quiet,#E9ECE8,#DCE1DB,#17201B,#526057,#2F5D46,#FFFFFF,"outdoors, cabins, nature non-profits",body,light,Pine at Night
-Vermilion After Hours,editorial,#15120C,#211D15,#F2EFE8,#B3AC9E,#E04A22,#15120C,"dark-mode pair of Paper & Vermilion: printed matter, newsrooms, studios",body,dark,Paper & Vermilion
-Graphite & Bone,quiet,#14120D,#211C15,#F1EEE9,#B3AB9E,#9F7A44,#14120D,"dark-mode pair of Bone & Graphite: architecture, interiors, calm portfolios",body,dark,Bone & Graphite
-Darkroom Contact Sheet,play,#F3F1EC,#EBE7E0,#191610,#675F51,#C5341D,#FFFFFF,"light-mode pair of Darkroom: film, photography, Motomation chapters",body,light,Darkroom
-Day Brass,quiet,#EDEDF2,#E1E1EA,#111118,#515167,#80602A,#FFFFFF,"light-mode pair of Night Brass: hotels at night, fragrance, watches",body,light,Night Brass
-Swiss Red at Night,editorial,#14140D,#212115,#F1F1E9,#B3B39E,#F9232F,#14140D,"dark-mode pair of Swiss Red: Swiss style, engineering, institutions",body,dark,Swiss Red
-Ultramarine Night Press,editorial,#15120C,#211D15,#F2EFE9,#B3AD9E,#6A79E5,#15120C,"dark-mode pair of Ultramarine Press: publications, culture, galleries",body,dark,Ultramarine Press
-Moss After Rain,quiet,#15110C,#211C15,#F3EEE8,#B3AA9E,#668750,#15110C,"dark-mode pair of Clay & Moss: ceramics, food, sustainability",body,dark,Clay & Moss
-Bauhaus Blackboard,play,#15130C,#211E15,#F3F0E8,#B3AE9E,#577DE7,#15130C,"dark-mode pair of Bauhaus Primaries: education, design schools, playful systems",body,dark,Bauhaus Primaries
-Citrus Blackout,play,#15130C,#211E15,#F3F1E7,#B3AE9E,#FF4D00,#15130C,"dark-mode pair of Citrus Brutal: neobrutalism, indie tools, events",body,dark,Citrus Brutal
-Night Lagoon,quiet,#0E1312,#161F1E,#EAF0EF,#9EB3AF,#118E83,#0E1312,"dark-mode pair of Lagoon: wellness, coastal hotels, health",body,dark,Lagoon
-Rose After Dark,editorial,#150F0C,#211815,#F3EAE7,#B3A39E,#CF547A,#150F0C,"dark-mode pair of Ink & Rose: beauty, fashion, personal brands",body,dark,Ink & Rose
-Wet Concrete,editorial,#121210,#1C1C19,#EEEEEC,#AEAEA3,#E84E0E,#121210,"dark-mode pair of Concrete & Signal: architecture, urban, industrial products",body,dark,Concrete & Signal
-Oxblood Reading Room,quiet,#15120C,#211C15,#F3EEE7,#B3AB9E,#D45454,#15120C,"dark-mode pair of Oxblood Library: heritage, law, literary brands",body,dark,Oxblood Library
-Monsoon Night,editorial,#10130E,#1A1E17,#EDF0EB,#A6B39E,#299371,#10130E,"dark-mode pair of Monsoon Dhaka: Bangladeshi brands, rain, rivers, green heritage",body,dark,Monsoon Dhaka
-Saffron Night Market,play,#15120C,#211C15,#F3EFE7,#B3AB9E,#CD6812,#15120C,"dark-mode pair of Saffron Market: food, festivals, markets",body,dark,Saffron Market
-Arctic Lab Dark,quiet,#0C1115,#151C21,#E8EEF2,#9EAAB3,#337FE3,#0C1115,"dark-mode pair of Arctic Lab: science, health tech, precise SaaS",body,dark,Arctic Lab
-Sun-Bleached Dusk,quiet,#15110C,#211C15,#F3EEE7,#B3AA9E,#CF5F37,#15110C,"dark-mode pair of Sun-Bleached: travel, summer hotels, ceramics",body,dark,Sun-Bleached
-Pine at Night,quiet,#10120F,#191D18,#ECEFEB,#A4B1A0,#478C6A,#10120F,"dark-mode pair of Pine & Fog: outdoors, cabins, nature non-profits",body,dark,Pine & Fog
+name,ground,surface,ink,muted,accent,accent_ink,story,accent_text,mode,pair
+Paper & Vermilion,#F3F0EA,#EAE6DE,#151412,#5E5A53,#C8401C,#FFFFFF,"printed matter, newsrooms, studios",large-only,light,Vermilion After Hours
+Bone & Graphite,#ECE8E1,#E2DDD4,#1C1C1A,#5A5852,#8A6A3B,#FFFFFF,"architecture, interiors, calm portfolios",large-only,light,Graphite & Bone
+Darkroom,#0E0D0B,#1A1814,#F2EEE6,#A8A196,#E0442B,#0E0D0B,"film, photography, Motomation chapters",body,dark,Darkroom Contact Sheet
+Night Brass,#0D0D0F,#18181B,#EDEBE6,#A3A09A,#C9A15B,#0D0D0F,"hotels at night, fragrance, watches",body,dark,Day Brass
+Signal Green Console,#0B0F0C,#121A14,#E3F2E6,#8FA894,#3DDC84,#0B0F0C,"dev tools, terminals, technical launches",body,dark,none
+Swiss Red,#FAFAF7,#EFEFEA,#111111,#555555,#E30613,#FFFFFF,"Swiss style, engineering, institutions",body,light,Swiss Red at Night
+Ultramarine Press,#F5F3EE,#EBE8E1,#14161F,#555B6B,#2337C6,#FFFFFF,"publications, culture, galleries",body,light,Ultramarine Night Press
+Clay & Moss,#EFE9E1,#E4DCD1,#2A241E,#6B6157,#5C7A48,#FFFFFF,"ceramics, food, sustainability",large-only,light,Moss After Rain
+Safelight,#140B0A,#21110F,#F6E9E2,#B89A90,#FF5A3C,#140B0A,"darkroom, music, nightlife",body,dark,none
+Bauhaus Primaries,#F2EFE6,#E7E2D5,#141414,#565452,#1F4FD8,#FFFFFF,"education, design schools, playful systems",body,light,Bauhaus Blackboard
+Citrus Brutal,#FFF6D6,#FFE9A3,#111111,#4A4536,#FF4D00,#111111,"neobrutalism, indie tools, events",large-only,light,Citrus Blackout
+Lagoon,#EEF3F2,#E1EAE8,#10201E,#4C5F5C,#0F7C72,#FFFFFF,"wellness, coastal hotels, health",body,light,Night Lagoon
+Ink & Rose,#F7F1EF,#EFE5E2,#1D1517,#655457,#B4325A,#FFFFFF,"beauty, fashion, personal brands",body,light,Rose After Dark
+Concrete & Signal,#E9E9E6,#DCDCD8,#161616,#555553,#C2410C,#FFFFFF,"architecture, urban, industrial products",large-only,light,Wet Concrete
+Midnight Ultraviolet,#0C0A14,#16122A,#EEEAFB,#A49DC4,#9B7BFF,#0C0A14,"music, games: only when violet is the concept",body,dark,none
+Oxblood Library,#F1ECE4,#E6DFD3,#1E1614,#62554F,#7A1F1F,#FFFFFF,"heritage, law, literary brands",body,light,Oxblood Reading Room
+Monsoon Dhaka,#ECEFEA,#DFE5DE,#151A16,#525C54,#1E6B52,#FFFFFF,"Bangladeshi brands, rain, rivers, green heritage",body,light,Monsoon Night
+Saffron Market,#FBF4E8,#F3E6CF,#1F1610,#64574A,#A8550F,#FFFFFF,"food, festivals, markets",body,light,Saffron Night Market
+Arctic Lab,#F4F7F9,#E8EEF2,#0F1820,#4F5D6A,#1E6FD9,#FFFFFF,"science, health tech, precise SaaS",body,light,Arctic Lab Dark
+Graphite Mono,#111111,#1B1B1B,#EDEDED,#9A9A9A,#FFFFFF,#111111,stark minimal portfolios: accent is pure white,body,dark,none
+Sun-Bleached,#F6EFE6,#EEE3D4,#2B2118,#6E5E4E,#C2562F,#FFFFFF,"travel, summer hotels, ceramics",large-only,light,Sun-Bleached Dusk
+Pine & Fog,#E9ECE8,#DCE1DB,#17201B,#526057,#2F5D46,#FFFFFF,"outdoors, cabins, nature non-profits",body,light,Pine at Night
+Vermilion After Hours,#15120C,#211D15,#F2EFE8,#B3AC9E,#E04A22,#15120C,"dark-mode pair of Paper & Vermilion: printed matter, newsrooms, studios",body,dark,Paper & Vermilion
+Graphite & Bone,#14120D,#211C15,#F1EEE9,#B3AB9E,#9F7A44,#14120D,"dark-mode pair of Bone & Graphite: architecture, interiors, calm portfolios",body,dark,Bone & Graphite
+Darkroom Contact Sheet,#F3F1EC,#EBE7E0,#191610,#675F51,#C5341D,#FFFFFF,"light-mode pair of Darkroom: film, photography, Motomation chapters",body,light,Darkroom
+Day Brass,#EDEDF2,#E1E1EA,#111118,#515167,#80602A,#FFFFFF,"light-mode pair of Night Brass: hotels at night, fragrance, watches",body,light,Night Brass
+Swiss Red at Night,#14140D,#212115,#F1F1E9,#B3B39E,#F9232F,#14140D,"dark-mode pair of Swiss Red: Swiss style, engineering, institutions",body,dark,Swiss Red
+Ultramarine Night Press,#15120C,#211D15,#F2EFE9,#B3AD9E,#6A79E5,#15120C,"dark-mode pair of Ultramarine Press: publications, culture, galleries",body,dark,Ultramarine Press
+Moss After Rain,#15110C,#211C15,#F3EEE8,#B3AA9E,#668750,#15110C,"dark-mode pair of Clay & Moss: ceramics, food, sustainability",body,dark,Clay & Moss
+Bauhaus Blackboard,#15130C,#211E15,#F3F0E8,#B3AE9E,#577DE7,#15130C,"dark-mode pair of Bauhaus Primaries: education, design schools, playful systems",body,dark,Bauhaus Primaries
+Citrus Blackout,#15130C,#211E15,#F3F1E7,#B3AE9E,#FF4D00,#15130C,"dark-mode pair of Citrus Brutal: neobrutalism, indie tools, events",body,dark,Citrus Brutal
+Night Lagoon,#0E1312,#161F1E,#EAF0EF,#9EB3AF,#118E83,#0E1312,"dark-mode pair of Lagoon: wellness, coastal hotels, health",body,dark,Lagoon
+Rose After Dark,#150F0C,#211815,#F3EAE7,#B3A39E,#CF547A,#150F0C,"dark-mode pair of Ink & Rose: beauty, fashion, personal brands",body,dark,Ink & Rose
+Wet Concrete,#121210,#1C1C19,#EEEEEC,#AEAEA3,#E84E0E,#121210,"dark-mode pair of Concrete & Signal: architecture, urban, industrial products",body,dark,Concrete & Signal
+Oxblood Reading Room,#15120C,#211C15,#F3EEE7,#B3AB9E,#D45454,#15120C,"dark-mode pair of Oxblood Library: heritage, law, literary brands",body,dark,Oxblood Library
+Monsoon Night,#10130E,#1A1E17,#EDF0EB,#A6B39E,#299371,#10130E,"dark-mode pair of Monsoon Dhaka: Bangladeshi brands, rain, rivers, green heritage",body,dark,Monsoon Dhaka
+Saffron Night Market,#15120C,#211C15,#F3EFE7,#B3AB9E,#CD6812,#15120C,"dark-mode pair of Saffron Market: food, festivals, markets",body,dark,Saffron Market
+Arctic Lab Dark,#0C1115,#151C21,#E8EEF2,#9EAAB3,#337FE3,#0C1115,"dark-mode pair of Arctic Lab: science, health tech, precise SaaS",body,dark,Arctic Lab
+Sun-Bleached Dusk,#15110C,#211C15,#F3EEE7,#B3AA9E,#CF5F37,#15110C,"dark-mode pair of Sun-Bleached: travel, summer hotels, ceramics",body,dark,Sun-Bleached
+Pine at Night,#10120F,#191D18,#ECEFEB,#A4B1A0,#478C6A,#10120F,"dark-mode pair of Pine & Fog: outdoors, cabins, nature non-profits",body,dark,Pine & Fog

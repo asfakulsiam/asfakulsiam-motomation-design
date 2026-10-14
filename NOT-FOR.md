@@ -1,6 +1,6 @@
 # Not for
 
-This skill is opinionated. Use something else, or turn it down with `--mood=quiet --motion=1`, when:
+This skill is opinionated. Use something else, or turn it down with `--energy=1 --motion=1`, when:
 
 - **The interface is a dense tool:** admin panels, data tables, IDEs, trading terminals. Use a design system (shadcn/ui, Radix, Carbon) and Tier 1 motion only.
 - **The brand has a strict design system already.** Follow it. Use `/critique` and `/polish` here, not `/build`.

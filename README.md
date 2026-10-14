@@ -65,7 +65,7 @@ Motomation Design changes the thinking:
 - **Motomation (Tier 5):** scroll-as-film. Storyboards with timecodes, image-sequence, video-scrub and DOM-timeline techniques, ffmpeg pipelines, frame budgets, and a designed reduced-motion storyboard.
 - **22 signature moves**, each with idea, reason, code, the detail that matters, an off-switch, and a **paste-ready prompt** for any AI tool.
 - **A house style:** minimal canvas, maximal type, one accent, editorial grid, motion with weight.
-- **3 dials** (Energy, Rhythm, Motion, each 1–3) and 3 moods (Quiet, Editorial, Play).
+- **3 dials** (Energy, Rhythm, Motion, each 1–3), set from the brief; no presets.
 - **12 site categories** and **10 visual styles**, each with its own guidance.
 - **Searchable data:** 68 components, 80 fonts (with axes, licences and script coverage, 15 of them Bangla, Devanagari or Arabic), 40 contrast-verified palettes (light and dark pairs), 50 motion recipes with timings, 12 imagery directions (one per category), 20 archetypes, 12 mutations, 40 collision sources.
 - **A Delivery Gate:** a self-critique score, a 25-point AI-default scan and a craft checklist.
@@ -212,7 +212,7 @@ These tools can't run `npx`, so use the single-file edition: **[`dist/motomation
 
 Without a shell, the skill uses the data tables included at the end of the file instead of its scripts.
 
-**Small context?** Custom instructions, rules files and prompt boxes often cap out at a few thousand tokens. Use **[`dist/motomation-lite.md`](dist/motomation-lite.md)** there: <!-- lite-tokens -->about 7.8k tokens<!-- /lite-tokens --> (estimated by the build script) with the five laws, flow, tiers, bans, the seven-step Thinking Sequence, the AI-default scan, the craft checklist and short lists of archetypes, mutations and signatures. `node scripts/build-lite.mjs` regenerates it, and `check-repo` fails if it goes stale or over 8k tokens.
+**Small context?** Custom instructions, rules files and prompt boxes often cap out at a few thousand tokens. Use **[`dist/motomation-lite.md`](dist/motomation-lite.md)** there: <!-- lite-tokens -->about 7.7k tokens<!-- /lite-tokens --> (estimated by the build script) with the five laws, flow, tiers, bans, the seven-step Thinking Sequence, the AI-default scan, the craft checklist and short lists of archetypes, mutations and signatures. `node scripts/build-lite.mjs` regenerates it, and `check-repo` fails if it goes stale or over 8k tokens.
 
 ### Update
 
@@ -226,7 +226,7 @@ npx skills update asfakulsiam-motomation-design
 
 ```text
 /build portfolio for a motion designer in Dhaka who wants title-sequence work
-/shape boutique hotel in a restored 1890s house in Puran Dhaka --mood=quiet
+/shape boutique hotel in a restored 1890s house in Puran Dhaka --energy=1 --rhythm=2
 /invent ceramics shop
 /motomate the product chapter --tier=5
 /critique https://your-site.com
@@ -281,14 +281,14 @@ Each command lists **what** it does, **when** to use it and **where** it applies
 
 ### Flags
 
-`--tier=1..5` · `--energy=1..3` · `--rhythm=1..3` · `--motion=1..3` · `--mood=quiet|editorial|play` · `--style=<name>` · `--stack=next|react|vanilla|astro` · `--seed=<n>` · `--review` (stop after the plan)
+`--tier=1..5` · `--energy=1..3` · `--rhythm=1..3` · `--motion=1..3` · `--style=<name>` · `--stack=next|react|vanilla|astro` · `--seed=<n>` · `--review` (stop after the plan)
 
 ### Typical sequences
 
 - **New site:** `/shape` → approve → `/build` → `/critique` → `/polish`
 - **Stuck:** `/invent` → pick one → `/build --review`
 - **Existing site feels generic:** `/critique` → `/mutate` → `/type` → `/signature`
-- **Product launch:** `/shape --mood=play` → `/motomate hero-product` → `/audit`
+- **Product launch:** `/shape --energy=3 --rhythm=3` → `/motomate hero-product` → `/audit`
 
 ---
 

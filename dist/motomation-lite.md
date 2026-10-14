@@ -30,7 +30,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 ### Default flow (`/build`)
 
 ```
-0. Read the room      thinking/brief-inference.md   → audience, job, mood, constraints, gaps
+0. Read the room      thinking/brief-inference.md   → audience, job, feel, constraints, gaps
 1. Thinking Sequence  thinking/sequence.md          → STACK (named, or ask; load the adapter),
                                                       tension, concept, archetype+mutation,
                                                       collision, signature move, anti-sameness,
@@ -101,7 +101,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 | Tier | Name | Tools | When |
 |---|---|---|---|
 | 1 | Basic | CSS transitions, `@keyframes`, View Transitions for same-page state | Every site. Hover, focus, press, reveal |
-| 2 | Intermediate | GSAP core, ScrollTrigger, SplitText, Lenis | Editorial reveals, pinned sections, kinetic type |
+| 2 | Intermediate | GSAP core, ScrollTrigger, SplitText, Lenis | Line reveals, pinned sections, kinetic type |
 | 3 | Pro | Cross-document View Transitions, Flip, Lottie, Rive, MorphSVG | Page-to-page continuity, illustrated product stories |
 | 4 | Max | Three.js / OGL, GLSL shaders, WebGPU where supported | When the concept is spatial, material, or lit |
 | 5 | **Motomation** | Scroll-scrubbed GSAP timelines + image sequence / video scrub + optional WebGL layer, synced by Lenis | When the story should play like After Effects as the user scrolls |
@@ -143,7 +143,7 @@ Two layers, kept apart on purpose (details in `principles/restraint.md`):
 
 `/shape` `/build` `/invent` `/signature` `/motomate` `/animate` `/type` `/bolder` `/quieter` `/distill` `/mutate` `/overdrive` `/critique` `/audit` `/study` `/polish` `/dials` `/help` `/version` `/check-update` `/update-skill`
 
-Flags: `--tier=1..5` `--energy=1..3` `--rhythm=1..3` `--motion=1..3` `--mood=quiet|editorial|play` `--stack=next|react|vanilla|astro` `--seed=<n>` `--review` (stop after the preview block)
+Flags: `--tier=1..5` `--energy=1..3` `--rhythm=1..3` `--motion=1..3` `--stack=next|react|vanilla|astro` `--seed=<n>` `--review` (stop after the preview block)
 
 Full behaviour of each command is in `commands/overview.md`. Critique output format is in `commands/critique-format.md`.
 

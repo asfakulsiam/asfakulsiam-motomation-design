@@ -1,27 +1,27 @@
 name,source,license,role,axes,personality,pairs_with,use_for,avoid,scripts
 Fraunces,Google Fonts,OFL,display serif,opsz wght SOFT WONK,"warm, quirky old-style with soft or wonky details",Switzer; Instrument Sans; Hanken Grotesk,"organic brands, food, editorial, heritage with humour",strict corporate tone,latin vietnamese
 Instrument Serif,Google Fonts,OFL,display serif,none (regular + italic),"condensed elegant serif, fashion-editorial",Instrument Sans; Geist; Satoshi,"fashion, portfolios, editorial headlines",body text,latin
-Newsreader,Google Fonts,OFL,text serif,opsz wght,calm newspaper serif built for reading,Schibsted Grotesk; Familjen Grotesk,"long-form, publications, organisations",loud play moods,latin vietnamese
+Newsreader,Google Fonts,OFL,text serif,opsz wght,calm newspaper serif built for reading,Schibsted Grotesk; Familjen Grotesk,"long-form, publications, organisations",loud playful brands,latin vietnamese
 Bodoni Moda,Google Fonts,OFL,display serif,opsz wght,"high-contrast didone, luxurious",Switzer; General Sans,"dark luxe, fragrance, fashion",small sizes on dark backgrounds,latin
 Gloock,Google Fonts,OFL,display serif,none,heavy high-contrast serif with sharp wedges,Hanken Grotesk; Satoshi,"dark luxe, posters, editorial hooks",body text,latin
 Young Serif,Google Fonts,OFL,display serif,none,friendly heavy old-style serif,Onest; Instrument Sans,"food, organic, children's brands",technical products,latin
 Cormorant Garamond,Google Fonts,OFL,display serif,wght,delicate calligraphic garamond at large sizes,Hanken Grotesk; Switzer,"hotels, weddings, luxury quiet",small text on screens,latin vietnamese cyrillic
-EB Garamond,Google Fonts,OFL,text serif,wght,classic book face,Schibsted Grotesk; Geist,"literary, academic, heritage",play moods,latin vietnamese cyrillic greek
+EB Garamond,Google Fonts,OFL,text serif,wght,classic book face,Schibsted Grotesk; Geist,"literary, academic, heritage",loud playful brands,latin vietnamese cyrillic greek
 Big Shoulders Display,Google Fonts,OFL,display sans,wght,"condensed American-industrial, cinematic",Switzer; Geist; JetBrains Mono,"film, sport, events, Motomation titles",long headlines in lowercase,latin vietnamese
 Archivo,Google Fonts,OFL,display/text sans,wdth wght,grotesk with a wide width range,Newsreader; JetBrains Mono,"kinetic width effects, editorial, sport",when you need a soft tone,latin vietnamese
-Anybody,Google Fonts,OFL,display sans,wdth wght ital,extreme width axis from ultra-condensed to ultra-wide,Inter Tight (text); Space Mono,"Width Sprint, kinetic type, events",quiet moods,latin vietnamese
+Anybody,Google Fonts,OFL,display sans,wdth wght ital,extreme width axis from ultra-condensed to ultra-wide,Inter Tight (text); Space Mono,"Width Sprint, kinetic type, events",calm still brands,latin vietnamese
 Bricolage Grotesque,Google Fonts,OFL,display sans,opsz wdth wght,characterful grotesk with ink-trap quirks,Newsreader; Geist Mono,"neobrutalism, creative tools, indie products",luxury,latin vietnamese
-Familjen Grotesk,Google Fonts,OFL,text/display sans,wght,Scandinavian grotesk with distinct shapes,Newsreader; EB Garamond,"studios, editorial, organisations",play moods,latin vietnamese
+Familjen Grotesk,Google Fonts,OFL,text/display sans,wght,Scandinavian grotesk with distinct shapes,Newsreader; EB Garamond,"studios, editorial, organisations",loud playful brands,latin vietnamese
 Hanken Grotesk,Google Fonts,OFL,text sans,wght,neutral geometric-humanist sans,Fraunces; Gloock; Cormorant Garamond,body text for serif-led sites,display identity,latin vietnamese
-Schibsted Grotesk,Google Fonts,OFL,text/display sans,wght,newsroom grotesk with sturdy forms,Newsreader; EB Garamond,"publications, Swiss style, organisations",soft moods,latin
+Schibsted Grotesk,Google Fonts,OFL,text/display sans,wght,newsroom grotesk with sturdy forms,Newsreader; EB Garamond,"publications, Swiss style, organisations",soft rounded brands,latin
 Instrument Sans,Google Fonts,OFL,text/display sans,wdth wght,precise neo-grotesk with a width axis,Instrument Serif; Fraunces,"SaaS, studios, minimal",when you need warmth,latin
 Onest,Google Fonts,OFL,text sans,wght,friendly open sans with Cyrillic,Young Serif; Bricolage Grotesque,"education, flat style, public services",luxury,latin vietnamese cyrillic
 Syne,Google Fonts,OFL,display sans,wght,art-school display that widens with weight,Hanken Grotesk; Space Mono,"galleries, art, festivals",body text,latin greek
-Unbounded,Google Fonts,OFL,display sans,wght,"wide rounded display, playful and loud",Onest; JetBrains Mono,"play moods, web3-free tech launches, events",quiet moods,latin vietnamese cyrillic
+Unbounded,Google Fonts,OFL,display sans,wght,"wide rounded display, playful and loud",Onest; JetBrains Mono,"loud playful brands, web3-free tech launches, events",calm still brands,latin vietnamese cyrillic
 Geist,Google Fonts,OFL,text sans,wght,clean technical grotesk (by Vercel),Instrument Serif; Fraunces; Geist Mono,"dev tools, SaaS, body text",display identity on its own,latin vietnamese cyrillic
 Geist Mono,Google Fonts,OFL,mono,wght,technical mono that pairs with Geist,Geist; Bricolage Grotesque,"labels, timecodes, code",long reading,latin vietnamese cyrillic
 JetBrains Mono,Google Fonts,OFL,mono,wght,coding mono with tall x-height,Archivo; Big Shoulders Display,"console archetype, timecodes, captions",body text,latin vietnamese cyrillic greek
-Martian Mono,Google Fonts,OFL,mono,wdth wght,wide-able mono with a strong voice,Syne; Unbounded,"technical brands with personality, index numbers",quiet moods,latin cyrillic
+Martian Mono,Google Fonts,OFL,mono,wdth wght,wide-able mono with a strong voice,Syne; Unbounded,"technical brands with personality, index numbers",calm still brands,latin cyrillic
 Space Mono,Google Fonts,OFL,mono,none,retro-futurist mono,Syne; Anybody,"retro, editorial labels",overused as a display,latin vietnamese
 Climate Crisis,Google Fonts,OFL,display sans,YEAR,weight melts with a YEAR axis (1979-2019) showing ice loss,Hanken Grotesk,climate and data storytelling: the axis is the concept,any brief not about change over time,latin cyrillic
 Inter Tight,Google Fonts,OFL,text sans,wght,tight neutral sans for UI text,Anybody; Big Shoulders Display,UI text when chosen deliberately,display identity,latin vietnamese cyrillic greek
@@ -31,7 +31,7 @@ Noto Serif Bengali,Google Fonts,OFL,bangla serif,wdth wght,bookish Bangla serif,
 Satoshi,Fontshare,ITF Free Font License,text/display sans,wght,"modern geometric grotesk, crisp",Zodiak; Gambetta; Boska,"SaaS, portfolios, soft and minimal styles",when everyone else uses it: vary with pairings,latin (check the foundry's language list)
 General Sans,Fontshare,ITF Free Font License,text sans,wght,soft modern grotesk,Bodoni Moda; Zodiak,"soft and neumorphic styles, wellness",brutalism,latin (check the foundry's language list)
 Cabinet Grotesk,Fontshare,ITF Free Font License,display sans,wght,punchy grotesk with tight curves,Sentient; Satoshi,"neobrutalism, posters, launches",quiet luxury,latin (check the foundry's language list)
-Clash Display,Fontshare,ITF Free Font License,display sans,wght,sharp contemporary display grotesk,Satoshi; Switzer,"studios, launches, play moods",body text,latin (check the foundry's language list)
+Clash Display,Fontshare,ITF Free Font License,display sans,wght,sharp contemporary display grotesk,Satoshi; Switzer,"studios, launches, loud playful brands",body text,latin (check the foundry's language list)
 Switzer,Fontshare,ITF Free Font License,text sans,wght,neutral Swiss-style grotesk,Fraunces; Big Shoulders Display; Bodoni Moda,"body text, Swiss style, minimal",display identity on its own,latin (check the foundry's language list)
 Zodiak,Fontshare,ITF Free Font License,display/text serif,wght,contemporary high-contrast serif,Satoshi; General Sans,"dark luxe, editorial, fashion",tiny UI,latin (check the foundry's language list)
 Gambetta,Fontshare,ITF Free Font License,text/display serif,wght,warm robust serif,Satoshi; Switzer,"organic, food, publishing",neobrutalism,latin (check the foundry's language list)

@@ -11,7 +11,7 @@ The portfolio proves the skill it sells. Nobody forgets driving into a project.
 
 ## Principles to take
 - **Proof over description.** A creative developer's portfolio can be its own best project; a designer's can be its best layout.
-- **Play has rules.** A world needs edges, a map and a way out; give the visitor all three.
+- **A playground has rules.** A world needs edges, a map and a way out; give the visitor all three.
 - **Offer the fast path.** Keep a plain list of projects and contact for people who came to hire, not to play.
 
 ## What not to take

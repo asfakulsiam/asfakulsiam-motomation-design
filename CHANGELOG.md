@@ -2,6 +2,11 @@
 
 All notable changes to this skill. Versions follow [Semantic Versioning](https://semver.org).
 
+## [Unreleased] (2.6.0 concept fix, in progress)
+
+- **T1 Step 0: Stack:** `thinking/sequence.md` starts with Step 0. Use the stack the brief or the project names; if none, ask the user (never assume); on "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. The stack is recorded in `DESIGN.md` (`templates/DESIGN.md` gains a `Stack` section) and picks the adapter. `SKILL.md` and `AGENTS.md` route through it; `brief-inference.md` and `--stack` no longer default to a stack. Traces: `docs/examples/step0-traces.md`.
+- **T2 Moods removed:** Removed the Quiet / Editorial / Play mood system. It came from one portfolio project and did not belong in a general skill. Style is now derived from the brief, informed by styles/. The `--mood` flag, the dial-preset table in `principles/dials.md`, the "Default mood" line in every `categories/*.md` (now "Starting dials", the brief overrides) and the `mood` column of `data/categories.csv`, `data/palettes.csv` and `data/signatures.csv` are gone; mood wording in references, components and eval briefs is rewritten.
+
 ## [2.5.0] - 2026-10-12
 
 Release of the v2.5.0 fixes already on `main` (the three known gaps listed under 2.4.0), plus the cut of the plain variants. Newest work first; each bullet names its task and files. The benchmark was not run for this release; its measurement runs on GitHub Actions (`.github/workflows/bench-measure-v4.yml`).

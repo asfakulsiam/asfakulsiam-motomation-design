@@ -10,7 +10,7 @@ Colour in this house style is quiet by default and loud at one moment.
 4. **Accent:** one hue, chosen from the concept (safelight red for a darkroom, brass for a hotel, signal green for a terminal).
 5. **Surface:** at most one extra tone for cards or panels, 3–6% away from the ground.
 
-Search curated palettes with `node scripts/search.mjs palettes "<mood>"` and verify every pair with `node scripts/contrast.mjs <fg> <bg>`.
+Search curated palettes with `node scripts/search.mjs palettes "<words from the brief>"` and verify every pair with `node scripts/contrast.mjs <fg> <bg>`.
 
 ## Tokens
 

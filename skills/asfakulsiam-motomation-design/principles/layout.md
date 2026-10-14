@@ -33,4 +33,4 @@ Vary them as part of the structure (see `structures/archetypes.md`). The footer 
 
 - Prefer open layouts over boxes. Use a card only when the content is a discrete object (a product, a room, a post).
 - No shadow + border + radius + gradient all at once. Pick one way to separate.
-- Radius scale with intent: 0 for editorial or brutalist, 2–6px for precise UIs, 16px+ only for soft or playful moods.
+- Radius scale with intent: 0 for editorial or brutalist, 2–6px for precise UIs, 16px+ only for soft or playful brands.

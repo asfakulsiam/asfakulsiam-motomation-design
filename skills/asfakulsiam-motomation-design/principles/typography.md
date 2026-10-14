@@ -26,7 +26,7 @@ Write one line: *"<Display> because <reason tied to the concept>; <Text> because
 - Concept about film, sport or speed: a condensed display with a width axis.
 - Concept about play: a face with unusual shapes, used **only** at display sizes.
 
-Search the curated list: `node scripts/search.mjs fonts "<mood words>"`. `data/fonts.csv` lists source, license, axes and good pairings.
+Search the curated list: `node scripts/search.mjs fonts "<words from the brief>"`. `data/fonts.csv` lists source, license, axes and good pairings.
 
 ## 2. Banned as display faces
 

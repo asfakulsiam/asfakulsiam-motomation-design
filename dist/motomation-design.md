@@ -41,15 +41,15 @@ If there is even a small chance this skill applies to a web design task, use it.
 | Need new ideas / "make it different" | `invention/mad-artist.md` + run `scripts/collide.mjs` |
 | Choosing a page structure | `structures/archetypes.md` |
 | Setting intensity | `principles/dials.md` |
-| Typography | `principles/typography.md` + `node scripts/search.mjs fonts "<mood>"` |
-| Colour | `principles/color.md` + `node scripts/search.mjs palettes "<mood>"` |
+| Typography | `principles/typography.md` + `node scripts/search.mjs fonts "<words from the brief>"` |
+| Colour | `principles/color.md` + `node scripts/search.mjs palettes "<words from the brief>"` |
 | Layout and spacing | `principles/layout.md` |
 | Motion of any kind | `motion/tokens.md` first, then the tier file |
 | Tier 1 CSS / Tier 2 GSAP / Tier 3 transitions & Lottie/Rive / Tier 4 WebGL / Tier 5 Motomation | `motion/tier-1-basic.md` … `motion/tier-5-motomation.md` |
 | Scroll-as-film storyboard | `motion/tier-5-motomation.md` + `templates/MOTION.md` |
 | Timing sheet, stagger/overlap, camera moves, chapter rhythm (Tier 3–5) | `motion/choreography.md` |
 | Signature moves and effects | `signatures/` + `references/effects-vocabulary.md` |
-| A visual style (glass, brutalist, swiss…) | `styles/<style>.md` |
+| A visual style (glass, brutalist, swiss…) | `styles/<style>.md`. Style is derived from the brief; `styles/` informs it, there are no presets |
 | A site category (hotel, SaaS, studio…) | `categories/<category>.md` |
 | **Any build or redesign (always, before step 6 Build)** | `craft/copy.md` + `craft/seo.md` + `craft/performance.md` + `craft/security.md` |
 | Accessibility, responsive, mobile motion, scroll sequences | `craft/*.md` |
@@ -66,7 +66,7 @@ Files are short on purpose. Load them as you need them, not all at once. The one
 ### Default flow (`/build`)
 
 ```
-0. Read the room      thinking/brief-inference.md   → audience, job, mood, constraints, gaps
+0. Read the room      thinking/brief-inference.md   → audience, job, feel, constraints, gaps
 1. Thinking Sequence  thinking/sequence.md          → STACK (named, or ask; load the adapter),
                                                       tension, concept, archetype+mutation,
                                                       collision, signature move, anti-sameness,
@@ -150,7 +150,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 | Tier | Name | Tools | When |
 |---|---|---|---|
 | 1 | Basic | CSS transitions, `@keyframes`, View Transitions for same-page state | Every site. Hover, focus, press, reveal |
-| 2 | Intermediate | GSAP core, ScrollTrigger, SplitText, Lenis | Editorial reveals, pinned sections, kinetic type |
+| 2 | Intermediate | GSAP core, ScrollTrigger, SplitText, Lenis | Line reveals, pinned sections, kinetic type |
 | 3 | Pro | Cross-document View Transitions, Flip, Lottie, Rive, MorphSVG | Page-to-page continuity, illustrated product stories |
 | 4 | Max | Three.js / OGL, GLSL shaders, WebGPU where supported | When the concept is spatial, material, or lit |
 | 5 | **Motomation** | Scroll-scrubbed GSAP timelines + image sequence / video scrub + optional WebGL layer, synced by Lenis | When the story should play like After Effects as the user scrolls |
@@ -214,7 +214,7 @@ If you can't run scripts (chat-only tools), pick from the CSV files in `data/` y
 
 `/shape` `/build` `/invent` `/signature` `/motomate` `/animate` `/type` `/bolder` `/quieter` `/distill` `/mutate` `/overdrive` `/critique` `/audit` `/study` `/polish` `/dials` `/help` `/version` `/check-update` `/update-skill`
 
-Flags: `--tier=1..5` `--energy=1..3` `--rhythm=1..3` `--motion=1..3` `--mood=quiet|editorial|play` `--stack=next|react|vanilla|astro` `--seed=<n>` `--review` (stop after the preview block)
+Flags: `--tier=1..5` `--energy=1..3` `--rhythm=1..3` `--motion=1..3` `--stack=next|react|vanilla|astro` `--seed=<n>` `--review` (stop after the preview block)
 
 Full behaviour of each command is in `commands/overview.md`. Critique output format is in `commands/critique-format.md`.
 
@@ -246,7 +246,7 @@ Before any design decision, turn the request into a brief. Most requests are one
 | 1 | **Who is it for?** One real person, not "users" | Category, product, wording |
 | 2 | **What must they do or feel?** One primary job | The verb in the request ("sell", "book", "hire me") |
 | 3 | **What is true and specific?** Real names, places, materials, numbers | Any detail the user gave; never invent numbers |
-| 4 | **What is the mood?** Quiet, Editorial or Play | Category defaults in `categories/` |
+| 4 | **How should it feel?** In the brief's own words ("calm", "loud", "like a magazine") | The brief's wording and the category's job; `styles/` as reference, never a fixed set |
 | 5 | **What is the stack?** | Files in the repo (`package.json`, framework config). Not inferable otherwise: ask, per Step 0 in `thinking/sequence.md`. Never a default |
 | 6 | **What tier can it afford?** | Audience devices, content weight, timeline |
 | 7 | **What must not happen?** | Brand rules, accessibility needs, legal limits |
@@ -583,7 +583,7 @@ Colour in this house style is quiet by default and loud at one moment.
 4. **Accent:** one hue, chosen from the concept (safelight red for a darkroom, brass for a hotel, signal green for a terminal).
 5. **Surface:** at most one extra tone for cards or panels, 3–6% away from the ground.
 
-Search curated palettes with `node scripts/search.mjs palettes "<mood>"` and verify every pair with `node scripts/contrast.mjs <fg> <bg>`.
+Search curated palettes with `node scripts/search.mjs palettes "<words from the brief>"` and verify every pair with `node scripts/contrast.mjs <fg> <bg>`.
 
 ### Tokens
 
@@ -621,7 +621,7 @@ Every design sets three dials, each at **1, 2 or 3**. There are three levels, no
 
 | Dial | 1 (Calm) | 2 (Balanced) | 3 (Bold) | What it controls |
 |---|---|---|---|---|
-| **ENERGY** | Quiet, still, lots of air | Confident, clear contrast | Loud, huge type, strong colour moments | Type scale jumps, contrast, accent strength |
+| **ENERGY** | Still, lots of air | Confident, clear contrast | Loud, huge type, strong colour moments | Type scale jumps, contrast, accent strength |
 | **RHYTHM** | Uniform, predictable sections | Consistent with deliberate breaks | Every section a different composition | Layout variation, grid breaks, asymmetry |
 | **MOTION** | Hover/focus/press only | Reveals, pinned moments, kinetic type | Scroll-as-film, choreography, WebGL | Motion tier and quantity |
 
@@ -633,15 +633,11 @@ Every design sets three dials, each at **1, 2 or 3**. There are three levels, no
 | 2 | Tier 2 | 1–3 |
 | 3 | Tier 5 for one chapter, Tier 2–3 elsewhere | 2–5 (Tier 4 only if the concept is spatial) |
 
-### Moods (dial presets)
+### Where the settings come from
 
-| Mood | ENERGY | RHYTHM | MOTION | Feels like | Typical categories |
-|---|---|---|---|---|---|
-| **Quiet** | 1 | 1 | 1–2 | A gallery, a hotel lobby, a museum label | Luxury, hotel, wellness, architecture, organisations |
-| **Editorial** | 2 | 2 | 2 | A great magazine | Studios, publications, SaaS marketing, e-commerce |
-| **Play** | 3 | 3 | 2–3 | A creative festival poster that moves | Portfolios, events, launches, music, youth brands |
+There are no presets. Each dial is set from the brief: what the visitor must do, how the brand should feel in the brief's own words, and what the concept needs. When a visual language helps, `styles/` is the reference: each row of `data/styles.csv` carries the energy, rhythm and motion that language usually runs at. Treat those as a starting point to argue with, not a value to copy.
 
-Set the mood with `--mood=quiet|editorial|play`, or set dials directly with `--energy=3 --rhythm=2 --motion=3`.
+Set dials directly with `--energy=3 --rhythm=2 --motion=3`.
 
 ### Levers (how dials become decisions)
 
@@ -673,9 +669,9 @@ This is the default look when the brief doesn't override it. These are defaults,
 | Trait | In practice |
 |---|---|
 | **Type as image** | The display face is set at 8–28vw for the hook. Headlines carry the composition; photos support them. (HOUSE STYLE briefs. SERVICE STYLE briefs use the compact scale in `principles/typography.md` §3.) |
-| **Quiet canvas** | Off-white or near-black grounds with a hint of warmth or coolness, never pure `#FFFFFF` + `#000000` unless the concept is stark. |
+| **Warm-neutral canvas** | Off-white or near-black grounds with a hint of warmth or coolness, never pure `#FFFFFF` + `#000000` unless the concept is stark. |
 | **One accent** | A single signal colour, used at the moment that matters (the CTA, the active state, the signature). |
-| **Editorial grid** | 12 columns with visible logic: index numbers, folios, hairline rules, captions in the margin. Break the grid once per screen, on purpose. |
+| **Folio grid** | 12 columns with visible logic: index numbers, folios, hairline rules, captions in the margin. Break the grid once per screen, on purpose. |
 | **Motion with weight** | Strong ease-out curves, staggered reveals by line rather than by word soup, pinned chapters for the story. |
 | **Noticing details** | Something reacts to the visitor: a letter under the cursor, a name that travels into the header, a list that remembers what you opened. |
 | **Honest content** | Real names, real copy, real constraints. Nothing invented. |
@@ -857,7 +853,7 @@ Vary them as part of the structure (see `structures/archetypes.md`). The footer 
 
 - Prefer open layouts over boxes. Use a card only when the content is a discrete object (a product, a room, a post).
 - No shadow + border + radius + gradient all at once. Pick one way to separate.
-- Radius scale with intent: 0 for editorial or brutalist, 2–6px for precise UIs, 16px+ only for soft or playful moods.
+- Radius scale with intent: 0 for editorial or brutalist, 2–6px for precise UIs, 16px+ only for soft or playful brands.
 
 
 ---
@@ -887,7 +883,7 @@ Restraint is what makes a minimal site feel expensive instead of empty. It is al
 |---|---|
 | Minimal canvas (quiet ground, lots of air) | the content is dense by nature: dashboards, data tools, catalogues with filters, timetables |
 | Maximal type (display at 8–28vw) | the data or the product UI is the hero; then type is compact, tabular and legible at a glance (compact scale in `principles/typography.md` §3) |
-| Editorial grid (folios, hairlines, margin captions) | the task is operational; use a functional grid (panels, tables, toolbars) |
+| Folio grid (index numbers, hairlines, margin captions) | the task is operational; use a functional grid (panels, tables, toolbars) |
 | Monochrome base, one accent as the only colour | colour encodes information (status, categories, series). Data colours are information, not accents; the one-brand-accent budget and the Restraint Gate still hold. |
 | Typography as hero ("set it large", Law 2) | imagery, data or the product is what the visitor came for. Type still leads by clarity, and is still chosen first and with a reason. |
 
@@ -918,7 +914,7 @@ Benchmark v3 judged reduced-motion strips on their own: the skill's Tier 4 pages
 
 1. **Don't mount the canvas.** Render a still composed for the purpose, in SVG or CSS. Every Tier 4 background in `examples/components/backgrounds/` ships one (aurora → a long-exposure plate, meteors → star trails, globe → a chart plate, particle-field → a star chart, beams → pools of light on the floor, mesh-gradient → a colour study, liquid-field → a marbled sheet).
 2. **Translate the motion into the picture.** What moved becomes something drawn: time as trails, flow as bands, a path as a line, a sequence as numbered plates. The still says what the motion said.
-3. **Keep the mood, change the frame.** Same palette, same density, same weight of composition; a different arrangement from any frame of the animation. If a screenshot of the still could be mistaken for a paused frame, it's a poster, not a still.
+3. **Keep the feel, change the frame.** Same palette, same density, same weight of composition; a different arrangement from any frame of the animation. If a screenshot of the still could be mistaken for a paused frame, it's a poster, not a still.
 4. **Unpin.** A pinned chapter or scrubbed sequence becomes a stack of plates: each step in normal flow, fully visible, each with its own still. Nothing stays pinned while text scrolls past it.
 5. **Complete on its own.** Judged alone, with no knowledge of the full version, the still must look finished: a focal point, the type set against it with AA contrast, no empty box where the canvas was.
 
@@ -961,7 +957,7 @@ Write one line: *"<Display> because <reason tied to the concept>; <Text> because
 - Concept about film, sport or speed: a condensed display with a width axis.
 - Concept about play: a face with unusual shapes, used **only** at display sizes.
 
-Search the curated list: `node scripts/search.mjs fonts "<mood words>"`. `data/fonts.csv` lists source, license, axes and good pairings.
+Search the curated list: `node scripts/search.mjs fonts "<words from the brief>"`. `data/fonts.csv` lists source, license, axes and good pairings.
 
 ### 2. Banned as display faces
 
@@ -1753,7 +1749,7 @@ GSAP equivalents: `"power3.out"` / `"expo.out"` for reveals, `"power2.inOut"` fo
 | Tooltips, small popovers | 140–220ms |
 | Dropdowns, menus | 180–260ms |
 | Modals, drawers | 240–420ms |
-| Editorial text reveals | 600–1000ms (+ stagger 60–120ms) |
+| Long-form text reveals | 600–1000ms (+ stagger 60–120ms) |
 | Page transitions | 400–700ms |
 | Scrubbed scroll | no duration: tied to scroll distance |
 
@@ -2274,7 +2270,7 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** space, light and material conveyed through the screen, then a clear way to enquire.
-**Default mood:** Quiet · Dials ENERGY 1 · RHYTHM 2 · MOTION 2 (Tier 4–5 for a walkthrough)
+**Starting dials** (the brief overrides; style is derived from the brief, with `styles/` as reference): ENERGY 1 · RHYTHM 2 · MOTION 2 (Tier 4–5 for a walkthrough)
 
 **Archetypes that work:** Room · Atlas · Catalogue (projects as numbered entries) · Lookbook
 
@@ -2295,7 +2291,7 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** make the product desirable, then make buying fast and certain.
-**Default mood:** Editorial or Quiet · Dials ENERGY 2 · RHYTHM 2 · MOTION 2 (Motomation for a hero product only)
+**Starting dials** (the brief overrides; style is derived from the brief, with `styles/` as reference): ENERGY 2 · RHYTHM 2 · MOTION 2 (Motomation for a hero product only)
 
 **Archetypes that work:** Catalogue · Shelf · Lookbook · Stage (single product) · Field Guide (many variants)
 
@@ -2323,7 +2319,7 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** show what someone will be able to do, and make enrolling or applying clear.
-**Default mood:** Editorial or Quiet · Dials ENERGY 2 · RHYTHM 1 · MOTION 1–2
+**Starting dials** (the brief overrides; style is derived from the brief, with `styles/` as reference): ENERGY 2 · RHYTHM 1 · MOTION 1–2
 
 **Archetypes that work:** Field Guide · Timeline (curriculum) · Letter (from the teacher) · Workbench (interactive lesson)
 
@@ -2346,7 +2342,7 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** excitement, then the facts (date, place, line-up, tickets) in seconds.
-**Default mood:** Play · Dials ENERGY 3 · RHYTHM 3 · MOTION 3
+**Starting dials** (the brief overrides; style is derived from the brief, with `styles/` as reference): ENERGY 3 · RHYTHM 3 · MOTION 3
 
 **Archetypes that work:** Poster · Stage · Timeline (schedule) · Index (line-up)
 
@@ -2369,7 +2365,7 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** make someone feel the place before they book, then make booking effortless.
-**Default mood:** Quiet · Dials ENERGY 1 · RHYTHM 2 · MOTION 2 (one Motomation "arrival" chapter allowed)
+**Starting dials** (the brief overrides; style is derived from the brief, with `styles/` as reference): ENERGY 1 · RHYTHM 2 · MOTION 2 (one Motomation "arrival" chapter allowed)
 
 **Archetypes that work:** Room · Atlas · Letter · Timeline (heritage) · Diptych (day/night)
 
@@ -2397,7 +2393,7 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** trust and clarity first: what you do, for whom, and how to act (donate, apply, volunteer, get help).
-**Default mood:** Quiet or Editorial · Dials ENERGY 1–2 · RHYTHM 1 · MOTION 1–2
+**Starting dials** (the brief overrides; style is derived from the brief, with `styles/` as reference): ENERGY 1–2 · RHYTHM 1 · MOTION 1–2
 
 **Archetypes that work:** Manifesto · Timeline · Field Guide · Letter · Atlas (where you work)
 
@@ -2420,7 +2416,7 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** a recognisable voice and a reason to follow, subscribe or hire.
-**Default mood:** Editorial · Dials ENERGY 2 · RHYTHM 2 · MOTION 2
+**Starting dials** (the brief overrides; style is derived from the brief, with `styles/` as reference): ENERGY 2 · RHYTHM 2 · MOTION 2
 
 **Archetypes that work:** Letter · Broadsheet · Index (writing list) · Specimen
 
@@ -2443,7 +2439,7 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** be remembered for one thing in 30 seconds, then prove range for the people who stay.
-**Default mood:** Play or Editorial · Dials ENERGY 3 · RHYTHM 2 · MOTION 3 → Tier 2 + one Motomation chapter
+**Starting dials** (the brief overrides; style is derived from the brief, with `styles/` as reference): ENERGY 3 · RHYTHM 2 · MOTION 3 → Tier 2 + one Motomation chapter
 
 **Archetypes that work:** Index · Specimen · Film Reel · Gallery Wall · Letter · Ledger
 
@@ -2474,7 +2470,7 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** a moment of desire, then the reasons to believe, then pre-order or buy.
-**Default mood:** Play or Dark Luxe · Dials ENERGY 3 · RHYTHM 2 · MOTION 3 → **Motomation home ground**
+**Starting dials** (the brief overrides; style is derived from the brief, with `styles/` as reference): ENERGY 3 · RHYTHM 2 · MOTION 3 → **Motomation home ground**
 
 **Archetypes that work:** Film Reel · Stage · Poster · Catalogue (specs)
 
@@ -2495,7 +2491,7 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** appetite, then a table: hours, menu, booking, location.
-**Default mood:** Editorial or Play · Dials ENERGY 2 · RHYTHM 2 · MOTION 2
+**Starting dials** (the brief overrides; style is derived from the brief, with `styles/` as reference): ENERGY 2 · RHYTHM 2 · MOTION 2
 
 **Archetypes that work:** Letter (the chef's note) · Broadsheet (a menu as a newspaper) · Poster · Field Guide (ingredients)
 
@@ -2516,7 +2512,7 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** make one painful problem and its solution obvious, then prove it with the product itself.
-**Default mood:** Editorial · Dials ENERGY 2 · RHYTHM 1–2 · MOTION 2
+**Starting dials** (the brief overrides; style is derived from the brief, with `styles/` as reference): ENERGY 2 · RHYTHM 1–2 · MOTION 2
 
 **Archetypes that work:** Workbench · Console · Letter (founder-led) · Stage · Diptych (before/after)
 
@@ -2546,7 +2542,7 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
 
 **The real job:** show taste and thinking, so the right clients self-select and the wrong ones leave.
-**Default mood:** Editorial · Dials ENERGY 2 · RHYTHM 3 · MOTION 2–3
+**Starting dials** (the brief overrides; style is derived from the brief, with `styles/` as reference): ENERGY 2 · RHYTHM 3 · MOTION 2–3
 
 **Archetypes that work:** Ledger · Index · Manifesto · Broadsheet · Stage · Film Reel
 
@@ -2636,7 +2632,7 @@ measured by `scripts/gate.mjs` (axis C); the rest are checked by reading, in `ga
 |---|---|---|---|---|---|
 | copy-01 | Headlines are specific | A generic line fits any company, so it sticks to none of them | "Deploys in 90 seconds, on a third of the servers" | "Take your business to the next level" | read |
 | copy-02 | Write for someone in a hurry | People skim. Most words on a page are never read | Short sentences that start with a verb: "Book a room. Pay at the desk." | A sentence with three clauses and two asides before its point | read |
-| copy-03 | Sell above the fold | Many visitors never scroll, so the first screen carries the offer | The first screen says what it is, who it's for and the next step | The offer first appears three screens down, after a mood film | read |
+| copy-03 | Sell above the fold | Many visitors never scroll, so the first screen carries the offer | The first screen says what it is, who it's for and the next step | The offer first appears three screens down, after a brand film | read |
 | copy-04 | No em dashes in visible copy | They have become a tell of generated text. A full stop or a comma reads cleaner | "Fast. Simple. Reliable." | "Fast — simple — reliable" | **C** |
 | copy-05 | Benefit first, then the feature | The feature says what it is; the benefit says why it matters to the reader | "Ship in minutes (one command deploys it)" | "One-command deploy" | read |
 | copy-06 | Break up blocks of text | A wall of text looks like work, so it gets skipped | Paragraphs of 2 to 4 lines | A 12-line paragraph on a landing page | **C** (paragraph length, advisory) |
@@ -3499,7 +3495,6 @@ Type a command at the start of a message. Commands combine with flags. Without a
 |---|---|---|
 | `--tier` | 1–5 | Force a motion tier |
 | `--energy` `--rhythm` `--motion` | 1–3 | Set a dial (see `principles/dials.md`) |
-| `--mood` | quiet · editorial · play | Set all three dials from a preset |
 | `--style` | a file in `styles/` | Apply a visual language |
 | `--stack` | next · react · vanilla · astro | Target framework. Without it: detect from the project, else ask (Step 0 in `thinking/sequence.md`) |
 | `--seed` | any number | Repeatable collision draws |
@@ -3600,7 +3595,7 @@ The final pass: spacing rhythm, alignment, typographic details (quotes, dashes, 
 - New site: `/shape` → approve → `/build` → `/critique` → `/polish`
 - Stuck on ideas: `/invent` → pick → `/build --review`
 - Existing site feels generic: `/critique` → `/mutate` → `/type` → `/signature`
-- Product launch: `/shape --mood=play` → `/motomate hero-product` → `/audit`
+- Product launch: `/shape --energy=3 --rhythm=3` → `/motomate hero-product` → `/audit`
 
 
 ---
@@ -3804,21 +3799,21 @@ Find before build (see `SKILL.md`, step 6): for a standard effect, check the pro
 | Decode | Characters resolve from random glyphs | 2 | Technical, secret or data-led brands; short labels only | signature `decode` · `examples/components/type/decode.tsx` |
 | Proximity weight | Weight/width follows cursor distance | 2 | Type-led identities; one word only | signature `proximity-weight` in `signatures/type-signatures.md` · `examples/typography/proximity-weight.tsx` |
 | Pressure type | Letters stretch or compress toward the cursor | 2 | Playful, elastic brands | `examples/components/type/pressure-type.tsx` |
-| Scroll float | Letters bob into place as they scroll in | 2 | Play mood display lines | `examples/components/type/scroll-float.tsx` |
+| Scroll float | Letters bob into place as they scroll in | 2 | Buoyant, light-hearted display lines | `examples/components/type/scroll-float.tsx` |
 | Ink fill | Words fill from muted to ink while reading | 2 | Manifestos, about statements | signature `ink-fill` · `examples/components/type/ink-fill.tsx` |
 | Velocity type | Text skews or widens with scroll speed | 2 | Sport, speed, launches | signature `velocity-skew` · `examples/components/scroll/velocity-marquee.tsx` · `examples/components/type/width-sprint.tsx` |
 | Split-flap | Characters flip like a departure board | 2 | Schedules, menus, travel | `examples/components/type/split-flap.tsx` |
 | Curved text | Text runs along a circle or path | 1–2 | Badges, stamps, seals | `examples/components/type/curved-text.tsx` |
 | Text gradient sweep | A highlight runs across the text | 1 | A single key word, rarely | concept only (CSS `background-clip: text` with a moving gradient; one word) |
 | Type film | A headline choreographed across a pinned chapter | 5 | Motomation hooks | `motion/tier-5-motomation.md` · `examples/html/motomation-film.html` |
-| Neighbour moves | Each letter of a name has its own small move on hover, so the word feels like a cast | 2 | Play-mood names and logotypes of 3–12 letters | `examples/components/type/neighbour-moves.tsx` |
+| Neighbour moves | Each letter of a name has its own small move on hover, so the word feels like a cast | 2 | Light-hearted names and logotypes of 3–12 letters | `examples/components/type/neighbour-moves.tsx` |
 | Letter relay | The hero name shrinks and travels into the header letter by letter as the first screen scrolls away | 2 | The name is the identity (portfolios, personal brands) | `examples/components/type/letter-relay.tsx` |
 
 ### Backgrounds and atmosphere
 
 | Concept | What it does | Tier | Earns its place when | In this skill |
 |---|---|---|---|---|
-| Grain | Animated or static film noise | 1–2 | Analogue, photographic or warm moods | `examples/components/backgrounds/grain.tsx` |
+| Grain | Animated or static film noise | 1–2 | Analogue, photographic or warm brands | `examples/components/backgrounds/grain.tsx` |
 | Liquid field | Flowing colour like silk or ink in water | 4 | The material is liquid, fabric or light | `examples/components/backgrounds/liquid-field.tsx` |
 | Dot / grid field | A grid of dots or lines that reacts to the cursor | 2–4 | Technical, structural concepts | `examples/components/backgrounds/dot-field.tsx` |
 | Aurora / light bands | Soft moving light | 4 | Night, sky, northern brands. Overused, needs a strong reason | `examples/components/backgrounds/light-sweep.tsx` (one band) · `motion/tier-4-max.md` |
@@ -3870,8 +3865,8 @@ Find before build (see `SKILL.md`, step 6): for a standard effect, check the pro
 | Hold to commit | Press and hold fills, then confirms | 1–2 | Important, irreversible actions | signature `hold-to-commit` · `examples/components/micro/hold-to-commit.tsx` |
 | Count-up | Numbers count to their value | 2 | Real figures with sources only | `examples/components/micro/count-up.tsx` |
 | Click spark | Small burst on click | 1 | Playful brands; rarely | `examples/components/micro/click-spark.tsx` |
-| Sticker scatter | Logo bursts into stickers | 2 | Play mood, personal sites | signature `sticker-scatter` · `examples/components/micro/sticker-scatter.tsx` |
-| Squish switch / jelly radio | Elastic toggles | 1–2 | Play mood products | `examples/components/micro/squish-switch.tsx` · `motion/tier-1-basic.md` |
+| Sticker scatter | Logo bursts into stickers | 2 | Light-hearted personal sites | signature `sticker-scatter` · `examples/components/micro/sticker-scatter.tsx` |
+| Squish switch / jelly radio | Elastic toggles | 1–2 | Light-hearted products | `examples/components/micro/squish-switch.tsx` · `motion/tier-1-basic.md` |
 | Swipe to confirm | Slide to commit an action | 2 | Mobile-first flows | `motion/tier-2-intermediate.md` · `craft/accessibility.md` (keep a tap alternative) |
 
 Use this vocabulary in briefs and critiques: "Replace the aurora background with a grain + lens concept tied to the darkroom idea."
@@ -4035,7 +4030,7 @@ The portfolio proves the skill it sells. Nobody forgets driving into a project.
 
 ### Principles to take
 - **Proof over description.** A creative developer's portfolio can be its own best project; a designer's can be its best layout.
-- **Play has rules.** A world needs edges, a map and a way out; give the visitor all three.
+- **A playground has rules.** A world needs edges, a map and a way out; give the visitor all three.
 - **Offer the fast path.** Keep a plain list of projects and contact for people who came to hire, not to play.
 
 ### What not to take
@@ -4463,19 +4458,19 @@ field-guide,The Field Guide,entries with illustrations notes and classes,educati
 ### data/categories.csv
 
 ```csv
-id,name,job,mood,energy,rhythm,motion,archetypes,signatures,file
-portfolio,Portfolio,be remembered then prove range,play editorial,3,2,3,index specimen film-reel gallery-wall letter ledger,letter-relay proximity-weight horizontal-reel lens remembered-list,categories/portfolio.md
-studio,Studio / Agency,show taste so the right clients self-select,editorial,2,3,2-3,ledger index manifesto broadsheet stage film-reel,ink-fill stacked-deck velocity-skew aperture,categories/studio.md
-ecommerce,E-commerce,desire then fast certain buying,editorial quiet,2,2,2,catalogue shelf lookbook stage field-guide,film-sequence darkroom-develop lens hold-to-commit,categories/ecommerce.md
-saas,SaaS,make one problem and its solution obvious,editorial,2,1-2,2,workbench console letter stage diptych,decode timecode-rail stacked-deck,categories/saas.md
-hotel,Hotel,feel the place then book effortlessly,quiet,1,2,2,room atlas letter timeline diptych,aperture darkroom-develop hold-to-commit,categories/hotel.md
-restaurant,Restaurant,appetite then a table,editorial play,2,2,2,letter broadsheet poster field-guide,ink-fill brand-selection,categories/restaurant.md
-organisation,Organisation / Non-profit,trust clarity and action,quiet editorial,1-2,1,1-2,manifesto timeline field-guide letter atlas,ink-fill thread,categories/organisation.md
-event,Event,excitement then the facts,play,3,3,3,poster stage timeline index,velocity-skew width-sprint sticker-scatter timecode-rail,categories/event.md
-architecture,Architecture / Real estate,space light and material then enquiry,quiet,1,2,2,room atlas catalogue lookbook,lens aperture horizontal-reel,categories/architecture.md
-personal-brand,Personal brand,a recognisable voice and a reason to follow,editorial,2,2,2,letter broadsheet index specimen,remembered-list brand-selection neighbour-moves,categories/personal-brand.md
-product-launch,Product launch,desire then belief then buy,play,3,2,3,film-reel stage poster catalogue,timecode-rail aperture decode,categories/product-launch.md
-education,Education,show the outcome then make enrolling clear,editorial quiet,2,1,1-2,field-guide timeline letter workbench,thread stacked-deck,categories/education.md
+id,name,job,energy,rhythm,motion,archetypes,signatures,file
+portfolio,Portfolio,be remembered then prove range,3,2,3,index specimen film-reel gallery-wall letter ledger,letter-relay proximity-weight horizontal-reel lens remembered-list,categories/portfolio.md
+studio,Studio / Agency,show taste so the right clients self-select,2,3,2-3,ledger index manifesto broadsheet stage film-reel,ink-fill stacked-deck velocity-skew aperture,categories/studio.md
+ecommerce,E-commerce,desire then fast certain buying,2,2,2,catalogue shelf lookbook stage field-guide,film-sequence darkroom-develop lens hold-to-commit,categories/ecommerce.md
+saas,SaaS,make one problem and its solution obvious,2,1-2,2,workbench console letter stage diptych,decode timecode-rail stacked-deck,categories/saas.md
+hotel,Hotel,feel the place then book effortlessly,1,2,2,room atlas letter timeline diptych,aperture darkroom-develop hold-to-commit,categories/hotel.md
+restaurant,Restaurant,appetite then a table,2,2,2,letter broadsheet poster field-guide,ink-fill brand-selection,categories/restaurant.md
+organisation,Organisation / Non-profit,trust clarity and action,1-2,1,1-2,manifesto timeline field-guide letter atlas,ink-fill thread,categories/organisation.md
+event,Event,excitement then the facts,3,3,3,poster stage timeline index,velocity-skew width-sprint sticker-scatter timecode-rail,categories/event.md
+architecture,Architecture / Real estate,space light and material then enquiry,1,2,2,room atlas catalogue lookbook,lens aperture horizontal-reel,categories/architecture.md
+personal-brand,Personal brand,a recognisable voice and a reason to follow,2,2,2,letter broadsheet index specimen,remembered-list brand-selection neighbour-moves,categories/personal-brand.md
+product-launch,Product launch,desire then belief then buy,3,2,3,film-reel stage poster catalogue,timecode-rail aperture decode,categories/product-launch.md
+education,Education,show the outcome then make enrolling clear,2,1,1-2,field-guide timeline letter workbench,thread stacked-deck,categories/education.md
 ```
 
 ### data/collisions.csv
@@ -4509,7 +4504,7 @@ newspaper press,print,rolling sheets and registration marks,page transitions wit
 metronome,music,steady tick and swing,a stagger rhythm locked to a visible beat
 elevator panel,architecture,floor numbers that light in sequence,section nav as lit floor numbers
 herbarium,botany,pressed specimens with labels,products pinned with handwritten labels
-rickshaw art,Dhaka street culture,bold painted panels and borders,a Play-mood frame system for a Bangladeshi brand
+rickshaw art,Dhaka street culture,bold painted panels and borders,a loud painted frame system for a Bangladeshi brand
 monsoon window,weather,rain streaks distorting the view,a shader that streaks images on scroll velocity
 nakshi kantha,textile,running stitch telling a story,a Thread line stitched through sections
 ticket stub,events,a numbered admission stub,a numbered progress counter for a launch
@@ -4533,9 +4528,9 @@ curved-text,Curved Text,type,1,examples/components/type/curved-text.tsx,CurvedTe
 decode,Decode,type,2,examples/components/type/decode.tsx,Decode,"A short label resolves from random glyphs, left to right, when it enters the screen or on hover.","Technical, secret or data-led brands; labels of 1–4 words.","Body text, headlines longer than a line, or more than one per screen.",Shows the final text at once; no glyph cycling.,Runs on enter; hover replay is mouse-only.,The real text is the accessible name; the cycling glyphs are aria-hidden.
 ink-fill,Ink Fill,type,2,examples/components/type/ink-fill.tsx,InkFill,A statement starts in the muted colour and fills with ink word by word as the reader scrolls through it.,"Manifestos, about statements, a single paragraph that is the page's idea.",More than one per page; text the reader needs before scrolling (it must stay readable when muted).,The whole statement is in ink from the start.,Same as desktop.,"Plain text; only colour changes, and the muted colour must still pass 4.5:1 for body text or 3:1 for large text."
 letter-relay,Letter Relay,type,2,examples/components/type/letter-relay.tsx,LetterRelay,"A large hero name shrinks and travels into a fixed header slot letter by letter as you scroll the first screen, so the name hands itself to the navigation.",Portfolios and personal brands where the name is the identity.,Long names (over ~16 characters); pages without a fixed header; product pages.,The hero name and the header name are both static; no scroll listener runs.,Same as desktop.,The h1 keeps the real text; the travelling letters are aria-hidden; the header name is a normal link.
-neighbour-moves,Neighbour Moves,type,2,examples/components/type/neighbour-moves.tsx,NeighbourMoves,"Each letter of a name has its own small move on hover (lift, tilt, stretch, spin, drop), so the word feels like a cast of characters.","Personal names, studio names and play-mood logotypes of 3–12 letters.","Navigation, body text, or brands that must feel calm.",No hover moves.,A tap on a letter plays its move once.,The word is the accessible name; letters are aria-hidden.
+neighbour-moves,Neighbour Moves,type,2,examples/components/type/neighbour-moves.tsx,NeighbourMoves,"Each letter of a name has its own small move on hover (lift, tilt, stretch, spin, drop), so the word feels like a cast of characters.","Personal names, studio names and light-hearted logotypes of 3–12 letters.","Navigation, body text, or brands that must feel calm.",No hover moves.,A tap on a letter plays its move once.,The word is the accessible name; letters are aria-hidden.
 pressure-type,Pressure Type,type,2,examples/components/type/pressure-type.tsx,PressureType,"Each letter of one display word stretches wider and heavier as the cursor nears it, like pressing into rubber.","Playful, elastic or physical brands with a variable font that has wdth and wght axes.",Fonts without variable axes; more than one word; any body copy.,Letters stay at the base width and weight.,Static on touch screens (no hover).,The word is the accessible name; letter spans are aria-hidden.
-scroll-float,Scroll Float,type,2,examples/components/type/scroll-float.tsx,ScrollFloat,"Letters of a display line rise and settle into place one by one, driven by scroll position, so scrolling back reverses it.",Play-mood display lines that should feel buoyant; one line per section.,"Serious or institutional briefs; text that must be readable before it settles (prices, dates).",Letters sit in place; no scroll listener runs.,Same as desktop.,The line is the accessible name; letter spans are aria-hidden.
+scroll-float,Scroll Float,type,2,examples/components/type/scroll-float.tsx,ScrollFloat,"Letters of a display line rise and settle into place one by one, driven by scroll position, so scrolling back reverses it.",Light-hearted display lines that should feel buoyant; one line per section.,"Serious or institutional briefs; text that must be readable before it settles (prices, dates).",Letters sit in place; no scroll listener runs.,Same as desktop.,The line is the accessible name; letter spans are aria-hidden.
 split-flap,Split Flap,type,2,examples/components/type/split-flap.tsx,SplitFlap,"Each character flips through the alphabet to its value like a departure board, settling left to right; changing the value flips again.","Schedules, line-ups, menus, travel, times and short codes.","Long text; values the reader must trust mid-animation (the final value is announced, not the flips).",Shows the new value at once.,Same as desktop.,aria-live announces the final value only; flipping glyphs are aria-hidden.
 width-sprint,Width Sprint,type,2,examples/components/type/width-sprint.tsx,WidthSprint,"A display word stretches wider the faster you scroll and relaxes back when you stop, using the font's width axis.","Sport, speed, events and launches with a variable font that has a wdth axis.",Fonts without wdth; more than one element; layouts where the word could overflow at its widest.,The word stays at its base width.,Same as desktop (scroll-driven).,Plain text; only font-variation-settings changes.
 ascii-text,ASCII Text,text,2,examples/components/text/ascii-text.tsx,AsciiText,"A word drawn as a grid of characters, sampled from the word's own letterforms; it settles out of character noise when it enters the screen.","The concept is code, print terminals, telegrams, early computing or textile grids; one short word at display size.",Anything longer than about 12 characters; small sizes (it becomes noise); as the only copy of important text.,"The finished character drawing, with no noise.",Same as desktop (settles when in view).,"The element has the word as its accessible name (role=""img"" + aria-label); the character grid is aria-hidden. The grid is sized from its container width, so it never overflows."
@@ -4562,7 +4557,7 @@ beams,Beams,backgrounds,4,examples/components/backgrounds/beams.tsx,Beams,"Paral
 contour-lines,Contour Lines,backgrounds,2,examples/components/backgrounds/contour-lines.tsx,ContourLines,"Topographic contour lines drawn as SVG that slowly drift, like a map breathing; deterministic from a seed.","Landscape, outdoors, climate, geography, agriculture and mapping concepts.",Urban or tech brands without a land story; behind dense text.,Still lines.,Same as desktop.,Decorative SVG (aria-hidden). The drift is a CSS transform on three composited layers: no JS and no repaint per frame.
 dot-field,Dot Field,backgrounds,2,examples/components/backgrounds/dot-field.tsx,DotField,"A grid of dots that swell and push away from the cursor, then ease back, like a pin-art board.","Technical, structural, data or grid-led concepts; behind a hero with little text.",Behind body text; organic or luxury briefs; together with a cursor signature.,A still dot grid.,A still dot grid.,"Decorative canvas (aria-hidden, pointer-events none); paused off screen and in hidden tabs."
 globe,Globe,backgrounds,4,examples/components/backgrounds/globe.tsx,Globe,"A sphere of evenly spaced dots turns slowly, the far side faint, with a few brighter markers for real places (lat/lon). WebGL points; a CSS dotted disc stands in everywhere else.","The business is genuinely about places on Earth (shipping, a diaspora, offices in named cities, a travel route), and the markers are real.","As a generic ""global"" or ""scale"" signal; with invented markers; on pages that already run WebGL; at small sizes (the dots turn to noise).","A designed still: a chart plate of the globe facing the first marker, drawn in line (graticule, rim, the markers ringed and joined by arcs in order), not the dot sphere stopped. No canvas is mounted.","Same, at two-thirds resolution.","Decorative (aria-hidden): list the places in text nearby too. Capability probe (Save-Data, ≤ 2 cores, < 4 GB, no or software WebGL → poster); DPR ≤ 1.5; paused off screen and in hidden tabs; fills its absolute box, so no layout shift."
-grain,Grain,backgrounds,1,examples/components/backgrounds/grain.tsx,Grain,"A film-grain layer over a section or the whole page, static by default or gently flickering at a low frame rate.","Analogue, photographic, warm or printed moods; to take the digital edge off flat colour.","Over small text at high opacity; on clinical, technical brands; animated on low-end mobile.",Static grain.,Static grain (flicker is skipped on coarse pointers to save battery).,"Decorative (aria-hidden, pointer-events none); keep opacity low enough that contrast still passes."
+grain,Grain,backgrounds,1,examples/components/backgrounds/grain.tsx,Grain,"A film-grain layer over a section or the whole page, static by default or gently flickering at a low frame rate.","Analogue, photographic, warm or printed brands; to take the digital edge off flat colour.","Over small text at high opacity; on clinical, technical brands; animated on low-end mobile.",Static grain.,Static grain (flicker is skipped on coarse pointers to save battery).,"Decorative (aria-hidden, pointer-events none); keep opacity low enough that contrast still passes."
 halftone,Halftone,backgrounds,2,examples/components/backgrounds/halftone.tsx,Halftone,"Renders an image as print dots on a canvas, sized by brightness, like a newspaper photo; dots can grow in as it enters the screen.","Print, newspaper, zine, poster, protest and retro concepts.",Product photos people must inspect; portraits where likeness matters; many on one page.,Dots render at full size immediately.,"The dots print at full size a few rows per frame, top to bottom, like a press: growing thousands of dots every",The canvas has role img and the alt text; the source image needs CORS headers if it's on another origin.
 light-sweep,Light Sweep,backgrounds,1,examples/components/backgrounds/light-sweep.tsx,LightSweep,"A slow band of light crosses a surface every few seconds, like sun moving through a window or a scanner pass.","Architecture, light, time-of-day and hospitality concepts; behind one hero or one card.","Behind text where the band would drop contrast; as a ""shimmer"" on buttons; more than one per screen.",No sweep.,Same as desktop.,"Decorative (aria-hidden, pointer-events none). CSS only."
 liquid-field,Liquid Field,backgrounds,4,examples/components/backgrounds/liquid-field.tsx,LiquidField,"Slow flowing colour like ink in water or silk in wind, drawn by a tiny WebGL fragment shader with a CSS gradient fallback.","The material really is liquid, fabric, light or weather; behind a hero with one line of type.","As generic ""AI gradient"" decoration; behind body text; on pages that already use WebGL.","A designed still: a marbled sheet. Combed bands of the same three colours, like marbled paper keeping the trace of moving ink; no canvas is mounted.",Runs at half resolution on coarse pointers.,"Decorative canvas (aria-hidden); paused off screen and in hidden tabs; falls back to a CSS gradient when WebGL is unavailable, loses its context, or renders wrong colours (it reads back one pixel to check). Keep all three colours dark (or all light) so text on top keeps its contrast everywhere."
@@ -4573,7 +4568,7 @@ bento-reveal,Bento Reveal,layout,1,examples/components/layout/bento-reveal.tsx,B
 curve-carousel,Curve Carousel,layout,2,examples/components/layout/curve-carousel.tsx,CurveCarousel,"Cards sit on a shallow arc; the focused card is upright and in front, its neighbours tilt and recede. Arrow keys, buttons, drag and swipe move it.",3–9 case studies or products where one at a time is the point.,Content people need to compare; more than 9 items; as autoplaying decoration.,Cards change position without easing.,Swipe left or right.,"A labelled region with previous/next buttons, aria-live status (""2 of 5""), and arrow-key support; hidden cards are inert."
 dock,Dock,layout,2,examples/components/layout/dock.tsx,Dock,"A row of icon buttons that magnify smoothly as the cursor passes along them, neighbours growing a little less.","App-like tool collections, launchers and playful personal sites with 4–8 actions.",Primary navigation that needs labels; touch-first sites; more than 8 items.,No magnification.,No magnification; normal-size buttons.,"Real buttons or links with visible tooltips on focus and hover, and accessible names."
 flowing-menu,Flowing Menu,layout,2,examples/components/layout/flowing-menu.tsx,FlowingMenu,"A big typographic list of links; hovering an item rolls a band over it from the edge the cursor entered, carrying a marquee of the item's words.",Portfolio and studio navigation or project indexes with 3–8 entries.,Primary site navigation on product sites; long lists; touch-first audiences.,Hover shows the band instantly with still text.,Plain links with a pressed state.,"A nav with a normal list of links; the band and marquee are aria-hidden. Keyboard focus rolls the band in, so focus is as visible as hover (the row clips an outline)."
-infinite-canvas,Infinite Canvas,layout,2,examples/components/layout/infinite-canvas.tsx,InfiniteCanvas,"Drag (or use arrow keys) to pan an endless wall of tiles that repeats in every direction, with a little momentum when you let go.","The Gallery Wall archetype: archives, mood boards, studios with lots of visual work.",Fewer than ~12 tiles; content that needs order; as the only way to reach the work (also provide a list).,No momentum; panning still works.,One-finger drag pans; the page doesn't scroll while dragging inside.,A focusable region with arrow-key panning and an instruction label; provide a plain list of the same work elsewhere on the page.
+infinite-canvas,Infinite Canvas,layout,2,examples/components/layout/infinite-canvas.tsx,InfiniteCanvas,"Drag (or use arrow keys) to pan an endless wall of tiles that repeats in every direction, with a little momentum when you let go.","The Gallery Wall archetype: archives, pin boards, studios with lots of visual work.",Fewer than ~12 tiles; content that needs order; as the only way to reach the work (also provide a list).,No momentum; panning still works.,One-finger drag pans; the page doesn't scroll while dragging inside.,A focusable region with arrow-key panning and an instruction label; provide a plain list of the same work elsewhere on the page.
 sticky-index,Sticky Index,layout,1,examples/components/layout/sticky-index.tsx,StickyIndex,"A sticky side index lists the page's sections and highlights the one you are reading, with a marker that slides between entries.","Long case studies, reports, documentation, annual reviews.",Short pages; mobile (it collapses to a top select); landing pages.,The marker jumps instead of sliding.,Hidden below 900px; sections stay in normal flow.,A nav of in-page links with aria-current on the active section.
 animated-list,Animated List,ui,1,examples/components/ui/animated-list.tsx,AnimatedList,"Entries arrive one at a time, like orders coming into a kitchen or messages into a log: each slides up into its slot and settles. It plays once, then the list is simply a list.","The content really arrives over time (orders, sign-ups, sensor readings, a changelog), and showing the arrival explains the product.","Fake ""live activity"" or social proof; long lists (over about 8 entries); content the visitor needs to scan at once.",Every entry is there from the start.,Same as desktop (plays when in view).,"All entries are in the DOM from the first render (the hidden ones are opacity 0, which screen readers still read), so nothing is announced late and nothing is missed; slots are laid out from the start, so the list never pushes the page (no layout shift). It pauses off screen."
 confetti,Confetti,ui,2,examples/components/ui/confetti.tsx,useConfetti,"Paper pieces burst from a point, tumble and flutter down under gravity and air drag, and are gone in under two seconds. Fired by you, from code, at a real moment.","A genuine, rare success the visitor caused: an order placed, a donation made, a course finished, a wedding RSVP. Once.","Page load; every button; form validation; serious contexts (payments for bills, health, legal); repeated triggers. For small click feedback use Click Spark.",No particles at all; your success message carries the moment.,Same as desktop (fire it from the tap's coordinates).,"Purely decorative: a temporary, aria-hidden, pointer-events-none canvas that is removed after the burst. Pair it with a visible text confirmation. DPR ≤ 1.5; at most 120 pieces; runs only while pieces are on screen."
@@ -4594,8 +4589,8 @@ copy-button,Copy Confirm,micro,1,examples/components/micro/copy-button.tsx,CopyB
 count-up,Count Up,micro,2,examples/components/micro/count-up.tsx,CountUp,"A number counts from a start value to its real value once, when it first enters the screen, with tabular figures so it doesn't jitter.","Real, sourced figures that are the point of a section (one to three per page).",Invented or rounded-up stats; prices; anything a screenshot mid-count would misreport (see the v2 benchmark note).,Shows the final value at once.,Same as desktop.,"The final value is in the accessible name from the start; the counting digits are aria-hidden. Before it counts, the visible value is the final value (no-JS and screenshots never show 0)."
 hold-to-commit,Hold to Commit,micro,2,examples/components/micro/hold-to-commit.tsx,HoldToCommit,"An important action fills while you press and hold, and only confirms when the fill completes; letting go early drains it back.","Irreversible or weighty actions: delete, publish, donate, sign.",Everyday actions; anything time-critical; as the only way to confirm (keyboard users get Enter-to-hold too).,"The fill still shows progress (it's information) but with a linear, unanimated drain.",Press and hold works with touch; long-press callouts are suppressed.,"A real button; Space or Enter held works like a press; the label says ""Hold to …""; aria-live announces completion. A click that was not a hold (screen readers, voice control and switch access synthesize these) arms a confirmation instead: the label becomes ""Press again to confirm"", it is announced, and a second activation within 6 s commits; double-clicks don't count. Pending frames are cancelled on unmount, and a hold stops if the window loses focus or the tab is hidden."
 remembered-list,Remembered List,micro,1,examples/components/micro/remembered-list.tsx,RememberedList,"A list of links quietly marks the ones you've already opened (a small tick and a lighter weight), remembered across visits on this device.","Project lists, article archives, course modules, menus people browse more than once.","Lists that change identity often; sensitive topics where ""visited"" is private information on shared devices.",The mark appears without a transition.,Same as desktop.,"Visited items get a visually hidden ""(opened)"" suffix; storage is local only and fails silently."
-squish-switch,Squish Switch,micro,1,examples/components/micro/squish-switch.tsx,SquishSwitch,"A toggle whose knob stretches while pressed and squashes as it lands on the other side, like a soft rubber key.",Play-mood products and settings panels where a little character is welcome.,Serious financial or medical settings; dense settings tables.,The knob moves without stretching.,Same as desktop.,A real button with role switch and aria-checked; the label is visible text.
-sticker-scatter,Sticker Scatter,micro,2,examples/components/micro/sticker-scatter.tsx,StickerScatter,"Clicking the logo or name bursts a handful of on-brand stickers (emoji or short glyphs) that fly out, spin, land and fade, like emptying a pocket of stickers.","Play-mood personal sites, festivals, kids' brands and events; the logo only.",Serious or institutional briefs; buttons that do something else; repeated clicks on every page element.,Stickers appear around the logo and fade without flying or spinning.,Works on tap.,The trigger keeps its normal role and name; stickers are aria-hidden and never block clicks.
+squish-switch,Squish Switch,micro,1,examples/components/micro/squish-switch.tsx,SquishSwitch,"A toggle whose knob stretches while pressed and squashes as it lands on the other side, like a soft rubber key.",Light-hearted products and settings panels where a little character is welcome.,Serious financial or medical settings; dense settings tables.,The knob moves without stretching.,Same as desktop.,A real button with role switch and aria-checked; the label is visible text.
+sticker-scatter,Sticker Scatter,micro,2,examples/components/micro/sticker-scatter.tsx,StickerScatter,"Clicking the logo or name bursts a handful of on-brand stickers (emoji or short glyphs) that fly out, spin, land and fade, like emptying a pocket of stickers.","Light-hearted personal sites, festivals, kids' brands and events; the logo only.",Serious or institutional briefs; buttons that do something else; repeated clicks on every page element.,Stickers appear around the logo and fade without flying or spinning.,Works on tap.,The trigger keeps its normal role and name; stickers are aria-hidden and never block clicks.
 ```
 
 ### data/fonts.csv
@@ -4604,27 +4599,27 @@ sticker-scatter,Sticker Scatter,micro,2,examples/components/micro/sticker-scatte
 name,source,license,role,axes,personality,pairs_with,use_for,avoid,scripts
 Fraunces,Google Fonts,OFL,display serif,opsz wght SOFT WONK,"warm, quirky old-style with soft or wonky details",Switzer; Instrument Sans; Hanken Grotesk,"organic brands, food, editorial, heritage with humour",strict corporate tone,latin vietnamese
 Instrument Serif,Google Fonts,OFL,display serif,none (regular + italic),"condensed elegant serif, fashion-editorial",Instrument Sans; Geist; Satoshi,"fashion, portfolios, editorial headlines",body text,latin
-Newsreader,Google Fonts,OFL,text serif,opsz wght,calm newspaper serif built for reading,Schibsted Grotesk; Familjen Grotesk,"long-form, publications, organisations",loud play moods,latin vietnamese
+Newsreader,Google Fonts,OFL,text serif,opsz wght,calm newspaper serif built for reading,Schibsted Grotesk; Familjen Grotesk,"long-form, publications, organisations",loud playful brands,latin vietnamese
 Bodoni Moda,Google Fonts,OFL,display serif,opsz wght,"high-contrast didone, luxurious",Switzer; General Sans,"dark luxe, fragrance, fashion",small sizes on dark backgrounds,latin
 Gloock,Google Fonts,OFL,display serif,none,heavy high-contrast serif with sharp wedges,Hanken Grotesk; Satoshi,"dark luxe, posters, editorial hooks",body text,latin
 Young Serif,Google Fonts,OFL,display serif,none,friendly heavy old-style serif,Onest; Instrument Sans,"food, organic, children's brands",technical products,latin
 Cormorant Garamond,Google Fonts,OFL,display serif,wght,delicate calligraphic garamond at large sizes,Hanken Grotesk; Switzer,"hotels, weddings, luxury quiet",small text on screens,latin vietnamese cyrillic
-EB Garamond,Google Fonts,OFL,text serif,wght,classic book face,Schibsted Grotesk; Geist,"literary, academic, heritage",play moods,latin vietnamese cyrillic greek
+EB Garamond,Google Fonts,OFL,text serif,wght,classic book face,Schibsted Grotesk; Geist,"literary, academic, heritage",loud playful brands,latin vietnamese cyrillic greek
 Big Shoulders Display,Google Fonts,OFL,display sans,wght,"condensed American-industrial, cinematic",Switzer; Geist; JetBrains Mono,"film, sport, events, Motomation titles",long headlines in lowercase,latin vietnamese
 Archivo,Google Fonts,OFL,display/text sans,wdth wght,grotesk with a wide width range,Newsreader; JetBrains Mono,"kinetic width effects, editorial, sport",when you need a soft tone,latin vietnamese
-Anybody,Google Fonts,OFL,display sans,wdth wght ital,extreme width axis from ultra-condensed to ultra-wide,Inter Tight (text); Space Mono,"Width Sprint, kinetic type, events",quiet moods,latin vietnamese
+Anybody,Google Fonts,OFL,display sans,wdth wght ital,extreme width axis from ultra-condensed to ultra-wide,Inter Tight (text); Space Mono,"Width Sprint, kinetic type, events",calm still brands,latin vietnamese
 Bricolage Grotesque,Google Fonts,OFL,display sans,opsz wdth wght,characterful grotesk with ink-trap quirks,Newsreader; Geist Mono,"neobrutalism, creative tools, indie products",luxury,latin vietnamese
-Familjen Grotesk,Google Fonts,OFL,text/display sans,wght,Scandinavian grotesk with distinct shapes,Newsreader; EB Garamond,"studios, editorial, organisations",play moods,latin vietnamese
+Familjen Grotesk,Google Fonts,OFL,text/display sans,wght,Scandinavian grotesk with distinct shapes,Newsreader; EB Garamond,"studios, editorial, organisations",loud playful brands,latin vietnamese
 Hanken Grotesk,Google Fonts,OFL,text sans,wght,neutral geometric-humanist sans,Fraunces; Gloock; Cormorant Garamond,body text for serif-led sites,display identity,latin vietnamese
-Schibsted Grotesk,Google Fonts,OFL,text/display sans,wght,newsroom grotesk with sturdy forms,Newsreader; EB Garamond,"publications, Swiss style, organisations",soft moods,latin
+Schibsted Grotesk,Google Fonts,OFL,text/display sans,wght,newsroom grotesk with sturdy forms,Newsreader; EB Garamond,"publications, Swiss style, organisations",soft rounded brands,latin
 Instrument Sans,Google Fonts,OFL,text/display sans,wdth wght,precise neo-grotesk with a width axis,Instrument Serif; Fraunces,"SaaS, studios, minimal",when you need warmth,latin
 Onest,Google Fonts,OFL,text sans,wght,friendly open sans with Cyrillic,Young Serif; Bricolage Grotesque,"education, flat style, public services",luxury,latin vietnamese cyrillic
 Syne,Google Fonts,OFL,display sans,wght,art-school display that widens with weight,Hanken Grotesk; Space Mono,"galleries, art, festivals",body text,latin greek
-Unbounded,Google Fonts,OFL,display sans,wght,"wide rounded display, playful and loud",Onest; JetBrains Mono,"play moods, web3-free tech launches, events",quiet moods,latin vietnamese cyrillic
+Unbounded,Google Fonts,OFL,display sans,wght,"wide rounded display, playful and loud",Onest; JetBrains Mono,"loud playful brands, web3-free tech launches, events",calm still brands,latin vietnamese cyrillic
 Geist,Google Fonts,OFL,text sans,wght,clean technical grotesk (by Vercel),Instrument Serif; Fraunces; Geist Mono,"dev tools, SaaS, body text",display identity on its own,latin vietnamese cyrillic
 Geist Mono,Google Fonts,OFL,mono,wght,technical mono that pairs with Geist,Geist; Bricolage Grotesque,"labels, timecodes, code",long reading,latin vietnamese cyrillic
 JetBrains Mono,Google Fonts,OFL,mono,wght,coding mono with tall x-height,Archivo; Big Shoulders Display,"console archetype, timecodes, captions",body text,latin vietnamese cyrillic greek
-Martian Mono,Google Fonts,OFL,mono,wdth wght,wide-able mono with a strong voice,Syne; Unbounded,"technical brands with personality, index numbers",quiet moods,latin cyrillic
+Martian Mono,Google Fonts,OFL,mono,wdth wght,wide-able mono with a strong voice,Syne; Unbounded,"technical brands with personality, index numbers",calm still brands,latin cyrillic
 Space Mono,Google Fonts,OFL,mono,none,retro-futurist mono,Syne; Anybody,"retro, editorial labels",overused as a display,latin vietnamese
 Climate Crisis,Google Fonts,OFL,display sans,YEAR,weight melts with a YEAR axis (1979-2019) showing ice loss,Hanken Grotesk,climate and data storytelling: the axis is the concept,any brief not about change over time,latin cyrillic
 Inter Tight,Google Fonts,OFL,text sans,wght,tight neutral sans for UI text,Anybody; Big Shoulders Display,UI text when chosen deliberately,display identity,latin vietnamese cyrillic greek
@@ -4634,7 +4629,7 @@ Noto Serif Bengali,Google Fonts,OFL,bangla serif,wdth wght,bookish Bangla serif,
 Satoshi,Fontshare,ITF Free Font License,text/display sans,wght,"modern geometric grotesk, crisp",Zodiak; Gambetta; Boska,"SaaS, portfolios, soft and minimal styles",when everyone else uses it: vary with pairings,latin (check the foundry's language list)
 General Sans,Fontshare,ITF Free Font License,text sans,wght,soft modern grotesk,Bodoni Moda; Zodiak,"soft and neumorphic styles, wellness",brutalism,latin (check the foundry's language list)
 Cabinet Grotesk,Fontshare,ITF Free Font License,display sans,wght,punchy grotesk with tight curves,Sentient; Satoshi,"neobrutalism, posters, launches",quiet luxury,latin (check the foundry's language list)
-Clash Display,Fontshare,ITF Free Font License,display sans,wght,sharp contemporary display grotesk,Satoshi; Switzer,"studios, launches, play moods",body text,latin (check the foundry's language list)
+Clash Display,Fontshare,ITF Free Font License,display sans,wght,sharp contemporary display grotesk,Satoshi; Switzer,"studios, launches, loud playful brands",body text,latin (check the foundry's language list)
 Switzer,Fontshare,ITF Free Font License,text sans,wght,neutral Swiss-style grotesk,Fraunces; Big Shoulders Display; Bodoni Moda,"body text, Swiss style, minimal",display identity on its own,latin (check the foundry's language list)
 Zodiak,Fontshare,ITF Free Font License,display/text serif,wght,contemporary high-contrast serif,Satoshi; General Sans,"dark luxe, editorial, fashion",tiny UI,latin (check the foundry's language list)
 Gambetta,Fontshare,ITF Free Font License,text/display serif,wght,warm robust serif,Satoshi; Switzer,"organic, food, publishing",neobrutalism,latin (check the foundry's language list)
@@ -4795,47 +4790,47 @@ constraint,Self-imposed constraint,"one colour, one size or one font weight only
 ### data/palettes.csv
 
 ```csv
-name,mood,ground,surface,ink,muted,accent,accent_ink,story,accent_text,mode,pair
-Paper & Vermilion,editorial,#F3F0EA,#EAE6DE,#151412,#5E5A53,#C8401C,#FFFFFF,"printed matter, newsrooms, studios",large-only,light,Vermilion After Hours
-Bone & Graphite,quiet,#ECE8E1,#E2DDD4,#1C1C1A,#5A5852,#8A6A3B,#FFFFFF,"architecture, interiors, calm portfolios",large-only,light,Graphite & Bone
-Darkroom,play,#0E0D0B,#1A1814,#F2EEE6,#A8A196,#E0442B,#0E0D0B,"film, photography, Motomation chapters",body,dark,Darkroom Contact Sheet
-Night Brass,quiet,#0D0D0F,#18181B,#EDEBE6,#A3A09A,#C9A15B,#0D0D0F,"hotels at night, fragrance, watches",body,dark,Day Brass
-Signal Green Console,editorial,#0B0F0C,#121A14,#E3F2E6,#8FA894,#3DDC84,#0B0F0C,"dev tools, terminals, technical launches",body,dark,none
-Swiss Red,editorial,#FAFAF7,#EFEFEA,#111111,#555555,#E30613,#FFFFFF,"Swiss style, engineering, institutions",body,light,Swiss Red at Night
-Ultramarine Press,editorial,#F5F3EE,#EBE8E1,#14161F,#555B6B,#2337C6,#FFFFFF,"publications, culture, galleries",body,light,Ultramarine Night Press
-Clay & Moss,quiet,#EFE9E1,#E4DCD1,#2A241E,#6B6157,#5C7A48,#FFFFFF,"ceramics, food, sustainability",large-only,light,Moss After Rain
-Safelight,play,#140B0A,#21110F,#F6E9E2,#B89A90,#FF5A3C,#140B0A,"darkroom, music, nightlife",body,dark,none
-Bauhaus Primaries,play,#F2EFE6,#E7E2D5,#141414,#565452,#1F4FD8,#FFFFFF,"education, design schools, playful systems",body,light,Bauhaus Blackboard
-Citrus Brutal,play,#FFF6D6,#FFE9A3,#111111,#4A4536,#FF4D00,#111111,"neobrutalism, indie tools, events",large-only,light,Citrus Blackout
-Lagoon,quiet,#EEF3F2,#E1EAE8,#10201E,#4C5F5C,#0F7C72,#FFFFFF,"wellness, coastal hotels, health",body,light,Night Lagoon
-Ink & Rose,editorial,#F7F1EF,#EFE5E2,#1D1517,#655457,#B4325A,#FFFFFF,"beauty, fashion, personal brands",body,light,Rose After Dark
-Concrete & Signal,editorial,#E9E9E6,#DCDCD8,#161616,#555553,#C2410C,#FFFFFF,"architecture, urban, industrial products",large-only,light,Wet Concrete
-Midnight Ultraviolet,play,#0C0A14,#16122A,#EEEAFB,#A49DC4,#9B7BFF,#0C0A14,"music, games: only when violet is the concept",body,dark,none
-Oxblood Library,quiet,#F1ECE4,#E6DFD3,#1E1614,#62554F,#7A1F1F,#FFFFFF,"heritage, law, literary brands",body,light,Oxblood Reading Room
-Monsoon Dhaka,editorial,#ECEFEA,#DFE5DE,#151A16,#525C54,#1E6B52,#FFFFFF,"Bangladeshi brands, rain, rivers, green heritage",body,light,Monsoon Night
-Saffron Market,play,#FBF4E8,#F3E6CF,#1F1610,#64574A,#A8550F,#FFFFFF,"food, festivals, markets",body,light,Saffron Night Market
-Arctic Lab,quiet,#F4F7F9,#E8EEF2,#0F1820,#4F5D6A,#1E6FD9,#FFFFFF,"science, health tech, precise SaaS",body,light,Arctic Lab Dark
-Graphite Mono,quiet,#111111,#1B1B1B,#EDEDED,#9A9A9A,#FFFFFF,#111111,stark minimal portfolios: accent is pure white,body,dark,none
-Sun-Bleached,quiet,#F6EFE6,#EEE3D4,#2B2118,#6E5E4E,#C2562F,#FFFFFF,"travel, summer hotels, ceramics",large-only,light,Sun-Bleached Dusk
-Pine & Fog,quiet,#E9ECE8,#DCE1DB,#17201B,#526057,#2F5D46,#FFFFFF,"outdoors, cabins, nature non-profits",body,light,Pine at Night
-Vermilion After Hours,editorial,#15120C,#211D15,#F2EFE8,#B3AC9E,#E04A22,#15120C,"dark-mode pair of Paper & Vermilion: printed matter, newsrooms, studios",body,dark,Paper & Vermilion
-Graphite & Bone,quiet,#14120D,#211C15,#F1EEE9,#B3AB9E,#9F7A44,#14120D,"dark-mode pair of Bone & Graphite: architecture, interiors, calm portfolios",body,dark,Bone & Graphite
-Darkroom Contact Sheet,play,#F3F1EC,#EBE7E0,#191610,#675F51,#C5341D,#FFFFFF,"light-mode pair of Darkroom: film, photography, Motomation chapters",body,light,Darkroom
-Day Brass,quiet,#EDEDF2,#E1E1EA,#111118,#515167,#80602A,#FFFFFF,"light-mode pair of Night Brass: hotels at night, fragrance, watches",body,light,Night Brass
-Swiss Red at Night,editorial,#14140D,#212115,#F1F1E9,#B3B39E,#F9232F,#14140D,"dark-mode pair of Swiss Red: Swiss style, engineering, institutions",body,dark,Swiss Red
-Ultramarine Night Press,editorial,#15120C,#211D15,#F2EFE9,#B3AD9E,#6A79E5,#15120C,"dark-mode pair of Ultramarine Press: publications, culture, galleries",body,dark,Ultramarine Press
-Moss After Rain,quiet,#15110C,#211C15,#F3EEE8,#B3AA9E,#668750,#15110C,"dark-mode pair of Clay & Moss: ceramics, food, sustainability",body,dark,Clay & Moss
-Bauhaus Blackboard,play,#15130C,#211E15,#F3F0E8,#B3AE9E,#577DE7,#15130C,"dark-mode pair of Bauhaus Primaries: education, design schools, playful systems",body,dark,Bauhaus Primaries
-Citrus Blackout,play,#15130C,#211E15,#F3F1E7,#B3AE9E,#FF4D00,#15130C,"dark-mode pair of Citrus Brutal: neobrutalism, indie tools, events",body,dark,Citrus Brutal
-Night Lagoon,quiet,#0E1312,#161F1E,#EAF0EF,#9EB3AF,#118E83,#0E1312,"dark-mode pair of Lagoon: wellness, coastal hotels, health",body,dark,Lagoon
-Rose After Dark,editorial,#150F0C,#211815,#F3EAE7,#B3A39E,#CF547A,#150F0C,"dark-mode pair of Ink & Rose: beauty, fashion, personal brands",body,dark,Ink & Rose
-Wet Concrete,editorial,#121210,#1C1C19,#EEEEEC,#AEAEA3,#E84E0E,#121210,"dark-mode pair of Concrete & Signal: architecture, urban, industrial products",body,dark,Concrete & Signal
-Oxblood Reading Room,quiet,#15120C,#211C15,#F3EEE7,#B3AB9E,#D45454,#15120C,"dark-mode pair of Oxblood Library: heritage, law, literary brands",body,dark,Oxblood Library
-Monsoon Night,editorial,#10130E,#1A1E17,#EDF0EB,#A6B39E,#299371,#10130E,"dark-mode pair of Monsoon Dhaka: Bangladeshi brands, rain, rivers, green heritage",body,dark,Monsoon Dhaka
-Saffron Night Market,play,#15120C,#211C15,#F3EFE7,#B3AB9E,#CD6812,#15120C,"dark-mode pair of Saffron Market: food, festivals, markets",body,dark,Saffron Market
-Arctic Lab Dark,quiet,#0C1115,#151C21,#E8EEF2,#9EAAB3,#337FE3,#0C1115,"dark-mode pair of Arctic Lab: science, health tech, precise SaaS",body,dark,Arctic Lab
-Sun-Bleached Dusk,quiet,#15110C,#211C15,#F3EEE7,#B3AA9E,#CF5F37,#15110C,"dark-mode pair of Sun-Bleached: travel, summer hotels, ceramics",body,dark,Sun-Bleached
-Pine at Night,quiet,#10120F,#191D18,#ECEFEB,#A4B1A0,#478C6A,#10120F,"dark-mode pair of Pine & Fog: outdoors, cabins, nature non-profits",body,dark,Pine & Fog
+name,ground,surface,ink,muted,accent,accent_ink,story,accent_text,mode,pair
+Paper & Vermilion,#F3F0EA,#EAE6DE,#151412,#5E5A53,#C8401C,#FFFFFF,"printed matter, newsrooms, studios",large-only,light,Vermilion After Hours
+Bone & Graphite,#ECE8E1,#E2DDD4,#1C1C1A,#5A5852,#8A6A3B,#FFFFFF,"architecture, interiors, calm portfolios",large-only,light,Graphite & Bone
+Darkroom,#0E0D0B,#1A1814,#F2EEE6,#A8A196,#E0442B,#0E0D0B,"film, photography, Motomation chapters",body,dark,Darkroom Contact Sheet
+Night Brass,#0D0D0F,#18181B,#EDEBE6,#A3A09A,#C9A15B,#0D0D0F,"hotels at night, fragrance, watches",body,dark,Day Brass
+Signal Green Console,#0B0F0C,#121A14,#E3F2E6,#8FA894,#3DDC84,#0B0F0C,"dev tools, terminals, technical launches",body,dark,none
+Swiss Red,#FAFAF7,#EFEFEA,#111111,#555555,#E30613,#FFFFFF,"Swiss style, engineering, institutions",body,light,Swiss Red at Night
+Ultramarine Press,#F5F3EE,#EBE8E1,#14161F,#555B6B,#2337C6,#FFFFFF,"publications, culture, galleries",body,light,Ultramarine Night Press
+Clay & Moss,#EFE9E1,#E4DCD1,#2A241E,#6B6157,#5C7A48,#FFFFFF,"ceramics, food, sustainability",large-only,light,Moss After Rain
+Safelight,#140B0A,#21110F,#F6E9E2,#B89A90,#FF5A3C,#140B0A,"darkroom, music, nightlife",body,dark,none
+Bauhaus Primaries,#F2EFE6,#E7E2D5,#141414,#565452,#1F4FD8,#FFFFFF,"education, design schools, playful systems",body,light,Bauhaus Blackboard
+Citrus Brutal,#FFF6D6,#FFE9A3,#111111,#4A4536,#FF4D00,#111111,"neobrutalism, indie tools, events",large-only,light,Citrus Blackout
+Lagoon,#EEF3F2,#E1EAE8,#10201E,#4C5F5C,#0F7C72,#FFFFFF,"wellness, coastal hotels, health",body,light,Night Lagoon
+Ink & Rose,#F7F1EF,#EFE5E2,#1D1517,#655457,#B4325A,#FFFFFF,"beauty, fashion, personal brands",body,light,Rose After Dark
+Concrete & Signal,#E9E9E6,#DCDCD8,#161616,#555553,#C2410C,#FFFFFF,"architecture, urban, industrial products",large-only,light,Wet Concrete
+Midnight Ultraviolet,#0C0A14,#16122A,#EEEAFB,#A49DC4,#9B7BFF,#0C0A14,"music, games: only when violet is the concept",body,dark,none
+Oxblood Library,#F1ECE4,#E6DFD3,#1E1614,#62554F,#7A1F1F,#FFFFFF,"heritage, law, literary brands",body,light,Oxblood Reading Room
+Monsoon Dhaka,#ECEFEA,#DFE5DE,#151A16,#525C54,#1E6B52,#FFFFFF,"Bangladeshi brands, rain, rivers, green heritage",body,light,Monsoon Night
+Saffron Market,#FBF4E8,#F3E6CF,#1F1610,#64574A,#A8550F,#FFFFFF,"food, festivals, markets",body,light,Saffron Night Market
+Arctic Lab,#F4F7F9,#E8EEF2,#0F1820,#4F5D6A,#1E6FD9,#FFFFFF,"science, health tech, precise SaaS",body,light,Arctic Lab Dark
+Graphite Mono,#111111,#1B1B1B,#EDEDED,#9A9A9A,#FFFFFF,#111111,stark minimal portfolios: accent is pure white,body,dark,none
+Sun-Bleached,#F6EFE6,#EEE3D4,#2B2118,#6E5E4E,#C2562F,#FFFFFF,"travel, summer hotels, ceramics",large-only,light,Sun-Bleached Dusk
+Pine & Fog,#E9ECE8,#DCE1DB,#17201B,#526057,#2F5D46,#FFFFFF,"outdoors, cabins, nature non-profits",body,light,Pine at Night
+Vermilion After Hours,#15120C,#211D15,#F2EFE8,#B3AC9E,#E04A22,#15120C,"dark-mode pair of Paper & Vermilion: printed matter, newsrooms, studios",body,dark,Paper & Vermilion
+Graphite & Bone,#14120D,#211C15,#F1EEE9,#B3AB9E,#9F7A44,#14120D,"dark-mode pair of Bone & Graphite: architecture, interiors, calm portfolios",body,dark,Bone & Graphite
+Darkroom Contact Sheet,#F3F1EC,#EBE7E0,#191610,#675F51,#C5341D,#FFFFFF,"light-mode pair of Darkroom: film, photography, Motomation chapters",body,light,Darkroom
+Day Brass,#EDEDF2,#E1E1EA,#111118,#515167,#80602A,#FFFFFF,"light-mode pair of Night Brass: hotels at night, fragrance, watches",body,light,Night Brass
+Swiss Red at Night,#14140D,#212115,#F1F1E9,#B3B39E,#F9232F,#14140D,"dark-mode pair of Swiss Red: Swiss style, engineering, institutions",body,dark,Swiss Red
+Ultramarine Night Press,#15120C,#211D15,#F2EFE9,#B3AD9E,#6A79E5,#15120C,"dark-mode pair of Ultramarine Press: publications, culture, galleries",body,dark,Ultramarine Press
+Moss After Rain,#15110C,#211C15,#F3EEE8,#B3AA9E,#668750,#15110C,"dark-mode pair of Clay & Moss: ceramics, food, sustainability",body,dark,Clay & Moss
+Bauhaus Blackboard,#15130C,#211E15,#F3F0E8,#B3AE9E,#577DE7,#15130C,"dark-mode pair of Bauhaus Primaries: education, design schools, playful systems",body,dark,Bauhaus Primaries
+Citrus Blackout,#15130C,#211E15,#F3F1E7,#B3AE9E,#FF4D00,#15130C,"dark-mode pair of Citrus Brutal: neobrutalism, indie tools, events",body,dark,Citrus Brutal
+Night Lagoon,#0E1312,#161F1E,#EAF0EF,#9EB3AF,#118E83,#0E1312,"dark-mode pair of Lagoon: wellness, coastal hotels, health",body,dark,Lagoon
+Rose After Dark,#150F0C,#211815,#F3EAE7,#B3A39E,#CF547A,#150F0C,"dark-mode pair of Ink & Rose: beauty, fashion, personal brands",body,dark,Ink & Rose
+Wet Concrete,#121210,#1C1C19,#EEEEEC,#AEAEA3,#E84E0E,#121210,"dark-mode pair of Concrete & Signal: architecture, urban, industrial products",body,dark,Concrete & Signal
+Oxblood Reading Room,#15120C,#211C15,#F3EEE7,#B3AB9E,#D45454,#15120C,"dark-mode pair of Oxblood Library: heritage, law, literary brands",body,dark,Oxblood Library
+Monsoon Night,#10130E,#1A1E17,#EDF0EB,#A6B39E,#299371,#10130E,"dark-mode pair of Monsoon Dhaka: Bangladeshi brands, rain, rivers, green heritage",body,dark,Monsoon Dhaka
+Saffron Night Market,#15120C,#211C15,#F3EFE7,#B3AB9E,#CD6812,#15120C,"dark-mode pair of Saffron Market: food, festivals, markets",body,dark,Saffron Market
+Arctic Lab Dark,#0C1115,#151C21,#E8EEF2,#9EAAB3,#337FE3,#0C1115,"dark-mode pair of Arctic Lab: science, health tech, precise SaaS",body,dark,Arctic Lab
+Sun-Bleached Dusk,#15110C,#211C15,#F3EEE7,#B3AA9E,#CF5F37,#15110C,"dark-mode pair of Sun-Bleached: travel, summer hotels, ceramics",body,dark,Sun-Bleached
+Pine at Night,#10120F,#191D18,#ECEFEB,#A4B1A0,#478C6A,#10120F,"dark-mode pair of Pine & Fog: outdoors, cabins, nature non-profits",body,dark,Pine & Fog
 ```
 
 ### data/rules.csv
@@ -4850,29 +4845,29 @@ caution_fonts,Playfair Display|Space Grotesk,"Not banned, but AI defaults: use o
 ### data/signatures.csv
 
 ```csv
-id,name,family,tier,mood,good_for,file,one_line
-proximity-weight,Proximity Weight,type,2,play editorial,portfolio studio specimen,signatures/type-signatures.md,letters near the cursor get heavier
-letter-relay,Letter Relay,type,2,play editorial,portfolio personal-brand,signatures/type-signatures.md,the hero name travels letter by letter into the header
-line-curtain,Line Curtain,type,2,all,all,signatures/type-signatures.md,headlines rise line by line from masks
-width-sprint,Width Sprint,type,2,play,event product-launch sport,signatures/type-signatures.md,variable width stretches with scroll speed
-decode,Decode,type,2,editorial play,saas console event,signatures/type-signatures.md,labels resolve from random glyphs
-neighbour-moves,Neighbour Moves,type,2,play,portfolio personal-brand,signatures/type-signatures.md,each letter has its own hover move
-ink-fill,Ink Fill,type,2,editorial quiet,studio organisation manifesto,signatures/type-signatures.md,statements fill with ink as you read
-timecode-rail,Timecode Rail,scroll,5,play editorial,product-launch portfolio,signatures/scroll-signatures.md,a running timecode shows chapter progress
-aperture,Aperture,scroll,2,quiet editorial,hotel architecture photography,signatures/scroll-signatures.md,the next section opens through an iris or door
-velocity-skew,Velocity Skew Marquee,scroll,2,play,studio event,signatures/scroll-signatures.md,a marquee that leans with scroll speed
-darkroom-develop,Darkroom Develop,scroll,2,quiet editorial,photography hotel heritage,signatures/scroll-signatures.md,photos develop from blank paper
-stacked-deck,Stacked Deck,scroll,2,editorial,saas studio education,signatures/scroll-signatures.md,sticky cards stack into a table of contents
-horizontal-reel,Horizontal Reel,scroll,2,play editorial,portfolio gallery architecture,signatures/scroll-signatures.md,vertical scroll pulls a film strip sideways
-thread,Thread,scroll,2,editorial quiet,organisation education journey,signatures/scroll-signatures.md,one line draws through the whole page
-seismograph-line,Seismograph Line,cursor,2,editorial play,portfolio studio,signatures/cursor-and-micro-signatures.md,a hairline bends toward the cursor
-lens,Lens,cursor,2,quiet editorial,architecture photography product,signatures/cursor-and-micro-signatures.md,the cursor reveals an alternate layer
-pixel-wake,Pixel Wake,cursor,2,play,portfolio games digital,signatures/cursor-and-micro-signatures.md,the cursor leaves fading pixels
-sticker-scatter,Sticker Scatter,micro,2,play,personal-brand event,signatures/cursor-and-micro-signatures.md,the logo bursts into on-brand stickers
-considerate-magnet,Considerate Magnet,micro,2,editorial play,saas studio,signatures/cursor-and-micro-signatures.md,the primary button leans toward the cursor
-remembered-list,Remembered List,micro,1,all,portfolio studio publication,signatures/cursor-and-micro-signatures.md,the list marks what you already opened
-brand-selection,Brand Selection,micro,1,all,all,signatures/cursor-and-micro-signatures.md,text selection uses the brand accent
-hold-to-commit,Hold to Commit,micro,2,quiet editorial,hotel ecommerce product-launch,signatures/cursor-and-micro-signatures.md,important actions fill while held
+id,name,family,tier,good_for,file,one_line
+proximity-weight,Proximity Weight,type,2,portfolio studio specimen,signatures/type-signatures.md,letters near the cursor get heavier
+letter-relay,Letter Relay,type,2,portfolio personal-brand,signatures/type-signatures.md,the hero name travels letter by letter into the header
+line-curtain,Line Curtain,type,2,all,signatures/type-signatures.md,headlines rise line by line from masks
+width-sprint,Width Sprint,type,2,event product-launch sport,signatures/type-signatures.md,variable width stretches with scroll speed
+decode,Decode,type,2,saas console event,signatures/type-signatures.md,labels resolve from random glyphs
+neighbour-moves,Neighbour Moves,type,2,portfolio personal-brand,signatures/type-signatures.md,each letter has its own hover move
+ink-fill,Ink Fill,type,2,studio organisation manifesto,signatures/type-signatures.md,statements fill with ink as you read
+timecode-rail,Timecode Rail,scroll,5,product-launch portfolio,signatures/scroll-signatures.md,a running timecode shows chapter progress
+aperture,Aperture,scroll,2,hotel architecture photography,signatures/scroll-signatures.md,the next section opens through an iris or door
+velocity-skew,Velocity Skew Marquee,scroll,2,studio event,signatures/scroll-signatures.md,a marquee that leans with scroll speed
+darkroom-develop,Darkroom Develop,scroll,2,photography hotel heritage,signatures/scroll-signatures.md,photos develop from blank paper
+stacked-deck,Stacked Deck,scroll,2,saas studio education,signatures/scroll-signatures.md,sticky cards stack into a table of contents
+horizontal-reel,Horizontal Reel,scroll,2,portfolio gallery architecture,signatures/scroll-signatures.md,vertical scroll pulls a film strip sideways
+thread,Thread,scroll,2,organisation education journey,signatures/scroll-signatures.md,one line draws through the whole page
+seismograph-line,Seismograph Line,cursor,2,portfolio studio,signatures/cursor-and-micro-signatures.md,a hairline bends toward the cursor
+lens,Lens,cursor,2,architecture photography product,signatures/cursor-and-micro-signatures.md,the cursor reveals an alternate layer
+pixel-wake,Pixel Wake,cursor,2,portfolio games digital,signatures/cursor-and-micro-signatures.md,the cursor leaves fading pixels
+sticker-scatter,Sticker Scatter,micro,2,personal-brand event,signatures/cursor-and-micro-signatures.md,the logo bursts into on-brand stickers
+considerate-magnet,Considerate Magnet,micro,2,saas studio,signatures/cursor-and-micro-signatures.md,the primary button leans toward the cursor
+remembered-list,Remembered List,micro,1,portfolio studio publication,signatures/cursor-and-micro-signatures.md,the list marks what you already opened
+brand-selection,Brand Selection,micro,1,all,signatures/cursor-and-micro-signatures.md,text selection uses the brand accent
+hold-to-commit,Hold to Commit,micro,2,hotel ecommerce product-launch,signatures/cursor-and-micro-signatures.md,important actions fill while held
 ```
 
 ### data/styles.csv
