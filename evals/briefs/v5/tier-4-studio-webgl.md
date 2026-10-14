@@ -1,3 +1,5 @@
+Imagery is out of scope for this benchmark. Placeholders are expected and will not be judged. Focus on structure, typography, layout, and motion.
+
 # Kaal Studio
 Tier: 4 — Max
 Why this tier: the studio sells real-time 3D and interactive work, so a live WebGL hero and spatial sections are a claim about what they can build; a Tier 2–3 site would undersell the product, and a Tier 5 scroll film would turn the portfolio into one linear story when clients need to browse four case studies.

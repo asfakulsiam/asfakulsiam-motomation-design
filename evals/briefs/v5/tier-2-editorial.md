@@ -1,3 +1,5 @@
+Imagery is out of scope for this benchmark. Placeholders are expected and will not be judged. Focus on structure, typography, layout, and motion.
+
 # Jol · Issue 07: "The Last Boatbuilders of Sadarghat"
 Tier: 2 — Intermediate
 Why this tier: a long read earns section entrances and scroll choreography that pace the story and mark its turns, but it is read, not watched, so pinned film sequences or real-time 3D (Tiers 4–5) would fight the text, and a static page (Tier 1) would waste the issue's rhythm.

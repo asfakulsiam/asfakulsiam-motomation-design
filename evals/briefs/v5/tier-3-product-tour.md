@@ -1,3 +1,5 @@
+Imagery is out of scope for this benchmark. Placeholders are expected and will not be judged. Focus on structure, typography, layout, and motion.
+
 # Tally · a four-step product tour
 Tier: 3 — Pro
 Why this tier: the site is a guided flow across four pages, not one scrolling page, so the motion that matters is the transition between pages (shared elements carried from one step to the next); Tier 2 scroll choreography would miss the point, and Tier 4–5 real-time 3D or scroll film would turn a short decision into a show.

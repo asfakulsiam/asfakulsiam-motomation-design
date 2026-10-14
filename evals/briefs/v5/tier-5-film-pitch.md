@@ -1,3 +1,5 @@
+Imagery is out of scope for this benchmark. Placeholders are expected and will not be judged. Focus on structure, typography, layout, and motion.
+
 # "Ghat" · a short film pitch
 Tier: 5 — Motomation
 Why this tier: the pitch is the film, so scroll must be the playhead (a pinned canvas scrubbing frames, with a timecode rail) to let a funder feel the film's pace and images; anything lower would describe the film instead of showing it.

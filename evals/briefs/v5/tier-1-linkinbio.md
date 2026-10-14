@@ -1,3 +1,5 @@
+Imagery is out of scope for this benchmark. Placeholders are expected and will not be judged. Focus on structure, typography, layout, and motion.
+
 # Rumana Akter · Photographs
 Tier: 1 — Basic
 Why this tier: there is no narrative to tell, only four doors to open, so micro-interactions (hover, focus, press) are the whole motion story; anything scroll-driven or cinematic would slow a page whose only job is to be tapped.
