@@ -2,6 +2,24 @@
 
 Proof that the skill does what it claims. Run them before a release.
 
+## Benchmark v5 (in progress)
+
+Five sites, one per motion tier. Sequential. Different agents
+can complete different sites across sessions.
+
+See `results/benchmark-v5/STATE.md` for progress.
+See `results/benchmark-v5/HOW-TO-RUN.md` for the process.
+
+v5 tests tier judgment: does the skill build at the tier the
+brief names? A Tier 5 brief that produces a Tier 2 page fails
+the tier check, not the gate.
+
+Briefs: `briefs/v5/` (Tier 1 link-in-bio photographer, Tier 2 editorial magazine issue, Tier 3 product tour, Tier 4 design studio site with WebGL, Tier 5 narrative film pitch). One site per session: `run-agent-benchmark.mjs --tier <n> --one <brief>`.
+
+## Earlier benchmarks (v3, v4: kept for comparison)
+
+v3 and v4 tested five site categories (studio, hotel, ecommerce, saas, public) at whatever tier the skill chose; it chose Tier 2 for all of them. They are not re-run and stay as history: [v3](results/2026-10-12-benchmark-v3.md) · [v3 Codex](results/2026-10-12-benchmark-v3-codex.md) · [v3 motion](results/2026-10-12-benchmark-v3-motion.md) · [v3 competitors](results/2026-10-12-benchmark-v3-competitors.md) · [v4](results/2026-10-12-benchmark-v4.md) · [v4 motion](results/2026-10-12-benchmark-v4-motion/).
+
 ## How to run
 1. Pick an agent (Claude Code, Codex, Cursor…) and a model. Note both.
 2. For each brief in `briefs/`, run it **twice**: once **without** the skill (baseline), once **with** it (`/build <brief>`).
