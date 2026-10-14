@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; font-src 'self'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Rumana Akter · Documentary photographer, Chattogram</title>
+<meta name="description" content="Documentary photographer. Ships, rivers and the people who work them, from Chattogram. Portfolio, signed prints, workshops and contact.">
+<link rel="canonical" href="https://rumana-akter.example.com/">
+<meta name="theme-color" content="#1F2120">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Rumana Akter · Photographs">
+<meta property="og:description" content="Documentary photographer. Ships, rivers and the people who work them, from Chattogram.">
+<meta property="og:url" content="https://rumana-akter.example.com/">
+<meta property="og:image" content="https://rumana-akter.example.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Rumana Akter, Photographs: a printed slip with her portrait and four lines">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/martian-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="portrait-400.webp" imagesrcset="portrait-400.webp 400w, portrait.webp 1200w" imagesizes="(min-width: 640px) 144px, 100px" type="image/webp" fetchpriority="high">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Rumana Akter","jobTitle":"Documentary photographer","description":"Documentary photographer. Ships, rivers and the people who work them, from Chattogram.","url":"https://rumana-akter.example.com/","image":"https://rumana-akter.example.com/portrait.jpg","email":"mailto:hello@rumana-akter.example.com","address":{"@type":"PostalAddress","addressLocality":"Chattogram","addressCountry":"BD"}}
+</script>
+<style>
+/* motomation · archetype: ledger · mutation: single-object · signature: thermal-feed · tier: 1 · critique: C5[restraint:kept] H5[375:0] S5[last5:no-log] R5[cuts:3,anim:3] M5[t1:pins0/2,webgl0/1,js2/30KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A5[focus:5/5,tgt:0f0w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · c430ba2f26 */
+
+@font-face {
+  font-family: "Martian Mono";
+  src: url("fonts/martian-mono-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* colour · checked with scripts/contrast.mjs
+     --ink on --paper 15.08 · --muted on --paper 6.15 (paper only)
+     --paper on --ink 15.08 · --paper on --accent 5.65 (printed band text and focus ring) */
+  --table: #1F2120;
+  --paper: #F2EEE5;
+  --ink: #191A18;
+  --muted: #5A5850;
+  --accent: #A8361C;
+  --rule: #8E8A80;
+
+  --display: "Martian Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Source Serif Pro", "Sitka Text", Georgia, serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* compact scale (SERVICE STYLE) */
+  --ui-0: 0.8125rem;
+  --ui-1: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  --ui-row: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+  --ui-name: clamp(1.875rem, 1.4rem + 2vw, 3.25rem);
+
+  --pad: 20px;
+  --tooth: 8px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-print: 200ms;
+  --t-press: 100ms;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--table);
+  color: var(--ink);
+  font-family: var(--serif);
+  padding: clamp(10px, 4vw, 72px) clamp(10px, 4vw, 72px) clamp(24px, 6vw, 96px);
+  display: grid;
+  justify-items: center;
+  align-content: start;
+}
+
+.skip {
+  position: absolute;
+  left: 12px;
+  top: -200px;
+  z-index: 2;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 var(--ui-0)/1 var(--mono);
+  padding: 16px;
+  min-height: 44px;
+  text-decoration: underline;
+}
+.skip:focus-visible { top: 12px; outline: 2px solid var(--paper); outline-offset: 3px; }
+
+/* ── the slip ─────────────────────────────────────────────── */
+.slip {
+  position: relative;
+  width: min(100%, 34rem);
+  margin-block: var(--tooth);
+  background: var(--paper);
+  padding: 28px var(--pad) 22px;
+}
+/* sawtooth tear edges, top and bottom */
+.slip::before, .slip::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--tooth);
+  background:
+    linear-gradient(135deg, var(--paper) 50%, transparent 50.5%) 0 0 / calc(var(--tooth) * 2) var(--tooth) repeat-x,
+    linear-gradient(225deg, var(--paper) 50%, transparent 50.5%) 0 0 / calc(var(--tooth) * 2) var(--tooth) repeat-x;
+}
+.slip::before { bottom: 100%; transform: scaleY(-1); }
+.slip::after { top: 100%; }
+
+/* head: the print and her line */
+.head {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 16px;
+  align-items: end;
+  padding-bottom: 22px;
+}
+.portrait {
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  background: #3A3C38;
+}
+.portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  color: transparent;
+}
+h1 {
+  margin: 0 0 10px;
+  font: 400 var(--ui-name)/1 var(--display);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.bio {
+  margin: 0;
+  font-size: var(--ui-1);
+  line-height: 1.42;
+  text-wrap: pretty;
+  max-width: 34ch;
+}
+
+/* ── the four lines ───────────────────────────────────────── */
+.feed {
+  list-style: none;
+  margin: 0 calc(var(--pad) * -1);
+  padding: 0;
+  border-top: 1px dashed var(--rule);
+}
+.feed li { border-bottom: 1px dashed var(--rule); }
+
+.row {
+  position: relative;
+  display: block;
+  color: var(--ink);
+  text-decoration: none;
+  -webkit-tap-highlight-color: rgb(25 26 24 / 0.12);
+  outline: none;
+}
+.line {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto;
+  column-gap: 4px;
+  row-gap: 4px;
+  align-items: baseline;
+  padding: 16px var(--pad) 15px;
+  transition: transform var(--t-press) var(--ease-out);
+}
+.idx {
+  font: 400 var(--ui-0)/1 var(--display);
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.word {
+  font: 400 var(--ui-row)/1.1 var(--display);
+  letter-spacing: -0.01em;
+}
+.arrow {
+  font: 400 1.125rem/1 var(--mono);
+  color: var(--muted);
+}
+.detail {
+  grid-column: 2 / 4;
+  font: 400 var(--ui-0)/1.4 var(--mono);
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+/* printed copy: revealed by the print head */
+.print {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  color: var(--paper);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--t-print) var(--ease-out);
+  pointer-events: none;
+}
+.print .idx, .print .arrow, .print .detail { color: var(--paper); }
+.row--end .print { background: var(--accent); }
+
+@media (hover: hover) and (pointer: fine) {
+  .row:hover .print { clip-path: inset(0 0 0 0); }
+}
+.row:focus-visible .print { clip-path: inset(0 0 0 0); }
+.row:focus-visible .print::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 2px solid var(--paper);
+}
+.row:active .print { clip-path: inset(0 0 0 0); transition-duration: 120ms; }
+.row:active .line { transform: translateY(-2px); }
+
+/* foot of the slip */
+.foot {
+  margin: 0;
+  padding-top: 18px;
+  font: 400 var(--ui-0)/1.4 var(--mono);
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+.foot strong { font-weight: 400; color: var(--ink); }
+
+.vh {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (min-width: 640px) {
+  :root { --pad: 32px; }
+  .slip { padding-top: 40px; padding-bottom: 28px; }
+  .head { grid-template-columns: 144px 1fr; gap: 24px; padding-bottom: 30px; }
+  .line { padding-block: 20px 19px; grid-template-columns: 3rem 1fr auto; }
+}
+@media (min-width: 640px) and (min-height: 760px) {
+  body { align-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .print, .line { transition: none; }
+  .row:active .line { transform: none; }
+}
+
+@media (forced-colors: active) {
+  .print { display: none; }
+  .row:focus-visible { outline: 2px solid Highlight; outline-offset: -4px; }
+  .slip::before, .slip::after { display: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#links">Skip to the four links</a>
+
+<main class="slip">
+  <header class="head">
+    <figure class="portrait">
+      <picture>
+        <source type="image/webp" srcset="portrait-400.webp 400w, portrait.webp 1200w" sizes="(min-width: 640px) 144px, 100px">
+        <img src="portrait.jpg" width="1200" height="1500" alt="Rumana Akter, portrait" fetchpriority="high" decoding="async">
+      </picture>
+    </figure>
+    <div>
+      <h1>Rumana Akter</h1>
+      <p class="bio">Documentary photographer. Ships, rivers and the people who work them, from Chattogram.</p>
+    </div>
+  </header>
+
+  <nav id="links" aria-label="Links">
+    <ol class="feed">
+      <li>
+        <a class="row" href="/work">
+          <span class="line">
+            <span class="idx">01</span><span class="word">Portfolio</span><span class="arrow" aria-hidden="true">→</span>
+            <span class="detail">The ship-breaking yards, Fishery Ghat, the hill tracts</span>
+          </span>
+          <span class="print" aria-hidden="true">
+            <span class="line">
+              <span class="idx">01</span><span class="word">Portfolio</span><span class="arrow">→</span>
+              <span class="detail">The ship-breaking yards, Fishery Ghat, the hill tracts</span>
+            </span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="/prints">
+          <span class="line">
+            <span class="idx">02</span><span class="word">Prints</span><span class="arrow" aria-hidden="true">→</span>
+            <span class="detail">Signed prints, editions of 20</span>
+          </span>
+          <span class="print" aria-hidden="true">
+            <span class="line">
+              <span class="idx">02</span><span class="word">Prints</span><span class="arrow">→</span>
+              <span class="detail">Signed prints, editions of 20</span>
+            </span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="/workshops">
+          <span class="line">
+            <span class="idx">03</span><span class="word">Workshops</span><span class="arrow" aria-hidden="true">→</span>
+            <span class="detail">Street photography, Chattogram, monthly</span>
+          </span>
+          <span class="print" aria-hidden="true">
+            <span class="line">
+              <span class="idx">03</span><span class="word">Workshops</span><span class="arrow">→</span>
+              <span class="detail">Street photography, Chattogram, monthly</span>
+            </span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="row row--end" href="mailto:hello@rumana-akter.example.com">
+          <span class="line">
+            <span class="idx">04</span><span class="word">Contact</span><span class="arrow" aria-hidden="true">→</span>
+            <span class="detail">hello@<wbr>rumana-akter.example.com</span>
+          </span>
+          <span class="print" aria-hidden="true">
+            <span class="line">
+              <span class="idx">04</span><span class="word">Contact</span><span class="arrow">→</span>
+              <span class="detail">hello@<wbr>rumana-akter.example.com</span>
+            </span>
+          </span>
+        </a>
+      </li>
+    </ol>
+  </nav>
+
+  <footer>
+    <p class="foot">Instagram and Threads <strong>@rumana.akter</strong></p>
+  </footer>
+</main>
+</body>
+</html>

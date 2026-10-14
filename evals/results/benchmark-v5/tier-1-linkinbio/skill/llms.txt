@@ -1,0 +1,12 @@
+# Rumana Akter · Photographs
+
+> Documentary photographer. Ships, rivers and the people who work them, from Chattogram.
+
+This is a one-page link list (motomation build, tier 1, plain HTML).
+
+- [Portfolio](https://rumana-akter.example.com/work): the ship-breaking yards, Fishery Ghat, the hill tracts
+- [Prints](https://rumana-akter.example.com/prints): signed prints, editions of 20
+- [Workshops](https://rumana-akter.example.com/workshops): street photography, Chattogram, monthly
+- [Contact](mailto:hello@rumana-akter.example.com)
+
+Instagram and Threads: @rumana.akter

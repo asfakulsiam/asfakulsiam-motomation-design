@@ -1,0 +1,28 @@
+{
+ "A": {
+  "scores": {
+   "concept": 4,
+   "originality": 3,
+   "typography": 4,
+   "motion": 4,
+   "craft": 4,
+   "access_performance": 5
+  },
+  "hard_gates": [],
+  "notes": "A is a restrained, coherent editorial layout with clear link rows and appropriate hover, focus, and press feedback. It stays lightweight, uses system fonts, includes a visible keyboard focus state, and provides a reduced-motion path. Its visual idea is less distinctive than B's."
+ },
+ "B": {
+  "scores": {
+   "concept": 5,
+   "originality": 5,
+   "typography": 4,
+   "motion": 5,
+   "craft": 4,
+   "access_performance": 4
+  },
+  "hard_gates": [],
+  "notes": "The torn-edge slip and print-reveal interaction create a distinctive, consistent concept that suits the brief's small set of destinations. The display type gives it a strong identity, though the monospaced name may feel cramped at narrow widths. Keyboard focus, touch-sized rows, forced-colors handling, and reduced motion are addressed; extra font and image asset references make its performance less certain than A's."
+ },
+ "winner": "B",
+ "reason": "B's printed-slip concept carries through the layout, typography, and tactile link reveal, making the page feel more particular to this photographer than a conventional link list. A is polished and especially lean, but its visual language and interactions are more familiar. Both meet the listed hard gates."
+}

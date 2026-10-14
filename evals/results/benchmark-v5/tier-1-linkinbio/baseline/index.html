@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rumana Akter · Photographs</title>
+<meta name="description" content="Documentary photographer. Ships, rivers and the people who work them, from Chattogram.">
+<meta name="theme-color" content="#f3efe7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151413" media="(prefers-color-scheme: dark)">
+<link rel="preload" as="image" href="portrait.jpg">
+<style>
+:root{
+  --paper:#f3efe7; --ink:#1a1917; --muted:#6b655c; --rule:#d6cfc2;
+  --rust:#a4472a; --rust-ink:#fff8f2;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#151413;--ink:#ece6db;--muted:#9a9286;--rule:#34312d;--rust:#d0714f;--rust-ink:#151413}
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;min-height:100vh;min-height:100svh;background:var(--paper);color:var(--ink);
+  font:400 1rem/1.5 var(--sans);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+.skip{position:absolute;left:1rem;top:-4rem;background:var(--ink);color:var(--paper);padding:.75rem 1rem;z-index:2;text-decoration:none}
+.skip:focus{top:1rem}
+
+main{flex:1;width:100%;max-width:30rem;margin:0 auto;padding:clamp(1.25rem,6vw,2rem) clamp(1rem,5vw,1.5rem) 1.5rem;
+  display:grid;gap:1.75rem;align-content:start}
+
+/* Identity */
+.who{display:grid;grid-template-columns:5.5rem 1fr;gap:1rem;align-items:end}
+.portrait{margin:0;position:relative;aspect-ratio:4/5;width:100%;overflow:hidden;
+  /* finished-looking placeholder until portrait.jpg arrives; the real file layers on top */
+  background:
+    url("portrait.jpg") center/cover no-repeat,
+    linear-gradient(160deg,transparent 55%,rgba(164,71,42,.18)),
+    repeating-linear-gradient(0deg,rgba(0,0,0,.035) 0 1px,transparent 1px 4px),
+    linear-gradient(180deg,#cfc6b6,#9d9384);
+}
+.portrait::after{content:"";position:absolute;inset:6%;border:1px solid rgba(255,255,255,.45);pointer-events:none}
+@media (prefers-color-scheme:dark){
+  .portrait{background:url("portrait.jpg") center/cover no-repeat,
+    linear-gradient(160deg,transparent 55%,rgba(208,113,79,.2)),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 4px),
+    linear-gradient(180deg,#3b3732,#24221f)}
+  .portrait::after{border-color:rgba(255,255,255,.14)}
+}
+h1{font:400 clamp(1.9rem,8.5vw,2.4rem)/1.02 var(--serif);letter-spacing:-.015em;margin:0 0 .5rem}
+.bio{margin:0;font:400 1rem/1.4 var(--serif);color:var(--ink);max-width:28ch}
+.handle{display:block;margin-top:.6rem;font:500 .75rem/1 var(--mono);letter-spacing:.02em;color:var(--muted)}
+
+/* Links */
+nav ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+nav li{border-bottom:1px solid var(--rule)}
+.door{position:relative;display:grid;grid-template-columns:2rem 1fr auto;align-items:center;column-gap:.75rem;
+  min-height:4.5rem;padding:.9rem .75rem .9rem .25rem;color:var(--ink);text-decoration:none;isolation:isolate;
+  -webkit-tap-highlight-color:transparent;transition:color .25s var(--ease),transform .12s var(--ease)}
+.door::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--ink);
+  transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.num{font:500 .75rem/1 var(--mono);color:var(--muted);transition:color .25s var(--ease)}
+.label{display:block;font:500 1.2rem/1.2 var(--sans);letter-spacing:-.01em}
+.note{display:block;margin-top:.2rem;font-size:.875rem;line-height:1.35;color:var(--muted);transition:color .25s var(--ease)}
+.arrow{width:1.25rem;height:1.25rem;flex:none;stroke:currentColor;fill:none;stroke-width:1.5;
+  transition:transform .3s var(--ease),color .25s var(--ease)}
+.door--contact .arrow{transition:transform .3s var(--ease)}
+
+@media (hover:hover){
+  .door:hover{color:var(--paper)}
+  .door:hover::before{transform:scaleX(1)}
+  .door:hover .num{color:var(--rust)}
+  .door:hover .note{color:var(--paper);opacity:.75}
+  .door:hover .arrow{transform:translateX(.3rem)}
+  .door--contact:hover .arrow{transform:translate(.2rem,-.2rem)}
+}
+.door:focus{outline:none}
+.door:focus-visible{outline:3px solid var(--rust);outline-offset:-3px;color:var(--paper)}
+.door:focus-visible::before{transform:scaleX(1)}
+.door:focus-visible .num{color:var(--rust)}
+.door:focus-visible .note{color:var(--paper);opacity:.75}
+.door:focus-visible .arrow{transform:translateX(.3rem)}
+/* press: the row sinks a pixel and the plate turns rust, like a shutter */
+.door:active{transform:translateY(1px) scale(.992);color:var(--rust-ink)}
+.door:active::before{transform:scaleX(1);background:var(--rust);transition-duration:.08s}
+.door:active .num,.door:active .note{color:var(--rust-ink);opacity:1}
+
+footer{width:100%;max-width:30rem;margin:0 auto;padding:0 clamp(1rem,5vw,1.5rem) 1.5rem;
+  font:400 .75rem/1.4 var(--mono);color:var(--muted);display:flex;justify-content:space-between;gap:1rem}
+footer p{margin:0}
+
+/* Wide screens: a contact sheet, portrait beside the doors */
+@media (min-width:56rem){
+  body{justify-content:center}
+  main{max-width:60rem;flex:none;grid-template-columns:minmax(0,22rem) minmax(0,1fr);column-gap:clamp(3rem,6vw,5.5rem);
+    align-items:end;padding-top:4rem;padding-bottom:2.5rem}
+  .who{grid-template-columns:1fr;align-items:start;gap:1.5rem}
+  h1{font-size:3.25rem}
+  .bio{font-size:1.125rem}
+  .door{min-height:5.5rem;padding-left:.5rem;padding-right:1rem}
+  .label{font-size:1.4rem}
+  footer{max-width:60rem}
+}
+@media (max-width:22rem){
+  .who{grid-template-columns:4.5rem 1fr}
+  .note{font-size:.8125rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important}
+  .door:active{transform:none}
+  .door:hover .arrow,.door:focus-visible .arrow,.door--contact:hover .arrow{transform:none}
+}
+@media (forced-colors:active){
+  .door:focus-visible{outline:3px solid CanvasText}
+  .door::before{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#links">Skip to links</a>
+<main>
+  <header class="who">
+    <div class="portrait" role="img" aria-label="Rumana Akter, portrait"></div>
+    <div>
+      <h1>Rumana Akter</h1>
+      <p class="bio">Documentary photographer. Ships, rivers and the people who work them, from Chattogram.</p>
+      <span class="handle">@rumana.akter</span>
+    </div>
+  </header>
+
+  <nav id="links" aria-label="Links">
+    <ol>
+      <li><a class="door" href="https://rumana-akter.example.com/work">
+        <span class="num" aria-hidden="true">01</span>
+        <span><span class="label">Portfolio</span><span class="note">Ship-breaking yards, Fishery Ghat, the hill tracts</span></span>
+        <svg class="arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5"/></svg>
+      </a></li>
+      <li><a class="door" href="https://rumana-akter.example.com/prints">
+        <span class="num" aria-hidden="true">02</span>
+        <span><span class="label">Prints</span><span class="note">Signed prints, editions of 20</span></span>
+        <svg class="arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5"/></svg>
+      </a></li>
+      <li><a class="door" href="https://rumana-akter.example.com/workshops">
+        <span class="num" aria-hidden="true">03</span>
+        <span><span class="label">Workshops</span><span class="note">Street photography, Chattogram, monthly</span></span>
+        <svg class="arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5"/></svg>
+      </a></li>
+      <li><a class="door door--contact" href="mailto:hello@rumana-akter.example.com">
+        <span class="num" aria-hidden="true">04</span>
+        <span><span class="label">Contact</span><span class="note">hello@rumana-akter.example.com</span></span>
+        <svg class="arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15L15 5M7 5h8v8"/></svg>
+      </a></li>
+    </ol>
+  </nav>
+</main>
+<footer>
+  <p>Chattogram, Bangladesh</p>
+  <p>&copy; 2026 Rumana Akter</p>
+</footer>
+</body>
+</html>

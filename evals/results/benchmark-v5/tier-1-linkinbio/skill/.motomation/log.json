@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "runs": [
+    {
+      "date": "2026-10-14T16:59:20.629Z",
+      "archetype": "ledger",
+      "signature": "thermal-feed",
+      "fonts": "Martian Mono/Charter stack",
+      "palette": "paper-on-steel #F2EEE5/#191A18/#A8361C",
+      "tier": "1",
+      "fingerprint": {
+        "layout": "rows",
+        "type_scale": "moderate",
+        "sections": [
+          "hook",
+          "links",
+          "footer"
+        ],
+        "tier": 1
+      }
+    }
+  ]
+}
