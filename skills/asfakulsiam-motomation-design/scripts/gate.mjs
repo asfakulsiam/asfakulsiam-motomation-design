@@ -2,6 +2,7 @@
 // Delivery Gate, measured. Scans a built page in a real browser and prints numbers, not opinions.
 //
 //   node scripts/gate.mjs <url | file.html | dir/> [more targets] [--json] [--out report.json]
+//     url: a running dev or preview server (any framework) · dir/: its index.html, else its build output (out/ dist/ build/ …)
 //   node scripts/gate.mjs --verify <file.html> [--url http://…]   check the stamp written in the file against a fresh scan
 //
 // Checks (all bounded: each one is only as strong as what it measures, and says what it skipped):
@@ -152,6 +153,23 @@ function serve(root) {
     }).listen(0, "127.0.0.1", () => ok({ srv, port: srv.address().port }));
   });
 }
+// Three input forms, any stack (gates/delivery-gate.md, Part 0 "Input"):
+//   http(s) URL         a running dev or preview server (next dev, astro preview, vite preview, …), scanned as served
+//   a project folder    its index.html, else its static build output (BUILD_DIRS, first with an index.html), served here
+//   a single .html file served from its own folder
+// A server-only build (.next/ without out/) can't be served as files: start it and pass the URL instead.
+export const BUILD_DIRS = ["out", "dist", "build", ".output/public", "_site", "public"];
+export function resolveTarget(target) {
+  if (/^https?:\/\//.test(target)) return { target, kind: "url" };
+  const abs = resolve(target); if (!existsSync(abs)) throw new Error(`not found: ${target}`);
+  if (!statSync(abs).isDirectory()) return { target, kind: "file" };
+  if (existsSync(join(abs, "index.html"))) return { target, kind: "folder" };
+  const hit = BUILD_DIRS.find((d) => existsSync(join(abs, d, "index.html")));
+  if (hit) return { target: join(abs, hit), kind: "build", project: abs, dir: hit };
+  const next = existsSync(join(abs, ".next")) ? " It has a .next/ server build: run `next start` (or `next dev`) and pass its URL, or set output: \"export\" to get out/." : "";
+  throw new Error(`no index.html in ${target} and no build output (${BUILD_DIRS.map((d) => d + "/").join(", ")}).${next} Build the project, or pass the URL of its dev or preview server.`);
+}
+
 async function toUrl(target) {
   if (/^https?:\/\//.test(target)) return { url: target, close: () => {} };
   const abs = resolve(target); if (!existsSync(abs)) throw new Error(`not found: ${target}`);
@@ -1256,6 +1274,16 @@ async function main() {
   if (typeof flags.report === "string" && !targets.length) { targets.push(flags.report); flags.report = true; } // `--report file.html` alone: the file is the target
   if (flags.help) { console.log(GATE_USAGE); process.exit(0); }
   if (!targets.length && !flags.verify) gateDie("missing argument: a page, folder or URL to check");
+  // a project folder is gated through its build output; its DESIGN.md and .motomation/log.json stay the project's
+  for (let i = 0; i < targets.length; i++) {
+    let r; try { r = resolveTarget(targets[i]); } catch (e) { gateDie(e.message); }
+    if (r.kind === "build") {
+      console.error(`gate: ${targets[i]} → its build output ${r.dir}/`);
+      targets[i] = r.target;
+      if (!flags.design && existsSync(join(r.project, "DESIGN.md"))) flags.design = join(r.project, "DESIGN.md");
+      if (!flags.log && existsSync(join(r.project, ".motomation/log.json"))) flags.log = join(r.project, ".motomation/log.json");
+    }
+  }
   const pw = await loadPlaywright();
   if (!pw) notVerified("no browser (install Playwright: npm i -D playwright && npx playwright install chromium)");
   if (PROBE.constrained) console.error(`gate: constrained machine (${PROBE.why.join(", ")}); a failed scan is retried once in the light footprint`);

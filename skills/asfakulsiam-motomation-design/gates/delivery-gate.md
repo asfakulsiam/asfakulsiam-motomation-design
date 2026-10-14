@@ -6,12 +6,22 @@ Run this before handing back **any** page or component. It has four parts: the m
 
 ## Part 0: Measured gate (`scripts/gate.mjs`)
 
-Build the page, then run the script against the built file, folder or URL:
+Run the script against the page in whatever stack Step 0 chose. The gate is framework-neutral: it measures what a browser renders, so it takes three input forms:
+
+| Input | Example | What the gate does |
+|---|---|---|
+| **A URL** of a running dev or preview server | `http://localhost:3000/` (`next dev`, `next start`), `http://localhost:4321/` (`astro dev`, `astro preview`), `http://localhost:5173/` (`vite`, `vite preview`) | scans the page as served, any framework |
+| **A project folder** with a build output | `.` or `my-site/` after `astro build`, `vite build`, `next build` with `output: "export"` | serves the folder's `index.html`; if it has none, the first of `out/`, `dist/`, `build/`, `.output/public/`, `_site/`, `public/` that has one. The project's own `DESIGN.md` and `.motomation/log.json` are still read |
+| **A single `.html` file** | `index.html`, `examples/templates/hotel.html` | serves it from its own folder (static still works) |
 
 ```bash
-node scripts/gate.mjs dist/index.html          # or a folder, or http://localhost:3000/
-node scripts/gate.mjs --verify dist/index.html # re-scan and check the stamp written in the file
+node scripts/gate.mjs http://localhost:3000/   # Next.js dev server (or any running server)
+node scripts/gate.mjs .                        # a project folder: its index.html, else out/ dist/ build/ …
+node scripts/gate.mjs index.html               # one static file
+node scripts/gate.mjs --verify index.html      # re-scan and check the stamp written in the file
 ```
+
+A server-rendered build that isn't files (a Next.js `.next/` without `out/`, an SSR adapter) can't be served as a folder: start it (`next start`, `astro preview`) and pass the URL. The gate says so instead of guessing. Stamps are written into `.html` files; for a URL or a framework build, keep the printed stamp line in the handoff note or `DESIGN.md`.
 
 It runs six bounded checks in a real browser and prints numbers:
 
