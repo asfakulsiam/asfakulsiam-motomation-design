@@ -15,6 +15,8 @@ Top 3 problems (most important first)
 3. …
 
 AI-default scan    <n>/25 failed: <list gate numbers>
+Restraint Gate     per questioned element: <element> — Q1 hierarchy/feedback/storytelling <pass|fail> · Q2 brief needs it
+                   to feel like itself <pass|fail> → <kept|cut>   (cut only if both fail; principles/restraint.md)
 Motion             <passes / list animations failing the four questions>
 Choreography       <n>/5 against MOTION.md's timing sheet · <deviations: drift, grammar, camera, rhythm, reduced motion>
                    (motion/choreography.md §5; "no timing sheet" on Tier 3–5 is a failure)
@@ -31,3 +33,4 @@ Next command       <e.g. /mutate hero, /type, /quieter>
 - Every problem links to a user effect (confusion, slowness, distrust, inaccessibility, forgettability).
 - Never invent measurements. If you didn't measure performance, say so.
 - Always include **Keep**. Critique protects what works.
+- Never recommend cutting an element for failing Q1 alone. If it passes Q2 (the brief needs it to feel like itself), it stays; name the brief's reason. Recommend a cut only when it fails both.

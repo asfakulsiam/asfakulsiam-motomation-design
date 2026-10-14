@@ -141,7 +141,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 4. **Forced Collision**: bring in something from an unrelated world (a railway board, a tailor's tape, a darkroom) and steal one property from it.
 5. **Signature Move**: invent the one interaction or motion the site will be remembered for.
 6. **Anti-Sameness Check**: compare against the AI-default list and the project memory log. If it matches either, mutate again.
-7. **Restraint Gate**: remove everything that doesn't serve the concept. One signature, not five.
+7. **Restraint Gate**: two questions per element: does it serve hierarchy, feedback or storytelling? Does the brief need it to feel like itself? Cut only what fails both. One signature, not five.
 
 ---
 
@@ -415,15 +415,16 @@ Compare your plan against three things:
 
 ### 7. Restraint Gate
 
-Now remove things.
+Test every element (section, ornament, texture, colour moment, animation) with two questions:
 
-- One signature move. Others become supporting details or get cut.
-- One accent colour moment per screen.
-- One display typeface (two only when the concept is about contrast).
-- Every animation passes the four questions in `motion/tokens.md`.
-- If a section has no job, delete it.
+1. **Does this serve hierarchy, feedback, or storytelling?**
+2. **Does the brief need this to feel like itself?** (the café's hand-drawn map, the darkroom's grain)
 
-**Test:** read the plan aloud. Does each part serve the concept sentence? Cut whatever doesn't.
+**Cut only what fails both.** Failing question 1 alone is no reason to cut: a brand's texture or ornament can do no informational work and still be the point. Passing question 2 needs a reason traceable to the brief, its audience or the concept sentence; "it looks nice" is not one.
+
+The budgets hold either way: one signature move, one accent moment per screen, one display face (two only for a contrast concept), every animation passes the four questions in `motion/tokens.md`. Question 2 keeps an element; it never buys a second signature or a contrast failure. Log `- Cut:` (failed both) and `- Kept:` (failed Q1, passed Q2, with the reason) in `DESIGN.md`. Example and counter-example: `principles/restraint.md`.
+
+**Test:** for every element, can you name the question it passes? If neither, cut it.
 
 ---
 
@@ -889,10 +890,31 @@ Restraint is what makes a minimal site feel expensive instead of empty. It is al
 
 Test: if obeying a rule would make the brief worse at its real job, and the rule is in the second table, override it and say so in one line of the plan. If it's in the first table, the brief is wrong, not the rule.
 
+### The Restraint Gate (two questions)
+
+Step 7 of `thinking/sequence.md` asks two questions of every element:
+
+1. **Does this serve hierarchy, feedback, or storytelling?**
+2. **Does the brief need this to feel like itself?**
+
+**Cut only what fails both.** An element that fails question 1 but passes question 2 is kept, and the `DESIGN.md` record says why (`- Kept: <element> — fails Q1, passes Q2: <the brief's reason>`). An element that fails both is cut (`- Cut: <element> — fails Q1 and Q2`). The budgets below and the universal standards above apply either way: question 2 keeps an element, it never overrides a budget.
+
+The single-question version ("does it serve hierarchy, feedback or storytelling?") cut real design as decoration: a bakery's hand-drawn wheat sprigs, a darkroom's film grain, a festival's sticker chaos. Those carry no information and are still how the brand is recognised. Question 2 exists so restraint removes noise, not identity.
+
+**Worked example (kept).** Brief: "Site for a family bakery in Old Dhaka, running since 1962; it should feel like the shop." Element: hand-drawn wheat sprigs in the margins of the menu.
+- Q1: fails. They don't order the content, don't respond to input, don't advance a story.
+- Q2: passes. The brief asks for the feel of the shop, and the shop's paper bags and signboard carry these sprigs. Without them the page reads as any bakery.
+- Decision: **kept.** `- Kept: hand-drawn wheat sprigs in the menu margins — fails Q1, passes Q2: the shop's own bag and sign ornament ("feel like the shop")`
+
+**Counter-example (cut).** Brief: "Landing page for a B2B invoice-reconciliation API." Element: three blurred gradient blobs floating behind the hero.
+- Q1: fails. They sit behind the headline without ordering it, respond to nothing, and tell no story.
+- Q2: fails. Nothing in the brief (developers, accuracy, an API) asks for soft floating colour; it is the AI-default look the delivery gate bans.
+- Decision: **cut.** `- Cut: gradient blobs behind the hero — fails Q1 and Q2`
+
 ### The four cuts
 
-Before delivery, make four passes and remove:
-1. **Decoration without a job**: blobs, random gradients, floating shapes, icons next to every heading.
+Before delivery, make four passes through the Restraint Gate and remove what fails both questions:
+1. **Decoration without a job**: blobs, random gradients, floating shapes, icons next to every heading, when the brief doesn't need them to feel like itself (question 2).
 2. **Duplicate messages**: two sections saying the same thing, or a headline repeated in the subtitle.
 3. **Motion without meaning**: anything that fails the four questions in `motion/tokens.md`.
 4. **Choices made twice**: a second display font, a second accent colour, a second signature move.
@@ -922,7 +944,7 @@ Check it the way v3 judged it: capture the reduced-motion strip (`gate.mjs --rep
 
 ### The "one more thing" test
 
-When you want to add something, ask: *does this make the concept clearer or just busier?* If busier, don't add it. If clearer, remove something else to make room.
+When you want to add something, ask: does this make the concept clearer, or the brand more itself? If neither, it is just busier: don't add it. If it does, remove something else to make room.
 
 
 ---
@@ -3463,6 +3485,8 @@ Top 3 problems (most important first)
 3. …
 
 AI-default scan    <n>/25 failed: <list gate numbers>
+Restraint Gate     per questioned element: <element> — Q1 hierarchy/feedback/storytelling <pass|fail> · Q2 brief needs it
+                   to feel like itself <pass|fail> → <kept|cut>   (cut only if both fail; principles/restraint.md)
 Motion             <passes / list animations failing the four questions>
 Choreography       <n>/5 against MOTION.md's timing sheet · <deviations: drift, grammar, camera, rhythm, reduced motion>
                    (motion/choreography.md §5; "no timing sheet" on Tier 3–5 is a failure)
@@ -3479,6 +3503,7 @@ Next command       <e.g. /mutate hero, /type, /quieter>
 - Every problem links to a user effect (confusion, slowness, distrust, inaccessibility, forgettability).
 - Never invent measurements. If you didn't measure performance, say so.
 - Always include **Keep**. Critique protects what works.
+- Never recommend cutting an element for failing Q1 alone. If it passes Q2 (the brief needs it to feel like itself), it stays; name the brief's reason. Recommend a cut only when it fails both.
 
 
 ---
@@ -4370,7 +4395,8 @@ Type mode: HOUSE STYLE (typography-led) | SERVICE STYLE (information-led) — be
 ### Restraint Gate record
 <!-- Filled in at step 7 of the Thinking Sequence. scripts/gate.mjs derives the C and R critique scores from these lines, so keep the exact prefixes. -->
 - Concept survived: <yes | yes, after 1 change | no>
-- Cut: <what was removed> — <why it had no job>
+- Cut: <what was removed> — fails Q1 and Q2 (no hierarchy, feedback or story; the brief doesn't need it)
+- Kept: <element> — fails Q1, passes Q2: <what in the brief needs it>
 - Rejected animation: <the animation> — <which of the four questions it failed>
 
 

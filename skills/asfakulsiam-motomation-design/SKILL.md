@@ -139,7 +139,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 4. **Forced Collision**: bring in something from an unrelated world (a railway board, a tailor's tape, a darkroom) and steal one property from it.
 5. **Signature Move**: invent the one interaction or motion the site will be remembered for.
 6. **Anti-Sameness Check**: compare against the AI-default list and the project memory log. If it matches either, mutate again.
-7. **Restraint Gate**: remove everything that doesn't serve the concept. One signature, not five.
+7. **Restraint Gate**: two questions per element: does it serve hierarchy, feedback or storytelling? Does the brief need it to feel like itself? Cut only what fails both. One signature, not five.
 
 ---
 

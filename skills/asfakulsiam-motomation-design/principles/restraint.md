@@ -27,10 +27,31 @@ Restraint is what makes a minimal site feel expensive instead of empty. It is al
 
 Test: if obeying a rule would make the brief worse at its real job, and the rule is in the second table, override it and say so in one line of the plan. If it's in the first table, the brief is wrong, not the rule.
 
+## The Restraint Gate (two questions)
+
+Step 7 of `thinking/sequence.md` asks two questions of every element:
+
+1. **Does this serve hierarchy, feedback, or storytelling?**
+2. **Does the brief need this to feel like itself?**
+
+**Cut only what fails both.** An element that fails question 1 but passes question 2 is kept, and the `DESIGN.md` record says why (`- Kept: <element> — fails Q1, passes Q2: <the brief's reason>`). An element that fails both is cut (`- Cut: <element> — fails Q1 and Q2`). The budgets below and the universal standards above apply either way: question 2 keeps an element, it never overrides a budget.
+
+The single-question version ("does it serve hierarchy, feedback or storytelling?") cut real design as decoration: a bakery's hand-drawn wheat sprigs, a darkroom's film grain, a festival's sticker chaos. Those carry no information and are still how the brand is recognised. Question 2 exists so restraint removes noise, not identity.
+
+**Worked example (kept).** Brief: "Site for a family bakery in Old Dhaka, running since 1962; it should feel like the shop." Element: hand-drawn wheat sprigs in the margins of the menu.
+- Q1: fails. They don't order the content, don't respond to input, don't advance a story.
+- Q2: passes. The brief asks for the feel of the shop, and the shop's paper bags and signboard carry these sprigs. Without them the page reads as any bakery.
+- Decision: **kept.** `- Kept: hand-drawn wheat sprigs in the menu margins — fails Q1, passes Q2: the shop's own bag and sign ornament ("feel like the shop")`
+
+**Counter-example (cut).** Brief: "Landing page for a B2B invoice-reconciliation API." Element: three blurred gradient blobs floating behind the hero.
+- Q1: fails. They sit behind the headline without ordering it, respond to nothing, and tell no story.
+- Q2: fails. Nothing in the brief (developers, accuracy, an API) asks for soft floating colour; it is the AI-default look the delivery gate bans.
+- Decision: **cut.** `- Cut: gradient blobs behind the hero — fails Q1 and Q2`
+
 ## The four cuts
 
-Before delivery, make four passes and remove:
-1. **Decoration without a job**: blobs, random gradients, floating shapes, icons next to every heading.
+Before delivery, make four passes through the Restraint Gate and remove what fails both questions:
+1. **Decoration without a job**: blobs, random gradients, floating shapes, icons next to every heading, when the brief doesn't need them to feel like itself (question 2).
 2. **Duplicate messages**: two sections saying the same thing, or a headline repeated in the subtitle.
 3. **Motion without meaning**: anything that fails the four questions in `motion/tokens.md`.
 4. **Choices made twice**: a second display font, a second accent colour, a second signature move.
@@ -60,4 +81,4 @@ Check it the way v3 judged it: capture the reduced-motion strip (`gate.mjs --rep
 
 ## The "one more thing" test
 
-When you want to add something, ask: *does this make the concept clearer or just busier?* If busier, don't add it. If clearer, remove something else to make room.
+When you want to add something, ask: does this make the concept clearer, or the brand more itself? If neither, it is just busier: don't add it. If it does, remove something else to make room.

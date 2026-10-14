@@ -35,7 +35,9 @@ const pickSections = (t, keep) => sections(t).filter((s) => keep(s.head)).map((s
 const version = read("VERSION").trim();
 // "Find before build" points into this skill's examples/ and component library, which a chat tool doesn't have either.
 const dropSub = (t, re) => t.replace(new RegExp(`^### ${re.source}[\\s\\S]*?(?=^#{2,3} )`, "m"), "");
-const skill = dropSub(unmark(noFrontMatter(read("SKILL.md"))), /Find before build/);
+// The summary's steps 1–7 are printed in full under "Thinking Sequence (steps)"; only its Step 0 line stays here.
+const onlyStep0 = (t) => t.replace(/(^## The Thinking Sequence[^\n]*\n)([\s\S]*?)(?=^## )/m, (_, h, body) => h + body.split("\n").filter((l) => !/^[1-7]\. /.test(l)).join("\n"));
+const skill = onlyStep0(dropSub(unmark(noFrontMatter(read("SKILL.md"))), /Find before build/));
 const DROP_FROM_SKILL = [/^Router/, /^Tools inside this skill/]; // file loading and scripts don't exist in a chat tool
 const parts = [
   `# Motomation Design v${version}: lite edition`,

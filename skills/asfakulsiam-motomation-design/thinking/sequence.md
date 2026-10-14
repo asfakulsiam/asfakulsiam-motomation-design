@@ -132,15 +132,16 @@ Compare your plan against three things:
 
 ## 7. Restraint Gate
 
-Now remove things.
+Test every element (section, ornament, texture, colour moment, animation) with two questions:
 
-- One signature move. Others become supporting details or get cut.
-- One accent colour moment per screen.
-- One display typeface (two only when the concept is about contrast).
-- Every animation passes the four questions in `motion/tokens.md`.
-- If a section has no job, delete it.
+1. **Does this serve hierarchy, feedback, or storytelling?**
+2. **Does the brief need this to feel like itself?** (the café's hand-drawn map, the darkroom's grain)
 
-**Test:** read the plan aloud. Does each part serve the concept sentence? Cut whatever doesn't.
+**Cut only what fails both.** Failing question 1 alone is no reason to cut: a brand's texture or ornament can do no informational work and still be the point. Passing question 2 needs a reason traceable to the brief, its audience or the concept sentence; "it looks nice" is not one.
+
+The budgets hold either way: one signature move, one accent moment per screen, one display face (two only for a contrast concept), every animation passes the four questions in `motion/tokens.md`. Question 2 keeps an element; it never buys a second signature or a contrast failure. Log `- Cut:` (failed both) and `- Kept:` (failed Q1, passed Q2, with the reason) in `DESIGN.md`. Example and counter-example: `principles/restraint.md`.
+
+**Test:** for every element, can you name the question it passes? If neither, cut it.
 
 ---
 

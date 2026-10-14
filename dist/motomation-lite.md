@@ -86,13 +86,6 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 ### The Thinking Sequence (summary; full version in `thinking/sequence.md`)
 
 0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, ask the user; never assume. On "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
-1. **Tension**: find the conflict inside the brief (calm vs. urgent, heritage vs. new, luxury vs. honest).
-2. **Concept**: resolve the tension in one sentence. This is the idea, not a layout.
-3. **Archetype + Mutation**: pick a page structure from `structures/archetypes.md`, then break one of its rules.
-4. **Forced Collision**: bring in something from an unrelated world (a railway board, a tailor's tape, a darkroom) and steal one property from it.
-5. **Signature Move**: invent the one interaction or motion the site will be remembered for.
-6. **Anti-Sameness Check**: compare against the AI-default list and the project memory log. If it matches either, mutate again.
-7. **Restraint Gate**: remove everything that doesn't serve the concept. One signature, not five.
 
 ---
 
@@ -268,15 +261,16 @@ Compare your plan against three things:
 
 ### 7. Restraint Gate
 
-Now remove things.
+Test every element (section, ornament, texture, colour moment, animation) with two questions:
 
-- One signature move. Others become supporting details or get cut.
-- One accent colour moment per screen.
-- One display typeface (two only when the concept is about contrast).
-- Every animation passes the four questions in `motion/tokens.md`.
-- If a section has no job, delete it.
+1. **Does this serve hierarchy, feedback, or storytelling?**
+2. **Does the brief need this to feel like itself?** (the café's hand-drawn map, the darkroom's grain)
 
-**Test:** read the plan aloud. Does each part serve the concept sentence? Cut whatever doesn't.
+**Cut only what fails both.** Failing question 1 alone is no reason to cut: a brand's texture or ornament can do no informational work and still be the point. Passing question 2 needs a reason traceable to the brief, its audience or the concept sentence; "it looks nice" is not one.
+
+The budgets hold either way: one signature move, one accent moment per screen, one display face (two only for a contrast concept), every animation passes the four questions in `motion/tokens.md`. Question 2 keeps an element; it never buys a second signature or a contrast failure. Log `- Cut:` (failed both) and `- Kept:` (failed Q1, passed Q2, with the reason) in `DESIGN.md`. Example and counter-example: `principles/restraint.md`.
+
+**Test:** for every element, can you name the question it passes? If neither, cut it.
 
 ---
 
