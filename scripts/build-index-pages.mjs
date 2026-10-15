@@ -62,7 +62,7 @@ ${templates.map((t) => li(`${t.id}.html`, t.name, `${t.kind} · tier ${t.tier} �
 ${films.map((f) => li(`${f.id}/`, f.name, `tier ${f.tier} · ${f.archetype}${f.frames ? ` · ${f.frames.desktop.frames} frames` : ""}`, f.what)).join("\n")}
 </ul>` : ""}`;
   const templatesHtml = page(`Motomation templates · ${templates.length + films.length} pages`, `${templates.length} page templates and ${films.length} Tier 5 films from the Motomation Design skill, each gated and stamped.`,
-    "Motomation Design · templates", "Page templates", `${templates.length} whole pages built only from the library's sections, plus ${films.length} scroll-as-film pages. Each one passed the Delivery Gate and carries its stamp in the source.`, tBody);
+    "Motomation Design · templates", "Page templates", `${templates.length} whole reference pages composed from the library's sections, plus ${films.length} scroll-as-film pages. Each one passed the Delivery Gate and carries its stamp in the source.`, tBody);
   const top = JSON.parse(readFileSync(join(ROOT, "vendor/plain/top5.json"), "utf8")).components;
   const comp = new Map(parseCSV(readFileSync(join(ROOT, "skills/asfakulsiam-motomation-design/data/components.csv"), "utf8")).map((r) => [r.id, r]));
   const what = (id) => comp.get(id)?.what || id;

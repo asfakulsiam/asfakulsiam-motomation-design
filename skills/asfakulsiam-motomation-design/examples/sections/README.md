@@ -1,6 +1,6 @@
 # Page sections
 
-38 sections built only from the library in `examples/components/` (no new effects). Each is tied to one of the 20 archetypes (`structures/archetypes.md`), and its header records what it is, which components it uses, why it earns its place (signature), its mobile layout and its reduced-motion behaviour. `node scripts/build-sections.mjs` (run from the repository root) checks every header and that each listed component exists and is imported, and writes this file.
+38 sections composed from the library in `examples/components/`, as references: a new build composes, extends, or invents its own sections and effects, and is not limited to these. Each is tied to one of the 20 archetypes (`structures/archetypes.md`), and its header records what it is, which components it uses, why it earns its place (signature), its mobile layout and its reduced-motion behaviour. `node scripts/build-sections.mjs` (run from the repository root) checks every header and that each listed component exists and is imported, and writes this file.
 
 By kind: heroes 9 · features 7 · galleries 1 · pricing 4 · testimonials 4 · team 3 · calls to action 4 · contact 3 · footers 3. Archetypes used: 14 of 20 (atlas, broadsheet, catalogue, console, field-guide, index, ledger, letter, manifesto, poster, room, shelf, stage, workbench).
 

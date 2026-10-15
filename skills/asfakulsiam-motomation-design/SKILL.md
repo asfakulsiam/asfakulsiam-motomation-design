@@ -76,22 +76,23 @@ R. Read the rules     gates/rules.md                → state "Rules : gates/rul
 3. Design system      typography → colour → layout  → write DESIGN.md (templates/DESIGN.md)
 4. Motion plan        motion/tokens.md + tier file  → write MOTION.md (templates/MOTION.md); Tier 3–5: timing sheet per motion/choreography.md
 5. Preview block      show the plan (below) and wait for approval only if the user asked to review first
-6. Build              find before build (below), in the stack and adapter from Step 0; complete code, real copy
+6. Build              compose, extend, or invent (below), in the stack and adapter from Step 0; complete code, real copy
 7. Delivery Gate      gates/delivery-gate.md        → verify gates/rules.md, score, fix, stamp, log to memory
 ```
 
-### Find before build (step 6)
+### Compose, extend, or invent (step 6)
 
-Standard UI gets found, not invented. Signature moments get invented, not found.
+**No component limits.** The components in examples/components/ are references and starting points. They are not a menu. They are not a limit. If the brief needs something that does not exist in the library, build it. Write it as one file, with a header that records tier, use-when, avoid-when, reduced-motion, and touch behaviour, following the same pattern as the library. The skill grows when the agent builds something new.
 
-- **Standard UI** means forms, inputs, menus, dialogs, tabs, accordions, toasts, tables, pagination, date pickers, carousels and any effect in the component library (`examples/components/README.md`). Before writing one from scratch, check in this order and stop at the first fit:
-  1. what the project already has (its components folder, its UI kit, its design system);
-  2. this skill: `examples/` and, for effects, the component library in `examples/components/` (68 original components in 8 families, one file each, with tier, reduced-motion and touch behaviour in the header; search with `node scripts/search.mjs components "<effect>"`, or copy from the catalogue);
-  3. an accessible headless or registry component that fits the stack (for example the project's existing shadcn/ui, Radix or React Aria setup).
+The header pattern is the library's own `@motomation-component` block (see any file in `examples/components/`): `id`, `name`, `family`, `tier`, `deps`, `what`, `use-when`, `avoid-when`, `reduced-motion`, `touch`, `a11y`.
 
-  Only then write it custom, and say which of the three had nothing.
-- **Signature moments are exempt.** The signature move, the hook and anything the Thinking Sequence calls the concept are designed for this brief. Don't swap them for a library effect because one exists.
-- Whatever you find still passes the Delivery Gate, the tier budget and the reduced-motion rules. Found code isn't trusted code.
+Build what the brief needs by composing, extending, or inventing:
+
+- **Compose** what exists: the project's own components, UI kit or design system first; then this skill's `examples/` and `examples/components/` (search with `node scripts/search.mjs components "<effect>"`); then an accessible headless or registry component that fits the stack (the project's shadcn/ui, Radix or React Aria). For standard UI (forms, inputs, menus, dialogs, tabs, accordions, toasts, tables, pagination, date pickers, carousels) this saves rebuilding solved accessibility.
+- **Extend** a reference when it is close: change its props, its timing, its markup, or fork it into a new file with its own header.
+- **Invent** when nothing fits, or when the brief asks for something no library has. The signature move, the hook and anything the Thinking Sequence calls the concept are designed for this brief; don't swap them for a library effect because one exists.
+
+Say in one line which of the three you did for each non-trivial piece. Whatever you compose, extend or invent still passes `gates/rules.md`, the tier budget and the reduced-motion rules. Found code isn't trusted code.
 
 ### Preview block (show before building)
 

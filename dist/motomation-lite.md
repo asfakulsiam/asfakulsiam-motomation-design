@@ -40,7 +40,7 @@ R. Read the rules     gates/rules.md                → state "Rules : gates/rul
 3. Design system      typography → colour → layout  → write DESIGN.md (templates/DESIGN.md)
 4. Motion plan        motion/tokens.md + tier file  → write MOTION.md (templates/MOTION.md); Tier 3–5: timing sheet per motion/choreography.md
 5. Preview block      show the plan (below) and wait for approval only if the user asked to review first
-6. Build              find before build (below), in the stack and adapter from Step 0; complete code, real copy
+6. Build              compose, extend, or invent (below), in the stack and adapter from Step 0; complete code, real copy
 7. Delivery Gate      gates/delivery-gate.md        → verify gates/rules.md, score, fix, stamp, log to memory
 ```
 
@@ -233,7 +233,7 @@ Run `node scripts/collide.mjs --n 3`, or read `data/collisions.csv` as fuel: the
 
 ### 5. Signature Move
 
-Invent one interaction or motion that people will remember and describe. Use `signatures/` for inspiration, then make it specific to this concept.
+Invent one interaction or motion that people will remember and describe. Use `signatures/` and `examples/components/` as references, then make it specific to this concept: compose, extend, or invent. If what the concept needs is not in the library, build it as a new file with the library's header.
 
 Good signature moves are:
 - **Tied to the concept.** For the hotel lane: doors that open on scroll. For the log tool: the page goes quiet as you type.

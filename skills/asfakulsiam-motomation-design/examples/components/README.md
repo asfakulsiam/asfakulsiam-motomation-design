@@ -4,7 +4,9 @@
 
 68 components across 8 families, written for this skill. Each is one file, typed in strict TypeScript, React only, with no other dependencies. They share small helper files: `_lib/motion.ts` for reduced motion, pointer type, viewport and scroll progress, and `_lib/ambient.ts` (heavy backgrounds only) for the capability probe, DPR clamp and pausing. Every component has props with sensible defaults, a reduced-motion path, a touch behaviour, and notes on when it earns its place and when it's slop.
 
-**Use them like this:** a component is a starting point for a concept, not a finished design. Pick one because the Thinking Sequence asked for it, tune its props to the brief, and keep it inside the tier budget. The signature move is designed for the brief. If a component here matches it, bend the component to the concept rather than the other way round.
+**References, not a limit.** The components in examples/components/ are references and starting points. They are not a menu. They are not a limit. If the brief needs something that does not exist in the library, build it. Write it as one file, with a header that records tier, use-when, avoid-when, reduced-motion, and touch behaviour, following the same pattern as the library. The skill grows when the agent builds something new.
+
+**Compose, extend, or invent.** Compose a component here when the Thinking Sequence asks for its effect, tune its props to the brief, and keep it inside the tier budget. Extend it (props, timing, a fork with its own header) when it is close. Invent a new one when nothing here fits. The signature move is designed for the brief: if a component here resembles it, bend the component to the concept rather than the other way round. A new component follows the header below (`id`, `name`, `family`, `tier`, `deps`, `what`, `use-when`, `avoid-when`, `reduced-motion`, `touch`, `a11y`); placed in this folder, `node scripts/build-components.mjs` checks the header and regenerates this catalogue, `data/components.csv` and the registry from it.
 
 **Install one into a project:**
 

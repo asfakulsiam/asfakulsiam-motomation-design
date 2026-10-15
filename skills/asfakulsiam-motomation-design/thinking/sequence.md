@@ -6,6 +6,8 @@ This is the missing key: it makes an agent think like a designer instead of a te
 
 **Rules come first, the gate comes last.** Before Step 0, read `gates/rules.md`: every limit the gate measures (contrast, overflow, reduced motion, accessibility, SEO, security, performance budgets). It is design input. Design inside it from the first step; `gates/delivery-gate.md` only verifies it at the end. A design that passes the gate by patching (an invented link, domain or page added to satisfy a check) was not designed within the rules.
 
+**No component limits.** The components in examples/components/ are references and starting points. They are not a menu. They are not a limit. If the brief needs something that does not exist in the library, build it. Write it as one file, with a header that records tier, use-when, avoid-when, reduced-motion, and touch behaviour, following the same pattern as the library. The skill grows when the agent builds something new. Every step below composes, extends, or invents; none of them chooses from the library.
+
 ---
 
 ## 0. Stack
@@ -116,7 +118,7 @@ Run `node scripts/collide.mjs --n 3`, or read `data/collisions.csv` as fuel: the
 
 ## 5. Signature Move
 
-Invent one interaction or motion that people will remember and describe. Use `signatures/` for inspiration, then make it specific to this concept.
+Invent one interaction or motion that people will remember and describe. Use `signatures/` and `examples/components/` as references, then make it specific to this concept: compose, extend, or invent. If what the concept needs is not in the library, build it as a new file with the library's header.
 
 Good signature moves are:
 - **Tied to the concept.** For the hotel lane: doors that open on scroll. For the log tool: the page goes quiet as you type.
