@@ -27,41 +27,6 @@ If there is even a small chance this skill applies to a web design task, use it.
 
 ---
 
-### Default flow (`/build`)
-
-```
-R. Read the rules     gates/rules.md                → state "Rules : gates/rules.md read; designing within it."
-0. Read the room      thinking/brief-inference.md   → audience, job, feel, constraints, gaps
-1. Thinking Sequence  thinking/sequence.md          → STACK (named, or ask; load the adapter),
-                                                      tension, concept, archetype+mutation,
-                                                      collision, signature move, anti-sameness,
-                                                      restraint gate
-2. Set the dials      principles/dials.md           → ENERGY / RHYTHM / MOTION (1–3) → tier
-3. Design system      typography → colour → layout  → write DESIGN.md (templates/DESIGN.md)
-4. Motion plan        motion/tokens.md + tier file  → write MOTION.md (templates/MOTION.md); Tier 3–5: timing sheet per motion/choreography.md
-5. Preview block      show the plan (below) and wait for approval only if the user asked to review first
-6. Build              compose, extend, or invent (below), in the stack and adapter from Step 0; complete code, real copy
-7. Delivery Gate      gates/delivery-gate.md        → verify gates/rules.md, score, fix, stamp, log to memory
-```
-
-#### Preview block (show before building)
-
-```
-MOTOMATION PLAN
-Rules       : gates/rules.md read; designing within it
-Stack       : <stack> (<named in brief | from the project | user's answer | "you choose" + why>) → adapters/<x>.md
-Tension     : <the conflict in the brief, one line>
-Concept     : <the idea, one sentence a client would repeat>
-Archetype   : <structure> mutated by <mutation>
-Collision   : <unrelated source> → <what it lends the design>
-Signature   : <the one move people will remember>
-Dials       : ENERGY <1-3> · RHYTHM <1-3> · MOTION <1-3> → Tier <1-5>
-Type mode   : HOUSE STYLE | SERVICE STYLE (<why, from the brief>)
-Type        : <display> / <text> (<why>)
-Palette     : <name or hexes> (<why>)
-Not doing   : <the obvious choice you rejected and why>
-```
-
 ### When to use the short route
 
 Two routes. Pick one before you start, and say which in your first line, with the reason: `Route: short (a contrast fix on an existing page; no new structure or signature)`.
@@ -90,6 +55,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it.
 
 0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, ask the user; never assume. On "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
+0.5. **Current design research**: before designing, look at what is being built now (Awwwards, FWA, CSSDA, Godly, Land-book, SiteInspire; X, Dribbble, Behance, recent publications; last 6 months). Name three references and what you took from each, and the overused pattern you avoid. Write it in `DESIGN.md` under `References`. No web: say so and record it. See `craft/research.md`.
 
 ---
 

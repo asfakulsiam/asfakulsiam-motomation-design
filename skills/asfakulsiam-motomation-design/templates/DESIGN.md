@@ -8,6 +8,14 @@
 - **Reason:** <one line; required for plain HTML and for "you choose">
 - **Adapter:** `adapters/<x>.md`
 
+## References
+<!-- Step 0.5 of the Thinking Sequence (craft/research.md). Written before Step 1. -->
+- **Access:** <web (searched YYYY-MM-DD) | no web access: working from training data>
+- **1. <site or reference> (<source>, <month year>, <URL>):** took <principle, one line>
+- **2. <site or reference> (<source>, <month year>, <URL>):** took <principle, one line>
+- **3. <site or reference> (<source>, <month year>, <URL>):** took <principle, one line>
+- **Avoiding:** <the overused pattern in this category, one line>
+
 ## Concept
 - **Tension:** 
 - **Concept sentence:** 

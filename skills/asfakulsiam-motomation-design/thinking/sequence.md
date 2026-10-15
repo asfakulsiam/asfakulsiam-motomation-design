@@ -35,6 +35,22 @@ Plain HTML is a real choice, not the default. Use it only with a reason written 
 
 ---
 
+## 0.5 Current design research
+
+Before designing anything, look at what is being built right now. This is not optional. How to do it: `craft/research.md`.
+
+- Search for award-winning sites in the brief's category: Awwwards, FWA, CSSDA, Godly, Land-book, SiteInspire.
+- Look at what is trending on X, Dribbble, Behance, and recent design publications, in the last 6 months.
+- Name three sites or references you looked at, in one line each. Say what you took from each (a principle, not a copy).
+- Name what you are deliberately avoiding: the overused pattern that every site in this category uses.
+- The research shapes the concept. Write it in `DESIGN.md` under `References` (from `templates/DESIGN.md`).
+
+If you cannot access the web, say so and work from your training data, and state that in `DESIGN.md` (`Access: no web access: working from training data`).
+
+**Test:** does `DESIGN.md` have a `References` section with three named references, what was taken from each, and an `Avoiding` line? If not, Step 1 doesn't start.
+
+---
+
 ## 1. Tension
 
 **Required before this step:** `gates/rules.md` has been read. State it in one line before the step starts:
