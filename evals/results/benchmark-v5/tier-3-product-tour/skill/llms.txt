@@ -1,0 +1,10 @@
+# Tally
+
+> Shared expenses for flatmates and families: add what you paid, Tally keeps a running balance and tells everyone who owes whom. On the web and Android. A four-step tour.
+
+Built with the asfakulsiam-motomation-design skill, version 2.6.0. Latest measured report: gate-all.txt (scripts/gate.mjs, gate/4, all four pages).
+
+- [Intro](https://tally.example.com/): what Tally is
+- [Features](https://tally.example.com/features.html): add in two taps; balances settle themselves; works in taka and offline
+- [Pricing](https://tally.example.com/pricing.html): Free (up to 2 groups, unlimited expenses); Tally Plus ৳ 149 / month or ৳ 1,290 / year (unlimited groups, receipts, export to CSV)
+- [Start](https://tally.example.com/start.html): Google Play, the browser app, and the iOS waitlist (ios@tally.example.com)

@@ -1,0 +1,606 @@
+
+===== FILE: assets/tour.css =====
+
+@font-face{font-family:"Young Serif";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/YoungSerif-400-normal-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Instrument Sans";font-style:normal;font-weight:400 600;font-display:swap;src:url(fonts/InstrumentSans-400-600-normal-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/JetBrainsMono-400-normal-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Hind Siliguri";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/HindSiliguri-400-normal-bengali.woff2) format("woff2");unicode-range:U+0951-0952,U+0964-0965,U+0980-09FE,U+200C-200D,U+25CC}
+@font-face{font-family:"Hind Siliguri";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/HindSiliguri-600-normal-bengali.woff2) format("woff2");unicode-range:U+0951-0952,U+0964-0965,U+0980-09FE,U+200C-200D,U+25CC}
+
+:root{
+  --ground:#ECE8DF; --paper:#FBFAF5; --ink:#171613; --muted:#59554C; --rule:#D6D1C5; --accent:#2B3CB0;
+  --display:"Young Serif","Hind Siliguri",Georgia,serif;
+  --text:"Instrument Sans","Hind Siliguri",ui-sans-serif,sans-serif;
+  --mono:"JetBrains Mono","Hind Siliguri",ui-monospace,monospace;
+  --ui--1:.8125rem; --ui-0:.9375rem; --ui-1:1.0625rem; --ui-2:1.25rem;
+  --ui-3:clamp(1.375rem,1.2rem + .8vw,1.875rem);
+  --step-display:clamp(2.25rem,1.4rem + 3.4vw,4.5rem);
+  --ease-out:cubic-bezier(0.22,1,0.36,1); --ease-in-out:cubic-bezier(0.65,0,0.35,1);
+  --margin:clamp(20px,5vw,88px); --gutter:clamp(16px,2vw,32px);
+  --slip-w:22rem;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--ground);color:var(--ink);-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;font:400 var(--ui-1)/1.55 var(--text);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
+p,li{text-wrap:pretty}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.2em}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1:focus{outline:none}
+.num{font-variant-numeric:tabular-nums}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-80px;z-index:10;padding:12px 16px;background:var(--ink);color:var(--paper);text-decoration:none}
+.skip:focus{top:12px}
+
+
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px var(--gutter);padding:18px var(--margin) 0;view-transition-name:top}
+.mark{display:inline-flex;align-items:center;gap:10px;min-height:44px;text-decoration:none;font:400 1.5rem/1 var(--display)}
+.mark svg{width:24px;height:28px;flex:none}
+.route{position:relative;flex:1 1 30rem;max-width:40rem;display:grid;grid-template-columns:auto 1fr;align-items:end;gap:6px 18px}
+.route-count{margin:0;font:400 var(--ui--1)/1.3 var(--mono);letter-spacing:.06em;color:var(--ink);padding-bottom:13px;white-space:nowrap}
+.track{position:relative;min-width:0}
+.route ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--rule)}
+.route li{min-width:0}
+.route a{display:flex;flex-direction:column;gap:2px;min-height:48px;padding:6px 8px 10px 0;font:400 var(--ui--1)/1.25 var(--mono);letter-spacing:.04em;color:var(--muted);text-decoration:none;transition:color 160ms var(--ease-out)}
+.route a b{font-weight:400;color:inherit}
+.route a:hover{color:var(--ink)}
+.route a[aria-current="step"]{color:var(--ink)}
+.route a[aria-current="step"] b{color:var(--accent)}
+.route-marker{position:absolute;left:0;bottom:-2px;width:25%;height:3px;background:var(--accent);view-transition-name:here}
+.s2 .route-marker{transform:translateX(100%)}
+.s3 .route-marker{transform:translateX(200%)}
+.s4 .route-marker{transform:translateX(300%)}
+
+
+main{flex:1;display:flex;flex-direction:column}
+.stage{flex:1;display:grid;gap:clamp(28px,5vw,96px);align-items:center;align-content:center;padding:clamp(32px,6vh,72px) var(--margin) clamp(24px,4vh,48px)}
+.s1 .stage,.s3 .stage{grid-template-columns:minmax(0,1fr) var(--slip-w);grid-template-areas:"copy slip"}
+.s2 .stage{grid-template-columns:var(--slip-w) minmax(0,1fr);grid-template-areas:"slip copy"}
+.s4 .stage{grid-template-columns:minmax(0,40rem);justify-content:center;justify-items:center;grid-template-areas:"slip" "copy";text-align:center;gap:clamp(24px,4vh,40px)}
+.copy{grid-area:copy;max-width:44rem}
+.s2 .copy,.s3 .copy{max-width:46rem}
+.kicker{margin:0 0 18px;font:400 var(--ui--1)/1.3 var(--mono);letter-spacing:.08em;color:var(--muted)}
+.kicker b{font-weight:400;color:var(--accent)}
+h1{font-size:var(--step-display);line-height:1.02;letter-spacing:-.015em;max-width:15ch}
+.s3 h1{max-width:18ch}
+.s4 h1{margin-inline:auto}
+.lead{margin:20px 0 0;max-width:52ch;font-size:var(--ui-2);line-height:1.5}
+.s4 .lead{margin-inline:auto}
+.aside{margin:14px 0 0;color:var(--muted);font-size:var(--ui-0)}
+
+
+.features{list-style:none;margin:32px 0 0;padding:0;display:grid;gap:0;border-top:1px solid var(--rule);max-width:40rem}
+.features li{display:grid;grid-template-columns:3rem 1fr;gap:4px 12px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.features .no{grid-row:span 2;font:400 var(--ui--1)/1.9 var(--mono);color:var(--muted)}
+.features h2{font-size:var(--ui-3);line-height:1.15}
+.features p{margin:0;color:var(--muted);max-width:48ch}
+
+
+.plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gutter);margin:32px 0 0;max-width:44rem}
+.plan{background:var(--paper);padding:22px 22px 24px;display:flex;flex-direction:column;gap:10px}
+.plan h2{font-size:var(--ui-3);line-height:1.15}
+.plan .price{margin:0;font:400 1.75rem/1.1 var(--display)}
+.plan .price small{font:400 var(--ui-0)/1 var(--text);color:var(--muted)}
+.plan .alt{margin:0;font:400 var(--ui-0)/1.4 var(--text);color:var(--muted)}
+.plan ul{margin:6px 0 0;padding:12px 0 0;list-style:none;border-top:1px dashed var(--muted);display:grid;gap:4px;font-size:var(--ui-0)}
+.plan li::before{content:"+ ";font-family:var(--mono);color:var(--muted)}
+.plan--plus{outline:2px solid var(--ink);outline-offset:-2px}
+
+
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 16px;margin:28px 0 0}
+.waitlist{margin:20px 0 0;color:var(--muted);font-size:var(--ui-0)}
+.waitlist a{color:var(--ink)}
+
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:48px;padding:12px 22px;border-radius:2px;font:600 var(--ui-1)/1.2 var(--text);text-decoration:none;transition:transform 120ms var(--ease-out),background-color 160ms var(--ease-out),color 160ms var(--ease-out)}
+.btn:active{transform:scale(.97)}
+.btn--go{background:var(--accent);color:var(--paper)}
+.btn--go:hover{background:#1F2D8C}
+.btn--quiet{color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn--quiet:hover{background:var(--paper)}
+.btn .arr{font-family:var(--mono);font-weight:400}
+
+
+.slip{grid-area:slip;position:relative;width:var(--slip-w);max-width:100%;margin:0;padding:18px 20px 26px;background:var(--paper);font-family:var(--mono);view-transition-name:slip;text-align:left}
+.slip::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:12px;background:radial-gradient(circle at 6px 6px,var(--ground) 4.5px,transparent 5px) 0 0/12px 12px repeat-x}
+.slip-head{display:flex;justify-content:space-between;gap:12px;margin:0;padding-bottom:10px;border-bottom:1px dashed var(--muted);font-size:var(--ui--1);letter-spacing:.08em;color:var(--muted)}
+.slip-head b{font-weight:400;color:var(--ink)}
+.window{position:relative;margin:14px 0 6px;aspect-ratio:8/3;width:100%}
+.window>.poster,.window>.player{position:absolute;inset:0;width:100%;height:100%}
+.window>.player{opacity:0}
+.window.is-live>.player{opacity:1}
+.window.is-live>.poster{visibility:hidden}
+.window .tag{position:absolute;transform:translate(-50%,-50%);font:400 var(--ui--1)/1 var(--mono);color:var(--ink);pointer-events:none}
+.window .tag--on{color:var(--paper)}
+.slip-lines{list-style:none;margin:0;padding:0}
+.slip-lines li{display:grid;grid-template-columns:2.25rem 1fr auto;align-items:baseline;gap:8px;padding:9px 0;border-top:1px dashed var(--rule);font-size:var(--ui--1);line-height:1.35}
+.slip-lines li:first-child{border-top:0}
+.slip-lines .ln{color:var(--muted)}
+.slip-lines li:last-child .ln{color:var(--accent)}
+.slip-lines .amt{font-variant-numeric:tabular-nums;white-space:nowrap}
+.slip-lines .line-1{font:400 1.3125rem/1.2 var(--display);padding-top:6px}
+.slip-lines .line-1 .ln{font:400 var(--ui--1)/1 var(--mono)}
+.line-1{view-transition-name:line-1}
+.line-2{view-transition-name:line-2}
+.line-3{view-transition-name:line-3}
+.line-4{view-transition-name:line-4}
+
+
+.pager{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:0 var(--margin) 28px}
+.pager .back{display:inline-flex;align-items:center;gap:.5em;min-height:48px;font:400 var(--ui-0)/1.2 var(--text)}
+.pager .spacer{flex:1}
+.foot{padding:18px var(--margin) 22px;border-top:1px solid var(--rule);font-size:var(--ui--1);color:var(--muted);view-transition-name:foot}
+.foot p{margin:0}
+
+
+@media (max-width:899px){
+  .route{flex-basis:100%;max-width:none;grid-template-columns:1fr}
+  .route-count{padding-bottom:0}
+  .s1 .stage,.s2 .stage,.s3 .stage{grid-template-columns:minmax(0,1fr);grid-template-areas:"copy" "slip";justify-items:stretch}
+  .slip{width:100%;max-width:var(--slip-w)}
+  .s4 .stage{grid-template-columns:minmax(0,1fr)}
+  .s4 .slip{justify-self:center}
+}
+@media (max-width:599px){
+  .plans{grid-template-columns:1fr}
+  .route a{font-size:.75rem;padding-right:4px}
+  .lead{font-size:var(--ui-1)}
+  .pager{flex-wrap:wrap}
+}
+
+
+@view-transition{navigation:auto}
+::view-transition-group(*){animation-duration:520ms;animation-timing-function:cubic-bezier(0.65,0,0.35,1)}
+::view-transition-old(root),::view-transition-new(root){mix-blend-mode:normal}
+::view-transition-old(root){animation:360ms cubic-bezier(0.22,1,0.36,1) both tally-out-fwd}
+::view-transition-new(root){animation:400ms cubic-bezier(0.22,1,0.36,1) 120ms both tally-in-fwd}
+html[data-dir="back"]::view-transition-old(root){animation-name:tally-out-back}
+html[data-dir="back"]::view-transition-new(root){animation-name:tally-in-back}
+
+::view-transition-new(line-2):only-child,::view-transition-new(line-3):only-child,::view-transition-new(line-4):only-child{animation:260ms cubic-bezier(0.22,1,0.36,1) 364ms both tally-feed-in}
+::view-transition-old(line-2):only-child,::view-transition-old(line-3):only-child,::view-transition-old(line-4):only-child{animation:240ms cubic-bezier(0.22,1,0.36,1) both tally-feed-out}
+@keyframes tally-out-fwd{to{opacity:0;transform:translateX(-24px)}}
+@keyframes tally-in-fwd{from{opacity:0;transform:translateX(24px)}}
+@keyframes tally-out-back{to{opacity:0;transform:translateX(24px)}}
+@keyframes tally-in-back{from{opacity:0;transform:translateX(-24px)}}
+@keyframes tally-feed-in{from{opacity:0;clip-path:inset(0 0 100% 0);transform:translateY(-8px)}to{opacity:1;clip-path:inset(0);transform:none}}
+@keyframes tally-feed-out{from{opacity:1;clip-path:inset(0);transform:none}to{opacity:0;clip-path:inset(0 0 100% 0);transform:translateY(-8px)}}
+@keyframes tally-fade-out{to{opacity:0}}
+@keyframes tally-fade-in{from{opacity:0}}
+
+
+@media (prefers-reduced-motion:reduce){
+  .top,.foot,.slip,.line-1,.line-2,.line-3,.line-4,.route-marker{view-transition-name:none}
+  ::view-transition-group(*){animation:none}
+  ::view-transition-old(root){animation:150ms linear both tally-fade-out}
+  ::view-transition-new(root){animation:150ms linear both tally-fade-in}
+  .btn,.route a{transition:color 120ms linear,background-color 120ms linear}
+  .btn:active{transform:none}
+}
+@media (forced-colors:active){
+  .route-marker{background:Highlight}
+  .plan,.slip{border:1px solid CanvasText}
+  .btn--go{border:2px solid ButtonText}
+  .window .tag,.window .tag--on{background:Canvas;color:CanvasText;padding:2px 4px}
+}
+
+===== FILE: assets/tour.js =====
+// Tally tour · focus after each page change, and the one Lottie per page.
+// The page-change motion itself is CSS (cross-document View Transitions in tour.css);
+// the direction (forward / back) is set before the first frame by the small inline script in each page's <head>.
+(function () {
+  "use strict";
+  var doc = document.documentElement;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var KEY = "tally-tour-arrive";
+
+  // ── Focus: the new page's heading, after every in-tour page change ──
+  function focusHeading() {
+    var h = document.querySelector("h1");
+    if (h) h.focus({ preventScroll: true });
+  }
+  var STEP = { "": 0, "index.html": 0, "features.html": 1, "pricing.html": 2, "start.html": 3 };
+  function stepOf(u) {
+    try { var p = new URL(u, location.href).pathname.split("/").pop(); return p in STEP ? STEP[p] : null; } catch (e) { return null; }
+  }
+  var arrived = doc.hasAttribute("data-arrived");
+  var act = window.navigation && window.navigation.activation;
+  if (!arrived && act && act.from && act.entry && act.navigationType !== "reload") {
+    var f = stepOf(act.from.url), t = stepOf(act.entry.url);
+    arrived = f !== null && t !== null && f !== t;
+  }
+  if (!arrived && !("navigation" in window)) {
+    // browsers without the Navigation API: a flag set when a tour link was followed
+    try { arrived = sessionStorage.getItem(KEY) === "1"; sessionStorage.removeItem(KEY); } catch (e) {}
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest("a[data-tour]");
+      if (a) { try { sessionStorage.setItem(KEY, "1"); } catch (err) {} }
+    });
+  }
+  if (arrived) focusHeading();
+  // restored from the back/forward cache: the heading again, and the animation at rest
+  window.addEventListener("pageshow", function (e) { if (e.persisted) focusHeading(); });
+
+  // ── Lottie: load after first paint, play once, rest on the final frame ──
+  var win = document.querySelector(".window[data-lottie]");
+  if (!win) return;
+
+  function loadPlayer() {
+    return new Promise(function (resolve, reject) {
+      if (window.lottie) return resolve(window.lottie);
+      var s = document.createElement("script");
+      s.src = win.getAttribute("data-player");
+      s.async = true;
+      s.onload = function () { window.lottie ? resolve(window.lottie) : reject(new Error("no player")); };
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  function start() {
+    var settled = window.__tallyReveal || Promise.resolve();
+    loadPlayer().then(function (lottie) {
+      var box = document.createElement("div");
+      box.className = "player";
+      box.setAttribute("aria-hidden", "true");
+      win.insertBefore(box, win.firstChild); // under the M/S and Free/Plus tags
+      var anim = lottie.loadAnimation({
+        container: box, renderer: "svg", loop: false, autoplay: false,
+        path: win.getAttribute("data-lottie"),
+        rendererSettings: { preserveAspectRatio: "xMidYMid meet", progressiveLoad: false }
+      });
+      anim.addEventListener("DOMLoaded", function () {
+        var last = anim.totalFrames - 1;
+        if (reduce.matches) {
+          anim.goToAndStop(last, true);       // reduced motion: the final frame, still
+          win.classList.add("is-live");
+          return;
+        }
+        anim.goToAndStop(0, true);
+        settled.then(function () {
+          win.classList.add("is-live");
+          anim.play();                         // plays once (loop: false), rests on the last frame
+        });
+      });
+      anim.addEventListener("data_failed", function () { box.remove(); }); // the poster stays
+      reduce.addEventListener && reduce.addEventListener("change", function (m) {
+        if (m.matches) anim.goToAndStop(anim.totalFrames - 1, true);
+      });
+    }).catch(function () {  });
+  }
+
+  if (document.readyState === "complete") start();
+  else window.addEventListener("load", start, { once: true });
+})();
+
+===== FILE: features.html =====
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Tally does · three features · Tally</title>
+<meta name="description" content="Add an expense in two taps, let balances settle themselves, and keep working in taka while offline. Step 2 of 4 of the Tally tour.">
+<link rel="canonical" href="https://tally.example.com/features.html">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-b8m1j6QzZfLm8rEvaqhr2/6asl56y/dG5DIF4tgH0bU='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#ECE8DF">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tally">
+<meta property="og:title" content="What Tally does · three features · Tally">
+<meta property="og:description" content="Add an expense in two taps, let balances settle themselves, and keep working in taka while offline. Step 2 of 4 of the Tally tour.">
+<meta property="og:url" content="https://tally.example.com/features.html">
+<meta property="og:image" content="https://tally.example.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/YoungSerif-400-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/tour.css">
+<style>
+
+</style>
+<link rel="expect" href="#tour-end" blocking="render">
+<script>(function(){var d=document.documentElement;d.className+=" js";var m={"":0,"index.html":0,"features.html":1,"pricing.html":2,"start.html":3};function s(u){try{var p=new URL(u,location.href).pathname.split("/").pop();return p in m?m[p]:null}catch(e){return null}}addEventListener("pagereveal",function(e){var a=window.navigation&&navigation.activation;if(!a||!a.from||!a.entry||a.navigationType==="reload")return;var f=s(a.from.url),t=s(a.entry.url);if(f===null||t===null||f===t)return;d.setAttribute("data-dir",t<f?"back":"fwd");d.setAttribute("data-arrived","");if(e.viewTransition){window.__tallyReveal=e.viewTransition.finished.catch(function(){}).then(function(){d.removeAttribute("data-dir")})}})})();</script>
+<script src="assets/tour.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Tally","applicationCategory":"FinanceApplication","operatingSystem":"Android, Web","url":"https://tally.example.com/","description":"Shared expenses for flatmates and families: a running balance that tells everyone who owes whom."}</script>
+</head>
+<body class="s2">
+<a class="skip" href="#title">Skip to step 2</a>
+<header class="top">
+  <a class="mark" href="index.html" data-tour aria-label="Tally, back to the start of the tour"><svg viewBox="0 0 24 28" aria-hidden="true" focusable="false"><path d="M3 2h18v22l-3-2-3 2-3-2-3 2-3-2-3 2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 8h10M7 12h10M7 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span aria-hidden="true">Tally</span></a>
+  <nav class="route" aria-label="Tour steps">
+    <p class="route-count">Step 2 of 4<span class="vh">: Features</span></p>
+    <div class="track">
+      <ol>
+          <li><a data-tour href="index.html"><b>01</b> Intro</a></li>
+          <li><a data-tour href="features.html" aria-current="step"><b>02</b> Features</a></li>
+          <li><a data-tour href="pricing.html"><b>03</b> Pricing</a></li>
+          <li><a data-tour href="start.html"><b>04</b> Start</a></li>
+      </ol>
+      <span class="route-marker" aria-hidden="true"></span>
+    </div>
+  </nav>
+</header>
+<main id="main">
+  <div class="stage">
+    <div class="copy">
+        <p class="kicker"><b>02</b> · What it does</p>
+        <h1 id="title" tabindex="-1">Three things it does for the whole group</h1>
+        <ol class="features">
+          <li><span class="no" aria-hidden="true">2.1</span><h2>Add in two taps</h2><p>Amount, who paid, done.</p></li>
+          <li><span class="no" aria-hidden="true">2.2</span><h2>Balances settle themselves</h2><p>Tally works out the fewest payments to square up.</p></li>
+          <li><span class="no" aria-hidden="true">2.3</span><h2>Works in ৳ and offline</h2><p>Entries sync when you are back online.</p></li>
+        </ol>
+    </div>
+    <aside class="slip" aria-label="Your Tally slip, 2 of 4 lines printed">
+      <p class="slip-head"><b>TALLY</b><span>running balance</span></p>
+      <div class="window" role="img" aria-label="An expense being added: the add button is tapped twice and a new row drops into the list with a tick." data-lottie="assets/lottie/add-expense.json" data-player="assets/vendor/lottie_light.min.js">
+        <svg class="poster" viewBox="0 0 320 120" aria-hidden="true" focusable="false"><rect x="100" y="25" width="196" height="26" rx="3" fill="#D6D1C5"/><rect x="100" y="69" width="196" height="26" rx="3" fill="#171613"/><path d="M264 81l7 7 13-13" fill="none" stroke="#FBFAF5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="52" cy="60" r="22" fill="#2B3CB0"/><path d="M43 60h18M52 51v18" stroke="#FBFAF5" stroke-width="3" stroke-linecap="round"/></svg>
+      </div>
+      <ol class="slip-lines">
+        <li class="line-1"><span class="ln">01</span><span>Mitu owes Sabbir</span><span class="amt">৳ 640</span></li>
+        <li class="line-2"><span class="ln">02</span><span>Expense added in two taps</span><span class="amt">done</span></li>
+      </ol>
+    </aside>
+  </div>
+  <nav class="pager" id="tour-end" aria-label="Previous and next step">
+    <a class="back" data-tour rel="prev" href="index.html"><span aria-hidden="true">&larr;</span> Back to Intro</a>
+    <a class="btn btn--go" data-tour rel="next" href="pricing.html">See the two plans <span class="arr" aria-hidden="true">&rarr;</span></a>
+  </nav>
+</main>
+<footer class="foot">
+  <p>Tally · shared expenses for flatmates and families · a small team in Dhaka</p>
+</footer>
+</body>
+</html>
+
+===== FILE: index.html =====
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tally · split shared expenses with flatmates and family</title>
+<meta name="description" content="Tally keeps a running balance for flatmates and families and tells everyone who owes whom. A four-step tour, step 1 of 4.">
+<link rel="canonical" href="https://tally.example.com/">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-b8m1j6QzZfLm8rEvaqhr2/6asl56y/dG5DIF4tgH0bU='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#ECE8DF">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tally">
+<meta property="og:title" content="Tally · split shared expenses with flatmates and family">
+<meta property="og:description" content="Tally keeps a running balance for flatmates and families and tells everyone who owes whom. A four-step tour, step 1 of 4.">
+<meta property="og:url" content="https://tally.example.com/">
+<meta property="og:image" content="https://tally.example.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/YoungSerif-400-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/tour.css">
+<style>
+
+</style>
+<link rel="expect" href="#tour-end" blocking="render">
+<script>(function(){var d=document.documentElement;d.className+=" js";var m={"":0,"index.html":0,"features.html":1,"pricing.html":2,"start.html":3};function s(u){try{var p=new URL(u,location.href).pathname.split("/").pop();return p in m?m[p]:null}catch(e){return null}}addEventListener("pagereveal",function(e){var a=window.navigation&&navigation.activation;if(!a||!a.from||!a.entry||a.navigationType==="reload")return;var f=s(a.from.url),t=s(a.entry.url);if(f===null||t===null||f===t)return;d.setAttribute("data-dir",t<f?"back":"fwd");d.setAttribute("data-arrived","");if(e.viewTransition){window.__tallyReveal=e.viewTransition.finished.catch(function(){}).then(function(){d.removeAttribute("data-dir")})}})})();</script>
+<script src="assets/tour.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Tally","applicationCategory":"FinanceApplication","operatingSystem":"Android, Web","url":"https://tally.example.com/","description":"Shared expenses for flatmates and families: a running balance that tells everyone who owes whom."}</script>
+</head>
+<body class="s1">
+<a class="skip" href="#title">Skip to step 1</a>
+<header class="top">
+  <a class="mark" href="index.html" data-tour aria-label="Tally, back to the start of the tour"><svg viewBox="0 0 24 28" aria-hidden="true" focusable="false"><path d="M3 2h18v22l-3-2-3 2-3-2-3 2-3-2-3 2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 8h10M7 12h10M7 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span aria-hidden="true">Tally</span></a>
+  <nav class="route" aria-label="Tour steps">
+    <p class="route-count">Step 1 of 4<span class="vh">: Intro</span></p>
+    <div class="track">
+      <ol>
+          <li><a data-tour href="index.html" aria-current="step"><b>01</b> Intro</a></li>
+          <li><a data-tour href="features.html"><b>02</b> Features</a></li>
+          <li><a data-tour href="pricing.html"><b>03</b> Pricing</a></li>
+          <li><a data-tour href="start.html"><b>04</b> Start</a></li>
+      </ol>
+      <span class="route-marker" aria-hidden="true"></span>
+    </div>
+  </nav>
+</header>
+<main id="main">
+  <div class="stage">
+    <div class="copy">
+        <p class="kicker"><b>01</b> · What it is</p>
+        <h1 id="title" tabindex="-1">Split it once. Stop doing the maths.</h1>
+        <p class="lead">Tally is a shared-expenses app for flatmates and families. Add what you paid. Tally keeps a running balance and tells everyone who owes whom.</p>
+        <p class="aside">On the web and Android.</p>
+    </div>
+    <aside class="slip" aria-label="Your Tally slip, 1 of 4 lines printed">
+      <p class="slip-head"><b>TALLY</b><span>running balance</span></p>
+      <div class="window" role="img" aria-label="Balance card: an arrow draws from Mitu to Sabbir and the balance bar fills to ৳ 640 owed." data-lottie="assets/lottie/balance.json" data-player="assets/vendor/lottie_light.min.js">
+        <svg class="poster" viewBox="0 0 320 120" aria-hidden="true" focusable="false"><rect x="48" y="92" width="224" height="8" rx="4" fill="#2B3CB0"/><circle cx="48" cy="46" r="18" fill="#171613"/><circle cx="272" cy="46" r="18" fill="#171613"/><path d="M72 46H246M234 34l14 12-14 12" fill="none" stroke="#2B3CB0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="tag tag--on" style="left:15%;top:38.3%">M</span><span class="tag tag--on" style="left:85%;top:38.3%">S</span>
+      </div>
+      <ol class="slip-lines">
+        <li class="line-1"><span class="ln">01</span><span>Mitu owes Sabbir</span><span class="amt">৳ 640</span></li>
+      </ol>
+    </aside>
+  </div>
+  <nav class="pager" id="tour-end" aria-label="Previous and next step">
+    <span class="spacer"></span>
+    <a class="btn btn--go" data-tour rel="next" href="features.html">See what it does <span class="arr" aria-hidden="true">&rarr;</span></a>
+  </nav>
+</main>
+<footer class="foot">
+  <p>Tally · shared expenses for flatmates and families · a small team in Dhaka</p>
+</footer>
+</body>
+</html>
+
+===== FILE: pricing.html =====
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tally pricing · Free, or Tally Plus at ৳ 149 a month</title>
+<meta name="description" content="Free covers up to 2 groups with unlimited expenses. Tally Plus is ৳ 149 a month or ৳ 1,290 a year with receipts and CSV export.">
+<link rel="canonical" href="https://tally.example.com/pricing.html">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-b8m1j6QzZfLm8rEvaqhr2/6asl56y/dG5DIF4tgH0bU='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#ECE8DF">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tally">
+<meta property="og:title" content="Tally pricing · Free, or Tally Plus at ৳ 149 a month">
+<meta property="og:description" content="Free covers up to 2 groups with unlimited expenses. Tally Plus is ৳ 149 a month or ৳ 1,290 a year with receipts and CSV export.">
+<meta property="og:url" content="https://tally.example.com/pricing.html">
+<meta property="og:image" content="https://tally.example.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/YoungSerif-400-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/tour.css">
+<style>
+
+</style>
+<link rel="expect" href="#tour-end" blocking="render">
+<script>(function(){var d=document.documentElement;d.className+=" js";var m={"":0,"index.html":0,"features.html":1,"pricing.html":2,"start.html":3};function s(u){try{var p=new URL(u,location.href).pathname.split("/").pop();return p in m?m[p]:null}catch(e){return null}}addEventListener("pagereveal",function(e){var a=window.navigation&&navigation.activation;if(!a||!a.from||!a.entry||a.navigationType==="reload")return;var f=s(a.from.url),t=s(a.entry.url);if(f===null||t===null||f===t)return;d.setAttribute("data-dir",t<f?"back":"fwd");d.setAttribute("data-arrived","");if(e.viewTransition){window.__tallyReveal=e.viewTransition.finished.catch(function(){}).then(function(){d.removeAttribute("data-dir")})}})})();</script>
+<script src="assets/tour.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Tally","applicationCategory":"FinanceApplication","operatingSystem":"Android, Web","url":"https://tally.example.com/","offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"BDT","description":"Up to 2 groups, unlimited expenses"},{"@type":"Offer","name":"Tally Plus (monthly)","price":"149","priceCurrency":"BDT","description":"Unlimited groups, receipts, export to CSV"},{"@type":"Offer","name":"Tally Plus (yearly)","price":"1290","priceCurrency":"BDT","description":"Unlimited groups, receipts, export to CSV"}]}</script>
+</head>
+<body class="s3">
+<a class="skip" href="#title">Skip to step 3</a>
+<header class="top">
+  <a class="mark" href="index.html" data-tour aria-label="Tally, back to the start of the tour"><svg viewBox="0 0 24 28" aria-hidden="true" focusable="false"><path d="M3 2h18v22l-3-2-3 2-3-2-3 2-3-2-3 2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 8h10M7 12h10M7 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span aria-hidden="true">Tally</span></a>
+  <nav class="route" aria-label="Tour steps">
+    <p class="route-count">Step 3 of 4<span class="vh">: Pricing</span></p>
+    <div class="track">
+      <ol>
+          <li><a data-tour href="index.html"><b>01</b> Intro</a></li>
+          <li><a data-tour href="features.html"><b>02</b> Features</a></li>
+          <li><a data-tour href="pricing.html" aria-current="step"><b>03</b> Pricing</a></li>
+          <li><a data-tour href="start.html"><b>04</b> Start</a></li>
+      </ol>
+      <span class="route-marker" aria-hidden="true"></span>
+    </div>
+  </nav>
+</header>
+<main id="main">
+  <div class="stage">
+    <div class="copy">
+        <p class="kicker"><b>03</b> · What it costs</p>
+        <h1 id="title" tabindex="-1">Free for up to 2 groups, or ৳ 149 a month for unlimited</h1>
+        <div class="plans">
+          <section class="plan" aria-labelledby="plan-free">
+            <h2 id="plan-free">Free</h2>
+            <p class="price">Up to 2 groups</p>
+            <ul><li>Unlimited expenses</li></ul>
+          </section>
+          <section class="plan plan--plus" aria-labelledby="plan-plus">
+            <h2 id="plan-plus">Tally Plus</h2>
+            <p class="price num">৳ 149 <small>/ month</small></p>
+            <p class="alt num">or ৳ 1,290 / year</p>
+            <ul><li>Unlimited groups</li><li>Receipts</li><li>Export to CSV</li></ul>
+          </section>
+        </div>
+    </div>
+    <aside class="slip" aria-label="Your Tally slip, 3 of 4 lines printed">
+      <p class="slip-head"><b>TALLY</b><span>running balance</span></p>
+      <div class="window" role="img" aria-label="Plan toggle: the switch slides from Free to Tally Plus." data-lottie="assets/lottie/plan-toggle.json" data-player="assets/vendor/lottie_light.min.js">
+        <svg class="poster" viewBox="0 0 320 120" aria-hidden="true" focusable="false"><rect x="108" y="34" width="104" height="52" rx="26" fill="#2B3CB0"/><circle cx="186" cy="60" r="20" fill="#FBFAF5" stroke="#171613" stroke-width="2"/></svg><span class="tag" style="left:17%;top:50%">Free</span><span class="tag" style="left:83%;top:50%">Plus</span>
+      </div>
+      <ol class="slip-lines">
+        <li class="line-1"><span class="ln">01</span><span>Mitu owes Sabbir</span><span class="amt">৳ 640</span></li>
+        <li class="line-2"><span class="ln">02</span><span>Expense added in two taps</span><span class="amt">done</span></li>
+        <li class="line-3"><span class="ln">03</span><span>Free, or Plus</span><span class="amt">৳ 149/mo</span></li>
+      </ol>
+    </aside>
+  </div>
+  <nav class="pager" id="tour-end" aria-label="Previous and next step">
+    <a class="back" data-tour rel="prev" href="features.html"><span aria-hidden="true">&larr;</span> Back to Features</a>
+    <a class="btn btn--go" data-tour rel="next" href="start.html">Go to Start <span class="arr" aria-hidden="true">&rarr;</span></a>
+  </nav>
+</main>
+<footer class="foot">
+  <p>Tally · shared expenses for flatmates and families · a small team in Dhaka</p>
+</footer>
+</body>
+</html>
+
+===== FILE: start.html =====
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Start with Tally · Google Play or your browser</title>
+<meta name="description" content="Get Tally on Google Play or use it in your browser. On iPhone, join the iOS waitlist at ios@tally.example.com. Step 4 of 4.">
+<link rel="canonical" href="https://tally.example.com/start.html">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-b8m1j6QzZfLm8rEvaqhr2/6asl56y/dG5DIF4tgH0bU='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#ECE8DF">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tally">
+<meta property="og:title" content="Start with Tally · Google Play or your browser">
+<meta property="og:description" content="Get Tally on Google Play or use it in your browser. On iPhone, join the iOS waitlist at ios@tally.example.com. Step 4 of 4.">
+<meta property="og:url" content="https://tally.example.com/start.html">
+<meta property="og:image" content="https://tally.example.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/YoungSerif-400-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/tour.css">
+<style>
+
+</style>
+<link rel="expect" href="#tour-end" blocking="render">
+<script>(function(){var d=document.documentElement;d.className+=" js";var m={"":0,"index.html":0,"features.html":1,"pricing.html":2,"start.html":3};function s(u){try{var p=new URL(u,location.href).pathname.split("/").pop();return p in m?m[p]:null}catch(e){return null}}addEventListener("pagereveal",function(e){var a=window.navigation&&navigation.activation;if(!a||!a.from||!a.entry||a.navigationType==="reload")return;var f=s(a.from.url),t=s(a.entry.url);if(f===null||t===null||f===t)return;d.setAttribute("data-dir",t<f?"back":"fwd");d.setAttribute("data-arrived","");if(e.viewTransition){window.__tallyReveal=e.viewTransition.finished.catch(function(){}).then(function(){d.removeAttribute("data-dir")})}})})();</script>
+<script src="assets/tour.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Tally","applicationCategory":"FinanceApplication","operatingSystem":"Android, Web","url":"https://tally.example.com/","offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"BDT","description":"Up to 2 groups, unlimited expenses"},{"@type":"Offer","name":"Tally Plus (monthly)","price":"149","priceCurrency":"BDT","description":"Unlimited groups, receipts, export to CSV"},{"@type":"Offer","name":"Tally Plus (yearly)","price":"1290","priceCurrency":"BDT","description":"Unlimited groups, receipts, export to CSV"}]}</script>
+</head>
+<body class="s4">
+<a class="skip" href="#title">Skip to step 4</a>
+<header class="top">
+  <a class="mark" href="index.html" data-tour aria-label="Tally, back to the start of the tour"><svg viewBox="0 0 24 28" aria-hidden="true" focusable="false"><path d="M3 2h18v22l-3-2-3 2-3-2-3 2-3-2-3 2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 8h10M7 12h10M7 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span aria-hidden="true">Tally</span></a>
+  <nav class="route" aria-label="Tour steps">
+    <p class="route-count">Step 4 of 4<span class="vh">: Start</span></p>
+    <div class="track">
+      <ol>
+          <li><a data-tour href="index.html"><b>01</b> Intro</a></li>
+          <li><a data-tour href="features.html"><b>02</b> Features</a></li>
+          <li><a data-tour href="pricing.html"><b>03</b> Pricing</a></li>
+          <li><a data-tour href="start.html" aria-current="step"><b>04</b> Start</a></li>
+      </ol>
+      <span class="route-marker" aria-hidden="true"></span>
+    </div>
+  </nav>
+</header>
+<main id="main">
+  <div class="stage">
+    <div class="copy">
+        <p class="kicker"><b>04</b> · Start</p>
+        <h1 id="title" tabindex="-1">Start your first group</h1>
+        <p class="lead">Free for up to 2 groups. Tally Plus is <span class="num">৳ 149</span> a month or <span class="num">৳ 1,290</span> a year when you need more.</p>
+        <div class="actions">
+          <a class="btn btn--go" href="https://play.example.com/tally">Get it on Google Play</a>
+          <a class="btn btn--quiet" href="https://app.tally.example.com/start">Use it in your browser</a>
+        </div>
+        <p class="waitlist">On iPhone? Email <a href="mailto:ios@tally.example.com">ios@tally.example.com</a> to join the iOS waitlist.</p>
+    </div>
+    <aside class="slip" aria-label="Your Tally slip, 4 of 4 lines printed">
+      <p class="slip-head"><b>TALLY</b><span>running balance</span></p>
+      <div class="window" role="img" aria-label="A check mark draws inside a circle: you are ready to start." data-lottie="assets/lottie/check.json" data-player="assets/vendor/lottie_light.min.js">
+        <svg class="poster" viewBox="0 0 320 120" aria-hidden="true" focusable="false"><circle cx="160" cy="60" r="42" fill="none" stroke="#2B3CB0" stroke-width="5"/><path d="M143 61l12 12 23-24" fill="none" stroke="#2B3CB0" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <ol class="slip-lines">
+        <li class="line-1"><span class="ln">01</span><span>Mitu owes Sabbir</span><span class="amt">৳ 640</span></li>
+        <li class="line-2"><span class="ln">02</span><span>Expense added in two taps</span><span class="amt">done</span></li>
+        <li class="line-3"><span class="ln">03</span><span>Free, or Plus</span><span class="amt">৳ 149/mo</span></li>
+        <li class="line-4"><span class="ln">04</span><span>Ready on web and Android</span><span class="amt">&#10003;</span></li>
+      </ol>
+    </aside>
+  </div>
+  <nav class="pager" id="tour-end" aria-label="Previous and next step">
+    <a class="back" data-tour rel="prev" href="pricing.html"><span aria-hidden="true">&larr;</span> Back to Pricing</a>
+    
+  </nav>
+</main>
+<footer class="foot">
+  <p>Tally · shared expenses for flatmates and families · a small team in Dhaka</p>
+</footer>
+</body>
+</html>

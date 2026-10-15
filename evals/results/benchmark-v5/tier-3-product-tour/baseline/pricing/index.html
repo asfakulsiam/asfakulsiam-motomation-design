@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tally · Pricing · Step 3 of 4</title>
+  <meta name="description" content="Free: up to 2 groups, unlimited expenses. Tally Plus: ৳ 149 / month or ৳ 1,290 / year.">
+  <meta name="view-transition" content="same-origin">
+  <link rel="expect" href="#tour-title" blocking="render">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@500;700&text=%E0%A7%B3&display=swap">
+  <link rel="stylesheet" href="../assets/tour.css">
+  <link rel="preload" href="../anim/pricing-toggle.json" as="fetch" crossorigin>
+  <script src="../assets/tour-head.js"></script>
+  <script src="../vendor/lottie_light.min.js" defer></script>
+  <script src="../assets/tour.js" defer></script>
+</head>
+<body class="page-pricing" style="--step:3">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <a class="brand" href="../" aria-label="Tally, back to the start of the tour"><span class="brand-mark" aria-hidden="true"></span>Tally</a>
+    <nav class="steps" aria-label="Tour progress">
+      <p class="steps-label" id="step-label">Step 3 of 4</p>
+      <ol>
+        <li><a href="../"><span class="n">1</span>Intro</a></li>
+        <li><a href="../features/"><span class="n">2</span>Features</a></li>
+        <li><a href="../pricing/" aria-current="step"><span class="n">3</span>Pricing</a></li>
+        <li><a href="../start/"><span class="n">4</span>Start</a></li>
+      </ol>
+      <div class="progress" aria-hidden="true"><span class="progress-fill"></span></div>
+    </nav>
+  </header>
+
+  <main id="main">
+      <div class="copy">
+        <p class="eyebrow">Pricing</p>
+        <h1 id="tour-title" tabindex="-1" aria-describedby="step-label">Two plans. Start on Free.</h1>
+        <div class="billing" role="group" aria-label="Tally Plus billing">
+          <button type="button" value="monthly" aria-pressed="true">Monthly</button>
+          <button type="button" value="yearly" aria-pressed="false">Yearly</button>
+        </div>
+        <div class="plans">
+          <section class="plan" aria-labelledby="plan-free">
+            <h2 id="plan-free">Free</h2>
+            <p class="price"><span class="taka">৳</span> 0</p>
+            <ul><li>Up to 2 groups</li><li>Unlimited expenses</li></ul>
+          </section>
+          <section class="plan is-plus" aria-labelledby="plan-plus">
+            <h2 id="plan-plus">Tally Plus</h2>
+            <p class="price" data-billing="monthly"><span class="taka">৳</span> 149 <small>/ month</small></p>
+            <p class="price" data-billing="yearly"><span class="taka">৳</span> 1,290 <small>/ year</small></p>
+            <ul><li>Unlimited groups</li><li>Receipts</li><li>Export to CSV</li></ul>
+          </section>
+        </div>
+      </div>
+      <figure class="card" aria-label="Tally preview">
+        <p class="card-balance"><span class="dot" aria-hidden="true"></span><span>Mitu owes Sabbir <strong><span class="taka">৳</span> 640</strong></span></p>
+        <div class="card-content">
+          <p class="card-title">Tally Plus</p>
+          <p class="card-sub" data-billing="monthly"><span class="taka">৳</span> 149 / month</p>
+          <p class="card-sub" data-billing="yearly"><span class="taka">৳</span> 1,290 / year</p>
+          
+        <div class="anim" data-name="toggle" data-src="../anim/pricing-toggle.json" style="--ar:20 / 9" data-mode="toggle" data-state="monthly" aria-hidden="true">
+          <img class="anim-poster" src="../anim/pricing-toggle-final.svg" alt="" width="320" height="140">
+          <div class="anim-player"></div>
+        </div>
+        <p class="sr-only">Animation: a plan toggle that follows the Monthly / Yearly choice.</p>
+          <div class="toggle-labels" aria-hidden="true"><span data-for="monthly" data-on="true">Monthly</span><span data-for="yearly">Yearly</span></div>
+        </div>
+      </figure>
+  </main>
+
+  <nav class="tour-nav" aria-label="Tour">
+    <a class="nav-btn nav-back" rel="prev" href="../features/"><span aria-hidden="true">←</span> Back<span class="sr-only">: step 2 of 4, Features</span></a>
+    <p class="kbd-hint"><kbd>←</kbd> <kbd>→</kbd> to move through the tour</p>
+    <a class="nav-btn nav-next" rel="next" href="../start/">Next: Start <span aria-hidden="true">→</span><span class="sr-only">, step 4 of 4</span></a>
+  </nav>
+</body>
+</html>

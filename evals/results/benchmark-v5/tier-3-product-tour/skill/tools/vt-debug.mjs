@@ -1,0 +1,10 @@
+import { chromium } from "playwright";
+import { serve } from "./serve.mjs";
+const srv = await serve(process.cwd(), 8766);
+const b = await chromium.launch();
+const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
+await p.goto("http://127.0.0.1:8766/index.html"); await p.waitForTimeout(1200);
+await p.click("a[rel=next]");
+await p.waitForTimeout(150);
+console.log(JSON.stringify(await p.evaluate(() => document.getAnimations().map(a => ({ pe: a.effect.pseudoElement, name: a.animationName, dur: a.effect.getTiming().duration, delay: a.effect.getTiming().delay, ease: a.effect.getTiming().easing, t: a.currentTime, kf: a.effect.getKeyframes().map(k => k.transform || k.opacity).slice(0, 2) }))), null, 0));
+await b.close(); srv.close();

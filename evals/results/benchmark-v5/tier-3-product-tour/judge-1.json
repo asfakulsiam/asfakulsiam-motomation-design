@@ -1,0 +1,28 @@
+{
+ "result": {
+  "A": {
+   "concept": 5,
+   "originality": 4,
+   "typography": 4,
+   "motion": 5,
+   "craft": 4,
+   "access_performance": 5,
+   "hard_gates": [],
+   "notes": "The shared receipt slip and its accumulating ledger lines give all four pages a coherent object to follow. Directional View Transitions, line-by-line reveals, reduced-motion fades, and a working instant-navigation fallback make the motion feel tied to the tour. Strong type and responsive structure are supported by local fonts and accessible focus handling."
+  },
+  "B": {
+   "concept": 5,
+   "originality": 3,
+   "typography": 4,
+   "motion": 4,
+   "craft": 4,
+   "access_performance": 2,
+   "hard_gates": [
+    "Body text contrast: --ink-3 (#6f756f) on --paper (#f5f2ea) is below 4.5:1; it is used for text such as card subtitles and step labels."
+   ],
+   "notes": "The persistent balance card and progress indicator create a clear through-line, and the billing control adds useful interaction on Pricing. Its View Transitions and Lottie animations have reduced-motion handling and directional behavior, though the overall card-based presentation feels more like a polished SaaS template than a distinctive visual idea. The low-contrast muted text fails a hard gate; external font loading is also less performance-friendly than A’s local fonts."
+  },
+  "winner": "A",
+  "reason": "A carries its distinctive receipt idea through the tour with stronger narrative motion and avoids the body-text contrast hard-gate failure present in B."
+ }
+}

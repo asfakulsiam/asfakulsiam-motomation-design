@@ -1,0 +1,259 @@
+===== baseline/index.html
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+DELIVERY GATE · evals/results/benchmark-v5/tier-3-product-tour/work/baseline/index.html
+  contrast  ✗ 36 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✗ 8 below AA  (20 measured; 1 skipped; 0 not visible at scan time)
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  13px  p#step-label.steps-label  "Step 1 of 4"
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  14px  a  "2Features"
+        2.54:1 < 4.5:1  #6f756f on #f5f2ea  14px  span.n  "2"
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  14px  a  "3Pricing"
+        2.54:1 < 4.5:1  #6f756f on #f5f2ea  14px  span.n  "3"
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  14px  a  "4Start"
+        2.54:1 < 4.5:1  #6f756f on #f5f2ea  14px  span.n  "4"
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  15px  p.card-sub  "On the web and Android."
+      390px  ✗ 8 below AA  (20 measured; 1 skipped; 0 not visible at scan time)
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  13px  p#step-label.steps-label  "Step 1 of 4"
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  14px  a  "2Features"
+        2.54:1 < 4.5:1  #6f756f on #f5f2ea  14px  span.n  "2"
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  14px  a  "3Pricing"
+        2.54:1 < 4.5:1  #6f756f on #f5f2ea  14px  span.n  "3"
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  14px  a  "4Start"
+        2.54:1 < 4.5:1  #6f756f on #f5f2ea  14px  span.n  "4"
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  15px  p.card-sub  "On the web and Android."
+      768px  ✗ 10 below AA  (23 measured; 1 skipped; 0 not visible at scan time)
+        1:1 < 3:1  #1b1f1d on #1b1f1d  21.6px  a.brand  "Tally"
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  13px  p#step-label.steps-label  "Step 1 of 4"
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  14px  a  "2Features"
+        2.54:1 < 4.5:1  #6f756f on #f5f2ea  14px  span.n  "2"
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  14px  a  "3Pricing"
+        2.54:1 < 4.5:1  #6f756f on #f5f2ea  14px  span.n  "3"
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  14px  a  "4Start"
+        2.54:1 < 4.5:1  #6f756f on #f5f2ea  14px  span.n  "4"
+     1440px  ✗ 10 below AA  (23 measured; 1 skipped; 0 not visible at scan time)
+        1:1 < 3:1  #1b1f1d on #1b1f1d  21.6px  a.brand  "Tally"
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  13px  p#step-label.steps-label  "Step 1 of 4"
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  14px  a  "2Features"
+        2.54:1 < 4.5:1  #6f756f on #f5f2ea  14px  span.n  "2"
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  14px  a  "3Pricing"
+        2.54:1 < 4.5:1  #6f756f on #f5f2ea  14px  span.n  "3"
+        4.22:1 < 4.5:1  #6f756f on #f5f2ea  14px  a  "4Start"
+        2.54:1 < 4.5:1  #6f756f on #f5f2ea  14px  span.n  "4"
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (1 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (24 compared)
+  names     ✓ 0 missing alt / accessible names  (7 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (6 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  progress  ✓ 0 of 0 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
+  smooth    – no pinned zone, not measured
+  rm-flow   – no pinned zone
+  focus     ✓ 0 of 7 focused elements show no visible focus indicator  (7 tabbable)
+  targets   ✓ 0 under 24px, 5 under 44px (warning) at 375 touch  (7 checked; inline links exempt)
+     335×33  a.brand  "Tally"
+     81×25  a  "1Intro"
+     81×25  a  "2Features"
+     81×25  a  "3Pricing"
+  zoom200   ✓ 0 lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%
+  reflow    ✓ 0px horizontal scroll at 320px
+  forced    ✓ 0 of 23 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
+  kbd-trap  ✓ 7 of 7 tabbable reached in 20 Tabs, no cycle
+  C copy     ✓ 0 rule(s) failing  (craft/copy.md; 0 warning(s))
+  S SEO      ✗ 2 rule(s) failing: seo-04 seo-18  (craft/seo.md; 1 warning(s))
+     ✗ seo-04  no canonical tag
+     ✗ seo-18  no og:image
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible
+  P perf     ✗ 1 rule(s) failing: perf-12  (craft/performance.md; 0 warning(s))
+     ✗ perf-12  render-blocking script in <head> (add defer or async)  http://127.0.0.1:44947/assets/tour-head.js
+  K security ✗ 3 rule(s) failing: sec-h1 sec-h2 sec-h3  (craft/security.md; 0 warning(s))
+     ✗ sec-h1  no Content-Security-Policy (header or meta)
+     ✗ sec-h2  no X-Content-Type-Options: nosniff header
+     ✗ sec-h3  no Referrer-Policy (header or meta referrer)
+  composition (advisory: heuristics, never fail the gate, not in the stamp)
+     pin fill  – no pinned zone
+     focal     ✓ 1 of 1 screen(s) with text have one clear focal point (heaviest text mass ≥ 1.5× the next)
+     scale     ⚠ display:body 1:3.1  (64px / 20.8px; warn below 1:6)
+  richness (advisory: "too little" warnings, never fail the gate, not in the stamp)
+     page      home (from path; set with --page home|category|about|page)
+     fold      ✓ 8 meaningful section(s) above the fold at 1440×900: nav header.top, heading h1#tour-title, text p.eyebrow, text p.lede, text p.card-sub, text p.card-balance, text p.card-sub, media svg  (warn below 3)
+     opening   ✓ h1 "Split it once. Stop doing the maths."
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  3 sections, entrances: static | static | fade → 0 repeat(s); pins 0, WebGL canvases 0, JS 50KB gzipped
+  records    DESIGN.md: none · memory log: none · stamp fields: {}
+  critique → C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A5[focus:7/7,tgt:0f5w,zoom:0,reflow:0,fc:0,trap:0]   (axes marked ? have no record to derive from)
+  coverage   ✓ worst width 375px: 1 of 21 text elements skipped (5%; limit 30% at every width)
+  FAIL  stamp → critique: C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A5[focus:7/7,tgt:0f5w,zoom:0,reflow:0,fc:0,trap:0] · gate: c36 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S2 P1 K3 · gate/4 · 141719bea0 · skipped 1/21@375
+
+
+===== baseline/features/index.html
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+DELIVERY GATE · evals/results/benchmark-v5/tier-3-product-tour/work/baseline/features/index.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (33 measured; 0 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (33 measured; 0 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (33 measured; 0 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (33 measured; 0 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (4 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (33 compared)
+  names     ✓ 0 missing alt / accessible names  (8 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (8 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  progress  ✓ 0 of 0 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
+  smooth    – no pinned zone, not measured
+  rm-flow   – no pinned zone
+  focus     ✓ 0 of 8 focused elements show no visible focus indicator  (8 tabbable)
+  targets   ✗ 8 under 24px, 0 under 44px (warning) at 375 touch  (8 checked; inline links exempt)
+     97×17  a.skip  "Skip to content"
+     33×17  a.brand  "Tally"
+     39×17  a  "1Intro"
+     62×17  a  "2Features"
+     54×17  a  "3Pricing"
+     38×17  a  "4Start"
+     168×17  a.nav-btn.nav-back  "← Back: step 1 of 4, Intro"
+     181×17  a.nav-btn.nav-next  "Next: Pricing →, step 3 of 4"
+  zoom200   ✓ 0 lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%
+  reflow    ✗ 48px horizontal scroll at 320px
+  forced    ✓ 0 of 32 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
+  kbd-trap  ✓ 8 of 8 tabbable reached in 22 Tabs, no cycle
+  C copy     ✓ 0 rule(s) failing  (craft/copy.md; 0 warning(s))
+  S SEO      ✗ 2 rule(s) failing: seo-04 seo-18  (craft/seo.md; 1 warning(s))
+     ✗ seo-04  no canonical tag
+     ✗ seo-18  no og:image
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible
+  P perf     ✗ 1 rule(s) failing: perf-12  (craft/performance.md; 0 warning(s))
+     ✗ perf-12  render-blocking script in <head> (add defer or async)  http://127.0.0.1:36015/assets/tour-head.js
+  K security ✗ 3 rule(s) failing: sec-h1 sec-h2 sec-h3  (craft/security.md; 0 warning(s))
+     ✗ sec-h1  no Content-Security-Policy (header or meta)
+     ✗ sec-h2  no X-Content-Type-Options: nosniff header
+     ✗ sec-h3  no Referrer-Policy (header or meta referrer)
+  composition (advisory: heuristics, never fail the gate, not in the stamp)
+     pin fill  – no pinned zone
+     focal     ✓ 2 of 2 screen(s) with text have one clear focal point (heaviest text mass ≥ 1.5× the next)
+     scale     ⚠ display:body 1:2  (32px / 16px; warn below 1:6)
+  richness (advisory: "too little" warnings, never fail the gate, not in the stamp)
+     page      home (from path; set with --page home|category|about|page)
+     fold      ✓ 13 meaningful section(s) above the fold at 1440×900: nav header.top, heading h1#tour-title, heading h2, heading h2, heading h2, text p, text p, text p, text p.card-balance, text p.card-sub, text p.sr-only, media img.anim-poster, action a.skip  (warn below 3)
+     opening   ✓ h1 "Three things, so nobody keeps score."
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  3 sections, entrances: static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 2KB gzipped
+  records    DESIGN.md: none · memory log: none · stamp fields: {}
+  critique → C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A3[focus:8/8,tgt:8f0w,zoom:0,reflow:48,fc:0,trap:0]   (axes marked ? have no record to derive from)
+  coverage   ✓ worst width 375px: 0 of 33 text elements skipped (0%; limit 30% at every width)
+  FAIL  stamp → critique: C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A3[focus:8/8,tgt:8f0w,zoom:0,reflow:48,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k9 · rules: C0 S2 P1 K3 · gate/4 · 90639ca08b · skipped 0/33@375
+
+
+===== baseline/pricing/index.html
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+DELIVERY GATE · evals/results/benchmark-v5/tier-3-product-tour/work/baseline/pricing/index.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (46 measured; 0 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (46 measured; 0 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (46 measured; 0 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (46 measured; 0 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (3 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (46 compared)
+  names     ✓ 0 missing alt / accessible names  (10 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (14 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  progress  ✓ 0 of 0 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
+  smooth    – no pinned zone, not measured
+  rm-flow   – no pinned zone
+  focus     ✓ 0 of 10 focused elements show no visible focus indicator  (10 tabbable)
+  targets   ✗ 10 under 24px, 0 under 44px (warning) at 375 touch  (10 checked; inline links exempt)
+     97×17  a.skip  "Skip to content"
+     33×17  a.brand  "Tally"
+     39×17  a  "1Intro"
+     62×17  a  "2Features"
+     54×17  a  "3Pricing"
+     38×17  a  "4Start"
+     63×21  button  "Monthly"
+     53×21  button  "Yearly"
+     191×17  a.nav-btn.nav-back  "← Back: step 2 of 4, Features"
+     165×17  a.nav-btn.nav-next  "Next: Start →, step 4 of 4"
+  zoom200   ✓ 0 lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%
+  reflow    ✗ 48px horizontal scroll at 320px
+  forced    ✓ 0 of 45 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
+  kbd-trap  ✓ 10 of 10 tabbable reached in 26 Tabs, no cycle
+  C copy     ✓ 0 rule(s) failing  (craft/copy.md; 0 warning(s))
+  S SEO      ✗ 2 rule(s) failing: seo-04 seo-18  (craft/seo.md; 1 warning(s))
+     ✗ seo-04  no canonical tag
+     ✗ seo-18  no og:image
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible
+  P perf     ✗ 1 rule(s) failing: perf-12  (craft/performance.md; 0 warning(s))
+     ✗ perf-12  render-blocking script in <head> (add defer or async)  http://127.0.0.1:40013/assets/tour-head.js
+  K security ✗ 3 rule(s) failing: sec-h1 sec-h2 sec-h3  (craft/security.md; 0 warning(s))
+     ✗ sec-h1  no Content-Security-Policy (header or meta)
+     ✗ sec-h2  no X-Content-Type-Options: nosniff header
+     ✗ sec-h3  no Referrer-Policy (header or meta referrer)
+  composition (advisory: heuristics, never fail the gate, not in the stamp)
+     pin fill  – no pinned zone
+     focal     ✓ 2 of 2 screen(s) with text have one clear focal point (heaviest text mass ≥ 1.5× the next)
+     scale     ⚠ display:body 1:2  (32px / 16px; warn below 1:6)
+  richness (advisory: "too little" warnings, never fail the gate, not in the stamp)
+     page      home (from path; set with --page home|category|about|page)
+     fold      ✓ 7 meaningful section(s) above the fold at 1440×900: nav header.top, heading h1#tour-title, heading h2#plan-free, heading h2#plan-plus, text p.card-balance, media img.anim-poster, action a.skip  (warn below 3)
+     opening   ✓ h1 "Two plans. Start on Free."
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  3 sections, entrances: static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 2KB gzipped
+  records    DESIGN.md: none · memory log: none · stamp fields: {}
+  critique → C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A3[focus:10/10,tgt:10f0w,zoom:0,reflow:48,fc:0,trap:0]   (axes marked ? have no record to derive from)
+  coverage   ✓ worst width 375px: 0 of 46 text elements skipped (0%; limit 30% at every width)
+  FAIL  stamp → critique: C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A3[focus:10/10,tgt:10f0w,zoom:0,reflow:48,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k11 · rules: C0 S2 P1 K3 · gate/4 · 3d675633fc · skipped 0/46@375
+
+
+===== baseline/start/index.html
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+DELIVERY GATE · evals/results/benchmark-v5/tier-3-product-tour/work/baseline/start/index.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (39 measured; 0 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (39 measured; 0 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (39 measured; 0 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (39 measured; 0 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (1 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (39 compared)
+  names     ✓ 0 missing alt / accessible names  (12 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (10 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  progress  ✓ 0 of 0 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
+  smooth    – no pinned zone, not measured
+  rm-flow   – no pinned zone
+  focus     ✓ 0 of 12 focused elements show no visible focus indicator  (12 tabbable)
+  targets   ✗ 9 under 24px, 0 under 44px (warning) at 375 touch  (9 checked; inline links exempt)
+     97×17  a.skip  "Skip to content"
+     33×17  a.brand  "Tally"
+     39×17  a  "1Intro"
+     62×17  a  "2Features"
+     54×17  a  "3Pricing"
+     38×17  a  "4Start"
+     143×17  a#cta.btn.btn-primary  "Use it in your browser"
+     140×17  a.btn.btn-primary  "Get it on Google Play"
+     183×17  a.nav-btn.nav-back  "← Back: step 3 of 4, Pricing"
+  zoom200   ✓ 0 lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%
+  reflow    ✗ 48px horizontal scroll at 320px
+  forced    ✓ 0 of 38 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
+  kbd-trap  ✓ 12 of 12 tabbable reached in 30 Tabs, no cycle
+  C copy     ✓ 0 rule(s) failing  (craft/copy.md; 0 warning(s))
+  S SEO      ✗ 2 rule(s) failing: seo-04 seo-18  (craft/seo.md; 1 warning(s))
+     ✗ seo-04  no canonical tag
+     ✗ seo-18  no og:image
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible
+  P perf     ✗ 1 rule(s) failing: perf-12  (craft/performance.md; 0 warning(s))
+     ✗ perf-12  render-blocking script in <head> (add defer or async)  http://127.0.0.1:37617/assets/tour-head.js
+  K security ✗ 3 rule(s) failing: sec-h1 sec-h2 sec-h3  (craft/security.md; 0 warning(s))
+     ✗ sec-h1  no Content-Security-Policy (header or meta)
+     ✗ sec-h2  no X-Content-Type-Options: nosniff header
+     ✗ sec-h3  no Referrer-Policy (header or meta referrer)
+  composition (advisory: heuristics, never fail the gate, not in the stamp)
+     pin fill  – no pinned zone
+     focal     ⚠ 0 of 1 screen(s) with text have one clear focal point (heaviest text mass ≥ 1.5× the next); no clear lead on screen 1 (1.23×)
+     scale     – no body text found
+  richness (advisory: "too little" warnings, never fail the gate, not in the stamp)
+     page      home (from path; set with --page home|category|about|page)
+     fold      ✓ 10 meaningful section(s) above the fold at 1440×900: nav header.top, heading h1#tour-title, text p.recap, text p.alt-links.only-web, text p.alt-links.only-android, text p.alt-links, text p.card-balance, text p.sr-only, media img.anim-poster, action a.skip  (warn below 3)
+     opening   ✓ h1 "Start splitting."
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  3 sections, entrances: static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 2KB gzipped
+  records    DESIGN.md: none · memory log: none · stamp fields: {}
+  critique → C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A3[focus:12/12,tgt:9f0w,zoom:0,reflow:48,fc:0,trap:0]   (axes marked ? have no record to derive from)
+  coverage   ✓ worst width 375px: 0 of 39 text elements skipped (0%; limit 30% at every width)
+  FAIL  stamp → critique: C?[no-record] H5[375:0] S?[no-archetype-in-stamp] R?[no-record] M?[no-tier] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A3[focus:12/12,tgt:9f0w,zoom:0,reflow:48,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k10 · rules: C0 S2 P1 K3 · gate/4 · cacc1ac987 · skipped 0/39@375
+
+

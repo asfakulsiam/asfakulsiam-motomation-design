@@ -1,0 +1,5 @@
+# Response headers for a host that reads this file (Netlify, Cloudflare Pages); scripts/gate.mjs reads it for local files.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

@@ -1,0 +1,42 @@
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+DELIVERY GATE · /home/user/workspace/repo/evals/results/benchmark-v5/tier-3-product-tour/work/skill/index.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (21 measured; 3 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (21 measured; 3 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (21 measured; 3 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (21 measured; 3 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (1 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (24 compared)
+  names     ✓ 0 missing alt / accessible names  (7 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (9 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  progress  ✓ 0 of 0 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
+  smooth    – no pinned zone, not measured
+  rm-flow   – no pinned zone
+  focus     ✓ 0 of 7 focused elements show no visible focus indicator  (7 tabbable)
+  targets   ✓ 0 under 24px, 0 under 44px (warning) at 375 touch  (7 checked; inline links exempt)
+  zoom200   ✓ 0 lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%
+  reflow    ✓ 0px horizontal scroll at 320px
+  forced    ✗ 2 of 23 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
+     1:1  span.tag.tag--on  "M"  forced-color-adjust: auto
+     1:1  span.tag.tag--on  "S"  forced-color-adjust: auto
+  kbd-trap  ✓ 7 of 7 tabbable reached in 20 Tabs, no cycle
+  C copy     ✓ 0 rule(s) failing  (craft/copy.md; 0 warning(s))
+  S SEO      ✓ 0 rule(s) failing  (craft/seo.md; 0 warning(s))
+  P perf     ✓ 0 rule(s) failing  (craft/performance.md; 0 warning(s))
+  K security ✓ 0 rule(s) failing  (craft/security.md; 0 warning(s))
+  composition (advisory: heuristics, never fail the gate, not in the stamp)
+     pin fill  – no pinned zone
+     focal     ✓ 1 of 1 screen(s) with text have one clear focal point (heaviest text mass ≥ 1.5× the next)
+     scale     ⚠ display:body 1:3.6  (71.36px / 20px; warn below 1:6)
+  richness (advisory: "too little" warnings, never fail the gate, not in the stamp)
+     page      home (from path; set with --page home|category|about|page)
+     fold      ✓ 7 meaningful section(s) above the fold at 1440×900: nav header.top, heading h1#title, text p.lead, text p.aside, text p.slip-head, text p, media svg  (warn below 3)
+     opening   ✓ h1 "Split it once. Stop doing the maths."
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  4 sections, entrances: static | static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 49KB gzipped
+  records    DESIGN.md: /home/user/workspace/repo/evals/results/benchmark-v5/tier-3-product-tour/work/skill/DESIGN.md · memory log: none · stamp fields: {"archetype":"atlas","mutation":"remove-expected","signature":"slip-carry","tier":"3"}
+  critique → C5[restraint:kept] H5[375:0] S5[last5:no-log] R5[cuts:3,anim:3] M5[t3:pins0/2,webgl0/1,js49/140KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A4[focus:7/7,tgt:0f0w,zoom:0,reflow:0,fc:2,trap:0]
+  coverage   ✓ worst width 375px: 3 of 24 text elements skipped (13%; limit 30% at every width)
+  FAIL  stamp → critique: C5[restraint:kept] H5[375:0] S5[last5:no-log] R5[cuts:3,anim:3] M5[t3:pins0/2,webgl0/1,js49/140KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A4[focus:7/7,tgt:0f0w,zoom:0,reflow:0,fc:2,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k2 · rules: C0 S0 P0 K0 · gate/4 · 4335327959 · skipped 3/24@375
+

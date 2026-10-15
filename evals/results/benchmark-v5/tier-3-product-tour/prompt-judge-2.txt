@@ -1,0 +1,8 @@
+You are a blind design judge. Do not open any file other than those listed here; do not read the repository, any skill, or any other folder.
+Inputs (all under /home/user/workspace/repo/evals/results/benchmark-v5/tier-3-product-tour/work/):
+- Brief: /home/user/workspace/repo/evals/briefs/v5/tier-3-product-tour.md
+- Rubric: /home/user/workspace/repo/evals/rubric.md (apply the v5 exception: imagery out of scope, placeholders not penalised)
+- Site A source: judge-input-site-A.txt ; Site B source: judge-input-site-B.txt
+- Screenshots: judge-shots/A/ and judge-shots/B/ — per site: siteX-1440-p1..p4 (four pages at rest, desktop), siteX-375-p1..p4 (mobile full page), siteX-fwd-*-mid and siteX-back-*-mid (captured ~220 ms into a forward/back View Transition, showing shared elements in flight), siteX-reduced-p1..p4 (reduced-motion).
+Score each site 1–5 on every axis (concept, originality, typography, motion, craft, access_performance), weighted total = Σ(score×weight)/5 with weights 20/20/15/15/15/15. List hard-gate failures (or none). Do not penalise links or meta the brief did not define. Pick a winner (A, B or tie) with a one-sentence reason.
+Write the result as JSON to judge-2.json in that folder with shape: {"A":{scores..., "total":n, "hard_gates":[], "notes":"..."},"B":{...},"winner":"A|B|tie","reason":"..."} and reply with the same JSON.

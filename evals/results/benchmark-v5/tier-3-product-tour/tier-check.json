@@ -1,0 +1,408 @@
+{
+ "baseline": {
+  "pages": [
+   {
+    "url": "/baseline/",
+    "atViewTransition": true,
+    "vtMeta": true,
+    "sharedNames": [
+     "root",
+     "brand",
+     "steps",
+     "progress-fill",
+     "tour-copy",
+     "tally-card",
+     "card-balance",
+     "card-content",
+     "nav-back",
+     "nav-next"
+    ],
+    "lottie": true,
+    "rive": false,
+    "lottieSvgs": 1,
+    "canvas": 0,
+    "three": false,
+    "stepText": null,
+    "focused": "BODY",
+    "hiddenText": 0,
+    "title": "Tally · Split it once. Stop doing the maths. · Step 1 of 4"
+   },
+   {
+    "url": "/baseline/features/",
+    "atViewTransition": true,
+    "vtMeta": true,
+    "sharedNames": [
+     "root",
+     "brand",
+     "steps",
+     "progress-fill",
+     "tour-copy",
+     "tally-card",
+     "card-balance",
+     "card-content",
+     "nav-back",
+     "nav-next"
+    ],
+    "lottie": true,
+    "rive": false,
+    "lottieSvgs": 1,
+    "canvas": 0,
+    "three": false,
+    "stepText": null,
+    "focused": "H1#tour-title",
+    "hiddenText": 0,
+    "title": "Tally · What it does · Step 2 of 4"
+   },
+   {
+    "url": "/baseline/pricing/",
+    "atViewTransition": true,
+    "vtMeta": true,
+    "sharedNames": [
+     "root",
+     "brand",
+     "steps",
+     "progress-fill",
+     "tour-copy",
+     "tally-card",
+     "card-balance",
+     "card-content",
+     "nav-back",
+     "nav-next"
+    ],
+    "lottie": true,
+    "rive": false,
+    "lottieSvgs": 1,
+    "canvas": 0,
+    "three": false,
+    "stepText": null,
+    "focused": "H1#tour-title",
+    "hiddenText": 0,
+    "title": "Tally · Pricing · Step 3 of 4"
+   },
+   {
+    "url": "/baseline/start/",
+    "atViewTransition": true,
+    "vtMeta": true,
+    "sharedNames": [
+     "root",
+     "brand",
+     "steps",
+     "progress-fill",
+     "tour-copy",
+     "tally-card",
+     "card-balance",
+     "card-content",
+     "nav-back",
+     "nav-next"
+    ],
+    "lottie": true,
+    "rive": false,
+    "lottieSvgs": 1,
+    "canvas": 0,
+    "three": false,
+    "stepText": null,
+    "focused": "H1#tour-title",
+    "hiddenText": 0,
+    "title": "Tally · Start · Step 4 of 4"
+   }
+  ],
+  "nav": [
+   {
+    "dir": "fwd",
+    "to": "/baseline/features/",
+    "focused": "H1#tour-title",
+    "step": null
+   },
+   {
+    "dir": "fwd",
+    "to": "/baseline/pricing/",
+    "focused": "H1#tour-title",
+    "step": null
+   },
+   {
+    "dir": "fwd",
+    "to": "/baseline/start/",
+    "focused": "H1#tour-title",
+    "step": null
+   },
+   {
+    "dir": "back",
+    "to": "/baseline/pricing/",
+    "focused": "H1#tour-title",
+    "step": null,
+    "dataDir": "back"
+   },
+   {
+    "dir": "back",
+    "to": "/baseline/features/",
+    "focused": "H1#tour-title",
+    "step": null,
+    "dataDir": "back"
+   },
+   {
+    "dir": "back",
+    "to": "/baseline/",
+    "focused": "H1#tour-title",
+    "step": null,
+    "dataDir": "back"
+   }
+  ],
+  "reduced": [
+   {
+    "url": "/baseline/",
+    "sharedNames": [
+     "root"
+    ],
+    "hiddenText": 0,
+    "lottie": [
+     {
+      "cur": 59,
+      "total": 60,
+      "paused": true
+     }
+    ]
+   },
+   {
+    "url": "/baseline/features/",
+    "sharedNames": [
+     "root"
+    ],
+    "hiddenText": 0,
+    "lottie": [
+     {
+      "cur": 65,
+      "total": 66,
+      "paused": true
+     }
+    ]
+   },
+   {
+    "url": "/baseline/pricing/",
+    "sharedNames": [
+     "root"
+    ],
+    "hiddenText": 0,
+    "lottie": [
+     {
+      "cur": 0,
+      "total": 31,
+      "paused": true
+     }
+    ]
+   },
+   {
+    "url": "/baseline/start/",
+    "sharedNames": [
+     "root"
+    ],
+    "hiddenText": 0,
+    "lottie": [
+     {
+      "cur": 49,
+      "total": 50,
+      "paused": true
+     }
+    ]
+   }
+  ],
+  "errors": []
+ },
+ "skill": {
+  "pages": [
+   {
+    "url": "/skill/index.html",
+    "atViewTransition": true,
+    "vtMeta": false,
+    "sharedNames": [
+     "root",
+     "top",
+     "here",
+     "slip",
+     "line-1",
+     "foot"
+    ],
+    "lottie": true,
+    "rive": false,
+    "lottieSvgs": 3,
+    "canvas": 0,
+    "three": false,
+    "stepText": "Step 1 of 4",
+    "focused": "BODY",
+    "hiddenText": 0,
+    "title": "Tally · split shared expenses with flatmates and family"
+   },
+   {
+    "url": "/skill/features.html",
+    "atViewTransition": true,
+    "vtMeta": false,
+    "sharedNames": [
+     "root",
+     "top",
+     "here",
+     "slip",
+     "line-1",
+     "line-2",
+     "foot"
+    ],
+    "lottie": true,
+    "rive": false,
+    "lottieSvgs": 3,
+    "canvas": 0,
+    "three": false,
+    "stepText": "Step 2 of 4",
+    "focused": "H1#title",
+    "hiddenText": 0,
+    "title": "What Tally does · three features · Tally"
+   },
+   {
+    "url": "/skill/pricing.html",
+    "atViewTransition": true,
+    "vtMeta": false,
+    "sharedNames": [
+     "root",
+     "top",
+     "here",
+     "slip",
+     "line-1",
+     "line-2",
+     "line-3",
+     "foot"
+    ],
+    "lottie": true,
+    "rive": false,
+    "lottieSvgs": 3,
+    "canvas": 0,
+    "three": false,
+    "stepText": "Step 3 of 4",
+    "focused": "H1#title",
+    "hiddenText": 0,
+    "title": "Tally pricing · Free, or Tally Plus at ৳ 149 a month"
+   },
+   {
+    "url": "/skill/start.html",
+    "atViewTransition": true,
+    "vtMeta": false,
+    "sharedNames": [
+     "root",
+     "top",
+     "here",
+     "slip",
+     "line-1",
+     "line-2",
+     "line-3",
+     "line-4",
+     "foot"
+    ],
+    "lottie": true,
+    "rive": false,
+    "lottieSvgs": 3,
+    "canvas": 0,
+    "three": false,
+    "stepText": "Step 4 of 4",
+    "focused": "H1#title",
+    "hiddenText": 0,
+    "title": "Start with Tally · Google Play or your browser"
+   }
+  ],
+  "nav": [
+   {
+    "dir": "fwd",
+    "to": "/skill/features.html",
+    "focused": "H1#title",
+    "step": "Step 2 of 4"
+   },
+   {
+    "dir": "fwd",
+    "to": "/skill/pricing.html",
+    "focused": "H1#title",
+    "step": "Step 3 of 4"
+   },
+   {
+    "dir": "fwd",
+    "to": "/skill/start.html",
+    "focused": "H1#title",
+    "step": "Step 4 of 4"
+   },
+   {
+    "dir": "back",
+    "to": "/skill/pricing.html",
+    "focused": "H1#title",
+    "step": "Step 3 of 4",
+    "dataDir": null
+   },
+   {
+    "dir": "back",
+    "to": "/skill/features.html",
+    "focused": "H1#title",
+    "step": "Step 2 of 4",
+    "dataDir": null
+   },
+   {
+    "dir": "back",
+    "to": "/skill/index.html",
+    "focused": "H1#title",
+    "step": "Step 1 of 4",
+    "dataDir": null
+   }
+  ],
+  "reduced": [
+   {
+    "url": "/skill/index.html",
+    "sharedNames": [
+     "root"
+    ],
+    "hiddenText": 0,
+    "lottie": [
+     {
+      "cur": 71,
+      "total": 72,
+      "paused": true
+     }
+    ]
+   },
+   {
+    "url": "/skill/features.html",
+    "sharedNames": [
+     "root"
+    ],
+    "hiddenText": 0,
+    "lottie": [
+     {
+      "cur": 77,
+      "total": 78,
+      "paused": true
+     }
+    ]
+   },
+   {
+    "url": "/skill/pricing.html",
+    "sharedNames": [
+     "root"
+    ],
+    "hiddenText": 0,
+    "lottie": [
+     {
+      "cur": 59,
+      "total": 60,
+      "paused": true
+     }
+    ]
+   },
+   {
+    "url": "/skill/start.html",
+    "sharedNames": [
+     "root"
+    ],
+    "hiddenText": 0,
+    "lottie": [
+     {
+      "cur": 65,
+      "total": 66,
+      "paused": true
+     }
+    ]
+   }
+  ],
+  "errors": []
+ }
+}

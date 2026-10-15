@@ -1,0 +1,716 @@
+
+===== FILE: assets/tour-head.js =====
+
+(function () {
+  var root = document.documentElement;
+  var STEPS = ['intro', 'features', 'pricing', 'start'];
+
+  function stepOf(url) {
+    try {
+      var m = new URL(url, location.href).pathname.match(/\/(features|pricing|start)(\/|\/index\.html|\.html)?$/);
+      return m ? STEPS.indexOf(m[1]) : 0;
+    } catch (e) { return -1; }
+  }
+  var here = stepOf(location.href);
+
+  if (/Android/i.test(navigator.userAgent)) root.classList.add('is-android');
+  root.classList.add('js');
+  // Billing choice from Pricing (monthly | yearly), applied before first paint so nothing jumps.
+  try { root.dataset.billing = sessionStorage.getItem('tally-billing') || 'monthly'; } catch (e) { root.dataset.billing = 'monthly'; }
+
+  // Shared with tour.js: resolves when the incoming transition is done (or immediately).
+  var resolveReady;
+  window.__tourReady = new Promise(function (r) { resolveReady = r; });
+  window.__tourArrived = false; // true when we came from another tour page
+
+  function setDir(fromUrl) {
+    var from = fromUrl ? stepOf(fromUrl) : -1;
+    root.dataset.dir = from > here ? 'back' : 'forward';
+    return from;
+  }
+
+  // Old page: tag the outgoing snapshot with the same direction.
+  window.addEventListener('pageswap', function (e) {
+    if (!e.viewTransition || !e.activation || !e.activation.entry) return;
+    var to = stepOf(e.activation.entry.url);
+    root.dataset.dir = to < here ? 'back' : 'forward';
+    if (e.viewTransition.types) e.viewTransition.types.add(root.dataset.dir);
+  });
+
+  // New page: decide direction before the first rendered frame.
+  window.addEventListener('pagereveal', function (e) {
+    var act = window.navigation && navigation.activation;
+    var fromUrl = act && act.from ? act.from.url : (document.referrer || '');
+    var sameSite = fromUrl && fromUrl.indexOf(location.origin) === 0;
+    var from = sameSite ? setDir(fromUrl) : -1;
+    window.__tourArrived = from >= 0 && from !== here;
+    if (e.viewTransition) {
+      if (e.viewTransition.types) e.viewTransition.types.add(root.dataset.dir || 'forward');
+      e.viewTransition.finished.finally(function () { resolveReady(true); });
+    } else {
+      resolveReady(false);
+    }
+  });
+
+  // Browsers without pagereveal: ready on DOM load, direction from referrer.
+  if (!('onpagereveal' in window)) {
+    var ref = document.referrer;
+    if (ref && ref.indexOf(location.origin) === 0) {
+      var f = setDir(ref);
+      window.__tourArrived = f >= 0 && f !== here;
+    }
+    document.addEventListener('DOMContentLoaded', function () { resolveReady(false); });
+  }
+})();
+
+===== FILE: assets/tour.css =====
+
+
+@view-transition { navigation: auto; }
+
+:root {
+  --paper: #f5f2ea;
+  --paper-2: #ece7db;
+  --ink: #1b1f1d;
+  --ink-2: #4c534f;
+  --ink-3: #6f756f;
+  --line: #e1dcd0;
+  --green: #0f7b5f;
+  --green-ink: #0b5e49;
+  --green-soft: #e4f2ed;
+  --coral: #c4512f;
+  --coral-soft: #fbe9e1;
+  --white: #fff;
+  --radius: 22px;
+  --ease: cubic-bezier(.22, .8, .24, 1);
+  --dur: 560ms;
+  --font-display: "Bricolage Grotesque", "Noto Sans Bengali", ui-sans-serif, system-ui, sans-serif;
+  --font-text: "Inter", "Noto Sans Bengali", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--paper); }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  font-family: var(--font-text);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+.taka { font-family: "Noto Sans Bengali", var(--font-text); font-weight: inherit; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+.skip { position: absolute; left: 1rem; top: -4rem; z-index: 10; background: var(--ink); color: var(--paper); padding: .6rem 1rem; border-radius: 10px; }
+.skip:focus { top: 1rem; }
+
+:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; border-radius: 8px; }
+h1:focus { outline: none; }
+h1:focus-visible { outline: none; text-decoration: underline 3px rgba(15,123,95,.45); text-underline-offset: .14em; text-decoration-skip-ink: auto; }
+
+
+.top {
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  padding: 1.25rem clamp(1.25rem, 4vw, 3rem);
+  max-width: 1200px; width: 100%; margin: 0 auto;
+}
+.brand {
+  view-transition-name: brand;
+  display: inline-flex; align-items: center; gap: .55rem;
+  font-family: var(--font-display); font-weight: 700; font-size: 1.35rem; letter-spacing: -.02em;
+  text-decoration: none;
+}
+.brand-mark { width: 28px; height: 28px; border-radius: 9px; background: var(--ink); display: grid; place-items: center; }
+.brand-mark::before { content: ""; width: 12px; height: 12px; border-radius: 50%; border: 3px solid var(--paper); border-right-color: var(--green); }
+
+.steps { view-transition-name: steps; display: grid; gap: .45rem; min-width: min(420px, 55vw); }
+.steps-label { margin: 0; font-size: .8125rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); text-align: right; }
+.steps ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: .25rem; }
+.steps li a {
+  display: block; text-decoration: none; font-size: .875rem; font-weight: 500; color: var(--ink-3);
+  padding: .1rem .15rem; border-radius: 6px; text-align: center;
+}
+.steps li a:hover { color: var(--ink); }
+.steps li a[aria-current="step"] { color: var(--ink); font-weight: 650; }
+.steps li a .n { font-variant-numeric: tabular-nums; opacity: .7; margin-right: .2rem; }
+.progress { position: relative; height: 4px; border-radius: 4px; background: var(--line); }
+.progress-fill {
+  view-transition-name: progress-fill;
+  position: absolute; inset: 0 auto 0 0; border-radius: 4px; background: var(--green);
+  width: calc(var(--step) / 4 * 100%);
+}
+
+
+main {
+  max-width: 1200px; width: 100%; margin: 0 auto;
+  padding: clamp(1rem, 3vw, 2.5rem) clamp(1.25rem, 4vw, 3rem);
+  display: grid; align-items: center; gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: 1fr;
+}
+.copy { view-transition-name: tour-copy; max-width: 34rem; }
+.eyebrow { margin: 0 0 .9rem; font-size: .875rem; font-weight: 600; color: var(--green-ink); letter-spacing: .02em; }
+h1 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(2.3rem, 5.2vw, 4rem); line-height: 1.02; letter-spacing: -.035em;
+  margin: 0 0 1.1rem; text-wrap: balance;
+}
+.lede { font-size: clamp(1.1rem, 1.6vw, 1.3rem); color: var(--ink-2); margin: 0 0 1.5rem; max-width: 30rem; text-wrap: pretty; }
+
+
+.card {
+  view-transition-name: tally-card;
+  position: relative; justify-self: center; width: 100%;
+  background: var(--white); border-radius: var(--radius);
+  box-shadow: 0 1px 0 rgba(27,31,29,.04), 0 24px 60px -28px rgba(27,31,29,.28);
+  padding: 1.4rem;
+  max-width: 460px;
+}
+.card-balance {
+  view-transition-name: card-balance;
+  display: flex; align-items: center; gap: .6rem; width: fit-content;
+  background: var(--coral-soft); color: #7a2d16; border-radius: 999px;
+  padding: .35rem .85rem .35rem .4rem; font-size: .9375rem; font-weight: 600;
+}
+.card-balance .dot { width: 22px; height: 22px; border-radius: 50%; background: var(--coral); }
+.card-balance strong { font-variant-numeric: tabular-nums; }
+.card-content { view-transition-name: card-content; margin-top: 1.1rem; }
+.card-title { font-family: var(--font-display); font-weight: 650; font-size: 1.15rem; letter-spacing: -.01em; margin: 0 0 .2rem; }
+.card-sub { margin: 0; color: var(--ink-3); font-size: .9375rem; }
+
+
+.anim { position: relative; margin: 1rem 0 0; aspect-ratio: var(--ar, 16 / 7); }
+.anim > * { position: absolute; inset: 0; width: 100%; height: 100%; }
+.anim-poster { object-fit: contain; transition: opacity .35s ease; }
+.anim-player { opacity: 0; transition: opacity .25s ease; }
+.anim.is-live .anim-player { opacity: 1; }
+.anim.is-live .anim-poster { opacity: 0; }
+.anim-player svg { display: block; }
+
+.big-line { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.6rem, 3vw, 2.1rem); letter-spacing: -.025em; line-height: 1.1; margin: .2rem 0 0; }
+.big-line .amt { color: var(--coral); white-space: nowrap; }
+.ledger { list-style: none; margin: 1rem 0 0; padding: 0; border-top: 1px solid var(--line); }
+.ledger li { display: flex; justify-content: space-between; gap: 1rem; padding: .55rem 0; border-bottom: 1px solid var(--line); font-size: .9375rem; color: var(--ink-2); }
+.ledger li span:last-child { font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 550; white-space: nowrap; }
+
+
+.features { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; gap: .25rem; counter-reset: f; }
+.features li { counter-increment: f; display: grid; grid-template-columns: 2.2rem 1fr; gap: .2rem .8rem; padding: 1rem 0; border-top: 1px solid var(--line); }
+.features li::before { content: counter(f); grid-row: span 2; width: 2rem; height: 2rem; border-radius: 50%; background: var(--ink); color: var(--paper); display: grid; place-items: center; font-weight: 650; font-size: .9rem; }
+.features h2 { margin: 0; font-family: var(--font-display); font-size: 1.25rem; letter-spacing: -.015em; line-height: 1.25; }
+.features p { margin: 0; color: var(--ink-2); }
+
+
+.billing { display: inline-flex; padding: 4px; background: var(--paper-2); border-radius: 999px; gap: 2px; margin: 0 0 1.25rem; }
+.billing button {
+  font: inherit; font-size: .9375rem; font-weight: 600; border: 0; background: transparent; color: var(--ink-2);
+  padding: .5rem 1.05rem; border-radius: 999px; cursor: pointer;
+}
+.billing button[aria-pressed="true"] { background: var(--white); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+.plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 0 0 1.5rem; }
+.plan { border: 1px solid var(--line); border-radius: 18px; padding: 1.25rem; background: rgba(255,255,255,.5); }
+.plan.is-plus { border-color: var(--green); background: var(--white); }
+.plan h2 { font-family: var(--font-display); margin: 0 0 .35rem; font-size: 1.25rem; letter-spacing: -.015em; }
+.price { margin: 0 0 .9rem; font-family: var(--font-display); font-weight: 700; font-size: 2rem; letter-spacing: -.03em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.price small { font-family: var(--font-text); font-size: .9375rem; font-weight: 500; color: var(--ink-3); letter-spacing: 0; }
+.plan ul { margin: 0; padding: 0 0 0 1.1rem; color: var(--ink-2); font-size: .9375rem; }
+.plan li + li { margin-top: .25rem; }
+.toggle-labels { display: flex; justify-content: space-between; font-size: .8125rem; font-weight: 600; color: var(--ink-3); padding: 0 18%; margin-top: .25rem; }
+.toggle-labels [data-on="true"] { color: var(--green-ink); }
+
+
+.cta-stack { display: grid; gap: .9rem; justify-items: start; margin: 0 0 1.5rem; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  font: inherit; font-weight: 650; text-decoration: none; border-radius: 999px;
+  padding: .95rem 1.6rem; border: 0; cursor: pointer;
+}
+.btn-primary { background: var(--ink); color: var(--paper); font-size: 1.125rem; padding: 1.1rem 2rem; }
+.btn-primary:hover { background: #000; }
+.alt-links { margin: 0; color: var(--ink-2); font-size: .9375rem; }
+.alt-links a { font-weight: 600; text-underline-offset: 3px; }
+.recap { margin: 0; padding: .9rem 1rem; border-radius: 14px; background: var(--paper-2); color: var(--ink-2); font-size: .9375rem; max-width: 30rem; }
+.recap strong { color: var(--ink); }
+html[data-billing="yearly"] [data-billing="monthly"], html:not([data-billing="yearly"]) [data-billing="yearly"] { display: none; }
+html.is-android .only-web, html:not(.is-android) .only-android { display: none; }
+
+
+.tour-nav {
+  max-width: 1200px; width: 100%; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  padding: 1rem clamp(1.25rem, 4vw, 3rem) 1.75rem;
+}
+.nav-btn {
+  display: inline-flex; align-items: center; gap: .5rem; min-height: 48px;
+  padding: .75rem 1.3rem; border-radius: 999px; text-decoration: none; font-weight: 650;
+}
+.nav-back { view-transition-name: nav-back; color: var(--ink); border: 1px solid var(--line); background: transparent; }
+.nav-back:hover { border-color: var(--ink-3); }
+.nav-next { view-transition-name: nav-next; background: var(--green); color: var(--white); }
+.nav-next:hover { background: var(--green-ink); }
+.nav-btn[aria-hidden="true"] { visibility: hidden; }
+.kbd-hint { font-size: .8125rem; color: var(--ink-3); margin: 0; }
+kbd { font: inherit; font-size: .75rem; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 0 .35rem; background: var(--white); }
+
+
+@media (min-width: 900px) {
+  main { grid-template-columns: 1fr 1fr; }
+  .page-intro .card { max-width: 480px; justify-self: end; }
+  .page-features main { grid-template-columns: .9fr 1.1fr; }
+  .page-features .card { order: -1; justify-self: start; max-width: 420px; }
+  .page-pricing main { grid-template-columns: 1.25fr .75fr; }
+  .page-pricing .copy { max-width: 38rem; }
+  .page-pricing .card { justify-self: end; max-width: 340px; align-self: start; margin-top: 2.5rem; }
+  .page-start main { grid-template-columns: .8fr 1.2fr; }
+  .page-start .card { order: -1; justify-self: center; max-width: 320px; }
+}
+
+@media (max-width: 899px) {
+  main { gap: 1.5rem; align-items: start; }
+  .card { order: -1; max-width: 520px; padding: 1.1rem; }
+  .anim { max-height: 150px; margin: .6rem auto 0; }
+  .page-start .anim { max-height: 120px; }
+  .card-content { margin-top: .8rem; }
+}
+@media (max-width: 640px) {
+  .top { flex-direction: column; align-items: stretch; gap: .9rem; }
+  .steps { min-width: 0; }
+  .steps-label { text-align: left; }
+  .kbd-hint { display: none; }
+}
+
+
+::view-transition-group(*) { animation-duration: var(--dur); animation-timing-function: var(--ease); }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 240ms; }
+
+
+::view-transition-old(tally-card) { animation: none; opacity: 0; }
+::view-transition-new(tally-card) { animation: none; width: 100%; height: 100%; }
+
+
+::view-transition-old(card-content) { animation: vt-out-fwd 240ms var(--ease) both; }
+::view-transition-new(card-content) { animation: vt-in-fwd 420ms var(--ease) 140ms both; }
+::view-transition-old(tour-copy) { animation: vt-out-fwd 260ms var(--ease) both; }
+::view-transition-new(tour-copy) { animation: vt-in-fwd 460ms var(--ease) 120ms both; }
+html[data-dir="back"]::view-transition-old(card-content),
+html[data-dir="back"]::view-transition-old(tour-copy) { animation-name: vt-out-back; }
+html[data-dir="back"]::view-transition-new(card-content),
+html[data-dir="back"]::view-transition-new(tour-copy) { animation-name: vt-in-back; }
+
+
+::view-transition-old(card-balance), ::view-transition-new(card-balance),
+::view-transition-old(nav-next), ::view-transition-new(nav-next),
+::view-transition-old(nav-back), ::view-transition-new(nav-back),
+::view-transition-old(steps), ::view-transition-new(steps) { animation-duration: 200ms; height: 100%; object-fit: none; object-position: left center; }
+::view-transition-old(progress-fill), ::view-transition-new(progress-fill) { animation: none; width: 100%; height: 100%; }
+::view-transition-old(progress-fill) { opacity: 0; }
+
+@keyframes vt-out-fwd { to { opacity: 0; transform: translateX(-28px); } }
+@keyframes vt-in-fwd { from { opacity: 0; transform: translateX(36px); } }
+@keyframes vt-out-back { to { opacity: 0; transform: translateX(28px); } }
+@keyframes vt-in-back { from { opacity: 0; transform: translateX(-36px); } }
+
+
+@media (prefers-reduced-motion: reduce) {
+  .brand, .steps, .progress-fill, .card, .card-balance, .card-content, .copy, .nav-back, .nav-next { view-transition-name: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 0s !important; }
+  ::view-transition-old(root) { animation: vt-fade-out 160ms linear both !important; }
+  ::view-transition-new(root) { animation: vt-fade-in 160ms linear both !important; }
+  .anim-poster, .anim-player { transition: none; }
+}
+@keyframes vt-fade-out { to { opacity: 0; } }
+@keyframes vt-fade-in { from { opacity: 0; } }
+
+===== FILE: assets/tour.js =====
+
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var ready = window.__tourReady || Promise.resolve(false);
+
+  
+  ready.then(function () {
+    if (!window.__tourArrived) return;          // first visit / shared link: leave focus alone
+    var h = document.getElementById('tour-title');
+    if (h) h.focus({ preventScroll: true });
+  });
+
+  
+  document.addEventListener('keydown', function (e) {
+    if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    var t = e.target;
+    if (t.closest && t.closest('input, textarea, select, [role="group"], [contenteditable]')) return;
+    var link = e.key === 'ArrowRight' ? document.querySelector('a.nav-next:not([aria-hidden])')
+             : e.key === 'ArrowLeft' ? document.querySelector('a.nav-back:not([aria-hidden])') : null;
+    if (link) { e.preventDefault(); link.click(); }
+  });
+
+  
+  var players = {};
+  function mount(slot) {
+    if (!window.lottie) return;
+    var holder = slot.querySelector('.anim-player');
+    var anim = window.lottie.loadAnimation({
+      container: holder, renderer: 'svg', loop: false, autoplay: false,
+      path: slot.dataset.src,
+      rendererSettings: { preserveAspectRatio: 'xMidYMid meet', progressiveLoad: false }
+    });
+    players[slot.dataset.name] = anim;
+    anim.addEventListener('DOMLoaded', function () {
+      var last = anim.totalFrames - 1;
+      var mode = slot.dataset.mode; // "toggle" = driven by the billing control
+      if (mode === 'toggle') {
+        var yearly = slot.dataset.state === 'yearly';
+        anim.goToAndStop(yearly ? last : 0, true);
+        slot.classList.add('is-live');
+        return;
+      }
+      if (reduce.matches) {
+        anim.goToAndStop(last, true);
+        slot.classList.add('is-live');
+        return;
+      }
+      ready.then(function () {
+        anim.goToAndStop(0, true);
+        slot.classList.add('is-live');
+        anim.play();
+      });
+    });
+    anim.addEventListener('data_failed', function () { slot.classList.remove('is-live'); });
+  }
+  function boot() { document.querySelectorAll('.anim[data-src]').forEach(mount); }
+  if (window.lottie) boot(); else window.addEventListener('load', boot);
+
+  
+  var KEY = 'tally-billing';
+  function getBilling() { try { return sessionStorage.getItem(KEY) || 'monthly'; } catch (e) { return 'monthly'; } }
+  function setBilling(v) { try { sessionStorage.setItem(KEY, v); } catch (e) {} }
+
+  var group = document.querySelector('.billing');
+  if (group) {
+    var slot = document.querySelector('.anim[data-name="toggle"]');
+    var apply = function (v, animate) {
+      group.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.value === v)); });
+      document.documentElement.dataset.billing = v;
+      document.querySelectorAll('.toggle-labels [data-for]').forEach(function (el) { el.dataset.on = String(el.dataset.for === v); });
+      if (slot) slot.dataset.state = v;
+      var a = players.toggle;
+      if (a && a.isLoaded) {
+        var last = a.totalFrames - 1;
+        if (!animate || reduce.matches) a.goToAndStop(v === 'yearly' ? last : 0, true);
+        else a.playSegments(v === 'yearly' ? [0, last] : [last, 0], true);
+      }
+      setBilling(v);
+    };
+    group.addEventListener('click', function (e) {
+      var b = e.target.closest('button');
+      if (b) apply(b.value, true);
+    });
+    group.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      var v = e.key === 'ArrowRight' ? 'yearly' : 'monthly';
+      apply(v, true);
+      group.querySelector('button[value="' + v + '"]').focus();
+    });
+    apply(getBilling(), false);
+  }
+
+})();
+
+===== FILE: features/index.html =====
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tally · What it does · Step 2 of 4</title>
+  <meta name="description" content="Add in two taps. Balances settle themselves. Works in taka and offline.">
+  <meta name="view-transition" content="same-origin">
+  <link rel="expect" href="#tour-title" blocking="render">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@500;700&text=%E0%A7%B3&display=swap">
+  <link rel="stylesheet" href="../assets/tour.css">
+  <link rel="preload" href="../anim/features-add.json" as="fetch" crossorigin>
+  <script src="../assets/tour-head.js"></script>
+  <script src="../vendor/lottie_light.min.js" defer></script>
+  <script src="../assets/tour.js" defer></script>
+</head>
+<body class="page-features" style="--step:2">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <a class="brand" href="../" aria-label="Tally, back to the start of the tour"><span class="brand-mark" aria-hidden="true"></span>Tally</a>
+    <nav class="steps" aria-label="Tour progress">
+      <p class="steps-label" id="step-label">Step 2 of 4</p>
+      <ol>
+        <li><a href="../"><span class="n">1</span>Intro</a></li>
+        <li><a href="../features/" aria-current="step"><span class="n">2</span>Features</a></li>
+        <li><a href="../pricing/"><span class="n">3</span>Pricing</a></li>
+        <li><a href="../start/"><span class="n">4</span>Start</a></li>
+      </ol>
+      <div class="progress" aria-hidden="true"><span class="progress-fill"></span></div>
+    </nav>
+  </header>
+
+  <main id="main">
+      <div class="copy">
+        <p class="eyebrow">What it does</p>
+        <h1 id="tour-title" tabindex="-1" aria-describedby="step-label">Three things, so nobody keeps score.</h1>
+        <ol class="features">
+          <li><h2>Add in two taps</h2><p>Amount, who paid, done.</p></li>
+          <li><h2>Balances settle themselves</h2><p>Tally works out the fewest payments to square up.</p></li>
+          <li><h2>Works in <span class="taka">৳</span> and offline</h2><p>Entries sync when you are back online.</p></li>
+        </ol>
+      </div>
+      <figure class="card" aria-label="Tally preview">
+        <p class="card-balance"><span class="dot" aria-hidden="true"></span><span>Mitu owes Sabbir <strong><span class="taka">৳</span> 640</strong></span></p>
+        <div class="card-content">
+          <p class="card-title">Add an expense</p>
+          <p class="card-sub">Amount, who paid, done.</p>
+          
+        <div class="anim" data-name="add" data-src="../anim/features-add.json" style="--ar:8 / 5" aria-hidden="true">
+          <img class="anim-poster" src="../anim/features-add-final.svg" alt="" width="320" height="140">
+          <div class="anim-player"></div>
+        </div>
+        <p class="sr-only">Animation: tapping the add button drops a new expense into the list and it is ticked off.</p>
+        </div>
+      </figure>
+  </main>
+
+  <nav class="tour-nav" aria-label="Tour">
+    <a class="nav-btn nav-back" rel="prev" href="../"><span aria-hidden="true">←</span> Back<span class="sr-only">: step 1 of 4, Intro</span></a>
+    <p class="kbd-hint"><kbd>←</kbd> <kbd>→</kbd> to move through the tour</p>
+    <a class="nav-btn nav-next" rel="next" href="../pricing/">Next: Pricing <span aria-hidden="true">→</span><span class="sr-only">, step 3 of 4</span></a>
+  </nav>
+</body>
+</html>
+
+===== FILE: index.html =====
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tally · Split it once. Stop doing the maths. · Step 1 of 4</title>
+  <meta name="description" content="Tally is a shared-expenses app for flatmates and families. Add what you paid; it keeps a running balance and tells everyone who owes whom.">
+  <meta name="view-transition" content="same-origin">
+  <link rel="expect" href="#tour-title" blocking="render">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@500;700&text=%E0%A7%B3&display=swap">
+  <link rel="stylesheet" href="assets/tour.css">
+  <link rel="preload" href="anim/intro-balance.json" as="fetch" crossorigin>
+  <script src="assets/tour-head.js"></script>
+  <script src="vendor/lottie_light.min.js" defer></script>
+  <script src="assets/tour.js" defer></script>
+</head>
+<body class="page-intro" style="--step:1">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <a class="brand" href="./" aria-label="Tally, back to the start of the tour"><span class="brand-mark" aria-hidden="true"></span>Tally</a>
+    <nav class="steps" aria-label="Tour progress">
+      <p class="steps-label" id="step-label">Step 1 of 4</p>
+      <ol>
+        <li><a href="./" aria-current="step"><span class="n">1</span>Intro</a></li>
+        <li><a href="features/"><span class="n">2</span>Features</a></li>
+        <li><a href="pricing/"><span class="n">3</span>Pricing</a></li>
+        <li><a href="start/"><span class="n">4</span>Start</a></li>
+      </ol>
+      <div class="progress" aria-hidden="true"><span class="progress-fill"></span></div>
+    </nav>
+  </header>
+
+  <main id="main">
+      <div class="copy">
+        <p class="eyebrow">Shared expenses for flatmates and families</p>
+        <h1 id="tour-title" tabindex="-1" aria-describedby="step-label">Split it once. Stop doing the maths.</h1>
+        <p class="lede">Tally is a shared-expenses app: you add what you paid, it keeps a running balance and tells everyone who owes whom.</p>
+        <p class="card-sub">On the web and Android.</p>
+      </div>
+      <figure class="card" aria-label="Tally preview">
+        <p class="card-balance"><span class="dot" aria-hidden="true"></span><span>Mitu owes Sabbir <strong><span class="taka">৳</span> 640</strong></span></p>
+        <div class="card-content">
+          <p class="card-title">Running balance</p>
+          <p class="card-sub">Tally keeps it up to date and tells everyone who owes whom.</p>
+          
+        <div class="anim" data-name="balance" data-src="anim/intro-balance.json" style="--ar:16 / 7" aria-hidden="true">
+          <img class="anim-poster" src="anim/intro-balance-final.svg" alt="" width="320" height="140">
+          <div class="anim-player"></div>
+        </div>
+        <p class="sr-only">Animation: the balance between Mitu and Sabbir fills in, showing Mitu owes Sabbir 640 taka.</p>
+          <div class="toggle-labels" aria-hidden="true" style="padding:0 2%"><span>Mitu</span><span>Sabbir</span></div>
+        </div>
+      </figure>
+  </main>
+
+  <nav class="tour-nav" aria-label="Tour">
+    <span class="nav-btn nav-back" aria-hidden="true">← Back</span>
+    <p class="kbd-hint"><kbd>←</kbd> <kbd>→</kbd> to move through the tour</p>
+    <a class="nav-btn nav-next" rel="next" href="features/">Next: Features <span aria-hidden="true">→</span><span class="sr-only">, step 2 of 4</span></a>
+  </nav>
+</body>
+</html>
+
+===== FILE: pricing/index.html =====
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tally · Pricing · Step 3 of 4</title>
+  <meta name="description" content="Free: up to 2 groups, unlimited expenses. Tally Plus: ৳ 149 / month or ৳ 1,290 / year.">
+  <meta name="view-transition" content="same-origin">
+  <link rel="expect" href="#tour-title" blocking="render">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@500;700&text=%E0%A7%B3&display=swap">
+  <link rel="stylesheet" href="../assets/tour.css">
+  <link rel="preload" href="../anim/pricing-toggle.json" as="fetch" crossorigin>
+  <script src="../assets/tour-head.js"></script>
+  <script src="../vendor/lottie_light.min.js" defer></script>
+  <script src="../assets/tour.js" defer></script>
+</head>
+<body class="page-pricing" style="--step:3">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <a class="brand" href="../" aria-label="Tally, back to the start of the tour"><span class="brand-mark" aria-hidden="true"></span>Tally</a>
+    <nav class="steps" aria-label="Tour progress">
+      <p class="steps-label" id="step-label">Step 3 of 4</p>
+      <ol>
+        <li><a href="../"><span class="n">1</span>Intro</a></li>
+        <li><a href="../features/"><span class="n">2</span>Features</a></li>
+        <li><a href="../pricing/" aria-current="step"><span class="n">3</span>Pricing</a></li>
+        <li><a href="../start/"><span class="n">4</span>Start</a></li>
+      </ol>
+      <div class="progress" aria-hidden="true"><span class="progress-fill"></span></div>
+    </nav>
+  </header>
+
+  <main id="main">
+      <div class="copy">
+        <p class="eyebrow">Pricing</p>
+        <h1 id="tour-title" tabindex="-1" aria-describedby="step-label">Two plans. Start on Free.</h1>
+        <div class="billing" role="group" aria-label="Tally Plus billing">
+          <button type="button" value="monthly" aria-pressed="true">Monthly</button>
+          <button type="button" value="yearly" aria-pressed="false">Yearly</button>
+        </div>
+        <div class="plans">
+          <section class="plan" aria-labelledby="plan-free">
+            <h2 id="plan-free">Free</h2>
+            <p class="price"><span class="taka">৳</span> 0</p>
+            <ul><li>Up to 2 groups</li><li>Unlimited expenses</li></ul>
+          </section>
+          <section class="plan is-plus" aria-labelledby="plan-plus">
+            <h2 id="plan-plus">Tally Plus</h2>
+            <p class="price" data-billing="monthly"><span class="taka">৳</span> 149 <small>/ month</small></p>
+            <p class="price" data-billing="yearly"><span class="taka">৳</span> 1,290 <small>/ year</small></p>
+            <ul><li>Unlimited groups</li><li>Receipts</li><li>Export to CSV</li></ul>
+          </section>
+        </div>
+      </div>
+      <figure class="card" aria-label="Tally preview">
+        <p class="card-balance"><span class="dot" aria-hidden="true"></span><span>Mitu owes Sabbir <strong><span class="taka">৳</span> 640</strong></span></p>
+        <div class="card-content">
+          <p class="card-title">Tally Plus</p>
+          <p class="card-sub" data-billing="monthly"><span class="taka">৳</span> 149 / month</p>
+          <p class="card-sub" data-billing="yearly"><span class="taka">৳</span> 1,290 / year</p>
+          
+        <div class="anim" data-name="toggle" data-src="../anim/pricing-toggle.json" style="--ar:20 / 9" data-mode="toggle" data-state="monthly" aria-hidden="true">
+          <img class="anim-poster" src="../anim/pricing-toggle-final.svg" alt="" width="320" height="140">
+          <div class="anim-player"></div>
+        </div>
+        <p class="sr-only">Animation: a plan toggle that follows the Monthly / Yearly choice.</p>
+          <div class="toggle-labels" aria-hidden="true"><span data-for="monthly" data-on="true">Monthly</span><span data-for="yearly">Yearly</span></div>
+        </div>
+      </figure>
+  </main>
+
+  <nav class="tour-nav" aria-label="Tour">
+    <a class="nav-btn nav-back" rel="prev" href="../features/"><span aria-hidden="true">←</span> Back<span class="sr-only">: step 2 of 4, Features</span></a>
+    <p class="kbd-hint"><kbd>←</kbd> <kbd>→</kbd> to move through the tour</p>
+    <a class="nav-btn nav-next" rel="next" href="../start/">Next: Start <span aria-hidden="true">→</span><span class="sr-only">, step 4 of 4</span></a>
+  </nav>
+</body>
+</html>
+
+===== FILE: start/index.html =====
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tally · Start · Step 4 of 4</title>
+  <meta name="description" content="Use Tally in your browser or get it on Google Play. iOS waitlist by email.">
+  <meta name="view-transition" content="same-origin">
+  <link rel="expect" href="#tour-title" blocking="render">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@500;700&text=%E0%A7%B3&display=swap">
+  <link rel="stylesheet" href="../assets/tour.css">
+  <link rel="preload" href="../anim/start-check.json" as="fetch" crossorigin>
+  <script src="../assets/tour-head.js"></script>
+  <script src="../vendor/lottie_light.min.js" defer></script>
+  <script src="../assets/tour.js" defer></script>
+</head>
+<body class="page-start" style="--step:4">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <a class="brand" href="../" aria-label="Tally, back to the start of the tour"><span class="brand-mark" aria-hidden="true"></span>Tally</a>
+    <nav class="steps" aria-label="Tour progress">
+      <p class="steps-label" id="step-label">Step 4 of 4</p>
+      <ol>
+        <li><a href="../"><span class="n">1</span>Intro</a></li>
+        <li><a href="../features/"><span class="n">2</span>Features</a></li>
+        <li><a href="../pricing/"><span class="n">3</span>Pricing</a></li>
+        <li><a href="../start/" aria-current="step"><span class="n">4</span>Start</a></li>
+      </ol>
+      <div class="progress" aria-hidden="true"><span class="progress-fill"></span></div>
+    </nav>
+  </header>
+
+  <main id="main">
+      <div class="copy">
+        <p class="eyebrow">Start</p>
+        <h1 id="tour-title" tabindex="-1" aria-describedby="step-label">Start splitting.</h1>
+        <p class="recap"><strong>Free</strong> for up to 2 groups. <strong>Tally Plus</strong> when you need more:
+          <span data-billing="monthly"><span class="taka">৳</span> 149 / month.</span><span data-billing="yearly"><span class="taka">৳</span> 1,290 / year.</span></p>
+        <div class="cta-stack" style="margin-top:1.5rem">
+          <a class="btn btn-primary only-web" id="cta" href="https://app.tally.example.com/start">Use it in your browser</a>
+          <a class="btn btn-primary only-android" href="https://play.example.com/tally">Get it on Google Play</a>
+          <p class="alt-links only-web">On Android? <a href="https://play.example.com/tally">Get it on Google Play</a></p>
+          <p class="alt-links only-android">On a computer? <a href="https://app.tally.example.com/start">Use it in your browser</a></p>
+          <p class="alt-links">On iPhone? Join the iOS waitlist: <a href="mailto:ios@tally.example.com">ios@tally.example.com</a></p>
+        </div>
+      </div>
+      <figure class="card" aria-label="Tally preview">
+        <p class="card-balance"><span class="dot" aria-hidden="true"></span><span>Mitu owes Sabbir <strong><span class="taka">৳</span> 640</strong></span></p>
+        <div class="card-content">
+          <p class="card-title">You're set</p>
+          <p class="card-sub">Web and Android.</p>
+          
+        <div class="anim" data-name="check" data-src="../anim/start-check.json" style="--ar:1 / 1" aria-hidden="true">
+          <img class="anim-poster" src="../anim/start-check-final.svg" alt="" width="320" height="140">
+          <div class="anim-player"></div>
+        </div>
+        <p class="sr-only">Animation: a check mark is drawn.</p>
+        </div>
+      </figure>
+  </main>
+
+  <nav class="tour-nav" aria-label="Tour">
+    <a class="nav-btn nav-back" rel="prev" href="../pricing/"><span aria-hidden="true">←</span> Back<span class="sr-only">: step 3 of 4, Pricing</span></a>
+    <p class="kbd-hint"><kbd>←</kbd> <kbd>→</kbd> to move through the tour</p>
+    <span class="nav-btn nav-next" aria-hidden="true">Next →</span>
+  </nav>
+</body>
+</html>
