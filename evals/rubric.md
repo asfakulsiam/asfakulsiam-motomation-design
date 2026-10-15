@@ -29,3 +29,5 @@ Weighted total = Σ(score × weight) / 5.
 - Body text contrast under 4.5:1
 - Keyboard users can't reach the primary action
 - Invented statistics, logos or testimonials
+
+"Body text" for contrast purposes means any text at or above 16px that carries reading content. Small secondary labels, captions, and metadata below 16px are not body text and do not trigger a hard-gate contrast failure, though they should still be legible (3:1 minimum).

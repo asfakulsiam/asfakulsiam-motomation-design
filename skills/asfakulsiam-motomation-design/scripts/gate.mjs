@@ -156,7 +156,8 @@ function serve(root) {
 // Three input forms, any stack (gates/delivery-gate.md, Part 0 "Input"):
 //   http(s) URL         a running dev or preview server (next dev, astro preview, vite preview, …), scanned as served
 //   a project folder    its index.html, else its static build output (BUILD_DIRS, first with an index.html), served here
-//   a single .html file served from its own folder
+//   a single .html file served from its own folder, unless it loads assets from ../ (siteRootFor below): then from
+//                       the site root found by walking up, so a subpage like features/index.html keeps ../assets/
 // A server-only build (.next/ without out/) can't be served as files: start it and pass the URL instead.
 export const BUILD_DIRS = ["out", "dist", "build", ".output/public", "_site", "public"];
 export function resolveTarget(target) {
@@ -170,12 +171,41 @@ export function resolveTarget(target) {
   throw new Error(`no index.html in ${target} and no build output (${BUILD_DIRS.map((d) => d + "/").join(", ")}).${next} Build the project, or pass the URL of its dev or preview server.`);
 }
 
+// Single-file mode: a page that only references files in or below its own folder is served from that folder, exactly as
+// before (its _headers, its stamp, its records). A page whose assets climb out (`../assets/tour.css`) is served from its
+// site root: walk up from the file's folder, at least as many levels as its deepest `../`, to the first folder that holds
+// an index.html (other than the page itself), a package.json, or is itself named `site/`. No root found: warn and keep
+// the page's own folder, so the out-of-folder assets 404 visibly rather than silently.
+export function upLevels(html) {
+  let max = 0;
+  const refs = [...html.matchAll(/<(?:script|img|source|video|audio|iframe|embed|track)\b[^>]*?\bsrc\s*=\s*["']([^"']+)["']/gi), ...html.matchAll(/<link\b[^>]*?\bhref\s*=\s*["']([^"']+)["']/gi), ...html.matchAll(/\bsrcset\s*=\s*["']([^"']+)["']/gi), ...html.matchAll(/url\(\s*["']?([^"')]+)/gi), ...html.matchAll(/\bdata-src\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]);
+  for (const r of refs) for (const part of r.split(/,\s*/)) { const m = part.trim().match(/^(?:\.\/)?((?:\.\.\/)+)/); if (m) max = Math.max(max, m[1].length / 3); }
+  return max;
+}
+export function siteRootFor(file) {
+  const own = dirname(file); let need = 0;
+  try { need = upLevels(readFileSync(file, "utf8")); } catch {}
+  if (need === 0) return { root: own, climbed: false };
+  let dir = own;
+  for (let lvl = 0; ; lvl++) {
+    if (lvl >= need) {
+      const idx = join(dir, "index.html");
+      if ((existsSync(idx) && resolve(idx) !== resolve(file)) || existsSync(join(dir, "package.json")) || basename(dir) === "site") return { root: dir, climbed: true };
+    }
+    const up = dirname(dir); if (up === dir) break; dir = up;
+  }
+  return { root: own, climbed: false, warn: "gate: single file mode, assets outside this folder will not load. Prefer a URL or a served project." };
+}
 async function toUrl(target) {
   if (/^https?:\/\//.test(target)) return { url: target, close: () => {} };
   const abs = resolve(target); if (!existsSync(abs)) throw new Error(`not found: ${target}`);
-  const isDir = statSync(abs).isDirectory(); const root = isDir ? abs : dirname(abs);
-  const { srv, port } = await serve(root);
-  return { url: `http://127.0.0.1:${port}/${isDir ? "" : basename(abs)}`, close: () => srv.close() };
+  const isDir = statSync(abs).isDirectory();
+  if (isDir) { const { srv, port } = await serve(abs); return { url: `http://127.0.0.1:${port}/`, close: () => srv.close() }; }
+  const site = siteRootFor(abs);
+  if (site.warn && !toUrl.warned?.has(abs)) { (toUrl.warned ||= new Set()).add(abs); console.error(site.warn); }
+  const { srv, port } = await serve(site.root);
+  const rel = abs.slice(site.root.length).split(/[\\/]/).filter(Boolean).map(encodeURIComponent).join("/");
+  return { url: `http://127.0.0.1:${port}/${rel}`, close: () => srv.close() };
 }
 
 // ── in-page helpers (serialised into the page) ─

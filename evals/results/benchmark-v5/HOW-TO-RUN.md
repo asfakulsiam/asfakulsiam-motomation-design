@@ -23,6 +23,7 @@ skill is told the tier, and the benchmark checks whether it builds to that tier 
 - Read `evals/results/benchmark-v5/STATE.md`.
 - Your brief is the first row marked ⬜.
 - Read the brief in `evals/briefs/v5/`.
+- If the Claude CLI is not logged in, the runner cannot drive builds. Use separate agents of the current session as a workaround, and state this in the summary. The model ID may not be exposed; say so.
 
 ## What you build
 

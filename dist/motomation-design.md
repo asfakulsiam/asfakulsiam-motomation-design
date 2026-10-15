@@ -3221,7 +3221,7 @@ Run the script against the page in whatever stack Step 0 chose. The gate is fram
 |---|---|---|
 | **A URL** of a running dev or preview server | `http://localhost:3000/` (`next dev`, `next start`), `http://localhost:4321/` (`astro dev`, `astro preview`), `http://localhost:5173/` (`vite`, `vite preview`) | scans the page as served, any framework |
 | **A project folder** with a build output | `.` or `my-site/` after `astro build`, `vite build`, `next build` with `output: "export"` | serves the folder's `index.html`; if it has none, the first of `out/`, `dist/`, `build/`, `.output/public/`, `_site/`, `public/` that has one. The project's own `DESIGN.md` and `.motomation/log.json` are still read |
-| **A single `.html` file** | `index.html`, `examples/templates/hotel.html` | serves it from its own folder (static still works) |
+| **A single `.html` file** | `index.html`, `examples/templates/hotel.html` | serves it from its own folder (static still works). If the page loads assets from `../` (a subpage such as `features/index.html` using `../assets/`), it walks up to the site root (the first folder, at least that many levels up, with an `index.html`, a `package.json`, or named `site/`) and serves from there. No root found: it warns "gate: single file mode, assets outside this folder will not load. Prefer a URL or a served project." |
 
 ```bash
 node scripts/gate.mjs http://localhost:3000/   # Next.js dev server (or any running server)
