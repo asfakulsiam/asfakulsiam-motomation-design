@@ -18,9 +18,9 @@ Type a command at the start of a message. Commands combine with flags. Without a
 ## Create
 
 ### `/shape [brief]`
-**What:** turns a brief into a design direction without code: brief inference, the Thinking Sequence, dials, and a `DESIGN.md` + `MOTION.md`.
+**What:** turns a brief into a design direction without code: brief inference, the Thinking Sequence, dials, and a `DESIGN.md` + `SCHEMA.md` + `MOTION.md`.
 **When:** at the very start, or when the client must approve a direction first.
-**Output:** preview block + `DESIGN.md` + `MOTION.md` (from `templates/`).
+**Output:** preview block + `DESIGN.md` + `SCHEMA.md` + `MOTION.md` (from `templates/`; `SCHEMA.md` is written with `DESIGN.md`).
 
 ### `/build [brief]`
 **What:** the full flow, from brief to finished, gated code.

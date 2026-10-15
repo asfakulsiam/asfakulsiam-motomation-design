@@ -53,6 +53,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 | A site category (hotel, SaaS, studio…) | `categories/<category>.md` |
 | **Any build or redesign (always, before step 6 Build)** | `craft/copy.md` + `craft/seo.md` + `craft/performance.md` + `craft/security.md` |
 | Accessibility, responsive, mobile motion, scroll sequences | `craft/*.md` |
+| Writing the design system (step 3) | `templates/DESIGN.md` and `templates/SCHEMA.md` (always, together) |
 | Before handing anything back | `gates/delivery-gate.md` (always): verification of `gates/rules.md`, not new rules |
 | Framework specifics | `adapters/<stack>.md`, chosen by Step 0 (Stack): `next.md`, `astro.md`, `react-vite.md` or `vanilla.md`. Never skipped, never assumed |
 | Commands and flags | `commands/overview.md` |
@@ -76,7 +77,9 @@ R. Read the rules     gates/rules.md                → state "Rules : gates/rul
                                                       collision, signature move, anti-sameness,
                                                       restraint gate
 2. Set the dials      principles/dials.md           → ENERGY / RHYTHM / MOTION (1–3) → tier
-3. Design system      typography → colour → layout  → write DESIGN.md (templates/DESIGN.md)
+3. Design system      typography → colour → layout  → write DESIGN.md (templates/DESIGN.md) and, at the same time,
+                                                      SCHEMA.md (templates/SCHEMA.md): data model, routes, section contract,
+                                                      API surface, handoff notes
 4. Motion plan        motion/tokens.md + tier file  → write MOTION.md (templates/MOTION.md); Tier 3–5: timing sheet per motion/choreography.md
 5. Preview block      show the plan (below) and wait for approval only if the user asked to review first
 6. Build              compose, extend, or invent (below), in the stack and adapter from Step 0; complete code, real copy
@@ -233,6 +236,7 @@ Full behaviour of each command is in `commands/overview.md`. Critique output for
 ## Output rules
 
 - Explain the plan in the preview block, then build. Keep prose short. The work is the answer.
+- Every build ships `DESIGN.md` and `SCHEMA.md` with the code. `SCHEMA.md` (format: `templates/SCHEMA.md`) is the data contract for the backend developer: data model, routes, section contract (empty, loading, error, filled), API surface, handoff notes. It is written with `DESIGN.md`, not after, and a developer can build the backend from it alone.
 - Deliver complete files. No `// rest of code here`, no TODOs, no placeholder images without a clear `alt` and a sourcing note.
 - Put a stamp comment at the top of the main stylesheet or layout:
   `/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: <from gate.mjs> · gate: <from gate.mjs> */`

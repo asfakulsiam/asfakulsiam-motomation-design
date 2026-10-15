@@ -105,6 +105,7 @@ Two layers, kept apart on purpose (details in `principles/restraint.md`):
 ### Output rules
 
 - Explain the plan in the preview block, then build. Keep prose short. The work is the answer.
+- Every build ships `DESIGN.md` and `SCHEMA.md` with the code. `SCHEMA.md` (format: `templates/SCHEMA.md`) is the data contract for the backend developer: data model, routes, section contract (empty, loading, error, filled), API surface, handoff notes. It is written with `DESIGN.md`, not after, and a developer can build the backend from it alone.
 - Deliver complete files. No `// rest of code here`, no TODOs, no placeholder images without a clear `alt` and a sourcing note.
 - Put a stamp comment at the top of the main stylesheet or layout:
   `/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: <from gate.mjs> · gate: <from gate.mjs> */`
@@ -290,6 +291,7 @@ The budgets hold either way: one signature move, one accent moment per screen, o
 ### Part 3: Craft checklist
 
 - [ ] Concept sentence and signature move are visible in the first screen
+- [ ] Handoff: `DESIGN.md` and `SCHEMA.md` (`templates/SCHEMA.md`) ship with the build; every section `id` in the markup has a row in the section contract, every field shown on the page is in the data model, every route is listed
 - [ ] Type: display face chosen with a reason; body size and measure within `gates/rules.md` (Hierarchy); `text-wrap: balance` on headings
 - [ ] Colour: all text pairs verified (`node scripts/contrast.mjs` while designing, `node scripts/gate.mjs` on the build); accent within `gates/rules.md` (Contrast)
 - [ ] Layout: one deliberate grid break per screen, recomposed (not squeezed) on mobile

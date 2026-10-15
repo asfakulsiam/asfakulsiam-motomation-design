@@ -55,6 +55,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 | A site category (hotel, SaaS, studio…) | `categories/<category>.md` |
 | **Any build or redesign (always, before step 6 Build)** | `craft/copy.md` + `craft/seo.md` + `craft/performance.md` + `craft/security.md` |
 | Accessibility, responsive, mobile motion, scroll sequences | `craft/*.md` |
+| Writing the design system (step 3) | `templates/DESIGN.md` and `templates/SCHEMA.md` (always, together) |
 | Before handing anything back | `gates/delivery-gate.md` (always): verification of `gates/rules.md`, not new rules |
 | Framework specifics | `adapters/<stack>.md`, chosen by Step 0 (Stack): `next.md`, `astro.md`, `react-vite.md` or `vanilla.md`. Never skipped, never assumed |
 | Commands and flags | `commands/overview.md` |
@@ -78,7 +79,9 @@ R. Read the rules     gates/rules.md                → state "Rules : gates/rul
                                                       collision, signature move, anti-sameness,
                                                       restraint gate
 2. Set the dials      principles/dials.md           → ENERGY / RHYTHM / MOTION (1–3) → tier
-3. Design system      typography → colour → layout  → write DESIGN.md (templates/DESIGN.md)
+3. Design system      typography → colour → layout  → write DESIGN.md (templates/DESIGN.md) and, at the same time,
+                                                      SCHEMA.md (templates/SCHEMA.md): data model, routes, section contract,
+                                                      API surface, handoff notes
 4. Motion plan        motion/tokens.md + tier file  → write MOTION.md (templates/MOTION.md); Tier 3–5: timing sheet per motion/choreography.md
 5. Preview block      show the plan (below) and wait for approval only if the user asked to review first
 6. Build              compose, extend, or invent (below), in the stack and adapter from Step 0; complete code, real copy
@@ -235,6 +238,7 @@ Full behaviour of each command is in `commands/overview.md`. Critique output for
 ### Output rules
 
 - Explain the plan in the preview block, then build. Keep prose short. The work is the answer.
+- Every build ships `DESIGN.md` and `SCHEMA.md` with the code. `SCHEMA.md` (format: `templates/SCHEMA.md`) is the data contract for the backend developer: data model, routes, section contract (empty, loading, error, filled), API surface, handoff notes. It is written with `DESIGN.md`, not after, and a developer can build the backend from it alone.
 - Deliver complete files. No `// rest of code here`, no TODOs, no placeholder images without a clear `alt` and a sourcing note.
 - Put a stamp comment at the top of the main stylesheet or layout:
   `/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: <from gate.mjs> · gate: <from gate.mjs> */`
@@ -468,6 +472,17 @@ Test every element (section, ornament, texture, colour moment, animation) with t
 The budgets hold either way: one signature move, one accent moment per screen, one display face (two only for a contrast concept), every animation passes the four questions in `motion/tokens.md`. Question 2 keeps an element; it never buys a second signature or a contrast failure. Log `- Cut:` (failed both) and `- Kept:` (failed Q1, passed Q2, with the reason) in `DESIGN.md`. Example and counter-example: `principles/restraint.md`.
 
 **Test:** for every element, can you name the question it passes? If neither, cut it.
+
+---
+
+### Required output: DESIGN.md and SCHEMA.md
+
+Every build ships two documents next to the code, written together while the design system is set (default flow, step 3), never after the build:
+
+- `DESIGN.md` (`templates/DESIGN.md`): how it looks, with `References` from Step 0.5.
+- `SCHEMA.md` (`templates/SCHEMA.md`): the data contract. Data model (every entity and field: name, type, required or optional, example, where it appears), Routes (every URL and what it reads), Section contract (every section id on every page, the data it reads, and what it renders when empty, loading, in error and filled), API surface (every endpoint, or "none: static"), Handoff notes (environment variables, third-party services, rate limits, auth flow).
+
+A section added to the page gets its row in `SCHEMA.md` in the same edit. **Test:** could a backend developer build the backend from `SCHEMA.md` alone, without asking a question? Does every section `id` in the markup have a row in the section contract? If not, the build isn't finished.
 
 ---
 
@@ -3657,6 +3672,7 @@ The placeholders are deliberate. There are no numbers to copy. Write the archety
 ### Part 3: Craft checklist
 
 - [ ] Concept sentence and signature move are visible in the first screen
+- [ ] Handoff: `DESIGN.md` and `SCHEMA.md` (`templates/SCHEMA.md`) ship with the build; every section `id` in the markup has a row in the section contract, every field shown on the page is in the data model, every route is listed
 - [ ] Type: display face chosen with a reason; body size and measure within `gates/rules.md` (Hierarchy); `text-wrap: balance` on headings
 - [ ] Colour: all text pairs verified (`node scripts/contrast.mjs` while designing, `node scripts/gate.mjs` on the build); accent within `gates/rules.md` (Contrast)
 - [ ] Layout: one deliberate grid break per screen, recomposed (not squeezed) on mobile
@@ -4027,9 +4043,9 @@ Type a command at the start of a message. Commands combine with flags. Without a
 ### Create
 
 #### `/shape [brief]`
-**What:** turns a brief into a design direction without code: brief inference, the Thinking Sequence, dials, and a `DESIGN.md` + `MOTION.md`.
+**What:** turns a brief into a design direction without code: brief inference, the Thinking Sequence, dials, and a `DESIGN.md` + `SCHEMA.md` + `MOTION.md`.
 **When:** at the very start, or when the client must approve a direction first.
-**Output:** preview block + `DESIGN.md` + `MOTION.md` (from `templates/`).
+**Output:** preview block + `DESIGN.md` + `SCHEMA.md` + `MOTION.md` (from `templates/`; `SCHEMA.md` is written with `DESIGN.md`).
 
 #### `/build [brief]`
 **What:** the full flow, from brief to finished, gated code.
@@ -4954,6 +4970,92 @@ Rhythm: <which chapters are dense / still; the breath in every run of three>
 - Name: 
 - Trigger: 
 - Off-switch (touch / reduced motion):
+
+
+---
+
+<!-- file: templates/SCHEMA.md -->
+
+## SCHEMA.md: <Project name>
+
+> The data contract. Written at the same time as DESIGN.md (not after the build), and shipped with every build. A backend developer reading this file alone builds the backend without asking a question. Every field, route, section and endpoint the page uses is here; nothing on the page reads data that isn't.
+
+<!--
+Rules for filling it in
+- One row per field. Types: string, text (multi-line), int, decimal, money (minor units + currency), bool, date (ISO 8601),
+  datetime (ISO 8601, UTC), url, email, phone (E.164), slug, enum(a|b|c), image (url + alt + width + height), ref(Entity),
+  list<T>.
+- "Appears at" names the route and the section id (from the section contract), e.g. `/` · `#rooms` · card title.
+- Example values are real or `[NEEDS COPY]`; never lorem ipsum.
+- A static site with no backend still fills Data model, Routes and Section contract (the content is the data);
+  API surface says "none: static", Handoff notes says where the content lives.
+- Write "none" rather than deleting a section.
+-->
+
+### Data model
+
+#### <Entity> <!-- e.g. Room, Product, Post, Event, Person, Settings -->
+<one line: what it is, where it comes from (CMS, database, file, third-party API)>
+
+| Field | Type | Required | Example | Appears at |
+|---|---|---|---|---|
+| `id` | string | required | `rm_08` | not shown; used in URLs and keys |
+| `<field>` | <type> | required / optional | `<example>` | `<route>` · `#<section-id>` · <element> |
+
+Relations: <Entity>.<field> → <Other entity> (one-to-many | many-to-many). Sort order: <field, direction>. Uniqueness: <fields>.
+
+### Routes
+
+Every URL the site serves.
+
+| Route | Page | Reads | Rendering | Notes |
+|---|---|---|---|---|
+| `/` | Home | <Entity (which fields, how many, sorted how)> | static / SSR / ISR (revalidate n s) / client | |
+| `/<collection>/[slug]` | <Detail> | <Entity by slug> | | 404 when the slug is unknown |
+| `/404` | Not found | none | static | |
+
+Redirects: <from → to, status>. Sitemap: <which routes>. `noindex`: <which routes>.
+
+### Section contract
+
+For every section on every page. The section id matches the `id` attribute in the markup.
+
+#### `<route>`
+
+| Section id | Reads | Empty | Loading | Error | Filled |
+|---|---|---|---|---|---|
+| `#<id>` | <Entity.fields, filter, limit> | <what renders when there is no data, or "never empty: <why>"> | <skeleton / reserved space (no layout shift) / "static: n/a"> | <message + retry, or the fallback content> | <what renders, in one line> |
+
+### API surface
+
+<"none: static" if the site has no backend. Otherwise every endpoint.>
+
+#### `<METHOD> <path>`
+- **Purpose:** <one line>
+- **Auth:** <none | session cookie | API key (server only)>
+- **Request:**
+  ```json
+  { "<field>": "<type, constraints>" }
+  ```
+- **Response 200:**
+  ```json
+  { "<field>": "<type>" }
+  ```
+- **Errors:** `400` <validation: which field, what message> · `401` <when> · `404` <when> · `409` <when> · `429` <rate limit> · `500` <generic message; details only in server logs>
+- **Validation:** <server-side schema, limits> (`craft/security.md` sec-11)
+- **Rate limit:** <n per window per IP/account> (sec-15)
+
+### Handoff notes
+
+- **Environment variables:** `<NAME>`: <what it is, where to get it, server only | public> (secrets never `NEXT_PUBLIC_`/`PUBLIC_`; sec-07)
+- **Third-party services:** <service: what for, which plan, which keys>
+- **Rate limits:** <per endpoint, as above>
+- **Auth flow:** <none | the flow, step by step: where the session is created, cookie flags (sec-06), where access is checked on the server (sec-02)>
+- **Content source:** <CMS / database / files: who edits it, how a change reaches the site>
+- **Images and media:** <where they are stored, sizes and formats the design needs (AVIF/WebP, width × height)>
+- **Caching and revalidation:** <per route>
+- **Security items for the owner:** <the [H] items of `craft/security.md` that apply, open or done>
+- **Assumptions:** <none, or each default the design assumed where the brief was silent, so nothing is left to ask>
 
 
 ---

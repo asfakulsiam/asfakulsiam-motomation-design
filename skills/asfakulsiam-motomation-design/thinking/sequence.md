@@ -176,6 +176,17 @@ The budgets hold either way: one signature move, one accent moment per screen, o
 
 ---
 
+## Required output: DESIGN.md and SCHEMA.md
+
+Every build ships two documents next to the code, written together while the design system is set (default flow, step 3), never after the build:
+
+- `DESIGN.md` (`templates/DESIGN.md`): how it looks, with `References` from Step 0.5.
+- `SCHEMA.md` (`templates/SCHEMA.md`): the data contract. Data model (every entity and field: name, type, required or optional, example, where it appears), Routes (every URL and what it reads), Section contract (every section id on every page, the data it reads, and what it renders when empty, loading, in error and filled), API surface (every endpoint, or "none: static"), Handoff notes (environment variables, third-party services, rate limits, auth flow).
+
+A section added to the page gets its row in `SCHEMA.md` in the same edit. **Test:** could a backend developer build the backend from `SCHEMA.md` alone, without asking a question? Does every section `id` in the markup have a row in the section contract? If not, the build isn't finished.
+
+---
+
 ## Worked example: "Portfolio for a motion designer in Dhaka"
 
 ```

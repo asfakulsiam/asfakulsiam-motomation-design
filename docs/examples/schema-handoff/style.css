@@ -1,0 +1,20 @@
+/* Daftari: demo build for templates/SCHEMA.md (v2.7.0). Tier 1. Not stamped: the stamp comes only from scripts/gate.mjs. */
+:root{--ground:#F4EFE6;--ink:#1D1A16;--muted:#5B544B;--accent:#8A2B1A;--rule:#CFC6B8;--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--ground);color:var(--ink);font:1.0625rem/1.6 var(--serif)}
+.skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;background:var(--ink);color:var(--ground);padding:.5rem 1rem}
+.masthead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;padding:1.25rem clamp(1rem,4vw,3rem);border-bottom:1px solid var(--rule)}
+.mark{margin:0;font-weight:700;letter-spacing:.08em;text-transform:uppercase}nav a{margin-left:1.25rem;color:var(--ink)}
+main{max-width:68rem;margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}section{padding:clamp(3rem,8vw,6rem) 0;border-bottom:1px solid var(--rule)}
+.hero h1{font-size:clamp(2rem,5.5vw,4.25rem);line-height:1.05;max-width:18ch;margin:.25rem 0 1.5rem;text-wrap:balance}
+.docket{font:600 .875rem/1 ui-monospace,Menlo,monospace;letter-spacing:.12em;color:var(--accent);margin:0}
+.lede{max-width:52ch;color:var(--muted)}.cta{display:inline-block;margin-top:1rem;padding:.8rem 1.4rem;background:var(--ink);color:var(--ground);text-decoration:none}
+.cta:hover,.cta:focus-visible{background:var(--accent)}:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+h2{font-size:clamp(1.5rem,3vw,2.25rem);margin:0 0 2rem}
+.tickets,.steps{list-style:none;padding:0;margin:0;display:grid;gap:1rem}.tickets{grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+.ticket{border:1px solid var(--ink);padding:1.25rem;background:#FBF8F2}.ticket h3{margin:0 0 .5rem}.price{font-weight:700;margin:.75rem 0 0}.turn{color:var(--muted);margin:0}
+.steps{grid-template-columns:repeat(auto-fit,minmax(11rem,1fr))}.steps li{border-top:2px solid var(--ink);padding-top:.75rem}.n{font:600 .875rem ui-monospace,Menlo,monospace;color:var(--accent)}.steps h3{margin:.25rem 0}
+form{display:grid;gap:1rem;max-width:40rem}label{display:grid;gap:.35rem;font-weight:600}
+input,select,textarea{font:inherit;padding:.65rem;border:1px solid var(--ink);background:#FFFDF9;color:var(--ink);min-height:44px}
+button{font:inherit;font-weight:700;padding:.8rem 1.4rem;background:var(--ink);color:var(--ground);border:0;min-height:44px;justify-self:start;cursor:pointer}
+.status[data-state=error]{color:var(--accent)}.needs{color:var(--muted)}footer{padding:2rem clamp(1rem,4vw,3rem);color:var(--muted)}

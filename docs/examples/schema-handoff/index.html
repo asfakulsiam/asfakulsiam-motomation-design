@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daftari · bookbinding and repair in Banglabazar</title>
+<meta name="description" content="Daftari repairs old books and binds new ones in Banglabazar, Dhaka. Rebacking from 900 taka, resewing from 1,800 taka, thesis copies from 450 taka.">
+<link rel="canonical" href="https://daftari.example/">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Daftari","address":"Banglabazar, Dhaka","openingHours":"Sa-Th 10:00-19:00"}</script>
+</head>
+<body>
+<a class="skip" href="#request">Skip to the request form</a>
+<header class="masthead"><p class="mark">Daftari</p><nav aria-label="Page"><a href="#services">Services</a><a href="#process">The bench</a><a href="#request">Send a book</a><a href="#hours">Hours</a></nav></header>
+<main id="main">
+  <section id="top" class="hero" aria-labelledby="hero-title">
+    <p class="docket" aria-hidden="true">Docket 0001</p>
+    <h1 id="hero-title">Every book on our bench gets a docket, a needle and a date it goes home.</h1>
+    <p class="lede">Two binders in Banglabazar. We repair old books and bind new ones by hand, and we tell you the price before we cut a thread.</p>
+    <p><a class="cta" href="#request">Open a docket for your book</a></p>
+  </section>
+
+  <section id="services" aria-labelledby="services-title">
+    <h2 id="services-title">Three kinds of work</h2>
+    <ol class="tickets" data-entity="Service">
+      <li class="ticket"><h3>Rebacking</h3><p>A new spine on the old boards, the original spine label laid back on top.</p><p class="price">from <data value="900">900 taka</data></p><p class="turn">about 7 days</p></li>
+      <li class="ticket"><h3>Full resew</h3><p>Every section taken apart, mended and sewn again on tapes, for books that fall open in pieces.</p><p class="price">from <data value="1800">1,800 taka</data></p><p class="turn">about 14 days</p></li>
+      <li class="ticket"><h3>Thesis binding</h3><p>Cloth case, gold title on the spine, sewn so it lies open at any page.</p><p class="price">from <data value="450">450 taka</data> a copy</p><p class="turn">about 3 days</p></li>
+    </ol>
+  </section>
+
+  <section id="process" aria-labelledby="process-title">
+    <h2 id="process-title">How a book moves across the bench</h2>
+    <ol class="steps" data-entity="ProcessStep">
+      <li><span class="n">1</span><h3>Docket</h3><p>You send photos. We reply with a price and a date.</p></li>
+      <li><span class="n">2</span><h3>Take apart</h3><p>Old glue off, torn leaves mended with Japanese tissue.</p></li>
+      <li><span class="n">3</span><h3>Sew</h3><p>Linen thread, sewn on tapes, section by section.</p></li>
+      <li><span class="n">4</span><h3>Cover</h3><p>Boards, cloth or leather, pressed overnight.</p></li>
+      <li><span class="n">5</span><h3>Home</h3><p>Collect from the shop, or we send it by courier.</p></li>
+    </ol>
+  </section>
+
+  <section id="request" aria-labelledby="request-title">
+    <h2 id="request-title">Send a book</h2>
+    <form id="request-form" action="/api/requests" method="post" enctype="multipart/form-data" novalidate>
+      <label>Your name <input name="name" autocomplete="name" required maxlength="80"></label>
+      <label>Phone or email <input name="contact" autocomplete="email" required maxlength="120"></label>
+      <label>Kind of work
+        <select name="service" required><option value="rebacking">Rebacking</option><option value="resew">Full resew</option><option value="thesis">Thesis binding</option><option value="other">Not sure yet</option></select></label>
+      <label>What is wrong with the book, or what you need <textarea name="details" required maxlength="2000" rows="5"></textarea></label>
+      <label>Photos (up to 3, JPEG, PNG or WebP, 5 MB each) <input type="file" name="photos" accept="image/jpeg,image/png,image/webp" multiple></label>
+      <button type="submit">Open the docket</button>
+      <p class="status" role="status" aria-live="polite" data-state="idle"></p>
+    </form>
+  </section>
+
+  <section id="hours" aria-labelledby="hours-title">
+    <h2 id="hours-title">Hours and address</h2>
+    <p>Saturday to Thursday, 10:00 to 19:00. Closed Friday.</p>
+    <p>Banglabazar, Dhaka. <span class="needs">[NEEDS COPY: street address and phone]</span></p>
+  </section>
+</main>
+<footer><p>Daftari bindery, Banglabazar. Sewn by hand since <span class="needs">[NEEDS COPY: year]</span>.</p></footer>
+<script src="request.js" defer></script>
+</body>
+</html>
