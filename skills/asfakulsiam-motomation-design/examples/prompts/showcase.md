@@ -36,7 +36,7 @@ Route: full. A new page with a concept, a signature and motion: every step runs.
 
 ## Step 0: read the room
 
-Audience: directors and programmers, on a laptop between screenings, deciding in a minute. Job: show how this studio thinks about titles, then give one address. Mood: dark, patient, exact. Constraint that shapes everything: **there are no images.** A portfolio without stills has to make its type and its timing the work. Gaps: none blocking.
+Audience: directors and programmers, on a laptop between screenings, deciding in a minute. Job: show how this studio thinks about titles, then give one address. Feel: dark, patient, exact (style derived from the brief, per `styles/`). Constraint that shapes everything: **there are no images.** A portfolio without stills has to make its type and its timing the work. Gaps: none blocking.
 
 ## Step 1–2: tension and concept
 

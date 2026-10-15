@@ -1,8 +1,8 @@
+# Recorded at v2.4.0. Lines for the data column removed in v2.6.0 (the fixed style presets) are omitted; EB Garamond's avoid value shows the current data/fonts.csv wording. Everything else is as recorded.
 $ node scripts/search.mjs palettes "night river blue tide"
 palettes: top 3 for "night river blue tide"
 
 ■ Night Brass  (score 3.82)
-  mood           quiet
   ground         #0D0D0F
   surface        #18181B
   ink            #EDEBE6
@@ -13,7 +13,6 @@ palettes: top 3 for "night river blue tide"
   accent_text    body
 
 ■ Monsoon Dhaka  (score 3.68)
-  mood           editorial
   ground         #ECEFEA
   surface        #DFE5DE
   ink            #151A16
@@ -24,7 +23,6 @@ palettes: top 3 for "night river blue tide"
   accent_text    body
 
 ■ Safelight  (score 2.96)
-  mood           play
   ground         #140B0A
   surface        #21110F
   ink            #F6E9E2

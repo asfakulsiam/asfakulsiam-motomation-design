@@ -1,3 +1,4 @@
+# Recorded at v2.4.0. Lines for the data column removed in v2.6.0 (the fixed style presets) are omitted; EB Garamond's avoid value shows the current data/fonts.csv wording. Everything else is as recorded.
 $ node scripts/collide.mjs --n 3 --spread --category ecommerce --seed 2410
 COLLISION ENGINE · category: E-commerce · seed 2410
 
@@ -63,7 +64,7 @@ fonts: top 5 for "bengali book editorial serif"
   personality    classic book face
   pairs_with     Schibsted Grotesk; Geist
   use_for        literary, academic, heritage
-  avoid          play moods
+  avoid          loud playful brands
 
 ■ Instrument Serif  (score 3.36)
   source         Google Fonts
@@ -100,7 +101,6 @@ $ node scripts/search.mjs palettes "printed matter paper ink"
 palettes: top 2 for "printed matter paper ink"
 
 ■ Paper & Vermilion  (score 8.10)
-  mood           editorial
   ground         #F3F0EA
   surface        #EAE6DE
   ink            #151412
@@ -111,7 +111,6 @@ palettes: top 2 for "printed matter paper ink"
   accent_text    large-only
 
 ■ Ink & Rose  (score 2.78)
-  mood           editorial
 $ node scripts/contrast.mjs #151412 #F3F0EA
 #151412 on #F3F0EA: 16.18:1  body PASS · large PASS · AAA PASS
 $ node scripts/contrast.mjs #5E5A53 #F3F0EA

@@ -4,6 +4,7 @@ All notable changes to this skill. Versions follow [Semantic Versioning](https:/
 
 ## [Unreleased]
 
+- Removed the Quiet / Editorial / Play mood system entirely. Style is derived from the brief.
 - Benchmark v5 setup: five sites, one per tier, sequential. Infrastructure in evals/results/benchmark-v5/. Not yet run.
 - Gate single-file mode: `scripts/gate.mjs` given one `.html` file that loads assets from `../` now serves from the site root (walk up to the first folder with an `index.html`, a `package.json`, or named `site/`), so subpages keep their styles; with no root found it warns. Pages without `../` assets are served from their own folder as before (stamps unchanged). Found in benchmark v5 Tier 3.
 - Benchmark v5: `evals/rubric.md` defines "body text" for the contrast hard gate (16px+ reading content; smaller labels need 3:1); `HOW-TO-RUN.md` notes the Claude CLI login workaround.

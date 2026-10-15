@@ -1,3 +1,4 @@
+# Recorded at v2.4.0. Lines for the data column removed in v2.6.0 (the fixed style presets) are omitted; EB Garamond's avoid value shows the current data/fonts.csv wording. Everything else is as recorded.
 $ node scripts/memory.mjs recent
 No runs logged yet in this project (/home/user/workspace/runs/showcase/.motomation/log.json).
 
@@ -47,7 +48,6 @@ $ node scripts/search.mjs palettes "dark cinema black film"
 palettes: top 2 for "dark cinema black film"
 
 ■ Darkroom  (score 6.90)
-  mood           play
   ground         #0E0D0B
   surface        #1A1814
   ink            #F2EEE6
@@ -58,7 +58,6 @@ palettes: top 2 for "dark cinema black film"
   accent_text    body
 
 ■ Safelight  (score 4.16)
-  mood           play
   ground         #140B0A
   surface        #21110F
   ink            #F6E9E2
@@ -71,7 +70,6 @@ signatures: top 1 for "timeline timecode scrub"
   name           Timecode Rail
   family         scroll
   tier           5
-  mood           play editorial
   good_for       product-launch portfolio
   file           signatures/scroll-signatures.md
   one_line       a running timecode shows chapter progress

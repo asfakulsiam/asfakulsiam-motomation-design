@@ -26,7 +26,7 @@ Director Sadia Islam and producer Mahmud Hasan are raising the last part of the 
   4. 07:30 "Night shift" — Rina and the stranger wait on the empty pontoon.
   5. 10:20 "Fog" — the river disappears; only horns.
   6. 12:40 "Dawn" — the terminal gates closing; Rina's choice.
-- Frames: the director's storyboard/mood frames, one sequence per scene, supplied later as image sequences; until then the site renders the sequence itself (drawn, generated or placeholder frames that clearly read as the scene), and documents where the real frames go.
+- Frames: the director's storyboard frames, one sequence per scene, supplied later as image sequences; until then the site renders the sequence itself (drawn, generated or placeholder frames that clearly read as the scene), and documents where the real frames go.
 - Team: Sadia Islam (writer-director; previous short *Dhulo* screened at two regional festivals), Mahmud Hasan (producer), Ayesha Karim (cinematographer).
 - Budget: ৳ 38,00,000 total; ৳ 26,00,000 raised; ask: ৳ 12,00,000 for the shoot and post-production.
 - Schedule: prep Nov–Dec 2026, shoot 10 days in January 2027, post Feb–Apr 2027, festival submissions from May 2027.
