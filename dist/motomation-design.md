@@ -37,6 +37,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 
 | Task | Load |
 |---|---|
+| **Any build or redesign (always, first, before Step 1)** | `gates/rules.md`: the rules the gate measures. Design input, read before designing; state `Rules : gates/rules.md read; designing within it.` before the Thinking Sequence |
 | Any new page or site | `thinking/brief-inference.md` → `thinking/sequence.md` (Step 0 Stack first) → `principles/house-style.md` |
 | Need new ideas / "make it different" | `invention/mad-artist.md` + run `scripts/collide.mjs` |
 | Choosing a page structure | `structures/archetypes.md` |
@@ -53,19 +54,21 @@ If there is even a small chance this skill applies to a web design task, use it.
 | A site category (hotel, SaaS, studio…) | `categories/<category>.md` |
 | **Any build or redesign (always, before step 6 Build)** | `craft/copy.md` + `craft/seo.md` + `craft/performance.md` + `craft/security.md` |
 | Accessibility, responsive, mobile motion, scroll sequences | `craft/*.md` |
-| Before handing anything back | `gates/delivery-gate.md` (always) |
+| Before handing anything back | `gates/delivery-gate.md` (always): verification of `gates/rules.md`, not new rules |
 | Framework specifics | `adapters/<stack>.md`, chosen by Step 0 (Stack): `next.md`, `astro.md`, `react-vite.md` or `vanilla.md`. Never skipped, never assumed |
 | Commands and flags | `commands/overview.md` |
 
-Files are short on purpose. Load them as you need them, not all at once. The one exception: the four rule sets
+Files are short on purpose. Load them as you need them, not all at once. Two exceptions: `gates/rules.md` is loaded first for every build or redesign, and the four rule sets
 (copy, SEO, performance, security) are always loaded for a build or a redesign, because the gate measures them
-(axes C, S, P, K in gate/4) and the Delivery Gate ticks the rest by hand.
+(axes C, S, P, K in gate/4) and the Delivery Gate ticks the rest by hand. Rules come first, the gate comes last:
+design inside `gates/rules.md`, then verify with `gates/delivery-gate.md`; never design first and patch to pass.
 
 ---
 
 ### Default flow (`/build`)
 
 ```
+R. Read the rules     gates/rules.md                → state "Rules : gates/rules.md read; designing within it."
 0. Read the room      thinking/brief-inference.md   → audience, job, feel, constraints, gaps
 1. Thinking Sequence  thinking/sequence.md          → STACK (named, or ask; load the adapter),
                                                       tension, concept, archetype+mutation,
@@ -76,7 +79,7 @@ Files are short on purpose. Load them as you need them, not all at once. The one
 4. Motion plan        motion/tokens.md + tier file  → write MOTION.md (templates/MOTION.md); Tier 3–5: timing sheet per motion/choreography.md
 5. Preview block      show the plan (below) and wait for approval only if the user asked to review first
 6. Build              find before build (below), in the stack and adapter from Step 0; complete code, real copy
-7. Delivery Gate      gates/delivery-gate.md        → score, fix, stamp, log to memory
+7. Delivery Gate      gates/delivery-gate.md        → verify gates/rules.md, score, fix, stamp, log to memory
 ```
 
 #### Find before build (step 6)
@@ -96,6 +99,7 @@ Standard UI gets found, not invented. Signature moments get invented, not found.
 
 ```
 MOTOMATION PLAN
+Rules       : gates/rules.md read; designing within it
 Stack       : <stack> (<named in brief | from the project | user's answer | "you choose" + why>) → adapters/<x>.md
 Tension     : <the conflict in the brief, one line>
 Concept     : <the idea, one sentence a client would repeat>
@@ -133,6 +137,8 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 ---
 
 ### The Thinking Sequence (summary; full version in `thinking/sequence.md`)
+
+Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it.
 
 0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, ask the user; never assume. On "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 1. **Tension**: find the conflict inside the brief (calm vs. urgent, heritage vs. new, luxury vs. honest).
@@ -287,6 +293,8 @@ This is the missing key: it makes an agent think like a designer instead of a te
 
 **Data is fuel, not a menu.** The files in `data/` (archetypes, palettes, fonts, mutations, collisions, motion, signatures, styles) inform the brief. Do not pick from a list; derive from the brief, using the list as reference and constraint. A draw from `scripts/collide.mjs` is a constraint to design inside, not a finished answer. Write the results into the preview block. Each step has a test. If the test fails, redo the step.
 
+**Rules come first, the gate comes last.** Before Step 0, read `gates/rules.md`: every limit the gate measures (contrast, overflow, reduced motion, accessibility, SEO, security, performance budgets). It is design input. Design inside it from the first step; `gates/delivery-gate.md` only verifies it at the end. A design that passes the gate by patching (an invented link, domain or page added to satisfy a check) was not designed within the rules.
+
 ---
 
 ### 0. Stack
@@ -315,6 +323,10 @@ Plain HTML is a real choice, not the default. Use it only with a reason written 
 ---
 
 ### 1. Tension
+
+**Required before this step:** `gates/rules.md` has been read. State it in one line before the step starts:
+`Rules : gates/rules.md read; designing within it.`
+If you haven't read it, stop and read it. No step of the sequence runs without that line.
 
 Every good brief hides a conflict. Design lives in that conflict.
 
@@ -3209,7 +3221,7 @@ as "relative (local)". Schema markup only warns: whether a page is eligible is a
 
 ## Delivery Gate
 
-Run this before handing back **any** page or component. It has four parts: the measured gate, a self-critique score, the AI-default scan and the craft checklist. If anything fails, fix it and run the gate again. Two passes is normal; needing three means the concept is weak, so go back to the Thinking Sequence.
+Verification only. The rules live in `gates/rules.md`, read before Step 1 and designed within; this file checks that the build kept them. Run it before handing back **any** page or component. Four parts: the measured gate, a self-critique score, the AI-default scan and the craft checklist. If anything fails, fix it and run the gate again. Two passes is normal; needing three means the design was not made inside `gates/rules.md`, so go back to the Thinking Sequence instead of patching.
 
 ---
 
@@ -3232,20 +3244,19 @@ node scripts/gate.mjs --verify index.html      # re-scan and check the stamp wri
 
 A server-rendered build that isn't files (a Next.js `.next/` without `out/`, an SSR adapter) can't be served as a folder: start it (`next start`, `astro preview`) and pass the URL. The gate says so instead of guessing. Stamps are written into `.html` files; for a URL or a framework build, keep the printed stamp line in the handoff note or `DESIGN.md`.
 
-It runs six bounded checks in a real browser and prints numbers:
+It runs these bounded checks in a real browser and prints numbers. Each one verifies a section of `gates/rules.md`; the limits are there, not here.
 
-| Code | Check | Fails when |
+| Code | Verify | Limits in `gates/rules.md` |
 |---|---|---|
-| `c` | **Contrast** at 375, 390, 768 and 1440px, reported per width: every visible text element against the pixels actually behind it. The text is hidden, the viewport is screenshotted at each scroll position and the background is sampled. A phone layout that stacks a caption over a pale crop of the image fails at 375 even when the desktop layout passes. Each element is judged by its 10th-percentile sample (not the median), so text that sits partly on a pale image edge cannot pass on its dark half. Every element is measured at every sampled scroll position (every 0.7 viewport, every 0.15 viewport in pinned zones, plus 0/25/50/75/100% of the page and of each zone); a scroll-sequence step is judged in its active (most visible) state **and in every inactive state it rests in**, so a dimmed step at 2.1:1 fails (v2.5.0; see `craft/scroll-sequences.md`). | below 4.5:1 for body text, below 3:1 for large text (≥ 24px, or ≥ 18.66px bold) |
-| `o` | **Overflow** at 375, 390, 768 and 1440px | the page scrolls sideways, or an element leaves the viewport or pushes text out of its parent by more than 1px with no clipping ancestor |
-| `w` | **Long display words** at 375px: every h1–h3 and any text ≥ 32px, including decorative text | the text is wider than its box, leaves the viewport, breaks a word across lines, or splits one word across elements (e.g. "Have" + "li" on two door leaves) |
-| `rm` | **Reduced motion**: the page loaded with `prefers-reduced-motion: reduce` | text that is visible normally is hidden, or pixels keep changing on a still page |
-| `a` | **Alt and names** | an `img` has no `alt`, or a link, button, input or other focusable element has no accessible name |
-| `n` | **Numbers**: every number (counters, prices, `progress`/`meter`, `aria-valuenow`) read at scroll 0, after jumping to the end, and under reduced motion, then compared with the value it settles on once scrolled into view. A value that changes by itself between two settled reads (a live ticker), or that reads as a clock (`9:02`) or sits in `<time>`, `role=timer`/`status`/`log` or `aria-live`, is listed as live and not judged. | an element is visible with a value that is later corrected: "0 hectares" before a count-up runs, a price replaced after load, a counter that never runs under reduced motion |
-
-| `q` | **Motion quality** (gate/3), at 1440 unless noted. *Progression*: every pinned zone (GSAP `.pin-spacer`, `position: sticky` in a parent ≥ 1.5 screens tall, CSS scroll/view timeline) is screenshotted at 8 scroll positions across its length, and consecutive frames are compared. *Smoothness*: p95 `requestAnimationFrame` interval while scrolling the first zone, at 1440 unthrottled and at 375 touch with CPU ×4. *Reduced-motion distinctness*: the page is reloaded under `prefers-reduced-motion: reduce`. | a zone whose median change between samples is ≤ 0.5% of pixels (pinned but static) · p95 over 20 ms at 1440 or over 25 ms at 375 ×4, **judged only on an unconstrained machine**: in a sandbox it prints `not verified — sandbox` with the measured numbers and counts nothing (`docs/adapters/sandbox.md`) · under reduced motion any zone is still pinned (the "animation stopped" fallback) or any text from the full-motion page is missing |
-| `k` | **Accessibility** (gate/3). *Focus-visible*: Tab to each of the first 40 focusable elements; the pixels around it focused and blurred are compared. *Target size* at 375 touch. *200% zoom*: the page at 1440×900, then at a 720×450 CSS viewport (1440×900 at 200%); only losses that appear at 720 count. *Reflow* at 320px. *Forced colors*: the page in `forced-colors: active`; text not on screen at rest is skipped (opacity ≤ 0.05, or an ancestor clipped to nothing, such as a Lens reveal layer at `circle(0px)`). *Keyboard trap*: Tab twice round the page. | focus changes < 1% of the pixels around the element (no visible ring) · a target under 24×24px (WCAG 2.5.8; inline links in a sentence exempt; under 44px is a warning, not counted) · text clipped by an `overflow: hidden` box, or a control off screen or covered, at 200% · any horizontal scroll at 320px · rendered text ink under 3:1 against its box in forced colors, or no visible ink (a transparent fill that survives) · focus cycles inside one region while tabbable elements elsewhere are never reached |
-| `rules` | **The four rule sets** (gate/4, `scripts/rulesets.mjs`), one count per set: the number of distinct rule IDs that fail on the page. **C** copy (`craft/copy.md`): em dashes, aphorism formulas, two-beat antithesis, warm-up openers, vague CTA labels in visible text, alt text, title and meta description. **S** SEO (`craft/seo.md`): noindex, exactly one canonical, title ≤ 60, description ≤ 160, one `h1`, no skipped heading level, JSON-LD parses, ≥ 3 internal links to other pages, clean slugs, no mixed content, `og:image` (1200 × 630 when stated). **P** performance (`craft/performance.md`): AVIF/WebP for raster images, `loading="lazy"` below the fold, the LCP image not lazy, JS gzipped within the tier budget, no empty inline scripts, no render-blocking head scripts. **K** security (`craft/security.md`): cookie flags, secret-shaped strings, URL values written as HTML, CORS wildcard, Content-Security-Policy, `nosniff`, Referrer-Policy (for local files, headers come from a `_headers` file next to the page). | any rule in the set fails; warnings (unsourced claims, long paragraphs, missing JSON-LD, unstated og:image size, unminified scripts, dev builds) are printed and not counted |
+| `c` | **Contrast** of every visible text element against the pixels actually behind it (text hidden, viewport screenshotted, background sampled), per width and per sampled scroll position; scroll-sequence steps in every state they rest in (see `craft/scroll-sequences.md`) | Contrast |
+| `o` | **Overflow**: sideways scroll and elements leaving the viewport or their parent | Overflow and long words |
+| `w` | **Long display words** at 375px, decorative text included | Overflow and long words |
+| `rm` | **Reduced motion**: the page loaded with `prefers-reduced-motion: reduce` | Reduced motion |
+| `a` | **Alt and names** of images and focusable elements | Accessibility |
+| `n` | **Numbers** (counters, prices, `progress`/`meter`, `aria-valuenow`) read at scroll 0, at the end and under reduced motion, against the settled value. Live values (a ticker, a clock, `<time>`, `role=timer`/`status`/`log`, `aria-live`) are listed, not judged | Reduced motion (values) |
+| `q` | **Motion quality** (gate/3): pinned-zone progression over 8 frames, p95 `requestAnimationFrame` while scrolling (in a sandbox: `not verified — sandbox`, numbers printed, nothing counted, `docs/adapters/sandbox.md`), reduced-motion distinctness | Motion quality and budgets; Reduced motion |
+| `k` | **Accessibility** (gate/3): focus-visible on the first 40 focusable elements, target size at 375 touch, 200% zoom, 320px reflow, forced colors (text not on screen at rest is skipped), keyboard trap | Accessibility; Overflow (reflow); Contrast (forced colors) |
+| `rules` | **The four rule sets** (gate/4, `scripts/rulesets.mjs`), one count per set: distinct failing rule IDs. **C** copy, **S** SEO, **P** performance, **K** security (for local files, headers come from a `_headers` file next to the page). Warnings are printed and not counted | Copy; SEO; Performance; Security |
 
 The output ends with a stamp line built only from those numbers:
 `gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · <id>`. The id is a hash of what was measured on this page, so the same page gives the same id and a different page does not. `c` is the total of the per-width contrast failures. A stamp from an older gate (`gate/1`: five checks; `gate/2`: no `q`/`k`, no Q/A axes; `gate/3`: no `rules:` segment) is rejected by `--verify`: re-run the gate and paste the new line. The rule-set letters live in their own `rules:` segment because the critique already uses C (concept) and S (sameness). While fixing copy, head tags or headers, `node scripts/gate.mjs <page> --rules` runs only the four rule sets in a few seconds; it prints no stamp, because a stamp needs every axis.
@@ -3342,40 +3353,41 @@ The placeholders are deliberate. There are no numbers to copy. Write the archety
 14. Are there invented statistics, logos, testimonials or awards?
 15. Does the copy contain any banned phrase from `craft/copy.md`?
 16. Are there emoji used as icons or bullets?
+17. Does the page link to a domain, page or address that the brief did not supply and the build did not create?
 
 **Motion**
-17. Does anything fade-up on scroll just because it can?
-18. Is any animation missing a reduced-motion path?
-19. Are layout properties animated?
-20. Do UI feedback animations exceed <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->, or use ease-in or `scale(0)` entrances?
-21. Is the scroll hijacked (custom scroll that breaks keyboard, anchor links or screen readers)?
-22. Does any loop or canvas keep running off-screen?
+18. Does anything fade-up on scroll just because it can?
+19. Is any animation missing a reduced-motion path?
+20. Are layout properties animated?
+21. Do UI feedback animations exceed <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->, or use ease-in or `scale(0)` entrances?
+22. Is the scroll hijacked (custom scroll that breaks keyboard, anchor links or screen readers)?
+23. Does any loop or canvas keep running off-screen?
 
 **Code**
-23. Are there TODOs, `// ...rest`, or unfinished components?
-24. Are there clickable `div`s, missing labels or missing `alt` text?
-25. Are there `markers: true`, console logs or unused imports left in?
+24. Are there TODOs, `// ...rest`, or unfinished components?
+25. Are there clickable `div`s, missing labels or missing `alt` text?
+26. Are there `markers: true`, console logs or unused imports left in?
 
 **Copy** (the copy pass in `craft/copy.md`)
-26. Does more than one section headline share the same shape (all questions, all "X. Y." fragments, all mirror sentences)?
-27. Does any sentence end in a vague "-ing" benefit tail, or cite unnamed experts or studies?
-28. Is the same thing called by more than one name across the page (synonym cycling)?
-29. Does an em dash appear in most paragraphs, or does every section close with a generic invitation?
+27. Does more than one section headline share the same shape (all questions, all "X. Y." fragments, all mirror sentences)?
+28. Does any sentence end in a vague "-ing" benefit tail, or cite unnamed experts or studies?
+29. Is the same thing called by more than one name across the page (synonym cycling)?
+30. Does an em dash appear in most paragraphs, or does every section close with a generic invitation?
 
 ---
 
 ### Part 3: Craft checklist
 
 - [ ] Concept sentence and signature move are visible in the first screen
-- [ ] Type: display face chosen with a reason; body ≥ 16px; measure ≤ 75ch; `text-wrap: balance` on headings
-- [ ] Colour: all text pairs verified (`node scripts/contrast.mjs` while designing, `node scripts/gate.mjs` on the build), accent ≤ 5% of each screen
+- [ ] Type: display face chosen with a reason; body size and measure within `gates/rules.md` (Hierarchy); `text-wrap: balance` on headings
+- [ ] Colour: all text pairs verified (`node scripts/contrast.mjs` while designing, `node scripts/gate.mjs` on the build); accent within `gates/rules.md` (Contrast)
 - [ ] Layout: one deliberate grid break per screen, recomposed (not squeezed) on mobile
 - [ ] Motion: tokens used; `gsap.matchMedia()` with reduced-motion and pointer conditions; `ScrollTrigger.refresh()` after load
 - [ ] Mobile motion matrix applied
 - [ ] Scroll sequences (pinned, scrubbed, image-sequence, lit-step lists) reviewed per `craft/scroll-sequences.md`, record in the handoff:
-  - [ ] Each step's contrast passes AA **active and inactive** (dimmed text measured as rendered: text × opacity + background × (1 − opacity))
-  - [ ] Reduced-motion fallback is a **designed still**, not a poster: unpinned plates, every step fully visible
-  - [ ] **No step shows a value that is later corrected**
+  - [ ] Each step's contrast verified **active and inactive** (`gates/rules.md`, Contrast)
+  - [ ] Reduced-motion fallback verified as a **designed still** (`gates/rules.md`, Reduced motion)
+  - [ ] **No step shows a value that is later corrected** (verified)
 - [ ] Accessibility: keyboard path, visible focus, landmarks, skip link, alt text
 - [ ] Performance: LCP image preloaded, heavy libraries loaded dynamically, off-screen work paused
 - [ ] SEO: title, description, OG image, structured data, `llms.txt` (for sites)
@@ -3499,6 +3511,166 @@ Needs     : <[NEEDS COPY]/[NEEDS ASSET] items for the user>
 Measured  : <the gate.mjs stamp line and real numbers, or "not verified — no browser">
 Try next  : <one command, e.g. /bolder on the hero, or /motomate the product chapter>
 ```
+
+
+---
+
+<!-- file: gates/rules.md -->
+
+## Rules (design input)
+
+Read before Step 1. Design inside these. `scripts/gate.mjs` measures them after the build; `gates/delivery-gate.md` verifies them.
+
+### Contrast (gate `c`)
+
+| Rule | Limit |
+|---|---|
+| Body text | ≥ 4.5:1 against the pixels behind it |
+| Large text (≥ 24px, or ≥ 18.66px bold) | ≥ 3:1 |
+| Widths measured | 375, 390, 768, 1440px |
+| Sample judged | the 10th-percentile background sample, not the median |
+| Scroll positions | every 0.7 viewport; every 0.15 viewport in pinned zones; 0/25/50/75/100% of page and zone |
+| Scroll-sequence steps | AA in the active state and in every inactive (dimmed) state |
+| Dimmed text | measured as rendered: text × opacity + background × (1 − opacity) |
+| Forced colors | rendered ink ≥ 3:1 against its box |
+| Accent | ≤ 5% of each screen |
+
+### Overflow and long words (gate `o`, `w`)
+
+| Rule | Limit |
+|---|---|
+| Horizontal scroll | none at 375, 390, 768, 1440px |
+| Element past viewport or parent | ≤ 1px, unless a clipping ancestor |
+| Display text at 375px (h1–h3, any text ≥ 32px) | fits its box, stays in the viewport, no word broken across lines |
+| One word split across elements | never |
+| Reflow at 320px | no horizontal scroll |
+
+### Hierarchy (critique `H`, SEO `S`)
+
+| Rule | Limit |
+|---|---|
+| `h1` | exactly one per page |
+| Heading levels | no skipped level |
+| Largest text on the first 375px screen | one |
+| Body size | ≥ 16px |
+| Measure | ≤ 75ch |
+
+### Reduced motion (gate `rm`, `q`)
+
+| Rule | Limit |
+|---|---|
+| `prefers-reduced-motion` path | every animation has one |
+| Text visible in full motion | visible under reduced motion |
+| Still page | no pixels change |
+| Pinned zones | none pinned under reduced motion |
+| Fallback | a designed still: unpinned plates, every step visible |
+| Values | no value later corrected (no "0" before a count-up) |
+
+### Motion quality and budgets (gate `q`, critique `M`, `V`)
+
+| Rule | Limit |
+|---|---|
+| Pinned zone progression | median change between 8 samples > 0.5% of pixels |
+| Smoothness, p95 rAF interval | ≤ 20 ms at 1440; ≤ 25 ms at 375 with CPU ×4 (unconstrained machine only) |
+| Pinned sections | ≤ 2 |
+| WebGL canvases | ≤ 1 |
+| JS gzipped, Tier 1 | ≤ 30KB beyond the framework |
+| JS gzipped, Tier 2 | ≤ 80KB |
+| JS gzipped, Tier 3 | ≤ 140KB |
+| JS gzipped, Tier 4–5 (or tier unknown) | ≤ 250KB |
+| Section entrance patterns | no two top-level sections share one (static excluded) |
+| UI feedback (press, hover, focus, toggle, tooltip) | ≤ <!--rule:ui_feedback_max_ms-->250ms<!--/rule--> |
+| Entrances | no `scale(0)`, no ease-in |
+| Animated properties | `transform`, `opacity`; never `top`, `left`, `width`, `height` |
+| Off-screen loops and canvases | paused |
+| Scroll | never hijacked: keyboard, anchors and screen readers keep working |
+
+### Accessibility (gate `a`, `k`)
+
+| Rule | Limit |
+|---|---|
+| `img` | has `alt`; decorative uses `alt=""` |
+| Focusable elements | have an accessible name |
+| Focus ring | changes ≥ 1% of the pixels around the element |
+| Touch targets at 375 | ≥ 24×24px (inline links exempt); < 44px warns |
+| 200% zoom (720×450 CSS viewport) | no text clipped, no control off screen or covered |
+| Keyboard | no trap; every tabbable element reachable |
+| Clickable elements | real `a`/`button`, never a clickable `div` |
+| Landmarks and skip link | present |
+
+### Content and defaults (Delivery Gate Part 2)
+
+| Rule | Limit |
+|---|---|
+| Display face | not <!--rule:banned_display_fonts-->Inter, Roboto, Open Sans, Lato, Poppins, Montserrat, Arial, Helvetica or the system UI stack<!--/rule--> |
+| Caution faces | <!--rule:caution_fonts-->Playfair Display and Space Grotesk<!--/rule--> only with a stated reason |
+| Display faces | one (two only for a contrast concept) |
+| Accent colours | one |
+| Signature moves | one |
+| Placeholder copy | none: no lorem ipsum, "Acme", "John Doe" |
+| Statistics, logos, testimonials, awards | real and sourced, or `[NEEDS COPY]` |
+| Links, domains, pages | only those the brief supplies or the build creates |
+| Emoji as icons or bullets | none |
+| Gradients, blobs, glass, bento, three-icon feature row | only with a concept reason |
+| Code | no TODOs, `// ...rest`, `markers: true`, stray `console.log` |
+
+### Copy (gate `rules: C`, `craft/copy.md`)
+
+| Rule | Limit |
+|---|---|
+| copy-04 | no em dash in visible copy, `alt`, title or description |
+| copy-09 | no aphorism formula ("It's not X, it's Y") |
+| copy-11 | no warm-up opener |
+| copy-15 | no two-beat antithesis ("Not just X, but Y") |
+| copy-17 | no vague CTA label ("Learn more", "Submit", "Click here") |
+| copy-06 | paragraphs ≤ 4 lines (warns) |
+| copy-16 | no unsourced "trusted by N" claim (warns) |
+
+### SEO (gate `rules: S`, `craft/seo.md`)
+
+| Rule | Limit |
+|---|---|
+| seo-03 | no `noindex` on public pages |
+| seo-04 | exactly one canonical |
+| seo-05 | title ≤ 60 characters, unique |
+| seo-06 | description ≤ 160 characters, unique |
+| seo-07 | one `h1` |
+| seo-08 | no skipped heading level |
+| seo-10 | JSON-LD parses; schema where eligible (warns when missing) |
+| seo-11 | ≥ 3 internal links to other pages |
+| seo-16 | no mixed content |
+| seo-17 | slugs lowercase, hyphenated, no IDs or query strings |
+| seo-18 | `og:image` present, 1200 × 630 |
+| seo-01, seo-02, seo-12 | sitemap, robots.txt, zero broken links (site level) |
+
+### Performance (gate `rules: P`, `craft/performance.md`)
+
+| Rule | Limit |
+|---|---|
+| perf-01 | raster images AVIF or WebP |
+| perf-02 | below-the-fold images `loading="lazy"` |
+| perf-03 | LCP image not lazy |
+| perf-04 | JS gzipped within the tier budget |
+| perf-11 | no empty inline scripts |
+| perf-12 | no render-blocking head scripts |
+| perf-07 | scripts > 2KB minified (warns) |
+| Hero image | ≤ 200KB |
+| `img`/`video` | `width` and `height` or an `aspect-ratio` box |
+| Fonts | ≤ 1 preloaded file, `font-display: swap` |
+| Core Web Vitals | LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1 (never claimed unmeasured) |
+
+### Security (gate `rules: K`, `craft/security.md`)
+
+| Rule | Limit |
+|---|---|
+| sec-06 | auth cookies `HttpOnly`, `Secure`, `SameSite` |
+| sec-07 | no secret-shaped string in served HTML or JS |
+| sec-12 | no URL-controlled value written with `innerHTML`/`outerHTML`/`document.write` |
+| sec-16 | no `Access-Control-Allow-Origin: *` over https |
+| sec-17 | no development build or source map in production (warns) |
+| sec-h1 | `Content-Security-Policy` sent (header or meta) |
+| sec-h2 | `X-Content-Type-Options: nosniff` sent (header) |
+| sec-h3 | `Referrer-Policy` sent (header or meta) |
 
 
 ---

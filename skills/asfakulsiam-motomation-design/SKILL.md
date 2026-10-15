@@ -35,6 +35,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 
 | Task | Load |
 |---|---|
+| **Any build or redesign (always, first, before Step 1)** | `gates/rules.md`: the rules the gate measures. Design input, read before designing; state `Rules : gates/rules.md read; designing within it.` before the Thinking Sequence |
 | Any new page or site | `thinking/brief-inference.md` → `thinking/sequence.md` (Step 0 Stack first) → `principles/house-style.md` |
 | Need new ideas / "make it different" | `invention/mad-artist.md` + run `scripts/collide.mjs` |
 | Choosing a page structure | `structures/archetypes.md` |
@@ -51,19 +52,21 @@ If there is even a small chance this skill applies to a web design task, use it.
 | A site category (hotel, SaaS, studio…) | `categories/<category>.md` |
 | **Any build or redesign (always, before step 6 Build)** | `craft/copy.md` + `craft/seo.md` + `craft/performance.md` + `craft/security.md` |
 | Accessibility, responsive, mobile motion, scroll sequences | `craft/*.md` |
-| Before handing anything back | `gates/delivery-gate.md` (always) |
+| Before handing anything back | `gates/delivery-gate.md` (always): verification of `gates/rules.md`, not new rules |
 | Framework specifics | `adapters/<stack>.md`, chosen by Step 0 (Stack): `next.md`, `astro.md`, `react-vite.md` or `vanilla.md`. Never skipped, never assumed |
 | Commands and flags | `commands/overview.md` |
 
-Files are short on purpose. Load them as you need them, not all at once. The one exception: the four rule sets
+Files are short on purpose. Load them as you need them, not all at once. Two exceptions: `gates/rules.md` is loaded first for every build or redesign, and the four rule sets
 (copy, SEO, performance, security) are always loaded for a build or a redesign, because the gate measures them
-(axes C, S, P, K in gate/4) and the Delivery Gate ticks the rest by hand.
+(axes C, S, P, K in gate/4) and the Delivery Gate ticks the rest by hand. Rules come first, the gate comes last:
+design inside `gates/rules.md`, then verify with `gates/delivery-gate.md`; never design first and patch to pass.
 
 ---
 
 ## Default flow (`/build`)
 
 ```
+R. Read the rules     gates/rules.md                → state "Rules : gates/rules.md read; designing within it."
 0. Read the room      thinking/brief-inference.md   → audience, job, feel, constraints, gaps
 1. Thinking Sequence  thinking/sequence.md          → STACK (named, or ask; load the adapter),
                                                       tension, concept, archetype+mutation,
@@ -74,7 +77,7 @@ Files are short on purpose. Load them as you need them, not all at once. The one
 4. Motion plan        motion/tokens.md + tier file  → write MOTION.md (templates/MOTION.md); Tier 3–5: timing sheet per motion/choreography.md
 5. Preview block      show the plan (below) and wait for approval only if the user asked to review first
 6. Build              find before build (below), in the stack and adapter from Step 0; complete code, real copy
-7. Delivery Gate      gates/delivery-gate.md        → score, fix, stamp, log to memory
+7. Delivery Gate      gates/delivery-gate.md        → verify gates/rules.md, score, fix, stamp, log to memory
 ```
 
 ### Find before build (step 6)
@@ -94,6 +97,7 @@ Standard UI gets found, not invented. Signature moments get invented, not found.
 
 ```
 MOTOMATION PLAN
+Rules       : gates/rules.md read; designing within it
 Stack       : <stack> (<named in brief | from the project | user's answer | "you choose" + why>) → adapters/<x>.md
 Tension     : <the conflict in the brief, one line>
 Concept     : <the idea, one sentence a client would repeat>
@@ -131,6 +135,8 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 ---
 
 ## The Thinking Sequence (summary; full version in `thinking/sequence.md`)
+
+Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it.
 
 0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, ask the user; never assume. On "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 1. **Tension**: find the conflict inside the brief (calm vs. urgent, heritage vs. new, luxury vs. honest).

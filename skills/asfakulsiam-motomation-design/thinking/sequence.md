@@ -4,6 +4,8 @@ This is the missing key: it makes an agent think like a designer instead of a te
 
 **Data is fuel, not a menu.** The files in `data/` (archetypes, palettes, fonts, mutations, collisions, motion, signatures, styles) inform the brief. Do not pick from a list; derive from the brief, using the list as reference and constraint. A draw from `scripts/collide.mjs` is a constraint to design inside, not a finished answer. Write the results into the preview block. Each step has a test. If the test fails, redo the step.
 
+**Rules come first, the gate comes last.** Before Step 0, read `gates/rules.md`: every limit the gate measures (contrast, overflow, reduced motion, accessibility, SEO, security, performance budgets). It is design input. Design inside it from the first step; `gates/delivery-gate.md` only verifies it at the end. A design that passes the gate by patching (an invented link, domain or page added to satisfy a check) was not designed within the rules.
+
 ---
 
 ## 0. Stack
@@ -32,6 +34,10 @@ Plain HTML is a real choice, not the default. Use it only with a reason written 
 ---
 
 ## 1. Tension
+
+**Required before this step:** `gates/rules.md` has been read. State it in one line before the step starts:
+`Rules : gates/rules.md read; designing within it.`
+If you haven't read it, stop and read it. No step of the sequence runs without that line.
 
 Every good brief hides a conflict. Design lives in that conflict.
 

@@ -157,6 +157,7 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
     "principles/house-style.md": ["ui_feedback_max_ms"],
     "motion/tier-1-basic.md": ["ui_feedback_max_ms"],
     "gates/delivery-gate.md": ["banned_display_fonts", "caution_fonts", "ui_feedback_max_ms"],
+    "gates/rules.md": ["banned_display_fonts", "caution_fonts", "ui_feedback_max_ms"],
   };
   for (const [file, keys] of Object.entries(required)) {
     const text = readFileSync(join(SKILL, file), "utf8");

@@ -30,6 +30,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 ### Default flow (`/build`)
 
 ```
+R. Read the rules     gates/rules.md                → state "Rules : gates/rules.md read; designing within it."
 0. Read the room      thinking/brief-inference.md   → audience, job, feel, constraints, gaps
 1. Thinking Sequence  thinking/sequence.md          → STACK (named, or ask; load the adapter),
                                                       tension, concept, archetype+mutation,
@@ -40,13 +41,14 @@ If there is even a small chance this skill applies to a web design task, use it.
 4. Motion plan        motion/tokens.md + tier file  → write MOTION.md (templates/MOTION.md); Tier 3–5: timing sheet per motion/choreography.md
 5. Preview block      show the plan (below) and wait for approval only if the user asked to review first
 6. Build              find before build (below), in the stack and adapter from Step 0; complete code, real copy
-7. Delivery Gate      gates/delivery-gate.md        → score, fix, stamp, log to memory
+7. Delivery Gate      gates/delivery-gate.md        → verify gates/rules.md, score, fix, stamp, log to memory
 ```
 
 #### Preview block (show before building)
 
 ```
 MOTOMATION PLAN
+Rules       : gates/rules.md read; designing within it
 Stack       : <stack> (<named in brief | from the project | user's answer | "you choose" + why>) → adapters/<x>.md
 Tension     : <the conflict in the brief, one line>
 Concept     : <the idea, one sentence a client would repeat>
@@ -84,6 +86,8 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 ---
 
 ### The Thinking Sequence (summary; full version in `thinking/sequence.md`)
+
+Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it.
 
 0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, ask the user; never assume. On "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 
@@ -132,16 +136,6 @@ Two layers, kept apart on purpose (details in `principles/restraint.md`):
 
 ---
 
-### Commands
-
-`/shape` `/build` `/invent` `/signature` `/motomate` `/animate` `/type` `/bolder` `/quieter` `/distill` `/mutate` `/overdrive` `/critique` `/audit` `/study` `/polish` `/dials` `/help` `/version` `/check-update` `/update-skill`
-
-Flags: `--tier=1..5` `--energy=1..3` `--rhythm=1..3` `--motion=1..3` `--stack=next|react|vanilla|astro` `--seed=<n>` `--review` (stop after the preview block)
-
-Full behaviour of each command is in `commands/overview.md`. Critique output format is in `commands/critique-format.md`.
-
----
-
 ### Output rules
 
 - Explain the plan in the preview block, then build. Keep prose short. The work is the answer.
@@ -159,6 +153,10 @@ You can't run the collision engine, memory or gate here. So derive the structure
 ## Thinking Sequence (steps)
 
 ### 1. Tension
+
+**Required before this step:** `gates/rules.md` has been read. State it in one line before the step starts:
+`Rules : gates/rules.md read; designing within it.`
+If you haven't read it, stop and read it. No step of the sequence runs without that line.
 
 Every good brief hides a conflict. Design lives in that conflict.
 
@@ -300,40 +298,41 @@ The budgets hold either way: one signature move, one accent moment per screen, o
 14. Are there invented statistics, logos, testimonials or awards?
 15. Does the copy contain any banned phrase from `craft/copy.md`?
 16. Are there emoji used as icons or bullets?
+17. Does the page link to a domain, page or address that the brief did not supply and the build did not create?
 
 **Motion**
-17. Does anything fade-up on scroll just because it can?
-18. Is any animation missing a reduced-motion path?
-19. Are layout properties animated?
-20. Do UI feedback animations exceed 250ms, or use ease-in or `scale(0)` entrances?
-21. Is the scroll hijacked (custom scroll that breaks keyboard, anchor links or screen readers)?
-22. Does any loop or canvas keep running off-screen?
+18. Does anything fade-up on scroll just because it can?
+19. Is any animation missing a reduced-motion path?
+20. Are layout properties animated?
+21. Do UI feedback animations exceed 250ms, or use ease-in or `scale(0)` entrances?
+22. Is the scroll hijacked (custom scroll that breaks keyboard, anchor links or screen readers)?
+23. Does any loop or canvas keep running off-screen?
 
 **Code**
-23. Are there TODOs, `// ...rest`, or unfinished components?
-24. Are there clickable `div`s, missing labels or missing `alt` text?
-25. Are there `markers: true`, console logs or unused imports left in?
+24. Are there TODOs, `// ...rest`, or unfinished components?
+25. Are there clickable `div`s, missing labels or missing `alt` text?
+26. Are there `markers: true`, console logs or unused imports left in?
 
 **Copy** (the copy pass in `craft/copy.md`)
-26. Does more than one section headline share the same shape (all questions, all "X. Y." fragments, all mirror sentences)?
-27. Does any sentence end in a vague "-ing" benefit tail, or cite unnamed experts or studies?
-28. Is the same thing called by more than one name across the page (synonym cycling)?
-29. Does an em dash appear in most paragraphs, or does every section close with a generic invitation?
+27. Does more than one section headline share the same shape (all questions, all "X. Y." fragments, all mirror sentences)?
+28. Does any sentence end in a vague "-ing" benefit tail, or cite unnamed experts or studies?
+29. Is the same thing called by more than one name across the page (synonym cycling)?
+30. Does an em dash appear in most paragraphs, or does every section close with a generic invitation?
 
 ---
 
 ### Part 3: Craft checklist
 
 - [ ] Concept sentence and signature move are visible in the first screen
-- [ ] Type: display face chosen with a reason; body ≥ 16px; measure ≤ 75ch; `text-wrap: balance` on headings
-- [ ] Colour: all text pairs verified (`node scripts/contrast.mjs` while designing, `node scripts/gate.mjs` on the build), accent ≤ 5% of each screen
+- [ ] Type: display face chosen with a reason; body size and measure within `gates/rules.md` (Hierarchy); `text-wrap: balance` on headings
+- [ ] Colour: all text pairs verified (`node scripts/contrast.mjs` while designing, `node scripts/gate.mjs` on the build); accent within `gates/rules.md` (Contrast)
 - [ ] Layout: one deliberate grid break per screen, recomposed (not squeezed) on mobile
 - [ ] Motion: tokens used; `gsap.matchMedia()` with reduced-motion and pointer conditions; `ScrollTrigger.refresh()` after load
 - [ ] Mobile motion matrix applied
 - [ ] Scroll sequences (pinned, scrubbed, image-sequence, lit-step lists) reviewed per `craft/scroll-sequences.md`, record in the handoff:
-  - [ ] Each step's contrast passes AA **active and inactive** (dimmed text measured as rendered: text × opacity + background × (1 − opacity))
-  - [ ] Reduced-motion fallback is a **designed still**, not a poster: unpinned plates, every step fully visible
-  - [ ] **No step shows a value that is later corrected**
+  - [ ] Each step's contrast verified **active and inactive** (`gates/rules.md`, Contrast)
+  - [ ] Reduced-motion fallback verified as a **designed still** (`gates/rules.md`, Reduced motion)
+  - [ ] **No step shows a value that is later corrected** (verified)
 - [ ] Accessibility: keyboard path, visible focus, landmarks, skip link, alt text
 - [ ] Performance: LCP image preloaded, heavy libraries loaded dynamically, off-screen work paused
 - [ ] SEO: title, description, OG image, structured data, `llms.txt` (for sites)

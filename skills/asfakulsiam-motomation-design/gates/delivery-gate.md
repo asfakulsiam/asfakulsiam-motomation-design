@@ -1,6 +1,6 @@
 # Delivery Gate
 
-Run this before handing back **any** page or component. It has four parts: the measured gate, a self-critique score, the AI-default scan and the craft checklist. If anything fails, fix it and run the gate again. Two passes is normal; needing three means the concept is weak, so go back to the Thinking Sequence.
+Verification only. The rules live in `gates/rules.md`, read before Step 1 and designed within; this file checks that the build kept them. Run it before handing back **any** page or component. Four parts: the measured gate, a self-critique score, the AI-default scan and the craft checklist. If anything fails, fix it and run the gate again. Two passes is normal; needing three means the design was not made inside `gates/rules.md`, so go back to the Thinking Sequence instead of patching.
 
 ---
 
@@ -23,20 +23,19 @@ node scripts/gate.mjs --verify index.html      # re-scan and check the stamp wri
 
 A server-rendered build that isn't files (a Next.js `.next/` without `out/`, an SSR adapter) can't be served as a folder: start it (`next start`, `astro preview`) and pass the URL. The gate says so instead of guessing. Stamps are written into `.html` files; for a URL or a framework build, keep the printed stamp line in the handoff note or `DESIGN.md`.
 
-It runs six bounded checks in a real browser and prints numbers:
+It runs these bounded checks in a real browser and prints numbers. Each one verifies a section of `gates/rules.md`; the limits are there, not here.
 
-| Code | Check | Fails when |
+| Code | Verify | Limits in `gates/rules.md` |
 |---|---|---|
-| `c` | **Contrast** at 375, 390, 768 and 1440px, reported per width: every visible text element against the pixels actually behind it. The text is hidden, the viewport is screenshotted at each scroll position and the background is sampled. A phone layout that stacks a caption over a pale crop of the image fails at 375 even when the desktop layout passes. Each element is judged by its 10th-percentile sample (not the median), so text that sits partly on a pale image edge cannot pass on its dark half. Every element is measured at every sampled scroll position (every 0.7 viewport, every 0.15 viewport in pinned zones, plus 0/25/50/75/100% of the page and of each zone); a scroll-sequence step is judged in its active (most visible) state **and in every inactive state it rests in**, so a dimmed step at 2.1:1 fails (v2.5.0; see `craft/scroll-sequences.md`). | below 4.5:1 for body text, below 3:1 for large text (≥ 24px, or ≥ 18.66px bold) |
-| `o` | **Overflow** at 375, 390, 768 and 1440px | the page scrolls sideways, or an element leaves the viewport or pushes text out of its parent by more than 1px with no clipping ancestor |
-| `w` | **Long display words** at 375px: every h1–h3 and any text ≥ 32px, including decorative text | the text is wider than its box, leaves the viewport, breaks a word across lines, or splits one word across elements (e.g. "Have" + "li" on two door leaves) |
-| `rm` | **Reduced motion**: the page loaded with `prefers-reduced-motion: reduce` | text that is visible normally is hidden, or pixels keep changing on a still page |
-| `a` | **Alt and names** | an `img` has no `alt`, or a link, button, input or other focusable element has no accessible name |
-| `n` | **Numbers**: every number (counters, prices, `progress`/`meter`, `aria-valuenow`) read at scroll 0, after jumping to the end, and under reduced motion, then compared with the value it settles on once scrolled into view. A value that changes by itself between two settled reads (a live ticker), or that reads as a clock (`9:02`) or sits in `<time>`, `role=timer`/`status`/`log` or `aria-live`, is listed as live and not judged. | an element is visible with a value that is later corrected: "0 hectares" before a count-up runs, a price replaced after load, a counter that never runs under reduced motion |
-
-| `q` | **Motion quality** (gate/3), at 1440 unless noted. *Progression*: every pinned zone (GSAP `.pin-spacer`, `position: sticky` in a parent ≥ 1.5 screens tall, CSS scroll/view timeline) is screenshotted at 8 scroll positions across its length, and consecutive frames are compared. *Smoothness*: p95 `requestAnimationFrame` interval while scrolling the first zone, at 1440 unthrottled and at 375 touch with CPU ×4. *Reduced-motion distinctness*: the page is reloaded under `prefers-reduced-motion: reduce`. | a zone whose median change between samples is ≤ 0.5% of pixels (pinned but static) · p95 over 20 ms at 1440 or over 25 ms at 375 ×4, **judged only on an unconstrained machine**: in a sandbox it prints `not verified — sandbox` with the measured numbers and counts nothing (`docs/adapters/sandbox.md`) · under reduced motion any zone is still pinned (the "animation stopped" fallback) or any text from the full-motion page is missing |
-| `k` | **Accessibility** (gate/3). *Focus-visible*: Tab to each of the first 40 focusable elements; the pixels around it focused and blurred are compared. *Target size* at 375 touch. *200% zoom*: the page at 1440×900, then at a 720×450 CSS viewport (1440×900 at 200%); only losses that appear at 720 count. *Reflow* at 320px. *Forced colors*: the page in `forced-colors: active`; text not on screen at rest is skipped (opacity ≤ 0.05, or an ancestor clipped to nothing, such as a Lens reveal layer at `circle(0px)`). *Keyboard trap*: Tab twice round the page. | focus changes < 1% of the pixels around the element (no visible ring) · a target under 24×24px (WCAG 2.5.8; inline links in a sentence exempt; under 44px is a warning, not counted) · text clipped by an `overflow: hidden` box, or a control off screen or covered, at 200% · any horizontal scroll at 320px · rendered text ink under 3:1 against its box in forced colors, or no visible ink (a transparent fill that survives) · focus cycles inside one region while tabbable elements elsewhere are never reached |
-| `rules` | **The four rule sets** (gate/4, `scripts/rulesets.mjs`), one count per set: the number of distinct rule IDs that fail on the page. **C** copy (`craft/copy.md`): em dashes, aphorism formulas, two-beat antithesis, warm-up openers, vague CTA labels in visible text, alt text, title and meta description. **S** SEO (`craft/seo.md`): noindex, exactly one canonical, title ≤ 60, description ≤ 160, one `h1`, no skipped heading level, JSON-LD parses, ≥ 3 internal links to other pages, clean slugs, no mixed content, `og:image` (1200 × 630 when stated). **P** performance (`craft/performance.md`): AVIF/WebP for raster images, `loading="lazy"` below the fold, the LCP image not lazy, JS gzipped within the tier budget, no empty inline scripts, no render-blocking head scripts. **K** security (`craft/security.md`): cookie flags, secret-shaped strings, URL values written as HTML, CORS wildcard, Content-Security-Policy, `nosniff`, Referrer-Policy (for local files, headers come from a `_headers` file next to the page). | any rule in the set fails; warnings (unsourced claims, long paragraphs, missing JSON-LD, unstated og:image size, unminified scripts, dev builds) are printed and not counted |
+| `c` | **Contrast** of every visible text element against the pixels actually behind it (text hidden, viewport screenshotted, background sampled), per width and per sampled scroll position; scroll-sequence steps in every state they rest in (see `craft/scroll-sequences.md`) | Contrast |
+| `o` | **Overflow**: sideways scroll and elements leaving the viewport or their parent | Overflow and long words |
+| `w` | **Long display words** at 375px, decorative text included | Overflow and long words |
+| `rm` | **Reduced motion**: the page loaded with `prefers-reduced-motion: reduce` | Reduced motion |
+| `a` | **Alt and names** of images and focusable elements | Accessibility |
+| `n` | **Numbers** (counters, prices, `progress`/`meter`, `aria-valuenow`) read at scroll 0, at the end and under reduced motion, against the settled value. Live values (a ticker, a clock, `<time>`, `role=timer`/`status`/`log`, `aria-live`) are listed, not judged | Reduced motion (values) |
+| `q` | **Motion quality** (gate/3): pinned-zone progression over 8 frames, p95 `requestAnimationFrame` while scrolling (in a sandbox: `not verified — sandbox`, numbers printed, nothing counted, `docs/adapters/sandbox.md`), reduced-motion distinctness | Motion quality and budgets; Reduced motion |
+| `k` | **Accessibility** (gate/3): focus-visible on the first 40 focusable elements, target size at 375 touch, 200% zoom, 320px reflow, forced colors (text not on screen at rest is skipped), keyboard trap | Accessibility; Overflow (reflow); Contrast (forced colors) |
+| `rules` | **The four rule sets** (gate/4, `scripts/rulesets.mjs`), one count per set: distinct failing rule IDs. **C** copy, **S** SEO, **P** performance, **K** security (for local files, headers come from a `_headers` file next to the page). Warnings are printed and not counted | Copy; SEO; Performance; Security |
 
 The output ends with a stamp line built only from those numbers:
 `gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · <id>`. The id is a hash of what was measured on this page, so the same page gives the same id and a different page does not. `c` is the total of the per-width contrast failures. A stamp from an older gate (`gate/1`: five checks; `gate/2`: no `q`/`k`, no Q/A axes; `gate/3`: no `rules:` segment) is rejected by `--verify`: re-run the gate and paste the new line. The rule-set letters live in their own `rules:` segment because the critique already uses C (concept) and S (sameness). While fixing copy, head tags or headers, `node scripts/gate.mjs <page> --rules` runs only the four rule sets in a few seconds; it prints no stamp, because a stamp needs every axis.
@@ -133,40 +132,41 @@ The placeholders are deliberate. There are no numbers to copy. Write the archety
 14. Are there invented statistics, logos, testimonials or awards?
 15. Does the copy contain any banned phrase from `craft/copy.md`?
 16. Are there emoji used as icons or bullets?
+17. Does the page link to a domain, page or address that the brief did not supply and the build did not create?
 
 **Motion**
-17. Does anything fade-up on scroll just because it can?
-18. Is any animation missing a reduced-motion path?
-19. Are layout properties animated?
-20. Do UI feedback animations exceed <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->, or use ease-in or `scale(0)` entrances?
-21. Is the scroll hijacked (custom scroll that breaks keyboard, anchor links or screen readers)?
-22. Does any loop or canvas keep running off-screen?
+18. Does anything fade-up on scroll just because it can?
+19. Is any animation missing a reduced-motion path?
+20. Are layout properties animated?
+21. Do UI feedback animations exceed <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->, or use ease-in or `scale(0)` entrances?
+22. Is the scroll hijacked (custom scroll that breaks keyboard, anchor links or screen readers)?
+23. Does any loop or canvas keep running off-screen?
 
 **Code**
-23. Are there TODOs, `// ...rest`, or unfinished components?
-24. Are there clickable `div`s, missing labels or missing `alt` text?
-25. Are there `markers: true`, console logs or unused imports left in?
+24. Are there TODOs, `// ...rest`, or unfinished components?
+25. Are there clickable `div`s, missing labels or missing `alt` text?
+26. Are there `markers: true`, console logs or unused imports left in?
 
 **Copy** (the copy pass in `craft/copy.md`)
-26. Does more than one section headline share the same shape (all questions, all "X. Y." fragments, all mirror sentences)?
-27. Does any sentence end in a vague "-ing" benefit tail, or cite unnamed experts or studies?
-28. Is the same thing called by more than one name across the page (synonym cycling)?
-29. Does an em dash appear in most paragraphs, or does every section close with a generic invitation?
+27. Does more than one section headline share the same shape (all questions, all "X. Y." fragments, all mirror sentences)?
+28. Does any sentence end in a vague "-ing" benefit tail, or cite unnamed experts or studies?
+29. Is the same thing called by more than one name across the page (synonym cycling)?
+30. Does an em dash appear in most paragraphs, or does every section close with a generic invitation?
 
 ---
 
 ## Part 3: Craft checklist
 
 - [ ] Concept sentence and signature move are visible in the first screen
-- [ ] Type: display face chosen with a reason; body ≥ 16px; measure ≤ 75ch; `text-wrap: balance` on headings
-- [ ] Colour: all text pairs verified (`node scripts/contrast.mjs` while designing, `node scripts/gate.mjs` on the build), accent ≤ 5% of each screen
+- [ ] Type: display face chosen with a reason; body size and measure within `gates/rules.md` (Hierarchy); `text-wrap: balance` on headings
+- [ ] Colour: all text pairs verified (`node scripts/contrast.mjs` while designing, `node scripts/gate.mjs` on the build); accent within `gates/rules.md` (Contrast)
 - [ ] Layout: one deliberate grid break per screen, recomposed (not squeezed) on mobile
 - [ ] Motion: tokens used; `gsap.matchMedia()` with reduced-motion and pointer conditions; `ScrollTrigger.refresh()` after load
 - [ ] Mobile motion matrix applied
 - [ ] Scroll sequences (pinned, scrubbed, image-sequence, lit-step lists) reviewed per `craft/scroll-sequences.md`, record in the handoff:
-  - [ ] Each step's contrast passes AA **active and inactive** (dimmed text measured as rendered: text × opacity + background × (1 − opacity))
-  - [ ] Reduced-motion fallback is a **designed still**, not a poster: unpinned plates, every step fully visible
-  - [ ] **No step shows a value that is later corrected**
+  - [ ] Each step's contrast verified **active and inactive** (`gates/rules.md`, Contrast)
+  - [ ] Reduced-motion fallback verified as a **designed still** (`gates/rules.md`, Reduced motion)
+  - [ ] **No step shows a value that is later corrected** (verified)
 - [ ] Accessibility: keyboard path, visible focus, landmarks, skip link, alt text
 - [ ] Performance: LCP image preloaded, heavy libraries loaded dynamically, off-screen work paused
 - [ ] SEO: title, description, OG image, structured data, `llms.txt` (for sites)
