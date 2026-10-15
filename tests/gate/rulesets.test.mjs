@@ -62,6 +62,16 @@ say(K({ headers: { ...goodSec.headers, "access-control-allow-origin": "*" } }) =
 say(K({ headers: { "x-content-type-options": "nosniff" } }) === "sec-h1 sec-h3", "sec-h1/h3: no CSP and no Referrer-Policy caught");
 say(K({ headers: { "x-content-type-options": "nosniff" }, metaCsp: "default-src 'self'", metaReferrer: "no-referrer" }) === "", "sec-h1/h3: meta CSP and meta referrer accepted");
 say(K({ headers: { ...goodSec.headers, "x-content-type-options": "" } }) === "sec-h2", "sec-h2: no nosniff caught");
+const W = (o) => secRules({ ...goodSec, ...o }).warns.map((w) => w.id).sort().join(" ");
+say(W({}) === "", "sec warnings: the good page has none");
+say(W({ scriptTexts: ["localStorage.setItem('authToken', res.token);"] }) === "sec-06", "sec-06 (warn): auth token in localStorage caught");
+say(W({ scriptTexts: ["localStorage.setItem('theme', 'dark');"] }) === "", "sec-06 (warn): a non-auth localStorage key is fine");
+say(W({ scriptTexts: ["console.log('session', user.email, token);"] }) === "sec-09", "sec-09 (warn): console.log of email/token caught");
+say(W({ scriptTexts: ["console.log('ready');"] }) === "", "sec-09 (warn): a plain console.log is not flagged");
+say(W({ envIgnored: { root: "/p", ignored: false, why: "no .gitignore found" } }) === "sec-08", "sec-08 (warn): .env not ignored caught");
+say(W({ envIgnored: { root: "/p", ignored: true } }) === "", "sec-08 (warn): .env ignored passes");
+say(W({ headers: { "x-content-type-options": "nosniff", "referrer-policy": "no-referrer" }, metaCsp: "default-src 'self'" }) === "sec-h1", "sec-h1 (warn): CSP only as meta over HTTP");
+say(countOf(secRules({ ...goodSec, scriptTexts: ["localStorage.setItem('jwt', t); console.log(token);"] })) === 0, "sec warnings never add to the K count");
 
 // _headers parsing and the stamp segment
 const hf = "/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: no-referrer\n/admin/*\n  X-Robots-Tag: noindex\n";

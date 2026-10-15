@@ -1,5 +1,9 @@
 node_modules/
 .DS_Store
+# secrets never in git (craft/security.md sec-08); .env.example holds placeholders only
+.env
+.env.*
+!.env.example
 .motomation/
 *.log
 *.motion-report.html

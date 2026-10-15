@@ -35,6 +35,9 @@
 //                inline scripts, render-blocking head scripts
 //              K security: cookie flags, secret-shaped strings, URL → innerHTML, CORS wildcard, CSP, nosniff,
 //                Referrer-Policy (local files: headers from a _headers file next to the page)
+//                warnings (heuristic, never counted): auth token in localStorage/sessionStorage (sec-06), console
+//                calls printing tokens/keys/passwords/emails (sec-09), .env not ignored by git for a local target
+//                (sec-08), CSP only as <meta> on a URL target served over HTTP (sec-h1)
 //
 //   richness   (advisory, v2.6.0) the "too little" side of restraint. Never fails, never in counts, the stamp or its id.
 //              At 1440×900, scroll 0. Warns when: the page has fewer than RICH_FOLD_MIN meaningful sections above the
@@ -67,6 +70,7 @@ import { readFileSync, existsSync, statSync, writeFileSync } from "node:fs";
 import { resolve, dirname, basename, extname, join } from "node:path";
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
+import { spawnSync } from "node:child_process";
 import os from "node:os";
 import { statfsSync } from "node:fs";
 import { projectRoot } from "./memory.mjs";
@@ -679,10 +683,30 @@ async function ruleFacts(browser, url) {
     return { ...facts, html, scriptTexts, headers, cookies };
   } finally { await ctx.close(); }
 }
-export function judgeRules(facts, url, jsKB, tier) {
+// sec-08: is .env ignored by git in the project that holds a local target? URL targets: null (not checked; and only a
+// URL target is judged on how it is really served, so the CSP-as-meta-only warning applies to URLs, not local files).
+// Nearest folder with .git → `git check-ignore`; else the nearest .gitignore read by hand; none found → not ignored.
+export function envIgnoredFor(target) {
+  if (!target || /^https?:\/\//.test(target)) return null;
+  let dir = resolve(target); try { if (!statSync(dir).isDirectory()) dir = dirname(dir); } catch { return null; }
+  for (let d = dir; ; d = dirname(d)) {
+    if (existsSync(join(d, ".git"))) {
+      const r = spawnSync("git", ["-C", d, "check-ignore", "-q", "--no-index", ".env"], { stdio: "ignore" });
+      if (r.status === 0 || r.status === 1) return { root: d, ignored: r.status === 0, why: r.status === 1 ? "git check-ignore .env: not ignored" : "" };
+      break;
+    }
+    if (dirname(d) === d) break;
+  }
+  for (let d = dir; ; d = dirname(d)) {
+    const gi = join(d, ".gitignore");
+    if (existsSync(gi)) { const ok = readFileSync(gi, "utf8").split(/\r?\n/).some((l) => /^\/?\.env(?:\*|\.\*)?\s*$/.test(l.trim()) || /^\*\*\/\.env\s*$/.test(l.trim())); return { root: d, ignored: ok, why: ok ? "" : ".gitignore has no .env line" }; }
+    if (dirname(d) === d) return { root: dir, ignored: false, why: "no .gitignore found" };
+  }
+}
+export function judgeRules(facts, url, jsKB, tier, envIgnored = null) {
   const budgetKB = JS_BUDGET_KB[tier !== undefined && tier !== null && tier !== "" ? +tier : 5] ?? JS_BUDGET_KB[5];
   const r = { copy: copyRules(facts), seo: seoRules({ pageUrl: url, ...facts.seo }), perf: perfRules({ images: facts.images, scripts: facts.scripts, jsKB, budgetKB }),
-    sec: secRules({ pageUrl: url, html: facts.html, scriptTexts: facts.scriptTexts, headers: facts.headers, cookies: facts.cookies, metaCsp: facts.metaCsp, metaReferrer: facts.metaReferrer }) };
+    sec: secRules({ pageUrl: url, html: facts.html, scriptTexts: facts.scriptTexts, headers: facts.headers, cookies: facts.cookies, metaCsp: facts.metaCsp, metaReferrer: facts.metaReferrer, envIgnored, remote: !envIgnored }) };
   return { ...r, ...rulesAxes(r) };
 }
 
@@ -1100,7 +1124,7 @@ export async function scan(target, browser, opts = {}) {
     const overflowFails = o.flatMap((x) => [...(x.pageScroll > 1 ? [{ width: x.width, el: "page", kind: "horizontal scroll", px: x.pageScroll }] : []), ...x.items.map((i) => ({ width: x.width, ...i }))]);
     const counts = { contrast: c.fails.length, overflow: overflowFails.length, words: w.fails.length, motion: m.hiddenUnderReducedMotion.length + (m.pixelsChangingWhenStillPct > 0.5 ? 1 : 0), names: n.fails.length, numbers: nu.fails.length, quality: mq.fails, access: ax.fails, copy: 0, seo: 0, perf: 0, sec: 0 };
     const pageTier = (() => { try { return !/^https?:/.test(target) ? readStamp(readFileSync(statSync(resolve(target)).isDirectory() ? join(resolve(target), "index.html") : resolve(target), "utf8"))?.fields?.tier : undefined; } catch { return undefined; } })();
-    const rules = judgeRules(rf, url, st.jsKB, opts.tier !== undefined ? opts.tier : pageTier); Object.assign(counts, rules.counts);
+    const rules = judgeRules(rf, url, st.jsKB, opts.tier !== undefined ? opts.tier : pageTier, envIgnoredFor(target)); Object.assign(counts, rules.counts);
     const id = createHash("sha256").update(JSON.stringify({ v: GATE_VERSION, rules: ["copy", "seo", "perf", "sec"].map((k) => rules[k].fails.map((x) => x.id).sort()), counts, sizes: [w.checked, m.compared, n.checked, nu.checked], page: pageHash, c: c.fails.map((x) => x.width + x.el + x.ratio), nu: nu.fails.map((x) => x.el + x.when + x.truth) /* not the shown value: a mid-count frame is timing-dependent */, o: overflowFails.map((x) => x.width + x.el + x.px), w: w.fails.map((x) => x.el + x.problem), m: m.hiddenUnderReducedMotion.map((x) => x.el), n: n.fails.map((x) => x.el) })).digest("hex").slice(0, 10);
     const pass = Object.values(counts).every((v) => v === 0);
     // the critique axes, each derived from a named check (gates/delivery-gate.md, Part 1)
@@ -1327,8 +1351,8 @@ async function main() {
       const out = []; const b = await launch(pw, !!flags.light);
       try { for (const t of targets) { const { url, close } = await toUrl(t); try { const st = await structure(b, url); const rf = await ruleFacts(b, url);
         const pageTier = (() => { try { return !/^https?:/.test(t) ? readStamp(readFileSync(statSync(resolve(t)).isDirectory() ? join(resolve(t), "index.html") : resolve(t), "utf8"))?.fields?.tier : undefined; } catch { return undefined; } })();
-        const r = judgeRules(rf, url, st.jsKB, opts.tier !== undefined ? opts.tier : pageTier); out.push({ target: t, jsKB: st.jsKB, ...r });
-        if (!flags.json) { console.log(`\n${t}\n  ${r.segment}  (rule sets only; no stamp)`); for (const k of ["copy", "seo", "perf", "sec"]) for (const f of r[k].fails) console.log(`     ✗ ${f.id}  ${f.why}${f.at ? `  ${f.at}` : ""}`); }
+        const r = judgeRules(rf, url, st.jsKB, opts.tier !== undefined ? opts.tier : pageTier, envIgnoredFor(t)); out.push({ target: t, jsKB: st.jsKB, ...r });
+        if (!flags.json) { console.log(`\n${t}\n  ${r.segment}  (rule sets only; no stamp)`); for (const k of ["copy", "seo", "perf", "sec"]) { for (const f of r[k].fails) console.log(`     ✗ ${f.id}  ${f.why}${f.at ? `  ${f.at}` : ""}`); for (const f of r[k].warns || []) console.log(`     ⚠ ${f.id}  ${f.why}${f.at ? `  ${f.at}` : ""}  (warning)`); } }
       } finally { await close?.(); } } } finally { await b.close().catch(() => {}); }
       if (flags.json) console.log(JSON.stringify(out.length === 1 ? out[0] : out, null, 2));
       process.exit(out.every((r) => Object.values(r.counts).every((n) => !n)) ? 0 : 1);

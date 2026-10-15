@@ -93,4 +93,7 @@ for (const [set, want] of Object.entries(RULE_FIXTURES)) {
   const missing = want.filter((id) => !got.includes(id)), extra = got.filter((id) => !want.includes(id));
   say(bad && !missing.length && !extra.length && !others.length, `fixtures/rules/${set}-bad: ${bad?.segment ?? "no result"} fails ${want.length} planted rule(s)${missing.length ? ` · missed ${missing.join(" ")}` : ""}${extra.length ? ` · unexpected ${extra.join(" ")}` : ""}${others.length ? ` · leaks into ${others.join(" ")}` : ""}`);
 }
+// v2.7.0: a client bundle with a deliberate secret fails sec-07 only; its localStorage token and email log warn (sec-06, sec-09)
+{ const b = rulesRun("fixtures/rules/sec-secret-bundle/index.html"); const got = b ? idsOf(b.sec) : []; const w = b ? [...new Set(b.sec.warns.map((x) => x.id))] : [];
+  say(b && got.join(" ") === "sec-07" && w.includes("sec-06") && w.includes("sec-09"), `fixtures/rules/sec-secret-bundle: ${b?.segment ?? "no result"} fails ${got.join(" ") || "nothing"}, warns ${w.join(" ") || "nothing"}`); }
 process.exit(failed ? 1 : 0);

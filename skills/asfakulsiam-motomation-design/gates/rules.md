@@ -142,13 +142,23 @@ Read before Step 1. Design inside these. `scripts/gate.mjs` measures them after 
 
 ## Security (gate `rules: K`, `craft/security.md`)
 
+Every [M] rule of `craft/security.md`. "warns" = heuristic, printed, never counted.
+
 | Rule | Limit |
 |---|---|
-| sec-06 | auth cookies `HttpOnly`, `Secure`, `SameSite` |
-| sec-07 | no secret-shaped string in served HTML or JS |
-| sec-12 | no URL-controlled value written with `innerHTML`/`outerHTML`/`document.write` |
-| sec-16 | no `Access-Control-Allow-Origin: *` over https |
-| sec-17 | no development build or source map in production (warns) |
-| sec-h1 | `Content-Security-Policy` sent (header or meta) |
-| sec-h2 | `X-Content-Type-Options: nosniff` sent (header) |
-| sec-h3 | `Referrer-Policy` sent (header or meta) |
+| sec-01 [M] | admin routes require auth and carry `noindex` |
+| sec-03 [M] | row-level security on every user-data table where the database supports it |
+| sec-06 [M] | auth cookies `HttpOnly`, `Secure`, `SameSite` (gate); no auth token in `localStorage`/`sessionStorage` (gate warns) |
+| sec-07 [M] | no secret-shaped string in served HTML or JS (gate) |
+| sec-08 [M] | `.env`, `.env.*` in `.gitignore`; only `.env.example` committed (gate warns, local targets) |
+| sec-09 [M] | no `console.*` or log line that prints a token, key, password, session id or email (gate warns) |
+| sec-11 [M] | every form input validated on the server with a schema |
+| sec-12 [M] | no URL- or user-controlled value written with `innerHTML`/`outerHTML`/`document.write` (gate) |
+| sec-13 [M] | uploads checked by real MIME type against an allow-list and by size |
+| sec-15 [M] | rate limits on auth, contact and every mutation |
+| sec-16 [M] | no `Access-Control-Allow-Origin: *` in production (gate) |
+| sec-17 [M] | no debug mode, development build or public source map in production (gate warns) |
+| sec-20 [M] | role, user id, tenant and price never taken from the client |
+| sec-h1 | `Content-Security-Policy` sent (gate; header or meta; meta only over HTTP warns) |
+| sec-h2 | `X-Content-Type-Options: nosniff` sent as a header (gate) |
+| sec-h3 | `Referrer-Policy` sent, header or meta (gate) |

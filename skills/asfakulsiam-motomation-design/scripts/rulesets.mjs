@@ -124,7 +124,16 @@ export const DOM_XSS = [
   /\bdocument\.write(?:ln)?\s*\([^)]*\b(?:location|document\.URL|document\.referrer|searchParams)\b/,
   /\binsertAdjacentHTML\s*\([^)]*\b(?:location|searchParams|document\.URL)\b/,
 ];
-export function secRules({ pageUrl, html = "", scriptTexts = [], headers = {}, cookies = [], metaCsp = null, metaReferrer = null } = {}) {
+// heuristic patterns (warnings, never counted): craft/security.md sec-06, sec-09
+export const STORAGE_TOKEN = [
+  /\b(?:localStorage|sessionStorage)\s*\.\s*setItem\s*\(\s*["'`][^"'`]*(?:token|jwt|auth|session|bearer|access|refresh|credential)[^"'`]*["'`]/i,
+  /\b(?:localStorage|sessionStorage)\s*(?:\.\s*[A-Za-z_$]*(?:token|jwt|auth|session|bearer)[A-Za-z_$]*|\[\s*["'`][^"'`]*(?:token|jwt|auth|session|bearer)[^"'`]*["'`]\s*\])\s*=(?!=)/i,
+];
+export const LOG_SENSITIVE = [
+  /\bconsole\.(?:log|info|debug|warn|error|trace|dir)\s*\([^)]*\b(?:token|jwt|passw(?:or)?d|secret|api[_-]?key|authorization|bearer|session[_-]?id|e-?mail)\b/i,
+  /\bconsole\.(?:log|info|debug|warn|error|trace|dir)\s*\([^)]*["'`][^"'`]*[\w.+-]+@[\w-]+\.[a-z]{2,}[^"'`]*["'`]/i,
+];
+export function secRules({ pageUrl, html = "", scriptTexts = [], headers = {}, cookies = [], metaCsp = null, metaReferrer = null, envIgnored = null, remote = true } = {}) {
   // headers: lower-cased response headers of the page; cookies: every Set-Cookie value on that response
   const fails = [], warns = [], f = (id, why, at = "") => fails.push({ id, why, at });
   const https = /^https:/.test(pageUrl);
@@ -134,10 +143,14 @@ export function secRules({ pageUrl, html = "", scriptTexts = [], headers = {}, c
   for (const t of [html, ...scriptTexts]) if (DOM_XSS.some((r) => r.test(t))) { f("sec-12", "URL-controlled value written as HTML (innerHTML / document.write)"); break; }
   if ((headers["access-control-allow-origin"] || "").trim() === "*") f("sec-16", "Access-Control-Allow-Origin: * on the page");
   if (/react(?:-dom)?\.development(?:\.min)?\.js/.test(hay) || (https && /\/[/*]# sourceMappingURL=/.test(hay))) warns.push({ id: "sec-17", why: "development build or source map on the page" });
+  for (const t of [html, ...scriptTexts]) { const m = STORAGE_TOKEN.map((r) => t.match(r)).find(Boolean); if (m) { warns.push({ id: "sec-06", why: "auth token written to localStorage/sessionStorage (use an HttpOnly, Secure, SameSite cookie)", at: m[0].slice(0, 60) }); break; } }
+  for (const t of [html, ...scriptTexts]) { const m = LOG_SENSITIVE.map((r) => t.match(r)).find(Boolean); if (m) { warns.push({ id: "sec-09", why: "console call that prints a token, key, password or email", at: m[0].slice(0, 60) }); break; } }
+  if (envIgnored && envIgnored.ignored === false) warns.push({ id: "sec-08", why: `.env is not ignored by git${envIgnored.why ? ` (${envIgnored.why})` : ""}`, at: envIgnored.root || "" });
+  if (remote && /^https?:/.test(pageUrl) && !(headers["content-security-policy"] || "").trim() && (metaCsp || "").trim()) warns.push({ id: "sec-h1", why: "CSP sent only as a <meta> tag; served over HTTP it should be a response header (meta cannot set frame-ancestors or reporting)" });
   if (!(headers["content-security-policy"] || "").trim() && !(metaCsp || "").trim()) f("sec-h1", "no Content-Security-Policy (header or meta)");
   if (!/nosniff/i.test(headers["x-content-type-options"] || "")) f("sec-h2", "no X-Content-Type-Options: nosniff header");
   if (!(headers["referrer-policy"] || "").trim() && !(metaReferrer || "").trim()) f("sec-h3", "no Referrer-Policy (header or meta referrer)");
-  return { fails, warns, checked: 9 };
+  return { fails, warns, checked: 12 };
 }
 
 // `_headers` (Netlify / Cloudflare Pages format) for local files: a path line, then indented "Name: value" lines

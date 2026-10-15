@@ -255,26 +255,26 @@ not check. Full rules, with why and examples: `craft/copy.md`, `craft/seo.md`, `
 
 ### Security
 
-- [ ] sec-01 [M] Admin routes require auth and carry `noindex` · check: route list + middleware; a request without a session gets 401/redirect
-- [ ] sec-02 [M] Access checks run on the server, not only in the client · check: read each protected handler; hiding a button is not a check
-- [ ] sec-03 [H] Row-level security where the database supports it · owner to do, or the record that proves it
-- [ ] sec-04 [H] Email verification on signup · owner to do, or the record that proves it
-- [ ] sec-05 [H] Passwords hashed with bcrypt or argon2 · owner to do, or the record that proves it
-- [ ] sec-06 [M] Auth cookies are `HttpOnly`, `Secure` and `SameSite` · **measured by the gate (K)**
+- [ ] sec-01 [M] Protect admin routes: auth required, `noindex` set · check: route list + middleware; a request without a session gets 401 or a redirect
+- [ ] sec-02 [H] Server-side permissions: every access check runs on the server · owner to do, or the record that proves it
+- [ ] sec-03 [M] Row-level security where applicable · check: the policy list (`pg_policies`, the Supabase dashboard); every user-data table has RLS on
+- [ ] sec-04 [H] Verify email addresses on signup · owner to do, or the record that proves it
+- [ ] sec-05 [H] Hash passwords with bcrypt or argon2 · owner to do, or the record that proves it
+- [ ] sec-06 [M] No auth tokens in local storage: cookies only, `HttpOnly`, `Secure`, `SameSite` · **measured by the gate (K)**; localStorage tokens warn
 - [ ] sec-07 [M] No secrets in client bundles · **measured by the gate (K)**
-- [ ] sec-08 [M] `.env` is gitignored; `.env.example` holds placeholders only · check: `git check-ignore .env`; read `.env.example`
-- [ ] sec-09 [M] No secrets in logs · check: grep the log output for the same secret patterns gate K uses
-- [ ] sec-10 [H] Every SQL query is parameterised · owner to do, or the record that proves it
-- [ ] sec-11 [M] Form inputs validated on the server (Zod or equivalent) · check: every mutation handler parses its input before use
-- [ ] sec-12 [M] Output escaped; no raw `innerHTML` with user input · **measured by the gate (K)**
-- [ ] sec-13 [M] File uploads validated by MIME type and size · check: the upload handler
-- [ ] sec-14 [H] Webhooks verify their signature · owner to do, or the record that proves it
-- [ ] sec-15 [M] Rate limits on auth, contact forms and every mutation · check: the middleware or edge config
-- [ ] sec-16 [M] CORS is narrow; no wildcard in production · **measured by the gate (K)**
-- [ ] sec-17 [M] Debug mode off in production · gate K warns; decide by reading
-- [ ] sec-18 [H] Dependencies patched (`npm audit` clean, or each finding written down) · owner to do, or the record that proves it
-- [ ] sec-19 [H] A security scan run and its results recorded · owner to do, or the record that proves it
-- [ ] sec-20 [M] No client-supplied value is trusted for authorisation · check: read the handlers: role, user id and price come from the session or the database, never the request body
+- [ ] sec-08 [M] `.env` files not in git (verify `.gitignore`) · gate K warns for a local target; check: `git check-ignore .env`; read `.env.example`
+- [ ] sec-09 [M] No sensitive data in logs · gate K warns on `console.*` calls; check: grep the log output for the gate K secret patterns and emails
+- [ ] sec-10 [H] All SQL is parameterized · owner to do, or the record that proves it
+- [ ] sec-11 [M] Validate all form inputs server-side · check: every mutation handler parses its input before use
+- [ ] sec-12 [M] Escape output; no raw `innerHTML` with user input · **measured by the gate (K)**
+- [ ] sec-13 [M] Validate file uploads by MIME and size · check: the upload handler: allow-list, size limit, storage path
+- [ ] sec-14 [H] Verify webhook signatures · owner to do, or the record that proves it
+- [ ] sec-15 [M] Rate-limit requests (auth, contact, mutations) · check: the middleware or edge config
+- [ ] sec-16 [M] Tighten CORS; no wildcard in production · **measured by the gate (K)**
+- [ ] sec-17 [M] Disable production debugging · gate K warns; decide by reading
+- [ ] sec-18 [H] Update vulnerable dependencies · owner to do, or the record that proves it
+- [ ] sec-19 [H] Run the security scan; record results · owner to do, or the record that proves it
+- [ ] sec-20 [M] Never trust client-supplied values for authorisation · check: read the handlers: role, user id and price come from the session or the database
 - [ ] sec-h1 `Content-Security-Policy` sent · **measured by the gate (K)**
 - [ ] sec-h2 `X-Content-Type-Options: nosniff` sent · **measured by the gate (K)**
 - [ ] sec-h3 `Referrer-Policy` sent · **measured by the gate (K)**
