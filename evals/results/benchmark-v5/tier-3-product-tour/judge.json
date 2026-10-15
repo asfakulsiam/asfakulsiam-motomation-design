@@ -1,0 +1,112 @@
+{
+ "brief": "tier-3-product-tour",
+ "tier": 3,
+ "rubric": "evals/rubric.md (v5 exception applied: imagery out of scope)",
+ "blinding": "labels assigned by random.seed(93015): A=skill, B=baseline; all HTML comments and CSS/JS block comments stripped from both arms, the word \"motomation\" removed (stamp/log references); vendor libraries, fonts, Lottie JSON, build tools and QA folders omitted; judges saw only the brief, the rubric, the two sources and (judge-2) screenshots renamed siteA/siteB",
+ "placeholder_rule": "v5 exception: image placeholders and missing images are not a penalty and not a hard-gate failure",
+ "judges": [
+  {
+   "judge": "judge-1",
+   "model": "gpt_6_luna (OpenAI family), one structured-output call",
+   "evidence": "HTML/CSS/JS source only (four pages per site), no screenshots",
+   "winner": "skill",
+   "reason": "A carries its distinctive receipt idea through the tour with stronger narrative motion and avoids the body-text contrast hard-gate failure present in B.",
+   "baseline": {
+    "blind_label": "B",
+    "scores": {
+     "concept": 5,
+     "originality": 3,
+     "typography": 4,
+     "motion": 4,
+     "craft": 4,
+     "access_performance": 2
+    },
+    "total": 74.0,
+    "hard_gates": [
+     "Body text contrast: --ink-3 (#6f756f) on --paper (#f5f2ea) is below 4.5:1; it is used for text such as card subtitles and step labels."
+    ],
+    "notes": "The persistent balance card and progress indicator create a clear through-line, and the billing control adds useful interaction on Pricing. Its View Transitions and Lottie animations have reduced-motion handling and directional behavior, though the overall card-based presentation feels more like a polished SaaS template than a distinctive visual idea. The low-contrast muted text fails a hard gate; external font loading is also less performance-friendly than A’s local fonts.",
+    "total_after_hard_gate": 0.0,
+    "hard_gate_note": "judge-1 flagged body-text contrast under 4.5:1 (#6f756f on #f5f2ea, ~4.2:1, gate-measured 4.22:1 on step labels and the 15px card subtitle). Under the rubric any hard-gate failure scores the run 0. judge-2 read the same lines as secondary labels, not body text, and did not apply the gate. Raw total kept alongside."
+   },
+   "skill": {
+    "blind_label": "A",
+    "scores": {
+     "concept": 5,
+     "originality": 4,
+     "typography": 4,
+     "motion": 5,
+     "craft": 4,
+     "access_performance": 5
+    },
+    "total": 90.0,
+    "hard_gates": [],
+    "notes": "The shared receipt slip and its accumulating ledger lines give all four pages a coherent object to follow. Directional View Transitions, line-by-line reveals, reduced-motion fades, and a working instant-navigation fallback make the motion feel tied to the tour. Strong type and responsive structure are supported by local fonts and accessible focus handling."
+   }
+  },
+  {
+   "judge": "judge-2",
+   "model": "default delegated-agent model of this session (not pinned; model id not exposed; may be the same family as the builders)",
+   "evidence": "source + 18 screenshots per site: 4 pages at 1440, 4 full pages at 375, 6 mid-transition captures (~220 ms into forward and back View Transitions), 4 reduced-motion pages; did not run the pages",
+   "winner": "skill",
+   "reason": "A's receipt that prints one more line at every step makes the shared element carry the story of the tour, with a more distinctive typographic identity and tighter accessibility, while B is a well-built but more generic card carousel.",
+   "baseline": {
+    "blind_label": "B",
+    "scores": {
+     "concept": 4,
+     "originality": 3,
+     "typography": 3,
+     "motion": 4,
+     "craft": 4,
+     "access_performance": 3
+    },
+    "total": 70.0,
+    "hard_gates": [],
+    "notes": "A white preview card with a persistent 'Mitu owes Sabbir ৳ 640' pill carries across pages, alongside a progress fill and directional copy slides. The motion clearly does the navigation, and the interactive Monthly/Yearly toggle drives the Lottie, which is a nice touch. The look is a competent but familiar SaaS card style: Bricolage Grotesque and Inter, rounded pills, green CTA. On pages 2–4 the h1 focus-visible underline shows at rest, which looks like a stray decoration. The ← → glyphs in the kbd hint render as near-empty boxes. Secondary text in --ink-3 (#6f756f on #f5f2ea) is about 4.2:1, including the 'On the web and Android.' line. I counted this as a contrast weakness, not a body-text gate. Fonts load from Google Fonts. The yearly price only appears after toggling. Start correctly gives one dominant CTA, chosen by platform. Reduced motion uses a fade, and the poster or final frame is shown. Focus goes to the h1, and the step label is linked via aria-describedby. Mobile is tidy."
+   },
+   "skill": {
+    "blind_label": "A",
+    "scores": {
+     "concept": 5,
+     "originality": 4,
+     "typography": 4,
+     "motion": 4,
+     "craft": 4,
+     "access_performance": 4
+    },
+    "total": 84.0,
+    "hard_gates": [],
+    "notes": "A receipt-style 'slip' is the shared object, and it adds one numbered line per step (balance, expense added, plan, ready). The tour reads as one object building up, which fits the brief's 'same object moving forward'. Mid-transition frames show the slip travelling across the grid, which alternates sides from page to page, and new lines feed in, with back reversing direction. In flight, line-1 briefly separates from the slip and overlaps the copy. Young Serif, Instrument Sans and JetBrains Mono give it a distinct ledger identity, and the taka sign renders properly. Pricing is in the H1 and on the cards, so it is understood by step 3. Reduced motion removes the shared names and uses a 150 ms fade, and the Lottie rests on its final frame. Focus goes to the h1 after in-tour navigation, there is a 'Step n of 4' label, a forced-colors path, self-hosted fonts and a CSP. Start has two near-equal CTAs rather than one dominant action. Mobile is clean."
+   }
+  }
+ ],
+ "result": {
+  "winner": "skill",
+  "judges_for_skill": "2 of 2",
+  "baseline_totals_raw": [
+   74.0,
+   70.0
+  ],
+  "baseline_totals_after_hard_gates": [
+   0.0,
+   70.0
+  ],
+  "skill_totals": [
+   90.0,
+   84.0
+  ],
+  "baseline_mean_raw": 72.0,
+  "skill_mean": 87.0,
+  "margin_note": "judge-1 +16 for skill on raw totals (baseline 0 after its contrast hard-gate call); judge-2 +14 for skill, no hard gates"
+ },
+ "gate": {
+  "baseline": "FAIL on all 4 pages",
+  "skill": "PASS on all 4 pages (stamps reproduced by re-run, same hashes)"
+ },
+ "tier_check": {
+  "named": 3,
+  "skill": "pass",
+  "baseline": "pass (informational)",
+  "evidence": "Tier 3 named; cross-document View Transitions (@view-transition navigation:auto) with shared elements on all four URLs (slip, line-1..4, route marker), lottie-web light 5.12.2 plays one animation per page, 0 canvas / 0 WebGL / no Three.js, reduced motion drops every shared name to root-only and parks each Lottie on its last frame: pass. See summary.md, Tier check."
+ }
+}

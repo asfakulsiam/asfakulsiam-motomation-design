@@ -1,13 +1,13 @@
 # Benchmark v5 — Progress
 
 Started: 2026-10-14
-Last update: 2026-10-14
+Last update: 2026-10-15
 
 | # | Tier | Brief | Status | Agent | Committed |
 |---|------|-------|--------|-------|-----------|
 | 1 | Tier 1 — Basic | link-in-bio photographer | ✅ done | Perplexity Computer (session ba2f8ac8) | 2026-10-14 |
 | 2 | Tier 2 — Intermediate | editorial magazine issue | ✅ done | Perplexity Computer (session 628e379f) | 2026-10-15 |
-| 3 | Tier 3 — Pro | product tour | ⬜ not started | — | — |
+| 3 | Tier 3 — Pro | product tour | ✅ done | Perplexity Computer (session 1ce03919) | 2026-10-15 |
 | 4 | Tier 4 — Max | design studio site (WebGL) | ⬜ not started | — | — |
 | 5 | Tier 5 — Motomation | narrative film pitch | ⬜ not started | — | — |
 
