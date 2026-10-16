@@ -1,0 +1,71 @@
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+DELIVERY GATE · evals/results/diversity/02-childrens-dentistry/book.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (19 measured; 1 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (19 measured; 1 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (19 measured; 1 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (19 measured; 1 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (1 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (20 compared)
+  names     ✓ 0 missing alt / accessible names  (13 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (1 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  progress  ✓ 0 of 0 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
+  smooth    – no pinned zone, not measured
+  rm-flow   – no pinned zone
+  focus     ✓ 0 of 13 focused elements show no visible focus indicator  (13 tabbable)
+  targets   ✓ 0 under 24px, 5 under 44px (warning) at 375 touch  (13 checked; inline links exempt)
+     114×27  a.skip  "Skip to content"
+     163×35  a.logo  "Little Molars"
+     69×40  a  "First visit"
+     86×40  a  "Treatments"
+  zoom200   ✓ 0 lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%
+  reflow    ✓ 0px horizontal scroll at 320px
+  forced    ✓ 0 of 19 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
+  kbd-trap  ✓ 13 of 13 tabbable reached in 32 Tabs, no cycle
+  C copy     ✓ 0 rule(s) failing  (craft/copy.md; 0 warning(s))
+  S SEO      ✓ 0 rule(s) failing  (craft/seo.md; 0 warning(s))
+  P perf     ✓ 0 rule(s) failing  (craft/performance.md; 0 warning(s))
+  K security ✓ 0 rule(s) failing  (craft/security.md; 0 warning(s))
+  composition (advisory: heuristics, never fail the gate, not in the stamp)
+     pin fill  – no pinned zone
+     focal     ⚠ 1 of 2 screen(s) with text have one clear focal point (heaviest text mass ≥ 1.5× the next); no clear lead on screen 2 (1.17×)
+     scale     ⚠ display:body 1:4.1  (70.4px / 17px; warn below 1:6)
+  richness (advisory: "too little" warnings, never fail the gate, not in the stamp)
+     page      page (from path; set with --page home|category|about|page)
+     fold      ✓ 4 meaningful section(s) above the fold at 1440×900: nav header.top, heading h1, text p.lede, action a.skip  (warn below 3)
+  micro-states (advisory: missing states are warnings, never fail the gate, not in the stamp)
+     buttons   ✓ 1 button(s)  (have: hover, focus, active, disabled, loading)
+     forms     ⚠ 1 form(s): no error state found  (have: validation error, loading, success)
+     lists     – none on the page
+     images    – none on the page
+     async     ⚠ fetch/XHR in scripts: no error state found  (have: pending, success)
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  4 sections, entrances: static | static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 3KB gzipped
+  records    DESIGN.md: evals/results/diversity/02-childrens-dentistry/DESIGN.md · memory log: /home/user/.motomation/log.json · stamp fields: {"archetype":"field-guide","mutation":"ui-as-content","signature":"tooth-stamps","tier":"3"}
+  critique → C4[restraint:changed1] H5[375:0] S5[last5:archetype-new,signature-new,layout-new,palette-new,fp28,self-excluded] R3[cuts:1,anim:1] M5[t3:pins0/2,webgl0/1,js3/140KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A5[focus:13/13,tgt:0f5w,zoom:0,reflow:0,fc:0,trap:0]
+  coverage   ✓ worst width 375px: 1 of 20 text elements skipped (5%; limit 30% at every width)
+  X — completeness (children's dental clinic, Dhaka, Bangladesh; static pages + one booking endpoint, admin panel: no)  ✓
+      Routes:      4/4 required present
+      Functions:   1/1 present
+      States:      1/1 defined
+      Edge cases:  1/1 handled
+      Template:    2/2 present · 11 not required (reason given)
+  J — journey (whole site, real browser; any missing state fails the page; not in the stamp or its id)
+    nav      ✓ 4/4 route(s) reachable from home in ≤ 3 clicks (/book:0 /:1 /first-visit:1 /treatments:1)
+               · sitemap.xml: 4 route(s)
+               · 4 page(s) loaded
+    mobile   ✓ 16/16 interactive element(s) respond at 375px · tap 16/16 · swipe n/a · long-press n/a
+               · 4 page(s); an element shared by several pages (header, footer) is tapped once
+               · 1 mailto/tel link(s) are handed to the OS and counted as responding
+               · 4 element(s) parked off-canvas (skip links, closed drawers) are keyboard-only by design and not tapped
+               · no element declares a long press
+    forms    ✓ 5/5 form state(s) rendered · Book a visit (/book.html): default✓ validation✓ loading✓ success✓ serverError✓
+    loading  – n/a: no fetch or XHR request after load: no async surface
+    errors   ✓ 1/1 designed not-found view (unknown route → HTTP 404)
+               · probed /__motomation-missing-mvat5qhk/
+    session  ✓ 6/6 · load ✓ · open a second route ✓ · back button ✓ · forward button ✓ · full reload ✓ · two tabs ✓
+               · second page: /
+    journey: nav0 mobile0 forms0 loading- errors0 session0 → PASS
+  PASS  stamp → critique: C4[restraint:changed1] H5[375:0] S5[last5:archetype-new,signature-new,layout-new,palette-new,fp28,self-excluded] R3[cuts:1,anim:1] M5[t3:pins0/2,webgl0/1,js3/140KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A5[focus:13/13,tgt:0f5w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · b2eafb9776 · skipped 1/20@375
+
