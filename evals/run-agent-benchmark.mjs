@@ -9,6 +9,8 @@
 //   node evals/run-agent-benchmark.mjs measure  --out …        screenshots, axe-core, keyboard, scripts/gate.mjs → checks.json
 //   node evals/run-agent-benchmark.mjs judge    --out … --judge-cmd "<cmd {model} {prompt} {images}>" [--models gpt_5_4,gemini_3_1_pro]
 //   node evals/run-agent-benchmark.mjs score    --out …        summary.json (+ per-brief verdicts)
+//   node evals/run-agent-benchmark.mjs cost     --out …        cost.json from the transcripts on disk (generate writes it too)
+//   --route light|full   the skill arm runs /build --route=… (unset: the agent picks and states its route)
 //   node evals/run-agent-benchmark.mjs originality --out …     the originality arm: per arm and seed, every build compared
 //           with the builds of the other briefs on the six axes of scripts/originality.mjs → originality.json (+ .md).
 //           Unrelated briefs must score below 0.4 on every axis; score folds the result into summary.json.
@@ -42,6 +44,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync, cpSync, rmSync, rea
 import { join, resolve, dirname } from "node:path";
 import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
+import { aggregate as costAggregate } from "../skills/asfakulsiam-motomation-design/scripts/cost.mjs";
 import { skillTreeHash, cacheKey, cacheLookup, cacheStore } from "./bench-cache.mjs";
 
 const ROOT = resolve(dirname(new URL(import.meta.url).pathname), "..");
@@ -64,7 +67,7 @@ const W = { Concept: 20, Originality: 20, Typography: 15, Motion: 15, Craft: 15,
 const argv = process.argv.slice(2); const phase = argv[0]; const flags = {};
 for (let i = 1; i < argv.length; i++) if (argv[i].startsWith("--")) flags[argv[i].slice(2)] = argv[i + 1] && !argv[i + 1].startsWith("--") ? argv[++i] : true;
 // v2.5.0 (C9): unknown phases and flags are one friendly line plus the usage, exit 2, before anything runs
-const BENCH_USAGE = "usage: node evals/run-agent-benchmark.mjs <generate|measure|judge|score|originality> --out <dir> [--n 3] [--only studio,hotel | --one <slug>] [--arms baseline,gated,skill] [--pairs baseline:skill,gated:skill] [--tier 4] [--parallel 4] [--judge-cmd …] [--model m] [--cache-dir d | --no-cache] [--dry-run]";
+const BENCH_USAGE = "usage: node evals/run-agent-benchmark.mjs <generate|measure|judge|score|originality|cost> --out <dir> [--n 3] [--only studio,hotel | --one <slug>] [--arms baseline,gated,skill] [--pairs baseline:skill,gated:skill] [--tier 4] [--parallel 4] [--judge-cmd …] [--model m] [--cache-dir d | --no-cache] [--dry-run]";
 const BENCH_HELP = `${BENCH_USAGE}
 
   --only a,b        briefs to run (default: the five v2-v4 category briefs)
@@ -75,12 +78,13 @@ const BENCH_HELP = `${BENCH_USAGE}
   --dry-run         list what would run (brief file, tier, arms, seeds, folders) and exit; nothing is written
   v5 briefs: ${(() => { try { return readdirSync(join(ROOT, "evals/briefs/v5")).filter((f) => f.endsWith(".md")).map((f) => f.slice(0, -3)).join(", "); } catch { return "none"; } })()}
   v5 process: evals/results/benchmark-v5/HOW-TO-RUN.md`;
-const BENCH_FLAGS = new Set(["agent", "arms", "claude", "codex", "competitors", "force", "model", "models", "n", "only", "out", "pairs", "parallel", "reasoning", "tier", "timeout", "cache-dir", "cache-unpinned", "claude-model", "codex-home", "judge-cmd", "match-turns", "max-turns", "model-cmd", "no-cache", "node-path", "help", "one", "dry-run"]);
+const BENCH_FLAGS = new Set(["agent", "arms", "claude", "codex", "competitors", "force", "model", "models", "n", "only", "out", "pairs", "parallel", "reasoning", "tier", "timeout", "cache-dir", "cache-unpinned", "claude-model", "codex-home", "judge-cmd", "match-turns", "max-turns", "model-cmd", "no-cache", "node-path", "help", "one", "dry-run", "route"]);
 const benchDie = (m) => { console.error(`run-agent-benchmark: ${m}\n${BENCH_USAGE}`); process.exit(2); };
 if (process.argv[1] && resolve(process.argv[1]) === resolve(new URL(import.meta.url).pathname)) {
   if (flags.help || phase === "--help" || phase === "-h") { console.log(BENCH_HELP); process.exit(0); }
   for (const k of Object.keys(flags)) if (!BENCH_FLAGS.has(k)) benchDie(`unknown flag --${k}`);
-  if (phase && !["generate", "measure", "judge", "score", "originality"].includes(phase)) benchDie(`unknown phase "${phase}"`);
+  if (flags.route !== undefined && !["light", "full"].includes(String(flags.route))) benchDie(`--route must be light or full (got "${flags.route}")`);
+  if (phase && !["generate", "measure", "judge", "score", "originality", "cost"].includes(phase)) benchDie(`unknown phase "${phase}"`);
   for (const k of ["out", "n", "only", "one", "arms", "pairs", "tier", "parallel", "judge-cmd", "model", "cache-dir", "match-turns", "max-turns", "timeout"]) if (flags[k] === true) benchDie(`--${k} needs a value`);
 }
 const OUT = resolve(flags.out || join(ROOT, `evals/results/${new Date().toISOString().slice(0, 10)}-benchmark-v2`));
@@ -172,20 +176,22 @@ export function promptFor({ slug, seed, cond, budget }) {
   if (cond === "matched") return `You are an expert web designer and front-end developer. ${TASK}${tier} Take the time a careful designer would: you have ${budget ?? MATCH_TURNS} turns, and you should use most of them. Work in stages: (1) write down the concept and the design system (type, colour, layout, motion) before any code; (2) build; (3) look at the page at 1440px and 375px; (4) write a critique of what is weak, generic or broken; (5) revise; repeat looking, critiquing and revising at least twice. Check accessibility (contrast, keyboard, reduced motion) yourself before you finish.\n\n${brief}`;
   // gated = the baseline prompt plus the same measured gate the skill uses, without any of the skill's knowledge
   if (cond === "gated") return `You are an expert web designer and front-end developer. ${TASK}${tier} Before you finish, run \`node gate/gate.mjs index.html\` and fix every failure it reports until it prints PASS (if it prints "not verified", say so).\n\n${brief}`;
-  return `Use the asfakulsiam-motomation-design skill: /build this brief. Approve every checkpoint. When you run the collision engine, use --seed ${seed}.${tier ? ` Force the motion tier: --tier=${TIER}.` : ""} ${TASK} Follow the skill end to end, including its Delivery Gate, and finish with the handoff.\n\n${brief}`;
+  return `Use the asfakulsiam-motomation-design skill: /build${ROUTE_ARG} this brief. Approve every checkpoint. When you run the collision engine, use --seed ${seed}.${tier ? ` Force the motion tier: --tier=${TIER}.` : ""} ${TASK} Follow the skill end to end, including its Delivery Gate, and finish with the handoff.\n\n${brief}`;
 }
 // Every brief ends with "Approve every checkpoint." (v2.10.0) and the skill arm's prompt says it too: the skill stops at
 // five checkpoints for an explicit answer, and nobody can answer inside a benchmark run.
 // v5 prompts: the tier is stated, never inferred, and no stack is imposed (Step 0 of the skill would ask; nobody can
 // answer inside a benchmark run, so every arm gets the client's answer "you choose" and must say what it chose and why).
 const V5_TASK = "Build the website described in the brief below in the current folder. The brief names no stack; the client's answer to \"which stack?\" is \"you choose\": choose one, say which and why in one line at the end, and leave the result where a browser can open it (an index.html in this folder, or a built output folder such as out/, dist/ or build/ with its index.html). Use only facts from the brief.";
+// --route light|full (v2.11): passed to the skill arm as /build --route=…; unset, the agent chooses and states its route
+const ROUTE_ARG = flags.route ? ` --route=${flags.route}` : "";
 export function promptV5({ slug, seed, cond, budget }, brief) {
   const t = BRIEFS[slug].tier, tier = ` Build it at motion Tier ${t} — ${V5_TIERS[t]} (${V5_MOTION[t]}), with a reduced-motion version that keeps all content. The tier is a requirement, not a suggestion.`;
   if (COMPETITORS[cond]) return `Use the ${COMPETITORS[cond].name} skill to build this brief. ${V5_TASK}${tier} Follow the skill end to end and check your work before you finish.\n\n${brief}`;
   if (cond === "baseline") return `You are an expert web designer and front-end developer. ${V5_TASK}${tier} Check your work before you finish.\n\n${brief}`;
   if (cond === "matched") return `You are an expert web designer and front-end developer. ${V5_TASK}${tier} Take the time a careful designer would: you have ${budget ?? MATCH_TURNS} turns, and you should use most of them: plan, build, look at the result at 1440px and 375px, critique it and revise.\n\n${brief}`;
   if (cond === "gated") return `You are an expert web designer and front-end developer. ${V5_TASK}${tier} Before you finish, run \`node gate/gate.mjs <your page, folder or URL>\` and fix every failure it reports until it prints PASS (if it prints "not verified", say so).\n\n${brief}`;
-  return `Use the asfakulsiam-motomation-design skill: /build this brief. Approve every checkpoint. When you run the collision engine, use --seed ${seed}. Force the motion tier: --tier=${t}. ${V5_TASK}${tier} Follow the skill end to end, including its Delivery Gate, and finish with the handoff.\n\n${brief}`;
+  return `Use the asfakulsiam-motomation-design skill: /build${ROUTE_ARG} this brief. Approve every checkpoint. When you run the collision engine, use --seed ${seed}. Force the motion tier: --tier=${t}. ${V5_TASK}${tier} Follow the skill end to end, including its Delivery Gate, and finish with the handoff.\n\n${brief}`;
 }
 const ALLOWED = ["Skill", "Read", "Write", "Edit", "Glob", "Grep", "TodoWrite", "Bash(node:*)", "Bash(ls:*)", "Bash(cat:*)", "Bash(mkdir:*)", "Bash(wc:*)"];
 
@@ -210,7 +216,7 @@ function runCodex(r) {
     p.on("close", (code) => {
       clearTimeout(kill); const tr = Buffer.concat(chunks).toString(); writeFileSync(join(r.dir, "transcript.jsonl"), tr);
       let calls = 0; for (const l of tr.split("\n")) { try { const j = JSON.parse(l); if (j.type === "item.completed" && /command_execution|file_change|mcp_tool_call/.test(j.item?.type || "")) calls++; } catch {} }
-      const meta = { ...r, exit: code, seconds: Math.round((Date.now() - t0) / 1000), turns: calls, agent: (spawnSync(flags.codex || "codex", ["--version"]).stdout?.toString().trim() || "codex ?"),
+      const meta = { ...r, exit: code, seconds: Math.round((Date.now() - t0) / 1000), elapsed_ms: Date.now() - t0, route: flags.route || null, turns: calls, agent: (spawnSync(flags.codex || "codex", ["--version"]).stdout?.toString().trim() || "codex ?"),
         output: existsSync(join(r.dir, "index.html")), stderr: err.slice(-400) };
       rmSync(join(r.dir, ".agents"), { recursive: true, force: true }); if (r.cond === "gated") rmSync(join(r.dir, "gate"), { recursive: true, force: true });
       writeFileSync(join(r.dir, "run.json"), JSON.stringify(meta, null, 1)); console.log(`${r.slug} ${r.cond} s${r.seed} [codex]: exit ${code}, ${calls} tool calls, ${meta.seconds}s, index.html ${meta.output ? "yes" : "MISSING"}`); ok(meta);
@@ -245,7 +251,7 @@ function runAgent(r) {
         effort = { budget: eff.budget, budgetFrom: eff.from, floor, used, resumes, enforced: used >= floor && used <= eff.budget };
         result = { ...(result || {}), num_turns: used };
       }
-      const meta = { ...r, exit: code, seconds: Math.round((Date.now() - t0) / 1000), turns: result?.num_turns ?? null, ...(effort ? { effort } : {}), agent: "claude-code " + (spawnSync(flags.claude || "claude", ["--version"]).stdout?.toString().trim() || "?"),
+      const meta = { ...r, exit: code, seconds: Math.round((Date.now() - t0) / 1000), elapsed_ms: Date.now() - t0, route: flags.route || null, turns: result?.num_turns ?? null, ...(effort ? { effort } : {}), agent: "claude-code " + (spawnSync(flags.claude || "claude", ["--version"]).stdout?.toString().trim() || "?"),
         output: existsSync(join(r.dir, "index.html")), stderr: err.slice(-400) };
       if (r.cond === "skill" || COMPETITORS[r.cond]) rmSync(join(r.dir, ".claude"), { recursive: true, force: true }); // keep the output folder small; the skill copy is the commit under test
       if (r.cond === "gated") rmSync(join(r.dir, "gate"), { recursive: true, force: true });
@@ -342,7 +348,7 @@ async function runRawAgent(r) {
     msgs.push({ role: "user", content: imgs.length ? [{ type: "text", text: fb }, ...imgs] : fb });
   }
   writeFileSync(join(r.dir, "transcript.jsonl"), tr.map((x) => JSON.stringify(x)).join("\n") + "\n");
-  const meta = { ...r, exit: fail ? 1 : 0, seconds: Math.round((Date.now() - t0) / 1000), turns, finished: done ? "done" : fail ? "error" : "turn cap", agent: `raw API (scripted tool loop in run-agent-benchmark.mjs), model ${flags.model || "claude_sonnet_5_5"}`,
+  const meta = { ...r, exit: fail ? 1 : 0, seconds: Math.round((Date.now() - t0) / 1000), elapsed_ms: Date.now() - t0, route: flags.route || null, turns, finished: done ? "done" : fail ? "error" : "turn cap", agent: `raw API (scripted tool loop in run-agent-benchmark.mjs), model ${flags.model || "claude_sonnet_5_5"}`,
     served: [...served], tokens: { in: tin, out: tout }, output: existsSync(join(r.dir, "index.html")), error: fail,
     ...(eff ? { effort: { budget: cap, budgetFrom: eff.from, floor, used: turns, resumes: 0, enforced: turns >= floor && turns <= cap } } : {}) };
   for (const d of ["skill", "gate", ".look"]) rmSync(join(r.dir, d), { recursive: true, force: true });
@@ -434,6 +440,15 @@ async function judgePair(slug, seed, model, pair = ["baseline", "skill"]) {
 }
 const total = (s) => AX.reduce((a, k) => a + (s[k] || 0) * W[k], 0) / 5;
 
+// Cost (v2.11, scripts/cost.mjs): per build, tokens in/out, wall-clock time, tool calls by type, retries with reasons,
+// completed or not, and the route the agent stated. Written to <out>/cost.json after every generate call, and by the
+// `cost` phase from the transcripts already on disk.
+function writeCost() {
+  if (!existsSync(OUT)) { console.log("cost: no run folder"); return; }
+  const c = costAggregate(OUT); const t = c.totals;
+  console.log(`cost: ${t.builds} build(s), ${t.completed} completed · ${t.tokens_in} in / ${t.tokens_out} out tokens · ${Math.round(t.elapsed_ms / 1000)}s · ${t.tool_calls} tool calls · ${t.retries} retries → ${join(OUT, "cost.json").replace(ROOT + "/", "")}`);
+}
+
 // The originality arm (v2.11): the gate checks one page; this checks that different briefs did not come out as the same
 // shape. For each arm and each seed index, the builds of every brief in the run are compared pairwise on the six axes of
 // scripts/originality.mjs (structure, composition, image, typography, interaction, signature). Writes originality.json
@@ -501,8 +516,10 @@ async function main() {
     if (skillHash) { meta.cache = { dir: cacheDir.replace(ROOT + "/", ""), skill_tree_sha256: skillHash, model, ...cacheStats }; console.log(`cache: ${cacheStats.hits} hit(s), ${cacheStats.misses} miss(es), ${cacheStats.stored} stored`); }
     // after the runs: the models the agents actually reported (Claude Code's stream-json init event), next to the pinned one
     meta.finished = new Date().toISOString(); meta.models_reported = [...new Set(todo.flatMap((r) => { try { return readFileSync(join(r.dir, "transcript.jsonl"), "utf8").split("\n").filter((l) => l.includes('"model"')).map((l) => { try { const j = JSON.parse(l); return j.model || j.message?.model; } catch { return null; } }).filter(Boolean); } catch { return []; } }))];
-    writeFileSync(join(OUT, "meta.json"), JSON.stringify(meta, null, 1)); return;
+    writeFileSync(join(OUT, "meta.json"), JSON.stringify(meta, null, 1));
+    writeCost(); return;
   }
+  if (phase === "cost") { writeCost(); return; }
   if (phase === "measure") {
     const req = createRequire(join(process.cwd(), "noop.js")); let pw; try { pw = await import(req.resolve("playwright")); pw = pw.chromium ? pw : pw.default; } catch { console.log("not verified — no browser (Playwright not found from the current folder)"); process.exit(3); }
     await pool(runs().filter((r) => existsSync(join(r.dir, "run.json")) && (flags.force || !existsSync(join(r.dir, "checks.json")))), +(flags.parallel || 3), async (r) => { try { await measure(r, pw); console.log(`measured ${r.slug} ${r.cond} s${r.seed}`); } catch (e) { console.log(`MEASURE FAILED ${r.slug} ${r.cond} s${r.seed}: ${String(e).split("\n")[0]} (no checks.json; the pair stays not scored)`); process.exitCode = 1; } }); return;
@@ -548,6 +565,8 @@ async function main() {
       const w = es.reduce((n, e) => n + e.wins, 0), l = es.reduce((n, e) => n + e.losses, 0), t = es.reduce((n, e) => n + e.ties, 0), ns = es.reduce((n, e) => n + e.notScored, 0);
       out.totals[k] = { pair, pairs: w + l + t + ns, wins: w, losses: l, ties: t, notScored: ns, signTestP: signTest(w, l) };
       console.log(`TOTAL ${k}: ${pair[1]} ${w}–${l}–${t} (wins–losses–ties), not scored ${ns}, sign test p=${signTest(w, l).toPrecision(3)}`); }
+    // cost per arm (scripts/cost.mjs), when cost.json exists
+    if (existsSync(join(OUT, "cost.json"))) { try { const c = JSON.parse(readFileSync(join(OUT, "cost.json"), "utf8")); out.cost = { totals: c.totals, by_arm: c.by_arm, by_route: c.by_route }; } catch {} }
     // the originality arm (scripts/originality.mjs), when it ran: per arm, the worst score per axis and the repeats
     const of = join(OUT, "originality.json");
     if (existsSync(of)) { try { const o = JSON.parse(readFileSync(of, "utf8")); out.originality = Object.fromEntries(Object.entries(o.arms).map(([arm, a]) => [arm, { pass: a.pass, max: a.max, repeats: a.repeats }])); for (const [arm, a] of Object.entries(out.originality)) console.log(`ORIGINALITY ${arm}: ${a.pass ? "every cross-brief pair below" : `${a.repeats.length} repeat(s) at or above`} ${o.threshold} · max ${Object.entries(a.max).map(([k, v]) => `${k} ${v ?? "–"}`).join(" ")}`); } catch (e) { out.originality = { error: String(e.message || e) }; } }
@@ -555,7 +574,7 @@ async function main() {
     for (const [s, b] of Object.entries(out.briefs)) for (const e of [b, ...Object.values(b).filter((x) => x && x.pair)]) if (e.pair) console.log(`${s.padEnd(10)} ${e.pair.join(" vs ").padEnd(18)} ${e.outcome.padEnd(16)} ${e.pair[1]} wins ${e.wins}, losses ${e.losses}, ties ${e.ties}, not scored ${e.notScored} · ` + e.pairs.map((p) => `s${p.seed}: ${p[e.pair[0]].gated?.toFixed(1)} vs ${p[e.pair[1]].gated?.toFixed(1)}`).join(" · "));
     return;
   }
-  console.log("usage: node evals/run-agent-benchmark.mjs <generate|measure|judge|score|originality> --out <dir> [--n 3] [--only studio,hotel] [--arms baseline,gated,skill] [--pairs baseline:skill,gated:skill] [--tier 4] [--parallel 4] [--judge-cmd …]");
+  console.log("usage: node evals/run-agent-benchmark.mjs <generate|measure|judge|score|originality|cost> --out <dir> [--n 3] [--only studio,hotel] [--arms baseline,gated,skill] [--pairs baseline:skill,gated:skill] [--tier 4] [--parallel 4] [--judge-cmd …]");
   process.exit(phase ? 1 : 0);
 }
 main().catch((e) => { console.error(e); process.exit(1); });

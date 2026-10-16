@@ -1,0 +1,57 @@
+{
+ "schema": "motomation-run-meta/1",
+ "phase": "generate",
+ "started": "2026-10-16T07:28:33.127Z",
+ "repo": {
+  "sha": "17cc39799b3c1fefbca1f7e1f40ed40a803ed4c4",
+  "short": "17cc397",
+  "branch": "main",
+  "dirty": true,
+  "remote": "https://github.com/asfakulsiam/asfakulsiam-motomation-design.git"
+ },
+ "skill_version": "2.10.1",
+ "adapter": {
+  "name": "claude-code",
+  "cli": "/home/user/workspace/repo/tests/evals/fixtures/fake-claude.mjs",
+  "version": "0.0.0 (fake claude)"
+ },
+ "model": {
+  "pinned": null,
+  "note": "not pinned by flag: the adapter's default; models_reported (filled in after the runs) lists what the agents said they were"
+ },
+ "browser": {
+  "name": "chromium",
+  "version": "147.0.7727.15",
+  "playwright": "1.59.0"
+ },
+ "node": "v20.20.2",
+ "platform": "linux-x64",
+ "runner": {
+  "file": "evals/run-agent-benchmark.mjs",
+  "sha256": "98cfb40f13ae4198"
+ },
+ "argv": [
+  "generate",
+  "--out",
+  "/home/user/workspace/repo/evals/results/cost-test/light",
+  "--only",
+  "studio",
+  "--n",
+  "1",
+  "--arms",
+  "skill",
+  "--claude",
+  "/home/user/workspace/repo/tests/evals/fixtures/fake-claude.mjs",
+  "--no-cache",
+  "--route",
+  "light"
+ ],
+ "ci": null,
+ "runs": [
+  "studio/skill-s7101"
+ ],
+ "finished": "2026-10-16T07:28:33.541Z",
+ "models_reported": [
+  "fake-model-1"
+ ]
+}

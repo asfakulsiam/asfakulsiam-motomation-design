@@ -73,7 +73,7 @@ const parts = [
 const full = parts.join("\n").replace(/\n{3,}/g, "\n\n").trim() + "\n";
 // Over the target, drop whole ### sections in this order (the ones a chat tool needs least first) until it fits, and
 // say so at the top. Nothing in the full skill is shortened to fit.
-const DROP_ORDER = [/^Standards vs house style/, /^When to use the short route/, /^Motion tiers/, /^House style defaults/, /^Part 3: Craft checklist/];
+const DROP_ORDER = [/^Standards vs house style/, /^Routes: full and light/, /^When to use the short route/, /^Motion tiers/, /^House style defaults/, /^Part 3: Craft checklist/];
 const dropSection = (t, re) => { let name = null; const u = t.replace(/^### ([^\n]*)\n[\s\S]*?(?=^#{2,3} |(?![\s\S]))/gm, (m, h) => (name === null && re.test(h) ? ((name = h.replace(/\s*\(.*\)$/, "")), "") : m)); return { text: u, name }; };
 const withNote = (t, dropped) => dropped.length ? t.replace(/^(# [^\n]*\n)/, `$1\nLite edition. Full version at the repo. Dropped: ${dropped.join(", ")}.\n`) : t;
 let body = full; const dropped = [];

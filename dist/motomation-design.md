@@ -136,27 +136,28 @@ Checkpoint <n> of 5: approve, redirect, or ask for alternatives.
 
 Checkpoint 1 shows Stack (with alternatives); 2 shows References through Not doing; 3 shows Scope, Defaults and Deferred; 4 shows the section order, components, animation per section and transitions; 5 shows the build, gate output and critique. After each, stop until the user answers. "Show me alternatives" gets 2–3 options and another wait. The user can override any earlier decision. Never ask the same question twice; a checkpoint the brief already answers is stated and skipped, still open to override.
 
-### When to use the short route
+### Routes: full and light (`--route=`)
 
-Two routes. Pick one before you start, and say which in your first line, with the reason: `Route: short (a contrast fix on an existing page; no new structure or signature)`.
+Two routes. `/build --route=light` or `/build --route=full` forces one. Without the flag, **you choose**, and say which in your first line, with the reason: `Route: light (one contact page on an existing site; no new concept)` or `Route: full (a new site for a new brand)`. "Route: short" (v2.10) is the same as light.
 
-| | Full route | Short route |
+| | Full route | Light route |
 |---|---|---|
-| Use for | Design work: a new page, site, section or component; a redesign; anything that changes what the page is or how it moves | Minor work on something that exists: fix spacing, change a colour, fix contrast, adjust or swap a component, fix a reduced-motion or keyboard bug |
-| Thinking Sequence | Step 0 + all 7 steps | Not run. No archetype selection, no collision draw, no new signature move |
-| Restraint Gate | Yes | Yes: the fix adds nothing that isn't needed. Note what you didn't add |
-| Reduced motion | Yes | Yes: every motion you touch keeps its reduced-motion path |
-| Accessibility | Yes | Yes: contrast, names, keyboard, focus for everything you touch |
-| Delivery Gate | Yes, with a stamp | Yes: run it before and after on the page, report both. Stamp only if the page already had one or you were asked |
+| Use for | Complex work: a new site or a multi-page build, a new brand or concept, a redesign, motion Tier 3+, forms, data or commerce, anything the client wants to be unique | Simple work: **one page or a small fix**. A single page inside an existing design system, a landing page with no new concept, spacing, a colour, contrast, a component swap, a reduced-motion or keyboard bug |
+| Thinking Sequence | Step 0 + all 7 steps, five checkpoints | **Skipped.** Step 0 stack only (keep the project's; a lone page is vanilla). No archetype pick, no reference study, no anti-sameness pass. Two checkpoints: **Plan** (route, stack, the one-line intent, what you will not do) and **Ship** (gate output). A small fix has only **Ship** |
+| Collision engine | `scripts/collide.mjs` draws archetype, mutation, collision, signature | **Not run.** No new signature move; a single page keeps the site's (or has none) |
+| Scope | Step 0.7: the full scope, every route, state and content type, checked by axis X | **Not derived.** The scope is the one page or the one fix. Axis X reads `DESIGN.md` if the project has one; a lone page has no scope to miss |
+| Design | `DESIGN.md`, `SCHEMA.md`, `MOTION.md` from the templates | Keep the existing design: its type, palette, layout and motion. A new single page with no system: house-style defaults, motion Tier ≤ 2, no new tokens beyond what the page uses |
+| Restraint, reduced motion, accessibility | Yes | Yes: add nothing that isn't needed (note what you didn't add); every motion you touch keeps its reduced-motion path; contrast, names, keyboard and focus for everything you touch |
+| Delivery Gate | Yes, every axis including J (journey) and O (originality), with a stamp | **Yes, the same gate**, every axis including J. A fix: run it before and after, report both. Stamp only if the page already had one or you were asked. O: not run (no new concept to compare) |
+| Cost | Recorded by `scripts/cost.mjs` in a benchmark run | Same record; the route is in it (`route.stated`), so the two routes can be compared |
 
-How to run the short route:
+How to run the light route:
 
-1. **Name the cause first.** Run the gate (or read the code) and say what is actually wrong, before editing anything.
-2. **Change only what the cause needs.** Keep the existing design: its type, palette, layout and motion. If the fix needs a new colour, take it from the page's own palette, darkened or lightened until it passes `scripts/contrast.mjs`.
-3. **Run the gate again** and report the before and after numbers side by side.
+1. **Say the route and the intent.** One line each. For a fix, name the cause first: run the gate (or read the code) and say what is actually wrong, before editing anything.
+2. **Build the page, or change only what the cause needs.** If the fix needs a new colour, take it from the page's own palette, darkened or lightened until it passes `scripts/contrast.mjs`.
+3. **Run the gate** (`scripts/gate.mjs`, every axis) and report the result; for a fix, the before and after numbers side by side.
 
-Switch to the full route, and say so, when the fix turns out to need a new structure, a new signature, or a different concept. A short route that grows into a redesign without saying so is the failure this section exists to stop. Worked example: `examples/prompts/fix-existing.md`.
-
+Switch to the full route, and say so, when the work turns out to need a second page, a new structure, a new signature or a different concept. A light route that grows into a redesign without saying so is the failure this section exists to stop. Worked example: `examples/prompts/fix-existing.md`.
 ---
 
 ### The Thinking Sequence (summary; full version in `thinking/sequence.md`)
@@ -247,7 +248,7 @@ node scripts/completeness.mjs ./my-site          # gate axis X: the Step 0.7 sco
 
 `/shape` `/build` `/invent` `/signature` `/motomate` `/animate` `/type` `/bolder` `/quieter` `/distill` `/mutate` `/overdrive` `/critique` `/audit` `/study` `/polish` `/dials` `/help` `/version` `/check-update` `/update-skill`
 
-Flags: `--tier=1..5` `--energy=1..3` `--rhythm=1..3` `--motion=1..3` `--stack=next|react|vanilla|astro` `--seed=<n>` `--review` (stop after the preview block)
+Flags: `--route=full|light` `--tier=1..5` `--energy=1..3` `--rhythm=1..3` `--motion=1..3` `--stack=next|react|vanilla|astro` `--seed=<n>` `--review` (stop after the preview block)
 
 Full behaviour of each command is in `commands/overview.md`. Critique output format is in `commands/critique-format.md`.
 
@@ -350,6 +351,13 @@ Each checkpoint message ends with what the skill is waiting for: `Checkpoint <n>
 **No component limits.** The components in examples/components/ are references and starting points. They are not a menu. They are not a limit. If the brief needs something that does not exist in the library, build it. Write it as one file, with a header that records tier, use-when, avoid-when, reduced-motion, and touch behaviour, following the same pattern as the library. The skill grows when the agent builds something new. Every step below composes, extends, or invents; none of them chooses from the library.
 
 ---
+
+### Which route (before Step 0)
+
+The sequence below is the **full route**. Say the route in your first line (`SKILL.md`, "Routes"); `/build --route=light|full` forces it.
+
+- **Full route** (complex: a new site, a new concept, Tier 3+, forms, data): every step below, the collision engine in Step 4, the full scope in Step 0.7, five checkpoints, the Delivery Gate with a stamp.
+- **Light route** (simple: one page or a small fix): skip Steps 0.5 to 7. Keep only Step 0 (the stack: the project's, or vanilla for a lone page), no collision draw, no scope derivation. Two checkpoints, Plan and Ship (a fix: Ship only). Build the page or the fix inside the existing design. **The Delivery Gate still runs, every axis**, including J. Grows into a second page or a new concept: switch to full and say so.
 
 ### 0. Stack
 
@@ -4320,6 +4328,7 @@ Type a command at the start of a message. Commands combine with flags. Without a
 
 | Flag | Values | Effect |
 |---|---|---|
+| `--route` | full · light | Force the route (`SKILL.md` "Routes"). Without it the agent picks: light for one page or a small fix, full for anything bigger, and says which in its first line |
 | `--tier` | 1–5 | Force a motion tier |
 | `--energy` `--rhythm` `--motion` | 1–3 | Set a dial (see `principles/dials.md`) |
 | `--style` | a file in `styles/` | Apply a visual language |
@@ -4336,9 +4345,9 @@ Type a command at the start of a message. Commands combine with flags. Without a
 **When:** at the very start, or when the client must approve a direction first.
 **Output:** preview block + `DESIGN.md` + `SCHEMA.md` + `MOTION.md` (from `templates/`; `SCHEMA.md` is written with `DESIGN.md`).
 
-#### `/build [brief]`
-**What:** the full flow, from brief to finished, gated code.
-**When:** you want a complete page or site.
+#### `/build [brief] [--route=full|light]`
+**What:** the full flow, from brief to finished, gated code. `--route=light` (one page or a small fix) skips the Thinking Sequence, the collision engine and scope derivation, and still runs the whole Delivery Gate.
+**When:** you want a complete page or site (full), or one page / a small fix (light).
 **Output:** preview block → complete code → Delivery Gate scores → handoff note.
 
 #### `/invent [topic]`

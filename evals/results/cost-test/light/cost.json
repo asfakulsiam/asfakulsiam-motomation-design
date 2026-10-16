@@ -1,0 +1,115 @@
+{
+ "schema": "motomation-cost/1",
+ "run": "light",
+ "generated": "2026-10-16T07:28:33.543Z",
+ "totals": {
+  "builds": 1,
+  "completed": 1,
+  "tokens_in": 7350,
+  "tokens_out": 1815,
+  "elapsed_ms": 76,
+  "tool_calls": 6,
+  "retries": 2,
+  "per_build": {
+   "tokens_in": 7350,
+   "tokens_out": 1815,
+   "elapsed_ms": 76,
+   "tool_calls": 6,
+   "retries": 2
+  }
+ },
+ "by_arm": {
+  "skill": {
+   "builds": 1,
+   "completed": 1,
+   "tokens_in": 7350,
+   "tokens_out": 1815,
+   "elapsed_ms": 76,
+   "tool_calls": 6,
+   "retries": 2,
+   "per_build": {
+    "tokens_in": 7350,
+    "tokens_out": 1815,
+    "elapsed_ms": 76,
+    "tool_calls": 6,
+    "retries": 2
+   }
+  }
+ },
+ "by_route": {
+  "light": {
+   "builds": 1,
+   "completed": 1,
+   "tokens_in": 7350,
+   "tokens_out": 1815,
+   "elapsed_ms": 76,
+   "tool_calls": 6,
+   "retries": 2,
+   "per_build": {
+    "tokens_in": 7350,
+    "tokens_out": 1815,
+    "elapsed_ms": 76,
+    "tool_calls": 6,
+    "retries": 2
+   }
+  }
+ },
+ "builds": [
+  {
+   "schema": "motomation-cost/1",
+   "build": "studio/skill-s7101",
+   "dir": "studio/skill-s7101",
+   "arm": "skill",
+   "brief": "studio",
+   "seed": 7101,
+   "route": {
+    "stated": "light",
+    "requested": "light"
+   },
+   "tokens": {
+    "in": 7350,
+    "out": 1815,
+    "cache_read": 30000,
+    "cache_write": 2000,
+    "total": 9165
+   },
+   "elapsed_ms": 76,
+   "elapsed": "0m 0s",
+   "agent_ms": 1234,
+   "tool_calls": {
+    "total": 6,
+    "by_type": {
+     "Write": 2,
+     "Bash": 4
+    },
+    "bash": {
+     "script:collide": 2,
+     "script:gate": 2
+    }
+   },
+   "retries": {
+    "count": 2,
+    "by_reason": {
+     "tool error": 1,
+     "gate re-run": 1
+    },
+    "events": [
+     {
+      "reason": "tool error",
+      "tool": "script:collide",
+      "detail": "Error: collide.mjs: unknown flag --sed"
+     },
+     {
+      "reason": "gate re-run"
+     }
+    ]
+   },
+   "turns": 6,
+   "completed": true,
+   "completion": "completed",
+   "transcript": "claude-code",
+   "model": "fake-model-1",
+   "usd": 0.0123
+  }
+ ]
+}

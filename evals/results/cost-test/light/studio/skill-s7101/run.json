@@ -1,0 +1,14 @@
+{
+ "slug": "studio",
+ "seed": 7101,
+ "cond": "skill",
+ "dir": "/home/user/workspace/repo/evals/results/cost-test/light/studio/skill-s7101",
+ "exit": 0,
+ "seconds": 0,
+ "elapsed_ms": 76,
+ "route": "light",
+ "turns": 6,
+ "agent": "claude-code 0.0.0 (fake claude)",
+ "output": true,
+ "stderr": ""
+}

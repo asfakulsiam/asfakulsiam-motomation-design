@@ -1,0 +1,116 @@
+{
+ "schema": "motomation-cost/1",
+ "run": "full",
+ "generated": "2026-10-16T07:28:34.511Z",
+ "totals": {
+  "builds": 1,
+  "completed": 1,
+  "tokens_in": 15060,
+  "tokens_out": 3666,
+  "elapsed_ms": 75,
+  "tool_calls": 12,
+  "retries": 2,
+  "per_build": {
+   "tokens_in": 15060,
+   "tokens_out": 3666,
+   "elapsed_ms": 75,
+   "tool_calls": 12,
+   "retries": 2
+  }
+ },
+ "by_arm": {
+  "skill": {
+   "builds": 1,
+   "completed": 1,
+   "tokens_in": 15060,
+   "tokens_out": 3666,
+   "elapsed_ms": 75,
+   "tool_calls": 12,
+   "retries": 2,
+   "per_build": {
+    "tokens_in": 15060,
+    "tokens_out": 3666,
+    "elapsed_ms": 75,
+    "tool_calls": 12,
+    "retries": 2
+   }
+  }
+ },
+ "by_route": {
+  "full": {
+   "builds": 1,
+   "completed": 1,
+   "tokens_in": 15060,
+   "tokens_out": 3666,
+   "elapsed_ms": 75,
+   "tool_calls": 12,
+   "retries": 2,
+   "per_build": {
+    "tokens_in": 15060,
+    "tokens_out": 3666,
+    "elapsed_ms": 75,
+    "tool_calls": 12,
+    "retries": 2
+   }
+  }
+ },
+ "builds": [
+  {
+   "schema": "motomation-cost/1",
+   "build": "studio/skill-s7101",
+   "dir": "studio/skill-s7101",
+   "arm": "skill",
+   "brief": "studio",
+   "seed": 7101,
+   "route": {
+    "stated": "full",
+    "requested": null
+   },
+   "tokens": {
+    "in": 15060,
+    "out": 3666,
+    "cache_read": 60000,
+    "cache_write": 2000,
+    "total": 18726
+   },
+   "elapsed_ms": 75,
+   "elapsed": "0m 0s",
+   "agent_ms": 1234,
+   "tool_calls": {
+    "total": 12,
+    "by_type": {
+     "Write": 5,
+     "Bash": 4,
+     "Read": 3
+    },
+    "bash": {
+     "script:collide": 2,
+     "script:gate": 2
+    }
+   },
+   "retries": {
+    "count": 2,
+    "by_reason": {
+     "tool error": 1,
+     "gate re-run": 1
+    },
+    "events": [
+     {
+      "reason": "tool error",
+      "tool": "script:collide",
+      "detail": "Error: collide.mjs: unknown flag --sed"
+     },
+     {
+      "reason": "gate re-run"
+     }
+    ]
+   },
+   "turns": 12,
+   "completed": true,
+   "completion": "completed",
+   "transcript": "claude-code",
+   "model": "fake-model-1",
+   "usd": 0.0123
+  }
+ ]
+}

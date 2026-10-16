@@ -32,6 +32,13 @@ Each checkpoint message ends with what the skill is waiting for: `Checkpoint <n>
 
 ---
 
+## Which route (before Step 0)
+
+The sequence below is the **full route**. Say the route in your first line (`SKILL.md`, "Routes"); `/build --route=light|full` forces it.
+
+- **Full route** (complex: a new site, a new concept, Tier 3+, forms, data): every step below, the collision engine in Step 4, the full scope in Step 0.7, five checkpoints, the Delivery Gate with a stamp.
+- **Light route** (simple: one page or a small fix): skip Steps 0.5 to 7. Keep only Step 0 (the stack: the project's, or vanilla for a lone page), no collision draw, no scope derivation. Two checkpoints, Plan and Ship (a fix: Ship only). Build the page or the fix inside the existing design. **The Delivery Gate still runs, every axis**, including J. Grows into a second page or a new concept: switch to full and say so.
+
 ## 0. Stack
 
 Before any design step, know what you are building in. The stack changes what the design can be (server rendering, a single file, a build step), so it is decided first and never guessed. Default and dependency rule: `craft/stack.md`.

@@ -6,6 +6,7 @@ Type a command at the start of a message. Commands combine with flags. Without a
 
 | Flag | Values | Effect |
 |---|---|---|
+| `--route` | full · light | Force the route (`SKILL.md` "Routes"). Without it the agent picks: light for one page or a small fix, full for anything bigger, and says which in its first line |
 | `--tier` | 1–5 | Force a motion tier |
 | `--energy` `--rhythm` `--motion` | 1–3 | Set a dial (see `principles/dials.md`) |
 | `--style` | a file in `styles/` | Apply a visual language |
@@ -22,9 +23,9 @@ Type a command at the start of a message. Commands combine with flags. Without a
 **When:** at the very start, or when the client must approve a direction first.
 **Output:** preview block + `DESIGN.md` + `SCHEMA.md` + `MOTION.md` (from `templates/`; `SCHEMA.md` is written with `DESIGN.md`).
 
-### `/build [brief]`
-**What:** the full flow, from brief to finished, gated code.
-**When:** you want a complete page or site.
+### `/build [brief] [--route=full|light]`
+**What:** the full flow, from brief to finished, gated code. `--route=light` (one page or a small fix) skips the Thinking Sequence, the collision engine and scope derivation, and still runs the whole Delivery Gate.
+**When:** you want a complete page or site (full), or one page / a small fix (light).
 **Output:** preview block → complete code → Delivery Gate scores → handoff note.
 
 ### `/invent [topic]`
