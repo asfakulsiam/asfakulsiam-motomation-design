@@ -1,0 +1,27 @@
+import os, design
+design.write(os.path.join(os.path.dirname(__file__), '..', '03-hardcore-metal-band'), dict(
+ name='GHURNI', brief='03-hardcore-metal-band.md', seed=9303, category='event', tier='4',
+ type='band site (album, tour, merch), Bangladesh; static + one notify endpoint',
+ routes=['/', '/album.html', '/shows.html', '/merch.html'],
+ scope=[('function', '/merch.html: email me when the drop opens', 'notify.js#/api/notify'),
+        ('state', 'notify form: default / validation error / pending / success / server error', 'notify.js#Please fix the marked fields'),
+        ('edge', 'photosensitive visitors: flashes capped below 3 per second, off under reduced motion', 'impact.js#under 3 per second')],
+ refs=['WCAG 2.3.1 Three Flashes or Below Threshold: the limit the flash is designed under',
+       'Hardcore show flyers (xerox, halftone, hand-cut type): took "type as a blunt object, cut not styled"',
+       'references/sources/motion.md (impact vs ease): a hit is a step, not a curve'],
+ draw='Archetype The Room · mutation Remove the expected (no nav bar) · collision darkroom tray, "images appear slowly under red light", bent: the red light arrives as one hit, not slowly · seed move Line Curtain (rejected) · fingerprint layout=sequence tier=2 signature_type=type',
+ tension='The music is violence and noise; the fan needs four facts (album, next show, dates, merch) readable at 375px in a crowd.',
+ concept='The site is the rehearsal room in Chattogram: each section is a room with a number on the door, entered one at a time. There is no nav bar; the rooms are listed at the bottom as words big enough to hit. Each room heading lands like a kick drum: two hard frames, and the room flashes red once, the darkroom light switched on by force.',
+ choices=[('Archetype', 'The Room, full-viewport rooms numbered 01 to 03', 'four facts, one per room'),
+          ('Signature', 'impact: two-frame slam + one red flash per room, capped under 3/s', 'darkroom red light x hardcore hit'),
+          ('Type', 'Anton (display, 27vw) + JetBrains Mono (body)', 'blunt condensed hit against a flat machine voice'),
+          ('Palette', 'black #0a0a0a, bone #ece6da, red #f22b1f (accent, also whole rooms; first #e01b12 failed AA at 4.09:1)', 'no smoke, no fire: one red'),
+          ('Layout', 'full-bleed, no container, 6px rules between rooms; word index replaces the nav', 'remove-the-expected mutation'),
+          ('Imagery', 'one halftone placeholder, jagged clip-path [NEEDS ASSET]', 'xerox flyer, not a stock photo')],
+ divergence='`memory.mjs check` against runs #1 and #2: archetype, signature, fonts, palette, motion fresh; tier 2 repeated, so the tier moved to 4. No similar brief logged (category event).',
+ survived='yes, after 1 change (darkroom slow develop bent to a single hit)', cut='Line Curtain (headlines rising line by line from masks): fails Q1 and Q2 (soft; the brief wants impact)',
+ kept='the scroll drift on the giant word: fails Q1, passes Q2: it makes the door feel like walking past a wall',
+ rejected='scroll-velocity cursor counter (the drawn kinetic): fails "does the fan need it"; the brief bans decoration clichés',
+ motion='Slam: 160 ms steps(2) from scale(1.18) translateY(-6%) to rest, once per .hit heading (IntersectionObserver 0.35). Flash: a fixed red layer, multiply blend, opacity 0 to 0.85 to 0 in 220 ms, only for h2 rooms, minimum 400 ms apart. Drift: hero word translateX(-0.18 x scroll) in rAF, passive listener. Hover: rows and merch cells invert, index words skew -8deg and slide 1.5rem (120 ms linear).',
+ rm='nothing is armed: headings visible at rest, the flash layer is display:none, no drift, transitions off.'))
+print('ok')

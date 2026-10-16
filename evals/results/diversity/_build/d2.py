@@ -1,0 +1,27 @@
+import os, design
+design.write(os.path.join(os.path.dirname(__file__), '..', '02-childrens-dentistry'), dict(
+ name='Little Molars Children\'s Dentistry', brief='02-childrens-dentistry.md', seed=9202, category='organisation', tier='3',
+ type='children\'s dental clinic, Dhaka, Bangladesh; static pages + one booking endpoint',
+ routes=['/', '/first-visit.html', '/treatments.html', '/book.html'],
+ scope=[('function', '/book.html: request a slot (name, child age, phone, day)', 'book.js#/api/book'),
+        ('state', 'booking form: default / validation error / pending / success / server error', 'book.js#Please fix the marked fields'),
+        ('edge', 'knocked-out tooth: what to do before calling', 'index.html#put it in milk')],
+ refs=['references/sources/components.md (form states): every form ships five states',
+       'A real stamp card (loyalty card, passport): progress you can see and own; took "progress is a collection"',
+       'references/sources/inspiration.md (playful systems): one playful rule applied everywhere beats many cute details'],
+ draw='Archetype The Manifesto, rejected: one argument set large like a speech would speak to parents and frighten nobody into calm; took the seeded fallback The Field Guide · mutation Make the UI the content · collision typewriter, "carriage return and ink strike" · seed move Width Sprint (rejected) · fingerprint layout=statement tier=2 signature_type=type',
+ tension='Parents book with reasons (price, time, credentials); children decide with fear. The site has to be legible to the first and harmless, even fun, to the second.',
+ concept='The site is a field guide to the visit, bound as the child\'s tooth passport: every step (Tell, Show, Do, Stamp) is a passport page with an empty stamp ring. Reading a page strikes the stamp in, like a typewriter key hitting the ribbon, and a pill of teeth at the bottom edge fills as you go. The scroll position is the passport.',
+ choices=[('Archetype', 'The Field Guide (fallback), pages as specimen cards', 'the visit is a sequence a child can learn in advance'),
+          ('Signature', 'tooth passport: ink-strike stamps + a fixed tooth pill as scroll progress', 'UI-as-content mutation x typewriter ink strike'),
+          ('Type', 'Fredoka (display) + Nunito (body)', 'round, friendly, still legible at 16px for parents'),
+          ('Palette', 'cream #fff8ee, navy #1c2a4a, coral #e8553d (accent), mint #dff2ea surface', 'nothing white-and-blue clinical'),
+          ('Layout', '2-column grid of rounded cards, 28px radius', 'pages of a booklet'),
+          ('Imagery', 'one inline SVG (the fish tank), round mask; doctor initials as faces [NEEDS ASSET]', 'no stock smiles')],
+ divergence='`memory.mjs check` against run #1 (funeral home): archetype, signature fresh; tier 2 repeated, so the tier moved to 3. Fingerprint layout=cards, closest run 37% (< 70%).',
+ survived='yes, after 1 change (Manifesto to Field Guide)', cut='Width Sprint (variable width with scroll speed): fails Q1 and Q2 (no hierarchy, feedback or story for a parent booking)',
+ kept='the fish SVG: fails Q1, passes Q2: the brief names the fish tank as the thing children remember',
+ rejected='a breathing cursor on idle (the drawn kinetic): fails "does it serve the brief": a parent reading has no use for it',
+ motion='Stamp strike: 320 ms rotate(-24deg) scale(1.5) to rotate(-12deg) scale(1), overshoot curve, on each .pp at 50% visibility; the same keyframe fills the matching tooth in the fixed pill. Hover: cards lift 3px and tilt 0.4deg (200 ms). Button press: 3px drop (150 ms).',
+ rm='all animation and transition off; stamps still fill (state, not motion).'))
+print('ok')

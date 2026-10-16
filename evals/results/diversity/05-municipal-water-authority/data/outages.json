@@ -1,0 +1,217 @@
+{
+ "demo": true,
+ "note": "Demo data. Replace with the authority's daily outage feed before launch.",
+ "updated": "2026-10-16T06:00:00+06:00",
+ "wards": [
+  {
+   "demo": true,
+   "ward": 1,
+   "area": "Shaheb Bazar",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 2,
+   "area": "Ghoramara",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 3,
+   "area": "Boalia",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 4,
+   "area": "Rajpara",
+   "cut": true,
+   "back": "4 pm"
+  },
+  {
+   "demo": true,
+   "ward": 5,
+   "area": "Kazla",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 6,
+   "area": "Motihar",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 7,
+   "area": "Talaimari",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 8,
+   "area": "Uposhohor",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 9,
+   "area": "Laxmipur",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 10,
+   "area": "Shiroil",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 11,
+   "area": "Kadirganj",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 12,
+   "area": "Hetem Khan",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 13,
+   "area": "Sagorpara",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 14,
+   "area": "Kumarpara",
+   "cut": true,
+   "back": "6 pm"
+  },
+  {
+   "demo": true,
+   "ward": 15,
+   "area": "Ranibazar",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 16,
+   "area": "Padma Residential",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 17,
+   "area": "Sapura",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 18,
+   "area": "Baliapukur",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 19,
+   "area": "Terokhadia",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 20,
+   "area": "Chhoto Bongram",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 21,
+   "area": "Horogram",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 22,
+   "area": "Keshobpur",
+   "cut": true,
+   "back": "tomorrow 6 am"
+  },
+  {
+   "demo": true,
+   "ward": 23,
+   "area": "Kashiadanga",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 24,
+   "area": "Naodapara",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 25,
+   "area": "Bhadra",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 26,
+   "area": "Binodpur",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 27,
+   "area": "Meherchandi",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 28,
+   "area": "Budhpara",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 29,
+   "area": "Khorkhori",
+   "cut": false,
+   "back": null
+  },
+  {
+   "demo": true,
+   "ward": 30,
+   "area": "Shalbagan",
+   "cut": false,
+   "back": null
+  }
+ ]
+}

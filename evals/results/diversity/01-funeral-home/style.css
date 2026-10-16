@@ -1,0 +1,45 @@
+:root { --table: #d8d2c6; --paper: #f8f5ef; --ink: #24211d; --soft: #5b554c; --brass: #7a4f0e; --rule: #cfc7b8; }
+* { box-sizing: border-box; }
+html { background: var(--table); color: var(--ink); }
+body { margin: 0; font: 400 1.125rem/1.6 "Newsreader", Georgia, serif; font-optical-sizing: auto; }
+a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; color: var(--brass); }
+a:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; border-radius: 2px; }
+.skip { position: absolute; left: -999px; top: 0; background: var(--paper); padding: .5rem 1rem; }
+.skip:focus { left: 1rem; z-index: 10; }
+.callbar { position: sticky; top: 0; z-index: 5; display: flex; flex-wrap: wrap; gap: .25rem 1rem; justify-content: center; align-items: center; padding: .55rem 1rem; background: var(--ink); color: var(--paper); font: 500 .95rem/1.3 "IBM Plex Mono", monospace; text-align: center; }
+.callbar-tel { color: var(--paper); font-weight: 500; padding: .35rem .6rem; border: 1px solid var(--paper); border-radius: 2px; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+.callbar-tel:hover { background: var(--paper); color: var(--ink); }
+.mast { max-width: 38rem; margin: 2.5rem auto 0; padding: 0 1.25rem; display: flex; flex-direction: column; gap: .5rem; }
+.mast-name { font-size: 1rem; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; color: var(--soft); }
+.mast nav { display: flex; flex-wrap: wrap; gap: 0 1.25rem; }
+.mast nav a { display: inline-block; padding: .55rem 0; color: var(--soft); }
+.sheet { position: relative; max-width: 38rem; margin: 1rem auto 3rem; padding: 3rem 2.25rem 2.5rem; background: var(--paper); box-shadow: 0 1px 0 var(--rule), 0 18px 40px -28px rgba(36, 33, 29, .45); }
+.sheet::before { content: ""; position: absolute; left: 0; right: 0; top: -8px; height: 8px; background: radial-gradient(circle at 6px 8px, var(--paper) 5px, transparent 5.5px) 0 0 / 12px 8px repeat-x; }
+.sheet-label { margin: 0 0 1.25rem; font: 500 .8rem/1.4 "IBM Plex Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); }
+h1 { margin: 0 0 1.25rem; font-weight: 300; font-size: clamp(2.1rem, 6.4vw, 3.1rem); line-height: 1.08; letter-spacing: -.01em; }
+h2 { margin: 2.75rem 0 .75rem; font-weight: 500; font-size: 1.45rem; line-height: 1.25; padding-top: 1.25rem; border-top: 1px dashed var(--rule); }
+h3 { margin: 0; font-weight: 500; font-size: 1.1rem; }
+p { margin: 0 0 .9rem; max-width: 62ch; }
+.lede { font-size: 1.2rem; color: var(--soft); }
+.steps { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 2.25rem 1fr; column-gap: .5rem; padding: .75rem 0; border-bottom: 1px dotted var(--rule); }
+.steps li::before { content: counter(s, decimal-leading-zero); grid-row: span 2; font: 500 .85rem/1.9 "IBM Plex Mono", monospace; color: var(--brass); }
+.steps p { margin: .15rem 0 0; color: var(--soft); }
+.receipt { list-style: none; margin: .75rem 0 1rem; padding: 0; font: 400 .95rem/1.5 "IBM Plex Mono", monospace; }
+.receipt li { display: flex; align-items: baseline; gap: .5rem; padding: .3rem 0; }
+.receipt .dots { flex: 1; border-bottom: 1px dotted var(--soft); transform: translateY(-.25em); min-width: 1rem; }
+.receipt .amt { white-space: nowrap; }
+.more { display: inline-block; padding: .5rem 0; font-style: italic; }
+.big-tel { font-size: clamp(2rem, 9vw, 3rem); font-weight: 300; }
+.big-tel a { text-decoration: none; border-bottom: 1px solid var(--ink); }
+.sheet-end { text-align: center; color: var(--soft); letter-spacing: .6em; margin-top: 2rem; }
+.foot { max-width: 38rem; margin: 0 auto 4rem; padding: 0 1.25rem; color: var(--soft); font-size: 1rem; }
+.foot a { color: var(--soft); display: inline-block; padding: .4rem 0; }
+.foot-small { font-size: .9rem; }
+/* paper feed: lines rise out of the slot one at a time, the way a printer feeds a slip. JS adds .feed to <html> */
+/* opacity, not clip-path: a clipped line cannot be tapped, a transparent one can (gate J found the clip-path version) */
+.feed .line { opacity: 0; transform: translateY(.6em); transition: opacity .7s cubic-bezier(.2, .7, .2, 1), transform .7s cubic-bezier(.2, .7, .2, 1); }
+.feed .line.fed { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .feed .line { opacity: 1; transform: none; transition: none; } }
+@media (max-width: 480px) { .sheet { padding: 2.25rem 1.25rem 2rem; margin-top: .75rem; } .callbar span { flex-basis: 100%; } }

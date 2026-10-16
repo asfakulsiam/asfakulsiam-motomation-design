@@ -1,0 +1,85 @@
+{
+  "version": 2,
+  "runs": [
+    {
+      "date": "2026-10-16T07:38:48.385Z",
+      "category": "organisation",
+      "archetype": "timeline",
+      "signature": "paper-feed",
+      "fonts": "Newsreader/IBM Plex Mono",
+      "palette": "paper-brass",
+      "motion": "clip-feed",
+      "tier": "2",
+      "project": "/home/user/workspace/repo",
+      "brief": "family funeral home Narayanganj 24-hour line, what happens next, fixed prices",
+      "fingerprint": {
+        "layout": "sequence",
+        "tier": 2
+      }
+    },
+    {
+      "date": "2026-10-16T07:40:58.333Z",
+      "category": "organisation",
+      "archetype": "field-guide",
+      "signature": "tooth-stamps",
+      "fonts": "Fredoka/Nunito",
+      "palette": "cream-coral",
+      "motion": "ink-strike",
+      "tier": "3",
+      "project": "/home/user/workspace/repo",
+      "brief": "children's dentistry clinic Uttara, tooth passport, booking",
+      "fingerprint": {
+        "layout": "cards",
+        "tier": 3
+      }
+    },
+    {
+      "date": "2026-10-16T07:42:29.902Z",
+      "category": "event",
+      "archetype": "room",
+      "signature": "impact-flash",
+      "fonts": "Anton/JetBrains Mono",
+      "palette": "black-red",
+      "motion": "slam",
+      "tier": "4",
+      "project": "/home/user/workspace/repo",
+      "brief": "hardcore metal band Chattogram album tour merch",
+      "fingerprint": {
+        "layout": "fullbleed",
+        "tier": 4
+      }
+    },
+    {
+      "date": "2026-10-16T07:44:13.043Z",
+      "category": "product-launch",
+      "archetype": "stage",
+      "signature": "year-ruler",
+      "fonts": "Bodoni Moda/Jost",
+      "palette": "smoke-amber",
+      "motion": "scroll-scrub",
+      "tier": "3",
+      "project": "/home/user/workspace/repo",
+      "brief": "luxury perfume single fragrance oud aged seven years numbered bottles",
+      "fingerprint": {
+        "layout": "stage",
+        "tier": 3
+      }
+    },
+    {
+      "date": "2026-10-16T07:46:07.259Z",
+      "category": "organisation",
+      "archetype": "manifesto",
+      "signature": "ward-sentence",
+      "fonts": "Atkinson Hyperlegible",
+      "palette": "civic-blue",
+      "motion": "none",
+      "tier": "1",
+      "project": "/home/user/workspace/repo",
+      "brief": "municipal water authority Rajshahi outages by ward, bills, report a leak, water quality",
+      "fingerprint": {
+        "layout": "document",
+        "tier": 1
+      }
+    }
+  ]
+}

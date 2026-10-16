@@ -1,0 +1,80 @@
+$ node skills/asfakulsiam-motomation-design/scripts/gate.mjs evals/results/diversity/01-funeral-home
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+DELIVERY GATE · evals/results/diversity/01-funeral-home
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (43 measured; 1 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (43 measured; 1 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (43 measured; 1 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (43 measured; 1 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (10 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (44 compared)
+  names     ✓ 0 missing alt / accessible names  (12 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (8 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  progress  ✓ 0 of 1 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
+     ✓ sticky div.callbar  1382px  Δ median 9.2% · 7/7 transitions change  [14.72 9.21 9.19 8.91 8.03 7.71 13.87]
+  smooth    – not verified — sandbox (sandbox: 2 CPUs); measured p95 16.7ms @1440, 16.8ms @375 CPU×4 (budgets 20/25ms) — see docs/adapters/sandbox.md
+  rm-flow   ✗ under reduced motion: 1 zone(s) still pinned (sticky div.callbar), 0 text(s) missing · 0 visible canvas(es)
+  focus     ✓ 0 of 12 focused elements show no visible focus indicator  (12 tabbable)
+  targets   ✓ 0 under 24px, 4 under 44px (warning) at 375 touch  (12 checked; inline links exempt)
+     335×26  a.mast-name  "Shanti Ghat Funeral Service"
+     132×38  a  "What happens next"
+     41×38  a  "Prices"
+     54×38  a  "Contact"
+  zoom200   ✓ 0 lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%
+  reflow    ✓ 0px horizontal scroll at 320px
+  forced    ✓ 0 of 43 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
+  kbd-trap  ✓ 12 of 12 tabbable reached in 30 Tabs, no cycle
+  C copy     ✓ 0 rule(s) failing  (craft/copy.md; 0 warning(s))
+  S SEO      ✓ 0 rule(s) failing  (craft/seo.md; 0 warning(s))
+  P perf     ✓ 0 rule(s) failing  (craft/performance.md; 0 warning(s))
+  K security ✓ 0 rule(s) failing  (craft/security.md; 0 warning(s))
+  composition (advisory: heuristics, never fail the gate, not in the stamp)
+     pin fill  ⚠ 0 of 1 pinned zone(s) at least 60% filled  (sticky div.callbar 12%)
+     focal     ⚠ 2 of 3 screen(s) with text have one clear focal point (heaviest text mass ≥ 1.5× the next); no clear lead on screen 2 (1.35×)
+     scale     ⚠ display:body 1:2.8  (49.6px / 18px; warn below 1:6)
+  richness (advisory: "too little" warnings, never fail the gate, not in the stamp)
+     page      home (from path; set with --page home|category|about|page)
+     fold      ✓ 12 meaningful section(s) above the fold at 1440×900: nav header.mast, heading h1.line.fed, heading h2#h-next.line.fed, heading h3, heading h3, heading h3, text p.sheet-label.line, text p.lede.line, text p, text p, text p, action a.skip  (warn below 3)
+     opening   ✓ h1 "We will come to you, tonight if you need"
+  micro-states (advisory: missing states are warnings, never fail the gate, not in the stamp)
+     buttons   – none on the page
+     forms     – none on the page
+     lists     – 2 static list(s): not judged (mark data lists with data-entity)
+     images    – none on the page
+     async     – no async actions in the page's scripts
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  8 sections, entrances: static | static | static | y+clip | y+clip | y+clip | y+clip | static → 3 repeat(s); pins 1, WebGL canvases 0, JS 2KB gzipped
+  records    DESIGN.md: /home/user/workspace/repo/evals/results/diversity/01-funeral-home/DESIGN.md · memory log: /home/user/.motomation/log.json · stamp fields: {"archetype":"timeline","mutation":"single-object","signature":"paper-feed","tier":"2"}
+  critique → C5[restraint:kept] H5[375:0] S1[last5:archetype-reused,signature-reused,fp100] R3[cuts:1,anim:1] M5[t2:pins1/2,webgl0/1,js2/80KB,rm0] V2[entrance-repeats:3] Q3[prog:Δ9.2%,smooth:sandbox,rm:pinned] A5[focus:12/12,tgt:0f4w,zoom:0,reflow:0,fc:0,trap:0]
+  coverage   ✓ worst width 375px: 1 of 44 text elements skipped (2%; limit 30% at every width)
+  X — completeness (funeral home, Narayanganj, Bangladesh; static, phone-first, admin panel: no)  ✗
+      Routes:      1/4 required present
+      Functions:   1/2 present
+      Edge cases:  2/2 handled
+      Template:    2/2 present · 11 not required (reason given)
+      ✗ route /what-happens-next.html: route not found in app/, pages/ or HTML
+      ✗ route /prices.html: route not found in app/, pages/ or HTML
+      ✗ route /contact.html: route not found in app/, pages/ or HTML
+      ✗ function 24-hour line: one tap to call from every page: index.html has no "tel:+8801711000000"
+  J — journey (whole site, real browser; any missing state fails the page; not in the stamp or its id)
+    nav      ✓ 4/4 route(s) reachable from home in ≤ 3 clicks (/:0 /what-happens-next:1 /prices:1 /contact:1)
+               · sitemap.xml: 4 route(s)
+               · 4 page(s) loaded
+    mobile   ✗ 13/15 interactive element(s) respond at 375px · tap 13/15 · swipe n/a · long-press n/a
+               ✗ tap a "How to reach us" (/): nothing changed after a tap (no DOM change, focus, scroll, navigation or event)
+               ✗ tap a "What each step costs" (/what-happens-next.html): nothing changed after a tap (no DOM change, focus, scroll, navigation or event)
+               · 4 page(s); an element shared by several pages (header, footer) is tapped once
+               · 6 mailto/tel link(s) are handed to the OS and counted as responding
+               · 4 element(s) parked off-canvas (skip links, closed drawers) are keyboard-only by design and not tapped
+               · no element declares a long press
+    forms    – n/a: no form with fields on any of 4 page(s)
+    loading  – n/a: no fetch or XHR request after load: no async surface
+    errors   ✓ 1/1 designed not-found view (unknown route → HTTP 404)
+               · probed /__motomation-missing-mvaoam4a/
+    session  ✓ 6/6 · load ✓ · open a second route ✓ · back button ✓ · forward button ✓ · full reload ✓ · two tabs ✓
+               · second page: /what-happens-next.html
+    journey: nav0 mobile2 forms- loading- errors0 session0 → FAIL (2 missing)
+  FAIL  stamp → critique: C5[restraint:kept] H5[375:0] S1[last5:archetype-reused,signature-reused,fp100] R3[cuts:1,anim:1] M5[t2:pins1/2,webgl0/1,js2/80KB,rm0] V2[entrance-repeats:3] Q3[prog:Δ9.2%,smooth:sandbox,rm:pinned] A5[focus:12/12,tgt:0f4w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q1 k0 · rules: C0 S0 P0 K0 · gate/4 · 9786947bba · skipped 1/44@375
+
+(exit 1, 274s)

@@ -101,9 +101,21 @@ Inventory: `which claude cursor-agent codex gemini aider`, then a one-line promp
 A release ships only if, compared with the baseline:
 - the average total score is higher on **every** brief,
 - **Variety** passes: running the same brief 3 times produces 3 different archetypes and signatures,
-- no brief fails a **hard gate** (reduced motion, keyboard access, contrast, no placeholders).
+- no brief fails a **hard gate** (reduced motion, keyboard access, contrast, no placeholders),
+- the **diversity arm** is re-run and its matrix published (below); a repeat does not block a release, but it must be named in its REPORT.md.
 
 ## Variety test
 Automated part: `node evals/variety.mjs` prints collision draws for 5 seeds and the fingerprint similarity matrix of published builds. Latest: [`results/2026-10-11-variety.md`](results/2026-10-11-variety.md).
 
 Run `briefs/03-ceramics-shop.md` three times in the same project, without clearing `.motomation/log.json`. The archetype, signature and nav must differ each time.
+
+## Diversity arm (permanent, every version re-runs it)
+Variety asks "does the same brief come out differently three times?". Diversity asks the opposite question: "do five briefs that have nothing in common come out as five different sites?". Five deliberately unrelated briefs live in [`briefs/diversity/`](briefs/diversity/): a funeral home, a children's dentistry clinic, a hardcore metal band, a luxury perfume and a municipal water authority. Each is built through the skill, every output is published under [`results/diversity/<brief>/`](results/diversity/), and the five are compared on the six axes of `scripts/originality.mjs` (structure, composition, image, typography, interaction, signature). Every pair must stay below 0.4 on every axis.
+
+```
+node evals/diversity.mjs                       # compare the published builds → results/diversity/matrix.json + matrix.md
+node evals/diversity.mjs --gate                # also run the Delivery Gate on every build (3–6 min each)
+node evals/diversity.mjs generate --out <dir>  # the full arm: a fresh agent builds all five with the skill (spends tokens), then compares
+```
+
+Every version re-runs the arm with `generate` into a new folder, publishes the five builds, `matrix.md` and a `REPORT.md` in three sections (Measured / Judged / Not verified) that names where the system avoided repetition, where it failed and why. Never edit a build to lower its similarity scores. Functional fixes the Delivery Gate asks for (contrast, targets, overflow) are allowed; keep the earlier gate logs and matrix, and re-run the matrix after the fixes. Latest: [`results/diversity/REPORT.md`](results/diversity/REPORT.md).

@@ -1,0 +1,78 @@
+$ node skills/asfakulsiam-motomation-design/scripts/gate.mjs evals/results/diversity/05-municipal-water-authority
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+DELIVERY GATE · evals/results/diversity/05-municipal-water-authority
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (35 measured; 1 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (35 measured; 1 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (35 measured; 1 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (35 measured; 1 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (3 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (36 compared)
+  names     ✓ 0 missing alt / accessible names  (16 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (10 numbers checked at scroll 0, scroll end and reduced motion; 1 live values skipped)
+  progress  ✓ 0 of 0 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
+  smooth    – no pinned zone, not measured
+  rm-flow   – no pinned zone
+  focus     ✓ 0 of 16 focused elements show no visible focus indicator  (16 tabbable)
+  targets   ✗ 4 under 24px, 2 under 44px (warning) at 375 touch  (14 checked; inline links exempt)
+     98×22  a  "All 30 wards"
+     188×22  a  "Understand or pay a bill"
+     214×22  a  "Report a leak or dirty water"
+     299×22  a  "Read this month's water qualit"
+     165×29  a.skip  "Skip to main content"
+     263×40  a.org  "RWRajshahi City Water Supply A"
+  zoom200   ✓ 0 lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%
+  reflow    ✓ 0px horizontal scroll at 320px
+  forced    ✓ 0 of 35 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
+  kbd-trap  ✓ 16 of 16 tabbable reached in 38 Tabs, no cycle
+  C copy     ✓ 0 rule(s) failing  (craft/copy.md; 0 warning(s))
+  S SEO      ✓ 0 rule(s) failing  (craft/seo.md; 0 warning(s))
+  P perf     ✓ 0 rule(s) failing  (craft/performance.md; 0 warning(s))
+  K security ✓ 0 rule(s) failing  (craft/security.md; 0 warning(s))
+  composition (advisory: heuristics, never fail the gate, not in the stamp)
+     pin fill  – no pinned zone
+     focal     ✓ 2 of 2 screen(s) with text have one clear focal point (heaviest text mass ≥ 1.5× the next)
+     scale     ⚠ display:body 1:4.2  (67.2px / 16px; warn below 1:6)
+  richness (advisory: "too little" warnings, never fail the gate, not in the stamp)
+     page      home (from path; set with --page home|category|about|page)
+     fold      ✓ 5 meaningful section(s) above the fold at 1440×900: nav header.top, heading h1#h1.sentence, heading h2#h-cuts, heading h2#h-jobs, action a.skip  (warn below 3)
+     opening   ✓ h1 "Today, 3 of 30 wards have a supply cut."
+  micro-states (advisory: missing states are warnings, never fail the gate, not in the stamp)
+     buttons   ✓ 2 button(s)  (have: hover, focus, active, disabled, loading)
+     forms     – none on the page
+     lists     – 1 static list(s): not judged (mark data lists with data-entity)
+     images    – none on the page
+     async     ⚠ fetch/XHR in scripts: no error state found  (have: pending, success)
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  5 sections, entrances: static | static | static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 3KB gzipped
+  records    DESIGN.md: /home/user/workspace/repo/evals/results/diversity/05-municipal-water-authority/DESIGN.md · memory log: /home/user/.motomation/log.json · stamp fields: {"archetype":"manifesto","mutation":"single-object (today's sentence)","signature":"ward-sentence","tier":"1"}
+  critique → C4[restraint:changed1] H5[375:0] S5[last5:archetype-new,signature-new,fp28] R3[cuts:1,anim:1] M5[t1:pins0/2,webgl0/1,js3/30KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A4[focus:16/16,tgt:4f2w,zoom:0,reflow:0,fc:0,trap:0]
+  coverage   ✓ worst width 375px: 1 of 36 text elements skipped (3%; limit 30% at every width)
+  X — completeness (public utility, Rajshahi, Bangladesh; static pages + daily JSON feed + one report endpoint; EN/Bangla, admin panel: no)  ✓
+      Routes:      5/5 required present
+      Functions:   3/3 present
+      States:      2/2 defined
+      Edge cases:  2/2 handled
+      Skeletons:   1/1 present
+      Template:    4/4 present · 10 not required (reason given)
+      ⚠ comments: 1 non-trivial file(s) (> 40 lines) without a comment: style.css  (warning)
+  J — journey (whole site, real browser; any missing state fails the page; not in the stamp or its id)
+    nav      ✓ 5/5 route(s) reachable from home in ≤ 3 clicks (/:0 /outages:1 /bills:1 /report:1 /water-quality:1)
+               · sitemap.xml: 5 route(s)
+               · 5 page(s) loaded
+    mobile   ✓ 20/20 interactive element(s) respond at 375px · tap 20/20 · swipe n/a · long-press n/a
+               · 5 page(s); an element shared by several pages (header, footer) is tapped once
+               · 5 element(s) parked off-canvas (skip links, closed drawers) are keyboard-only by design and not tapped
+               · no element declares a long press
+    forms    ✓ 5/5 form state(s) rendered · Report a problem (/report.html): default✓ validation✓ loading✓ success✓ serverError✓
+    loading  ✓ 4/4 async surface(s) show a skeleton while pending
+               · 2 request(s) held 2.5 s before release, across 5 page(s)
+    errors   ✓ 1/1 designed not-found view (unknown route → HTTP 404)
+               · probed /__motomation-missing-mvaouwl4/
+    session  ✓ 6/6 · load ✓ · open a second route ✓ · back button ✓ · forward button ✓ · full reload ✓ · two tabs ✓
+               · second page: /outages.html
+    journey: nav0 mobile0 forms0 loading0 errors0 session0 → PASS
+  FAIL  stamp → critique: C4[restraint:changed1] H5[375:0] S5[last5:archetype-new,signature-new,fp28] R3[cuts:1,anim:1] M5[t1:pins0/2,webgl0/1,js3/30KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A4[focus:16/16,tgt:4f2w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k4 · rules: C0 S0 P0 K0 · gate/4 · df8157688c · skipped 1/36@375
+
+(exit 1, 187s)

@@ -85,7 +85,7 @@ export function projectRoutes(root) {
   return routes;
 }
 function routeMatch(item, routes) {
-  const want = norm(item.split(/\s/)[0]); if (routes.has(want)) return true;
+  const want = norm(item.split(/\s/)[0].replace(/\.html?$/, "").replace(/(^|\/)index$/, "")); if (routes.has(want)) return true; // /prices.html names the same route as /prices
   const w = want.split("/"); // a concrete item (/products/linen-shirt) matches a dynamic route (/products/[*])
   return [...routes].some((r) => { const s = r.split("/"); if (s.includes("[...]")) { const k = s.indexOf("[...]"); return w.length >= k && s.slice(0, k).every((x, i) => x === w[i] || x === "[*]"); } return s.length === w.length && s.every((x, i) => x === w[i] || x === "[*]" || w[i] === "[*]"); });
 }

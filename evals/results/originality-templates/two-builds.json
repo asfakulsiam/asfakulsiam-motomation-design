@@ -10,12 +10,12 @@
       "b": "launch-product-film",
       "score": {
         "structure": 0.02,
-        "composition": 0.14,
-        "image": 0.33,
+        "composition": 0.11,
+        "image": 0.07,
         "typography": 0.31,
         "interaction": 0.24,
         "signature": 0.1,
-        "overall": 0.19
+        "overall": 0.14
       },
       "parts": {
         "structure": {
@@ -23,14 +23,14 @@
           "order": 0
         },
         "composition": {
-          "placement": 0.06,
+          "placement": 0.07,
           "columns": 0.38,
-          "density": 0.14
+          "density": 0
         },
         "image": {
           "ratio_size": 0,
           "crop_mask": 0,
-          "effects": 1
+          "effects": 0.2
         },
         "typography": {
           "families": 0.5,
@@ -55,12 +55,12 @@
   "pass": true,
   "max": {
     "structure": 0.02,
-    "composition": 0.14,
-    "image": 0.33,
+    "composition": 0.11,
+    "image": 0.07,
     "typography": 0.31,
     "interaction": 0.24,
     "signature": 0.1,
-    "overall": 0.19
+    "overall": 0.14
   },
   "targets": [
     "examples/templates/org.html",
@@ -75,7 +75,7 @@
         "grid:m",
         "statement:m"
       ],
-      "images": 1,
+      "images": 5,
       "display": "gloock",
       "body": "schibsted grotesk",
       "signature": {

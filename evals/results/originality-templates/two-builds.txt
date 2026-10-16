@@ -1,12 +1,12 @@
 ORIGINALITY · 2 build(s) · 1 pair(s) · threshold < 0.4 on every axis (lower = more different)
-  org-climate-nonprofit: 4 content blocks [text:m media:m grid:m statement:m] · 1 image(s) · type gloock / schibsted grotesk (body 17px) · signature declared seismograph-line, measured pointer+scroll+time → transform on svg (large)
+  org-climate-nonprofit: 4 content blocks [text:m media:m grid:m statement:m] · 5 image(s) · type gloock / schibsted grotesk (body 17px) · signature declared seismograph-line, measured pointer+scroll+time → transform on svg (large)
   launch-product-film: 4 content blocks [statement:m grid:xl statement:m form:s] · 1 image(s) · type fraunces / schibsted grotesk (body 18px) · signature declared aperture, measured scroll → clip on block (large)
 
 | Pair | structure | composition | image | typography | interaction | signature | overall | Verdict |
 |---|---:|---:|---:|---:|---:|---:|---:|---|
-| org-climate-nonprofit × launch-product-film | 0.02 | 0.14 | 0.33 | 0.31 | 0.24 | 0.10 | 0.19 | different on every axis |
+| org-climate-nonprofit × launch-product-film | 0.02 | 0.11 | 0.07 | 0.31 | 0.24 | 0.10 | 0.14 | different on every axis |
 
 parts (why each axis scored what it did):
-  org-climate-nonprofit × launch-product-film: structure shingles=0.03,order=0 · composition placement=0.06,columns=0.38,density=0.14 · image ratio_size=0,crop_mask=0,effects=1 · typography families=0.5,scale=0.39,rhythm=0.26,hierarchy=0 · interaction hover=0,click=0.8,scroll=0.14,pointer=0 · signature declared=0,measured=0.2
+  org-climate-nonprofit × launch-product-film: structure shingles=0.03,order=0 · composition placement=0.07,columns=0.38,density=0 · image ratio_size=0,crop_mask=0,effects=0.2 · typography families=0.5,scale=0.39,rhythm=0.26,hierarchy=0 · interaction hover=0,click=0.8,scroll=0.14,pointer=0 · signature declared=0,measured=0.2
 
 PASS  every pair below 0.4 on every axis

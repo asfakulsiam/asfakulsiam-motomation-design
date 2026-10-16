@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Book a visit · Little Molars</title>
+<meta name="description" content="Book a check-up for your child online. Tell us their age and a good day; we call back to confirm a time.">
+<link rel="canonical" href="https://littlemolars.example/book.html">
+<meta property="og:title" content="Book a visit · Little Molars"><meta property="og:description" content="Book a check-up for your child online. Tell us their age and a good day; we call back to confirm a time."><meta property="og:image" content="https://littlemolars.example/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;700&display=swap">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Dentist", "name": "Little Molars Children's Dentistry", "address": {"@type": "PostalAddress", "addressLocality": "Uttara, Dhaka", "addressCountry": "BD"}, "medicalSpecialty": "Pediatric"}</script>
+</head>
+<body class="p-book">
+<!-- motomation · archetype: field-guide · mutation: ui-as-content · signature: tooth-stamps · tier: 3 · critique: <paste> · gate: <paste> -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><a class="logo" href="/"><svg viewBox="0 0 40 44" aria-hidden="true" focusable="false"><path d="M8 4c5-3 9 1 12 1s7-4 12-1c6 4 5 13 2 19-2 5-2 17-6 18-3 1-4-10-8-10s-5 11-8 10c-4-1-4-13-6-18C3 17 2 8 8 4z"/></svg><span>Little Molars</span></a><nav aria-label="Main"><a href="/">Home</a><a href="/first-visit.html">First visit</a><a href="/treatments.html">Treatments</a><a href="/book.html" aria-current="page">Book</a></nav></header>
+<ol class="passport" aria-label="Your tooth passport: a stamp for each part of this page you have read"></ol>
+<main id="main"><div class="intro"><p class="kicker">Book</p><h1>Book a visit</h1><p class="lede">Choose a day. We call you within one working day to confirm the time.</p></div>
+<form id="book" class="form card" novalidate aria-label="Book a visit">
+<div class="field"><label for="parent">Your name</label><input id="parent" name="parent" autocomplete="name" required><span class="err" data-for="parent" aria-live="polite"></span></div>
+<div class="field"><label for="age">Child's age (years)</label><input id="age" name="age" type="number" min="1" max="14" inputmode="numeric" required><span class="err" data-for="age" aria-live="polite"></span></div>
+<div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" required><span class="err" data-for="phone" aria-live="polite"></span></div>
+<div class="field"><label for="day">Preferred day</label><select id="day" name="day" required><option value="">Choose a day</option><option>Saturday</option><option>Sunday</option><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option></select><span class="err" data-for="day" aria-live="polite"></span></div>
+<button class="btn" type="submit">Request this visit</button>
+<p class="form-status" role="status" aria-live="polite"></p>
+</form></main>
+<footer class="foot"><div><p class="foot-name">Little Molars Children's Dentistry</p><p>House 12, Road 7, Sector 4, Uttara, Dhaka [NEEDS COPY: address]. Saturday to Thursday, 9 am to 7 pm.</p></div><nav aria-label="Footer"><a href="/first-visit.html">First visit</a><a href="/treatments.html">Treatments</a><a href="/book.html">Book a visit</a></nav></footer>
+<script src="/passport.js" defer></script>
+<script src="/book.js" defer></script>
+</body>
+</html>

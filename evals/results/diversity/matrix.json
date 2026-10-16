@@ -1,0 +1,705 @@
+{
+ "schema": "motomation-diversity/1",
+ "threshold": 0.4,
+ "briefs": [
+  {
+   "slug": "01-funeral-home",
+   "file": "01-funeral-home.md",
+   "title": "Funeral home",
+   "seed": 9101,
+   "category": "organisation",
+   "built": true
+  },
+  {
+   "slug": "02-childrens-dentistry",
+   "file": "02-childrens-dentistry.md",
+   "title": "Children's dentistry clinic",
+   "seed": 9202,
+   "category": "organisation",
+   "built": true
+  },
+  {
+   "slug": "03-hardcore-metal-band",
+   "file": "03-hardcore-metal-band.md",
+   "title": "Hardcore metal band",
+   "seed": 9303,
+   "category": "event",
+   "built": true
+  },
+  {
+   "slug": "04-luxury-perfume",
+   "file": "04-luxury-perfume.md",
+   "title": "Luxury perfume",
+   "seed": 9404,
+   "category": "product-launch",
+   "built": true
+  },
+  {
+   "slug": "05-municipal-water-authority",
+   "file": "05-municipal-water-authority.md",
+   "title": "Municipal water authority",
+   "seed": 9505,
+   "category": "organisation",
+   "built": true
+  }
+ ],
+ "report": {
+  "threshold": 0.4,
+  "labels": [
+   "funeral-home",
+   "childrens-dentistry",
+   "hardcore-metal-band",
+   "luxury-perfume",
+   "municipal-water-authority"
+  ],
+  "pairs": [
+   {
+    "a": "funeral-home",
+    "b": "childrens-dentistry",
+    "score": {
+     "structure": 0.18,
+     "composition": 0.12,
+     "image": 0,
+     "typography": 0.41,
+     "interaction": 0.58,
+     "signature": 0.17,
+     "overall": 0.24
+    },
+    "parts": {
+     "structure": {
+      "shingles": 0.11,
+      "order": 0.25
+     },
+     "composition": {
+      "placement": 0.2,
+      "columns": 0,
+      "density": 0
+     },
+     "image": {
+      "one_side_only": 0
+     },
+     "typography": {
+      "families": 0,
+      "scale": 0.54,
+      "rhythm": 0.48,
+      "hierarchy": 0.66
+     },
+     "interaction": {
+      "hover": 0,
+      "click": 1,
+      "scroll": 0.33,
+      "pointer": 1
+     },
+     "signature": {
+      "declared": 0,
+      "measured": 0.33
+     }
+    },
+    "over": [
+     "typography",
+     "interaction"
+    ]
+   },
+   {
+    "a": "funeral-home",
+    "b": "hardcore-metal-band",
+    "score": {
+     "structure": 0.01,
+     "composition": 0.06,
+     "image": 0,
+     "typography": 0.09,
+     "interaction": 0.47,
+     "signature": 0.1,
+     "overall": 0.12
+    },
+    "parts": {
+     "structure": {
+      "shingles": 0.02,
+      "order": 0
+     },
+     "composition": {
+      "placement": 0.1,
+      "columns": 0,
+      "density": 0
+     },
+     "image": {
+      "one_side_only": 0
+     },
+     "typography": {
+      "families": 0,
+      "scale": 0.17,
+      "rhythm": 0.13,
+      "hierarchy": 0
+     },
+     "interaction": {
+      "hover": 0.2,
+      "click": 0.5,
+      "scroll": 0.17,
+      "pointer": 1
+     },
+     "signature": {
+      "declared": 0,
+      "measured": 0.2
+     }
+    },
+    "over": [
+     "interaction"
+    ]
+   },
+   {
+    "a": "funeral-home",
+    "b": "luxury-perfume",
+    "score": {
+     "structure": 0.13,
+     "composition": 0.09,
+     "image": 0,
+     "typography": 0.2,
+     "interaction": 0.49,
+     "signature": 0.09,
+     "overall": 0.17
+    },
+    "parts": {
+     "structure": {
+      "shingles": 0.26,
+      "order": 0
+     },
+     "composition": {
+      "placement": 0.04,
+      "columns": 0.1,
+      "density": 0.25
+     },
+     "image": {
+      "one_side_only": 0
+     },
+     "typography": {
+      "families": 0,
+      "scale": 0.57,
+      "rhythm": 0.12,
+      "hierarchy": 0
+     },
+     "interaction": {
+      "hover": 0.33,
+      "click": 0.5,
+      "scroll": 0.14,
+      "pointer": 1
+     },
+     "signature": {
+      "declared": 0,
+      "measured": 0.18
+     }
+    },
+    "over": [
+     "interaction"
+    ]
+   },
+   {
+    "a": "funeral-home",
+    "b": "municipal-water-authority",
+    "score": {
+     "structure": 0.1,
+     "composition": 0.31,
+     "image": 1,
+     "typography": 0.41,
+     "interaction": 0.35,
+     "signature": 0.1,
+     "overall": 0.38
+    },
+    "parts": {
+     "structure": {
+      "shingles": 0.2,
+      "order": 0
+     },
+     "composition": {
+      "placement": 0.21,
+      "columns": 0.25,
+      "density": 0.67
+     },
+     "image": {
+      "none": 1
+     },
+     "typography": {
+      "families": 0,
+      "scale": 0.6,
+      "rhythm": 0.5,
+      "hierarchy": 0.5
+     },
+     "interaction": {
+      "hover": 0.17,
+      "click": 0.25,
+      "scroll": 0,
+      "pointer": 1
+     },
+     "signature": {
+      "declared": 0,
+      "measured": 0.2
+     }
+    },
+    "over": [
+     "image",
+     "typography"
+    ]
+   },
+   {
+    "a": "childrens-dentistry",
+    "b": "hardcore-metal-band",
+    "score": {
+     "structure": 0.03,
+     "composition": 0.18,
+     "image": 0,
+     "typography": 0.1,
+     "interaction": 0.52,
+     "signature": 0.13,
+     "overall": 0.16
+    },
+    "parts": {
+     "structure": {
+      "shingles": 0.05,
+      "order": 0
+     },
+     "composition": {
+      "placement": 0.16,
+      "columns": 0,
+      "density": 0.4
+     },
+     "image": {
+      "ratio_size": 0,
+      "crop_mask": 0,
+      "effects": 0
+     },
+     "typography": {
+      "families": 0,
+      "scale": 0.19,
+      "rhythm": 0.16,
+      "hierarchy": 0
+     },
+     "interaction": {
+      "hover": 0.17,
+      "click": 0.5,
+      "scroll": 0.4,
+      "pointer": 1
+     },
+     "signature": {
+      "declared": 0,
+      "measured": 0.25
+     }
+    },
+    "over": [
+     "interaction"
+    ]
+   },
+   {
+    "a": "childrens-dentistry",
+    "b": "luxury-perfume",
+    "score": {
+     "structure": 0.05,
+     "composition": 0.04,
+     "image": 0.67,
+     "typography": 0.16,
+     "interaction": 0.38,
+     "signature": 0,
+     "overall": 0.22
+    },
+    "parts": {
+     "structure": {
+      "shingles": 0.11,
+      "order": 0
+     },
+     "composition": {
+      "placement": 0.03,
+      "columns": 0.11,
+      "density": 0
+     },
+     "image": {
+      "ratio_size": 0,
+      "crop_mask": 1,
+      "effects": 1
+     },
+     "typography": {
+      "families": 0,
+      "scale": 0.38,
+      "rhythm": 0.1,
+      "hierarchy": 0.08
+     },
+     "interaction": {
+      "hover": 0,
+      "click": 0.5,
+      "scroll": 0,
+      "pointer": 1
+     },
+     "signature": {
+      "declared": 0,
+      "measured": 0
+     }
+    },
+    "over": [
+     "image"
+    ]
+   },
+   {
+    "a": "childrens-dentistry",
+    "b": "municipal-water-authority",
+    "score": {
+     "structure": 0.06,
+     "composition": 0.29,
+     "image": 0,
+     "typography": 0.37,
+     "interaction": 0.35,
+     "signature": 0.06,
+     "overall": 0.19
+    },
+    "parts": {
+     "structure": {
+      "shingles": 0.12,
+      "order": 0
+     },
+     "composition": {
+      "placement": 0.37,
+      "columns": 0.33,
+      "density": 0
+     },
+     "image": {
+      "one_side_only": 0
+     },
+     "typography": {
+      "families": 0,
+      "scale": 0.51,
+      "rhythm": 0.47,
+      "hierarchy": 0.53
+     },
+     "interaction": {
+      "hover": 0.14,
+      "click": 0.25,
+      "scroll": 0,
+      "pointer": 1
+     },
+     "signature": {
+      "declared": 0,
+      "measured": 0.11
+     }
+    },
+    "over": []
+   },
+   {
+    "a": "hardcore-metal-band",
+    "b": "luxury-perfume",
+    "score": {
+     "structure": 0.16,
+     "composition": 0.04,
+     "image": 0,
+     "typography": 0.08,
+     "interaction": 0.64,
+     "signature": 0.05,
+     "overall": 0.16
+    },
+    "parts": {
+     "structure": {
+      "shingles": 0.07,
+      "order": 0.25
+     },
+     "composition": {
+      "placement": 0.03,
+      "columns": 0,
+      "density": 0.13
+     },
+     "image": {
+      "ratio_size": 0,
+      "crop_mask": 0,
+      "effects": 0
+     },
+     "typography": {
+      "families": 0,
+      "scale": 0.19,
+      "rhythm": 0.08,
+      "hierarchy": 0
+     },
+     "interaction": {
+      "hover": 0.2,
+      "click": 1,
+      "scroll": 0.38,
+      "pointer": 1
+     },
+     "signature": {
+      "declared": 0,
+      "measured": 0.1
+     }
+    },
+    "over": [
+     "interaction"
+    ]
+   },
+   {
+    "a": "hardcore-metal-band",
+    "b": "municipal-water-authority",
+    "score": {
+     "structure": 0.01,
+     "composition": 0.04,
+     "image": 0,
+     "typography": 0.12,
+     "interaction": 0.36,
+     "signature": 0.13,
+     "overall": 0.11
+    },
+    "parts": {
+     "structure": {
+      "shingles": 0.01,
+      "order": 0
+     },
+     "composition": {
+      "placement": 0.07,
+      "columns": 0,
+      "density": 0
+     },
+     "image": {
+      "one_side_only": 0
+     },
+     "typography": {
+      "families": 0,
+      "scale": 0.24,
+      "rhythm": 0.17,
+      "hierarchy": 0
+     },
+     "interaction": {
+      "hover": 0.13,
+      "click": 0.33,
+      "scroll": 0,
+      "pointer": 1
+     },
+     "signature": {
+      "declared": 0,
+      "measured": 0.25
+     }
+    },
+    "over": []
+   },
+   {
+    "a": "luxury-perfume",
+    "b": "municipal-water-authority",
+    "score": {
+     "structure": 0.07,
+     "composition": 0.06,
+     "image": 0,
+     "typography": 0.26,
+     "interaction": 0.38,
+     "signature": 0.11,
+     "overall": 0.15
+    },
+    "parts": {
+     "structure": {
+      "shingles": 0.14,
+      "order": 0
+     },
+     "composition": {
+      "placement": 0.02,
+      "columns": 0.11,
+      "density": 0.13
+     },
+     "image": {
+      "one_side_only": 0
+     },
+     "typography": {
+      "families": 0,
+      "scale": 0.6,
+      "rhythm": 0.12,
+      "hierarchy": 0.27
+     },
+     "interaction": {
+      "hover": 0,
+      "click": 0.33,
+      "scroll": 0.17,
+      "pointer": 1
+     },
+     "signature": {
+      "declared": 0,
+      "measured": 0.22
+     }
+    },
+    "over": []
+   }
+  ],
+  "pass": false,
+  "max": {
+   "structure": 0.18,
+   "composition": 0.31,
+   "image": 1,
+   "typography": 0.41,
+   "interaction": 0.64,
+   "signature": 0.17,
+   "overall": 0.38
+  },
+  "targets": [
+   "/home/user/workspace/repo/evals/results/diversity/01-funeral-home",
+   "/home/user/workspace/repo/evals/results/diversity/02-childrens-dentistry",
+   "/home/user/workspace/repo/evals/results/diversity/03-hardcore-metal-band",
+   "/home/user/workspace/repo/evals/results/diversity/04-luxury-perfume",
+   "/home/user/workspace/repo/evals/results/diversity/05-municipal-water-authority"
+  ],
+  "features": [
+   {
+    "label": "funeral-home",
+    "blocks": [
+     "grid:m",
+     "list:s",
+     "statement:s",
+     "statement:s"
+    ],
+    "images": 0,
+    "display": "newsreader",
+    "body": "newsreader",
+    "signature": {
+     "tokens": {
+      "trigger:pointer": 1,
+      "trigger:time": 1,
+      "prop:opacity": 1,
+      "prop:transform": 1,
+      "el:text": 1,
+      "size:small": 1,
+      "mech:pointer+time>opacity+transform": 1
+     },
+     "found": {
+      "trigger": [
+       "pointer",
+       "time"
+      ],
+      "props": [
+       "opacity",
+       "transform"
+      ],
+      "kind": "text",
+      "size": "small"
+     },
+     "declared": "paper-feed"
+    }
+   },
+   {
+    "label": "childrens-dentistry",
+    "blocks": [
+     "text:s",
+     "text:s",
+     "statement:s"
+    ],
+    "images": 1,
+    "display": "fredoka",
+    "body": "nunito",
+    "signature": {
+     "tokens": {
+      "trigger:pointer": 1,
+      "prop:transform": 1,
+      "el:text": 1,
+      "size:medium": 1,
+      "mech:pointer>transform": 1
+     },
+     "found": {
+      "trigger": [
+       "pointer"
+      ],
+      "props": [
+       "transform"
+      ],
+      "kind": "text",
+      "size": "medium"
+     },
+     "declared": "tooth-stamps"
+    }
+   },
+   {
+    "label": "hardcore-metal-band",
+    "blocks": [
+     "statement:m",
+     "statement:m",
+     "statement:m",
+     "statement:m"
+    ],
+    "images": 1,
+    "display": "anton",
+    "body": "jetbrains mono",
+    "signature": {
+     "tokens": {
+      "trigger:scroll": 1,
+      "prop:transform": 1,
+      "el:text": 1,
+      "size:large": 1,
+      "mech:scroll>transform": 1
+     },
+     "found": {
+      "trigger": [
+       "scroll"
+      ],
+      "props": [
+       "transform"
+      ],
+      "kind": "text",
+      "size": "large"
+     },
+     "declared": "impact"
+    }
+   },
+   {
+    "label": "luxury-perfume",
+    "blocks": [
+     "statement:m",
+     "text:xl",
+     "list:m"
+    ],
+    "images": 1,
+    "display": "bodoni moda",
+    "body": "jost",
+    "signature": {
+     "tokens": {
+      "trigger:scroll": 1,
+      "prop:opacity": 1,
+      "prop:text-content": 1,
+      "el:block": 1,
+      "size:small": 1,
+      "mech:scroll>opacity+text-content": 1
+     },
+     "found": {
+      "trigger": [
+       "scroll"
+      ],
+      "props": [
+       "opacity",
+       "text-content"
+      ],
+      "kind": "block",
+      "size": "small"
+     },
+     "declared": "seven-year-ruler"
+    }
+   },
+   {
+    "label": "municipal-water-authority",
+    "blocks": [
+     "form:s",
+     "grid:s",
+     "grid:s"
+    ],
+    "images": 0,
+    "display": "atkinson hyperlegible",
+    "body": "atkinson hyperlegible",
+    "signature": {
+     "tokens": {
+      "trigger:scroll": 1,
+      "prop:bg-colour": 1,
+      "el:text": 1,
+      "size:small": 1,
+      "mech:scroll>bg-colour": 1
+     },
+     "found": {
+      "trigger": [
+       "scroll"
+      ],
+      "props": [
+       "bg-colour"
+      ],
+      "kind": "text",
+      "size": "small"
+     },
+     "declared": "ward-sentence"
+    }
+   }
+  ],
+  "seconds": 35
+ },
+ "not_verified": [],
+ "exit": 1
+}

@@ -16,7 +16,8 @@
 //   composition  placement (each of the first 8 screens as a 12×8 cell grid, each cell empty, text or media; similarity
 //                is matching non-empty cells over cells non-empty in either), columns and alignment per screen, density
 //                (share of each screen covered by content, in four bins).
-//   image        image treatment: every img, picture, video, canvas, large svg and background-image ≥ 48px, as three
+//   image        image treatment: every img, picture, video, canvas, svg root, background-image url() and painted
+//                role="img" box ≥ 48px, as three
 //                token bags: aspect ratio × size class, crop (object-fit vs natural ratio) × mask (radius, clip-path,
 //                mask-image), filter × blend × rotation. Both pages without imagery score 1 (the same treatment: none).
 //   typography   families (display and body), scale (font-size steps relative to body, quarter-octave bins, weighted by
@@ -124,13 +125,13 @@ const FEATURES = async () => {
   walk(document.body, ["body"]);
   const isChrome = (e) => e.matches("header, nav, footer, [role=banner], [role=navigation], [role=contentinfo]") || (e.closest("header, footer") && e.closest("header, footer") !== document.body);
   let root = document.querySelector("main") || document.body; root = unwrap(root);
-  const blocks = [];
+  const blocks = []; const minW = Math.min(vw, box(root).w || vw) * 0.5; // half of main's width: a narrow single-column site still has blocks
   const collect = (e, depth) => {
     for (const c0 of kids(e)) {
       const c = c0; if (isChrome(c)) continue; const b = box(c);
-      if (b.h < 120 || b.w < vw * 0.5) { if (b.h >= 120 && depth < 3) collect(c, depth + 1); continue; }
+      if (b.h < 120 || b.w < minW) { if (b.h >= 120 && depth < 3) collect(c, depth + 1); continue; }
       // a block that is just a container of several big blocks is not one block
-      const big = kids(c).filter((k) => { const r = box(k); return r.h >= 0.6 * vh && r.w >= vw * 0.5 && !isChrome(k); });
+      const big = kids(c).filter((k) => { const r = box(k); return r.h >= 0.6 * vh && r.w >= minW && !isChrome(k); });
       if (big.length >= 2 && depth < 3) { collect(c, depth + 1); continue; }
       blocks.push(c);
     }
@@ -146,13 +147,13 @@ const FEATURES = async () => {
   });
 
   // ── composition: 12×8 grids per screen, columns × alignment, density
-  const leaves = [...document.body.querySelectorAll("*")].filter((e) => !SKIP.has(e.tagName) && visible(e) && !e.closest("svg"));
+  const leaves = [...document.body.querySelectorAll("*")].filter((e) => !SKIP.has(e.tagName) && visible(e) && !e.parentElement?.closest("svg")); // the svg root counts (as media); its shapes do not
   // text is painted as the box of its block-level container (a paragraph, a heading), not line by line: a 16px line
   // never covers a 112px cell, so line boxes would read as empty space
   const blockOf = (e) => { let n = e; while (n && n !== document.body && /^inline/.test(cs(n).display) && n.parentElement) n = n.parentElement; return n; };
   const textEls = [...new Set(leaves.filter((e) => ownText(e).length >= 2).map(blockOf))].filter((e) => e && e !== document.body);
   const textBoxes = textEls.map((e) => ({ ...box(e), el: e })).filter((b) => b.w > 0 && b.h > 0 && b.h < vh * 3);
-  const mediaBoxes = leaves.filter((e) => ["IMG", "VIDEO", "CANVAS", "svg"].includes(e.tagName) || (cs(e).backgroundImage.includes("url(") )).map(box).filter((b) => b.w >= 48 && b.h >= 48);
+  const mediaBoxes = leaves.filter((e) => ["IMG", "VIDEO", "CANVAS", "svg"].includes(e.tagName) || cs(e).backgroundImage.includes("url(") || (e.getAttribute("role") === "img" && cs(e).backgroundImage !== "none")).map(box).filter((b) => b.w >= 48 && b.h >= 48);
   const SCREENS = Math.min(8, Math.ceil(H / vh)); const grids = [], density = [], columns = {};
   for (let s = 0; s < SCREENS; s++) {
     const y0 = s * vh, cells = Array(96).fill("");
@@ -168,7 +169,7 @@ const FEATURES = async () => {
 
   // ── image treatment
   const ratioBin = (r) => { const bins = [[1 / 3, "1:3"], [9 / 16, "9:16"], [2 / 3, "2:3"], [3 / 4, "3:4"], [1, "1:1"], [4 / 3, "4:3"], [3 / 2, "3:2"], [16 / 9, "16:9"], [21 / 9, "21:9"], [4, "wide"]]; let best = bins[0]; for (const b of bins) if (Math.abs(Math.log(r / b[0])) < Math.abs(Math.log(r / best[0]))) best = b; return best[1]; };
-  const imgEls = leaves.filter((e) => ["IMG", "VIDEO", "CANVAS", "svg"].includes(e.tagName) || cs(e).backgroundImage.includes("url(")).filter((e) => { const r = e.getBoundingClientRect(); return r.width >= 48 && r.height >= 48; });
+  const imgEls = leaves.filter((e) => ["IMG", "VIDEO", "CANVAS", "svg"].includes(e.tagName) || cs(e).backgroundImage.includes("url(") || (e.getAttribute("role") === "img" && cs(e).backgroundImage !== "none")).filter((e) => { const r = e.getBoundingClientRect(); return r.width >= 48 && r.height >= 48; });
   const ratioSize = {}, cropMask = {}, effects = {};
   for (const e of imgEls) {
     const r = e.getBoundingClientRect(), s = cs(e); const kind = e.tagName === "IMG" ? "img" : e.tagName === "VIDEO" ? "video" : e.tagName === "CANVAS" ? "canvas" : e.tagName === "svg" ? "svg" : "bg";

@@ -1,0 +1,110 @@
+$ node scripts/collide.mjs --n 1 --seed 9101 --category organisation
+COLLISION ENGINE · category: Organisation / Non-profit · seed 9101
+
+Draw 1
+  Archetype  : The Timeline (timeline): history on one axis with years as nav
+  If it can't serve the brief, take: The Letter (letter), not a favourite
+  Mutation   : Single object: the whole site orbits one object
+  Collision  : receipt printer (retail) → steal "paper feeding line by line"
+               e.g. order summaries printing as you scroll
+  Kinetic    : a word magnifies, driven by idle time
+  Seed move  : Horizontal Reel: vertical scroll pulls a film strip sideways
+  Fingerprint: layout=sequence · tier=2 · signature_type=scroll  (closest logged run: 100% ⚠ rebuilds a recent page)
+
+Diversity (measured)
+  archetypes       : 1/1 unique  ✓
+  signature seeds  : 1/1 unique  ✓
+  mutations        : 1/1 unique  ✓
+  collision sources: 1/1 unique  ✓
+
+Treat these as constraints, not answers. Combine, bend or reject them, but start from them.
+Next: write Tension → Concept with one draw, then run the Thinking Sequence (thinking/sequence.md).
+
+$ node scripts/collide.mjs --n 1 --seed 9202 --category organisation
+COLLISION ENGINE · category: Organisation / Non-profit · seed 9202
+
+Draw 1
+  Archetype  : The Manifesto (manifesto): one argument set large like a speech
+  If it can't serve the brief, take: The Field Guide (field-guide), not a favourite
+  Mutation   : Make the UI the content: the scrollbar is the timeline; the cursor is the product
+  Collision  : typewriter (writing) → steal "carriage return and ink strike"
+               e.g. headlines typed with a strike effect, carriage returns as section breaks
+  Kinetic    : the cursor breathes, driven by idle time
+  Seed move  : Width Sprint: variable width stretches with scroll speed
+  Fingerprint: layout=statement · tier=2 · signature_type=type  (closest logged run: 37%)
+
+Diversity (measured)
+  archetypes       : 1/1 unique  ✓
+  signature seeds  : 1/1 unique  ✓
+  mutations        : 1/1 unique  ✓
+  collision sources: 1/1 unique  ✓
+
+Treat these as constraints, not answers. Combine, bend or reject them, but start from them.
+Next: write Tension → Concept with one draw, then run the Thinking Sequence (thinking/sequence.md).
+
+$ node scripts/collide.mjs --n 1 --seed 9303 --category event
+COLLISION ENGINE · category: Event · seed 9303
+
+Draw 1
+  Archetype  : The Room (room): each section is a room you walk into
+  If it can't serve the brief, take: The Stage (stage), not a favourite
+  Mutation   : Remove the expected: no nav, no hero image or no grid
+  Collision  : darkroom tray (photography) → steal "images appear slowly under red light"
+               e.g. photos that develop as they enter
+  Kinetic    : the cursor counts, driven by scroll velocity
+  Seed move  : Line Curtain: headlines rise line by line from masks
+  Fingerprint: layout=sequence · tier=2 · signature_type=type  (closest logged run: 100% ⚠ rebuilds a recent page)
+
+Diversity (measured)
+  archetypes       : 1/1 unique  ✓
+  signature seeds  : 1/1 unique  ✓
+  mutations        : 1/1 unique  ✓
+  collision sources: 1/1 unique  ✓
+
+Treat these as constraints, not answers. Combine, bend or reject them, but start from them.
+Next: write Tension → Concept with one draw, then run the Thinking Sequence (thinking/sequence.md).
+
+$ node scripts/collide.mjs --n 1 --seed 9404 --category product-launch
+COLLISION ENGINE · category: Product launch · seed 9404
+
+Draw 1
+  Archetype  : The Timeline (timeline): history on one axis with years as nav
+  If it can't serve the brief, take: The Stage (stage), not a favourite
+  Mutation   : Invert the axis: vertical becomes horizontal or time runs backwards
+  Collision  : tailor's measuring tape (craft) → steal "a numbered ruler with tension"
+               e.g. a scroll progress bar that stretches
+  Kinetic    : the background bends, driven by hover
+  Seed move  : Darkroom Develop: photos develop from blank paper
+  Fingerprint: layout=sequence · tier=2 · signature_type=scroll  (closest logged run: 100% ⚠ rebuilds a recent page)
+
+Diversity (measured)
+  archetypes       : 1/1 unique  ✓
+  signature seeds  : 1/1 unique  ✓
+  mutations        : 1/1 unique  ✓
+  collision sources: 1/1 unique  ✓
+
+Treat these as constraints, not answers. Combine, bend or reject them, but start from them.
+Next: write Tension → Concept with one draw, then run the Thinking Sequence (thinking/sequence.md).
+
+$ node scripts/collide.mjs --n 1 --seed 9505 --category organisation
+COLLISION ENGINE · category: Organisation / Non-profit · seed 9505
+
+Draw 1
+  Archetype  : The Film Reel (film-reel): scroll is a timeline of scenes
+  If it can't serve the brief, take: The Manifesto (manifesto), not a favourite
+  Mutation   : Single object: the whole site orbits one object
+  Collision  : tailor's measuring tape (craft) → steal "a numbered ruler with tension"
+               e.g. a scroll progress bar that stretches
+  Kinetic    : a word travels, driven by page exit
+  Seed move  : Brand Selection: text selection uses the brand accent
+  Fingerprint: layout=sequence · tier=1 · signature_type=micro  (closest logged run: 91% ⚠ rebuilds a recent page)
+
+Diversity (measured)
+  archetypes       : 1/1 unique  ✓
+  signature seeds  : 1/1 unique  ✓
+  mutations        : 1/1 unique  ✓
+  collision sources: 1/1 unique  ✓
+
+Treat these as constraints, not answers. Combine, bend or reject them, but start from them.
+Next: write Tension → Concept with one draw, then run the Thinking Sequence (thinking/sequence.md).
+
