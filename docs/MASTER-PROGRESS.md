@@ -20,3 +20,4 @@ Benchmark: not run.
 ## Notes for the next agent
 
 - Note: commit order in the previous session was T1 → T4 → T2 → T3, because T1 pushed main over its size limit. All tasks were completed in the end.
+- Not verified: The delivery flow (Design → Preview → Approve → Gate → Push → Handoff) is documented but has not been exercised on a real build. The next real build should follow it and report any mismatch between the flow and reality.
