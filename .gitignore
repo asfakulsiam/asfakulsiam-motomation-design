@@ -18,9 +18,6 @@ evals/results/**/*.jpg
 evals/results/**/*.jpeg
 evals/results/**/*.mp4
 evals/results/**/index.html
-# diversity arm: the five builds are the published output (evals/diversity.mjs); their pages and og images are kept
-!evals/results/diversity/*/index.html
-!evals/results/diversity/*/og.jpg
 evals/results/**/motion-report.html
 evals/results/**/transcript.jsonl
 evals/results/**/transcript.jsonl.gz

@@ -10,6 +10,8 @@ Five deliberately unrelated briefs, one build each, compared on the six original
 | [04 luxury perfume](../../briefs/diversity/04-luxury-perfume.md) | [04-luxury-perfume/](04-luxury-perfume/) | Stage · seven-year ruler · 3 | FAIL (J mobile 1) |
 | [05 municipal water authority](../../briefs/diversity/05-municipal-water-authority.md) | [05-municipal-water-authority/](05-municipal-water-authority/) | Manifesto · the sentence answers your ward · 1 | PASS |
 
+Each build's home page (`index.html`) and `og.jpg` live on the [`evals` branch](https://github.com/asfakulsiam/asfakulsiam-motomation-design/tree/evals/evals/results/diversity), like every heavy artifact (evals/README.md); everything else (the other pages, CSS, JS, DESIGN.md, MOTION.md, gate.txt) is on main. Restore them before a re-run: `git checkout origin/evals -- evals/results/diversity && git restore --staged evals/results/diversity`.
+
 Re-run: `node evals/diversity.mjs` (matrix only, about 35 s) or `node evals/diversity.mjs --gate` (plus the Delivery Gate, about 20 min on 2 CPUs).
 
 ## Measured
