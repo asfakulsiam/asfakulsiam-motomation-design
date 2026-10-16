@@ -179,7 +179,8 @@ export function promptFor({ slug, seed, cond, budget }) {
   return `Use the asfakulsiam-motomation-design skill: /build${ROUTE_ARG} this brief. Approve every checkpoint. When you run the collision engine, use --seed ${seed}.${tier ? ` Force the motion tier: --tier=${TIER}.` : ""} ${TASK} Follow the skill end to end, including its Delivery Gate, and finish with the handoff.\n\n${brief}`;
 }
 // Every brief ends with "Approve every checkpoint." (v2.10.0) and the skill arm's prompt says it too: the skill stops at
-// five checkpoints for an explicit answer, and nobody can answer inside a benchmark run.
+// six checkpoints for an explicit answer (1 Stack · 2 Research and concept · 3 Scope · 4 Build plan · 5 Design review ·
+// 6 Gate and ship; thinking/sequence.md), and nobody can answer inside a benchmark run.
 // v5 prompts: the tier is stated, never inferred, and no stack is imposed (Step 0 of the skill would ask; nobody can
 // answer inside a benchmark run, so every arm gets the client's answer "you choose" and must say what it chose and why).
 const V5_TASK = "Build the website described in the brief below in the current folder. The brief names no stack; the client's answer to \"which stack?\" is \"you choose\": choose one, say which and why in one line at the end, and leave the result where a browser can open it (an index.html in this folder, or a built output folder such as out/, dist/ or build/ with its index.html). Use only facts from the brief.";
