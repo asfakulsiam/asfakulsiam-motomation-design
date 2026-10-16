@@ -4,6 +4,18 @@ All notable changes to this skill. Versions follow [Semantic Versioning](https:/
 
 ## [Unreleased]
 
+## [2.10.0] - 2026-10-16
+
+- **Five checkpoints replace the one confirmation.** Asking once at the start and then committing was wrong: the user decides at every meaningful step. The skill drafts, shows its reasoning, and stops after each checkpoint until the user approves, redirects, or asks for more information:
+  1. **Stack**: the proposed stack, why, and the alternatives.
+  2. **Research and concept**: the 3 references and what was taken from each, the pattern being avoided, tension, concept, archetype, mutation, the collision draw output, palette, typography, motion tier, signature move, and the reasoning for each.
+  3. **Scope**: routes, states, legal pages, admin surface, edge cases, each marked requested / required / optional, plus what is deferred and why.
+  4. **Build plan**: section order, the components to create, the animation language per section, page-to-page transitions.
+  5. **Ship**: the finished build, the gate output and the critique.
+- Rules at every checkpoint: "show me alternatives" gets 2–3 options and another wait; the user can override any decision; the skill never proceeds without an explicit answer and never asks the same question twice; a checkpoint the brief already answers (e.g. "use Next.js") is stated and skipped, still open to override. A brief that pre-approves every checkpoint (benchmark, CI) counts as the brief answering; otherwise a run with no one to answer stops at the checkpoint.
+- `thinking/sequence.md`: the "One confirmation" block is removed; the five checkpoints, their order and rules are added, with a stop line after Step 0 (1), Step 7 (2), Step 0.7 (3), and a new "Checkpoints 4 and 5" section. `SKILL.md`: the default flow marks the five checkpoints, the router gets a checkpoints row, the preview block becomes a checkpoint block, the output rule says five checkpoints. `AGENTS.md` lists them.
+- Consistency (the same old rule, worded elsewhere): `thinking/brief-inference.md` (gaps shown at their checkpoint), `craft/stack.md` ("ask me" → Checkpoint 1), `templates/DESIGN.md` (admin panel settled at Checkpoint 3), `commands/overview.md` (`--review` keeps the checkpoints even when a brief pre-approves them).
+
 ## [2.9.1] - 2026-10-16
 
 - **Dependency rule: three checks replace the five.** The five-check rule (6-month maintenance, 10k+ weekly downloads, Node 20/React 19, MIT/Apache/ISC/BSD only) was too strict: it flagged GSAP, lottie-web and SplitType, which are industry standards. `craft/stack.md` → `## Dependencies` now approves a package that is (1) active: a release, commit or verified maintainer response within 12 months, or a stable, widely used package with a settled API and long-term support; (2) not deprecated; (3) licensed free for commercial use (MIT, Apache 2.0, ISC, BSD, or a permissive no-charge licence such as GSAP's Standard licence; not AGPL, GPL, Commons Clause or non-commercial). Not measured by commit frequency or download count alone. Lists the approved examples; before adding a package the agent checks npm and the repo for the deprecation notice, last release date and licence. The snapshot (checked 2026-10-16) now shows the 21 examples (plus `@rive-app/canvas`) approved.

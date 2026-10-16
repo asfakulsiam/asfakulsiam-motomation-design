@@ -4,7 +4,7 @@ description: Use when designing, building, redesigning, animating, or critiquing
 license: MIT
 metadata:
   author: asfakulsiam
-  version: 2.9.1
+  version: 2.10.0
   repository: https://github.com/asfakulsiam/asfakulsiam-motomation-design
 ---
 
@@ -37,6 +37,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 |---|---|
 | **Any build or redesign (always, first, before Step 1)** | `gates/rules.md`: the rules the gate measures. Design input, read before designing; state `Rules : gates/rules.md read; designing within it.` before the Thinking Sequence |
 | Any new page or site | `thinking/brief-inference.md` → `thinking/sequence.md` (Step 0 Stack first) → `principles/house-style.md` |
+| **Every build: the five checkpoints** | `thinking/sequence.md` → Five checkpoints: 1 Stack · 2 Research and concept · 3 Scope · 4 Build plan · 5 Ship. Stop and wait for an explicit answer at each; alternatives (2–3) on request; any decision can be overridden; never ask twice; state and skip what the brief answers |
 | **Step 0 Stack, and any new dependency** | `craft/stack.md`: Next.js default, the three dependency checks, platform first |
 | **Any build or redesign (always, after Step 0 Stack, before Step 1)** | `craft/research.md`: Step 0.5 research, mandatory. Live award sources + `references/sources/` (skills, components, motion, 3d, foundation, future); concepts only, no copied code. `DESIGN.md` gets References looked at (3), Techniques considered (3), Pattern being avoided, and a Decision trace: nothing comes from the skill's defaults alone |
 | Need new ideas / "make it different" | `invention/mad-artist.md` + run `scripts/collide.mjs` |
@@ -71,7 +72,8 @@ design inside `gates/rules.md`, then verify with `gates/delivery-gate.md`; never
 ```
 R. Read the rules     gates/rules.md                → state "Rules : gates/rules.md read; designing within it."
 0. Read the room      thinking/brief-inference.md   → audience, job, feel, constraints, gaps
-1. Thinking Sequence  thinking/sequence.md          → STACK (named, or chosen in the plan; load the adapter),
+1. Thinking Sequence  thinking/sequence.md          → STACK (named, or proposed with alternatives; load the adapter)
+                      ■ CHECKPOINT 1 Stack: stop, wait for approve / override; then
                                                       RESEARCH (Step 0.5, craft/research.md + references/sources/:
                                                       3 references, 3 techniques, avoided pattern, decision trace),
                                                       tension, concept, archetype+mutation,
@@ -81,11 +83,15 @@ R. Read the rules     gates/rules.md                → state "Rules : gates/rul
 3. Design system      typography → colour → layout  → write DESIGN.md (templates/DESIGN.md) and, at the same time,
                                                       SCHEMA.md (templates/SCHEMA.md): data model, routes, section contract,
                                                       API surface, handoff notes
+                      ■ CHECKPOINT 2 Research and concept: references, avoided pattern, tension → signature,
+                        collision output, palette, type, tier, reasoning; stop, wait
+                      Step 0.7 scope → ■ CHECKPOINT 3 Scope: routes, states, legal, admin, edge cases,
+                        requested / required / optional, deferred + why; stop, wait
 4. Motion plan        motion/tokens.md + tier file  → write MOTION.md (templates/MOTION.md); Tier 3–5: timing sheet per motion/choreography.md
-5. Plan + one question show the plan (below): stack, scope, references, deferred items; ask "Proceed?" once.
-                      On yes: build, gate, ship with no further questions (exceptions: thinking/sequence.md)
+5. Build plan         ■ CHECKPOINT 4: section order, components, animation per section, page transitions; stop, wait
 6. Build              compose, extend, or invent (below), in the stack and adapter from Step 0; complete code, real copy
 7. Delivery Gate      gates/delivery-gate.md        → verify gates/rules.md, score, fix, stamp, log to memory
+8. Ship               ■ CHECKPOINT 5: the build, the gate output, the critique; stop, wait for accept / changes
 ```
 
 ### Compose, extend, or invent (step 6)
@@ -102,7 +108,7 @@ Build what the brief needs by composing, extending, or inventing:
 
 Say in one line which of the three you did for each non-trivial piece. Whatever you compose, extend or invent still passes `gates/rules.md`, the tier budget and the reduced-motion rules. Found code isn't trusted code.
 
-### Preview block (the plan, shown once before building, ending in "Proceed?")
+### Checkpoint block (one per checkpoint; show the lines for that checkpoint, then stop)
 
 ```
 MOTOMATION PLAN
@@ -123,10 +129,10 @@ Palette     : <name or hexes> (<why>)
 Not doing   : <the obvious choice you rejected and why>
 Deferred    : <what this build leaves out, each with its reason>
 
-Proceed?
+Checkpoint <n> of 5: approve, redirect, or ask for alternatives.
 ```
 
-That is the only question. On yes, build, gate and ship without asking again.
+Checkpoint 1 shows Stack (with alternatives); 2 shows References through Not doing; 3 shows Scope, Defaults and Deferred; 4 shows the section order, components, animation per section and transitions; 5 shows the build, gate output and critique. After each, stop until the user answers. "Show me alternatives" gets 2–3 options and another wait. The user can override any earlier decision. Never ask the same question twice; a checkpoint the brief already answers is stated and skipped, still open to override.
 
 ## When to use the short route
 
@@ -247,8 +253,7 @@ Full behaviour of each command is in `commands/overview.md`. Critique output for
 
 ## Output rules
 
-- **One confirmation.** Present the plan once and ask only "Proceed?"; after yes, build, gate and ship without asking again (exceptions: `thinking/sequence.md`). Non-interactive runs proceed.
-- Explain the plan in the preview block, then build. Keep prose short. The work is the answer.
+- **Five checkpoints** (`thinking/sequence.md`): after Stack, Concept, Scope, Build plan and Ship, show the reasoning and stop for an explicit answer; never re-ask. Keep prose short.
 - Every build ships a **sellable template** (`templates/TEMPLATE.md`): README with the demo line, DESIGN, MOTION, SCHEMA, DATA, CRITIQUE, GATE, LICENSE, CHANGELOG, `.env.example`, demo-labelled `data/`, `middleware.ts`; runs with `npm install && npm run dev`, no configuration.
 - **Micro-states ship** (`thinking/sequence.md`): every button, form, list, image and async action has all its states; the gate warns on missing ones.
 - Deliver complete files. No `// rest of code here`, no TODOs, no placeholder images without a clear `alt` and a sourcing note.

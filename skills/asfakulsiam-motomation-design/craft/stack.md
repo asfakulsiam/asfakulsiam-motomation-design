@@ -9,7 +9,7 @@ Step 0 of `thinking/sequence.md` decides the stack. This file holds the default 
 | The brief | Stack |
 |---|---|
 | names a stack (or the project already has one) | that stack |
-| says "ask me" | ask once, in the plan's single question, offering Next.js as the default |
+| says "ask me" | propose at Checkpoint 1 (`thinking/sequence.md`), Next.js as the default, with the alternatives |
 | says "you choose", or names none, and the site has routes or data | Next.js |
 | is a single static page (one route, no data, no build step wanted) | plain HTML/CSS/JS is fine (`adapters/vanilla.md`) |
 | is e-commerce | Next.js. Never Astro or React + Vite for e-commerce unless the brief demands it |

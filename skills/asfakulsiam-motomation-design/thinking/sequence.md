@@ -4,17 +4,27 @@ This is the missing key: it makes an agent think like a designer instead of a te
 
 **Data is fuel, not a menu.** The files in `data/` (archetypes, palettes, fonts, mutations, collisions, motion, signatures, styles) inform the brief. Do not pick from a list; derive from the brief, using the list as reference and constraint. A draw from `scripts/collide.mjs` is a constraint to design inside, not a finished answer. Write the results into the preview block. Each step has a test. If the test fails, redo the step.
 
-**One confirmation.** The agent asks exactly once per build, at the start, and never again. The flow:
+**Five checkpoints.** The user decides at every meaningful step. The skill drafts, shows its reasoning, and waits. After each checkpoint the skill **stops** and waits for the user's answer: approve, redirect, or ask for more information.
 
-1. Read the brief.
-2. Step 0: Stack.
-3. Step 0.5: Research.
-4. Step 0.7: Derive the scope (routes, functions, states, legal pages, edge cases, admin, skeletons).
-5. Present the plan: stack, scope, references, and what will be deferred (each with its reason).
-6. Ask exactly one question: **"Proceed?"**
-7. On yes, commit to the plan: build, gate, ship. No more interruptions: no question before the build, before the gate, or after the critique.
+| Checkpoint | Comes after | The skill shows | The user |
+|---|---|---|---|
+| **1 Stack** | Step 0 | the proposed stack, why, and the alternatives | approves or overrides |
+| **2 Research and concept** | Step 0.5, Steps 1–7, dials, type and colour | the 3 references looked at and what it took from each; the pattern it is avoiding; the tension, concept, archetype and mutation; the collision draw output (`scripts/collide.mjs`, pasted); the palette, typography, motion tier and signature move; its reasoning for each | approves or redirects |
+| **3 Scope** | Step 0.7 | the derived route list, states, legal pages, admin surface and edge cases, each marked requested / required / optional; what it is deferring and why | approves, cuts or adds |
+| **4 Build plan** | the motion plan (`MOTION.md`) | the section order, the components it will create (compose, extend or invent), the animation language per section, the page-to-page transitions | approves or redirects |
+| **5 Ship** | the build, the gate and `/critique` | the finished build, the gate output (pasted) and the critique (pasted) | accepts or asks for changes |
 
-The agent may ask again only when (a) the brief is genuinely ambiguous on a critical choice (payment provider, legal region, locale priority), (b) a decision would lock in a costly choice the plan didn't cover (framework, hosting), or (c) the brief says "ask me before X" for something specific. Everything else the agent decides, states its reasoning in `DESIGN.md`, and moves on. Gaps in the brief are not questions: each becomes a stated default in the plan, which the user can change in their answer to "Proceed?". When no one can answer (CI, a benchmark run, a brief that says "don't ask"), the plan goes into `DESIGN.md` and the build proceeds.
+**Order:** Step 0 → **Checkpoint 1** → Step 0.5, the memory check, Steps 1–7, the dials, type and colour → **Checkpoint 2** → Step 0.7 → **Checkpoint 3** → the motion plan and section order → **Checkpoint 4** → build, gate, `/critique` → **Checkpoint 5**. (Step 0.7 is written below Step 0.5 because its research overlaps; it is shown at Checkpoint 3, after the concept is approved.)
+
+Rules at every checkpoint:
+
+- **"Show me alternatives" is a valid answer.** The skill shows 2–3 options, each with its reasoning, and waits again.
+- **The user can override any decision** the skill made, at this checkpoint or an earlier one. An override replaces the decision; the skill redoes only what depends on it and shows the affected checkpoint again.
+- **The skill never proceeds without an explicit answer.** Silence, "hmm" or a question is not approval; answer the question and wait.
+- **The skill never asks the same question twice.** An answered question stays answered (record it in `DESIGN.md` under `Decision trace`); a later checkpoint states it, it does not re-ask it.
+- **If the brief already answers a checkpoint** (e.g. "use Next.js"), the skill states the answer and skips the question, but the user can still override. A brief that answers every checkpoint in advance (for example a benchmark or CI brief that says "approve every checkpoint") counts as the brief answering; without that, a run with no one to answer stops at the checkpoint.
+
+Each checkpoint message ends with what the skill is waiting for: `Checkpoint <n> of 5: approve, redirect, or ask for alternatives.`
 
 **Rules come first, the gate comes last.** Before Step 0, read `gates/rules.md`: every limit the gate measures (contrast, overflow, reduced motion, accessibility, SEO, security, performance budgets). It is design input. Design inside it from the first step; `gates/delivery-gate.md` only verifies it at the end. A design that passes the gate by patching (an invented link, domain or page added to satisfy a check) was not designed within the rules.
 
@@ -27,7 +37,7 @@ The agent may ask again only when (a) the brief is genuinely ambiguous on a crit
 Before any design step, know what you are building in. The stack changes what the design can be (server rendering, a single file, a build step), so it is decided first and never guessed. Default and dependency rule: `craft/stack.md`.
 
 1. **The brief names a stack** ("Next.js", "Astro", "a single HTML file", `--stack=<x>`), or the project already has one (read `package.json` and the framework config, say what you found): use it.
-2. **The brief says "ask me":** ask once, inside the plan's single question, offering Next.js as the default.
+2. **The brief says "ask me":** propose at Checkpoint 1, with Next.js as the default and the alternatives.
 3. **The brief says "you choose", or names none:** choose **Next.js (App Router, TypeScript, Tailwind)** for anything with routes or data. A single static page may be plain HTML/CSS/JS. Never pick Astro or React + Vite for e-commerce unless the brief demands it. Never pick the stack you used last.
 
    | Stack | When | Adapter |
@@ -38,10 +48,12 @@ Before any design step, know what you are building in. The stack changes what th
    | React + Vite | only when the brief asks for a client-only embed or prototype | `adapters/react-vite.md` |
 
 4. **Every dependency passes the three checks** in `craft/stack.md` (active, not deprecated, licence free for commercial use) before it is added: npm and the repo for the deprecation notice, the last release date and the licence. A failure means an alternative or building it from scratch. Platform first; no heavy package for a small feature.
-5. **Record it** in `DESIGN.md` under `Stack` and `Dependencies` (from `templates/DESIGN.md`): the stack, who chose it (brief, project, or you, confirmed at "Proceed?"), the reason, and each dependency's three checks.
+5. **Record it** in `DESIGN.md` under `Stack` and `Dependencies` (from `templates/DESIGN.md`): the stack, who chose it (brief, project, or you, approved at Checkpoint 1), the reason, and each dependency's three checks.
 6. **Load the adapter** for that stack. The adapter is chosen here, not at build time, and it is never skipped.
 
 **Test:** can you point to where the stack came from (the brief, the project, or the default with its reason, shown in the plan), and does every dependency in `DESIGN.md` show three passed checks? If not, fix it before Step 0.5.
+
+**Checkpoint 1: Stack.** Show the proposed stack, why, and the alternatives (e.g. Next.js · plain HTML · Astro, each with its trade-off). If the brief or project named the stack, state it and skip the question; the user can still override. Stop and wait.
 
 ---
 
@@ -81,7 +93,7 @@ Write each as a row of the Scope table (`| Kind | Item | Mark | Evidence |`; kin
 - **optional**: nice to have; not checked
 - **not required for this brief, reason: <why>**: excused, with the reason
 
-The admin panel is part of the plan: the one question becomes "Proceed? (Admin panel: included / not included.)" and the answer settles it. Then commit to the scope.
+Show the Scope table at **Checkpoint 3**, with the admin panel (included / not included) and what is deferred, each with its reason. The user approves, cuts or adds; then the scope is settled.
 
 The skill also requires, in every build that has a server (each one excused in the table with a reason when it doesn't apply, e.g. a single static page):
 
@@ -93,6 +105,8 @@ The skill also requires, in every build that has a server (each one excused in t
 - component headers (tier, use-when, avoid-when, reduced-motion, touch)
 
 **Test:** is every route, state, legal page, edge case, admin surface and skeleton the site type needs in the Scope table, each marked, each excuse with a reason? `node scripts/completeness.mjs <project>` (gate axis X) will check them after the build; a missing item fails the gate.
+
+**Checkpoint 3: Scope** (after Checkpoint 2). Show the route list, states, legal pages, admin surface and edge cases, each marked requested / required / optional, and what is deferred and why. Stop and wait: the user approves, cuts or adds.
 
 ## Memory check (mandatory, before Step 1)
 
@@ -229,6 +243,16 @@ The budgets hold either way: one signature move, one accent moment per screen, o
 
 **Test:** for every element, can you name the question it passes? If neither, cut it.
 
+**Checkpoint 2: Research and concept** (after the dials, type and colour). Show the references and what each gave, the avoided pattern, tension to mutation, the collision output, palette, type, tier, signature, with reasons. Stop.
+
+---
+
+## Checkpoints 4 and 5
+
+**Checkpoint 4: Build plan** (after `MOTION.md`). Show the section order, the components to create (compose, extend or invent, each named), the animation language per section, and the page-to-page transitions. Stop and wait.
+
+**Checkpoint 5: Ship** (after the build, `gates/delivery-gate.md` and `/critique`). Show the finished build, the gate output and the critique, both pasted, never typed. Stop and wait: the user accepts or asks for changes. A change request goes back to the checkpoint it affects.
+
 ---
 
 ## Micro-states: every one ships
@@ -266,7 +290,7 @@ It runs with zero configuration after `npm install && npm run dev`: mock data co
 ## Worked example: "Portfolio for a motion designer in Dhaka"
 
 ```
-Stack     : none named → Next.js (App Router, TS, Tailwind): the default for a site with routes (case studies) and data (the reel list); confirmed at "Proceed?"
+Stack     : none named → Next.js (App Router, TS, Tailwind): the default for a site with routes (case studies) and data (the reel list); approved at Checkpoint 1
 Tension   : 10 years of varied work ↔ clients remember one thing
 Concept   : The site is a single film reel; each project is a frame you scrub through
 Archetype : Film Reel (Tier 5 scroll-film) mutated by "invert the axis": the reel runs horizontally while the page scrolls vertically
