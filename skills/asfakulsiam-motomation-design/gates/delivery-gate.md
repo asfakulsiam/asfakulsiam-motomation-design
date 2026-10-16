@@ -4,6 +4,24 @@ Verification only. The rules live in `gates/rules.md`, read before Step 1 and de
 
 ---
 
+## Every report: Measured, Judged, Not verified
+
+Every report this skill writes (the handoff note below, `/critique` in `commands/critique-format.md`, `GATE.md` and `CRITIQUE.md` in a template package from `templates/GATE.md` and `templates/CRITIQUE.md`, and the markdown reports written by `evals/run-agent-benchmark.mjs originality` and `evals/diversity.mjs`) has exactly these three sections, in this order, and nothing is claimed outside them:
+
+```
+## Measured
+## Judged
+## Not verified
+```
+
+| Section | What goes in | What may not |
+|---|---|---|
+| **Measured** | What a tool observed, with the tool named: `scripts/gate.mjs` lines and counts (axes c o w rm a n q k, rules C S P K, completeness X, journey J), `scripts/originality.mjs` scores (O), `scripts/contrast.mjs` ratios, `scripts/cost.mjs` numbers, the critique axes the gate derives from measurements (H, M, V, Q, A, and S from the memory log). Numbers and pass/fail as printed. Nothing here is a claim | an opinion, an adjective without a number, a check done by eye or by hand, a number no tool printed |
+| **Judged** | Design opinions, each marked `(opinion)` and attributed: `self` (the building agent: its self-critique, its Restraint Gate record, the AI-default scan and craft checklist answered by eye, checks done by hand) or `judge` (an independent judge model, named). C and R are here even though gate.mjs prints them: it counts the agent's own Restraint Gate record, so they are self-reported. A judged line may point at evidence (`see Measured: J forms`) but never restates a number as its own | a measurement, a pass/fail a tool printed |
+| **Not verified** | Every check that did not run, or ran and could not decide, with the reason: no browser, timed out, `?` axes with no record, `n/a` journey checks, O with no earlier build, real devices, screen readers, copy accuracy, `[NEEDS COPY]` / `[NEEDS ASSET]` placeholders. No claim either way | "probably fine", "should pass", any verdict |
+
+Three tests a reader can run on any report: every line under **Measured** names the tool that printed it; every line under **Judged** says `(opinion)` and who judged; every line under **Not verified** gives a reason. A line that fails its section's test moves to **Not verified**. A section with nothing in it says `none`; it never disappears. A "not verified — …" line from a tool goes under **Not verified**, never under Measured.
+
 ## Part 0: Measured gate (`scripts/gate.mjs`)
 
 Run the script against the page in whatever stack Step 0 chose. The gate is framework-neutral: it measures what a browser renders, so it takes three input forms:
@@ -45,7 +63,7 @@ The output ends with a stamp line built only from those numbers:
 
 **Rule: a stamp is only valid if it contains numbers produced by `scripts/gate.mjs` in the same run. A hand-written stamp is rejected.** Paste the line the script printed. Never type the numbers yourself and never copy them from an example or an earlier page. `--verify` re-scans the page and rejects any stamp whose numbers or id differ from the fresh scan, or that has no `gate:` segment at all.
 
-**No browser, no pass.** If Playwright or Chromium is missing, the script prints `not verified — no browser` and exits with code 3. Report exactly that in the handoff (`Measured: not verified — no browser`) and leave the `gate:` segment out of the stamp. Don't write a pass you didn't measure.
+**No browser, no pass.** If Playwright or Chromium is missing, the script prints `not verified — no browser` and exits with code 3. Report exactly that in the handoff, under **Not verified** (`gate.mjs: not verified — no browser`) and leave the `gate:` segment out of the stamp. Don't write a pass you didn't measure.
 
 The checks are bounded, and each reports what it skipped (text that was covered or never settled, elements parked off-canvas such as skip links and closed drawers). When more than 30% of text elements are skipped for contrast, the gate prints a coverage warning: the `c` count is then not a full measurement, and the skipped text needs a check by hand. A clean run means these eight things were measured (the composition and richness blocks are advisory and never change it). It doesn't mean the page is accessible. Keyboard paths, focus order and copy still need Parts 1–3.
 
@@ -327,9 +345,26 @@ not check. Full rules, with why and examples: `craft/copy.md`, `craft/seo.md`, `
 ## Handoff note (end every delivery with this)
 
 ```
-Chose     : <archetype + mutation, signature, type, palette, tier>
-Rejected  : <the obvious option and why>
-Needs     : <[NEEDS COPY]/[NEEDS ASSET] items for the user>
-Measured  : <the gate.mjs stamp line and real numbers, or "not verified — no browser">
-Try next  : <one command, e.g. /bolder on the hero, or /motomate the product chapter>
+HANDOFF · <page, site or fix> · route <full|light> · <date>
+
+## Measured
+gate.mjs     <the full stamp line it printed: critique: … · gate: … · rules: … · gate/n · id · skipped …>
+             <the X lines and the J line: journey: nav0 mobile0 forms0 loading0 errors0 session0, each failing state named>
+originality  <originality.mjs pairs against earlier builds, per axis; not run → Not verified>
+contrast     <contrast.mjs ratios for any colour you changed>
+cost         <cost.mjs: tokens in/out, wall clock, tool calls, retries; benchmark runs only>
+
+## Judged
+self (opinion)   Chose: <archetype + mutation, signature, type, palette, tier>, because <reason from the brief>
+self (opinion)   Rejected: <the obvious option> because <why>
+self (opinion)   C <n> · R <n> (from my own Restraint Gate record) · AI-default scan <n>/25 by eye · craft checklist by eye: <failed items or "none">
+judge (opinion)  <independent judge scores and notes, named, or "none">
+self (opinion)   Try next: <one command, e.g. /bolder on the hero, or /motomate the product chapter>
+
+## Not verified
+<each check that did not run or could not decide, with the reason: "gate.mjs: not verified — no browser"; axes marked ?;
+ journey checks that printed n/a and why; O with no earlier build; real devices, screen readers, copy accuracy>
+<[NEEDS COPY] / [NEEDS ASSET] items: placeholders, nothing claimed about them>
 ```
+
+The light route writes the same three sections; for a fix, **Measured** has the gate's before and after lines side by side.

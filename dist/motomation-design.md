@@ -3752,6 +3752,24 @@ Verification only. The rules live in `gates/rules.md`, read before Step 1 and de
 
 ---
 
+### Every report: Measured, Judged, Not verified
+
+Every report this skill writes (the handoff note below, `/critique` in `commands/critique-format.md`, `GATE.md` and `CRITIQUE.md` in a template package from `templates/GATE.md` and `templates/CRITIQUE.md`, and the markdown reports written by `evals/run-agent-benchmark.mjs originality` and `evals/diversity.mjs`) has exactly these three sections, in this order, and nothing is claimed outside them:
+
+```
+### Measured
+### Judged
+### Not verified
+```
+
+| Section | What goes in | What may not |
+|---|---|---|
+| **Measured** | What a tool observed, with the tool named: `scripts/gate.mjs` lines and counts (axes c o w rm a n q k, rules C S P K, completeness X, journey J), `scripts/originality.mjs` scores (O), `scripts/contrast.mjs` ratios, `scripts/cost.mjs` numbers, the critique axes the gate derives from measurements (H, M, V, Q, A, and S from the memory log). Numbers and pass/fail as printed. Nothing here is a claim | an opinion, an adjective without a number, a check done by eye or by hand, a number no tool printed |
+| **Judged** | Design opinions, each marked `(opinion)` and attributed: `self` (the building agent: its self-critique, its Restraint Gate record, the AI-default scan and craft checklist answered by eye, checks done by hand) or `judge` (an independent judge model, named). C and R are here even though gate.mjs prints them: it counts the agent's own Restraint Gate record, so they are self-reported. A judged line may point at evidence (`see Measured: J forms`) but never restates a number as its own | a measurement, a pass/fail a tool printed |
+| **Not verified** | Every check that did not run, or ran and could not decide, with the reason: no browser, timed out, `?` axes with no record, `n/a` journey checks, O with no earlier build, real devices, screen readers, copy accuracy, `[NEEDS COPY]` / `[NEEDS ASSET]` placeholders. No claim either way | "probably fine", "should pass", any verdict |
+
+Three tests a reader can run on any report: every line under **Measured** names the tool that printed it; every line under **Judged** says `(opinion)` and who judged; every line under **Not verified** gives a reason. A line that fails its section's test moves to **Not verified**. A section with nothing in it says `none`; it never disappears. A "not verified — …" line from a tool goes under **Not verified**, never under Measured.
+
 ### Part 0: Measured gate (`scripts/gate.mjs`)
 
 Run the script against the page in whatever stack Step 0 chose. The gate is framework-neutral: it measures what a browser renders, so it takes three input forms:
@@ -3793,7 +3811,7 @@ The output ends with a stamp line built only from those numbers:
 
 **Rule: a stamp is only valid if it contains numbers produced by `scripts/gate.mjs` in the same run. A hand-written stamp is rejected.** Paste the line the script printed. Never type the numbers yourself and never copy them from an example or an earlier page. `--verify` re-scans the page and rejects any stamp whose numbers or id differ from the fresh scan, or that has no `gate:` segment at all.
 
-**No browser, no pass.** If Playwright or Chromium is missing, the script prints `not verified — no browser` and exits with code 3. Report exactly that in the handoff (`Measured: not verified — no browser`) and leave the `gate:` segment out of the stamp. Don't write a pass you didn't measure.
+**No browser, no pass.** If Playwright or Chromium is missing, the script prints `not verified — no browser` and exits with code 3. Report exactly that in the handoff, under **Not verified** (`gate.mjs: not verified — no browser`) and leave the `gate:` segment out of the stamp. Don't write a pass you didn't measure.
 
 The checks are bounded, and each reports what it skipped (text that was covered or never settled, elements parked off-canvas such as skip links and closed drawers). When more than 30% of text elements are skipped for contrast, the gate prints a coverage warning: the `c` count is then not a full measurement, and the skipped text needs a check by hand. A clean run means these eight things were measured (the composition and richness blocks are advisory and never change it). It doesn't mean the page is accessible. Keyboard paths, focus order and copy still need Parts 1–3.
 
@@ -4075,12 +4093,29 @@ not check. Full rules, with why and examples: `craft/copy.md`, `craft/seo.md`, `
 ### Handoff note (end every delivery with this)
 
 ```
-Chose     : <archetype + mutation, signature, type, palette, tier>
-Rejected  : <the obvious option and why>
-Needs     : <[NEEDS COPY]/[NEEDS ASSET] items for the user>
-Measured  : <the gate.mjs stamp line and real numbers, or "not verified — no browser">
-Try next  : <one command, e.g. /bolder on the hero, or /motomate the product chapter>
+HANDOFF · <page, site or fix> · route <full|light> · <date>
+
+### Measured
+gate.mjs     <the full stamp line it printed: critique: … · gate: … · rules: … · gate/n · id · skipped …>
+             <the X lines and the J line: journey: nav0 mobile0 forms0 loading0 errors0 session0, each failing state named>
+originality  <originality.mjs pairs against earlier builds, per axis; not run → Not verified>
+contrast     <contrast.mjs ratios for any colour you changed>
+cost         <cost.mjs: tokens in/out, wall clock, tool calls, retries; benchmark runs only>
+
+### Judged
+self (opinion)   Chose: <archetype + mutation, signature, type, palette, tier>, because <reason from the brief>
+self (opinion)   Rejected: <the obvious option> because <why>
+self (opinion)   C <n> · R <n> (from my own Restraint Gate record) · AI-default scan <n>/25 by eye · craft checklist by eye: <failed items or "none">
+judge (opinion)  <independent judge scores and notes, named, or "none">
+self (opinion)   Try next: <one command, e.g. /bolder on the hero, or /motomate the product chapter>
+
+### Not verified
+<each check that did not run or could not decide, with the reason: "gate.mjs: not verified — no browser"; axes marked ?;
+ journey checks that printed n/a and why; O with no earlier build; real devices, screen readers, copy accuracy>
+<[NEEDS COPY] / [NEEDS ASSET] items: placeholders, nothing claimed about them>
 ```
+
+The light route writes the same three sections; for a fix, **Measured** has the gate's before and after lines side by side.
 
 
 ---
@@ -4283,35 +4318,45 @@ Every [M] rule of `craft/security.md`. "warns" = heuristic, printed, never count
 Use this exact structure for `/critique` and for the critique step inside `/overdrive`.
 
 ```
-CRITIQUE · <page or component>
+CRITIQUE · <page or component> · <date>
 
-Scores     C <n> · H <n> · S <n> · R <n> · M <n> · V <n>      (1–5, see gates/delivery-gate.md)
-Verdict    <one sentence: the single biggest reason it does or doesn't work>
+### Measured
+gate.mjs        H <n> · M <n> · V <n> · Q <n> · A <n> · S <n>, with the traces it printed (the critique: segment without C and R)
+                gate: c o w rm a n q k · rules: C S P K · the X lines · journey: nav mobile forms loading errors session
+contrast.mjs    <failures with the ratio and the pair, e.g. 3.1:1 #8a857a on #f3efe6>
+performance     <numbers a tool printed: JS gzipped, LCP, CLS; none printed → Not verified>
+originality.mjs <scores against earlier builds, if it ran>
 
-Top 3 problems (most important first)
-1. <problem> — where: <section/file:line> — why it matters: <effect on the user>
-   Fix: <specific change>
-2. …
-3. …
+### Judged
+self (opinion)  C <n> · R <n> (counted by gate.mjs from my own Restraint Gate record: self-reported)
+self (opinion)  Verdict: <one sentence: the single biggest reason it does or doesn't work>
+self (opinion)  Top 3 problems (most important first)
+                1. <problem> — where: <section/file:line> — why it matters: <effect on the user> — evidence: <"see Measured: …" or "by eye">
+                   Fix: <specific change>
+                2. …
+                3. …
+self (opinion)  AI-default scan <n>/25 failed, by eye: <list gate numbers>
+self (opinion)  Restraint Gate, per questioned element: <element> — Q1 hierarchy/feedback/storytelling <pass|fail> · Q2 brief
+                needs it to feel like itself <pass|fail> → <kept|cut>   (cut only if both fail; principles/restraint.md)
+self (opinion)  Motion: <passes / animations failing the four questions>
+self (opinion)  Choreography <n>/5 against MOTION.md's timing sheet: <drift, grammar, camera, rhythm, reduced motion>
+                (motion/choreography.md §5; "no timing sheet" on Tier 3–5 is a failure)
+self (opinion)  Keyboard and focus, by hand: <issues found by tabbing, or "none found">
+judge (opinion) <an independent judge, named, with its scores and notes, or "none">
+self (opinion)  Keep: <the 1–3 things that are working and must survive the revision>
+self (opinion)  Next command: <e.g. /mutate hero, /type, /quieter>
 
-AI-default scan    <n>/25 failed: <list gate numbers>
-Restraint Gate     per questioned element: <element> — Q1 hierarchy/feedback/storytelling <pass|fail> · Q2 brief needs it
-                   to feel like itself <pass|fail> → <kept|cut>   (cut only if both fail; principles/restraint.md)
-Motion             <passes / list animations failing the four questions>
-Choreography       <n>/5 against MOTION.md's timing sheet · <deviations: drift, grammar, camera, rhythm, reduced motion>
-                   (motion/choreography.md §5; "no timing sheet" on Tier 3–5 is a failure)
-Accessibility      <contrast failures with values, keyboard issues, missing reduced-motion>
-Performance        <measured numbers, or "not measured">
-
-Keep               <the 1–3 things that are working and must survive the revision>
-Next command       <e.g. /mutate hero, /type, /quieter>
+### Not verified
+<every check that did not run or could not decide, with the reason: "not verified — no browser", axes marked ?, n/a journey
+ checks, performance not measured, real devices, screen readers>
 ```
 
 ### Rules
 
 - Be specific: name the element, the value and the fix. "Increase hero display size from 64px to clamp(4rem, 12vw, 14rem)", not "make it bolder".
 - Every problem links to a user effect (confusion, slowness, distrust, inaccessibility, forgettability).
-- Never invent measurements. If you didn't measure performance, say so.
+- Never invent measurements. A number goes under **Measured** only if a tool printed it; name the tool. Performance you didn't measure goes under **Not verified**, with the reason.
+- Three sections, no mixing (`gates/delivery-gate.md`, "Every report"). Every **Judged** line says `(opinion)` and who judged (`self` or a named `judge`). A problem may cite measured evidence (`see Measured: contrast`) but does not restate its numbers. A check done by hand (tabbing, reading copy) is judged, not measured: no tool observed it.
 - Always include **Keep**. Critique protects what works.
 - Never recommend cutting an element for failing Q1 alone. If it passes Q2 (the brief needs it to feel like itself), it stays; name the brief's reason. Recommend a cut only when it fails both.
 
@@ -5408,6 +5453,39 @@ Wireframe as decoration on a product that has no structure to show.
 
 ---
 
+<!-- file: templates/CRITIQUE.md -->
+
+## CRITIQUE.md · <project>
+
+The `/critique` output, pasted, never typed (`commands/critique-format.md`). Three sections, no mixing (`gates/delivery-gate.md`, "Every report"). A section with nothing in it says `none`.
+
+### Measured
+
+Only what a tool printed, with the tool named.
+
+- gate.mjs: H <n> · M <n> · V <n> · Q <n> · A <n> · S <n> with traces · gate: … · rules: … · journey: …
+- contrast.mjs: <failing pairs with ratios, or "0 failures">
+- performance: <numbers a tool printed>
+- originality.mjs: <scores against earlier builds, if it ran>
+
+### Judged
+
+Opinions, each marked `(opinion)` with who judged (`self`, or a named `judge`). Evidence is cited, not restated.
+
+- self (opinion): C <n> · R <n> (counted from my own Restraint Gate record)
+- self (opinion): Verdict: <one sentence>
+- self (opinion): Top 3 problems, each with where, why it matters, evidence (`see Measured: …` or "by eye") and the fix
+- self (opinion): AI-default scan by eye, Restraint Gate per questioned element, motion, choreography, keyboard by hand
+- judge (opinion): <independent judge, named, or "none">
+- self (opinion): Keep: <1–3 things> · Next command: <one>
+
+### Not verified
+
+- <each check that did not run or could not decide, with the reason>
+
+
+---
+
 <!-- file: templates/DATA.md -->
 
 ## DATA.md: <Project name>
@@ -5585,6 +5663,48 @@ Type mode: HOUSE STYLE (typography-led) | SERVICE STYLE (information-led) — be
 - Cut: <what was removed> — fails Q1 and Q2 (no hierarchy, feedback or story; the brief doesn't need it)
 - Kept: <element> — fails Q1, passes Q2: <what in the brief needs it>
 - Rejected animation: <the animation> — <which of the four questions it failed>
+
+
+---
+
+<!-- file: templates/GATE.md -->
+
+## GATE.md · <project>
+
+The gate output per page, pasted from `node scripts/gate.mjs …`, never typed. Three sections, no mixing (`gates/delivery-gate.md`, "Every report"). A section with nothing in it says `none`.
+
+### Measured
+
+What `scripts/gate.mjs` (and any other tool) printed, per page. Paste; do not summarise.
+
+```
+<page path or URL> · gate.mjs <version> · <date> · Chromium <version>
+<the full output: gate: … · rules: … · the X lines · the J lines (nav, mobile, forms, loading, errors, session) · PASS/FAIL>
+<the stamp line>
+```
+
+```
+originality.mjs <this build> <earlier builds>   (axis O; only if it ran)
+<the pair table it printed>
+```
+
+### Judged
+
+Opinions, each marked `(opinion)` with who judged. The gate prints C and R, but it counts the agent's own Restraint Gate record, so they live here.
+
+- self (opinion): C <n> · R <n>, from `DESIGN.md` → Restraint Gate record
+- self (opinion): AI-default scan (`gates/delivery-gate.md` Part 2) answered by eye: <n>/25 failed, <numbers>
+- self (opinion): craft checklist (Part 3) items checked by eye: <failed items or "none">
+- judge (opinion): <independent judge, named, or "none">
+
+### Not verified
+
+Each check that did not run or could not decide, with the reason. No claim either way.
+
+- <"gate.mjs: not verified — no browser" / "timed out after 600 s" / axes marked `?` and the missing record>
+- <journey checks that printed `n/a`, and why: "forms: no form on any page">
+- <O: not run, no earlier build to compare>
+- <real devices, screen readers, copy accuracy: not checked>
 
 
 ---
@@ -5774,8 +5894,8 @@ npm install && npm run dev
 | `MOTION.md` | motion spec per section (`templates/MOTION.md`) | before the build |
 | `SCHEMA.md` | every entity, route, state, the API surface and handoff notes (`templates/SCHEMA.md`) | with `DESIGN.md` |
 | `DATA.md` | the shape of the `data/` folder (`templates/DATA.md`) | with `SCHEMA.md` |
-| `CRITIQUE.md` | the `/critique` output, pasted, never typed | after the gate |
-| `GATE.md` | the gate output per page (`node scripts/gate.mjs …`), pasted, never typed, including the X lines | after the gate |
+| `CRITIQUE.md` | the `/critique` output, pasted, never typed, in three sections: Measured, Judged, Not verified (`templates/CRITIQUE.md`) | after the gate |
+| `GATE.md` | the gate output per page (`node scripts/gate.mjs …`), pasted, never typed, including the X and J lines, in three sections: Measured, Judged, Not verified (`templates/GATE.md`) | after the gate |
 | `LICENSE` | MIT by default (the brief can name another) | with the build |
 | `CHANGELOG.md` | starts at `## [0.1.0] - <date>` | with the build |
 | `.env.example` | every environment variable the code reads, each with a placeholder and a comment | with the build |

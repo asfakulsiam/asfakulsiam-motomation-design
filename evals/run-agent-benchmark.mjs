@@ -456,7 +456,8 @@ function writeCost() {
 export const ORIGINALITY_THRESHOLD = 0.4;
 function originalityArm() {
   const script = join(SKILL, "scripts/originality.mjs"); const result = { threshold: ORIGINALITY_THRESHOLD, generated: new Date().toISOString(), arms: {} };
-  const md = [`# Originality arm`, "", `Builds for different briefs, same arm and seed, compared on six axes (0 = nothing shared, 1 = the same). Every axis must stay below ${ORIGINALITY_THRESHOLD}.`, ""];
+  // three sections, no mixing (gates/delivery-gate.md, "Every report"): this report measures; it judges nothing
+  const md = [`# Originality arm`, "", `Builds for different briefs, same arm and seed, compared on six axes by scripts/originality.mjs (0 = nothing shared, 1 = the same). Every axis must stay below ${ORIGINALITY_THRESHOLD}.`, "", "## Measured", ""]; const nv = [];
   const built = (d) => existsSync(join(d, "index.html")) || ["out", "dist", "build", ".output/public", "_site", "public"].some((x) => existsSync(join(d, x, "index.html")));
   let notVerified = false;
   for (const cond of arms) {
@@ -465,17 +466,18 @@ function originalityArm() {
       const set = only.map((slug) => ({ slug, seed: BRIEFS[slug].seeds[k], dir: join(OUT, slug, `${cond}-s${BRIEFS[slug].seeds[k]}`) })).filter((x) => x.seed && built(x.dir));
       if (set.length < 2) continue;
       const g = spawnSync(process.execPath, [script, ...set.map((x) => x.dir), "--json", "--labels", set.map((x) => x.slug).join(",")], { encoding: "utf8", maxBuffer: 64 << 20 });
-      if (g.status === 3) { console.log(`originality ${cond} seed#${k + 1}: ${(g.stdout || g.stderr).trim().split("\n")[0]}`); notVerified = true; continue; }
-      let rep; try { rep = JSON.parse(g.stdout); } catch { console.log(`originality ${cond} seed#${k + 1}: no report (${(g.stderr || g.stdout).slice(0, 200)})`); notVerified = true; continue; }
+      if (g.status === 3) { const why = (g.stdout || g.stderr).trim().split("\n")[0]; console.log(`originality ${cond} seed#${k + 1}: ${why}`); nv.push(`- ${cond}, seed #${k + 1}: ${why}`); notVerified = true; continue; }
+      let rep; try { rep = JSON.parse(g.stdout); } catch { console.log(`originality ${cond} seed#${k + 1}: no report (${(g.stderr || g.stdout).slice(0, 200)})`); nv.push(`- ${cond}, seed #${k + 1}: originality.mjs printed no report`); notVerified = true; continue; }
       arm.sets.push({ seedIndex: k + 1, builds: set.map((x) => x.dir.replace(ROOT + "/", "")), pairs: rep.pairs.map(({ a, b, score, over }) => ({ a, b, score, over })), max: rep.max, pass: rep.pass });
       for (const p of rep.pairs) if (p.over.length) arm.repeats.push({ seedIndex: k + 1, a: p.a, b: p.b, axes: p.over });
       for (const [ax, v] of Object.entries(rep.max)) arm.max[ax] = Math.max(arm.max[ax] ?? 0, v ?? 0);
       arm.pass &&= rep.pass;
-      md.push(`## ${cond}, seed #${k + 1}`, "", `| Pair | structure | composition | image | typography | interaction | signature | overall |`, `|---|---:|---:|---:|---:|---:|---:|---:|`, ...rep.pairs.map((p) => `| ${p.a} × ${p.b} | ${["structure", "composition", "image", "typography", "interaction", "signature", "overall"].map((ax) => `${p.score[ax].toFixed(2)}${ax !== "overall" && p.score[ax] >= ORIGINALITY_THRESHOLD ? " ✗" : ""}`).join(" | ")} |`), "");
+      md.push(`### ${cond}, seed #${k + 1}`, "", `| Pair | structure | composition | image | typography | interaction | signature | overall |`, `|---|---:|---:|---:|---:|---:|---:|---:|`, ...rep.pairs.map((p) => `| ${p.a} × ${p.b} | ${["structure", "composition", "image", "typography", "interaction", "signature", "overall"].map((ax) => `${p.score[ax].toFixed(2)}${ax !== "overall" && p.score[ax] >= ORIGINALITY_THRESHOLD ? " ✗" : ""}`).join(" | ")} |`), "");
       console.log(`originality ${cond} seed#${k + 1}: ${set.length} builds, ${rep.pairs.length} pairs, ${rep.pass ? "PASS" : `FAIL (${rep.pairs.filter((p) => p.over.length).length} repeat pair(s))`}`);
     }
-    if (arm.sets.length) result.arms[cond] = arm; else console.log(`originality ${cond}: fewer than two built briefs per seed, nothing to compare`);
+    if (arm.sets.length) result.arms[cond] = arm; else { console.log(`originality ${cond}: fewer than two built briefs per seed, nothing to compare`); nv.push(`- ${cond}: fewer than two built briefs per seed, nothing to compare`); }
   }
+  md.push("## Judged", "", "none: this report measures similarity; it holds no design opinion.", "", "## Not verified", "", ...(nv.length ? nv : ["none"]), "");
   if (!Object.keys(result.arms).length) { if (notVerified) { console.log("originality: not verified"); return null; } console.log("originality: nothing to compare (needs at least two briefs built in one arm)"); return { pass: true }; }
   mkdirSync(OUT, { recursive: true }); writeFileSync(join(OUT, "originality.json"), JSON.stringify(result, null, 1)); writeFileSync(join(OUT, "originality.md"), md.join("\n") + "\n");
   return { pass: Object.values(result.arms).every((a) => a.pass) && !notVerified };
