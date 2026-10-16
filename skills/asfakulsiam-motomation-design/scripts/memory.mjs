@@ -42,7 +42,7 @@ const DIR = cliProject ? join(resolve(cliProject), ".motomation") : userDir();
 const FILE = join(DIR, "log.json");
 const LEGACY = cliProject ? null : join(PROJECT, ".motomation", "log.json"); // a pre-2.9 per-project log, read but never written
 export const logPath = () => FILE;
-const FIELDS = ["dir", "page", "category", "archetype", "mutation", "signature", "fonts", "palette", "palette_family", "motion", "tier", "nav", "footer", "notes"];
+const FIELDS = ["dir", "page", "category", "archetype", "mutation", "signature", "collision", "fonts", "palette", "palette_family", "motion", "tier", "nav", "footer", "notes"];
 // the five dimensions a similar brief must diverge on
 export const DIVERGE = [["archetype", "archetype"], ["palette_family", "palette family"], ["fonts", "type pairing"], ["motion", "motion language"], ["signature", "signature move"]];
 const FP_FLAGS = { layout: "layout", "type-scale": "type_scale", sections: "sections", "signature-type": "signature_type" }; // extra structural inputs
@@ -82,7 +82,7 @@ function write(runs) { mkdirSync(DIR, { recursive: true }); writeFileSync(FILE, 
 
 const isMain = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
-  const a = cli("memory", "Usage: node scripts/memory.mjs <log|recent|similar|check|fingerprint> [--brief \"…\"] [--category c] [--motion m] [--archetype x] [--signature y] [--fonts a/b] [--palette p] [--tier n] [--page p] [--sections a,b,c] [--type-scale 1.333] [--layout family] [--threshold 0.7] [--project <dir>]",
+  const a = cli("memory", "Usage: node scripts/memory.mjs <log|recent|similar|check|fingerprint> [--brief \"…\"] [--category c] [--motion m] [--archetype x] [--signature y] [--collision \"source\"] [--fonts a/b] [--palette p] [--tier n] [--page p] [--sections a,b,c] [--type-scale 1.333] [--layout family] [--threshold 0.7] [--project <dir>]",
     Object.fromEntries([...FIELDS, "sections", "type-scale", "layout", "threshold", "project", "n", "url"].concat(["brief", "palette-family", "ground", "accent", "design"]).map((k) => [k, "value"]).concat([["json", "bool"]])), null, { pos: [0, 1] }); const cmd = a._[0];
   // The palette a build declares in DESIGN.md (--design file, else <--dir>/DESIGN.md): named palette or hex list → family
   const designFile = flagVal(a.design) ? resolve(String(a.design)) : flagVal(a.dir) && existsSync(join(resolve(String(a.dir)), "DESIGN.md")) ? join(resolve(String(a.dir)), "DESIGN.md") : null;
@@ -125,6 +125,9 @@ if (isMain) {
     for (const f of FIELDS) {
       if (f === "category" || f === "dir" || !a[f] || a[f] === true) continue; // the category and the build folder are context, not choices to avoid
       const hit = runs.filter((r) => r[f] && r[f].toLowerCase() === String(a[f]).toLowerCase());
+      if (hit.length && f === "collision") { // the collision source the draw used (collide.mjs prints it)
+        console.log(`⚠ collision source "${a[f]}" was drawn in ${hit.length} of the last ${runs.length} builds (run${hit.length > 1 ? "s" : ""} ${hit.map((r) => runs.indexOf(r) + 1 + readLog().length - runs.length).map((n) => `#${n}`).join(", ")}) → warning: draw again (collide.mjs --exclude-recent) or state in DESIGN.md why the same source fits`); continue;
+      }
       if (hit.length && f === "tier") { // the motion tier follows the brief: a repeat is a warning, never a forced change
         let streak = 0; for (let i = runs.length - 1; i >= 0 && String(runs[i].tier) === String(a.tier); i--) streak++;
         console.log(`⚠ Tier ${a.tier} used in ${streak ? `the last ${streak}` : `${hit.length} of the last ${runs.length}`} builds. This is allowed if the brief requires it. State the reason in DESIGN.md.`); continue;
@@ -170,7 +173,7 @@ if (isMain) {
   } else if (cmd === "fingerprint") {
     const fp = fpFrom(a); console.log(fpText(fp)); if (a.json) console.log(JSON.stringify(fp));
   } else {
-    console.log("Usage: node scripts/memory.mjs <log|recent|similar|check|fingerprint> [--brief \"…\"] [--category c] [--motion m] [--archetype x] [--signature y] [--fonts a/b] [--palette p] [--tier n] [--page p] [--sections a,b,c] [--type-scale 1.333] [--layout family] [--threshold 0.7] [--project <dir>]");
+    console.log("Usage: node scripts/memory.mjs <log|recent|similar|check|fingerprint> [--brief \"…\"] [--category c] [--motion m] [--archetype x] [--signature y] [--collision \"source\"] [--fonts a/b] [--palette p] [--tier n] [--page p] [--sections a,b,c] [--type-scale 1.333] [--layout family] [--threshold 0.7] [--project <dir>]");
     process.exit(cmd ? 1 : 0);
   }
 }

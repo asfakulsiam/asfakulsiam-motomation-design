@@ -38,6 +38,9 @@ if (a["exclude-recent"]) {
   const usedA = new Set(log.map((e) => e.archetype)), usedS = new Set(log.map((e) => e.signature));
   const fa = archetypes.filter((x) => !usedA.has(x.id)); if (fa.length) archetypes = fa;
   const fs = signatures.filter((x) => !usedS.has(x.id)); if (fs.length) signatures = fs;
+  // collision sources logged with memory.mjs log --collision "<source>" in the last 5 runs are not drawn again
+  const usedC = new Set(log.map((e) => String(e.collision || "").toLowerCase()).filter(Boolean));
+  const fc = collisions.filter((c) => !usedC.has(c.source.toLowerCase())); if (fc.length) collisions = fc;
 }
 
 // Without-replacement picker. `key` decides what counts as "the same"; when every item is used the pool
@@ -128,6 +131,7 @@ draws.forEach((d, i) => {
   console.log(`  Mutation   : ${d.mutation.name}: ${d.mutation.operator}`);
   console.log(`  Collision  : ${d.collision.source} (${d.collision.world}) → steal "${d.collision.property}"`);
   console.log(`               e.g. ${d.collision.becomes}`);
+  console.log(`               log it: memory.mjs log … --collision "${d.collision.source}"`);
   console.log(`  Kinetic    : ${d.kinetic}`);
   console.log(`  Seed move  : ${d.signature_seed.name}: ${d.signature_seed.one_line}`);
   console.log(`  Fingerprint: ${fpText(d.fingerprint)}${d.closest_logged == null ? "" : `  (closest logged run: ${Math.round(d.closest_logged * 100)}%${d.closest_logged >= 0.7 ? " ⚠ rebuilds a recent page" : ""})`}`);
