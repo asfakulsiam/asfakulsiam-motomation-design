@@ -125,6 +125,10 @@ if (isMain) {
     for (const f of FIELDS) {
       if (f === "category" || f === "dir" || !a[f] || a[f] === true) continue; // the category and the build folder are context, not choices to avoid
       const hit = runs.filter((r) => r[f] && r[f].toLowerCase() === String(a[f]).toLowerCase());
+      if (hit.length && f === "tier") { // the motion tier follows the brief: a repeat is a warning, never a forced change
+        let streak = 0; for (let i = runs.length - 1; i >= 0 && String(runs[i].tier) === String(a.tier); i--) streak++;
+        console.log(`⚠ Tier ${a.tier} used in ${streak ? `the last ${streak}` : `${hit.length} of the last ${runs.length}`} builds. This is allowed if the brief requires it. State the reason in DESIGN.md.`); continue;
+      }
       if (hit.length) { clash++; console.log(`✗ ${f} "${a[f]}" was used in ${hit.length} of the last ${runs.length} runs → choose another`); }
       else console.log(`✓ ${f} "${a[f]}" is fresh`);
     }
