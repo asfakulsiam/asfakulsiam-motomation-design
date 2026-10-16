@@ -105,9 +105,9 @@ Two layers, kept apart on purpose (details in `principles/restraint.md`):
 
 ### Output rules
 
-- **One confirmation.** Present the plan once and ask exactly one question, "Proceed?". After yes: build, gate and ship without asking again; decisions go in `DESIGN.md` with their reasons. Ask again only for a genuinely critical ambiguity (payment provider, legal region, locale priority), a costly lock-in the plan didn't cover (framework, hosting), or an "ask me before X" in the brief. Non-interactive runs write the plan to `DESIGN.md` and proceed.
+- **One confirmation.** Present the plan once and ask only "Proceed?"; after yes, build, gate and ship without asking again (exceptions: `thinking/sequence.md`). Non-interactive runs proceed.
 - Explain the plan in the preview block, then build. Keep prose short. The work is the answer.
-- Every build ships `DESIGN.md` and `SCHEMA.md` with the code. `SCHEMA.md` (format: `templates/SCHEMA.md`) is the data contract for the backend developer: data model, routes, section contract (empty, loading, error, filled), API surface, handoff notes. It is written with `DESIGN.md`, not after, and a developer can build the backend from it alone.
+- Every build ships a **sellable template** (`templates/TEMPLATE.md`): README with the demo line, DESIGN, MOTION, SCHEMA, DATA, CRITIQUE, GATE, LICENSE, CHANGELOG, `.env.example`, demo-labelled `data/`, `middleware.ts`; runs with `npm install && npm run dev`, no configuration.
 - Deliver complete files. No `// rest of code here`, no TODOs, no placeholder images without a clear `alt` and a sourcing note.
 - Put a stamp comment at the top of the main stylesheet or layout:
   `/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: <from gate.mjs> · gate: <from gate.mjs> */`
@@ -294,7 +294,7 @@ The budgets hold either way: one signature move, one accent moment per screen, o
 
 - [ ] Concept sentence and signature move are visible in the first screen
 - [ ] Scope: `node scripts/completeness.mjs <project>` (axis X) prints every line `n/n`; each excused item has its reason
-- [ ] Handoff: `DESIGN.md` and `SCHEMA.md` (`templates/SCHEMA.md`) ship with the build; every section `id` in the markup has a row in the section contract, every field shown on the page is in the data model, every route is listed
+- [ ] Template: the build has the `templates/TEMPLATE.md` shape (README with the demo line, DESIGN, MOTION, SCHEMA, DATA, CRITIQUE, GATE, LICENSE, CHANGELOG, `.env.example`, demo-labelled `data/`, `middleware.ts`) and starts with `npm install && npm run dev` and no `.env`; every section `id` has a row in the `SCHEMA.md` section contract, every field shown is in the data model, every route is listed
 - [ ] Type: display face chosen with a reason; body size and measure within `gates/rules.md` (Hierarchy); `text-wrap: balance` on headings
 - [ ] Colour: all text pairs verified (`node scripts/contrast.mjs` while designing, `node scripts/gate.mjs` on the build); accent within `gates/rules.md` (Contrast)
 - [ ] Layout: one deliberate grid break per screen, recomposed (not squeezed) on mobile

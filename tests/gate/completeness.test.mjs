@@ -5,10 +5,10 @@ import { tmpdir } from "node:os";
 import { completeness, completenessLines } from "../../skills/asfakulsiam-motomation-design/scripts/completeness.mjs";
 let bad = 0; const say = (ok, msg) => { console.log(`${ok ? "ok  " : "FAIL"} ${msg}`); if (!ok) bad++; };
 const put = (root, f, t = "// demo\n") => { mkdirSync(dirname(join(root, f)), { recursive: true }); writeFileSync(join(root, f), t); };
-const SHAPE = ["README.md", "MOTION.md", "SCHEMA.md", "CRITIQUE.md", "GATE.md", "LICENSE", "CHANGELOG.md", ".env.example", "middleware.ts", "data/schema.json"];
+const SHAPE = ["README.md", "MOTION.md", "SCHEMA.md", "DATA.md", "CRITIQUE.md", "GATE.md", "LICENSE", "CHANGELOG.md", ".env.example", "middleware.ts", "data/schema.json", "data/products.json"];
 function project(scopeRows, files) {
   const root = mkdtempSync(join(tmpdir(), "moto-x-"));
-  for (const f of [...SHAPE, ...files]) put(root, f, f === "SCHEMA.md" ? "## Section contract\n| #cart | empty: Your cart is empty |\n" : f.startsWith("data/") && f.endsWith(".json") ? '{"demo": true, "items": []}' : "// demo\n");
+  for (const f of [...SHAPE, ...files]) put(root, f, f === "SCHEMA.md" ? "## Section contract\n| #cart | empty: Your cart is empty |\n" : f === "data/products.json" ? '{"demo": true, "entity": "Product", "items": [{"id": "p1", "demo": true}]}' : f === "README.md" ? "# Demo\n\nAll data in data/ is demo. Replace with real data before launch.\n" : f === ".env.example" ? "# demo\nSHOP_API_KEY=placeholder\n" : "// demo\n");
   put(root, "DESIGN.md", `# DESIGN.md\n\n## Scope\n**Site type:** e-commerce\n**Admin panel:** yes\n\n| Kind | Item | Mark | Evidence |\n|---|---|---|---|\n${scopeRows.join("\n")}\n\n## Concept\n`);
   return root;
 }
@@ -31,4 +31,12 @@ const gRoot = project(["| route | / | requested | |"], ["index.html"]); for (con
 const g = completeness(gRoot); say(g.pass && g.tally.route.have === 1, "static HTML routes are found too");
 const hRoot = mkdtempSync(join(tmpdir(), "moto-x-")); put(hRoot, "DESIGN.md", "# x\n\n## Scope\n| Kind | Item | Mark | Evidence |\n|---|---|---|---|\n| route | / | requested | |\n| template | middleware.ts | not required for this brief, reason: single static page, no server |\n"); put(hRoot, "index.html", "<p>x</p>");
 const h = completeness(hRoot); say(!h.pass && h.tally.template.excused === 1 && h.missing.some((m) => m.item === "README.md"), "template files are required unless excused with a reason");
+// v2.9.0 Phase 6: template content (README demo line, demo labels, .env.example coverage, npm run dev)
+const iRoot = project(["| route | / | requested | |"], ["app/page.tsx"]);
+writeFileSync(join(iRoot, "data/products.json"), '{"demo": true, "entity": "Product", "items": [{"id": "p1"}]}');
+writeFileSync(join(iRoot, "README.md"), "# Shop\n");
+put(iRoot, "lib/pay.ts", "// demo\nexport const key = process.env.STRIPE_SECRET_KEY;\n");
+writeFileSync(join(iRoot, "package.json"), '{"scripts": {"build": "next build"}}');
+const i = completeness(iRoot); const ids = i.missing.map((m) => m.item).sort().join(", ");
+say(ids === ".env.example coverage, README demo line, demo labels, npm run dev", `template content checks bite (${ids})`);
 console.log(bad ? `\n${bad} failure(s)` : "\ncompleteness (X) bites"); process.exit(bad ? 1 : 0);

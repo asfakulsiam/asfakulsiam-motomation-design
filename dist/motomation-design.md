@@ -56,7 +56,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 | A site category (hotel, SaaS, studio…) | `categories/<category>.md` |
 | **Any build or redesign (always, before step 6 Build)** | `craft/copy.md` + `craft/seo.md` + `craft/performance.md` + `craft/security.md` |
 | Accessibility, responsive, mobile motion, scroll sequences | `craft/*.md` |
-| Writing the design system (step 3) | `templates/DESIGN.md` and `templates/SCHEMA.md` (always, together) |
+| Writing the design system (step 3) | `templates/DESIGN.md`, `templates/SCHEMA.md` and `templates/DATA.md` (always, together); the whole deliverable: `templates/TEMPLATE.md` |
 | Before handing anything back | `gates/delivery-gate.md` (always): verification of `gates/rules.md`, not new rules |
 | Framework specifics | `adapters/<stack>.md`, chosen by Step 0 (Stack): `next.md`, `astro.md`, `react-vite.md` or `vanilla.md`. Never skipped, never assumed |
 | Commands and flags | `commands/overview.md` |
@@ -249,9 +249,9 @@ Full behaviour of each command is in `commands/overview.md`. Critique output for
 
 ### Output rules
 
-- **One confirmation.** Present the plan once and ask exactly one question, "Proceed?". After yes: build, gate and ship without asking again; decisions go in `DESIGN.md` with their reasons. Ask again only for a genuinely critical ambiguity (payment provider, legal region, locale priority), a costly lock-in the plan didn't cover (framework, hosting), or an "ask me before X" in the brief. Non-interactive runs write the plan to `DESIGN.md` and proceed.
+- **One confirmation.** Present the plan once and ask only "Proceed?"; after yes, build, gate and ship without asking again (exceptions: `thinking/sequence.md`). Non-interactive runs proceed.
 - Explain the plan in the preview block, then build. Keep prose short. The work is the answer.
-- Every build ships `DESIGN.md` and `SCHEMA.md` with the code. `SCHEMA.md` (format: `templates/SCHEMA.md`) is the data contract for the backend developer: data model, routes, section contract (empty, loading, error, filled), API surface, handoff notes. It is written with `DESIGN.md`, not after, and a developer can build the backend from it alone.
+- Every build ships a **sellable template** (`templates/TEMPLATE.md`): README with the demo line, DESIGN, MOTION, SCHEMA, DATA, CRITIQUE, GATE, LICENSE, CHANGELOG, `.env.example`, demo-labelled `data/`, `middleware.ts`; runs with `npm install && npm run dev`, no configuration.
 - Deliver complete files. No `// rest of code here`, no TODOs, no placeholder images without a clear `alt` and a sourcing note.
 - Put a stamp comment at the top of the main stylesheet or layout:
   `/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: <from gate.mjs> · gate: <from gate.mjs> */`
@@ -543,14 +543,19 @@ The budgets hold either way: one signature move, one accent moment per screen, o
 
 ---
 
-### Required output: DESIGN.md and SCHEMA.md
+### Required output: a sellable template
 
-Every build ships two documents next to the code, written together while the design system is set (default flow, step 3), never after the build:
+Every build ships as a complete, runnable template a designer can sell, not a folder of pages. The shape is `templates/TEMPLATE.md`:
 
-- `DESIGN.md` (`templates/DESIGN.md`): how it looks, with `References` from Step 0.5.
-- `SCHEMA.md` (`templates/SCHEMA.md`): the data contract. Data model (every entity and field: name, type, required or optional, example, where it appears), Routes (every URL and what it reads), Section contract (every section id on every page, the data it reads, and what it renders when empty, loading, in error and filled), API surface (every endpoint, or "none: static"), Handoff notes (environment variables, third-party services, rate limits, auth flow).
+- `README.md` (what it is, what is real, what is demo, how to run, how to deploy; it states "All data in data/ is demo. Replace with real data before launch."), `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `DATA.md`, `CRITIQUE.md`, `GATE.md` (the gate output per page, pasted), `LICENSE` (MIT by default), `CHANGELOG.md` (from v0.1.0), `.env.example` (every variable, with a placeholder)
+- `data/`: mock JSON typed by its `schema.json`, every entry labelled demo (`templates/DATA.md`)
+- `middleware.ts`, and a comment at the top of every non-trivial file
 
-A section added to the page gets its row in `SCHEMA.md` in the same edit. **Test:** could a backend developer build the backend from `SCHEMA.md` alone, without asking a question? Does every section `id` in the markup have a row in the section contract? If not, the build isn't finished.
+It runs with zero configuration after `npm install && npm run dev`: mock data committed, no external services required.
+
+`DESIGN.md` and `SCHEMA.md` are written together while the design system is set (default flow, step 3), never after the build; `DATA.md` with `SCHEMA.md`. `SCHEMA.md` (`templates/SCHEMA.md`) holds every entity and its data file, every route, every state, the environment variables, the API surface (or "none: static") and the handoff notes. A section added to the page gets its row in `SCHEMA.md` in the same edit.
+
+**Test:** could a backend developer build the backend from `SCHEMA.md` alone, without asking a question? Does `npm install && npm run dev` start with no `.env`? Does `node scripts/completeness.mjs <project>` show `Template: n/n present` (excused items with their reasons)? If not, the build isn't finished.
 
 ---
 
@@ -3833,7 +3838,7 @@ The placeholders are deliberate. There are no numbers to copy. Write the archety
 
 - [ ] Concept sentence and signature move are visible in the first screen
 - [ ] Scope: `node scripts/completeness.mjs <project>` (axis X) prints every line `n/n`; each excused item has its reason
-- [ ] Handoff: `DESIGN.md` and `SCHEMA.md` (`templates/SCHEMA.md`) ship with the build; every section `id` in the markup has a row in the section contract, every field shown on the page is in the data model, every route is listed
+- [ ] Template: the build has the `templates/TEMPLATE.md` shape (README with the demo line, DESIGN, MOTION, SCHEMA, DATA, CRITIQUE, GATE, LICENSE, CHANGELOG, `.env.example`, demo-labelled `data/`, `middleware.ts`) and starts with `npm install && npm run dev` and no `.env`; every section `id` has a row in the `SCHEMA.md` section contract, every field shown is in the data model, every route is listed
 - [ ] Type: display face chosen with a reason; body size and measure within `gates/rules.md` (Hierarchy); `text-wrap: balance` on headings
 - [ ] Colour: all text pairs verified (`node scripts/contrast.mjs` while designing, `node scripts/gate.mjs` on the build); accent within `gates/rules.md` (Contrast)
 - [ ] Layout: one deliberate grid break per screen, recomposed (not squeezed) on mobile
@@ -4122,7 +4127,7 @@ Read before Step 1. Design inside these. `scripts/gate.mjs` measures them after 
 | Requested and required items | every one present (route found, or evidence file and text found) |
 | Excused items | "not required for this brief, reason: <why>"; a reason is required |
 | Marks | requested, required, optional, or excused; anything else fails |
-| Template shape | `README.md`, `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `CRITIQUE.md`, `GATE.md`, `LICENSE`, `CHANGELOG.md`, `.env.example`, `middleware.ts`, the build's `data/` folder with its `schema.json`, unless excused |
+| Template shape (`templates/TEMPLATE.md`) | `README.md` (with "All data in data/ is demo. Replace with real data before launch."), `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `DATA.md`, `CRITIQUE.md`, `GATE.md`, `LICENSE`, `CHANGELOG.md`, `.env.example` covering every env var the code reads, `middleware.ts`, the build's `data/` folder with its `schema.json` and every entry labelled demo, a `dev` script; each unless excused |
 | Middleware, comments, component headers | checked as warnings |
 
 ### Security (gate `rules: K`, `craft/security.md`)
@@ -5279,6 +5284,65 @@ Wireframe as decoration on a product that has no structure to show.
 
 ---
 
+<!-- file: templates/DATA.md -->
+
+## DATA.md: <Project name>
+
+> The shape of the `data/` folder: the committed mock data that lets the template run with zero configuration. Written with `SCHEMA.md`; every entity here is an entity in `SCHEMA.md` → Data model, with the same field names and types.
+
+All data in data/ is demo. Replace with real data before launch.
+
+<!--
+Rules for the data/ folder
+- One JSON file per entity: data/<entity-plural>.json (products.json, posts.json, settings.json). Derive the list from
+  SCHEMA.md; there is no fixed set.
+- Each file: { "demo": true, "entity": "<Entity>", "items": [ { ...fields, "demo": true } ] }. A single record
+  (settings) is { "demo": true, "entity": "Settings", "item": { ... } }.
+- Every entry carries "demo": true. scripts/completeness.mjs fails a data file whose entries are not labelled.
+- The schema.json in data/ is a JSON Schema (draft 2020-12) with one $defs entry per entity; each data file validates against it.
+- Ids are stable strings; references use ids (ref(Entity) in SCHEMA.md).
+- Images are local, under public/demo/, with width, height and alt in the entry. No hotlinked images.
+- No real personal data: demo people use example.com addresses and +8800000000000-style placeholder numbers.
+- Enough entries to show every state: at least one list long enough to paginate, one empty case reachable
+  (a filter with no results), one item in each enum state (in stock / out of stock, draft / published).
+- The code reads data/ through one typed module (lib/data.ts or equivalent). Swapping to a real source changes that
+  module only.
+-->
+
+### Files
+
+| File | Entity (`SCHEMA.md`) | Entries | Covers states |
+|---|---|---|---|
+| `data/<entity-plural>.json` | <Entity> | <n> | <e.g. one out of stock, one on sale, enough for 2 pages> |
+| the `schema.json` in `data/` | all, as `$defs` | — | — |
+
+### Example entry
+
+```json
+{
+  "demo": true,
+  "entity": "<Entity>",
+  "items": [
+    { "id": "<id>", "<field>": "<value>", "demo": true }
+  ]
+}
+```
+
+### Loader
+
+- **Module:** `<lib/data.ts>`: typed getters (`get<Entities>()`, `get<Entity>(id)`), the only place that reads `data/`.
+- **Types:** generated from or written to match the `schema.json` in `data/`.
+- **Switching to real data:** <what replaces the loader: CMS client, database query, API call>, and the environment variables it needs (all in `.env.example`).
+
+### Replacing demo data
+
+1. Replace each file's `items` with real entries; remove `"demo": true` from the file and every entry.
+2. Validate against the `schema.json` in `data/`.
+3. Remove the demo line from `README.md` only when no demo entry is left.
+
+
+---
+
 <!-- file: templates/DESIGN.md -->
 
 ## DESIGN.md: <Project name>
@@ -5456,7 +5520,7 @@ Rhythm: <which chapters are dense / still; the breath in every run of three>
 
 ## SCHEMA.md: <Project name>
 
-> The data contract. Written at the same time as DESIGN.md (not after the build), and shipped with every build. A backend developer reading this file alone builds the backend without asking a question. Every field, route, section and endpoint the page uses is here; nothing on the page reads data that isn't.
+> The data contract. Written at the same time as DESIGN.md (not after the build), and shipped with every build as part of the template (`templates/TEMPLATE.md`). Every entity, every route, every state, the API surface and the handoff notes. A backend developer reading this file alone builds the backend without asking a question. Every field, route, section and endpoint the page uses is here; nothing on the page reads data that isn't.
 
 <!--
 Rules for filling it in
@@ -5482,6 +5546,13 @@ Rules for filling it in
 
 Relations: <Entity>.<field> → <Other entity> (one-to-many | many-to-many). Sort order: <field, direction>. Uniqueness: <fields>.
 
+#### Data files
+Where each entity's mock data lives (`DATA.md`). Every entity above has a file; every file is labelled demo.
+
+| Entity | Mock file | Entries | Loader |
+|---|---|---|---|
+| <Entity> | `data/<entity-plural>.json` | <n> | `<lib/data.ts: getEntities()>` |
+
 ### Routes
 
 Every URL the site serves.
@@ -5504,6 +5575,13 @@ For every section on every page. The section id matches the `id` attribute in th
 |---|---|---|---|---|---|
 | `#<id>` | <Entity.fields, filter, limit> | <what renders when there is no data, or "never empty: <why>"> | <skeleton / reserved space (no layout shift) / "static: n/a"> | <message + retry, or the fallback content> | <what renders, in one line> |
 
+### States
+Every state of every route and async surface, in one index (the section contract has the detail). Derived from the Step 0.7 scope; nothing here is a fixed list.
+
+| Route or surface | States | Where defined |
+|---|---|---|
+| `<route>` · `<surface>` | <empty · loading (skeleton) · error · filled · …> | section contract row / component file |
+
 ### API surface
 
 <"none: static" if the site has no backend. Otherwise every endpoint.>
@@ -5523,6 +5601,13 @@ For every section on every page. The section id matches the `id` attribute in th
 - **Validation:** <server-side schema, limits> (`craft/security.md` sec-11)
 - **Rate limit:** <n per window per IP/account> (sec-15)
 
+### Environment variables
+Every variable the code reads. All are in `.env.example` with a placeholder; the template runs with none of them set.
+
+| Variable | Server / public | Required in production | Placeholder | Used by | When unset |
+|---|---|---|---|---|---|
+| `<NAME>` | server | yes | `<placeholder>` | `<file or endpoint>` | <falls back to data/ · feature shows a notice> |
+
 ### Handoff notes
 
 - **Environment variables:** `<NAME>`: <what it is, where to get it, server only | public> (secrets never `NEXT_PUBLIC_`/`PUBLIC_`; sec-07)
@@ -5534,6 +5619,83 @@ For every section on every page. The section id matches the `id` attribute in th
 - **Caching and revalidation:** <per route>
 - **Security items for the owner:** <the [H] items of `craft/security.md` that apply, open or done>
 - **Assumptions:** <none, or each default the design assumed where the brief was silent, so nothing is left to ask>
+
+
+---
+
+<!-- file: templates/TEMPLATE.md -->
+
+## TEMPLATE.md: the shape of every build
+
+> Every build ships as a complete, runnable template a designer can sell, not a folder of pages. This file is the shape. `scripts/completeness.mjs` (gate axis X, "Template" line) checks it; any item that truly doesn't apply is excused in the `DESIGN.md` Scope table with "not required for this brief, reason: …".
+
+### Zero configuration
+
+The template runs with **zero configuration** after:
+
+```bash
+npm install && npm run dev
+```
+
+- Mock data is committed in `data/`. No database, API key, CMS or external service is needed to run it.
+- Every environment variable has a placeholder in `.env.example`, and the code runs when it is unset (falls back to `data/`, or disables the feature with a visible notice).
+- `package.json` has `dev`, `build` and `start` scripts (a static single page with no build step excuses this, with the reason).
+
+### The files
+
+| File | What it holds | Written |
+|---|---|---|
+| `README.md` | what it is, what is real, what is demo, how to run, how to deploy (skeleton below) | with the build |
+| `DESIGN.md` | rationale, tokens, references, divergence, scope, decision trace (`templates/DESIGN.md`) | before the build |
+| `MOTION.md` | motion spec per section (`templates/MOTION.md`) | before the build |
+| `SCHEMA.md` | every entity, route, state, the API surface and handoff notes (`templates/SCHEMA.md`) | with `DESIGN.md` |
+| `DATA.md` | the shape of the `data/` folder (`templates/DATA.md`) | with `SCHEMA.md` |
+| `CRITIQUE.md` | the `/critique` output, pasted, never typed | after the gate |
+| `GATE.md` | the gate output per page (`node scripts/gate.mjs …`), pasted, never typed, including the X lines | after the gate |
+| `LICENSE` | MIT by default (the brief can name another) | with the build |
+| `CHANGELOG.md` | starts at `## [0.1.0] - <date>` | with the build |
+| `.env.example` | every environment variable the code reads, each with a placeholder and a comment | with the build |
+| `data/` | mock JSON, typed by the `schema.json` in `data/`, every entry labelled demo | with `SCHEMA.md` |
+| `middleware.ts` | auth gate, locale routing, redirects, rate limiting, security headers | with the build |
+| source files | a comment at the top of every non-trivial file (what it does, what it reads); component headers (tier, use-when, avoid-when, reduced-motion, touch) | with the build |
+
+### README.md skeleton
+
+```markdown
+## <Project name>
+
+<One sentence: what this template is and who it is for.>
+
+> All data in data/ is demo. Replace with real data before launch.
+
+### What is real, what is demo
+| Part | Status |
+|---|---|
+| Pages, components, motion | real, production code |
+| Content in `data/` | demo (every entry has `"demo": true`) |
+| <payments, email, auth, search> | <real integration behind ENV_VAR | demo stub until ENV_VAR is set> |
+
+### Run
+npm install && npm run dev   # no configuration needed; opens http://localhost:3000
+
+### Configure
+Copy `.env.example` to `.env.local` and fill in the values. Every variable is optional for local runs.
+
+### Deploy
+<host>: <the exact steps or button>. Set the variables from `.env.example`. <Anything the host needs.>
+
+### Files
+DESIGN.md, MOTION.md, SCHEMA.md, DATA.md, CRITIQUE.md, GATE.md, CHANGELOG.md, LICENSE
+
+### Licence
+MIT (see LICENSE).
+```
+
+The line **"All data in data/ is demo. Replace with real data before launch."** appears in every README, word for word.
+
+### Test
+
+Does `node scripts/completeness.mjs <project>` show `Template: n/n present`, with any excused item carrying its reason? Does `npm install && npm run dev` start with no `.env` file? If not, the build isn't a template yet.
 
 
 ---

@@ -231,14 +231,19 @@ The budgets hold either way: one signature move, one accent moment per screen, o
 
 ---
 
-## Required output: DESIGN.md and SCHEMA.md
+## Required output: a sellable template
 
-Every build ships two documents next to the code, written together while the design system is set (default flow, step 3), never after the build:
+Every build ships as a complete, runnable template a designer can sell, not a folder of pages. The shape is `templates/TEMPLATE.md`:
 
-- `DESIGN.md` (`templates/DESIGN.md`): how it looks, with `References` from Step 0.5.
-- `SCHEMA.md` (`templates/SCHEMA.md`): the data contract. Data model (every entity and field: name, type, required or optional, example, where it appears), Routes (every URL and what it reads), Section contract (every section id on every page, the data it reads, and what it renders when empty, loading, in error and filled), API surface (every endpoint, or "none: static"), Handoff notes (environment variables, third-party services, rate limits, auth flow).
+- `README.md` (what it is, what is real, what is demo, how to run, how to deploy; it states "All data in data/ is demo. Replace with real data before launch."), `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `DATA.md`, `CRITIQUE.md`, `GATE.md` (the gate output per page, pasted), `LICENSE` (MIT by default), `CHANGELOG.md` (from v0.1.0), `.env.example` (every variable, with a placeholder)
+- `data/`: mock JSON typed by its `schema.json`, every entry labelled demo (`templates/DATA.md`)
+- `middleware.ts`, and a comment at the top of every non-trivial file
 
-A section added to the page gets its row in `SCHEMA.md` in the same edit. **Test:** could a backend developer build the backend from `SCHEMA.md` alone, without asking a question? Does every section `id` in the markup have a row in the section contract? If not, the build isn't finished.
+It runs with zero configuration after `npm install && npm run dev`: mock data committed, no external services required.
+
+`DESIGN.md` and `SCHEMA.md` are written together while the design system is set (default flow, step 3), never after the build; `DATA.md` with `SCHEMA.md`. `SCHEMA.md` (`templates/SCHEMA.md`) holds every entity and its data file, every route, every state, the environment variables, the API surface (or "none: static") and the handoff notes. A section added to the page gets its row in `SCHEMA.md` in the same edit.
+
+**Test:** could a backend developer build the backend from `SCHEMA.md` alone, without asking a question? Does `npm install && npm run dev` start with no `.env`? Does `node scripts/completeness.mjs <project>` show `Template: n/n present` (excused items with their reasons)? If not, the build isn't finished.
 
 ---
 

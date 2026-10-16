@@ -10,8 +10,8 @@ Statuses: ⬜ not started · ⏳ in progress · ✅ done · ❌ blocked
 | 2 | One confirmation | ✅ done | 823296d | `thinking/sequence.md` one-confirmation flow, `SKILL.md`, `brief-inference.md`, `AGENTS.md` |
 | 3 | Memory across projects | ✅ done | e7b2bef | user-level `~/.motomation/log.json`, `memory.mjs similar` + five-way divergence in `check`, `tests/repo/memory.test.mjs` |
 | 4 | Stack defaults | ✅ done | 23709b3 | `craft/stack.md` (Next.js default, five checks, dated snapshot: gsap fails 1 and 5, lottie-web and split-type fail 1); Step 0 rewritten |
-| 5 | Derived scope | ✅ done | see the "Phase 5" commit | Step 0.7, `scripts/completeness.mjs` (gate axis X, run by gate.mjs when DESIGN.md has a Scope section; not in the stamp), `tests/gate/completeness.test.mjs` |
-| 6 | Sellable template | ⬜ not started | | |
+| 5 | Derived scope | ✅ done | 0427483 | Step 0.7, `scripts/completeness.mjs` (gate axis X, run by gate.mjs when DESIGN.md has a Scope section; not in the stamp), `tests/gate/completeness.test.mjs` |
+| 6 | Sellable template | ✅ done | see the "Phase 6" commit | `templates/TEMPLATE.md`, `templates/DATA.md`, `templates/SCHEMA.md` (data files, states, env vars); completeness checks README demo line, demo labels, .env.example coverage, dev script |
 | 7 | Micro-states | ⬜ not started | | |
 | 8 | Changelog + version | ⬜ not started | | |
 

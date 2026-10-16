@@ -148,7 +148,7 @@ Read before Step 1. Design inside these. `scripts/gate.mjs` measures them after 
 | Requested and required items | every one present (route found, or evidence file and text found) |
 | Excused items | "not required for this brief, reason: <why>"; a reason is required |
 | Marks | requested, required, optional, or excused; anything else fails |
-| Template shape | `README.md`, `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `CRITIQUE.md`, `GATE.md`, `LICENSE`, `CHANGELOG.md`, `.env.example`, `middleware.ts`, the build's `data/` folder with its `schema.json`, unless excused |
+| Template shape (`templates/TEMPLATE.md`) | `README.md` (with "All data in data/ is demo. Replace with real data before launch."), `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `DATA.md`, `CRITIQUE.md`, `GATE.md`, `LICENSE`, `CHANGELOG.md`, `.env.example` covering every env var the code reads, `middleware.ts`, the build's `data/` folder with its `schema.json` and every entry labelled demo, a `dev` script; each unless excused |
 | Middleware, comments, component headers | checked as warnings |
 
 ## Security (gate `rules: K`, `craft/security.md`)

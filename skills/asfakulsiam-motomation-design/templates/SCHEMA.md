@@ -1,6 +1,6 @@
 # SCHEMA.md: <Project name>
 
-> The data contract. Written at the same time as DESIGN.md (not after the build), and shipped with every build. A backend developer reading this file alone builds the backend without asking a question. Every field, route, section and endpoint the page uses is here; nothing on the page reads data that isn't.
+> The data contract. Written at the same time as DESIGN.md (not after the build), and shipped with every build as part of the template (`templates/TEMPLATE.md`). Every entity, every route, every state, the API surface and the handoff notes. A backend developer reading this file alone builds the backend without asking a question. Every field, route, section and endpoint the page uses is here; nothing on the page reads data that isn't.
 
 <!--
 Rules for filling it in
@@ -26,6 +26,13 @@ Rules for filling it in
 
 Relations: <Entity>.<field> → <Other entity> (one-to-many | many-to-many). Sort order: <field, direction>. Uniqueness: <fields>.
 
+### Data files
+Where each entity's mock data lives (`DATA.md`). Every entity above has a file; every file is labelled demo.
+
+| Entity | Mock file | Entries | Loader |
+|---|---|---|---|
+| <Entity> | `data/<entity-plural>.json` | <n> | `<lib/data.ts: getEntities()>` |
+
 ## Routes
 
 Every URL the site serves.
@@ -48,6 +55,13 @@ For every section on every page. The section id matches the `id` attribute in th
 |---|---|---|---|---|---|
 | `#<id>` | <Entity.fields, filter, limit> | <what renders when there is no data, or "never empty: <why>"> | <skeleton / reserved space (no layout shift) / "static: n/a"> | <message + retry, or the fallback content> | <what renders, in one line> |
 
+## States
+Every state of every route and async surface, in one index (the section contract has the detail). Derived from the Step 0.7 scope; nothing here is a fixed list.
+
+| Route or surface | States | Where defined |
+|---|---|---|
+| `<route>` · `<surface>` | <empty · loading (skeleton) · error · filled · …> | section contract row / component file |
+
 ## API surface
 
 <"none: static" if the site has no backend. Otherwise every endpoint.>
@@ -66,6 +80,13 @@ For every section on every page. The section id matches the `id` attribute in th
 - **Errors:** `400` <validation: which field, what message> · `401` <when> · `404` <when> · `409` <when> · `429` <rate limit> · `500` <generic message; details only in server logs>
 - **Validation:** <server-side schema, limits> (`craft/security.md` sec-11)
 - **Rate limit:** <n per window per IP/account> (sec-15)
+
+## Environment variables
+Every variable the code reads. All are in `.env.example` with a placeholder; the template runs with none of them set.
+
+| Variable | Server / public | Required in production | Placeholder | Used by | When unset |
+|---|---|---|---|---|---|
+| `<NAME>` | server | yes | `<placeholder>` | `<file or endpoint>` | <falls back to data/ · feature shows a notice> |
 
 ## Handoff notes
 
