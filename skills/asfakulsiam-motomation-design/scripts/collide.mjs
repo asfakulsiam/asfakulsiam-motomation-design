@@ -27,6 +27,12 @@ if (a.category) {
   if (!cat) { console.error(`Unknown category "${a.category}". Options: ${categories.map((c) => c.id).join(", ")}`); process.exit(1); }
 }
 
+// Layout spread: a draw prefers an archetype whose layout family (lib.mjs LAYOUT_FAMILY) is the least used so far, so
+// ten draws over eight families repeat a family at most twice. Without it, four "sequence" archetypes and the
+// categories that list `timeline` gave 4 of 5 diversity draws layout=sequence (evals/results/diversity/REPORT.md).
+// With --exclude-recent, the layout families of the last 3 logged runs count as already used once.
+const famUse = {};
+if (a["exclude-recent"]) for (const e of recent(3)) { const f = (e.fingerprint && e.fingerprint.layout) || layoutFamily(e.archetype); if (f) famUse[f] = (famUse[f] || 0) + 1; }
 if (a["exclude-recent"]) {
   const log = recent(5);
   const usedA = new Set(log.map((e) => e.archetype)), usedS = new Set(log.map((e) => e.signature));
@@ -42,7 +48,8 @@ function drawer(name, all, key = (x) => x.id) {
   return (filter = () => true) => {
     let fresh = all.filter((x) => !used.has(key(x)));
     if (!fresh.length) { (exhausted[name] ??= { pool: new Set(all.map(key)).size, at: draws.length + 1 }); used.clear(); fresh = all; }
-    const prefer = fresh.filter(filter);
+    // filter: one predicate, or a list in priority order (the first that leaves any candidate wins)
+    const prefer = (Array.isArray(filter) ? filter : [filter]).map((f) => fresh.filter((x) => f(x, fresh))).find((p) => p.length) || []; // f(x, pool)
     const item = pick(prefer.length ? prefer : fresh, r);
     used.add(key(item));
     return item;
@@ -57,7 +64,11 @@ const nextSig = drawer("signature seeds", signatures);
 const nextMut = drawer("mutations", mutations);
 const nextCol = a.spread ? drawer("collision worlds", collisions, (c) => c.world) : drawer("collision sources", collisions, (c) => c.source);
 for (let i = 0; i < n; i++) {
-  const arch = nextArch(catIds.length && r() < 0.6 ? (x) => catIds.includes(x.id) : undefined);
+  const useCat = catIds.length && r() < 0.6;
+  const famOf = (x) => layoutFamily(x.id), use = (x) => famUse[famOf(x)] || 0, inCat = (x) => catIds.includes(x.id);
+  const balanced = (x, pool) => use(x) === Math.min(...pool.map(use)); // least-used family among the archetypes still undrawn
+  const arch = nextArch(useCat ? [(x, p) => inCat(x) && balanced(x, p), balanced] : [balanced]);
+  famUse[famOf(arch)] = (famUse[famOf(arch)] || 0) + 1;
   draws.push({
     archetype: arch.id, archetype_name: arch.name, shape: arch.shape,
     mutation: nextMut(),
@@ -102,6 +113,8 @@ const diversity = {
   signature_seeds: uniq((d) => d.signature_seed.id),
   mutations: uniq((d) => d.mutation.id),
   collision_worlds: uniq((d) => d.collision.world),
+  layouts: uniq((d) => layoutFamily(d.archetype)),
+  layout_max_repeat: Math.max(0, ...Object.values(draws.reduce((m, d) => { const f = layoutFamily(d.archetype); m[f] = (m[f] || 0) + 1; return m; }, {}))),
   exhausted: Object.fromEntries(Object.entries(exhausted).map(([k, v]) => [k, { pool: v.pool, repeats_from_draw: v.at }])),
 };
 
@@ -126,6 +139,7 @@ const line = (label, got, poolName) => {
 };
 console.log("Diversity (measured)");
 console.log(line("archetypes", diversity.archetypes, "archetypes"));
+console.log(`  layout families  : ${diversity.layouts} distinct over ${n} draw(s), at most ${diversity.layout_max_repeat} of any one  ${diversity.layout_max_repeat <= Math.ceil(n / 8) ? "✓" : "✗"}`);
 console.log(line("signature seeds", diversity.signature_seeds, "signature seeds"));
 console.log(line("mutations", diversity.mutations, "mutations"));
 console.log(line(a.spread ? "collision worlds" : "collision sources", a.spread ? diversity.collision_worlds : uniq((d) => d.collision.source), a.spread ? "collision worlds" : "collision sources"));

@@ -26,6 +26,9 @@ Every archetype below has a searchable row in `data/archetypes.csv` (`node scrip
 | `lookbook` | **The Lookbook** | Full-bleed editorial spreads, page by page | Fashion, beauty, photography | Page-turn or crop-shift between spreads |
 | `poster` | **The Poster** | One screen, one image; everything else is hidden in layers | Events, launches, campaigns | Poster tears or peels into the details |
 | `field-guide` | **The Field Guide** | Entries with illustrations, notes and classifications | Education, nature, products with many variants | Annotations that point and label |
+| `almanac` | **The Almanac** | A reference year in columns: dated entries side by side | Utilities, public services, schedules, education | The current column fills as its date arrives |
+| `vitrine` | **The Vitrine** | One object in a lit case; details are labels pinned around it | Luxury, craft, museums, single products | Labels draw their leader lines to the object |
+| `fold` | **The Fold** | One sheet folded in two; each half answers the other when opened | Services, before/after, two audiences | The crease opens with scroll |
 
 ## Rules
 

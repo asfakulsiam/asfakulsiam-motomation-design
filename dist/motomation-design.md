@@ -727,6 +727,9 @@ Every archetype below has a searchable row in `data/archetypes.csv` (`node scrip
 | `lookbook` | **The Lookbook** | Full-bleed editorial spreads, page by page | Fashion, beauty, photography | Page-turn or crop-shift between spreads |
 | `poster` | **The Poster** | One screen, one image; everything else is hidden in layers | Events, launches, campaigns | Poster tears or peels into the details |
 | `field-guide` | **The Field Guide** | Entries with illustrations, notes and classifications | Education, nature, products with many variants | Annotations that point and label |
+| `almanac` | **The Almanac** | A reference year in columns: dated entries side by side | Utilities, public services, schedules, education | The current column fills as its date arrives |
+| `vitrine` | **The Vitrine** | One object in a lit case; details are labels pinned around it | Luxury, craft, museums, single products | Labels draw their leader lines to the object |
+| `fold` | **The Fold** | One sheet folded in two; each half answers the other when opened | Services, before/after, two audiences | The crease opens with scroll |
 
 ### Rules
 
@@ -5971,6 +5974,9 @@ shelf,The Shelf,products as objects on shelves,retail books ceramics,pick up an 
 lookbook,The Lookbook,full-bleed editorial spreads page by page,fashion beauty photography,crop-shift between spreads,page numbers
 poster,The Poster,one screen one image with layers beneath,event launch campaign,the poster peels into the details,poster corners
 field-guide,The Field Guide,entries with illustrations notes and classes,education nature many-variant products,annotations that point and label,classification tabs
+almanac,The Almanac,a reference year in columns: dated entries side by side,utilities public-service education schedules,the current column fills as the date arrives,month columns
+vitrine,The Vitrine,one object in a lit case; details are labels pinned around it,luxury craft museum single-product,labels draw their leader lines to the object,case labels
+fold,The Fold,one sheet folded in two: each half answers the other when opened,services before-after two-audience,the crease opens with scroll,fold tabs
 ```
 
 ### data/categories.csv

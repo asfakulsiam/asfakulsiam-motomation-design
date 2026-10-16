@@ -107,6 +107,7 @@ export const LAYOUT_FAMILY = {
   manifesto: "statement", poster: "statement", specimen: "statement", letter: "statement",
   "gallery-wall": "canvas", atlas: "canvas", stage: "stage", diptych: "split", // diptych: two halves in dialogue, its own family (was grouped with stage)
   workbench: "product", console: "product", shelf: "product",
+  almanac: "columns", vitrine: "stage", fold: "split", // v2.11: every layout family has at least two archetypes
 };
 const SECTION_ALIASES = {
   hero: ["hero", "intro", "landing", "opening", "cover", "masthead"], work: ["work", "projects", "portfolio", "cases", "case-studies", "selected-work"],
