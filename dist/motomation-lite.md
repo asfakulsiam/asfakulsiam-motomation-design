@@ -283,7 +283,7 @@ The budgets hold either way: one signature move, one accent moment per screen, o
 - [ ] Mobile motion matrix applied
 - [ ] Scroll sequences (pinned, scrubbed, image-sequence, lit-step lists) reviewed per `craft/scroll-sequences.md`, record in the handoff:
   - [ ] Each step's contrast verified **active and inactive** (`gates/rules.md`, Contrast)
-  - [ ] Reduced-motion fallback verified as a **designed still** (`gates/rules.md`, Reduced motion)
+  - [ ] Reduced-motion fallback verified as a **designed still** (`gates/rules.md`, Reduced motion; gate `rm-still`)
   - [ ] **No step shows a value that is later corrected** (verified)
 - [ ] Accessibility: keyboard path, visible focus, landmarks, skip link, alt text
 - [ ] Performance: LCP image preloaded, heavy libraries loaded dynamically, off-screen work paused
