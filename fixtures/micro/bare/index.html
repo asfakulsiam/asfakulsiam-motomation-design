@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Micro-state fixture: happy path only</title>
+<meta name="description" content="Gate fixture (v2.9.0): a button, form, data list, image and fetch with only their happy path.">
+<style>
+  body { font: 18px/1.5 Georgia, serif; margin: 2rem; color: #111; background: #fafafa; }
+  button { padding: .75rem 1.25rem; background: #111; color: #fff; border: 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Happy path only</h1>
+  <p>Gate fixture: every element below ships its default state and nothing else.</p>
+  <ul id="items" data-entity="Item"><li>One</li><li>Two</li><li>Three</li></ul>
+  <img src="photo.svg" alt="A grey square standing in for a product photo">
+  <form id="f"><label>Email <input name="email"></label><button type="submit">Join the list</button></form>
+</main>
+<script>
+  document.getElementById("f").addEventListener("submit", async (e) => { e.preventDefault(); const r = await fetch("/api/join", { method: "POST" }); document.getElementById("items").append(Object.assign(document.createElement("li"), { textContent: "Four" })); });
+</script>
+</body>
+</html>

@@ -11,8 +11,8 @@ Statuses: ⬜ not started · ⏳ in progress · ✅ done · ❌ blocked
 | 3 | Memory across projects | ✅ done | e7b2bef | user-level `~/.motomation/log.json`, `memory.mjs similar` + five-way divergence in `check`, `tests/repo/memory.test.mjs` |
 | 4 | Stack defaults | ✅ done | 23709b3 | `craft/stack.md` (Next.js default, five checks, dated snapshot: gsap fails 1 and 5, lottie-web and split-type fail 1); Step 0 rewritten |
 | 5 | Derived scope | ✅ done | 0427483 | Step 0.7, `scripts/completeness.mjs` (gate axis X, run by gate.mjs when DESIGN.md has a Scope section; not in the stamp), `tests/gate/completeness.test.mjs` |
-| 6 | Sellable template | ✅ done | see the "Phase 6" commit | `templates/TEMPLATE.md`, `templates/DATA.md`, `templates/SCHEMA.md` (data files, states, env vars); completeness checks README demo line, demo labels, .env.example coverage, dev script |
-| 7 | Micro-states | ⬜ not started | | |
+| 6 | Sellable template | ✅ done | 48188d7 | `templates/TEMPLATE.md`, `templates/DATA.md`, `templates/SCHEMA.md` (data files, states, env vars); completeness checks README demo line, demo labels, .env.example coverage, dev script |
+| 7 | Micro-states | ✅ done | see the "Phase 7" commit | sequence section, gate advisory block (warnings only), `fixtures/micro/bare` |
 | 8 | Changelog + version | ⬜ not started | | |
 
 Benchmark: not run.

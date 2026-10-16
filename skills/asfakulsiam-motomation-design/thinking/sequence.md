@@ -231,6 +231,22 @@ The budgets hold either way: one signature move, one accent moment per screen, o
 
 ---
 
+## Micro-states: every one ships
+
+The happy path is not the build. Every interactive or async thing ships all of its states, designed, not left to the browser default:
+
+| Thing | States it ships |
+|---|---|
+| Every button | default, hover, focus, active, disabled, loading |
+| Every form | default, validation error, submit loading, success, server error |
+| Every list | empty, loading, error, filled |
+| Every image | loading, loaded, error |
+| Every async action | idle, pending, success, error |
+
+Each state is in the section contract of `SCHEMA.md` and in the code (a CSS rule, an attribute such as `aria-busy`, `aria-invalid`, `disabled` or `data-state`, and the script that sets it). Mark data-driven lists with `data-entity` so their states can be checked. The gate reads the page's CSS, markup and scripts and **warns** on missing micro-states; it is advisory and never fails the gate.
+
+**Test:** pick any button, form, list, image and async action on the page: can you show each state, and does `SCHEMA.md` name it?
+
 ## Required output: a sellable template
 
 Every build ships as a complete, runnable template a designer can sell, not a folder of pages. The shape is `templates/TEMPLATE.md`:

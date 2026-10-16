@@ -42,6 +42,8 @@
 //   X          (v2.9.0) completeness: when DESIGN.md has a Scope section (Step 0.7), scripts/completeness.mjs checks
 //              every requested/required route, state, legal page, edge case, admin surface and skeleton the agent
 //              derived, plus the template shape. A missing item fails the page; not in the stamp or its id.
+//   micro-states (advisory, v2.9.0) buttons, forms, data lists, images and async actions: each expected state found in
+//              the page's CSS, markup or scripts? Missing ones warn; never fails, never in counts, the stamp or its id.
 //   richness   (advisory, v2.6.0) the "too little" side of restraint. Never fails, never in counts, the stamp or its id.
 //              At 1440×900, scroll 0. Warns when: the page has fewer than RICH_FOLD_MIN meaningful sections above the
 //              fold; a homepage has no hero or opening statement (a visible h1, or display text ≥ 32px); a category
@@ -1096,6 +1098,67 @@ const RICH_PAGE = () => {
   }
   return { fold, opening, grid: grid ? { el: __g.label(grid), items: kids(grid).length } : null, title, count, blocks: blocks.map((e) => __g.label(e)) };
 };
+// ── micro-states (v2.9.0): advisory only ────────────────────────────────────────────────────────────────────────
+// Every button ships default, hover, focus, active, disabled, loading; every form default, validation error, submit
+// loading, success, server error; every list empty, loading, error, filled; every image loading, loaded, error; every async
+// action idle, pending, success, error (thinking/sequence.md). Read from the page's own CSS rules, markup and scripts.
+// Heuristic: a missing state is a warning, never a failure, never in counts, the stamp or its id.
+const MICRO_PAGE = async () => {
+  const sels = []; const walkRules = (rules) => { for (const r of rules) { if (r.selectorText) sels.push(r.selectorText); if (r.cssRules) walkRules(r.cssRules); } };
+  for (const sh of document.styleSheets) { try { walkRules(sh.cssRules); } catch {} }
+  let js = [...document.querySelectorAll("script:not([src])")].map((x) => x.textContent).join("\n");
+  for (const sc of document.querySelectorAll("script[src]")) { try { const u = new URL(sc.src, location.href); if (u.origin === location.origin) js += "\n" + await (await fetch(u)).text(); } catch {} }
+  const vis = (e) => { const b = e.getBoundingClientRect(); const cs = getComputedStyle(e); return (b.width > 0 || b.height > 0) && cs.display !== "none"; };
+  const buttons = [...document.querySelectorAll('button, [role="button"], input[type="submit"], input[type="button"]')].filter(vis);
+  const hasState = (els, re) => sels.some((sel) => sel.split(",").some((one) => { if (!re.test(one)) return false; const base = one.replace(re, "").replace(/::?[a-z-]+(\([^)]*\))?$/i, "").trim() || "*"; try { return els.some((e) => e.matches(base) || e.matches(base + " *") || !!e.closest(base)); } catch { return false; } }));
+  const btn = buttons.length ? {
+    n: buttons.length,
+    hover: hasState(buttons, /:hover/g), focus: hasState(buttons, /:focus(-visible|-within)?/g), active: hasState(buttons, /:active/g),
+    disabled: hasState(buttons, /:disabled|\[disabled\]|\[aria-disabled[^\]]*\]/g) || buttons.some((b) => b.disabled),
+    loading: hasState(buttons, /\[aria-busy[^\]]*\]|\[data-(state|loading)[^\]]*\]|\.(is-)?loading/g) || /aria-busy|\.disabled\s*=\s*true|setAttribute\(\s*["']disabled|data-?state|loading/i.test(js),
+  } : null;
+  const forms = [...document.querySelectorAll("form")].filter(vis);
+  const live = (f) => !!(f.querySelector('[role="status"], [role="alert"], [aria-live]') || f.parentElement?.querySelector('[role="status"], [role="alert"], [aria-live]'));
+  const frm = forms.length ? {
+    n: forms.length,
+    validation: sels.some((x) => /:invalid|:user-invalid|\[aria-invalid/.test(x)) || /aria-invalid|setCustomValidity|reportValidity|checkValidity|validity\./.test(js) || forms.some((f) => f.querySelector('[role="alert"]')),
+    loading: /aria-busy|\.disabled\s*=\s*true|setAttribute\(\s*["']disabled|sending|submitting|pending|loading/i.test(js),
+    success: forms.every(live) && /success|sent|thank|ok\b|res\.ok|status\s*===?\s*2\d\d/i.test(js),
+    error: forms.every(live) && /catch\s*\(|\.catch\(|!res\.ok|!response\.ok|status\s*>=?\s*4\d\d|onerror/i.test(js),
+  } : null;
+  const asyncJs = /\bfetch\s*\(|XMLHttpRequest|axios\.|\.then\(/.test(js);
+  const lists = [...document.querySelectorAll('ul, ol, [role="list"]')].filter((l) => vis(l) && l.children.length >= 2 && !l.closest("nav, footer, header"));
+  const dynLists = lists.filter((l) => l.matches("[data-entity], [data-list], [aria-busy], [data-state]") || (asyncJs && l.id && js.includes(l.id)));
+  const lst = dynLists.length ? {
+    n: dynLists.length,
+    empty: /empty|no results|nothing (here|yet|found)|length\s*===?\s*0|!\w+\.length/i.test(js) || sels.some((x) => /empty|data-state[^\]]*empty/.test(x)) || !!document.querySelector('[data-state="empty"], [data-empty], .empty'),
+    loading: /aria-busy|skeleton|loading|pending/i.test(js) || sels.some((x) => /skeleton|aria-busy|loading/.test(x)),
+    error: /catch\s*\(|\.catch\(|!res\.ok|error/i.test(js),
+  } : { n: 0, static: lists.length };
+  const imgs = [...document.querySelectorAll("img")].filter(vis);
+  const img = imgs.length ? {
+    n: imgs.length,
+    loading: imgs.every((i) => (i.getAttribute("width") && i.getAttribute("height")) || getComputedStyle(i).aspectRatio !== "auto" || getComputedStyle(i).backgroundColor !== "rgba(0, 0, 0, 0)"),
+    loaded: imgs.every((i) => i.complete && i.naturalWidth > 0) || /\bload\b|onload|decode\(\)/.test(js),
+    error: imgs.every((i) => i.hasAttribute("onerror")) || /addEventListener\(\s*["']error|\.onerror\s*=|onError=/.test(js),
+  } : null;
+  const asy = asyncJs ? {
+    pending: /aria-busy|\.disabled\s*=\s*true|pending|loading|sending|submitting/i.test(js),
+    success: /res\.ok|response\.ok|\.then\(|await\s+fetch[\s\S]{0,400}(ok|status|json)/i.test(js),
+    error: /catch\s*\(|\.catch\(|!res\.ok|!response\.ok/i.test(js),
+  } : null;
+  return { btn, frm, lst, img, asy };
+};
+const MICRO_EXPECT = { btn: ["hover", "focus", "active", "disabled", "loading"], frm: ["validation", "loading", "success", "error"], lst: ["empty", "loading", "error"], img: ["loading", "loaded", "error"], asy: ["pending", "success", "error"] };
+const MICRO_NAME = { validation: "validation error", loading: "loading", error: "error" };
+export async function microStates(browser, url) {
+  const { ctx, page } = await open(browser, url, { viewport: { width: 1440, height: 900 } });
+  try {
+    const r = await page.evaluate(MICRO_PAGE); const warns = [];
+    for (const [k, states] of Object.entries(MICRO_EXPECT)) { const v = r[k]; if (!v || !v.n && k !== "asy") continue; const miss = states.filter((st) => !v[st]); if (miss.length) warns.push({ id: k, miss }); }
+    return { ...r, warns };
+  } finally { await ctx.close(); }
+}
 export async function richness(browser, url, forced) {
   const { kind, from } = pageKind(url, forced);
   const { ctx, page } = await open(browser, url, { viewport: { width: 1440, height: 900 } });
@@ -1122,6 +1185,7 @@ export async function scan(target, browser, opts = {}) {
     const comp = await composition(browser, url).catch((e) => ({ error: firstLine(e) }));
     // advisory (v2.6.0 richness): never fails, never in counts, stamp or id
     const rich = await richness(browser, url, opts.page).catch((e) => ({ error: firstLine(e) }));
+    const micro = await microStates(browser, url).catch((e) => ({ error: firstLine(e) })); // advisory (v2.9.0): never fails, never in counts, stamp or id
     // fingerprint of the served HTML with stamp comments removed: same page → same id, any other page → a different id
     const html = await fetch(url).then((r) => r.text()).catch(() => "");
     const pageHash = createHash("sha256").update(html.replace(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g, "")).digest("hex").slice(0, 16);
@@ -1148,7 +1212,7 @@ export async function scan(target, browser, opts = {}) {
     // coverage: the worst width decides; more than SKIP_WARN_PCT skipped at any width means the page was not measured, not passed
     const worstW = c.byWidth.reduce((a, x) => (x.skippedPct > a.skippedPct ? x : a), c.byWidth[0]);
     const coverage = { ok: !c.lowCoverage, skipped: worstW.skipped, total: worstW.total, pct: worstW.skippedPct, width: worstW.width, low: c.byWidth.filter((x) => x.lowCoverage).map((x) => x.width) };
-    return { target, url, version: GATE_VERSION, pass: pass && (!compl || !!compl.pass), completeness: compl, verified: coverage.ok, coverage, counts, id, stamp: stampOf(counts, id, coverage), critique: critiqueFull, sources: { design: designFile || null, log: logFile || null, meta }, rules, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu, quality: mq, access: ax, composition: comp, richness: rich };
+    return { target, url, version: GATE_VERSION, pass: pass && (!compl || !!compl.pass), completeness: compl, verified: coverage.ok, coverage, counts, id, stamp: stampOf(counts, id, coverage), critique: critiqueFull, sources: { design: designFile || null, log: logFile || null, meta }, rules, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu, quality: mq, access: ax, composition: comp, richness: rich, microStates: micro };
   } finally { close(); }
 }
 export const stampOf = (k, id, cov, version = GATE_VERSION) => `gate: c${k.contrast} o${k.overflow} w${k.words} rm${k.motion} a${k.names} n${k.numbers ?? 0}${k.quality !== undefined ? ` q${k.quality} k${k.access}` : ""}${k.copy !== undefined ? ` · rules: C${k.copy} S${k.seo} P${k.perf} K${k.sec}` : ""} · ${version} · ${id}${cov ? ` · skipped ${cov.skipped}/${cov.total}@${cov.width}` : ""}`;
@@ -1231,6 +1295,20 @@ function print(r) {
       if (rc.kind === "home") L(`     opening   ${w("opening") ? `⚠ ${w("opening").why}` : `✓ ${rc.opening}`}`);
       if (rc.kind === "category") L(`     category  ${w("category") ? `⚠ ${w("category").why}` : `✓ grid ${rc.grid.el} (${rc.grid.items} items) · title ${rc.title} · count "${rc.count}"`}`);
       if (rc.kind === "about") L(`     about     ${w("about") ? `⚠ ${w("about").why}` : `✓ ${rc.blocks.length} content blocks: ${rc.blocks.join(", ")}`}`);
+    }
+  }
+  const ms = r.microStates;
+  if (ms) {
+    L(`  micro-states (advisory: missing states are warnings, never fail the gate, not in the stamp)`);
+    if (ms.error) L(`     – not measured (${ms.error})`);
+    else {
+      const row = (k, label, n, have) => { const w = ms.warns.find((x) => x.id === k); L(`     ${label.padEnd(9)} ${w ? "⚠" : "✓"} ${n}${w ? `: no ${w.miss.map((x) => MICRO_NAME[x] || x).join(", ")} state found` : ""}${have ? `  (have: ${have})` : ""}`); };
+      const have = (k) => MICRO_EXPECT[k].filter((x) => ms[k][x]).map((x) => MICRO_NAME[x] || x).join(", ");
+      if (ms.btn) row("btn", "buttons", `${ms.btn.n} button(s)`, have("btn")); else L(`     buttons   – none on the page`);
+      if (ms.frm) row("frm", "forms", `${ms.frm.n} form(s)`, have("frm")); else L(`     forms     – none on the page`);
+      if (ms.lst.n) row("lst", "lists", `${ms.lst.n} data-driven list(s)`, have("lst")); else L(`     lists     – ${ms.lst.static ? `${ms.lst.static} static list(s): not judged (mark data lists with data-entity)` : "none on the page"}`);
+      if (ms.img) row("img", "images", `${ms.img.n} image(s)`, have("img")); else L(`     images    – none on the page`);
+      if (ms.asy) row("asy", "async", "fetch/XHR in scripts", have("asy")); else L(`     async     – no async actions in the page's scripts`);
     }
   }
   const st = r.structure;

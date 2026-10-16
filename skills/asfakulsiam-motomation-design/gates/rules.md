@@ -140,6 +140,16 @@ Read before Step 1. Design inside these. `scripts/gate.mjs` measures them after 
 | Fonts | ≤ 1 preloaded file, `font-display: swap` |
 | Core Web Vitals | LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1 (never claimed unmeasured) |
 
+## Micro-states (gate `micro-states`, warns)
+
+| Thing | Ships |
+|---|---|
+| Button | default, hover, focus, active, disabled, loading |
+| Form | default, validation error, submit loading, success, server error |
+| List | empty, loading, error, filled (data lists carry `data-entity`) |
+| Image | loading, loaded, error |
+| Async action | idle, pending, success, error |
+
 ## Completeness (gate `X`, `scripts/completeness.mjs`)
 
 | Rule | Limit |

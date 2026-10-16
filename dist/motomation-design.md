@@ -159,7 +159,7 @@ Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rule
 
 0. **Stack**: if the brief (or the existing project) names a stack, use it. Otherwise **Next.js (App Router, TypeScript, Tailwind)** for anything with routes or data, plain HTML for a single static page; never Astro or Vite for e-commerce unless the brief demands it. Every dependency passes the five checks in `craft/stack.md` (maintained, popular, not deprecated, Node 20 + React 19, permissive licence). Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 0.5. **Research (mandatory)**: leave the skill before designing. Live award sources (last 6 months) and `references/sources/`, concepts only. Record three references, three techniques with sources, and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference, never to the skill's defaults alone. No web: say so and state the limitation. See `craft/research.md`.
-0.7. **Derive the scope**: what a complete site of this type serves (routes, functions, states, legal pages for the region, edge cases, admin, skeletons), derived from research and knowledge, never a fixed list; each item requested / required / optional / not required with a reason, in `DESIGN.md` under `Scope`. Gate axis X (`scripts/completeness.mjs`) checks it.
+0.7. **Derive the scope**: everything a complete site of this type needs (routes, functions, states, legal, edge cases, admin, skeletons), from research and knowledge, never a fixed list; each item marked in `DESIGN.md` under `Scope`. Gate axis X checks it.
 1. **Tension**: find the conflict inside the brief (calm vs. urgent, heritage vs. new, luxury vs. honest).
 2. **Concept**: resolve the tension in one sentence. This is the idea, not a layout.
 3. **Archetype + Mutation**: derive the page structure from the brief, with `structures/archetypes.md` and `data/archetypes.csv` as reference and constraint (not a menu), then break one of its rules.
@@ -252,6 +252,7 @@ Full behaviour of each command is in `commands/overview.md`. Critique output for
 - **One confirmation.** Present the plan once and ask only "Proceed?"; after yes, build, gate and ship without asking again (exceptions: `thinking/sequence.md`). Non-interactive runs proceed.
 - Explain the plan in the preview block, then build. Keep prose short. The work is the answer.
 - Every build ships a **sellable template** (`templates/TEMPLATE.md`): README with the demo line, DESIGN, MOTION, SCHEMA, DATA, CRITIQUE, GATE, LICENSE, CHANGELOG, `.env.example`, demo-labelled `data/`, `middleware.ts`; runs with `npm install && npm run dev`, no configuration.
+- **Micro-states ship** (`thinking/sequence.md`): every button, form, list, image and async action has all its states; the gate warns on missing ones.
 - Deliver complete files. No `// rest of code here`, no TODOs, no placeholder images without a clear `alt` and a sourcing note.
 - Put a stamp comment at the top of the main stylesheet or layout:
   `/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: <from gate.mjs> · gate: <from gate.mjs> */`
@@ -542,6 +543,22 @@ The budgets hold either way: one signature move, one accent moment per screen, o
 **Test:** for every element, can you name the question it passes? If neither, cut it.
 
 ---
+
+### Micro-states: every one ships
+
+The happy path is not the build. Every interactive or async thing ships all of its states, designed, not left to the browser default:
+
+| Thing | States it ships |
+|---|---|
+| Every button | default, hover, focus, active, disabled, loading |
+| Every form | default, validation error, submit loading, success, server error |
+| Every list | empty, loading, error, filled |
+| Every image | loading, loaded, error |
+| Every async action | idle, pending, success, error |
+
+Each state is in the section contract of `SCHEMA.md` and in the code (a CSS rule, an attribute such as `aria-busy`, `aria-invalid`, `disabled` or `data-state`, and the script that sets it). Mark data-driven lists with `data-entity` so their states can be checked. The gate reads the page's CSS, markup and scripts and **warns** on missing micro-states; it is advisory and never fails the gate.
+
+**Test:** pick any button, form, list, image and async action on the page: can you show each state, and does `SCHEMA.md` name it?
 
 ### Required output: a sellable template
 
@@ -3714,6 +3731,7 @@ It runs these bounded checks in a real browser and prints numbers. Each one veri
 | `q` | **Motion quality** (gate/3): pinned-zone progression over 8 frames, p95 `requestAnimationFrame` while scrolling (in a sandbox: `not verified — sandbox`, numbers printed, nothing counted, `docs/adapters/sandbox.md`), reduced-motion distinctness | Motion quality and budgets; Reduced motion |
 | `k` | **Accessibility** (gate/3): focus-visible on the first 40 focusable elements, target size at 375 touch, 200% zoom, 320px reflow, forced colors (text not on screen at rest is skipped), keyboard trap | Accessibility; Overflow (reflow); Contrast (forced colors) |
 | `X` | **Completeness** (v2.9.0, `scripts/completeness.mjs`, run by the gate when `DESIGN.md` has a `Scope` section): routes, functions, states, legal pages, edge cases, admin surfaces, skeletons and the template shape, each counted `<have>/<need>` against the scope derived in Step 0.7. Missing items fail the page unless marked "not required for this brief, reason:". Not in the stamp or its id | Completeness |
+| `micro-states` | **Micro-states** (v2.9.0, advisory): buttons (default, hover, focus, active, disabled, loading), forms (validation error, submit loading, success, server error), data-driven lists (empty, loading, error, filled), images (loading, loaded, error), async actions (pending, success, error), read from the page's CSS rules, markup and scripts. Missing states are **warnings only**: never a failure, never in the stamp | Micro-states |
 | `rules` | **The four rule sets** (gate/4, `scripts/rulesets.mjs`), one count per set: distinct failing rule IDs. **C** copy, **S** SEO, **P** performance, **K** security (for local files, headers come from a `_headers` file next to the page). Warnings are printed and not counted | Copy; SEO; Performance; Security |
 
 The output ends with a stamp line built only from those numbers:
@@ -3838,6 +3856,7 @@ The placeholders are deliberate. There are no numbers to copy. Write the archety
 
 - [ ] Concept sentence and signature move are visible in the first screen
 - [ ] Scope: `node scripts/completeness.mjs <project>` (axis X) prints every line `n/n`; each excused item has its reason
+- [ ] Micro-states: no ⚠ left in the gate's micro-states block, or each one explained in `GATE.md`
 - [ ] Template: the build has the `templates/TEMPLATE.md` shape (README with the demo line, DESIGN, MOTION, SCHEMA, DATA, CRITIQUE, GATE, LICENSE, CHANGELOG, `.env.example`, demo-labelled `data/`, `middleware.ts`) and starts with `npm install && npm run dev` and no `.env`; every section `id` has a row in the `SCHEMA.md` section contract, every field shown is in the data model, every route is listed
 - [ ] Type: display face chosen with a reason; body size and measure within `gates/rules.md` (Hierarchy); `text-wrap: balance` on headings
 - [ ] Colour: all text pairs verified (`node scripts/contrast.mjs` while designing, `node scripts/gate.mjs` on the build); accent within `gates/rules.md` (Contrast)
@@ -4118,6 +4137,16 @@ Read before Step 1. Design inside these. `scripts/gate.mjs` measures them after 
 | `img`/`video` | `width` and `height` or an `aspect-ratio` box |
 | Fonts | ≤ 1 preloaded file, `font-display: swap` |
 | Core Web Vitals | LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1 (never claimed unmeasured) |
+
+### Micro-states (gate `micro-states`, warns)
+
+| Thing | Ships |
+|---|---|
+| Button | default, hover, focus, active, disabled, loading |
+| Form | default, validation error, submit loading, success, server error |
+| List | empty, loading, error, filled (data lists carry `data-entity`) |
+| Image | loading, loaded, error |
+| Async action | idle, pending, success, error |
 
 ### Completeness (gate `X`, `scripts/completeness.mjs`)
 
