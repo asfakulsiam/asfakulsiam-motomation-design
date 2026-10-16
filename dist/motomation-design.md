@@ -39,7 +39,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 |---|---|
 | **Any build or redesign (always, first, before Step 1)** | `gates/rules.md`: the rules the gate measures. Design input, read before designing; state `Rules : gates/rules.md read; designing within it.` before the Thinking Sequence |
 | Any new page or site | `thinking/brief-inference.md` → `thinking/sequence.md` (Step 0 Stack first) → `principles/house-style.md` |
-| **Every build: the five checkpoints** | `thinking/sequence.md` → Five checkpoints: 1 Stack · 2 Research and concept · 3 Scope · 4 Build plan · 5 Ship. Stop and wait for an explicit answer at each; alternatives (2–3) on request; any decision can be overridden; never ask twice; state and skip what the brief answers |
+| **Every build: the six checkpoints** | `thinking/sequence.md` → Six checkpoints: 1 Stack · 2 Research and concept · 3 Scope · 4 Build plan · 5 Design review · 6 Gate and ship. Stop and wait for an explicit answer at each; alternatives (2–3) on request; any decision can be overridden; never ask twice; state and skip what the brief answers |
 | **Step 0 Stack, and any new dependency** | `craft/stack.md`: Next.js default, the three dependency checks, platform first |
 | **Any build or redesign (always, after Step 0 Stack, before Step 1)** | `craft/research.md`: Step 0.5 research, mandatory. Live award sources + `references/sources/` (skills, components, motion, 3d, foundation, future); concepts only, no copied code. `DESIGN.md` gets References looked at (3), Techniques considered (3), Pattern being avoided, and a Decision trace: nothing comes from the skill's defaults alone |
 | Need new ideas / "make it different" | `invention/mad-artist.md` + run `scripts/collide.mjs` |
@@ -92,8 +92,12 @@ R. Read the rules     gates/rules.md                → state "Rules : gates/rul
 4. Motion plan        motion/tokens.md + tier file  → write MOTION.md (templates/MOTION.md); Tier 3–5: timing sheet per motion/choreography.md
 5. Build plan         ■ CHECKPOINT 4: section order, components, animation per section, page transitions; stop, wait
 6. Build              compose, extend, or invent (below), in the stack and adapter from Step 0; complete code, real copy
-7. Delivery Gate      gates/delivery-gate.md        → verify gates/rules.md, score, fix, stamp, log to memory
-8. Ship               ■ CHECKPOINT 5: the build, the gate output, the critique; stop, wait for accept / changes
+7. Preview            Path A: a live preview URL · Path B: a build zip or a temporary preview push (never main)
+                      ■ CHECKPOINT 5 Design review: preview, screenshots 375 / 768 / 1440, DESIGN.md, MOTION.md,
+                        SCHEMA.md, DATA.md, one-line summary; stop; approve, or changes → new preview → again
+8. Delivery Gate      gates/delivery-gate.md on the APPROVED design → verify gates/rules.md, score, fix, stamp;
+                        fail → fix and re-present · pass → write GATE.md, CRITIQUE.md → handoff push (design/<name>)
+9. Ship               ■ CHECKPOINT 6 Gate and ship: gate output, critique, where the handoff push went; stop
 ```
 
 #### Compose, extend, or invent (step 6)
@@ -131,10 +135,14 @@ Palette     : <name or hexes> (<why>)
 Not doing   : <the obvious choice you rejected and why>
 Deferred    : <what this build leaves out, each with its reason>
 
-Checkpoint <n> of 5: approve, redirect, or ask for alternatives.
+Checkpoint <n> of 6: approve, redirect, or ask for alternatives.
 ```
 
-Checkpoint 1 shows Stack (with alternatives); 2 shows References through Not doing; 3 shows Scope, Defaults and Deferred; 4 shows the section order, components, animation per section and transitions; 5 shows the build, gate output and critique. After each, stop until the user answers. "Show me alternatives" gets 2–3 options and another wait. The user can override any earlier decision. Never ask the same question twice; a checkpoint the brief already answers is stated and skipped, still open to override.
+Checkpoint 1 shows Stack (with alternatives); 2 shows References through Not doing; 3 shows Scope, Defaults and Deferred; 4 shows the section order, components, animation per section and transitions; 5 shows the preview and the review pack (screenshots at 375, 768 and 1440, DESIGN.md, MOTION.md, SCHEMA.md, DATA.md, a one-line summary); 6 shows the gate output, the critique and where the handoff push went. After each, stop until the user answers. "Show me alternatives" gets 2–3 options and another wait. The user can override any earlier decision. Never ask the same question twice; a checkpoint the brief already answers is stated and skipped, still open to override.
+
+#### Delivery flow (Checkpoints 5 and 6)
+
+Preview → **Design review** (approve, or changes → new preview) → gate on the approved design (fail → fix, re-present) → **handoff push** → handoff. Path A: a live preview. Path B: a build zip, or a temporary preview push. A preview push is temporary and never main. The handoff push is final: `design/<name>`, or `evals` for a demo's heavy files. **Nothing is pushed until the gate passes; main is the shipping truth.** Details: `thinking/sequence.md` → Delivery flow.
 
 ### Routes: full and light (`--route=`)
 
@@ -143,7 +151,7 @@ Two routes. `/build --route=light` or `/build --route=full` forces one. Without 
 | | Full route | Light route |
 |---|---|---|
 | Use for | Complex work: a new site or a multi-page build, a new brand or concept, a redesign, motion Tier 3+, forms, data or commerce, anything the client wants to be unique | Simple work: **one page or a small fix**. A single page inside an existing design system, a landing page with no new concept, spacing, a colour, contrast, a component swap, a reduced-motion or keyboard bug |
-| Thinking Sequence | Step 0 + all 7 steps, five checkpoints | **Skipped.** Step 0 stack only (keep the project's; a lone page is vanilla). No archetype pick, no reference study, no anti-sameness pass. Two checkpoints: **Plan** (route, stack, the one-line intent, what you will not do) and **Ship** (gate output). A small fix has only **Ship** |
+| Thinking Sequence | Step 0 + all 7 steps, six checkpoints | **Skipped.** Step 0 stack only (keep the project's; a lone page is vanilla). No archetype pick, no reference study, no anti-sameness pass. Two checkpoints: **Plan** (route, stack, the one-line intent, what you will not do) and **Ship** (gate output). A small fix has only **Ship** |
 | Collision engine | `scripts/collide.mjs` draws archetype, mutation, collision, signature | **Not run.** No new signature move; a single page keeps the site's (or has none) |
 | Scope | Step 0.7: the full scope, every route, state and content type, checked by axis X | **Not derived.** The scope is the one page or the one fix. Axis X reads `DESIGN.md` if the project has one; a lone page has no scope to miss |
 | Design | `DESIGN.md`, `SCHEMA.md`, `MOTION.md` from the templates | Keep the existing design: its type, palette, layout and motion. A new single page with no system: house-style defaults, motion Tier ≤ 2, no new tokens beyond what the page uses |
@@ -256,7 +264,7 @@ Full behaviour of each command is in `commands/overview.md`. Critique output for
 
 ### Output rules
 
-- **Five checkpoints** (`thinking/sequence.md`): Stack, Research and concept, Scope, Build plan, Ship. At each, draft, show the reasoning, stop and wait for an explicit answer (approve, redirect, alternatives, override). Never re-ask an answered question.
+- **Six checkpoints** (`thinking/sequence.md`): Stack, Research and concept, Scope, Build plan, Design review, Gate and ship. At each, draft, show the reasoning, stop and wait for an explicit answer (approve, redirect, alternatives, override). Never re-ask an answered question.
 - Explain each decision in its checkpoint block, then wait. Keep prose short. The work is the answer.
 - Every build ships a **sellable template** (`templates/TEMPLATE.md`): README (what is real, what is demo, run, deploy; "All data in data/ is demo. Replace with real data before launch."), DESIGN, MOTION, SCHEMA, DATA, CRITIQUE, GATE, LICENSE (MIT), CHANGELOG (v0.1.0), `.env.example`, a demo-labelled `data/` typed by its `schema.json`, `middleware.ts`, comments in every non-trivial file. It runs with `npm install && npm run dev` and no configuration. `SCHEMA.md` is written with `DESIGN.md`, not after.
 - **Micro-states ship:** buttons (default, hover, focus, active, disabled, loading), forms (default, validation error, submit loading, success, server error), lists (empty, loading, error, filled), images (loading, loaded, error), async actions (idle, pending, success, error). The gate warns on missing ones (`thinking/sequence.md`).
@@ -297,7 +305,7 @@ Mark anything that would change the design but can't be inferred:
 [NEEDS CLARIFICATION: real product photos available? → affects hero archetype]
 ```
 
-- **Gaps are not separate questions.** Each gap becomes a stated default, with its reason, shown at the checkpoint it belongs to (`thinking/sequence.md`, five checkpoints); the user can change any of them in their answer.
+- **Gaps are not separate questions.** Each gap becomes a stated default, with its reason, shown at the checkpoint it belongs to (`thinking/sequence.md`, six checkpoints); the user can change any of them in their answer.
 - **Only critical ambiguity earns its own question:** a payment provider, a legal region, a locale priority, or a costly lock-in the plan can't default (framework, hosting). Even then, it goes in the checkpoint message it belongs to, never in a separate one.
 - **The stack is never silently assumed.** If neither the brief nor the project names it, the chosen stack and its reason are in the plan (Step 0 in `thinking/sequence.md`).
 
@@ -324,7 +332,7 @@ This is the missing key: it makes an agent think like a designer instead of a te
 
 **Data is fuel, not a menu.** The files in `data/` (archetypes, palettes, fonts, mutations, collisions, motion, signatures, styles) inform the brief. Do not pick from a list; derive from the brief, using the list as reference and constraint. A draw from `scripts/collide.mjs` is a constraint to design inside, not a finished answer. Write the results into the preview block. Each step has a test. If the test fails, redo the step.
 
-**Five checkpoints.** The user decides at every meaningful step. The skill drafts, shows its reasoning, and waits. After each checkpoint the skill **stops** and waits for the user's answer: approve, redirect, or ask for more information.
+**Six checkpoints.** The user decides at every meaningful step. The skill drafts, shows its reasoning, and waits. After each checkpoint the skill **stops** and waits for the user's answer: approve, redirect, or ask for more information.
 
 | Checkpoint | Comes after | The skill shows | The user |
 |---|---|---|---|
@@ -332,9 +340,10 @@ This is the missing key: it makes an agent think like a designer instead of a te
 | **2 Research and concept** | Step 0.5, Steps 1–7, dials, type and colour | the 3 references looked at and what it took from each; the pattern it is avoiding; the tension, concept, archetype and mutation; the collision draw output (`scripts/collide.mjs`, pasted); the palette, typography, motion tier and signature move; its reasoning for each | approves or redirects |
 | **3 Scope** | Step 0.7 | the derived route list, states, legal pages, admin surface and edge cases, each marked requested / required / optional; what it is deferring and why | approves, cuts or adds |
 | **4 Build plan** | the motion plan (`MOTION.md`) | the section order, the components it will create (compose, extend or invent), the animation language per section, the page-to-page transitions | approves or redirects |
-| **5 Ship** | the build, the gate and `/critique` | the finished build, the gate output (pasted) and the critique (pasted) | accepts or asks for changes |
+| **5 Design review** | the build and its preview (Path A or B, below) | the preview (a live URL, or a build zip / temporary preview location), screenshots at 375, 768 and 1440, `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `DATA.md` and a one-line summary | approves, or requests changes (a new preview, then Checkpoint 5 again) |
+| **6 Gate and ship** | the gate and `/critique` on the **approved** design | the gate output (pasted), the critique (pasted), `GATE.md` and `CRITIQUE.md`, and where the handoff push went | accepts; a gate failure is fixed and the design re-presented first |
 
-**Order:** Step 0 → **Checkpoint 1** → Step 0.5, the memory check, Steps 1–7, the dials, type and colour → **Checkpoint 2** → Step 0.7 → **Checkpoint 3** → the motion plan and section order → **Checkpoint 4** → build, gate, `/critique` → **Checkpoint 5**. (Step 0.7 is written below Step 0.5 because its research overlaps; it is shown at Checkpoint 3, after the concept is approved.)
+**Order:** Step 0 → **Checkpoint 1** → Step 0.5, the memory check, Steps 1–7, the dials, type and colour → **Checkpoint 2** → Step 0.7 → **Checkpoint 3** → the motion plan and section order → **Checkpoint 4** → build → preview → **Checkpoint 5** (loops until approved) → gate and `/critique` on the approved design → handoff push → **Checkpoint 6**. (Step 0.7 is written below Step 0.5 because its research overlaps; it is shown at Checkpoint 3, after the concept is approved.)
 
 Rules at every checkpoint:
 
@@ -344,7 +353,7 @@ Rules at every checkpoint:
 - **The skill never asks the same question twice.** An answered question stays answered (record it in `DESIGN.md` under `Decision trace`); a later checkpoint states it, it does not re-ask it.
 - **If the brief already answers a checkpoint** (e.g. "use Next.js"), the skill states the answer and skips the question, but the user can still override. A brief that answers every checkpoint in advance (for example a benchmark or CI brief that says "approve every checkpoint") counts as the brief answering; without that, a run with no one to answer stops at the checkpoint.
 
-Each checkpoint message ends with what the skill is waiting for: `Checkpoint <n> of 5: approve, redirect, or ask for alternatives.`
+Each checkpoint message ends with what the skill is waiting for: `Checkpoint <n> of 6: approve, redirect, or ask for alternatives.`
 
 **Rules come first, the gate comes last.** Before Step 0, read `gates/rules.md`: every limit the gate measures (contrast, overflow, reduced motion, accessibility, SEO, security, performance budgets). It is design input. Design inside it from the first step; `gates/delivery-gate.md` only verifies it at the end. A design that passes the gate by patching (an invented link, domain or page added to satisfy a check) was not designed within the rules.
 
@@ -356,7 +365,7 @@ Each checkpoint message ends with what the skill is waiting for: `Checkpoint <n>
 
 The sequence below is the **full route**. Say the route in your first line (`SKILL.md`, "Routes"); `/build --route=light|full` forces it.
 
-- **Full route** (complex: a new site, a new concept, Tier 3+, forms, data): every step below, the collision engine in Step 4, the full scope in Step 0.7, five checkpoints, the Delivery Gate with a stamp.
+- **Full route** (complex: a new site, a new concept, Tier 3+, forms, data): every step below, the collision engine in Step 4, the full scope in Step 0.7, six checkpoints, the Delivery Gate with a stamp.
 - **Light route** (simple: one page or a small fix): skip Steps 0.5 to 7. Keep only Step 0 (the stack: the project's, or vanilla for a lone page), no collision draw, no scope derivation. Two checkpoints, Plan and Ship (a fix: Ship only). Build the page or the fix inside the existing design. **The Delivery Gate still runs, every axis**, including J. Grows into a second page or a new concept: switch to full and say so.
 
 ### 0. Stack
@@ -575,7 +584,35 @@ The budgets hold either way: one signature move, one accent moment per screen, o
 
 **Checkpoint 4: Build plan** (after `MOTION.md`). Show the section order, the components to create (compose, extend or invent, each named), the animation language per section, and the page-to-page transitions. Stop and wait.
 
-**Checkpoint 5: Ship** (after the build, `gates/delivery-gate.md` and `/critique`). Show the finished build, the gate output and the critique, both pasted, never typed. Stop and wait: the user accepts or asks for changes. A change request goes back to the checkpoint it affects.
+**Checkpoint 5: Design review**: the preview and review pack; approve, or changes and a new preview.
+
+**Checkpoint 6: Gate and ship**: the gate and `/critique` on the approved design, pasted, and the handoff. Nothing is pushed before the gate passes.
+
+### Delivery flow: design review, then gate, then ship
+
+Two paths. Both run the same six steps; only step 2 differs, by whether the agent can produce a preview the author can open.
+
+**Path A: preview possible** (the agent can run a dev server or deploy and give the author a URL):
+
+1. The agent designs and builds in its own environment.
+2. It produces a **live preview** (a URL the author opens).
+3. **Checkpoint 5:** it shows the preview plus the review pack: screenshots at 375, 768 and 1440, `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `DATA.md`, and a one-line summary.
+4. The author reviews: **approve**, or **request changes**, which loop back to step 1 and a new preview.
+5. The gate (`gates/delivery-gate.md`) and `/critique` run on the approved design. **Pass:** the handoff push to the connected repo. **Fail:** fix, and re-present (step 3).
+6. **Checkpoint 6:** the handoff (the gate output, the critique, `GATE.md`, `CRITIQUE.md`, where the push went).
+
+**Path B: preview not possible** (no server, no deploy target, no network): the same six steps, except step 2. The agent produces a **build zip**, or pushes to a **temporary preview location** the author can open or deploy themselves. Steps 3–6 are unchanged.
+
+**Preview push and handoff push are different things. Do not confuse the two.**
+
+| | Preview push | Handoff push |
+|---|---|---|
+| When | step 2, before approval, as often as each review round needs | step 5, once, after approval **and** a passing gate |
+| Where | any temporary location that is **not main**: a preview deploy, a `preview/<name>` branch, a zip | a real project: a feature branch `design/<name>`. A skill demo: heavy files (screenshots, frames, video) to the `evals` branch, the code to a `design/<name>` branch |
+| Afterwards | deleted or ignored after approval; never merged | final; merged to main only by the owner, after review |
+| Gate | not required (it is a draft) | required: the gate has passed on exactly what is pushed |
+
+**Main is the shipping truth.** Nothing reaches main until the design is approved and the gate passes, and then only by merging the handoff branch.
 
 ---
 
@@ -3753,6 +3790,11 @@ Record every dependency in `DESIGN.md`:
 
 Verification only. The rules live in `gates/rules.md`, read before Step 1 and designed within; this file checks that the build kept them. Run it before handing back **any** page or component. Four parts: the measured gate (one page, plus axis J for the whole site and axis O across briefs), a self-critique score, the AI-default scan and the craft checklist. If anything fails, fix it and run the gate again. Two passes is normal; needing three means the design was not made inside `gates/rules.md`, so go back to the Thinking Sequence instead of patching.
 
+
+**When it runs: after design approval.** The gate runs at Checkpoint 6, on the design the author approved at Checkpoint 5 (`thinking/sequence.md` → Delivery flow), not on a draft.
+- During review, previews are built and changed as often as the author asks. A preview push (any temporary location, never main) needs no gate.
+- After approval: run the gate. If it fails, fix and re-present. If it passes, write `GATE.md` and `CRITIQUE.md`, then make the handoff push (a `design/<name>` branch; for a skill demo, heavy files go to the `evals` branch).
+- Nothing is pushed for good until the gate passes, and main only after that, by merging the handoff branch.
 ---
 
 ### Every report: Measured, Judged, Not verified
@@ -4385,7 +4427,7 @@ Type a command at the start of a message. Commands combine with flags. Without a
 | `--style` | a file in `styles/` | Apply a visual language |
 | `--stack` | next · react · vanilla · astro | Target framework. Without it: detect from the project, else choose and show it in the plan (Step 0 in `thinking/sequence.md`) |
 | `--seed` | any number | Repeatable collision draws |
-| `--review` | — | Every build stops at the five checkpoints (`thinking/sequence.md`); `--review` keeps them even when the brief pre-approves every checkpoint |
+| `--review` | — | Every build stops at the six checkpoints (`thinking/sequence.md`); `--review` keeps them even when the brief pre-approves every checkpoint |
 
 ---
 
@@ -5463,6 +5505,8 @@ Wireframe as decoration on a product that has no structure to show.
 
 ## CRITIQUE.md · <project>
 
+**Written after Checkpoint 5.** Fill this in at Checkpoint 6, from the `/critique` output on the design the author approved at Checkpoint 5 (Design review), never on a draft or a preview (`thinking/sequence.md` → Delivery flow). A gate failure is fixed and the design re-presented before this file is final.
+
 The `/critique` output, pasted, never typed (`commands/critique-format.md`). Three sections, no mixing (`gates/delivery-gate.md`, "Every report"). A section with nothing in it says `none`.
 
 ### Measured
@@ -5676,6 +5720,8 @@ Type mode: HOUSE STYLE (typography-led) | SERVICE STYLE (information-led) — be
 <!-- file: templates/GATE.md -->
 
 ## GATE.md · <project>
+
+**Written after Checkpoint 5.** Fill this in at Checkpoint 6, from the gate output on the design the author approved at Checkpoint 5 (Design review), never on a draft or a preview (`thinking/sequence.md` → Delivery flow). A gate failure is fixed and the design re-presented before this file is final.
 
 The gate output per page, pasted from `node scripts/gate.mjs …`, never typed. Three sections, no mixing (`gates/delivery-gate.md`, "Every report"). A section with nothing in it says `none`.
 

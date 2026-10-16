@@ -2,6 +2,11 @@
 
 Verification only. The rules live in `gates/rules.md`, read before Step 1 and designed within; this file checks that the build kept them. Run it before handing back **any** page or component. Four parts: the measured gate (one page, plus axis J for the whole site and axis O across briefs), a self-critique score, the AI-default scan and the craft checklist. If anything fails, fix it and run the gate again. Two passes is normal; needing three means the design was not made inside `gates/rules.md`, so go back to the Thinking Sequence instead of patching.
 
+
+**When it runs: after design approval.** The gate runs at Checkpoint 6, on the design the author approved at Checkpoint 5 (`thinking/sequence.md` → Delivery flow), not on a draft.
+- During review, previews are built and changed as often as the author asks. A preview push (any temporary location, never main) needs no gate.
+- After approval: run the gate. If it fails, fix and re-present. If it passes, write `GATE.md` and `CRITIQUE.md`, then make the handoff push (a `design/<name>` branch; for a skill demo, heavy files go to the `evals` branch).
+- Nothing is pushed for good until the gate passes, and main only after that, by merging the handoff branch.
 ---
 
 ## Every report: Measured, Judged, Not verified

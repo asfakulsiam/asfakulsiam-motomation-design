@@ -4,6 +4,28 @@ All notable changes to this skill. Versions follow [Semantic Versioning](https:/
 
 ## [Unreleased]
 
+- **Delivery flow: six checkpoints, design review before the gate** (`thinking/sequence.md` → Delivery flow).
+  - Checkpoint 5 is now **Design review**: a preview, screenshots at 375 / 768 / 1440, DESIGN.md, MOTION.md, SCHEMA.md, DATA.md and a one-line summary. The author approves, or requests changes; each change gets a new preview.
+  - Checkpoint 6 is **Gate and ship**: the gate and `/critique` run on the approved design. A pass leads to the handoff push; a failure is fixed and re-presented.
+  - **Path A** (preview possible): a live preview. **Path B**: a build zip, or a temporary preview push.
+  - **Preview push ≠ handoff push.** The preview is temporary, never main, and deleted or ignored after approval. The handoff is final: `design/<name>` for a real project; for a skill demo, heavy files go to `evals` and code to `design/<name>`. Nothing is pushed until the gate passes, and main only after approval: main is the shipping truth.
+  - Updated: `SKILL.md`, `AGENTS.md`, `gates/delivery-gate.md` (the gate runs after design approval), `templates/GATE.md` and `templates/CRITIQUE.md` (written after Checkpoint 5), `docs/CHEATSHEET.md`, `commands/overview.md`, `thinking/brief-inference.md`.
+- **Templates diverge** (T1, 899f842; evidence `evals/results/originality-templates/`).
+  - The ten templates were redesigned on navigation, hero, section order, density, image treatment, type, interaction and signature.
+  - Originality: 4/45 → **45/45** pairs below 0.4 on every axis at 1440×900, and **42/45** at 1440×900 + 375×812.
+  - `vendor/plain`: grain replaces typewriter in the top five.
+- **Motion quality** (T2, 1b8c398; `evals/results/motion-quality/`).
+  - The Tier 4–5 reduced-motion stills are new compositions: event's follow-spot, launch's parts plate, the portfolio's title-card wall.
+  - The three Tier 3–5 timing sheets give per-chapter scroll %, enter · hold · exit, ease, overlap, and a "Why this moves" line per beat.
+  - Cut, for having no reason: PressureType, ShinyText, Dock magnification and the caption rise. No motion was added.
+- **`templates/verify-nextjs`** (T3, 41475e4): a functional Next.js App Router template (TypeScript, Tailwind v4, GSAP, mock data, schema.json, middleware.ts). `npm install` and `npm run dev` work from a fresh shell.
+- **Open items** (T4, 2c51224; `evals/results/open-items/`):
+  - Error pages are exempt from seo-04, because a canonical on a 404 is a soft 404.
+  - `evals/results/2026-10-12-benchmark-v3/` moved to the evals branch; main is 12.4 MB of 15.
+  - The stamped diversity pages were synced to the evals branch.
+  - `originality.mjs` measures 1440×900 and 375×812 by default (the diversity verdict is unchanged, 5/10).
+  - Mocked form endpoints are noted in `gates/delivery-gate.md`.
+
 ## [2.10.1] - 2026-10-16
 
 - **New `docs/CHEATSHEET.md`:** the whole skill on one page. The five checkpoints and how to answer them (approve, redirect, "show me alternatives", override, "Approve every checkpoint." for unattended runs); every flag; the five motion tiers with use cases; every command (create, tune, evaluate, ship, meta) with what it does, when to use it and a copy-paste prompt; what every `/build` ships; the scripts with examples; six full-potential recipes (Tier 5 story site, full e-commerce template, WebGL launch, redesign, short-route fix, unattended run); tips for the best output. Linked from the top of `README.md` and from Quick start.

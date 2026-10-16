@@ -12,7 +12,7 @@ Type a command at the start of a message. Commands combine with flags. Without a
 | `--style` | a file in `styles/` | Apply a visual language |
 | `--stack` | next · react · vanilla · astro | Target framework. Without it: detect from the project, else choose and show it in the plan (Step 0 in `thinking/sequence.md`) |
 | `--seed` | any number | Repeatable collision draws |
-| `--review` | — | Every build stops at the five checkpoints (`thinking/sequence.md`); `--review` keeps them even when the brief pre-approves every checkpoint |
+| `--review` | — | Every build stops at the six checkpoints (`thinking/sequence.md`); `--review` keeps them even when the brief pre-approves every checkpoint |
 
 ---
 

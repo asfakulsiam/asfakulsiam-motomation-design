@@ -1,5 +1,7 @@
 # GATE.md · <project>
 
+**Written after Checkpoint 5.** Fill this in at Checkpoint 6, from the gate output on the design the author approved at Checkpoint 5 (Design review), never on a draft or a preview (`thinking/sequence.md` → Delivery flow). A gate failure is fixed and the design re-presented before this file is final.
+
 The gate output per page, pasted from `node scripts/gate.mjs …`, never typed. Three sections, no mixing (`gates/delivery-gate.md`, "Every report"). A section with nothing in it says `none`.
 
 ## Measured

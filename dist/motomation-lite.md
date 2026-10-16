@@ -77,7 +77,7 @@ Higher tiers include all lower-tier craft. Choose the **lowest tier that deliver
 
 ### Output rules
 
-- **Five checkpoints** (`thinking/sequence.md`): Stack, Research and concept, Scope, Build plan, Ship. At each, draft, show the reasoning, stop and wait for an explicit answer (approve, redirect, alternatives, override). Never re-ask an answered question.
+- **Six checkpoints** (`thinking/sequence.md`): Stack, Research and concept, Scope, Build plan, Design review, Gate and ship. At each, draft, show the reasoning, stop and wait for an explicit answer (approve, redirect, alternatives, override). Never re-ask an answered question.
 - Explain each decision in its checkpoint block, then wait. Keep prose short. The work is the answer.
 - Every build ships a **sellable template** (`templates/TEMPLATE.md`): README (what is real, what is demo, run, deploy; "All data in data/ is demo. Replace with real data before launch."), DESIGN, MOTION, SCHEMA, DATA, CRITIQUE, GATE, LICENSE (MIT), CHANGELOG (v0.1.0), `.env.example`, a demo-labelled `data/` typed by its `schema.json`, `middleware.ts`, comments in every non-trivial file. It runs with `npm install && npm run dev` and no configuration. `SCHEMA.md` is written with `DESIGN.md`, not after.
 - **Micro-states ship:** buttons (default, hover, focus, active, disabled, loading), forms (default, validation error, submit loading, success, server error), lists (empty, loading, error, filled), images (loading, loaded, error), async actions (idle, pending, success, error). The gate warns on missing ones (`thinking/sequence.md`).
@@ -220,9 +220,9 @@ The budgets hold either way: one signature move, one accent moment per screen, o
 
 **Checkpoint 4: Build plan** (after `MOTION.md`). Show the section order, the components to create (compose, extend or invent, each named), the animation language per section, and the page-to-page transitions. Stop and wait.
 
-**Checkpoint 5: Ship** (after the build, `gates/delivery-gate.md` and `/critique`). Show the finished build, the gate output and the critique, both pasted, never typed. Stop and wait: the user accepts or asks for changes. A change request goes back to the checkpoint it affects.
+**Checkpoint 5: Design review**: the preview and review pack; approve, or changes and a new preview.
 
----
+**Checkpoint 6: Gate and ship**: the gate and `/critique` on the approved design, pasted, and the handoff. Nothing is pushed before the gate passes.
 
 ### Part 2: AI-default scan (every answer must be "no")
 

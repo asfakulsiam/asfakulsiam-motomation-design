@@ -4,7 +4,7 @@ Every command, flag, tier, dial and script on one page, with a use case and a co
 
 ---
 
-## 1. How a build runs: five checkpoints
+## 1. How a build runs: six checkpoints
 
 The skill drafts, shows its reasoning, and **stops** after each checkpoint until you answer.
 
@@ -14,7 +14,10 @@ The skill drafts, shows its reasoning, and **stops** after each checkpoint until
 | 2 | **Research and concept** | 3 references and what was taken from each, the pattern being avoided, tension, concept, archetype + mutation, the collision draw, palette, type, motion tier, signature move, the reasoning | "approve" · "push it further" · "less safe" · "warmer palette" |
 | 3 | **Scope** | routes, states, legal pages, admin, edge cases (requested / required / optional), what is deferred and why | "approve" · "cut the blog" · "add a wholesale page" |
 | 4 | **Build plan** | section order, components to create, animation per section, page transitions | "approve" · "swap sections 2 and 3" · "calmer transitions" |
-| 5 | **Ship** | the build, the gate output, the critique (pasted, never typed) | "accept" · "fix the mobile hero" |
+| 5 | **Design review** | a preview (a live URL; or a build zip / temporary preview push when no preview is possible), screenshots at 375, 768 and 1440, DESIGN.md, MOTION.md, SCHEMA.md, DATA.md, a one-line summary | "approve" · "fix the mobile hero" (a new preview, then this checkpoint again) |
+| 6 | **Gate and ship** | the gate and the critique on the approved design (pasted, never typed), GATE.md, CRITIQUE.md, where the handoff push went (`design/<name>`, never main) | "accept" |
+
+Nothing is pushed for good until the design is approved and the gate passes. A preview push is temporary (never main; deleted or ignored after approval); the handoff push is final.
 
 Answers that work at every checkpoint:
 

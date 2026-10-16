@@ -1,5 +1,7 @@
 # CRITIQUE.md · <project>
 
+**Written after Checkpoint 5.** Fill this in at Checkpoint 6, from the `/critique` output on the design the author approved at Checkpoint 5 (Design review), never on a draft or a preview (`thinking/sequence.md` → Delivery flow). A gate failure is fixed and the design re-presented before this file is final.
+
 The `/critique` output, pasted, never typed (`commands/critique-format.md`). Three sections, no mixing (`gates/delivery-gate.md`, "Every report"). A section with nothing in it says `none`.
 
 ## Measured

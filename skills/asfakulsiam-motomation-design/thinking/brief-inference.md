@@ -23,7 +23,7 @@ Mark anything that would change the design but can't be inferred:
 [NEEDS CLARIFICATION: real product photos available? → affects hero archetype]
 ```
 
-- **Gaps are not separate questions.** Each gap becomes a stated default, with its reason, shown at the checkpoint it belongs to (`thinking/sequence.md`, five checkpoints); the user can change any of them in their answer.
+- **Gaps are not separate questions.** Each gap becomes a stated default, with its reason, shown at the checkpoint it belongs to (`thinking/sequence.md`, six checkpoints); the user can change any of them in their answer.
 - **Only critical ambiguity earns its own question:** a payment provider, a legal region, a locale priority, or a costly lock-in the plan can't default (framework, hosting). Even then, it goes in the checkpoint message it belongs to, never in a separate one.
 - **The stack is never silently assumed.** If neither the brief nor the project names it, the chosen stack and its reason are in the plan (Step 0 in `thinking/sequence.md`).
 
