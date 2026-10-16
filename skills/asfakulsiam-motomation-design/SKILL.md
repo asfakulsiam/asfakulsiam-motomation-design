@@ -37,6 +37,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 |---|---|
 | **Any build or redesign (always, first, before Step 1)** | `gates/rules.md`: the rules the gate measures. Design input, read before designing; state `Rules : gates/rules.md read; designing within it.` before the Thinking Sequence |
 | Any new page or site | `thinking/brief-inference.md` → `thinking/sequence.md` (Step 0 Stack first) → `principles/house-style.md` |
+| **Step 0 Stack, and any new dependency** | `craft/stack.md`: Next.js default, the five dependency checks, platform first |
 | **Any build or redesign (always, after Step 0 Stack, before Step 1)** | `craft/research.md`: Step 0.5 research, mandatory. Live award sources + `references/sources/` (skills, components, motion, 3d, foundation, future); concepts only, no copied code. `DESIGN.md` gets References looked at (3), Techniques considered (3), Pattern being avoided, and a Decision trace: nothing comes from the skill's defaults alone |
 | Need new ideas / "make it different" | `invention/mad-artist.md` + run `scripts/collide.mjs` |
 | Choosing a page structure | `structures/archetypes.md` |
@@ -154,7 +155,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 
 Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it.
 
-0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, choose one with a reason and put it in the plan; never assume silently. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
+0. **Stack**: if the brief (or the existing project) names a stack, use it. Otherwise **Next.js (App Router, TypeScript, Tailwind)** for anything with routes or data, plain HTML for a single static page; never Astro or Vite for e-commerce unless the brief demands it. Every dependency passes the five checks in `craft/stack.md` (maintained, popular, not deprecated, Node 20 + React 19, permissive licence). Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 0.5. **Research (mandatory)**: leave the skill before designing. Live award sources (last 6 months) and `references/sources/`, concepts only. Record three references, three techniques with sources, and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference, never to the skill's defaults alone. No web: say so and state the limitation. See `craft/research.md`.
 1. **Tension**: find the conflict inside the brief (calm vs. urgent, heritage vs. new, luxury vs. honest).
 2. **Concept**: resolve the tension in one sentence. This is the idea, not a layout.

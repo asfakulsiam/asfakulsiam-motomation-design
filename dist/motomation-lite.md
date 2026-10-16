@@ -54,7 +54,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 
 Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it.
 
-0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, choose one with a reason and put it in the plan; never assume silently. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
+0. **Stack**: if the brief (or the existing project) names a stack, use it. Otherwise **Next.js (App Router, TypeScript, Tailwind)** for anything with routes or data, plain HTML for a single static page; never Astro or Vite for e-commerce unless the brief demands it. Every dependency passes the five checks in `craft/stack.md` (maintained, popular, not deprecated, Node 20 + React 19, permissive licence). Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 0.5. **Research (mandatory)**: leave the skill before designing. Live award sources (last 6 months) and `references/sources/`, concepts only. Record three references, three techniques with sources, and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference, never to the skill's defaults alone. No web: say so and state the limitation. See `craft/research.md`.
 
 ---

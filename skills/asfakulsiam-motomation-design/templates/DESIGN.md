@@ -8,6 +8,12 @@
 - **Reason:** <one line; required for plain HTML and for "you choose">
 - **Adapter:** `adapters/<x>.md`
 
+## Dependencies
+<!-- craft/stack.md: every package passes all five checks (checked with npm view + the repo) or is named by the brief. Platform first. -->
+| Package | Why (what the platform can't do) | 1 maintained (last release) | 2 weekly downloads | 3 deprecated | 4 Node 20 / React 19 | 5 licence |
+|---|---|---|---|---|---|---|
+| | | | | | | |
+
 ## References
 <!-- Step 0.5, mandatory (craft/research.md). Written before Step 1. Sources: references/sources/ + live award sites. Concepts only, no copied code. -->
 **Access:** <web (searched YYYY-MM-DD) | no web access: working from training data (limitation: <what that means here>)>

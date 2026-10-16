@@ -24,25 +24,24 @@ The agent may ask again only when (a) the brief is genuinely ambiguous on a crit
 
 ## 0. Stack
 
-Before any design step, know what you are building in. The stack changes what the design can be (server rendering, islands, a single file, a build step), so it is decided first and never guessed.
+Before any design step, know what you are building in. The stack changes what the design can be (server rendering, a single file, a build step), so it is decided first and never guessed. Default and dependency rule: `craft/stack.md`.
 
-1. **Read the brief.** If it names a stack ("Next.js", "Astro", "a single HTML file", `--stack=<x>`), use that stack. An existing project names its own stack: read `package.json` and the framework config and say what you found.
-2. **If it names none, choose and put it in the plan.** Never assume silently, and never fill the gap with the last stack you used. The stack goes in the plan with its reason, and the one confirmation (below) covers it. A separate stack question is asked only when the brief says "ask me" about the stack.
-3. **Choose** from this small set and give the reason in one line:
+1. **The brief names a stack** ("Next.js", "Astro", "a single HTML file", `--stack=<x>`), or the project already has one (read `package.json` and the framework config, say what you found): use it.
+2. **The brief says "ask me":** ask once, inside the plan's single question, offering Next.js as the default.
+3. **The brief says "you choose", or names none:** choose **Next.js (App Router, TypeScript, Tailwind)** for anything with routes or data. A single static page may be plain HTML/CSS/JS. Never pick Astro or React + Vite for e-commerce unless the brief demands it. Never pick the stack you used last.
 
-   | Stack | Pick it when | Adapter |
+   | Stack | When | Adapter |
    |---|---|---|
-   | Next.js (App Router) | an app-like site, server data, many routes, or a team already on React | `adapters/next.md` |
-   | Astro | content-first, mostly static, SEO-heavy, little client JS | `adapters/astro.md` |
-   | React + Vite | a client-only interactive piece, a prototype, an embed | `adapters/react-vite.md` |
-   | Plain HTML/CSS/JS | one page, no build step, a host or chat tool that only takes files | `adapters/vanilla.md` |
+   | **Next.js (App Router, TS, Tailwind): the default** | anything with routes or data; every e-commerce | `adapters/next.md` |
+   | Plain HTML/CSS/JS | a single static page | `adapters/vanilla.md` |
+   | Astro | only when the brief asks for it | `adapters/astro.md` |
+   | React + Vite | only when the brief asks for a client-only embed or prototype | `adapters/react-vite.md` |
 
-4. **Record it** in `DESIGN.md` under `Stack` (from `templates/DESIGN.md`): the stack, who chose it (brief, project, user, or you, confirmed at "Proceed?"), and the reason.
-5. **Load the adapter** for that stack from the table above. The adapter is chosen here, not at build time, and it is never skipped.
+4. **Every dependency passes the five checks** in `craft/stack.md` (maintained within 6 months, 10k+ weekly downloads, not deprecated, Node 20+ and React 19, MIT/Apache-2.0/ISC/BSD) before it is added: `npm view <pkg>`, the repo, the last release. A failure means an alternative or building it from scratch. Platform first; no heavy package for a small feature.
+5. **Record it** in `DESIGN.md` under `Stack` and `Dependencies` (from `templates/DESIGN.md`): the stack, who chose it (brief, project, or you, confirmed at "Proceed?"), the reason, and each dependency's five checks.
+6. **Load the adapter** for that stack. The adapter is chosen here, not at build time, and it is never skipped.
 
-Plain HTML is a real choice, not the default. Use it only with a reason written in `DESIGN.md` (the brief asked for it, the host takes only static files, the tool can only produce one file).
-
-**Test:** can you point to where the stack came from (the brief, the project, the user's answer, or your choice with a written reason, shown in the plan)? If the answer is "I assumed", write the reason or put the choice in the plan.
+**Test:** can you point to where the stack came from (the brief, the project, or the default with its reason, shown in the plan), and does every dependency in `DESIGN.md` show five passed checks? If not, fix it before Step 0.5.
 
 ---
 
@@ -212,7 +211,7 @@ A section added to the page gets its row in `SCHEMA.md` in the same edit. **Test
 ## Worked example: "Portfolio for a motion designer in Dhaka"
 
 ```
-Stack     : none named; chosen in the plan, confirmed at "Proceed?" → Astro (content-first portfolio, mostly static, one interactive reel as an island)
+Stack     : none named → Next.js (App Router, TS, Tailwind): the default for a site with routes (case studies) and data (the reel list); confirmed at "Proceed?"
 Tension   : 10 years of varied work ↔ clients remember one thing
 Concept   : The site is a single film reel; each project is a frame you scrub through
 Archetype : Film Reel (Tier 5 scroll-film) mutated by "invert the axis": the reel runs horizontally while the page scrolls vertically
