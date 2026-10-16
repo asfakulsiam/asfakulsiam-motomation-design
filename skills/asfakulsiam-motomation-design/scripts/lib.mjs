@@ -159,3 +159,45 @@ export function mutationFor(dims, used = []) {
   return null;
 }
 export const fpText = (fp) => Object.entries(fp).map(([k, v]) => `${k}=${Array.isArray(v) ? v.join(">") : v}`).join(" · ") || "(empty)";
+
+// ── palettes (memory.mjs logs them, gate.mjs compares them) ─────────────────────────────────────────────────────────
+export const hex = (h) => { const m = /^#?([0-9a-f]{6})$/i.exec(String(h || "").trim()); if (!m) return null; const n = parseInt(m[1], 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => v / 255); };
+function hueBucket(rgb) {
+  const [r, g, b] = rgb, mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn, l = (mx + mn) / 2;
+  const sat = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1)); if (sat < 0.15 || d < 0.06) return "neutral";
+  let h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h = (h * 60 + 360) % 360;
+  return [[15, "red"], [45, "orange"], [70, "yellow"], [160, "green"], [195, "teal"], [255, "blue"], [290, "purple"], [345, "pink"], [360, "red"]].find(([e]) => h < e)[1];
+}
+export function paletteFamily({ palette_family, "palette-family": pf, palette, ground, accent } = {}) {
+  const v = palette_family ?? pf; const given = v === true || v == null ? undefined : String(v).trim() || undefined; if (given) return given.toLowerCase();
+  let g = hex(ground), a = hex(accent);
+  if ((!g || !a) && palette) { const row = load("palettes").find((p) => p.name && p.name.toLowerCase() === String(palette).toLowerCase()); if (row) { g = g || hex(row.ground); a = a || hex(row.accent); } }
+  if (!g || !a) return undefined;
+  const lum = 0.2126 * g[0] + 0.7152 * g[1] + 0.0722 * g[2];
+  return `${lum < 0.5 ? "dark" : "light"}-${hueBucket(a)}`;
+}
+// The palette a build declares in its DESIGN.md: a named palette from data/palettes.csv, or an explicit hex list
+// ("paper #f8f5ef on table #d8d2c6, ink #24211d, brass #7a4f0e (accent)"). Looks at a "**Palette:**" line, a
+// "| Palette |" table row, then the "## Palette" section. Returns { palette, ground, accent, hexes, family, id }:
+// family is the comparable name (the palettes.csv name if one is used, else lightness × accent hue: "light-orange");
+// id is the palette name or a short hash of the sorted hex list. undefined when DESIGN.md names no palette.
+const NAMED = { white: "#ffffff", black: "#000000", cream: "#fff8ee", ivory: "#fffff0" };
+export function designPalette(md) {
+  if (!md) return undefined;
+  const lines = md.split("\n");
+  let line = lines.find((l) => /^\s*\*\*palette:?\*\*/i.test(l)) || lines.find((l) => /^\s*\|\s*palette\s*\|/i.test(l));
+  if (!line) { const i = lines.findIndex((l) => /^#+\s*palette\b/i.test(l)); if (i >= 0) line = lines.slice(i + 1, i + 8).join(" "); }
+  if (!line) return undefined;
+  const cell = /^\s*\|/.test(line) ? line.split("|")[2] || "" : line.replace(/^\s*\*\*palette:?\*\*/i, "");
+  const rows = load("palettes"); const named = rows.find((p) => p.name && new RegExp(`\\b${p.name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i").test(cell));
+  const segs = cell.split(/[,;]| on /).map((s) => s.trim()).filter(Boolean);
+  const hexOf = (s) => (s.match(/#[0-9a-f]{6}\b/i) || [])[0] || (Object.entries(NAMED).find(([w]) => new RegExp(`^${w}\\b`, "i").test(s)) || [])[1];
+  const hexes = segs.map(hexOf).filter(Boolean).map((h) => h.toLowerCase());
+  const accentSeg = segs.find((s) => /accent/i.test(s)); const accent = (accentSeg && hexOf(accentSeg)) || (named && named.accent) || hexes[hexes.length - 1];
+  const ground = hexes.find((h) => h !== (accent || "").toLowerCase()) || (named && named.ground);
+  if (!named && !hexes.length) return undefined;
+  const family = named ? named.name.toLowerCase() : paletteFamily({ ground, accent });
+  let id = named ? named.name : null;
+  if (!id) { let x = 2166136261; for (const c of [...new Set(hexes)].sort().join(",")) { x ^= c.charCodeAt(0); x = Math.imul(x, 16777619) >>> 0; } id = "hex:" + x.toString(16).padStart(8, "0"); }
+  return { palette: named ? named.name : undefined, ground, accent, hexes, family, id };
+}

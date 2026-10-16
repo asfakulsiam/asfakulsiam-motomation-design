@@ -739,22 +739,31 @@ function readRecord(file) {
   const lines = (re) => sec.split("\n").filter((l) => re.test(l) && l.replace(re, "").replace(/[-—:\s]/g, "").length > 2 && !/<[^>]+>/.test(l)).length;
   return { survived: v.startsWith("yes") ? (changes ? "changed" : "kept") : "replaced", changes, cuts: lines(/^\s*-\s*Cut:/i), anim: lines(/^\s*-\s*Rejected animation:/i) };
 }
-async function memoryAxis(logFile, stamp, sectionIds) {
+// Variety (critique S): this build against the builds logged BEFORE it, never against its own entry.
+// "This build" is the newest log entry whose `dir` is the build folder (memory.mjs log --dir); entries without a dir fall
+// back to the newest entry with the same archetype, signature and tier (and palette family when both have one).
+// Everything logged before that entry is history; the last 5 of it are compared on four fields: archetype, signature,
+// layout family (lib.mjs fingerprint) and palette family (DESIGN.md, lib.mjs designPalette). S = 5 − fields reused
+// (floor 1); an identical fingerprint is S1. Nothing reused → S5.
+export async function memoryAxis(logFile, stamp, sectionIds, { dir, designFile } = {}) {
   if (!stamp?.archetype || !stamp?.signature) return null;
-  const { fingerprint, similarity, load } = await import("./lib.mjs");
+  const { fingerprint, similarity, load, designPalette, paletteFamily } = await import("./lib.mjs");
   let runs = []; if (logFile && existsSync(logFile)) { try { runs = JSON.parse(readFileSync(logFile, "utf8")).runs || []; } catch {} }
-  const last = runs[runs.length - 1];
-  // this run, already logged: same archetype and signature, and the same tier (or no tier logged; `memory.mjs log` without
-  // --tier used to make --verify score the page against itself, S1, after the agent logged it)
-  if (last && last.archetype === stamp.archetype && last.signature === stamp.signature && (last.tier === undefined || last.tier === null || last.tier === "" || String(last.tier) === String(stamp.tier))) runs = runs.slice(0, -1);
-  const prev = runs.slice(-5); if (!prev.length) return { s: 5, trace: logFile && existsSync(logFile) ? "last5:none" : "last5:no-log" };
+  const pal = designFile && existsSync(designFile) ? designPalette(readFileSync(designFile, "utf8")) : undefined;
+  const famOf = (r) => r.palette_family || paletteFamily(r) || undefined;
+  const tierEq = (r) => r.tier === undefined || r.tier === null || r.tier === "" || String(r.tier) === String(stamp.tier);
+  let own = dir ? runs.map((r) => r.dir && resolve(r.dir) === resolve(dir)).lastIndexOf(true) : -1;
+  if (own < 0) own = runs.map((r) => !r.dir && r.archetype === stamp.archetype && r.signature === stamp.signature && tierEq(r) && (!pal?.family || !famOf(r) || famOf(r) === pal.family)).lastIndexOf(true);
+  const history = own >= 0 ? runs.slice(0, own) : runs;
+  const prev = history.slice(-5); if (!prev.length) return { s: 5, trace: logFile && existsSync(logFile) ? `last5:none${own >= 0 ? ",self-excluded" : ""}` : "last5:no-log" };
   const sigs = load("signatures"); const mine = fingerprint({ archetype: stamp.archetype, signature: stamp.signature, tier: stamp.tier, sections: sectionIds }, sigs);
   const fp = (r) => r.fingerprint || fingerprint({ archetype: r.archetype, signature: r.signature, tier: r.tier, sections: r.sections }, sigs);
   const worst = Math.max(0, ...prev.map((r) => similarity(mine, fp(r)).score));
-  const reusedA = prev.some((r) => r.archetype === stamp.archetype), reusedS = prev.some((r) => r.signature === stamp.signature);
-  const pct = Math.round(worst * 100);
-  const sc = worst >= 0.999 ? 1 : reusedA && reusedS ? 2 : reusedA || reusedS || worst >= 0.7 ? 3 : worst >= 0.5 ? 4 : 5;
-  return { s: sc, trace: `last5:${reusedA ? "archetype-reused" : "archetype-new"},${reusedS ? "signature-reused" : "signature-new"},fp${pct}` };
+  const reused = { archetype: prev.some((r) => r.archetype === stamp.archetype), signature: prev.some((r) => r.signature === stamp.signature),
+    layout: !!mine.layout && prev.some((r) => fp(r).layout === mine.layout), palette: !!pal?.family && prev.some((r) => famOf(r) === pal.family) };
+  const n = Object.values(reused).filter(Boolean).length;
+  const sc = worst >= 0.999 ? 1 : Math.max(1, 5 - n);
+  return { s: sc, reused, palette: pal?.family || null, trace: `last5:${Object.entries(reused).map(([k, v]) => `${k}-${v ? "reused" : "new"}`).join(",")},fp${Math.round(worst * 100)}${own >= 0 ? ",self-excluded" : ""}` };
 }
 // ── motion quality (gate/3): progression in pinned zones, smoothness, reduced-motion distinctness → Q axis, count q ──
 const PROG_MIN_PCT = 0.5;   // a zone "moves" between two scroll samples when more than this % of its pixels changes
@@ -1216,7 +1225,7 @@ export async function scan(target, browser, opts = {}) {
     const own = !/^https?:/.test(target) && !statSync(resolve(target)).isDirectory() ? join(local, basename(resolve(target)).replace(/\.html?$/, "")) : null;
     const designFile = opts.design || [join(local, "DESIGN.md"), ...(own ? [join(own, "DESIGN.md")] : []), join(process.cwd(), "DESIGN.md")].find((f) => existsSync(f));
     const logFile = opts.log || [join(local, ".motomation/log.json"), join(local, "log.json"), ...(own ? [join(own, "log.json"), join(own, ".motomation/log.json")] : []), join(projectRoot(local), ".motomation/log.json"), join(projectRoot(), ".motomation/log.json"), join(userDir(), "log.json")].find((f) => existsSync(f)); // last: the user-level log shared by every project
-    const record = readRecord(designFile); const mem = await memoryAxis(logFile, meta, st.sectionIds);
+    const record = readRecord(designFile); const mem = await memoryAxis(logFile, meta, st.sectionIds, { dir: local, designFile });
     // axis X (v2.9.0): the scope the agent derived in Step 0.7, when DESIGN.md has a Scope section. Not in the stamp or its id;
     // a missing required item fails the page.
     const compl = designFile && /^##\s+Scope\b/m.test(readFileSync(designFile, "utf8")) ? completeness(designFile) : null;

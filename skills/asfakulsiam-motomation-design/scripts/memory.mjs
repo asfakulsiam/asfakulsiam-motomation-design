@@ -18,7 +18,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join, resolve, dirname, sep, basename } from "node:path";
 import { homedir } from "node:os";
 import { fileURLToPath } from "node:url";
-import { args, cli, load, fingerprint, similarity, mutationFor, fpText } from "./lib.mjs";
+import { args, cli, load, fingerprint, similarity, mutationFor, fpText, paletteFamily, designPalette } from "./lib.mjs";
 
 const SKILL_DIR = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 /** The project that owns the memory log: nearest ancestor of `start` with package.json or .git, outside the skill folder. */
@@ -41,7 +41,7 @@ const DIR = cliProject ? join(resolve(cliProject), ".motomation") : userDir();
 const FILE = join(DIR, "log.json");
 const LEGACY = cliProject ? null : join(PROJECT, ".motomation", "log.json"); // a pre-2.9 per-project log, read but never written
 export const logPath = () => FILE;
-const FIELDS = ["page", "category", "archetype", "mutation", "signature", "fonts", "palette", "palette_family", "motion", "tier", "nav", "footer", "notes"];
+const FIELDS = ["dir", "page", "category", "archetype", "mutation", "signature", "fonts", "palette", "palette_family", "motion", "tier", "nav", "footer", "notes"];
 // the five dimensions a similar brief must diverge on
 export const DIVERGE = [["archetype", "archetype"], ["palette_family", "palette family"], ["fonts", "type pairing"], ["motion", "motion language"], ["signature", "signature move"]];
 const FP_FLAGS = { layout: "layout", "type-scale": "type_scale", sections: "sections", "signature-type": "signature_type" }; // extra structural inputs
@@ -64,21 +64,8 @@ export function readLog() {
 }
 
 // palette family: light/dark ground × accent hue bucket (or neutral). From --palette-family, or a palettes.csv name, or --ground/--accent hexes.
-const hex = (h) => { const m = /^#?([0-9a-f]{6})$/i.exec(String(h || "").trim()); if (!m) return null; const n = parseInt(m[1], 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => v / 255); };
-function hueBucket(rgb) {
-  const [r, g, b] = rgb, mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn, l = (mx + mn) / 2;
-  const sat = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1)); if (sat < 0.15 || d < 0.06) return "neutral";
-  let h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h = (h * 60 + 360) % 360;
-  return [[15, "red"], [45, "orange"], [70, "yellow"], [160, "green"], [195, "teal"], [255, "blue"], [290, "purple"], [345, "pink"], [360, "red"]].find(([e]) => h < e)[1];
-}
-export function paletteFamily({ palette_family, "palette-family": pf, palette, ground, accent } = {}) {
-  const given = flagVal(palette_family ?? pf); if (given) return given.toLowerCase();
-  let g = hex(ground), a = hex(accent);
-  if ((!g || !a) && palette) { const row = load("palettes").find((p) => p.name && p.name.toLowerCase() === String(palette).toLowerCase()); if (row) { g = g || hex(row.ground); a = a || hex(row.accent); } }
-  if (!g || !a) return undefined;
-  const lum = 0.2126 * g[0] + 0.7152 * g[1] + 0.0722 * g[2];
-  return `${lum < 0.5 ? "dark" : "light"}-${hueBucket(a)}`;
-}
+// palette helpers live in lib.mjs (shared with gate.mjs, which reads the current build's palette from DESIGN.md)
+export { paletteFamily, designPalette } from "./lib.mjs";
 // brief similarity: same category, or ≥ 30% shared content words (Jaccard). Deterministic.
 const STOP = new Set("the and for with from that this into your our you are was were will site page website build make design new one two a an of to in on at by is it be as or we us me my".split(" "));
 const words = (t) => new Set(String(t || "").toLowerCase().split(/[^\p{L}\p{N}]+/u).filter((w) => w.length > 2 && !STOP.has(w)));
@@ -99,6 +86,7 @@ if (isMain) {
   if (cmd === "log") {
     const entry = { date: new Date().toISOString() };
     for (const f of FIELDS) if (a[f] !== undefined && a[f] !== true) entry[f] = String(a[f]);
+    if (entry.dir) entry.dir = resolve(entry.dir); // the build folder: gate.mjs finds this build's own entry by it
     if (Object.keys(entry).length === 1) { console.error("Nothing to log. Pass at least --archetype or --signature."); process.exit(1); }
     entry.project = cliProject ? resolve(cliProject) : PROJECT;
     if (flagVal(a.brief)) entry.brief = String(a.brief).slice(0, 400);
