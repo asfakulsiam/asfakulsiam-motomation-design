@@ -4115,6 +4115,7 @@ self (opinion)   Try next: <one command, e.g. /bolder on the hero, or /motomate 
 ### Not verified
 <each check that did not run or could not decide, with the reason: "gate.mjs: not verified — no browser"; axes marked ?;
  journey checks that printed n/a and why; O with no earlier build; real devices, screen readers, copy accuracy>
+forms        Form states are checked by intercepting requests in the browser. No real server exists for /api/* endpoints. When the template ships, replace the mock endpoints with a real server.
 <[NEEDS COPY] / [NEEDS ASSET] items: placeholders, nothing claimed about them>
 ```
 
