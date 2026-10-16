@@ -54,7 +54,7 @@ One object on a stage: the bottle, lit from inside a dark room. The page runs ba
 | Type | Bodoni Moda italic (display) + Jost light, tracked capitals (body/labels) | didone contrast reads as a label on glass |
 | Palette | night #120e0b, smoke #e8dfd2, amber #c9893b (accent: the oil) | the accent is the product's colour |
 | Layout | centred stage scenes; sticky bottle beside scenes; wide empty margins | space as the luxury |
-| Imagery | one SVG bottle in a radial vignette, on every scene [NEEDS ASSET: photograph] | one treatment carried through, as the brief asks |
+| Imagery | one drawn SVG bottle in a radial vignette, on every scene (no photograph) | one treatment carried through, as the brief asks |
 
 ## Divergence
 `memory.mjs check` against runs #1 to #3: archetype "timeline" refused (run #1), so The Stage; signature, fonts, palette, motion fresh. Tier: the check flags every tier used in the last three runs (2, 3, 4), so any honest tier repeats; kept 3 because the brief supports it, and logged the conflict as a finding in REPORT.md.

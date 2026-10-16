@@ -17,9 +17,9 @@
     try {
       const r = await fetch("/api/report", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(new FormData(form))) });
       if (!r.ok) throw new Error(String(r.status));
-      status.className = "form-status is-ok"; status.textContent = "Thank you. Report received; reference number to follow by SMS [NEEDS COPY: reference format]."; form.reset();
+      status.className = "form-status is-ok"; status.textContent = "Thank you. Report received; we will send a reference number by SMS."; form.reset();
     } catch {
-      status.className = "form-status is-error"; status.textContent = "Sorry, we could not send your report. Please try again, or call 16162.";
+      status.className = "form-status is-error"; status.textContent = "Sorry, we could not send your report. Please try again, or call 0721-000000.";
     } finally { btn.disabled = false; btn.textContent = label; form.removeAttribute("aria-busy"); }
   });
 })();

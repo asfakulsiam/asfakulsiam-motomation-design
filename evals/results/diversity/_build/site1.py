@@ -27,16 +27,16 @@ def head(title, desc, path):
 <div class="callbar" role="region" aria-label="24-hour line"><span>Someone has died? We answer at any hour.</span> <a class="callbar-tel" href="tel:+8801711000000">Call 01711-000000</a></div>
 <header class="mast"><a class="mast-name" href="/">Shanti Ghat Funeral Service</a><nav aria-label="Main"><a href="/what-happens-next.html">What happens next</a><a href="/prices.html">Prices</a><a href="/contact.html">Contact</a></nav></header>
 '''
-FOOT = '''<footer class="foot"><p>Shanti Ghat Funeral Service · Narayanganj · since 1974</p><p><a href="/what-happens-next.html">What happens next</a> · <a href="/prices.html">Prices</a> · <a href="/contact.html">Contact</a></p><p class="foot-small">Phone number and prices are placeholders [NEEDS COPY].</p></footer>
+FOOT = '''<footer class="foot"><p>Shanti Ghat Funeral Service · Narayanganj · since 1974</p><p><a href="/what-happens-next.html">What happens next</a> · <a href="/prices.html">Prices</a> · <a href="/contact.html">Contact</a></p><p class="foot-small">Sample content: the phone number, address and prices on this demo site are illustrative.</p></footer>
 <script src="/feed.js" defer></script>
 </body>
 </html>
 '''
-STEPS = [("The first hour", "Call the line. A person answers, not a menu. Tell us where your family member is and which rite you follow."), ("Within 90 minutes", "Two of us arrive with a vehicle, at home or at the hospital. We bring the papers you will need to sign [NEEDS COPY: arrival time]."), ("The washing", "Ghusl or snan, done by people of your faith, men for men and women for women. Family may join."), ("The rite", "Burial at the graveyard you choose, cremation at the ghat, or a church service. We arrange the place and the time."), ("After", "Transport to the home district if the family wishes, and the death certificate paperwork with the city office.")]
+STEPS = [("The first hour", "Call the line. A person answers, not a menu. Tell us where your family member is and which rite you follow."), ("We come to you", "Two of us arrive with a vehicle, at home or at the hospital. We bring the papers you will need to sign."), ("The washing", "Ghusl or snan, done by people of your faith, men for men and women for women. Family may join."), ("The rite", "Burial at the graveyard you choose, cremation at the ghat, or a church service. We arrange the place and the time."), ("After", "Transport to the home district if the family wishes, and the death certificate paperwork with the city office.")]
 PRICES = [("Collection, home or hospital", "4,500"), ("Washing and shrouding", "3,000"), ("Coffin or bier", "6,000"), ("Cremation arrangement at the ghat", "9,000"), ("Burial coordination", "5,000"), ("Transport per 100 km", "2,500")]
 def receipt(rows, total=True):
     lines = ''.join(f'<li class="line"><span>{n}</span><span class="dots" aria-hidden="true"></span><span class="amt">BDT {a}</span></li>' for n, a in rows)
-    return f'<ol class="receipt" aria-label="Fixed prices in taka [NEEDS COPY: real prices]">{lines}</ol>'
+    return f'<ol class="receipt" aria-label="Sample prices in taka">{lines}</ol>'
 def steps(rows):
     return '<ol class="steps">' + ''.join(f'<li class="line"><h3>{t}</h3><p>{d}</p></li>' for t, d in rows) + '</ol>'
 
@@ -46,8 +46,8 @@ index = head('Shanti Ghat Funeral Service · Narayanganj', 'A family funeral hom
 <p class="lede line">Shanti Ghat has looked after families in Narayanganj since 1974: Muslim, Hindu and Christian. Below is everything that happens next, in order, and what each part costs.</p>
 <section aria-labelledby="h-next"><h2 id="h-next" class="line">What happens next</h2>{steps(STEPS)}<p class="line"><a class="more" href="/what-happens-next.html">Read each step in full</a></p></section>
 <section aria-labelledby="h-prices"><h2 id="h-prices" class="line">Prices, written down</h2><p class="line">Every price is fixed. Nothing is added later, and nothing is sold at the door.</p>{receipt(PRICES[:4])}<p class="line"><a class="more" href="/prices.html">See every price</a></p></section>
-<section aria-labelledby="h-faith"><h2 id="h-faith" class="line">For every faith</h2><p class="line">Our staff include imams' families, a purohit we work with at the ghat, and the parish of St. Paul's [NEEDS COPY: confirm]. Tell us the rite; we follow it.</p></section>
-<section aria-labelledby="h-reach"><h2 id="h-reach" class="line">Where we are</h2><p class="line">Shanti Ghat, Bandar Road, Narayanganj [NEEDS COPY: address]. Open every day, every hour.</p><p class="line"><a class="more" href="/contact.html">How to reach us</a></p></section>
+<section aria-labelledby="h-faith"><h2 id="h-faith" class="line">For every faith</h2><p class="line">Muslim, Hindu, Christian or Buddhist: tell us the rite, and we follow it.</p></section>
+<section aria-labelledby="h-reach"><h2 id="h-reach" class="line">Where we are</h2><p class="line">Shanti Ghat, Bandar Road, Narayanganj. Open every day, every hour.</p><p class="line"><a class="more" href="/contact.html">How to reach us</a></p></section>
 <p class="sheet-end line" aria-hidden="true">· · ·</p>
 </main>
 ''' + FOOT
@@ -69,7 +69,7 @@ ct = head('Contact · Shanti Ghat Funeral Service', 'Call 01711-000000 at any ho
 <p class="sheet-label line">Contact</p><h1 class="line">Call us. A person answers.</h1>
 <p class="line big-tel"><a href="tel:+8801711000000">01711-000000</a></p>
 <p class="line">Every hour of every day. If you cannot speak, send a text with your address and we will come.</p>
-<p class="line">Shanti Ghat, Bandar Road, Narayanganj [NEEDS COPY: address]</p>
+<p class="line">Shanti Ghat, Bandar Road, Narayanganj</p>
 <p class="line">Email for paperwork, not emergencies: <a href="mailto:office@shantighat.example">office@shantighat.example</a></p>
 </main>
 ''' + FOOT

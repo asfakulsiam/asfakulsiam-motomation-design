@@ -14,7 +14,7 @@
     if (!list.length) tb.firstChild.firstChild.colSpan = 3; tb.setAttribute("aria-busy", "false"); });
   const fail = () => { document.querySelectorAll("tbody[data-entity=outage]").forEach((tb) => { const tr = row([["Could not load today's outage list. Check your connection."]], "msg"); tr.firstChild.colSpan = 3;
       const b = document.createElement("button"); b.type = "button"; b.textContent = "Try again"; b.addEventListener("click", load); tr.firstChild.append(" ", b); tb.replaceChildren(tr); tb.setAttribute("aria-busy", "false"); });
-    const el = $(".sentence"); if (el) { el.textContent = "Today's supply list could not load. Call 16162."; el.setAttribute("aria-busy", "false"); } };
+    const el = $(".sentence"); if (el) { el.textContent = "Today's supply list could not load. Call 0721-000000."; el.setAttribute("aria-busy", "false"); } };
   async function load() { try { const r = await fetch("/data/outages.json", { cache: "no-store" }); if (!r.ok) throw 0; data = await r.json(); sentence(); fill();
       const u = $("#updated"); if (u) u.textContent = "Last update: " + new Date(data.updated).toLocaleString("en-GB", { timeZone: "Asia/Dhaka" }) + "."; } catch { fail(); } }
   const d = $("#today-date"); if (d) d.textContent = new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", timeZone: "Asia/Dhaka" });

@@ -54,7 +54,7 @@ The site is a field guide to the visit, bound as the child's tooth passport: eve
 | Type | Fredoka (display) + Nunito (body) | round, friendly, still legible at 16px for parents |
 | Palette | cream #fff8ee, navy #1c2a4a, coral #e8553d (accent), mint #dff2ea surface | nothing white-and-blue clinical |
 | Layout | 2-column grid of rounded cards, 28px radius | pages of a booklet |
-| Imagery | one inline SVG (the fish tank), round mask; doctor initials as faces [NEEDS ASSET] | no stock smiles |
+| Imagery | one inline SVG (the fish tank), round mask; doctor initials as faces (drawn, no photographs) | no stock smiles |
 
 ## Divergence
 `memory.mjs check` against run #1 (funeral home): archetype, signature fresh; tier 2 repeated, so the tier moved to 3. Fingerprint layout=cards, closest run 37% (< 70%).

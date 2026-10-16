@@ -17,7 +17,7 @@ design.write(os.path.join(os.path.dirname(__file__), '..', '02-childrens-dentist
           ('Type', 'Fredoka (display) + Nunito (body)', 'round, friendly, still legible at 16px for parents'),
           ('Palette', 'cream #fff8ee, navy #1c2a4a, coral #e8553d (accent), mint #dff2ea surface', 'nothing white-and-blue clinical'),
           ('Layout', '2-column grid of rounded cards, 28px radius', 'pages of a booklet'),
-          ('Imagery', 'one inline SVG (the fish tank), round mask; doctor initials as faces [NEEDS ASSET]', 'no stock smiles')],
+          ('Imagery', 'one inline SVG (the fish tank), round mask; doctor initials as faces (drawn, no photographs)', 'no stock smiles')],
  divergence='`memory.mjs check` against run #1 (funeral home): archetype, signature fresh; tier 2 repeated, so the tier moved to 3. Fingerprint layout=cards, closest run 37% (< 70%).',
  survived='yes, after 1 change (Manifesto to Field Guide)', cut='Width Sprint (variable width with scroll speed): fails Q1 and Q2 (no hierarchy, feedback or story for a parent booking)',
  kept='the fish SVG: fails Q1, passes Q2: the brief names the fish tank as the thing children remember',

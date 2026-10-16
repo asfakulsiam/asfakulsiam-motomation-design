@@ -29,7 +29,7 @@ def head(title, desc, path, page):
 <a class="skip" href="#main">Skip to main content</a>
 <header class="top"><div class="bar"><a class="org" href="/"><span class="org-mark" aria-hidden="true">RW</span><span>Rajshahi City Water Supply Authority</span></a><button class="lang" type="button" aria-pressed="false" lang="bn">বাংলা</button></div><nav aria-label="Main">{nav}</nav></header>
 '''
-FOOT = '''<footer class="foot"><p><b>Rajshahi City Water Supply Authority</b> · Helpline 16162 [NEEDS COPY: number], 24 hours · <a href="/report.html">Report a problem</a> · <a href="/water-quality.html">Water quality</a></p><p>Bangla text is partial [NEEDS COPY: Bangla text]. Outage data on this demo site is labelled demo.</p></footer>
+FOOT = '''<footer class="foot"><p><b>Rajshahi City Water Supply Authority</b> · Helpline 0721-000000, 24 hours · <a href="/report.html">Report a problem</a> · <a href="/water-quality.html">Water quality</a></p><p>The Bangla switch translates the navigation and the ward sentence; the rest of this demo site is in English. Sample content: the helpline, tariffs, outage data and water-quality readings are illustrative.</p></footer>
 <script src="/site.js" defer></script>
 '''
 SKEL = '<tr class="skel"><td colspan="3"><span></span></td></tr>' * 4
@@ -44,11 +44,11 @@ outages = head('Supply cuts by ward · Rajshahi water', 'The full list of all 30
 <table class="table"><thead><tr><th scope="col">Ward</th><th scope="col">Area</th><th scope="col">Status</th></tr></thead><tbody data-entity="outage" data-filter="all" aria-busy="true">{SKEL}</tbody></table></main>
 ''' + FOOT + '</body>\n</html>\n'
 bills = head('Water bills and tariffs · Rajshahi water', 'Water tariffs per 1,000 litres for homes and businesses, how to read your bill, and where to pay it.', '/bills.html', 'bills') + '''<main id="main"><h1>Bills and tariffs</h1>
-<h2>Tariff per 1,000 litres</h2><table class="table"><thead><tr><th scope="col">Connection</th><th scope="col">Price per 1,000 litres</th></tr></thead><tbody><tr><td>Home</td><td>[NEEDS COPY: current tariff]</td></tr><tr><td>Business</td><td>[NEEDS COPY: current tariff]</td></tr><tr><td>Public standpipe</td><td>Free</td></tr></tbody></table>
-<h2>Reading your bill</h2><ol class="steps"><li>Your account number is at the top left. Keep it for every payment.</li><li>Usage is the difference between this month's and last month's meter reading, in thousands of litres.</li><li>Pay by the due date to avoid a late fee [NEEDS COPY: fee].</li></ol>
-<h2>Where to pay</h2><p>[NEEDS COPY: payment channels and counters]</p><p><a href="/report.html">Report a wrong bill</a></p></main>
+<h2>Tariff per 1,000 litres</h2><table class="table"><thead><tr><th scope="col">Connection</th><th scope="col">Price per 1,000 litres</th></tr></thead><tbody><tr><td>Home</td><td>BDT 12 (sample)</td></tr><tr><td>Business</td><td>BDT 30 (sample)</td></tr><tr><td>Public standpipe</td><td>Free</td></tr></tbody></table>
+<h2>Reading your bill</h2><ol class="steps"><li>Your account number is at the top left. Keep it for every payment.</li><li>Usage is the difference between this month's and last month's meter reading, in thousands of litres.</li><li>Pay by the due date shown on the bill to avoid a late fee.</li></ol>
+<h2>Where to pay</h2><p>At any ward office counter, at a partner bank, or by mobile banking with the account number printed on your bill.</p><p><a href="/report.html">Report a wrong bill</a></p></main>
 ''' + FOOT + '</body>\n</html>\n'
-report = head('Report a leak or dirty water · Rajshahi water', 'Report a leak, dirty water or no water to the Rajshahi water authority. You get a reference number to track it.', '/report.html', 'report') + '''<main id="main"><h1>Report a problem</h1><p class="lede">You will get a reference number. For a burst main, call 16162 now.</p>
+report = head('Report a leak or dirty water · Rajshahi water', 'Report a leak, dirty water or no water to the Rajshahi water authority. You get a reference number to track it.', '/report.html', 'report') + '''<main id="main"><h1>Report a problem</h1><p class="lede">You will get a reference number. For a burst main, call 0721-000000 now.</p>
 <form id="report" class="form" novalidate aria-label="Report a problem">
 <div class="field"><label for="kind">What is wrong?</label><select id="kind" name="kind" required><option value="">Choose one</option><option>Leak or burst pipe</option><option>Dirty or smelly water</option><option>No water</option><option>Wrong bill</option></select><span class="err" data-for="kind" aria-live="polite"></span></div>
 <div class="field"><label for="ward">Ward number</label><input id="ward" name="ward" type="number" min="1" max="30" inputmode="numeric" required><span class="err" data-for="ward" aria-live="polite"></span></div>
@@ -64,7 +64,7 @@ def ruler(n, u, lo, hi, s0, s1, v):
     safe = f"safe {s0} to {s1} {u}" if s1 > s0 else f"safe: {s0} {u}"
     return f'<li class="q"><h3>{n}</h3><p class="q-val"><b>{v}</b> {u} · <span>{safe}</span> · within limit (demo)</p><div class="gauge q-{n.split()[0].lower().replace(".", "")}" role="img" aria-label="{n}: {v} {u}, {safe}"><span class="band"></span><span class="mark"></span></div><p class="scale"><span>{lo}</span><span>{hi} {u}</span></p></li>'
 qcss = ''.join(f'.q-{n.split()[0].lower().replace(".", "")} .band {{ left: {(s0 - lo) / (hi - lo) * 100:.1f}%; width: {max((s1 - s0) / (hi - lo) * 100, 1.2):.1f}%; }} .q-{n.split()[0].lower().replace(".", "")} .mark {{ left: {(v - lo) / (hi - lo) * 100:.1f}%; }}\n' for n, u, lo, hi, s0, s1, v in Q)
-quality = head('Water quality report · Rajshahi water', 'This month\'s tap water quality in Rajshahi: free chlorine, turbidity and E. coli, each measured against the safe limit.', '/water-quality.html', 'quality') + '''<main id="main"><h1>Water quality this month</h1><p class="lede">Sampled at 60 taps across the city [NEEDS COPY: real monthly report; values below are demo]. Each ruler shows the safe range and this month's reading.</p>
+quality = head('Water quality report · Rajshahi water', 'This month\'s tap water quality in Rajshahi: free chlorine, turbidity and E. coli, each measured against the safe limit.', '/water-quality.html', 'quality') + '''<main id="main"><h1>Water quality this month</h1><p class="lede">Sampled at 60 taps across the city. The readings below are sample values, not a real monthly report. Each ruler shows the safe range and this month's reading.</p>
 <ul class="quality">''' + ''.join(ruler(*q) for q in Q) + '''</ul><p><a href="/report.html">Report dirty water</a></p></main>
 ''' + FOOT + '</body>\n</html>\n'
 nf = head('Page not found · Rajshahi water', 'This page does not exist. Check today\'s supply cuts or report a problem instead.', '/404.html', '404') + '''<main id="main"><h1>Page not found</h1><p class="lede">This address is not on the site (error 404).</p><ul class="jobs-list"><li><a href="/">Today's supply cuts</a></li><li><a href="/report.html">Report a problem</a></li></ul></main>
@@ -155,7 +155,7 @@ SJS = r'''// Tier 1. One state script: today's sentence, the ward lookup (signat
     if (!list.length) tb.firstChild.firstChild.colSpan = 3; tb.setAttribute("aria-busy", "false"); });
   const fail = () => { document.querySelectorAll("tbody[data-entity=outage]").forEach((tb) => { const tr = row([["Could not load today's outage list. Check your connection."]], "msg"); tr.firstChild.colSpan = 3;
       const b = document.createElement("button"); b.type = "button"; b.textContent = "Try again"; b.addEventListener("click", load); tr.firstChild.append(" ", b); tb.replaceChildren(tr); tb.setAttribute("aria-busy", "false"); });
-    const el = $(".sentence"); if (el) { el.textContent = "Today's supply list could not load. Call 16162."; el.setAttribute("aria-busy", "false"); } };
+    const el = $(".sentence"); if (el) { el.textContent = "Today's supply list could not load. Call 0721-000000."; el.setAttribute("aria-busy", "false"); } };
   async function load() { try { const r = await fetch("/data/outages.json", { cache: "no-store" }); if (!r.ok) throw 0; data = await r.json(); sentence(); fill();
       const u = $("#updated"); if (u) u.textContent = "Last update: " + new Date(data.updated).toLocaleString("en-GB", { timeZone: "Asia/Dhaka" }) + "."; } catch { fail(); } }
   const d = $("#today-date"); if (d) d.textContent = new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", timeZone: "Asia/Dhaka" });
@@ -174,7 +174,7 @@ SJS = r'''// Tier 1. One state script: today's sentence, the ward lookup (signat
 })();
 '''
 files = {'index.html': index, 'outages.html': outages, 'bills.html': bills, 'report.html': report, 'water-quality.html': quality, '404.html': nf, 'style.css': CSS, 'site.js': SJS,
- 'report.js': forms.form_js('#report', '/api/report', 'Sending the report…', 'Thank you. Report received; reference number to follow by SMS [NEEDS COPY: reference format].', 'Sorry, we could not send your report. Please try again, or call 16162.'),
+ 'report.js': forms.form_js('#report', '/api/report', 'Sending the report…', 'Thank you. Report received; we will send a reference number by SMS.', 'Sorry, we could not send your report. Please try again, or call 0721-000000.'),
  'data/outages.json': json.dumps(data, ensure_ascii=False, indent=1),
  'sitemap.xml': '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'<url><loc>{DOMAIN}{p}</loc></url>\n' for p in ['/', '/outages.html', '/bills.html', '/report.html', '/water-quality.html']) + '</urlset>\n',
  'robots.txt': f'User-agent: *\nAllow: /\nSitemap: {DOMAIN}/sitemap.xml\n',

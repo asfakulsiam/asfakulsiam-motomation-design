@@ -17,7 +17,7 @@ design.write(os.path.join(os.path.dirname(__file__), '..', '03-hardcore-metal-ba
           ('Type', 'Anton (display, 27vw) + JetBrains Mono (body)', 'blunt condensed hit against a flat machine voice'),
           ('Palette', 'black #0a0a0a, bone #ece6da, red #f22b1f (accent, also whole rooms; first #e01b12 failed AA at 4.09:1)', 'no smoke, no fire: one red'),
           ('Layout', 'full-bleed, no container, 6px rules between rooms; word index replaces the nav', 'remove-the-expected mutation'),
-          ('Imagery', 'one halftone placeholder, jagged clip-path [NEEDS ASSET]', 'xerox flyer, not a stock photo')],
+          ('Imagery', 'one drawn halftone SVG (bulb, four silhouettes), jagged clip-path', 'xerox flyer, not a stock photo')],
  divergence='`memory.mjs check` against runs #1 and #2: archetype, signature, fonts, palette, motion fresh; tier 2 repeated, so the tier moved to 4. No similar brief logged (category event).',
  survived='yes, after 1 change (darkroom slow develop bent to a single hit)', cut='Line Curtain (headlines rising line by line from masks): fails Q1 and Q2 (soft; the brief wants impact)',
  kept='the scroll drift on the giant word: fails Q1, passes Q2: it makes the door feel like walking past a wall',
