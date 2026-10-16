@@ -243,11 +243,7 @@ The budgets hold either way: one signature move, one accent moment per screen, o
 
 **Test:** for every element, can you name the question it passes? If neither, cut it.
 
-**Checkpoint 2: Research and concept** (after the dials, type and colour). Show the references and what each gave, the avoided pattern, tension to mutation, the collision output, palette, type, tier, signature, with reasons. Stop.
-
----
-
-## Checkpoints 4 and 5
+**Checkpoint 2: Research and concept** (after the dials, type and colour). Show the 3 references looked at and what was taken from each, the pattern being avoided, the tension, concept, archetype and mutation, the collision draw output (pasted), the palette, typography, motion tier and signature move, with the reasoning for each. Stop and wait: the user approves or redirects.
 
 **Checkpoint 4: Build plan** (after `MOTION.md`). Show the section order, the components to create (compose, extend or invent, each named), the animation language per section, and the page-to-page transitions. Stop and wait.
 

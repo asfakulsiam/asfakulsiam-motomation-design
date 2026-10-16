@@ -45,3 +45,5 @@ Tally is a small Dhaka startup making a shared-expenses app for flatmates and fa
 - A visitor clicks through all four pages and it feels like one continuous object moving forward, then backward, without a reload feel.
 - By the Pricing page they understand what Tally does and what it costs; Start is one obvious action.
 - The motion is the navigation: remove it and the tour would lose its sense of sequence.
+
+Approve every checkpoint.

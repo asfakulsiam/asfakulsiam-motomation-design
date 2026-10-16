@@ -46,3 +46,5 @@ Why this tier: a long read earns section entrances and scroll choreography that 
 - A phone reader finishes the piece and it felt paced, like a printed feature turned by hand: sections arrive, quotes land, nothing distracts from the words.
 - The motion marks structure (where a section starts, what to look at) and never delays reading.
 - The issue looks like *Jol*, not like a blog template.
+
+Approve every checkpoint.

@@ -9,6 +9,7 @@ Landing page for **Tracewell**, a CLI and web app that finds the one log line th
 - Install: `brew install tracewell` or `curl -fsSL https://tracewell.dev/install.sh | sh`.
 - No customer logos yet, no usage numbers. Don't invent any.
 
+Approve every checkpoint.
 **Expect:** no fake logos or metrics, the product shown working, Console or Workbench thinking, MOTION 2.
 
 ## Benchmark conditions (identical for baseline and skill runs)

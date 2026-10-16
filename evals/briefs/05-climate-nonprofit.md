@@ -9,6 +9,7 @@ Site for **Sundari Trust**, a non-profit that restores mangroves in the Sundarba
 - Bilingual: the headline and section titles in Bangla and English (e.g. "ম্যানগ্রোভ ফিরিয়ে আনি / Bringing the mangroves back").
 - Contact: hello@sundaritrust.org.
 
+Approve every checkpoint.
 **Expect:** WCAG AA, MOTION ≤ 2, no guilt imagery, the real figure with its source, bilingual typography.
 
 ## Benchmark conditions (identical for baseline and skill runs)

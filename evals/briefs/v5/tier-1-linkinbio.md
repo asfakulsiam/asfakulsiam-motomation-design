@@ -39,3 +39,5 @@ Rumana Akter is a documentary photographer in Chattogram who shoots the ship-bre
 - A visitor on a phone with a weak signal sees her name, her line and four clearly different links almost instantly, and taps the right one without thinking.
 - Touching a link feels crafted (a press, a shift, a reveal), and nothing moves on its own.
 - It reads as hers, not as a generic link-in-bio service page.
+
+Approve every checkpoint.

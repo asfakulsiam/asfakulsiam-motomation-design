@@ -169,8 +169,10 @@ export function promptFor({ slug, seed, cond, budget }) {
   if (cond === "matched") return `You are an expert web designer and front-end developer. ${TASK}${tier} Take the time a careful designer would: you have ${budget ?? MATCH_TURNS} turns, and you should use most of them. Work in stages: (1) write down the concept and the design system (type, colour, layout, motion) before any code; (2) build; (3) look at the page at 1440px and 375px; (4) write a critique of what is weak, generic or broken; (5) revise; repeat looking, critiquing and revising at least twice. Check accessibility (contrast, keyboard, reduced motion) yourself before you finish.\n\n${brief}`;
   // gated = the baseline prompt plus the same measured gate the skill uses, without any of the skill's knowledge
   if (cond === "gated") return `You are an expert web designer and front-end developer. ${TASK}${tier} Before you finish, run \`node gate/gate.mjs index.html\` and fix every failure it reports until it prints PASS (if it prints "not verified", say so).\n\n${brief}`;
-  return `Use the asfakulsiam-motomation-design skill: /build this brief. When you run the collision engine, use --seed ${seed}.${tier ? ` Force the motion tier: --tier=${TIER}.` : ""} ${TASK} Follow the skill end to end, including its Delivery Gate, and finish with the handoff.\n\n${brief}`;
+  return `Use the asfakulsiam-motomation-design skill: /build this brief. Approve every checkpoint. When you run the collision engine, use --seed ${seed}.${tier ? ` Force the motion tier: --tier=${TIER}.` : ""} ${TASK} Follow the skill end to end, including its Delivery Gate, and finish with the handoff.\n\n${brief}`;
 }
+// Every brief ends with "Approve every checkpoint." (v2.10.0) and the skill arm's prompt says it too: the skill stops at
+// five checkpoints for an explicit answer, and nobody can answer inside a benchmark run.
 // v5 prompts: the tier is stated, never inferred, and no stack is imposed (Step 0 of the skill would ask; nobody can
 // answer inside a benchmark run, so every arm gets the client's answer "you choose" and must say what it chose and why).
 const V5_TASK = "Build the website described in the brief below in the current folder. The brief names no stack; the client's answer to \"which stack?\" is \"you choose\": choose one, say which and why in one line at the end, and leave the result where a browser can open it (an index.html in this folder, or a built output folder such as out/, dist/ or build/ with its index.html). Use only facts from the brief.";
@@ -180,7 +182,7 @@ export function promptV5({ slug, seed, cond, budget }, brief) {
   if (cond === "baseline") return `You are an expert web designer and front-end developer. ${V5_TASK}${tier} Check your work before you finish.\n\n${brief}`;
   if (cond === "matched") return `You are an expert web designer and front-end developer. ${V5_TASK}${tier} Take the time a careful designer would: you have ${budget ?? MATCH_TURNS} turns, and you should use most of them: plan, build, look at the result at 1440px and 375px, critique it and revise.\n\n${brief}`;
   if (cond === "gated") return `You are an expert web designer and front-end developer. ${V5_TASK}${tier} Before you finish, run \`node gate/gate.mjs <your page, folder or URL>\` and fix every failure it reports until it prints PASS (if it prints "not verified", say so).\n\n${brief}`;
-  return `Use the asfakulsiam-motomation-design skill: /build this brief. When you run the collision engine, use --seed ${seed}. Force the motion tier: --tier=${t}. ${V5_TASK}${tier} Follow the skill end to end, including its Delivery Gate, and finish with the handoff.\n\n${brief}`;
+  return `Use the asfakulsiam-motomation-design skill: /build this brief. Approve every checkpoint. When you run the collision engine, use --seed ${seed}. Force the motion tier: --tier=${t}. ${V5_TASK}${tier} Follow the skill end to end, including its Delivery Gate, and finish with the handoff.\n\n${brief}`;
 }
 const ALLOWED = ["Skill", "Read", "Write", "Edit", "Glob", "Grep", "TodoWrite", "Bash(node:*)", "Bash(ls:*)", "Bash(cat:*)", "Bash(mkdir:*)", "Bash(wc:*)"];
 

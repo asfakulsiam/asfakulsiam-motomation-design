@@ -163,7 +163,7 @@ Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rule
 
 0. **Stack**: if the brief (or the existing project) names a stack, use it. Otherwise **Next.js (App Router, TypeScript, Tailwind)** for anything with routes or data, plain HTML for a single static page; never Astro or Vite for e-commerce unless the brief demands it. Every dependency passes the three checks in `craft/stack.md` (active, not deprecated, licence free for commercial use). Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 0.5. **Research (mandatory)**: leave the skill before designing. Live award sources (last 6 months) and `references/sources/`, concepts only. Record three references, three techniques with sources, and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference, never to the skill's defaults alone. No web: say so and state the limitation. See `craft/research.md`.
-0.7. **Derive the scope**: everything a complete site of this type needs (routes, functions, states, legal, edge cases, admin, skeletons), from research and knowledge, never a fixed list; each item marked in `DESIGN.md` under `Scope`. Gate axis X checks it.
+0.7. **Derive the scope**: what a complete site of this type serves (routes, functions, states, legal pages for the region, edge cases, admin, skeletons), derived from research and knowledge, never a fixed list; each item requested / required / optional / not required with a reason, in `DESIGN.md` under `Scope`. Gate axis X (`scripts/completeness.mjs`) checks it.
 1. **Tension**: find the conflict inside the brief (calm vs. urgent, heritage vs. new, luxury vs. honest).
 2. **Concept**: resolve the tension in one sentence. This is the idea, not a layout.
 3. **Archetype + Mutation**: derive the page structure from the brief, with `structures/archetypes.md` and `data/archetypes.csv` as reference and constraint (not a menu), then break one of its rules.
@@ -253,9 +253,10 @@ Full behaviour of each command is in `commands/overview.md`. Critique output for
 
 ## Output rules
 
-- **Five checkpoints** (`thinking/sequence.md`): after Stack, Concept, Scope, Build plan and Ship, show the reasoning and stop for an explicit answer; never re-ask. Keep prose short.
-- Every build ships a **sellable template** (`templates/TEMPLATE.md`): README with the demo line, DESIGN, MOTION, SCHEMA, DATA, CRITIQUE, GATE, LICENSE, CHANGELOG, `.env.example`, demo-labelled `data/`, `middleware.ts`; runs with `npm install && npm run dev`, no configuration.
-- **Micro-states ship** (`thinking/sequence.md`): every button, form, list, image and async action has all its states; the gate warns on missing ones.
+- **Five checkpoints** (`thinking/sequence.md`): Stack, Research and concept, Scope, Build plan, Ship. At each, draft, show the reasoning, stop and wait for an explicit answer (approve, redirect, alternatives, override). Never re-ask an answered question.
+- Explain each decision in its checkpoint block, then wait. Keep prose short. The work is the answer.
+- Every build ships a **sellable template** (`templates/TEMPLATE.md`): README (what is real, what is demo, run, deploy; "All data in data/ is demo. Replace with real data before launch."), DESIGN, MOTION, SCHEMA, DATA, CRITIQUE, GATE, LICENSE (MIT), CHANGELOG (v0.1.0), `.env.example`, a demo-labelled `data/` typed by its `schema.json`, `middleware.ts`, comments in every non-trivial file. It runs with `npm install && npm run dev` and no configuration. `SCHEMA.md` is written with `DESIGN.md`, not after.
+- **Micro-states ship:** buttons (default, hover, focus, active, disabled, loading), forms (default, validation error, submit loading, success, server error), lists (empty, loading, error, filled), images (loading, loaded, error), async actions (idle, pending, success, error). The gate warns on missing ones (`thinking/sequence.md`).
 - Deliver complete files. No `// rest of code here`, no TODOs, no placeholder images without a clear `alt` and a sourcing note.
 - Put a stamp comment at the top of the main stylesheet or layout:
   `/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: <from gate.mjs> · gate: <from gate.mjs> */`

@@ -43,3 +43,5 @@ Kaal Studio is a five-person design and creative-technology studio in Dhaka (Gul
 - On a laptop, the hero makes a prospective client want to touch it, and the four case studies are easy to tell apart and open.
 - On an old phone or with reduced motion, the site is just as complete, fast and good-looking with posters instead of a live scene.
 - The 3D is the studio's argument, not decoration: it shows the kind of thing Kaal builds.
+
+Approve every checkpoint.

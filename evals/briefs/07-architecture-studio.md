@@ -12,6 +12,7 @@ Website for **Ittaghor Studio**, a three-partner architecture practice in Dhaka 
 - Each project shows a simple plan (draw it in SVG) and an "image" (CSS or SVG).
 - Studio, process (site visit → sketch → brick sample → build) and contact: studio@ittaghor.studio.
 
+Approve every checkpoint.
 **Expect:** a calm, still register, large imagery, plans viewable, a signature tied to light, brick or courtyards.
 
 ## Benchmark conditions (identical for baseline and skill runs)

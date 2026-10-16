@@ -1,7 +1,9 @@
 #!/usr/bin/env node
-// Build dist/motomation-lite.md: the core of the skill in under 8k tokens, for small-context tools
+// Build dist/motomation-lite.md: the core of the skill, compressed toward an 8k-token target, for small-context tools
 // (custom instructions, rules files, v0/Bolt prompts). The full edition stays in dist/motomation-design.md.
-// Deterministic: same sources → byte-identical output. `--check` fails if the file is stale or over budget.
+// The target belongs to this build step only. The full skill has no token budget and never reads this one: the build
+// reads the full skill and compresses it. Over the target, whole sections are dropped (DROP_ORDER) and named at the top.
+// Deterministic: same sources → byte-identical output. `--check` fails if the file is stale.
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -11,7 +13,7 @@ cli("build-lite", "Usage: node scripts/build-lite.mjs [--check]", { check: "bool
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SKILL = join(ROOT, "skills/asfakulsiam-motomation-design");
-const TOKEN_BUDGET = 8000;
+const TOKEN_BUDGET = 8000; // lite size target (a goal for this build step, not a limit on the skill)
 // Conservative estimate without a tokenizer dependency: ~3.5 characters per token for English Markdown
 // (real tokenizers average ~4, so this over-counts).
 export const estimateTokens = (s) => Math.ceil(s.length / 3.5);
@@ -68,9 +70,17 @@ const parts = [
   "Signatures: " + csv("signatures").map((r) => `${r.name} [T${r.tier}]: ${r.one_line}`).join("; ") + ".",
   "",
 ];
-let out = parts.join("\n").replace(/\n{3,}/g, "\n\n").trim() + "\n";
+const full = parts.join("\n").replace(/\n{3,}/g, "\n\n").trim() + "\n";
+// Over the target, drop whole ### sections in this order (the ones a chat tool needs least first) until it fits, and
+// say so at the top. Nothing in the full skill is shortened to fit.
+const DROP_ORDER = [/^Standards vs house style/, /^When to use the short route/, /^Motion tiers/, /^House style defaults/, /^Part 3: Craft checklist/];
+const dropSection = (t, re) => { let name = null; const u = t.replace(/^### ([^\n]*)\n[\s\S]*?(?=^#{2,3} |(?![\s\S]))/gm, (m, h) => (name === null && re.test(h) ? ((name = h.replace(/\s*\(.*\)$/, "")), "") : m)); return { text: u, name }; };
+const withNote = (t, dropped) => dropped.length ? t.replace(/^(# [^\n]*\n)/, `$1\nLite edition. Full version at the repo. Dropped: ${dropped.join(", ")}.\n`) : t;
+let body = full; const dropped = [];
+for (const re of DROP_ORDER) { if (estimateTokens(withNote(body, dropped)) <= TOKEN_BUDGET) break; const d = dropSection(body, re); if (d.name) { body = d.text; dropped.push(d.name); } }
+let out = withNote(body, dropped).replace(/\n{3,}/g, "\n\n");
 const tokens = estimateTokens(out);
-if (tokens > TOKEN_BUDGET) { console.error(`motomation-lite.md is ~${tokens} tokens, over the ${TOKEN_BUDGET} budget. Trim the selection in scripts/build-lite.mjs.`); process.exit(1); }
+if (tokens > TOKEN_BUDGET) console.warn(`motomation-lite.md is ~${tokens} tokens, still over the ${TOKEN_BUDGET}-token target after dropping ${dropped.length} section(s); add to DROP_ORDER in scripts/build-lite.mjs.`);
 
 const target = join(ROOT, "dist/motomation-lite.md");
 // The README states the lite size between markers. This script writes it, so the number is generated, never typed:
@@ -85,10 +95,10 @@ if (process.argv.includes("--check")) {
   if (current !== out) { console.error("dist/motomation-lite.md is out of date. Run: node scripts/build-lite.mjs"); process.exit(1); }
   const said = readme.match(MARK)[0];
   if (said !== claim) { console.error(`README says "${said.replace(/<!--[^>]*-->/g, "")}" but the lite is ~${tokens} tokens ("${claim.replace(/<!--[^>]*-->/g, "")}"). Run: node scripts/build-lite.mjs`); process.exit(1); }
-  console.log(`lite is up to date (~${tokens} tokens, budget ${TOKEN_BUDGET})`);
+  console.log(`lite is up to date (~${tokens} tokens, target ${TOKEN_BUDGET}${dropped.length ? `, dropped: ${dropped.join(", ")}` : ""})`);
 } else {
   mkdirSync(join(ROOT, "dist"), { recursive: true });
   writeFileSync(target, out);
   if (readme.match(MARK)[0] !== claim) writeFileSync(README, readme.replace(MARK, claim));
-  console.log(`Wrote dist/motomation-lite.md (${(out.length / 1024).toFixed(1)} KB, ~${tokens} tokens estimated, budget ${TOKEN_BUDGET})`);
+  console.log(`Wrote dist/motomation-lite.md (${(out.length / 1024).toFixed(1)} KB, ~${tokens} tokens estimated, target ${TOKEN_BUDGET}${dropped.length ? `; dropped: ${dropped.join(", ")}` : ""})`);
 }

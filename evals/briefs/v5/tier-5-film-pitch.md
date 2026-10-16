@@ -46,3 +46,5 @@ Director Sadia Islam and producer Mahmud Hasan are raising the last part of the 
 - At any point they can tell which scene and minute they are in.
 - With reduced motion, they get a beautiful, complete editorial sequence of the same six scenes, not a broken or frozen film.
 - The ask is impossible to miss and easy to act on.
+
+Approve every checkpoint.

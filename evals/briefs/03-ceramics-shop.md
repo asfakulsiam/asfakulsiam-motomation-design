@@ -8,6 +8,7 @@ Online shop for **Mati**, a two-person ceramics studio in Rajshahi (Rina and Soh
 - Shipping: 3–5 days inside Bangladesh, ৳150 flat; free over ৳5,000. Care: dishwasher safe, not for the microwave.
 - Add to cart must work (a cart count in the page is enough; no real checkout).
 
+Approve every checkpoint.
 **Expect:** buying stays fast, a story of the firing, real prices in ৳, an organic or editorial direction. Also used for the variety test.
 
 ## Benchmark conditions (identical for baseline and skill runs)
