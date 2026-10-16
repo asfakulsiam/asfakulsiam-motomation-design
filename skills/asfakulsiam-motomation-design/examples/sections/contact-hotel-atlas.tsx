@@ -2,12 +2,11 @@
 // id: contact-hotel-atlas
 // kind: contact
 // archetype: atlas
-// components: ContourLines, CopyButton
-// what: How to arrive, drawn as a survey sheet: the route from Dhaka in three legs over slow contour lines, with the address and phone to copy for the driver.
+// components: CopyButton
+// what: How to arrive, set as a survey sheet: the route from Dhaka in three legs, with the address and phone to copy for the driver.
 // signature: The Atlas archetype answers the guest's real question (how do I get there in Dhaka traffic), and the copy buttons hand the details to a driver.
-// mobile: Legs stack; contour lines stay behind at low contrast.
-// reduced-motion: Contour lines are still.
-import { ContourLines } from "../components/backgrounds/contour-lines";
+// mobile: Legs stack; the address and phone each keep their copy button.
+// reduced-motion: Nothing here moves; the copy buttons confirm with text, not motion.
 import { CopyButton } from "../components/micro/copy-button";
 import { Section, cols, h, label, MONO, MUTED } from "./_shared";
 
@@ -16,7 +15,6 @@ const LEGS = [["1", "Dhaka → Mograpara", "27 km on the N1, 50–90 min"], ["2"
 export function ContactHotelAtlas() {
   return (
     <Section id="contact-hotel-atlas" title="Getting here">
-      <ContourLines lines={18} seed={9} color="rgba(138,75,42,.16)" />
       <div style={{ position: "relative" }}>
         <p style={label}>Sheet 2 of 2 · arrival</p>
         <h2 id="contact-hotel-atlas-title" style={h("clamp(2rem, 4.4vw, 3.4rem)", { margin: "12px 0 36px" })}>From Dhaka, in three legs.</h2>

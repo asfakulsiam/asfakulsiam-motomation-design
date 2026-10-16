@@ -3,7 +3,7 @@
 
 The library is React-first. Plain variants exist for the 5 most-used components. For other components, use the React version.
 
-Why only five (v2.5.0): every plain variant is a second implementation that has to keep behaving like the React original, and most of the twenty were used by one or two sections. The five kept are the ones the most page sections and templates import (count-up and split-flap: 4 sections, 3 templates; copy-button, ink-fill and typewriter: 3 sections, 3 templates; the next component is in 2). Each is in three variants that behave the same:
+Why only five (v2.5.0): every plain variant is a second implementation that has to keep behaving like the React original, and most of the twenty were used by one or two sections. The five kept are the ones the most page sections and templates import (the order check-repo computes: sections that import it, then templates that reach it; v2.13: grain replaced typewriter when the hotel's rooms gallery took grain). Each is in three variants that behave the same:
 
 - React: the original in `skills/asfakulsiam-motomation-design/examples/components/`, unchanged.
 - CSS + HTML: `<id>/<id>.css` (BEM classes `.mm-<id>__part`) with the markup in `<id>/plain.html`.
@@ -35,14 +35,14 @@ The fallbacks are the same as in React: reduced motion gives the same still stat
 | [split-flap](split-flap/) | [split-flap.tsx](../../skills/asfakulsiam-motomation-design/examples/components/type/split-flap.tsx) | Shows the new value at once. | Same as desktop. |
 | [copy-button](copy-button/) | [copy-button.tsx](../../skills/asfakulsiam-motomation-design/examples/components/micro/copy-button.tsx) | The tick swaps in without the morph (the CSS turns the path transition off). | Same as desktop. |
 | [ink-fill](ink-fill/) | [ink-fill.tsx](../../skills/asfakulsiam-motomation-design/examples/components/type/ink-fill.tsx) | The whole statement is in ink from the start. | Same as desktop. |
-| [typewriter](typewriter/) | [typewriter.tsx](../../skills/asfakulsiam-motomation-design/examples/components/text/typewriter.tsx) | The whole line is there from the start, with no caret. | Same as desktop (starts when in view). |
+| [grain](grain/) | [grain.tsx](../../skills/asfakulsiam-motomation-design/examples/components/backgrounds/grain.tsx) | Static grain. | Static grain (no repaint on coarse pointers). |
 
 ## Without JavaScript
 
 The React components render on the server. The plain variants start from your HTML. Wherever the two would differ, the plain variant shows the finished content:
 
 - InkFill shows full ink, not the muted pre-scroll state.
-- Typewriter shows the whole sentence, not hidden characters.
+- Grain shows no grain (the canvas is empty); nothing is hidden.
 
 The scripts add the "before" state just before animating, and under reduced motion they don't add it at all. With JavaScript running, the visible result and the screen-reader text match React. `tests/variants/compare.mjs` checks this.
 

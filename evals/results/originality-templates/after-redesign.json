@@ -1,0 +1,2318 @@
+{
+  "threshold": 0.4,
+  "labels": [
+    "editorial-article",
+    "event",
+    "hotel",
+    "motion-portfolio",
+    "org",
+    "personal",
+    "product-launch",
+    "saas-landing",
+    "shop-product",
+    "studio-portfolio"
+  ],
+  "pairs": [
+    {
+      "a": "editorial-article",
+      "b": "event",
+      "score": {
+        "structure": 0.06,
+        "composition": 0.17,
+        "image": null,
+        "typography": 0.19,
+        "interaction": 0.21,
+        "signature": 0.38,
+        "overall": 0.2
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.13,
+          "order": 0
+        },
+        "composition": {
+          "placement": 0.23,
+          "columns": 0.17,
+          "density": 0
+        },
+        "image": {},
+        "typography": {
+          "families": 0.17,
+          "scale": 0.36,
+          "rhythm": 0.23,
+          "hierarchy": 0
+        },
+        "interaction": {
+          "feedback": 0.11,
+          "navigation": 0.3
+        },
+        "signature": {
+          "declared": 0.5,
+          "measured": 0.25
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "editorial-article",
+      "b": "hotel",
+      "score": {
+        "structure": 0.13,
+        "composition": 0.09,
+        "image": 0,
+        "typography": 0.36,
+        "interaction": 0.32,
+        "signature": 0.06,
+        "overall": 0.16
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.07,
+          "order": 0.2
+        },
+        "composition": {
+          "placement": 0.03,
+          "columns": 0.14,
+          "density": 0.2
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0.17,
+          "scale": 0.4,
+          "rhythm": 0.38,
+          "hierarchy": 0.65
+        },
+        "interaction": {
+          "feedback": 0.14,
+          "navigation": 0.5
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.11
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "editorial-article",
+      "b": "motion-portfolio",
+      "score": {
+        "structure": 0.03,
+        "composition": 0.12,
+        "image": 0,
+        "typography": 0.3,
+        "interaction": 0.13,
+        "signature": 0.13,
+        "overall": 0.12
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.06,
+          "order": 0
+        },
+        "composition": {
+          "placement": 0.04,
+          "columns": 0.38,
+          "density": 0.13
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0.17,
+          "scale": 0.42,
+          "rhythm": 0.38,
+          "hierarchy": 0.37
+        },
+        "interaction": {
+          "feedback": 0,
+          "navigation": 0.25
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.25
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "editorial-article",
+      "b": "org",
+      "score": {
+        "structure": 0.21,
+        "composition": 0.12,
+        "image": 0,
+        "typography": 0.23,
+        "interaction": 0.36,
+        "signature": 0.05,
+        "overall": 0.16
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.21,
+          "order": 0.2
+        },
+        "composition": {
+          "placement": 0.09,
+          "columns": 0.14,
+          "density": 0.2
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0.34,
+          "scale": 0.29,
+          "rhythm": 0.18,
+          "hierarchy": 0
+        },
+        "interaction": {
+          "feedback": 0.14,
+          "navigation": 0.57
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.09
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "editorial-article",
+      "b": "personal",
+      "score": {
+        "structure": 0.21,
+        "composition": 0.35,
+        "image": 0,
+        "typography": 0.3,
+        "interaction": 0.16,
+        "signature": 0.13,
+        "overall": 0.19
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.08,
+          "order": 0.33
+        },
+        "composition": {
+          "placement": 0.29,
+          "columns": 0.2,
+          "density": 0.67
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0.17,
+          "scale": 0.44,
+          "rhythm": 0.26,
+          "hierarchy": 0.48
+        },
+        "interaction": {
+          "feedback": 0.11,
+          "forms": 0,
+          "navigation": 0.38
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.25
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "editorial-article",
+      "b": "product-launch",
+      "score": {
+        "structure": 0.02,
+        "composition": 0.11,
+        "image": 0,
+        "typography": 0.34,
+        "interaction": 0.22,
+        "signature": 0.06,
+        "overall": 0.13
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.04,
+          "order": 0
+        },
+        "composition": {
+          "placement": 0.05,
+          "columns": 0.25,
+          "density": 0.14
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0.34,
+          "scale": 0.4,
+          "rhythm": 0.19,
+          "hierarchy": 0.41
+        },
+        "interaction": {
+          "feedback": 0,
+          "forms": 0,
+          "navigation": 0.67
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.11
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "editorial-article",
+      "b": "saas-landing",
+      "score": {
+        "structure": 0.13,
+        "composition": 0.14,
+        "image": null,
+        "typography": 0.12,
+        "interaction": 0.22,
+        "signature": 0.3,
+        "overall": 0.18
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.09,
+          "order": 0.17
+        },
+        "composition": {
+          "placement": 0.12,
+          "columns": 0.14,
+          "density": 0.2
+        },
+        "image": {},
+        "typography": {
+          "families": 0,
+          "scale": 0.27,
+          "rhythm": 0.26,
+          "hierarchy": 0.06
+        },
+        "interaction": {
+          "feedback": 0.11,
+          "navigation": 0.33
+        },
+        "signature": {
+          "declared": 0.5,
+          "measured": 0.1
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "editorial-article",
+      "b": "shop-product",
+      "score": {
+        "structure": 0.12,
+        "composition": 0.19,
+        "image": 0,
+        "typography": 0.26,
+        "interaction": 0.28,
+        "signature": 0,
+        "overall": 0.14
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.06,
+          "order": 0.17
+        },
+        "composition": {
+          "placement": 0.14,
+          "columns": 0.14,
+          "density": 0.4
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0.34,
+          "scale": 0.36,
+          "rhythm": 0.27,
+          "hierarchy": 0
+        },
+        "interaction": {
+          "feedback": 0.13,
+          "navigation": 0.44
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "editorial-article",
+      "b": "studio-portfolio",
+      "score": {
+        "structure": 0.15,
+        "composition": 0.04,
+        "image": 0,
+        "typography": 0.26,
+        "interaction": 0.31,
+        "signature": 0.06,
+        "overall": 0.14
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.1,
+          "order": 0.2
+        },
+        "composition": {
+          "placement": 0.06,
+          "columns": 0,
+          "density": 0
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0.17,
+          "scale": 0.37,
+          "rhythm": 0.29,
+          "hierarchy": 0.3
+        },
+        "interaction": {
+          "feedback": 0.13,
+          "navigation": 0.5
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.11
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "event",
+      "b": "hotel",
+      "score": {
+        "structure": 0.19,
+        "composition": 0.07,
+        "image": 0,
+        "typography": 0.1,
+        "interaction": 0.21,
+        "signature": 0.06,
+        "overall": 0.1
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.19,
+          "order": 0.2
+        },
+        "composition": {
+          "placement": 0.07,
+          "columns": 0.13,
+          "density": 0
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0,
+          "scale": 0.27,
+          "rhythm": 0.13,
+          "hierarchy": 0.09
+        },
+        "interaction": {
+          "feedback": 0.11,
+          "navigation": 0.3
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.11
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "event",
+      "b": "motion-portfolio",
+      "score": {
+        "structure": 0.04,
+        "composition": 0.07,
+        "image": 0,
+        "typography": 0.28,
+        "interaction": 0.17,
+        "signature": 0.21,
+        "overall": 0.13
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.07,
+          "order": 0
+        },
+        "composition": {
+          "placement": 0.04,
+          "columns": 0.09,
+          "density": 0.13
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0.35,
+          "scale": 0.27,
+          "rhythm": 0.19,
+          "hierarchy": 0.23
+        },
+        "interaction": {
+          "feedback": 0.11,
+          "navigation": 0.22
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.43
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "event",
+      "b": "org",
+      "score": {
+        "structure": 0.2,
+        "composition": 0.22,
+        "image": 0,
+        "typography": 0.14,
+        "interaction": 0.16,
+        "signature": 0.1,
+        "overall": 0.14
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.21,
+          "order": 0.2
+        },
+        "composition": {
+          "placement": 0.19,
+          "columns": 0.13,
+          "density": 0.4
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0.18,
+          "scale": 0.23,
+          "rhythm": 0.11,
+          "hierarchy": 0
+        },
+        "interaction": {
+          "feedback": 0.11,
+          "navigation": 0.2
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.2
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "event",
+      "b": "personal",
+      "score": {
+        "structure": 0.04,
+        "composition": 0.21,
+        "image": 0,
+        "typography": 0.08,
+        "interaction": 0.18,
+        "signature": 0.06,
+        "overall": 0.1
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.09,
+          "order": 0
+        },
+        "composition": {
+          "placement": 0.21,
+          "columns": 0.17,
+          "density": 0.25
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0,
+          "scale": 0.29,
+          "rhythm": 0.13,
+          "hierarchy": 0
+        },
+        "interaction": {
+          "feedback": 0.2,
+          "forms": 0,
+          "navigation": 0.33
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.11
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "event",
+      "b": "product-launch",
+      "score": {
+        "structure": 0.15,
+        "composition": 0.2,
+        "image": 0,
+        "typography": 0.3,
+        "interaction": 0.1,
+        "signature": 0.06,
+        "overall": 0.13
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.05,
+          "order": 0.25
+        },
+        "composition": {
+          "placement": 0.07,
+          "columns": 0.38,
+          "density": 0.43
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0.19,
+          "scale": 0.41,
+          "rhythm": 0.24,
+          "hierarchy": 0.45
+        },
+        "interaction": {
+          "feedback": 0.08,
+          "forms": 0,
+          "navigation": 0.22
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.11
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "event",
+      "b": "saas-landing",
+      "score": {
+        "structure": 0.17,
+        "composition": 0.2,
+        "image": null,
+        "typography": 0.25,
+        "interaction": 0.26,
+        "signature": 0.3,
+        "overall": 0.24
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.17,
+          "order": 0.17
+        },
+        "composition": {
+          "placement": 0.22,
+          "columns": 0.13,
+          "density": 0.2
+        },
+        "image": {},
+        "typography": {
+          "families": 0.18,
+          "scale": 0.13,
+          "rhythm": 0.17,
+          "hierarchy": 0.61
+        },
+        "interaction": {
+          "feedback": 0.33,
+          "navigation": 0.18
+        },
+        "signature": {
+          "declared": 0.5,
+          "measured": 0.1
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "event",
+      "b": "shop-product",
+      "score": {
+        "structure": 0.32,
+        "composition": 0.19,
+        "image": 0,
+        "typography": 0.3,
+        "interaction": 0.25,
+        "signature": 0.06,
+        "overall": 0.19
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.14,
+          "order": 0.5
+        },
+        "composition": {
+          "placement": 0.15,
+          "columns": 0.29,
+          "density": 0.2
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0.18,
+          "scale": 0.18,
+          "rhythm": 0.29,
+          "hierarchy": 0.67
+        },
+        "interaction": {
+          "feedback": 0.22,
+          "navigation": 0.27
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.11
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "event",
+      "b": "studio-portfolio",
+      "score": {
+        "structure": 0.23,
+        "composition": 0.19,
+        "image": 0,
+        "typography": 0.19,
+        "interaction": 0.2,
+        "signature": 0.33,
+        "overall": 0.19
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.26,
+          "order": 0.2
+        },
+        "composition": {
+          "placement": 0.09,
+          "columns": 0.29,
+          "density": 0.4
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0.18,
+          "scale": 0.27,
+          "rhythm": 0.23,
+          "hierarchy": 0.06
+        },
+        "interaction": {
+          "feedback": 0.22,
+          "navigation": 0.18
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.67
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "hotel",
+      "b": "motion-portfolio",
+      "score": {
+        "structure": 0.12,
+        "composition": 0.14,
+        "image": 0.1,
+        "typography": 0.24,
+        "interaction": 0.13,
+        "signature": 0.31,
+        "overall": 0.17
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.04,
+          "order": 0.2
+        },
+        "composition": {
+          "placement": 0.12,
+          "columns": 0.08,
+          "density": 0.25
+        },
+        "image": {
+          "ratio_size": 0.1,
+          "crop_mask": 0.1,
+          "effects": 0.1
+        },
+        "typography": {
+          "families": 0,
+          "scale": 0.58,
+          "rhythm": 0.35,
+          "hierarchy": 0.27
+        },
+        "interaction": {
+          "feedback": 0,
+          "navigation": 0.25
+        },
+        "signature": {
+          "declared": 0.5,
+          "measured": 0.11
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "hotel",
+      "b": "org",
+      "score": {
+        "structure": 0.11,
+        "composition": 0.28,
+        "image": 0.24,
+        "typography": 0.22,
+        "interaction": 0.36,
+        "signature": 0.1,
+        "overall": 0.22
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.23,
+          "order": 0
+        },
+        "composition": {
+          "placement": 0.12,
+          "columns": 0.43,
+          "density": 0.6
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0.17,
+          "effects": 0.56
+        },
+        "typography": {
+          "families": 0.17,
+          "scale": 0.49,
+          "rhythm": 0.26,
+          "hierarchy": 0
+        },
+        "interaction": {
+          "feedback": 0.14,
+          "navigation": 0.57
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.2
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "hotel",
+      "b": "personal",
+      "score": {
+        "structure": 0.24,
+        "composition": 0.09,
+        "image": 0.11,
+        "typography": 0.34,
+        "interaction": 0.11,
+        "signature": 0.31,
+        "overall": 0.2
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.09,
+          "order": 0.4
+        },
+        "composition": {
+          "placement": 0.03,
+          "columns": 0.14,
+          "density": 0.2
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0.22,
+          "effects": 0.1
+        },
+        "typography": {
+          "families": 0.33,
+          "scale": 0.6,
+          "rhythm": 0.32,
+          "hierarchy": 0.13
+        },
+        "interaction": {
+          "feedback": 0.11,
+          "forms": 0,
+          "navigation": 0.22
+        },
+        "signature": {
+          "declared": 0.5,
+          "measured": 0.11
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "hotel",
+      "b": "product-launch",
+      "score": {
+        "structure": 0.03,
+        "composition": 0.1,
+        "image": 0.07,
+        "typography": 0.33,
+        "interaction": 0.22,
+        "signature": 0.38,
+        "overall": 0.19
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.05,
+          "order": 0
+        },
+        "composition": {
+          "placement": 0.05,
+          "columns": 0.2,
+          "density": 0.14
+        },
+        "image": {
+          "ratio_size": 0.11,
+          "crop_mask": 0,
+          "effects": 0.11
+        },
+        "typography": {
+          "families": 0.17,
+          "scale": 0.46,
+          "rhythm": 0.21,
+          "hierarchy": 0.64
+        },
+        "interaction": {
+          "feedback": 0,
+          "forms": 0,
+          "navigation": 0.67
+        },
+        "signature": {
+          "declared": 0.5,
+          "measured": 0.25
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "hotel",
+      "b": "saas-landing",
+      "score": {
+        "structure": 0.17,
+        "composition": 0.19,
+        "image": 0,
+        "typography": 0.14,
+        "interaction": 0.31,
+        "signature": 0,
+        "overall": 0.14
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.18,
+          "order": 0.17
+        },
+        "composition": {
+          "placement": 0.08,
+          "columns": 0.11,
+          "density": 0.6
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0,
+          "scale": 0.28,
+          "rhythm": 0.16,
+          "hierarchy": 0.24
+        },
+        "interaction": {
+          "feedback": 0.11,
+          "navigation": 0.5
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "hotel",
+      "b": "shop-product",
+      "score": {
+        "structure": 0.16,
+        "composition": 0.16,
+        "image": 0.14,
+        "typography": 0.25,
+        "interaction": 0.21,
+        "signature": 0.06,
+        "overall": 0.16
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.15,
+          "order": 0.17
+        },
+        "composition": {
+          "placement": 0.12,
+          "columns": 0.25,
+          "density": 0.2
+        },
+        "image": {
+          "ratio_size": 0.21,
+          "crop_mask": 0.13,
+          "effects": 0.06
+        },
+        "typography": {
+          "families": 0.17,
+          "scale": 0.41,
+          "rhythm": 0.23,
+          "hierarchy": 0.25
+        },
+        "interaction": {
+          "feedback": 0.13,
+          "navigation": 0.3
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.11
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "hotel",
+      "b": "studio-portfolio",
+      "score": {
+        "structure": 0.18,
+        "composition": 0.22,
+        "image": 0.07,
+        "typography": 0.29,
+        "interaction": 0.31,
+        "signature": 0.06,
+        "overall": 0.19
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.15,
+          "order": 0.2
+        },
+        "composition": {
+          "placement": 0.2,
+          "columns": 0.11,
+          "density": 0.4
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0,
+          "effects": 0.22
+        },
+        "typography": {
+          "families": 0,
+          "scale": 0.66,
+          "rhythm": 0.29,
+          "hierarchy": 0.48
+        },
+        "interaction": {
+          "feedback": 0.13,
+          "navigation": 0.5
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.11
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "motion-portfolio",
+      "b": "org",
+      "score": {
+        "structure": 0.12,
+        "composition": 0.16,
+        "image": 0.11,
+        "typography": 0.2,
+        "interaction": 0.14,
+        "signature": 0.05,
+        "overall": 0.13
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.04,
+          "order": 0.2
+        },
+        "composition": {
+          "placement": 0.17,
+          "columns": 0.18,
+          "density": 0.13
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0.17,
+          "effects": 0.17
+        },
+        "typography": {
+          "families": 0.19,
+          "scale": 0.45,
+          "rhythm": 0.19,
+          "hierarchy": 0
+        },
+        "interaction": {
+          "feedback": 0,
+          "navigation": 0.29
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.09
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "motion-portfolio",
+      "b": "personal",
+      "score": {
+        "structure": 0.16,
+        "composition": 0.06,
+        "image": 0.22,
+        "typography": 0.16,
+        "interaction": 0.3,
+        "signature": 0.31,
+        "overall": 0.2
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.07,
+          "order": 0.25
+        },
+        "composition": {
+          "placement": 0.03,
+          "columns": 0.1,
+          "density": 0.13
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0.33,
+          "effects": 0.33
+        },
+        "typography": {
+          "families": 0,
+          "scale": 0.52,
+          "rhythm": 0.29,
+          "hierarchy": 0
+        },
+        "interaction": {
+          "feedback": 0.11,
+          "forms": 0,
+          "navigation": 0.8
+        },
+        "signature": {
+          "declared": 0.5,
+          "measured": 0.11
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "motion-portfolio",
+      "b": "product-launch",
+      "score": {
+        "structure": 0.1,
+        "composition": 0.38,
+        "image": 0.17,
+        "typography": 0.36,
+        "interaction": 0.24,
+        "signature": 0.31,
+        "overall": 0.26
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.21,
+          "order": 0
+        },
+        "composition": {
+          "placement": 0.35,
+          "columns": 0.5,
+          "density": 0.38
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0,
+          "effects": 0.5
+        },
+        "typography": {
+          "families": 0.2,
+          "scale": 0.52,
+          "rhythm": 0.44,
+          "hierarchy": 0.44
+        },
+        "interaction": {
+          "feedback": 0.38,
+          "forms": 0,
+          "navigation": 0.33
+        },
+        "signature": {
+          "declared": 0.5,
+          "measured": 0.11
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "motion-portfolio",
+      "b": "saas-landing",
+      "score": {
+        "structure": 0.19,
+        "composition": 0.06,
+        "image": 0,
+        "typography": 0.25,
+        "interaction": 0.13,
+        "signature": 0.05,
+        "overall": 0.11
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.04,
+          "order": 0.33
+        },
+        "composition": {
+          "placement": 0.03,
+          "columns": 0.08,
+          "density": 0.13
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0.38,
+          "scale": 0.26,
+          "rhythm": 0.16,
+          "hierarchy": 0.06
+        },
+        "interaction": {
+          "feedback": 0,
+          "navigation": 0.25
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.1
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "motion-portfolio",
+      "b": "shop-product",
+      "score": {
+        "structure": 0.02,
+        "composition": 0.07,
+        "image": 0.04,
+        "typography": 0.19,
+        "interaction": 0.17,
+        "signature": 0,
+        "overall": 0.08
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.03,
+          "order": 0
+        },
+        "composition": {
+          "placement": 0.04,
+          "columns": 0.08,
+          "density": 0.13
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0.11,
+          "effects": 0
+        },
+        "typography": {
+          "families": 0.19,
+          "scale": 0.29,
+          "rhythm": 0.23,
+          "hierarchy": 0.05
+        },
+        "interaction": {
+          "feedback": 0.13,
+          "navigation": 0.22
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "motion-portfolio",
+      "b": "studio-portfolio",
+      "score": {
+        "structure": 0.02,
+        "composition": 0.1,
+        "image": 0.11,
+        "typography": 0.39,
+        "interaction": 0.21,
+        "signature": 0.13,
+        "overall": 0.16
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.04,
+          "order": 0
+        },
+        "composition": {
+          "placement": 0.1,
+          "columns": 0.08,
+          "density": 0.13
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0,
+          "effects": 0.33
+        },
+        "typography": {
+          "families": 0.52,
+          "scale": 0.57,
+          "rhythm": 0.34,
+          "hierarchy": 0.03
+        },
+        "interaction": {
+          "feedback": 0,
+          "navigation": 0.43
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.25
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "org",
+      "b": "personal",
+      "score": {
+        "structure": 0.14,
+        "composition": 0.11,
+        "image": 0.19,
+        "typography": 0.19,
+        "interaction": 0.12,
+        "signature": 0.1,
+        "overall": 0.14
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.08,
+          "order": 0.2
+        },
+        "composition": {
+          "placement": 0.05,
+          "columns": 0,
+          "density": 0.4
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0.4,
+          "effects": 0.17
+        },
+        "typography": {
+          "families": 0.17,
+          "scale": 0.38,
+          "rhythm": 0.26,
+          "hierarchy": 0
+        },
+        "interaction": {
+          "feedback": 0.11,
+          "forms": 0,
+          "navigation": 0.25
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.2
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "org",
+      "b": "product-launch",
+      "score": {
+        "structure": 0.13,
+        "composition": 0.24,
+        "image": 0.07,
+        "typography": 0.38,
+        "interaction": 0.27,
+        "signature": 0.1,
+        "overall": 0.2
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.06,
+          "order": 0.2
+        },
+        "composition": {
+          "placement": 0.19,
+          "columns": 0.33,
+          "density": 0.29
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0,
+          "effects": 0.2
+        },
+        "typography": {
+          "families": 0.63,
+          "scale": 0.39,
+          "rhythm": 0.24,
+          "hierarchy": 0
+        },
+        "interaction": {
+          "feedback": 0,
+          "forms": 0,
+          "navigation": 0.8
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.2
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "org",
+      "b": "saas-landing",
+      "score": {
+        "structure": 0.18,
+        "composition": 0.27,
+        "image": 0,
+        "typography": 0.07,
+        "interaction": 0.31,
+        "signature": 0.09,
+        "overall": 0.15
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.19,
+          "order": 0.17
+        },
+        "composition": {
+          "placement": 0.09,
+          "columns": 0.25,
+          "density": 0.8
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0.02,
+          "scale": 0.18,
+          "rhythm": 0.14,
+          "hierarchy": 0
+        },
+        "interaction": {
+          "feedback": 0.25,
+          "navigation": 0.38
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.18
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "org",
+      "b": "shop-product",
+      "score": {
+        "structure": 0.26,
+        "composition": 0.2,
+        "image": 0.03,
+        "typography": 0.23,
+        "interaction": 0.23,
+        "signature": 0.17,
+        "overall": 0.19
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.18,
+          "order": 0.33
+        },
+        "composition": {
+          "placement": 0.18,
+          "columns": 0.25,
+          "density": 0.2
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0.08,
+          "effects": 0
+        },
+        "typography": {
+          "families": 0.35,
+          "scale": 0.28,
+          "rhythm": 0.19,
+          "hierarchy": 0
+        },
+        "interaction": {
+          "feedback": 0.13,
+          "navigation": 0.33
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.33
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "org",
+      "b": "studio-portfolio",
+      "score": {
+        "structure": 0.18,
+        "composition": 0.29,
+        "image": 0.13,
+        "typography": 0.23,
+        "interaction": 0.35,
+        "signature": 0.35,
+        "overall": 0.25
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.16,
+          "order": 0.2
+        },
+        "composition": {
+          "placement": 0.21,
+          "columns": 0.25,
+          "density": 0.6
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0,
+          "effects": 0.4
+        },
+        "typography": {
+          "families": 0.19,
+          "scale": 0.48,
+          "rhythm": 0.32,
+          "hierarchy": 0
+        },
+        "interaction": {
+          "feedback": 0.13,
+          "navigation": 0.57
+        },
+        "signature": {
+          "declared": 0.5,
+          "measured": 0.2
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "personal",
+      "b": "product-launch",
+      "score": {
+        "structure": 0.02,
+        "composition": 0.1,
+        "image": 0.17,
+        "typography": 0.22,
+        "interaction": 0.31,
+        "signature": 0.31,
+        "overall": 0.19
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.04,
+          "order": 0
+        },
+        "composition": {
+          "placement": 0.03,
+          "columns": 0.11,
+          "density": 0.29
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0,
+          "effects": 0.5
+        },
+        "typography": {
+          "families": 0.17,
+          "scale": 0.5,
+          "rhythm": 0.26,
+          "hierarchy": 0
+        },
+        "interaction": {
+          "feedback": 0.08,
+          "forms": 0.56,
+          "navigation": 0.29
+        },
+        "signature": {
+          "declared": 0.5,
+          "measured": 0.11
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "personal",
+      "b": "saas-landing",
+      "score": {
+        "structure": 0.16,
+        "composition": 0.19,
+        "image": 0,
+        "typography": 0.07,
+        "interaction": 0.1,
+        "signature": 0,
+        "overall": 0.09
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.16,
+          "order": 0.17
+        },
+        "composition": {
+          "placement": 0.14,
+          "columns": 0.14,
+          "density": 0.4
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0,
+          "scale": 0.23,
+          "rhythm": 0.14,
+          "hierarchy": 0
+        },
+        "interaction": {
+          "feedback": 0.09,
+          "forms": 0,
+          "navigation": 0.22
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "personal",
+      "b": "shop-product",
+      "score": {
+        "structure": 0.12,
+        "composition": 0.13,
+        "image": 0.04,
+        "typography": 0.18,
+        "interaction": 0.14,
+        "signature": 0,
+        "overall": 0.1
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.08,
+          "order": 0.17
+        },
+        "composition": {
+          "placement": 0.1,
+          "columns": 0.14,
+          "density": 0.2
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0.11,
+          "effects": 0
+        },
+        "typography": {
+          "families": 0.17,
+          "scale": 0.34,
+          "rhythm": 0.23,
+          "hierarchy": 0
+        },
+        "interaction": {
+          "feedback": 0.22,
+          "forms": 0,
+          "navigation": 0.2
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "personal",
+      "b": "studio-portfolio",
+      "score": {
+        "structure": 0.16,
+        "composition": 0.11,
+        "image": 0.11,
+        "typography": 0.16,
+        "interaction": 0.16,
+        "signature": 0.06,
+        "overall": 0.13
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.13,
+          "order": 0.2
+        },
+        "composition": {
+          "placement": 0.07,
+          "columns": 0.14,
+          "density": 0.2
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0,
+          "effects": 0.33
+        },
+        "typography": {
+          "families": 0,
+          "scale": 0.5,
+          "rhythm": 0.29,
+          "hierarchy": 0.01
+        },
+        "interaction": {
+          "feedback": 0.1,
+          "forms": 0,
+          "navigation": 0.38
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.11
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "product-launch",
+      "b": "saas-landing",
+      "score": {
+        "structure": 0.11,
+        "composition": 0.13,
+        "image": 0,
+        "typography": 0.19,
+        "interaction": 0.14,
+        "signature": 0,
+        "overall": 0.1
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.05,
+          "order": 0.17
+        },
+        "composition": {
+          "placement": 0.05,
+          "columns": 0.2,
+          "density": 0.29
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0.02,
+          "scale": 0.16,
+          "rhythm": 0.14,
+          "hierarchy": 0.59
+        },
+        "interaction": {
+          "feedback": 0,
+          "forms": 0,
+          "navigation": 0.43
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "product-launch",
+      "b": "shop-product",
+      "score": {
+        "structure": 0.11,
+        "composition": 0.12,
+        "image": 0,
+        "typography": 0.34,
+        "interaction": 0.19,
+        "signature": 0.13,
+        "overall": 0.15
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.05,
+          "order": 0.17
+        },
+        "composition": {
+          "placement": 0.04,
+          "columns": 0.33,
+          "density": 0.14
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0,
+          "effects": 0
+        },
+        "typography": {
+          "families": 0.36,
+          "scale": 0.25,
+          "rhythm": 0.2,
+          "hierarchy": 0.52
+        },
+        "interaction": {
+          "feedback": 0.2,
+          "forms": 0,
+          "navigation": 0.38
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.25
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "product-launch",
+      "b": "studio-portfolio",
+      "score": {
+        "structure": 0.01,
+        "composition": 0.18,
+        "image": 0.17,
+        "typography": 0.34,
+        "interaction": 0.22,
+        "signature": 0.06,
+        "overall": 0.16
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.03,
+          "order": 0
+        },
+        "composition": {
+          "placement": 0.05,
+          "columns": 0.33,
+          "density": 0.43
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0,
+          "effects": 0.5
+        },
+        "typography": {
+          "families": 0.19,
+          "scale": 0.45,
+          "rhythm": 0.3,
+          "hierarchy": 0.58
+        },
+        "interaction": {
+          "feedback": 0,
+          "forms": 0,
+          "navigation": 0.67
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.11
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "saas-landing",
+      "b": "shop-product",
+      "score": {
+        "structure": 0.2,
+        "composition": 0.21,
+        "image": 0,
+        "typography": 0.29,
+        "interaction": 0.14,
+        "signature": 0.05,
+        "overall": 0.15
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.23,
+          "order": 0.17
+        },
+        "composition": {
+          "placement": 0.13,
+          "columns": 0.25,
+          "density": 0.4
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0.02,
+          "scale": 0.47,
+          "rhythm": 0.31,
+          "hierarchy": 0.65
+        },
+        "interaction": {
+          "feedback": 0.1,
+          "navigation": 0.18
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.1
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "saas-landing",
+      "b": "studio-portfolio",
+      "score": {
+        "structure": 0.19,
+        "composition": 0.27,
+        "image": 0,
+        "typography": 0.26,
+        "interaction": 0.28,
+        "signature": 0,
+        "overall": 0.17
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.22,
+          "order": 0.17
+        },
+        "composition": {
+          "placement": 0.15,
+          "columns": 0.11,
+          "density": 0.8
+        },
+        "image": {
+          "one_side_only": 0
+        },
+        "typography": {
+          "families": 0.11,
+          "scale": 0.34,
+          "rhythm": 0.27,
+          "hierarchy": 0.46
+        },
+        "interaction": {
+          "feedback": 0.22,
+          "navigation": 0.33
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0
+        }
+      },
+      "over": []
+    },
+    {
+      "a": "shop-product",
+      "b": "studio-portfolio",
+      "score": {
+        "structure": 0.1,
+        "composition": 0.19,
+        "image": 0,
+        "typography": 0.27,
+        "interaction": 0.21,
+        "signature": 0.06,
+        "overall": 0.14
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.2,
+          "order": 0
+        },
+        "composition": {
+          "placement": 0.11,
+          "columns": 0.43,
+          "density": 0.2
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0,
+          "effects": 0
+        },
+        "typography": {
+          "families": 0.19,
+          "scale": 0.38,
+          "rhythm": 0.35,
+          "hierarchy": 0.22
+        },
+        "interaction": {
+          "feedback": 0.11,
+          "navigation": 0.3
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.11
+        }
+      },
+      "over": []
+    }
+  ],
+  "pass": true,
+  "max": {
+    "structure": 0.32,
+    "composition": 0.38,
+    "image": 0.24,
+    "typography": 0.39,
+    "interaction": 0.36,
+    "signature": 0.38,
+    "overall": 0.26
+  },
+  "viewports": [
+    "1440x900"
+  ],
+  "targets": [
+    "/home/user/workspace/repo/skills/asfakulsiam-motomation-design/examples/templates/editorial-article.html",
+    "/home/user/workspace/repo/skills/asfakulsiam-motomation-design/examples/templates/event.html",
+    "/home/user/workspace/repo/skills/asfakulsiam-motomation-design/examples/templates/hotel.html",
+    "/home/user/workspace/repo/skills/asfakulsiam-motomation-design/examples/templates/motion-portfolio/index.html",
+    "/home/user/workspace/repo/skills/asfakulsiam-motomation-design/examples/templates/org.html",
+    "/home/user/workspace/repo/skills/asfakulsiam-motomation-design/examples/templates/personal.html",
+    "/home/user/workspace/repo/skills/asfakulsiam-motomation-design/examples/templates/product-launch/index.html",
+    "/home/user/workspace/repo/skills/asfakulsiam-motomation-design/examples/templates/saas-landing.html",
+    "/home/user/workspace/repo/skills/asfakulsiam-motomation-design/examples/templates/shop-product.html",
+    "/home/user/workspace/repo/skills/asfakulsiam-motomation-design/examples/templates/studio-portfolio.html"
+  ],
+  "features": [
+    {
+      "label": "editorial-article",
+      "blocks": [
+        "text:m",
+        "text:s",
+        "grid:s"
+      ],
+      "images": 0,
+      "display": "bodoni moda",
+      "body": "instrument sans",
+      "signature": {
+        "tokens": {
+          "trigger:scroll": 1,
+          "prop:colour": 1,
+          "el:text": 1,
+          "size:small": 1,
+          "mech:scroll>colour": 1
+        },
+        "found": {
+          "trigger": [
+            "scroll"
+          ],
+          "props": [
+            "colour"
+          ],
+          "kind": "text",
+          "size": "small"
+        },
+        "declared": "decode"
+      }
+    },
+    {
+      "label": "event",
+      "blocks": [
+        "statement:m",
+        "grid:s",
+        "grid:m",
+        "grid:m"
+      ],
+      "images": 0,
+      "display": "anybody",
+      "body": "anybody",
+      "signature": {
+        "tokens": {
+          "trigger:scroll": 1,
+          "prop:transform": 1,
+          "el:text": 1,
+          "size:medium": 1,
+          "mech:scroll>transform": 1
+        },
+        "found": {
+          "trigger": [
+            "scroll"
+          ],
+          "props": [
+            "transform"
+          ],
+          "kind": "text",
+          "size": "medium"
+        },
+        "declared": "width-sprint"
+      }
+    },
+    {
+      "label": "hotel",
+      "blocks": [
+        "media:m",
+        "text:m",
+        "media:l",
+        "grid:m",
+        "list:m"
+      ],
+      "images": 9,
+      "display": "cormorant garamond",
+      "body": "cormorant garamond",
+      "signature": {
+        "tokens": {
+          "trigger:scroll": 1,
+          "prop:filter": 1,
+          "el:media": 1,
+          "size:large": 1,
+          "mech:scroll>filter": 1
+        },
+        "found": {
+          "trigger": [
+            "scroll"
+          ],
+          "props": [
+            "filter"
+          ],
+          "kind": "media",
+          "size": "large"
+        },
+        "declared": "darkroom-develop"
+      }
+    },
+    {
+      "label": "motion-portfolio",
+      "blocks": [
+        "media:m",
+        "list:xl",
+        "list:m",
+        "statement:m"
+      ],
+      "images": 2,
+      "display": "bricolage grotesque",
+      "body": "hanken grotesk",
+      "signature": {
+        "tokens": {
+          "trigger:scroll": 1,
+          "prop:opacity": 1,
+          "el:text": 1,
+          "size:medium": 1,
+          "mech:scroll>opacity": 1
+        },
+        "found": {
+          "trigger": [
+            "scroll"
+          ],
+          "props": [
+            "opacity"
+          ],
+          "kind": "text",
+          "size": "medium"
+        },
+        "declared": "timecode-rail"
+      }
+    },
+    {
+      "label": "org",
+      "blocks": [
+        "text:m",
+        "grid:m",
+        "media:m",
+        "statement:m",
+        "grid:m"
+      ],
+      "images": 5,
+      "display": "gloock",
+      "body": "schibsted grotesk",
+      "signature": {
+        "tokens": {
+          "trigger:pointer": 1,
+          "trigger:scroll": 1,
+          "trigger:time": 1,
+          "prop:transform": 1,
+          "el:svg": 1,
+          "size:large": 1,
+          "mech:pointer+scroll+time>transform": 1
+        },
+        "found": {
+          "trigger": [
+            "pointer",
+            "scroll",
+            "time"
+          ],
+          "props": [
+            "transform"
+          ],
+          "kind": "svg",
+          "size": "large"
+        },
+        "declared": "seismograph-line"
+      }
+    },
+    {
+      "label": "personal",
+      "blocks": [
+        "text:m",
+        "form:m",
+        "list:m"
+      ],
+      "images": 2,
+      "display": "instrument serif",
+      "body": "instrument serif",
+      "signature": {
+        "tokens": {
+          "trigger:scroll": 1,
+          "prop:stroke": 1,
+          "el:svg": 1,
+          "size:small": 1,
+          "mech:scroll>stroke": 1
+        },
+        "found": {
+          "trigger": [
+            "scroll"
+          ],
+          "props": [
+            "stroke"
+          ],
+          "kind": "svg",
+          "size": "small"
+        },
+        "declared": "thread"
+      }
+    },
+    {
+      "label": "product-launch",
+      "blocks": [
+        "statement:m",
+        "grid:xl",
+        "statement:m",
+        "form:s"
+      ],
+      "images": 1,
+      "display": "fraunces",
+      "body": "schibsted grotesk",
+      "signature": {
+        "tokens": {
+          "trigger:scroll": 1,
+          "prop:clip": 1,
+          "el:block": 1,
+          "size:large": 1,
+          "mech:scroll>clip": 1
+        },
+        "found": {
+          "trigger": [
+            "scroll"
+          ],
+          "props": [
+            "clip"
+          ],
+          "kind": "block",
+          "size": "large"
+        },
+        "declared": "aperture"
+      }
+    },
+    {
+      "label": "saas-landing",
+      "blocks": [
+        "grid:m",
+        "list:m",
+        "list:m",
+        "grid:m",
+        "statement:m",
+        "grid:s"
+      ],
+      "images": 0,
+      "display": "bricolage grotesque",
+      "body": "jetbrains mono",
+      "signature": {
+        "tokens": {
+          "trigger:pointer": 1,
+          "trigger:time": 1,
+          "prop:text-content": 1,
+          "el:text": 1,
+          "size:screen": 1,
+          "mech:pointer+time>text-content": 1
+        },
+        "found": {
+          "trigger": [
+            "pointer",
+            "time"
+          ],
+          "props": [
+            "text-content"
+          ],
+          "kind": "text",
+          "size": "screen"
+        },
+        "declared": "ink-fill"
+      }
+    },
+    {
+      "label": "shop-product",
+      "blocks": [
+        "grid:m",
+        "grid:m",
+        "statement:m",
+        "text:m",
+        "grid:m",
+        "grid:m"
+      ],
+      "images": 8,
+      "display": "young serif",
+      "body": "familjen grotesk",
+      "signature": {
+        "tokens": {
+          "trigger:pointer": 1,
+          "prop:transform": 1,
+          "el:block": 1,
+          "size:large": 1,
+          "mech:pointer>transform": 1
+        },
+        "found": {
+          "trigger": [
+            "pointer"
+          ],
+          "props": [
+            "transform"
+          ],
+          "kind": "block",
+          "size": "large"
+        },
+        "declared": "hold-to-commit"
+      }
+    },
+    {
+      "label": "studio-portfolio",
+      "blocks": [
+        "text:m",
+        "grid:l",
+        "grid:m",
+        "statement:s",
+        "text:s"
+      ],
+      "images": 2,
+      "display": "jetbrains mono",
+      "body": "hanken grotesk",
+      "signature": {
+        "tokens": {
+          "trigger:scroll": 1,
+          "prop:transform": 1,
+          "el:strip": 1,
+          "size:medium": 1,
+          "mech:scroll>transform": 1
+        },
+        "found": {
+          "trigger": [
+            "scroll"
+          ],
+          "props": [
+            "transform"
+          ],
+          "kind": "strip",
+          "size": "medium"
+        },
+        "declared": "lens"
+      }
+    }
+  ]
+}

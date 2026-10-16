@@ -63,7 +63,8 @@ export async function collect() {
     for (const role of ["display", "text", "mono"]) if (!fonts[role]) problems.push(`${rel}: fonts must name display, text and mono`); else if (!families.has(fonts[role])) problems.push(`${rel}: font ${fonts[role]} is not in templates/fonts/fonts.json`);
     const used = list.flatMap((s) => sections.get(s)?.list || []);
     const tier = Math.max(1, ...used.map((c) => tierOf.get(c) || 1));
-    const archetypeOfHero = sections.get(list[0])?.archetype;
+    const archetypeOfHero = sections.get(list.find((x) => sections.get(x)?.kind === "hero") || list[0])?.archetype; // the hero need not come first
+    if (!/:focus-visible/.test(src)) problems.push(`${rel}: sets no :focus-visible style (focus is the page's design; BASE has none)`);
     if (archetypeOfHero && m.archetype && archetypeOfHero !== m.archetype) problems.push(`${rel}: page archetype ${m.archetype} ≠ its hero's archetype ${archetypeOfHero}`);
     templates.push({ ...m, list, fonts, tier, components: [...new Set(used)].sort(), file: rel, html: `examples/templates/${id}.html` });
   }
@@ -94,9 +95,15 @@ export function sourceHash(t) {
 // links into the Motomation Design site on GitHub Pages; when a template becomes a real site, replace this nav with
 // the site's own links (its other pages), and keep at least three.
 export const KIT = (next) => `<nav class="kit" aria-label="Motomation Design"><p>A Motomation Design page template. <a href="${next.id}.html">Next template: ${next.name}</a> · <a href="./">Browse all templates</a> · <a href="../gallery/">Open the component gallery</a> · <a href="../">Read the docs</a></p></nav>`;
+// Generic class per self-hosted family (fonts/fonts.json), for the fallback in each font stack.
+const CLASS = { "Bodoni Moda": "serif", "Cormorant Garamond": "serif", Fraunces: "serif", Gloock: "serif", "Instrument Serif": "serif", "Young Serif": "serif", "JetBrains Mono": "monospace" };
+const FALLBACK = { serif: "Georgia,serif", "sans-serif": "system-ui,sans-serif", monospace: "ui-monospace,monospace" };
+// BASE is reset and layout only. Focus, hover and press styles are design: each page sets its own in page.tsx
+// (check-repo fails a template whose page.tsx has no :focus-visible rule). Body size and line-height come from the
+// page's --body-size / --body-lh.
 const BASE = `*,*::before,*::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font-text);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-img,svg,canvas{max-width:100%}a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3px}\n.kit{padding:20px 24px 28px;background:var(--ground);color:var(--ink);font:15px/1.5 var(--font-text)}.kit p{margin:0;max-width:72ch}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font-text);font-size:var(--body-size,17px);line-height:var(--body-lh,1.55);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,svg,canvas{max-width:100%}a{color:inherit}\n.kit{padding:20px 24px 28px;background:var(--ground);color:var(--ink);font:15px/1.5 var(--font-text)}.kit p{margin:0;max-width:72ch}
 .skip{position:absolute;left:12px;top:-60px;z-index:100;padding:10px 16px;background:var(--ink);color:var(--ground);border-radius:6px;text-decoration:none}.skip:focus{top:12px}`;
 
 async function build(t, next) {
@@ -114,8 +121,9 @@ async function build(t, next) {
     const want = new Set([...Object.values(t.fonts), "Hind Siliguri"]);
     const faces = fontRows.filter((f) => want.has(f.family)).map((f) => `@font-face{font-family:"${f.family}";font-style:${f.style};font-weight:${f.weight};${f.stretch ? `font-stretch:${f.stretch};` : ""}font-display:swap;src:url(fonts/${f.file}) format("woff2");unicode-range:${f.unicodeRange}}`).join("\n");
     const preload = fontRows.filter((f) => f.style === "normal" && (f.family === t.fonts.display || f.family === t.fonts.text)).map((f) => `<link rel="preload" href="fonts/${f.file}" as="font" type="font/woff2" crossorigin>`).join("");
-    const stack = (fam, fallback) => `"${fam}","Hind Siliguri",${fallback}`;
-    const root = `:root{${t.theme};--font-display:${stack(t.fonts.display, "Georgia,serif")};--font-text:${stack(t.fonts.text, "sans-serif")};--font-mono:${stack(t.fonts.mono, "ui-monospace,monospace")}}`;
+    // each face falls back to its own generic class: a sans display face falls back to sans-serif, not Georgia
+    const stack = (fam) => `"${fam}","Hind Siliguri",${FALLBACK[CLASS[fam] || "sans-serif"]}`;
+    const root = `:root{${t.theme};--font-display:${stack(t.fonts.display)};--font-text:${stack(t.fonts.text)};--font-mono:${stack(t.fonts.mono)}}`;
     const stamp = `/* motomation · archetype: ${t.archetype} · mutation: ${t.mutation} · signature: ${t.signature} · tier: ${t.tier} */`;
     // gate/4 head (craft/seo.md, craft/security.md): canonical on the Pages URL, a CSP whose script-src is the hash of the
     // one inline script, a referrer policy; og:image and JSON-LD when the template folder ships og.jpg (scripts/build-og.mjs) / schema.json

@@ -47,7 +47,7 @@
 // 3 not verified (no browser). Without Playwright it prints "not verified — no browser" and exits 3; it never prints
 // a score it did not measure.
 import { createServer } from "node:http";
-import { existsSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { basename, dirname, extname, join, resolve } from "node:path";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
@@ -55,7 +55,16 @@ import { cli, load } from "./lib.mjs";
 
 export const AXES = ["structure", "composition", "image", "typography", "interaction", "signature"];
 export const THRESHOLD = 0.4;
-const USAGE = "Usage: node scripts/originality.mjs <a> <b> [c …] [--json] [--out report.json] [--threshold 0.4] [--labels a,b,…]";
+const USAGE = "Usage: node scripts/originality.mjs <a> <b> [c …] | --dir <folder> [--json] [--out report.json] [--threshold 0.4] [--labels a,b,…]";
+// --dir <folder>: every *.html directly in the folder plus every <subfolder>/index.html, each labelled by its name (target selection only; scoring is unchanged)
+export function dirTargets(dir) {
+  const abs = resolve(dir); const out = [];
+  for (const e of readdirSync(abs, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
+    if (e.isFile() && /\.html?$/.test(e.name)) out.push(join(abs, e.name));
+    else if (e.isDirectory() && existsSync(join(abs, e.name, "index.html"))) out.push(join(abs, e.name, "index.html"));
+  }
+  return out;
+}
 
 // ── pure similarity helpers (exported for tests) ───────────────────────────────
 /** weighted Jaccard of two bags {token: weight}: Σ min / Σ max. Two empty bags are the same (1). */
@@ -360,7 +369,9 @@ export function printReport(rep, feats) {
 }
 
 async function main() {
-  const a = cli("originality", USAGE, { json: "bool", out: "value", threshold: "value", labels: "value" }, null, { pos: [2, Infinity] });
+  const a = cli("originality", USAGE, { json: "bool", out: "value", threshold: "value", labels: "value", dir: "value" }, null, { pos: [0, Infinity] });
+  if (a.dir) { if (a._.length) { console.error(`originality: give --dir or targets, not both\n${USAGE}`); process.exit(2); } if (!existsSync(resolve(String(a.dir)))) { console.error(`originality: not found: ${a.dir}\n${USAGE}`); process.exit(2); } a._ = dirTargets(String(a.dir)); }
+  if (a._.length < 2) { console.error(`originality: needs at least two pages to compare\n${USAGE}`); process.exit(2); }
   const threshold = a.threshold !== undefined ? +a.threshold : THRESHOLD; if (!(threshold > 0 && threshold <= 1)) { console.error(`originality: --threshold must be in (0, 1]\n${USAGE}`); process.exit(2); }
   for (const t of a._) { try { locate(t); } catch (e) { console.error(`originality: ${e.message}\n${USAGE}`); process.exit(2); } }
   const labels = a.labels ? String(a.labels).split(",") : a._.map((t) => (/^https?:/.test(t) ? t : basename(resolve(t)).replace(/\.html?$/, "") === "index" ? basename(dirname(resolve(t))) : basename(resolve(t)).replace(/\.html?$/, "")));

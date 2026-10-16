@@ -10,16 +10,16 @@
       "react": "skills/asfakulsiam-motomation-design/examples/components/type/split-flap.tsx"
     },
     {
+      "id": "grain",
+      "react": "skills/asfakulsiam-motomation-design/examples/components/backgrounds/grain.tsx"
+    },
+    {
       "id": "copy-button",
       "react": "skills/asfakulsiam-motomation-design/examples/components/micro/copy-button.tsx"
     },
     {
       "id": "ink-fill",
       "react": "skills/asfakulsiam-motomation-design/examples/components/type/ink-fill.tsx"
-    },
-    {
-      "id": "typewriter",
-      "react": "skills/asfakulsiam-motomation-design/examples/components/text/typewriter.tsx"
     }
   ]
 }

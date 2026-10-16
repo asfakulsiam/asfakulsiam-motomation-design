@@ -4,9 +4,9 @@
 // archetype: stage
 // components: Dock, CopyButton
 // what: The night's practical details (venue, doors, getting there) with a small dock of the four things people do next: add to calendar, open the map, share, and call the box office.
-// signature: A dock of real next actions instead of a contact form; magnification makes the target you're reaching for bigger, which matters on a crowded footer.
+// signature: A dock of real next actions instead of a contact form, at a fixed size: the magnification was cut (it enlarged four already 48px targets under a mouse only, and gave no reason to move).
 // mobile: The dock is a static row of large buttons.
-// reduced-motion: No magnification; the buttons are the same size.
+// reduced-motion: Nothing here moves; the copy button's label change is the only feedback.
 import { Dock } from "../components/layout/dock";
 import { CopyButton } from "../components/micro/copy-button";
 import { Section, cols, h, label, MUTED } from "./_shared";
@@ -22,7 +22,7 @@ export function ContactEventVenue() {
         <div><p style={label}>Metro</p><p style={{ margin: "6px 0 0" }}>Shahbagh station, 9 min walk</p></div>
         <div><p style={label}>Box office</p><p style={{ margin: "6px 0 0" }}>+880 2 9562 801 <CopyButton text="+88029562801" label="Copy" /></p><p style={{ margin: 0, color: MUTED }}>12:00–20:00 daily</p></div>
       </div>
-      <Dock items={[
+      <Dock magnify={1} items={[
         { label: "Add to calendar", icon: icon("M4 6h16v14H4zM4 10h16M9 3v4M15 3v4"), href: "#calendar" },
         { label: "Open map", icon: icon("M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11zM12 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"), href: "#map" },
         { label: "Share", icon: icon("M4 12v7h16v-7M12 3v12M7 8l5-5 5 5"), href: "#share" },

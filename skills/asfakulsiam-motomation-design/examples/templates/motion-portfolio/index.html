@@ -20,7 +20,7 @@
 @font-face{font-family:"Bricolage Grotesque";font-style:normal;font-weight:300 700;font-display:swap;src:url(../fonts/BricolageGrotesque-300-700-normal-latin.woff2) format("woff2")}
 @font-face{font-family:"Hanken Grotesk";font-style:normal;font-weight:400 700;font-display:swap;src:url(../fonts/HankenGrotesk-400-700-normal-latin.woff2) format("woff2")}
 @font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/JetBrainsMono-400-normal-latin.woff2) format("woff2")}
-  /* motomation · archetype: film-reel · mutation: tempo-shift · signature: timecode-rail · tier: 5 · critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp28] R5[cuts:3,anim:2] M5[t5:pins1/2,webgl0/1,js3/250KB,rm0] V5[entrance-repeats:0] Q5[prog:Δ15.4%,smooth:sandbox,rm:flow] A5[focus:11/11,tgt:0f9w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · 6b1c0870bf · skipped 2/50@1440 */
+  /* motomation · archetype: film-reel · mutation: tempo-shift · signature: timecode-rail · tier: 5 · critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,layout-new,palette-new,fp28,self-excluded] R5[cuts:3,anim:2] M5[t5:pins1/2,webgl0/1,js3/250KB,rm0] V5[entrance-repeats:0] Q5[prog:Δ15.5%,smooth:sandbox,rm:flow] A5[focus:11/11,tgt:0f9w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K1 · gate/4 · dfef7f795b · skipped 1/50@375 */
   :root {
     --ground: #0A0D12; --surface: #141922; --ink: #EEE8DC; --muted: #A39D90; --accent: #F2A541;
     --line: rgba(238, 232, 220, 0.16);
@@ -42,7 +42,12 @@
   header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5vw; border-bottom: 1px solid var(--line); }
   header a { display: inline-block; padding: 0.5rem 0; text-decoration: none; }
 
-  .hook { min-height: 88svh; display: grid; align-content: end; gap: 2.5rem; padding: 12vh 5vw 8vh; }
+  /* The hook is full-bleed: the reel's first shot (one slit of amber light) fills the screen behind the title, so the
+     page opens on the work itself; the type sits over the dark part of the frame. */
+  .hook { position: relative; min-height: 100svh; display: grid; align-content: end; gap: 2.5rem; padding: 12vh 5vw 8vh; overflow: hidden; }
+  .hook .still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.8; mix-blend-mode: screen; transform: translateY(-24%); -webkit-mask-image: linear-gradient(#000 52%, transparent 80%); mask-image: linear-gradient(#000 52%, transparent 80%); }
+  /* screened: only the light of the frame lands on the page; lifted 24% and faded out below so the slit hangs above the title (behind it, the amber "hold" fell to 1.5:1) */
+  .hook > :not(.still) { position: relative; }
   .hook h1 { font: 300 clamp(3.25rem, 11.5vw, 13rem)/0.86 var(--display); letter-spacing: -0.045em; max-width: 12ch; }
   .hook h1 em { font-style: normal; font-weight: 700; color: var(--accent); }
   .hook .row { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; align-items: end; }
@@ -50,8 +55,8 @@
   .hook .lead strong { color: var(--ink); font-weight: 600; }
   .hook .row .mono { grid-column: 9 / 13; justify-self: end; text-align: right; }
 
-  /* The reel. Without motion (reduced motion, no JavaScript) it is a storyboard: four stills from the film's own
-     frames, in normal flow, each with its caption beside it, like the pages of a treatment. No canvas is mounted.
+  /* The reel. Without motion (reduced motion, no JavaScript) it is a wall of four title cards (below), each shot's
+     name set on its still. No canvas is mounted.
      With motion, the script adds .reel-on: the section grows to 520vh, the stage sticks for the whole pass, a canvas
      is created and draws the frame sequence for the scroll position, and the same four figures become the captions
      over the film (one visible at a time; focusing a caption link moves the film to that shot). */
@@ -68,15 +73,26 @@
   .shot h3 a { text-decoration: none; display: inline-block; padding: 0.15rem 0; }
   .shot .cap p { color: var(--muted); max-width: 34ch; }
   .rail { display: none; }
+  /* Reduced motion (and no JavaScript) is its own picture, not the film stopped: a wall of four title cards, two by
+     two. Each shot's name is set on its own still the way a main title sits on a plate, the slate (shot, timecode)
+     in the corner, the commission in a line under it. */
+  html:not(.reel-on) .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem 1.5rem; }
+  html:not(.reel-on) .shot { grid-template-columns: 1fr; grid-template-rows: auto auto; align-items: stretch; gap: 0.9rem; }
+  html:not(.reel-on) .shot .cap { display: contents; }
+  html:not(.reel-on) .shot img { grid-column: 1; grid-row: 1; }
+  html:not(.reel-on) .shot .tc { grid-column: 1; grid-row: 1; align-self: start; justify-self: start; margin: 0.9rem; padding: 0.3rem 0.55rem; background: rgba(10, 13, 18, 0.82); }
+  html:not(.reel-on) .shot h3 { grid-column: 1; grid-row: 1; align-self: center; justify-self: center; text-align: center; padding: 0.35rem 0.9rem; background: rgba(10, 13, 18, 0.72); color: #f4efe6; font-size: clamp(1.75rem, 1rem + 2.6vw, 3.6rem); }
+  html:not(.reel-on) .shot h3 a { color: inherit; }
+  html:not(.reel-on) .shot .cap p:last-child { grid-column: 1; grid-row: 2; }
 
   .reel-on .reel { height: 520vh; position: relative; }
   .reel-on .reel__head { display: none; }
   .reel-on .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: #000; }
   .reel-on .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   .reel-on .shots { position: absolute; left: 5vw; right: 5vw; bottom: 13vh; padding: 0; display: block; }
-  .reel-on .shot { position: absolute; left: 0; bottom: 0; display: block; max-width: min(40rem, 90vw); opacity: 0; transform: translateY(14px);
-    transition: opacity 360ms var(--ease), transform 480ms var(--ease); pointer-events: none; }
-  .reel-on .shot.on, .reel-on .shot:focus-within { opacity: 1; transform: none; pointer-events: auto; }
+  .reel-on .shot { position: absolute; left: 0; bottom: 0; display: block; max-width: min(40rem, 90vw); opacity: 0;
+    transition: opacity 360ms var(--ease); pointer-events: none; } /* no rise: a caption changes on a cut, it does not arrive */
+  .reel-on .shot.on, .reel-on .shot:focus-within { opacity: 1; pointer-events: auto; }
   .reel-on .shot img { display: none; }
   .reel-on .shot .cap { padding: 1rem 1.25rem 1.1rem; background: rgba(10, 13, 18, 0.82); border-left: 2px solid var(--accent); }
   .reel-on .shot h3 { font-size: clamp(2.25rem, 1.2rem + 4vw, 5.5rem); }
@@ -86,11 +102,11 @@
   .rail i b { position: absolute; inset: 0; background: var(--accent); transform-origin: left; transform: scaleX(0); }
   .rail .chap { min-width: 7.5em; }
 
-  .credits { padding: 14vh 5vw; border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
-  .credits h2 { grid-column: 1 / 4; font: 600 clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem)/1.1 var(--display); }
-  .credits ol { grid-column: 4 / 13; list-style: none; }
-  .credits li { display: grid; grid-template-columns: 4.5rem 1fr 1fr; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid var(--line); align-items: baseline; }
-  .credits li:first-child { border-top: 1px solid var(--line); }
+  /* Credits are a contact sheet: six cards in three columns, year over title over role, like slates on a wall. */
+  .credits { padding: 14vh 5vw; border-top: 1px solid var(--line); display: grid; gap: 2rem; }
+  .credits h2 { font: 600 clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem)/1.1 var(--display); }
+  .credits ol { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .credits li { display: grid; align-content: start; gap: 0.5rem; min-height: 11rem; padding: 1.5rem; background: var(--ground); }
   .credits .t { font: 600 1.25rem/1.2 var(--display); }
   .credits .r { color: var(--muted); }
 
@@ -104,11 +120,12 @@
   footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding: 2rem 5vw 3rem; border-top: 1px solid var(--line); }
 
   @media (max-width: 767px) {
-    .hook .lead, .hook .row .mono, .reel__head h2, .reel__head p, .credits h2, .credits ol { grid-column: 1 / -1; }
+    .hook .lead, .hook .row .mono, .reel__head h2, .reel__head p { grid-column: 1 / -1; }
     .hook .row .mono { justify-self: start; text-align: left; }
     .shot > * { grid-column: 1 / -1 !important; }
-    .credits li { grid-template-columns: 3.5rem 1fr; }
-    .credits .r { grid-column: 2; }
+    html:not(.reel-on) .shots { grid-template-columns: 1fr; }
+    .credits ol { grid-template-columns: 1fr; }
+    .credits li { min-height: 0; }
     .reel-on .reel { height: 340vh; }
     .reel-on .shots { bottom: 16vh; }
   }
@@ -120,6 +137,7 @@
 
 <main id="main">
   <section class="hook" aria-labelledby="t">
+    <img class="still" src="storyboard/1.webp" width="1600" height="900" alt="" fetchpriority="high">
     <h1 id="t">Titles that <em>hold</em> the frame</h1>
     <div class="row">
       <p class="lead"><strong>I design the first ninety seconds of a film:</strong> the opening titles, the cast cards, the end crawl. Below is the 2026 reel. Scroll to play it; stop, and it holds the frame.</p>
@@ -130,7 +148,7 @@
   <section class="reel" aria-labelledby="reel-t">
     <div class="stage">
       <div class="reel__head">
-        <h2 id="reel-t">The 2026 reel, as a storyboard</h2>
+        <h2 id="reel-t">The 2026 reel, as four title cards</h2>
         <p>Four shots, one commission each. With motion on, this is a film you scrub by scrolling.</p>
       </div>
       <ol class="shots">
@@ -165,7 +183,7 @@
     <a class="btn" href="mailto:titles@noorhaque.film">titles@noorhaque.film <span aria-hidden="true">→</span></a>
   </section>
 </main>
-<footer><span class="mono">Noor Haque · title design</span><span class="mono">Reduced motion shows the storyboard</span></footer>
+<footer><span class="mono">Noor Haque · title design</span><span class="mono">Reduced motion shows the title cards</span></footer>
 <nav class="kit" aria-label="Motomation Design" style="padding:20px 24px 28px;font-size:15px;line-height:1.5"><p style="margin:0">A Motomation Design page template. <a href="../product-launch/">Next template: Shapla R1 · a kitchen radio you tune by hand</a> · <a href="../">Browse all templates</a> · <a href="../../gallery/">Open the component gallery</a> · <a href="../../">Read the docs</a></p></nav>
 
 <script>

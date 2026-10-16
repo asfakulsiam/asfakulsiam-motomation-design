@@ -6,8 +6,8 @@
 - **Kind:** SaaS landing
 - **Archetype · mutation · signature:** workbench · ui-is-content · ink-fill
 - **Tier:** 2
-- **Type roles:** display Bricolage Grotesque · text Hanken Grotesk · mono JetBrains Mono
-- **What it is:** A bookkeeping app for corner shops where the product is the page: the day's ledger, the four screens, the export line, one customer's evening, two plans.
+- **Type roles:** display Bricolage Grotesque · text JetBrains Mono · mono JetBrains Mono
+- **What it is:** Bookkeeping for corner shops where the product is the page: the day's ledger, a one-line export, four screens, two plans and one customer's evening.
 
 ## Sections, in order
 
@@ -19,15 +19,7 @@ A bookkeeping app for small shops opens on the app itself: the real ledger scree
 - **Mobile:** The frame drops below the sentence at full width; the screen is a normal scroll area.
 - **Reduced motion:** The first customer type, still; the screen doesn't glide.
 
-### 2. features (`features-saas-bento`)
-
-Four product facts as a bento of working parts of the app (a sale typed in Bangla, the credit book, the stock alert, the offline badge), each tile revealing as it's reached.
-
-- **Why it's memorable:** Each tile is a piece of the real interface with real numbers, not an icon with a feature name; the bento layout mirrors the app's own home screen.
-- **Mobile:** Tiles stack in reading order at full width.
-- **Reduced motion:** Tiles are all shown; numbers show final values.
-
-### 3. features (`features-saas-console`)
+### 2. features (`features-saas-console`)
 
 For the developer side of a bookkeeping app: the real CLI session that exports a month of sales, next to the list of what arrives in the accountant's inbox as it runs.
 
@@ -35,21 +27,29 @@ For the developer side of a bookkeeping app: the real CLI session that exports a
 - **Mobile:** Terminal first, then the list, both full width; long commands wrap.
 - **Reduced motion:** The session and the list are shown complete.
 
-### 4. testimonial (`testimonial-saas-ink`)
+### 3. features (`features-saas-bento`)
 
-One shopkeeper's words, long enough to be specific, inking in as they're read, beside the one number that changed for her.
+Four product facts as a bento of working parts of the app (a sale typed in Bangla, the credit book, the stock alert, the offline badge), each tile revealing as it's reached.
 
-- **Why it's memorable:** One real testimonial with a measured result beats a carousel of five-star quotes; the number is the before/after of her evening.
-- **Mobile:** The number sits above the quote; the quote wraps at full width.
-- **Reduced motion:** The quote is fully inked; the number shows its final value.
+- **Why it's memorable:** Each tile is a piece of the real interface with real numbers, not an icon with a feature name; the bento layout mirrors the app's own home screen.
+- **Mobile:** Tiles stack in reading order at full width.
+- **Reduced motion:** Tiles are all shown; numbers show final values.
 
-### 5. pricing (`pricing-saas-switch`)
+### 4. pricing (`pricing-saas-switch`)
 
 Two plans and a monthly/yearly switch that squishes as it flips; the prices change in place, and the plan cards' edges light toward the pointer.
 
 - **Why it's memorable:** Only two plans, priced in taka per shop per month, with the saving shown as months free (how shopkeepers count), not a percentage.
 - **Mobile:** Cards stack; the switch stays above them; the glow rests as a faint border.
 - **Reduced motion:** The switch flips without squish; prices swap instantly.
+
+### 5. testimonial (`testimonial-saas-ink`)
+
+One shopkeeper's words, long enough to be specific, inking in as they're read, beside the one number that changed for her.
+
+- **Why it's memorable:** One real testimonial with a measured result beats a carousel of five-star quotes; the number is the before/after of her evening.
+- **Mobile:** The number sits above the quote; the quote wraps at full width.
+- **Reduced motion:** The quote is fully inked; the number shows its final value.
 
 ### 6. cta (`cta-saas-trial`)
 

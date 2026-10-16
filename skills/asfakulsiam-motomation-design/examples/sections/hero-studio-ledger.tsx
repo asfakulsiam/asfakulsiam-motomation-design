@@ -20,7 +20,7 @@ export function HeroStudioLedger() {
         <h1 id="hero-studio-ledger-title" style={h("clamp(2.6rem, 8vw, 7rem)")}>Hawa Studio</h1>
         <div><p style={label}>Projects shipped since 2011</p><SplitFlap value="0312" cellStyle={{ fontSize: "clamp(1.6rem, 4vw, 2.6rem)" }} /></div>
       </div>
-      <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: TEXT, marginTop: 8 }}>
+      <table id="studio-entries" style={{ width: "100%", scrollMarginTop: 24, borderCollapse: "collapse", fontFamily: TEXT, marginTop: 8 }}>
         <caption style={{ ...label, textAlign: "left", padding: "14px 0" }}>Recent entries</caption>
         <thead><tr style={{ fontFamily: MONO, fontSize: 12, color: MUTED, textAlign: "left" }}><th scope="col" style={{ padding: "8px 0" }}>Year</th><th scope="col">Client</th><th scope="col" className="ledger-wide">Discipline</th><th scope="col" className="ledger-wide" style={{ textAlign: "right" }}>Hours</th></tr></thead>
         <tbody>{ROWS.map(([y, c, d, hrs]) => (

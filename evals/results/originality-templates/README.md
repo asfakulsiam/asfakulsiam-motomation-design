@@ -30,3 +30,89 @@ Same ten templates, same command, with the redefined axes (interaction = feedbac
 | composition / signature / structure | 2 / 5 / 0 | 2 / 5 / 0 |
 
 The stricter axes find more sameness among the shipped templates, not less: they share one navigation and feedback pattern, and several share type classes. The templates were not changed in this session.
+
+## Redesign of the ten templates (2026-10-16)
+
+`node scripts/originality.mjs --dir examples/templates/` (from the skill folder; `--dir` is new and only selects the targets: every `*.html` in the folder plus each subfolder's `index.html`). No axis, weight or threshold changed.
+
+| | Before (`before-redesign.md`) | After (`after-redesign.txt`, `after-redesign.json`) |
+|---|---|---|
+| Pairs below 0.4 on every axis | 4/45 | 45/45 |
+| interaction repeats | 35 | 0 (max 0.36) |
+| typography repeats | 10 | 0 (max 0.39) |
+| signature repeats | 5 | 0 (max 0.38) |
+| image repeats | 2 | 0 (max 0.24) |
+| composition repeats | 2 | 0 (max 0.38) |
+| structure repeats | 0 | 0 (max 0.32) |
+
+### What was shared, and why
+
+Three things made every section-built template alike, whatever its brief:
+
+- **No interaction design of their own.** The only feedback rules were the build's one `:focus-visible` outline and the skip link, and the only navigation was the gallery's kit strip, so feedback and navigation were identical (1.00) between any two of the eight. `BASE` in `scripts/build-templates.mjs` now holds reset and layout only; each `page.tsx` sets its own focus, hover and press styles (the build fails a page with no `:focus-visible` rule) and its own navigation.
+- **One type voice.** `h()`, `label` and `body` in `sections/_shared.tsx` fixed heading line-height 1, tracking -0.02em, weight 400, labels as 12px mono capitals, body 1.55. They now read CSS variables (`--display-scale`, `--display-lh`, `--display-track`, `--display-weight`, `--display-case`, `--display-style`, `--label-*`, `--body-size`, `--body-lh`) with the old values as defaults; each template sets its own in its theme.
+- **Every display face fell back to `Georgia,serif`**, so a sans display (Bricolage, Anybody) read as a serif. Each family now falls back to its own class.
+
+### Per template (each changed in at least three dimensions; no two share a choice)
+
+| Template | Navigation | Hero / composition | Section order | Grid | Image | Type | Interaction | Signature |
+|---|---|---|---|---|---|---|---|---|
+| hotel | fixed key-tag side rail (the page's header) | split: name top-left, courtyard developing right (was centred door) | guest book second | rooms: asymmetric arches 1.4fr + 2 (was a pinned sideways reel) | arch-masked rooms; courtyard develops | Cormorant / Cormorant, italic, body 20/1.62 | tracking opens on hover, press dims, dotted ring + underline focus | darkroom-develop (was aperture) |
+| event | floating sticky pill | poster in fixed night colours | tickets before lineup | — | typographic only | Anybody / Anybody, caps 800, lh .82, labels .32em | skew + amber on hover, press squashes, focus inverts | width-sprint (was velocity-skew; the name marquee is cut) |
+| org | plain top bar + disclosure for the trust's papers | — | watchers before the numbers | — | — | Gloock / Schibsted 18/1.72, bold sentence-case labels | rule under on hover (border), river tint on press, soft ring focus | seismograph-line |
+| personal | none: a letter; sign-off links (write back, back to top) | — | P.S. before replies | — | inked postmark (multiply, tilted) | Instrument Serif / Instrument Serif 21/1.78, italic labels | red + underline on hover, darker on press, highlighter focus | thread (the replies' timed entrance is cut) |
+| saas-landing | fixed app bar + real menu toggle on phones | — | console before bento | — | — | Bricolage 700 / JetBrains Mono 14/1.52 | lift + shadow on hover, press flat, green border + halo focus | ink-fill |
+| shop-product | breadcrumb + lot pager (prev/next) | — | reserve right after the making | — | photos desaturated, full colour on hover | Young Serif (was Fraunces) at 1.42 / Familjen 14/1.4 | celadon wash on hover, press inverts, square outline focus | hold-to-commit |
+| studio-portfolio | fixed bottom dock + start-a-project dialog | — | people before services | — | drawing cut like a ledger card (notched corner) | JetBrains Mono display (was Young Serif) / Hanken | invert on hover, press lifts and fades, red halo + underline focus | lens |
+| editorial-article | sticky chapter rail that marks the chapter being read | — | — | rail + story, two columns | — | Bodoni 600 at 1.18 / Instrument Sans 16/1.6, italic display labels | underline on hover, red on press, yellow marker focus | decode |
+| product-launch | radio-preset buttons | — | — | — | — | body leading 1.55 → 1.7, display tracked −0.035em (a service manual's open setting) | presets turn vermilion on hover; a pressed key drops 3 px onto its shadow | aperture |
+| motion-portfolio | — | full-bleed: the reel's first shot behind the title | — | credits: three-column contact sheet (was a 3/9 list) | the still is screened onto the ground | — | — | timecode-rail |
+
+Palettes moved too (not an axis): ochre limewash, night, river green-grey, airmail blue, white, celadon grey, ledger white with red rules, newsprint grey.
+
+### Pairs at or above 0.4 on the way, and what changed
+
+| Run | Below 0.4 on every axis | Pair · axis → change |
+|---|---|---|
+| 1 (page-level nav, feedback, type) | 34/45 | event × hotel, motion-portfolio, personal · signature (all four in the scroll family) → event's signature became width-sprint (type family). launch × shop · typography (both Fraunces) → shop to Young Serif. editorial × shop · interaction (both had a prev/next pager) → editorial's pager removed. org × studio · interaction (both mailto + three links) → org's mailto removed. personal × launch · interaction (same email form) → personal's edition choice moved into the form as radios. motion-portfolio × personal · image and signature → replies' entrance cut, a postmark added. Composition pairs with motion-portfolio → its hook made full-bleed, credits a contact sheet. |
+| 2 | 38/45 | three image pairs (all flat, unfiltered) → postmark multiply, studio notch, still screened. shop × launch, shop × studio · typography → shop's heading scale 1.42, body 14/1.4. org × saas · interaction → org back to three links. |
+| 3 | 43/45 | hotel × motion-portfolio · composition (both had a scroll-pinned stretch: identical empty screens) → the hotel's pinned reel replaced by a still arch gallery (also restraint: the courtyard develop is the hotel's one motion). editorial × org · interaction → the chapter rail marks the current chapter. |
+| 4 | 44/45 | editorial × hotel · interaction → the hotel rail's `aria-current` was static and always said "Door": removed; the rail is the page's header. |
+| 5 | 45/45 | — (then the gate fixes below, and launch's specs became three-column tiles) |
+| 6 | 44/45 | motion-portfolio × product-launch · composition 0.41 (placement 0.35, columns 0.5, density 0.5: both films' pinned stage reads as three empty screens) → two-column tiles made it 0.42, so the specs went back to their original table and launch's third dimension became typography (leading and tracking) |
+| 7 | 45/45 | — (final: `after-redesign.txt`; composition max 0.38) |
+
+### Gate after the redesign (`scripts/gate.mjs`, each page, 2026-10-16)
+
+Every page passes every page-level axis (contrast, overflow, words, motion, names, focus, targets, zoom, reflow, the
+critique scores, rules C/S/P) except where marked. The stamp in each page is the line its own gate printed. Every
+verdict is FAIL, for two reasons that came before this redesign:
+
+| Template | Page-level failures | Journey (whole folder served as one site) |
+|---|---|---|
+| hotel | none | nav2 mobile0 forms4 errors3 session0 → FAIL |
+| event | none | nav2 mobile3 forms3 errors3 → FAIL |
+| org | none | nav2 mobile1 forms3 errors3 → FAIL |
+| personal | none | nav2 mobile1 forms3 errors3 → FAIL |
+| saas-landing | none | nav2 mobile1 errors3 → FAIL |
+| shop-product | none | nav2 mobile4 errors3 → FAIL |
+| studio-portfolio | none | nav2 mobile3 errors3 → FAIL |
+| editorial-article | none | nav2 mobile3 errors3 → FAIL |
+| product-launch | sec-h2 (no nosniff header) | nav2 mobile0 forms3 errors3 → FAIL |
+| motion-portfolio | sec-h2 (no nosniff header) | nav2 mobile0 forms3 errors3 → FAIL |
+
+- **Journey (all ten).** The journey check (v2.11) treats the templates folder as one site, which it is not:
+  - nav2: the gallery-kit links `../` and `../../gallery/` point outside the folder and return 404.
+  - errors3: the folder has no 404 page.
+  - forms: personal's and launch's demo forms confirm locally and make no request. Form states are checked by intercepting requests, and these forms send none.
+  - mobile: the running-order rows on the event page all link to `#tickets`, unchanged since before the redesign, so after the first tap the page is already there. The carousel's Previous button is `disabled` at the first slide, and the check counts a tap on a disabled control as no response.
+
+  None of these come from the redesign.
+- **sec-h2 (the two films).** A film links one level up, so the gate serves the repository root and the folder's `_headers` is not applied. HEAD's own `product-launch/index.html`, run with `gate.mjs --rules` in the same folder, fails sec-h2 the same way. Its old K0 stamp predates the serve-root logic.
+- **Fixed during the redesign** (each one caught by the gate):
+  - Event: no focus ring on the dock and the copy button, and the prices overflowed their boxes at 375px.
+  - Org: the trust's-papers panel overflowed at 375px.
+  - Personal: no focus ring on the form controls, and 18px radio buttons.
+  - Studio: the dock covered the footer links at 200% zoom, and the dock's Work link pointed at the top of the page.
+  - Motion-portfolio: the amber "hold" sat on the still's glow at 1.5:1.
+  - All eight: meta descriptions over 160 characters.

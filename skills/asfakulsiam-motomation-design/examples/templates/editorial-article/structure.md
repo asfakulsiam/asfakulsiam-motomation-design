@@ -7,7 +7,7 @@
 - **Archetype · mutation · signature:** broadsheet · print-rule · decode
 - **Tier:** 2
 - **Type roles:** display Bodoni Moda · text Instrument Sans · mono JetBrains Mono
-- **What it is:** A long-read set like a broadsheet: masthead, deck and columns, one pull quote that inks in as it is read, and a folio footer that remembers what you've read.
+- **What it is:** A long-read set like a broadsheet on newsprint: a chapter rail, masthead, deck and columns, one pull quote that inks in, and a folio footer.
 
 ## Sections, in order
 

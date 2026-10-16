@@ -7,7 +7,7 @@
 - **Archetype · mutation · signature:** manifesto · constraint · seismograph-line
 - **Tier:** 2
 - **Type roles:** display Gloock · text Schibsted Grotesk · mono JetBrains Mono
-- **What it is:** A river trust's case in one page: the claim, a year of audited hearings, the people who watch the banks, gifts tied to real costs, and its registration.
+- **What it is:** A river trust's case in one page: the claim, the people who watch the banks, a year of hearings, gifts tied to real costs, and its papers.
 
 ## Sections, in order
 
@@ -19,21 +19,21 @@ A rivers charity opens with its argument, not its logo: one large sentence float
 - **Mobile:** The statement wraps to four or five lines at a smaller size; the paragraph is full width.
 - **Reduced motion:** Statement and paragraph appear fully set.
 
-### 2. features (`features-org-impact`)
-
-Three numbers from the trust's last year, set huge on a contour-line field like a survey map, each with the sentence that makes it mean something.
-
-- **Why it's memorable:** The Manifesto backs its argument with evidence at the same scale as the words; the contour lines are the survey work itself.
-- **Mobile:** Numbers stack, still large; contour lines stay behind at low contrast.
-- **Reduced motion:** Lines are still; numbers show final values.
-
-### 3. team (`team-org-field-guide`)
+### 2. team (`team-org-field-guide`)
 
 The river watchers as field-guide entries (name, the reach each person watches, one line from their log) beside a single halftone survey print of the three rivers.
 
 - **Why it's memorable:** The people who do the work, catalogued the way the trust catalogues rivers; the one halftone ties the page to the survey prints, and it shows the water, not the people.
 - **Mobile:** The survey print sits above the entries; entries stack one per row.
 - **Reduced motion:** The print is drawn at full size at once; nothing moves.
+
+### 3. features (`features-org-impact`)
+
+Three numbers from the trust's last year, set huge on a contour-line field like a survey map, each with the sentence that makes it mean something.
+
+- **Why it's memorable:** The Manifesto backs its argument with evidence at the same scale as the words; the contour lines are the survey work itself.
+- **Mobile:** Numbers stack, still large; contour lines stay behind at low contrast.
+- **Reduced motion:** Lines are still; numbers show final values.
 
 ### 4. cta (`cta-org-donate`)
 

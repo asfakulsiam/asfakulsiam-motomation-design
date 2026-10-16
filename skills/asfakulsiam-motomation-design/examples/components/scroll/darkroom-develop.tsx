@@ -14,15 +14,15 @@
 import { useRef, type CSSProperties } from "react";
 import { useReducedMotion, useScrollProgress, clamp } from "../_lib/motion";
 
-type Props = { src: string; alt: string; width?: number; height?: number; className?: string; style?: CSSProperties };
+type Props = { src: string; alt: string; width?: number; height?: number; loading?: "lazy" | "eager"; className?: string; style?: CSSProperties };
 
-export function DarkroomDevelop({ src, alt, width, height, className, style }: Props) {
+export function DarkroomDevelop({ src, alt, width, height, loading = "lazy", className, style }: Props) { // loading="eager" for a first-screen photograph
   const ref = useRef<HTMLImageElement>(null);
   const reduce = useReducedMotion();
   useScrollProgress(ref, (p) => {
     const k = clamp((p - 0.1) / 0.45); const el = ref.current; if (!el) return;
     el.style.filter = `brightness(${1.9 - 0.9 * k}) contrast(${0.35 + 0.65 * k}) sepia(${(1 - k) * 0.5}) grayscale(${1 - k})`;
   }, !reduce);
-  return <img ref={ref} src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" className={className}
+  return <img ref={ref} src={src} alt={alt} width={width} height={height} loading={loading} decoding="async" className={className}
     style={{ display: "block", maxWidth: "100%", height: "auto", filter: reduce ? "none" : "brightness(1.9) contrast(.35) sepia(.5) grayscale(1)", ...style }} />;
 }

@@ -7,6 +7,7 @@ import { SplitFlap } from "../../skills/asfakulsiam-motomation-design/examples/c
 import { CopyButton } from "../../skills/asfakulsiam-motomation-design/examples/components/micro/copy-button";
 import { InkFill } from "../../skills/asfakulsiam-motomation-design/examples/components/type/ink-fill";
 import { Typewriter } from "../../skills/asfakulsiam-motomation-design/examples/components/text/typewriter";
+import { Grain } from "../../skills/asfakulsiam-motomation-design/examples/components/backgrounds/grain";
 import { useState } from "react";
 
 const Label = ({ children }: { children: ReactNode }) => <p className="demo-label">{children}</p>;
@@ -24,6 +25,7 @@ const DEMOS: Record<string, () => ReactNode> = {
   "split-flap": () => <Flap />,
   "copy-button": () => <><p className="demo-big">work@hawa.studio</p><CopyButton text="work@hawa.studio" label="Copy email" style={{ justifySelf: "start" }} /></>,
   "ink-fill": () => <><Spacer /><InkFill className="demo-big" text={LONG} /><Spacer /></>,
+  grain: () => <section style={{ position: "relative", padding: 48, background: "#c9b48f", borderRadius: 8 }}><p className="demo-big" style={{ position: "relative", margin: 0 }}>The courtyard at noon, printed on paper.</p><Grain opacity={0.12} /></section>,
   typewriter: () => <Typewriter className="demo-big" text="Dear reader, this month is about the binders." />,
 };
 

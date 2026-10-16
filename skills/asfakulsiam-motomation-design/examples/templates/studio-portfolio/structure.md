@@ -6,8 +6,8 @@
 - **Kind:** portfolio (studio)
 - **Archetype · mutation · signature:** ledger · swap-material · lens
 - **Tier:** 2
-- **Type roles:** display Young Serif · text Hanken Grotesk · mono JetBrains Mono
-- **What it is:** A design studio's site kept as its account book: projects as ledger entries, services with fixed shapes, the team at the table, and the wait for a new start.
+- **Type roles:** display JetBrains Mono · text Hanken Grotesk · mono JetBrains Mono
+- **What it is:** A design studio kept as its account book on ledger paper: projects as entries, the people at the table, fixed-shape services and how to start one.
 
 ## Sections, in order
 
@@ -19,21 +19,21 @@ A studio's homepage set as an account book: a ruled ledger of recent projects wi
 - **Mobile:** The ledger drops its hours and discipline columns below 640px (they move under the client name); the counter stays on one line.
 - **Reduced motion:** The counter shows its final value; names don't scramble.
 
-### 2. features (`features-studio-services`)
-
-A studio's three services as dark ledger cards whose edges light up toward the pointer, each with the one number that describes it (weeks, rounds, people).
-
-- **Why it's memorable:** Services are priced and staffed like entries, not described with adjectives; the lit edge makes the row feel like a panel of switches you choose between.
-- **Mobile:** Cards stack; the glow rests as a faint border.
-- **Reduced motion:** Faint static border; numbers show their final value.
-
-### 3. team (`team-studio-rows`)
+### 2. team (`team-studio-rows`)
 
 The studio's team as a ledger of names, roles and years, above a studio photograph you can look through with a lens that reveals who sits where.
 
 - **Why it's memorable:** A team page with no headshot grid: the people are entries in the book and in the room, and the lens connects the two.
 - **Mobile:** The lens becomes a toggle button (Lens's touch path); rows stack name over role.
 - **Reduced motion:** The lens is a toggle; names don't scramble.
+
+### 3. features (`features-studio-services`)
+
+A studio's three services as dark ledger cards whose edges light up toward the pointer, each with the one number that describes it (weeks, rounds, people).
+
+- **Why it's memorable:** Services are priced and staffed like entries, not described with adjectives; the lit edge makes the row feel like a panel of switches you choose between.
+- **Mobile:** Cards stack; the glow rests as a faint border.
+- **Reduced motion:** Faint static border; numbers show their final value.
 
 ### 4. contact (`contact-studio-copy`)
 

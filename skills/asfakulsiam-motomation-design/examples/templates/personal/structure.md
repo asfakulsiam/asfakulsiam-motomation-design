@@ -6,8 +6,8 @@
 - **Kind:** personal brand
 - **Archetype · mutation · signature:** letter · second-person · thread
 - **Tier:** 2
-- **Type roles:** display Instrument Serif · text Familjen Grotesk · mono JetBrains Mono
-- **What it is:** A writer's homepage that is this month's letter: written to the reader, with replies that came in the post and a postscript to subscribe.
+- **Type roles:** display Instrument Serif · text Instrument Serif · mono JetBrains Mono
+- **What it is:** A writer's homepage that is this month's letter, on airmail paper: written to you, a postscript to subscribe, and the replies that came in the post.
 
 ## Sections, in order
 
@@ -19,18 +19,18 @@ A writer's personal site opens as a letter: the salutation types itself, the bod
 - **Mobile:** The page is full width with a narrower measure; the thread runs in the left margin.
 - **Reduced motion:** Salutation complete; the line is drawn in full.
 
-### 2. testimonial (`testimonial-personal-replies`)
+### 2. cta (`cta-personal-subscribe`)
 
-Replies to last month's letter arrive one by one, like the morning's post: a line from each, with the reader's town.
-
-- **Why it's memorable:** A newsletter's proof is that people write back; the arrival order is the order the replies came in.
-- **Mobile:** Replies are full width cards.
-- **Reduced motion:** All replies are shown at once.
-
-### 3. cta (`cta-personal-subscribe`)
-
-The sign-up at the foot of the letter: one email field, a switch for the Bangla edition, and a line whose last words name what the next letters are about.
+The sign-up at the foot of the letter: which edition (English, Bangla or both), one email field, and a line whose last words name what the next letters are about.
 
 - **Why it's memorable:** The ask is written as a postscript in the letter's voice; the topics rotating are the real next three letters.
-- **Mobile:** Field and button stack full width; the switch sits under them.
-- **Reduced motion:** The first topic, still; the switch flips without squish.
+- **Mobile:** The edition choices wrap; field and button stack full width.
+- **Reduced motion:** The first topic, still.
+
+### 3. testimonial (`testimonial-personal-replies`)
+
+Replies to last month's letter, laid out as the morning's post: a received postmark inked over the paper (multiply), tilted as a hand stamp lands, then a line from each, with the reader's town.
+
+- **Why it's memorable:** A newsletter's proof is that people write back; the postmark dates the replies, and nothing animates in, because letters don't arrive on scroll.
+- **Mobile:** The postmark sits above the replies; replies are full-width cards.
+- **Reduced motion:** Nothing here moves.

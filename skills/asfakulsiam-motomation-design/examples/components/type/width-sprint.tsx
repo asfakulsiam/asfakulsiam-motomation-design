@@ -14,11 +14,11 @@
 import { useRef, type CSSProperties } from "react";
 import { useReducedMotion, useScrollVelocity, clamp } from "../_lib/motion";
 
-type Props = { text: string; base?: number; max?: number; sensitivity?: number; as?: "h1" | "h2" | "span"; className?: string; style?: CSSProperties };
+type Props = { text: string; base?: number; max?: number; sensitivity?: number; as?: "h1" | "h2" | "span"; id?: string; className?: string; style?: CSSProperties };
 
-export function WidthSprint({ text, base = 90, max = 125, sensitivity = 40, as: Tag = "h2", className, style }: Props) {
+export function WidthSprint({ text, base = 90, max = 125, sensitivity = 40, as: Tag = "h2", id, className, style }: Props) {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   useScrollVelocity((v) => { const el = ref.current; if (el) el.style.fontVariationSettings = `"wdth" ${base + (max - base) * clamp(Math.abs(v) / sensitivity)}`; }, !reduce);
-  return <Tag ref={ref as never} className={className} style={{ fontVariationSettings: `"wdth" ${base}`, whiteSpace: "nowrap", maxWidth: "100%", ...style }}>{text}</Tag>;
+  return <Tag ref={ref as never} id={id} className={className} style={{ fontVariationSettings: `"wdth" ${base}`, whiteSpace: "nowrap", maxWidth: "100%", ...style }}>{text}</Tag>;
 }

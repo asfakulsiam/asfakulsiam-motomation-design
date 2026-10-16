@@ -22,7 +22,7 @@
 @font-face{font-family:"Schibsted Grotesk";font-style:normal;font-weight:400 700;font-display:swap;src:url(../fonts/SchibstedGrotesk-400-700-normal-latin.woff2) format("woff2")}
 @font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/JetBrainsMono-400-normal-latin.woff2) format("woff2")}
 @font-face{font-family:"Hind Siliguri";font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/HindSiliguri-400-normal-bengali.woff2) format("woff2");unicode-range:U+0980-09FE}
-  /* motomation · archetype: stage · mutation: single-object · signature: aperture · tier: 5 · critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,fp41] R5[cuts:3,anim:2] M5[t5:pins1/2,webgl0/1,js3/250KB,rm0] V5[entrance-repeats:0] Q5[prog:Δ16.5%,smooth:sandbox,rm:flow] A5[focus:13/13,tgt:0f6w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · 99f3f9d14b · skipped 2/44@768 */
+  /* motomation · archetype: stage · mutation: single-object · signature: aperture · tier: 5 · critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,layout-new,palette-new,fp41,self-excluded] R5[cuts:3,anim:2] M5[t5:pins1/2,webgl0/1,js3/250KB,rm0] V5[entrance-repeats:0] Q5[prog:Δ16.5%,smooth:sandbox,rm:flow] A5[focus:16/16,tgt:0f6w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K1 · gate/4 · a0d1894fe6 · skipped 2/47@768 */
   :root {
     --ground: #E9E4D8; --ink: #191814; --muted: #5A554B; --accent: #A8341B; --line: rgba(25, 24, 20, 0.18);
     --display: "Fraunces", Georgia, serif;
@@ -32,13 +32,21 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { background: var(--ground); color: var(--ink); }
-  body { font: 400 clamp(1rem, 0.97rem + 0.18vw, 1.125rem)/1.55 var(--text); -webkit-font-smoothing: antialiased; }
+  /* Typography (v2.13 redesign): a service manual's open leading and tight, heavy display, so the page reads as printed matter. */
+  body { font: 400 clamp(1rem, 0.97rem + 0.18vw, 1.125rem)/1.7 var(--text); -webkit-font-smoothing: antialiased; }
+  h1, h2, h3 { letter-spacing: -0.035em; }
   a { color: inherit; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
   .skip { position: absolute; left: -9999px; } .skip:focus { left: 1rem; top: 1rem; z-index: 20; background: var(--ink); color: var(--ground); padding: .6rem 1rem; }
   .mono { font: 400 0.75rem/1.5 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 
-  header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 4vw; }
+  /* Navigation is a row of radio presets: three buttons that press in, like the ones under the dial. */
+  header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem 1.5rem; padding: 1rem 4vw; }
+  .presets { display: flex; gap: 6px; }
+  .presets a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1rem; border: 1px solid var(--ink); border-radius: 4px; background: var(--ground);
+    box-shadow: 0 3px 0 var(--ink); text-decoration: none; font: 400 0.75rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
+  .presets a:hover { border-color: var(--accent); color: var(--accent); }
+  .presets a:active { filter: brightness(0.9); box-shadow: 0 0 0 var(--ink); translate: 0 3px; }
   header a { display: inline-block; padding: 0.4rem 0; text-decoration: none; font: 600 1.25rem/1 var(--display); font-style: italic; }
 
   .hook { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; padding: 10vh 4vw 12vh; align-items: end; min-height: 82svh; }
@@ -50,8 +58,8 @@
     transition: background-color 160ms var(--ease); }
   .btn:hover { background: var(--ink); }
 
-  /* The stage. Without motion (reduced motion, no JavaScript, or a window under 560px tall) it is a printed spec
-     sheet: four stills of the radio in normal flow, each with its note. With motion, .stage-on: the section is
+  /* The stage. Without motion (reduced motion, no JavaScript, or a window under 560px tall) it is a parts plate
+     (below): the exploded still numbered and keyed, the other three steps as small figures. With motion, .stage-on: the section is
      440vh, the stage sticks, a canvas opens through an aperture on the right and the radio turns and comes apart in
      four beats; each beat moves, then holds, and the note for the current beat is marked in the column on the left. */
   .stage { border-top: 1px solid var(--line); }
@@ -65,6 +73,25 @@
   .beat h3 a { text-decoration: none; display: inline-block; padding: 0.1rem 0; }
   .beat .note p:last-child { color: var(--muted); max-width: 36ch; }
   .beat .n { color: var(--accent); }
+
+  /* Reduced motion (and no JavaScript, and windows under 560px tall) is its own picture, not the film stopped: a parts
+     plate. The exploded view is the plate, framed, with the five parts numbered on it and keyed beside it; the other
+     three steps sit under it as small figures, like the views printed along the foot of a service sheet. */
+  html:not(.stage-on) .beats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3rem 1.5rem; }
+  html:not(.stage-on) .beat { grid-template-columns: 1fr; align-items: start; gap: 1rem; }
+  html:not(.stage-on) .beat img { grid-column: 1; grid-row: 1; }
+  html:not(.stage-on) .beat .note { grid-column: 1; grid-row: 2; }
+  html:not(.stage-on) .beat h3 { font-size: clamp(1.3rem, 1rem + 0.8vw, 1.7rem); }
+  html:not(.stage-on) #beat-3 { order: -1; grid-column: 1 / -1; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1.5rem; padding: 1.5rem; border: 1px solid var(--ink); }
+  html:not(.stage-on) #beat-3 > img, html:not(.stage-on) #beat-3 > .pins { grid-column: 1 / 9; grid-row: 1 / 3; }
+  html:not(.stage-on) #beat-3 .note { grid-column: 9 / 13; grid-row: 1; }
+  html:not(.stage-on) #beat-3 h3 { font-size: clamp(1.8rem, 1.3rem + 1.6vw, 2.8rem); }
+  .pins, .key { display: none; }
+  html:not(.stage-on) .pins { display: block; position: relative; aspect-ratio: 4 / 3; pointer-events: none; }
+  html:not(.stage-on) .pins span { position: absolute; display: grid; place-items: center; width: 2rem; height: 2rem; margin: -1rem 0 0 -1rem; border-radius: 50%; background: var(--ground); border: 1px solid var(--ink); font: 400 0.85rem/1 var(--mono); }
+  html:not(.stage-on) .key { display: grid; grid-column: 9 / 13; grid-row: 2; align-self: end; gap: 0; list-style: none; border-top: 1px solid var(--ink); }
+  html:not(.stage-on) .key li { display: grid; grid-template-columns: 2.4rem 1fr; padding: 0.55rem 0; border-bottom: 1px solid var(--line); }
+  html:not(.stage-on) .key b { font: 400 0.85rem/1.5 var(--mono); color: var(--accent); }
 
   .stage-on .stage { height: 440vh; position: relative; }
   .stage-on .stage__head { display: none; }
@@ -102,6 +129,9 @@
   @media (max-width: 767px) {
     .hook h1, .hook .buy, .stage__head h2, .specs h2, .specs dl, .order h2, .order form { grid-column: 1 / -1; }
     .beat > * { grid-column: 1 / -1 !important; grid-row: auto !important; }
+    html:not(.stage-on) .beats { grid-template-columns: 1fr; }
+    html:not(.stage-on) #beat-3 { grid-column: 1; padding: 1rem; }
+    html:not(.stage-on) #beat-3 > img, html:not(.stage-on) #beat-3 > .pins { grid-row: 1 !important; }
     .stage-on .stage { height: 360vh; }
     .stage-on .pin { grid-template-columns: 1fr; grid-template-rows: 58fr 42fr; }
     .stage-on .film { grid-column: 1; grid-row: 1; }
@@ -114,7 +144,7 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header><a href="#main">Shapla</a><span class="mono">Pre-order · ships March 2027</span></header>
+<header><a href="#main">Shapla</a><nav class="presets" aria-label="Presets"><a href="#beat-1">1 · Film</a><a href="#sp">2 · Specs</a><a href="#order">3 · Reserve</a></nav><span class="mono">Pre-order · ships March 2027</span></header>
 
 <main id="main">
   <section class="hook" aria-labelledby="t">
@@ -135,8 +165,9 @@
           <div class="note"><p class="mono n">01 · Face</p><h3><a href="#beat-1" data-jump="0">Folded from one sheet</a></h3><p>The case is 1.5 mm aluminium, anodised vermilion, bent at four corners and closed with two screws.</p></div></li>
         <li class="beat" id="beat-2"><img src="storyboard/2.webp" width="1600" height="1200" alt="The radio turned three-quarters, showing its depth and the seam where the two shells meet." loading="lazy">
           <div class="note"><p class="mono n">02 · Profile</p><h3><a href="#beat-2" data-jump="1">48 mm deep</a></h3><p>Shallow enough for the shelf above the stove, deep enough for a speaker that carries across a kitchen.</p></div></li>
-        <li class="beat" id="beat-3"><img src="storyboard/3.webp" width="1600" height="1200" alt="An exploded view: front shell, aluminium dial plate, green circuit board, battery cell and back shell, spaced apart." loading="lazy">
-          <div class="note"><p class="mono n">03 · Inside</p><h3><a href="#beat-3" data-jump="2">Five parts, no glue</a></h3><p>Front shell, dial plate, one board, one 3.7 V cell, back shell. Every part comes out with a screwdriver.</p></div></li>
+        <li class="beat" id="beat-3"><img src="storyboard/3.webp" width="1600" height="1200" alt="An exploded view: front shell, aluminium dial plate, green circuit board, battery cell and back shell, spaced apart." loading="lazy"><div class="pins" aria-hidden="true"><span style="left:24%;top:30%">1</span><span style="left:35%;top:31%">2</span><span style="left:44%;top:32%">3</span><span style="left:67%;top:47%">4</span><span style="left:81%;top:34%">5</span></div>
+          <div class="note"><p class="mono n">03 · Inside</p><h3><a href="#beat-3" data-jump="2">Five parts, no glue</a></h3><p>Front shell, dial plate, one board, one 3.7 V cell, back shell. Every part comes out with a screwdriver.</p></div>
+          <ol class="key" aria-label="Parts, numbered on the drawing"><li><b>1</b>Front shell</li><li><b>2</b>Dial plate</li><li><b>3</b>Board</li><li><b>4</b>3.7 V cell</li><li><b>5</b>Back shell</li></ol></li>
         <li class="beat" id="beat-4"><img src="storyboard/4.webp" width="1600" height="1200" alt="The radio closed again, with the dial needle moved to a station." loading="lazy">
           <div class="note"><p class="mono n">04 · Tune</p><h3><a href="#beat-4" data-jump="3">A dial, not a screen</a></h3><p>Turn the knob and the needle moves across the band. The station stays where you left it.</p></div></li>
       </ol>
@@ -166,7 +197,7 @@
     </form>
   </section>
 </main>
-<footer><span class="mono">Shapla · Dhaka</span><span class="mono">Reduced motion shows the spec sheet</span></footer>
+<footer><span class="mono">Shapla · Dhaka</span><span class="mono">Reduced motion shows the parts plate</span></footer>
 <nav class="kit" aria-label="Motomation Design" style="padding:20px 24px 28px;font-size:15px;line-height:1.5"><p style="margin:0">A Motomation Design page template. <a href="../motion-portfolio/">Next template: Noor Haque · titles and motion for film</a> · <a href="../">Browse all templates</a> · <a href="../../gallery/">Open the component gallery</a> · <a href="../../">Read the docs</a></p></nav>
 
 <script>
