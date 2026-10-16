@@ -1,0 +1,139 @@
+{
+  "threshold": 0.4,
+  "labels": [
+    "org-climate-nonprofit",
+    "launch-product-film"
+  ],
+  "pairs": [
+    {
+      "a": "org-climate-nonprofit",
+      "b": "launch-product-film",
+      "score": {
+        "structure": 0.02,
+        "composition": 0.14,
+        "image": 0.33,
+        "typography": 0.31,
+        "interaction": 0.24,
+        "signature": 0.1,
+        "overall": 0.19
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.03,
+          "order": 0
+        },
+        "composition": {
+          "placement": 0.06,
+          "columns": 0.38,
+          "density": 0.14
+        },
+        "image": {
+          "ratio_size": 0,
+          "crop_mask": 0,
+          "effects": 1
+        },
+        "typography": {
+          "families": 0.5,
+          "scale": 0.39,
+          "rhythm": 0.26,
+          "hierarchy": 0
+        },
+        "interaction": {
+          "hover": 0,
+          "click": 0.8,
+          "scroll": 0.14,
+          "pointer": 0
+        },
+        "signature": {
+          "declared": 0,
+          "measured": 0.2
+        }
+      },
+      "over": []
+    }
+  ],
+  "pass": true,
+  "max": {
+    "structure": 0.02,
+    "composition": 0.14,
+    "image": 0.33,
+    "typography": 0.31,
+    "interaction": 0.24,
+    "signature": 0.1,
+    "overall": 0.19
+  },
+  "targets": [
+    "examples/templates/org.html",
+    "examples/templates/product-launch/index.html"
+  ],
+  "features": [
+    {
+      "label": "org-climate-nonprofit",
+      "blocks": [
+        "text:m",
+        "media:m",
+        "grid:m",
+        "statement:m"
+      ],
+      "images": 1,
+      "display": "gloock",
+      "body": "schibsted grotesk",
+      "signature": {
+        "tokens": {
+          "trigger:pointer": 1,
+          "trigger:scroll": 1,
+          "trigger:time": 1,
+          "prop:transform": 1,
+          "el:svg": 1,
+          "size:large": 1,
+          "mech:pointer+scroll+time>transform": 1
+        },
+        "found": {
+          "trigger": [
+            "pointer",
+            "scroll",
+            "time"
+          ],
+          "props": [
+            "transform"
+          ],
+          "kind": "svg",
+          "size": "large"
+        },
+        "declared": "seismograph-line"
+      }
+    },
+    {
+      "label": "launch-product-film",
+      "blocks": [
+        "statement:m",
+        "grid:xl",
+        "statement:m",
+        "form:s"
+      ],
+      "images": 1,
+      "display": "fraunces",
+      "body": "schibsted grotesk",
+      "signature": {
+        "tokens": {
+          "trigger:scroll": 1,
+          "prop:clip": 1,
+          "el:block": 1,
+          "size:large": 1,
+          "mech:scroll>clip": 1
+        },
+        "found": {
+          "trigger": [
+            "scroll"
+          ],
+          "props": [
+            "clip"
+          ],
+          "kind": "block",
+          "size": "large"
+        },
+        "declared": "aperture"
+      }
+    }
+  ]
+}

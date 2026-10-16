@@ -71,6 +71,28 @@ Exit code `2` also covers usage errors (an unknown flag, a missing value or no t
 
 **Optional motion report.** `node scripts/gate.mjs --report dist/index.html` (or `--report out.html` after a target) also writes a self-contained HTML file with scroll-frame strips: 8 frames at 1440px, 8 at 375px and 8 at 1440px under reduced motion. Use it to review motion by eye, show a client, or give judges something better than one screenshot. It's off by default, doesn't change the text output, and adds nothing to the gate's numbers.
 
+
+### Axis O: originality across briefs (`scripts/originality.mjs`)
+
+The table above checks one page against rules. It cannot see that two unrelated briefs came out as the same shape. Axis **O** compares this build with builds made for **other, unrelated briefs** and scores every pair from 0 (nothing shared) to 1 (the same) on six axes, all measured in a real browser at 1440×900:
+
+| Axis | What is compared |
+|---|---|
+| **structure** | DOM hierarchy (3-deep tag-path shingles, single-child wrappers collapsed) and section order (the content blocks between header and footer, typed form / grid / media / list / text / statement plus height) |
+| **composition** | placement (each of the first 8 screens as a 12×8 grid of empty / text / media cells), columns and alignment per screen, density per screen |
+| **image** | image treatment: aspect ratio × size class, crop × mask (radius, clip-path, mask-image), filter × blend × rotation |
+| **typography** | display and body families, the size scale relative to body, rhythm (leading, tracking, case, weight per role), h1/h2/h3 hierarchy |
+| **interaction** | hover rules that apply to the page (the property groups they change), click patterns (disclosure, dialog, tabs, toggles, forms, carousels), scroll behaviour (sticky, snap, scroll libraries, properties that change while scrolling), pointer behaviour |
+| **signature** | the element that changes most under time, pointer and scroll (trigger, properties, element kind, size), plus the declared signature when both stamps carry one |
+
+```bash
+node scripts/originality.mjs <this build> <a build for an unrelated brief> [more …]   # matrix per axis + overall
+node scripts/originality.mjs a/ b/ c/ --json --out originality.json
+```
+
+**Pass: every pair below 0.4 on every axis.** An axis at or above 0.4 is a repeat (`✗`): the skill produced the same shape for different briefs on that axis. Go back to Step 6 of the Thinking Sequence and change that axis (not the copy), then re-run. Absence on both sides counts as the same pattern: two builds with no imagery score 1 on image, two builds with no hover feedback score 1 on hover. Which builds: the earlier projects in the memory log (`node scripts/memory.mjs recent` lists each run's project folder). No earlier build on this machine: record `O: not verified — no earlier build to compare` in the report, under **Not verified**. Exit codes: 0 pass, 1 a repeat, 2 usage, 3 not verified (no browser). O is a cross-build axis, so it is not in the stamp or its id; the stamp describes one page. In the benchmark it is the `originality` arm: `node evals/run-agent-benchmark.mjs originality --out <run>` compares, per arm and seed, every brief's build with every other brief's (`originality.json`, `originality.md`), and `score` folds the result into `summary.json`.
+
+Calibration on this repo (`evals/results/originality-templates/`): a page against itself scores 1.00 on every axis; across the 10 shipped templates, 11 of 45 pairs are below 0.4 on every axis. The repeat is mostly **interaction** (the 8 section-library templates share no hover feedback and the same observer, scroll and pointer listener stack), then image (several have no imagery) and typography.
 ---
 
 ## Part 1: Self-critique (score 1–5)

@@ -9,6 +9,9 @@
 //   node evals/run-agent-benchmark.mjs measure  --out …        screenshots, axe-core, keyboard, scripts/gate.mjs → checks.json
 //   node evals/run-agent-benchmark.mjs judge    --out … --judge-cmd "<cmd {model} {prompt} {images}>" [--models gpt_5_4,gemini_3_1_pro]
 //   node evals/run-agent-benchmark.mjs score    --out …        summary.json (+ per-brief verdicts)
+//   node evals/run-agent-benchmark.mjs originality --out …     the originality arm: per arm and seed, every build compared
+//           with the builds of the other briefs on the six axes of scripts/originality.mjs → originality.json (+ .md).
+//           Unrelated briefs must score below 0.4 on every axis; score folds the result into summary.json.
 //   --cache-dir <dir> | --no-cache | --cache-unpinned   generate reuses finished runs keyed by (brief, seed, arm, skill tree
 //           hash, model): evals/bench-cache.mjs. Default dir evals/.cache/runs/ (gitignored). Off unless the model is pinned.
 //   --arms baseline,gated,skill   third arm "gated": the baseline prompt + scripts/gate.mjs (tool only, no skill docs)
@@ -61,7 +64,7 @@ const W = { Concept: 20, Originality: 20, Typography: 15, Motion: 15, Craft: 15,
 const argv = process.argv.slice(2); const phase = argv[0]; const flags = {};
 for (let i = 1; i < argv.length; i++) if (argv[i].startsWith("--")) flags[argv[i].slice(2)] = argv[i + 1] && !argv[i + 1].startsWith("--") ? argv[++i] : true;
 // v2.5.0 (C9): unknown phases and flags are one friendly line plus the usage, exit 2, before anything runs
-const BENCH_USAGE = "usage: node evals/run-agent-benchmark.mjs <generate|measure|judge|score> --out <dir> [--n 3] [--only studio,hotel | --one <slug>] [--arms baseline,gated,skill] [--pairs baseline:skill,gated:skill] [--tier 4] [--parallel 4] [--judge-cmd …] [--model m] [--cache-dir d | --no-cache] [--dry-run]";
+const BENCH_USAGE = "usage: node evals/run-agent-benchmark.mjs <generate|measure|judge|score|originality> --out <dir> [--n 3] [--only studio,hotel | --one <slug>] [--arms baseline,gated,skill] [--pairs baseline:skill,gated:skill] [--tier 4] [--parallel 4] [--judge-cmd …] [--model m] [--cache-dir d | --no-cache] [--dry-run]";
 const BENCH_HELP = `${BENCH_USAGE}
 
   --only a,b        briefs to run (default: the five v2-v4 category briefs)
@@ -77,7 +80,7 @@ const benchDie = (m) => { console.error(`run-agent-benchmark: ${m}\n${BENCH_USAG
 if (process.argv[1] && resolve(process.argv[1]) === resolve(new URL(import.meta.url).pathname)) {
   if (flags.help || phase === "--help" || phase === "-h") { console.log(BENCH_HELP); process.exit(0); }
   for (const k of Object.keys(flags)) if (!BENCH_FLAGS.has(k)) benchDie(`unknown flag --${k}`);
-  if (phase && !["generate", "measure", "judge", "score"].includes(phase)) benchDie(`unknown phase "${phase}"`);
+  if (phase && !["generate", "measure", "judge", "score", "originality"].includes(phase)) benchDie(`unknown phase "${phase}"`);
   for (const k of ["out", "n", "only", "one", "arms", "pairs", "tier", "parallel", "judge-cmd", "model", "cache-dir", "match-turns", "max-turns", "timeout"]) if (flags[k] === true) benchDie(`--${k} needs a value`);
 }
 const OUT = resolve(flags.out || join(ROOT, `evals/results/${new Date().toISOString().slice(0, 10)}-benchmark-v2`));
@@ -431,6 +434,38 @@ async function judgePair(slug, seed, model, pair = ["baseline", "skill"]) {
 }
 const total = (s) => AX.reduce((a, k) => a + (s[k] || 0) * W[k], 0) / 5;
 
+// The originality arm (v2.11): the gate checks one page; this checks that different briefs did not come out as the same
+// shape. For each arm and each seed index, the builds of every brief in the run are compared pairwise on the six axes of
+// scripts/originality.mjs (structure, composition, image, typography, interaction, signature). Writes originality.json
+// and originality.md in --out. Returns null when not verified (no browser), else { pass }.
+export const ORIGINALITY_THRESHOLD = 0.4;
+function originalityArm() {
+  const script = join(SKILL, "scripts/originality.mjs"); const result = { threshold: ORIGINALITY_THRESHOLD, generated: new Date().toISOString(), arms: {} };
+  const md = [`# Originality arm`, "", `Builds for different briefs, same arm and seed, compared on six axes (0 = nothing shared, 1 = the same). Every axis must stay below ${ORIGINALITY_THRESHOLD}.`, ""];
+  const built = (d) => existsSync(join(d, "index.html")) || ["out", "dist", "build", ".output/public", "_site", "public"].some((x) => existsSync(join(d, x, "index.html")));
+  let notVerified = false;
+  for (const cond of arms) {
+    const arm = { sets: [], repeats: [], max: {}, pass: true };
+    for (let k = 0; k < N; k++) {
+      const set = only.map((slug) => ({ slug, seed: BRIEFS[slug].seeds[k], dir: join(OUT, slug, `${cond}-s${BRIEFS[slug].seeds[k]}`) })).filter((x) => x.seed && built(x.dir));
+      if (set.length < 2) continue;
+      const g = spawnSync(process.execPath, [script, ...set.map((x) => x.dir), "--json", "--labels", set.map((x) => x.slug).join(",")], { encoding: "utf8", maxBuffer: 64 << 20 });
+      if (g.status === 3) { console.log(`originality ${cond} seed#${k + 1}: ${(g.stdout || g.stderr).trim().split("\n")[0]}`); notVerified = true; continue; }
+      let rep; try { rep = JSON.parse(g.stdout); } catch { console.log(`originality ${cond} seed#${k + 1}: no report (${(g.stderr || g.stdout).slice(0, 200)})`); notVerified = true; continue; }
+      arm.sets.push({ seedIndex: k + 1, builds: set.map((x) => x.dir.replace(ROOT + "/", "")), pairs: rep.pairs.map(({ a, b, score, over }) => ({ a, b, score, over })), max: rep.max, pass: rep.pass });
+      for (const p of rep.pairs) if (p.over.length) arm.repeats.push({ seedIndex: k + 1, a: p.a, b: p.b, axes: p.over });
+      for (const [ax, v] of Object.entries(rep.max)) arm.max[ax] = Math.max(arm.max[ax] ?? 0, v ?? 0);
+      arm.pass &&= rep.pass;
+      md.push(`## ${cond}, seed #${k + 1}`, "", `| Pair | structure | composition | image | typography | interaction | signature | overall |`, `|---|---:|---:|---:|---:|---:|---:|---:|`, ...rep.pairs.map((p) => `| ${p.a} × ${p.b} | ${["structure", "composition", "image", "typography", "interaction", "signature", "overall"].map((ax) => `${p.score[ax].toFixed(2)}${ax !== "overall" && p.score[ax] >= ORIGINALITY_THRESHOLD ? " ✗" : ""}`).join(" | ")} |`), "");
+      console.log(`originality ${cond} seed#${k + 1}: ${set.length} builds, ${rep.pairs.length} pairs, ${rep.pass ? "PASS" : `FAIL (${rep.pairs.filter((p) => p.over.length).length} repeat pair(s))`}`);
+    }
+    if (arm.sets.length) result.arms[cond] = arm; else console.log(`originality ${cond}: fewer than two built briefs per seed, nothing to compare`);
+  }
+  if (!Object.keys(result.arms).length) { if (notVerified) { console.log("originality: not verified"); return null; } console.log("originality: nothing to compare (needs at least two briefs built in one arm)"); return { pass: true }; }
+  mkdirSync(OUT, { recursive: true }); writeFileSync(join(OUT, "originality.json"), JSON.stringify(result, null, 1)); writeFileSync(join(OUT, "originality.md"), md.join("\n") + "\n");
+  return { pass: Object.values(result.arms).every((a) => a.pass) && !notVerified };
+}
+
 async function main() {
   if (flags["dry-run"]) { // list, write nothing
     const list = runs(); const b = only.map((s) => BRIEFS[s]);
@@ -480,6 +515,9 @@ async function main() {
       .filter((j) => j.pair.every((c) => existsSync(join(OUT, j.slug, `${c}-s${j.seed}`, "checks.json")) && !JSON.parse(readFileSync(join(OUT, j.slug, `${c}-s${j.seed}`, "checks.json"))).missing));
     await pool(jobs, +(flags.parallel || 4), (j) => new Promise((ok) => setImmediate(async () => ok(await judgePair(j.slug, j.seed, j.m, j.pair))))); return;
   }
+  if (phase === "originality") {
+    const res = originalityArm(); if (res === null) process.exit(3); process.exitCode = res.pass ? 0 : 1; return;
+  }
   if (phase === "score") {
     const models = String(flags.models || "gpt_5_4,gemini_3_1_pro").split(","); const out = { generated: new Date().toISOString(), briefs: {} };
     for (const slug of only) {
@@ -510,11 +548,14 @@ async function main() {
       const w = es.reduce((n, e) => n + e.wins, 0), l = es.reduce((n, e) => n + e.losses, 0), t = es.reduce((n, e) => n + e.ties, 0), ns = es.reduce((n, e) => n + e.notScored, 0);
       out.totals[k] = { pair, pairs: w + l + t + ns, wins: w, losses: l, ties: t, notScored: ns, signTestP: signTest(w, l) };
       console.log(`TOTAL ${k}: ${pair[1]} ${w}–${l}–${t} (wins–losses–ties), not scored ${ns}, sign test p=${signTest(w, l).toPrecision(3)}`); }
+    // the originality arm (scripts/originality.mjs), when it ran: per arm, the worst score per axis and the repeats
+    const of = join(OUT, "originality.json");
+    if (existsSync(of)) { try { const o = JSON.parse(readFileSync(of, "utf8")); out.originality = Object.fromEntries(Object.entries(o.arms).map(([arm, a]) => [arm, { pass: a.pass, max: a.max, repeats: a.repeats }])); for (const [arm, a] of Object.entries(out.originality)) console.log(`ORIGINALITY ${arm}: ${a.pass ? "every cross-brief pair below" : `${a.repeats.length} repeat(s) at or above`} ${o.threshold} · max ${Object.entries(a.max).map(([k, v]) => `${k} ${v ?? "–"}`).join(" ")}`); } catch (e) { out.originality = { error: String(e.message || e) }; } }
     writeFileSync(join(OUT, "summary.json"), JSON.stringify(out, null, 1));
     for (const [s, b] of Object.entries(out.briefs)) for (const e of [b, ...Object.values(b).filter((x) => x && x.pair)]) if (e.pair) console.log(`${s.padEnd(10)} ${e.pair.join(" vs ").padEnd(18)} ${e.outcome.padEnd(16)} ${e.pair[1]} wins ${e.wins}, losses ${e.losses}, ties ${e.ties}, not scored ${e.notScored} · ` + e.pairs.map((p) => `s${p.seed}: ${p[e.pair[0]].gated?.toFixed(1)} vs ${p[e.pair[1]].gated?.toFixed(1)}`).join(" · "));
     return;
   }
-  console.log("usage: node evals/run-agent-benchmark.mjs <generate|measure|judge|score> --out <dir> [--n 3] [--only studio,hotel] [--arms baseline,gated,skill] [--pairs baseline:skill,gated:skill] [--tier 4] [--parallel 4] [--judge-cmd …]");
+  console.log("usage: node evals/run-agent-benchmark.mjs <generate|measure|judge|score|originality> --out <dir> [--n 3] [--only studio,hotel] [--arms baseline,gated,skill] [--pairs baseline:skill,gated:skill] [--tier 4] [--parallel 4] [--judge-cmd …]");
   process.exit(phase ? 1 : 0);
 }
 main().catch((e) => { console.error(e); process.exit(1); });

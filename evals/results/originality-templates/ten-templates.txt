@@ -1,0 +1,206 @@
+ORIGINALITY · 10 build(s) · 45 pair(s) · threshold < 0.4 on every axis (lower = more different)
+  hotel: 5 content blocks [media:m grid:xl grid:m text:m media:m] · 8 image(s) · type cormorant garamond / instrument sans (body 17px) · signature declared aperture, measured pointer+scroll+time → transform on svg (large)
+  event: 4 content blocks [statement:m grid:m grid:s grid:s] · 0 image(s) · type instrument sans / instrument sans (body 15px) · signature declared velocity-skew, measured scroll → transform on strip (medium)
+  org: 4 content blocks [text:m media:m grid:m statement:m] · 1 image(s) · type gloock / schibsted grotesk (body 17px) · signature declared seismograph-line, measured pointer+scroll+time → transform on svg (large)
+  personal: 3 content blocks [text:m list:m form:m] · 0 image(s) · type instrument serif / familjen grotesk (body 16px) · signature declared thread, measured scroll → opacity+transform on text (medium)
+  saas: 6 content blocks [grid:m list:m list:m statement:m grid:m grid:s] · 0 image(s) · type bricolage grotesque / jetbrains mono (body 13px) · signature declared ink-fill, measured pointer+time → text-content on text (screen)
+  shop: 6 content blocks [grid:m grid:m text:m statement:m grid:m grid:m] · 8 image(s) · type fraunces / familjen grotesk (body 16px) · signature declared hold-to-commit, measured pointer → transform on block (large)
+  studio: 4 content blocks [text:m grid:m grid:l statement:s] · 2 image(s) · type young serif / hanken grotesk (body 17px) · signature declared lens, measured pointer → transform on block (medium)
+  editorial: 2 content blocks [text:m text:s] · 0 image(s) · type bodoni moda / instrument sans (body 16px) · signature declared decode, measured scroll → colour on text (small)
+  launch: 4 content blocks [statement:m grid:xl statement:m form:s] · 1 image(s) · type fraunces / schibsted grotesk (body 18px) · signature declared aperture, measured scroll → clip on block (large)
+  motionpf: 4 content blocks [statement:m list:xl list:m statement:m] · 1 image(s) · type bricolage grotesque / hanken grotesk (body 18px) · signature declared timecode-rail, measured scroll → opacity+transform on text (medium)
+
+| Pair | structure | composition | image | typography | interaction | signature | overall | Verdict |
+|---|---:|---:|---:|---:|---:|---:|---:|---|
+| hotel × event | 0.20 | 0.11 | 0.00 | 0.41 ✗ | 0.63 ✗ | 0.35 | 0.28 | repeat on typography, interaction |
+| hotel × org | 0.19 | 0.06 | 0.08 | 0.31 | 0.81 ✗ | 0.50 ✗ | 0.33 | repeat on interaction, signature |
+| hotel × personal | 0.06 | 0.05 | 0.00 | 0.33 | 0.75 ✗ | 0.34 | 0.26 | repeat on interaction |
+| hotel × saas | 0.06 | 0.08 | 0.00 | 0.29 | 0.73 ✗ | 0.09 | 0.21 | repeat on interaction |
+| hotel × shop | 0.14 | 0.22 | 0.52 ✗ | 0.51 ✗ | 0.81 ✗ | 0.17 | 0.40 | repeat on image, typography, interaction |
+| hotel × studio | 0.15 | 0.10 | 0.16 | 0.48 ✗ | 0.81 ✗ | 0.10 | 0.30 | repeat on typography, interaction |
+| hotel × editorial | 0.15 | 0.06 | 0.00 | 0.42 ✗ | 0.71 ✗ | 0.05 | 0.23 | repeat on typography, interaction |
+| hotel × launch | 0.12 | 0.38 | 0.04 | 0.36 | 0.17 | 0.60 ✗ | 0.28 | repeat on signature |
+| hotel × motionpf | 0.02 | 0.37 | 0.13 | 0.32 | 0.25 | 0.34 | 0.24 | different on every axis |
+| event × org | 0.11 | 0.32 | 0.00 | 0.11 | 0.76 ✗ | 0.10 | 0.23 | repeat on interaction |
+| event × personal | 0.07 | 0.13 | 1.00 ✗ | 0.11 | 0.57 ✗ | 0.44 ✗ | 0.39 | repeat on image, interaction, signature |
+| event × saas | 0.27 | 0.16 | 1.00 ✗ | 0.20 | 0.67 ✗ | 0.00 | 0.38 | repeat on image, interaction |
+| event × shop | 0.17 | 0.12 | 0.00 | 0.24 | 0.54 ✗ | 0.06 | 0.19 | repeat on interaction |
+| event × studio | 0.26 | 0.12 | 0.00 | 0.29 | 0.69 ✗ | 0.13 | 0.25 | repeat on interaction |
+| event × editorial | 0.07 | 0.17 | 1.00 ✗ | 0.28 | 0.66 ✗ | 0.06 | 0.37 | repeat on image, interaction |
+| event × launch | 0.15 | 0.09 | 0.00 | 0.26 | 0.20 | 0.31 | 0.17 | different on every axis |
+| event × motionpf | 0.16 | 0.08 | 0.00 | 0.17 | 0.33 | 0.44 ✗ | 0.20 | repeat on signature |
+| org × personal | 0.17 | 0.10 | 0.00 | 0.18 | 0.73 ✗ | 0.09 | 0.21 | repeat on interaction |
+| org × saas | 0.14 | 0.22 | 0.00 | 0.12 | 0.85 ✗ | 0.09 | 0.24 | repeat on interaction |
+| org × shop | 0.23 | 0.13 | 0.08 | 0.26 | 0.71 ✗ | 0.17 | 0.26 | repeat on interaction |
+| org × studio | 0.22 | 0.13 | 0.33 | 0.28 | 0.90 ✗ | 0.35 | 0.37 | repeat on interaction |
+| org × editorial | 0.27 | 0.22 | 0.00 | 0.16 | 0.85 ✗ | 0.05 | 0.26 | repeat on interaction |
+| org × launch | 0.02 | 0.14 | 0.33 | 0.31 | 0.24 | 0.10 | 0.19 | different on every axis |
+| org × motionpf | 0.15 | 0.07 | 0.67 ✗ | 0.20 | 0.30 | 0.09 | 0.25 | repeat on image |
+| personal × saas | 0.17 | 0.13 | 1.00 ✗ | 0.22 | 0.79 ✗ | 0.05 | 0.39 | repeat on image, interaction |
+| personal × shop | 0.14 | 0.13 | 0.00 | 0.42 ✗ | 0.68 ✗ | 0.05 | 0.24 | repeat on typography, interaction |
+| personal × studio | 0.18 | 0.14 | 0.00 | 0.30 | 0.80 ✗ | 0.11 | 0.26 | repeat on interaction |
+| personal × editorial | 0.24 | 0.51 ✗ | 1.00 ✗ | 0.33 | 0.65 ✗ | 0.11 | 0.47 | repeat on composition, image, interaction |
+| personal × launch | 0.03 | 0.12 | 0.00 | 0.22 | 0.19 | 0.30 | 0.14 | different on every axis |
+| personal × motionpf | 0.18 | 0.06 | 0.00 | 0.18 | 0.20 | 0.75 ✗ | 0.23 | repeat on signature |
+| saas × shop | 0.36 | 0.30 | 0.00 | 0.35 | 0.65 ✗ | 0.05 | 0.28 | repeat on interaction |
+| saas × studio | 0.09 | 0.38 | 0.00 | 0.27 | 0.85 ✗ | 0.05 | 0.27 | repeat on interaction |
+| saas × editorial | 0.05 | 0.19 | 1.00 ✗ | 0.21 | 0.83 ✗ | 0.30 | 0.43 | repeat on image, interaction |
+| saas × launch | 0.11 | 0.09 | 0.00 | 0.21 | 0.27 | 0.00 | 0.11 | different on every axis |
+| saas × motionpf | 0.19 | 0.05 | 0.00 | 0.26 | 0.29 | 0.05 | 0.14 | different on every axis |
+| shop × studio | 0.17 | 0.31 | 0.12 | 0.46 ✗ | 0.71 ✗ | 0.33 | 0.35 | repeat on typography, interaction |
+| shop × editorial | 0.12 | 0.21 | 0.00 | 0.27 | 0.69 ✗ | 0.00 | 0.22 | repeat on interaction |
+| shop × launch | 0.10 | 0.15 | 0.04 | 0.41 ✗ | 0.10 | 0.13 | 0.16 | repeat on typography |
+| shop × motionpf | 0.10 | 0.10 | 0.08 | 0.26 | 0.10 | 0.05 | 0.12 | different on every axis |
+| studio × editorial | 0.19 | 0.21 | 0.00 | 0.24 | 0.75 ✗ | 0.00 | 0.23 | repeat on interaction |
+| studio × launch | 0.01 | 0.09 | 0.33 | 0.35 | 0.16 | 0.06 | 0.17 | different on every axis |
+| studio × motionpf | 0.02 | 0.04 | 0.33 | 0.37 | 0.23 | 0.11 | 0.18 | different on every axis |
+| editorial × launch | 0.02 | 0.14 | 0.00 | 0.28 | 0.27 | 0.06 | 0.13 | different on every axis |
+| editorial × motionpf | 0.03 | 0.10 | 0.00 | 0.29 | 0.24 | 0.11 | 0.13 | different on every axis |
+| launch × motionpf | 0.24 | 0.46 ✗ | 0.33 | 0.33 | 0.54 ✗ | 0.30 | 0.37 | repeat on composition, interaction |
+
+structure
+| | hotel | event | org | personal | saas | shop | studio | editorial | launch | motionpf |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| hotel | — | 0.20 | 0.19 | 0.06 | 0.06 | 0.14 | 0.15 | 0.15 | 0.12 | 0.02 |
+| event | 0.20 | — | 0.11 | 0.07 | 0.27 | 0.17 | 0.26 | 0.07 | 0.15 | 0.16 |
+| org | 0.19 | 0.11 | — | 0.17 | 0.14 | 0.23 | 0.22 | 0.27 | 0.02 | 0.15 |
+| personal | 0.06 | 0.07 | 0.17 | — | 0.17 | 0.14 | 0.18 | 0.24 | 0.03 | 0.18 |
+| saas | 0.06 | 0.27 | 0.14 | 0.17 | — | 0.36 | 0.09 | 0.05 | 0.11 | 0.19 |
+| shop | 0.14 | 0.17 | 0.23 | 0.14 | 0.36 | — | 0.17 | 0.12 | 0.10 | 0.10 |
+| studio | 0.15 | 0.26 | 0.22 | 0.18 | 0.09 | 0.17 | — | 0.19 | 0.01 | 0.02 |
+| editorial | 0.15 | 0.07 | 0.27 | 0.24 | 0.05 | 0.12 | 0.19 | — | 0.02 | 0.03 |
+| launch | 0.12 | 0.15 | 0.02 | 0.03 | 0.11 | 0.10 | 0.01 | 0.02 | — | 0.24 |
+| motionpf | 0.02 | 0.16 | 0.15 | 0.18 | 0.19 | 0.10 | 0.02 | 0.03 | 0.24 | — |
+
+composition
+| | hotel | event | org | personal | saas | shop | studio | editorial | launch | motionpf |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| hotel | — | 0.11 | 0.06 | 0.05 | 0.08 | 0.22 | 0.10 | 0.06 | 0.38 | 0.37 |
+| event | 0.11 | — | 0.32 | 0.13 | 0.16 | 0.12 | 0.12 | 0.17 | 0.09 | 0.08 |
+| org | 0.06 | 0.32 | — | 0.10 | 0.22 | 0.13 | 0.13 | 0.22 | 0.14 | 0.07 |
+| personal | 0.05 | 0.13 | 0.10 | — | 0.13 | 0.13 | 0.14 | 0.51 | 0.12 | 0.06 |
+| saas | 0.08 | 0.16 | 0.22 | 0.13 | — | 0.30 | 0.38 | 0.19 | 0.09 | 0.05 |
+| shop | 0.22 | 0.12 | 0.13 | 0.13 | 0.30 | — | 0.31 | 0.21 | 0.15 | 0.10 |
+| studio | 0.10 | 0.12 | 0.13 | 0.14 | 0.38 | 0.31 | — | 0.21 | 0.09 | 0.04 |
+| editorial | 0.06 | 0.17 | 0.22 | 0.51 | 0.19 | 0.21 | 0.21 | — | 0.14 | 0.10 |
+| launch | 0.38 | 0.09 | 0.14 | 0.12 | 0.09 | 0.15 | 0.09 | 0.14 | — | 0.46 |
+| motionpf | 0.37 | 0.08 | 0.07 | 0.06 | 0.05 | 0.10 | 0.04 | 0.10 | 0.46 | — |
+
+image
+| | hotel | event | org | personal | saas | shop | studio | editorial | launch | motionpf |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| hotel | — | 0.00 | 0.08 | 0.00 | 0.00 | 0.52 | 0.16 | 0.00 | 0.04 | 0.13 |
+| event | 0.00 | — | 0.00 | 1.00 | 1.00 | 0.00 | 0.00 | 1.00 | 0.00 | 0.00 |
+| org | 0.08 | 0.00 | — | 0.00 | 0.00 | 0.08 | 0.33 | 0.00 | 0.33 | 0.67 |
+| personal | 0.00 | 1.00 | 0.00 | — | 1.00 | 0.00 | 0.00 | 1.00 | 0.00 | 0.00 |
+| saas | 0.00 | 1.00 | 0.00 | 1.00 | — | 0.00 | 0.00 | 1.00 | 0.00 | 0.00 |
+| shop | 0.52 | 0.00 | 0.08 | 0.00 | 0.00 | — | 0.12 | 0.00 | 0.04 | 0.08 |
+| studio | 0.16 | 0.00 | 0.33 | 0.00 | 0.00 | 0.12 | — | 0.00 | 0.33 | 0.33 |
+| editorial | 0.00 | 1.00 | 0.00 | 1.00 | 1.00 | 0.00 | 0.00 | — | 0.00 | 0.00 |
+| launch | 0.04 | 0.00 | 0.33 | 0.00 | 0.00 | 0.04 | 0.33 | 0.00 | — | 0.33 |
+| motionpf | 0.13 | 0.00 | 0.67 | 0.00 | 0.00 | 0.08 | 0.33 | 0.00 | 0.33 | — |
+
+typography
+| | hotel | event | org | personal | saas | shop | studio | editorial | launch | motionpf |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| hotel | — | 0.41 | 0.31 | 0.33 | 0.29 | 0.51 | 0.48 | 0.42 | 0.36 | 0.32 |
+| event | 0.41 | — | 0.11 | 0.11 | 0.20 | 0.24 | 0.29 | 0.28 | 0.26 | 0.17 |
+| org | 0.31 | 0.11 | — | 0.18 | 0.12 | 0.26 | 0.28 | 0.16 | 0.31 | 0.20 |
+| personal | 0.33 | 0.11 | 0.18 | — | 0.22 | 0.42 | 0.30 | 0.33 | 0.22 | 0.18 |
+| saas | 0.29 | 0.20 | 0.12 | 0.22 | — | 0.35 | 0.27 | 0.21 | 0.21 | 0.26 |
+| shop | 0.51 | 0.24 | 0.26 | 0.42 | 0.35 | — | 0.46 | 0.27 | 0.41 | 0.26 |
+| studio | 0.48 | 0.29 | 0.28 | 0.30 | 0.27 | 0.46 | — | 0.24 | 0.35 | 0.37 |
+| editorial | 0.42 | 0.28 | 0.16 | 0.33 | 0.21 | 0.27 | 0.24 | — | 0.28 | 0.29 |
+| launch | 0.36 | 0.26 | 0.31 | 0.22 | 0.21 | 0.41 | 0.35 | 0.28 | — | 0.33 |
+| motionpf | 0.32 | 0.17 | 0.20 | 0.18 | 0.26 | 0.26 | 0.37 | 0.29 | 0.33 | — |
+
+interaction
+| | hotel | event | org | personal | saas | shop | studio | editorial | launch | motionpf |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| hotel | — | 0.63 | 0.81 | 0.75 | 0.73 | 0.81 | 0.81 | 0.71 | 0.17 | 0.25 |
+| event | 0.63 | — | 0.76 | 0.57 | 0.67 | 0.54 | 0.69 | 0.66 | 0.20 | 0.33 |
+| org | 0.81 | 0.76 | — | 0.73 | 0.85 | 0.71 | 0.90 | 0.85 | 0.24 | 0.30 |
+| personal | 0.75 | 0.57 | 0.73 | — | 0.79 | 0.68 | 0.80 | 0.65 | 0.19 | 0.20 |
+| saas | 0.73 | 0.67 | 0.85 | 0.79 | — | 0.65 | 0.85 | 0.83 | 0.27 | 0.29 |
+| shop | 0.81 | 0.54 | 0.71 | 0.68 | 0.65 | — | 0.71 | 0.69 | 0.10 | 0.10 |
+| studio | 0.81 | 0.69 | 0.90 | 0.80 | 0.85 | 0.71 | — | 0.75 | 0.16 | 0.23 |
+| editorial | 0.71 | 0.66 | 0.85 | 0.65 | 0.83 | 0.69 | 0.75 | — | 0.27 | 0.24 |
+| launch | 0.17 | 0.20 | 0.24 | 0.19 | 0.27 | 0.10 | 0.16 | 0.27 | — | 0.54 |
+| motionpf | 0.25 | 0.33 | 0.30 | 0.20 | 0.29 | 0.10 | 0.23 | 0.24 | 0.54 | — |
+
+signature
+| | hotel | event | org | personal | saas | shop | studio | editorial | launch | motionpf |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| hotel | — | 0.35 | 0.50 | 0.34 | 0.09 | 0.17 | 0.10 | 0.05 | 0.60 | 0.34 |
+| event | 0.35 | — | 0.10 | 0.44 | 0.00 | 0.06 | 0.13 | 0.06 | 0.31 | 0.44 |
+| org | 0.50 | 0.10 | — | 0.09 | 0.09 | 0.17 | 0.35 | 0.05 | 0.10 | 0.09 |
+| personal | 0.34 | 0.44 | 0.09 | — | 0.05 | 0.05 | 0.11 | 0.11 | 0.30 | 0.75 |
+| saas | 0.09 | 0.00 | 0.09 | 0.05 | — | 0.05 | 0.05 | 0.30 | 0.00 | 0.05 |
+| shop | 0.17 | 0.06 | 0.17 | 0.05 | 0.05 | — | 0.33 | 0.00 | 0.13 | 0.05 |
+| studio | 0.10 | 0.13 | 0.35 | 0.11 | 0.05 | 0.33 | — | 0.00 | 0.06 | 0.11 |
+| editorial | 0.05 | 0.06 | 0.05 | 0.11 | 0.30 | 0.00 | 0.00 | — | 0.06 | 0.11 |
+| launch | 0.60 | 0.31 | 0.10 | 0.30 | 0.00 | 0.13 | 0.06 | 0.06 | — | 0.30 |
+| motionpf | 0.34 | 0.44 | 0.09 | 0.75 | 0.05 | 0.05 | 0.11 | 0.11 | 0.30 | — |
+
+overall
+| | hotel | event | org | personal | saas | shop | studio | editorial | launch | motionpf |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| hotel | — | 0.28 | 0.33 | 0.26 | 0.21 | 0.40 | 0.30 | 0.23 | 0.28 | 0.24 |
+| event | 0.28 | — | 0.23 | 0.39 | 0.38 | 0.19 | 0.25 | 0.37 | 0.17 | 0.20 |
+| org | 0.33 | 0.23 | — | 0.21 | 0.24 | 0.26 | 0.37 | 0.26 | 0.19 | 0.25 |
+| personal | 0.26 | 0.39 | 0.21 | — | 0.39 | 0.24 | 0.26 | 0.47 | 0.14 | 0.23 |
+| saas | 0.21 | 0.38 | 0.24 | 0.39 | — | 0.28 | 0.27 | 0.43 | 0.11 | 0.14 |
+| shop | 0.40 | 0.19 | 0.26 | 0.24 | 0.28 | — | 0.35 | 0.22 | 0.16 | 0.12 |
+| studio | 0.30 | 0.25 | 0.37 | 0.26 | 0.27 | 0.35 | — | 0.23 | 0.17 | 0.18 |
+| editorial | 0.23 | 0.37 | 0.26 | 0.47 | 0.43 | 0.22 | 0.23 | — | 0.13 | 0.13 |
+| launch | 0.28 | 0.17 | 0.19 | 0.14 | 0.11 | 0.16 | 0.17 | 0.13 | — | 0.37 |
+| motionpf | 0.24 | 0.20 | 0.25 | 0.23 | 0.14 | 0.12 | 0.18 | 0.13 | 0.37 | — |
+
+parts (why each axis scored what it did):
+  hotel × event: structure shingles=0.2,order=0.2 · composition placement=0.03,columns=0.33,density=0.13 · image one_side_only=0 · typography families=0.5,scale=0.2,rhythm=0.33,hierarchy=0.69 · interaction hover=1,click=0.4,scroll=0.6,pointer=0.5 · signature declared=0.5,measured=0.2
+  hotel × org: structure shingles=0.18,order=0.2 · composition placement=0.02,columns=0.09,density=0.13 · image ratio_size=0,crop_mask=0.13,effects=0.13 · typography families=0,scale=0.62,rhythm=0.51,hierarchy=0 · interaction hover=1,click=0.5,scroll=0.75,pointer=1 · signature declared=0,measured=1
+  hotel × personal: structure shingles=0.13,order=0 · composition placement=0,columns=0.1,density=0.13 · image one_side_only=0 · typography families=0,scale=0.46,rhythm=0.43,hierarchy=0.39 · interaction hover=1,click=0.5,scroll=0.5,pointer=1 · signature declared=0.5,measured=0.18
+  hotel × saas: structure shingles=0.13,order=0 · composition placement=0.02,columns=0.18,density=0.13 · image one_side_only=0 · typography families=0,scale=0.27,rhythm=0.26,hierarchy=0.73 · interaction hover=1,click=0.4,scroll=0.5,pointer=1 · signature declared=0,measured=0.18
+  hotel × shop: structure shingles=0.11,order=0.17 · composition placement=0.1,columns=0.44,density=0.38 · image ratio_size=0,crop_mask=0.78,effects=0.78 · typography families=0,scale=0.64,rhythm=0.57,hierarchy=0.86 · interaction hover=1,click=1,scroll=0.25,pointer=1 · signature declared=0,measured=0.33
+  hotel × studio: structure shingles=0.1,order=0.2 · composition placement=0.02,columns=0.3,density=0.13 · image ratio_size=0.11,crop_mask=0.11,effects=0.25 · typography families=0,scale=0.59,rhythm=0.54,hierarchy=0.84 · interaction hover=1,click=0.5,scroll=0.75,pointer=1 · signature declared=0,measured=0.2
+  hotel × editorial: structure shingles=0.11,order=0.2 · composition placement=0.02,columns=0.1,density=0.13 · image one_side_only=0 · typography families=0.5,scale=0.39,rhythm=0.46,hierarchy=0.33 · interaction hover=1,click=0.5,scroll=0.33,pointer=1 · signature declared=0,measured=0.09
+  hotel × launch: structure shingles=0.04,order=0.2 · composition placement=0.34,columns=0.36,density=0.5 · image ratio_size=0,crop_mask=0,effects=0.13 · typography families=0,scale=0.45,rhythm=0.37,hierarchy=0.68 · interaction hover=0,click=0.4,scroll=0.29,pointer=0 · signature declared=1,measured=0.2
+  hotel × motionpf: structure shingles=0.04,order=0 · composition placement=0.34,columns=0.23,density=0.63 · image ratio_size=0.13,crop_mask=0.13,effects=0.13 · typography families=0,scale=0.58,rhythm=0.49,hierarchy=0.12 · interaction hover=0,click=0.4,scroll=0.6,pointer=0 · signature declared=0.5,measured=0.18
+  event × org: structure shingles=0.22,order=0 · composition placement=0.17,columns=0.33,density=0.75 · image one_side_only=0 · typography families=0,scale=0.19,rhythm=0.23,hierarchy=0 · interaction hover=1,click=0.8,scroll=0.75,pointer=0.5 · signature declared=0,measured=0.2
+  event × personal: structure shingles=0.15,order=0 · composition placement=0.08,columns=0.4,density=0 · image none=1 · typography families=0,scale=0.12,rhythm=0.23,hierarchy=0.09 · interaction hover=1,click=0.29,scroll=0.5,pointer=0.5 · signature declared=0.5,measured=0.38
+  event × saas: structure shingles=0.21,order=0.33 · composition placement=0.11,columns=0.29,density=0.2 · image none=1 · typography families=0,scale=0.17,rhythm=0.25,hierarchy=0.43 · interaction hover=1,click=0.67,scroll=0.5,pointer=0.5 · signature declared=0,measured=0
+  event × shop: structure shingles=0.18,order=0.17 · composition placement=0.1,columns=0.29,density=0 · image one_side_only=0 · typography families=0,scale=0.21,rhythm=0.27,hierarchy=0.55 · interaction hover=1,click=0.4,scroll=0.25,pointer=0.5 · signature declared=0,measured=0.11
+  event × studio: structure shingles=0.28,order=0.25 · composition placement=0.11,columns=0.29,density=0 · image one_side_only=0 · typography families=0,scale=0.22,rhythm=0.36,hierarchy=0.68 · interaction hover=1,click=0.5,scroll=0.75,pointer=0.5 · signature declared=0,measured=0.25
+  event × editorial: structure shingles=0.15,order=0 · composition placement=0.16,columns=0.4,density=0 · image none=1 · typography families=0.5,scale=0.23,rhythm=0.34,hierarchy=0.02 · interaction hover=1,click=0.8,scroll=0.33,pointer=0.5 · signature declared=0,measured=0.11
+  event × launch: structure shingles=0.06,order=0.25 · composition placement=0.03,columns=0.22,density=0.14 · image one_side_only=0 · typography families=0,scale=0.28,rhythm=0.25,hierarchy=0.57 · interaction hover=0,click=0.67,scroll=0.13,pointer=0 · signature declared=0.5,measured=0.11
+  event × motionpf: structure shingles=0.07,order=0.25 · composition placement=0.01,columns=0.09,density=0.25 · image one_side_only=0 · typography families=0,scale=0.21,rhythm=0.2,hierarchy=0.29 · interaction hover=0,click=1,scroll=0.33,pointer=0 · signature declared=0.5,measured=0.38
+  org × personal: structure shingles=0.09,order=0.25 · composition placement=0.03,columns=0.4,density=0 · image one_side_only=0 · typography families=0,scale=0.36,rhythm=0.31,hierarchy=0 · interaction hover=1,click=0.33,scroll=0.6,pointer=1 · signature declared=0,measured=0.18
+  org × saas: structure shingles=0.12,order=0.17 · composition placement=0.2,columns=0.13,density=0.4 · image one_side_only=0 · typography families=0,scale=0.23,rhythm=0.22,hierarchy=0 · interaction hover=1,click=0.8,scroll=0.6,pointer=1 · signature declared=0,measured=0.18
+  org × shop: structure shingles=0.13,order=0.33 · composition placement=0.17,columns=0.13,density=0 · image ratio_size=0,crop_mask=0.13,effects=0.13 · typography families=0,scale=0.47,rhythm=0.47,hierarchy=0 · interaction hover=1,click=0.5,scroll=0.33,pointer=1 · signature declared=0,measured=0.33
+  org × studio: structure shingles=0.18,order=0.25 · composition placement=0.11,columns=0.13,density=0.2 · image ratio_size=0,crop_mask=0.5,effects=0.5 · typography families=0,scale=0.53,rhythm=0.49,hierarchy=0 · interaction hover=1,click=0.6,scroll=1,pointer=1 · signature declared=0.5,measured=0.2
+  org × editorial: structure shingles=0.29,order=0.25 · composition placement=0.16,columns=0.4,density=0.25 · image one_side_only=0 · typography families=0,scale=0.28,rhythm=0.3,hierarchy=0 · interaction hover=1,click=1,scroll=0.4,pointer=1 · signature declared=0,measured=0.09
+  org × launch: structure shingles=0.03,order=0 · composition placement=0.06,columns=0.38,density=0.14 · image ratio_size=0,crop_mask=0,effects=1 · typography families=0.5,scale=0.39,rhythm=0.26,hierarchy=0 · interaction hover=0,click=0.8,scroll=0.14,pointer=0 · signature declared=0,measured=0.2
+  org × motionpf: structure shingles=0.04,order=0.25 · composition placement=0.05,columns=0.09,density=0.13 · image ratio_size=0,crop_mask=1,effects=1 · typography families=0,scale=0.42,rhythm=0.31,hierarchy=0 · interaction hover=0,click=0.8,scroll=0.4,pointer=0 · signature declared=0,measured=0.18
+  personal × saas: structure shingles=0.17,order=0.17 · composition placement=0.1,columns=0.14,density=0.2 · image none=1 · typography families=0,scale=0.31,rhythm=0.27,hierarchy=0.31 · interaction hover=1,click=0.5,scroll=0.67,pointer=1 · signature declared=0,measured=0.09
+  personal × shop: structure shingles=0.11,order=0.17 · composition placement=0.03,columns=0.14,density=0.4 · image one_side_only=0 · typography families=0.5,scale=0.35,rhythm=0.39,hierarchy=0.46 · interaction hover=1,click=0.5,scroll=0.2,pointer=1 · signature declared=0,measured=0.1
+  personal × studio: structure shingles=0.1,order=0.25 · composition placement=0.12,columns=0.14,density=0.2 · image one_side_only=0 · typography families=0,scale=0.49,rhythm=0.38,hierarchy=0.29 · interaction hover=1,click=0.6,scroll=0.6,pointer=1 · signature declared=0,measured=0.22
+  personal × editorial: structure shingles=0.14,order=0.33 · composition placement=0.46,columns=0.5,density=0.67 · image none=1 · typography families=0,scale=0.39,rhythm=0.49,hierarchy=0.46 · interaction hover=1,click=0.33,scroll=0.29,pointer=1 · signature declared=0,measured=0.22
+  personal × launch: structure shingles=0.07,order=0 · composition placement=0.02,columns=0.25,density=0.29 · image one_side_only=0 · typography families=0,scale=0.33,rhythm=0.31,hierarchy=0.23 · interaction hover=0,click=0.5,scroll=0.25,pointer=0 · signature declared=0.5,measured=0.1
+  personal × motionpf: structure shingles=0.1,order=0.25 · composition placement=0.02,columns=0.1,density=0.13 · image one_side_only=0 · typography families=0,scale=0.34,rhythm=0.31,hierarchy=0 · interaction hover=0,click=0.29,scroll=0.5,pointer=0 · signature declared=0.5,measured=1
+  saas × shop: structure shingles=0.21,order=0.5 · composition placement=0.22,columns=0.25,density=0.6 · image one_side_only=0 · typography families=0,scale=0.38,rhythm=0.37,hierarchy=0.73 · interaction hover=1,click=0.4,scroll=0.2,pointer=1 · signature declared=0,measured=0.1
+  saas × studio: structure shingles=0.18,order=0 · composition placement=0.22,columns=0.43,density=0.8 · image one_side_only=0 · typography families=0,scale=0.26,rhythm=0.27,hierarchy=0.63 · interaction hover=1,click=0.8,scroll=0.6,pointer=1 · signature declared=0,measured=0.1
+  saas × editorial: structure shingles=0.1,order=0 · composition placement=0.14,columns=0.14,density=0.4 · image none=1 · typography families=0,scale=0.29,rhythm=0.35,hierarchy=0.16 · interaction hover=1,click=0.8,scroll=0.5,pointer=1 · signature declared=0.5,measured=0.1
+  saas × launch: structure shingles=0.05,order=0.17 · composition placement=0.03,columns=0.09,density=0.29 · image one_side_only=0 · typography families=0,scale=0.15,rhythm=0.18,hierarchy=0.6 · interaction hover=0,click=0.67,scroll=0.43,pointer=0 · signature declared=0,measured=0
+  saas × motionpf: structure shingles=0.06,order=0.33 · composition placement=0.04,columns=0,density=0.13 · image one_side_only=0 · typography families=0.5,scale=0.27,rhythm=0.19,hierarchy=0.05 · interaction hover=0,click=0.67,scroll=0.5,pointer=0 · signature declared=0,measured=0.09
+  shop × studio: structure shingles=0.18,order=0.17 · composition placement=0.17,columns=0.43,density=0.6 · image ratio_size=0,crop_mask=0.11,effects=0.25 · typography families=0,scale=0.55,rhythm=0.55,hierarchy=0.78 · interaction hover=1,click=0.5,scroll=0.33,pointer=1 · signature declared=0,measured=0.67
+  shop × editorial: structure shingles=0.07,order=0.17 · composition placement=0.1,columns=0.33,density=0.4 · image one_side_only=0 · typography families=0,scale=0.39,rhythm=0.46,hierarchy=0.21 · interaction hover=1,click=0.5,scroll=0.25,pointer=1 · signature declared=0,measured=0
+  shop × launch: structure shingles=0.04,order=0.17 · composition placement=0.03,columns=0.09,density=0.57 · image ratio_size=0,crop_mask=0,effects=0.13 · typography families=0.5,scale=0.34,rhythm=0.29,hierarchy=0.54 · interaction hover=0,click=0.4,scroll=0,pointer=0 · signature declared=0,measured=0.25
+  shop × motionpf: structure shingles=0.04,order=0.17 · composition placement=0.03,columns=0.18,density=0.25 · image ratio_size=0,crop_mask=0.13,effects=0.13 · typography families=0,scale=0.51,rhythm=0.41,hierarchy=0 · interaction hover=0,click=0.4,scroll=0,pointer=0 · signature declared=0,measured=0.1
+  studio × editorial: structure shingles=0.14,order=0.25 · composition placement=0.17,columns=0.14,density=0.4 · image one_side_only=0 · typography families=0,scale=0.3,rhythm=0.41,hierarchy=0.23 · interaction hover=1,click=0.6,scroll=0.4,pointer=1 · signature declared=0,measured=0
+  studio × launch: structure shingles=0.03,order=0 · composition placement=0.02,columns=0.09,density=0.29 · image ratio_size=0,crop_mask=0.5,effects=0.5 · typography families=0,scale=0.41,rhythm=0.38,hierarchy=0.67 · interaction hover=0,click=0.5,scroll=0.14,pointer=0 · signature declared=0,measured=0.11
+  studio × motionpf: structure shingles=0.05,order=0 · composition placement=0.02,columns=0,density=0.13 · image ratio_size=0,crop_mask=0.5,effects=0.5 · typography families=0.5,scale=0.45,rhythm=0.35,hierarchy=0.11 · interaction hover=0,click=0.5,scroll=0.4,pointer=0 · signature declared=0,measured=0.22
+  editorial × launch: structure shingles=0.05,order=0 · composition placement=0.06,columns=0.25,density=0.29 · image one_side_only=0 · typography families=0,scale=0.43,rhythm=0.3,hierarchy=0.36 · interaction hover=0,click=0.8,scroll=0.29,pointer=0 · signature declared=0,measured=0.11
+  editorial × motionpf: structure shingles=0.07,order=0 · composition placement=0.06,columns=0.22,density=0.13 · image one_side_only=0 · typography families=0,scale=0.41,rhythm=0.42,hierarchy=0.32 · interaction hover=0,click=0.8,scroll=0.14,pointer=0 · signature declared=0,measured=0.22
+  launch × motionpf: structure shingles=0.23,order=0.25 · composition placement=0.53,columns=0.36,density=0.38 · image ratio_size=0,crop_mask=0,effects=1 · typography families=0,scale=0.49,rhythm=0.4,hierarchy=0.44 · interaction hover=0,click=0.67,scroll=0.5,pointer=1 · signature declared=0.5,measured=0.1
+
+FAIL  34 of 45 pair(s) at or above 0.4 on at least one axis

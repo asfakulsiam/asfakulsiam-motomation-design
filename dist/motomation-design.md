@@ -536,12 +536,13 @@ Good signature moves are:
 
 ### 6. Anti-Sameness Check
 
-Compare your plan against three things:
+Compare your plan against four things:
 1. **The AI-default list** in `gates/delivery-gate.md`. Count the matches.
 2. **Memory (IDs and structure, every project):** run
    `node scripts/memory.mjs check --archetype <x> --signature <y> --tier <n> --sections hero,work,contact --type-scale <ratio>`.
    It checks the last 5 runs in the user-level log, from any project. First, exact IDs: an archetype or signature already used. Second, a **structural fingerprint**: layout family, type-scale bucket, section order, motion tier and signature type, scored 0–100%. A different archetype with the same rows layout, the same section order and the same kind of signature is still a repeat. At **≥ 70%** the script names the run you're rebuilding and the dimensions that match, and offers a mutation aimed at the heaviest one. Apply it (or justify the overlap in one line) and check again. Exit code 2 means a clash. `/invent` prints each draw's partial fingerprint and flags draws that rebuild a recent page. After delivery, `memory.mjs log` with the same flags stores the fingerprint. Without a shell, compare the five dimensions by hand against `~/.motomation/log.json`.
-3. **The obvious version:** write down what a template would do. Your plan must differ in at least **three** of: structure, type, colour, motion, signature, imagery.
+3. **Earlier builds, measured (after the build):** the plan is checked here; the result is checked by `node scripts/originality.mjs <this build> <earlier builds for unrelated briefs>`, axis O of `gates/delivery-gate.md`. It scores structure, composition, image treatment, typography, interaction and signature move from 0 to 1 against each earlier build. Any axis at or above **0.4** means this brief came out in the same shape as an unrelated one: change that axis and re-run. The memory check compares what you intended; this compares what the browser renders.
+4. **The obvious version:** write down what a template would do. Your plan must differ in at least **three** of: structure, type, colour, motion, signature, imagery.
 
 **Reuse across projects.** Memory now spans every project, so a repeat from another project is caught like one from this project. A deliberate reuse is allowed only for a dissimilar brief, as a documented mutation (a different mutation **and** a different structural fingerprint), stated in one line: `Reuse : Letter again (used in <project>), mutated by remove-expected; signature type micro, not type`. For a similar brief, the five-way divergence above always applies.
 
@@ -3810,6 +3811,28 @@ Exit code `2` also covers usage errors (an unknown flag, a missing value or no t
 
 **Optional motion report.** `node scripts/gate.mjs --report dist/index.html` (or `--report out.html` after a target) also writes a self-contained HTML file with scroll-frame strips: 8 frames at 1440px, 8 at 375px and 8 at 1440px under reduced motion. Use it to review motion by eye, show a client, or give judges something better than one screenshot. It's off by default, doesn't change the text output, and adds nothing to the gate's numbers.
 
+
+#### Axis O: originality across briefs (`scripts/originality.mjs`)
+
+The table above checks one page against rules. It cannot see that two unrelated briefs came out as the same shape. Axis **O** compares this build with builds made for **other, unrelated briefs** and scores every pair from 0 (nothing shared) to 1 (the same) on six axes, all measured in a real browser at 1440×900:
+
+| Axis | What is compared |
+|---|---|
+| **structure** | DOM hierarchy (3-deep tag-path shingles, single-child wrappers collapsed) and section order (the content blocks between header and footer, typed form / grid / media / list / text / statement plus height) |
+| **composition** | placement (each of the first 8 screens as a 12×8 grid of empty / text / media cells), columns and alignment per screen, density per screen |
+| **image** | image treatment: aspect ratio × size class, crop × mask (radius, clip-path, mask-image), filter × blend × rotation |
+| **typography** | display and body families, the size scale relative to body, rhythm (leading, tracking, case, weight per role), h1/h2/h3 hierarchy |
+| **interaction** | hover rules that apply to the page (the property groups they change), click patterns (disclosure, dialog, tabs, toggles, forms, carousels), scroll behaviour (sticky, snap, scroll libraries, properties that change while scrolling), pointer behaviour |
+| **signature** | the element that changes most under time, pointer and scroll (trigger, properties, element kind, size), plus the declared signature when both stamps carry one |
+
+```bash
+node scripts/originality.mjs <this build> <a build for an unrelated brief> [more …]   # matrix per axis + overall
+node scripts/originality.mjs a/ b/ c/ --json --out originality.json
+```
+
+**Pass: every pair below 0.4 on every axis.** An axis at or above 0.4 is a repeat (`✗`): the skill produced the same shape for different briefs on that axis. Go back to Step 6 of the Thinking Sequence and change that axis (not the copy), then re-run. Absence on both sides counts as the same pattern: two builds with no imagery score 1 on image, two builds with no hover feedback score 1 on hover. Which builds: the earlier projects in the memory log (`node scripts/memory.mjs recent` lists each run's project folder). No earlier build on this machine: record `O: not verified — no earlier build to compare` in the report, under **Not verified**. Exit codes: 0 pass, 1 a repeat, 2 usage, 3 not verified (no browser). O is a cross-build axis, so it is not in the stamp or its id; the stamp describes one page. In the benchmark it is the `originality` arm: `node evals/run-agent-benchmark.mjs originality --out <run>` compares, per arm and seed, every brief's build with every other brief's (`originality.json`, `originality.md`), and `score` folds the result into `summary.json`.
+
+Calibration on this repo (`evals/results/originality-templates/`): a page against itself scores 1.00 on every axis; across the 10 shipped templates, 11 of 45 pairs are below 0.4 on every axis. The repeat is mostly **interaction** (the 8 section-library templates share no hover feedback and the same observer, scroll and pointer listener stack), then image (several have no imagery) and typography.
 ---
 
 ### Part 1: Self-critique (score 1–5)
