@@ -21,7 +21,8 @@
 //                token bags: aspect ratio × size class, crop (object-fit vs natural ratio) × mask (radius, clip-path,
 //                mask-image), filter × blend × rotation. Both pages without imagery: not applicable (n/a, left out of
 //                the overall mean; before v2.11 this scored 1.00); imagery on one side only scores 0.
-//   typography   families (display and body), scale (font-size steps relative to body, quarter-octave bins, weighted by
+//   typography   families (display and body face: same face 1, same generic class 0.5, else 0; plus every face on the
+//                page weighted by text; weight 0.4), scale (font-size steps relative to body, quarter-octave bins, weighted by
 //                text length), rhythm (line-height, tracking, case, weight, italic per role), hierarchy (h1/h2/h3 size
 //                relative to body).
 //   interaction  (v2.11, redefined) what a visitor does with the page, three parts:
@@ -90,16 +91,17 @@ export function compare(A, B, sigFamily = {}) {
   parts.composition = { placement: mean(gs), columns: wjaccard(A.composition.columns, B.composition.columns), density: mean(dens) };
   const noImg = !A.image.count && !B.image.count, oneImg = !A.image.count !== !B.image.count;
   parts.image = noImg ? {} /* neither page has imagery: not applicable (n/a), not "the same treatment" */ : oneImg ? { one_side_only: 0 } : { ratio_size: wjaccard(A.image.ratioSize, B.image.ratioSize), crop_mask: wjaccard(A.image.cropMask, B.image.cropMask), effects: wjaccard(A.image.effects, B.image.effects) };
-  const famSame = (x, y) => (x && y && x === y ? 1 : 0);
+  // font family, graded: the same face 1 · a different face of the same generic class (serif, sans-serif, monospace…) 0.5 · else 0
+  const famSame = (x, y, cx, cy) => (x && y && x === y ? 1 : cx && cy && cx !== "unknown" && cx === cy ? 0.5 : 0);
   const hDiff = ["h1", "h2", "h3"].map((h) => (A.typography.hier[h] && B.typography.hier[h] ? Math.abs(Math.log2(A.typography.hier[h] / B.typography.hier[h])) : A.typography.hier[h] || B.typography.hier[h] ? 1 : 0));
-  parts.typography = { families: (famSame(A.typography.display, B.typography.display) + famSame(A.typography.body, B.typography.body)) / 2, scale: wjaccard(A.typography.scale, B.typography.scale), rhythm: wjaccard(A.typography.rhythm, B.typography.rhythm), hierarchy: Math.max(0, 1 - mean(hDiff)) };
+  parts.typography = { families: (famSame(A.typography.display, B.typography.display, A.typography.displayClass, B.typography.displayClass) + famSame(A.typography.body, B.typography.body, A.typography.bodyClass, B.typography.bodyClass) + (A.typography.faces && B.typography.faces ? wjaccard(A.typography.faces, B.typography.faces) : famSame(A.typography.display, B.typography.display))) / 3, scale: wjaccard(A.typography.scale, B.typography.scale), rhythm: wjaccard(A.typography.rhythm, B.typography.rhythm), hierarchy: Math.max(0, 1 - mean(hDiff)) };
   // interaction: feedback, forms, navigation; a part neither page has is not applicable (left out), not a match
   const nonEmpty = (o) => !!o && Object.keys(o).length > 0;
   parts.interaction = {}; for (const k of ["feedback", "forms", "navigation"]) { const x = A.interaction[k], y = B.interaction[k]; if (nonEmpty(x) || nonEmpty(y)) parts.interaction[k] = wjaccard(x, y); }
   const measured = wjaccard(A.signature.tokens, B.signature.tokens);
   const da = A.signature.declared, db = B.signature.declared;
   parts.signature = da && db ? { declared: da === db ? 1 : sigFamily[da] && sigFamily[da] === sigFamily[db] ? 0.5 : 0, measured } : { measured };
-  const W = { structure: { shingles: 0.5, order: 0.5 }, composition: { placement: 0.6, columns: 0.2, density: 0.2 }, typography: { families: 0.25, scale: 0.3, rhythm: 0.25, hierarchy: 0.2 } };
+  const W = { structure: { shingles: 0.5, order: 0.5 }, composition: { placement: 0.6, columns: 0.2, density: 0.2 }, typography: { families: 0.4, scale: 0.2, rhythm: 0.2, hierarchy: 0.2 } }; // v2.11: the face counts most; same proportions in different fonts are a weaker repeat than in the same fonts
   const score = {};
   for (const ax of AXES) { const p = parts[ax]; const w = W[ax]; const ks = Object.keys(p); score[ax] = !ks.length ? null : r2(w ? ks.reduce((s, k) => s + p[k] * w[k], 0) / ks.reduce((s, k) => s + w[k], 0) : mean(ks.map((k) => p[k]))); for (const k of ks) p[k] = r2(p[k]); } // score null: the axis does not apply to this pair
   score.overall = r2(mean(AXES.map((a) => score[a]).filter((x) => x !== null)));
@@ -197,11 +199,13 @@ const FEATURES = async () => {
   }
 
   // ── typography
-  const runs = leaves.filter((e) => ownText(e).length >= 2).map((el) => ({ el })).map((b) => { const s = cs(b.el); return { el: b.el, size: parseFloat(s.fontSize), fam: s.fontFamily.split(",")[0].replace(/["']/g, "").trim().toLowerCase(), chars: ownText(b.el).length, lh: s.lineHeight === "normal" ? 1.2 : parseFloat(s.lineHeight) / parseFloat(s.fontSize), ls: s.letterSpacing === "normal" ? 0 : parseFloat(s.letterSpacing) / parseFloat(s.fontSize), upper: s.textTransform === "uppercase" || (ownText(b.el).length > 3 && ownText(b.el) === ownText(b.el).toUpperCase() && /[A-Z]/.test(ownText(b.el))), weight: +s.fontWeight || 400, italic: s.fontStyle === "italic" }; });
+  const runs = leaves.filter((e) => ownText(e).length >= 2).map((el) => ({ el })).map((b) => { const s = cs(b.el); return { el: b.el, size: parseFloat(s.fontSize), fam: s.fontFamily.split(",")[0].replace(/["']/g, "").trim().toLowerCase(), cls: (s.fontFamily.toLowerCase().match(/\b(sans-serif|serif|monospace|cursive|fantasy|system-ui)\b(?![\s\S]*\b(sans-serif|serif|monospace|cursive|fantasy|system-ui)\b)/) || [])[1] || "unknown", chars: ownText(b.el).length, lh: s.lineHeight === "normal" ? 1.2 : parseFloat(s.lineHeight) / parseFloat(s.fontSize), ls: s.letterSpacing === "normal" ? 0 : parseFloat(s.letterSpacing) / parseFloat(s.fontSize), upper: s.textTransform === "uppercase" || (ownText(b.el).length > 3 && ownText(b.el) === ownText(b.el).toUpperCase() && /[A-Z]/.test(ownText(b.el))), weight: +s.fontWeight || 400, italic: s.fontStyle === "italic" }; });
   const bySize = {}; for (const r of runs) bySize[r.size] = (bySize[r.size] || 0) + r.chars;
   const body = +(Object.entries(bySize).filter(([sz]) => +sz <= 22).sort((a, b) => b[1] - a[1])[0] || Object.entries(bySize).sort((a, b) => b[1] - a[1])[0] || [16])[0];
   const famBy = (pred) => { const f = {}; for (const r of runs.filter(pred)) f[r.fam] = (f[r.fam] || 0) + r.chars * r.size; return Object.entries(f).sort((a, b) => b[1] - a[1])[0]?.[0] || null; };
   const display = famBy((r) => r.size >= Math.max(28, body * 1.75)), bodyFam = famBy((r) => Math.abs(r.size - body) < 1);
+  const clsOf = (fam) => (fam ? runs.find((r) => r.fam === fam)?.cls || "unknown" : null); // generic class from the font stack's fallback
+  const faces = {}; for (const r of runs) bump(faces, r.fam, r.chars); // every face on the page, weighted by text length
   const scale = {}, rhythm = {};
   for (const r of runs) {
     bump(scale, String(Math.round(Math.log2(r.size / body) * 4)), Math.sqrt(r.chars));
@@ -256,7 +260,7 @@ const FEATURES = async () => {
   if (document.querySelector("[role=search], input[type=search]")) nb("search"); if (document.querySelector('a[href^="tel:"]')) nb("tel"); if (document.querySelector('a[href^="mailto:"]')) nb("mailto");
   if (document.querySelector('a[href="#top"], a[href="#"]')) nb("back-to-top"); if (document.querySelector("details")) nb("disclosure"); if (document.querySelector("[role=tab]")) nb("tabs"); if (document.querySelector("dialog, [role=dialog]")) nb("dialog");
   if (document.querySelector("footer nav, footer ul a")) nb("footer-links"); if (document.querySelector("[aria-current]")) nb("current-marked");
-  return { H, vh, structure: { shingles, order }, composition: { grids, density, columns }, image: { count: imgEls.length, ratioSize, cropMask, effects }, typography: { display, body: bodyFam, bodyPx: body, scale, rhythm, hier }, interaction: { feedback, forms, navigation, hover, click, scroll, pointer } };
+  return { H, vh, structure: { shingles, order }, composition: { grids, density, columns }, image: { count: imgEls.length, ratioSize, cropMask, effects }, typography: { display, body: bodyFam, displayClass: clsOf(display), bodyClass: clsOf(bodyFam), faces, bodyPx: body, scale, rhythm, hier }, interaction: { feedback, forms, navigation, hover, click, scroll, pointer } };
 };
 
 // The signature move, measured: snapshot candidate elements' animatable styles under time, pointer and scroll, and

@@ -4,19 +4,19 @@ Five unrelated briefs (evals/briefs/diversity/), one build each, compared by scr
 
 ## Measured
 
-Tool: scripts/originality.mjs (35s). Result: FAIL, 6 of 10 pairs repeat on at least one axis.
+Tool: scripts/originality.mjs (35s). Result: FAIL, 5 of 10 pairs repeat on at least one axis.
 
 | Pair | structure | composition | image | typography | interaction | signature | overall |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| funeral-home × childrens-dentistry | 0.18 | 0.12 | 0.00 | 0.41 ✗ | 0.18 | 0.17 | 0.18 |
-| funeral-home × hardcore-metal-band | 0.01 | 0.06 | 0.00 | 0.09 | 0.41 ✗ | 0.10 | 0.11 |
+| funeral-home × childrens-dentistry | 0.18 | 0.12 | 0.00 | 0.34 | 0.18 | 0.17 | 0.17 |
+| funeral-home × hardcore-metal-band | 0.01 | 0.06 | 0.00 | 0.06 | 0.41 ✗ | 0.10 | 0.11 |
 | funeral-home × luxury-perfume | 0.13 | 0.09 | 0.00 | 0.20 | 0.54 ✗ | 0.09 | 0.18 |
-| funeral-home × municipal-water-authority | 0.10 | 0.31 | n/a | 0.41 ✗ | 0.35 | 0.10 | 0.25 |
-| childrens-dentistry × hardcore-metal-band | 0.03 | 0.18 | 0.00 | 0.10 | 0.22 | 0.13 | 0.11 |
-| childrens-dentistry × luxury-perfume | 0.05 | 0.04 | 0.67 ✗ | 0.16 | 0.12 | 0.00 | 0.17 |
-| childrens-dentistry × municipal-water-authority | 0.06 | 0.29 | 0.00 | 0.37 | 0.21 | 0.06 | 0.17 |
-| hardcore-metal-band × luxury-perfume | 0.16 | 0.04 | 0.00 | 0.08 | 0.56 ✗ | 0.05 | 0.15 |
-| hardcore-metal-band × municipal-water-authority | 0.01 | 0.04 | 0.00 | 0.12 | 0.34 | 0.13 | 0.11 |
+| funeral-home × municipal-water-authority | 0.10 | 0.31 | n/a | 0.32 | 0.35 | 0.10 | 0.24 |
+| childrens-dentistry × hardcore-metal-band | 0.03 | 0.18 | 0.00 | 0.14 | 0.22 | 0.13 | 0.12 |
+| childrens-dentistry × luxury-perfume | 0.05 | 0.04 | 0.67 ✗ | 0.18 | 0.12 | 0.00 | 0.18 |
+| childrens-dentistry × municipal-water-authority | 0.06 | 0.29 | 0.00 | 0.43 ✗ | 0.21 | 0.06 | 0.18 |
+| hardcore-metal-band × luxury-perfume | 0.16 | 0.04 | 0.00 | 0.05 | 0.56 ✗ | 0.05 | 0.14 |
+| hardcore-metal-band × municipal-water-authority | 0.01 | 0.04 | 0.00 | 0.15 | 0.34 | 0.13 | 0.11 |
 | luxury-perfume × municipal-water-authority | 0.07 | 0.06 | 0.00 | 0.26 | 0.38 | 0.11 | 0.15 |
 
 Per axis, the five builds against each other (rows × columns):
@@ -51,15 +51,15 @@ Per axis, the five builds against each other (rows × columns):
 | luxury-perfume | 0.00 | 0.67 ✗ | 0.00 | 1.00 | 0.00 |
 | municipal-water-authority | n/a | 0.00 | 0.00 | 0.00 | 1.00 |
 
-**typography** (max 0.41)
+**typography** (max 0.43)
 
 | | funeral-home | childrens-dentistry | hardcore-metal-band | luxury-perfume | municipal-water-authority |
 |---|---:|---:|---:|---:|---:|
-| funeral-home | 1.00 | 0.41 ✗ | 0.09 | 0.20 | 0.41 ✗ |
-| childrens-dentistry | 0.41 ✗ | 1.00 | 0.10 | 0.16 | 0.37 |
-| hardcore-metal-band | 0.09 | 0.10 | 1.00 | 0.08 | 0.12 |
-| luxury-perfume | 0.20 | 0.16 | 0.08 | 1.00 | 0.26 |
-| municipal-water-authority | 0.41 ✗ | 0.37 | 0.12 | 0.26 | 1.00 |
+| funeral-home | 1.00 | 0.34 | 0.06 | 0.20 | 0.32 |
+| childrens-dentistry | 0.34 | 1.00 | 0.14 | 0.18 | 0.43 ✗ |
+| hardcore-metal-band | 0.06 | 0.14 | 1.00 | 0.05 | 0.15 |
+| luxury-perfume | 0.20 | 0.18 | 0.05 | 1.00 | 0.26 |
+| municipal-water-authority | 0.32 | 0.43 ✗ | 0.15 | 0.26 | 1.00 |
 
 **interaction** (max 0.56)
 
@@ -81,15 +81,15 @@ Per axis, the five builds against each other (rows × columns):
 | luxury-perfume | 0.09 | 0.00 | 0.05 | 1.00 | 0.11 |
 | municipal-water-authority | 0.10 | 0.06 | 0.13 | 0.11 | 1.00 |
 
-**overall** (max 0.25)
+**overall** (max 0.24)
 
 | | funeral-home | childrens-dentistry | hardcore-metal-band | luxury-perfume | municipal-water-authority |
 |---|---:|---:|---:|---:|---:|
-| funeral-home | 1.00 | 0.18 | 0.11 | 0.18 | 0.25 |
-| childrens-dentistry | 0.18 | 1.00 | 0.11 | 0.17 | 0.17 |
-| hardcore-metal-band | 0.11 | 0.11 | 1.00 | 0.15 | 0.11 |
-| luxury-perfume | 0.18 | 0.17 | 0.15 | 1.00 | 0.15 |
-| municipal-water-authority | 0.25 | 0.17 | 0.11 | 0.15 | 1.00 |
+| funeral-home | 1.00 | 0.17 | 0.11 | 0.18 | 0.24 |
+| childrens-dentistry | 0.17 | 1.00 | 0.12 | 0.18 | 0.18 |
+| hardcore-metal-band | 0.11 | 0.12 | 1.00 | 0.14 | 0.11 |
+| luxury-perfume | 0.18 | 0.18 | 0.14 | 1.00 | 0.15 |
+| municipal-water-authority | 0.24 | 0.18 | 0.11 | 0.15 | 1.00 |
 
 ## Judged
 

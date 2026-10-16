@@ -30,6 +30,9 @@ const other = feat({
 const diff = compare(feat(), other);
 say(AXES.every((a) => diff.score[a] < 0.4), `compare: unrelated feature sets → every axis below 0.4 (${AXES.map((a) => `${a} ${diff.score[a]}`).join(", ")})`);
 say(compare(feat(), feat({ image: { count: 0, ratioSize: {}, cropMask: {}, effects: {} } })).score.image === 0, "compare: imagery on one side only → image 0");
+{ const t = feat().typography, other = { ...t, display: "anton", body: "jetbrains mono", displayClass: "sans-serif", bodyClass: "monospace", faces: { anton: 5, "jetbrains mono": 20 } };
+  const sameFonts = compare(feat(), feat()).score.typography, diffFonts = compare(feat(), feat({ typography: other })).score.typography;
+  say(diffFonts < sameFonts && diffFonts <= 0.6, `compare: same proportions, different fonts (${diffFonts}) score lower than same proportions, same fonts (${sameFonts})`); }
 { const none = { image: { count: 0, ratioSize: {}, cropMask: {}, effects: {} } }; const c = compare(feat(none), feat(none));
   say(c.score.image === null && c.score.image !== 1, "compare: neither page has imagery → image n/a (null), never 1.00"); }
 { const none = { feedback: {}, forms: {}, navigation: {} }; const c = compare(feat({ interaction: none }), feat({ interaction: none }));

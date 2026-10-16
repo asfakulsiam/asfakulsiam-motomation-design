@@ -60,10 +60,10 @@
      "structure": 0.18,
      "composition": 0.12,
      "image": 0,
-     "typography": 0.41,
+     "typography": 0.34,
      "interaction": 0.18,
      "signature": 0.17,
-     "overall": 0.18
+     "overall": 0.17
     },
     "parts": {
      "structure": {
@@ -93,9 +93,7 @@
       "measured": 0.33
      }
     },
-    "over": [
-     "typography"
-    ]
+    "over": []
    },
    {
     "a": "funeral-home",
@@ -104,7 +102,7 @@
      "structure": 0.01,
      "composition": 0.06,
      "image": 0,
-     "typography": 0.09,
+     "typography": 0.06,
      "interaction": 0.41,
      "signature": 0.1,
      "overall": 0.11
@@ -167,7 +165,7 @@
       "one_side_only": 0
      },
      "typography": {
-      "families": 0,
+      "families": 0.17,
       "scale": 0.57,
       "rhythm": 0.12,
       "hierarchy": 0
@@ -192,10 +190,10 @@
      "structure": 0.1,
      "composition": 0.31,
      "image": null,
-     "typography": 0.41,
+     "typography": 0.32,
      "interaction": 0.35,
      "signature": 0.1,
-     "overall": 0.25
+     "overall": 0.24
     },
     "parts": {
      "structure": {
@@ -223,9 +221,7 @@
       "measured": 0.2
      }
     },
-    "over": [
-     "typography"
-    ]
+    "over": []
    },
    {
     "a": "childrens-dentistry",
@@ -234,10 +230,10 @@
      "structure": 0.03,
      "composition": 0.18,
      "image": 0,
-     "typography": 0.1,
+     "typography": 0.14,
      "interaction": 0.22,
      "signature": 0.13,
-     "overall": 0.11
+     "overall": 0.12
     },
     "parts": {
      "structure": {
@@ -255,7 +251,7 @@
       "effects": 0
      },
      "typography": {
-      "families": 0,
+      "families": 0.17,
       "scale": 0.19,
       "rhythm": 0.16,
       "hierarchy": 0
@@ -278,10 +274,10 @@
      "structure": 0.05,
      "composition": 0.04,
      "image": 0.67,
-     "typography": 0.16,
+     "typography": 0.18,
      "interaction": 0.12,
      "signature": 0,
-     "overall": 0.17
+     "overall": 0.18
     },
     "parts": {
      "structure": {
@@ -299,7 +295,7 @@
       "effects": 1
      },
      "typography": {
-      "families": 0,
+      "families": 0.17,
       "scale": 0.38,
       "rhythm": 0.1,
       "hierarchy": 0.08
@@ -324,10 +320,10 @@
      "structure": 0.06,
      "composition": 0.29,
      "image": 0,
-     "typography": 0.37,
+     "typography": 0.43,
      "interaction": 0.21,
      "signature": 0.06,
-     "overall": 0.17
+     "overall": 0.18
     },
     "parts": {
      "structure": {
@@ -343,7 +339,7 @@
       "one_side_only": 0
      },
      "typography": {
-      "families": 0,
+      "families": 0.33,
       "scale": 0.51,
       "rhythm": 0.47,
       "hierarchy": 0.53
@@ -357,7 +353,9 @@
       "measured": 0.11
      }
     },
-    "over": []
+    "over": [
+     "typography"
+    ]
    },
    {
     "a": "hardcore-metal-band",
@@ -366,10 +364,10 @@
      "structure": 0.16,
      "composition": 0.04,
      "image": 0,
-     "typography": 0.08,
+     "typography": 0.05,
      "interaction": 0.56,
      "signature": 0.05,
-     "overall": 0.15
+     "overall": 0.14
     },
     "parts": {
      "structure": {
@@ -412,7 +410,7 @@
      "structure": 0.01,
      "composition": 0.04,
      "image": 0,
-     "typography": 0.12,
+     "typography": 0.15,
      "interaction": 0.34,
      "signature": 0.13,
      "overall": 0.11
@@ -431,7 +429,7 @@
       "one_side_only": 0
      },
      "typography": {
-      "families": 0,
+      "families": 0.17,
       "scale": 0.24,
       "rhythm": 0.17,
       "hierarchy": 0
@@ -473,7 +471,7 @@
       "one_side_only": 0
      },
      "typography": {
-      "families": 0,
+      "families": 0.17,
       "scale": 0.6,
       "rhythm": 0.12,
       "hierarchy": 0.27
@@ -495,10 +493,10 @@
    "structure": 0.18,
    "composition": 0.31,
    "image": 0.67,
-   "typography": 0.41,
+   "typography": 0.43,
    "interaction": 0.56,
    "signature": 0.17,
-   "overall": 0.25
+   "overall": 0.24
   },
   "targets": [
    "/home/user/workspace/repo/evals/results/diversity/01-funeral-home",
