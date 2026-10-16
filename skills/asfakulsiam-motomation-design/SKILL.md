@@ -70,7 +70,7 @@ design inside `gates/rules.md`, then verify with `gates/delivery-gate.md`; never
 ```
 R. Read the rules     gates/rules.md                → state "Rules : gates/rules.md read; designing within it."
 0. Read the room      thinking/brief-inference.md   → audience, job, feel, constraints, gaps
-1. Thinking Sequence  thinking/sequence.md          → STACK (named, or ask; load the adapter),
+1. Thinking Sequence  thinking/sequence.md          → STACK (named, or chosen in the plan; load the adapter),
                                                       RESEARCH (Step 0.5, craft/research.md + references/sources/:
                                                       3 references, 3 techniques, avoided pattern, decision trace),
                                                       tension, concept, archetype+mutation,
@@ -81,7 +81,8 @@ R. Read the rules     gates/rules.md                → state "Rules : gates/rul
                                                       SCHEMA.md (templates/SCHEMA.md): data model, routes, section contract,
                                                       API surface, handoff notes
 4. Motion plan        motion/tokens.md + tier file  → write MOTION.md (templates/MOTION.md); Tier 3–5: timing sheet per motion/choreography.md
-5. Preview block      show the plan (below) and wait for approval only if the user asked to review first
+5. Plan + one question show the plan (below): stack, scope, references, deferred items; ask "Proceed?" once.
+                      On yes: build, gate, ship with no further questions (exceptions: thinking/sequence.md)
 6. Build              compose, extend, or invent (below), in the stack and adapter from Step 0; complete code, real copy
 7. Delivery Gate      gates/delivery-gate.md        → verify gates/rules.md, score, fix, stamp, log to memory
 ```
@@ -100,13 +101,15 @@ Build what the brief needs by composing, extending, or inventing:
 
 Say in one line which of the three you did for each non-trivial piece. Whatever you compose, extend or invent still passes `gates/rules.md`, the tier budget and the reduced-motion rules. Found code isn't trusted code.
 
-### Preview block (show before building)
+### Preview block (the plan, shown once before building, ending in "Proceed?")
 
 ```
 MOTOMATION PLAN
 Rules       : gates/rules.md read; designing within it
-Stack       : <stack> (<named in brief | from the project | user's answer | "you choose" + why>) → adapters/<x>.md
+Stack       : <stack> (<named in brief | from the project | chosen: why>) → adapters/<x>.md
 References  : <3 references looked at> · techniques: <3, sourced> · avoiding: <overused pattern>
+Scope       : <what this build covers (Step 0.7)>
+Defaults    : <each gap in the brief and the default taken>
 Tension     : <the conflict in the brief, one line>
 Concept     : <the idea, one sentence a client would repeat>
 Archetype   : <structure> mutated by <mutation>
@@ -117,7 +120,12 @@ Type mode   : HOUSE STYLE | SERVICE STYLE (<why, from the brief>)
 Type        : <display> / <text> (<why>)
 Palette     : <name or hexes> (<why>)
 Not doing   : <the obvious choice you rejected and why>
+Deferred    : <what this build leaves out, each with its reason>
+
+Proceed?
 ```
+
+That is the only question. On yes, build, gate and ship without asking again.
 
 ## When to use the short route
 
@@ -146,7 +154,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 
 Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it.
 
-0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, ask the user; never assume. On "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
+0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, choose one with a reason and put it in the plan; never assume silently. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 0.5. **Research (mandatory)**: leave the skill before designing. Live award sources (last 6 months) and `references/sources/`, concepts only. Record three references, three techniques with sources, and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference, never to the skill's defaults alone. No web: say so and state the limitation. See `craft/research.md`.
 1. **Tension**: find the conflict inside the brief (calm vs. urgent, heritage vs. new, luxury vs. honest).
 2. **Concept**: resolve the tension in one sentence. This is the idea, not a layout.
@@ -235,6 +243,7 @@ Full behaviour of each command is in `commands/overview.md`. Critique output for
 
 ## Output rules
 
+- **One confirmation.** Present the plan once and ask exactly one question, "Proceed?". After yes: build, gate and ship without asking again; decisions go in `DESIGN.md` with their reasons. Ask again only for a genuinely critical ambiguity (payment provider, legal region, locale priority), a costly lock-in the plan didn't cover (framework, hosting), or an "ask me before X" in the brief. Non-interactive runs write the plan to `DESIGN.md` and proceed.
 - Explain the plan in the preview block, then build. Keep prose short. The work is the answer.
 - Every build ships `DESIGN.md` and `SCHEMA.md` with the code. `SCHEMA.md` (format: `templates/SCHEMA.md`) is the data contract for the backend developer: data model, routes, section contract (empty, loading, error, filled), API surface, handoff notes. It is written with `DESIGN.md`, not after, and a developer can build the backend from it alone.
 - Deliver complete files. No `// rest of code here`, no TODOs, no placeholder images without a clear `alt` and a sourcing note.

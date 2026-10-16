@@ -9,9 +9,9 @@ Type a command at the start of a message. Commands combine with flags. Without a
 | `--tier` | 1–5 | Force a motion tier |
 | `--energy` `--rhythm` `--motion` | 1–3 | Set a dial (see `principles/dials.md`) |
 | `--style` | a file in `styles/` | Apply a visual language |
-| `--stack` | next · react · vanilla · astro | Target framework. Without it: detect from the project, else ask (Step 0 in `thinking/sequence.md`) |
+| `--stack` | next · react · vanilla · astro | Target framework. Without it: detect from the project, else choose and show it in the plan (Step 0 in `thinking/sequence.md`) |
 | `--seed` | any number | Repeatable collision draws |
-| `--review` | — | Stop after the preview block and wait for approval |
+| `--review` | — | The plan always ends in one "Proceed?" (`thinking/sequence.md`); `--review` keeps it even in a run that would otherwise proceed without asking |
 
 ---
 

@@ -72,7 +72,7 @@ design inside `gates/rules.md`, then verify with `gates/delivery-gate.md`; never
 ```
 R. Read the rules     gates/rules.md                → state "Rules : gates/rules.md read; designing within it."
 0. Read the room      thinking/brief-inference.md   → audience, job, feel, constraints, gaps
-1. Thinking Sequence  thinking/sequence.md          → STACK (named, or ask; load the adapter),
+1. Thinking Sequence  thinking/sequence.md          → STACK (named, or chosen in the plan; load the adapter),
                                                       RESEARCH (Step 0.5, craft/research.md + references/sources/:
                                                       3 references, 3 techniques, avoided pattern, decision trace),
                                                       tension, concept, archetype+mutation,
@@ -83,7 +83,8 @@ R. Read the rules     gates/rules.md                → state "Rules : gates/rul
                                                       SCHEMA.md (templates/SCHEMA.md): data model, routes, section contract,
                                                       API surface, handoff notes
 4. Motion plan        motion/tokens.md + tier file  → write MOTION.md (templates/MOTION.md); Tier 3–5: timing sheet per motion/choreography.md
-5. Preview block      show the plan (below) and wait for approval only if the user asked to review first
+5. Plan + one question show the plan (below): stack, scope, references, deferred items; ask "Proceed?" once.
+                      On yes: build, gate, ship with no further questions (exceptions: thinking/sequence.md)
 6. Build              compose, extend, or invent (below), in the stack and adapter from Step 0; complete code, real copy
 7. Delivery Gate      gates/delivery-gate.md        → verify gates/rules.md, score, fix, stamp, log to memory
 ```
@@ -102,13 +103,15 @@ Build what the brief needs by composing, extending, or inventing:
 
 Say in one line which of the three you did for each non-trivial piece. Whatever you compose, extend or invent still passes `gates/rules.md`, the tier budget and the reduced-motion rules. Found code isn't trusted code.
 
-#### Preview block (show before building)
+#### Preview block (the plan, shown once before building, ending in "Proceed?")
 
 ```
 MOTOMATION PLAN
 Rules       : gates/rules.md read; designing within it
-Stack       : <stack> (<named in brief | from the project | user's answer | "you choose" + why>) → adapters/<x>.md
+Stack       : <stack> (<named in brief | from the project | chosen: why>) → adapters/<x>.md
 References  : <3 references looked at> · techniques: <3, sourced> · avoiding: <overused pattern>
+Scope       : <what this build covers (Step 0.7)>
+Defaults    : <each gap in the brief and the default taken>
 Tension     : <the conflict in the brief, one line>
 Concept     : <the idea, one sentence a client would repeat>
 Archetype   : <structure> mutated by <mutation>
@@ -119,7 +122,12 @@ Type mode   : HOUSE STYLE | SERVICE STYLE (<why, from the brief>)
 Type        : <display> / <text> (<why>)
 Palette     : <name or hexes> (<why>)
 Not doing   : <the obvious choice you rejected and why>
+Deferred    : <what this build leaves out, each with its reason>
+
+Proceed?
 ```
+
+That is the only question. On yes, build, gate and ship without asking again.
 
 ### When to use the short route
 
@@ -148,7 +156,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 
 Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it.
 
-0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, ask the user; never assume. On "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
+0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, choose one with a reason and put it in the plan; never assume silently. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 0.5. **Research (mandatory)**: leave the skill before designing. Live award sources (last 6 months) and `references/sources/`, concepts only. Record three references, three techniques with sources, and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference, never to the skill's defaults alone. No web: say so and state the limitation. See `craft/research.md`.
 1. **Tension**: find the conflict inside the brief (calm vs. urgent, heritage vs. new, luxury vs. honest).
 2. **Concept**: resolve the tension in one sentence. This is the idea, not a layout.
@@ -237,6 +245,7 @@ Full behaviour of each command is in `commands/overview.md`. Critique output for
 
 ### Output rules
 
+- **One confirmation.** Present the plan once and ask exactly one question, "Proceed?". After yes: build, gate and ship without asking again; decisions go in `DESIGN.md` with their reasons. Ask again only for a genuinely critical ambiguity (payment provider, legal region, locale priority), a costly lock-in the plan didn't cover (framework, hosting), or an "ask me before X" in the brief. Non-interactive runs write the plan to `DESIGN.md` and proceed.
 - Explain the plan in the preview block, then build. Keep prose short. The work is the answer.
 - Every build ships `DESIGN.md` and `SCHEMA.md` with the code. `SCHEMA.md` (format: `templates/SCHEMA.md`) is the data contract for the backend developer: data model, routes, section contract (empty, loading, error, filled), API surface, handoff notes. It is written with `DESIGN.md`, not after, and a developer can build the backend from it alone.
 - Deliver complete files. No `// rest of code here`, no TODOs, no placeholder images without a clear `alt` and a sourcing note.
@@ -263,7 +272,7 @@ Before any design decision, turn the request into a brief. Most requests are one
 | 2 | **What must they do or feel?** One primary job | The verb in the request ("sell", "book", "hire me") |
 | 3 | **What is true and specific?** Real names, places, materials, numbers | Any detail the user gave; never invent numbers |
 | 4 | **How should it feel?** In the brief's own words ("calm", "loud", "like a magazine") | The brief's wording and the category's job; `styles/` as reference, never a fixed set |
-| 5 | **What is the stack?** | Files in the repo (`package.json`, framework config). Not inferable otherwise: ask, per Step 0 in `thinking/sequence.md`. Never a default |
+| 5 | **What is the stack?** | Files in the repo (`package.json`, framework config). Not inferable otherwise: choose per Step 0 in `thinking/sequence.md` and show it in the plan. Never silent |
 | 6 | **What tier can it afford?** | Audience devices, content weight, timeline |
 | 7 | **What must not happen?** | Brand rules, accessibility needs, legal limits |
 | 8 | **What would the lazy version look like?** | The AI-default list in `gates/delivery-gate.md` |
@@ -276,9 +285,9 @@ Mark anything that would change the design but can't be inferred:
 [NEEDS CLARIFICATION: real product photos available? → affects hero archetype]
 ```
 
-- **One or two gaps:** make a sensible assumption, state it in the preview block, and continue.
-- **Three or more gaps that change the archetype:** ask **once**, in a single short message with options. Then build.
-- **The stack is never a gap to assume past.** If neither the brief nor the project names it, the stack question goes in that same message (or on its own if it is the only gap). See Step 0 in `thinking/sequence.md`.
+- **Gaps are not questions.** Each gap becomes a stated default in the plan, with its reason. The user sees them all at the one confirmation ("Proceed?", `thinking/sequence.md`) and can change any of them in their answer. Then build without asking again.
+- **Only critical ambiguity earns its own question:** a payment provider, a legal region, a locale priority, or a costly lock-in the plan can't default (framework, hosting). Even then, it goes in the same single message as "Proceed?".
+- **The stack is never silently assumed.** If neither the brief nor the project names it, the chosen stack and its reason are in the plan (Step 0 in `thinking/sequence.md`).
 
 ### Read the existing project
 
@@ -303,6 +312,18 @@ This is the missing key: it makes an agent think like a designer instead of a te
 
 **Data is fuel, not a menu.** The files in `data/` (archetypes, palettes, fonts, mutations, collisions, motion, signatures, styles) inform the brief. Do not pick from a list; derive from the brief, using the list as reference and constraint. A draw from `scripts/collide.mjs` is a constraint to design inside, not a finished answer. Write the results into the preview block. Each step has a test. If the test fails, redo the step.
 
+**One confirmation.** The agent asks exactly once per build, at the start, and never again. The flow:
+
+1. Read the brief.
+2. Step 0: Stack.
+3. Step 0.5: Research.
+4. Step 0.7: Derive the scope (what this build covers).
+5. Present the plan: stack, scope, references, and what will be deferred (each with its reason).
+6. Ask exactly one question: **"Proceed?"**
+7. On yes, commit to the plan: build, gate, ship. No more interruptions: no question before the build, before the gate, or after the critique.
+
+The agent may ask again only when (a) the brief is genuinely ambiguous on a critical choice (payment provider, legal region, locale priority), (b) a decision would lock in a costly choice the plan didn't cover (framework, hosting), or (c) the brief says "ask me before X" for something specific. Everything else the agent decides, states its reasoning in `DESIGN.md`, and moves on. Gaps in the brief are not questions: each becomes a stated default in the plan, which the user can change in their answer to "Proceed?". When no one can answer (CI, a benchmark run, a brief that says "don't ask"), the plan goes into `DESIGN.md` and the build proceeds.
+
 **Rules come first, the gate comes last.** Before Step 0, read `gates/rules.md`: every limit the gate measures (contrast, overflow, reduced motion, accessibility, SEO, security, performance budgets). It is design input. Design inside it from the first step; `gates/delivery-gate.md` only verifies it at the end. A design that passes the gate by patching (an invented link, domain or page added to satisfy a check) was not designed within the rules.
 
 **No component limits.** The components in examples/components/ are references and starting points. They are not a menu. They are not a limit. If the brief needs something that does not exist in the library, build it. Write it as one file, with a header that records tier, use-when, avoid-when, reduced-motion, and touch behaviour, following the same pattern as the library. The skill grows when the agent builds something new. Every step below composes, extends, or invents; none of them chooses from the library.
@@ -314,9 +335,8 @@ This is the missing key: it makes an agent think like a designer instead of a te
 Before any design step, know what you are building in. The stack changes what the design can be (server rendering, islands, a single file, a build step), so it is decided first and never guessed.
 
 1. **Read the brief.** If it names a stack ("Next.js", "Astro", "a single HTML file", `--stack=<x>`), use that stack. An existing project names its own stack: read `package.json` and the framework config and say what you found.
-2. **If it names none, ask.** One short question, before Step 1. Never assume a stack, and never fill the gap with the last one you used.
-   `Which stack should I build this in: Next.js, Astro, React + Vite, or plain HTML/CSS/JS? If you have no preference, say "you choose".`
-3. **If the user says "you choose",** pick from this small set and give the reason in one line:
+2. **If it names none, choose and put it in the plan.** Never assume silently, and never fill the gap with the last stack you used. The stack goes in the plan with its reason, and the one confirmation (below) covers it. A separate stack question is asked only when the brief says "ask me" about the stack.
+3. **Choose** from this small set and give the reason in one line:
 
    | Stack | Pick it when | Adapter |
    |---|---|---|
@@ -325,12 +345,12 @@ Before any design step, know what you are building in. The stack changes what th
    | React + Vite | a client-only interactive piece, a prototype, an embed | `adapters/react-vite.md` |
    | Plain HTML/CSS/JS | one page, no build step, a host or chat tool that only takes files | `adapters/vanilla.md` |
 
-4. **Record it** in `DESIGN.md` under `Stack` (from `templates/DESIGN.md`): the stack, who chose it (brief, project, user, or you), and the reason.
+4. **Record it** in `DESIGN.md` under `Stack` (from `templates/DESIGN.md`): the stack, who chose it (brief, project, user, or you, confirmed at "Proceed?"), and the reason.
 5. **Load the adapter** for that stack from the table above. The adapter is chosen here, not at build time, and it is never skipped.
 
 Plain HTML is a real choice, not the default. Use it only with a reason written in `DESIGN.md` (the brief asked for it, the host takes only static files, the tool can only produce one file).
 
-**Test:** can you point to where the stack came from (the brief, the project, the user's answer, or a "you choose" with a written reason)? If the answer is "I assumed", stop and ask.
+**Test:** can you point to where the stack came from (the brief, the project, the user's answer, or your choice with a written reason, shown in the plan)? If the answer is "I assumed", write the reason or put the choice in the plan.
 
 ---
 
@@ -488,7 +508,7 @@ A section added to the page gets its row in `SCHEMA.md` in the same edit. **Test
 ### Worked example: "Portfolio for a motion designer in Dhaka"
 
 ```
-Stack     : asked; the user said "you choose" → Astro (content-first portfolio, mostly static, one interactive reel as an island)
+Stack     : none named; chosen in the plan, confirmed at "Proceed?" → Astro (content-first portfolio, mostly static, one interactive reel as an island)
 Tension   : 10 years of varied work ↔ clients remember one thing
 Concept   : The site is a single film reel; each project is a frame you scrub through
 Archetype : Film Reel (Tier 5 scroll-film) mutated by "invert the axis": the reel runs horizontally while the page scrolls vertically
@@ -4048,9 +4068,9 @@ Type a command at the start of a message. Commands combine with flags. Without a
 | `--tier` | 1–5 | Force a motion tier |
 | `--energy` `--rhythm` `--motion` | 1–3 | Set a dial (see `principles/dials.md`) |
 | `--style` | a file in `styles/` | Apply a visual language |
-| `--stack` | next · react · vanilla · astro | Target framework. Without it: detect from the project, else ask (Step 0 in `thinking/sequence.md`) |
+| `--stack` | next · react · vanilla · astro | Target framework. Without it: detect from the project, else choose and show it in the plan (Step 0 in `thinking/sequence.md`) |
 | `--seed` | any number | Repeatable collision draws |
-| `--review` | — | Stop after the preview block and wait for approval |
+| `--review` | — | The plan always ends in one "Proceed?" (`thinking/sequence.md`); `--review` keeps it even in a run that would otherwise proceed without asking |
 
 ---
 

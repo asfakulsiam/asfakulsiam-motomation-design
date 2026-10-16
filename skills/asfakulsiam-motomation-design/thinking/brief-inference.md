@@ -10,7 +10,7 @@ Before any design decision, turn the request into a brief. Most requests are one
 | 2 | **What must they do or feel?** One primary job | The verb in the request ("sell", "book", "hire me") |
 | 3 | **What is true and specific?** Real names, places, materials, numbers | Any detail the user gave; never invent numbers |
 | 4 | **How should it feel?** In the brief's own words ("calm", "loud", "like a magazine") | The brief's wording and the category's job; `styles/` as reference, never a fixed set |
-| 5 | **What is the stack?** | Files in the repo (`package.json`, framework config). Not inferable otherwise: ask, per Step 0 in `thinking/sequence.md`. Never a default |
+| 5 | **What is the stack?** | Files in the repo (`package.json`, framework config). Not inferable otherwise: choose per Step 0 in `thinking/sequence.md` and show it in the plan. Never silent |
 | 6 | **What tier can it afford?** | Audience devices, content weight, timeline |
 | 7 | **What must not happen?** | Brand rules, accessibility needs, legal limits |
 | 8 | **What would the lazy version look like?** | The AI-default list in `gates/delivery-gate.md` |
@@ -23,9 +23,9 @@ Mark anything that would change the design but can't be inferred:
 [NEEDS CLARIFICATION: real product photos available? → affects hero archetype]
 ```
 
-- **One or two gaps:** make a sensible assumption, state it in the preview block, and continue.
-- **Three or more gaps that change the archetype:** ask **once**, in a single short message with options. Then build.
-- **The stack is never a gap to assume past.** If neither the brief nor the project names it, the stack question goes in that same message (or on its own if it is the only gap). See Step 0 in `thinking/sequence.md`.
+- **Gaps are not questions.** Each gap becomes a stated default in the plan, with its reason. The user sees them all at the one confirmation ("Proceed?", `thinking/sequence.md`) and can change any of them in their answer. Then build without asking again.
+- **Only critical ambiguity earns its own question:** a payment provider, a legal region, a locale priority, or a costly lock-in the plan can't default (framework, hosting). Even then, it goes in the same single message as "Proceed?".
+- **The stack is never silently assumed.** If neither the brief nor the project names it, the chosen stack and its reason are in the plan (Step 0 in `thinking/sequence.md`).
 
 ## Read the existing project
 

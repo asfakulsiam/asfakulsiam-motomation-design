@@ -4,6 +4,18 @@ This is the missing key: it makes an agent think like a designer instead of a te
 
 **Data is fuel, not a menu.** The files in `data/` (archetypes, palettes, fonts, mutations, collisions, motion, signatures, styles) inform the brief. Do not pick from a list; derive from the brief, using the list as reference and constraint. A draw from `scripts/collide.mjs` is a constraint to design inside, not a finished answer. Write the results into the preview block. Each step has a test. If the test fails, redo the step.
 
+**One confirmation.** The agent asks exactly once per build, at the start, and never again. The flow:
+
+1. Read the brief.
+2. Step 0: Stack.
+3. Step 0.5: Research.
+4. Step 0.7: Derive the scope (what this build covers).
+5. Present the plan: stack, scope, references, and what will be deferred (each with its reason).
+6. Ask exactly one question: **"Proceed?"**
+7. On yes, commit to the plan: build, gate, ship. No more interruptions: no question before the build, before the gate, or after the critique.
+
+The agent may ask again only when (a) the brief is genuinely ambiguous on a critical choice (payment provider, legal region, locale priority), (b) a decision would lock in a costly choice the plan didn't cover (framework, hosting), or (c) the brief says "ask me before X" for something specific. Everything else the agent decides, states its reasoning in `DESIGN.md`, and moves on. Gaps in the brief are not questions: each becomes a stated default in the plan, which the user can change in their answer to "Proceed?". When no one can answer (CI, a benchmark run, a brief that says "don't ask"), the plan goes into `DESIGN.md` and the build proceeds.
+
 **Rules come first, the gate comes last.** Before Step 0, read `gates/rules.md`: every limit the gate measures (contrast, overflow, reduced motion, accessibility, SEO, security, performance budgets). It is design input. Design inside it from the first step; `gates/delivery-gate.md` only verifies it at the end. A design that passes the gate by patching (an invented link, domain or page added to satisfy a check) was not designed within the rules.
 
 **No component limits.** The components in examples/components/ are references and starting points. They are not a menu. They are not a limit. If the brief needs something that does not exist in the library, build it. Write it as one file, with a header that records tier, use-when, avoid-when, reduced-motion, and touch behaviour, following the same pattern as the library. The skill grows when the agent builds something new. Every step below composes, extends, or invents; none of them chooses from the library.
@@ -15,9 +27,8 @@ This is the missing key: it makes an agent think like a designer instead of a te
 Before any design step, know what you are building in. The stack changes what the design can be (server rendering, islands, a single file, a build step), so it is decided first and never guessed.
 
 1. **Read the brief.** If it names a stack ("Next.js", "Astro", "a single HTML file", `--stack=<x>`), use that stack. An existing project names its own stack: read `package.json` and the framework config and say what you found.
-2. **If it names none, ask.** One short question, before Step 1. Never assume a stack, and never fill the gap with the last one you used.
-   `Which stack should I build this in: Next.js, Astro, React + Vite, or plain HTML/CSS/JS? If you have no preference, say "you choose".`
-3. **If the user says "you choose",** pick from this small set and give the reason in one line:
+2. **If it names none, choose and put it in the plan.** Never assume silently, and never fill the gap with the last stack you used. The stack goes in the plan with its reason, and the one confirmation (below) covers it. A separate stack question is asked only when the brief says "ask me" about the stack.
+3. **Choose** from this small set and give the reason in one line:
 
    | Stack | Pick it when | Adapter |
    |---|---|---|
@@ -26,12 +37,12 @@ Before any design step, know what you are building in. The stack changes what th
    | React + Vite | a client-only interactive piece, a prototype, an embed | `adapters/react-vite.md` |
    | Plain HTML/CSS/JS | one page, no build step, a host or chat tool that only takes files | `adapters/vanilla.md` |
 
-4. **Record it** in `DESIGN.md` under `Stack` (from `templates/DESIGN.md`): the stack, who chose it (brief, project, user, or you), and the reason.
+4. **Record it** in `DESIGN.md` under `Stack` (from `templates/DESIGN.md`): the stack, who chose it (brief, project, user, or you, confirmed at "Proceed?"), and the reason.
 5. **Load the adapter** for that stack from the table above. The adapter is chosen here, not at build time, and it is never skipped.
 
 Plain HTML is a real choice, not the default. Use it only with a reason written in `DESIGN.md` (the brief asked for it, the host takes only static files, the tool can only produce one file).
 
-**Test:** can you point to where the stack came from (the brief, the project, the user's answer, or a "you choose" with a written reason)? If the answer is "I assumed", stop and ask.
+**Test:** can you point to where the stack came from (the brief, the project, the user's answer, or your choice with a written reason, shown in the plan)? If the answer is "I assumed", write the reason or put the choice in the plan.
 
 ---
 
@@ -189,7 +200,7 @@ A section added to the page gets its row in `SCHEMA.md` in the same edit. **Test
 ## Worked example: "Portfolio for a motion designer in Dhaka"
 
 ```
-Stack     : asked; the user said "you choose" → Astro (content-first portfolio, mostly static, one interactive reel as an island)
+Stack     : none named; chosen in the plan, confirmed at "Proceed?" → Astro (content-first portfolio, mostly static, one interactive reel as an island)
 Tension   : 10 years of varied work ↔ clients remember one thing
 Concept   : The site is a single film reel; each project is a frame you scrub through
 Archetype : Film Reel (Tier 5 scroll-film) mutated by "invert the axis": the reel runs horizontally while the page scrolls vertically

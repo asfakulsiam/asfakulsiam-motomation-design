@@ -54,7 +54,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 
 Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it.
 
-0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, ask the user; never assume. On "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
+0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, choose one with a reason and put it in the plan; never assume silently. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 0.5. **Research (mandatory)**: leave the skill before designing. Live award sources (last 6 months) and `references/sources/`, concepts only. Record three references, three techniques with sources, and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference, never to the skill's defaults alone. No web: say so and state the limitation. See `craft/research.md`.
 
 ---
@@ -104,6 +104,7 @@ Two layers, kept apart on purpose (details in `principles/restraint.md`):
 
 ### Output rules
 
+- **One confirmation.** Present the plan once and ask exactly one question, "Proceed?". After yes: build, gate and ship without asking again; decisions go in `DESIGN.md` with their reasons. Ask again only for a genuinely critical ambiguity (payment provider, legal region, locale priority), a costly lock-in the plan didn't cover (framework, hosting), or an "ask me before X" in the brief. Non-interactive runs write the plan to `DESIGN.md` and proceed.
 - Explain the plan in the preview block, then build. Keep prose short. The work is the answer.
 - Every build ships `DESIGN.md` and `SCHEMA.md` with the code. `SCHEMA.md` (format: `templates/SCHEMA.md`) is the data contract for the backend developer: data model, routes, section contract (empty, loading, error, filled), API surface, handoff notes. It is written with `DESIGN.md`, not after, and a developer can build the backend from it alone.
 - Deliver complete files. No `// rest of code here`, no TODOs, no placeholder images without a clear `alt` and a sourcing note.
