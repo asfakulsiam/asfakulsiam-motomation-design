@@ -98,6 +98,12 @@ All opinions are `(opinion)` from `self`, the agent that built the five sites an
 
 **Bias (opinion, self).** This run is not blind. One agent, in one session, wrote `originality.mjs`, chose the five briefs, built all five sites knowing they would be compared, and wrote this report. That pushes toward diversity on the axes the agent knew were measured, so these numbers are likely more flattering than a fresh agent's would be. The permanent arm exists to remove this: `node evals/diversity.mjs generate --out <dir>` has a fresh agent build each brief separately with the skill installed. It was not run here.
 
+## After the fixes (v2.11, fix list 2)
+
+The tables above are the run as first reported. These changes were made afterwards, one commit each; `matrix.md` / `matrix.json` are always the latest measurement.
+
+- **Interaction axis (Fix 4): Option B, redefined.** It now measures press/tap feedback (`:hover`, `:active`, `:focus-visible` rules that apply on the page, as state × property groups), form patterns (field types, validation, live regions, fieldsets, submit) and navigation patterns (nav landmarks, in-page vs page links, menu toggle, skip link, breadcrumb, sticky header, tel/mailto, disclosures, dialogs). A part neither page has is not applicable and leaves the mean; before, shared absence (`pointer` = 1 in all 10 pairs) counted as a match. Re-run on the five builds: 10 distinct interaction scores (0.12–0.56); pairs at or above 0.4 went from 5 to 3 (funeral × metal 0.41, funeral × perfume 0.54, metal × perfume 0.56, all from `navigation` 0.6–0.75). `forms` is n/a in every pair: none of the five home pages has a form.
+
 ## Not verified
 
 - **The arm with a fresh agent:** `generate` was not run (no model calls, no benchmark in this session). Its code path (prompt, transcript, cost.json via cost.mjs, compare) is untested end to end.

@@ -23,10 +23,16 @@
 //   typography   families (display and body), scale (font-size steps relative to body, quarter-octave bins, weighted by
 //                text length), rhythm (line-height, tracking, case, weight, italic per role), hierarchy (h1/h2/h3 size
 //                relative to body).
-//   interaction  hover (each :hover rule as the set of property groups it changes), click (disclosures, dialogs, tabs,
-//                toggles, forms, carousels, anchors), scroll (sticky, fixed, snap, scroll-driven animation libraries,
-//                and the properties that actually change while scrolling, measured), pointer (custom cursor, pointer
-//                listeners).
+//   interaction  (v2.11, redefined) what a visitor does with the page, three parts:
+//                feedback: each :hover, :active and :focus-visible/:focus rule that applies on the page, as state × the
+//                  property groups it changes ("active:transform", "focus:border+shadow");
+//                forms: field types, required/pattern validation, live regions, fieldsets, submit kind;
+//                navigation: nav landmarks, in-page vs page links, menu toggle, skip link, breadcrumb, pagination,
+//                  sticky/fixed header, search, tel/mailto links, back-to-top, disclosures, tabs, dialogs.
+//                A part that neither page has is not applicable and leaves the mean (shared absence is not a shared
+//                pattern); a part only one page has scores 0. No applicable part → the axis is "n/a" (null).
+//                (Before v2.11 the axis compared hover, click widgets, scroll and pointer; two pages with no pointer
+//                behaviour scored pointer = 1, which pushed every pair of plain pages above 0.4.)
 //   signature    the one memorable thing: the element that changes most (area × changed properties) under time, pointer
 //                and scroll, described by trigger, properties, element kind and size; plus the declared signature (the
 //                stamp's `signature:` field or `data-signature`) when both pages declare one (same id 1, same family in
@@ -86,14 +92,16 @@ export function compare(A, B, sigFamily = {}) {
   const famSame = (x, y) => (x && y && x === y ? 1 : 0);
   const hDiff = ["h1", "h2", "h3"].map((h) => (A.typography.hier[h] && B.typography.hier[h] ? Math.abs(Math.log2(A.typography.hier[h] / B.typography.hier[h])) : A.typography.hier[h] || B.typography.hier[h] ? 1 : 0));
   parts.typography = { families: (famSame(A.typography.display, B.typography.display) + famSame(A.typography.body, B.typography.body)) / 2, scale: wjaccard(A.typography.scale, B.typography.scale), rhythm: wjaccard(A.typography.rhythm, B.typography.rhythm), hierarchy: Math.max(0, 1 - mean(hDiff)) };
-  parts.interaction = { hover: wjaccard(A.interaction.hover, B.interaction.hover), click: wjaccard(A.interaction.click, B.interaction.click), scroll: wjaccard(A.interaction.scroll, B.interaction.scroll), pointer: wjaccard(A.interaction.pointer, B.interaction.pointer) };
+  // interaction: feedback, forms, navigation; a part neither page has is not applicable (left out), not a match
+  const nonEmpty = (o) => !!o && Object.keys(o).length > 0;
+  parts.interaction = {}; for (const k of ["feedback", "forms", "navigation"]) { const x = A.interaction[k], y = B.interaction[k]; if (nonEmpty(x) || nonEmpty(y)) parts.interaction[k] = wjaccard(x, y); }
   const measured = wjaccard(A.signature.tokens, B.signature.tokens);
   const da = A.signature.declared, db = B.signature.declared;
   parts.signature = da && db ? { declared: da === db ? 1 : sigFamily[da] && sigFamily[da] === sigFamily[db] ? 0.5 : 0, measured } : { measured };
   const W = { structure: { shingles: 0.5, order: 0.5 }, composition: { placement: 0.6, columns: 0.2, density: 0.2 }, typography: { families: 0.25, scale: 0.3, rhythm: 0.25, hierarchy: 0.2 } };
   const score = {};
-  for (const ax of AXES) { const p = parts[ax]; const w = W[ax]; const ks = Object.keys(p); score[ax] = r2(w ? ks.reduce((s, k) => s + p[k] * w[k], 0) : mean(ks.map((k) => p[k]))); for (const k of ks) p[k] = r2(p[k]); }
-  score.overall = r2(mean(AXES.map((a) => score[a])));
+  for (const ax of AXES) { const p = parts[ax]; const w = W[ax]; const ks = Object.keys(p); score[ax] = !ks.length ? null : r2(w ? ks.reduce((s, k) => s + p[k] * w[k], 0) / ks.reduce((s, k) => s + w[k], 0) : mean(ks.map((k) => p[k]))); for (const k of ks) p[k] = r2(p[k]); } // score null: the axis does not apply to this pair
+  score.overall = r2(mean(AXES.map((a) => score[a]).filter((x) => x !== null)));
   return { score, parts };
 }
 
@@ -224,7 +232,30 @@ const FEATURES = async () => {
   if (rules.some((r) => /animation-timeline|view-timeline|scroll-timeline/.test(r.cssText))) bump(scroll, "css-scroll-timeline");
   if (/mousemove|pointermove/.test(js)) bump(pointer, "pointer-listener"); if (all.some((e) => cs(e).cursor === "none") || rules.some((r) => /cursor:\s*none/.test(r.cssText))) bump(pointer, "custom-cursor");
   if (/deviceorientation|gyro/i.test(js)) bump(pointer, "tilt"); if (/getContext\(\s*["']webgl|THREE\.|WebGLRenderer/.test(js)) bump(pointer, "webgl");
-  return { H, vh, structure: { shingles, order }, composition: { grids, density, columns }, image: { count: imgEls.length, ratioSize, cropMask, effects }, typography: { display, body: bodyFam, bodyPx: body, scale, rhythm, hier }, interaction: { hover, click, scroll, pointer } };
+  // feedback: hover, press and focus rules that apply here, as state × property groups
+  const feedback = {}; const appliesTo = (sel, re) => sel.split(",").some((one) => { if (!re.test(one)) return false; const base = one.replace(/:(hover|active|focus-visible|focus-within|focus)/g, "").replace(/::?[a-z-]+(\([^)]*\))?/gi, (m) => (/^:(not|is|where|has)\(/i.test(m) ? m : "")).trim() || "*"; try { return !!document.querySelector(base); } catch { return false; } });
+  for (const r of rules) for (const [st, re] of [["hover", /:hover/], ["active", /:active/], ["focus", /:focus(-visible)?\b/]]) if (re.test(r.selectorText) && appliesTo(r.selectorText, re)) { const g = [...new Set([...r.style].map(GROUP))].filter((x) => x !== "other").sort(); if (g.length) bump(feedback, `${st}:${g.join("+")}`); }
+  // forms: what a visitor fills in and how the page answers
+  const forms = {}; const fs = [...document.querySelectorAll("form")];
+  if (fs.length) { bump(forms, `forms:${fs.length > 2 ? "many" : fs.length}`);
+    for (const el of document.querySelectorAll("form input, form select, form textarea")) { const t = el.tagName === "INPUT" ? (el.type || "text") : el.tagName.toLowerCase(); if (!["hidden", "submit", "button"].includes(t)) bump(forms, `field:${t}`); }
+    if (document.querySelector("form [required]")) bump(forms, "required"); if (document.querySelector("form [pattern], form [minlength], form [min], form [max]")) bump(forms, "constraint");
+    if (document.querySelector("form [aria-live], form [role=status], form [role=alert], form output") || fs.some((f) => f.nextElementSibling?.matches?.("[aria-live],[role=status],[role=alert]"))) bump(forms, "live-region");
+    if (document.querySelector("form fieldset")) bump(forms, "fieldset"); if (document.querySelector("form [aria-describedby]")) bump(forms, "described");
+    if (fs.some((f) => f.querySelectorAll("fieldset").length > 2)) bump(forms, "steps"); if (document.querySelector("form button[type=submit], form input[type=submit], form button:not([type])")) bump(forms, "submit-button"); }
+  // navigation: how a visitor moves around
+  const navigation = {}; const nb = (k) => bump(navigation, k); const navs = [...document.querySelectorAll("nav, [role=navigation]")];
+  if (navs.length) nb(`nav:${navs.length > 3 ? "many" : navs.length}`);
+  const navLinks = navs.flatMap((n) => [...n.querySelectorAll("a[href]")]); const inPage = navLinks.filter((x) => x.getAttribute("href").startsWith("#")).length, pages = navLinks.length - inPage;
+  if (inPage) nb(`nav-in-page:${inPage > 6 ? "many" : inPage > 2 ? "some" : "few"}`); if (pages) nb(`nav-pages:${pages > 6 ? "many" : pages > 2 ? "some" : "few"}`);
+  if (document.querySelector("header button[aria-expanded], nav button[aria-expanded], [aria-controls][aria-expanded]")) nb("menu-toggle");
+  const first = document.querySelector("body a[href^='#']"); if (first && /skip|main|content/i.test(first.textContent + first.getAttribute("href"))) nb("skip-link");
+  if (document.querySelector("[aria-label*=breadcrumb i], .breadcrumb, ol.breadcrumbs")) nb("breadcrumb"); if (document.querySelector("[aria-label*=pagination i], .pagination, a[rel=next], a[rel=prev]")) nb("pagination");
+  const hdr = document.querySelector("header, [role=banner]"); if (hdr) { const p = cs(hdr).position; if (p === "sticky" || p === "fixed") nb(`header:${p}`); }
+  if (document.querySelector("[role=search], input[type=search]")) nb("search"); if (document.querySelector('a[href^="tel:"]')) nb("tel"); if (document.querySelector('a[href^="mailto:"]')) nb("mailto");
+  if (document.querySelector('a[href="#top"], a[href="#"]')) nb("back-to-top"); if (document.querySelector("details")) nb("disclosure"); if (document.querySelector("[role=tab]")) nb("tabs"); if (document.querySelector("dialog, [role=dialog]")) nb("dialog");
+  if (document.querySelector("footer nav, footer ul a")) nb("footer-links"); if (document.querySelector("[aria-current]")) nb("current-marked");
+  return { H, vh, structure: { shingles, order }, composition: { grids, density, columns }, image: { count: imgEls.length, ratioSize, cropMask, effects }, typography: { display, body: bodyFam, bodyPx: body, scale, rhythm, hier }, interaction: { feedback, forms, navigation, hover, click, scroll, pointer } };
 };
 
 // The signature move, measured: snapshot candidate elements' animatable styles under time, pointer and scroll, and
@@ -304,8 +335,8 @@ export async function features(browser, target) {
 export function matrixReport(labels, feats, threshold = THRESHOLD) {
   const fam = Object.fromEntries(load("signatures").map((s) => [s.id, s.family]));
   const pairs = [];
-  for (let i = 0; i < feats.length; i++) for (let j = i + 1; j < feats.length; j++) { const c = compare(feats[i], feats[j], fam); pairs.push({ a: labels[i], b: labels[j], ...c, over: AXES.filter((ax) => c.score[ax] >= threshold) }); }
-  return { threshold, labels, pairs, pass: pairs.every((p) => !p.over.length), max: Object.fromEntries([...AXES, "overall"].map((ax) => [ax, pairs.length ? Math.max(...pairs.map((p) => p.score[ax])) : null])) };
+  for (let i = 0; i < feats.length; i++) for (let j = i + 1; j < feats.length; j++) { const c = compare(feats[i], feats[j], fam); pairs.push({ a: labels[i], b: labels[j], ...c, over: AXES.filter((ax) => c.score[ax] !== null && c.score[ax] >= threshold) }); }
+  return { threshold, labels, pairs, pass: pairs.every((p) => !p.over.length), max: Object.fromEntries([...AXES, "overall"].map((ax) => [ax, pairs.length ? Math.max(...pairs.map((p) => p.score[ax] ?? 0)) : null])) };
 }
 export function printReport(rep, feats) {
   const L = (s = "") => console.log(s); const { labels, pairs, threshold } = rep;
@@ -313,13 +344,13 @@ export function printReport(rep, feats) {
   feats.forEach((f, i) => L(`  ${labels[i]}: ${f.structure.order.length} content blocks [${f.structure.order.join(" ")}] · ${f.image.count} image(s) · type ${f.typography.display || "–"} / ${f.typography.body || "–"} (body ${f.typography.bodyPx}px) · signature ${f.signature.declared ? `declared ${f.signature.declared}, ` : ""}measured ${f.signature.found ? `${f.signature.found.trigger.join("+")} → ${f.signature.found.props.join("+")} on ${f.signature.found.kind} (${f.signature.found.size})` : "none (static)"}`));
   L("");
   L(`| Pair | ${[...AXES, "overall"].join(" | ")} | Verdict |`); L(`|---|${[...AXES, "overall"].map(() => "---:").join("|")}|---|`);
-  for (const p of pairs) L(`| ${p.a} × ${p.b} | ${[...AXES, "overall"].map((ax) => `${p.score[ax].toFixed(2)}${AXES.includes(ax) && p.score[ax] >= threshold ? " ✗" : ""}`).join(" | ")} | ${p.over.length ? `repeat on ${p.over.join(", ")}` : "different on every axis"} |`);
+  for (const p of pairs) L(`| ${p.a} × ${p.b} | ${[...AXES, "overall"].map((ax) => `${p.score[ax] === null ? "n/a" : p.score[ax].toFixed(2)}${AXES.includes(ax) && p.score[ax] !== null && p.score[ax] >= threshold ? " ✗" : ""}`).join(" | ")} | ${p.over.length ? `repeat on ${p.over.join(", ")}` : "different on every axis"} |`);
   if (labels.length > 2) for (const ax of [...AXES, "overall"]) {
     L(""); L(`${ax}`); L(`| | ${labels.join(" | ")} |`); L(`|---|${labels.map(() => "---:").join("|")}|`);
-    for (const a of labels) L(`| ${a} | ${labels.map((b) => (a === b ? "—" : pairs.find((p) => (p.a === a && p.b === b) || (p.a === b && p.b === a)).score[ax].toFixed(2))).join(" | ")} |`);
+    for (const a of labels) L(`| ${a} | ${labels.map((b) => (a === b ? "—" : pairs.find((p) => (p.a === a && p.b === b) || (p.a === b && p.b === a)).score[ax]?.toFixed(2) ?? "n/a")).join(" | ")} |`);
   }
   L(""); L("parts (why each axis scored what it did):");
-  for (const p of pairs) L(`  ${p.a} × ${p.b}: ${AXES.map((ax) => `${ax} ${Object.entries(p.parts[ax]).map(([k, v]) => `${k}=${v}`).join(",")}`).join(" · ")}`);
+  for (const p of pairs) L(`  ${p.a} × ${p.b}: ${AXES.map((ax) => `${ax} ${Object.entries(p.parts[ax]).map(([k, v]) => `${k}=${v}`).join(",") || "n/a"}`).join(" · ")}`);
   L(""); L(rep.pass ? `PASS  every pair below ${threshold} on every axis` : `FAIL  ${pairs.filter((p) => p.over.length).length} of ${pairs.length} pair(s) at or above ${threshold} on at least one axis`);
 }
 

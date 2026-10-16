@@ -16,7 +16,7 @@ const feat = (o = {}) => ({
   composition: { grids: [["t", "m", "", "t"], ["t", "", "", ""]], density: [0.6, 0.2], columns: { "c2:left": 1, "c1:centre": 1 } },
   image: { count: 2, ratioSize: { "img:16:9:bleed": 2 }, cropMask: { "crop:square:none": 2 }, effects: { "none:normal:flat": 2 } },
   typography: { display: "fraunces", body: "inter", bodyPx: 17, scale: { 0: 10, 8: 3 }, rhythm: { "body:lh1.5": 10 }, hier: { h1: 4, h2: 2 } },
-  interaction: { hover: { colour: 2 }, click: { anchor: 3 }, scroll: { sticky: 1 }, pointer: {} },
+  interaction: { feedback: { "hover:colour": 2, "focus:border": 1 }, forms: {}, navigation: { "nav:1": 1, "nav-in-page:some": 1, "skip-link": 1 } },
   signature: { tokens: { "trigger:scroll": 1, "prop:transform": 1 }, declared: "aperture" }, ...o });
 const same = compare(feat(), feat());
 say(AXES.every((a) => same.score[a] === 1) && same.score.overall === 1, "compare: a build against itself → 1.00 on every axis");
@@ -25,11 +25,15 @@ const other = feat({
   composition: { grids: [["", "", "m", ""], ["", "t", "", ""], ["m", "m", "m", "m"]], density: [0.9, 0.1, 1], columns: { "c4:spread": 3 } },
   image: { count: 0, ratioSize: {}, cropMask: {}, effects: {} },
   typography: { display: "space mono", body: "space mono", bodyPx: 14, scale: { 0: 4, 12: 1 }, rhythm: { "body:lh1.2": 4 }, hier: { h1: 8 } },
-  interaction: { hover: { transform: 1 }, click: { dialog: 1 }, scroll: { "snap-y": 1 }, pointer: { "custom-cursor": 1 } },
+  interaction: { feedback: { "active:transform": 1 }, forms: { "forms:1": 1, "field:email": 1, required: 1 }, navigation: { "nav-pages:few": 1, dialog: 1 } },
   signature: { tokens: { "trigger:pointer": 1, "prop:clip": 1 }, declared: "split-type" } });
 const diff = compare(feat(), other);
 say(AXES.every((a) => diff.score[a] < 0.4), `compare: unrelated feature sets → every axis below 0.4 (${AXES.map((a) => `${a} ${diff.score[a]}`).join(", ")})`);
 say(compare(feat(), feat({ image: { count: 0, ratioSize: {}, cropMask: {}, effects: {} } })).score.image === 0, "compare: imagery on one side only → image 0");
+{ const none = { feedback: {}, forms: {}, navigation: {} }; const c = compare(feat({ interaction: none }), feat({ interaction: none }));
+  say(c.score.interaction === null && !Number.isNaN(c.score.overall), "compare: neither page has any interaction pattern → interaction n/a (null), overall from the other axes"); }
+{ const c = compare(feat(), feat({ interaction: { feedback: { "hover:colour": 2, "focus:border": 1 }, forms: {}, navigation: { "nav:1": 1 } } }));
+  say(!("forms" in c.parts.interaction) && c.score.interaction < 1, `compare: a part neither page has (forms) is left out, not counted as a match (${JSON.stringify(c.parts.interaction)})`); }
 
 const snap = (p, t = "text", a = 400000) => ({ p, t, a, txt: "x" });
 const base = [snap(["none", "1"]), snap(["none", "1"], "media", 900000)];

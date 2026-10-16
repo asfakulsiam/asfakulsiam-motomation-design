@@ -57,7 +57,7 @@ function finish(dir, rep, found, nv, code) {
   mkdirSync(dir, { recursive: true });
   const json = { schema: "motomation-diversity/1", threshold: THRESHOLD, briefs: briefs().map(({ text, ...b }) => ({ ...b, built: found.some((f) => f.slug === b.slug) })), report: rep, not_verified: nv, exit: code };
   writeFileSync(join(dir, "matrix.json"), JSON.stringify(json, null, 1) + "\n");
-  const f = (x) => (x == null ? "?" : x.toFixed(2));
+  const f = (x) => (x == null ? "n/a" : x.toFixed(2)); // n/a: the axis does not apply to that pair (originality.mjs)
   const md = ["# Diversity arm: similarity matrix", "", `Five unrelated briefs (evals/briefs/diversity/), one build each, compared by scripts/originality.mjs at 1440×900 on six axes. 0 = nothing shared, 1 = the same. Every axis of every pair must stay below ${THRESHOLD}; ✗ marks a repeat. Written by \`node evals/diversity.mjs\`.`, "", "## Measured", ""];
   if (rep) {
     md.push(`Tool: scripts/originality.mjs (${rep.seconds}s). Result: ${rep.pass ? "PASS, no pair repeats on any axis" : `FAIL, ${rep.pairs.filter((p) => p.over.length).length} of ${rep.pairs.length} pairs repeat on at least one axis`}.`, "");
