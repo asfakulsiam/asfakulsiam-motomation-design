@@ -1,0 +1,47 @@
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+DELIVERY GATE · examples/templates/hotel.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (63 measured; 1 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (63 measured; 1 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (63 measured; 1 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (60 measured; 4 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (12 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (64 compared)
+  names     ✓ 0 missing alt / accessible names  (13 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (18 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  progress  ✓ 0 of 0 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
+  smooth    – no pinned zone, not measured
+  rm-flow   – no pinned zone
+  focus     ✓ 0 of 13 focused elements show no visible focus indicator  (13 tabbable)
+  targets   ✓ 0 under 24px, 0 under 44px (warning) at 375 touch  (9 checked; inline links exempt)
+  zoom200   ✓ 0 lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%
+  reflow    ✓ 0px horizontal scroll at 320px
+  forced    ✓ 0 of 63 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
+  kbd-trap  ✓ 13 of 13 tabbable reached in 32 Tabs, no cycle
+  C copy     ✓ 0 rule(s) failing  (craft/copy.md; 0 warning(s))
+  S SEO      ✓ 0 rule(s) failing  (craft/seo.md; 1 warning(s))
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible
+  P perf     ✓ 0 rule(s) failing  (craft/performance.md; 0 warning(s))
+  K security ✓ 0 rule(s) failing  (craft/security.md; 0 warning(s))
+  composition (advisory: heuristics, never fail the gate, not in the stamp)
+     pin fill  – no pinned zone
+     focal     ⚠ 3 of 5 screen(s) with text have one clear focal point (heaviest text mass ≥ 1.5× the next); no clear lead on screen 1 (1.2×), 3 (1.05×)
+     scale     ✓ display:body 1:6.8  (135.475px / 20px; warn below 1:6)
+  richness (advisory: "too little" warnings, never fail the gate, not in the stamp)
+     page      page (from path; set with --page home|category|about|page)
+     fold      ✓ 6 meaningful section(s) above the fold at 1440×900: nav header.rail, heading h1#hero-hotel-room-title, text p, text p, media img, media canvas  (warn below 3)
+  micro-states (advisory: missing states are warnings, never fail the gate, not in the stamp)
+     buttons   ⚠ 2 button(s): no hover, active, disabled state found  (have: focus, loading)
+     forms     – none on the page
+     lists     – 1 static list(s): not judged (mark data lists with data-entity)
+     images    ✓ 6 image(s)  (have: loading, loaded, error)
+     async     ✓ fetch/XHR in scripts  (have: pending, success, error)
+  hierarchy  h1×1, 0 skipped heading levels, 2 element(s) tied for largest on the first 375px screen
+  structure  5 sections, entrances: static | fade | static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 68KB gzipped
+  records    DESIGN.md: /home/user/workspace/repo/skills/asfakulsiam-motomation-design/examples/templates/hotel/DESIGN.md · memory log: /home/user/workspace/repo/skills/asfakulsiam-motomation-design/examples/templates/hotel/log.json · stamp fields: {"archetype":"room","mutation":"reverse-reveal","signature":"darkroom-develop","tier":"2"}
+  critique → C4[restraint:changed1] H4[375:1] S3[last5:archetype-reused,signature-new,layout-reused,palette-new,fp94] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js68/80KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A5[focus:13/13,tgt:0f0w,zoom:0,reflow:0,fc:0,trap:0]
+  coverage   ✓ worst width 1440px: 4 of 64 text elements skipped (6%; limit 30% at every width)
+  J — journey  – skipped (--reference: a design reference, not a live site; no cross-page navigation, 404 or form-backend requirement)
+  PASS  stamp → critique: C4[restraint:changed1] H4[375:1] S3[last5:archetype-reused,signature-new,layout-reused,palette-new,fp94] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js68/80KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A5[focus:13/13,tgt:0f0w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · 7fd32d1077 · skipped 4/64@1440
+

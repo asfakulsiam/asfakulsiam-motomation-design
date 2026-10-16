@@ -1,0 +1,50 @@
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+DELIVERY GATE · examples/templates/org.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (101 measured; 1 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (101 measured; 1 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (101 measured; 1 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (101 measured; 1 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (12 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (102 compared)
+  names     ✓ 0 missing alt / accessible names  (15 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (20 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  progress  ✓ 0 of 0 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
+  smooth    – no pinned zone, not measured
+  rm-flow   – no pinned zone
+  focus     ✓ 0 of 15 focused elements show no visible focus indicator  (15 tabbable)
+  targets   ✓ 0 under 24px, 3 under 44px (warning) at 375 touch  (11 checked; inline links exempt)
+     37×44  a  "Give"
+     257×37  a  "2025 annual report (PDF, 4 MB)"
+     155×37  a  "Court cases, all 38"
+  zoom200   ✓ 0 lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%
+  reflow    ✓ 0px horizontal scroll at 320px
+  forced    ✓ 0 of 79 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
+  kbd-trap  ✓ 15 of 15 tabbable reached in 36 Tabs, no cycle
+  C copy     ✓ 0 rule(s) failing  (craft/copy.md; 0 warning(s))
+  S SEO      ✓ 0 rule(s) failing  (craft/seo.md; 1 warning(s))
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible
+  P perf     ✓ 0 rule(s) failing  (craft/performance.md; 0 warning(s))
+  K security ✓ 0 rule(s) failing  (craft/security.md; 0 warning(s))
+  composition (advisory: heuristics, never fail the gate, not in the stamp)
+     pin fill  – no pinned zone
+     focal     ⚠ 4 of 5 screen(s) with text have one clear focal point (heaviest text mass ≥ 1.5× the next); no clear lead on screen 3 (1.32×)
+     scale     ⚠ display:body 1:5.2  (94.208px / 18px; warn below 1:6)
+  richness (advisory: "too little" warnings, never fail the gate, not in the stamp)
+     page      page (from path; set with --page home|category|about|page)
+     fold      ✓ 4 meaningful section(s) above the fold at 1440×900: nav header.bar, heading h1#hero-org-manifesto-title, heading h2, text p  (warn below 3)
+  micro-states (advisory: missing states are warnings, never fail the gate, not in the stamp)
+     buttons   ⚠ 4 button(s): no hover, active, disabled state found  (have: focus, loading)
+     forms     – none on the page
+     lists     – 2 static list(s): not judged (mark data lists with data-entity)
+     images    – none on the page
+     async     ✓ fetch/XHR in scripts  (have: pending, success, error)
+  hierarchy  h1×1, 0 skipped heading levels, 21 element(s) tied for largest on the first 375px screen
+  structure  5 sections, entrances: static | static | static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 69KB gzipped
+  records    DESIGN.md: /home/user/workspace/repo/skills/asfakulsiam-motomation-design/examples/templates/org/DESIGN.md · memory log: /home/user/workspace/repo/skills/asfakulsiam-motomation-design/examples/templates/org/log.json · stamp fields: {"archetype":"manifesto","mutation":"constraint","signature":"seismograph-line","tier":"2"}
+  critique → C4[restraint:changed1] H4[375:1] S4[last5:archetype-new,signature-new,layout-reused,palette-new,fp38,self-excluded] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js69/80KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A5[focus:15/15,tgt:0f3w,zoom:0,reflow:0,fc:0,trap:0]
+  coverage   ✓ worst width 375px: 1 of 102 text elements skipped (1%; limit 30% at every width)
+  J — journey  – skipped (--reference: a design reference, not a live site; no cross-page navigation, 404 or form-backend requirement)
+  PASS  stamp → critique: C4[restraint:changed1] H4[375:1] S4[last5:archetype-new,signature-new,layout-reused,palette-new,fp38,self-excluded] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js69/80KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A5[focus:15/15,tgt:0f3w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · e31ec06eb8 · skipped 1/102@375
+

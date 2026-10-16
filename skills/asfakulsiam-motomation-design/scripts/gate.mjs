@@ -49,6 +49,9 @@
 //              request is held), errors (an unknown route gets a designed not-found view), session (works after reload,
 //              back, forward and with two tabs). Any missing state fails the page. Not in the stamp or its id.
 //              --journey runs only these six (no stamp).
+//              --reference (v2.13) skips axis J for a design reference (a template that is an example, not a live site), and
+//              serves each page from its own folder so that folder's _headers apply (assets that climb out with ../ are
+//              answered from the folder they resolve to). Every page-level axis still runs and still fails the page.
 //   micro-states (advisory, v2.9.0) buttons, forms, data lists, images and async actions: each expected state found in
 //              the page's CSS, markup or scripts? Missing ones warn; never fails, never in counts, the stamp or its id.
 //   richness   (advisory, v2.6.0) the "too little" side of restraint. Never fails, never in counts, the stamp or its id.
@@ -127,8 +130,8 @@ const argv = process.argv.slice(2);
 const flags = {}; const targets = [];
 // v2.5.0 (C9): unknown flags and missing values are one friendly line plus the usage, exit 2; boolean flags never
 // swallow the word after them (`--json page.html` used to lose the target).
-const GATE_USAGE = "Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]] [--timeout s | --timeout-ms ms] [--light] [--rules] [--journey] [--page home|category|about|page]   |   --report <file.html>   |   --verify <file.html> [--url u]";
-const GATE_FLAGS = { json: "bool", light: "bool", rules: "bool", journey: "bool", help: "bool", report: "optional", verify: "value", url: "value", out: "value", design: "value", log: "value", tier: "value", archetype: "value", signature: "value", timeout: "value", "timeout-ms": "value", page: "value" };
+const GATE_USAGE = "Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]] [--timeout s | --timeout-ms ms] [--light] [--rules] [--reference] [--journey] [--page home|category|about|page]   |   --report <file.html>   |   --verify <file.html> [--url u]";
+const GATE_FLAGS = { json: "bool", light: "bool", rules: "bool", journey: "bool", reference: "bool", help: "bool", report: "optional", verify: "value", url: "value", out: "value", design: "value", log: "value", tier: "value", archetype: "value", signature: "value", timeout: "value", "timeout-ms": "value", page: "value" };
 const gateDie = (m) => { console.error(`gate: ${m}\n${GATE_USAGE}`); process.exit(2); };
 for (let i = 0; i < argv.length; i++) {
   const t = argv[i];
@@ -144,6 +147,7 @@ for (let i = 0; i < argv.length; i++) {
   } else if (/^-[^-]/.test(t)) gateDie(`unknown flag ${t} (flags start with --)`);
   else targets.push(t);
 }
+if (flags.reference && flags.journey) gateDie("--reference skips the journey (axis J); it cannot be combined with --journey");
 if (flags.page !== undefined && !/^(home|category|about|page)$/.test(String(flags.page))) gateDie(`--page must be home, category, about or page (got ${flags.page})`);
 
 // ── browser (optional dependency) ─────────────────────────────────────────────
@@ -159,14 +163,18 @@ async function loadPlaywright() {
 
 // ── static server for files and folders ───────────────────────────────────────
 const MIME = { ".html": "text/html", ".js": "text/javascript", ".mjs": "text/javascript", ".css": "text/css", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".avif": "image/avif", ".woff2": "font/woff2", ".json": "application/json", ".mp4": "video/mp4" };
-function serve(root) {
+// --reference (v2.13): serve(own, { fallback }) serves the page's own folder, so its _headers apply, and answers a request
+// the folder lacks from `fallback` (the folder its ../ assets resolve to, e.g. the shared fonts/), so the page still
+// renders as designed. The headers always come from the page's own folder.
+function serve(root, { fallback = null } = {}) {
   return new Promise((ok) => {
     const srv = createServer((req, res) => {
       let p = decodeURIComponent(new URL(req.url, "http://x").pathname);
       let f = join(root, p); if (existsSync(f) && statSync(f).isDirectory()) f = join(f, "index.html");
+      if (fallback && (!f.startsWith(root) || !existsSync(f))) { const g = join(fallback, p); if (g.startsWith(fallback) && existsSync(g) && statSync(g).isFile()) f = g; }
       // a missing file answers 404 with the site's own 404.html when it has one, as static hosts (GitHub Pages, Netlify,
       // Cloudflare Pages, Vercel) do; axis J (errors) reads that view
-      if (!f.startsWith(root) || !existsSync(f)) { const nf = join(root, "404.html"); if (existsSync(nf)) { res.writeHead(404, { "content-type": "text/html" }); return res.end(readFileSync(nf)); } res.writeHead(404); return res.end(); }
+      if (!(f.startsWith(root) || (fallback && f.startsWith(fallback))) || !existsSync(f)) { const nf = join(root, "404.html"); if (existsSync(nf)) { res.writeHead(404, { "content-type": "text/html" }); return res.end(readFileSync(nf)); } res.writeHead(404); return res.end(); }
       // a _headers file next to the page (Netlify / Cloudflare Pages format) supplies the response headers it would ship with
       const hf = join(root, "_headers"); const extra = existsSync(hf) ? parseHeadersFile(readFileSync(hf, "utf8"), p) : {};
       res.writeHead(200, { ...extra, "content-type": MIME[extname(f)] || "application/octet-stream" }); res.end(readFileSync(f));
@@ -222,6 +230,10 @@ async function toUrl(target) {
   const isDir = statSync(abs).isDirectory();
   if (isDir) { const { srv, port } = await serve(abs); return { url: `http://127.0.0.1:${port}/`, close: () => srv.close() }; }
   const site = siteRootFor(abs);
+  if (flags.reference) { // a design reference: its own folder (its own _headers), assets that climb out from the site root
+    const own = dirname(abs); const { srv, port } = await serve(own, { fallback: site.climbed ? site.root : null });
+    return { url: `http://127.0.0.1:${port}/${encodeURIComponent(basename(abs))}`, close: () => srv.close() };
+  }
   if (site.warn && !toUrl.warned?.has(abs)) { (toUrl.warned ||= new Set()).add(abs); console.error(site.warn); }
   const { srv, port } = await serve(site.root);
   const rel = abs.slice(site.root.length).split(/[\\/]/).filter(Boolean).map(encodeURIComponent).join("/");
@@ -1208,7 +1220,10 @@ export async function scan(target, browser, opts = {}) {
     const rich = await richness(browser, url, opts.page).catch((e) => ({ error: firstLine(e) }));
     const micro = await microStates(browser, url).catch((e) => ({ error: firstLine(e) })); // advisory (v2.9.0): never fails, never in counts, stamp or id
     // axis J (v2.11): the whole site as a journey. Fails the page on any missing state; not in the counts, the stamp or its id
-    const jr = await journey(browser, url, { T }).catch((e) => ({ error: firstLine(e), pass: false, fails: 1, segment: "journey: not measured" }));
+    // --reference (v2.13): a design reference is one page, not a site: no cross-page navigation, no 404 page, demo forms.
+    // Axis J is skipped (reported as skipped); every page-level axis above still runs and still fails the page.
+    const jr = flags.reference ? { pass: true, skipped: true, fails: 0, segment: "journey: skipped (--reference)" }
+      : await journey(browser, url, { T }).catch((e) => ({ error: firstLine(e), pass: false, fails: 1, segment: "journey: not measured" }));
     // fingerprint of the served HTML with stamp comments removed: same page → same id, any other page → a different id
     const html = await fetch(url).then((r) => r.text()).catch(() => "");
     const pageHash = createHash("sha256").update(html.replace(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g, "")).digest("hex").slice(0, 16);
@@ -1342,7 +1357,8 @@ function print(r) {
   L(`  critique → ${r.critique}${/\?/.test(r.critique) ? "   (axes marked ? have no record to derive from)" : ""}`);
   L(`  coverage   ${r.coverage.ok ? "✓" : "✗"} worst width ${r.coverage.width}px: ${r.coverage.skipped} of ${r.coverage.total} text elements skipped (${r.coverage.pct}%; limit ${SKIP_WARN_PCT}% at every width)${r.coverage.low.length ? ` · over the limit at ${r.coverage.low.join("/")}px` : ""}`);
   if (r.completeness) for (const l of r.completeness.error ? [`  X — completeness  ✗ ${r.completeness.error}`] : completenessLines(r.completeness)) L(l);
-  if (r.journey) for (const l of r.journey.error ? [`  J — journey  ✗ not measured: ${r.journey.error}`] : journeyLines(r.journey)) L(l);
+  if (r.journey?.skipped) L("  J — journey  – skipped (--reference: a design reference, not a live site; no cross-page navigation, 404 or form-backend requirement)");
+  else if (r.journey) for (const l of r.journey.error ? [`  J — journey  ✗ not measured: ${r.journey.error}`] : journeyLines(r.journey)) L(l);
   L(`  ${!r.coverage.ok ? "NOT VERIFIED (coverage)" : r.pass ? "PASS" : "FAIL"}  stamp → critique: ${r.critique} · ${r.stamp}`);
   L("");
 }

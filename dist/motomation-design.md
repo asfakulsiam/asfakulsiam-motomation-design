@@ -3884,6 +3884,17 @@ Exit code `2` also covers usage errors (an unknown flag, a missing value or no t
 **Optional motion report.** `node scripts/gate.mjs --report dist/index.html` (or `--report out.html` after a target) also writes a self-contained HTML file with scroll-frame strips: 8 frames at 1440px, 8 at 375px and 8 at 1440px under reduced motion. Use it to review motion by eye, show a client, or give judges something better than one screenshot. It's off by default, doesn't change the text output, and adds nothing to the gate's numbers.
 
 
+#### Reference mode (`--reference`)
+
+**Reference mode. For templates that are design examples, not live sites. Skips site-level checks. Keeps every page-level check.**
+
+`node scripts/gate.mjs --reference examples/templates/<name>.html` (or `<name>/index.html`):
+
+- **Served from its own folder.** Each page is served from the folder it lives in, so that folder's `_headers` apply (Content-Security-Policy, `X-Content-Type-Options` and the rest). A request the folder cannot answer, such as a film's `../fonts/`, is answered from the folder it resolves to, so the page renders as designed. The headers still come from the page's own folder.
+- **Axis J is skipped and reported as skipped.** A reference is one page, not a site. Nothing requires cross-page navigation or a 404 page, and its forms are demos with no backend.
+- **Every page-level axis runs unchanged:** contrast, overflow, words, motion, names, focus, targets, zoom, reflow, the critique scores, and the rule sets (C content, S SEO, P performance, K security). Any one of them still fails the page.
+- **Live sites are gated as before.** Without the flag, the gate serves the site root and runs axis J. `--reference` cannot be combined with `--journey`.
+
 #### Axis J: the whole site as a journey (`scripts/journey.mjs`)
 
 The axes above check the page the gate was given. Axis J starts from that page and walks the site, the way a visitor does. It runs on every gate run (`--journey` runs only J, in about a minute, with no stamp). Every check is measured in Chromium; nothing is read from source text where the browser can show it.
