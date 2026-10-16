@@ -29,3 +29,9 @@ test("S: entries logged without --dir fall back to archetype + signature + tier"
   const m = await memoryAxis(f, a, [], { dir: "/nowhere", designFile: join(A, "DESIGN.md") });
   assert.equal(m.reused.archetype, false); assert.match(m.trace, /self-excluded/);
 });
+test("designPalette: the five diversity builds give five palette families", async () => {
+  const { designPalette } = await import("../../skills/asfakulsiam-motomation-design/scripts/lib.mjs");
+  const { readFileSync } = await import("node:fs");
+  const fam = ["01-funeral-home", "02-childrens-dentistry", "03-hardcore-metal-band", "04-luxury-perfume", "05-municipal-water-authority"].map((d) => designPalette(readFileSync(`evals/results/diversity/${d}/DESIGN.md`, "utf8")).family);
+  assert.deepEqual(fam, ["light-orange", "light-red", "dark-red", "dark-orange", "light-blue"]);
+});

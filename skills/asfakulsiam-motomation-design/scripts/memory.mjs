@@ -5,6 +5,7 @@
 // (<dir>/.motomation/log.json) for tests and isolated runs. A project's own legacy .motomation/log.json is still read.
 // Usage:
 //   node scripts/memory.mjs log --brief "bakery in Dhaka, preorders" --category restaurant --archetype ledger --palette "Paper & Vermilion"
+//   node scripts/memory.mjs log --dir <build> …          # reads the palette from <build>/DESIGN.md (or --design file): named palette or hex list → palette family
 //        --fonts "Fraunces/Switzer" --motion "scrubbed reveals" --signature letter-relay --tier 2 --page home
 //   node scripts/memory.mjs recent [--n 5]
 //   node scripts/memory.mjs similar --brief "<brief>" [--category c]       → prior builds with a similar brief, and what to diverge from
@@ -82,7 +83,12 @@ function write(runs) { mkdirSync(DIR, { recursive: true }); writeFileSync(FILE, 
 const isMain = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
   const a = cli("memory", "Usage: node scripts/memory.mjs <log|recent|similar|check|fingerprint> [--brief \"…\"] [--category c] [--motion m] [--archetype x] [--signature y] [--fonts a/b] [--palette p] [--tier n] [--page p] [--sections a,b,c] [--type-scale 1.333] [--layout family] [--threshold 0.7] [--project <dir>]",
-    Object.fromEntries([...FIELDS, "sections", "type-scale", "layout", "threshold", "project", "n", "url"].concat(["brief", "palette-family", "ground", "accent"]).map((k) => [k, "value"]).concat([["json", "bool"]])), null, { pos: [0, 1] }); const cmd = a._[0];
+    Object.fromEntries([...FIELDS, "sections", "type-scale", "layout", "threshold", "project", "n", "url"].concat(["brief", "palette-family", "ground", "accent", "design"]).map((k) => [k, "value"]).concat([["json", "bool"]])), null, { pos: [0, 1] }); const cmd = a._[0];
+  // The palette a build declares in DESIGN.md (--design file, else <--dir>/DESIGN.md): named palette or hex list → family
+  const designFile = flagVal(a.design) ? resolve(String(a.design)) : flagVal(a.dir) && existsSync(join(resolve(String(a.dir)), "DESIGN.md")) ? join(resolve(String(a.dir)), "DESIGN.md") : null;
+  const dpal = designFile && existsSync(designFile) ? designPalette(readFileSync(designFile, "utf8")) : undefined;
+  const famOf = (r) => r.palette_family || paletteFamily(r) || undefined;
+  const myFamily = () => paletteFamily(a) || dpal?.family;
   if (cmd === "log") {
     const entry = { date: new Date().toISOString() };
     for (const f of FIELDS) if (a[f] !== undefined && a[f] !== true) entry[f] = String(a[f]);
@@ -90,7 +96,8 @@ if (isMain) {
     if (Object.keys(entry).length === 1) { console.error("Nothing to log. Pass at least --archetype or --signature."); process.exit(1); }
     entry.project = cliProject ? resolve(cliProject) : PROJECT;
     if (flagVal(a.brief)) entry.brief = String(a.brief).slice(0, 400);
-    const fam = paletteFamily(a); if (fam) entry.palette_family = fam;
+    const fam = myFamily(); if (fam) entry.palette_family = fam;
+    if (dpal) { if (!entry.palette) entry.palette = dpal.palette || dpal.id; if (dpal.hexes.length) entry.palette_hexes = dpal.hexes.join(" "); }
     entry.fingerprint = fpFrom(a);
     const runs = readLog(); runs.push(entry); write(runs);
     console.log(`Logged run #${runs.length} to ${FILE}`);
@@ -99,7 +106,7 @@ if (isMain) {
     const runs = recent(Number(a.n || 5));
     if (!runs.length) { console.log(`No runs logged yet (${FILE}).`); process.exit(0); }
     console.log(`Log: ${FILE}`);
-    runs.forEach((r, i) => console.log(`${i + 1}. ${r.date.slice(0, 10)}${r.project ? ` · project: ${basename(r.project)}` : ""} · ${FIELDS.filter((f) => r[f]).map((f) => `${f}: ${r[f]}`).join(" · ")}\n   fingerprint: ${fpText(fpFrom(r))}`));
+    runs.forEach((r, i) => console.log(`${i + 1}. ${r.date.slice(0, 10)}${r.project ? ` · project: ${basename(r.project)}` : ""} · ${FIELDS.filter((f) => r[f] && f !== "palette_family").map((f) => `${f}: ${r[f]}`).join(" · ")} · palette family: ${famOf(r) || "?"}\n   fingerprint: ${fpText(fpFrom(r))}`));
   } else if (cmd === "similar") {
     const all = readLog();
     if (!all.length) { console.log(`No log yet (${FILE}): first build, no divergence required.`); process.exit(0); }
@@ -116,14 +123,18 @@ if (isMain) {
     const runs = recent(Number(a.n || 5)); let clash = 0;
     console.log("IDs");
     for (const f of FIELDS) {
-      if (f === "category" || !a[f] || a[f] === true) continue; // the category is context, not a choice to avoid
+      if (f === "category" || f === "dir" || !a[f] || a[f] === true) continue; // the category and the build folder are context, not choices to avoid
       const hit = runs.filter((r) => r[f] && r[f].toLowerCase() === String(a[f]).toLowerCase());
       if (hit.length) { clash++; console.log(`✗ ${f} "${a[f]}" was used in ${hit.length} of the last ${runs.length} runs → choose another`); }
       else console.log(`✓ ${f} "${a[f]}" is fresh`);
     }
+    // Palette family (from --palette/--ground/--accent or the build's DESIGN.md): a repeat is a warning, not a failure
+    const fam = myFamily();
+    if (fam) { const hit = runs.filter((r) => famOf(r) === fam); console.log(hit.length ? `⚠ palette family "${fam}" was used in ${hit.length} of the last ${runs.length} runs (${hit.map((r) => r.palette || "?").join(", ")}) → warning: change the palette or state the reason in DESIGN.md` : `✓ palette family "${fam}" is fresh`); }
+    else console.log("· palette family: unknown (pass --design DESIGN.md, --dir <build>, --palette or --ground/--accent)");
     // Forced divergence: a prior build with a similar brief must differ on all five dimensions
     if (flagVal(a.brief) || flagVal(a.category)) {
-      const hits = similarRuns({ brief: a.brief, category: a.category }); const mineD = { archetype: flagVal(a.archetype), palette_family: paletteFamily(a), fonts: flagVal(a.fonts), motion: flagVal(a.motion), signature: flagVal(a.signature) };
+      const hits = similarRuns({ brief: a.brief, category: a.category }); const mineD = { archetype: flagVal(a.archetype), palette_family: myFamily(), fonts: flagVal(a.fonts), motion: flagVal(a.motion), signature: flagVal(a.signature) };
       console.log("Divergence (similar briefs, all projects)");
       if (!readLog().length) console.log("  · no log yet: first build, no divergence required");
       else if (!hits.length) console.log("  ✓ no prior build with a similar brief");
