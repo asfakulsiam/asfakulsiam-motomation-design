@@ -1,6 +1,6 @@
 # Inspiration and Resource Libraries
 
-Use these to **study**, not to copy. Run `/study <url>` to extract principles.
+Use these to **study**, not to copy. Run `/study <url>` to extract principles. The wider, status-checked source lists for Step 0.5 are in `references/sources/` (protocol: `craft/research.md`).
 
 | Need | Go to |
 |---|---|

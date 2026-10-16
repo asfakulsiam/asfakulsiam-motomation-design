@@ -35,19 +35,18 @@ Plain HTML is a real choice, not the default. Use it only with a reason written 
 
 ---
 
-## 0.5 Current design research
+## 0.5 Research (mandatory)
 
-Before designing anything, look at what is being built right now. This is not optional. How to do it: `craft/research.md`.
+Before designing anything, leave the skill. Its own components, data, archetypes and collision engine are one source; used alone, every build looks like the skill made it. This step is not optional. Protocol: `craft/research.md`.
 
-- Search for award-winning sites in the brief's category: Awwwards, FWA, CSSDA, Godly, Land-book, SiteInspire.
-- Look at what is trending on X, Dribbble, Behance, and recent design publications, in the last 6 months.
-- Name three sites or references you looked at, in one line each. Say what you took from each (a principle, not a copy).
-- Name what you are deliberately avoiding: the overused pattern that every site in this category uses.
-- The research shapes the concept. Write it in `DESIGN.md` under `References` (from `templates/DESIGN.md`).
+- Search the live sources for the brief's category, last 6 months: Awwwards, FWA, CSSDA, Godly, Land-book, SiteInspire, Dribbble, Behance, Codrops, X and recent design publications (`references/sources/inspiration.md`).
+- Read wide in `references/sources/` (at least two of `skills.md`, `components.md`, `motion.md`, `3d.md`, `foundation.md`, `future.md`) for method and technique. Concepts only: copy no code from any repository.
+- Write in `DESIGN.md` under `References`: **References looked at** (three: name — what it is — what you took from it), **Techniques considered** (three, sources named), **Pattern being avoided** (the overused pattern in this category, and why).
+- Fill the **Decision trace** in `DESIGN.md` as you go: every design decision traces to the brief or a named reference. "The skill's defaults" alone is never a source.
 
-If you cannot access the web, say so and work from your training data, and state that in `DESIGN.md` (`Access: no web access: working from training data`).
+If you cannot access the web, say so explicitly, work from training data, and state the limitation in `DESIGN.md` (`Access: no web access: working from training data`).
 
-**Test:** does `DESIGN.md` have a `References` section with three named references, what was taken from each, and an `Avoiding` line? If not, Step 1 doesn't start.
+**Test:** three references, three techniques with sources, the avoided pattern with why, the access line, and no decision traced only to the skill's defaults. If not, Step 1 doesn't start.
 
 ---
 

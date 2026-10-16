@@ -9,12 +9,30 @@
 - **Adapter:** `adapters/<x>.md`
 
 ## References
-<!-- Step 0.5 of the Thinking Sequence (craft/research.md). Written before Step 1. -->
-- **Access:** <web (searched YYYY-MM-DD) | no web access: working from training data>
-- **1. <site or reference> (<source>, <month year>, <URL>):** took <principle, one line>
-- **2. <site or reference> (<source>, <month year>, <URL>):** took <principle, one line>
-- **3. <site or reference> (<source>, <month year>, <URL>):** took <principle, one line>
-- **Avoiding:** <the overused pattern in this category, one line>
+<!-- Step 0.5, mandatory (craft/research.md). Written before Step 1. Sources: references/sources/ + live award sites. Concepts only, no copied code. -->
+**Access:** <web (searched YYYY-MM-DD) | no web access: working from training data (limitation: <what that means here>)>
+
+**References looked at:**
+1. <name> — <what it is> — <what I took from it, as a principle>
+2. <name> — <what it is> — <what I took from it>
+3. <name> — <what it is> — <what I took from it>
+
+**Techniques considered:**
+- <technique> (<source>): <used | not used, why>
+- <technique> (<source>): <used | not used, why>
+- <technique> (<source>): <used | not used, why>
+
+**Pattern being avoided:** <the overused pattern in this category> — <why it fails this brief>
+
+## Decision trace
+<!-- Every design decision traces to the brief or a reference above. "Skill default" is not a source. -->
+| Decision | Traces to |
+|---|---|
+| Archetype | <brief: "…" / reference n / technique> |
+| Palette | |
+| Type pairing | |
+| Motion language | |
+| Signature move | |
 
 ## Concept
 - **Tension:** 

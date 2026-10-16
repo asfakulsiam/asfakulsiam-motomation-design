@@ -37,7 +37,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 |---|---|
 | **Any build or redesign (always, first, before Step 1)** | `gates/rules.md`: the rules the gate measures. Design input, read before designing; state `Rules : gates/rules.md read; designing within it.` before the Thinking Sequence |
 | Any new page or site | `thinking/brief-inference.md` → `thinking/sequence.md` (Step 0 Stack first) → `principles/house-style.md` |
-| **Any build or redesign (always, after Step 0 Stack, before Step 1)** | `craft/research.md`: Step 0.5 current design research. Three current references and the overused pattern to avoid, written in `DESIGN.md` under `References`. Not optional; without web access, say so and record it |
+| **Any build or redesign (always, after Step 0 Stack, before Step 1)** | `craft/research.md`: Step 0.5 research, mandatory. Live award sources + `references/sources/` (skills, components, motion, 3d, foundation, future); concepts only, no copied code. `DESIGN.md` gets References looked at (3), Techniques considered (3), Pattern being avoided, and a Decision trace: nothing comes from the skill's defaults alone |
 | Need new ideas / "make it different" | `invention/mad-artist.md` + run `scripts/collide.mjs` |
 | Choosing a page structure | `structures/archetypes.md` |
 | Setting intensity | `principles/dials.md` |
@@ -71,8 +71,8 @@ design inside `gates/rules.md`, then verify with `gates/delivery-gate.md`; never
 R. Read the rules     gates/rules.md                → state "Rules : gates/rules.md read; designing within it."
 0. Read the room      thinking/brief-inference.md   → audience, job, feel, constraints, gaps
 1. Thinking Sequence  thinking/sequence.md          → STACK (named, or ask; load the adapter),
-                                                      RESEARCH (Step 0.5, craft/research.md: 3 current
-                                                      references + the pattern to avoid → DESIGN.md References),
+                                                      RESEARCH (Step 0.5, craft/research.md + references/sources/:
+                                                      3 references, 3 techniques, avoided pattern, decision trace),
                                                       tension, concept, archetype+mutation,
                                                       collision, signature move, anti-sameness,
                                                       restraint gate
@@ -106,7 +106,7 @@ Say in one line which of the three you did for each non-trivial piece. Whatever 
 MOTOMATION PLAN
 Rules       : gates/rules.md read; designing within it
 Stack       : <stack> (<named in brief | from the project | user's answer | "you choose" + why>) → adapters/<x>.md
-References  : <3 current references, one line each> · avoiding: <overused pattern>
+References  : <3 references looked at> · techniques: <3, sourced> · avoiding: <overused pattern>
 Tension     : <the conflict in the brief, one line>
 Concept     : <the idea, one sentence a client would repeat>
 Archetype   : <structure> mutated by <mutation>
@@ -147,7 +147,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it.
 
 0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, ask the user; never assume. On "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
-0.5. **Current design research**: before designing, look at what is being built now (Awwwards, FWA, CSSDA, Godly, Land-book, SiteInspire; X, Dribbble, Behance, recent publications; last 6 months). Name three references and what you took from each, and the overused pattern you avoid. Write it in `DESIGN.md` under `References`. No web: say so and record it. See `craft/research.md`.
+0.5. **Research (mandatory)**: leave the skill before designing. Live award sources (last 6 months) and `references/sources/`, concepts only. Record three references, three techniques with sources, and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference, never to the skill's defaults alone. No web: say so and state the limitation. See `craft/research.md`.
 1. **Tension**: find the conflict inside the brief (calm vs. urgent, heritage vs. new, luxury vs. honest).
 2. **Concept**: resolve the tension in one sentence. This is the idea, not a layout.
 3. **Archetype + Mutation**: derive the page structure from the brief, with `structures/archetypes.md` and `data/archetypes.csv` as reference and constraint (not a menu), then break one of its rules.

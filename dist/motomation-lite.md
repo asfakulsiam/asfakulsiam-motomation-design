@@ -55,7 +55,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it.
 
 0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, ask the user; never assume. On "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
-0.5. **Current design research**: before designing, look at what is being built now (Awwwards, FWA, CSSDA, Godly, Land-book, SiteInspire; X, Dribbble, Behance, recent publications; last 6 months). Name three references and what you took from each, and the overused pattern you avoid. Write it in `DESIGN.md` under `References`. No web: say so and record it. See `craft/research.md`.
+0.5. **Research (mandatory)**: leave the skill before designing. Live award sources (last 6 months) and `references/sources/`, concepts only. Record three references, three techniques with sources, and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference, never to the skill's defaults alone. No web: say so and state the limitation. See `craft/research.md`.
 
 ---
 

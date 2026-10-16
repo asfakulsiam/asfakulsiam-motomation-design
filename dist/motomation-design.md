@@ -39,7 +39,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 |---|---|
 | **Any build or redesign (always, first, before Step 1)** | `gates/rules.md`: the rules the gate measures. Design input, read before designing; state `Rules : gates/rules.md read; designing within it.` before the Thinking Sequence |
 | Any new page or site | `thinking/brief-inference.md` → `thinking/sequence.md` (Step 0 Stack first) → `principles/house-style.md` |
-| **Any build or redesign (always, after Step 0 Stack, before Step 1)** | `craft/research.md`: Step 0.5 current design research. Three current references and the overused pattern to avoid, written in `DESIGN.md` under `References`. Not optional; without web access, say so and record it |
+| **Any build or redesign (always, after Step 0 Stack, before Step 1)** | `craft/research.md`: Step 0.5 research, mandatory. Live award sources + `references/sources/` (skills, components, motion, 3d, foundation, future); concepts only, no copied code. `DESIGN.md` gets References looked at (3), Techniques considered (3), Pattern being avoided, and a Decision trace: nothing comes from the skill's defaults alone |
 | Need new ideas / "make it different" | `invention/mad-artist.md` + run `scripts/collide.mjs` |
 | Choosing a page structure | `structures/archetypes.md` |
 | Setting intensity | `principles/dials.md` |
@@ -73,8 +73,8 @@ design inside `gates/rules.md`, then verify with `gates/delivery-gate.md`; never
 R. Read the rules     gates/rules.md                → state "Rules : gates/rules.md read; designing within it."
 0. Read the room      thinking/brief-inference.md   → audience, job, feel, constraints, gaps
 1. Thinking Sequence  thinking/sequence.md          → STACK (named, or ask; load the adapter),
-                                                      RESEARCH (Step 0.5, craft/research.md: 3 current
-                                                      references + the pattern to avoid → DESIGN.md References),
+                                                      RESEARCH (Step 0.5, craft/research.md + references/sources/:
+                                                      3 references, 3 techniques, avoided pattern, decision trace),
                                                       tension, concept, archetype+mutation,
                                                       collision, signature move, anti-sameness,
                                                       restraint gate
@@ -108,7 +108,7 @@ Say in one line which of the three you did for each non-trivial piece. Whatever 
 MOTOMATION PLAN
 Rules       : gates/rules.md read; designing within it
 Stack       : <stack> (<named in brief | from the project | user's answer | "you choose" + why>) → adapters/<x>.md
-References  : <3 current references, one line each> · avoiding: <overused pattern>
+References  : <3 references looked at> · techniques: <3, sourced> · avoiding: <overused pattern>
 Tension     : <the conflict in the brief, one line>
 Concept     : <the idea, one sentence a client would repeat>
 Archetype   : <structure> mutated by <mutation>
@@ -149,7 +149,7 @@ Switch to the full route, and say so, when the fix turns out to need a new struc
 Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it.
 
 0. **Stack**: if the brief (or the existing project) names a stack, use it. If not, ask the user; never assume. On "you choose", pick from Next.js / Astro / React + Vite / plain HTML and say why. Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
-0.5. **Current design research**: before designing, look at what is being built now (Awwwards, FWA, CSSDA, Godly, Land-book, SiteInspire; X, Dribbble, Behance, recent publications; last 6 months). Name three references and what you took from each, and the overused pattern you avoid. Write it in `DESIGN.md` under `References`. No web: say so and record it. See `craft/research.md`.
+0.5. **Research (mandatory)**: leave the skill before designing. Live award sources (last 6 months) and `references/sources/`, concepts only. Record three references, three techniques with sources, and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference, never to the skill's defaults alone. No web: say so and state the limitation. See `craft/research.md`.
 1. **Tension**: find the conflict inside the brief (calm vs. urgent, heritage vs. new, luxury vs. honest).
 2. **Concept**: resolve the tension in one sentence. This is the idea, not a layout.
 3. **Archetype + Mutation**: derive the page structure from the brief, with `structures/archetypes.md` and `data/archetypes.csv` as reference and constraint (not a menu), then break one of its rules.
@@ -334,19 +334,18 @@ Plain HTML is a real choice, not the default. Use it only with a reason written 
 
 ---
 
-### 0.5 Current design research
+### 0.5 Research (mandatory)
 
-Before designing anything, look at what is being built right now. This is not optional. How to do it: `craft/research.md`.
+Before designing anything, leave the skill. Its own components, data, archetypes and collision engine are one source; used alone, every build looks like the skill made it. This step is not optional. Protocol: `craft/research.md`.
 
-- Search for award-winning sites in the brief's category: Awwwards, FWA, CSSDA, Godly, Land-book, SiteInspire.
-- Look at what is trending on X, Dribbble, Behance, and recent design publications, in the last 6 months.
-- Name three sites or references you looked at, in one line each. Say what you took from each (a principle, not a copy).
-- Name what you are deliberately avoiding: the overused pattern that every site in this category uses.
-- The research shapes the concept. Write it in `DESIGN.md` under `References` (from `templates/DESIGN.md`).
+- Search the live sources for the brief's category, last 6 months: Awwwards, FWA, CSSDA, Godly, Land-book, SiteInspire, Dribbble, Behance, Codrops, X and recent design publications (`references/sources/inspiration.md`).
+- Read wide in `references/sources/` (at least two of `skills.md`, `components.md`, `motion.md`, `3d.md`, `foundation.md`, `future.md`) for method and technique. Concepts only: copy no code from any repository.
+- Write in `DESIGN.md` under `References`: **References looked at** (three: name — what it is — what you took from it), **Techniques considered** (three, sources named), **Pattern being avoided** (the overused pattern in this category, and why).
+- Fill the **Decision trace** in `DESIGN.md` as you go: every design decision traces to the brief or a named reference. "The skill's defaults" alone is never a source.
 
-If you cannot access the web, say so and work from your training data, and state that in `DESIGN.md` (`Access: no web access: working from training data`).
+If you cannot access the web, say so explicitly, work from training data, and state the limitation in `DESIGN.md` (`Access: no web access: working from training data`).
 
-**Test:** does `DESIGN.md` have a `References` section with three named references, what was taken from each, and an `Avoiding` line? If not, Step 1 doesn't start.
+**Test:** three references, three techniques with sources, the avoided pattern with why, the access line, and no decision traced only to the skill's defaults. If not, Step 1 doesn't start.
 
 ---
 
@@ -2989,78 +2988,93 @@ Each failing gate P item adds one to the P count in the stamp (`rules: C0 S0 P0 
 
 <!-- file: craft/research.md -->
 
-## Current design research (Step 0.5)
+## Research protocol (Step 0.5, mandatory)
 
-The data files and the collision engine hold what the skill knew when it was written. What designers are building this month is not in any CSV. Before Step 1, go and look. This step is required for every build or redesign.
+The skill's own components, data sets, archetypes and collision engine are one source. Used alone they make every build look like the skill made it. Step 0.5 sends the agent outside the skill before anything is designed. It is required for every build or redesign, and nothing in Step 1 onward may come from "the skill's defaults" alone: **every design decision traces to the brief or to a named reference.**
+
+### The rule
+
+- Look **outside the skill** first: the live award sources, then the repositories in `references/sources/`. The skill's `examples/`, `data/` and `signatures/` come after, as one more reference.
+- Look **wide**: at least two of the six source files below, plus the live sources for the brief's category.
+- Take **principles, never code**. Nothing is copied from any repository: no components, shaders, markup, styles or assets. Concepts only. Nothing at all from CreativeAgencyStyle (reported as malware).
+- **Record it** in `DESIGN.md` before Step 1, in the format below.
 
 ### Where to look
 
-| Source | What it shows | How to search |
+| File | Holds | Look here when |
 |---|---|---|
-| [Awwwards](https://www.awwwards.com/websites/) | Site of the Day / Month, filterable by category | `awwwards <category> site of the day <year>` |
-| [The FWA](https://thefwa.com/) | interaction and motion-led work | `FWA of the day <category>` |
-| [CSS Design Awards](https://www.cssdesignawards.com/) | WOTD, judged on UI, UX and innovation | `cssda website of the day <category>` |
-| [Godly](https://godly.website/) | curated current web design, tagged by type | browse by tag nearest the brief |
-| [Land-book](https://land-book.com/) | landing pages and product sites | filter by category |
-| [SiteInspire](https://www.siteinspire.com/) | editorial, institutional, cultural sites | filter by subject and style |
-| X, Dribbble, Behance | what designers are posting now | search the category + "website", "landing", "motion" |
-| Recent design publications | trend pieces, case studies, studio write-ups | `<category> web design <current year>` |
+| `references/sources/inspiration.md` | award sites and live sources (Awwwards, FWA, CSSDA, Godly, Land-book, SiteInspire, Dribbble, Behance, Codrops, showcases, platform design systems), curated lists, interaction experiments | always: start here for the brief's category |
+| `references/sources/skills.md` | other agent skills and design methods (taste, anti-slop, motion principles, spec-first) | always: to question this skill's own process |
+| `references/sources/components.md` | component libraries and design systems | the brief needs UI anatomy, states or accessibility behaviour |
+| `references/sources/motion.md` | animation engines and motion references | Tier 2 and up, or any signature move that moves |
+| `references/sources/3d.md` | 3D, shaders, WebGL, WebGPU | Tier 4–5, or a concept that needs depth or light |
+| `references/sources/foundation.md` | frameworks, tokens, colour, fonts, measurement, testing | every build that ships code |
+| `references/sources/future.md` | AI in the browser | the brief has an AI, camera or on-device feature |
 
-Window: the last 6 months. Older references are allowed only when the brief is about heritage, and they are labelled as older.
-
-Search the brief's category, not "best websites". A bakery brief searches bakeries, food, hospitality; a SaaS brief searches the product's domain, not "SaaS landing page" alone (that returns the pattern you are about to avoid).
+Live search, last 6 months, by the brief's category (a bakery searches bakeries, food and hospitality; a SaaS brief searches the product's domain, not "SaaS landing page"). Older references only for heritage briefs, labelled as older. Search queries that work: `awwwards <category> site of the day <year>`, `<category> website <year> godly`, `codrops <technique>`.
 
 ### What to look for
 
-Look at each reference for one transferable decision, not its look:
+For each reference, one transferable decision, not its look:
 
-- **Structure**: how the page is ordered, where the first proof lands, what the scroll is for.
-- **Type**: the role type plays (headline as image, type as navigation, type as data).
-- **Motion**: what moves, what triggers it, what it explains. Note the timing feel, not the library.
+- **Structure**: order of the page, where proof lands, what the scroll is for.
+- **Type**: the role type plays (image, navigation, data).
+- **Motion**: what moves, what triggers it, what it explains.
 - **Interaction**: the one thing a visitor would describe to someone else.
-- **Restraint**: what the site chose not to do.
-- **Content**: how real product, people or numbers are shown.
+- **States**: how it handles empty, loading, error and success.
+- **Restraint**: what it chose not to do.
 
 Also note what repeats across the category. The pattern on five of the first ten results is the overused one.
 
 ### Reference into principle, not a copy
 
-A reference is translated before it is used. Never copy a layout, a palette, a typeface pairing, copy, or an effect as built.
+1. **Name the decision.** "The menu is the hero: dishes listed as a timetable", not "big serif on beige".
+2. **Say why it works there.** What problem in that brief does it solve?
+3. **State it as a principle.** "Lead with the inventory, not the atmosphere." A principle has no colour, font, brand or code in it.
+4. **Test it against this brief.** Same problem here? If not, drop it.
+5. **Hand it to the sequence.** It feeds Step 1 (Tension), 2 (Concept), 4 (Collision) or 5 (Signature). Input, not the concept.
 
-1. **Name the decision.** "The menu is the hero: dishes listed as a timetable" — not "big serif and a beige background".
-2. **Say why it works there.** What problem in that brief does the decision solve?
-3. **State it as a principle.** "Lead with the inventory, not the atmosphere." A principle has no colour, font or brand in it.
-4. **Test it against this brief.** Does this brief have the same problem? If not, drop the reference.
-5. **Hand it to the sequence.** The principle feeds Step 1 (Tension), Step 2 (Concept) or Step 4 (Collision). It is input, not the concept.
+If the build would still be recognisable as the reference with the logo swapped, it is a copy. Go back to 3.
 
-If the build would still be recognisable as the reference with the logo swapped, it is a copy. Go back to step 3.
+### Techniques
 
-### The overused pattern
-
-Name the one pattern every site in the category uses (the centred hero with a gradient blob, the three-icon feature row, the full-bleed food photo with a script logo, the dashboard screenshot tilted in 3D). Say it in one line. It joins the Anti-Sameness Check in Step 6: if the build uses it, mutate.
+Name three specific techniques considered for this brief, each with its source: a repository from `references/sources/`, a Codrops article, a showcase entry, or a live site. "Scroll-scrubbed text split by line (GSAP SplitText, `motion.md`)", not "nice animations". Say which one is used and why the others were not. A technique is a method; the code is written for this build.
 
 ### How to record it
 
-Write it in `DESIGN.md` under `## References` (from `templates/DESIGN.md`) while doing the research, before Step 1:
+In `DESIGN.md` (from `templates/DESIGN.md`), before Step 1:
 
 ```markdown
 ### References
-- **Access:** web (searched <date>) | no web access: working from training data
-- **1. <Site or reference> (<source>, <month year>, <URL>):** took <the principle, one line>
-- **2. <Site or reference> (<source>, <month year>, <URL>):** took <the principle, one line>
-- **3. <Site or reference> (<source>, <month year>, <URL>):** took <the principle, one line>
-- **Avoiding:** <the overused pattern in this category, one line>
+**Access:** web (searched YYYY-MM-DD) | no web access: working from training data (limitation: references may be out of date; nothing was checked live)
+
+**References looked at:**
+1. <name> — <what it is> — <what I took from it, as a principle>
+2. <name> — <what it is> — <what I took from it>
+3. <name> — <what it is> — <what I took from it>
+
+**Techniques considered:**
+- <technique> (<source>): <used | not used, why>
+- <technique> (<source>): <used | not used, why>
+- <technique> (<source>): <used | not used, why>
+
+**Pattern being avoided:** <the overused pattern in this category> — <why it fails this brief>
+
+### Decision trace
+| Decision | Traces to |
+|---|---|
+| <archetype, palette, type, motion language, signature, layout> | <brief: "quote" | reference 1–3 | technique> |
 ```
 
-Three references, one line each, each with what was taken from it. The `Avoiding` line is required.
+At least three references, at least one from outside the brief's category, at least one from the live sources. Every row of the decision trace names the brief or a reference; "skill default" is not an allowed answer.
 
 ### No web access
 
-If the tool cannot reach the web, say so in one line before Step 1 and set `Access: no web access: working from training data` in `DESIGN.md`. Still name three references (from what you know) and the overused pattern, and mark each reference with the year you last knew it. Don't present remembered sites as current, and don't invent URLs.
+If the tool cannot reach the web, say so in one line before Step 1, set `Access: no web access: working from training data` and state the limitation. Still name three references, three techniques and the pattern being avoided, from what you know, each with the year you last knew it. Don't present remembered sites as current, and don't invent URLs.
 
 ### Test
 
-Can you name three references, what you took from each as a principle, and the pattern you are avoiding? Is it in `DESIGN.md` under `References`? If not, Step 1 doesn't start.
+Before Step 1: does `DESIGN.md` have `References looked at` (3), `Techniques considered` (3, sources named), `Pattern being avoided` (with why), the access line, and a decision trace where nothing traces to "the skill's defaults"? If not, Step 1 doesn't start.
 
 
 ---
@@ -4470,7 +4484,7 @@ Lenis respects `prefers-reduced-motion` by default and keeps native touch scroll
 
 ## Inspiration and Resource Libraries
 
-Use these to **study**, not to copy. Run `/study <url>` to extract principles.
+Use these to **study**, not to copy. Run `/study <url>` to extract principles. The wider, status-checked source lists for Step 0.5 are in `references/sources/` (protocol: `craft/research.md`).
 
 | Need | Go to |
 |---|---|
@@ -4489,6 +4503,257 @@ Use these to **study**, not to copy. Run `/study <url>` to extract principles.
 1. Collect three references from **outside** the category (a hotel brief studies a bookshop, a film title and a museum).
 2. Extract principles: what is the structure, the type logic, the motion language?
 3. Never copy a layout, illustration or code wholesale. Check the license before using any asset or code.
+
+
+---
+
+<!-- file: references/sources/3d.md -->
+
+## Sources: 3D, shaders, WebGL, WebGPU
+
+> Concepts only. Read these for **method and principle**; never copy code, markup, shaders or assets into a build
+> (`craft/research.md`). Status checked 2026-10-16 with the GitHub API (stars · last push · licence). Re-check before
+> relying on one: a source that is archived, unlicensed or untouched for a year is a reference, never a dependency
+> (dependencies are chosen in Step 0, `thinking/sequence.md`). Never use anything from CreativeAgencyStyle (reported as malware).
+
+Read for **technique**: render loops, shader patterns, DOM-to-WebGL sync, post-processing. Tier 4–5 only, one canvas per page (`gates/rules.md`).
+
+| Source | What it is | What to take (a principle, not code) | Status |
+|---|---|---|---|
+| [`mrdoob/three.js`](https://github.com/mrdoob/three.js) | three.js | scene graph, materials, the examples as a technique index | ★116,473 · pushed 2026-10-16 · MIT |
+| [`pmndrs/react-three-fiber`](https://github.com/pmndrs/react-three-fiber) | React renderer for three.js | declarative scenes that follow app state | ★33,002 · pushed 2026-10-15 · MIT |
+| [`pmndrs/drei`](https://github.com/pmndrs/drei) | helpers for react-three-fiber | solved patterns (cameras, loaders, text) before custom code | ★9,966 · pushed 2026-10-05 · MIT |
+| [`pmndrs/postprocessing`](https://github.com/pmndrs/postprocessing) | post-processing for three.js | effect passes merged for performance | ★2,883 · pushed 2026-10-05 · Zlib |
+| [`pmndrs/maath`](https://github.com/pmndrs/maath) | math helpers (easing, random, buffers) | damped easing for frame-rate-independent motion | ★? · pushed 2024-07-07 · ? · API not reached; last commit 2024-07-07 per the repo page |
+| [`FarazzShaikh/THREE-CustomShaderMaterial`](https://github.com/FarazzShaikh/THREE-CustomShaderMaterial) | extend three.js standard materials with shaders | keep lighting, change only what the concept needs | ★1,345 · pushed 2025-10-12 · MIT |
+| [`14islands/r3f-scroll-rig`](https://github.com/14islands/r3f-scroll-rig) | sync 3D meshes with DOM elements on scroll | DOM stays the source of truth for layout and accessibility | ★983 · pushed 2025-12-17 · MIT |
+| [`oframe/ogl`](https://github.com/oframe/ogl) | minimal WebGL library | the smallest renderer that does the job | ★4,673 · pushed 2025-04-13 · no licence file · no licence file |
+| [`martinlaxenaire/curtainsjs`](https://github.com/martinlaxenaire/curtainsjs) | DOM elements to WebGL planes | images become textured planes that track their DOM box | ★1,827 · pushed 2025-04-03 · MIT |
+| [`martinlaxenaire/gpu-curtains`](https://github.com/martinlaxenaire/gpu-curtains) | the same idea on WebGPU | WebGPU path with a WebGL fallback | ★188 · pushed 2026-10-14 · MIT |
+| [`patriciogonzalezvivo/lygia`](https://github.com/patriciogonzalezvivo/lygia) | granular multi-language shader library | shader functions as a vocabulary (noise, SDFs, colour) | ★3,463 · pushed 2026-09-14 · custom (read it) |
+| [`playcanvas/engine`](https://github.com/playcanvas/engine) | web graphics runtime (WebGL, WebGPU, WebXR) | engine-level scene management for heavy 3D | ★17,056 · pushed 2026-10-16 · MIT |
+| [`BabylonJS/Babylon.js`](https://github.com/BabylonJS/Babylon.js) | game and rendering engine | full engine when the brief is an experience, not a page | ★26,167 · pushed 2026-10-15 · Apache-2.0 |
+| [`pixijs/pixijs`](https://github.com/pixijs/pixijs) | fast 2D WebGL renderer | 2D effects at scale (particles, sprites) without 3D cost | ★48,393 · pushed 2026-10-14 · MIT |
+| [`mkkellogg/GaussianSplats3D`](https://github.com/mkkellogg/GaussianSplats3D) | Gaussian splatting on three.js | photoreal captured scenes in the browser | ★2,912 · pushed 2025-10-19 · MIT |
+| [`vasturiano/globe.gl`](https://github.com/vasturiano/globe.gl) | globe data visualisation | data on a globe: geography as story | ★3,196 · pushed 2026-08-22 · MIT |
+| [`tsparticles/tsparticles`](https://github.com/tsparticles/tsparticles) | particles and confetti | particles as feedback, not background noise | ★8,992 · pushed 2026-10-15 · MIT |
+| [`CloudAI-X/threejs-skills`](https://github.com/CloudAI-X/threejs-skills) | three.js skills for agents | how agents are taught three.js (no licence file: concept only) | ★3,581 · pushed 2026-07-09 · no licence file |
+| [`ruucm/shadergradient`](https://github.com/ruucm/shadergradient) | moving shader gradients | the overused 2024–25 gradient look: study it to avoid it | ★2,871 · pushed 2026-09-23 · no licence file · no licence file |
+| [`dashersw/liquid-glass-js`](https://github.com/dashersw/liquid-glass-js) | Apple-style liquid glass effects | refraction as material, only with a concept reason | ★1,452 · pushed 2025-06-12 · MIT |
+| [`polygonjs/polygonjs`](https://github.com/polygonjs/polygonjs) | node-based WebGL design tool | procedural scenes built as graphs | ★818 · pushed 2026-08-08 · MIT |
+| [`gpuweb/gpuweb`](https://github.com/gpuweb/gpuweb) | the WebGPU specification work | what WebGPU guarantees and where support stands | ★5,506 · pushed 2026-10-08 · custom (read it) |
+| [`webgpu/webgpufundamentals`](https://github.com/webgpu/webgpufundamentals) | WebGPU lessons | WebGPU from first principles | ★1,050 · pushed 2026-08-22 · BSD-3-Clause |
+| [`gfxfundamentals/webgl-fundamentals`](https://github.com/gfxfundamentals/webgl-fundamentals) | WebGL lessons | WebGL from first principles | ★5,020 · pushed 2025-02-26 · custom (read it) |
+
+
+---
+
+<!-- file: references/sources/components.md -->
+
+## Sources: Component libraries and design systems
+
+> Concepts only. Read these for **method and principle**; never copy code, markup, shaders or assets into a build
+> (`craft/research.md`). Status checked 2026-10-16 with the GitHub API (stars · last push · licence). Re-check before
+> relying on one: a source that is archived, unlicensed or untouched for a year is a reference, never a dependency
+> (dependencies are chosen in Step 0, `thinking/sequence.md`). Never use anything from CreativeAgencyStyle (reported as malware).
+
+Read for **anatomy, accessibility and API shape**: how a dialog traps focus, how a combobox announces, how a motion component exposes timing. The skill's own `examples/components/` is one reference among these, not the limit.
+
+| Source | What it is | What to take (a principle, not code) | Status |
+|---|---|---|---|
+| [`shadcn-ui/ui`](https://github.com/shadcn-ui/ui) | copy-in components on Radix/Base UI with Tailwind | own the code you ship; composition over configuration | ★125,724 · pushed 2026-10-15 · MIT |
+| [`magicuidesign/magicui`](https://github.com/magicuidesign/magicui) | animated components and effects | catalogue of current effect vocabulary: see what is common so you can avoid it | ★22,688 · pushed 2026-10-11 · MIT |
+| [`DavidHDev/react-bits`](https://github.com/DavidHDev/react-bits) | large library of animated, interactive React components | text and background effects as building blocks; check the licence before any reuse | ★49,337 · pushed 2026-10-15 · custom (read it) |
+| [`ibelick/motion-primitives`](https://github.com/ibelick/motion-primitives) | animated UI kit on Motion | small motion primitives composed into bigger behaviour | ★6,703 · pushed 2026-09-28 · MIT |
+| [`danielpetho/fancy-components`](https://github.com/danielpetho/fancy) | experimental typography and motion components | type as interaction: letters as objects | ★3,247 · pushed 2026-03-14 · MIT · now `danielpetho/fancy` · the listed name does not exist; the library is `danielpetho/fancy` |
+| [`animate-ui/animate-ui`](https://github.com/imskyleen/animate-ui) | animated component distribution (React, Tailwind, Motion) | motion baked into primitives (tabs, accordions) instead of added after | ★4,391 · pushed 2025-12-31 · custom (read it) · now `imskyleen/animate-ui` |
+| [`nolly-studio/cult-ui`](https://github.com/nolly-studio/cult-ui) | 150+ animated shadcn-style components | polish details: springs, layered shadows, tactile press states | ★6,540 · pushed 2026-10-14 · MIT |
+| [`origin-space/originui`](https://github.com/cosscom/ui) | Origin UI, now coss.com/ui (Cal.com's design system) | dense, production form and input patterns | ★10,700 · pushed 2026-10-15 · AGPL-3.0 · now `cosscom/ui` · AGPL-3.0: never copy, concepts only |
+| [`heroui-inc/heroui`](https://github.com/heroui-inc/heroui) | React UI library (formerly NextUI) | complete state coverage per component (hover, pressed, disabled, loading) | ★30,948 · pushed 2026-10-16 · Apache-2.0 |
+| [`radix-ui/primitives`](https://github.com/radix-ui/primitives) | unstyled accessible primitives | keyboard and ARIA behaviour as the baseline for any custom control | ★19,397 · pushed 2026-10-14 · MIT |
+| [`mui/base-ui`](https://github.com/mui/base-ui) | unstyled accessible components from the Radix/Floating UI/MUI teams | headless behaviour separated from styling | ★11,156 · pushed 2026-10-16 · MIT |
+| [`adobe/react-spectrum`](https://github.com/adobe/react-spectrum) | React Aria, React Stately, Spectrum | the most complete accessibility behaviour reference (i18n, touch, screen readers) | ★15,951 · pushed 2026-10-16 · Apache-2.0 |
+| [`chakra-ui/ark`](https://github.com/chakra-ui/ark) | unstyled components across React, Vue, Solid, Svelte | state machines per component: every state named | ★5,421 · pushed 2026-10-16 · MIT |
+| [`saadeghi/daisyui`](https://github.com/saadeghi/daisyui) | Tailwind component classes and themes | semantic theme tokens over raw utilities | ★42,608 · pushed 2026-10-13 · MIT |
+| [`pmndrs/uikit`](https://github.com/pmndrs/uikit) | UI for react-three-fiber | layout and type inside a 3D scene | ★3,248 · pushed 2026-10-15 · custom (read it) |
+| [`flohoeller/affectui`](https://github.com/flohoeller/affectui) | one-file components and motion for AI products | one file per component, calm motion, dark mode (same pattern as this library's headers) | ★37 · pushed 2026-10-15 · MIT |
+| [`21st-dev/skill`](https://github.com/21st-dev/skill) | 21st.dev skill: search, install, publish components | registry workflow for finding before building | ★19 · pushed 2026-09-09 · Apache-2.0 |
+| [`21st-dev/magic-mcp`](https://github.com/21st-dev/magic-mcp) | component search and generation over MCP | see skills.md | ★6,044 · pushed 2026-09-09 · ISC |
+
+
+---
+
+<!-- file: references/sources/foundation.md -->
+
+## Sources: Production-grade foundation
+
+> Concepts only. Read these for **method and principle**; never copy code, markup, shaders or assets into a build
+> (`craft/research.md`). Status checked 2026-10-16 with the GitHub API (stars · last push · licence). Re-check before
+> relying on one: a source that is archived, unlicensed or untouched for a year is a reference, never a dependency
+> (dependencies are chosen in Step 0, `thinking/sequence.md`). Never use anything from CreativeAgencyStyle (reported as malware).
+
+Read for **production defaults**: framework conventions, tokens, colour, fonts, measurement and testing. These are what a sellable template is built on.
+
+| Source | What it is | What to take (a principle, not code) | Status |
+|---|---|---|---|
+| [`vercel/next.js`](https://github.com/vercel/next.js) | Next.js | App Router conventions: layouts, loading and error files per route, middleware | ★143,027 · pushed 2026-10-16 · MIT |
+| [`withastro/astro`](https://github.com/withastro/astro) | Astro | content-first static output; islands only where needed | ★63,263 · pushed 2026-10-16 · custom (read it) |
+| [`sveltejs/kit`](https://github.com/sveltejs/kit) | SvelteKit | load functions and form actions: data and mutation per route | ★20,861 · pushed 2026-10-16 · MIT |
+| [`tailwindlabs/tailwindcss`](https://github.com/tailwindlabs/tailwindcss) | Tailwind CSS | design tokens as the only source of values | ★97,879 · pushed 2026-10-15 · MIT |
+| [`storybookjs/storybook`](https://github.com/storybookjs/storybook) | Storybook | every component state rendered and reviewable in isolation | ★91,314 · pushed 2026-10-15 · MIT |
+| [`amzn/style-dictionary`](https://github.com/style-dictionary/style-dictionary) | Style Dictionary | one token source compiled to every platform | ★4,861 · pushed 2026-10-10 · Apache-2.0 · now `style-dictionary/style-dictionary` |
+| [`argyleink/open-props`](https://github.com/argyleink/open-props) | Open Props | a complete token scale as CSS custom properties | ★5,546 · pushed 2026-10-11 · MIT |
+| [`culori/culori`](https://github.com/Evercoder/culori) | culori colour library | OKLCH maths for palettes and contrast | ★1,241 · pushed 2026-10-15 · MIT · now `Evercoder/culori` · the listed `culori/culori` does not exist |
+| [`fontsource/fontsource`](https://github.com/fontsource/fontsource) | self-hosted open-source fonts as npm packages | self-host fonts: no third-party request, CSP stays `self` | ★6,201 · pushed 2026-10-14 · MIT |
+| [`GoogleChrome/lighthouse`](https://github.com/GoogleChrome/lighthouse) | Lighthouse | measured performance, accessibility and SEO, never claimed | ★30,894 · pushed 2026-10-15 · Apache-2.0 |
+| [`GoogleChrome/web-vitals`](https://github.com/GoogleChrome/web-vitals) | web-vitals | LCP, INP, CLS from real users | ★8,648 · pushed 2026-10-15 · Apache-2.0 |
+| [`microsoft/playwright`](https://github.com/microsoft/playwright) | Playwright | the browser this skill's gate runs in; test states, not screenshots alone | ★97,818 · pushed 2026-10-16 · Apache-2.0 |
+
+
+---
+
+<!-- file: references/sources/future.md -->
+
+## Sources: AI in the browser and next-wave tech
+
+> Concepts only. Read these for **method and principle**; never copy code, markup, shaders or assets into a build
+> (`craft/research.md`). Status checked 2026-10-16 with the GitHub API (stars · last push · licence). Re-check before
+> relying on one: a source that is archived, unlicensed or untouched for a year is a reference, never a dependency
+> (dependencies are chosen in Step 0, `thinking/sequence.md`). Never use anything from CreativeAgencyStyle (reported as malware).
+
+Read for **what is newly possible**: on-device models and AI UI patterns. Use only when the brief needs it; every model download is a performance cost to state in `DESIGN.md`.
+
+| Source | What it is | What to take (a principle, not code) | Status |
+|---|---|---|---|
+| [`mlc-ai/web-llm`](https://github.com/mlc-ai/web-llm) | in-browser LLM inference on WebGPU | private, offline AI features with no server | ★19,272 · pushed 2026-10-11 · Apache-2.0 |
+| [`huggingface/transformers.js`](https://github.com/huggingface/transformers.js) | Transformers models in the browser | small on-device models (search, captioning, classification) | ★16,349 · pushed 2026-10-15 · Apache-2.0 |
+| [`google-ai-edge/mediapipe`](https://github.com/google-ai-edge/mediapipe) | on-device ML for live media | camera and gesture input as interaction | ★37,299 · pushed 2026-10-15 · Apache-2.0 |
+| [`vercel/ai`](https://github.com/vercel/ai) | AI SDK for TypeScript | streaming UI states for AI responses (pending, streaming, done, error) | ★27,340 · pushed 2026-10-15 · custom (read it) |
+
+
+---
+
+<!-- file: references/sources/inspiration.md -->
+
+## Sources: curated references, award sites, live sources
+
+> Concepts only. Read these for **method and principle**; never copy code, markup, shaders or assets into a build
+> (`craft/research.md`). Status checked 2026-10-16 with the GitHub API (stars · last push · licence). Re-check before
+> relying on one: a source that is archived, unlicensed or untouched for a year is a reference, never a dependency
+> (dependencies are chosen in Step 0, `thinking/sequence.md`). Never use anything from CreativeAgencyStyle (reported as malware).
+
+Read for **what is being made now and how small details carry a site**. Repositories first, then the live sources searched at build time.
+
+| Source | What it is | What to take (a principle, not code) | Status |
+|---|---|---|---|
+| [`terkelg/awesome-creative-coding`](https://github.com/terkelg/awesome-creative-coding) | creative coding list: generative art, data viz, interaction | search by technique when the concept needs one | ★15,441 · pushed 2026-07-21 · no licence file |
+| [`sergey-pimenov/awesome-web-animation`](https://github.com/sergey-pimenov/awesome-web-animation) | web animation libraries, books, apps | survey of the motion landscape before choosing | ★1,590 · pushed 2026-09-20 · CC0-1.0 |
+| [`alexpate/awesome-design-systems`](https://github.com/alexpate/awesome-design-systems) | list of public design systems | how mature systems document tokens, states and usage | ★26,133 · pushed 2026-10-06 · Unlicense |
+| [`VoltAgent/awesome-claude-design`](https://github.com/VoltAgent/awesome-claude-design) | 68 design-system inspirations in DESIGN.md format | DESIGN.md as a portable design brief (compare `templates/DESIGN.md`) | ★4,098 · pushed 2026-06-20 · MIT |
+| [`rohitg00/awesome-claude-design`](https://github.com/rohitg00/awesome-claude-design) | DESIGN.md prompts by aesthetic family, remix recipes | how an aesthetic is described in words before it is built | ★1,146 · pushed 2026-04-23 · MIT |
+| [`miguelclavel/miguelclavel.com`](https://github.com/miguelclavel/miguelclavel.com) | portfolio: twelve case studies in one long scroll | small interactions as the personality of a page | ★0 · pushed 2026-10-09 · no licence file |
+| [`miguelclavel/portfolio-details`](https://github.com/miguelclavel/portfolio-details) | viewed badge, case-study short version, more | respect the reader's time: the short version first | ★0 · pushed 2026-10-10 · MIT |
+| [`miguelclavel/wave-line`](https://github.com/miguelclavel/wave-line) | divider that leans to the cursor and wobbles back | physical metaphors (a plucked string) for feedback | ★0 · pushed 2026-10-10 · MIT |
+| [`miguelclavel/sticker-burst`](https://github.com/miguelclavel/sticker-burst) | heading bursts into stickers under gravity | a reward moment tied to one deliberate action | ★0 · pushed 2026-10-10 · MIT |
+| [`miguelclavel/scroll-into-header`](https://github.com/miguelclavel/scroll-into-header) | big name travels into the header on scroll | one object, one continuous journey (continuity over cuts) | ★0 · pushed 2026-10-10 · MIT |
+| [`miguelclavel/pixel-trail`](https://github.com/miguelclavel/pixel-trail) | pointer-charged grid behind a hero | trace of the visitor as decoration that responds | ★0 · pushed 2026-10-10 · MIT |
+| [`miguelclavel/name-hover`](https://github.com/miguelclavel/name-hover) | every letter has its own hover, neighbours differ | variety inside a system: no two neighbours alike | ★0 · pushed 2026-10-10 · MIT |
+| [`miguelclavel/interaction-recipes`](https://github.com/miguelclavel/interaction-recipes) | twenty small interactions with recordings and prompts | recipe form: the interaction, the problem it solves, the prompt | ★0 · pushed 2026-10-10 · MIT |
+| [`miguelclavel/curve-carousel`](https://github.com/miguelclavel/curve-carousel) | cards riding a huge circle so neighbours tilt | one number drives the whole effect: a single parameter | ★0 · pushed 2026-10-10 · MIT |
+
+### Live sources to search at build time
+
+Search these in Step 0.5 for the brief's category, last 6 months (`craft/research.md`).
+
+| Source | What it shows |
+|---|---|
+| [awwwards.com](https://www.awwwards.com/websites/) | Site of the Day / Month, by category |
+| [fwa.co.uk](https://thefwa.com/) | The FWA: interaction- and motion-led work |
+| [cssdesignawards.com](https://www.cssdesignawards.com/) | Website of the Day, judged on UI, UX, innovation |
+| [godly.website](https://godly.website/) | curated current web design, by tag |
+| [land-book.com](https://land-book.com/) | landing and product pages |
+| [siteinspire.com](https://www.siteinspire.com/) | editorial, institutional, cultural sites |
+| [dribbble.com](https://dribbble.com/) | what designers are posting now (concepts, not shipped sites) |
+| [behance.net](https://www.behance.net/) | case studies with process |
+| [Codrops](https://tympanus.net/codrops/) | technique tutorials and experiments with write-ups |
+| [gsap.com/showcase](https://gsap.com/showcase/) | shipped GSAP work |
+| [threejs.org/examples](https://threejs.org/examples/) | three.js techniques by name |
+| [Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/) | platform conventions, motion and accessibility |
+| [Material Design](https://m3.material.io/) | component states, motion system, tokens |
+| [Carbon](https://carbondesignsystem.com/) | enterprise patterns, data tables, empty states |
+| [Polaris](https://polaris.shopify.com/) | commerce patterns and admin UI |
+| [Atlassian Design](https://atlassian.design/) | product UI, content and state guidance |
+
+
+---
+
+<!-- file: references/sources/motion.md -->
+
+## Sources: Animation engines and motion references
+
+> Concepts only. Read these for **method and principle**; never copy code, markup, shaders or assets into a build
+> (`craft/research.md`). Status checked 2026-10-16 with the GitHub API (stars · last push · licence). Re-check before
+> relying on one: a source that is archived, unlicensed or untouched for a year is a reference, never a dependency
+> (dependencies are chosen in Step 0, `thinking/sequence.md`). Never use anything from CreativeAgencyStyle (reported as malware).
+
+Read for **timing models and techniques**: timelines, springs, scroll-linked progress, page transitions, text splitting. Choose the engine in Step 0 with the dependency checks; take the technique from here.
+
+| Source | What it is | What to take (a principle, not code) | Status |
+|---|---|---|---|
+| [`greensock/GSAP`](https://github.com/greensock/GSAP) | GSAP: timelines, ScrollTrigger, SplitText | timeline as the score; scrub to scroll progress, not to time | ★29,280 · pushed 2026-04-13 · no licence file |
+| [`greensock/gsap-skills`](https://github.com/greensock/gsap-skills) | official GSAP skills for AI agents | correct GSAP use: cleanup, contexts, reduced motion | ★16,466 · pushed 2026-07-29 · MIT |
+| [`motiondivision/motion`](https://github.com/motiondivision/motion) | Motion (formerly Framer Motion) for React and JS | layout animation and springs driven by state | ★34,177 · pushed 2026-10-16 · MIT |
+| [`darkroomengineering/lenis`](https://github.com/darkroomengineering/lenis) | smooth scroll | scroll that stays native for keyboard, anchors and screen readers | ★16,575 · pushed 2026-10-15 · MIT |
+| [`darkroomengineering/satus`](https://github.com/darkroomengineering/satus) | Next.js App Router starter for content sites | how an award-level studio structures a Next.js project | ★1,003 · pushed 2026-10-15 · MIT |
+| [`theatre-js/theatre`](https://github.com/theatre-js/theatre) | motion design editor for the web | keyframed sequences edited visually and played in code | ★12,773 · pushed 2024-08-14 · Apache-2.0 · last push 2024: reference, not a dependency |
+| [`rive-app/rive-wasm`](https://github.com/rive-app/rive-wasm) | Rive web runtime | state-machine animations: designed states, not tweens | ★1,000 · pushed 2026-10-16 · MIT |
+| [`airbnb/lottie-web`](https://github.com/airbnb/lottie-web) | After Effects animations on the web | when an illustrator's motion should stay the illustrator's | ★32,239 · pushed 2025-09-01 · MIT |
+| [`juliangarnier/anime`](https://github.com/juliangarnier/anime) | anime.js | lightweight timelines and staggers without a framework | ★73,639 · pushed 2026-08-21 · MIT |
+| [`locomotivemtl/locomotive-scroll`](https://github.com/locomotivemtl/locomotive-scroll) | viewport detection and smooth scroll with parallax | scroll-position data exposed to CSS | ★8,877 · pushed 2026-06-30 · MIT |
+| [`barbajs/barba`](https://github.com/barbajs/barba) | page transitions for multi-page sites | the transition as continuity between pages | ★12,999 · pushed 2024-12-02 · MIT · last push 2024 |
+| [`swup/swup`](https://github.com/swup/swup) | page transitions for server-rendered sites | progressive enhancement: pages work without the transition | ★5,242 · pushed 2026-10-06 · MIT |
+| [`formkit/auto-animate`](https://github.com/formkit/auto-animate) | drop-in transitions for list changes | animate add/remove/reorder so state changes are legible | ★13,934 · pushed 2026-07-10 · MIT |
+| [`react-spring/react-spring`](https://github.com/pmndrs/react-spring) | spring physics animation for React | interruptible motion: springs keep velocity when the target changes | ★29,167 · pushed 2026-10-15 · MIT · now `pmndrs/react-spring` |
+| [`lukePeavey/SplitType`](https://github.com/lukePeavey/SplitType) | split text into lines, words, characters | split for animation without breaking accessible text | ★733 · pushed 2023-12-03 · no licence file · last push 2023, no licence file: concept only |
+| [`mojs/mojs`](https://github.com/mojs/mojs) | motion graphics toolbelt | bursts and shape motion for celebratory feedback | ★18,815 · pushed 2026-07-30 · MIT |
+| [`flackr/scroll-timeline`](https://github.com/flackr/scroll-timeline) | ScrollTimeline polyfill | scroll-driven animations in CSS first; JS only where CSS can't | ★1,167 · pushed 2024-08-26 · Apache-2.0 · last push 2024 |
+
+
+---
+
+<!-- file: references/sources/skills.md -->
+
+## Sources: Agent skills and design brains
+
+> Concepts only. Read these for **method and principle**; never copy code, markup, shaders or assets into a build
+> (`craft/research.md`). Status checked 2026-10-16 with the GitHub API (stars · last push · licence). Re-check before
+> relying on one: a source that is archived, unlicensed or untouched for a year is a reference, never a dependency
+> (dependencies are chosen in Step 0, `thinking/sequence.md`). Never use anything from CreativeAgencyStyle (reported as malware).
+
+Read for **method**: how other skills structure a brief, force taste, cut slop, and check work. Use them to question this skill's own process, not to replace it.
+
+| Source | What it is | What to take (a principle, not code) | Status |
+|---|---|---|---|
+| [`anthropics/skills`](https://github.com/anthropics/skills) | the public Agent Skills collection | how a skill is scoped, routed and loaded progressively | ★181,438 · pushed 2026-10-09 · no licence file |
+| [`emilkowalski/skills`](https://github.com/emilkowalski/skills) | skills for designers and engineers | interaction craft: the small details that make UI feel considered | ★46,525 · pushed 2026-10-11 · MIT |
+| [`obra/superpowers`](https://github.com/obra/superpowers) | an agentic skills framework and development method | plan → test → verify loops; never claim done without evidence | ★300,073 · pushed 2026-10-10 · MIT |
+| [`DietrichGebert/ponytail`](https://github.com/DietrichGebert/ponytail) | a skill for writing less code | the cheapest correct build: delete before you add | ★164,555 · pushed 2026-10-15 · MIT |
+| [`ayghri/i-have-adhd`](https://github.com/ayghri/i-have-adhd) | a skill for answer-first output | lead with the result; structure for scanning | ★57,321 · pushed 2026-10-11 · MIT |
+| [`affaan-m/ECC`](https://github.com/affaan-m/ECC) | an agent harness: skills, memory, security, research-first | research before code; memory that changes the next decision | ★280,564 · pushed 2026-10-15 · MIT |
+| [`blader/humanizer`](https://github.com/blader/humanizer) | removes signs of AI-written text | copy audit: the tells of generated prose (pairs with `craft/copy.md`) | ★57,335 · pushed 2026-09-28 · MIT |
+| [`nextlevelbuilder/ui-ux-pro-max-skill`](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | design-intelligence skill with searchable style data | how a style database is queried by need, not browsed | ★136,303 · pushed 2026-10-15 · MIT |
+| [`Leonxlnx/taste-skill`](https://github.com/Leonxlnx/taste-skill) | art direction, reference images and a browser check | decide the art direction from references, then verify in the browser | ★97,477 · pushed 2026-10-14 · MIT |
+| [`miqdadbadjuber/anti-slop`](https://github.com/miqdadbadjuber/anti-slop) | rules that filter generic AI UI, text and code | a named list of slop patterns is easier to avoid than a vague 'be original' | ★6,196 · pushed 2026-10-13 · MIT |
+| [`pbakaus/impeccable`](https://github.com/pbakaus/impeccable) | a design language for AI harnesses | shared vocabulary between brief, agent and critique | ★81,693 · pushed 2026-10-16 · Apache-2.0 |
+| [`Nutlope/hallmark`](https://github.com/Nutlope/hallmark) | anti-slop design skill for Claude Code, Cursor, Codex | cross-tool packaging; one opinionated pass against defaults | ★30,164 · pushed 2026-08-06 · MIT |
+| [`kylezantos/design-motion-principles`](https://github.com/kylezantos/design-motion-principles) | motion skill: build with purpose, or audit motion | every motion answers 'what does it explain?' | ★1,329 · pushed 2026-05-30 · MIT |
+| [`github/spec-kit`](https://github.com/github/spec-kit) | spec-driven development toolkit | spec before build: the spec is the contract (compare `templates/SCHEMA.md`) | ★141,463 · pushed 2026-10-15 · MIT |
+| [`bmad-code-org/BMAD-METHOD`](https://github.com/bmad-code-org/BMAD-METHOD) | agile AI-driven development method with role agents | role separation: analyst, architect, builder, reviewer as distinct passes | ★54,199 · pushed 2026-10-16 · custom (read it) |
+| [`Netxeo/skill-file-design`](https://github.com/Netxeo/skill-file-design) | skill-file design (empty description, 0 stars) | read only if it has content; treat as unverified | ★0 · pushed 2026-05-05 · no licence file |
+| [`AnayDhawan/Components`](https://github.com/AnayDhawan/Components) | skill that fetches proven animated React/Tailwind components live | fetch-then-adapt beats hand-coding solved components (pair with 'compose, extend, or invent') | ★17 · pushed 2026-10-03 · custom (read it) |
+| [`pato-gonzalez/design-system-stack`](https://github.com/pato-gonzalez/design-system-stack) | 4-skill bundle: extract a design system, patterns, references | extract tokens and patterns from a reference before designing against it | ★4 · pushed 2026-04-20 · custom (read it) |
+| [`Yu-369 Awwwards skills`](https://github.com/Yu-369/VibeCurb) | `awwwards-hero`, `awwwards-sections`, `awwwards-motion` inside VibeCurb | how award-level heroes, section rhythm and motion are broken into separate passes | ★984 · pushed 2026-08-05 · MIT · now `Yu-369/VibeCurb` · the listing named no repo; these skills live in VibeCurb |
+| [`21st-dev/magic-mcp`](https://github.com/21st-dev/magic-mcp) | MCP server that searches and generates React/Tailwind components | search an existing component before inventing one; adapt, don't paste | ★6,044 · pushed 2026-09-09 · ISC |
 
 
 ---
@@ -4861,12 +5126,30 @@ Wireframe as decoration on a product that has no structure to show.
 - **Adapter:** `adapters/<x>.md`
 
 ### References
-<!-- Step 0.5 of the Thinking Sequence (craft/research.md). Written before Step 1. -->
-- **Access:** <web (searched YYYY-MM-DD) | no web access: working from training data>
-- **1. <site or reference> (<source>, <month year>, <URL>):** took <principle, one line>
-- **2. <site or reference> (<source>, <month year>, <URL>):** took <principle, one line>
-- **3. <site or reference> (<source>, <month year>, <URL>):** took <principle, one line>
-- **Avoiding:** <the overused pattern in this category, one line>
+<!-- Step 0.5, mandatory (craft/research.md). Written before Step 1. Sources: references/sources/ + live award sites. Concepts only, no copied code. -->
+**Access:** <web (searched YYYY-MM-DD) | no web access: working from training data (limitation: <what that means here>)>
+
+**References looked at:**
+1. <name> — <what it is> — <what I took from it, as a principle>
+2. <name> — <what it is> — <what I took from it>
+3. <name> — <what it is> — <what I took from it>
+
+**Techniques considered:**
+- <technique> (<source>): <used | not used, why>
+- <technique> (<source>): <used | not used, why>
+- <technique> (<source>): <used | not used, why>
+
+**Pattern being avoided:** <the overused pattern in this category> — <why it fails this brief>
+
+### Decision trace
+<!-- Every design decision traces to the brief or a reference above. "Skill default" is not a source. -->
+| Decision | Traces to |
+|---|---|
+| Archetype | <brief: "…" / reference n / technique> |
+| Palette | |
+| Type pairing | |
+| Motion language | |
+| Signature move | |
 
 ### Concept
 - **Tension:** 

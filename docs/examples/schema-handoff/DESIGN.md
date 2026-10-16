@@ -11,11 +11,28 @@ Rules : gates/rules.md read; designing within it.
 - **Adapter:** `adapters/vanilla.md`
 
 ## References
-- **Access:** web (searched 2026-10-15)
-- **1. LPAS (Awwwards Site of the Day, 2026, [x.com/awwwards](https://x.com/awwwards)):** took "the process is the structure": a studio that sells process shows the steps as the page's spine, not as a feature row.
-- **2. Uncommon Studio (Awwwards Site of the Day + FWA, Jul 2026, [hontran.dev](https://www.hontran.dev/blog/best-award-winning-websites-2026)):** took "a confident grid that breaks once": a strict ticket grid, broken only by the hero line.
-- **3. Mat Voyce (Awwwards Site of the Day, 2026, [hontran.dev](https://www.hontran.dev/blog/best-award-winning-websites-2026)):** took "type earns its motion": here, at Tier 1, type carries the page with no motion at all.
-- **Avoiding:** the craft-shop default: a full-bleed moody workshop photo with a script logo and a three-icon "Quality · Care · Tradition" row.
+**Access:** web (searched 2026-10-15)
+
+**References looked at:**
+1. LPAS — process-driven architecture studio, Awwwards Site of the Day 2026 ([x.com/awwwards](https://x.com/awwwards)) — the process is the structure: the steps are the page's spine, not a feature row.
+2. Uncommon Studio — studio site, Awwwards SOTD and FWA, Jul 2026 ([hontran.dev](https://www.hontran.dev/blog/best-award-winning-websites-2026)) — a confident grid that breaks once: a strict ticket grid broken only by the hero line.
+3. Mat Voyce — portfolio, Awwwards SOTD 2026 ([hontran.dev](https://www.hontran.dev/blog/best-award-winning-websites-2026)) — type earns its motion: here, at Tier 1, type carries the page with none.
+
+**Techniques considered:**
+- Scroll-scrubbed step reveal (GSAP ScrollTrigger, `references/sources/motion.md`): not used; Tier 1, the steps must be readable at once.
+- List add/remove transitions (formkit/auto-animate, `motion.md`): not used; the lists don't change on the page.
+- Form state machine with a live region (React Aria patterns, `references/sources/components.md`): used, written by hand in `request.js`.
+
+**Pattern being avoided:** the craft-shop default, a full-bleed moody workshop photo with a script logo and a three-icon "Quality · Care · Tradition" row — it sells atmosphere, and this brief sells a price and a request.
+
+## Decision trace
+| Decision | Traces to |
+|---|---|
+| Archetype: single-page ledger | brief: "see the three services … send a request"; reference 1 |
+| Palette: paper and ink, one red | brief: a bindery; restraint from reference 2 |
+| Type: one book face | reference 3 (type carries the page) |
+| Motion language: none (Tier 1) | brief: price and request; technique notes above |
+| Signature move: the docket number | brief: requests become jobs |
 
 ## Concept
 - **Tension:** slow handwork vs. a quick online request
