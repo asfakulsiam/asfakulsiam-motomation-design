@@ -57,21 +57,21 @@
     "a": "funeral-home",
     "b": "childrens-dentistry",
     "score": {
-     "structure": 0.18,
-     "composition": 0.12,
+     "structure": 0.2,
+     "composition": 0.09,
      "image": 0,
-     "typography": 0.34,
-     "interaction": 0.18,
+     "typography": 0.33,
+     "interaction": 0.27,
      "signature": 0.17,
-     "overall": 0.17
+     "overall": 0.18
     },
     "parts": {
      "structure": {
-      "shingles": 0.11,
-      "order": 0.25
+      "shingles": 0.07,
+      "order": 0.33
      },
      "composition": {
-      "placement": 0.2,
+      "placement": 0.16,
       "columns": 0,
       "density": 0
      },
@@ -80,13 +80,13 @@
      },
      "typography": {
       "families": 0,
-      "scale": 0.54,
-      "rhythm": 0.48,
+      "scale": 0.52,
+      "rhythm": 0.46,
       "hierarchy": 0.66
      },
      "interaction": {
       "feedback": 0.11,
-      "navigation": 0.25
+      "navigation": 0.43
      },
      "signature": {
       "declared": 0,
@@ -143,21 +143,21 @@
     "a": "funeral-home",
     "b": "luxury-perfume",
     "score": {
-     "structure": 0.13,
-     "composition": 0.09,
+     "structure": 0.12,
+     "composition": 0.1,
      "image": 0,
-     "typography": 0.2,
+     "typography": 0.21,
      "interaction": 0.54,
      "signature": 0.09,
      "overall": 0.18
     },
     "parts": {
      "structure": {
-      "shingles": 0.26,
+      "shingles": 0.25,
       "order": 0
      },
      "composition": {
-      "placement": 0.04,
+      "placement": 0.06,
       "columns": 0.1,
       "density": 0.25
      },
@@ -166,8 +166,8 @@
      },
      "typography": {
       "families": 0.17,
-      "scale": 0.57,
-      "rhythm": 0.12,
+      "scale": 0.58,
+      "rhythm": 0.11,
       "hierarchy": 0
      },
      "interaction": {
@@ -188,12 +188,12 @@
     "b": "municipal-water-authority",
     "score": {
      "structure": 0.1,
-     "composition": 0.31,
+     "composition": 0.26,
      "image": null,
-     "typography": 0.32,
+     "typography": 0.33,
      "interaction": 0.35,
      "signature": 0.1,
-     "overall": 0.24
+     "overall": 0.23
     },
     "parts": {
      "structure": {
@@ -201,15 +201,15 @@
       "order": 0
      },
      "composition": {
-      "placement": 0.21,
+      "placement": 0.24,
       "columns": 0.25,
-      "density": 0.67
+      "density": 0.33
      },
      "image": {},
      "typography": {
       "families": 0,
-      "scale": 0.6,
-      "rhythm": 0.5,
+      "scale": 0.61,
+      "rhythm": 0.51,
       "hierarchy": 0.5
      },
      "interaction": {
@@ -228,20 +228,20 @@
     "b": "hardcore-metal-band",
     "score": {
      "structure": 0.03,
-     "composition": 0.18,
+     "composition": 0.16,
      "image": 0,
      "typography": 0.14,
-     "interaction": 0.22,
+     "interaction": 0.31,
      "signature": 0.13,
-     "overall": 0.12
+     "overall": 0.13
     },
     "parts": {
      "structure": {
-      "shingles": 0.05,
+      "shingles": 0.06,
       "order": 0
      },
      "composition": {
-      "placement": 0.16,
+      "placement": 0.13,
       "columns": 0,
       "density": 0.4
      },
@@ -258,7 +258,7 @@
      },
      "interaction": {
       "feedback": 0.18,
-      "navigation": 0.25
+      "navigation": 0.43
      },
      "signature": {
       "declared": 0,
@@ -271,17 +271,17 @@
     "a": "childrens-dentistry",
     "b": "luxury-perfume",
     "score": {
-     "structure": 0.05,
+     "structure": 0.03,
      "composition": 0.04,
      "image": 0.67,
-     "typography": 0.18,
-     "interaction": 0.12,
+     "typography": 0.17,
+     "interaction": 0.2,
      "signature": 0,
-     "overall": 0.18
+     "overall": 0.19
     },
     "parts": {
      "structure": {
-      "shingles": 0.11,
+      "shingles": 0.06,
       "order": 0
      },
      "composition": {
@@ -296,13 +296,13 @@
      },
      "typography": {
       "families": 0.17,
-      "scale": 0.38,
+      "scale": 0.36,
       "rhythm": 0.1,
       "hierarchy": 0.08
      },
      "interaction": {
       "feedback": 0.11,
-      "navigation": 0.13
+      "navigation": 0.29
      },
      "signature": {
       "declared": 0,
@@ -317,36 +317,36 @@
     "a": "childrens-dentistry",
     "b": "municipal-water-authority",
     "score": {
-     "structure": 0.06,
-     "composition": 0.29,
+     "structure": 0.04,
+     "composition": 0.36,
      "image": 0,
      "typography": 0.43,
-     "interaction": 0.21,
+     "interaction": 0.3,
      "signature": 0.06,
-     "overall": 0.18
+     "overall": 0.2
     },
     "parts": {
      "structure": {
-      "shingles": 0.12,
+      "shingles": 0.08,
       "order": 0
      },
      "composition": {
-      "placement": 0.37,
+      "placement": 0.31,
       "columns": 0.33,
-      "density": 0
+      "density": 0.5
      },
      "image": {
       "one_side_only": 0
      },
      "typography": {
       "families": 0.33,
-      "scale": 0.51,
-      "rhythm": 0.47,
+      "scale": 0.49,
+      "rhythm": 0.45,
       "hierarchy": 0.53
      },
      "interaction": {
       "feedback": 0.17,
-      "navigation": 0.25
+      "navigation": 0.43
      },
      "signature": {
       "declared": 0,
@@ -408,12 +408,12 @@
     "b": "municipal-water-authority",
     "score": {
      "structure": 0.01,
-     "composition": 0.04,
+     "composition": 0.09,
      "image": 0,
      "typography": 0.15,
      "interaction": 0.34,
      "signature": 0.13,
-     "overall": 0.11
+     "overall": 0.12
     },
     "parts": {
      "structure": {
@@ -421,9 +421,9 @@
       "order": 0
      },
      "composition": {
-      "placement": 0.07,
+      "placement": 0.08,
       "columns": 0,
-      "density": 0
+      "density": 0.2
      },
      "image": {
       "one_side_only": 0
@@ -450,12 +450,12 @@
     "b": "municipal-water-authority",
     "score": {
      "structure": 0.07,
-     "composition": 0.06,
+     "composition": 0.03,
      "image": 0,
      "typography": 0.26,
      "interaction": 0.38,
      "signature": 0.11,
-     "overall": 0.15
+     "overall": 0.14
     },
     "parts": {
      "structure": {
@@ -465,15 +465,15 @@
      "composition": {
       "placement": 0.02,
       "columns": 0.11,
-      "density": 0.13
+      "density": 0
      },
      "image": {
       "one_side_only": 0
      },
      "typography": {
       "families": 0.17,
-      "scale": 0.6,
-      "rhythm": 0.12,
+      "scale": 0.58,
+      "rhythm": 0.11,
       "hierarchy": 0.27
      },
      "interaction": {
@@ -490,13 +490,13 @@
   ],
   "pass": false,
   "max": {
-   "structure": 0.18,
-   "composition": 0.31,
+   "structure": 0.2,
+   "composition": 0.36,
    "image": 0.67,
    "typography": 0.43,
    "interaction": 0.56,
    "signature": 0.17,
-   "overall": 0.24
+   "overall": 0.23
   },
   "targets": [
    "/home/user/workspace/repo/evals/results/diversity/01-funeral-home",
@@ -511,7 +511,6 @@
     "blocks": [
      "grid:m",
      "list:s",
-     "statement:s",
      "statement:s"
     ],
     "images": 0,
@@ -581,7 +580,7 @@
      "statement:m",
      "statement:m"
     ],
-    "images": 1,
+    "images": 2,
     "display": "anton",
     "body": "jetbrains mono",
     "signature": {

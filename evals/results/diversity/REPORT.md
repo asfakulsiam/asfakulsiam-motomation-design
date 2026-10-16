@@ -100,6 +100,8 @@ All opinions are `(opinion)` from `self`, the agent that built the five sites an
 
 ## After the fixes (v2.11, fix list 2)
 
+- **Final numbers (re-measured after Fix 17):** diversity, 5/10 pairs below 0.4 on every axis (was 3/10). Remaining repeats: interaction funeral×metal 0.41, funeral×perfume 0.54, metal×perfume 0.56 (the navigation part, 0.6–0.75); image dentistry×perfume 0.67; typography dentistry×water 0.43. Ten-template calibration, 4/45 (was 12/45): the redefined axes find more sameness among the shipped templates (see `../originality-templates/README.md`).
+
 The tables above are the run as first reported. These changes were made afterwards, one commit each; `matrix.md` / `matrix.json` are always the latest measurement.
 
 - **Interaction axis (Fix 4): Option B, redefined.** It now measures press/tap feedback (`:hover`, `:active`, `:focus-visible` rules that apply on the page, as state × property groups), form patterns (field types, validation, live regions, fieldsets, submit) and navigation patterns (nav landmarks, in-page vs page links, menu toggle, skip link, breadcrumb, sticky header, tel/mailto, disclosures, dialogs). A part neither page has is not applicable and leaves the mean; before, shared absence (`pointer` = 1 in all 10 pairs) counted as a match. Re-run on the five builds: 10 distinct interaction scores (0.12–0.56); pairs at or above 0.4 went from 5 to 3 (funeral × metal 0.41, funeral × perfume 0.54, metal × perfume 0.56, all from `navigation` 0.6–0.75). `forms` is n/a in every pair: none of the five home pages has a form.

@@ -16,3 +16,17 @@ The diversity arm (`evals/results/diversity/REPORT.md`) found two measurement bu
 2. Content blocks had to be half the viewport wide, so a narrow single-column page had zero blocks. They now have to be half the width of `<main>`.
 
 Effect here: two builds, overall 0.19 → 0.14 (image 0.33 → 0.07, composition 0.14 → 0.11), still PASS; ten templates, 11 → 12 pairs below 0.4 on every axis.
+
+## After Fixes 4, 5 and 8 (re-measured 2026-10-16)
+
+Same ten templates, same command, with the redefined axes (interaction = feedback, forms, navigation; image n/a when both pages have none; typography grades families). Result in `ten-templates-after-fixes.json`.
+
+| | Before | After |
+|---|---|---|
+| Pairs below 0.4 on every axis | 12/45 | 4/45 |
+| interaction repeats | 29 | 35 |
+| typography repeats | 7 | 10 |
+| image repeats | 5 | 2 (3 pairs n/a) |
+| composition / signature / structure | 2 / 5 / 0 | 2 / 5 / 0 |
+
+The stricter axes find more sameness among the shipped templates, not less: they share one navigation and feedback pattern, and several share type classes. The templates were not changed in this session.
