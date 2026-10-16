@@ -104,6 +104,8 @@ The axes above check the page the gate was given. Axis J starts from that page a
 | **errors** · error states | an unknown route shows a **designed not-found view** | a random path is requested. It must answer 404 (or a soft 404 that says so) with not-found wording, a link to the home page and the site's own styles. A local folder is served like a static host: its `404.html` with status 404. An empty 404 body, Chromium's error page or the home page served for every path fail |
 | **session** · session survival | the site **works after a full reload, the back button, the forward button, and with two tabs** | load home, open a second route (else an in-page anchor), back, forward, reload, then two tabs on the same site used in turn. "Works" means the page renders text and throws no uncaught error since that step |
 
+**Form states are checked by intercepting requests. When the template ships, replace mock endpoints with a real server.** The gate holds and answers the form's request inside the browser (200 for success, 500 for the server error); no `/api/*` endpoint exists behind a template, so a passing **forms** line proves the page renders all five states, not that a server accepts the data.
+
 A check with nothing to check (no form, no request after load, no long press) prints `n/a` with the reason and does not fail. Everything else is counted: the line `journey: nav0 mobile0 forms0 loading0 errors0 session0` must be all zeros (a `-` is n/a). J is not in the stamp or its id, like X: the stamp describes one page, J the site around it. Fixtures: `fixtures/journey/complete/` passes all six; `fixtures/journey/incomplete/` fails all six.
 
 ### Axis O: originality across briefs (`scripts/originality.mjs`)
@@ -273,7 +275,7 @@ not check. Full rules, with why and examples: `craft/copy.md`, `craft/seo.md`, `
 - [ ] seo-01 [M] `sitemap.xml` exists and lists every public route · check: site-level: compare the sitemap with the route list
 - [ ] seo-02 [M] `robots.txt` exists, with no accidental `Disallow: /` · check: site-level: read the file
 - [ ] seo-03 [M] No `noindex` on public pages · **measured by the gate (S)**
-- [ ] seo-04 [M] A canonical tag on every route · **measured by the gate (S)**
+- [ ] seo-04 [M] A canonical tag on every route except error pages (404, 500, error views have no canonical URL; see `craft/seo.md`) · **measured by the gate (S)**
 - [ ] seo-05 [M] Meta title unique per page, 60 characters or fewer · **measured by the gate (S)**
 - [ ] seo-06 [M] Meta description unique per page, 160 characters or fewer · **measured by the gate (S)**
 - [ ] seo-07 [M] Exactly one `<h1>` per page · **measured by the gate (S)**

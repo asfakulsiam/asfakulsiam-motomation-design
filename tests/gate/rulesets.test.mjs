@@ -35,6 +35,12 @@ say(S({ subresources: ["http://cdn.example.org/a.js"] }) === "seo-16", "seo-16: 
 say(S({ ogImage: null }) === "seo-18", "seo-18: missing og:image caught");
 say(S({ ogWidth: "800", ogHeight: "600" }) === "seo-18", "seo-18: 800×600 og:image caught");
 say(countOf(seoRules({ ...goodSeo, pageUrl: "http://127.0.0.1:5000/p.html", canonicals: ["p.html"], links: ["a.html", "b.html", "c.html"] })) === 0, "seo-04: a relative canonical is accepted for a local file");
+// error pages have no canonical URL: exempt by status (an unknown route) or by name (404.html, 500.html, error.html)
+const noCanon = (o) => seoRules({ ...goodSeo, canonicals: [], ...o }).fails.some((x) => x.id === "seo-04");
+say(!noCanon({ status: 404 }) && !noCanon({ status: 500 }), "seo-04: a 404 or 500 response needs no canonical");
+say(!noCanon({ pageUrl: "https://example.com/404.html" }) && !noCanon({ pageUrl: "https://example.com/500.html" }) && !noCanon({ pageUrl: "https://example.com/error" }) && !noCanon({ pageUrl: "https://example.com/not-found/" }), "seo-04: 404.html, 500.html, /error and /not-found/ need no canonical");
+say(noCanon({ status: 200 }) && noCanon({ pageUrl: "https://example.com/errors-explained.html" }) && noCanon({ pageUrl: "https://example.com/blog/404-day" }), "seo-04: still required on a 200 page, and on pages that only mention an error in their slug");
+say(seoRules({ ...goodSeo, status: 404 }).warns.some((x) => x.id === "seo-04"), "seo-04: a canonical on an error page is a warning");
 
 // P · performance
 const goodPerf = { images: [{ src: "/hero.avif", top: 100, area: 5e5, loading: null }, { src: "/a.webp", top: 2000, area: 1e5, loading: "lazy" }], scripts: [{ inline: true, type: "module", text: "init()" }, { src: "/a.js", inline: false, inHead: true, defer: true }], jsKB: 40, budgetKB: 80 };

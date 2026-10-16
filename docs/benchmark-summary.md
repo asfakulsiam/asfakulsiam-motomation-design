@@ -8,7 +8,7 @@ Full report: [`evals/results/2026-10-12-benchmark-v4.md`](../evals/results/2026-
 
 ## v3 (inside Claude Code, 2026-10-12) — latest scored result
 
-Full report: [`evals/results/2026-10-12-benchmark-v3.md`](../evals/results/2026-10-12-benchmark-v3.md). Runner output: `evals/results/2026-10-12-benchmark-v3/summary.json`. Companion reports: [motion briefs](../evals/results/2026-10-12-benchmark-v3-motion.md) · [competitor skills](../evals/results/2026-10-12-benchmark-v3-competitors.md) · [Codex](../evals/results/2026-10-12-benchmark-v3-codex.md). Commit tested: `6f2724f`.
+Full report: [`evals/results/2026-10-12-benchmark-v3.md`](../evals/results/2026-10-12-benchmark-v3.md). Runner output: [`evals/results/2026-10-12-benchmark-v3/summary.json`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/evals/results/2026-10-12-benchmark-v3/summary.json) (on the evals branch). Companion reports: [motion briefs](../evals/results/2026-10-12-benchmark-v3-motion.md) · [competitor skills](../evals/results/2026-10-12-benchmark-v3-competitors.md) · [Codex](../evals/results/2026-10-12-benchmark-v3-codex.md). Commit tested: `6f2724f`.
 
 ### What was compared
 Five briefs × three seeds × four arms = 60 builds in Claude Code, one generator model (`claude_sonnet_5_5`), judged blind in pairs by GPT-5.4 and Gemini 3.1 Pro against `evals/rubric.md`. Arms: baseline (no skill), baseline + `gate.mjs` only, matched-effort baseline (told to refine for about the skill's median turn count), skill. Measurement (Playwright Chromium + axe-core + `gate.mjs`) ran on GitHub Actions.

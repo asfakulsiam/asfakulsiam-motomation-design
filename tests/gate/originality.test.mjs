@@ -1,6 +1,6 @@
 // Originality math, without a browser: the similarity helpers and the six-axis comparison behave at the edges.
 //   node tests/gate/originality.test.mjs
-import { wjaccard, seqSim, gridSim, compare, signatureOf, AXES } from "../../skills/asfakulsiam-motomation-design/scripts/originality.mjs";
+import { wjaccard, seqSim, gridSim, compare, signatureOf, AXES, mergeReports, parseViewports, VIEWPORTS } from "../../skills/asfakulsiam-motomation-design/scripts/originality.mjs";
 let bad = 0; const say = (ok, m) => { console.log(`${ok ? "ok  " : "FAIL"} ${m}`); if (!ok) bad++; };
 
 say(wjaccard({ a: 2, b: 1 }, { a: 2, b: 1 }) === 1, "wjaccard: identical bags → 1");
@@ -45,5 +45,13 @@ const base = [snap(["none", "1"]), snap(["none", "1"], "media", 900000)];
 const sig = signatureOf({ base, time: base, pointer: base, scroll: [base, [snap(["matrix(1,0,0,1,0,-40)", "1"]), snap(["none", "1"], "media", 900000)]] }, 1440, 900);
 say(sig.found && sig.found.trigger.join() === "scroll" && sig.found.props.join() === "transform" && sig.found.kind === "text", "signatureOf: the element that moves under scroll is the signature, the static one is not");
 say(signatureOf({ base, time: base, pointer: base, scroll: [base, base] }, 1440, 900).found === null, "signatureOf: nothing changes → static, no signature");
+
+// viewports (v2.13): default both sizes; the verdict is the worst of them per pair and axis
+say(JSON.stringify(parseViewports(undefined)) === JSON.stringify(VIEWPORTS) && VIEWPORTS.some(([w, h]) => w === 375 && h === 812), "viewports: default includes 375×812");
+say(JSON.stringify(parseViewports("1440x900")) === "[[1440,900]]" && parseViewports("wide") === null, "viewports: --viewport parses WxH, rejects junk");
+const mk = (v) => ({ threshold: 0.4, labels: ["a", "b"], pairs: [{ a: "a", b: "b", score: Object.fromEntries([...AXES, "overall"].map((x) => [x, x === "composition" ? v : 0.1])), parts: Object.fromEntries(AXES.map((x) => [x, { v }])) }] });
+const m = mergeReports([mk(0.2), mk(0.45)], ["1440x900", "375x812"]);
+say(m.pairs[0].score.composition === 0.45 && m.pairs[0].at.composition === "375x812" && m.pairs[0].over.join() === "composition" && !m.pass, "viewports: a repeat at 375 alone fails the pair, and names the viewport");
+say(mergeReports([mk(0.2), mk(0.3)], ["1440x900", "375x812"]).pass, "viewports: below threshold at both sizes passes");
 
 console.log(bad ? `\n${bad} failing` : "\nall originality checks pass"); process.exit(bad ? 1 : 0);

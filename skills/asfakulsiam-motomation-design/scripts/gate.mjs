@@ -664,10 +664,10 @@ async function structure(browser, url) {
 // ── the four rule sets (gate/4): facts from the page, judged by scripts/rulesets.mjs → C S P K ──
 async function ruleFacts(browser, url) {
   const ctx = await browser.newContext({ bypassCSP: true, viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 }); const page = await ctx.newPage();
-  let headers = {}, cookies = [];
+  let headers = {}, cookies = [], status = null;
   try {
     const res = await page.goto(url, { waitUntil: "load", timeout: T(60000) }).catch(() => null);
-    if (res) { headers = await res.allHeaders().catch(() => res.headers()); const arr = await res.headersArray().catch(() => []); cookies = arr.filter((h) => h.name.toLowerCase() === "set-cookie").map((h) => h.value); }
+    if (res) { status = res.status(); headers = await res.allHeaders().catch(() => res.headers()); const arr = await res.headersArray().catch(() => []); cookies = arr.filter((h) => h.name.toLowerCase() === "set-cookie").map((h) => h.value); }
     await page.waitForTimeout(T(600));
     const facts = await page.evaluate(() => {
       const vis = (e) => { for (let n = e; n && n.nodeType === 1; n = n.parentElement) { const cs = getComputedStyle(n); if (cs.display === "none" || cs.visibility === "hidden") return false; } return true; };
@@ -696,7 +696,7 @@ async function ruleFacts(browser, url) {
     const html = await fetch(url).then((r) => r.text()).catch(() => "");
     const origin = new URL(url).origin; const scriptTexts = [];
     for (const sc of facts.scripts) { if (sc.inline) { scriptTexts.push(sc.text || ""); continue; } try { if (new URL(sc.src).origin === origin) { sc.text = await fetch(sc.src).then((r) => r.text()); scriptTexts.push(sc.text); } } catch {} }
-    return { ...facts, html, scriptTexts, headers, cookies };
+    return { ...facts, html, scriptTexts, headers, cookies, status };
   } finally { await ctx.close(); }
 }
 // sec-08: is .env ignored by git in the project that holds a local target? URL targets: null (not checked; and only a
@@ -721,7 +721,7 @@ export function envIgnoredFor(target) {
 }
 export function judgeRules(facts, url, jsKB, tier, envIgnored = null) {
   const budgetKB = JS_BUDGET_KB[tier !== undefined && tier !== null && tier !== "" ? +tier : 5] ?? JS_BUDGET_KB[5];
-  const r = { copy: copyRules(facts), seo: seoRules({ pageUrl: url, ...facts.seo }), perf: perfRules({ images: facts.images, scripts: facts.scripts, jsKB, budgetKB }),
+  const r = { copy: copyRules(facts), seo: seoRules({ pageUrl: url, ...facts.seo, status: facts.status }), perf: perfRules({ images: facts.images, scripts: facts.scripts, jsKB, budgetKB }),
     sec: secRules({ pageUrl: url, html: facts.html, scriptTexts: facts.scriptTexts, headers: facts.headers, cookies: facts.cookies, metaCsp: facts.metaCsp, metaReferrer: facts.metaReferrer, envIgnored, remote: !envIgnored }) };
   return { ...r, ...rulesAxes(r) };
 }

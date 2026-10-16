@@ -116,3 +116,31 @@ verdict is FAIL, for two reasons that came before this redesign:
   - Studio: the dock covered the footer links at 200% zoom, and the dock's Work link pointed at the top of the page.
   - Motion-portfolio: the amber "hold" sat on the still's glow at 1.5:1.
   - All eight: meta descriptions over 160 characters.
+
+## At two viewports (v2.13, measured during the open-items pass)
+
+Task 4C made `scripts/originality.mjs` measure 1440×900 **and** 375×812 by default, each axis scored as the worse of
+the two. Run on the ten redesigned templates, that first gave **36/45** (9 pairs crossed at 375: seven on typography,
+five of them involving product-launch). Phone `clamp()` minimums had pulled every template's h1/h2/h3 ratios toward
+the same middle.
+
+The two films got a phone type scale of their own, mobile only, so the 1440 numbers did not move:
+
+- **product-launch:** the model name at 4.5rem; the stage and spec headings at 1.25rem; step titles as mono caps at 1rem.
+- **motion-portfolio:** shot titles at 2.75rem, like title cards; the credits heading at 1.1rem.
+
+Result (`after-two-viewports.txt`, `.json`):
+
+| Viewport | Pairs below 0.4 on every axis | Max per axis (structure · composition · image · typography · interaction · signature) |
+|---|---|---|
+| 1440×900 | 45/45 | 0.32 · 0.38 · 0.24 · 0.39 · 0.36 · 0.38 |
+| 375×812 | 42/45 | 0.39 · 0.38 · 0.28 · 0.40 · 0.40 · 0.50 |
+| both (worst of) | **42/45** | as 375 |
+
+The three pairs at or above 0.4, all at 375 only:
+
+| Pair | Axis | Why not fixed |
+|---|---|---|
+| editorial-article × saas-landing | signature 0.50 (declared 0.5: decode and ink-fill are both text-reveal moves; measured 0.5) | On a phone the tool's pointer path crosses editorial's decoding dateline and replays it, and the hero (98% of the screen) contains that text, so both pages read as "text changes under pointer, screen-size". Changing it means cutting editorial's hover replay or its signature; left as measured. |
+| hotel × org | interaction 0.40 (navigation 0.67) | Measured only: the navigation feature sets are 0.67 alike at 375 (0.57 at 1440, where the axis scores 0.36). Not investigated or changed in this pass. |
+| motion-portfolio × studio-portfolio | typography 0.40 (families 0.52) | Both set body text in Hanken Grotesk. Every face in `examples/templates/fonts/` is already in use by some template; a new face means adding a font. |

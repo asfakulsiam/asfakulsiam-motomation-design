@@ -14,7 +14,7 @@ The older notes in `craft/seo-performance.md` (content in the HTML, JSON-LD type
 | seo-01 | [M] | `sitemap.xml` exists and lists every public route | site-level: compare the sitemap with the route list |
 | seo-02 | [M] | `robots.txt` exists, with no accidental `Disallow: /` | site-level: read the file |
 | seo-03 | [M] | No `noindex` on public pages | **gate S** (a `noindex` robots meta on the page) |
-| seo-04 | [M] | A canonical tag on every route | **gate S** (exactly one `<link rel="canonical">` with an absolute URL) |
+| seo-04 | [M] | A canonical tag on every route except error pages | **gate S** (exactly one `<link rel="canonical">` with an absolute URL). **Exempt:** 404, 500 and other error pages: a response with status ≥ 400, or a page named `404.html`, `500.html`, `error.html`, `not-found`, `_error`. An error page has no canonical URL: it is served at whatever address failed, and a canonical there would point every broken URL at one indexable page (a soft 404). A canonical present on an error page is a warning |
 | seo-05 | [M] | Meta title unique per page, 60 characters or fewer | **gate S** (present, ≤ 60); uniqueness is site-level |
 | seo-06 | [M] | Meta description unique per page, 160 characters or fewer | **gate S** (present, ≤ 160); uniqueness is site-level |
 | seo-07 | [M] | Exactly one `<h1>` per page | **gate S** |

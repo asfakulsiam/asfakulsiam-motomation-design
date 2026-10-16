@@ -4,7 +4,7 @@ A scroll sequence is any part of a page whose state is set by the scroll positio
 
 ## Why this file exists
 
-Benchmark v3, ceramics shop, seed 3103 (`evals/results/2026-10-12-benchmark-v3/ecommerce/skill-s3103/`). The page had a sticky kiln stage and four firing steps; the step in the middle of the screen got `.on`, and every other step was dimmed with `.js-scrub .steps li:not(.on) { opacity: .4 }`. Lit, the step labels read at 6.62:1. Dimmed, the same labels read at **2.1:1** and the body text at 3.37:1, and a visitor reads the dimmed steps for most of the scroll, because only one step is lit at a time. The page shipped with a gate pass (the gate judged each element only at its most visible state; fixed in v2.5.0) and then failed the benchmark's hard gate on axe's contrast check, scoring 0.
+Benchmark v3, ceramics shop, seed 3103 (`evals/results/2026-10-12-benchmark-v3/ecommerce/skill-s3103/` on the evals branch). The page had a sticky kiln stage and four firing steps; the step in the middle of the screen got `.on`, and every other step was dimmed with `.js-scrub .steps li:not(.on) { opacity: .4 }`. Lit, the step labels read at 6.62:1. Dimmed, the same labels read at **2.1:1** and the body text at 3.37:1, and a visitor reads the dimmed steps for most of the scroll, because only one step is lit at a time. The page shipped with a gate pass (the gate judged each element only at its most visible state; fixed in v2.5.0) and then failed the benchmark's hard gate on axe's contrast check, scoring 0.
 
 The lesson isn't "don't dim". It's that a sequence has more states than its active one, and every state a visitor can read is a state that has to work.
 

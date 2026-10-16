@@ -112,7 +112,7 @@ Read before Step 1. Design inside these. `scripts/gate.mjs` measures them after 
 | Rule | Limit |
 |---|---|
 | seo-03 | no `noindex` on public pages |
-| seo-04 | exactly one canonical |
+| seo-04 | exactly one canonical; error pages (status ≥ 400, or 404/500/error/not-found pages) are exempt, a canonical on one warns |
 | seo-05 | title ≤ 60 characters, unique |
 | seo-06 | description ≤ 160 characters, unique |
 | seo-07 | one `h1` |

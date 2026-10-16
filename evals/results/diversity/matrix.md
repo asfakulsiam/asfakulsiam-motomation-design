@@ -2,6 +2,8 @@
 
 Five unrelated briefs (evals/briefs/diversity/), one build each, compared by scripts/originality.mjs at 1440×900 on six axes. 0 = nothing shared, 1 = the same. Every axis of every pair must stay below 0.4; ✗ marks a repeat. Written by `node evals/diversity.mjs`.
 
+See also [matrix-two-viewports.md](matrix-two-viewports.md): the same five builds at 1440×900 and 375×812 (v2.13). The 1440 numbers are unchanged; the 375 numbers move, and the verdict does not.
+
 ## Measured
 
 Tool: scripts/originality.mjs (35s). Result: FAIL, 5 of 10 pairs repeat on at least one axis.

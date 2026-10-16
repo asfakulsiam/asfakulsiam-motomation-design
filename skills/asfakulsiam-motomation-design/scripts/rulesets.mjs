@@ -53,11 +53,20 @@ export function copyRules({ blocks = [], ctas = [], extras = [] } = {}) {
 
 // ── S · SEO ─────────────────────────────────────────────────────────────────
 export const TITLE_MAX = 60, DESC_MAX = 160, MIN_INTERNAL_LINKS = 3;
-export function seoRules({ pageUrl, title = null, description = null, robots = [], canonicals = [], headings = [], links = [], jsonld = [], ogImage = null, ogWidth = null, ogHeight = null, subresources = [] } = {}) {
+// Error pages (404, 500, any error view) have no canonical URL: a canonical names the one address search engines should
+// index for this content, and an error view is not content at any address (it is served at whatever URL failed). A
+// canonical on a 404 would point every broken URL at one indexable page, the "soft 404" search engines penalise. So
+// seo-04 is not required on them; a canonical that is present anyway is a warning. An error page is a response with
+// status ≥ 400 (an unknown route served by the site) or a file/route named for one (404.html, 500.html, error.html,
+// not-found, _error), which a static host serves with 200 when the file is opened directly.
+export const ERROR_PAGE_PATH = /(?:^|\/)(?:40[0-9]|50[0-9]|error|not-found|_error)(?:\.html?)?\/?$/i;
+export const isErrorPage = (pageUrl, status = null) => (Number.isFinite(status) && status >= 400) || ERROR_PAGE_PATH.test(new URL(pageUrl).pathname);
+export function seoRules({ pageUrl, title = null, description = null, robots = [], canonicals = [], headings = [], links = [], jsonld = [], ogImage = null, ogWidth = null, ogHeight = null, subresources = [], status = null } = {}) {
   const fails = [], warns = [], f = (id, why, at = "") => fails.push({ id, why, at }), w = (id, why, at = "") => warns.push({ id, why, at });
   const page = new URL(pageUrl); const local = /^(127\.0\.0\.1|localhost|\[::1\])$/.test(page.hostname) || page.protocol === "file:";
   if (robots.some((r) => /noindex/i.test(r))) f("seo-03", "robots meta says noindex");
-  if (canonicals.length !== 1) f("seo-04", canonicals.length ? `${canonicals.length} canonical tags` : "no canonical tag");
+  if (isErrorPage(pageUrl, status)) { if (canonicals.length) w("seo-04", "error page has a canonical tag; an error page has no canonical URL (remove it)"); }
+  else if (canonicals.length !== 1) f("seo-04", canonicals.length ? `${canonicals.length} canonical tags` : "no canonical tag");
   else if (!/^https?:\/\//.test(canonicals[0])) (local ? w : f)("seo-04", `canonical "${canonicals[0]}" is not absolute${local ? " (accepted for a local file)" : ""}`);
   if (!title) f("seo-05", "no <title>"); else if (title.length > TITLE_MAX) f("seo-05", `title is ${title.length} characters (≤ ${TITLE_MAX})`, `"${clip(title)}"`);
   if (!description) f("seo-06", "no meta description"); else if (description.length > DESC_MAX) f("seo-06", `meta description is ${description.length} characters (≤ ${DESC_MAX})`);

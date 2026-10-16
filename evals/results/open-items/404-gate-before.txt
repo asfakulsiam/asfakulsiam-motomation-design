@@ -1,0 +1,5 @@
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+
+evals/results/diversity/01-funeral-home/404.html
+  rules: C0 S1 P0 K0  (rule sets only; no stamp)
+     ✗ seo-04  no canonical tag

@@ -5,7 +5,8 @@
 //     each target: a built page (file.html), a project folder (its index.html, else out/ dist/ build/ …) or a URL
 //
 // The Delivery Gate checks rules on one page. It cannot see that two unrelated briefs came out as the same shape. This
-// script opens every build at 1440×900, extracts six feature sets, and scores every pair 0–1 per axis
+// script opens every build at 1440×900 and at 375×812 (v2.13; --viewport picks others), extracts six feature sets per
+// viewport, and scores every pair 0–1 per axis
 // (0 = nothing shared, 1 = the same):
 //
 //   structure    DOM hierarchy (weighted Jaccard of 3-deep tag-path shingles, single-child wrappers collapsed, so
@@ -55,7 +56,31 @@ import { cli, load } from "./lib.mjs";
 
 export const AXES = ["structure", "composition", "image", "typography", "interaction", "signature"];
 export const THRESHOLD = 0.4;
-const USAGE = "Usage: node scripts/originality.mjs <a> <b> [c …] | --dir <folder> [--json] [--out report.json] [--threshold 0.4] [--labels a,b,…]";
+const USAGE = "Usage: node scripts/originality.mjs <a> <b> [c …] | --dir <folder> [--json] [--out report.json] [--threshold 0.4] [--labels a,b,…] [--viewport 1440x900,375x812]";
+// --viewport: the sizes each page is measured at (default both). With more than one, every viewport gets its own matrix
+// and the verdict is the worst of them: a pair repeats on an axis if it repeats there at any size. A desktop that
+// differs and a phone layout that collapses both pages into the same single column is still a repeat.
+export const VIEWPORTS = [[1440, 900], [375, 812]];
+export function parseViewports(v) {
+  if (v === undefined || v === true) return VIEWPORTS;
+  const out = String(v).split(",").map((x) => x.trim().match(/^(\d{3,4})x(\d{3,4})$/)).map((m) => (m ? [+m[1], +m[2]] : null));
+  return out.length && out.every(Boolean) ? out : null;
+}
+// worst case across viewports, per pair and axis; parts come from the viewport that scored highest on that axis
+export function mergeReports(reps, keys) {
+  const [first] = reps; const threshold = first.threshold;
+  const pairs = first.pairs.map((p0, i) => {
+    const score = {}, parts = {}, at = {};
+    for (const ax of [...AXES, "overall"]) {
+      let best = null, bi = 0;
+      reps.forEach((r, k) => { const v = r.pairs[i].score[ax]; if (v !== null && v !== undefined && (best === null || v > best)) { best = v; bi = k; } });
+      score[ax] = best; at[ax] = keys[bi]; if (AXES.includes(ax)) parts[ax] = reps[bi].pairs[i].parts[ax];
+    }
+    return { a: p0.a, b: p0.b, score, parts, at, over: AXES.filter((ax) => score[ax] !== null && score[ax] >= threshold) };
+  });
+  return { threshold, labels: first.labels, pairs, pass: pairs.every((p) => !p.over.length), max: Object.fromEntries([...AXES, "overall"].map((ax) => [ax, pairs.length ? Math.max(...pairs.map((p) => p.score[ax] ?? 0)) : null])),
+    viewports: keys, byViewport: Object.fromEntries(keys.map((k, i) => [k, reps[i]])) };
+}
 // --dir <folder>: every *.html directly in the folder plus every <subfolder>/index.html, each labelled by its name (target selection only; scoring is unchanged)
 export function dirTargets(dir) {
   const abs = resolve(dir); const out = [];
@@ -319,9 +344,9 @@ async function loadPlaywright() {
 function declaredSignature(html) {
   const m = html.match(/motomation ·[^*>]*?signature:\s*([a-z0-9-]+)/i) || html.match(/data-signature=["']([a-z0-9-]+)["']/i); return m ? m[1].toLowerCase() : null;
 }
-export async function features(browser, target) {
+export async function features(browser, target, [W, H] = [1440, 900]) {
   const loc = locate(target); const srv = loc.url ? null : await serve(loc.root); const url = loc.url || `http://127.0.0.1:${srv.address().port}/${encodeURIComponent(loc.file)}`;
-  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, bypassCSP: true }); const page = await ctx.newPage();
+  const ctx = await browser.newContext({ viewport: { width: W, height: H }, deviceScaleFactor: 1, bypassCSP: true }); const page = await ctx.newPage();
   try {
     await page.goto(url, { waitUntil: "networkidle", timeout: 60000 }).catch(() => page.waitForTimeout(3000));
     await page.waitForTimeout(800);
@@ -332,11 +357,11 @@ export async function features(browser, target) {
     // signature: base, +1.2s idle (loops), pointer sweep, then 5 scroll positions
     await page.mouse.move(5, 5); await page.evaluate(SNAP_SETUP); const base = await page.evaluate(SNAP);
     await page.waitForTimeout(1200); const time = await page.evaluate(SNAP);
-    for (const [x, y] of [[720, 450], [300, 300], [1100, 600], [720, 450]]) { await page.mouse.move(x, y, { steps: 6 }); await page.waitForTimeout(60); }
+    for (const [x, y] of [[720, 450], [300, 300], [1100, 600], [720, 450]]) { await page.mouse.move(Math.round(x * W / 1440), Math.round(y * H / 900), { steps: 6 }); await page.waitForTimeout(60); }
     const pointer = await page.evaluate(SNAP);
-    const max = Math.max(0, h - 900); const scrollSnaps = [];
+    const max = Math.max(0, h - H); const scrollSnaps = [];
     for (const t of [0, 0.25, 0.5, 0.75, 1]) { const y = Math.round(max * t); await page.mouse.wheel(0, 0); await page.evaluate((v) => scrollTo(0, v), y); await page.waitForTimeout(500); scrollSnaps.push(await page.evaluate(SNAP)); }
-    const sig = signatureOf({ base, time, pointer, scroll: scrollSnaps }, 1440, 900);
+    const sig = signatureOf({ base, time, pointer, scroll: scrollSnaps }, W, H);
     // measured scroll behaviour feeds the interaction axis: which properties change while scrolling, anywhere on the page
     const changing = new Set(); for (let s = 1; s < scrollSnaps.length; s++) scrollSnaps[s].forEach((e, i) => e.p.forEach((v, k) => { if (v !== scrollSnaps[s - 1][i].p[k]) changing.add(PROPS[k]); }));
     for (const p of changing) f.interaction.scroll[`scroll-changes:${p}`] = 1;
@@ -369,7 +394,7 @@ export function printReport(rep, feats) {
 }
 
 async function main() {
-  const a = cli("originality", USAGE, { json: "bool", out: "value", threshold: "value", labels: "value", dir: "value" }, null, { pos: [0, Infinity] });
+  const a = cli("originality", USAGE, { json: "bool", out: "value", threshold: "value", labels: "value", dir: "value", viewport: "value" }, null, { pos: [0, Infinity] });
   if (a.dir) { if (a._.length) { console.error(`originality: give --dir or targets, not both\n${USAGE}`); process.exit(2); } if (!existsSync(resolve(String(a.dir)))) { console.error(`originality: not found: ${a.dir}\n${USAGE}`); process.exit(2); } a._ = dirTargets(String(a.dir)); }
   if (a._.length < 2) { console.error(`originality: needs at least two pages to compare\n${USAGE}`); process.exit(2); }
   const threshold = a.threshold !== undefined ? +a.threshold : THRESHOLD; if (!(threshold > 0 && threshold <= 1)) { console.error(`originality: --threshold must be in (0, 1]\n${USAGE}`); process.exit(2); }
@@ -377,12 +402,17 @@ async function main() {
   const labels = a.labels ? String(a.labels).split(",") : a._.map((t) => (/^https?:/.test(t) ? t : basename(resolve(t)).replace(/\.html?$/, "") === "index" ? basename(dirname(resolve(t))) : basename(resolve(t)).replace(/\.html?$/, "")));
   if (labels.length !== a._.length) { console.error(`originality: --labels has ${labels.length} name(s) for ${a._.length} target(s)\n${USAGE}`); process.exit(2); }
   const pw = await loadPlaywright(); if (!pw) { console.log("not verified — no browser (install Playwright: npm i -D playwright && npx playwright install chromium)"); process.exit(3); }
-  const browser = await pw.chromium.launch(); const feats = [];
-  try { for (const t of a._) feats.push(await features(browser, t)); } catch (e) { console.log(`not verified — the browser failed (${String(e.message || e).split("\n")[0]})`); process.exit(3); } finally { await browser.close().catch(() => {}); }
-  const rep = matrixReport(labels, feats, threshold); rep.targets = a._;
+  const vps = parseViewports(a.viewport); if (!vps) { console.error(`originality: --viewport takes WxH[,WxH…], e.g. 1440x900,375x812\n${USAGE}`); process.exit(2); }
+  const keys = vps.map(([w, h]) => `${w}x${h}`);
+  const browser = await pw.chromium.launch(); const byVp = [];
+  try { for (const vp of vps) { const fs = []; for (const t of a._) fs.push(await features(browser, t, vp)); byVp.push(fs); } } catch (e) { console.log(`not verified — the browser failed (${String(e.message || e).split("\n")[0]})`); process.exit(3); } finally { await browser.close().catch(() => {}); }
+  const reps = byVp.map((fs) => matrixReport(labels, fs, threshold)); const feats = byVp[0];
+  const rep = reps.length === 1 ? { ...reps[0], viewports: keys } : mergeReports(reps, keys); rep.targets = a._;
   rep.features = feats.map((f, i) => ({ label: labels[i], blocks: f.structure.order, images: f.image.count, display: f.typography.display, body: f.typography.body, signature: f.signature }));
   if (a.out) writeFileSync(String(a.out), JSON.stringify(rep, null, 2));
-  if (a.json) console.log(JSON.stringify(rep, null, 2)); else printReport(rep, feats);
+  if (a.json) console.log(JSON.stringify(rep, null, 2));
+  else if (reps.length === 1) printReport(rep, feats);
+  else { reps.forEach((r, i) => { console.log(`\n=== at ${keys[i].replace("x", "×")} ===`); printReport(r, byVp[i]); }); console.log(`\n=== worst of ${keys.map((k) => k.replace("x", "×")).join(" and ")} (the verdict) ===`); printReport(rep, feats); }
   process.exit(rep.pass ? 0 : 1);
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch((e) => { console.log(`not verified — ${String(e.message || e).split("\n")[0]}`); process.exit(3); });
