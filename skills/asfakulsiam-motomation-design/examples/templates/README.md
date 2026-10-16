@@ -30,7 +30,7 @@ The pages are also built once, in one stack, so the Delivery Gate can measure th
 
 **Tier 5 film templates** (standalone: `index.html` + a frame sequence, not built from sections)
 
-2 scroll-as-film pages. Each folder holds the page, its `scene.mjs`, the frames rendered from it by `scripts/build-frames.mjs` (`poster.webp`, `storyboard/`, `frames.json`; `frames/`, `frames-mobile/` and `film.mp4` are not on main: `node scripts/fetch-frames.mjs` restores them from the tarball named in `frames.lock.json`, sha256-checked), `DESIGN.md`, `MOTION.md` and `log.json`. Reduced motion is the storyboard: stills in normal flow, no canvas mounted.
+2 scroll-as-film pages. Each folder holds the page, its `scene.mjs`, the frames rendered from it by `scripts/build-frames.mjs` (`poster.webp`, `storyboard/`, `frames.json`; `frames/`, `frames-mobile/` and `film.mp4` are not on main: `node scripts/fetch-frames.mjs` restores them from the tarball named in `frames.lock.json`, sha256-checked), `DESIGN.md`, `MOTION.md` and `log.json`. Reduced motion is the storyboard: stills in normal flow, no canvas mounted. **Run `node scripts/fetch-frames.mjs` before building the film templates. Frames are kept off the repo to keep install small.** Without them a fresh clone shows a blank film canvas; each film folder's `README.md` says how to get them, and records the choice (fetch on demand, not committed: about 7.2 MB of frames).
 
 | Page | Archetype · mutation · signature | Tier | Frames (desktop · mobile) | Fonts | Motion | Tier 5 assets |
 |---|---|---|---|---|---|---|
