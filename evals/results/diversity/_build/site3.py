@@ -89,6 +89,9 @@ h1 { margin: 0; position: relative; z-index: 2; }
 .room.red a { color: var(--black); }
 .room.red :focus-visible { outline-color: var(--black); }
 .room-no { margin: 0; font-size: 1rem; letter-spacing: .2em; color: var(--dim); }
+/* forced colours paint an opaque backplate behind every text run; the transformed .giant and the oversized .hit headings
+   paint above their non-positioned siblings, so their backplates covered .sub and .room-no. Lift both above them. */
+.room-no, .sub { position: relative; z-index: 3; }
 .room.red .room-no { color: var(--black); }
 h2 { margin: 0; font-size: clamp(3.4rem, 15vw, 13rem); line-height: .85; letter-spacing: -.01em; overflow-wrap: normal; }
 .big { font-size: clamp(1.15rem, 2.6vw, 1.9rem); line-height: 1.3; max-width: 34ch; margin: 0; font-weight: 700; }

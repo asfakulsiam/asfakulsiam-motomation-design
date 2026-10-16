@@ -20,11 +20,7 @@ DELIVERY GATE · evals/results/diversity/03-hardcore-metal-band
      40×38  a.mark  "GH"
   zoom200   ✓ 0 lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%
   reflow    ✓ 0px horizontal scroll at 320px
-  forced    ✗ 4 of 21 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
-     1:1  span.sub  "Lohar Shohor. Eight tracks. Ou"  forced-color-adjust: auto
-     1:1  p.room-no  "ROOM 01"  forced-color-adjust: auto
-     1:1  p.room-no  "ROOM 02"  forced-color-adjust: auto
-     1:1  p.room-no  "ROOM 03"  forced-color-adjust: auto
+  forced    ✓ 0 of 21 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
   kbd-trap  ✓ 8 of 8 tabbable reached in 22 Tabs, no cycle
   C copy     ✓ 0 rule(s) failing  (craft/copy.md; 0 warning(s))
   S SEO      ✓ 0 rule(s) failing  (craft/seo.md; 0 warning(s))
@@ -47,7 +43,7 @@ DELIVERY GATE · evals/results/diversity/03-hardcore-metal-band
   hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
   structure  5 sections, entrances: fade | fade+y+scale | fade+y+scale | fade+y+scale | static → 2 repeat(s); pins 0, WebGL canvases 0, JS 2KB gzipped
   records    DESIGN.md: /home/user/workspace/repo/evals/results/diversity/03-hardcore-metal-band/DESIGN.md · memory log: /home/user/.motomation/log.json · stamp fields: {"archetype":"room","mutation":"remove-expected","signature":"impact","tier":"4"}
-  critique → C4[restraint:changed1] H5[375:0] S3[last5:archetype-reused,signature-new,fp81] R3[cuts:1,anim:1] M5[t4:pins0/2,webgl0/1,js2/250KB,rm0] V3[entrance-repeats:2] Q5[prog:n/a,smooth:n/a,rm:n/a] A4[focus:8/8,tgt:0f2w,zoom:0,reflow:0,fc:4,trap:0]
+  critique → C4[restraint:changed1] H5[375:0] S3[last5:archetype-reused,signature-new,layout-reused,palette-new,fp81] R3[cuts:1,anim:1] M5[t4:pins0/2,webgl0/1,js2/250KB,rm0] V3[entrance-repeats:2] Q5[prog:n/a,smooth:n/a,rm:n/a] A5[focus:8/8,tgt:0f2w,zoom:0,reflow:0,fc:0,trap:0]
   coverage   ✓ worst width 375px: 1 of 23 text elements skipped (4%; limit 30% at every width)
   X — completeness (band site (album, tour, merch), Bangladesh; static + one notify endpoint, admin panel: no)  ✓
       Routes:      4/4 required present
@@ -66,10 +62,10 @@ DELIVERY GATE · evals/results/diversity/03-hardcore-metal-band
     forms    ✓ 5/5 form state(s) rendered · Tell me when the drop opens (/merch.html): default✓ validation✓ loading✓ success✓ serverError✓
     loading  – n/a: no fetch or XHR request after load: no async surface
     errors   ✓ 1/1 designed not-found view (unknown route → HTTP 404)
-               · probed /__motomation-missing-mvap9wpy/
+               · probed /__motomation-missing-mvas3bv1/
     session  ✓ 6/6 · load ✓ · open a second route ✓ · back button ✓ · forward button ✓ · full reload ✓ · two tabs ✓
                · second page: /album.html
     journey: nav0 mobile0 forms0 loading- errors0 session0 → PASS
-  FAIL  stamp → critique: C4[restraint:changed1] H5[375:0] S3[last5:archetype-reused,signature-new,fp81] R3[cuts:1,anim:1] M5[t4:pins0/2,webgl0/1,js2/250KB,rm0] V3[entrance-repeats:2] Q5[prog:n/a,smooth:n/a,rm:n/a] A4[focus:8/8,tgt:0f2w,zoom:0,reflow:0,fc:4,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k4 · rules: C0 S0 P0 K0 · gate/4 · 66ac91d409 · skipped 1/23@375
+  PASS  stamp → critique: C4[restraint:changed1] H5[375:0] S3[last5:archetype-reused,signature-new,layout-reused,palette-new,fp81] R3[cuts:1,anim:1] M5[t4:pins0/2,webgl0/1,js2/250KB,rm0] V3[entrance-repeats:2] Q5[prog:n/a,smooth:n/a,rm:n/a] A5[focus:8/8,tgt:0f2w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · 50557913c5 · skipped 1/23@375
 
-(exit 1, 184s)
+(exit 0)
