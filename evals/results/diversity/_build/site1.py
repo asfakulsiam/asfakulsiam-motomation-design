@@ -37,8 +37,8 @@ PRICES = [("Collection, home or hospital", "4,500"), ("Washing and shrouding", "
 def receipt(rows, total=True):
     lines = ''.join(f'<li class="line"><span>{n}</span><span class="dots" aria-hidden="true"></span><span class="amt">BDT {a}</span></li>' for n, a in rows)
     return f'<ol class="receipt" aria-label="Sample prices in taka">{lines}</ol>'
-def steps(rows):
-    return '<ol class="steps">' + ''.join(f'<li class="line"><h3>{t}</h3><p>{d}</p></li>' for t, d in rows) + '</ol>'
+def steps(rows, h='h3'):  # h2 where the list sits directly under the page's h1 (no skipped heading level)
+    return '<ol class="steps">' + ''.join(f'<li class="line"><{h}>{t}</{h}><p>{d}</p></li>' for t, d in rows) + '</ol>'
 
 index = head('Shanti Ghat Funeral Service · Narayanganj', 'A family funeral home in Narayanganj since 1974. We answer at any hour, come to you, and publish every price.', '/') + f'''<main id="main" class="sheet">
 <p class="sheet-label line">Instructions for the family · keep this page</p>
@@ -53,7 +53,7 @@ index = head('Shanti Ghat Funeral Service · Narayanganj', 'A family funeral hom
 ''' + FOOT
 wh = head('What happens next · Shanti Ghat', 'Each step from the first call to the paperwork afterwards, in the order it happens, for every faith.', '/what-happens-next.html') + f'''<main id="main" class="sheet">
 <p class="sheet-label line">Step by step</p><h1 class="line">What happens next</h1>
-{steps(STEPS + [("Paperwork", "We fill in the death registration with you and take it to the city office. You keep the copies."), ("Later", "If you want a gathering on the fortieth day or a shraddha, we can help with the hall and the food.")])}
+{steps(STEPS + [("Paperwork", "We fill in the death registration with you and take it to the city office. You keep the copies."), ("Later", "If you want a gathering on the fortieth day or a shraddha, we can help with the hall and the food.")], "h2")}
 <p class="line"><a class="more" href="/prices.html">What each step costs</a></p>
 </main>
 ''' + FOOT
@@ -100,7 +100,7 @@ a:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; border-r
 .sheet-label { margin: 0 0 1.25rem; font: 500 .8rem/1.4 "IBM Plex Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); }
 h1 { margin: 0 0 1.25rem; font-weight: 300; font-size: clamp(2.1rem, 6.4vw, 3.1rem); line-height: 1.08; letter-spacing: -.01em; }
 h2 { margin: 2.75rem 0 .75rem; font-weight: 500; font-size: 1.45rem; line-height: 1.25; padding-top: 1.25rem; border-top: 1px dashed var(--rule); }
-h3 { margin: 0; font-weight: 500; font-size: 1.1rem; }
+h3, .steps h2 { margin: 0; font-weight: 500; font-size: 1.1rem; }
 p { margin: 0 0 .9rem; max-width: 62ch; }
 .lede { font-size: 1.2rem; color: var(--soft); }
 .steps { list-style: none; margin: 0; padding: 0; counter-reset: s; }

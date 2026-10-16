@@ -10,7 +10,7 @@ design.write(os.path.join(os.path.dirname(__file__), '..', '05-municipal-water-a
         ('state', 'report form: default / validation error / pending / success / server error', 'report.js#Please fix the marked fields'),
         ('skeleton', 'outage tables and today\'s sentence', 'index.html#skel'),
         ('edge', 'Bangla readers: language toggle (partial copy)', 'site.js#বাংলা'),
-        ('edge', 'feed fails on slow 3G: the sentence names the helpline', 'site.js#Call 16162')],
+        ('edge', 'feed fails on slow 3G: the sentence names the helpline', 'site.js#Call 0721-000000')],
  refs=['GOV.UK Design System (public service pattern): the task first, nothing between the resident and the answer',
        'WCAG 2.2 AAA focus appearance and Atkinson Hyperlegible (Braille Institute): accessibility beyond AA where cheap',
        'A tailor\'s tape (collision): a ruler with a marked band; used for the quality report only'],

@@ -19,7 +19,7 @@ a:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; border-r
 .sheet-label { margin: 0 0 1.25rem; font: 500 .8rem/1.4 "IBM Plex Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); }
 h1 { margin: 0 0 1.25rem; font-weight: 300; font-size: clamp(2.1rem, 6.4vw, 3.1rem); line-height: 1.08; letter-spacing: -.01em; }
 h2 { margin: 2.75rem 0 .75rem; font-weight: 500; font-size: 1.45rem; line-height: 1.25; padding-top: 1.25rem; border-top: 1px dashed var(--rule); }
-h3 { margin: 0; font-weight: 500; font-size: 1.1rem; }
+h3, .steps h2 { margin: 0; font-weight: 500; font-size: 1.1rem; }
 p { margin: 0 0 .9rem; max-width: 62ch; }
 .lede { font-size: 1.2rem; color: var(--soft); }
 .steps { list-style: none; margin: 0; padding: 0; counter-reset: s; }

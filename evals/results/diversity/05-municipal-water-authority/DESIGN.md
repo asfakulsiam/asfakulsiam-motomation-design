@@ -20,7 +20,7 @@ Built for `evals/briefs/diversity/05-municipal-water-authority.md` by following 
 | state | report form: default / validation error / pending / success / server error | required | report.js#Please fix the marked fields |
 | skeleton | outage tables and today's sentence | required | index.html#skel |
 | edge | Bangla readers: language toggle (partial copy) | required | site.js#বাংলা |
-| edge | feed fails on slow 3G: the sentence names the helpline | required | site.js#Call 16162 |
+| edge | feed fails on slow 3G: the sentence names the helpline | required | site.js#Call 0721-000000 |
 | template | README.md | not required for this brief, reason: the diversity arm compares rendered sites, not the sellable template package | |
 | template | SCHEMA.md | not required for this brief, reason: the diversity arm compares rendered sites, not the sellable template package | |
 | template | DATA.md | not required for this brief, reason: the diversity arm compares rendered sites, not the sellable template package | |

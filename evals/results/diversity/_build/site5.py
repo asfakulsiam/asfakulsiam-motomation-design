@@ -7,7 +7,8 @@ CSP = "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-s
 STAMP = '<!-- motomation · archetype: manifesto · mutation: single-object (today\'s sentence) · signature: ward-sentence · tier: 1 · critique: <paste> · gate: <paste> -->'
 NAV = [('/', 'Today', 'আজ'), ('/outages.html', 'Outages', 'সরবরাহ বন্ধ'), ('/bills.html', 'Bills', 'বিল'), ('/report.html', 'Report a problem', 'সমস্যা জানান'), ('/water-quality.html', 'Water quality', 'পানির মান')]
 def head(title, desc, path, page):
-    nav = ''.join(f'<a href="{h}" data-bn="{b}"{" aria-current=\"page\"" if h == path else ""}>{t}</a>' for h, t, b in NAV)
+    # the current page is marked, not linked: a link to the page you are on changes nothing when tapped
+    nav = ''.join(f'<span data-bn="{b}" aria-current="page">{t}</span>' if h == path else f'<a href="{h}" data-bn="{b}">{t}</a>' for h, t, b in NAV)
     ld = {"@context": "https://schema.org", "@type": "GovernmentOrganization", "name": "Rajshahi City Water Supply Authority", "areaServed": "Rajshahi City Corporation"}
     return f'''<!doctype html>
 <html lang="en">
@@ -91,9 +92,9 @@ a:hover { color: var(--ink); text-decoration-thickness: 3px; }
 .lang:hover { background: var(--pale); }
 .lang[aria-pressed="true"] { background: var(--ink); color: #fff; }
 .top nav { max-width: 64rem; margin: 0 auto; padding: 0 1rem; display: flex; flex-wrap: wrap; gap: 0 .25rem; }
-.top nav a { padding: .7rem .6rem; color: var(--ink); text-decoration: none; border-bottom: 4px solid transparent; margin-bottom: -4px; }
+.top nav a, .top nav [aria-current] { padding: .7rem .6rem; color: var(--ink); text-decoration: none; border-bottom: 4px solid transparent; margin-bottom: -4px; }
 .top nav a:hover { border-bottom-color: var(--soft); }
-.top nav a[aria-current] { font-weight: 700; border-bottom-color: var(--ink); }
+.top nav [aria-current] { font-weight: 700; border-bottom-color: var(--ink); }
 main { max-width: 64rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
 h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); line-height: 1.15; margin: .5rem 0 1rem; }
 h2 { font-size: 1.4rem; margin: 2.25rem 0 .75rem; }
