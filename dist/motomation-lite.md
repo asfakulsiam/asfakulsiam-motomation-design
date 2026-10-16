@@ -1,4 +1,4 @@
-# Motomation Design v2.10.0: lite edition
+# Motomation Design v2.10.1: lite edition
 
 Lite edition. Full version at the repo. Dropped: Standards vs house style, When to use the short route.
 

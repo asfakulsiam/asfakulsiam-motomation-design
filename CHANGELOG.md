@@ -4,6 +4,11 @@ All notable changes to this skill. Versions follow [Semantic Versioning](https:/
 
 ## [Unreleased]
 
+## [2.10.1] - 2026-10-16
+
+- **New `docs/CHEATSHEET.md`:** the whole skill on one page. The five checkpoints and how to answer them (approve, redirect, "show me alternatives", override, "Approve every checkpoint." for unattended runs); every flag; the five motion tiers with use cases; every command (create, tune, evaluate, ship, meta) with what it does, when to use it and a copy-paste prompt; what every `/build` ships; the scripts with examples; six full-potential recipes (Tier 5 story site, full e-commerce template, WebGL launch, redesign, short-route fix, unattended run); tips for the best output. Linked from the top of `README.md` and from Quick start.
+- Also recorded here (committed after 2.10.0 in 33d150d, without a changelog entry): the full skill has no token budget (the lite build drops whole sections in a fixed order and names them at the top: "Lite edition. Full version at the repo. Dropped: …"; Checkpoint 2 and the shortened `SKILL.md` rules restored), and every benchmark brief and the runner's skill prompts say "Approve every checkpoint.".
+
 ## [2.10.0] - 2026-10-16
 
 - **Five checkpoints replace the one confirmation.** Asking once at the start and then committing was wrong: the user decides at every meaningful step. The skill drafts, shows its reasoning, and stops after each checkpoint until the user approves, redirects, or asks for more information:
