@@ -1,0 +1,30 @@
+
+fixtures/journey/incomplete  (journey only; no stamp)
+  J — journey (whole site, real browser; any missing state fails the page; not in the stamp or its id)
+    nav      ✗ 2/3 route(s) reachable from home in ≤ 3 clicks (/:0 /contact:1)
+               ✗ /prices: not reachable from home in ≤ 3 clicks
+               ✗ /gallery: broken link: HTTP 404 (linked from /)
+               · sitemap.xml: 3 route(s)
+               · 3 page(s) loaded
+    mobile   ✗ 6/7 interactive element(s) respond at 375px · tap 6/7 · swipe n/a · long-press n/a
+               ✗ tap button "Book a repair" (/): nothing changed after a tap (no DOM change, focus, scroll, navigation or event)
+               · 2 page(s); an element shared by several pages (header, footer) is tapped once
+               · no element declares a long press
+    forms    ✗ 1/5 form state(s) rendered · Book a repair (/contact.html): default✗ validation✗ loading✗ success✓ serverError✗
+               ✗ Book a repair (/contact.html) default: field(s) without a label: phone
+               ✗ Book a repair (/contact.html) validation: an empty submit shows no designed error (no message, no field style change; a browser bubble alone does not count)
+               ✗ Book a repair (/contact.html) loading: nothing changed while the request was pending (button, aria-busy, progress, text)
+               ✗ Book a repair (/contact.html) serverError: after a 500 the form shows success
+    loading  ✗ 0/1 async surface(s) show a skeleton while pending
+               ✗ div#hours (/): filled after a request, but showed no skeleton while it was pending
+               · 1 request(s) held 2.5 s before release, across 2 page(s)
+    errors   ✗ 0/1 designed not-found view (unknown route → HTTP 404)
+               ✗ HTTP 404 but the page does not say the page was not found (empty body)
+               ✗ the not-found view has no link back to the home page
+               ✗ the not-found view is unstyled (browser defaults, not the site's styles)
+               · probed /__motomation-missing-mvan1kg0/
+    session  ✗ 4/6 · load ✓ · open a second route ✓ · back button ✗ · forward button ✓ · full reload ✓ · two tabs ✗
+               ✗ back button: uncaught error: state from the last visit broke the page
+               ✗ two tabs: tab 1: uncaught error: state from the last visit broke the page
+               · second page: /contact.html
+    journey: nav2 mobile1 forms4 loading1 errors3 session2 → FAIL (13 missing)

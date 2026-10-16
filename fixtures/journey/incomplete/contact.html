@@ -1,0 +1,11 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Contact · Ferry Lane Repairs</title><link rel="stylesheet" href="style.css"></head><body>
+<header><nav aria-label="Main"><a href="index.html">Home</a> <a href="contact.html">Contact</a></nav></header>
+<main id="main"><h1>Book a repair</h1>
+<form id="book" aria-label="Book a repair" novalidate>
+  <label for="name">Your name</label><input id="name" name="name">
+  <input name="phone" type="tel" placeholder="Phone">
+  <p><button type="submit">Send</button></p>
+  <p id="out"></p>
+</form></main>
+<script>document.getElementById("book").addEventListener("submit", (e) => { e.preventDefault(); fetch("/api/book", { method: "POST", body: new FormData(e.target) }).then(() => { document.getElementById("out").textContent = "Thank you, we got it."; }); });</script>
+</body></html>

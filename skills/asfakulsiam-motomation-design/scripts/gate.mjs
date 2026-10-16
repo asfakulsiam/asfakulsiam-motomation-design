@@ -42,6 +42,13 @@
 //   X          (v2.9.0) completeness: when DESIGN.md has a Scope section (Step 0.7), scripts/completeness.mjs checks
 //              every requested/required route, state, legal page, edge case, admin surface and skeleton the agent
 //              derived, plus the template shape. A missing item fails the page; not in the stamp or its id.
+//   J          (v2.11) journey: the whole site from this page, scripts/journey.mjs. nav (every sitemap route reachable from
+//              home in ≤ 3 clicks, no broken internal link), mobile (every interactive element responds to tap, swipe and
+//              long press at 375px with touch), forms (default, validation error, submit loading, success, server error,
+//              with the request held and answered 200 or 500), loading (every async surface shows a skeleton while its
+//              request is held), errors (an unknown route gets a designed not-found view), session (works after reload,
+//              back, forward and with two tabs). Any missing state fails the page. Not in the stamp or its id.
+//              --journey runs only these six (no stamp).
 //   micro-states (advisory, v2.9.0) buttons, forms, data lists, images and async actions: each expected state found in
 //              the page's CSS, markup or scripts? Missing ones warn; never fails, never in counts, the stamp or its id.
 //   richness   (advisory, v2.6.0) the "too little" side of restraint. Never fails, never in counts, the stamp or its id.
@@ -80,6 +87,7 @@ import os from "node:os";
 import { statfsSync } from "node:fs";
 import { projectRoot, userDir } from "./memory.mjs";
 import { completeness, completenessLines } from "./completeness.mjs";
+import { journey, journeyLines } from "./journey.mjs";
 import { copyRules, seoRules, perfRules, secRules, parseHeadersFile, rulesAxes } from "./rulesets.mjs";
 
 export const WIDTHS = [375, 390, 768, 1440];
@@ -119,8 +127,8 @@ const argv = process.argv.slice(2);
 const flags = {}; const targets = [];
 // v2.5.0 (C9): unknown flags and missing values are one friendly line plus the usage, exit 2; boolean flags never
 // swallow the word after them (`--json page.html` used to lose the target).
-const GATE_USAGE = "Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]] [--timeout s | --timeout-ms ms] [--light] [--rules] [--page home|category|about|page]   |   --report <file.html>   |   --verify <file.html> [--url u]";
-const GATE_FLAGS = { json: "bool", light: "bool", rules: "bool", help: "bool", report: "optional", verify: "value", url: "value", out: "value", design: "value", log: "value", tier: "value", archetype: "value", signature: "value", timeout: "value", "timeout-ms": "value", page: "value" };
+const GATE_USAGE = "Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]] [--timeout s | --timeout-ms ms] [--light] [--rules] [--journey] [--page home|category|about|page]   |   --report <file.html>   |   --verify <file.html> [--url u]";
+const GATE_FLAGS = { json: "bool", light: "bool", rules: "bool", journey: "bool", help: "bool", report: "optional", verify: "value", url: "value", out: "value", design: "value", log: "value", tier: "value", archetype: "value", signature: "value", timeout: "value", "timeout-ms": "value", page: "value" };
 const gateDie = (m) => { console.error(`gate: ${m}\n${GATE_USAGE}`); process.exit(2); };
 for (let i = 0; i < argv.length; i++) {
   const t = argv[i];
@@ -156,7 +164,9 @@ function serve(root) {
     const srv = createServer((req, res) => {
       let p = decodeURIComponent(new URL(req.url, "http://x").pathname);
       let f = join(root, p); if (existsSync(f) && statSync(f).isDirectory()) f = join(f, "index.html");
-      if (!f.startsWith(root) || !existsSync(f)) { res.writeHead(404); return res.end(); }
+      // a missing file answers 404 with the site's own 404.html when it has one, as static hosts (GitHub Pages, Netlify,
+      // Cloudflare Pages, Vercel) do; axis J (errors) reads that view
+      if (!f.startsWith(root) || !existsSync(f)) { const nf = join(root, "404.html"); if (existsSync(nf)) { res.writeHead(404, { "content-type": "text/html" }); return res.end(readFileSync(nf)); } res.writeHead(404); return res.end(); }
       // a _headers file next to the page (Netlify / Cloudflare Pages format) supplies the response headers it would ship with
       const hf = join(root, "_headers"); const extra = existsSync(hf) ? parseHeadersFile(readFileSync(hf, "utf8"), p) : {};
       res.writeHead(200, { ...extra, "content-type": MIME[extname(f)] || "application/octet-stream" }); res.end(readFileSync(f));
@@ -1186,6 +1196,8 @@ export async function scan(target, browser, opts = {}) {
     // advisory (v2.6.0 richness): never fails, never in counts, stamp or id
     const rich = await richness(browser, url, opts.page).catch((e) => ({ error: firstLine(e) }));
     const micro = await microStates(browser, url).catch((e) => ({ error: firstLine(e) })); // advisory (v2.9.0): never fails, never in counts, stamp or id
+    // axis J (v2.11): the whole site as a journey. Fails the page on any missing state; not in the counts, the stamp or its id
+    const jr = await journey(browser, url, { T }).catch((e) => ({ error: firstLine(e), pass: false, fails: 1, segment: "journey: not measured" }));
     // fingerprint of the served HTML with stamp comments removed: same page → same id, any other page → a different id
     const html = await fetch(url).then((r) => r.text()).catch(() => "");
     const pageHash = createHash("sha256").update(html.replace(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g, "")).digest("hex").slice(0, 16);
@@ -1212,7 +1224,7 @@ export async function scan(target, browser, opts = {}) {
     // coverage: the worst width decides; more than SKIP_WARN_PCT skipped at any width means the page was not measured, not passed
     const worstW = c.byWidth.reduce((a, x) => (x.skippedPct > a.skippedPct ? x : a), c.byWidth[0]);
     const coverage = { ok: !c.lowCoverage, skipped: worstW.skipped, total: worstW.total, pct: worstW.skippedPct, width: worstW.width, low: c.byWidth.filter((x) => x.lowCoverage).map((x) => x.width) };
-    return { target, url, version: GATE_VERSION, pass: pass && (!compl || !!compl.pass), completeness: compl, verified: coverage.ok, coverage, counts, id, stamp: stampOf(counts, id, coverage), critique: critiqueFull, sources: { design: designFile || null, log: logFile || null, meta }, rules, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu, quality: mq, access: ax, composition: comp, richness: rich, microStates: micro };
+    return { target, url, version: GATE_VERSION, pass: pass && (!compl || !!compl.pass) && !!jr.pass, completeness: compl, journey: jr, verified: coverage.ok, coverage, counts, id, stamp: stampOf(counts, id, coverage), critique: critiqueFull, sources: { design: designFile || null, log: logFile || null, meta }, rules, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu, quality: mq, access: ax, composition: comp, richness: rich, microStates: micro };
   } finally { close(); }
 }
 export const stampOf = (k, id, cov, version = GATE_VERSION) => `gate: c${k.contrast} o${k.overflow} w${k.words} rm${k.motion} a${k.names} n${k.numbers ?? 0}${k.quality !== undefined ? ` q${k.quality} k${k.access}` : ""}${k.copy !== undefined ? ` · rules: C${k.copy} S${k.seo} P${k.perf} K${k.sec}` : ""} · ${version} · ${id}${cov ? ` · skipped ${cov.skipped}/${cov.total}@${cov.width}` : ""}`;
@@ -1318,6 +1330,7 @@ function print(r) {
   L(`  critique → ${r.critique}${/\?/.test(r.critique) ? "   (axes marked ? have no record to derive from)" : ""}`);
   L(`  coverage   ${r.coverage.ok ? "✓" : "✗"} worst width ${r.coverage.width}px: ${r.coverage.skipped} of ${r.coverage.total} text elements skipped (${r.coverage.pct}%; limit ${SKIP_WARN_PCT}% at every width)${r.coverage.low.length ? ` · over the limit at ${r.coverage.low.join("/")}px` : ""}`);
   if (r.completeness) for (const l of r.completeness.error ? [`  X — completeness  ✗ ${r.completeness.error}`] : completenessLines(r.completeness)) L(l);
+  if (r.journey) for (const l of r.journey.error ? [`  J — journey  ✗ not measured: ${r.journey.error}`] : journeyLines(r.journey)) L(l);
   L(`  ${!r.coverage.ok ? "NOT VERIFIED (coverage)" : r.pass ? "PASS" : "FAIL"}  stamp → critique: ${r.critique} · ${r.stamp}`);
   L("");
 }
@@ -1442,6 +1455,13 @@ async function main() {
       } finally { await close?.(); } } } finally { await b.close().catch(() => {}); }
       if (flags.json) console.log(JSON.stringify(out.length === 1 ? out[0] : out, null, 2));
       process.exit(out.every((r) => Object.values(r.counts).every((n) => !n)) ? 0 : 1);
+    }
+    // --journey: only axis J (the six whole-site checks); no stamp (a stamp needs every axis)
+    if (flags.journey) {
+      const out = []; const b = await launch(pw, !!flags.light);
+      try { for (const t of targets) { const { url, close } = await toUrl(t); try { const j = await journey(b, url, { T }); out.push({ target: t, url, ...j }); if (!flags.json) { console.log(`\n${t}  (journey only; no stamp)`); for (const l of journeyLines(j)) console.log(l); } } finally { await close?.(); } } } finally { await b.close().catch(() => {}); }
+      if (flags.json) console.log(JSON.stringify(out.length === 1 ? out[0] : out, null, 2));
+      process.exit(out.every((r) => r.pass) ? 0 : 1);
     }
     if (flags.verify) {
       const file = String(flags.verify); const st = readStamp(readFileSync(file, "utf8"));

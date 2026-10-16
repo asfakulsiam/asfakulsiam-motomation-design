@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Ferry Lane Repairs</title><link rel="stylesheet" href="style.css"></head><body>
+<header><nav aria-label="Main"><a href="index.html">Home</a> <a href="contact.html">Contact</a></nav></header>
+<main id="main">
+<h1>Boat engines, fixed on the ghat</h1>
+<p>We repair outboard engines where the boat is moored. Most jobs are done the same day.</p>
+<button type="button" class="button">Book a repair</button>
+<h2>Open today</h2>
+<div id="hours"></div>
+<p>See also the <a href="gallery.html">gallery</a>.</p>
+</main>
+<footer><p>Ferry Lane Repairs · Narayanganj</p></footer>
+<script>if (sessionStorage.getItem("seen")) throw new Error("state from the last visit broke the page"); sessionStorage.setItem("seen", "1");
+fetch("data/hours.json").then((r) => r.json()).then((d) => { document.getElementById("hours").innerHTML = d.map((x) => "<p>" + x + "</p>").join(""); });</script>
+</body></html>

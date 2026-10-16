@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Ferry Lane Repairs</title><link rel="stylesheet" href="style.css"></head><body>
+<header><nav aria-label="Main"><a href="index.html">Home</a> <a href="services.html">Services</a> <a href="contact.html">Contact</a></nav></header>
+<main id="main">
+<h1>Boat engines, fixed on the ghat</h1>
+<p>We repair outboard engines where the boat is moored. Most jobs are done the same day.</p>
+<a class="button" href="contact.html">Book a repair</a>
+<h2>Recent jobs</h2>
+<ul class="reel" aria-label="Recent jobs"><li>Yamaha 15 · new impeller</li><li>Suzuki 9.9 · carburettor</li><li>Tohatsu 6 · fuel line</li><li>Honda 20 · gearbox oil</li></ul>
+<h2>Open today</h2>
+<div id="hours" aria-busy="true"><span class="skeleton"></span><span class="skeleton"></span></div>
+<button class="hold" type="button" data-long-press id="hold">Hold to call the workshop</button>
+<p id="hold-out" role="status"></p>
+</main>
+<footer><p>Ferry Lane Repairs · Narayanganj</p></footer>
+<script>
+fetch("data/hours.json").then((r) => r.json()).then((d) => { const h = document.getElementById("hours"); h.innerHTML = d.map((x) => "<p>" + x + "</p>").join(""); h.setAttribute("aria-busy", "false"); });
+let t; const b = document.getElementById("hold"), o = document.getElementById("hold-out");
+b.addEventListener("pointerdown", () => { t = setTimeout(() => { o.textContent = "Calling the workshop…"; }, 600); });
+b.addEventListener("pointerup", () => clearTimeout(t)); b.addEventListener("pointercancel", () => clearTimeout(t));
+b.addEventListener("click", () => { o.textContent = "Press and hold for a second to call."; });
+</script>
+</body></html>

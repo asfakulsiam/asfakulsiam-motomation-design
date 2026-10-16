@@ -1,0 +1,16 @@
+
+../../fixtures/journey/complete  (journey only; no stamp)
+  J — journey (whole site, real browser; any missing state fails the page; not in the stamp or its id)
+    nav      ✓ 4/4 route(s) reachable from home in ≤ 3 clicks (/:0 /services:1 /contact:1 /prices:2)
+               · sitemap.xml: 4 route(s)
+               · 4 page(s) loaded
+    mobile   ✓ 12/12 interactive element(s) respond at 375px · tap 10/10 · swipe 1/1 · long-press 1/1
+               · 4 page(s); an element shared by several pages (header, footer) is tapped once
+    forms    ✓ 5/5 form state(s) rendered · Book a repair (/contact.html): default✓ validation✓ loading✓ success✓ serverError✓
+    loading  ✓ 1/1 async surface(s) show a skeleton while pending
+               · 1 request(s) held 2.5 s before release, across 4 page(s)
+    errors   ✓ 1/1 designed not-found view (unknown route → HTTP 404)
+               · probed /__motomation-missing-mvam5ur1/
+    session  ✓ 6/6 · load ✓ · open a second route ✓ · back button ✓ · forward button ✓ · full reload ✓ · two tabs ✓
+               · second page: /services.html
+    journey: nav0 mobile0 forms0 loading0 errors0 session0 → PASS

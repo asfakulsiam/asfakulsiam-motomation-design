@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Contact · Ferry Lane Repairs</title><link rel="stylesheet" href="style.css"></head><body>
+<header><nav aria-label="Main"><a href="index.html">Home</a> <a href="services.html">Services</a> <a href="contact.html">Contact</a></nav></header>
+<main id="main"><h1>Book a repair</h1>
+<form id="book" novalidate aria-label="Book a repair">
+  <label for="name">Your name</label><input id="name" name="name" required autocomplete="name" aria-describedby="name-err"><p id="name-err" class="err" hidden></p>
+  <label for="phone">Phone</label><input id="phone" name="phone" type="tel" required autocomplete="tel" aria-describedby="phone-err"><p id="phone-err" class="err" hidden></p>
+  <label for="msg">What is wrong with the engine?</label><textarea id="msg" name="msg" rows="3"></textarea>
+  <p><button type="submit" id="send">Send the booking</button></p>
+  <p id="form-status" role="status"></p>
+</form></main>
+<footer><p>Ferry Lane Repairs · Narayanganj</p></footer>
+<script>
+const f = document.getElementById("book"), s = document.getElementById("send"), st = document.getElementById("form-status");
+f.addEventListener("submit", async (e) => { e.preventDefault(); let bad = false;
+  for (const [id, msg] of [["name", "Please enter your name."], ["phone", "Please enter a phone number we can call."]]) { const el = document.getElementById(id), er = document.getElementById(id + "-err"); if (!el.value.trim()) { el.setAttribute("aria-invalid", "true"); er.textContent = msg; er.hidden = false; bad = true; } else { el.removeAttribute("aria-invalid"); er.hidden = true; } }
+  if (bad) return;
+  s.disabled = true; s.setAttribute("aria-busy", "true"); s.textContent = "Sending…"; st.textContent = "";
+  try { const r = await fetch("/api/book", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(Object.fromEntries(new FormData(f))) }); if (!r.ok) throw new Error(r.status);
+    st.textContent = "Thank you. We will call you within the hour."; f.reset();
+  } catch { st.textContent = "Sorry, the booking did not go through. Please try again or call 01700-000000."; }
+  finally { s.disabled = false; s.removeAttribute("aria-busy"); s.textContent = "Send the booking"; } });
+</script>
+</body></html>

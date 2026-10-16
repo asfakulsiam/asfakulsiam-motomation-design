@@ -1,0 +1,71 @@
+DELIVERY GATE · examples/templates/hotel.html
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (55 measured; 1 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (55 measured; 1 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (55 measured; 1 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (55 measured; 1 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (11 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (56 compared)
+  names     ✓ 0 missing alt / accessible names  (7 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (18 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  progress  ✓ 0 of 1 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
+     ✓ sticky div  2700px  Δ median 28.7% · 7/7 transitions change  [22.71 23.74 26.13 28.67 28.88 28.98 29.44]
+  smooth    – not verified — sandbox (sandbox: 2 CPUs); measured p95 16.8ms @1440, 16.8ms @375 CPU×4 (budgets 20/25ms) — see docs/adapters/sandbox.md
+  rm-flow   ✓ reduced motion is normal flow, all text present · 2 visible canvas(es)
+  focus     ✓ 0 of 7 focused elements show no visible focus indicator  (7 tabbable)
+  targets   ✓ 0 under 24px, 0 under 44px (warning) at 375 touch  (3 checked; inline links exempt)
+  zoom200   ✓ 0 lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%
+  reflow    ✓ 0px horizontal scroll at 320px
+  forced    ✓ 0 of 55 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
+  kbd-trap  ✓ 7 of 7 tabbable reached in 20 Tabs, no cycle
+  C copy     ✓ 0 rule(s) failing  (craft/copy.md; 0 warning(s))
+  S SEO      ✓ 0 rule(s) failing  (craft/seo.md; 1 warning(s))
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible
+  P perf     ✓ 0 rule(s) failing  (craft/performance.md; 0 warning(s))
+  K security ✓ 0 rule(s) failing  (craft/security.md; 0 warning(s))
+  composition (advisory: heuristics, never fail the gate, not in the stamp)
+     pin fill  ⚠ 0 of 1 pinned zone(s) at least 60% filled  (sticky div 48%)
+     focal     ⚠ 4 of 8 screen(s) with text have one clear focal point (heaviest text mass ≥ 1.5× the next); no clear lead on screen 3 (1.02×), 4 (1.02×), 5 (1.02×), 7 (1.06×)
+     scale     ⚠ display:body 1:5.6  (96px / 17px; warn below 1:6)
+  richness (advisory: "too little" warnings, never fail the gate, not in the stamp)
+     page      home (from --page; set with --page home|category|about|page)
+     fold      ✓ 4 meaningful section(s) above the fold at 1440×900: heading h1#hero-hotel-room-title, text p, media img, media canvas  (warn below 3)
+     opening   ✓ h1 "Haveli Panam"
+  micro-states (advisory: missing states are warnings, never fail the gate, not in the stamp)
+     buttons   ⚠ 2 button(s): no hover, active, disabled state found  (have: focus, loading)
+     forms     – none on the page
+     lists     – 2 static list(s): not judged (mark data lists with data-entity)
+     images    ✓ 6 image(s)  (have: loading, loaded, error)
+     async     ✓ fetch/XHR in scripts  (have: pending, success, error)
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  5 sections, entrances: static | static | static | fade | static → 0 repeat(s); pins 1, WebGL canvases 0, JS 68KB gzipped
+  records    DESIGN.md: skills/asfakulsiam-motomation-design/examples/templates/hotel/DESIGN.md · memory log: skills/asfakulsiam-motomation-design/examples/templates/hotel/log.json · stamp fields: {"archetype":"room","mutation":"reverse-reveal","signature":"aperture","tier":"2"}
+  critique → C4[restraint:changed1] H5[375:0] S5[last5:archetype-new,signature-new,fp32] R5[cuts:2,anim:2] M5[t2:pins1/2,webgl0/1,js68/80KB,rm0] V5[entrance-repeats:0] Q5[prog:Δ28.7%,smooth:sandbox,rm:flow] A5[focus:7/7,tgt:0f0w,zoom:0,reflow:0,fc:0,trap:0]
+  coverage   ✓ worst width 375px: 1 of 56 text elements skipped (2%; limit 30% at every width)
+  J — journey (whole site, real browser; any missing state fails the page; not in the stamp or its id)
+    nav      ✗ 4/6 route(s) reachable from home in ≤ 3 clicks (/hotel:0 /org:1 /:1 /gallery:1 /personal:2 /saas-landing:3)
+               ✗ /: broken link: HTTP 404 (linked from /hotel)
+               ✗ /gallery: broken link: HTTP 404 (linked from /hotel)
+               · no sitemap.xml: the routes are the ones found by following links from home
+               · 6 page(s) loaded
+    mobile   ✓ 22/22 interactive element(s) respond at 375px · tap 21/21 · swipe 1/1 · long-press n/a
+               · 4 page(s); an element shared by several pages (header, footer) is tapped once
+               · 4 element(s) parked off-canvas (skip links, closed drawers) are keyboard-only by design and not tapped
+               · no element declares a long press
+    forms    ✗ 2/5 form state(s) rendered · YOUR EMAIL (/personal.html): default✓ validation✓ loading✗ success✗ serverError✗
+               ✗ YOUR EMAIL (/personal.html) loading: no request was made on a valid submit, so there is no pending state to show
+               ✗ YOUR EMAIL (/personal.html) success: no request was made: success cannot follow a server answer (a success message appears without any request)
+               ✗ YOUR EMAIL (/personal.html) serverError: no request was made, so a server error cannot happen or be shown
+    loading  – n/a: no fetch or XHR request after load: no async surface
+    errors   ✗ 0/1 designed not-found view (unknown route → HTTP 404)
+               ✗ HTTP 404 but the page does not say the page was not found (empty body)
+               ✗ the not-found view has no link back to the home page
+               ✗ the not-found view is unstyled (browser defaults, not the site's styles)
+               · probed /__motomation-missing-mvamhgu5/
+    session  ✓ 6/6 · load ✓ · open a second route ✓ · back button ✓ · forward button ✓ · full reload ✓ · two tabs ✓
+               · second page: /org.html
+    journey: nav2 mobile0 forms3 loading- errors3 session0 → FAIL (8 missing)
+  FAIL  stamp → critique: C4[restraint:changed1] H5[375:0] S5[last5:archetype-new,signature-new,fp32] R5[cuts:2,anim:2] M5[t2:pins1/2,webgl0/1,js68/80KB,rm0] V5[entrance-repeats:0] Q5[prog:Δ28.7%,smooth:sandbox,rm:flow] A5[focus:7/7,tgt:0f0w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · b5b26ee678 · skipped 1/56@375
+
+
