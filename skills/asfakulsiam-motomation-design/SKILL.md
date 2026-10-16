@@ -157,6 +157,7 @@ Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rule
 
 0. **Stack**: if the brief (or the existing project) names a stack, use it. Otherwise **Next.js (App Router, TypeScript, Tailwind)** for anything with routes or data, plain HTML for a single static page; never Astro or Vite for e-commerce unless the brief demands it. Every dependency passes the five checks in `craft/stack.md` (maintained, popular, not deprecated, Node 20 + React 19, permissive licence). Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 0.5. **Research (mandatory)**: leave the skill before designing. Live award sources (last 6 months) and `references/sources/`, concepts only. Record three references, three techniques with sources, and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference, never to the skill's defaults alone. No web: say so and state the limitation. See `craft/research.md`.
+0.7. **Derive the scope**: what a complete site of this type serves (routes, functions, states, legal pages for the region, edge cases, admin, skeletons), derived from research and knowledge, never a fixed list; each item requested / required / optional / not required with a reason, in `DESIGN.md` under `Scope`. Gate axis X (`scripts/completeness.mjs`) checks it.
 1. **Tension**: find the conflict inside the brief (calm vs. urgent, heritage vs. new, luxury vs. honest).
 2. **Concept**: resolve the tension in one sentence. This is the idea, not a layout.
 3. **Archetype + Mutation**: derive the page structure from the brief, with `structures/archetypes.md` and `data/archetypes.csv` as reference and constraint (not a menu), then break one of its rules.
@@ -227,6 +228,7 @@ node scripts/memory.mjs similar --brief "<brief>" --category <c>   # prior simil
 node scripts/memory.mjs recent --project ../..  # a per-project log, for tests
 node scripts/memory.mjs log --brief "<brief>" --category <c> --archetype ledger --palette "<name>" --fonts "Fraunces/Switzer" --motion "<language>" --signature letter-relay
 node scripts/contrast.mjs "#111111" "#F4F1EA"   # WCAG contrast check
+node scripts/completeness.mjs ./my-site          # gate axis X: the Step 0.7 scope, present or excused
 ```
 
 **Data is fuel, not a menu.** The files in `data/` (archetypes, palettes, fonts, mutations, collisions, motion, signatures, styles) inform the brief. Do not pick from a list; derive from the brief, using the list as reference and constraint. The scripts read these files to draw constraints and check contrast; if you can't run them (chat-only tools), read the CSVs yourself the same way: as constraints to bend to the brief, never a row to copy, and never the first row by default.

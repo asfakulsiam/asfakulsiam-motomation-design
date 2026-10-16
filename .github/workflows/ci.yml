@@ -24,6 +24,8 @@ jobs:
         run: node tests/repo/workflow-rules.test.mjs
       - name: Memory spans projects and forces divergence (user-level log, temp MOTOMATION_HOME)
         run: node tests/repo/memory.test.mjs
+      - name: Completeness axis X bites (derived scope, template shape; no browser)
+        run: node tests/gate/completeness.test.mjs
       - name: Template rules bite and templates don't drift (dials 1–3, tier in range, pins ≤ 2, timing sheets)
         run: node tests/templates/template-rules.test.mjs
       - name: Matched-arm turn cap is exact (fake claude)

@@ -14,6 +14,24 @@
 |---|---|---|---|---|---|---|
 | | | | | | | |
 
+## Scope
+<!-- Step 0.7 (thinking/sequence.md). Derived from research, standards and knowledge; never from a fixed list.
+     Checked by scripts/completeness.mjs (gate axis X). Marks: requested · required · optional · not required for this brief, reason: <why>.
+     Evidence: a path, optionally #<text> it must contain. Routes, legal pages and admin items starting with "/" are found automatically. -->
+**Site type:** <type, region>
+**Admin panel:** <yes | no> (settled at "Proceed?")
+
+| Kind | Item | Mark | Evidence |
+|---|---|---|---|
+| route | </path> | requested | |
+| function | <route: what it does> | required | <file#text> |
+| state | <route or surface: empty / loading / error / filled> | required | <SCHEMA.md#text or file#text> |
+| legal | </privacy-or-what-the-region-requires> | required | |
+| edge | <edge case> | required | <file#text> |
+| admin | </admin/...> | required | |
+| skeleton | <async surface> | required | <file> |
+| template | <middleware.ts, data/, …> | <required, or not required for this brief, reason: …> | |
+
 ## References
 <!-- Step 0.5, mandatory (craft/research.md). Written before Step 1. Sources: references/sources/ + live award sites. Concepts only, no copied code. -->
 **Access:** <web (searched YYYY-MM-DD) | no web access: working from training data (limitation: <what that means here>)>

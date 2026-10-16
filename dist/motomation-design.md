@@ -159,6 +159,7 @@ Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rule
 
 0. **Stack**: if the brief (or the existing project) names a stack, use it. Otherwise **Next.js (App Router, TypeScript, Tailwind)** for anything with routes or data, plain HTML for a single static page; never Astro or Vite for e-commerce unless the brief demands it. Every dependency passes the five checks in `craft/stack.md` (maintained, popular, not deprecated, Node 20 + React 19, permissive licence). Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 0.5. **Research (mandatory)**: leave the skill before designing. Live award sources (last 6 months) and `references/sources/`, concepts only. Record three references, three techniques with sources, and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference, never to the skill's defaults alone. No web: say so and state the limitation. See `craft/research.md`.
+0.7. **Derive the scope**: what a complete site of this type serves (routes, functions, states, legal pages for the region, edge cases, admin, skeletons), derived from research and knowledge, never a fixed list; each item requested / required / optional / not required with a reason, in `DESIGN.md` under `Scope`. Gate axis X (`scripts/completeness.mjs`) checks it.
 1. **Tension**: find the conflict inside the brief (calm vs. urgent, heritage vs. new, luxury vs. honest).
 2. **Concept**: resolve the tension in one sentence. This is the idea, not a layout.
 3. **Archetype + Mutation**: derive the page structure from the brief, with `structures/archetypes.md` and `data/archetypes.csv` as reference and constraint (not a menu), then break one of its rules.
@@ -229,6 +230,7 @@ node scripts/memory.mjs similar --brief "<brief>" --category <c>   # prior simil
 node scripts/memory.mjs recent --project ../..  # a per-project log, for tests
 node scripts/memory.mjs log --brief "<brief>" --category <c> --archetype ledger --palette "<name>" --fonts "Fraunces/Switzer" --motion "<language>" --signature letter-relay
 node scripts/contrast.mjs "#111111" "#F4F1EA"   # WCAG contrast check
+node scripts/completeness.mjs ./my-site          # gate axis X: the Step 0.7 scope, present or excused
 ```
 
 **Data is fuel, not a menu.** The files in `data/` (archetypes, palettes, fonts, mutations, collisions, motion, signatures, styles) inform the brief. Do not pick from a list; derive from the brief, using the list as reference and constraint. The scripts read these files to draw constraints and check contrast; if you can't run them (chat-only tools), read the CSVs yourself the same way: as constraints to bend to the brief, never a row to copy, and never the first row by default.
@@ -319,7 +321,7 @@ This is the missing key: it makes an agent think like a designer instead of a te
 1. Read the brief.
 2. Step 0: Stack.
 3. Step 0.5: Research.
-4. Step 0.7: Derive the scope (what this build covers).
+4. Step 0.7: Derive the scope (routes, functions, states, legal pages, edge cases, admin, skeletons).
 5. Present the plan: stack, scope, references, and what will be deferred (each with its reason).
 6. Ask exactly one question: **"Proceed?"**
 7. On yes, commit to the plan: build, gate, ship. No more interruptions: no question before the build, before the gate, or after the critique.
@@ -369,6 +371,40 @@ If you cannot access the web, say so explicitly, work from training data, and st
 **Test:** three references, three techniques with sources, the avoided pattern with why, the access line, and no decision traced only to the skill's defaults. If not, Step 1 doesn't start.
 
 ---
+
+### 0.7 Derive the scope
+
+The brief names a few pages; a complete site of its type needs more. "Build an e-commerce" means the whole e-commerce, not a homepage and some pages. Derive the scope yourself, from the Step 0.5 research, industry standards and your own knowledge. **Do not pick from a hardcoded list**: there is none in this skill, and `scripts/completeness.mjs` only checks what you derive.
+
+Answer, and write in `DESIGN.md` under `Scope` (from `templates/DESIGN.md`):
+
+- What routes does a complete <site type> serve?
+- What functionality exists on each page?
+- What states does each page need?
+- What legal pages are required in this region?
+- What edge cases must be handled?
+- What admin surface does this type need?
+- What skeleton states exist (one for every async surface: lists, grids, search, detail pages, cart, checkout, account, admin, whatever this type has)?
+
+Write each as a row of the Scope table (`| Kind | Item | Mark | Evidence |`; kinds: route, function, state, legal, edge, admin, skeleton, template) and mark it:
+
+- **requested**: the brief asks for it
+- **required**: the site type needs it, though the brief didn't ask
+- **optional**: nice to have; not checked
+- **not required for this brief, reason: <why>**: excused, with the reason
+
+The admin panel is part of the plan: the one question becomes "Proceed? (Admin panel: included / not included.)" and the answer settles it. Then commit to the scope.
+
+The skill also requires, in every build that has a server (each one excused in the table with a reason when it doesn't apply, e.g. a single static page):
+
+- `middleware.ts` with the auth gate, locale routing, redirects, rate limiting and security headers
+- a skeleton for every async surface
+- a `data/` folder of JSON mock data, typed by a `schema.json` inside that folder (the build's own `data/`, not this skill's)
+- comments in every non-trivial file
+- a sellable template: `README.md`, `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `CRITIQUE.md`, `GATE.md`, `LICENSE`, `CHANGELOG.md`, `.env.example`
+- component headers (tier, use-when, avoid-when, reduced-motion, touch)
+
+**Test:** is every route, state, legal page, edge case, admin surface and skeleton the site type needs in the Scope table, each marked, each excuse with a reason? `node scripts/completeness.mjs <project>` (gate axis X) will check them after the build; a missing item fails the gate.
 
 ### Memory check (mandatory, before Step 1)
 
@@ -3672,6 +3708,7 @@ It runs these bounded checks in a real browser and prints numbers. Each one veri
 | `n` | **Numbers** (counters, prices, `progress`/`meter`, `aria-valuenow`) read at scroll 0, at the end and under reduced motion, against the settled value. Live values (a ticker, a clock, `<time>`, `role=timer`/`status`/`log`, `aria-live`) are listed, not judged | Reduced motion (values) |
 | `q` | **Motion quality** (gate/3): pinned-zone progression over 8 frames, p95 `requestAnimationFrame` while scrolling (in a sandbox: `not verified — sandbox`, numbers printed, nothing counted, `docs/adapters/sandbox.md`), reduced-motion distinctness | Motion quality and budgets; Reduced motion |
 | `k` | **Accessibility** (gate/3): focus-visible on the first 40 focusable elements, target size at 375 touch, 200% zoom, 320px reflow, forced colors (text not on screen at rest is skipped), keyboard trap | Accessibility; Overflow (reflow); Contrast (forced colors) |
+| `X` | **Completeness** (v2.9.0, `scripts/completeness.mjs`, run by the gate when `DESIGN.md` has a `Scope` section): routes, functions, states, legal pages, edge cases, admin surfaces, skeletons and the template shape, each counted `<have>/<need>` against the scope derived in Step 0.7. Missing items fail the page unless marked "not required for this brief, reason:". Not in the stamp or its id | Completeness |
 | `rules` | **The four rule sets** (gate/4, `scripts/rulesets.mjs`), one count per set: distinct failing rule IDs. **C** copy, **S** SEO, **P** performance, **K** security (for local files, headers come from a `_headers` file next to the page). Warnings are printed and not counted | Copy; SEO; Performance; Security |
 
 The output ends with a stamp line built only from those numbers:
@@ -3795,6 +3832,7 @@ The placeholders are deliberate. There are no numbers to copy. Write the archety
 ### Part 3: Craft checklist
 
 - [ ] Concept sentence and signature move are visible in the first screen
+- [ ] Scope: `node scripts/completeness.mjs <project>` (axis X) prints every line `n/n`; each excused item has its reason
 - [ ] Handoff: `DESIGN.md` and `SCHEMA.md` (`templates/SCHEMA.md`) ship with the build; every section `id` in the markup has a row in the section contract, every field shown on the page is in the data model, every route is listed
 - [ ] Type: display face chosen with a reason; body size and measure within `gates/rules.md` (Hierarchy); `text-wrap: balance` on headings
 - [ ] Colour: all text pairs verified (`node scripts/contrast.mjs` while designing, `node scripts/gate.mjs` on the build); accent within `gates/rules.md` (Contrast)
@@ -4075,6 +4113,17 @@ Read before Step 1. Design inside these. `scripts/gate.mjs` measures them after 
 | `img`/`video` | `width` and `height` or an `aspect-ratio` box |
 | Fonts | ≤ 1 preloaded file, `font-display: swap` |
 | Core Web Vitals | LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1 (never claimed unmeasured) |
+
+### Completeness (gate `X`, `scripts/completeness.mjs`)
+
+| Rule | Limit |
+|---|---|
+| Scope | derived in Step 0.7, written in `DESIGN.md` under `Scope`; never from a fixed list |
+| Requested and required items | every one present (route found, or evidence file and text found) |
+| Excused items | "not required for this brief, reason: <why>"; a reason is required |
+| Marks | requested, required, optional, or excused; anything else fails |
+| Template shape | `README.md`, `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `CRITIQUE.md`, `GATE.md`, `LICENSE`, `CHANGELOG.md`, `.env.example`, `middleware.ts`, the build's `data/` folder with its `schema.json`, unless excused |
+| Middleware, comments, component headers | checked as warnings |
 
 ### Security (gate `rules: K`, `craft/security.md`)
 
@@ -5247,6 +5296,24 @@ Wireframe as decoration on a product that has no structure to show.
 | Package | Why (what the platform can't do) | 1 maintained (last release) | 2 weekly downloads | 3 deprecated | 4 Node 20 / React 19 | 5 licence |
 |---|---|---|---|---|---|---|
 | | | | | | | |
+
+### Scope
+<!-- Step 0.7 (thinking/sequence.md). Derived from research, standards and knowledge; never from a fixed list.
+     Checked by scripts/completeness.mjs (gate axis X). Marks: requested · required · optional · not required for this brief, reason: <why>.
+     Evidence: a path, optionally #<text> it must contain. Routes, legal pages and admin items starting with "/" are found automatically. -->
+**Site type:** <type, region>
+**Admin panel:** <yes | no> (settled at "Proceed?")
+
+| Kind | Item | Mark | Evidence |
+|---|---|---|---|
+| route | </path> | requested | |
+| function | <route: what it does> | required | <file#text> |
+| state | <route or surface: empty / loading / error / filled> | required | <SCHEMA.md#text or file#text> |
+| legal | </privacy-or-what-the-region-requires> | required | |
+| edge | <edge case> | required | <file#text> |
+| admin | </admin/...> | required | |
+| skeleton | <async surface> | required | <file> |
+| template | <middleware.ts, data/, …> | <required, or not required for this brief, reason: …> | |
 
 ### References
 <!-- Step 0.5, mandatory (craft/research.md). Written before Step 1. Sources: references/sources/ + live award sites. Concepts only, no copied code. -->

@@ -35,6 +35,7 @@ It runs these bounded checks in a real browser and prints numbers. Each one veri
 | `n` | **Numbers** (counters, prices, `progress`/`meter`, `aria-valuenow`) read at scroll 0, at the end and under reduced motion, against the settled value. Live values (a ticker, a clock, `<time>`, `role=timer`/`status`/`log`, `aria-live`) are listed, not judged | Reduced motion (values) |
 | `q` | **Motion quality** (gate/3): pinned-zone progression over 8 frames, p95 `requestAnimationFrame` while scrolling (in a sandbox: `not verified — sandbox`, numbers printed, nothing counted, `docs/adapters/sandbox.md`), reduced-motion distinctness | Motion quality and budgets; Reduced motion |
 | `k` | **Accessibility** (gate/3): focus-visible on the first 40 focusable elements, target size at 375 touch, 200% zoom, 320px reflow, forced colors (text not on screen at rest is skipped), keyboard trap | Accessibility; Overflow (reflow); Contrast (forced colors) |
+| `X` | **Completeness** (v2.9.0, `scripts/completeness.mjs`, run by the gate when `DESIGN.md` has a `Scope` section): routes, functions, states, legal pages, edge cases, admin surfaces, skeletons and the template shape, each counted `<have>/<need>` against the scope derived in Step 0.7. Missing items fail the page unless marked "not required for this brief, reason:". Not in the stamp or its id | Completeness |
 | `rules` | **The four rule sets** (gate/4, `scripts/rulesets.mjs`), one count per set: distinct failing rule IDs. **C** copy, **S** SEO, **P** performance, **K** security (for local files, headers come from a `_headers` file next to the page). Warnings are printed and not counted | Copy; SEO; Performance; Security |
 
 The output ends with a stamp line built only from those numbers:
@@ -158,6 +159,7 @@ The placeholders are deliberate. There are no numbers to copy. Write the archety
 ## Part 3: Craft checklist
 
 - [ ] Concept sentence and signature move are visible in the first screen
+- [ ] Scope: `node scripts/completeness.mjs <project>` (axis X) prints every line `n/n`; each excused item has its reason
 - [ ] Handoff: `DESIGN.md` and `SCHEMA.md` (`templates/SCHEMA.md`) ship with the build; every section `id` in the markup has a row in the section contract, every field shown on the page is in the data model, every route is listed
 - [ ] Type: display face chosen with a reason; body size and measure within `gates/rules.md` (Hierarchy); `text-wrap: balance` on headings
 - [ ] Colour: all text pairs verified (`node scripts/contrast.mjs` while designing, `node scripts/gate.mjs` on the build); accent within `gates/rules.md` (Contrast)

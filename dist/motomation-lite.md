@@ -56,6 +56,7 @@ Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rule
 
 0. **Stack**: if the brief (or the existing project) names a stack, use it. Otherwise **Next.js (App Router, TypeScript, Tailwind)** for anything with routes or data, plain HTML for a single static page; never Astro or Vite for e-commerce unless the brief demands it. Every dependency passes the five checks in `craft/stack.md` (maintained, popular, not deprecated, Node 20 + React 19, permissive licence). Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 0.5. **Research (mandatory)**: leave the skill before designing. Live award sources (last 6 months) and `references/sources/`, concepts only. Record three references, three techniques with sources, and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference, never to the skill's defaults alone. No web: say so and state the limitation. See `craft/research.md`.
+0.7. **Derive the scope**: what a complete site of this type serves (routes, functions, states, legal pages for the region, edge cases, admin, skeletons), derived from research and knowledge, never a fixed list; each item requested / required / optional / not required with a reason, in `DESIGN.md` under `Scope`. Gate axis X (`scripts/completeness.mjs`) checks it.
 
 ---
 
@@ -292,6 +293,7 @@ The budgets hold either way: one signature move, one accent moment per screen, o
 ### Part 3: Craft checklist
 
 - [ ] Concept sentence and signature move are visible in the first screen
+- [ ] Scope: `node scripts/completeness.mjs <project>` (axis X) prints every line `n/n`; each excused item has its reason
 - [ ] Handoff: `DESIGN.md` and `SCHEMA.md` (`templates/SCHEMA.md`) ship with the build; every section `id` in the markup has a row in the section contract, every field shown on the page is in the data model, every route is listed
 - [ ] Type: display face chosen with a reason; body size and measure within `gates/rules.md` (Hierarchy); `text-wrap: balance` on headings
 - [ ] Colour: all text pairs verified (`node scripts/contrast.mjs` while designing, `node scripts/gate.mjs` on the build); accent within `gates/rules.md` (Contrast)

@@ -9,7 +9,7 @@ This is the missing key: it makes an agent think like a designer instead of a te
 1. Read the brief.
 2. Step 0: Stack.
 3. Step 0.5: Research.
-4. Step 0.7: Derive the scope (what this build covers).
+4. Step 0.7: Derive the scope (routes, functions, states, legal pages, edge cases, admin, skeletons).
 5. Present the plan: stack, scope, references, and what will be deferred (each with its reason).
 6. Ask exactly one question: **"Proceed?"**
 7. On yes, commit to the plan: build, gate, ship. No more interruptions: no question before the build, before the gate, or after the critique.
@@ -59,6 +59,40 @@ If you cannot access the web, say so explicitly, work from training data, and st
 **Test:** three references, three techniques with sources, the avoided pattern with why, the access line, and no decision traced only to the skill's defaults. If not, Step 1 doesn't start.
 
 ---
+
+## 0.7 Derive the scope
+
+The brief names a few pages; a complete site of its type needs more. "Build an e-commerce" means the whole e-commerce, not a homepage and some pages. Derive the scope yourself, from the Step 0.5 research, industry standards and your own knowledge. **Do not pick from a hardcoded list**: there is none in this skill, and `scripts/completeness.mjs` only checks what you derive.
+
+Answer, and write in `DESIGN.md` under `Scope` (from `templates/DESIGN.md`):
+
+- What routes does a complete <site type> serve?
+- What functionality exists on each page?
+- What states does each page need?
+- What legal pages are required in this region?
+- What edge cases must be handled?
+- What admin surface does this type need?
+- What skeleton states exist (one for every async surface: lists, grids, search, detail pages, cart, checkout, account, admin, whatever this type has)?
+
+Write each as a row of the Scope table (`| Kind | Item | Mark | Evidence |`; kinds: route, function, state, legal, edge, admin, skeleton, template) and mark it:
+
+- **requested**: the brief asks for it
+- **required**: the site type needs it, though the brief didn't ask
+- **optional**: nice to have; not checked
+- **not required for this brief, reason: <why>**: excused, with the reason
+
+The admin panel is part of the plan: the one question becomes "Proceed? (Admin panel: included / not included.)" and the answer settles it. Then commit to the scope.
+
+The skill also requires, in every build that has a server (each one excused in the table with a reason when it doesn't apply, e.g. a single static page):
+
+- `middleware.ts` with the auth gate, locale routing, redirects, rate limiting and security headers
+- a skeleton for every async surface
+- a `data/` folder of JSON mock data, typed by a `schema.json` inside that folder (the build's own `data/`, not this skill's)
+- comments in every non-trivial file
+- a sellable template: `README.md`, `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `CRITIQUE.md`, `GATE.md`, `LICENSE`, `CHANGELOG.md`, `.env.example`
+- component headers (tier, use-when, avoid-when, reduced-motion, touch)
+
+**Test:** is every route, state, legal page, edge case, admin surface and skeleton the site type needs in the Scope table, each marked, each excuse with a reason? `node scripts/completeness.mjs <project>` (gate axis X) will check them after the build; a missing item fails the gate.
 
 ## Memory check (mandatory, before Step 1)
 
