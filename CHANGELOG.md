@@ -4,6 +4,7 @@ All notable changes to this skill. Versions follow [Semantic Versioning](https:/
 
 ## [Unreleased]
 
+- Note: commit order in the previous session was T1 → T4 → T2 → T3, because T1 pushed main over its size limit. All tasks were completed in the end.
 - **Delivery flow: six checkpoints, design review before the gate** (`thinking/sequence.md` → Delivery flow).
   - Checkpoint 5 is now **Design review**: a preview, screenshots at 375 / 768 / 1440, DESIGN.md, MOTION.md, SCHEMA.md, DATA.md and a one-line summary. The author approves, or requests changes; each change gets a new preview.
   - Checkpoint 6 is **Gate and ship**: the gate and `/critique` run on the approved design. A pass leads to the handoff push; a failure is fixed and re-presented.

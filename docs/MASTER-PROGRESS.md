@@ -16,3 +16,7 @@ Statuses: ⬜ not started · ⏳ in progress · ✅ done · ❌ blocked
 | 8 | Changelog + version | ✅ done | see the "Phase 8" commit | every version file reads 2.9.0; check-repo OK |
 
 Benchmark: not run.
+
+## Notes for the next agent
+
+- Note: commit order in the previous session was T1 → T4 → T2 → T3, because T1 pushed main over its size limit. All tasks were completed in the end.
