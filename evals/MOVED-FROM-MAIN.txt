@@ -1944,3 +1944,13 @@ evals/results/evidence-2026-10-11-v3/e1-docs/component-mobile.jpg
 evals/results/evidence-2026-10-11-v3/e1-docs/component.jpg
 evals/results/evidence-2026-10-11-v3/e1-docs/search.jpg
 evals/results/evidence-2026-10-11-v3/e3-pages/live-gallery.jpg
+evals/results/diversity/01-funeral-home/index.html
+evals/results/diversity/01-funeral-home/og.jpg
+evals/results/diversity/02-childrens-dentistry/index.html
+evals/results/diversity/02-childrens-dentistry/og.jpg
+evals/results/diversity/03-hardcore-metal-band/index.html
+evals/results/diversity/03-hardcore-metal-band/og.jpg
+evals/results/diversity/04-luxury-perfume/index.html
+evals/results/diversity/04-luxury-perfume/og.jpg
+evals/results/diversity/05-municipal-water-authority/index.html
+evals/results/diversity/05-municipal-water-authority/og.jpg
