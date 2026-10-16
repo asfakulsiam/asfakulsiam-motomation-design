@@ -9,10 +9,10 @@
 - **Adapter:** `adapters/<x>.md`
 
 ## Dependencies
-<!-- craft/stack.md: every package passes all five checks (checked with npm view + the repo) or is named by the brief. Platform first. -->
-| Package | Why (what the platform can't do) | 1 maintained (last release) | 2 weekly downloads | 3 deprecated | 4 Node 20 / React 19 | 5 licence |
-|---|---|---|---|---|---|---|
-| | | | | | | |
+<!-- craft/stack.md: every package passes the three checks (active, not deprecated, licence free for commercial use; checked on npm and in the repo). Platform first. -->
+| Package | Why (what the platform can't do) | 1 active (last release) | 2 deprecated | 3 licence |
+|---|---|---|---|---|
+| | | | | |
 
 ## Scope
 <!-- Step 0.7 (thinking/sequence.md). Derived from research, standards and knowledge; never from a fixed list.

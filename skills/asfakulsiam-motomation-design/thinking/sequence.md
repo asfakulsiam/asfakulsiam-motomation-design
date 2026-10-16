@@ -37,11 +37,11 @@ Before any design step, know what you are building in. The stack changes what th
    | Astro | only when the brief asks for it | `adapters/astro.md` |
    | React + Vite | only when the brief asks for a client-only embed or prototype | `adapters/react-vite.md` |
 
-4. **Every dependency passes the five checks** in `craft/stack.md` (maintained within 6 months, 10k+ weekly downloads, not deprecated, Node 20+ and React 19, MIT/Apache-2.0/ISC/BSD) before it is added: `npm view <pkg>`, the repo, the last release. A failure means an alternative or building it from scratch. Platform first; no heavy package for a small feature.
-5. **Record it** in `DESIGN.md` under `Stack` and `Dependencies` (from `templates/DESIGN.md`): the stack, who chose it (brief, project, or you, confirmed at "Proceed?"), the reason, and each dependency's five checks.
+4. **Every dependency passes the three checks** in `craft/stack.md` (active, not deprecated, licence free for commercial use) before it is added: npm and the repo for the deprecation notice, the last release date and the licence. A failure means an alternative or building it from scratch. Platform first; no heavy package for a small feature.
+5. **Record it** in `DESIGN.md` under `Stack` and `Dependencies` (from `templates/DESIGN.md`): the stack, who chose it (brief, project, or you, confirmed at "Proceed?"), the reason, and each dependency's three checks.
 6. **Load the adapter** for that stack. The adapter is chosen here, not at build time, and it is never skipped.
 
-**Test:** can you point to where the stack came from (the brief, the project, or the default with its reason, shown in the plan), and does every dependency in `DESIGN.md` show five passed checks? If not, fix it before Step 0.5.
+**Test:** can you point to where the stack came from (the brief, the project, or the default with its reason, shown in the plan), and does every dependency in `DESIGN.md` show three passed checks? If not, fix it before Step 0.5.
 
 ---
 

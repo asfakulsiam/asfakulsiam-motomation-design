@@ -4,6 +4,13 @@ All notable changes to this skill. Versions follow [Semantic Versioning](https:/
 
 ## [Unreleased]
 
+## [2.9.1] - 2026-10-16
+
+- **Dependency rule: three checks replace the five.** The five-check rule (6-month maintenance, 10k+ weekly downloads, Node 20/React 19, MIT/Apache/ISC/BSD only) was too strict: it flagged GSAP, lottie-web and SplitType, which are industry standards. `craft/stack.md` → `## Dependencies` now approves a package that is (1) active: a release, commit or verified maintainer response within 12 months, or a stable, widely used package with a settled API and long-term support; (2) not deprecated; (3) licensed free for commercial use (MIT, Apache 2.0, ISC, BSD, or a permissive no-charge licence such as GSAP's Standard licence; not AGPL, GPL, Commons Clause or non-commercial). Not measured by commit frequency or download count alone. Lists the approved examples; before adding a package the agent checks npm and the repo for the deprecation notice, last release date and licence. The snapshot (checked 2026-10-16) now shows the 21 examples (plus `@rive-app/canvas`) approved.
+- The GSAP note in `adapters/next.md`, `adapters/vanilla.md`, `adapters/react-vite.md` and `references/gsap-lenis.md` now says GSAP and Lenis are approved; `adapters/astro.md` gets the same note.
+- `references/sources/motion.md`: the header points to the three checks; GSAP, lottie-web and SplitType (npm licence ISC) marked approved; theatre, barba and scroll-timeline say "no push in 12 months: run the checks".
+- Consistency: `thinking/sequence.md` Step 0, `SKILL.md` (Step 0 summary, router row), `AGENTS.md` and the `templates/DESIGN.md` Dependencies table say "three checks".
+
 ## [2.9.0] - 2026-10-16
 
 The skill leaves its own bubble, asks once, remembers across projects, defaults to Next.js, derives the full scope, ships a sellable template, and ships every micro-state. (There is no 2.8.0; the master prompt set 2.9.0.) Progress per phase: `docs/MASTER-PROGRESS.md`.

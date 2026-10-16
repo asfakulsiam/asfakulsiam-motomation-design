@@ -1,6 +1,6 @@
 # Stack and dependencies
 
-Step 0 of `thinking/sequence.md` decides the stack. This file holds the default and the rule every dependency passes.
+Step 0 of `thinking/sequence.md` decides the stack. This file holds the default and the three checks every dependency passes.
 
 ## The default
 
@@ -18,27 +18,36 @@ Step 0 of `thinking/sequence.md` decides the stack. This file holds the default 
 
 Never pick a stack because it was the last one used. The choice and its reason go in the plan and in `DESIGN.md` under `Stack`.
 
-## The five checks
+## Dependencies
 
-Every dependency, direct or added later, passes all five before it is installed:
+A dependency is approved if it meets all three:
 
-| # | Check | Passes when | How to check |
-|---|---|---|---|
-| 1 | **Maintained** | a commit or release within the last 6 months | `npm view <pkg> time.modified`; the repo's last commit (`gh api repos/<owner>/<repo> --jq .pushed_at`) |
-| 2 | **Popular** | 10,000+ weekly npm downloads | `curl -s https://api.npmjs.org/downloads/point/last-week/<pkg>` |
-| 3 | **Not deprecated** | no deprecation notice on npm or in the repo | `npm view <pkg> deprecated` prints nothing; the README and repo are not archived |
-| 4 | **Modern** | supports Node 20+ and React 19 (when it touches React) | `npm view <pkg> engines peerDependencies` |
-| 5 | **Licensed** | MIT, Apache-2.0, ISC or BSD | `npm view <pkg> license` |
+1. **Active** — the package is maintained. It has a release, a commit, or a verified maintainer response within the last 12 months, OR it is a stable, widely-used package whose API is settled and whose maintainers have committed to long-term support (React, Next.js, GSAP, three.js, and similar are examples).
 
-Before adding a package, run `npm view <pkg> name version license deprecated time.modified engines peerDependencies`, open its GitHub repo, and check the last release and any deprecation. **If any check fails, find an alternative that passes, or build it from scratch.** A brief that names a specific library overrides the check for that library only (the same way a named stack wins); record it in `DESIGN.md` under `Dependencies` with the failing check.
+2. **Not deprecated** — no deprecation notice on npm, in the package, or in its repository. No "use X instead" banner.
+
+3. **Licence is free for commercial use** — MIT, Apache 2.0, ISC, BSD, or a permissive no-charge licence whose text clearly allows free commercial use. GSAP's Standard no-charge licence qualifies. AGPL, GPL, Commons Clause, and "for non-commercial use only" licences do not.
+
+Do not measure by commit frequency alone. Do not measure by weekly download count alone. Popular, stable, well-maintained libraries with infrequent releases are approved.
+
+Examples of approved libraries:
+Motion (Framer Motion), GSAP, Lenis, Three.js, React Three Fiber, anime.js, lottie-web, SplitType, Swiper, Radix UI, shadcn/ui, Tailwind, Next.js, React, TypeScript, Zod, TanStack Query, TanStack Router, tRPC, Prisma, Drizzle
+
+Before adding a package the agent checks npm and the repo for:
+
+- deprecation notice
+- last release date
+- licence
+
+If any is a fail, find an alternative or build from scratch.
 
 Record every dependency in `DESIGN.md`:
 
 ```markdown
 ## Dependencies
-| Package | Why (what the platform can't do) | 1 maintained | 2 weekly downloads | 3 deprecated | 4 Node 20 / React 19 | 5 licence |
-|---|---|---|---|---|---|---|
-| motion | layout and spring animation | 2026-10-15 | 25.2M | no | yes / yes | MIT |
+| Package | Why (what the platform can't do) | 1 active (last release) | 2 deprecated | 3 licence |
+|---|---|---|---|---|
+| motion | layout and spring animation | 2026-10-15 | no | MIT |
 ```
 
 ## Eco-friendly
@@ -46,25 +55,34 @@ Record every dependency in `DESIGN.md`:
 - **Use the platform first.** CSS scroll-driven animations, `view-transition`, WAAPI, `IntersectionObserver`, `<dialog>`, `popover` and native form validation before a library.
 - **No heavy dependency for a small feature.** A 40KB library for one fade is a fail; write the fade.
 - **Tree-shakeable only.** ES modules with named exports; import what is used (`import { animate } from "motion"`).
-- **No unmaintained transitive dependencies.** Check `npm ls --all` after install; a deprecated transitive package fails check 3 for its parent.
+- **No unmaintained transitive dependencies.** Check `npm ls --all` after install; a deprecated transitive package fails check 2 for its parent.
 - Every dependency counts against the tier's JS budget in `gates/rules.md`.
 
 ## Snapshot (checked 2026-10-16)
 
-Re-check at build time; this table goes stale.
+`npm view <pkg> version license deprecated time.modified` for the approved examples. Re-check at build time; this table goes stale.
 
-| Package | Last publish | Weekly downloads | Licence | Node / React | Result |
-|---|---|---|---|---|---|
-| next 16.4.2 | 2026-10-15 | 67.5M | MIT | ≥ 20.9 / ^19 | passes |
-| react 19.3.1 | 2026-10-15 | 188.0M | MIT | — | passes |
-| tailwindcss 4.3.3 | 2026-10-15 | 137.3M | MIT | — | passes |
-| motion 14.3.0 | 2026-10-15 | 25.2M | MIT | — / ^19 | passes |
-| lenis 1.3.27 | 2026-10-15 | 1.9M | MIT | — / ≥ 17 | passes |
-| three 0.186.1 | 2026-09-24 | 21.4M | MIT | — | passes |
-| @react-three/fiber 9.8.2 | 2026-10-14 | 6.2M | MIT | — / ≥ 19 < 19.4 | passes |
-| animejs 4.5.0 | 2026-08-17 | 1.1M | MIT | — | passes |
-| @rive-app/canvas 2.44.2 | 2026-10-10 | 1.3M | MIT | — | passes |
-| zod 4.6.7 | 2026-10-12 | 346.9M | MIT | — | passes |
-| gsap 3.15.0 | 2026-04-13 | 6.0M | GSAP Standard "no charge" licence | — | **fails 1 and 5**: use Motion, anime.js or the platform unless the brief names GSAP |
-| lottie-web 5.13.0 | 2025-05-21 | 7.9M | MIT | — | **fails 1**: prefer Rive or the platform |
-| split-type 0.3.4 | 2023-10-22 | 57K | ISC | — | **fails 1**: split text by hand (`Intl.Segmenter`) |
+| Package | Last publish | Deprecated | Licence | Result |
+|---|---|---|---|---|
+| motion 14.3.0 | 2026-10-15 | no | MIT | approved |
+| gsap 3.15.0 | 2026-04-13 | no | GSAP Standard "no charge" licence (free commercial use) | approved (stable, settled API, long-term support) |
+| lenis 1.3.27 | 2026-10-15 | no | MIT | approved |
+| three 0.186.1 | 2026-09-24 | no | MIT | approved |
+| @react-three/fiber 9.8.2 | 2026-10-14 | no | MIT | approved |
+| animejs 4.5.0 | 2026-08-17 | no | MIT | approved |
+| lottie-web 5.13.0 | 2025-05-21 | no | MIT | approved (stable, settled API) |
+| split-type 0.3.4 | 2023-10-22 | no | ISC | approved (stable, settled API) |
+| swiper 14.3.0 | 2026-09-28 | no | MIT | approved |
+| @radix-ui/react-dialog 1.3.1 | 2026-10-14 | no | MIT | approved |
+| shadcn 4.21.5 | 2026-10-14 | no | MIT | approved |
+| tailwindcss 4.3.3 | 2026-10-15 | no | MIT | approved |
+| next 16.4.2 | 2026-10-15 | no | MIT | approved |
+| react 19.3.1 | 2026-10-15 | no | MIT | approved |
+| typescript 7.0.2 | 2026-10-15 | no | Apache-2.0 | approved |
+| @rive-app/canvas 2.44.2 | 2026-10-10 | no | MIT | approved |
+| zod 4.6.7 | 2026-10-12 | no | MIT | approved |
+| @tanstack/react-query 5.104.3 | 2026-10-15 | no | MIT | approved |
+| @tanstack/react-router 1.170.44 | 2026-10-12 | no | MIT | approved |
+| @trpc/server 11.19.0 | 2026-09-28 | no | MIT | approved |
+| prisma 8.0.0-rc.23 | 2026-10-15 | no | Apache-2.0 | approved |
+| drizzle-orm 0.45.4 | 2026-10-08 | no | Apache-2.0 | approved |

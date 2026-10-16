@@ -1,6 +1,6 @@
 # GSAP + Lenis Quick Reference
 
-> **Dependency check (`craft/stack.md`, checked 2026-10-16):** `gsap` 3.15.0 fails check 1 (last release 2026-04-13, more than 6 months) and check 5 (GSAP Standard "no charge" licence, not MIT/Apache/ISC/BSD). Use GSAP only when the brief names it; otherwise the same technique is built with Motion, anime.js or the platform (CSS scroll-driven animations, WAAPI). Re-run the checks at build time.
+> **Dependencies (`craft/stack.md`, checked 2026-10-16):** `gsap` 3.15.0 and `lenis` 1.3.27 are approved: active, not deprecated, licence free for commercial use (GSAP Standard no-charge licence; Lenis MIT). Re-check npm and the repo (deprecation, last release, licence) at build time.
 
 ## Imports
 ```js

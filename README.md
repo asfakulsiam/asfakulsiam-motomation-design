@@ -9,7 +9,7 @@ At the top tier, scrolling plays like a film.
 **New here? [Start here → what it is, who it's for, and what a session looks like](ABOUT.md)** · **[See it in action → worked examples](#see-it-in-action)**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.9.0-E0442B?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2.9.1-E0442B?style=flat-square)](CHANGELOG.md)
 [![Agent Skill](https://img.shields.io/badge/agent%20skill-npx%20skills%20add-111111?style=flat-square)](#install)
 [![Zero dependencies (gate: Playwright, optional)](https://img.shields.io/badge/scripts-zero%20dependencies%20%28gate%3A%20Playwright%2C%20optional%29-111111?style=flat-square)](skills/asfakulsiam-motomation-design/scripts)
 
