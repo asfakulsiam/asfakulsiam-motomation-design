@@ -8,7 +8,10 @@ STAMP = '<!-- motomation · archetype: field-guide · mutation: ui-as-content ·
 TOOTH = '<svg viewBox="0 0 40 44" aria-hidden="true" focusable="false"><path d="M8 4c5-3 9 1 12 1s7-4 12-1c6 4 5 13 2 19-2 5-2 17-6 18-3 1-4-10-8-10s-5 11-8 10c-4-1-4-13-6-18C3 17 2 8 8 4z"/></svg>'
 FISH = '<svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle cx="60" cy="60" r="60" class="pool"/><path class="fish" d="M28 62c10-14 30-20 46-12l14-10v40L74 70c-16 8-36 4-46-8z"/><circle cx="44" cy="58" r="3.5" class="eye"/><circle cx="84" cy="34" r="4" class="bub"/><circle cx="92" cy="22" r="2.5" class="bub"/></svg>'
 def head(title, desc, path, page):
-    nav = ''.join(f'<a href="{h}"{" aria-current=\"page\"" if h == path else ""}>{t}</a>' for h, t in [('/', 'Home'), ('/first-visit.html', 'First visit'), ('/treatments.html', 'Treatments'), ('/book.html', 'Book')])
+    # the current page is marked, not linked (a link to the page you are on changes nothing when tapped); the label sits in
+    # a span so the measured text box is the text on the navy pill, not the pill's rounded corners
+    nav = ''.join(f'<span class="here" aria-current="page"><span>{t}</span></span>' if h == path else f'<a href="{h}"><span>{t}</span></a>' for h, t in [('/', 'Home'), ('/first-visit.html', 'First visit'), ('/treatments.html', 'Treatments'), ('/book.html', 'Book')])
+    logo = f'<span class="logo">{TOOTH}<span>Little Molars</span></span>' if path == '/' else f'<a class="logo" href="/">{TOOTH}<span>Little Molars</span></a>'
     ld = {"@context": "https://schema.org", "@type": "Dentist", "name": "Little Molars Children's Dentistry", "address": {"@type": "PostalAddress", "addressLocality": "Uttara, Dhaka", "addressCountry": "BD"}, "medicalSpecialty": "Pediatric"}
     return f'''<!doctype html>
 <html lang="en">
@@ -28,7 +31,7 @@ def head(title, desc, path, page):
 <body class="p-{page}">
 {STAMP}
 <a class="skip" href="#main">Skip to content</a>
-<header class="top"><a class="logo" href="/">{TOOTH}<span>Little Molars</span></a><nav aria-label="Main">{nav}</nav></header>
+<header class="top">{logo}<nav aria-label="Main">{nav}</nav></header>
 <ol class="passport" aria-label="Your tooth passport: a stamp for each part of this page you have read"></ol>
 '''
 FOOT = '''<footer class="foot"><div><p class="foot-name">Little Molars Children's Dentistry</p><p>House 12, Road 7, Sector 4, Uttara, Dhaka [NEEDS COPY: address]. Saturday to Thursday, 9 am to 7 pm.</p></div><nav aria-label="Footer"><a href="/first-visit.html">First visit</a><a href="/treatments.html">Treatments</a><a href="/book.html">Book a visit</a></nav></footer>
@@ -85,9 +88,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .logo { display: inline-flex; align-items: center; gap: .5rem; font-weight: 600; font-size: 1.35rem; text-decoration: none; }
 .logo svg { width: 2rem; height: 2.2rem; fill: var(--navy); }
 .top nav { display: flex; flex-wrap: wrap; gap: .25rem; }
-.top nav a { padding: .55rem .9rem; border-radius: 999px; text-decoration: none; font-weight: 700; }
+.top nav a, .top nav .here { padding: .55rem .9rem; border-radius: 999px; text-decoration: none; font-weight: 700; }
 .top nav a:hover { background: var(--mint); }
-.top nav a[aria-current] { background: var(--navy); color: var(--cream); }
+.top nav [aria-current] { background: var(--navy); color: var(--cream); }
 main { max-width: 72rem; margin: 0 auto; padding: 0 1.25rem; }
 .kicker { margin: 0 0 .5rem; font-weight: 500; color: var(--soft); letter-spacing: .02em; }
 h1 { font-weight: 600; font-size: clamp(2.4rem, 7vw, 4.4rem); line-height: 1.02; margin: 0 0 1rem; letter-spacing: -.01em; }

@@ -10,9 +10,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .logo { display: inline-flex; align-items: center; gap: .5rem; font-weight: 600; font-size: 1.35rem; text-decoration: none; }
 .logo svg { width: 2rem; height: 2.2rem; fill: var(--navy); }
 .top nav { display: flex; flex-wrap: wrap; gap: .25rem; }
-.top nav a { padding: .55rem .9rem; border-radius: 999px; text-decoration: none; font-weight: 700; }
+.top nav a, .top nav .here { padding: .55rem .9rem; border-radius: 999px; text-decoration: none; font-weight: 700; }
 .top nav a:hover { background: var(--mint); }
-.top nav a[aria-current] { background: var(--navy); color: var(--cream); }
+.top nav [aria-current] { background: var(--navy); color: var(--cream); }
 main { max-width: 72rem; margin: 0 auto; padding: 0 1.25rem; }
 .kicker { margin: 0 0 .5rem; font-weight: 500; color: var(--soft); letter-spacing: .02em; }
 h1 { font-weight: 600; font-size: clamp(2.4rem, 7vw, 4.4rem); line-height: 1.02; margin: 0 0 1rem; letter-spacing: -.01em; }
