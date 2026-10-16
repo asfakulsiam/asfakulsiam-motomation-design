@@ -22,7 +22,7 @@ The title, the price and the reserve action. Nothing animates.
 One fixed stage, one object. The film window opens through an iris (the signature), then four numbered steps like a repair manual, each a held frame with its note: front-on ("Folded from one sheet"), a three-quarter turn showing the 48 mm depth, the five parts separating along the depth axis, and the parts closing up as the needle sweeps to a station.
 
 - **Mobile:** its own frame set; the same steps and notes.
-- **Reduced motion:** the storyboard: each step as a still in normal flow with its note; no canvas.
+- **Reduced motion:** a parts plate: the exploded still framed, its five parts numbered and keyed, the other three steps as small figures under it; no canvas.
 
 ### 3. Specifications (still)
 

@@ -22,7 +22,7 @@ The title, a lead and the reel's meta. Nothing animates; the film's first frame 
 Scroll is the playhead. Four shots, one per commission, each with its caption beside the film (one caption on at a time). A running mm:ss:ff timecode, the current shot and a progress bar sit under the film: the signature.
 
 - **Mobile:** its own portrait frame set; same four shots and captions.
-- **Reduced motion:** the storyboard: four stills in normal flow, each with its caption; no canvas.
+- **Reduced motion:** a wall of four title cards, two by two: each shot's name set on its still, the slate in the corner; no canvas.
 
 ### 3. Credits (still)
 

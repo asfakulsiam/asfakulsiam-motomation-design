@@ -21,7 +21,7 @@ Reduced motion: **a contact sheet**. The stage is unpinned and the four scenes a
 
 Full motion: the hero is the poster under moving stage light (Beams): soft shafts sweep across the dark; the date flips in on a split-flap board.
 
-Reduced motion: **the poster as printed**. The shafts stop being light and become graphic: hard-edged bars at the same angle, landing as pools on a stage floor, with the dust motes fixed as a dot pattern. The split-flap shows the date at once, in its tiles. It is the same poster, composed for paper.
+Reduced motion (v2.13): **one follow-spot**, a different picture. The rig runs across the top, and a single cone drops from one lamp onto an empty stage to the right of the title. It lands as a sharp oval pool, with dust only inside the light. The moving version is five shafts passing ("light passing"); the still is one fixed cone ("the stage is set"). The split-flap shows the date at once, in its tiles. The earlier still kept the same five shafts at the same angle and only hardened their edges, which read as the animation paused; it measured 47.1% different and passed the check below, so that number alone cannot tell a stopped frame from a new composition.
 
 ![Event: full motion vs reduced motion](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/rm-stills/event.webp?raw=true)
 
@@ -30,7 +30,7 @@ Reduced motion: **the poster as printed**. The shafts stop being light and becom
 | Component | Reduced-motion still | Canvas full → reduced | Still changes in 1 s | Differs from full motion |
 |---|---|---|---|---|
 | [aurora](../site/c/aurora.html) | A long-exposure plate: the curtains settle into three smooth ribbons of the same two colours over a dark ridge, under circular star trails. | 0 → 0 | 0% | 52.9% |
-| [beams](../site/c/beams.html) | Noon held: hard-edged shafts fall through the windows and land as bright pools on the floor, dust caught in the light. | 0 → 0 | 0% | 44.2% |
+| [beams](../site/c/beams.html) | One follow-spot (v2.13; was the five shafts held hard-edged, which read as the animation paused): a single cone from the rig onto an empty stage, a sharp oval pool, dust only inside the light. | 0 → 0 | 0% | 44.2% |
 | [globe](../site/c/globe.html) | A chart plate of the globe facing the first marker, drawn in line: graticule, rim, the markers ringed and joined. | 0 → 0 | 0% | 15.1% |
 | [liquid-field](../site/c/liquid-field.html) | A marbled sheet: combed bands of the same three colours, like marbled paper keeping the trace of moving ink. | 1 → 0 | 0% | 65% |
 | [mesh-gradient](../site/c/mesh-gradient.html) | A colour study: the four colours laid out as soft horizontal fields (horizon, body, ground) with a fine grain. | 0 → 0 | 0% | 69.9% |

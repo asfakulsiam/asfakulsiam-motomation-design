@@ -46,9 +46,9 @@ Type mode: HOUSE STYLE (typography-led), because the poster is the brand
 - Mode: none (texture only, as light). The type is the poster; Beams is stage light falling through the hall, a background effect, not a picture of anything (principles/imagery.md §5)
 - Subject: the date, the lineup and the tickets, set as a concert poster
 - Direction: no photography; if the venue wants a performer photograph later, one stage shot in the same light (a single hard top-light, deep shadow, warm), cropped tight, never full-bleed behind the title
-- Illustration style: kinetic-type (§2): the letterforms are the image (SplitFlap, PressureType, the lineup marquee)
+- Illustration style: kinetic-type (§2): the letterforms are the image (SplitFlap, the width-sprint lineup heading; the pointer-pressure title and the marquee were cut)
 - Texture: the beams only; nothing behind the ticket prices
-- Interplay: the light passes behind the type, never over it; reduced motion shows the beams as hard bars that miss the title (docs/rm-stills/event.webp)
+- Interplay: the light passes behind the type, never over it; reduced motion is a different picture, one follow-spot on an empty stage to the right of the title (docs/rm-stills/event.webp)
 - Template stand-in: none needed
 - `[NEEDS ASSET]`: none
 
