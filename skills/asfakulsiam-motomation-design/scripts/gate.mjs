@@ -646,7 +646,7 @@ async function structure(browser, url) {
   const seen = {}; for (const p of patterns) if (p !== "static") seen[p] = (seen[p] || 0) + 1;
   const repeats = Object.values(seen).reduce((a, c) => a + c - 1, 0);
   const bud = await page.evaluate(() => {
-    const pins = document.querySelectorAll(".pin-spacer").length + [...document.querySelectorAll("*")].filter((e) => getComputedStyle(e).position === "sticky" && e.parentElement && e.parentElement.getBoundingClientRect().height >= innerHeight * 1.5).length;
+    const pins = document.querySelectorAll(".pin-spacer").length + [...document.querySelectorAll("*")].filter((e) => getComputedStyle(e).position === "sticky" && e.parentElement && e.parentElement.getBoundingClientRect().height >= innerHeight * 1.5 && (() => { const r = e.getBoundingClientRect(); return r.width * r.height >= innerWidth * innerHeight * 0.15; })()).length;
     const webgl = [...document.querySelectorAll("canvas")].filter((c) => { try { return c.getContext("2d") === null; } catch { return true; } }).length;
     const scripts = [...document.scripts].map((s) => (s.src ? { src: s.src } : { inline: s.textContent }));
     const ids = (window.__secs || []).map((s) => s.id || s.getAttribute("aria-label") || s.tagName.toLowerCase()).filter(Boolean);
@@ -771,13 +771,15 @@ const PROG_SAMPLES = 8;     // scroll positions sampled across each zone
 const MAX_ZONES = 6;
 export const SMOOTH_P95_MS = { desktop: 20, mobile: 25 }; // p95 rAF interval while scrolling: 1440 unthrottled, 375 at CPU ×4
 // zones that hold the screen while the page scrolls: GSAP pin spacers, position: sticky inside a parent ≥ 1.5 screens
-// tall, and elements driven by a CSS scroll/view timeline
+// tall, and elements driven by a CSS scroll/view timeline. A sticky element covering < 15% of the viewport (a header,
+// a call bar, a progress rail) is chrome, not a zone: it holds no sequence, so reduced motion need not unpin it.
 const ZONES = () => {
   const z = [];
   for (const s of document.querySelectorAll(".pin-spacer")) { const r = s.getBoundingClientRect(); z.push({ kind: "pin", label: __g.label(s.firstElementChild || s), top: Math.round(r.top + scrollY), len: Math.round(r.height - innerHeight) }); }
   for (const e of document.body.querySelectorAll("*")) {
     const cs = getComputedStyle(e); if (cs.display === "none") continue;
-    if (cs.position === "sticky" && e.parentElement) { const p = e.parentElement.getBoundingClientRect(); if (p.height >= innerHeight * 1.5) z.push({ kind: "sticky", label: __g.label(e), top: Math.round(p.top + scrollY), len: Math.round(p.height - innerHeight) }); }
+    // a thin sticky element (< 15% of the viewport: header, call bar, progress rail) is page chrome, not a pinned sequence
+    if (cs.position === "sticky" && e.parentElement) { const p = e.parentElement.getBoundingClientRect(), own = e.getBoundingClientRect(); if (own.width * own.height < innerWidth * innerHeight * 0.15) { (window.__chrome = window.__chrome || new Set()).add(`${__g.label(e)} ${Math.round((own.width * own.height * 100) / (innerWidth * innerHeight))}%`); continue; } if (p.height >= innerHeight * 1.5) z.push({ kind: "sticky", label: __g.label(e), top: Math.round(p.top + scrollY), len: Math.round(p.height - innerHeight) }); }
     const tl = cs.animationTimeline || ""; if (/scroll\(|view\(|^--/.test(tl)) { const r = e.getBoundingClientRect(); z.push({ kind: "scroll-timeline", label: __g.label(e), top: Math.max(0, Math.round(r.top + scrollY - innerHeight)), len: Math.round(r.height + innerHeight) }); }
   }
   return z.filter((a, i) => a.len > 40 && !z.slice(0, i).some((b) => Math.abs(b.top - a.top) < 4 && Math.abs(b.len - a.len) < 4));
@@ -806,7 +808,7 @@ async function motionQuality(browser, url) {
   // 1. progression: sample each zone at PROG_SAMPLES scroll positions; a zone whose median change is under PROG_MIN_PCT
   //    holds the screen without showing anything happen
   const { ctx, page } = await open(browser, url, { viewport: { width: 1440, height: 900 } });
-  const zones = (await page.evaluate(ZONES)).slice(0, MAX_ZONES); const texts = await page.evaluate(() => __g.textEls().filter((e) => !__g.decorative(e) && !__g.srOnly(e)).map((e) => e.textContent.replace(/\s+/g, " ").trim()).filter((t) => t.length > 1));
+  const zones = (await page.evaluate(ZONES)).slice(0, MAX_ZONES); const chrome = await page.evaluate(() => [...(window.__chrome || [])]); const texts = await page.evaluate(() => __g.textEls().filter((e) => !__g.decorative(e) && !__g.srOnly(e)).map((e) => e.textContent.replace(/\s+/g, " ").trim()).filter((t) => t.length > 1));
   const prog = [];
   for (const z of zones) {
     const shots = [];
@@ -838,7 +840,7 @@ async function motionQuality(browser, url) {
     await r.ctx.close();
   }
   const fails = prog.filter((z) => !z.ok).length + (rm && !rm.ok ? 1 : 0) + (smooth.judged && zones.length ? (smooth.desktop.ok ? 0 : 1) + (smooth.mobile.ok ? 0 : 1) : 0);
-  return { zones: prog, smooth, rm, fails };
+  return { zones: prog, smooth, rm, fails, chrome };
 }
 export function qAxis(q) {
   if (!q) return "Q?[not-measured]";
@@ -1276,6 +1278,7 @@ function print(r) {
   L(`  progress  ${q.zones.every((z) => z.ok) ? "✓" : "✗"} ${q.zones.filter((z) => !z.ok).length} of ${q.zones.length} pinned/scrubbed zone(s) static (median change between ${PROG_SAMPLES} scroll samples ≤ ${PROG_MIN_PCT}% of pixels)`);
   for (const z of q.zones) L(`     ${z.ok ? "✓" : "✗"} ${z.kind} ${z.label}  ${z.len}px  Δ median ${z.medianPct}% · ${z.moving}/${z.diffs.length} transitions change  [${z.diffs.join(" ")}]`);
   L(`  smooth    ${!q.smooth.desktop ? "– no pinned zone, not measured" : !q.smooth.judged ? `– not verified — sandbox (${q.smooth.why}); measured p95 ${q.smooth.desktop.p95}ms @1440, ${q.smooth.mobile.p95}ms @375 CPU×4 (budgets ${SMOOTH_P95_MS.desktop}/${SMOOTH_P95_MS.mobile}ms) — see docs/adapters/sandbox.md` : `${q.smooth.desktop.ok && q.smooth.mobile.ok ? "✓" : "✗"} p95 ${q.smooth.desktop.p95}ms @1440 (≤ ${SMOOTH_P95_MS.desktop}) · ${q.smooth.mobile.p95}ms @375 CPU×4 (≤ ${SMOOTH_P95_MS.mobile})`}`);
+  if (q.chrome?.length) L(`  chrome    · sticky chrome, not a pinned zone (< 15% of the viewport): ${q.chrome.slice(0, 4).join("; ")}`);
   L(`  rm-flow   ${!q.rm ? "– no pinned zone" : q.rm.ok ? "✓ reduced motion is normal flow, all text present" : `✗ under reduced motion: ${q.rm.pinned.length} zone(s) still pinned${q.rm.pinned.length ? ` (${q.rm.pinned.slice(0, 3).join("; ")})` : ""}, ${q.rm.missingCount} text(s) missing${q.rm.missing.length ? ` ("${q.rm.missing.slice(0, 2).join('", "').slice(0, 80)}")` : ""}`}${q.rm ? ` · ${q.rm.canvases} visible canvas(es)` : ""}`);
   L(`  focus     ${a.focus.fails.length === 0 ? "✓" : "✗"} ${a.focus.fails.length} of ${a.focus.checked} focused elements show no visible focus indicator  (${a.focus.tabbables} tabbable)`);
   for (const f of a.focus.fails.slice(0, 8)) L(`     no ring  ${f.el}  "${f.text}"  (${f.changedPct}% of pixels change on focus)`);
