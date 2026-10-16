@@ -12,8 +12,9 @@ DELIVERY GATE · examples/templates/motion-portfolio/index.html
   numbers   ✓ 0 values shown wrong before they settle  (11 numbers checked at scroll 0, scroll end and reduced motion; 5 live values skipped)
   progress  ✓ 0 of 1 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
      ✓ sticky div.stage  3780px  Δ median 15.4% · 7/7 transitions change  [25.46 14.31 9.31 14.08 28.01 22.78 15.42]
-  smooth    – not verified — sandbox (sandbox: 2 CPUs); measured p95 16.8ms @1440, 566.7ms @375 CPU×4 (budgets 20/25ms) — see docs/adapters/sandbox.md
+  smooth    – not verified — sandbox (sandbox: 2 CPUs); measured p95 16.8ms @1440, 50ms @375 CPU×4 (budgets 20/25ms) — see docs/adapters/sandbox.md
   rm-flow   ✓ reduced motion is normal flow, all text present · 0 visible canvas(es)
+  rm-still  ✓ reduced motion differs from full motion by 47.09% of pixels at section.reel[aria-labelledby="reel-t"] (full motion at scroll 2857px, reduced at 967px), 1440×900 (frozen-frame control: 0%; warn below 25%; advisory, not in the stamp)  [1 zone(s), 1 canvas]
   focus     ✓ 0 of 11 focused elements show no visible focus indicator  (11 tabbable)
   targets   ✓ 0 under 24px, 5 under 44px (warning) at 375 touch  (11 checked; inline links exempt)
      114×26  a.skip  "Skip to content"
@@ -49,5 +50,6 @@ DELIVERY GATE · examples/templates/motion-portfolio/index.html
   critique → C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,layout-new,palette-new,fp28,self-excluded] R5[cuts:3,anim:2] M5[t5:pins1/2,webgl0/1,js3/250KB,rm0] V5[entrance-repeats:0] Q5[prog:Δ15.4%,smooth:sandbox,rm:flow] A5[focus:11/11,tgt:0f5w,zoom:0,reflow:0,fc:0,trap:0]
   coverage   ✓ worst width 375px: 1 of 50 text elements skipped (2%; limit 30% at every width)
   J — journey  – skipped (--reference: a design reference, not a live site; no cross-page navigation, 404 or form-backend requirement)
-  PASS  stamp → critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,layout-new,palette-new,fp28,self-excluded] R5[cuts:3,anim:2] M5[t5:pins1/2,webgl0/1,js3/250KB,rm0] V5[entrance-repeats:0] Q5[prog:Δ15.4%,smooth:sandbox,rm:flow] A5[focus:11/11,tgt:0f5w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · f025a3139f · skipped 1/50@375
+  PASS  stamp → critique: C5[restraint:kept] H5[375:0] S5[last5:archetype-new,signature-new,layout-new,palette-new,fp28,self-excluded] R5[cuts:3,anim:2] M5[t5:pins1/2,webgl0/1,js3/250KB,rm0] V5[entrance-repeats:0] Q5[prog:Δ15.4%,smooth:sandbox,rm:flow] A5[focus:11/11,tgt:0f5w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · c08a56ec22 · skipped 1/50@375
 
+exit 0

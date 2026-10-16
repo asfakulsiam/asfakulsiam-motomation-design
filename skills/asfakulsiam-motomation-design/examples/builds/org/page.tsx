@@ -16,7 +16,9 @@ import { CtaOrgDonate } from "../../sections/cta-org-donate";
 import { FooterOrgSeismograph } from "../../sections/footer-org-seismograph";
 
 // Navigation: a full-width top bar that scrolls away with the page (a trust is read, not operated), three plain links
-// and a disclosure that opens the trust's registration and audit details in place. Feedback: links gain a rule under
+// and a disclosure that opens the trust's registration and audit details in place. The trust's papers (annual report,
+// court cases) are a footer list under the gauge line, outside the article, where a careful donor looks last; the
+// footer is the page's contentinfo landmark, so it is reachable as its own region. Feedback: links gain a rule under
 // them on hover (a border, not an underline), a pressed link fills with the river tint, focus is a soft ring.
 const CSS = `
 .bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 28px;padding:14px clamp(20px,5vw,72px);border-bottom:2px solid var(--ink);background:var(--surface)}
@@ -46,8 +48,10 @@ export function Page() {
         <TeamOrgFieldGuide />
         <FeaturesOrgImpact />
         <CtaOrgDonate />
-        <FooterOrgSeismograph />
       </main>
+      <footer>
+        <FooterOrgSeismograph />
+      </footer>
     </>
   );
 }

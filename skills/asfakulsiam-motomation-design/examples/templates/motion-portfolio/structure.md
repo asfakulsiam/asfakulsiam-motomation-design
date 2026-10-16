@@ -8,7 +8,7 @@
 - **Kind:** portfolio (motion designer)
 - **Archetype · mutation · signature:** film-reel · tempo-shift · timecode-rail
 - **Tier:** 5 (one pinned film; nothing else past Tier 1)
-- **Type roles:** display Bricolage Grotesque · text Hanken Grotesk · mono JetBrains Mono
+- **Type roles:** display Bricolage Grotesque · text Bricolage Grotesque · mono JetBrains Mono
 - **What it is:** Noor Haque designs title sequences in Dhaka. The reel on this page is a film you play by scrolling: four shots, four commissions.
 
 ## Chapters, in order

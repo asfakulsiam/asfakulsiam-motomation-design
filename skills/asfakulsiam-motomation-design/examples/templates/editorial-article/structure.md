@@ -4,7 +4,7 @@
 > anywhere into a different stack. Screenshot: `og.jpg`. Decisions (concept, type, colour, imagery, restraint): `DESIGN.md`.
 
 - **Kind:** editorial article
-- **Archetype · mutation · signature:** broadsheet · print-rule · decode
+- **Archetype · mutation · signature:** broadsheet · print-rule · remembered-list
 - **Tier:** 2
 - **Type roles:** display Bodoni Moda · text Instrument Sans · mono JetBrains Mono
 - **What it is:** A long-read set like a broadsheet on newsprint: a chapter rail, masthead, deck and columns, one pull quote that inks in, and a folio footer.
@@ -13,11 +13,11 @@
 
 ### 1. hero (`hero-editorial-broadsheet`)
 
-A long-read's opening set as a newspaper front: masthead, dateline that decodes from the wire, a headline that comes into focus, and the first paragraphs in two columns with a drop cap.
+A long-read's opening set as a newspaper front: masthead, a dateline set as filed, a headline that comes into focus, and the first paragraphs in two columns with a drop cap.
 
-- **Why it's memorable:** It reads as journalism before a word is read: masthead, folio and columns are the structure, and the decoding dateline marks the piece as filed, not published by a template.
+- **Why it's memorable:** It reads as journalism before a word is read: masthead, folio and columns are the structure, and the wire dateline marks the piece as filed, not published by a template.
 - **Mobile:** Columns collapse to one; the masthead rules stay; the headline wraps at a smaller size.
-- **Reduced motion:** The dateline and headline appear complete and sharp.
+- **Reduced motion:** The headline appears complete and sharp.
 
 ### 2. features (`feature-editorial-pullquote`)
 

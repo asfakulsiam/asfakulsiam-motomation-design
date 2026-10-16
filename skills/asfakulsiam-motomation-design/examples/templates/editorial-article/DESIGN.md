@@ -7,8 +7,8 @@
 - **Concept sentence:** The article is set as a broadsheet front page, and only the pull quote moves.
 - **Archetype + mutation:** broadsheet + print-rule
 - **Collision:** newspaper front page × reading progress
-- **Signature move:** decode
-- **Dials:** ENERGY 1 · RHYTHM 2 · MOTION 2 → Tier 2 (Decode, BlurFocus and InkFill are Tier 2 reveals; MOTION 1 would allow hover and focus only)
+- **Signature move:** remembered-list: the chapter rail ticks the chapters you have read on this device, so a long read put down is picked up at the right place (was decode: the wire dateline resolving from random glyphs, a text-reveal move in the same family as the SaaS page's ink-fill)
+- **Dials:** ENERGY 1 · RHYTHM 2 · MOTION 2 → Tier 2 (BlurFocus and InkFill are Tier 2 reveals; MOTION 1 would allow hover and focus only)
 - **Rejected:** Full-bleed hero photo with the headline over it; sticky share bar.
 
 ## Typography
@@ -56,5 +56,5 @@ Type mode: HOUSE STYLE (typography-led), because the writing is the product
 - Concept survived: yes
 - Cut: a share bar — the folio footer and the reading rail are the only chrome
 - Cut: related-article cards — 'You've read' does the job without tracking
-- Rejected animation: decoding the deck and byline as well as the headline — one decode is a headline; three is noise
+- Rejected animation: decoding the dateline, deck and byline from random glyphs — the dateline is set as filed; the headline's focus and the pull quote's ink are the page's only reveals
 - Rejected animation: a parallax photograph — the story has no photograph at the top, on purpose

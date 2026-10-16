@@ -6,7 +6,7 @@
       "page": "editorial-article",
       "archetype": "broadsheet",
       "mutation": "print-rule",
-      "signature": "decode",
+      "signature": "remembered-list",
       "tier": "2",
       "notes": "template editorial-article (examples/templates/editorial-article.html); runs before it are the templates listed before it in examples/templates/README.md",
       "fingerprint": {
@@ -17,7 +17,7 @@
           "footer-editorial-folio"
         ],
         "tier": 2,
-        "signature_type": "type"
+        "signature_type": "micro"
       }
     }
   ]

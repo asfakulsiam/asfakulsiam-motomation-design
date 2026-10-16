@@ -13,6 +13,8 @@ DELIVERY GATE · examples/templates/org.html
   progress  ✓ 0 of 0 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
   smooth    – no pinned zone, not measured
   rm-flow   – no pinned zone
+  rm-still  ⚠ reduced motion differs from full motion by 4.97% of pixels at scroll 0px, 1440×900 (frozen-frame control: 0%; warn below 25%; advisory, not in the stamp)  [1 canvas, 3 looping animation(s)]
+     ⚠ rm-still  the reduced-motion screen differs from full motion by 4.97% of pixels at scroll 0px (under 25%): it reads as a frozen frame, not a designed still (the frozen-frame control differs by 0%)
   focus     ✓ 0 of 15 focused elements show no visible focus indicator  (15 tabbable)
   targets   ✓ 0 under 24px, 3 under 44px (warning) at 375 touch  (11 checked; inline links exempt)
      37×44  a  "Give"
@@ -37,14 +39,15 @@ DELIVERY GATE · examples/templates/org.html
   micro-states (advisory: missing states are warnings, never fail the gate, not in the stamp)
      buttons   ⚠ 4 button(s): no hover, active, disabled state found  (have: focus, loading)
      forms     – none on the page
-     lists     – 2 static list(s): not judged (mark data lists with data-entity)
+     lists     – 1 static list(s): not judged (mark data lists with data-entity)
      images    – none on the page
      async     ✓ fetch/XHR in scripts  (have: pending, success, error)
   hierarchy  h1×1, 0 skipped heading levels, 21 element(s) tied for largest on the first 375px screen
-  structure  5 sections, entrances: static | static | static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 69KB gzipped
+  structure  5 sections, entrances: static | static | static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 77KB gzipped
   records    DESIGN.md: /home/user/workspace/repo/skills/asfakulsiam-motomation-design/examples/templates/org/DESIGN.md · memory log: /home/user/workspace/repo/skills/asfakulsiam-motomation-design/examples/templates/org/log.json · stamp fields: {"archetype":"manifesto","mutation":"constraint","signature":"seismograph-line","tier":"2"}
-  critique → C4[restraint:changed1] H4[375:1] S4[last5:archetype-new,signature-new,layout-reused,palette-new,fp38,self-excluded] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js69/80KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A5[focus:15/15,tgt:0f3w,zoom:0,reflow:0,fc:0,trap:0]
+  critique → C4[restraint:changed1] H4[375:1] S4[last5:archetype-new,signature-new,layout-reused,palette-new,fp38,self-excluded] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js77/80KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A5[focus:15/15,tgt:0f3w,zoom:0,reflow:0,fc:0,trap:0]
   coverage   ✓ worst width 375px: 1 of 102 text elements skipped (1%; limit 30% at every width)
   J — journey  – skipped (--reference: a design reference, not a live site; no cross-page navigation, 404 or form-backend requirement)
-  PASS  stamp → critique: C4[restraint:changed1] H4[375:1] S4[last5:archetype-new,signature-new,layout-reused,palette-new,fp38,self-excluded] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js69/80KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A5[focus:15/15,tgt:0f3w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · e31ec06eb8 · skipped 1/102@375
+  PASS  stamp → critique: C4[restraint:changed1] H4[375:1] S4[last5:archetype-new,signature-new,layout-reused,palette-new,fp38,self-excluded] R5[cuts:2,anim:2] M5[t2:pins0/2,webgl0/1,js77/80KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A5[focus:15/15,tgt:0f3w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · 9fca318112 · skipped 1/102@375
 
+exit 0

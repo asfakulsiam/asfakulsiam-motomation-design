@@ -144,3 +144,34 @@ The three pairs at or above 0.4, all at 375 only:
 | editorial-article × saas-landing | signature 0.50 (declared 0.5: decode and ink-fill are both text-reveal moves; measured 0.5) | On a phone the tool's pointer path crosses editorial's decoding dateline and replays it, and the hero (98% of the screen) contains that text, so both pages read as "text changes under pointer, screen-size". Changing it means cutting editorial's hover replay or its signature; left as measured. |
 | hotel × org | interaction 0.40 (navigation 0.67) | Measured only: the navigation feature sets are 0.67 alike at 375 (0.57 at 1440, where the axis scores 0.36). Not investigated or changed in this pass. |
 | motion-portfolio × studio-portfolio | typography 0.40 (families 0.52) | Both set body text in Hanken Grotesk. Every face in `examples/templates/fonts/` is already in use by some template; a new face means adding a font. |
+
+## The three marginal pairs fixed (2026-10-16, remaining-fixes pass, Task 2)
+
+One axis changed per pair, on one page of each pair:
+
+| Pair | Axis | Change | Page changed |
+|---|---|---|---|
+| editorial-article × saas-landing | signature | Signature move **decode → remembered-list**. The dateline no longer decodes from random glyphs. Instead the chapter rail ticks the chapters you have read on this device (localStorage, this article only), so a long read you put down is picked up at the right chapter. remembered-list is in the micro family, ink-fill in the type family, so the declared score is 0. | editorial-article (`builds/editorial-article/page.tsx`, `sections/hero-editorial-broadsheet.tsx`, DESIGN.md, structure.md, log.json) |
+| hotel × org | interaction | The trust's footer (gauge line, address, registration, the "Read" list of papers) moves out of `<main>` into a real `<footer>` landmark. Its papers list becomes footer navigation, a pattern no other template has. The top bar is unchanged. | org (`builds/org/page.tsx`) |
+| motion-portfolio × studio-portfolio | typography | Body face **Hanken Grotesk → Bricolage Grotesque**, the page's display face: one family, the way a title sequence's end card sets its credits in the title face. Hanken Grotesk is now used only by studio-portfolio. No new font was added. | motion-portfolio (`index.html`, DESIGN.md, structure.md) |
+
+Command: `node scripts/originality.mjs --dir examples/templates/`. Both viewports (1440×900 and 375×812) are the default. The script has no `--viewports 1440,375` flag; its flag is `--viewport 1440x900,375x812`, which is the default. Files: `after-marginal-fixes.txt` and `.json`.
+
+| Pair | Viewport | Before (worst axis) | After, every axis (structure · composition · image · typography · interaction · signature) |
+|---|---|---|---|
+| editorial-article × saas-landing | 1440 | signature 0.30 | 0.13 · 0.14 · n/a · 0.12 · 0.22 · **0.05** |
+| editorial-article × saas-landing | 375 | **signature 0.50** | 0.13 · 0.13 · n/a · 0.23 · 0.22 · **0.05** |
+| hotel × org | 1440 | interaction 0.36 | 0.21 · 0.28 · 0.24 · 0.22 · **0.32** · 0.10 |
+| hotel × org | 375 | **interaction 0.40** | 0.11 · 0.27 · 0.28 · 0.25 · **0.36** · 0.05 |
+| motion-portfolio × studio-portfolio | 1440 | typography 0.39 | 0.02 · 0.10 · 0.11 · **0.26** · 0.21 · 0.13 |
+| motion-portfolio × studio-portfolio | 375 | **typography 0.40** | 0.12 · 0.08 · 0.11 · **0.27** · 0.21 · 0.11 |
+
+| Viewport | Pairs below 0.4 on every axis | Max per axis (structure · composition · image · typography · interaction · signature) |
+|---|---|---|
+| 1440×900 | 45/45 | 0.32 · 0.38 · 0.24 · 0.38 · 0.32 · 0.38 |
+| 375×812 | 45/45 | 0.37 · 0.33 · 0.28 · 0.39 · 0.36 · 0.38 |
+| both (worst of) | **45/45** | 0.37 · 0.38 · 0.28 · 0.39 · 0.36 · 0.38 |
+
+The three changed templates were re-gated with `gate.mjs --reference` and re-stamped. All three PASS with `gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0`. The output is in `evals/results/gate-reference/{editorial-article,org,motion-portfolio}.txt`. The org and motion-portfolio runs used the working copy of `gate.mjs` that was being built for Task 3, so they print one advisory `rm-still` line. That line is not in the counts or the stamp.
+
+Side effect, not a design change: `org.html` and `editorial-article.html` were rebuilt with this machine's toolchain (react 19.3.1, esbuild 0.28.2), so their inlined script and CSP hash differ from the previous build.

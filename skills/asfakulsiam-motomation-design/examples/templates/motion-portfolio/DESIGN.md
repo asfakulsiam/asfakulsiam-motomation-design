@@ -20,7 +20,7 @@ Type mode: HOUSE STYLE (typography-led): titles are the trade, so the page sets 
 |---|---|---|---|---|
 | Display | Bricolage Grotesque | 300 for statements, 700 for the one accented word, 600 for shot titles | `clamp(3.25rem, 11.5vw, 13rem)` hero | light weight at size, like a main title card |
 | Heading | Bricolage Grotesque | 600 | `clamp(1.75rem, …, 3.5rem)` | |
-| Body | Hanken Grotesk | 400 / 600 | 16–18px | |
+| Body | Bricolage Grotesque | 400 / 600 | 16–18px | one family, as a title sequence's end card sets its credits in the title face (was Hanken Grotesk, which the studio portfolio also sets its body in) |
 | Mono / labels | JetBrains Mono | 400 | 12px, 0.12em tracking, uppercase | timecodes, shot numbers, years |
 
 ## Colour
