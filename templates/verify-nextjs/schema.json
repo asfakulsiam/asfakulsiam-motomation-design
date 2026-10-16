@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "verify-nextjs/schema.json",
+  "title": "verify-nextjs mock data",
+  "description": "Shapes of the files in data/. The page reads only these; a real backend replaces them with the same shapes.",
+  "$defs": {
+    "chapter": {
+      "type": "object",
+      "required": ["id", "number", "title", "body"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+        "number": { "type": "integer", "minimum": 1 },
+        "title": { "type": "string", "minLength": 1, "maxLength": 60 },
+        "body": { "type": "string", "minLength": 1, "maxLength": 240 }
+      }
+    },
+    "statusItem": {
+      "type": "object",
+      "required": ["label", "state"],
+      "additionalProperties": false,
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "state": { "enum": ["ok", "fail"] }
+      }
+    }
+  },
+  "properties": {
+    "site": {
+      "type": "object",
+      "required": ["name", "tagline", "chapters"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "tagline": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "chapters": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/chapter" } }
+      }
+    },
+    "status": {
+      "type": "object",
+      "required": ["items"],
+      "additionalProperties": false,
+      "properties": { "items": { "type": "array", "items": { "$ref": "#/$defs/statusItem" } } }
+    }
+  }
+}

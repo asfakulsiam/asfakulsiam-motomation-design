@@ -1,0 +1,9 @@
+{
+  "items": [
+    { "label": "App Router", "state": "ok" },
+    { "label": "TypeScript", "state": "ok" },
+    { "label": "Tailwind", "state": "ok" },
+    { "label": "GSAP", "state": "ok" },
+    { "label": "Middleware", "state": "ok" }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Verify",
+  "tagline": "A functional check of the Next.js output: if this page renders and the chapters move on scroll, the toolchain works.",
+  "chapters": [
+    { "id": "install", "number": 1, "title": "npm install", "body": "Pinned versions, no peer-dependency warnings to silence, no postinstall scripts of our own." },
+    { "id": "dev", "number": 2, "title": "npm run dev", "body": "App Router, TypeScript and Tailwind with their default configs; the dev server answers on port 3000." },
+    { "id": "data", "number": 3, "title": "Mock data", "body": "Everything on this page is read from data/*.json, described by schema.json and checked by npm run check:data." },
+    { "id": "motion", "number": 4, "title": "Scroll motion", "body": "GSAP ScrollTrigger reveals each chapter as it enters. Reduced motion shows every chapter in place, nothing animates." }
+  ]
+}

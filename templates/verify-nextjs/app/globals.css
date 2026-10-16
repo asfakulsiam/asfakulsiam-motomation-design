@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ground: #f3f1ec;
+  --color-ink: #16161a;
+  --color-muted: #5d5d66;
+  --color-accent: #1f5eff;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }

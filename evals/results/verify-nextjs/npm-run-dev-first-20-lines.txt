@@ -1,0 +1,21 @@
+$ npm run dev   # first 20 lines
+
+> verify-nextjs@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.5.28
+   - Local:        http://localhost:3000
+   - Network:      http://169.254.0.21:3000
+
+ ✓ Starting...
+ ✓ Ready in 1482ms
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 713ms (115 modules)
+ ○ Compiling / ...
+ ✓ Compiled / in 4.2s (589 modules)
+ GET / 200 in 4595ms
+ GET / 200 in 70ms
+ GET / 200 in 96ms
+ ✓ Compiled /icon.svg in 377ms (370 modules)
+ GET /icon.svg?f1ecff09b6d58e0e 200 in 509ms
+[?25h

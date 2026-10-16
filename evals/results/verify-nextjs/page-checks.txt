@@ -1,0 +1,5 @@
+GET / 200
+x-verify-middleware: ran
+GET /home 307 -> http://localhost:3000/
+<title>Verify · Next.js zero-config check</title>
+chapter opacities after scrolling 0.9 screen: 1.00 1.00 0.00 0.00 | console errors: none
