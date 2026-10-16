@@ -107,6 +107,19 @@ Exit code `2` also covers usage errors (an unknown flag, a missing value or no t
 - **Every page-level axis runs unchanged:** contrast, overflow, words, motion, names, focus, targets, zoom, reflow, the critique scores, and the rule sets (C content, S SEO, P performance, K security). Any one of them still fails the page.
 - **Live sites are gated as before.** Without the flag, the gate serves the site root and runs axis J. `--reference` cannot be combined with `--journey`.
 
+### Reduced-motion still quality (`rm-still`, advisory)
+
+**A designed still must differ from the full-motion screen by at least 25% of pixels. A frozen frame differs by less.** This is a warning, never a failure. It is not in the counts, the stamp or the page id.
+
+- **When it runs.** Every gate scan runs it, on pages whose motion needs a still: a pinned or scroll-driven zone, a visible canvas or video, or a running infinite animation. Other pages print `– no motion that needs a still`. `node scripts/gate.mjs --rm-still <page>` runs only this check (exit 0 either way). It combines with `--reference`.
+- **How it measures.** At 1440×900, with `?ambient=force` so the full-motion shot is what a capable device sees (a 2-core sandbox would otherwise get the ambient components' poster in full motion too), it takes three screenshots:
+  1. Full motion at a fixed scroll point: the middle of the first zone, else the top.
+  2. The same page frozen in place: every animation paused, `requestAnimationFrame` stopped, video paused. This is the **frozen-frame control**, what a fallback that only stops the animation would show.
+  3. Reduced motion at the same point: the same top-level block (the child of `<main>` under the viewport centre), scrolled to the top. An unpinned page is shorter, so the same raw scroll Y would land somewhere else.
+- **What it compares.** Full vs reduced, as the share of pixels that change: downscaled to 360px wide, channel-sum difference > 24, the same measure as the focus and progression checks. Under 25% prints `⚠ rm-still … it reads as a frozen frame, not a designed still`. The control's number is printed next to it, so you can see how far the still is from a frozen frame.
+- **What it cannot tell.** The pixel count separates a stopped frame (≈ 0%) from a new picture. It does not separate a new composition from the same composition **restyled**. The old event still (the same five shafts redrawn hard-edged) scores 54.1%, above the current follow-spot's 46.7%. Whether a still is a *distinct composition* is still judged by eye, from the side-by-side pairs (`gates/rules.md`, Reduced motion).
+- `RM_STILL_DUMP=/tmp/x` writes the three screenshots as `/tmp/x-full.jpg`, `-frozen.jpg` and `-reduced.jpg`.
+
 ### Axis J: the whole site as a journey (`scripts/journey.mjs`)
 
 The axes above check the page the gate was given. Axis J starts from that page and walks the site, the way a visitor does. It runs on every gate run (`--journey` runs only J, in about a minute, with no stamp). Every check is measured in Chromium; nothing is read from source text where the browser can show it.
@@ -244,7 +257,7 @@ The placeholders are deliberate. There are no numbers to copy. Write the archety
 - [ ] Mobile motion matrix applied
 - [ ] Scroll sequences (pinned, scrubbed, image-sequence, lit-step lists) reviewed per `craft/scroll-sequences.md`, record in the handoff:
   - [ ] Each step's contrast verified **active and inactive** (`gates/rules.md`, Contrast)
-  - [ ] Reduced-motion fallback verified as a **designed still** (`gates/rules.md`, Reduced motion)
+  - [ ] Reduced-motion fallback verified as a **designed still** (`gates/rules.md`, Reduced motion); `rm-still` shows no warning (≥ 25% different from full motion)
   - [ ] **No step shows a value that is later corrected** (verified)
 - [ ] Accessibility: keyboard path, visible focus, landmarks, skip link, alt text
 - [ ] Performance: LCP image preloaded, heavy libraries loaded dynamically, off-screen work paused

@@ -52,6 +52,9 @@
 //              --reference (v2.13) skips axis J for a design reference (a template that is an example, not a live site), and
 //              serves each page from its own folder so that folder's _headers apply (assets that climb out with ../ are
 //              answered from the folder they resolve to). Every page-level axis still runs and still fails the page.
+//   rm-still (advisory, v2.13) reduced-motion still quality: full motion vs reduced motion at the same scroll point
+//              must differ by >= 25% of pixels (a frozen frame differs by ~0%, printed as the frozen-frame control).
+//              Warns; never fails, never in counts, the stamp or its id. --rm-still runs only this check.
 //   micro-states (advisory, v2.9.0) buttons, forms, data lists, images and async actions: each expected state found in
 //              the page's CSS, markup or scripts? Missing ones warn; never fails, never in counts, the stamp or its id.
 //   richness   (advisory, v2.6.0) the "too little" side of restraint. Never fails, never in counts, the stamp or its id.
@@ -130,8 +133,8 @@ const argv = process.argv.slice(2);
 const flags = {}; const targets = [];
 // v2.5.0 (C9): unknown flags and missing values are one friendly line plus the usage, exit 2; boolean flags never
 // swallow the word after them (`--json page.html` used to lose the target).
-const GATE_USAGE = "Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]] [--timeout s | --timeout-ms ms] [--light] [--rules] [--reference] [--journey] [--page home|category|about|page]   |   --report <file.html>   |   --verify <file.html> [--url u]";
-const GATE_FLAGS = { json: "bool", light: "bool", rules: "bool", journey: "bool", reference: "bool", help: "bool", report: "optional", verify: "value", url: "value", out: "value", design: "value", log: "value", tier: "value", archetype: "value", signature: "value", timeout: "value", "timeout-ms": "value", page: "value" };
+const GATE_USAGE = "Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]] [--timeout s | --timeout-ms ms] [--light] [--rules] [--reference] [--rm-still] [--journey] [--page home|category|about|page]   |   --report <file.html>   |   --verify <file.html> [--url u]";
+const GATE_FLAGS = { json: "bool", light: "bool", rules: "bool", journey: "bool", reference: "bool", "rm-still": "bool", help: "bool", report: "optional", verify: "value", url: "value", out: "value", design: "value", log: "value", tier: "value", archetype: "value", signature: "value", timeout: "value", "timeout-ms": "value", page: "value" };
 const gateDie = (m) => { console.error(`gate: ${m}\n${GATE_USAGE}`); process.exit(2); };
 for (let i = 0; i < argv.length; i++) {
   const t = argv[i];
@@ -854,6 +857,61 @@ async function motionQuality(browser, url) {
   const fails = prog.filter((z) => !z.ok).length + (rm && !rm.ok ? 1 : 0) + (smooth.judged && zones.length ? (smooth.desktop.ok ? 0 : 1) + (smooth.mobile.ok ? 0 : 1) : 0);
   return { zones: prog, smooth, rm, fails, chrome };
 }
+// 4. reduced-motion still quality (v2.13, advisory): a designed still is a new composition, so at the same scroll point
+//    it differs from the full-motion screen; a frozen frame (the animation stopped where it was) barely does. Applies
+//    where the page has motion that needs a still: a pinned or scroll-driven zone, a visible canvas or video, or a
+//    running infinite animation. Screenshot full motion at a fixed scroll point (the middle of the first zone, else the
+//    top), then the same page frozen in place (every animation paused, rAF stopped, video paused: the frozen-frame
+//    control), then reduced motion at the same point. Full vs reduced must change at least RM_STILL_MIN_PCT of pixels.
+//    A warning, never a failure, never in the counts, the stamp or its id.
+export const RM_STILL_MIN_PCT = 25;
+export async function rmStill(browser, url) {
+  const vp = { width: 1440, height: 900 };
+  // ?ambient=force (components/_lib/ambient.ts): the full-motion shot is what a capable device sees. Without it, a
+  // 2-core sandbox gets the ambient components' still poster in full motion too, and the two shots would match
+  url = url + (url.includes("?") ? "&" : "?") + "ambient=force";
+  const full = await open(browser, url, { viewport: vp, reducedMotion: "no-preference" });
+  try {
+    const zones = await full.page.evaluate(ZONES);
+    const live = await full.page.evaluate(() => ({
+      canvas: [...document.querySelectorAll("canvas")].filter((c) => { const b = c.getBoundingClientRect(); return b.width * b.height > 4000 && getComputedStyle(c).visibility !== "hidden" && getComputedStyle(c).display !== "none"; }).length,
+      video: [...document.querySelectorAll("video")].filter((v) => v.getClientRects().length && !v.paused).length,
+      loops: document.getAnimations().filter((a) => a.playState === "running" && a.effect?.getComputedTiming().iterations === Infinity).length }));
+    const why = [zones.length ? `${zones.length} zone(s)` : null, live.canvas ? `${live.canvas} canvas` : null, live.video ? `${live.video} video` : null, live.loops ? `${live.loops} looping animation(s)` : null].filter(Boolean);
+    if (!why.length) return { applies: false };
+    const y = zones[0] ? Math.max(0, Math.round(zones[0].top + zones[0].len * 0.5)) : 0;
+    const shot = async (page) => (await page.screenshot({ type: "jpeg", quality: 85 })).toString("base64");
+    const idle = (page) => page.waitForLoadState("networkidle", { timeout: T(8000) }).catch(() => {});
+    // full motion: scroll to the point, let the frames it asks for arrive, then note the section on screen (the nearest
+    // ancestor with an id of the element at the viewport centre). Reduced motion: that same section, at the top. The
+    // same raw scroll Y would land somewhere else, because an unpinned page is shorter
+    await full.page.evaluate((y) => scrollTo(0, y), y); await full.page.waitForTimeout(T(800)); await idle(full.page); await full.page.waitForTimeout(T(1200));
+    const anchor = y === 0 ? null : await full.page.evaluate(() => {
+      // the top-level block (a child of main, else of body; a GSAP .pin-spacer is looked through) under the viewport centre
+      let e = document.elementFromPoint(innerWidth / 2, innerHeight / 2); const top = document.querySelector("main") || document.body;
+      while (e && e.parentElement && e.parentElement !== top && e !== top) e = e.parentElement;
+      if (!e || e === top) return null; if (e.classList.contains("pin-spacer") && e.firstElementChild) e = e.firstElementChild;
+      const q = (v) => v.replace(/["\\]/g, "\\$&");
+      return e.tagName.toLowerCase() + (e.id ? `#${CSS.escape(e.id)}` : "") + [...e.classList].filter((c) => !/^(pin-spacer|is-|gsap)/.test(c)).map((c) => `.${CSS.escape(c)}`).join("") + (e.getAttribute("aria-labelledby") ? `[aria-labelledby="${q(e.getAttribute("aria-labelledby"))}"]` : "");
+    });
+    const at = await full.page.evaluate(() => Math.round(scrollY)); const a = await shot(full.page);
+    // the frozen-frame control: what a fallback that only stops the animation would show
+    await full.page.evaluate(() => { for (const x of document.getAnimations()) x.pause(); window.requestAnimationFrame = () => 0; for (const v of document.querySelectorAll("video")) v.pause(); });
+    await full.page.waitForTimeout(T(600)); const frozen = await shot(full.page);
+    const red = await open(browser, url, { viewport: vp, reducedMotion: "reduce" });
+    let b, atR; try {
+      await red.page.evaluate(([id, y]) => { const e = id && document.querySelector(id); if (e) e.scrollIntoView({ block: "start" }); else scrollTo(0, y); }, [anchor, y]);
+      await red.page.waitForTimeout(T(800)); await idle(red.page); await red.page.waitForTimeout(T(800));
+      atR = await red.page.evaluate(() => Math.round(scrollY)); b = await shot(red.page);
+    } finally { await red.ctx.close(); }
+    if (process.env.RM_STILL_DUMP) for (const [k, v] of Object.entries({ full: a, frozen, reduced: b })) writeFileSync(`${process.env.RM_STILL_DUMP}-${k}.jpg`, Buffer.from(v, "base64"));
+    const [stillPct] = await pixelDiffs(browser, [a, b]); const [frozenPct] = await pixelDiffs(browser, [a, frozen]);
+    return { applies: true, why, anchor, scrollY: at, scrollYReduced: atR, stillPct, frozenPct, min: RM_STILL_MIN_PCT, ok: stillPct >= RM_STILL_MIN_PCT,
+      warns: stillPct >= RM_STILL_MIN_PCT ? [] : [{ id: "rm-still", why: `the reduced-motion screen differs from full motion by ${stillPct}% of pixels at scroll ${at}px (under ${RM_STILL_MIN_PCT}%): it reads as a frozen frame, not a designed still (the frozen-frame control differs by ${frozenPct}%)` }] };
+  } finally { await full.ctx.close(); }
+}
+export const rmStillLine = (x) => !x ? "  rm-still  – not measured" : x.error ? `  rm-still  – not measured (${x.error})` : !x.applies ? "  rm-still  – no motion that needs a still (no zone, canvas, video or looping animation)"
+  : `  rm-still  ${x.ok ? "✓" : "⚠"} reduced motion differs from full motion by ${x.stillPct}% of pixels at ${x.anchor ? `${x.anchor} (full motion at scroll ${x.scrollY}px, reduced at ${x.scrollYReduced}px)` : `scroll ${x.scrollY}px`}, 1440×900 (frozen-frame control: ${x.frozenPct}%; warn below ${x.min}%; advisory, not in the stamp)  [${x.why.join(", ")}]${x.ok ? "" : `\n     ⚠ rm-still  ${x.warns[0].why}`}`;
 export function qAxis(q) {
   if (!q) return "Q?[not-measured]";
   const cats = (q.zones.some((z) => !z.ok) ? 1 : 0) + (q.rm && !q.rm.ok ? 1 : 0) + (q.smooth.judged && q.smooth.desktop && !(q.smooth.desktop.ok && q.smooth.mobile.ok) ? 1 : 0);
@@ -1219,6 +1277,7 @@ export async function scan(target, browser, opts = {}) {
     // advisory (v2.6.0 richness): never fails, never in counts, stamp or id
     const rich = await richness(browser, url, opts.page).catch((e) => ({ error: firstLine(e) }));
     const micro = await microStates(browser, url).catch((e) => ({ error: firstLine(e) })); // advisory (v2.9.0): never fails, never in counts, stamp or id
+    const still = await rmStill(browser, url).catch((e) => ({ error: firstLine(e) })); // advisory (v2.13): never fails, never in counts, stamp or id
     // axis J (v2.11): the whole site as a journey. Fails the page on any missing state; not in the counts, the stamp or its id
     // --reference (v2.13): a design reference is one page, not a site: no cross-page navigation, no 404 page, demo forms.
     // Axis J is skipped (reported as skipped); every page-level axis above still runs and still fails the page.
@@ -1250,7 +1309,7 @@ export async function scan(target, browser, opts = {}) {
     // coverage: the worst width decides; more than SKIP_WARN_PCT skipped at any width means the page was not measured, not passed
     const worstW = c.byWidth.reduce((a, x) => (x.skippedPct > a.skippedPct ? x : a), c.byWidth[0]);
     const coverage = { ok: !c.lowCoverage, skipped: worstW.skipped, total: worstW.total, pct: worstW.skippedPct, width: worstW.width, low: c.byWidth.filter((x) => x.lowCoverage).map((x) => x.width) };
-    return { target, url, version: GATE_VERSION, pass: pass && (!compl || !!compl.pass) && !!jr.pass, completeness: compl, journey: jr, verified: coverage.ok, coverage, counts, id, stamp: stampOf(counts, id, coverage), critique: critiqueFull, sources: { design: designFile || null, log: logFile || null, meta }, rules, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu, quality: mq, access: ax, composition: comp, richness: rich, microStates: micro };
+    return { target, url, version: GATE_VERSION, pass: pass && (!compl || !!compl.pass) && !!jr.pass, completeness: compl, journey: jr, verified: coverage.ok, coverage, counts, id, stamp: stampOf(counts, id, coverage), critique: critiqueFull, sources: { design: designFile || null, log: logFile || null, meta }, rules, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu, quality: mq, rmStill: still, access: ax, composition: comp, richness: rich, microStates: micro };
   } finally { close(); }
 }
 export const stampOf = (k, id, cov, version = GATE_VERSION) => `gate: c${k.contrast} o${k.overflow} w${k.words} rm${k.motion} a${k.names} n${k.numbers ?? 0}${k.quality !== undefined ? ` q${k.quality} k${k.access}` : ""}${k.copy !== undefined ? ` · rules: C${k.copy} S${k.seo} P${k.perf} K${k.sec}` : ""} · ${version} · ${id}${cov ? ` · skipped ${cov.skipped}/${cov.total}@${cov.width}` : ""}`;
@@ -1295,6 +1354,7 @@ function print(r) {
   L(`  smooth    ${!q.smooth.desktop ? "– no pinned zone, not measured" : !q.smooth.judged ? `– not verified — sandbox (${q.smooth.why}); measured p95 ${q.smooth.desktop.p95}ms @1440, ${q.smooth.mobile.p95}ms @375 CPU×4 (budgets ${SMOOTH_P95_MS.desktop}/${SMOOTH_P95_MS.mobile}ms) — see docs/adapters/sandbox.md` : `${q.smooth.desktop.ok && q.smooth.mobile.ok ? "✓" : "✗"} p95 ${q.smooth.desktop.p95}ms @1440 (≤ ${SMOOTH_P95_MS.desktop}) · ${q.smooth.mobile.p95}ms @375 CPU×4 (≤ ${SMOOTH_P95_MS.mobile})`}`);
   if (q.chrome?.length) L(`  chrome    · sticky chrome, not a pinned zone (< 15% of the viewport): ${q.chrome.slice(0, 4).join("; ")}`);
   L(`  rm-flow   ${!q.rm ? "– no pinned zone" : q.rm.ok ? "✓ reduced motion is normal flow, all text present" : `✗ under reduced motion: ${q.rm.pinned.length} zone(s) still pinned${q.rm.pinned.length ? ` (${q.rm.pinned.slice(0, 3).join("; ")})` : ""}, ${q.rm.missingCount} text(s) missing${q.rm.missing.length ? ` ("${q.rm.missing.slice(0, 2).join('", "').slice(0, 80)}")` : ""}`}${q.rm ? ` · ${q.rm.canvases} visible canvas(es)` : ""}`);
+  if (r.rmStill) L(rmStillLine(r.rmStill));
   L(`  focus     ${a.focus.fails.length === 0 ? "✓" : "✗"} ${a.focus.fails.length} of ${a.focus.checked} focused elements show no visible focus indicator  (${a.focus.tabbables} tabbable)`);
   for (const f of a.focus.fails.slice(0, 8)) L(`     no ring  ${f.el}  "${f.text}"  (${f.changedPct}% of pixels change on focus)`);
   L(`  targets   ${a.target.fails.length === 0 ? "✓" : "✗"} ${a.target.fails.length} under ${TARGET_MIN}px, ${a.target.warns.length} under ${TARGET_TOUCH}px (warning) at 375 touch  (${a.target.checked} checked; inline links exempt)`);
@@ -1483,6 +1543,13 @@ async function main() {
       } finally { await close?.(); } } } finally { await b.close().catch(() => {}); }
       if (flags.json) console.log(JSON.stringify(out.length === 1 ? out[0] : out, null, 2));
       process.exit(out.every((r) => Object.values(r.counts).every((n) => !n)) ? 0 : 1);
+    }
+    // --rm-still: only the reduced-motion still-quality check (advisory); no stamp. Exit 0 either way: it warns, never fails
+    if (flags["rm-still"]) {
+      const out = []; const b = await launch(pw, !!flags.light);
+      try { for (const t of targets) { const { url, close } = await toUrl(t); try { const x = await rmStill(b, url).catch((e) => ({ error: firstLine(e) })); out.push({ target: t, ...x }); if (!flags.json) console.log(`\n${t}  (reduced-motion still only; advisory; no stamp)\n${rmStillLine(x)}`); } finally { await close?.(); } } } finally { await b.close().catch(() => {}); }
+      if (flags.json) console.log(JSON.stringify(out.length === 1 ? out[0] : out, null, 2));
+      process.exit(0);
     }
     // --journey: only axis J (the six whole-site checks); no stamp (a stamp needs every axis)
     if (flags.journey) {

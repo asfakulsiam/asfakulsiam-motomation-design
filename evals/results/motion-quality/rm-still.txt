@@ -1,0 +1,11 @@
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+
+examples/templates/event.html  (reduced-motion still only; advisory; no stamp)
+  rm-still  ✓ reduced motion differs from full motion by 46.7% of pixels at scroll 0px, 1440×900 (frozen-frame control: 0%; warn below 25%; advisory, not in the stamp)  [5 looping animation(s)]
+
+examples/templates/product-launch/index.html  (reduced-motion still only; advisory; no stamp)
+  rm-still  ✓ reduced motion differs from full motion by 35.65% of pixels at section.stage[aria-labelledby="stage-t"] (full motion at scroll 2344px, reduced at 814px), 1440×900 (frozen-frame control: 0%; warn below 25%; advisory, not in the stamp)  [1 zone(s), 1 canvas]
+
+examples/templates/motion-portfolio/index.html  (reduced-motion still only; advisory; no stamp)
+  rm-still  ✓ reduced motion differs from full motion by 47.09% of pixels at section.reel[aria-labelledby="reel-t"] (full motion at scroll 2857px, reduced at 967px), 1440×900 (frozen-frame control: 0%; warn below 25%; advisory, not in the stamp)  [1 zone(s), 1 canvas]
+exit 0

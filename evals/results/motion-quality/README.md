@@ -114,3 +114,32 @@ the redesign's new order (tickets before the lineup) removed the old deviation (
 a 14% hold).
 
 Diffs of the three MOTION.md files: `git show <this commit> -- 'skills/asfakulsiam-motomation-design/examples/templates/*/MOTION.md'` (the commit titled "T2: motion quality").
+
+## D. The reduced-motion still check (2026-10-16, remaining-fixes pass, Task 3)
+
+Section A above notes that the pixel test passed the old frozen still too. The gate now has its own check:
+`rm-still` in `scripts/gate.mjs`, documented in `gates/delivery-gate.md` ("Reduced-motion still quality"). It is a
+warning, never a failure, and not in the stamp.
+
+At 1440×900 it takes three screenshots: full motion at a fixed scroll point (the middle of the first pinned zone,
+else the top), the same page frozen in place (the frozen-frame control), and reduced motion at the same point (the same
+top-level block). It requires full vs reduced to differ by at least 25% of pixels.
+
+`node scripts/gate.mjs --rm-still --reference examples/templates/<name>` from the skill folder, with the films' frames
+restored (`node scripts/fetch-frames.mjs`; without them the film canvas is blank). Output: `rm-still.txt`.
+
+| Template | Tier | Scroll point (full · reduced) | Designed still vs full motion | Frozen-frame control | Result |
+|---|---|---|---|---|---|
+| event | 4 | top · top | **46.7%** | 0% | ✓ no warning |
+| product-launch | 5 | `section.stage` (2344px · 814px) | **35.65%** | 0% | ✓ no warning |
+| motion-portfolio | 5 | `section.reel` (2857px · 967px) | **47.09%** | 0% | ✓ no warning |
+
+A frozen frame scores lower than a designed still in all three: 0% against 35–47%. The check also warns when it
+should. Before the scroll point was anchored to the same block, product-launch compared the film with the spec table
+further down the shorter reduced page, scored 9.24%, and warned.
+
+What it still cannot tell: the **old** event still, the same five shafts redrawn hard-edged (built from
+`components/backgrounds/beams.tsx` before 899f842, as a temporary page that was not committed), scores **54.1%**. That is
+higher than the new follow-spot. A restyled copy of the same composition changes as many pixels as a new composition
+does. So the check catches a frozen frame, not a restyle, and "distinct composition" is still judged by eye from the
+pairs in section A.
