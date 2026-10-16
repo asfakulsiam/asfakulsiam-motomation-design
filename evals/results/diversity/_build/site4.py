@@ -8,7 +8,9 @@ STAMP = '<!-- motomation · archetype: stage · mutation: invert-axis (time runs
 BOTTLE = '''<svg class="bottle" viewBox="0 0 200 320" role="img" aria-label="Oud No. 7, a squat glass bottle with a brass cap, bottle 41 of 120 [NEEDS ASSET: photograph]"><defs><radialGradient id="glow" cx="50%" cy="58%" r="55%"><stop offset="0" stop-color="#3a2a1c"/><stop offset="1" stop-color="#120e0b" stop-opacity="0"/></radialGradient><clipPath id="glass"><path d="M48 120c0-14 10-22 26-22h52c16 0 26 8 26 22v150c0 18-12 30-30 30H78c-18 0-30-12-30-30z"/></clipPath></defs><circle cx="100" cy="190" r="150" fill="url(#glow)"/><rect x="78" y="40" width="44" height="52" rx="4" fill="#c9893b"/><rect x="86" y="88" width="28" height="14" fill="#8a5d27"/><path d="M48 120c0-14 10-22 26-22h52c16 0 26 8 26 22v150c0 18-12 30-30 30H78c-18 0-30-12-30-30z" fill="#1d1712" stroke="#e8dfd2" stroke-opacity=".5" stroke-width="1.5"/><g clip-path="url(#glass)"><rect class="liquid" x="40" y="150" width="120" height="160" fill="#c9893b"/></g><text x="100" y="230" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="22" fill="#e8dfd2">No. 7</text></svg>'''
 def head(title, desc, path, page):
     ld = {"@context": "https://schema.org", "@type": "Product", "name": "Oud No. 7", "brand": {"@type": "Brand", "name": "Maison Ilham"}, "description": desc}
-    nav = ''.join(f'<a href="{h}">{t}</a>' for h, t in [('/the-oud.html', 'The oud'), ('/atelier.html', 'The atelier'), ('/request.html', 'Request a bottle')])
+    # the page you are on is marked, not linked: a link to the current page changes nothing when tapped
+    nav = ''.join(f'<span aria-current="page">{t}</span>' if h == path else f'<a href="{h}">{t}</a>' for h, t in [('/the-oud.html', 'The oud'), ('/atelier.html', 'The atelier'), ('/request.html', 'Request a bottle')])
+    house = '<span class="house">Maison Ilham</span>' if path == '/' else '<a class="house" href="/">Maison Ilham</a>'
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -27,7 +29,7 @@ def head(title, desc, path, page):
 <body class="p-{page}">
 {STAMP}
 <a class="skip" href="#main">Skip to content</a>
-<header class="top"><a class="house" href="/">Maison Ilham</a><nav aria-label="Main">{nav}</nav></header>
+<header class="top">{house}<nav aria-label="Main">{nav}</nav></header>
 '''
 FOOT = '''<footer class="foot"><p class="house">Maison Ilham</p><p>Atelier, Road 79, Gulshan 2, Dhaka · by appointment [NEEDS COPY: address]</p><p><a href="/the-oud.html">The oud</a> · <a href="/atelier.html">The atelier</a> · <a href="/request.html">Request a bottle</a></p></footer>
 <script src="/ruler.js" defer></script>
@@ -78,7 +80,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 2rem; padding: 1.5rem 6vw; position: relative; z-index: 5; }
 .house { font: italic 400 1.2rem/1 "Bodoni Moda", Didot, serif; text-decoration: none; display: inline-block; padding: .7rem 0; } /* 19px tall failed the 24px target rule */
 .top nav { display: flex; flex-wrap: wrap; gap: 0 1.75rem; font-size: .8rem; letter-spacing: .22em; text-transform: uppercase; }
-.top nav a { text-decoration: none; padding: .6rem 0; }
+.top nav a, .top nav [aria-current] { text-decoration: none; padding: .6rem 0; } .top nav [aria-current] { border-bottom: 1px solid currentColor; }
 h1, h2 { font-family: "Bodoni Moda", Didot, serif; font-weight: 400; }
 .eyebrow { font-size: .78rem; letter-spacing: .3em; text-transform: uppercase; color: var(--dim); margin: 0 0 1.5rem; }
 .stage-open { min-height: 78vh; display: grid; align-content: center; justify-items: center; text-align: center; padding: 4rem 8vw; }

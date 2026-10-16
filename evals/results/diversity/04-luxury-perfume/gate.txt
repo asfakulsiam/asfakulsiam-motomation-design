@@ -9,22 +9,22 @@ DELIVERY GATE · evals/results/diversity/04-luxury-perfume
   overflow  ✓ 0 at 375/390/768/1440px
   words     ✓ 0 display-text problems at 375px  (10 display elements checked)
   motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (40 compared)
-  names     ✓ 0 missing alt / accessible names  (9 interactive elements checked)
+  names     ✓ 0 missing alt / accessible names  (8 interactive elements checked)
   numbers   ✓ 0 values shown wrong before they settle  (6 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
   progress  ✓ 0 of 1 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
      ✓ sticky div.stage-object  4410px  Δ median 3% · 7/7 transitions change  [3.79 3.41 3.17 2.95 2.66 2.87 2.99]
-  smooth    – not verified — sandbox (sandbox: 2 CPUs); measured p95 16.7ms @1440, 16.8ms @375 CPU×4 (budgets 20/25ms) — see docs/adapters/sandbox.md
+  smooth    – not verified — sandbox (sandbox: 2 CPUs); measured p95 16.8ms @1440, 16.7ms @375 CPU×4 (budgets 20/25ms) — see docs/adapters/sandbox.md
   rm-flow   ✓ reduced motion is normal flow, all text present · 0 visible canvas(es)
-  focus     ✓ 0 of 9 focused elements show no visible focus indicator  (9 tabbable)
-  targets   ✓ 0 under 24px, 8 under 44px (warning) at 375 touch  (9 checked; inline links exempt)
+  focus     ✓ 0 of 8 focused elements show no visible focus indicator  (8 tabbable)
+  targets   ✓ 0 under 24px, 7 under 44px (warning) at 375 touch  (8 checked; inline links exempt)
      106×30  a.skip  "Skip to content"
-     117×42  a.house  "Maison Ilham"
      71×42  a  "The oud"
      98×42  a  "The atelier"
+     152×42  a  "Request a bottle"
   zoom200   ✓ 0 lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%
   reflow    ✓ 0px horizontal scroll at 320px
   forced    ✓ 0 of 39 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
-  kbd-trap  ✓ 9 of 9 tabbable reached in 24 Tabs, no cycle
+  kbd-trap  ✓ 8 of 8 tabbable reached in 22 Tabs, no cycle
   C copy     ✓ 0 rule(s) failing  (craft/copy.md; 0 warning(s))
   S SEO      ✓ 0 rule(s) failing  (craft/seo.md; 0 warning(s))
   P perf     ✓ 0 rule(s) failing  (craft/performance.md; 0 warning(s))
@@ -46,7 +46,7 @@ DELIVERY GATE · evals/results/diversity/04-luxury-perfume
   hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
   structure  5 sections, entrances: static | static | static | static | static → 0 repeat(s); pins 1, WebGL canvases 0, JS 3KB gzipped
   records    DESIGN.md: /home/user/workspace/repo/evals/results/diversity/04-luxury-perfume/DESIGN.md · memory log: /home/user/.motomation/log.json · stamp fields: {"archetype":"stage","mutation":"invert-axis (time runs backwards)","signature":"seven-year-ruler","tier":"3"}
-  critique → C4[restraint:changed1] H5[375:0] S1[last5:archetype-reused,signature-new,fp100] R3[cuts:1,anim:1] M5[t3:pins1/2,webgl0/1,js3/140KB,rm0] V5[entrance-repeats:0] Q5[prog:Δ3%,smooth:sandbox,rm:flow] A5[focus:9/9,tgt:0f8w,zoom:0,reflow:0,fc:0,trap:0]
+  critique → C4[restraint:changed1] H5[375:0] S1[last5:archetype-reused,signature-new,layout-reused,palette-new,fp100] R3[cuts:1,anim:1] M5[t3:pins1/2,webgl0/1,js3/140KB,rm0] V5[entrance-repeats:0] Q5[prog:Δ3%,smooth:sandbox,rm:flow] A5[focus:8/8,tgt:0f7w,zoom:0,reflow:0,fc:0,trap:0]
   coverage   ✓ worst width 375px: 1 of 40 text elements skipped (3%; limit 30% at every width)
   X — completeness (single luxury product, Dhaka, Bangladesh; static + one request endpoint, admin panel: no)  ✓
       Routes:      4/4 required present
@@ -58,18 +58,17 @@ DELIVERY GATE · evals/results/diversity/04-luxury-perfume
     nav      ✓ 4/4 route(s) reachable from home in ≤ 3 clicks (/:0 /the-oud:1 /atelier:1 /request:1)
                · sitemap.xml: 4 route(s)
                · 4 page(s) loaded
-    mobile   ✗ 14/15 interactive element(s) respond at 375px · tap 14/15 · swipe n/a · long-press n/a
-               ✗ tap a "Maison Ilham" (/): nothing changed after a tap (no DOM change, focus, scroll, navigation or event)
+    mobile   ✓ 15/15 interactive element(s) respond at 375px · tap 15/15 · swipe n/a · long-press n/a
                · 4 page(s); an element shared by several pages (header, footer) is tapped once
                · 4 element(s) parked off-canvas (skip links, closed drawers) are keyboard-only by design and not tapped
                · no element declares a long press
     forms    ✓ 5/5 form state(s) rendered · Request a bottle (/request.html): default✓ validation✓ loading✓ success✓ serverError✓
     loading  – n/a: no fetch or XHR request after load: no async surface
     errors   ✓ 1/1 designed not-found view (unknown route → HTTP 404)
-               · probed /__motomation-missing-mvapi32o/
+               · probed /__motomation-missing-mvasc741/
     session  ✓ 6/6 · load ✓ · open a second route ✓ · back button ✓ · forward button ✓ · full reload ✓ · two tabs ✓
                · second page: /the-oud.html
-    journey: nav0 mobile1 forms0 loading- errors0 session0 → FAIL (1 missing)
-  FAIL  stamp → critique: C4[restraint:changed1] H5[375:0] S1[last5:archetype-reused,signature-new,fp100] R3[cuts:1,anim:1] M5[t3:pins1/2,webgl0/1,js3/140KB,rm0] V5[entrance-repeats:0] Q5[prog:Δ3%,smooth:sandbox,rm:flow] A5[focus:9/9,tgt:0f8w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · 6dba9ebb32 · skipped 1/40@375
+    journey: nav0 mobile0 forms0 loading- errors0 session0 → PASS
+  PASS  stamp → critique: C4[restraint:changed1] H5[375:0] S1[last5:archetype-reused,signature-new,layout-reused,palette-new,fp100] R3[cuts:1,anim:1] M5[t3:pins1/2,webgl0/1,js3/140KB,rm0] V5[entrance-repeats:0] Q5[prog:Δ3%,smooth:sandbox,rm:flow] A5[focus:8/8,tgt:0f7w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · a72bb34522 · skipped 1/40@375
 
-(exit 1, 381s)
+(exit 0)

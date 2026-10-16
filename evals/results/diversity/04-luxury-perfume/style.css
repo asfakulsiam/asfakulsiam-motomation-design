@@ -9,7 +9,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 2rem; padding: 1.5rem 6vw; position: relative; z-index: 5; }
 .house { font: italic 400 1.2rem/1 "Bodoni Moda", Didot, serif; text-decoration: none; display: inline-block; padding: .7rem 0; } /* 19px tall failed the 24px target rule */
 .top nav { display: flex; flex-wrap: wrap; gap: 0 1.75rem; font-size: .8rem; letter-spacing: .22em; text-transform: uppercase; }
-.top nav a { text-decoration: none; padding: .6rem 0; }
+.top nav a, .top nav [aria-current] { text-decoration: none; padding: .6rem 0; } .top nav [aria-current] { border-bottom: 1px solid currentColor; }
 h1, h2 { font-family: "Bodoni Moda", Didot, serif; font-weight: 400; }
 .eyebrow { font-size: .78rem; letter-spacing: .3em; text-transform: uppercase; color: var(--dim); margin: 0 0 1.5rem; }
 .stage-open { min-height: 78vh; display: grid; align-content: center; justify-items: center; text-align: center; padding: 4rem 8vw; }
