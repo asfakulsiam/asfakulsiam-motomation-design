@@ -11,7 +11,7 @@ Tool: scripts/originality.mjs (35s). Result: FAIL, 6 of 10 pairs repeat on at le
 | funeral-home × childrens-dentistry | 0.18 | 0.12 | 0.00 | 0.41 ✗ | 0.18 | 0.17 | 0.18 |
 | funeral-home × hardcore-metal-band | 0.01 | 0.06 | 0.00 | 0.09 | 0.41 ✗ | 0.10 | 0.11 |
 | funeral-home × luxury-perfume | 0.13 | 0.09 | 0.00 | 0.20 | 0.54 ✗ | 0.09 | 0.18 |
-| funeral-home × municipal-water-authority | 0.10 | 0.31 | 1.00 ✗ | 0.41 ✗ | 0.35 | 0.10 | 0.38 |
+| funeral-home × municipal-water-authority | 0.10 | 0.31 | n/a | 0.41 ✗ | 0.35 | 0.10 | 0.25 |
 | childrens-dentistry × hardcore-metal-band | 0.03 | 0.18 | 0.00 | 0.10 | 0.22 | 0.13 | 0.11 |
 | childrens-dentistry × luxury-perfume | 0.05 | 0.04 | 0.67 ✗ | 0.16 | 0.12 | 0.00 | 0.17 |
 | childrens-dentistry × municipal-water-authority | 0.06 | 0.29 | 0.00 | 0.37 | 0.21 | 0.06 | 0.17 |
@@ -41,15 +41,15 @@ Per axis, the five builds against each other (rows × columns):
 | luxury-perfume | 0.09 | 0.04 | 0.04 | 1.00 | 0.06 |
 | municipal-water-authority | 0.31 | 0.29 | 0.04 | 0.06 | 1.00 |
 
-**image** (max 1.00)
+**image** (max 0.67)
 
 | | funeral-home | childrens-dentistry | hardcore-metal-band | luxury-perfume | municipal-water-authority |
 |---|---:|---:|---:|---:|---:|
-| funeral-home | 1.00 | 0.00 | 0.00 | 0.00 | 1.00 ✗ |
+| funeral-home | 1.00 | 0.00 | 0.00 | 0.00 | n/a |
 | childrens-dentistry | 0.00 | 1.00 | 0.00 | 0.67 ✗ | 0.00 |
 | hardcore-metal-band | 0.00 | 0.00 | 1.00 | 0.00 | 0.00 |
 | luxury-perfume | 0.00 | 0.67 ✗ | 0.00 | 1.00 | 0.00 |
-| municipal-water-authority | 1.00 ✗ | 0.00 | 0.00 | 0.00 | 1.00 |
+| municipal-water-authority | n/a | 0.00 | 0.00 | 0.00 | 1.00 |
 
 **typography** (max 0.41)
 
@@ -81,15 +81,15 @@ Per axis, the five builds against each other (rows × columns):
 | luxury-perfume | 0.09 | 0.00 | 0.05 | 1.00 | 0.11 |
 | municipal-water-authority | 0.10 | 0.06 | 0.13 | 0.11 | 1.00 |
 
-**overall** (max 0.38)
+**overall** (max 0.25)
 
 | | funeral-home | childrens-dentistry | hardcore-metal-band | luxury-perfume | municipal-water-authority |
 |---|---:|---:|---:|---:|---:|
-| funeral-home | 1.00 | 0.18 | 0.11 | 0.18 | 0.38 |
+| funeral-home | 1.00 | 0.18 | 0.11 | 0.18 | 0.25 |
 | childrens-dentistry | 0.18 | 1.00 | 0.11 | 0.17 | 0.17 |
 | hardcore-metal-band | 0.11 | 0.11 | 1.00 | 0.15 | 0.11 |
 | luxury-perfume | 0.18 | 0.17 | 0.15 | 1.00 | 0.15 |
-| municipal-water-authority | 0.38 | 0.17 | 0.11 | 0.15 | 1.00 |
+| municipal-water-authority | 0.25 | 0.17 | 0.11 | 0.15 | 1.00 |
 
 ## Judged
 

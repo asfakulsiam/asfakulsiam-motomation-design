@@ -19,7 +19,8 @@
 //   image        image treatment: every img, picture, video, canvas, svg root, background-image url() and painted
 //                role="img" box ≥ 48px, as three
 //                token bags: aspect ratio × size class, crop (object-fit vs natural ratio) × mask (radius, clip-path,
-//                mask-image), filter × blend × rotation. Both pages without imagery score 1 (the same treatment: none).
+//                mask-image), filter × blend × rotation. Both pages without imagery: not applicable (n/a, left out of
+//                the overall mean; before v2.11 this scored 1.00); imagery on one side only scores 0.
 //   typography   families (display and body), scale (font-size steps relative to body, quarter-octave bins, weighted by
 //                text length), rhythm (line-height, tracking, case, weight, italic per role), hierarchy (h1/h2/h3 size
 //                relative to body).
@@ -88,7 +89,7 @@ export function compare(A, B, sigFamily = {}) {
   const dens = []; for (let i = 0; i < screens; i++) dens.push(bin(A.composition.density[i]) === bin(B.composition.density[i]) ? 1 : 0);
   parts.composition = { placement: mean(gs), columns: wjaccard(A.composition.columns, B.composition.columns), density: mean(dens) };
   const noImg = !A.image.count && !B.image.count, oneImg = !A.image.count !== !B.image.count;
-  parts.image = noImg ? { none: 1 } : oneImg ? { one_side_only: 0 } : { ratio_size: wjaccard(A.image.ratioSize, B.image.ratioSize), crop_mask: wjaccard(A.image.cropMask, B.image.cropMask), effects: wjaccard(A.image.effects, B.image.effects) };
+  parts.image = noImg ? {} /* neither page has imagery: not applicable (n/a), not "the same treatment" */ : oneImg ? { one_side_only: 0 } : { ratio_size: wjaccard(A.image.ratioSize, B.image.ratioSize), crop_mask: wjaccard(A.image.cropMask, B.image.cropMask), effects: wjaccard(A.image.effects, B.image.effects) };
   const famSame = (x, y) => (x && y && x === y ? 1 : 0);
   const hDiff = ["h1", "h2", "h3"].map((h) => (A.typography.hier[h] && B.typography.hier[h] ? Math.abs(Math.log2(A.typography.hier[h] / B.typography.hier[h])) : A.typography.hier[h] || B.typography.hier[h] ? 1 : 0));
   parts.typography = { families: (famSame(A.typography.display, B.typography.display) + famSame(A.typography.body, B.typography.body)) / 2, scale: wjaccard(A.typography.scale, B.typography.scale), rhythm: wjaccard(A.typography.rhythm, B.typography.rhythm), hierarchy: Math.max(0, 1 - mean(hDiff)) };

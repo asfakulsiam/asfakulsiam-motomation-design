@@ -191,11 +191,11 @@
     "score": {
      "structure": 0.1,
      "composition": 0.31,
-     "image": 1,
+     "image": null,
      "typography": 0.41,
      "interaction": 0.35,
      "signature": 0.1,
-     "overall": 0.38
+     "overall": 0.25
     },
     "parts": {
      "structure": {
@@ -207,9 +207,7 @@
       "columns": 0.25,
       "density": 0.67
      },
-     "image": {
-      "none": 1
-     },
+     "image": {},
      "typography": {
       "families": 0,
       "scale": 0.6,
@@ -226,7 +224,6 @@
      }
     },
     "over": [
-     "image",
      "typography"
     ]
    },
@@ -497,11 +494,11 @@
   "max": {
    "structure": 0.18,
    "composition": 0.31,
-   "image": 1,
+   "image": 0.67,
    "typography": 0.41,
    "interaction": 0.56,
    "signature": 0.17,
-   "overall": 0.38
+   "overall": 0.25
   },
   "targets": [
    "/home/user/workspace/repo/evals/results/diversity/01-funeral-home",
