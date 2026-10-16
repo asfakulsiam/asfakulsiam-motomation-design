@@ -1,0 +1,68 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 2101,
+ "pair": [
+  "c-fdesign",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-fdesign"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 2,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a highly polished, editorial interpretation of a technical tool. The typography and layout are pristine, elevating it above standard SaaS templates. However, it almost entirely ignores the motion requirement, relying on static layout rather than scroll-linked storytelling."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 4,
+    "Craft": 2,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "Site B successfully uses scroll-linked motion to demonstrate the terminal working, directly addressing the brief's request. Unfortunately, it suffers from severe contrast issues (20 failing nodes) on body text and secondary elements, triggering a hard gate failure, and relies on a generic aesthetic."
+  },
+  "better": "A",
+  "why": "Site A is a masterclass in typographic craft and accessibility, easily winning despite its lack of motion, whereas Site B fails a critical accessibility hard gate."
+ },
+ "c-fdesign": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 4,
+   "Craft": 2,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "Site B successfully uses scroll-linked motion to demonstrate the terminal working, directly addressing the brief's request. Unfortunately, it suffers from severe contrast issues (20 failing nodes) on body text and secondary elements, triggering a hard gate failure, and relies on a generic aesthetic."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 2,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a highly polished, editorial interpretation of a technical tool. The typography and layout are pristine, elevating it above standard SaaS templates. However, it almost entirely ignores the motion requirement, relying on static layout rather than scroll-linked storytelling."
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 3101,
+ "pair": [
+  "c-fdesign",
+  "skill"
+ ],
+ "order": {
+  "A": "c-fdesign",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A solid, clean implementation with a fitting earthy palette. The visual mapping of the firing timeline where the width of each block matches the duration is a thoughtful touch, though the overall layout remains quite standard."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "An exceptional interpretation of the brief. Turning the '32 pieces, each marked differently' detail into a fully realized interactive contact sheet elevates the entire experience, supported by pristine editorial typography and a clever scroll-linked firing timeline."
+  },
+  "better": "B",
+  "why": "Site B brilliantly leverages the brief's specific constraints to create a unique, highly engaging product selector that perfectly captures the studio's small-batch identity."
+ },
+ "c-fdesign": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A solid, clean implementation with a fitting earthy palette. The visual mapping of the firing timeline where the width of each block matches the duration is a thoughtful touch, though the overall layout remains quite standard."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "An exceptional interpretation of the brief. Turning the '32 pieces, each marked differently' detail into a fully realized interactive contact sheet elevates the entire experience, supported by pristine editorial typography and a clever scroll-linked firing timeline."
+ }
+}

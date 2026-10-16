@@ -1,0 +1,68 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 5102,
+ "pair": [
+  "baseline",
+  "matched"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "matched"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a functional and appropriately themed site, utilizing simple SVG graphics for the mangroves. While the design is somewhat generic, it correctly presents the required bilingual content and facts. It loses points in accessibility due to color contrast failures."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Any animation without a reduced-motion path"
+   ],
+   "notes": "Site B features an outstanding editorial design with exceptional bilingual typography and a clever CSS grid visualization for the 140 hectares. However, it fails a hard gate because the scroll-scrubbing counter animation does not have a proper reduced-motion fallback; the reduced-motion screenshot captures the number midway at '126' instead of the factual '140', meaning the animation is either still active or broken in that state."
+  },
+  "better": "A",
+  "why": "Site B is significantly stronger in design, concept, and typography, but it fails a hard gate by not disabling its scrubbing counter animation under prefers-reduced-motion, leaving the site displaying an inaccurate statistic."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a functional and appropriately themed site, utilizing simple SVG graphics for the mangroves. While the design is somewhat generic, it correctly presents the required bilingual content and facts. It loses points in accessibility due to color contrast failures."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Any animation without a reduced-motion path"
+  ],
+  "notes": "Site B features an outstanding editorial design with exceptional bilingual typography and a clever CSS grid visualization for the 140 hectares. However, it fails a hard gate because the scroll-scrubbing counter animation does not have a proper reduced-motion fallback; the reduced-motion screenshot captures the number midway at '126' instead of the factual '140', meaning the animation is either still active or broken in that state."
+ }
+}

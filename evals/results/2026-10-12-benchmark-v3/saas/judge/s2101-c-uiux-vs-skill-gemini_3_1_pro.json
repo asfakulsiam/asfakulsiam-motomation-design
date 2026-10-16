@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 2101,
+ "pair": [
+  "c-uiux",
+  "skill"
+ ],
+ "order": {
+  "A": "c-uiux",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 2,
+    "Originality": 1,
+    "Typography": 2,
+    "Motion": 2,
+    "Craft": 2,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a highly generic, template-like SaaS design that lacks a distinct identity. The typography and layout are timid and basic, and the mobile view suffers from a massive 167px horizontal overflow. The motion is minimal and does not effectively tell the story of the product."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B takes a bold, unexpected editorial approach ('The on-call edition') that makes it stand out beautifully while retaining developer-tool aesthetics through its monospace usage. The typography is elegant and precise, and the craft is flawless across breakpoints. The motion effectively demonstrates the 'one line that matters' concept right in the hero section."
+  },
+  "better": "B",
+  "why": "Site B applies a highly original, cohesive design concept with flawless execution, whereas Site A is a generic template with critical mobile layout bugs."
+ },
+ "c-uiux": {
+  "scores": {
+   "Concept": 2,
+   "Originality": 1,
+   "Typography": 2,
+   "Motion": 2,
+   "Craft": 2,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a highly generic, template-like SaaS design that lacks a distinct identity. The typography and layout are timid and basic, and the mobile view suffers from a massive 167px horizontal overflow. The motion is minimal and does not effectively tell the story of the product."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B takes a bold, unexpected editorial approach ('The on-call edition') that makes it stand out beautifully while retaining developer-tool aesthetics through its monospace usage. The typography is elegant and precise, and the craft is flawless across breakpoints. The motion effectively demonstrates the 'one line that matters' concept right in the hero section."
+ }
+}

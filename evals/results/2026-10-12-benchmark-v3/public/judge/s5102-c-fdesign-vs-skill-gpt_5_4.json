@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 5102,
+ "pair": [
+  "c-fdesign",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-fdesign"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a strong editorial-field-report concept carried through the whole page: plate labels, restrained illustration, the stamped data section, and bilingual hierarchy all feel like one system. The scroll strip shows the 140-hectare grid progressing meaningfully, which is the clearest story-led motion of the two, though some small text and the very tall pinned section feel a bit sparse in static views."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B is clean and coherent, with a clear mangrove-root/sprout motif and solid bilingual presentation, but it reads more like a polished standard non-profit landing page than a distinctive public-interest identity. In the scroll frames, motion appears minimal or mostly equivalent to normal scrolling, so I can't credit it as telling the story beyond basic section transitions."
+  },
+  "better": "A",
+  "why": "A turns the brief into a more distinctive, better-integrated visual system and uses scroll progression more meaningfully to communicate the 140-hectare figure."
+ },
+ "c-fdesign": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B is clean and coherent, with a clear mangrove-root/sprout motif and solid bilingual presentation, but it reads more like a polished standard non-profit landing page than a distinctive public-interest identity. In the scroll frames, motion appears minimal or mostly equivalent to normal scrolling, so I can't credit it as telling the story beyond basic section transitions."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a strong editorial-field-report concept carried through the whole page: plate labels, restrained illustration, the stamped data section, and bilingual hierarchy all feel like one system. The scroll strip shows the 140-hectare grid progressing meaningfully, which is the clearest story-led motion of the two, though some small text and the very tall pinned section feel a bit sparse in static views."
+ }
+}

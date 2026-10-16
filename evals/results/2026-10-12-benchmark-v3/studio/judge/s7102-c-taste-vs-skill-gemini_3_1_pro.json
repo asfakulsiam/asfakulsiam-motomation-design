@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 7102,
+ "pair": [
+  "c-taste",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-taste"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "An exceptionally strong response to the brief. The print-inspired layout, exquisite typographic hierarchy, and the brilliant scroll-driven SVG animations (where the brick walls literally 'build' or reveal their architectural features) create a perfect, cohesive identity."
+  },
+  "B": {
+   "scores": {
+    "Concept": 2,
+    "Originality": 1,
+    "Typography": 2,
+    "Motion": 2,
+    "Craft": 1,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "Feels like a generic corporate template rather than a quiet architecture portfolio. The execution suffers from severe layout bugs, including massive empty gaps on the desktop page and horizontal overflow on mobile."
+  },
+  "better": "A",
+  "why": "Site A delivers a masterful, highly original architectural identity with purposeful scroll-driven animations, while Site B is generic and plagued by layout bugs."
+ },
+ "c-taste": {
+  "scores": {
+   "Concept": 2,
+   "Originality": 1,
+   "Typography": 2,
+   "Motion": 2,
+   "Craft": 1,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "Feels like a generic corporate template rather than a quiet architecture portfolio. The execution suffers from severe layout bugs, including massive empty gaps on the desktop page and horizontal overflow on mobile."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "An exceptionally strong response to the brief. The print-inspired layout, exquisite typographic hierarchy, and the brilliant scroll-driven SVG animations (where the brick walls literally 'build' or reveal their architectural features) create a perfect, cohesive identity."
+ }
+}

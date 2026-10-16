@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 3101,
+ "pair": [
+  "matched",
+  "skill"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a strong editorial idea: the kiln, flame palette and the line \"Made by fire, not by us.\" carry the brand and the firing story well. Buying is clear enough, though the shop presentation feels less immediate than the featured-cup section, and the motion evidence reads mostly as section reveals/progression rather than a distinctive scroll narrative. Craft and accessibility are solid overall, with clean mobile behavior and all measured checks passing."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B has the clearer commerce concept: the numbered batch of 32 cups makes the small-batch firing tangible and turns the featured product into the organizing idea of the whole page. The structure is more distinctive and useful than a standard shop, with excellent restraint and alignment, though the scroll-frame strip shows little motion beyond basic sectional progression. It is the tighter, more product-specific execution and still passes all access/performance checks."
+  },
+  "better": "B",
+  "why": "B better matches the brief by making the small-batch, one-of-many firing logic central to both shopping and storytelling while staying exceptionally clean and usable."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a strong editorial idea: the kiln, flame palette and the line \"Made by fire, not by us.\" carry the brand and the firing story well. Buying is clear enough, though the shop presentation feels less immediate than the featured-cup section, and the motion evidence reads mostly as section reveals/progression rather than a distinctive scroll narrative. Craft and accessibility are solid overall, with clean mobile behavior and all measured checks passing."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B has the clearer commerce concept: the numbered batch of 32 cups makes the small-batch firing tangible and turns the featured product into the organizing idea of the whole page. The structure is more distinctive and useful than a standard shop, with excellent restraint and alignment, though the scroll-frame strip shows little motion beyond basic sectional progression. It is the tighter, more product-specific execution and still passes all access/performance checks."
+ }
+}

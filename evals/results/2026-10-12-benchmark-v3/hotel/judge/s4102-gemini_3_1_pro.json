@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 4102,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a stunning editorial experience with exceptional typography and a quiet, sophisticated mood perfect for a boutique hotel. The motion design is masterful, seamlessly revealing architectural illustrations and maintaining a floating booking action, while flawlessly supporting accessibility."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B presents a warm, inviting concept with charming geometric illustrations that fit the architectural brief well. However, the execution is hampered by a basic approach to motion and a technical craft error with SVG radius syntax."
+  },
+  "better": "A",
+  "why": "Site A is vastly superior in typographic refinement, motion design, and technical execution, perfectly capturing the quiet luxury of the brief."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B presents a warm, inviting concept with charming geometric illustrations that fit the architectural brief well. However, the execution is hampered by a basic approach to motion and a technical craft error with SVG radius syntax."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a stunning editorial experience with exceptional typography and a quiet, sophisticated mood perfect for a boutique hotel. The motion design is masterful, seamlessly revealing architectural illustrations and maintaining a floating booking action, while flawlessly supporting accessibility."
+ }
+}

@@ -1,0 +1,68 @@
+{
+ "model": "gpt_5_4",
+ "seed": 5102,
+ "pair": [
+  "matched",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "matched"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a clear field-report/archive concept that runs through the plate labels, stamp motif, hectare grid, and form styling. The scroll frames show purposeful progression as the 140-square graphic fills with scroll, and the reduced-motion state keeps content intact; only some spacing and density feel a touch uneven, especially across section transitions."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [
+    "Invented statistics: the hectares figure is inconsistent across captures (112, 126, and 140) instead of using only the required real figure, 140 hectares replanted since 2019."
+   ],
+   "notes": "B looks polished at first glance, with elegant type and a strong mangrove-root illustration, but the structure is more conventional and the work section feels under-carried in the standard full-page capture. The inconsistent hectare number is a decisive brief violation and hard-gate failure, even though the measured accessibility checks pass."
+  },
+  "better": "A",
+  "why": "A is the stronger and valid solution: it carries one distinctive concept through the whole page and uses the required 140-hectare figure consistently."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [
+   "Invented statistics: the hectares figure is inconsistent across captures (112, 126, and 140) instead of using only the required real figure, 140 hectares replanted since 2019."
+  ],
+  "notes": "B looks polished at first glance, with elegant type and a strong mangrove-root illustration, but the structure is more conventional and the work section feels under-carried in the standard full-page capture. The inconsistent hectare number is a decisive brief violation and hard-gate failure, even though the measured accessibility checks pass."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a clear field-report/archive concept that runs through the plate labels, stamp motif, hectare grid, and form styling. The scroll frames show purposeful progression as the 140-square graphic fills with scroll, and the reduced-motion state keeps content intact; only some spacing and density feel a touch uneven, especially across section transitions."
+ }
+}

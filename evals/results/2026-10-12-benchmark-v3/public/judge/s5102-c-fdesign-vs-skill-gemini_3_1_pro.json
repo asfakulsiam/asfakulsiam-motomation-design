@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 5102,
+ "pair": [
+  "c-fdesign",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-fdesign"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A beautifully executed editorial design that handles the bilingual requirement with elegance. The scroll-triggered pinning sequence where the 140 squares fill in with sprouts is a perfect, purposeful translation of the brief's central statistic. Form styling and layout are crisp and professional across viewports."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A very solid interpretation with a nice timeline feature for the work process and a thematic sprout visualization for the 140 hectares. The motion effectively reveals the sprouts on scroll, though it feels slightly less integrated into a larger editorial narrative than Site A. The typography is good but slightly less refined in its scale and alignment, particularly in the navigation and form sections."
+  },
+  "better": "A",
+  "why": "Site A exhibits superior typographic craft and a more polished, seamless scroll-driven data visualization that perfectly serves the brief."
+ },
+ "c-fdesign": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A very solid interpretation with a nice timeline feature for the work process and a thematic sprout visualization for the 140 hectares. The motion effectively reveals the sprouts on scroll, though it feels slightly less integrated into a larger editorial narrative than Site A. The typography is good but slightly less refined in its scale and alignment, particularly in the navigation and form sections."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A beautifully executed editorial design that handles the bilingual requirement with elegance. The scroll-triggered pinning sequence where the 140 squares fill in with sprouts is a perfect, purposeful translation of the brief's central statistic. Form styling and layout are crisp and professional across viewports."
+ }
+}

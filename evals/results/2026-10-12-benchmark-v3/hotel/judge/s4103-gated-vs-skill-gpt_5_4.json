@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 4103,
+ "pair": [
+  "gated",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "gated"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has one strong idea: a quiet journey along a line, with stations, doors and arrival carrying the whole page from hero to booking. The typography is the identity and the room facts are clear once reached; the scroll-strip shows motion progressing section by section in service of that narrative, though I can't fully verify timing and a few layouts feel a bit sparse. The measured checks are excellent, including reduced motion, keyboard reachability and contrast."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B sets a warm old-city mood well with the skyline, moonlit palette and door motif, but the concept is not carried as rigorously through every section. Typography and illustration are tasteful and clean, yet the structure settles into a more familiar card-and-list pattern; from the scroll-strip, motion appears mostly as standard sectional progression rather than a story-bearing device. Accessibility and basic robustness look strong from the checks."
+  },
+  "better": "A",
+  "why": "A is the clearer and more distinctive response to the brief, with a signature arrival concept that shapes type, structure and motion all the way to booking."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B sets a warm old-city mood well with the skyline, moonlit palette and door motif, but the concept is not carried as rigorously through every section. Typography and illustration are tasteful and clean, yet the structure settles into a more familiar card-and-list pattern; from the scroll-strip, motion appears mostly as standard sectional progression rather than a story-bearing device. Accessibility and basic robustness look strong from the checks."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has one strong idea: a quiet journey along a line, with stations, doors and arrival carrying the whole page from hero to booking. The typography is the identity and the room facts are clear once reached; the scroll-strip shows motion progressing section by section in service of that narrative, though I can't fully verify timing and a few layouts feel a bit sparse. The measured checks are excellent, including reduced motion, keyboard reachability and contrast."
+ }
+}

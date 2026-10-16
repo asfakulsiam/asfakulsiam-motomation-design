@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 4101,
+ "pair": [
+  "c-fdesign",
+  "skill"
+ ],
+ "order": {
+  "A": "c-fdesign",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a coherent door-and-arch signature that runs from the hero illustration to the room markers, which suits the brief well. Room facts are very clear and the layout is notably clean on desktop and mobile. The weak point is motion: the scroll-frame strip shows little story progression beyond ordinary scrolling/reveals, so animation does not meaningfully deepen the concept."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B makes the house itself the idea: the page climbs from courtyard to balcony to roof, then out into walks and back to arrival, so the whole structure feels authored rather than assembled. The typography is elegant and distinctive, and the scroll-strip shows a clear floor-by-floor progression that serves the story. I docked craft slightly because the very large gaps make parts of the page feel a bit overstretched, especially in the long scroll."
+  },
+  "better": "B",
+  "why": "B delivers the stronger and more original concept, and its scroll progression actively tells the hotel's story instead of just decorating it."
+ },
+ "c-fdesign": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a coherent door-and-arch signature that runs from the hero illustration to the room markers, which suits the brief well. Room facts are very clear and the layout is notably clean on desktop and mobile. The weak point is motion: the scroll-frame strip shows little story progression beyond ordinary scrolling/reveals, so animation does not meaningfully deepen the concept."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B makes the house itself the idea: the page climbs from courtyard to balcony to roof, then out into walks and back to arrival, so the whole structure feels authored rather than assembled. The typography is elegant and distinctive, and the scroll-strip shows a clear floor-by-floor progression that serves the story. I docked craft slightly because the very large gaps make parts of the page feel a bit overstretched, especially in the long scroll."
+ }
+}

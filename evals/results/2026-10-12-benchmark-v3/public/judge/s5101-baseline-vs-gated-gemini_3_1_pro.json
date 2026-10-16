@@ -1,0 +1,68 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 5101,
+ "pair": [
+  "baseline",
+  "gated"
+ ],
+ "order": {
+  "A": "gated",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a functional, straightforward layout that meets all the brief's requirements and passes accessibility checks. However, the design feels heavily templated, and the typography and visual hierarchy lack the distinction needed for a strong conceptual identity."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Any animation without a reduced-motion path"
+   ],
+   "notes": "Site B features a beautiful, illustrative hero section and excellent typographic integration between English and Bangla. Unfortunately, it fails a hard gate because the animated number counter lacks a proper reduced-motion fallback, freezing at an incorrect '127' rather than the factual 140."
+  },
+  "better": "A",
+  "why": "Although Site B is visually far superior, it fails a hard gate by displaying an inaccurate statistic (127) to users with reduced motion, leaving Site A as the only functional winner."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Any animation without a reduced-motion path"
+  ],
+  "notes": "Site B features a beautiful, illustrative hero section and excellent typographic integration between English and Bangla. Unfortunately, it fails a hard gate because the animated number counter lacks a proper reduced-motion fallback, freezing at an incorrect '127' rather than the factual 140."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a functional, straightforward layout that meets all the brief's requirements and passes accessibility checks. However, the design feels heavily templated, and the typography and visual hierarchy lack the distinction needed for a strong conceptual identity."
+ }
+}

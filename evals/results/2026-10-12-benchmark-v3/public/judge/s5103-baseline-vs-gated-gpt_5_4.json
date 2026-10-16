@@ -1,0 +1,70 @@
+{
+ "model": "gpt_5_4",
+ "seed": 5103,
+ "pair": [
+  "baseline",
+  "gated"
+ ],
+ "order": {
+  "A": "gated",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a coherent mangrove-restoration identity: restrained palette, reed motif, and bilingual hierarchy all support the brief without melodrama. The page is clean and complete on desktop and mobile, and the measured checks are strong; motion evidence is minimal in the scroll strip, so it reads as mostly static rather than story-driving."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 2,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1",
+    "Invented statistics (intermediate counter values such as 119/128 are shown instead of only 140)"
+   ],
+   "notes": "B has the more distinctive illustrated world, and the bilingual headline treatment is ambitious and memorable. But the trust-critical stat handling is not acceptable, the measured contrast failure triggers the hard gate, and the full-page captures show awkward empty bands / flow issues that hurt craft."
+  },
+  "better": "A",
+  "why": "A is the better run because it satisfies the brief cleanly and accessibly, while B fails hard gates on contrast and statistic integrity."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 2,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1",
+   "Invented statistics (intermediate counter values such as 119/128 are shown instead of only 140)"
+  ],
+  "notes": "B has the more distinctive illustrated world, and the bilingual headline treatment is ambitious and memorable. But the trust-critical stat handling is not acceptable, the measured contrast failure triggers the hard gate, and the full-page captures show awkward empty bands / flow issues that hurt craft."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a coherent mangrove-restoration identity: restrained palette, reed motif, and bilingual hierarchy all support the brief without melodrama. The page is clean and complete on desktop and mobile, and the measured checks are strong; motion evidence is minimal in the scroll strip, so it reads as mostly static rather than story-driving."
+ }
+}

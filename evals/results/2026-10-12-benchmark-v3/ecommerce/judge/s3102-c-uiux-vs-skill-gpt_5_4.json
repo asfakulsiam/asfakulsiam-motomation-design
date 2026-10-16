@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 3102,
+ "pair": [
+  "c-uiux",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-uiux"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a coherent editorial-retail idea: restrained kiln colors, a custom cup illustration, and a firing section that explains process without slowing the buy path. The motion evidence is modest but purposeful, mainly the firing diagram progression and state changes, and the automated checks plus mobile capture suggest a reliable, accessible implementation."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 2,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "B has strong art direction and a nice slow-fire mood, and the scroll-strip suggests motion is being used to stage the firing story rather than decorate it. But the normal page captures show very large empty spans and delayed/obscured commerce content, especially on mobile, which weakens the brief's requirement that buying stay fast and makes the build feel less stable despite passing the automated checks."
+  },
+  "better": "A",
+  "why": "A is the more complete and dependable e-commerce response, with stronger buying clarity and fewer apparent layout or content-delivery issues."
+ },
+ "c-uiux": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 2,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "B has strong art direction and a nice slow-fire mood, and the scroll-strip suggests motion is being used to stage the firing story rather than decorate it. But the normal page captures show very large empty spans and delayed/obscured commerce content, especially on mobile, which weakens the brief's requirement that buying stay fast and makes the build feel less stable despite passing the automated checks."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a coherent editorial-retail idea: restrained kiln colors, a custom cup illustration, and a firing section that explains process without slowing the buy path. The motion evidence is modest but purposeful, mainly the firing diagram progression and state changes, and the automated checks plus mobile capture suggest a reliable, accessible implementation."
+ }
+}

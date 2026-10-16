@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 4101,
+ "pair": [
+  "c-uiux",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-uiux"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a clear vertical-house idea: the rooms read as levels of the building, the roof breakfast lands naturally, and the drawn facade gives it a distinct signature. The typography and spacing are elegant and quiet, though some sections verge on too sparse and a few small text details feel delicate. From the scroll frames, the facade changes progressively with the room sections and the breakfast scene adds a small narrative beat; reduced-motion fallback appears intact."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "B has a strong opening line and a persuasive house/door motif that fits the restoration story well, with room facts presented more directly than A. But the normal full-page and mobile captures show large empty bands that make the scroll-driven layout feel less robust, even if the reduced-motion version is complete. The scroll strip suggests mostly reveal-based progression with a modest breakfast scene change, so motion reads as purposeful but not especially deep from the available evidence."
+  },
+  "better": "A",
+  "why": "A is the more coherent and better-resolved interpretation, with a stronger concept-to-layout connection and fewer signs of scroll mechanics undermining the page."
+ },
+ "c-uiux": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "B has a strong opening line and a persuasive house/door motif that fits the restoration story well, with room facts presented more directly than A. But the normal full-page and mobile captures show large empty bands that make the scroll-driven layout feel less robust, even if the reduced-motion version is complete. The scroll strip suggests mostly reveal-based progression with a modest breakfast scene change, so motion reads as purposeful but not especially deep from the available evidence."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a clear vertical-house idea: the rooms read as levels of the building, the roof breakfast lands naturally, and the drawn facade gives it a distinct signature. The typography and spacing are elegant and quiet, though some sections verge on too sparse and a few small text details feel delicate. From the scroll frames, the facade changes progressively with the room sections and the breakfast scene adds a small narrative beat; reduced-motion fallback appears intact."
+ }
+}

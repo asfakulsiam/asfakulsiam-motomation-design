@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 2102,
+ "pair": [
+  "matched",
+  "skill"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers the required content but relies on a somewhat generic, template-like light theme that doesn't fully capture the 'console' aesthetic requested in the brief. Motion consists mainly of simple scroll reveals, and the execution is marred by a 65px horizontal overflow on mobile devices."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B heavily leans into the target audience with a well-executed dark mode and workbench aesthetic. The typography is precise, and the scroll-linked motion—particularly the connecting line in the 'How it works' section and the terminal sequence—adds functional storytelling without feeling overwhelming. The build is exceptionally clean across breakpoints."
+  },
+  "better": "B",
+  "why": "Site B perfectly nails the developer-tool aesthetic with strong typography and functional motion, whereas Site A feels a bit generic and suffers from mobile layout bugs."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers the required content but relies on a somewhat generic, template-like light theme that doesn't fully capture the 'console' aesthetic requested in the brief. Motion consists mainly of simple scroll reveals, and the execution is marred by a 65px horizontal overflow on mobile devices."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B heavily leans into the target audience with a well-executed dark mode and workbench aesthetic. The typography is precise, and the scroll-linked motion—particularly the connecting line in the 'How it works' section and the terminal sequence—adds functional storytelling without feeling overwhelming. The build is exceptionally clean across breakpoints."
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 2103,
+ "pair": [
+  "c-fdesign",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-fdesign"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 3,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a coherent reduction idea: a quiet editorial layout and terminal-first presentation that narrows attention to a single anomalous line. The scroll-strip shows purposeful hero progression with the highlighted line emerging from the log stream, which serves the brief well, but the page also carries a large dead zone and some uneven section states that make the craft feel less resolved than the concept."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "B carries one strong idea all the way through: the haystack of logs, the highlighted culprit line, and the heavy headline all reinforce the product promise. Typography and overall composition are more distinctive and polished than A, but the scroll-strip provides little evidence of meaningful motion beyond standard scrolling, so Motion scores lower despite the strong static design."
+  },
+  "better": "B",
+  "why": "B is the stronger overall landing page because its core idea is clearer and more consistently expressed through typography and layout, while A’s better motion is offset by weaker spatial pacing and craft."
+ },
+ "c-fdesign": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "B carries one strong idea all the way through: the haystack of logs, the highlighted culprit line, and the heavy headline all reinforce the product promise. Typography and overall composition are more distinctive and polished than A, but the scroll-strip provides little evidence of meaningful motion beyond standard scrolling, so Motion scores lower despite the strong static design."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 3,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a coherent reduction idea: a quiet editorial layout and terminal-first presentation that narrows attention to a single anomalous line. The scroll-strip shows purposeful hero progression with the highlighted line emerging from the log stream, which serves the brief well, but the page also carries a large dead zone and some uneven section states that make the craft feel less resolved than the concept."
+ }
+}

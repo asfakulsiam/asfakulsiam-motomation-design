@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 4102,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has one strong idea—the house's doors and the act of arrival—and it carries from the first screen through rooms, rooftop, the 1893/2022 restoration section, and the closing 'Find the door.' The typography is the identity here, and the scroll-strip shows motion that advances the concept rather than merely revealing content: the hero evolves, the roofline scene progresses, and booking stays persistently reachable. Minor deductions only for a few slightly awkward mobile/header moments and some generous spacing that can feel empty in static capture."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "B has a coherent arrival/facade idea and keeps booking prominent, but it feels more like a stylish hospitality template than a singular Haveli 1893 world. The illustrated building and door are pleasant, yet the typography and section structure are less distinctive, and the scroll-strip reads mostly as standard section progression rather than motion telling the story. Craft drops because the hero overlay is crowded, several captures show large blank spans or delayed content, and there is a JS/SVG error in the measured checks."
+  },
+  "better": "A",
+  "why": "A is more conceptually complete and distinctive, with stronger typography and motion that directly reinforces the brief’s signature of doors, roofs, and arrival."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "B has a coherent arrival/facade idea and keeps booking prominent, but it feels more like a stylish hospitality template than a singular Haveli 1893 world. The illustrated building and door are pleasant, yet the typography and section structure are less distinctive, and the scroll-strip reads mostly as standard section progression rather than motion telling the story. Craft drops because the hero overlay is crowded, several captures show large blank spans or delayed content, and there is a JS/SVG error in the measured checks."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has one strong idea—the house's doors and the act of arrival—and it carries from the first screen through rooms, rooftop, the 1893/2022 restoration section, and the closing 'Find the door.' The typography is the identity here, and the scroll-strip shows motion that advances the concept rather than merely revealing content: the hero evolves, the roofline scene progresses, and booking stays persistently reachable. Minor deductions only for a few slightly awkward mobile/header moments and some generous spacing that can feel empty in static capture."
+ }
+}

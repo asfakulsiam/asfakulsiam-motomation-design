@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 7101,
+ "pair": [
+  "c-fdesign",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-fdesign"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 2,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "The site suffers from a severely flawed hero section, leaving the initial viewport almost completely blank and omitting the primary positioning statement. While the vertical timeline concept for the projects is interesting, the execution feels incomplete and lacks the quiet, purposeful mood requested in the brief. The SVG illustrations are adequate but lack the refinement seen in the benchmark."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "An outstanding interpretation of the brief. The interactive 'sun position' diagram in the hero perfectly encapsulates the studio's focus on light and courtyards. The CSS/SVG illustrations are highly crafted, establishing a distinct visual signature, and the typography is robust and well-hierarchized across all viewports."
+  },
+  "better": "B",
+  "why": "Site B delivers a brilliant, brief-aligned interactive concept (the sun/shadow diagram) and superior visual craft, whereas Site A has a broken, empty hero section."
+ },
+ "c-fdesign": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "An outstanding interpretation of the brief. The interactive 'sun position' diagram in the hero perfectly encapsulates the studio's focus on light and courtyards. The CSS/SVG illustrations are highly crafted, establishing a distinct visual signature, and the typography is robust and well-hierarchized across all viewports."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 2,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "The site suffers from a severely flawed hero section, leaving the initial viewport almost completely blank and omitting the primary positioning statement. While the vertical timeline concept for the projects is interesting, the execution feels incomplete and lacks the quiet, purposeful mood requested in the brief. The SVG illustrations are adequate but lack the refinement seen in the benchmark."
+ }
+}

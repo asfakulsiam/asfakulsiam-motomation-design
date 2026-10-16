@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 7101,
+ "pair": [
+  "baseline",
+  "gated"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "gated"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a clear architectural idea: courtyard plans, brick-toned drawings and the highlighted word “light” give it a coherent studio signature. The typography and palette are elegant, but the page feels less resolved lower down, with some awkward spacing and a less polished mobile/full-page rhythm than the best benchmark work. From the scroll-strip, motion appears limited to basic reveal/scroll behavior rather than a meaningful narrative, though the reduced-motion fallback is present and intact."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B carries one idea more completely: light, courtyard and brick are visible in the hero, project imagery, plans, section titles and overall pacing. It feels cleaner and more deliberate across desktop and mobile, with stronger editorial structure and more consistently legible project presentation. The scroll-strip shows little evidence of concept-driving motion beyond straightforward scroll progression, but the reduced-motion version preserves all content cleanly."
+  },
+  "better": "B",
+  "why": "B is the more fully realized and consistently crafted response to the brief, with a clearer end-to-end concept and cleaner execution."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a clear architectural idea: courtyard plans, brick-toned drawings and the highlighted word “light” give it a coherent studio signature. The typography and palette are elegant, but the page feels less resolved lower down, with some awkward spacing and a less polished mobile/full-page rhythm than the best benchmark work. From the scroll-strip, motion appears limited to basic reveal/scroll behavior rather than a meaningful narrative, though the reduced-motion fallback is present and intact."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B carries one idea more completely: light, courtyard and brick are visible in the hero, project imagery, plans, section titles and overall pacing. It feels cleaner and more deliberate across desktop and mobile, with stronger editorial structure and more consistently legible project presentation. The scroll-strip shows little evidence of concept-driving motion beyond straightforward scroll progression, but the reduced-motion version preserves all content cleanly."
+ }
+}

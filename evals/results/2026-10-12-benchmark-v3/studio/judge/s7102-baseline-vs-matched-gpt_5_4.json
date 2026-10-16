@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 7102,
+ "pair": [
+  "baseline",
+  "matched"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a strong governing idea: the sun/hour motif, the emphasis on “light,” and the project sequence all reinforce the studio’s courtyard-and-brick identity. The typography is excellent and feels like the brand, and the motion strip suggests purposeful scroll progression tied to the concept, though I can’t judge timing from stills. The weakness is craft in the standard captures, which show large empty stretches and pinning/reveal behavior that reads awkwardly on desktop and especially mobile."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B is quieter and more systematic, with a convincing brick-arch hero and a clear portfolio structure that keeps plans and imagery legible. It is cleaner and steadier than A in overall layout, but the concept is less singular and the motion strip reads mostly as orderly section reveals and state changes rather than a narrative driven by light or courtyards. Accessibility and basic robustness look strong from the checks and reduced-motion capture."
+  },
+  "better": "A",
+  "why": "A is more memorable and conceptually complete, with type, imagery and motion all pointing to the same idea, even if B is the cleaner build."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B is quieter and more systematic, with a convincing brick-arch hero and a clear portfolio structure that keeps plans and imagery legible. It is cleaner and steadier than A in overall layout, but the concept is less singular and the motion strip reads mostly as orderly section reveals and state changes rather than a narrative driven by light or courtyards. Accessibility and basic robustness look strong from the checks and reduced-motion capture."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a strong governing idea: the sun/hour motif, the emphasis on “light,” and the project sequence all reinforce the studio’s courtyard-and-brick identity. The typography is excellent and feels like the brand, and the motion strip suggests purposeful scroll progression tied to the concept, though I can’t judge timing from stills. The weakness is craft in the standard captures, which show large empty stretches and pinning/reveal behavior that reads awkwardly on desktop and especially mobile."
+ }
+}

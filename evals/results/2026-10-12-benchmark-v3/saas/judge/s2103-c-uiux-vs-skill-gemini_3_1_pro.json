@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 2103,
+ "pair": [
+  "c-uiux",
+  "skill"
+ ],
+ "order": {
+  "A": "c-uiux",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 2,
+    "Craft": 2,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "Adopts a standard dark-mode developer aesthetic but feels largely indistinguishable from a generic SaaS template. The execution suffers from a massive 162px horizontal overflow on mobile devices, severely breaking the layout. Motion is limited and does not actively contribute to the product's story."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "Exceptional translation of the brief into an interactive experience. The hero section brilliantly uses scroll-linked motion to dim irrelevant logs and highlight the critical error, perfectly demonstrating the product's value proposition. Typography is crisp, the layout is fresh, and technical execution is flawless with zero mobile overflow."
+  },
+  "better": "B",
+  "why": "Site B perfectly leverages scroll motion to tell the product's story directly in the hero section, while maintaining superior technical craft and avoiding Site A's severe mobile layout issues."
+ },
+ "c-uiux": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 2,
+   "Craft": 2,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "Adopts a standard dark-mode developer aesthetic but feels largely indistinguishable from a generic SaaS template. The execution suffers from a massive 162px horizontal overflow on mobile devices, severely breaking the layout. Motion is limited and does not actively contribute to the product's story."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "Exceptional translation of the brief into an interactive experience. The hero section brilliantly uses scroll-linked motion to dim irrelevant logs and highlight the critical error, perfectly demonstrating the product's value proposition. Typography is crisp, the layout is fresh, and technical execution is flawless with zero mobile overflow."
+ }
+}

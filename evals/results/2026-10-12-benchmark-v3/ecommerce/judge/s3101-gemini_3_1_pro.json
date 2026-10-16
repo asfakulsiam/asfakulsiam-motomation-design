@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 3101,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a brilliant conceptual interpretation of the brief. By creating a 'contact sheet' UI that actually lets the user browse and select from the 32 unique cups, it perfectly highlights the 'marked by the flame' aspect. While the CSS illustrations are somewhat basic, the structural originality makes it a standout e-commerce experience."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B features excellent craft, with beautifully executed CSS art that gives the ceramics real volume and texture. The typography is elegant and the scroll-linked hero transition is smooth. However, it relies heavily on standard e-commerce structural tropes, missing an opportunity to do something truly unique with the small-batch premise."
+  },
+  "better": "A",
+  "why": "Site A's contact-sheet UI is a masterclass in structurally integrating the brief's narrative into the shopping experience, outshining Site B's more generic template despite B's superior illustration craft."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B features excellent craft, with beautifully executed CSS art that gives the ceramics real volume and texture. The typography is elegant and the scroll-linked hero transition is smooth. However, it relies heavily on standard e-commerce structural tropes, missing an opportunity to do something truly unique with the small-batch premise."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a brilliant conceptual interpretation of the brief. By creating a 'contact sheet' UI that actually lets the user browse and select from the 32 unique cups, it perfectly highlights the 'marked by the flame' aspect. While the CSS illustrations are somewhat basic, the structural originality makes it a standout e-commerce experience."
+ }
+}

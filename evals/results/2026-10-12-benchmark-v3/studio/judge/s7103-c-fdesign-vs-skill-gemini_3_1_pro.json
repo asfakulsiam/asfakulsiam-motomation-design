@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 7103,
+ "pair": [
+  "c-fdesign",
+  "skill"
+ ],
+ "order": {
+  "A": "c-fdesign",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A is a clean, competent build with a nice interactive touch in the hero section where the sun moves across the courtyard. However, the typography and overall layout feel a bit generic and don't strongly evoke the architectural mood requested in the brief."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B beautifully captures the quiet, architectural mood with its brick-red palette, elegant serif typography, and fine-line grid structure. The SVG illustrations are exceptionally well-crafted, resembling actual architectural diagrams, and the sticky-stacking scroll effect on the projects elevates the entire experience."
+  },
+  "better": "B",
+  "why": "Site B delivers a much stronger, more original visual identity that perfectly aligns with the brief's request for a quiet mood tied to brick and architecture, supported by masterful typography and layout craft."
+ },
+ "c-fdesign": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A is a clean, competent build with a nice interactive touch in the hero section where the sun moves across the courtyard. However, the typography and overall layout feel a bit generic and don't strongly evoke the architectural mood requested in the brief."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B beautifully captures the quiet, architectural mood with its brick-red palette, elegant serif typography, and fine-line grid structure. The SVG illustrations are exceptionally well-crafted, resembling actual architectural diagrams, and the sticky-stacking scroll effect on the projects elevates the entire experience."
+ }
+}

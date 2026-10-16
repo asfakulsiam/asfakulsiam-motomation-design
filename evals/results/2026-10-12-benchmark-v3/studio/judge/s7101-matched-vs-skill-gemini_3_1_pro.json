@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 7101,
+ "pair": [
+  "matched",
+  "skill"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 3,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a beautifully crafted editorial experience. The typography and SVG illustrations feel inherently architectural and perfectly suited to the brief. The motion is functional and polite, though standard, and the overall execution is pixel-perfect across all states."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 1,
+    "Craft": 2,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B introduces a strong timeline concept and nice diagrammatic visuals. However, it suffers from a critical animation bug: the main positioning statement ('Houses built around light...') is hidden at opacity zero in the default animated state and never reveals on scroll, leaving a massive empty space in the hero section."
+  },
+  "better": "A",
+  "why": "Site A executes a flawless editorial design with beautiful SVG craft, whereas Site B fails to display its primary positioning text due to a broken animation."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 3,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a beautifully crafted editorial experience. The typography and SVG illustrations feel inherently architectural and perfectly suited to the brief. The motion is functional and polite, though standard, and the overall execution is pixel-perfect across all states."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 1,
+   "Craft": 2,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B introduces a strong timeline concept and nice diagrammatic visuals. However, it suffers from a critical animation bug: the main positioning statement ('Houses built around light...') is hidden at opacity zero in the default animated state and never reveals on scroll, leaving a massive empty space in the hero section."
+ }
+}

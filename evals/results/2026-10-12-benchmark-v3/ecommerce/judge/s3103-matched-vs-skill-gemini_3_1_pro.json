@@ -1,0 +1,68 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 3103,
+ "pair": [
+  "matched",
+  "skill"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a clean, organic editorial layout that fits the brief perfectly. The CSS illustrations are a bit simple, and the motion is limited to highlighting the timeline, but the overall craft is solid. Accessibility is flawless."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 3,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "Site B features an outstanding scroll animation where the CSS cup visually undergoes the firing and glazing process as you read the story. However, it fails on basic contrast for the text in the dark section, triggering a hard gate, and suffers from font loading errors."
+  },
+  "better": "A",
+  "why": "While Site B has a brilliant, brief-specific motion sequence, Site A wins by being a highly polished, fully accessible execution without hard gate failures."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a clean, organic editorial layout that fits the brief perfectly. The CSS illustrations are a bit simple, and the motion is limited to highlighting the timeline, but the overall craft is solid. Accessibility is flawless."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 3,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "Site B features an outstanding scroll animation where the CSS cup visually undergoes the firing and glazing process as you read the story. However, it fails on basic contrast for the text in the dark section, triggering a hard gate, and suffers from font loading errors."
+ }
+}

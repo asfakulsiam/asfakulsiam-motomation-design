@@ -1,0 +1,68 @@
+{
+ "model": "gpt_5_4",
+ "seed": 3103,
+ "pair": [
+  "matched",
+  "skill"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a coherent warm editorial idea: the featured cup, ash-glaze palette, and kiln story all feel like one system. Typography is strong and the buying path is immediate, but the mobile page shows a large empty stretch around the product-list area, which dents craft. Motion appears modest from the scroll strip, with the firing section progress treatment doing some narrative work but not much beyond standard reveals/scroll progression."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "B presents a crisp catalog-editorial concept with a strong masthead, tabular product details, and a more developed firing sequence. The scroll-strip motion is the clearest of the two: the firing story progresses step by step and the cup/progress state changes serve the concept well. However, it fails the hard gate on contrast, and the measured font-loading errors also weaken the access/performance axis."
+  },
+  "better": "A",
+  "why": "A is the better run because it clears the hard gates and delivers a strong, usable shop/story balance, while B is disqualified by contrast failure despite stronger motion."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a coherent warm editorial idea: the featured cup, ash-glaze palette, and kiln story all feel like one system. Typography is strong and the buying path is immediate, but the mobile page shows a large empty stretch around the product-list area, which dents craft. Motion appears modest from the scroll strip, with the firing section progress treatment doing some narrative work but not much beyond standard reveals/scroll progression."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "B presents a crisp catalog-editorial concept with a strong masthead, tabular product details, and a more developed firing sequence. The scroll-strip motion is the clearest of the two: the firing story progresses step by step and the cup/progress state changes serve the concept well. However, it fails the hard gate on contrast, and the measured font-loading errors also weaken the access/performance axis."
+ }
+}

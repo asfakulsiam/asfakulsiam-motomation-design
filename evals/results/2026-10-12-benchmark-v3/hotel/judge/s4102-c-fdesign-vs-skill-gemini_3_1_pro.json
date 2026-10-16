@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 4102,
+ "pair": [
+  "c-fdesign",
+  "skill"
+ ],
+ "order": {
+  "A": "c-fdesign",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 1,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A presents the information clearly but relies on a fairly standard, template-like structure. The arch motif is pleasant, but the complete lack of motion leaves the experience feeling flat. While technically sound and accessible, it doesn't elevate the brief into a memorable brand experience."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B executes a stunning editorial/architectural concept ('Fig. 1') that perfectly suits the restored merchant house brief. The typography is elegant and precise, and the geometric illustrations are highly original. Motion is used effectively to tell the story—such as the sun rising over the city roofs on scroll—making it a deeply cohesive design."
+  },
+  "better": "B",
+  "why": "Site B offers a vastly superior, deeply cohesive design concept with exquisite typography and purposeful scroll interactions, whereas Site A is a purely static, standard layout."
+ },
+ "c-fdesign": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 1,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A presents the information clearly but relies on a fairly standard, template-like structure. The arch motif is pleasant, but the complete lack of motion leaves the experience feeling flat. While technically sound and accessible, it doesn't elevate the brief into a memorable brand experience."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B executes a stunning editorial/architectural concept ('Fig. 1') that perfectly suits the restored merchant house brief. The typography is elegant and precise, and the geometric illustrations are highly original. Motion is used effectively to tell the story—such as the sun rising over the city roofs on scroll—making it a deeply cohesive design."
+ }
+}

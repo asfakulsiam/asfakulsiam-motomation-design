@@ -1,0 +1,68 @@
+{
+ "model": "gpt_5_4",
+ "seed": 4103,
+ "pair": [
+  "c-fdesign",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-fdesign"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has one strong idea: a journey/line from house to room, breakfast and walks, and it carries through the whole page with unusual discipline. The typography is the identity and the scroll-strip shows motion progressing section by section in a way that serves the brief, not just decoration. It also clears the measured accessibility checks; only some oversized spacing/pinning on mobile keeps Craft from a perfect score."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1 (1 measured color-contrast failure)"
+   ],
+   "notes": "B has a clear door-based signature and a calm, coherent visual system, with rooms and booking presented plainly. The motion evidence is modest: some illustration/parallax progression and a rooftop skyline moment, but it reads more generic than narrative from the scroll frames. It is disqualified by the measured contrast failure despite otherwise solid keyboard and reduced-motion basics."
+  },
+  "better": "A",
+  "why": "A is the stronger design and the valid run: its line-and-station concept is more original, more fully carried through, and its motion directly reinforces the hotel’s arrival/walks story."
+ },
+ "c-fdesign": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1 (1 measured color-contrast failure)"
+  ],
+  "notes": "B has a clear door-based signature and a calm, coherent visual system, with rooms and booking presented plainly. The motion evidence is modest: some illustration/parallax progression and a rooftop skyline moment, but it reads more generic than narrative from the scroll frames. It is disqualified by the measured contrast failure despite otherwise solid keyboard and reduced-motion basics."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has one strong idea: a journey/line from house to room, breakfast and walks, and it carries through the whole page with unusual discipline. The typography is the identity and the scroll-strip shows motion progressing section by section in a way that serves the brief, not just decoration. It also clears the measured accessibility checks; only some oversized spacing/pinning on mobile keeps Craft from a perfect score."
+ }
+}

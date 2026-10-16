@@ -1,0 +1,68 @@
+{
+ "model": "gpt_5_4",
+ "seed": 2103,
+ "pair": [
+  "baseline",
+  "gated"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "gated"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "A has a clear developer-tool idea and a strong headline, and it does include a believable terminal/result demo. In the scroll strip, motion reads mainly as staged reveals and typed-in content rather than a stronger narrative device. Craft and accessibility are notably hurt by the measured contrast failures and the 375px horizontal overflow."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "B communicates faster by putting the install command and the working product directly in the hero, which fits the on-call engineer audience well. The scroll strip shows purposeful section-by-section reveals that support comprehension, and the reduced-motion fallback appears intact. It is still a familiar dark SaaS/developer aesthetic, but it is cleaner and more complete than A."
+  },
+  "better": "B",
+  "why": "B is better because it shows the product working sooner, is cleaner across desktop and mobile checks, and passes the hard gates that A fails."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "A has a clear developer-tool idea and a strong headline, and it does include a believable terminal/result demo. In the scroll strip, motion reads mainly as staged reveals and typed-in content rather than a stronger narrative device. Craft and accessibility are notably hurt by the measured contrast failures and the 375px horizontal overflow."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "B communicates faster by putting the install command and the working product directly in the hero, which fits the on-call engineer audience well. The scroll strip shows purposeful section-by-section reveals that support comprehension, and the reduced-motion fallback appears intact. It is still a familiar dark SaaS/developer aesthetic, but it is cleaner and more complete than A."
+ }
+}

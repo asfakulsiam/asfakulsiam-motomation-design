@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 2101,
+ "pair": [
+  "matched",
+  "skill"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A very clean, competent, and standard SaaS landing page. It executes the brief well, with a strong, legible layout and nice subtle highlights in the terminal block, but it lacks a distinct personality compared to more adventurous designs."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "An exceptionally fresh take on a developer tool landing page, using an editorial, document-like grid and elegant serif typography. The progressive reveal of the terminal and result views effectively tells the product's story, and the meticulous layout holds together perfectly across responsive sizes."
+  },
+  "better": "B",
+  "why": "Site B brings a highly original, beautifully crafted editorial aesthetic to a category usually dominated by generic SaaS templates, executing it with perfect typography and purposeful storytelling motion."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A very clean, competent, and standard SaaS landing page. It executes the brief well, with a strong, legible layout and nice subtle highlights in the terminal block, but it lacks a distinct personality compared to more adventurous designs."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "An exceptionally fresh take on a developer tool landing page, using an editorial, document-like grid and elegant serif typography. The progressive reveal of the terminal and result views effectively tells the product's story, and the meticulous layout holds together perfectly across responsive sizes."
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 3101,
+ "pair": [
+  "c-uiux",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-uiux"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 3,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a clear editorial-commerce idea: the cup is treated like a numbered firing sheet, and that logic carries from hero to selection grid to kiln story. Typography and layout feel distinctive and highly controlled, and buying is immediate. Motion appears limited from the scroll strip—mainly sectional progression and a firing-story highlight—so it supports the page but does not define it."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "B has a warm, coherent art direction built around flame, glow and soft ceramic forms, but the structure is closer to a polished landing template than a fully specific shopping concept. The type is good and the palette suits the brief, yet the normal page and mobile captures show a large empty gap around the shop area that hurts confidence in layout craft. From the scroll strip, motion looks mostly like generic reveals/parallax rather than storytelling tied tightly to the firing process."
+  },
+  "better": "A",
+  "why": "A is the more distinctive and complete response, with stronger product specificity, faster buying flow, and more consistently excellent craft."
+ },
+ "c-uiux": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "B has a warm, coherent art direction built around flame, glow and soft ceramic forms, but the structure is closer to a polished landing template than a fully specific shopping concept. The type is good and the palette suits the brief, yet the normal page and mobile captures show a large empty gap around the shop area that hurts confidence in layout craft. From the scroll strip, motion looks mostly like generic reveals/parallax rather than storytelling tied tightly to the firing process."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 3,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a clear editorial-commerce idea: the cup is treated like a numbered firing sheet, and that logic carries from hero to selection grid to kiln story. Typography and layout feel distinctive and highly controlled, and buying is immediate. Motion appears limited from the scroll strip—mainly sectional progression and a firing-story highlight—so it supports the page but does not define it."
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 7102,
+ "pair": [
+  "matched",
+  "skill"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has the clearer central idea: the sun/hour device, the highlighted word “light,” and the way projects answer that prompt make the brief feel authored rather than assembled. The scroll strip shows purposeful progression from hero to list to project chapters, and the reduced-motion version keeps all content available; the only restraint is some awkward-looking blank space in the full-page default capture, which softens the craft score."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B is elegant and disciplined, with superb typographic control and a strong brick-wall visual language that fits the studio. Its motion sequence appears to reveal openings, light and project-specific conditions as you scroll, which is conceptually apt, but the overall structure is more conventional and the idea feels slightly less singular than A’s."
+  },
+  "better": "A",
+  "why": "A turns the brief’s light/courtyard premise into a more distinctive, end-to-end concept with motion that meaningfully drives the storytelling."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has the clearer central idea: the sun/hour device, the highlighted word “light,” and the way projects answer that prompt make the brief feel authored rather than assembled. The scroll strip shows purposeful progression from hero to list to project chapters, and the reduced-motion version keeps all content available; the only restraint is some awkward-looking blank space in the full-page default capture, which softens the craft score."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B is elegant and disciplined, with superb typographic control and a strong brick-wall visual language that fits the studio. Its motion sequence appears to reveal openings, light and project-specific conditions as you scroll, which is conceptually apt, but the overall structure is more conventional and the idea feels slightly less singular than A’s."
+ }
+}

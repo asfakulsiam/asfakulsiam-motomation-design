@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 4103,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a brilliant concept by using a continuous tracking line and dot that follows the user's scroll, perfectly embodying the 'lanes or arrival' and walking tour aspects of the brief. The typography is exceptional, acting as the primary visual identity with striking scale and hierarchy. The motion is entirely purposeful, driving the narrative of a journey through the house and city."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B features beautifully crafted, minimalist SVG/CSS illustrations of the house's architecture that give it a premium boutique feel. However, the structural layout and scroll-triggered animations are relatively conventional compared to A. The typography is elegant, though the scale feels slightly timid next to the bold artwork."
+  },
+  "better": "A",
+  "why": "Site A's ingenious use of scroll-driven motion to draw a physical path through the content creates a deeply unified concept that sets it apart from Site B's more traditional section-based approach."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B features beautifully crafted, minimalist SVG/CSS illustrations of the house's architecture that give it a premium boutique feel. However, the structural layout and scroll-triggered animations are relatively conventional compared to A. The typography is elegant, though the scale feels slightly timid next to the bold artwork."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a brilliant concept by using a continuous tracking line and dot that follows the user's scroll, perfectly embodying the 'lanes or arrival' and walking tour aspects of the brief. The typography is exceptional, acting as the primary visual identity with striking scale and hierarchy. The motion is entirely purposeful, driving the narrative of a journey through the house and city."
+ }
+}

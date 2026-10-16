@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 4102,
+ "pair": [
+  "baseline",
+  "matched"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has the clearest fit to the brief: a quiet, editorial mood built around the original doors, with booking always present and room facts handled plainly. The typography does most of the identity work and the scroll strip suggests purposeful progression, though the motion evidence is limited and some captures show awkward empty spans that keep Craft from a 5."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 3,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "B is more visually unexpected, with a strong architectural signature and a more evident scroll narrative across the frame strip. But it feels less quiet, the mobile/long-page captures show more overlap and large empty bands, and the JS error plus rougher layout polish lower Craft and Access & performance."
+  },
+  "better": "A",
+  "why": "A answers the hotel brief more completely and calmly, with stronger clarity around booking and room information while still carrying a distinct door-led identity."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 3,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "B is more visually unexpected, with a strong architectural signature and a more evident scroll narrative across the frame strip. But it feels less quiet, the mobile/long-page captures show more overlap and large empty bands, and the JS error plus rougher layout polish lower Craft and Access & performance."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has the clearest fit to the brief: a quiet, editorial mood built around the original doors, with booking always present and room facts handled plainly. The typography does most of the identity work and the scroll strip suggests purposeful progression, though the motion evidence is limited and some captures show awkward empty spans that keep Craft from a 5."
+ }
+}

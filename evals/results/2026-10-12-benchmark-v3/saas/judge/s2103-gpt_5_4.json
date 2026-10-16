@@ -1,0 +1,68 @@
+{
+ "model": "gpt_5_4",
+ "seed": 2103,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a clear idea: calm editorial layout plus terminal evidence, with the scroll sequence narrowing a noisy log stream down to the singled-out line. The product is shown credibly in both terminal and result views, and the measured checks are clean; only the very large pinned whitespace makes the pacing feel a bit overstretched."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "B makes a strong first-screen impression with bold type and a dark developer-tool palette, but the structure is much closer to a standard SaaS template. The scroll strip suggests mostly generic reveal/progression, and the mobile capture is visibly broken with off-canvas content; the measured contrast failure triggers the hard gate."
+  },
+  "better": "A",
+  "why": "A is the stronger run because it fulfills the brief more credibly, carries a clearer product-focused idea through the page, and passes the hard gates while B fails contrast and breaks on mobile."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "B makes a strong first-screen impression with bold type and a dark developer-tool palette, but the structure is much closer to a standard SaaS template. The scroll strip suggests mostly generic reveal/progression, and the mobile capture is visibly broken with off-canvas content; the measured contrast failure triggers the hard gate."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a clear idea: calm editorial layout plus terminal evidence, with the scroll sequence narrowing a noisy log stream down to the singled-out line. The product is shown credibly in both terminal and result views, and the measured checks are clean; only the very large pinned whitespace makes the pacing feel a bit overstretched."
+ }
+}

@@ -1,0 +1,68 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 5102,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 2,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "Relies on a generic, template-like structure with floating cards that don't strongly evoke the conservation theme. Motion is purely decorative, and it fails the accessibility hard gate due to contrast violations."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "An exceptionally crafted page where the typography acts as the identity. The scroll-triggered 140-hectare grid is a brilliant, purposeful use of motion that directly communicates the brief's primary metric, and it degrades gracefully under reduced motion."
+  },
+  "better": "B",
+  "why": "Site B flawlessly executes a compelling, story-driven concept with elegant bilingual typography and purposeful motion, whereas Site A feels generic and fails core accessibility requirements."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 2,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "Relies on a generic, template-like structure with floating cards that don't strongly evoke the conservation theme. Motion is purely decorative, and it fails the accessibility hard gate due to contrast violations."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "An exceptionally crafted page where the typography acts as the identity. The scroll-triggered 140-hectare grid is a brilliant, purposeful use of motion that directly communicates the brief's primary metric, and it degrades gracefully under reduced motion."
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 7103,
+ "pair": [
+  "matched",
+  "skill"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A introduces a clever interactive light slider that directly addresses the brief's focus on light and time. The warm, earthy palette suits the brick motif well. However, the typography in the hero section feels slightly disjointed, and the overall layout is somewhat standard outside of the interactive widget."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B delivers a masterclass in architectural web design, utilizing precise linework, a refined editorial layout, and an exquisite typographic scale. The sticky stacking motion of the project cards as you scroll is technically flawless and conceptually perfect for a structural practice."
+  },
+  "better": "B",
+  "why": "Site B achieves a significantly higher level of polish, with brilliant typographic detailing and a highly appropriate stacking scroll interaction that reinforces the architectural theme."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A introduces a clever interactive light slider that directly addresses the brief's focus on light and time. The warm, earthy palette suits the brick motif well. However, the typography in the hero section feels slightly disjointed, and the overall layout is somewhat standard outside of the interactive widget."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B delivers a masterclass in architectural web design, utilizing precise linework, a refined editorial layout, and an exquisite typographic scale. The sticky stacking motion of the project cards as you scroll is technically flawless and conceptually perfect for a structural practice."
+ }
+}

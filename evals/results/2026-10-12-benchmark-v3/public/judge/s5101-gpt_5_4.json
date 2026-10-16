@@ -1,0 +1,70 @@
+{
+ "model": "gpt_5_4",
+ "seed": 5101,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1",
+    "Invented statistics (captures show values other than 140, e.g. 105/127)"
+   ],
+   "notes": "The mangrove horizon illustration gives Site A a clear idea and a warm public-interest tone, especially in the hero. But the concept weakens in the lower sections, and the mobile/full-page captures suggest uneven layout handling. Most seriously, it fails contrast checks and the animated impact figure appears as incorrect intermediate numbers instead of only the allowed 140."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B has a strong, coherent editorial concept: careful restoration is expressed through the measured typography, restrained palette, and seedling motif across sections. The bilingual hierarchy is excellent, the forms and donation choices are clean and usable, and the motion seen in the scroll strip appears purposeful and subtle; reduced-motion fallback keeps all content visible. It also passes the measured accessibility gates."
+  },
+  "better": "B",
+  "why": "B is the stronger and more trustworthy execution because it passes the hard gates and delivers a more coherent type-led design with cleaner craft and accessibility."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1",
+   "Invented statistics (captures show values other than 140, e.g. 105/127)"
+  ],
+  "notes": "The mangrove horizon illustration gives Site A a clear idea and a warm public-interest tone, especially in the hero. But the concept weakens in the lower sections, and the mobile/full-page captures suggest uneven layout handling. Most seriously, it fails contrast checks and the animated impact figure appears as incorrect intermediate numbers instead of only the allowed 140."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B has a strong, coherent editorial concept: careful restoration is expressed through the measured typography, restrained palette, and seedling motif across sections. The bilingual hierarchy is excellent, the forms and donation choices are clean and usable, and the motion seen in the scroll strip appears purposeful and subtle; reduced-motion fallback keeps all content visible. It also passes the measured accessibility gates."
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 3103,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "baseline",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 4,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A presents a warm, competent e-commerce layout with charming CSS/SVG illustrations for all the products. However, the structure feels like a standard template, and the motion is limited to basic reveals and a generic progress bar rather than enhancing the narrative."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B adopts a strong editorial approach, using a compact list for secondary products to maintain focus on the featured item. The scroll-driven firing sequence is exceptional: pinning the cup and changing its visual state (clay, firing, glazed) perfectly translates the brief's story into a tangible interaction."
+  },
+  "better": "B",
+  "why": "Site B leverages purposeful motion and clever SVG state changes to actively tell the story of the wood-firing process, resulting in a much stronger and more original concept."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 4,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A presents a warm, competent e-commerce layout with charming CSS/SVG illustrations for all the products. However, the structure feels like a standard template, and the motion is limited to basic reveals and a generic progress bar rather than enhancing the narrative."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B adopts a strong editorial approach, using a compact list for secondary products to maintain focus on the featured item. The scroll-driven firing sequence is exceptional: pinning the cup and changing its visual state (clay, firing, glazed) perfectly translates the brief's story into a tangible interaction."
+ }
+}

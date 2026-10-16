@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 7101,
+ "pair": [
+  "matched",
+  "skill"
+ ],
+ "order": {
+  "A": "matched",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A has a clear brick/courtyard/light idea, and the hero plus project drawings make the studio's identity legible immediately. The scroll-frame strip suggests a purposeful step-through of the five projects and then studio/process/contact, while the reduced-motion version keeps content present and usable. Typography and illustration are strong, though the motion-enabled full-page capture shows some awkward empty stretches that keep it just short of top craft."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 1,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B has an elegant plan-led system and refined typography, with strong diagrams and a calm editorial structure. But the default motion version opens on a largely empty first screen and appears to hide the main positioning line; in the scroll frames that reads as broken rather than useful storytelling. The reduced-motion version is clearer than the default, so Motion and Craft score notably lower despite solid accessibility checks."
+  },
+  "better": "A",
+  "why": "A carries the brief's identity and story more consistently, while B's default motion undermines an otherwise strong design."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A has a clear brick/courtyard/light idea, and the hero plus project drawings make the studio's identity legible immediately. The scroll-frame strip suggests a purposeful step-through of the five projects and then studio/process/contact, while the reduced-motion version keeps content present and usable. Typography and illustration are strong, though the motion-enabled full-page capture shows some awkward empty stretches that keep it just short of top craft."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 1,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B has an elegant plan-led system and refined typography, with strong diagrams and a calm editorial structure. But the default motion version opens on a largely empty first screen and appears to hide the main positioning line; in the scroll frames that reads as broken rather than useful storytelling. The reduced-motion version is clearer than the default, so Motion and Craft score notably lower despite solid accessibility checks."
+ }
+}

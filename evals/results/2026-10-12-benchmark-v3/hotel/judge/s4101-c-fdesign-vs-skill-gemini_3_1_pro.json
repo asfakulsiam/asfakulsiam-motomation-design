@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 4101,
+ "pair": [
+  "c-fdesign",
+  "skill"
+ ],
+ "order": {
+  "A": "c-fdesign",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 3,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "The design is competent and clean, utilizing a simple arch motif that ties loosely to the architecture. However, the motion is limited to a simple sun rising in the breakfast section, missing an opportunity to tell a cohesive story. Typography is legible but relies on default-feeling scales."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 5,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "An exceptionally strong execution of the brief. The pinning building graphic that fills with color floor-by-floor as the user scrolls through the room tiers is a brilliant, interactive realization of the 'merchant house' concept. The typography is elegant, and the layout is meticulously crafted across all breakpoints."
+  },
+  "better": "B",
+  "why": "Site B elevates the brief through a highly original scroll-driven interaction that visually guides the user up the floors of the historic house."
+ },
+ "c-fdesign": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 3,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "The design is competent and clean, utilizing a simple arch motif that ties loosely to the architecture. However, the motion is limited to a simple sun rising in the breakfast section, missing an opportunity to tell a cohesive story. Typography is legible but relies on default-feeling scales."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 5,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "An exceptionally strong execution of the brief. The pinning building graphic that fills with color floor-by-floor as the user scrolls through the room tiers is a brilliant, interactive realization of the 'merchant house' concept. The typography is elegant, and the layout is meticulously crafted across all breakpoints."
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 4102,
+ "pair": [
+  "c-taste",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-taste"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a strong, coherent idea: doors, thresholds and arrival shape the hero, room graphics, house story and even the contact section. The scroll-strip shows meaningful progression rather than simple reveals, especially in the hero sequence, and the persistent booking action fits the brief well. Desktop craft is excellent, though the mobile hero/navigation feel tighter and less resolved than the desktop."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B is calm, legible and tasteful, with a clear boutique-hotel tone and solid typography, but the idea is less distinctive and less fully carried through. The scroll-strip shows little motion evidence beyond basic section changes, so I can't credit it for concept-led animation. It passes the measured access checks cleanly, but the page reads more like a refined template and the long blank stretches hurt perceived craft."
+  },
+  "better": "A",
+  "why": "A delivers a clearer signature and stronger sense of place, with more concept-led motion and a more memorable identity while still meeting the functional brief."
+ },
+ "c-taste": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B is calm, legible and tasteful, with a clear boutique-hotel tone and solid typography, but the idea is less distinctive and less fully carried through. The scroll-strip shows little motion evidence beyond basic section changes, so I can't credit it for concept-led animation. It passes the measured access checks cleanly, but the page reads more like a refined template and the long blank stretches hurt perceived craft."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a strong, coherent idea: doors, thresholds and arrival shape the hero, room graphics, house story and even the contact section. The scroll-strip shows meaningful progression rather than simple reveals, especially in the hero sequence, and the persistent booking action fits the brief well. Desktop craft is excellent, though the mobile hero/navigation feel tighter and less resolved than the desktop."
+ }
+}

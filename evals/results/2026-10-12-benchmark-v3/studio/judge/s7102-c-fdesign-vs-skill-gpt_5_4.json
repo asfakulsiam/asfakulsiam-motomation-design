@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 7102,
+ "pair": [
+  "c-fdesign",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-fdesign"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 4,
+    "Typography": 5,
+    "Motion": 2,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a clear architectural idea: light, brick and courtyard logic shape the hero, the project imagery, the plans, and even the process/contact treatment. Typography is the identity here, with a strong display serif and disciplined small supporting text, and the plans remain visible on mobile. The scroll frames show mostly straightforward section-to-section progression rather than motion that meaningfully advances the concept, so Motion scores lower."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B starts with a strong, brief-specific gesture: the courtyard wall and movable sun make light feel like a design tool, and the overall palette is calm and appropriate. But the idea is carried less consistently through the full page, some plan panels read sparse or blank in the standard captures, and the contact copy feels more generic than the rest. The scroll strip suggests basic progressive reveals and sequencing, with the strongest motion idea in the hero interaction rather than the scroll story, so Motion is only moderate."
+  },
+  "better": "A",
+  "why": "A is more cohesive and refined overall, with stronger typography and a clearer signature carried consistently through the entire site."
+ },
+ "c-fdesign": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B starts with a strong, brief-specific gesture: the courtyard wall and movable sun make light feel like a design tool, and the overall palette is calm and appropriate. But the idea is carried less consistently through the full page, some plan panels read sparse or blank in the standard captures, and the contact copy feels more generic than the rest. The scroll strip suggests basic progressive reveals and sequencing, with the strongest motion idea in the hero interaction rather than the scroll story, so Motion is only moderate."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 4,
+   "Typography": 5,
+   "Motion": 2,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a clear architectural idea: light, brick and courtyard logic shape the hero, the project imagery, the plans, and even the process/contact treatment. Typography is the identity here, with a strong display serif and disciplined small supporting text, and the plans remain visible on mobile. The scroll frames show mostly straightforward section-to-section progression rather than motion that meaningfully advances the concept, so Motion scores lower."
+ }
+}

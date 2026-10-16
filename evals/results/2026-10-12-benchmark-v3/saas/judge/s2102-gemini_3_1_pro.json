@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 2102,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A captures the CLI tool aesthetic well with a stark, dark layout and good typographic contrast. The motion implementation is excellent, using scroll to drive a terminal typing sequence and result reveal, directly answering the brief's requirement to 'show the product working'. The build is technically solid with no mobile overflow or accessibility issues."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 2,
+    "Craft": 2,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B presents a clean but relatively generic SaaS layout. The motion relies on basic fade-ins rather than using it to demonstrate the product's functionality, missing an opportunity to tell the story. A significant horizontal overflow bug on mobile detracts from the overall craft."
+  },
+  "better": "A",
+  "why": "Site A effectively uses scroll-linked motion to demonstrate the CLI tool working as requested, while maintaining a bug-free, accessible build across viewport sizes."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 2,
+   "Craft": 2,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B presents a clean but relatively generic SaaS layout. The motion relies on basic fade-ins rather than using it to demonstrate the product's functionality, missing an opportunity to tell the story. A significant horizontal overflow bug on mobile detracts from the overall craft."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A captures the CLI tool aesthetic well with a stark, dark layout and good typographic contrast. The motion implementation is excellent, using scroll to drive a terminal typing sequence and result reveal, directly answering the brief's requirement to 'show the product working'. The build is technically solid with no mobile overflow or accessibility issues."
+ }
+}

@@ -1,0 +1,68 @@
+{
+ "model": "gpt_5_4",
+ "seed": 4101,
+ "pair": [
+  "matched",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "matched"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a clear, quiet idea: the house facade becomes the organizing device, and the room sequence reads as moving upward from courtyard to roof. The typography and line illustration feel refined and appropriate, and the scroll-strip suggests motion that meaningfully reveals doors, windows and the rooftop rather than adding generic effects. It is very clean and accessible, though some sections feel a little sparse and less fully resolved than they could be."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 5,
+    "Craft": 3,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "B has the stronger visual idea: arrival through the arch/door and ascent to the roof gives the site a memorable signature tied directly to the brief. Its scroll-strip shows a more narrative motion sequence than A, and the desktop composition is distinctive. But the measured contrast failures trigger a hard gate, and the very large empty stretches on mobile make the experience feel less controlled."
+  },
+  "better": "A",
+  "why": "A is the better run because it meets the hard gates and delivers a coherent, elegant concept, while B is disqualified by contrast failures despite having the bolder idea."
+ },
+ "matched": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 5,
+   "Craft": 3,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "B has the stronger visual idea: arrival through the arch/door and ascent to the roof gives the site a memorable signature tied directly to the brief. Its scroll-strip shows a more narrative motion sequence than A, and the desktop composition is distinctive. But the measured contrast failures trigger a hard gate, and the very large empty stretches on mobile make the experience feel less controlled."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a clear, quiet idea: the house facade becomes the organizing device, and the room sequence reads as moving upward from courtyard to roof. The typography and line illustration feel refined and appropriate, and the scroll-strip suggests motion that meaningfully reveals doors, windows and the rooftop rather than adding generic effects. It is very clean and accessible, though some sections feel a little sparse and less fully resolved than they could be."
+ }
+}

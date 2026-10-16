@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 4103,
+ "pair": [
+  "c-taste",
+  "skill"
+ ],
+ "order": {
+  "A": "c-taste",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 4
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a calm, coherent idea built from doors, balconies and rooftops, and it fits the hotel brief well without overreaching. The typography is elegant and the room facts are clear, but the structure feels more conventional than distinctive, and the scroll-strip shows only light, mostly generic motion. Accessibility is strong overall, though the axe definition-list violations keep it from top marks."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 2,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B has the stronger signature: the vertical route line, station language and ‘arrival/front door’ framing turn the brief into one clear narrative carried through every section. Its typography is memorable and the scroll-strip suggests motion that meaningfully progresses the journey down the page, but the stitched page and phone captures show large blank/pinned gaps that hurt visual finish. Measured checks are otherwise excellent, with clean accessibility and reduced-motion support."
+  },
+  "better": "B",
+  "why": "B is the more complete design idea, with a distinctive line-and-arrival concept that meaningfully shapes the type, structure and scroll experience."
+ },
+ "c-taste": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 4
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a calm, coherent idea built from doors, balconies and rooftops, and it fits the hotel brief well without overreaching. The typography is elegant and the room facts are clear, but the structure feels more conventional than distinctive, and the scroll-strip shows only light, mostly generic motion. Accessibility is strong overall, though the axe definition-list violations keep it from top marks."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 2,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B has the stronger signature: the vertical route line, station language and ‘arrival/front door’ framing turn the brief into one clear narrative carried through every section. Its typography is memorable and the scroll-strip suggests motion that meaningfully progresses the journey down the page, but the stitched page and phone captures show large blank/pinned gaps that hurt visual finish. Measured checks are otherwise excellent, with clean accessibility and reduced-motion support."
+ }
+}

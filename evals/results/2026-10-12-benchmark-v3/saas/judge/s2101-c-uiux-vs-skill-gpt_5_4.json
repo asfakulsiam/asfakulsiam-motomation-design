@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 2101,
+ "pair": [
+  "c-uiux",
+  "skill"
+ ],
+ "order": {
+  "A": "c-uiux",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 3
+   },
+   "hard_gate_failures": [],
+   "notes": "The page communicates the product clearly, but the overall idea is a familiar dark SaaS/dev-tools pattern rather than a distinctive concept. The scroll sequence does progress from terminal to ranked result, yet large empty regions and the 375px horizontal overflow make the experience feel fragile, especially on mobile where key product visuals appear cropped or absent."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "This has a strong editorial/on-call concept that carries from the headline to the scrolling log treatment, the product demo, pricing, and install section. The serif-plus-monospace typography gives it a real identity, and the scroll-strip shows story-driven motion, though some animated product areas read a bit empty in still captures before their sequence completes."
+  },
+  "better": "B",
+  "why": "B is the clearer, more original and better-crafted interpretation, and it also avoids A’s mobile overflow and layout fragility."
+ },
+ "c-uiux": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 3
+  },
+  "hard_gate_failures": [],
+  "notes": "The page communicates the product clearly, but the overall idea is a familiar dark SaaS/dev-tools pattern rather than a distinctive concept. The scroll sequence does progress from terminal to ranked result, yet large empty regions and the 375px horizontal overflow make the experience feel fragile, especially on mobile where key product visuals appear cropped or absent."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "This has a strong editorial/on-call concept that carries from the headline to the scrolling log treatment, the product demo, pricing, and install section. The serif-plus-monospace typography gives it a real identity, and the scroll-strip shows story-driven motion, though some animated product areas read a bit empty in still captures before their sequence completes."
+ }
+}

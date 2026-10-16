@@ -1,0 +1,68 @@
+{
+ "model": "gpt_5_4",
+ "seed": 3103,
+ "pair": [
+  "c-uiux",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-uiux"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 3,
+    "Access & performance": 1
+   },
+   "hard_gate_failures": [
+    "Body text contrast under 4.5:1"
+   ],
+   "notes": "A has a clear editorial catalog idea and the kiln-story section carries it well, with custom drawn ware and a strong material palette. The scroll-strip suggests motion is tied to the firing narrative rather than decorative, but the contrast failure is a hard gate and some details feel less refined on mobile and in small text."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 3,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B is the cleaner and more complete e-commerce expression: the product, shop, and care information are fast to parse, and the visual language stays consistent across sections. Motion appears modest and purposeful rather than especially ambitious, but the overall craft, accessibility checks, and polish are stronger."
+  },
+  "better": "B",
+  "why": "B wins because it clears the hard gates and is more polished, accessible, and dependable while still meeting the brief with a coherent editorial/product concept."
+ },
+ "c-uiux": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 3,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B is the cleaner and more complete e-commerce expression: the product, shop, and care information are fast to parse, and the visual language stays consistent across sections. Motion appears modest and purposeful rather than especially ambitious, but the overall craft, accessibility checks, and polish are stronger."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 3,
+   "Access & performance": 1
+  },
+  "hard_gate_failures": [
+   "Body text contrast under 4.5:1"
+  ],
+  "notes": "A has a clear editorial catalog idea and the kiln-story section carries it well, with custom drawn ware and a strong material palette. The scroll-strip suggests motion is tied to the firing narrative rather than decorative, but the contrast failure is a hard gate and some details feel less refined on mobile and in small text."
+ }
+}

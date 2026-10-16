@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 3101,
+ "pair": [
+  "baseline",
+  "gated"
+ ],
+ "order": {
+  "A": "gated",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A is coherent and usable, with a warm earthy palette and custom pottery drawings, but the idea stays close to a conventional small-shop template rather than becoming a distinct editorial concept. Typography is tasteful but not especially characterful, and the scroll-strip shows mostly straightforward page progression with little motion storytelling beyond standard reveals. Measured checks are strong across accessibility, keyboard reach, reduced motion, and mobile fit."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "B has a clearer point of view: the 'marked by flame' editorial line, luminous cup rendering, and darker firing-story section carry one concept across the page. The scroll-strip suggests purposeful staged reveals and a story/progress treatment that supports the brief, though timing cannot be judged from stills; reduced-motion fallback appears intact. Craft is less consistent than A because the stitched full-page capture shows an awkwardly empty shop area before later frames reveal the product grid, which makes the build feel less robust visually."
+  },
+  "better": "B",
+  "why": "B delivers the stronger and more distinctive concept with typography and motion that better support the ceramics story while still passing the functional and accessibility checks."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "B has a clearer point of view: the 'marked by flame' editorial line, luminous cup rendering, and darker firing-story section carry one concept across the page. The scroll-strip suggests purposeful staged reveals and a story/progress treatment that supports the brief, though timing cannot be judged from stills; reduced-motion fallback appears intact. Craft is less consistent than A because the stitched full-page capture shows an awkwardly empty shop area before later frames reveal the product grid, which makes the build feel less robust visually."
+ },
+ "gated": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A is coherent and usable, with a warm earthy palette and custom pottery drawings, but the idea stays close to a conventional small-shop template rather than becoming a distinct editorial concept. Typography is tasteful but not especially characterful, and the scroll-strip shows mostly straightforward page progression with little motion storytelling beyond standard reveals. Measured checks are strong across accessibility, keyboard reach, reduced motion, and mobile fit."
+ }
+}

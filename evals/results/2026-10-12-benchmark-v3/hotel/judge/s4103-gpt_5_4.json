@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 4103,
+ "pair": [
+  "baseline",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "baseline"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "The left-hand line, station markers, and copy about leaving by the front door give this a single strong idea that runs through the whole page and fits the brief unusually well. Typography has real character and the booking action stays easy to find, while the scroll-strip suggests motion tied to the journey concept rather than generic reveals. I am holding Craft just short of top marks because some sections feel overly sparse in the long page views and a few small text details read a bit tiny."
+  },
+  "B": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 3,
+    "Typography": 4,
+    "Motion": 2,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "The arch/door motif is appropriate and the palette is attractive, with clear room facts and a consistently visible booking path. However, the structure feels much closer to a polished boutique-hotel template, and the scroll-strip shows little clear motion logic beyond ordinary section changes, so I cannot score Motion highly from the evidence. Overall it is clean and competent, but less distinctive and less tightly tied to arrival, lanes, or doors than Site A."
+  },
+  "better": "A",
+  "why": "Site A has the clearer signature and more fully carries one brief-specific idea across concept, structure, typography, and motion evidence."
+ },
+ "baseline": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 3,
+   "Typography": 4,
+   "Motion": 2,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "The arch/door motif is appropriate and the palette is attractive, with clear room facts and a consistently visible booking path. However, the structure feels much closer to a polished boutique-hotel template, and the scroll-strip shows little clear motion logic beyond ordinary section changes, so I cannot score Motion highly from the evidence. Overall it is clean and competent, but less distinctive and less tightly tied to arrival, lanes, or doors than Site A."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "The left-hand line, station markers, and copy about leaving by the front door give this a single strong idea that runs through the whole page and fits the brief unusually well. Typography has real character and the booking action stays easy to find, while the scroll-strip suggests motion tied to the journey concept rather than generic reveals. I am holding Craft just short of top marks because some sections feel overly sparse in the long page views and a few small text details read a bit tiny."
+ }
+}

@@ -1,0 +1,68 @@
+{
+ "model": "gpt_5_4",
+ "seed": 5101,
+ "pair": [
+  "c-taste",
+  "skill"
+ ],
+ "order": {
+  "A": "c-taste",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 0,
+    "Originality": 0,
+    "Typography": 0,
+    "Motion": 0,
+    "Craft": 0,
+    "Access & performance": 0
+   },
+   "hard_gate_failures": [
+    "Invented/wrong statistic: the captured page shows 131 and 137 hectares in some states instead of the required 140 hectares replanted since 2019."
+   ],
+   "notes": "This is a calm, usable, visually clean nonprofit layout with solid accessibility checks and a clear donation path. But the brief's only numeric fact is mishandled and inconsistent across captures, which is a hard disqualifying error."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 4,
+    "Craft": 4,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "This has a strong editorial idea carried through the whole page: the typography, restrained palette, seedling illustration, and section structure all feel specific to the brief rather than templated. The scroll-strip suggests concept-serving growth/reveal motion in the hero, and the reduced-motion version preserves content cleanly; I am not fully certain about timing from stills, so I stop short of a 5 for Motion."
+  },
+  "better": "B",
+  "why": "B is the stronger design and the only valid run, with a distinctive bilingual public-interest identity, excellent typography, and no hard-gate failure."
+ },
+ "c-taste": {
+  "scores": {
+   "Concept": 0,
+   "Originality": 0,
+   "Typography": 0,
+   "Motion": 0,
+   "Craft": 0,
+   "Access & performance": 0
+  },
+  "hard_gate_failures": [
+   "Invented/wrong statistic: the captured page shows 131 and 137 hectares in some states instead of the required 140 hectares replanted since 2019."
+  ],
+  "notes": "This is a calm, usable, visually clean nonprofit layout with solid accessibility checks and a clear donation path. But the brief's only numeric fact is mishandled and inconsistent across captures, which is a hard disqualifying error."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 4,
+   "Craft": 4,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "This has a strong editorial idea carried through the whole page: the typography, restrained palette, seedling illustration, and section structure all feel specific to the brief rather than templated. The scroll-strip suggests concept-serving growth/reveal motion in the hero, and the reduced-motion version preserves content cleanly; I am not fully certain about timing from stills, so I stop short of a 5 for Motion."
+ }
+}

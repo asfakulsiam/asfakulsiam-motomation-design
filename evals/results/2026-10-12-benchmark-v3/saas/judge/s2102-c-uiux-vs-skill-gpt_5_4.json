@@ -1,0 +1,64 @@
+{
+ "model": "gpt_5_4",
+ "seed": 2102,
+ "pair": [
+  "c-uiux",
+  "skill"
+ ],
+ "order": {
+  "A": "skill",
+  "B": "c-uiux"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 4,
+    "Originality": 4,
+    "Typography": 4,
+    "Motion": 4,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "A has a clear idea: isolate and elevate the one decisive log line, and that logic carries from the hero through the demo and install flow. The typography and spacing are disciplined, the product is shown working in HTML/CSS, and the scroll-strip suggests purposeful progression rather than decorative motion. It is not radically novel, but it is highly coherent and well executed on desktop and mobile."
+  },
+  "B": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 3,
+    "Craft": 2,
+    "Access & performance": 2
+   },
+   "hard_gate_failures": [],
+   "notes": "B looks competent at first glance, but it leans much closer to a generic dark SaaS template with green accents than to a distinctive product idea. The scroll-strip shows content revealing in sequence, yet the motion reads as standard section reveals, and the mobile capture plus measured 185px overflow point to a real responsiveness/craft failure. Reduced-motion and contrast basics are present, but the 375px layout does not feel fully resolved."
+  },
+  "better": "A",
+  "why": "A better matches the brief with a more unified concept, a clearer product demonstration, stronger mobile execution, and no visible responsive breakage."
+ },
+ "c-uiux": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 3,
+   "Craft": 2,
+   "Access & performance": 2
+  },
+  "hard_gate_failures": [],
+  "notes": "B looks competent at first glance, but it leans much closer to a generic dark SaaS template with green accents than to a distinctive product idea. The scroll-strip shows content revealing in sequence, yet the motion reads as standard section reveals, and the mobile capture plus measured 185px overflow point to a real responsiveness/craft failure. Reduced-motion and contrast basics are present, but the 375px layout does not feel fully resolved."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 4,
+   "Originality": 4,
+   "Typography": 4,
+   "Motion": 4,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "A has a clear idea: isolate and elevate the one decisive log line, and that logic carries from the hero through the demo and install flow. The typography and spacing are disciplined, the product is shown working in HTML/CSS, and the scroll-strip suggests purposeful progression rather than decorative motion. It is not radically novel, but it is highly coherent and well executed on desktop and mobile."
+ }
+}

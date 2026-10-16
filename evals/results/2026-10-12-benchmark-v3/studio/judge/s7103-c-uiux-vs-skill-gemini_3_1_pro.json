@@ -1,0 +1,64 @@
+{
+ "model": "gemini_3_1_pro",
+ "seed": 7103,
+ "pair": [
+  "c-uiux",
+  "skill"
+ ],
+ "order": {
+  "A": "c-uiux",
+  "B": "skill"
+ },
+ "raw": {
+  "A": {
+   "scores": {
+    "Concept": 3,
+    "Originality": 2,
+    "Typography": 3,
+    "Motion": 2,
+    "Craft": 3,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site A delivers a functional but visually generic interpretation of the brief. The design relies heavily on standard section stacking, and it reuses the hero graphic for the first project, which undermines the uniqueness of the architecture."
+  },
+  "B": {
+   "scores": {
+    "Concept": 5,
+    "Originality": 5,
+    "Typography": 5,
+    "Motion": 3,
+    "Craft": 5,
+    "Access & performance": 5
+   },
+   "hard_gate_failures": [],
+   "notes": "Site B is a stunning editorial piece that captures the essence of a brick-and-courtyard architectural practice. The typography is elegant, and the bespoke SVG plans and elevations for each project demonstrate exceptional craft and attention to the brief's specifics."
+  },
+  "better": "B",
+  "why": "Site B demonstrates vastly superior craft and conceptual depth, particularly through its beautiful typography and custom, brief-accurate SVG architectural illustrations."
+ },
+ "c-uiux": {
+  "scores": {
+   "Concept": 3,
+   "Originality": 2,
+   "Typography": 3,
+   "Motion": 2,
+   "Craft": 3,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site A delivers a functional but visually generic interpretation of the brief. The design relies heavily on standard section stacking, and it reuses the hero graphic for the first project, which undermines the uniqueness of the architecture."
+ },
+ "skill": {
+  "scores": {
+   "Concept": 5,
+   "Originality": 5,
+   "Typography": 5,
+   "Motion": 3,
+   "Craft": 5,
+   "Access & performance": 5
+  },
+  "hard_gate_failures": [],
+  "notes": "Site B is a stunning editorial piece that captures the essence of a brick-and-courtyard architectural practice. The typography is elegant, and the bespoke SVG plans and elevations for each project demonstrate exceptional craft and attention to the brief's specifics."
+ }
+}
