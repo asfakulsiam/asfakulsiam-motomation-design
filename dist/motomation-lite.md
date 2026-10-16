@@ -111,7 +111,7 @@ Two layers, kept apart on purpose (details in `principles/restraint.md`):
 - Put a stamp comment at the top of the main stylesheet or layout:
   `/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: <from gate.mjs> · gate: <from gate.mjs> */`
   The critique and gate segments are pasted from `node scripts/gate.mjs`, never typed. Each axis carries its trace, e.g. `H4[375:1]`. See `gates/delivery-gate.md`, Part 1.
-- After delivery, log the run: `node scripts/memory.mjs log ...` (or append to `.motomation/log.json` by hand).
+- After delivery, log the run to the user-level memory: `node scripts/memory.mjs log --brief … --category … --archetype … --palette … --fonts … --motion … --signature …` (or append to `~/.motomation/log.json` by hand).
 - End with: what you chose, what you rejected, and one thing to try next.
 
 ## Without a shell
@@ -217,12 +217,12 @@ Good signature moves are:
 
 Compare your plan against three things:
 1. **The AI-default list** in `gates/delivery-gate.md`. Count the matches.
-2. **Project memory (IDs and structure):** run
+2. **Memory (IDs and structure, every project):** run
    `node scripts/memory.mjs check --archetype <x> --signature <y> --tier <n> --sections hero,work,contact --type-scale <ratio>`.
-   It checks two things against the last 5 runs. First, exact IDs: an archetype or signature already used. Second, a **structural fingerprint**: layout family, type-scale bucket, section order, motion tier and signature type, scored 0–100%. A different archetype with the same rows layout, the same section order and the same kind of signature is still a repeat. At **≥ 70%** the script names the run you're rebuilding and the dimensions that match, and offers a mutation aimed at the heaviest one. Apply it (or justify the overlap in one line) and check again. Exit code 2 means a clash. `/invent` prints each draw's partial fingerprint and flags draws that rebuild a recent page. After delivery, `memory.mjs log` with the same flags stores the fingerprint. Without a shell, compare the five dimensions by hand against `.motomation/log.json`.
+   It checks the last 5 runs in the user-level log, from any project. First, exact IDs: an archetype or signature already used. Second, a **structural fingerprint**: layout family, type-scale bucket, section order, motion tier and signature type, scored 0–100%. A different archetype with the same rows layout, the same section order and the same kind of signature is still a repeat. At **≥ 70%** the script names the run you're rebuilding and the dimensions that match, and offers a mutation aimed at the heaviest one. Apply it (or justify the overlap in one line) and check again. Exit code 2 means a clash. `/invent` prints each draw's partial fingerprint and flags draws that rebuild a recent page. After delivery, `memory.mjs log` with the same flags stores the fingerprint. Without a shell, compare the five dimensions by hand against `~/.motomation/log.json`.
 3. **The obvious version:** write down what a template would do. Your plan must differ in at least **three** of: structure, type, colour, motion, signature, imagery.
 
-**Controlled reuse across separate projects.** Memory only knows its own project, so two projects (or two benchmark seeds) can land on the same archetype. That is allowed only as a documented mutation: the second use carries a different mutation **and** a different structural fingerprint (layout, tier or signature type differs), and the plan says so in one line: `Reuse : Letter again (used in <project>), mutated by remove-expected; signature type micro, not type`. Inside one project nothing changes: memory blocks the repeat, and the release gate still requires 3 different archetypes and signatures across 3 runs of the same brief.
+**Reuse across projects.** Memory now spans every project, so a repeat from another project is caught like one from this project. A deliberate reuse is allowed only for a dissimilar brief, as a documented mutation (a different mutation **and** a different structural fingerprint), stated in one line: `Reuse : Letter again (used in <project>), mutated by remove-expected; signature type micro, not type`. For a similar brief, the five-way divergence above always applies.
 
 **Test:** if a stranger saw your site next to the last one you made, would they think the same person made them on autopilot? If yes, mutate again.
 

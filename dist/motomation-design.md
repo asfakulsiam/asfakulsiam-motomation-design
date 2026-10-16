@@ -215,7 +215,7 @@ Two layers, kept apart on purpose (details in `principles/restraint.md`):
 
 All scripts are Node.js (v18+) and zero-dependency, except `gate.mjs`, which needs Playwright (optional: without it the gate says "not verified" and exits 3). Run them from the skill folder.
 
-The memory log always belongs to the project, not the skill: `memory.mjs` walks up from the current folder to the nearest `package.json` or `.git` (skipping the skill's own folder) and uses `<project>/.motomation/log.json`. Pass `--project <dir>` when the project has neither marker or you want a different one.
+The memory log lives at the **user level**, shared by every project: `$MOTOMATION_HOME/log.json`, default `~/.motomation/log.json`. Every build in every project is logged there with its project and a short brief, so the same brief run twice (or in two projects) is caught. `--project <dir>` uses `<dir>/.motomation/log.json` instead, for tests and isolated runs; a project's own pre-2.9 `.motomation/log.json` is still read.
 
 ```bash
 node scripts/collide.mjs --n 3                  # draw 3 random concept collisions (real randomness)
@@ -223,9 +223,10 @@ node scripts/collide.mjs --category hotel --seed 42
 node scripts/search.mjs fonts "editorial serif warm"
 node scripts/search.mjs motion "pinned scrub" --tier 5
 node scripts/search.mjs signatures "cursor type"
-node scripts/memory.mjs recent                  # what this project already used
-node scripts/memory.mjs recent --project ../..  # same, for an explicit project folder
-node scripts/memory.mjs log --archetype ledger --signature letter-relay --fonts "Fraunces/Switzer"
+node scripts/memory.mjs recent                  # what every project already used (user-level log)
+node scripts/memory.mjs similar --brief "<brief>" --category <c>   # prior similar briefs → what to diverge from
+node scripts/memory.mjs recent --project ../..  # a per-project log, for tests
+node scripts/memory.mjs log --brief "<brief>" --category <c> --archetype ledger --palette "<name>" --fonts "Fraunces/Switzer" --motion "<language>" --signature letter-relay
 node scripts/contrast.mjs "#111111" "#F4F1EA"   # WCAG contrast check
 ```
 
@@ -252,7 +253,7 @@ Full behaviour of each command is in `commands/overview.md`. Critique output for
 - Put a stamp comment at the top of the main stylesheet or layout:
   `/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: <from gate.mjs> · gate: <from gate.mjs> */`
   The critique and gate segments are pasted from `node scripts/gate.mjs`, never typed. Each axis carries its trace, e.g. `H4[375:1]`. See `gates/delivery-gate.md`, Part 1.
-- After delivery, log the run: `node scripts/memory.mjs log ...` (or append to `.motomation/log.json` by hand).
+- After delivery, log the run to the user-level memory: `node scripts/memory.mjs log --brief … --category … --archetype … --palette … --fonts … --motion … --signature …` (or append to `~/.motomation/log.json` by hand).
 - End with: what you chose, what you rejected, and one thing to try next.
 
 
@@ -292,7 +293,7 @@ Mark anything that would change the design but can't be inferred:
 ### Read the existing project
 
 If there is code already:
-1. Look for `.motomation/log.json` and any `/* motomation · ... */` stamps. These are previous decisions you must not repeat.
+1. Run `node scripts/memory.mjs similar --brief "<brief>" --category <c>` (the user-level log, every project) and look for any `/* motomation · ... */` stamps. These are previous decisions you must not repeat.
 2. Look for `DESIGN.md` and `MOTION.md`. If they exist, they win over your defaults.
 3. Note installed packages (`gsap`, `lenis`, `three`, `motion`, `@rive-app/*`, `lottie-web`) and use what is already there.
 4. Note the font loading method, the CSS approach (Tailwind, CSS Modules, vanilla) and the router.
@@ -368,6 +369,18 @@ If you cannot access the web, say so explicitly, work from training data, and st
 **Test:** three references, three techniques with sources, the avoided pattern with why, the access line, and no decision traced only to the skill's defaults. If not, Step 1 doesn't start.
 
 ---
+
+### Memory check (mandatory, before Step 1)
+
+Memory lives at the user level (`~/.motomation/log.json`, every project), not in the project. Before designing, check it for similar briefs:
+
+`node scripts/memory.mjs similar --brief "<the brief, one line>" --category <category>`
+
+- **No log yet** (first build ever): no divergence required. Say so in `DESIGN.md` under `Divergence`.
+- **No similar brief:** say so, and continue.
+- **A similar prior build** (same category, or shared brief words): the new build must differ on **all five**: archetype, palette family, type pairing, motion language, signature move. Write in `DESIGN.md` under `Divergence` what you are diverging from (run, project, and the five values) and what you chose instead. Confirm with `node scripts/memory.mjs check --brief … --category … --archetype … --palette … --fonts … --motion … --signature …` (exit 2 = a repeat).
+
+Without a shell, read `~/.motomation/log.json` by hand and compare the five values. **Test:** does `DESIGN.md` have a `Divergence` section that names the prior build (or says there is none)? If not, Step 1 doesn't start.
 
 ### 1. Tension
 
@@ -468,12 +481,12 @@ Good signature moves are:
 
 Compare your plan against three things:
 1. **The AI-default list** in `gates/delivery-gate.md`. Count the matches.
-2. **Project memory (IDs and structure):** run
+2. **Memory (IDs and structure, every project):** run
    `node scripts/memory.mjs check --archetype <x> --signature <y> --tier <n> --sections hero,work,contact --type-scale <ratio>`.
-   It checks two things against the last 5 runs. First, exact IDs: an archetype or signature already used. Second, a **structural fingerprint**: layout family, type-scale bucket, section order, motion tier and signature type, scored 0–100%. A different archetype with the same rows layout, the same section order and the same kind of signature is still a repeat. At **≥ 70%** the script names the run you're rebuilding and the dimensions that match, and offers a mutation aimed at the heaviest one. Apply it (or justify the overlap in one line) and check again. Exit code 2 means a clash. `/invent` prints each draw's partial fingerprint and flags draws that rebuild a recent page. After delivery, `memory.mjs log` with the same flags stores the fingerprint. Without a shell, compare the five dimensions by hand against `.motomation/log.json`.
+   It checks the last 5 runs in the user-level log, from any project. First, exact IDs: an archetype or signature already used. Second, a **structural fingerprint**: layout family, type-scale bucket, section order, motion tier and signature type, scored 0–100%. A different archetype with the same rows layout, the same section order and the same kind of signature is still a repeat. At **≥ 70%** the script names the run you're rebuilding and the dimensions that match, and offers a mutation aimed at the heaviest one. Apply it (or justify the overlap in one line) and check again. Exit code 2 means a clash. `/invent` prints each draw's partial fingerprint and flags draws that rebuild a recent page. After delivery, `memory.mjs log` with the same flags stores the fingerprint. Without a shell, compare the five dimensions by hand against `~/.motomation/log.json`.
 3. **The obvious version:** write down what a template would do. Your plan must differ in at least **three** of: structure, type, colour, motion, signature, imagery.
 
-**Controlled reuse across separate projects.** Memory only knows its own project, so two projects (or two benchmark seeds) can land on the same archetype. That is allowed only as a documented mutation: the second use carries a different mutation **and** a different structural fingerprint (layout, tier or signature type differs), and the plan says so in one line: `Reuse : Letter again (used in <project>), mutated by remove-expected; signature type micro, not type`. Inside one project nothing changes: memory blocks the repeat, and the release gate still requires 3 different archetypes and signatures across 3 runs of the same brief.
+**Reuse across projects.** Memory now spans every project, so a repeat from another project is caught like one from this project. A deliberate reuse is allowed only for a dissimilar brief, as a documented mutation (a different mutation **and** a different structural fingerprint), stated in one line: `Reuse : Letter again (used in <project>), mutated by remove-expected; signature type micro, not type`. For a similar brief, the five-way divergence above always applies.
 
 **Test:** if a stranger saw your site next to the last one you made, would they think the same person made them on autopilot? If yes, mutate again.
 
@@ -3638,7 +3651,7 @@ You don't type the scores. Each axis is derived from one named check, and `scrip
 |---|---|---|---|
 | **C** | Did the concept survive the Restraint Gate? | `DESIGN.md` → "Restraint Gate record" → `Concept survived:` | `yes` → 5 · `yes, after N change(s)` → 5 − N (min 2) · `no` (replaced) → 1 |
 | **H** | 375 hierarchy test: display words fit (`w`), no overflow at 375, exactly one `h1`, no skipped heading levels, one largest text on the first 375px screen | measured by gate.mjs | 5 − issues (min 1) |
-| **S** | Is the archetype/signature unique across the last 5 runs, and how similar is the structural fingerprint? | `.motomation/log.json` (via `scripts/lib.mjs` fingerprints) + the stamp's archetype, signature, tier | both new and fingerprint < 50% → 5 · < 70% → 4 · one reused or ≥ 70% → 3 · both reused → 2 · identical → 1 |
+| **S** | Is the archetype/signature unique across the last 5 runs, and how similar is the structural fingerprint? | the memory log: `.motomation/log.json` next to the page or project, else the user-level `~/.motomation/log.json` (via `scripts/lib.mjs` fingerprints) + the stamp's archetype, signature, tier | both new and fingerprint < 50% → 5 · < 70% → 4 · one reused or ≥ 70% → 3 · both reused → 2 · identical → 1 |
 | **R** | How many things the Restraint Gate cut and logged | `DESIGN.md` → "Restraint Gate record" → `- Cut:` and `- Rejected animation:` lines | 1 + cuts + rejected animations (max 5). Four logged rejections → R5 |
 | **M** | Is the tier under budget? | measured by gate.mjs against the stamp's `tier`: pinned sections ≤ 2, WebGL canvases ≤ 1, JS (gzipped) ≤ the tier budget in `craft/performance.md`, reduced motion clean (`rm0`) | 5 − budget breaches (min 1); any `rm` failure caps M at 2 |
 | **V** | How many sections repeat an entrance pattern already used on the page? | measured by gate.mjs: each top-level section's entrance (fade, x, y, scale, clip, filter, or static) | 5 − repeats (min 1). Static sections don't count |
@@ -5160,6 +5173,11 @@ Wireframe as decoration on a product that has no structure to show.
 - <technique> (<source>): <used | not used, why>
 
 **Pattern being avoided:** <the overused pattern in this category> — <why it fails this brief>
+
+### Divergence
+<!-- Memory check (thinking/sequence.md): node scripts/memory.mjs similar --brief "…" --category … (user-level log, every project) -->
+- **Prior similar build:** <none: first build ever | none similar | run #n, <project>, <date>>
+- **Diverging from → chose:** archetype <x → y> · palette family <x → y> · type pairing <x → y> · motion language <x → y> · signature move <x → y>
 
 ### Decision trace
 <!-- Every design decision traces to the brief or a reference above. "Skill default" is not a source. -->

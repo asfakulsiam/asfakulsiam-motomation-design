@@ -213,7 +213,7 @@ Two layers, kept apart on purpose (details in `principles/restraint.md`):
 
 All scripts are Node.js (v18+) and zero-dependency, except `gate.mjs`, which needs Playwright (optional: without it the gate says "not verified" and exits 3). Run them from the skill folder.
 
-The memory log always belongs to the project, not the skill: `memory.mjs` walks up from the current folder to the nearest `package.json` or `.git` (skipping the skill's own folder) and uses `<project>/.motomation/log.json`. Pass `--project <dir>` when the project has neither marker or you want a different one.
+The memory log lives at the **user level**, shared by every project: `$MOTOMATION_HOME/log.json`, default `~/.motomation/log.json`. Every build in every project is logged there with its project and a short brief, so the same brief run twice (or in two projects) is caught. `--project <dir>` uses `<dir>/.motomation/log.json` instead, for tests and isolated runs; a project's own pre-2.9 `.motomation/log.json` is still read.
 
 ```bash
 node scripts/collide.mjs --n 3                  # draw 3 random concept collisions (real randomness)
@@ -221,9 +221,10 @@ node scripts/collide.mjs --category hotel --seed 42
 node scripts/search.mjs fonts "editorial serif warm"
 node scripts/search.mjs motion "pinned scrub" --tier 5
 node scripts/search.mjs signatures "cursor type"
-node scripts/memory.mjs recent                  # what this project already used
-node scripts/memory.mjs recent --project ../..  # same, for an explicit project folder
-node scripts/memory.mjs log --archetype ledger --signature letter-relay --fonts "Fraunces/Switzer"
+node scripts/memory.mjs recent                  # what every project already used (user-level log)
+node scripts/memory.mjs similar --brief "<brief>" --category <c>   # prior similar briefs → what to diverge from
+node scripts/memory.mjs recent --project ../..  # a per-project log, for tests
+node scripts/memory.mjs log --brief "<brief>" --category <c> --archetype ledger --palette "<name>" --fonts "Fraunces/Switzer" --motion "<language>" --signature letter-relay
 node scripts/contrast.mjs "#111111" "#F4F1EA"   # WCAG contrast check
 ```
 
@@ -250,5 +251,5 @@ Full behaviour of each command is in `commands/overview.md`. Critique output for
 - Put a stamp comment at the top of the main stylesheet or layout:
   `/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: <from gate.mjs> · gate: <from gate.mjs> */`
   The critique and gate segments are pasted from `node scripts/gate.mjs`, never typed. Each axis carries its trace, e.g. `H4[375:1]`. See `gates/delivery-gate.md`, Part 1.
-- After delivery, log the run: `node scripts/memory.mjs log ...` (or append to `.motomation/log.json` by hand).
+- After delivery, log the run to the user-level memory: `node scripts/memory.mjs log --brief … --category … --archetype … --palette … --fonts … --motion … --signature …` (or append to `~/.motomation/log.json` by hand).
 - End with: what you chose, what you rejected, and one thing to try next.

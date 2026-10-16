@@ -61,6 +61,18 @@ If you cannot access the web, say so explicitly, work from training data, and st
 
 ---
 
+## Memory check (mandatory, before Step 1)
+
+Memory lives at the user level (`~/.motomation/log.json`, every project), not in the project. Before designing, check it for similar briefs:
+
+`node scripts/memory.mjs similar --brief "<the brief, one line>" --category <category>`
+
+- **No log yet** (first build ever): no divergence required. Say so in `DESIGN.md` under `Divergence`.
+- **No similar brief:** say so, and continue.
+- **A similar prior build** (same category, or shared brief words): the new build must differ on **all five**: archetype, palette family, type pairing, motion language, signature move. Write in `DESIGN.md` under `Divergence` what you are diverging from (run, project, and the five values) and what you chose instead. Confirm with `node scripts/memory.mjs check --brief … --category … --archetype … --palette … --fonts … --motion … --signature …` (exit 2 = a repeat).
+
+Without a shell, read `~/.motomation/log.json` by hand and compare the five values. **Test:** does `DESIGN.md` have a `Divergence` section that names the prior build (or says there is none)? If not, Step 1 doesn't start.
+
 ## 1. Tension
 
 **Required before this step:** `gates/rules.md` has been read. State it in one line before the step starts:
@@ -160,12 +172,12 @@ Good signature moves are:
 
 Compare your plan against three things:
 1. **The AI-default list** in `gates/delivery-gate.md`. Count the matches.
-2. **Project memory (IDs and structure):** run
+2. **Memory (IDs and structure, every project):** run
    `node scripts/memory.mjs check --archetype <x> --signature <y> --tier <n> --sections hero,work,contact --type-scale <ratio>`.
-   It checks two things against the last 5 runs. First, exact IDs: an archetype or signature already used. Second, a **structural fingerprint**: layout family, type-scale bucket, section order, motion tier and signature type, scored 0–100%. A different archetype with the same rows layout, the same section order and the same kind of signature is still a repeat. At **≥ 70%** the script names the run you're rebuilding and the dimensions that match, and offers a mutation aimed at the heaviest one. Apply it (or justify the overlap in one line) and check again. Exit code 2 means a clash. `/invent` prints each draw's partial fingerprint and flags draws that rebuild a recent page. After delivery, `memory.mjs log` with the same flags stores the fingerprint. Without a shell, compare the five dimensions by hand against `.motomation/log.json`.
+   It checks the last 5 runs in the user-level log, from any project. First, exact IDs: an archetype or signature already used. Second, a **structural fingerprint**: layout family, type-scale bucket, section order, motion tier and signature type, scored 0–100%. A different archetype with the same rows layout, the same section order and the same kind of signature is still a repeat. At **≥ 70%** the script names the run you're rebuilding and the dimensions that match, and offers a mutation aimed at the heaviest one. Apply it (or justify the overlap in one line) and check again. Exit code 2 means a clash. `/invent` prints each draw's partial fingerprint and flags draws that rebuild a recent page. After delivery, `memory.mjs log` with the same flags stores the fingerprint. Without a shell, compare the five dimensions by hand against `~/.motomation/log.json`.
 3. **The obvious version:** write down what a template would do. Your plan must differ in at least **three** of: structure, type, colour, motion, signature, imagery.
 
-**Controlled reuse across separate projects.** Memory only knows its own project, so two projects (or two benchmark seeds) can land on the same archetype. That is allowed only as a documented mutation: the second use carries a different mutation **and** a different structural fingerprint (layout, tier or signature type differs), and the plan says so in one line: `Reuse : Letter again (used in <project>), mutated by remove-expected; signature type micro, not type`. Inside one project nothing changes: memory blocks the repeat, and the release gate still requires 3 different archetypes and signatures across 3 runs of the same brief.
+**Reuse across projects.** Memory now spans every project, so a repeat from another project is caught like one from this project. A deliberate reuse is allowed only for a dissimilar brief, as a documented mutation (a different mutation **and** a different structural fingerprint), stated in one line: `Reuse : Letter again (used in <project>), mutated by remove-expected; signature type micro, not type`. For a similar brief, the five-way divergence above always applies.
 
 **Test:** if a stranger saw your site next to the last one you made, would they think the same person made them on autopilot? If yes, mutate again.
 

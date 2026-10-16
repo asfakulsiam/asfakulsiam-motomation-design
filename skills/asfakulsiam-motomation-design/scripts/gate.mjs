@@ -73,7 +73,7 @@ import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
 import os from "node:os";
 import { statfsSync } from "node:fs";
-import { projectRoot } from "./memory.mjs";
+import { projectRoot, userDir } from "./memory.mjs";
 import { copyRules, seoRules, perfRules, secRules, parseHeadersFile, rulesAxes } from "./rulesets.mjs";
 
 export const WIDTHS = [375, 390, 768, 1440];
@@ -1135,7 +1135,7 @@ export async function scan(target, browser, opts = {}) {
     // so a shipped page's DESIGN.md and log.json are found in a fresh clone without flags
     const own = !/^https?:/.test(target) && !statSync(resolve(target)).isDirectory() ? join(local, basename(resolve(target)).replace(/\.html?$/, "")) : null;
     const designFile = opts.design || [join(local, "DESIGN.md"), ...(own ? [join(own, "DESIGN.md")] : []), join(process.cwd(), "DESIGN.md")].find((f) => existsSync(f));
-    const logFile = opts.log || [join(local, ".motomation/log.json"), join(local, "log.json"), ...(own ? [join(own, "log.json"), join(own, ".motomation/log.json")] : []), join(projectRoot(local), ".motomation/log.json"), join(projectRoot(), ".motomation/log.json")].find((f) => existsSync(f));
+    const logFile = opts.log || [join(local, ".motomation/log.json"), join(local, "log.json"), ...(own ? [join(own, "log.json"), join(own, ".motomation/log.json")] : []), join(projectRoot(local), ".motomation/log.json"), join(projectRoot(), ".motomation/log.json"), join(userDir(), "log.json")].find((f) => existsSync(f)); // last: the user-level log shared by every project
     const record = readRecord(designFile); const mem = await memoryAxis(logFile, meta, st.sectionIds);
     const critique = critiqueOf({ hier: w.hier, words375: w.fails.length, overflow375: overflowFails.filter((x) => x.width === 375).length, motionFails: counts.motion, st, tier: meta.tier, record, mem }); const critique6 = critique; const critiqueFull = `${critique6} ${qAxis(mq)} ${aAxis(ax)}`;
     // coverage: the worst width decides; more than SKIP_WARN_PCT skipped at any width means the page was not measured, not passed

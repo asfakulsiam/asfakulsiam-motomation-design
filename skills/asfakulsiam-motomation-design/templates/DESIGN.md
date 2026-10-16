@@ -24,6 +24,11 @@
 
 **Pattern being avoided:** <the overused pattern in this category> — <why it fails this brief>
 
+## Divergence
+<!-- Memory check (thinking/sequence.md): node scripts/memory.mjs similar --brief "…" --category … (user-level log, every project) -->
+- **Prior similar build:** <none: first build ever | none similar | run #n, <project>, <date>>
+- **Diverging from → chose:** archetype <x → y> · palette family <x → y> · type pairing <x → y> · motion language <x → y> · signature move <x → y>
+
 ## Decision trace
 <!-- Every design decision traces to the brief or a reference above. "Skill default" is not a source. -->
 | Decision | Traces to |

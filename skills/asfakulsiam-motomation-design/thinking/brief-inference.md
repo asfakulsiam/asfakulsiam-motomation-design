@@ -30,7 +30,7 @@ Mark anything that would change the design but can't be inferred:
 ## Read the existing project
 
 If there is code already:
-1. Look for `.motomation/log.json` and any `/* motomation · ... */` stamps. These are previous decisions you must not repeat.
+1. Run `node scripts/memory.mjs similar --brief "<brief>" --category <c>` (the user-level log, every project) and look for any `/* motomation · ... */` stamps. These are previous decisions you must not repeat.
 2. Look for `DESIGN.md` and `MOTION.md`. If they exist, they win over your defaults.
 3. Note installed packages (`gsap`, `lenis`, `three`, `motion`, `@rive-app/*`, `lottie-web`) and use what is already there.
 4. Note the font loading method, the CSS approach (Tailwind, CSS Modules, vanilla) and the router.

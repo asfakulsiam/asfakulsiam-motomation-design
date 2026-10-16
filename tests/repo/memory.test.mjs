@@ -1,0 +1,24 @@
+// v2.9.0 Phase 3: memory lives at the user level and forces divergence for similar briefs across projects.
+import { spawnSync } from "node:child_process";
+import { mkdtempSync, mkdirSync, existsSync } from "node:fs";
+import { join, resolve, dirname } from "node:path";
+import { tmpdir } from "node:os";
+import { fileURLToPath } from "node:url";
+const S = resolve(dirname(fileURLToPath(import.meta.url)), "../../skills/asfakulsiam-motomation-design/scripts/memory.mjs");
+const home = mkdtempSync(join(tmpdir(), "moto-home-")); const A = mkdtempSync(join(tmpdir(), "moto-a-")); const B = mkdtempSync(join(tmpdir(), "moto-b-"));
+for (const d of [A, B]) mkdirSync(join(d, ".git"));
+const run = (cwd, ...args) => spawnSync(process.execPath, [S, ...args], { cwd, env: { ...process.env, MOTOMATION_HOME: home }, encoding: "utf8" });
+let bad = 0; const say = (ok, msg) => { console.log(`${ok ? "ok  " : "FAIL"} ${msg}`); if (!ok) bad++; };
+const brief = ["--brief", "artisan bakery in Dhaka with preorders", "--category", "restaurant"];
+say(/first build, no divergence required/.test(run(A, "similar", ...brief).stdout), "empty log: no divergence required");
+run(A, "log", ...brief, "--archetype", "ledger", "--palette", "Paper & Vermilion", "--fonts", "Fraunces/Switzer", "--motion", "scrubbed reveals", "--signature", "letter-relay");
+say(existsSync(join(home, "log.json")) && !existsSync(join(A, ".motomation")), "log is written at the user level, not in the project");
+const sim = run(B, "similar", "--brief", "bakery site for a Dhaka bakery, cake preorders", "--category", "restaurant").stdout;
+say(/similar to run #1/.test(sim) && /palette family: light-red/.test(sim), "a similar brief in another project is found, with the five values to diverge from");
+const same = run(B, "check", "--brief", "bakery site, cake preorders", "--category", "restaurant", "--archetype", "ledger", "--palette", "Paper & Vermilion", "--fonts", "Fraunces/Switzer", "--motion", "scrubbed reveals", "--signature", "letter-relay");
+say(same.status === 2 && (same.stdout.match(/repeats run #1/g) || []).length === 5, "repeating all five on a similar brief fails (exit 2, five repeats)");
+const div = run(B, "check", "--brief", "bakery site, cake preorders", "--category", "restaurant", "--archetype", "lookbook", "--palette-family", "dark-green", "--fonts", "Instrument Serif/Inter Tight", "--motion", "spring settles", "--signature", "crumb-trail");
+say(div.status === 0 && (div.stdout.match(/differs from run #1/g) || []).length === 5, "diverging on all five passes");
+say(/no prior build with a similar brief/.test(run(B, "similar", "--brief", "observatory night tours booking", "--category", "event").stdout), "a dissimilar brief needs no divergence");
+say(/No runs logged yet/.test(run(B, "recent", "--project", B).stdout), "--project <dir> still uses a per-project log");
+console.log(bad ? `\n${bad} failure(s)` : "\nmemory spans projects and forces divergence"); process.exit(bad ? 1 : 0);

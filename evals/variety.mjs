@@ -58,9 +58,9 @@ out.push(`Distinct fingerprints: ${distinctFp}/${draws.length}. Repeated archety
   const proj = mkdtempSync(join(tmpdir(), "variety-")); writeFileSync(join(proj, "package.json"), "{}");
   const runsC = [];
   for (const seed of seeds) {
-    const r = spawnSync(process.execPath, [join(SKILL, "scripts/collide.mjs"), "--seed", String(seed), "--n", "1", "--category", category, "--exclude-recent", "--json"], { encoding: "utf8", cwd: proj });
+    const r = spawnSync(process.execPath, [join(SKILL, "scripts/collide.mjs"), "--seed", String(seed), "--n", "1", "--category", category, "--exclude-recent", "--json"], { encoding: "utf8", cwd: proj, env: { ...process.env, MOTOMATION_HOME: join(proj, ".motomation") } }); // isolated memory (v2.9: memory is user-level by default)
     const d = JSON.parse(r.stdout).draws[0];
-    spawnSync(process.execPath, [join(SKILL, "scripts/memory.mjs"), "log", "--archetype", d.archetype, "--mutation", d.mutation.id, "--signature", d.signature_seed.id, "--tier", String(d.fingerprint.tier || 2)], { encoding: "utf8", cwd: proj });
+    spawnSync(process.execPath, [join(SKILL, "scripts/memory.mjs"), "log", "--archetype", d.archetype, "--mutation", d.mutation.id, "--signature", d.signature_seed.id, "--tier", String(d.fingerprint.tier || 2)], { encoding: "utf8", cwd: proj, env: { ...process.env, MOTOMATION_HOME: join(proj, ".motomation") } });
     runsC.push({ seed, archetype: d.archetype, mutation: d.mutation.id, signature: d.signature_seed.id, fp: d.fingerprint });
   }
   out.push(`## C. Same project, memory on (\`collide --exclude-recent\` + \`memory log\` after each run)`, "");
