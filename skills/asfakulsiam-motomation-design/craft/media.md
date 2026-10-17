@@ -1,6 +1,6 @@
 # Media
 
-A visually rich site needs real visual material, not generic gradients, empty image boxes and arbitrary placeholders. A reachable URL is not a licence, though, and a direct image link is not a promise that the file stays online or free for commercial use. This file covers how to find media, track where it came from, and make clear what must be replaced before launch. Referenced from `thinking/sequence.md` ("Required output: a sellable template").
+A visually rich site needs real visual material, not generic gradients, empty image boxes and arbitrary placeholders. A reachable URL is not a licence, though, and a direct image link is not a promise that the file stays online or free for commercial use. This file covers how to find media, track where it came from, and make clear what must be replaced before launch. Referenced from `thinking/sequence.md` ("Required output: by delivery mode"); checked by `scripts/completeness.mjs` (gate axis X).
 
 ## Media selection
 
@@ -26,7 +26,7 @@ Starting points:
 | Lucide — https://lucide.dev | icons |
 | Feather — https://feathericons.com | icons |
 
-These are **discovery sources**, not blanket guarantees. None of them guarantees, for every asset, that it is licence-eligible for this project, free of restrictions, at a stable URL, or available without limits.
+Other legitimate sources fit the asset type too (the client's own library, a museum's open-access collection, a font or icon set's official repository), on the same terms. These are **discovery sources**, not blanket guarantees. None of them guarantees, for every asset, that it is licence-eligible for this project, free of restrictions, at a stable URL, or available without limits.
 
 - **Verify each selected asset's licence and usage terms** when possible, on the asset's own page and the source's current licence page. Respect attribution, commercial-use restrictions, redistribution rules, hotlinking restrictions and any other condition.
 - **Prefer stable integration**: download the file into the project, or use the source's supported method, when the terms permit it. Do not assume an image URL stays available.
@@ -56,9 +56,19 @@ When a file cannot reasonably be renamed (a CMS path, a framework-imposed name),
 
 Do not label a properly licensed, production-approved asset as disposable just because it came from a stock site.
 
+## Placeholders by delivery mode
+
+The delivery mode (`templates/TEMPLATE.md`) decides how far temporary media may go; for media, "no placeholders" (`SKILL.md`, law 5) means no undocumented or disguised placeholder.
+
+| Mode | Temporary assets |
+|---|---|
+| Design exploration | allowed when needed, each identified as a placeholder in `MEDIA.md` with its replacement need; never shown as approved |
+| Functional frontend | as above; the handoff names what must be replaced before launch |
+| Production template | production-bound assets have suitable rights or documented approval; anything still unresolved (rights, attribution, replacement) stays visible in `MEDIA.md` and `README.md`, and the build is not called production-ready |
+
 ## Required `MEDIA.md`
 
-Every generated website project has a `MEDIA.md` in its root. At least these columns:
+Every generated website project has a `MEDIA.md` in its root, in every delivery mode. At least these columns (add `Used where`, `Creator / provider` or `Notes` when they help; skip metadata that doesn't apply):
 
 ```markdown
 | File or asset | Source URL | License / usage status | Placeholder? | Replace before production? |
@@ -75,6 +85,8 @@ Every generated website project has a `MEDIA.md` in its root. At least these col
 - A build with no external media still ships `MEDIA.md`: a short inventory stating that no external media assets were used.
 
 The root `README.md` explains the media handoff and names every unverified or temporary asset that must be reviewed before production.
+
+**What the gate checks** (`scripts/completeness.mjs`, axis X, whenever `DESIGN.md` has a `Scope` section, i.e. website creation): `MEDIA.md` exists and cannot be excused; it has the inventory table, or states that no external media assets were used; each row has a source, a licence / usage status (`unknown` is allowed) and yes / no in both last columns; a placeholder is marked for replacement; an `unknown` or `unverified` licence is marked for replacement; a `placeholder-…` file or a `PLACEHOLDER:` comment in the project is listed; and `README.md` points to `MEDIA.md` when anything still needs replacing. Pending replacements print a not-production-ready warning. It never decides whether a licence is valid. A `Scope` with no `**Delivery mode:**` line (a build from before delivery modes) only warns on a missing `MEDIA.md`, so a fix there doesn't fail. Narrow maintenance (the light route) writes no `Scope` section of its own; when it adds or replaces media in a project that has a `MEDIA.md`, add or update the row by hand.
 
 ## Media rules
 

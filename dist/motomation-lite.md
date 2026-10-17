@@ -18,24 +18,24 @@ If there is even a small chance this skill applies to a web design task, use it.
 
 ### The five laws
 
-1. **Think before you draw.** Run the Thinking Sequence before writing any UI code. No exceptions for "simple" pages.
+1. **Think before you draw.** Run the Thinking Sequence before writing UI code for any new design work (a new site, brand, art direction, product experience or distinctive redesign), even one page, scaled to the job. Only narrow maintenance inside an established design takes the light route ("Routes"). Page count never decides.
 2. **Type is chosen first, in one of two modes.** Pick the mode from the brief, write it in the plan with the reason, and design fully inside it. Neither mode is a fallback for the other.
    - **HOUSE STYLE (typography-led).** Default for portfolio, studio, editorial and brand work. Type is the primary image: set it large, make it do work, let one word carry the screen.
    - **SERVICE STYLE (information-led).** Default for dashboards, SaaS product and admin UIs, and dense service UIs (booking, checkout, catalogues with filters, data tools). The visitor came to read, compare or act: type leads by clarity, with a compact scale, tabular figures and dense, legible rows; no hero-scale display word.
    - Both modes keep the same standards: size floors, contrast, measure and a reasoned choice of face. A brief that sits between them (a SaaS marketing site, a hotel) picks one and says why. Detail: `principles/typography.md`.
 3. **Motion must mean something.** Every animation answers "what does this tell the user?" If the answer is "nothing", delete it.
 4. **Actively reduce repetition.** Draw constraints from `scripts/collide.mjs` (no archetype or signature repeats inside a run) and compare your plan's structural choices (archetype, signature, type, palette, tier) against `.motomation/log.json` with `scripts/memory.mjs check`. This detects and reduces repetition inside one project; it cannot guarantee novelty across projects that don't share a log, so say so when it matters.
-5. **Ship complete, accessible, fast.** No placeholders, no lorem ipsum, no broken reduced-motion, no fake numbers.
+5. **Ship complete, accessible, fast.** No placeholder copy, no lorem ipsum, no broken reduced-motion, no fake numbers. Temporary media only when listed in `MEDIA.md` as a placeholder (`craft/media.md`); not production-ready while one is unresolved.
 
 ---
 
 ### The Thinking Sequence (summary; full version in `thinking/sequence.md`)
 
-Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it.
+Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it. Light route (narrow maintenance only): inspect the existing design, change only what the cause needs, run the gate.
 
 0. **Stack**: if the brief (or the existing project) names a stack, use it. Otherwise **Next.js (App Router, TypeScript, Tailwind)** for anything with routes or data, plain HTML for a single static page; never Astro or Vite for e-commerce unless the brief demands it. Every dependency passes the three checks in `craft/stack.md` (active, not deprecated, licence free for commercial use). Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
-0.5. **Research (mandatory)**: leave the skill before designing. Live award sources (last 6 months) and `references/sources/`, concepts only. Record three references, three techniques with sources, and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference, never to the skill's defaults alone. No web: say so and state the limitation. See `craft/research.md`.
-0.7. **Derive the scope**: what a complete site of this type serves (routes, functions, states, legal pages for the region, edge cases, admin, skeletons), derived from research and knowledge, never a fixed list; each item requested / required / optional / not required with a reason, in `DESIGN.md` under `Scope`. Gate axis X (`scripts/completeness.mjs`) checks it.
+0.5. **Research (mandatory)**: leave the skill before designing. First 3–5 real sites of the exact type (or the closest, gap stated): routes, functions, states, flows, admin, legal; each finding observed, inferred or unverified, nothing hidden claimed. Then, separately, design inspiration: live award sources (last 6 months) and `references/sources/`, concepts only (another industry's site is inspiration, not a type reference). Record the type research, three references, three techniques and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference. No web: say so. See `craft/research.md`.
+0.7. **Derive the scope**: what a complete site of this type serves (routes, functions, states, journeys, legal and support pages, edge cases, admin, skeletons), from the brief, the type research, industry and legal expectations, the delivery mode and judgment, never a fixed list; a competitor's feature is evidence, not a requirement. A category recipe is optional design guidance; the derived scope wins. Each item requested / required / optional / not required with a reason, in `DESIGN.md` under `Scope`, with the delivery mode. Axis X (`scripts/completeness.mjs`) checks it.
 
 ---
 
@@ -79,13 +79,12 @@ Higher tiers include all lower-tier craft. Choose the **lowest tier that deliver
 
 - **Six checkpoints** (`thinking/sequence.md`): Stack, Research and concept, Scope, Build plan, Design review, Gate and ship. At each, draft, show the reasoning, stop and wait for an explicit answer (approve, redirect, alternatives, override). Never re-ask an answered question.
 - Explain each decision in its checkpoint block, then wait. Keep prose short. The work is the answer.
-- Every build ships a **sellable template** (`templates/TEMPLATE.md`): README (what is real, what is demo, run, deploy; "All data in data/ is demo. Replace with real data before launch."), DESIGN, MOTION, SCHEMA, DATA, CRITIQUE, GATE, LICENSE (MIT), CHANGELOG (v0.1.0), `.env.example`, a demo-labelled `data/` typed by its `schema.json`, `middleware.ts`, comments in every non-trivial file. It runs with `npm install && npm run dev` and no configuration. `SCHEMA.md` is written with `DESIGN.md`, not after.
+- **Deliver in the mode asked for** (`templates/TEMPLATE.md`; inferred when unstated): **Design exploration** (concept, route map and states, design system, motion direction, a credible responsive prototype and preview; no backend), **Functional frontend** (working routes, interactions and UI states on demo-labelled mock data; no claimed integrations), or **Production template** (the **sellable template**: README with "All data in data/ is demo. Replace with real data before launch.", DESIGN, MOTION, SCHEMA, DATA, CRITIQUE, GATE, LICENSE, CHANGELOG, `.env.example`, `data/` with `schema.json`, `middleware.ts`; runs with `npm install && npm run dev`). Every mode ships `MEDIA.md` and keeps research, quality, accessibility, reduced motion and the gate. A complete prototype is not production-ready.
 - **Micro-states ship:** buttons (default, hover, focus, active, disabled, loading), forms (default, validation error, submit loading, success, server error), lists (empty, loading, error, filled), images (loading, loaded, error), async actions (idle, pending, success, error). The gate warns on missing ones (`thinking/sequence.md`).
-- Deliver complete files. No `// rest of code here`, no TODOs, no placeholder images without a clear `alt` and a sourcing note.
+- Deliver complete files. No `// rest of code here`, no TODOs. Media from a legitimate source, licence verified where possible (a URL is not a licence); a temporary asset is named `placeholder-…`, has a clear `alt` and a `MEDIA.md` row marked for replacement. A verified, approved asset is not a placeholder.
 - Put a stamp comment at the top of the main stylesheet or layout:
   `/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: <from gate.mjs> · gate: <from gate.mjs> */`
   The critique and gate segments are pasted from `node scripts/gate.mjs`, never typed. Each axis carries its trace, e.g. `H4[375:1]`. See `gates/delivery-gate.md`, Part 1.
-- After delivery, log the run to the user-level memory: `node scripts/memory.mjs log --brief … --category … --archetype … --palette … --fonts … --motion … --signature …` (or append to `~/.motomation/log.json` by hand).
 - End with: what you chose, what you rejected, and one thing to try next.
 
 ## Without a shell
@@ -145,11 +144,6 @@ Mutation operators (or draw one with `node scripts/collide.mjs`):
 - **Slow it down / speed it up.** One section moves at film speed while the rest stay still.
 - **Borrow a rule from print.** Marginalia, footnotes, a folio, a masthead, a colophon.
 
-**WRONG / RIGHT** (brief: "a 1962 family bakery in Old Dhaka; it should feel like the shop"):
-
-- **WRONG:** `Archetype: The Ledger. Mutation: invert-axis.` Two rows copied from the CSVs; it would read the same for a law firm.
-- **RIGHT:** `Structure: the shop's order book (Ledger as reference: dated rows, running totals). Each section is a day's page, bakes as line items. Mutation (invert-axis as the constraint): the book reads back in time, today first, the 1962 opening entry last.` The rows set the constraints; the brief supplied every specific.
-
 **Test:** name the original structure, then name the rule you broke. If you can't name the broken rule, you haven't mutated it. If your plan line could be pasted onto a different brief unchanged, you copied a row instead of deriving.
 
 ---
@@ -196,8 +190,6 @@ Compare your plan against four things:
    It checks the last 5 runs in the user-level log, from any project. First, exact IDs: an archetype or signature already used. A repeated motion tier is only a warning ("Tier 2 used in the last N builds. This is allowed if the brief requires it. State the reason in DESIGN.md."): the tier follows the brief, so it is never forced to change. A repeated palette family is also a warning, and so is a collision source drawn in the last 5 builds (`memory.mjs log --collision "<source>"`; `collide.mjs --exclude-recent` skips those sources). Second, a **structural fingerprint**: layout family, type-scale bucket, section order, motion tier and signature type, scored 0–100%. A different archetype with the same rows layout, the same section order and the same kind of signature is still a repeat. At **≥ 70%** the script names the run you're rebuilding and the dimensions that match, and offers a mutation aimed at the heaviest one. Apply it (or justify the overlap in one line) and check again. Exit code 2 means a clash. `/invent` prints each draw's partial fingerprint and flags draws that rebuild a recent page. After delivery, `memory.mjs log` with the same flags stores the fingerprint. Without a shell, compare the five dimensions by hand against `~/.motomation/log.json`.
 3. **Earlier builds, measured (after the build):** the plan is checked here; the result is checked by `node scripts/originality.mjs <this build> <earlier builds for unrelated briefs>`, axis O of `gates/delivery-gate.md`. It scores structure, composition, image treatment, typography, interaction and signature move from 0 to 1 against each earlier build. Any axis at or above **0.4** means this brief came out in the same shape as an unrelated one: change that axis and re-run. The memory check compares what you intended; this compares what the browser renders.
 4. **The obvious version:** write down what a template would do. Your plan must differ in at least **three** of: structure, type, colour, motion, signature, imagery.
-
-**Reuse across projects.** Memory now spans every project, so a repeat from another project is caught like one from this project. A deliberate reuse is allowed only for a dissimilar brief, as a documented mutation (a different mutation **and** a different structural fingerprint), stated in one line: `Reuse : Letter again (used in <project>), mutated by remove-expected; signature type micro, not type`. For a similar brief, the five-way divergence above always applies.
 
 **Test:** if a stranger saw your site next to the last one you made, would they think the same person made them on autopilot? If yes, mutate again.
 
@@ -275,7 +267,7 @@ The budgets hold either way: one signature move, one accent moment per screen, o
 - [ ] Concept sentence and signature move are visible in the first screen
 - [ ] Scope: `node scripts/completeness.mjs <project>` (axis X) prints every line `n/n`; each excused item has its reason
 - [ ] Micro-states: no ⚠ left in the gate's micro-states block, or each one explained in `GATE.md`
-- [ ] Template: the build has the `templates/TEMPLATE.md` shape (README with the demo line, DESIGN, MOTION, SCHEMA, DATA, CRITIQUE, GATE, LICENSE, CHANGELOG, `.env.example`, demo-labelled `data/`, `middleware.ts`) and starts with `npm install && npm run dev` and no `.env`; every section `id` has a row in the `SCHEMA.md` section contract, every field shown is in the data model, every route is listed
+- [ ] Template: the files the delivery mode requires (`templates/TEMPLATE.md`), `MEDIA.md` always; a production template starts with `npm install && npm run dev` and no `.env`; every section `id` has a `SCHEMA.md` row when the mode has one
 - [ ] Type: display face chosen with a reason; body size and measure within `gates/rules.md` (Hierarchy); `text-wrap: balance` on headings
 - [ ] Colour: all text pairs verified (`node scripts/contrast.mjs` while designing, `node scripts/gate.mjs` on the build); accent within `gates/rules.md` (Contrast)
 - [ ] Layout: one deliberate grid break per screen, recomposed (not squeezed) on mobile

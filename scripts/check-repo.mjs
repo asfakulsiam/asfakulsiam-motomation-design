@@ -396,6 +396,24 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   if (/v2 is the current result/i.test(sum)) fail("docs/benchmark-summary.md still says v2 is the current result");
 }
 
+// 14. Workflow policy stays intact in the sources and both dist editions (routing, exact-type research, scope over
+//     category recipes, media, delivery modes). Stable phrases only, not whole paragraphs.
+{
+  const RECIPE_HEAD = "> This recipe is design guidance for the pages it names. It is";
+  for (const f of readdirSync(join(SKILL, "categories")).filter((f) => f.endsWith(".md") && f !== "README.md")) {
+    const t = readFileSync(join(SKILL, "categories", f), "utf8");
+    if (!t.startsWith(RECIPE_HEAD) || t.split("This recipe is design guidance for the pages it names").length !== 2) fail(`categories/${f}: must open with the scope-precedence block, exactly once`);
+  }
+  const src = (p) => readFileSync(join(SKILL, p), "utf8");
+  if (!/Page count never decides/.test(src("SKILL.md")) || !/Page count never decides the route/.test(src("thinking/sequence.md"))) fail("SKILL.md and thinking/sequence.md must say that page count never decides the route");
+  for (const p of ["SKILL.md", "thinking/sequence.md", "commands/overview.md"]) if (/one page or a small fix/i.test(src(p))) fail(`${p}: "one page or a small fix" lets new design work skip research; the light route is narrow maintenance only`);
+  if (!/3–5 real websites/.test(src("thinking/sequence.md")) || !/3–5 real websites/.test(src("craft/research.md"))) fail("Step 0.5 and craft/research.md must require 3–5 real websites of the exact type");
+  const POLICY = [/Page count never decides/, /exact type/, /observed, inferred or unverified/, /derived scope wins/, /MEDIA\.md/, /a URL is not a licence/, /Design exploration/, /Functional frontend/, /Production template/, /not production-ready/];
+  for (const d of ["dist/motomation-design.md", "dist/motomation-lite.md"]) { const t = readFileSync(join(ROOT, d), "utf8"); for (const re of POLICY) if (!re.test(t)) fail(`${d} lost a policy rule (${re.source}); fix the source or the build script, then regenerate`); }
+  const { TEMPLATE_FILES, MODE_FILES } = await import("../skills/asfakulsiam-motomation-design/scripts/completeness.mjs");
+  if (!TEMPLATE_FILES.some((a) => a[0] === "MEDIA.md") || !Object.values(MODE_FILES).every((l) => l.includes("MEDIA.md"))) fail("scripts/completeness.mjs must require MEDIA.md in every delivery mode");
+}
+
 warn.forEach((w) => console.warn(`warn: ${w}`));
 // workflow hygiene (v2.5.0, C10): timeouts on every job, npm and Playwright caches where they are used
 { const W = join(ROOT, ".github/workflows"); if (existsSync(W)) for (const f of readdirSync(W).filter((f) => /\.ya?ml$/.test(f))) workflowProblems(`.github/workflows/${f}`, readFileSync(join(W, f), "utf8")).forEach(fail); }

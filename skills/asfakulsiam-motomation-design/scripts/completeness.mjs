@@ -6,6 +6,13 @@
 // The deliverable shape the skill itself requires (templates/TEMPLATE.md) is checked too, as the "Template" line:
 // the files, the README demo line, demo labels on every data/ entry, .env.example covering every env var the code
 // reads, and a dev script for zero-configuration runs.
+// Delivery mode (templates/TEMPLATE.md → Delivery modes), read from "**Delivery mode:**" in the Scope section, decides
+// which template files are required: design exploration < functional frontend < production template (the default when
+// the line is missing, so older builds are checked as before). Every mode requires MEDIA.md (craft/media.md), checked
+// for a usable inventory, honest placeholder and licence status, and a README pointer when assets still need replacing.
+// Narrow maintenance (the light route) writes no Scope section, so the gate never runs X, or this media check, on it.
+// A Scope with no Delivery mode line predates modes: a missing MEDIA.md there is a warning, so a fix on an older build
+// doesn't fail for an inventory it never had; every build that states its mode must ship MEDIA.md.
 //
 // Usage:
 //   node scripts/completeness.mjs <project-dir | path/to/DESIGN.md> [--json]
@@ -34,18 +41,33 @@ const VERB = { route: "required present", function: "present", state: "defined",
 export const TEMPLATE_FILES = [
   ["README.md"], ["DESIGN.md"], ["MOTION.md"], ["SCHEMA.md"], ["DATA.md"], ["CRITIQUE.md"], ["GATE.md"], ["LICENSE", "LICENSE.md"],
   ["CHANGELOG.md"], [".env.example"], ["middleware.ts", "src/middleware.ts", "middleware.js", "src/middleware.js"], ["data/"], ["data/schema.json", "schema.json"],
+  ["MEDIA.md"],
 ];
+// files each delivery mode requires (first name of each TEMPLATE_FILES entry); production template requires them all
+const EXPLORATION = ["README.md", "DESIGN.md", "MOTION.md", "CRITIQUE.md", "GATE.md", "MEDIA.md"];
+export const MODE_FILES = {
+  "design exploration": EXPLORATION,
+  "functional frontend": [...EXPLORATION, "SCHEMA.md", "DATA.md", "data/", "data/schema.json"],
+  "production template": TEMPLATE_FILES.map((a) => a[0]),
+};
+export function modeOf(raw) {
+  if (!raw) return { mode: "production template", stated: false };
+  const s = raw.toLowerCase();
+  const mode = /explor/.test(s) ? "design exploration" : /frontend/.test(s) ? "functional frontend" : /production|template/.test(s) ? "production template" : null;
+  return mode ? { mode, stated: true } : { mode: "production template", stated: true, invalid: raw };
+}
 
 function scopeTable(md) {
   const i = md.search(/^##\s+Scope\b/m); if (i < 0) return null;
   const body = md.slice(i).split("\n").slice(1); const end = body.findIndex((l) => /^##\s/.test(l)); const sec = (end < 0 ? body : body.slice(0, end)).join("\n");
   const admin = (/\*\*Admin panel:\*\*\s*([a-z]+)/i.exec(sec) || /Admin panel:\s*([a-z]+)/i.exec(sec) || [])[1] || null;
   const type = (/\*\*Site type:\*\*\s*([^\n]+)/i.exec(sec) || /Site type:\s*([^\n]+)/i.exec(sec) || [])[1]?.trim() || null;
+  const mode = (/\*\*Delivery mode:\*\*\s*([^\n]+)/i.exec(sec) || /Delivery mode:\s*([^\n]+)/i.exec(sec) || [])[1]?.trim() || null;
   const rows = sec.split("\n").filter((l) => /^\s*\|/.test(l)).map((l) => l.trim().replace(/^\||\|$/g, "").split("|").map((c) => c.trim()));
   const head = rows.findIndex((r) => r[0] && /^kind$/i.test(r[0]));
   const items = rows.slice(head + 1).filter((r) => r.length >= 3 && !/^-+$/.test(r[0].replace(/:/g, "")) && r[0] && !/^<.*>$/.test(r[1] || ""))
     .map((r) => ({ kind: r[0].toLowerCase().replace(/s$/, "").replace(/^edge case$|^edge-case$/, "edge"), item: r[1].replace(/^`|`$/g, ""), mark: r[2], evidence: (r[3] || "").replace(/^`|`$/g, "") }));
-  return { admin, type, items };
+  return { admin, type, mode, items };
 }
 function markOf(m) {
   const s = m.toLowerCase();
@@ -120,11 +142,53 @@ function warnings(root) {
   return w;
 }
 
+// MEDIA.md (craft/media.md): a usable inventory, honest placeholder / licence status, every placeholder documented.
+// Deterministic text checks only; it never decides whether a licence is valid, it only refuses contradictions.
+const yes = (v) => /^(yes|y|true)\b/i.test(v); const no = (v) => /^(no|n|false)\b/i.test(v);
+export function mediaChecks(root) {
+  const f = join(root, "MEDIA.md"); if (!existsSync(f)) return { problems: [], unresolved: 0 }; // the file itself is a template row
+  const md = readFileSync(f, "utf8"); const problems = []; let unresolved = 0;
+  const rows = md.split("\n").filter((l) => /^\s*\|/.test(l)).map((l) => l.trim().replace(/^\||\|$/g, "").split("|").map((c) => c.trim()));
+  const hi = rows.findIndex((r) => r.some((c) => /asset|file/i.test(c)) && r.some((c) => /source/i.test(c)) && r.some((c) => /licen[cs]e|usage/i.test(c)) && r.some((c) => /placeholder/i.test(c)) && r.some((c) => /replace/i.test(c)));
+  if (hi < 0) {
+    if (!/no external media/i.test(md)) problems.push("MEDIA.md has no inventory table (File or asset | Source URL | License / usage status | Placeholder? | Replace before production?) and does not state that no external media assets were used");
+  } else {
+    const h = rows[hi]; const col = (re) => h.findIndex((c) => re.test(c));
+    const cA = col(/asset|file/i), cS = col(/source/i), cL = col(/licen[cs]e|usage/i), cP = col(/placeholder/i), cR = col(/replace/i);
+    for (const r of rows.slice(hi + 1).filter((r) => !r.every((c) => /^:?-+:?$/.test(c) || !c))) {
+      const a = (r[cA] || "").replace(/`/g, ""), src = r[cS] || "", lic = r[cL] || "", ph = r[cP] || "", rp = r[cR] || "";
+      if (!a || /^<.*>$/.test(a)) continue; // template example rows
+      const name = `MEDIA.md "${a}"`;
+      if (!src || /^<.*>$/.test(src)) problems.push(`${name}: no source (a URL, "custom", or "client-supplied")`);
+      if (!lic || /^<.*>$/.test(lic)) problems.push(`${name}: no license / usage status (write "unknown" if unverified)`);
+      if (!yes(ph) && !no(ph)) problems.push(`${name}: Placeholder? must be yes or no`);
+      if (!yes(rp) && !no(rp)) problems.push(`${name}: Replace before production? must be yes or no`);
+      if (yes(ph) && no(rp)) problems.push(`${name}: a placeholder marked as not needing replacement`);
+      if (/placeholder-/i.test(a) && no(ph)) problems.push(`${name}: named placeholder-… but marked as not a placeholder`);
+      if (/\b(unknown|unverified)\b/i.test(lic) && no(rp)) problems.push(`${name}: licence unknown or unverified, yet not marked for replacement before production`);
+      if (yes(rp)) unresolved++;
+    }
+  }
+  // every placeholder file and PLACEHOLDER comment in the project is listed in MEDIA.md
+  for (const p of walk(root).filter((x) => !/[\\/](out|dist|build|\.next)[\\/]/.test(x))) {
+    const base = p.split(/[\\/]/).pop();
+    if (/^placeholder-/i.test(base) && !md.includes(base)) problems.push(`placeholder ${relative(root, p)} is not listed in MEDIA.md`);
+    if (/\.(html?|tsx|ts|jsx|js|mjs|css|astro|svelte|vue|mdx)$/.test(base)) {
+      let t = ""; try { t = readFileSync(p, "utf8"); } catch {}
+      for (const m of t.matchAll(/PLACEHOLDER:\s*([^;\s]+)/g)) if (!/^<.*>$/.test(m[1]) && !md.includes(m[1])) problems.push(`PLACEHOLDER ${m[1]} in ${relative(root, p)} is not listed in MEDIA.md`);
+    }
+  }
+  if (unresolved) { const rd = join(root, "README.md"); if (existsSync(rd) && !/MEDIA\.md/.test(readFileSync(rd, "utf8"))) problems.push(`README.md does not point to MEDIA.md, though ${unresolved} asset(s) must be replaced or cleared before production`); }
+  return { problems, unresolved };
+}
+
 export function completeness(target) {
   const t = resolve(target); const designFile = existsSync(t) && statSync(t).isDirectory() ? join(t, "DESIGN.md") : t; const root = dirname(designFile);
   if (!existsSync(designFile)) return { error: `no DESIGN.md at ${designFile}` };
   const scope = scopeTable(readFileSync(designFile, "utf8")); if (!scope) return { error: `${designFile} has no "## Scope" section (thinking/sequence.md, Step 0.7)` };
   const routes = projectRoutes(root); const rows = []; const invalid = [];
+  const dm = modeOf(scope.mode); if (dm.invalid) invalid.push(`delivery mode "${dm.invalid}" (use design exploration, functional frontend or production template)`);
+  const needed = new Set(MODE_FILES[dm.mode]); let legacyNoMedia = false;
   for (const it of scope.items) {
     const m = markOf(it.mark); if (m.invalid) { invalid.push(`${it.kind} "${it.item}": mark "${m.label}" (use requested, required, optional, or "not required for this brief, reason: …")`); continue; }
     if (!KINDS[it.kind]) { invalid.push(`unknown kind "${it.kind}" for "${it.item}" (kinds: ${Object.keys(KINDS).join(", ")})`); continue; }
@@ -137,30 +201,38 @@ export function completeness(target) {
     rows.push({ ...it, mark: m.label, reason: m.reason, counts: m.counts, ok: found.ok, why: found.why });
   }
   // the template shape, unless the Scope table excuses a file with a reason
-  for (const alts of TEMPLATE_FILES) {
+  for (const alts of TEMPLATE_FILES.filter((a) => needed.has(a[0]))) {
     const listed = rows.find((r) => r.kind === "template" && alts.some((a) => r.item.replace(/\/$/, "") === a.replace(/\/$/, "")));
-    if (listed && !listed.counts) continue; if (listed) continue;
+    if (alts[0] === "MEDIA.md" && listed && !listed.counts) invalid.push("MEDIA.md cannot be excused: every website build ships it (craft/media.md); with no external media it says so");
+    if (alts[0] !== "MEDIA.md" && listed) continue;
     const ok = alts.some((a) => existsSync(join(root, a)));
+    if (alts[0] === "MEDIA.md" && !ok && !dm.stated) { legacyNoMedia = true; continue; }
     rows.push({ kind: "template", item: alts[0], mark: "required (skill)", counts: true, ok, why: ok ? "" : "not found" });
   }
   // template content checks (templates/TEMPLATE.md), each excusable by a template row naming it
   const excused = (name) => rows.some((r) => r.kind === "template" && r.item === name && !r.counts);
   const add = (item, ok, why) => { if (!excused(item)) rows.push({ kind: "template", item, mark: "required (skill)", counts: true, ok, why: ok ? "" : why }); };
   const readme = join(root, "README.md");
-  if (existsSync(readme)) add("README demo line", /All data in data\/ is demo\. Replace with real data before launch\./.test(readFileSync(readme, "utf8")), 'README.md lacks "All data in data/ is demo. Replace with real data before launch."');
+  if (existsSync(readme) && (dm.mode !== "design exploration" || existsSync(join(root, "data")))) add("README demo line", /All data in data\/ is demo\. Replace with real data before launch\./.test(readFileSync(readme, "utf8")), 'README.md lacks "All data in data/ is demo. Replace with real data before launch."');
   const dataFiles = walk(join(root, "data")).filter((f) => f.endsWith(".json") && !/schema\.json$/.test(f));
   if (existsSync(join(root, "data"))) { const bad = dataFiles.filter((f) => !demoLabelled(f)); add("demo labels", dataFiles.length > 0 && !bad.length, dataFiles.length ? `entries not labelled "demo": true in ${bad.slice(0, 4).map((f) => relative(root, f)).join(", ")}` : "data/ has no JSON files"); }
   const used = envVars(root); const envEx = join(root, ".env.example");
   if (used.length) { const listed = existsSync(envEx) ? readFileSync(envEx, "utf8") : ""; const miss = used.filter((v) => !new RegExp(`^\\s*#?\\s*${v}\\s*=`, "m").test(listed)); add(".env.example coverage", !miss.length, `.env.example lacks ${miss.slice(0, 6).join(", ")}`); }
   const pkg = join(root, "package.json");
   if (existsSync(pkg)) { let dev = false; try { dev = !!JSON.parse(readFileSync(pkg, "utf8")).scripts?.dev; } catch {} add("npm run dev", dev, 'package.json has no "dev" script (zero-configuration run)'); }
+  const media = mediaChecks(root);
+  for (const p of media.problems) rows.push({ kind: "template", item: "MEDIA.md inventory", mark: "required (skill)", counts: true, ok: false, why: p });
+  if (existsSync(join(root, "MEDIA.md")) && !media.problems.length) rows.push({ kind: "template", item: "MEDIA.md inventory", mark: "required (skill)", counts: true, ok: true, why: "" });
   const tally = Object.fromEntries(Object.keys(KINDS).map((k) => { const r = rows.filter((x) => x.kind === k && x.counts); return [k, { have: r.filter((x) => x.ok).length, need: r.length, excused: rows.filter((x) => x.kind === k && x.mark === "excused").length }]; }));
   const missing = rows.filter((r) => r.counts && !r.ok);
-  return { designFile, root, type: scope.type, admin: scope.admin, routesFound: [...routes].sort(), rows, tally, missing, invalid, warnings: warnings(root), pass: !missing.length && !invalid.length && scope.items.length > 0, empty: scope.items.length === 0 };
+  const warn = warnings(root); if (media.unresolved) warn.push(`media: ${media.unresolved} asset(s) in MEDIA.md must be replaced or cleared before production; not production-ready until they are`);
+  if (legacyNoMedia) warn.push("media: no MEDIA.md (craft/media.md); required for every build that states its delivery mode, add it when this build is next delivered");
+  if (!dm.stated) warn.push("delivery mode: no \"**Delivery mode:**\" line in the Scope section; checked as production template");
+  return { designFile, root, type: scope.type, admin: scope.admin, mode: dm.mode, routesFound: [...routes].sort(), rows, tally, missing, invalid, warnings: warn, pass: !missing.length && !invalid.length && scope.items.length > 0, empty: scope.items.length === 0 };
 }
 
 export function completenessLines(r) {
-  const L = [`  X — completeness${r.type ? ` (${r.type}${r.admin ? `, admin panel: ${r.admin}` : ""})` : ""}  ${r.pass ? "✓" : "✗"}`];
+  const L = [`  X — completeness${r.type ? ` (${r.type}${r.admin ? `, admin panel: ${r.admin}` : ""})` : ""}${r.mode ? ` [${r.mode}]` : ""}  ${r.pass ? "✓" : "✗"}`];
   for (const [k, label] of Object.entries(KINDS)) { const t = r.tally[k]; if (!t.need && !t.excused) continue; L.push(`      ${(label + ":").padEnd(12)} ${t.have}/${t.need} ${VERB[k]}${t.excused ? ` · ${t.excused} not required (reason given)` : ""}`); }
   if (r.empty) L.push("      ✗ the Scope table has no items: derive the scope in Step 0.7");
   for (const m of r.missing) L.push(`      ✗ ${m.kind} ${m.item}: ${m.why || "missing"}`);

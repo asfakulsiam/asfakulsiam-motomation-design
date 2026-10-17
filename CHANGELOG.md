@@ -4,6 +4,15 @@ All notable changes to this skill. Versions follow [Semantic Versioning](https:/
 
 ## [Unreleased]
 
+- **Workflow consistency and enforcement** (`SKILL.md`, `thinking/sequence.md`, `craft/research.md`, `craft/media.md`, `categories/README.md`, `templates/TEMPLATE.md`, `templates/DESIGN.md`, `gates/rules.md`, `gates/delivery-gate.md`, `commands/overview.md`, `AGENTS.md`, `README.md`).
+  - Routes: the light route is narrow maintenance inside an established design only; any new design work, even one page, runs research, concept and scope at a proportionate depth. Page count never decides.
+  - Research: Step 0.5 adds the closest-comparable fallback, flows, responsive behaviour and validation / disabled states; type references and design inspiration are separate lists. Step 0.7 names every scope input, including the delivery mode. The category index says recipes are optional and are picked after the type and scope.
+  - Delivery modes: design exploration, functional frontend and production template (`templates/TEMPLATE.md`), written as `**Delivery mode:**` in the Scope section; no new checkpoint, no lower design bar.
+  - Media: `MEDIA.md` in every mode; "no placeholders" now means no undocumented or disguised placeholder media.
+  - `scripts/completeness.mjs` (axis X): mode-aware template files (production template when the line is missing) and `MEDIA.md` checks (inventory, source and licence status, placeholder contradictions, undocumented `placeholder-…` files and `PLACEHOLDER:` comments, README pointer); `tests/gate/completeness.test.mjs` covers them.
+  - `scripts/build-lite.mjs` leaves out two shell-only passages and one secondary worked example, so the lite edition keeps the new rules and Motion tiers inside its 8k target. `scripts/check-repo.mjs` (section 14) fails if a recipe loses its scope block, the old "one page or a small fix" route returns, or either dist edition loses a routing, research, scope, media or delivery-mode rule.
+  - Not verified: no real build has run through the delivery modes or the media check yet; no benchmark was run.
+
 - Note: commit order in the previous session was T1 → T4 → T2 → T3, because T1 pushed main over its size limit. All tasks were completed in the end.
 - Not verified: The delivery flow (Design → Preview → Approve → Gate → Push → Handoff) is documented but has not been exercised on a real build. The next real build should follow it and report any mismatch between the flow and reality.
 - **Delivery flow: six checkpoints, design review before the gate** (193d3f2; `thinking/sequence.md` → Delivery flow).

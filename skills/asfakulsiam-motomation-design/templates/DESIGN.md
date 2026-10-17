@@ -20,6 +20,7 @@
      Evidence: a path, optionally #<text> it must contain. Routes, legal pages and admin items starting with "/" are found automatically. -->
 **Site type:** <type, region>
 **Admin panel:** <yes | no> (settled at Checkpoint 3)
+**Delivery mode:** <design exploration | functional frontend | production template> (from the request; templates/TEMPLATE.md)
 
 | Kind | Item | Mark | Evidence |
 |---|---|---|---|

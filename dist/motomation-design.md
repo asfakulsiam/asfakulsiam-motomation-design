@@ -22,14 +22,14 @@ If there is even a small chance this skill applies to a web design task, use it.
 
 ### The five laws
 
-1. **Think before you draw.** Run the Thinking Sequence before writing any UI code. No exceptions for "simple" pages.
+1. **Think before you draw.** Run the Thinking Sequence before writing UI code for any new design work (a new site, brand, art direction, product experience or distinctive redesign), even one page, scaled to the job. Only narrow maintenance inside an established design takes the light route ("Routes"). Page count never decides.
 2. **Type is chosen first, in one of two modes.** Pick the mode from the brief, write it in the plan with the reason, and design fully inside it. Neither mode is a fallback for the other.
    - **HOUSE STYLE (typography-led).** Default for portfolio, studio, editorial and brand work. Type is the primary image: set it large, make it do work, let one word carry the screen.
    - **SERVICE STYLE (information-led).** Default for dashboards, SaaS product and admin UIs, and dense service UIs (booking, checkout, catalogues with filters, data tools). The visitor came to read, compare or act: type leads by clarity, with a compact scale, tabular figures and dense, legible rows; no hero-scale display word.
    - Both modes keep the same standards: size floors, contrast, measure and a reasoned choice of face. A brief that sits between them (a SaaS marketing site, a hotel) picks one and says why. Detail: `principles/typography.md`.
 3. **Motion must mean something.** Every animation answers "what does this tell the user?" If the answer is "nothing", delete it.
 4. **Actively reduce repetition.** Draw constraints from `scripts/collide.mjs` (no archetype or signature repeats inside a run) and compare your plan's structural choices (archetype, signature, type, palette, tier) against `.motomation/log.json` with `scripts/memory.mjs check`. This detects and reduces repetition inside one project; it cannot guarantee novelty across projects that don't share a log, so say so when it matters.
-5. **Ship complete, accessible, fast.** No placeholders, no lorem ipsum, no broken reduced-motion, no fake numbers.
+5. **Ship complete, accessible, fast.** No placeholder copy, no lorem ipsum, no broken reduced-motion, no fake numbers. Temporary media only when listed in `MEDIA.md` as a placeholder (`craft/media.md`); not production-ready while one is unresolved.
 
 ---
 
@@ -41,7 +41,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 | Any new page or site | `thinking/brief-inference.md` → `thinking/sequence.md` (Step 0 Stack first) → `principles/house-style.md` |
 | **Every build: the six checkpoints** | `thinking/sequence.md` → Six checkpoints: 1 Stack · 2 Research and concept · 3 Scope · 4 Build plan · 5 Design review · 6 Gate and ship. Stop and wait for an explicit answer at each; alternatives (2–3) on request; any decision can be overridden; never ask twice; state and skip what the brief answers |
 | **Step 0 Stack, and any new dependency** | `craft/stack.md`: Next.js default, the three dependency checks, platform first |
-| **Any build or redesign (always, after Step 0 Stack, before Step 1)** | `craft/research.md`: Step 0.5 research, mandatory. Live award sources + `references/sources/` (skills, components, motion, 3d, foundation, future); concepts only, no copied code. `DESIGN.md` gets References looked at (3), Techniques considered (3), Pattern being avoided, and a Decision trace: nothing comes from the skill's defaults alone |
+| **Any build or redesign (always, after Step 0 Stack, before Step 1)** | `craft/research.md`: Step 0.5 research, mandatory for new design work. First 3–5 real sites of the exact type (routes, functions, states, admin, legal; observed / inferred / unverified) for the scope; then, separately, live award sources + `references/sources/` for design; concepts only, no copied code. `DESIGN.md` gets Type research, References looked at (3), Techniques considered (3), Pattern being avoided, and a Decision trace: nothing comes from the skill's defaults alone |
 | Need new ideas / "make it different" | `invention/mad-artist.md` + run `scripts/collide.mjs` |
 | Choosing a page structure | `structures/archetypes.md` |
 | Setting intensity | `principles/dials.md` |
@@ -54,7 +54,8 @@ If there is even a small chance this skill applies to a web design task, use it.
 | Timing sheet, stagger/overlap, camera moves, chapter rhythm (Tier 3–5) | `motion/choreography.md` |
 | Signature moves and effects | `signatures/` + `references/effects-vocabulary.md` |
 | A visual style (glass, brutalist, swiss…) | `styles/<style>.md`. Style is derived from the brief; `styles/` informs it, there are no presets |
-| A site category (hotel, SaaS, studio…) | `categories/<category>.md`: design guidance, not scope. The scope comes from Step 0.7 (`thinking/sequence.md`); if they disagree, the derived scope wins |
+| A site category (hotel, SaaS, studio…) | `categories/<category>.md`: optional design guidance, not scope. The scope comes from Step 0.7 (`thinking/sequence.md`); if they disagree, the derived scope wins. A type with no file is researched as itself |
+| Any image, video, icon or illustration | `craft/media.md`: sourcing, licence and provenance status, placeholders, and the root `MEDIA.md` every website build ships |
 | **Any build or redesign (always, before step 6 Build)** | `craft/copy.md` + `craft/seo.md` + `craft/performance.md` + `craft/security.md` |
 | Accessibility, responsive, mobile motion, scroll sequences | `craft/*.md` |
 | Writing the design system (step 3) | `templates/DESIGN.md`, `templates/SCHEMA.md` and `templates/DATA.md` (always, together); the whole deliverable: `templates/TEMPLATE.md` |
@@ -77,14 +78,15 @@ R. Read the rules     gates/rules.md                → state "Rules : gates/rul
 1. Thinking Sequence  thinking/sequence.md          → STACK (named, or proposed with alternatives; load the adapter)
                       ■ CHECKPOINT 1 Stack: stop, wait for approve / override; then
                                                       RESEARCH (Step 0.5, craft/research.md + references/sources/:
-                                                      3 references, 3 techniques, avoided pattern, decision trace),
+                                                      3–5 exact-type sites, 3 references, 3 techniques,
+                                                      avoided pattern, decision trace),
                                                       tension, concept, archetype+mutation,
                                                       collision, signature move, anti-sameness,
                                                       restraint gate
 2. Set the dials      principles/dials.md           → ENERGY / RHYTHM / MOTION (1–3) → tier
 3. Design system      typography → colour → layout  → write DESIGN.md (templates/DESIGN.md) and, at the same time,
-                                                      SCHEMA.md (templates/SCHEMA.md): data model, routes, section contract,
-                                                      API surface, handoff notes
+                                                      SCHEMA.md (templates/SCHEMA.md; functional frontend and production
+                                                      template): data model, routes, section contract, API surface, handoff notes
                       ■ CHECKPOINT 2 Research and concept: references, avoided pattern, tension → signature,
                         collision output, palette, type, tier, reasoning; stop, wait
                       Step 0.7 scope → ■ CHECKPOINT 3 Scope: routes, states, legal, admin, edge cases,
@@ -94,7 +96,8 @@ R. Read the rules     gates/rules.md                → state "Rules : gates/rul
 6. Build              compose, extend, or invent (below), in the stack and adapter from Step 0; complete code, real copy
 7. Preview            Path A: a live preview URL · Path B: a build zip or a temporary preview push (never main)
                       ■ CHECKPOINT 5 Design review: preview, screenshots 375 / 768 / 1440, DESIGN.md, MOTION.md,
-                        SCHEMA.md, DATA.md, one-line summary; stop; approve, or changes → new preview → again
+                        MEDIA.md, SCHEMA.md and DATA.md (when the mode has them), one-line summary; stop; approve,
+                        or changes → new preview → again
 8. Delivery Gate      gates/delivery-gate.md on the APPROVED design → verify gates/rules.md, score, fix, stamp;
                         fail → fix and re-present · pass → write GATE.md, CRITIQUE.md → handoff push (design/<name>)
 9. Ship               ■ CHECKPOINT 6 Gate and ship: gate output, critique, where the handoff push went; stop
@@ -121,7 +124,7 @@ MOTOMATION PLAN
 Rules       : gates/rules.md read; designing within it
 Stack       : <stack> (<named in brief | from the project | chosen: why>) → adapters/<x>.md
 References  : <3 references looked at> · techniques: <3, sourced> · avoiding: <overused pattern>
-Scope       : <what this build covers (Step 0.7)>
+Scope       : <what this build covers (Step 0.7)> · delivery mode: <design exploration | functional frontend | production template>
 Defaults    : <each gap in the brief and the default taken>
 Tension     : <the conflict in the brief, one line>
 Concept     : <the idea, one sentence a client would repeat>
@@ -138,7 +141,7 @@ Deferred    : <what this build leaves out, each with its reason>
 Checkpoint <n> of 6: approve, redirect, or ask for alternatives.
 ```
 
-Checkpoint 1 shows Stack (with alternatives); 2 shows References through Not doing; 3 shows Scope, Defaults and Deferred; 4 shows the section order, components, animation per section and transitions; 5 shows the preview and the review pack (screenshots at 375, 768 and 1440, DESIGN.md, MOTION.md, SCHEMA.md, DATA.md, a one-line summary); 6 shows the gate output, the critique and where the handoff push went. After each, stop until the user answers. "Show me alternatives" gets 2–3 options and another wait. The user can override any earlier decision. Never ask the same question twice; a checkpoint the brief already answers is stated and skipped, still open to override.
+Checkpoint 1 shows Stack (with alternatives); 2 shows References through Not doing; 3 shows Scope, Defaults and Deferred; 4 shows the section order, components, animation per section and transitions; 5 shows the preview and the review pack (screenshots at 375, 768 and 1440, DESIGN.md, MOTION.md, MEDIA.md, SCHEMA.md and DATA.md when the delivery mode has them, a one-line summary); 6 shows the gate output, the critique and where the handoff push went. After each, stop until the user answers. "Show me alternatives" gets 2–3 options and another wait. The user can override any earlier decision. Never ask the same question twice; a checkpoint the brief already answers is stated and skipped, still open to override.
 
 #### Delivery flow (Checkpoints 5 and 6)
 
@@ -146,15 +149,17 @@ Preview → **Design review** (approve, or changes → new preview) → gate on 
 
 ### Routes: full and light (`--route=`)
 
-Two routes. `/build --route=light` or `/build --route=full` forces one. Without the flag, **you choose**, and say which in your first line, with the reason: `Route: light (one contact page on an existing site; no new concept)` or `Route: full (a new site for a new brand)`. "Route: short" (v2.10) is the same as light.
+Two routes. `/build --route=light` or `/build --route=full` forces one. Without the flag, **you choose**, and say which in your first line, with the reason: `Route: light (a broken hover state on an existing site; no new direction)` or `Route: full (a one-page site for a new brand)`. "Route: short" (v2.10) is the same as light.
+
+**The test is the work, not the page count.** Light is for narrow maintenance inside an established design: the change introduces no new design direction and needs no new product or site research. New design work (a new site or page set, a new brand or art direction, a new product experience, a distinctive redesign) is always full, even at one page; its research, concept and scope are scaled to the job, never skipped. `--route=light` on new design work does not skip them either: say so, and run the full route at the smallest proportionate depth.
 
 | | Full route | Light route |
 |---|---|---|
-| Use for | Complex work: a new site or a multi-page build, a new brand or concept, a redesign, motion Tier 3+, forms, data or commerce, anything the client wants to be unique | Simple work: **one page or a small fix**. A single page inside an existing design system, a landing page with no new concept, spacing, a colour, contrast, a component swap, a reduced-motion or keyboard bug |
-| Thinking Sequence | Step 0 + all 7 steps, six checkpoints | **Skipped.** Step 0 stack only (keep the project's; a lone page is vanilla). No archetype pick, no reference study, no anti-sameness pass. Two checkpoints: **Plan** (route, stack, the one-line intent, what you will not do) and **Ship** (gate output). A small fix has only **Ship** |
+| Use for | New design work of any size: a new site (one page or many), a new brand, concept or art direction, a new product experience, a distinctive redesign, motion Tier 3+, forms, data or commerce | Narrow maintenance in an established design: a broken hover state, a spacing defect, a responsive bug, contrast, a component adjusted or swapped inside its visual system, a reduced-motion or keyboard bug, a page added inside an existing design system with no new direction |
+| Thinking Sequence | Step 0 + all 7 steps, six checkpoints | **Skipped.** Step 0 stack only (keep the project's). Read the existing design first (its tokens, components and `DESIGN.md`). No archetype pick, no reference study, no anti-sameness pass. Two checkpoints: **Plan** (route, stack, the one-line intent, what you will not do) and **Ship** (gate output). A small fix has only **Ship** |
 | Collision engine | `scripts/collide.mjs` draws archetype, mutation, collision, signature | **Not run.** No new signature move; a single page keeps the site's (or has none) |
-| Scope | Step 0.7: the full scope, every route, state and content type, checked by axis X | **Not derived.** The scope is the one page or the one fix. Axis X reads `DESIGN.md` if the project has one; a lone page has no scope to miss |
-| Design | `DESIGN.md`, `SCHEMA.md`, `MOTION.md` from the templates | Keep the existing design: its type, palette, layout and motion. A new single page with no system: house-style defaults, motion Tier ≤ 2, no new tokens beyond what the page uses |
+| Scope | Step 0.7: the full scope, every route, state and content type, checked by axis X | **Not derived.** The scope is the one page or the one fix. Axis X reads the project's `DESIGN.md` Scope if it has one |
+| Design | `DESIGN.md`, `MOTION.md`, `MEDIA.md` and the rest the delivery mode requires (`templates/TEMPLATE.md`) | Keep the existing design: its type, palette, layout and motion. No new tokens beyond what the change uses. New or replaced media gets its row in the project's `MEDIA.md` (`craft/media.md`) |
 | Restraint, reduced motion, accessibility | Yes | Yes: add nothing that isn't needed (note what you didn't add); every motion you touch keeps its reduced-motion path; contrast, names, keyboard and focus for everything you touch |
 | Delivery Gate | Yes, every axis including J (journey) and O (originality), with a stamp | **Yes, the same gate**, every axis including J. A fix: run it before and after, report both. Stamp only if the page already had one or you were asked. O: not run (no new concept to compare) |
 | Cost | Recorded by `scripts/cost.mjs` in a benchmark run | Same record; the route is in it (`route.stated`), so the two routes can be compared |
@@ -165,16 +170,16 @@ How to run the light route:
 2. **Build the page, or change only what the cause needs.** If the fix needs a new colour, take it from the page's own palette, darkened or lightened until it passes `scripts/contrast.mjs`.
 3. **Run the gate** (`scripts/gate.mjs`, every axis) and report the result; for a fix, the before and after numbers side by side.
 
-Switch to the full route, and say so, when the work turns out to need a second page, a new structure, a new signature or a different concept. A light route that grows into a redesign without saying so is the failure this section exists to stop. Worked example: `examples/prompts/fix-existing.md`.
+Switch to the full route, and say so, when the work turns out to need a new structure, a new signature, a new direction or a different concept. A light route that grows into a redesign without saying so is the failure this section exists to stop. Worked example: `examples/prompts/fix-existing.md`.
 ---
 
 ### The Thinking Sequence (summary; full version in `thinking/sequence.md`)
 
-Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it.
+Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it. Light route (narrow maintenance only): inspect the existing design, change only what the cause needs, run the gate.
 
 0. **Stack**: if the brief (or the existing project) names a stack, use it. Otherwise **Next.js (App Router, TypeScript, Tailwind)** for anything with routes or data, plain HTML for a single static page; never Astro or Vite for e-commerce unless the brief demands it. Every dependency passes the three checks in `craft/stack.md` (active, not deprecated, licence free for commercial use). Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
-0.5. **Research (mandatory)**: leave the skill before designing. Live award sources (last 6 months) and `references/sources/`, concepts only. Record three references, three techniques with sources, and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference, never to the skill's defaults alone. No web: say so and state the limitation. See `craft/research.md`.
-0.7. **Derive the scope**: what a complete site of this type serves (routes, functions, states, legal pages for the region, edge cases, admin, skeletons), derived from research and knowledge, never a fixed list; each item requested / required / optional / not required with a reason, in `DESIGN.md` under `Scope`. Gate axis X (`scripts/completeness.mjs`) checks it.
+0.5. **Research (mandatory)**: leave the skill before designing. First 3–5 real sites of the exact type (or the closest, gap stated): routes, functions, states, flows, admin, legal; each finding observed, inferred or unverified, nothing hidden claimed. Then, separately, design inspiration: live award sources (last 6 months) and `references/sources/`, concepts only (another industry's site is inspiration, not a type reference). Record the type research, three references, three techniques and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference. No web: say so. See `craft/research.md`.
+0.7. **Derive the scope**: what a complete site of this type serves (routes, functions, states, journeys, legal and support pages, edge cases, admin, skeletons), from the brief, the type research, industry and legal expectations, the delivery mode and judgment, never a fixed list; a competitor's feature is evidence, not a requirement. A category recipe is optional design guidance; the derived scope wins. Each item requested / required / optional / not required with a reason, in `DESIGN.md` under `Scope`, with the delivery mode. Axis X (`scripts/completeness.mjs`) checks it.
 1. **Tension**: find the conflict inside the brief (calm vs. urgent, heritage vs. new, luxury vs. honest).
 2. **Concept**: resolve the tension in one sentence. This is the idea, not a layout.
 3. **Archetype + Mutation**: derive the page structure from the brief, with `structures/archetypes.md` and `data/archetypes.csv` as reference and constraint (not a menu), then break one of its rules.
@@ -266,9 +271,9 @@ Full behaviour of each command is in `commands/overview.md`. Critique output for
 
 - **Six checkpoints** (`thinking/sequence.md`): Stack, Research and concept, Scope, Build plan, Design review, Gate and ship. At each, draft, show the reasoning, stop and wait for an explicit answer (approve, redirect, alternatives, override). Never re-ask an answered question.
 - Explain each decision in its checkpoint block, then wait. Keep prose short. The work is the answer.
-- Every build ships a **sellable template** (`templates/TEMPLATE.md`): README (what is real, what is demo, run, deploy; "All data in data/ is demo. Replace with real data before launch."), DESIGN, MOTION, SCHEMA, DATA, CRITIQUE, GATE, LICENSE (MIT), CHANGELOG (v0.1.0), `.env.example`, a demo-labelled `data/` typed by its `schema.json`, `middleware.ts`, comments in every non-trivial file. It runs with `npm install && npm run dev` and no configuration. `SCHEMA.md` is written with `DESIGN.md`, not after.
+- **Deliver in the mode asked for** (`templates/TEMPLATE.md`; inferred when unstated): **Design exploration** (concept, route map and states, design system, motion direction, a credible responsive prototype and preview; no backend), **Functional frontend** (working routes, interactions and UI states on demo-labelled mock data; no claimed integrations), or **Production template** (the **sellable template**: README with "All data in data/ is demo. Replace with real data before launch.", DESIGN, MOTION, SCHEMA, DATA, CRITIQUE, GATE, LICENSE, CHANGELOG, `.env.example`, `data/` with `schema.json`, `middleware.ts`; runs with `npm install && npm run dev`). Every mode ships `MEDIA.md` and keeps research, quality, accessibility, reduced motion and the gate. A complete prototype is not production-ready.
 - **Micro-states ship:** buttons (default, hover, focus, active, disabled, loading), forms (default, validation error, submit loading, success, server error), lists (empty, loading, error, filled), images (loading, loaded, error), async actions (idle, pending, success, error). The gate warns on missing ones (`thinking/sequence.md`).
-- Deliver complete files. No `// rest of code here`, no TODOs, no placeholder images without a clear `alt` and a sourcing note.
+- Deliver complete files. No `// rest of code here`, no TODOs. Media from a legitimate source, licence verified where possible (a URL is not a licence); a temporary asset is named `placeholder-…`, has a clear `alt` and a `MEDIA.md` row marked for replacement. A verified, approved asset is not a placeholder.
 - Put a stamp comment at the top of the main stylesheet or layout:
   `/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: <from gate.mjs> · gate: <from gate.mjs> */`
   The critique and gate segments are pasted from `node scripts/gate.mjs`, never typed. Each axis carries its trace, e.g. `H4[375:1]`. See `gates/delivery-gate.md`, Part 1.
@@ -340,7 +345,7 @@ This is the missing key: it makes an agent think like a designer instead of a te
 | **2 Research and concept** | Step 0.5, Steps 1–7, dials, type and colour | the 3 references looked at and what it took from each; the pattern it is avoiding; the tension, concept, archetype and mutation; the collision draw output (`scripts/collide.mjs`, pasted); the palette, typography, motion tier and signature move; its reasoning for each | approves or redirects |
 | **3 Scope** | Step 0.7 | the derived route list, states, legal pages, admin surface and edge cases, each marked requested / required / optional; what it is deferring and why | approves, cuts or adds |
 | **4 Build plan** | the motion plan (`MOTION.md`) | the section order, the components it will create (compose, extend or invent), the animation language per section, the page-to-page transitions | approves or redirects |
-| **5 Design review** | the build and its preview (Path A or B, below) | the preview (a live URL, or a build zip / temporary preview location), screenshots at 375, 768 and 1440, `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `DATA.md` and a one-line summary | approves, or requests changes (a new preview, then Checkpoint 5 again) |
+| **5 Design review** | the build and its preview (Path A or B, below) | the preview (a live URL, or a build zip / temporary preview location), screenshots at 375, 768 and 1440, `DESIGN.md`, `MOTION.md`, `MEDIA.md`, `SCHEMA.md` and `DATA.md` (when the delivery mode has them) and a one-line summary | approves, or requests changes (a new preview, then Checkpoint 5 again) |
 | **6 Gate and ship** | the gate and `/critique` on the **approved** design | the gate output (pasted), the critique (pasted), `GATE.md` and `CRITIQUE.md`, and where the handoff push went | accepts; a gate failure is fixed and the design re-presented first |
 
 **Order:** Step 0 → **Checkpoint 1** → Step 0.5, the memory check, Steps 1–7, the dials, type and colour → **Checkpoint 2** → Step 0.7 → **Checkpoint 3** → the motion plan and section order → **Checkpoint 4** → build → preview → **Checkpoint 5** (loops until approved) → gate and `/critique` on the approved design → handoff push → **Checkpoint 6**. (Step 0.7 is written below Step 0.5 because its research overlaps; it is shown at Checkpoint 3, after the concept is approved.)
@@ -365,8 +370,9 @@ Each checkpoint message ends with what the skill is waiting for: `Checkpoint <n>
 
 The sequence below is the **full route**. Say the route in your first line (`SKILL.md`, "Routes"); `/build --route=light|full` forces it.
 
-- **Full route** (complex: a new site, a new concept, Tier 3+, forms, data): every step below, the collision engine in Step 4, the full scope in Step 0.7, six checkpoints, the Delivery Gate with a stamp.
-- **Light route** (simple: one page or a small fix): skip Steps 0.5 to 7. Keep only Step 0 (the stack: the project's, or vanilla for a lone page), no collision draw, no scope derivation. Two checkpoints, Plan and Ship (a fix: Ship only). Build the page or the fix inside the existing design. **The Delivery Gate still runs, every axis**, including J. Grows into a second page or a new concept: switch to full and say so.
+- **Full route** (all new design work, whatever its size: a new site even of one page, a new brand, art direction or product experience, a distinctive redesign, Tier 3+, forms, data): every step below, the collision engine in Step 4, the scope in Step 0.7, six checkpoints, the Delivery Gate with a stamp. Depth is proportional: a one-page site gets a shorter Step 0.5 and a smaller Scope table, never none.
+- **Light route** (narrow maintenance in an established design: a broken state, a spacing or responsive defect, contrast, a component adjusted inside its visual system, a page added to an existing system with no new direction): skip Steps 0.5 to 7. Keep only Step 0 (the project's stack) and read the existing design first; no collision draw, no scope derivation. Two checkpoints, Plan and Ship (a fix: Ship only). Change only what the cause needs, inside the existing design. **The Delivery Gate still runs, every axis**, including J. Needs a new direction, structure, signature or concept: switch to full and say so.
+- **Page count never decides the route.** If the work introduces a design direction or needs new product or site research, it is full.
 
 ### 0. Stack
 
@@ -397,17 +403,18 @@ Before any design step, know what you are building in. The stack changes what th
 
 Before designing anything, leave the skill. Its own components, data, archetypes and collision engine are one source; used alone, every build looks like the skill made it. This step is not optional. Protocol: `craft/research.md`.
 
-**First, the exact type.** Find 3–5 real websites that are exactly the type you are building. Not merely visually similar: a banking site for a banking brief, a model portfolio for a model brief, a B2B portal for a B2B brief, an e-commerce marketplace for a marketplace brief, and so on. For each, record in `DESIGN.md` under `Type research`, as far as it is publicly observable:
+**First, the exact type.** Find 3–5 real websites that are exactly the type you are building. Not merely visually similar: a banking site for a banking brief, a model portfolio for a model brief, a B2B portal for a B2B brief, an e-commerce marketplace for a marketplace brief, and so on. If fewer than three credible ones exist, use the closest genuinely comparable products and state the limitation; never invent one. A striking site from another industry is design inspiration (below), not a type reference. For each, record in `DESIGN.md` under `Type research`, as far as it is publicly observable:
 
 - identity, purpose, audience and business model
 - the discoverable route or page inventory, including nested pages and important route variants
-- the functionality on each relevant route
-- important states: empty, loading, error, success, authentication and permission-dependent, where they apply
+- the functionality on each relevant route, and its flows: forms, search, filters, sorting, pagination; account, sign-in and onboarding; cart, checkout, payment and orders, or the type's equivalent
+- important states: empty, loading, error, success, disabled, validation, authentication and permission-dependent, where they apply
+- responsive behaviour and mobile navigation
 - visible admin or seller-facing surfaces, if public or documented
 - legal, privacy, policy and compliance pages
 - navigation, information architecture, content hierarchy and user journeys worth noting
 
-Mark each finding **observed**, **inferred**, or **unverified**. Never claim to have inspected hidden routes, private admin panels, authenticated flows or anything you could not reach; label it unverified and fall back on other evidence or a stated assumption. A hybrid brief (two business models or site types) researches each type separately. A type with no category file is researched as itself, never forced into an unrelated category. These findings feed Step 0.7: the scope is derived from the brief, this evidence, industry conventions, legal or regulatory requirements and design judgment. Neither a competitor's feature nor a category recipe becomes a requirement automatically; a recipe, if one exists, is a starting point for design exploration. Proportion the depth to the build: the goal is a justified scope, not an audit of every competitor.
+Mark each finding **observed**, **inferred**, or **unverified**. Never claim to have inspected hidden routes, private admin panels, authenticated flows or anything you could not reach; label it unverified and fall back on other evidence or a stated assumption. A hybrid brief (two business models or site types) researches each type separately. A type with no category file is researched as itself, never forced into an unrelated category. These findings feed Step 0.7: the scope is derived from the brief, this evidence, industry conventions, legal or regulatory requirements, the delivery mode and design judgment. Neither a competitor's feature nor a category recipe becomes a requirement automatically; a recipe, if one exists, is a starting point for design exploration. Proportion the depth to the build: the goal is a justified scope, not an audit of every competitor.
 
 **Then, design inspiration, separately:**
 
@@ -418,22 +425,22 @@ Mark each finding **observed**, **inferred**, or **unverified**. Never claim to 
 
 If you cannot access the web, say so explicitly, work from training data, and state the limitation in `DESIGN.md` (`Access: no web access: working from training data`).
 
-**Test:** 3–5 exact-type websites with their findings marked observed / inferred / unverified, three references, three techniques with sources, the avoided pattern with why, the access line, and no decision traced only to the skill's defaults. If not, Step 1 doesn't start.
+**Test:** 3–5 exact-type websites (or the closest, with the gap stated) with their findings marked observed / inferred / unverified, three references, three techniques with sources, the avoided pattern with why, the access line, and no decision traced only to the skill's defaults. If not, Step 1 doesn't start.
 
 ---
 
 ### 0.7 Derive the scope
 
-The brief names a few pages; a complete site of its type needs more. "Build an e-commerce" means the whole e-commerce, not a homepage and some pages. Derive the scope yourself, from the Step 0.5 research, industry standards and your own knowledge. **Do not pick from a hardcoded list**: there is none in this skill, and `scripts/completeness.mjs` only checks what you derive.
+The brief names a few pages; a complete site of its type needs more. "Build an e-commerce" means the whole e-commerce, not a homepage and some pages. Derive the scope yourself, from the brief and its explicit requirements, the Step 0.5 type research, the functionality and journeys the type needs, industry and legal expectations, technical constraints, the delivery mode, and reasoned judgment where evidence is missing (marked as such). **Do not pick from a hardcoded list**: there is none in this skill, and `scripts/completeness.mjs` only checks what you derive.
 
 A category recipe (`categories/<type>.md`) is design opinion, not scope. The scope is derived from research, not read from a file. This applies to every site type, not just the ones with a category file. If the requested type has no category file, the scope is derived entirely from research. If the recipe and the derived scope disagree, the derived scope wins.
 
-Answer, and write in `DESIGN.md` under `Scope` (from `templates/DESIGN.md`):
+Answer, and write in `DESIGN.md` under `Scope` (from `templates/DESIGN.md`), with the **Delivery mode** line (Required output, below):
 
-- What routes does a complete <site type> serve?
+- What routes does a complete <site type> serve, and which user journeys run through them?
 - What functionality exists on each page?
 - What states does each page need?
-- What legal pages are required in this region?
+- What legal, policy and support pages are required in this region?
 - What edge cases must be handled?
 - What admin surface does this type need?
 - What skeleton states exist (one for every async surface: lists, grids, search, detail pages, cart, checkout, account, admin, whatever this type has)?
@@ -447,7 +454,7 @@ Write each as a row of the Scope table (`| Kind | Item | Mark | Evidence |`; kin
 
 Show the Scope table at **Checkpoint 3**, with the admin panel (included / not included) and what is deferred, each with its reason. The user approves, cuts or adds; then the scope is settled.
 
-The skill also requires, in every build that has a server (each one excused in the table with a reason when it doesn't apply, e.g. a single static page):
+A **production template** build that has a server also requires (each one excused in the table with a reason when it doesn't apply, e.g. a single static page; the other delivery modes need only what `templates/TEMPLATE.md` lists for them):
 
 - `middleware.ts` with the auth gate, locale routing, redirects, rate limiting and security headers
 - a skeleton for every async surface
@@ -612,7 +619,7 @@ Two paths. Both run the same six steps; only step 2 differs, by whether the agen
 
 1. The agent designs and builds in its own environment.
 2. It produces a **live preview** (a URL the author opens).
-3. **Checkpoint 5:** it shows the preview plus the review pack: screenshots at 375, 768 and 1440, `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `DATA.md`, and a one-line summary.
+3. **Checkpoint 5:** it shows the preview plus the review pack: screenshots at 375, 768 and 1440, `DESIGN.md`, `MOTION.md`, `MEDIA.md`, `SCHEMA.md` and `DATA.md` (when the delivery mode has them), and a one-line summary.
 4. The author reviews: **approve**, or **request changes**, which loop back to step 1 and a new preview.
 5. The gate (`gates/delivery-gate.md`) and `/critique` run on the approved design. **Pass:** the handoff push to the connected repo. **Fail:** fix, and re-present (step 3).
 6. **Checkpoint 6:** the handoff (the gate output, the critique, `GATE.md`, `CRITIQUE.md`, where the push went).
@@ -648,9 +655,17 @@ Each state is in the section contract of `SCHEMA.md` and in the code (a CSS rule
 
 **Test:** pick any button, form, list, image and async action on the page: can you show each state, and does `SCHEMA.md` name it?
 
-### Required output: a sellable template
+### Required output: by delivery mode
 
-Every build ships as a complete, runnable template a designer can sell, not a folder of pages. The shape is `templates/TEMPLATE.md`:
+The user's request sets the **delivery mode**; write it in `DESIGN.md` under `Scope` (`**Delivery mode:** …`). Respect an explicit request. "Design first, backend after approval" is **design exploration**; "a working UI on mock data, no backend" is **functional frontend**; "a complete implementation" is **production template**. Otherwise infer the most proportionate mode from the brief, and ask one focused question only when the difference matters and can't be inferred. The files each mode requires are in `templates/TEMPLATE.md` (axis X checks them):
+
+- **Design exploration:** the researched concept, the derived route map and states, the design system, the motion direction with representative motion, a credible responsive prototype and a preview; `README.md`, `DESIGN.md`, `MOTION.md`, `MEDIA.md`, then `GATE.md` and `CRITIQUE.md`. No database, auth, payments or unrequested infrastructure, and not a generic static mockup either.
+- **Functional frontend:** the approved design as working routes, navigation, interactions and every relevant UI state (loading, empty, success, validation, error) on demo-labelled mock data, with the integration boundaries named; adds `SCHEMA.md`, `DATA.md` and `data/` with its `schema.json`. Never claim persistence, auth, payment or another integration that doesn't exist.
+- **Production template:** a complete, runnable template a designer can sell, not a folder of pages (below).
+
+No mode lowers the bar: research for new design work, the concept, accessibility, responsiveness, reduced motion, originality and the gate apply to all three. A prototype that is complete is not production-ready; say which one you delivered.
+
+The **production template** shape is `templates/TEMPLATE.md`:
 
 - `README.md` (what it is, what is real, what is demo, how to run, how to deploy; it states "All data in data/ is demo. Replace with real data before launch."), `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `DATA.md`, `CRITIQUE.md`, `GATE.md` (the gate output per page, pasted), `LICENSE` (MIT by default), `CHANGELOG.md` (from v0.1.0), `.env.example` (every variable, with a placeholder)
 - `data/`: mock JSON typed by its `schema.json`, every entry labelled demo (`templates/DATA.md`)
@@ -2533,7 +2548,7 @@ Each file covers the real job of that kind of site, default dials, suitable arch
 
 `portfolio` · `studio` · `ecommerce` · `saas` · `hotel` · `restaurant` · `organisation` · `event` · `architecture` · `personal-brand` · `product-launch` · `education`
 
-Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) and combine two files. Categories set defaults; the concept still decides the design.
+**Order:** the project type and its scope come first (Step 0.5 type research, Step 0.7 scope in `thinking/sequence.md`); a recipe is picked after, if one helps. Every recipe is optional design guidance: use it, adapt it, combine it with another, or ignore it. Not listed? Research the type as itself; do not force it into the nearest file. Combining two files is an option, never a requirement. A recipe's patterns are not a checklist to implement, and the concept may invent structures and interactions no recipe names, when the brief justifies them.
 
 **A category file is design guidance, not scope.** Its section order or page set covers the pages it names. It is not the list of everything the site needs. The scope (routes, states, legal pages, admin surface, edge cases) comes from Step 0.7 in `thinking/sequence.md`, derived from research. If the derived scope and a category file disagree, the derived scope wins. This applies to every category.
 
@@ -3062,7 +3077,7 @@ The pass is done when every row is "none found" or fixed. Record leftovers as `[
 
 ## Media
 
-A visually rich site needs real visual material, not generic gradients, empty image boxes and arbitrary placeholders. A reachable URL is not a licence, though, and a direct image link is not a promise that the file stays online or free for commercial use. This file covers how to find media, track where it came from, and make clear what must be replaced before launch. Referenced from `thinking/sequence.md` ("Required output: a sellable template").
+A visually rich site needs real visual material, not generic gradients, empty image boxes and arbitrary placeholders. A reachable URL is not a licence, though, and a direct image link is not a promise that the file stays online or free for commercial use. This file covers how to find media, track where it came from, and make clear what must be replaced before launch. Referenced from `thinking/sequence.md` ("Required output: by delivery mode"); checked by `scripts/completeness.mjs` (gate axis X).
 
 ### Media selection
 
@@ -3088,7 +3103,7 @@ Starting points:
 | Lucide — https://lucide.dev | icons |
 | Feather — https://feathericons.com | icons |
 
-These are **discovery sources**, not blanket guarantees. None of them guarantees, for every asset, that it is licence-eligible for this project, free of restrictions, at a stable URL, or available without limits.
+Other legitimate sources fit the asset type too (the client's own library, a museum's open-access collection, a font or icon set's official repository), on the same terms. These are **discovery sources**, not blanket guarantees. None of them guarantees, for every asset, that it is licence-eligible for this project, free of restrictions, at a stable URL, or available without limits.
 
 - **Verify each selected asset's licence and usage terms** when possible, on the asset's own page and the source's current licence page. Respect attribution, commercial-use restrictions, redistribution rules, hotlinking restrictions and any other condition.
 - **Prefer stable integration**: download the file into the project, or use the source's supported method, when the terms permit it. Do not assume an image URL stays available.
@@ -3118,9 +3133,19 @@ When a file cannot reasonably be renamed (a CMS path, a framework-imposed name),
 
 Do not label a properly licensed, production-approved asset as disposable just because it came from a stock site.
 
+### Placeholders by delivery mode
+
+The delivery mode (`templates/TEMPLATE.md`) decides how far temporary media may go; for media, "no placeholders" (`SKILL.md`, law 5) means no undocumented or disguised placeholder.
+
+| Mode | Temporary assets |
+|---|---|
+| Design exploration | allowed when needed, each identified as a placeholder in `MEDIA.md` with its replacement need; never shown as approved |
+| Functional frontend | as above; the handoff names what must be replaced before launch |
+| Production template | production-bound assets have suitable rights or documented approval; anything still unresolved (rights, attribution, replacement) stays visible in `MEDIA.md` and `README.md`, and the build is not called production-ready |
+
 ### Required `MEDIA.md`
 
-Every generated website project has a `MEDIA.md` in its root. At least these columns:
+Every generated website project has a `MEDIA.md` in its root, in every delivery mode. At least these columns (add `Used where`, `Creator / provider` or `Notes` when they help; skip metadata that doesn't apply):
 
 ```markdown
 | File or asset | Source URL | License / usage status | Placeholder? | Replace before production? |
@@ -3137,6 +3162,8 @@ Every generated website project has a `MEDIA.md` in its root. At least these col
 - A build with no external media still ships `MEDIA.md`: a short inventory stating that no external media assets were used.
 
 The root `README.md` explains the media handoff and names every unverified or temporary asset that must be reviewed before production.
+
+**What the gate checks** (`scripts/completeness.mjs`, axis X, whenever `DESIGN.md` has a `Scope` section, i.e. website creation): `MEDIA.md` exists and cannot be excused; it has the inventory table, or states that no external media assets were used; each row has a source, a licence / usage status (`unknown` is allowed) and yes / no in both last columns; a placeholder is marked for replacement; an `unknown` or `unverified` licence is marked for replacement; a `placeholder-…` file or a `PLACEHOLDER:` comment in the project is listed; and `README.md` points to `MEDIA.md` when anything still needs replacing. Pending replacements print a not-production-ready warning. It never decides whether a licence is valid. A `Scope` with no `**Delivery mode:**` line (a build from before delivery modes) only warns on a missing `MEDIA.md`, so a fix there doesn't fail. Narrow maintenance (the light route) writes no `Scope` section of its own; when it adds or replaces media in a project that has a `MEDIA.md`, add or update the row by hand.
 
 ### Media rules
 
@@ -3356,14 +3383,14 @@ Each failing gate P item adds one to the P count in the stamp (`rules: C0 S0 P0 
 
 ## Research protocol (Step 0.5, mandatory)
 
-The skill's own components, data sets, archetypes and collision engine are one source. Used alone they make every build look like the skill made it. Step 0.5 sends the agent outside the skill before anything is designed. It is required for every build or redesign, and nothing in Step 1 onward may come from "the skill's defaults" alone: **every design decision traces to the brief or to a named reference.**
+The skill's own components, data sets, archetypes and collision engine are one source. Used alone they make every build look like the skill made it. Step 0.5 sends the agent outside the skill before anything is designed. It is required for all new design work (a new site of any page count, a new brand or art direction, a new product experience, a distinctive redesign); only narrow maintenance inside an established design (the light route, `SKILL.md` "Routes") skips it, and nothing in Step 1 onward may come from "the skill's defaults" alone: **every design decision traces to the brief or to a named reference.**
 
 ### The order
 
 Two kinds of research, in this order. Step 0.5 in `thinking/sequence.md` states the requirement; this file is the method.
 
 1. **Read the brief.** Name the exact website type, or the combination of types (a marketplace with a subscription box is two).
-2. **Find 3–5 real websites of that exact type**, with whatever research tools are available. Same job, not same look.
+2. **Find 3–5 real websites of that exact type**, with whatever research tools are available. Same job, not same look. Fewer than three credible ones: use the closest genuinely comparable products and say so. Never invent a reference.
 3. **Investigate them**: routes and page hierarchy, functionality, the states that matter, visible admin or seller surfaces, legal pages ("Type research", below).
 4. **Record what is useful**, each finding marked observed, inferred or unverified.
 5. **Derive the scope** in Step 0.7 from the brief, this evidence, industry knowledge and the constraints that apply (region, regulation, budget).
@@ -3371,7 +3398,7 @@ Two kinds of research, in this order. Step 0.5 in `thinking/sequence.md` states 
 7. **Synthesize a distinct concept** for this project. Never a copy of a reference.
 8. **Carry it forward** into Step 0.7 (scope), the plan and the design steps.
 
-Research serves the brief. It is not a box-checking exercise: a one-page build needs a short look, a marketplace needs a real one.
+Research serves the brief. It is not a box-checking exercise: a one-page build needs a short look, a marketplace needs a real one. Short is still not skipped: a one-page site for a new brand is new design work.
 
 ### Type research (exact type, for scope)
 
@@ -3382,14 +3409,19 @@ For each of the 3–5 sites, as far as it is publicly observable:
 | Identity | who it is, purpose, audience, business model |
 | Routes | the discoverable page inventory, nested pages, important route variants |
 | Functionality | what each relevant route lets the visitor do |
-| States | empty, loading, error, success, authentication, permission-dependent, where they apply |
+| Flows | forms, search, filters, sorting, pagination; account, sign-in, onboarding; cart, checkout, payment, orders, or the type's equivalent |
+| States | empty, loading, error, success, disabled, validation, authentication, permission-dependent, where they apply |
 | Admin | seller-facing or admin surfaces, only if public or documented |
 | Legal | privacy, terms, cookies, returns, accessibility, compliance pages |
 | Structure | navigation, information architecture, content hierarchy, user journeys |
+| Responsive | mobile navigation and what changes on small screens |
+
+Record only the dimensions that matter for this type; a portfolio has no checkout to study.
 
 Rules:
 
 - **Observed, inferred, unverified.** Observed: you saw it. Inferred: a reasoned conclusion from what you saw or from the industry. Unverified: you could not reach it (behind a login, a paywall, a private admin, a region block). Never present an inferred or unverified item as observed.
+- **Type references and inspiration are different lists.** A visually striking site from another industry can be a design reference below; it never counts as one of the 3–5 type references.
 - **References are evidence, not a specification.** A competitor's feature becomes a scope row only when this brief needs it. A category recipe (`categories/<type>.md`), if one exists, is a starting point for design, not the scope.
 - **Hybrid briefs** research each type separately, then keep only what the actual brief needs.
 - **No category file** for the type: research it as itself. Do not force it into the nearest category.
@@ -4092,7 +4124,7 @@ It runs these bounded checks in a real browser and prints numbers. Each one veri
 | `n` | **Numbers** (counters, prices, `progress`/`meter`, `aria-valuenow`) read at scroll 0, at the end and under reduced motion, against the settled value. Live values (a ticker, a clock, `<time>`, `role=timer`/`status`/`log`, `aria-live`) are listed, not judged | Reduced motion (values) |
 | `q` | **Motion quality** (gate/3): pinned-zone progression over 8 frames, p95 `requestAnimationFrame` while scrolling (in a sandbox: `not verified — sandbox`, numbers printed, nothing counted, `docs/adapters/sandbox.md`), reduced-motion distinctness | Motion quality and budgets; Reduced motion A sticky element covering less than 15% of the viewport (a header, a call bar, a progress rail) is chrome, not a pinned zone: it holds no sequence, so it may stay sticky under reduced motion; the report lists it on a `chrome` line. |
 | `k` | **Accessibility** (gate/3): focus-visible on the first 40 focusable elements, target size at 375 touch, 200% zoom, 320px reflow, forced colors (text not on screen at rest is skipped), keyboard trap | Accessibility; Overflow (reflow); Contrast (forced colors) |
-| `X` | **Completeness** (v2.9.0, `scripts/completeness.mjs`, run by the gate when `DESIGN.md` has a `Scope` section): routes, functions, states, legal pages, edge cases, admin surfaces, skeletons and the template shape, each counted `<have>/<need>` against the scope derived in Step 0.7. Missing items fail the page unless marked "not required for this brief, reason:". Not in the stamp or its id | Completeness |
+| `X` | **Completeness** (v2.9.0, `scripts/completeness.mjs`, run by the gate when `DESIGN.md` has a `Scope` section): routes, functions, states, legal pages, edge cases, admin surfaces, skeletons, the template shape of the delivery mode and the `MEDIA.md` inventory (`craft/media.md`), each counted `<have>/<need>` against the scope derived in Step 0.7. Missing items fail the page unless marked "not required for this brief, reason:". Not in the stamp or its id | Completeness |
 | `J` | **Journey** (v2.11, `scripts/journey.mjs`): the whole site from this page, in a real browser. Six checks, each `<have>/<need>`: **nav**, **mobile**, **forms**, **loading**, **errors**, **session** (below). Any missing state fails the page. Not in the stamp or its id | Completeness; Micro-states; Accessibility |
 | `micro-states` | **Micro-states** (v2.9.0, advisory): buttons (default, hover, focus, active, disabled, loading), forms (validation error, submit loading, success, server error), data-driven lists (empty, loading, error, filled), images (loading, loaded, error), async actions (pending, success, error), read from the page's CSS rules, markup and scripts. Missing states are **warnings only**: never a failure, never in the stamp | Micro-states |
 | `rules` | **The four rule sets** (gate/4, `scripts/rulesets.mjs`), one count per set: distinct failing rule IDs. **C** copy, **S** SEO, **P** performance, **K** security (for local files, headers come from a `_headers` file next to the page). Warnings are printed and not counted | Copy; SEO; Performance; Security |
@@ -4283,7 +4315,7 @@ The placeholders are deliberate. There are no numbers to copy. Write the archety
 - [ ] Concept sentence and signature move are visible in the first screen
 - [ ] Scope: `node scripts/completeness.mjs <project>` (axis X) prints every line `n/n`; each excused item has its reason
 - [ ] Micro-states: no ⚠ left in the gate's micro-states block, or each one explained in `GATE.md`
-- [ ] Template: the build has the `templates/TEMPLATE.md` shape (README with the demo line, DESIGN, MOTION, SCHEMA, DATA, CRITIQUE, GATE, LICENSE, CHANGELOG, `.env.example`, demo-labelled `data/`, `middleware.ts`) and starts with `npm install && npm run dev` and no `.env`; every section `id` has a row in the `SCHEMA.md` section contract, every field shown is in the data model, every route is listed
+- [ ] Template: the files the delivery mode requires (`templates/TEMPLATE.md`), `MEDIA.md` always; a production template starts with `npm install && npm run dev` and no `.env`; every section `id` has a `SCHEMA.md` row when the mode has one
 - [ ] Type: display face chosen with a reason; body size and measure within `gates/rules.md` (Hierarchy); `text-wrap: balance` on headings
 - [ ] Colour: all text pairs verified (`node scripts/contrast.mjs` while designing, `node scripts/gate.mjs` on the build); accent within `gates/rules.md` (Contrast)
 - [ ] Layout: one deliberate grid break per screen, recomposed (not squeezed) on mobile
@@ -4600,7 +4632,8 @@ Read before Step 1. Design inside these. `scripts/gate.mjs` measures them after 
 | Requested and required items | every one present (route found, or evidence file and text found) |
 | Excused items | "not required for this brief, reason: <why>"; a reason is required |
 | Marks | requested, required, optional, or excused; anything else fails |
-| Template shape (`templates/TEMPLATE.md`) | `README.md` (with "All data in data/ is demo. Replace with real data before launch."), `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `DATA.md`, `CRITIQUE.md`, `GATE.md`, `LICENSE`, `CHANGELOG.md`, `.env.example` covering every env var the code reads, `middleware.ts`, the build's `data/` folder with its `schema.json` and every entry labelled demo, a `dev` script; each unless excused |
+| Template shape (`templates/TEMPLATE.md`, by delivery mode; production template shown, and the default) | `README.md` (with "All data in data/ is demo. Replace with real data before launch."), `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `DATA.md`, `CRITIQUE.md`, `GATE.md`, `LICENSE`, `CHANGELOG.md`, `.env.example` covering every env var the code reads, `middleware.ts`, the build's `data/` folder with its `schema.json` and every entry labelled demo, a `dev` script; each unless excused |
+| Media (`craft/media.md`) | `MEDIA.md` in every mode, never excused: an inventory (or "no external media assets were used"), source and licence status per row, placeholders and unknown licences marked for replacement, every `placeholder-…` file and `PLACEHOLDER:` comment listed, `README.md` pointing to it while anything needs replacing |
 | Middleware, comments, component headers | checked as warnings |
 
 ### Security (gate `rules: K`, `craft/security.md`)
@@ -4691,7 +4724,7 @@ Type a command at the start of a message. Commands combine with flags. Without a
 
 | Flag | Values | Effect |
 |---|---|---|
-| `--route` | full · light | Force the route (`SKILL.md` "Routes"). Without it the agent picks: light for one page or a small fix, full for anything bigger, and says which in its first line |
+| `--route` | full · light | Force the route (`SKILL.md` "Routes"). Without it the agent picks: light for narrow maintenance inside an established design, full for any new design work (even one page), and says which in its first line. Light never skips research for new design work |
 | `--tier` | 1–5 | Force a motion tier |
 | `--energy` `--rhythm` `--motion` | 1–3 | Set a dial (see `principles/dials.md`) |
 | `--style` | a file in `styles/` | Apply a visual language |
@@ -4709,8 +4742,8 @@ Type a command at the start of a message. Commands combine with flags. Without a
 **Output:** preview block + `DESIGN.md` + `SCHEMA.md` + `MOTION.md` (from `templates/`; `SCHEMA.md` is written with `DESIGN.md`).
 
 #### `/build [brief] [--route=full|light]`
-**What:** the full flow, from brief to finished, gated code. `--route=light` (one page or a small fix) skips the Thinking Sequence, the collision engine and scope derivation, and still runs the whole Delivery Gate.
-**When:** you want a complete page or site (full), or one page / a small fix (light).
+**What:** the full flow, from brief to finished, gated code, in the delivery mode the request asks for (design exploration, functional frontend or production template; `templates/TEMPLATE.md`). `--route=light` (narrow maintenance inside an established design) skips the Thinking Sequence, the collision engine and scope derivation, and still runs the whole Delivery Gate.
+**When:** you want a new page or site, any size (full), or a fix inside an existing design (light).
 **Output:** preview block → complete code → Delivery Gate scores → handoff note.
 
 #### `/invent [topic]`
@@ -5889,6 +5922,7 @@ Rules for the data/ folder
      Evidence: a path, optionally #<text> it must contain. Routes, legal pages and admin items starting with "/" are found automatically. -->
 **Site type:** <type, region>
 **Admin panel:** <yes | no> (settled at Checkpoint 3)
+**Delivery mode:** <design exploration | functional frontend | production template> (from the request; templates/TEMPLATE.md)
 
 | Kind | Item | Mark | Evidence |
 |---|---|---|---|
@@ -6193,7 +6227,17 @@ Every variable the code reads. All are in `.env.example` with a placeholder; the
 
 ## TEMPLATE.md: the shape of every build
 
-> Every build ships as a complete, runnable template a designer can sell, not a folder of pages. This file is the shape. `scripts/completeness.mjs` (gate axis X, "Template" line) checks it; any item that truly doesn't apply is excused in the `DESIGN.md` Scope table with "not required for this brief, reason: …".
+> A **production template** build ships as a complete, runnable template a designer can sell, not a folder of pages. This file is its shape, and the lighter shape of the other two delivery modes. `scripts/completeness.mjs` (gate axis X, "Template" line) checks the files of the mode named in `DESIGN.md` (`**Delivery mode:**` under `Scope`; production template when the line is missing); any item that truly doesn't apply is excused in the `DESIGN.md` Scope table with "not required for this brief, reason: …". `MEDIA.md` is never excused.
+
+### Delivery modes
+
+Chosen from the user's request (`thinking/sequence.md` → Required output). The mode changes the deliverable, never the design bar: research for new design work, the concept, accessibility, responsiveness, reduced motion, originality and the gate apply to all three.
+
+| Mode | Required files | Not required |
+|---|---|---|
+| Design exploration | `README.md`, `DESIGN.md`, `MOTION.md`, `MEDIA.md`, `CRITIQUE.md`, `GATE.md` | backend, auth, payments, `SCHEMA.md`, `DATA.md`, `data/`, `LICENSE`, `CHANGELOG.md`, `.env.example`, `middleware.ts`, zero-config run |
+| Functional frontend | the above + `SCHEMA.md`, `DATA.md`, `data/` and its `schema.json` (demo-labelled; README demo line) | real backend or integrations, `LICENSE`, `CHANGELOG.md`, `middleware.ts`; `.env.example` only if the code reads env vars |
+| Production template | every file below | nothing by default; excuse with a reason |
 
 ### Zero configuration
 
@@ -6222,6 +6266,7 @@ npm install && npm run dev
 | `CHANGELOG.md` | starts at `## [0.1.0] - <date>` | with the build |
 | `.env.example` | every environment variable the code reads, each with a placeholder and a comment | with the build |
 | `data/` | mock JSON, typed by the `schema.json` in `data/`, every entry labelled demo | with `SCHEMA.md` |
+| `MEDIA.md` | every image, video, icon, illustration and external visual asset: source, licence / usage status, placeholder?, replace before production? (`craft/media.md`); says so when no external media is used | with the build |
 | `middleware.ts` | auth gate, locale routing, redirects, rate limiting, security headers | with the build |
 | source files | a comment at the top of every non-trivial file (what it does, what it reads); component headers (tier, use-when, avoid-when, reduced-motion, touch) | with the build |
 
@@ -6250,8 +6295,11 @@ Copy `.env.example` to `.env.local` and fill in the values. Every variable is op
 ### Deploy
 <host>: <the exact steps or button>. Set the variables from `.env.example`. <Anything the host needs.>
 
+### Media
+Every asset and its licence status is in MEDIA.md. <Before launch: replace or clear these temporary or unverified assets: … | No asset needs replacing.>
+
 ### Files
-DESIGN.md, MOTION.md, SCHEMA.md, DATA.md, CRITIQUE.md, GATE.md, CHANGELOG.md, LICENSE
+DESIGN.md, MOTION.md, MEDIA.md, SCHEMA.md, DATA.md, CRITIQUE.md, GATE.md, CHANGELOG.md, LICENSE
 
 ### Licence
 MIT (see LICENSE).
@@ -6261,7 +6309,7 @@ The line **"All data in data/ is demo. Replace with real data before launch."** 
 
 ### Test
 
-Does `node scripts/completeness.mjs <project>` show `Template: n/n present`, with any excused item carrying its reason? Does `npm install && npm run dev` start with no `.env` file? If not, the build isn't a template yet.
+Does `node scripts/completeness.mjs <project>` show `Template: n/n present` for the delivery mode, with any excused item carrying its reason? For a production template, does `npm install && npm run dev` start with no `.env` file? If not, the build isn't finished.
 
 
 ---

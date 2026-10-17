@@ -212,7 +212,7 @@ These tools can't run `npx`, so use the single-file edition: **[`dist/motomation
 
 Without a shell, the skill uses the data tables included at the end of the file instead of its scripts.
 
-**Small context?** Custom instructions, rules files and prompt boxes often cap out at a few thousand tokens. Use **[`dist/motomation-lite.md`](dist/motomation-lite.md)** there: <!-- lite-tokens -->about 8.0k tokens<!-- /lite-tokens --> (estimated by the build script) with the five laws, flow, tiers, bans, the seven-step Thinking Sequence, the AI-default scan, the craft checklist and short lists of archetypes, mutations and signatures. `node scripts/build-lite.mjs` regenerates it, and `check-repo` fails if it goes stale or over 8k tokens.
+**Small context?** Custom instructions, rules files and prompt boxes often cap out at a few thousand tokens. Use **[`dist/motomation-lite.md`](dist/motomation-lite.md)** there: <!-- lite-tokens -->about 8.0k tokens<!-- /lite-tokens --> (estimated by the build script) with the five laws, when the light route applies, the research, scope and media rules, the delivery modes, tiers, bans, the seven-step Thinking Sequence, the AI-default scan, the craft checklist and short lists of archetypes, mutations and signatures. Sections it drops to fit are named at its top. `node scripts/build-lite.mjs` regenerates it, and `check-repo` fails if it goes stale, over 8k tokens, or loses one of those rules.
 
 ### Update
 
@@ -371,7 +371,7 @@ The memory log is per project. `memory.mjs` walks up from the folder you run it 
 
 **Styles:** minimal · editorial · swiss · neobrutalism · glass · soft/neumorphism · flat/illustrative · kinetic type · organic · dark luxe
 
-Each has its own file with default dials, archetypes, section order, a signature menu, must-haves and pitfalls.
+Each has its own file with default dials, archetypes, section order, a signature menu, must-haves and pitfalls. A category file is optional design guidance, never the scope: the scope comes from researching real sites of the exact type (Step 0.7), and a type with no file is researched as itself.
 
 ---
 

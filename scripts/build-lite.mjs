@@ -39,7 +39,8 @@ const version = read("VERSION").trim();
 const dropSub = (t, re) => t.replace(new RegExp(`^### ${re.source}[\\s\\S]*?(?=^#{2,3} )`, "m"), "");
 // The summary's steps 1–7 are printed in full under "Thinking Sequence (steps)"; only its Step 0 line stays here.
 const onlyStep0 = (t) => t.replace(/(^## The Thinking Sequence[^\n]*\n)([\s\S]*?)(?=^## )/m, (_, h, body) => h + body.split("\n").filter((l) => !/^[1-7]\. /.test(l)).join("\n"));
-const skill = onlyStep0(dropSub(unmark(noFrontMatter(read("SKILL.md"))), /Compose, extend, or invent/));
+const skill = onlyStep0(dropSub(unmark(noFrontMatter(read("SKILL.md"))), /Compose, extend, or invent/))
+  .replace(/^- After delivery, log the run to the user-level memory[^\n]*\n/m, ""); // the memory log needs a shell and a file system
 const DROP_FROM_SKILL = [/^Router/, /^Tools inside this skill/, /^Commands/, /^Default flow/]; // file loading, scripts, slash commands and the file-by-file flow map don't exist in a chat tool; the sequence summary and steps below carry the order
 const parts = [
   `# Motomation Design v${version}: lite edition`,
@@ -56,7 +57,9 @@ const parts = [
   "",
   "## Thinking Sequence (steps)",
   "",
-  demote(pickSections(unmark(read("thinking/sequence.md")).replace(/^\*\*When the draw doesn't fit\.\*\*[^\n]*\n\n/m, ""), // collide.mjs draws need a shell
+  demote(pickSections(unmark(read("thinking/sequence.md")).replace(/^\*\*When the draw doesn't fit\.\*\*[^\n]*\n\n/m, "") // collide.mjs draws need a shell
+     .replace(/^\*\*Reuse across projects\.\*\*[^\n]*\n\n/m, "") // the cross-project memory log needs a shell too
+     .replace(/^\*\*WRONG \/ RIGHT\*\*[^\n]*\n\n(?:- [^\n]*\n)+\n/m, ""), // a secondary worked example; the rule above it and its test stay
      (h) => /^[1-7]\. /.test(h))), // Step 0 (Stack) rides in the SKILL.md summary above
   "",
   demote(pickSections(unmark(read("gates/delivery-gate.md")), (h) => /^Part [23]/.test(h))),

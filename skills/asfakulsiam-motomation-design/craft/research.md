@@ -1,13 +1,13 @@
 # Research protocol (Step 0.5, mandatory)
 
-The skill's own components, data sets, archetypes and collision engine are one source. Used alone they make every build look like the skill made it. Step 0.5 sends the agent outside the skill before anything is designed. It is required for every build or redesign, and nothing in Step 1 onward may come from "the skill's defaults" alone: **every design decision traces to the brief or to a named reference.**
+The skill's own components, data sets, archetypes and collision engine are one source. Used alone they make every build look like the skill made it. Step 0.5 sends the agent outside the skill before anything is designed. It is required for all new design work (a new site of any page count, a new brand or art direction, a new product experience, a distinctive redesign); only narrow maintenance inside an established design (the light route, `SKILL.md` "Routes") skips it, and nothing in Step 1 onward may come from "the skill's defaults" alone: **every design decision traces to the brief or to a named reference.**
 
 ## The order
 
 Two kinds of research, in this order. Step 0.5 in `thinking/sequence.md` states the requirement; this file is the method.
 
 1. **Read the brief.** Name the exact website type, or the combination of types (a marketplace with a subscription box is two).
-2. **Find 3–5 real websites of that exact type**, with whatever research tools are available. Same job, not same look.
+2. **Find 3–5 real websites of that exact type**, with whatever research tools are available. Same job, not same look. Fewer than three credible ones: use the closest genuinely comparable products and say so. Never invent a reference.
 3. **Investigate them**: routes and page hierarchy, functionality, the states that matter, visible admin or seller surfaces, legal pages ("Type research", below).
 4. **Record what is useful**, each finding marked observed, inferred or unverified.
 5. **Derive the scope** in Step 0.7 from the brief, this evidence, industry knowledge and the constraints that apply (region, regulation, budget).
@@ -15,7 +15,7 @@ Two kinds of research, in this order. Step 0.5 in `thinking/sequence.md` states 
 7. **Synthesize a distinct concept** for this project. Never a copy of a reference.
 8. **Carry it forward** into Step 0.7 (scope), the plan and the design steps.
 
-Research serves the brief. It is not a box-checking exercise: a one-page build needs a short look, a marketplace needs a real one.
+Research serves the brief. It is not a box-checking exercise: a one-page build needs a short look, a marketplace needs a real one. Short is still not skipped: a one-page site for a new brand is new design work.
 
 ## Type research (exact type, for scope)
 
@@ -26,14 +26,19 @@ For each of the 3–5 sites, as far as it is publicly observable:
 | Identity | who it is, purpose, audience, business model |
 | Routes | the discoverable page inventory, nested pages, important route variants |
 | Functionality | what each relevant route lets the visitor do |
-| States | empty, loading, error, success, authentication, permission-dependent, where they apply |
+| Flows | forms, search, filters, sorting, pagination; account, sign-in, onboarding; cart, checkout, payment, orders, or the type's equivalent |
+| States | empty, loading, error, success, disabled, validation, authentication, permission-dependent, where they apply |
 | Admin | seller-facing or admin surfaces, only if public or documented |
 | Legal | privacy, terms, cookies, returns, accessibility, compliance pages |
 | Structure | navigation, information architecture, content hierarchy, user journeys |
+| Responsive | mobile navigation and what changes on small screens |
+
+Record only the dimensions that matter for this type; a portfolio has no checkout to study.
 
 Rules:
 
 - **Observed, inferred, unverified.** Observed: you saw it. Inferred: a reasoned conclusion from what you saw or from the industry. Unverified: you could not reach it (behind a login, a paywall, a private admin, a region block). Never present an inferred or unverified item as observed.
+- **Type references and inspiration are different lists.** A visually striking site from another industry can be a design reference below; it never counts as one of the 3–5 type references.
 - **References are evidence, not a specification.** A competitor's feature becomes a scope row only when this brief needs it. A category recipe (`categories/<type>.md`), if one exists, is a starting point for design, not the scope.
 - **Hybrid briefs** research each type separately, then keep only what the actual brief needs.
 - **No category file** for the type: research it as itself. Do not force it into the nearest category.

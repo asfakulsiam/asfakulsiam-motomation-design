@@ -1,6 +1,16 @@
 # TEMPLATE.md: the shape of every build
 
-> Every build ships as a complete, runnable template a designer can sell, not a folder of pages. This file is the shape. `scripts/completeness.mjs` (gate axis X, "Template" line) checks it; any item that truly doesn't apply is excused in the `DESIGN.md` Scope table with "not required for this brief, reason: …".
+> A **production template** build ships as a complete, runnable template a designer can sell, not a folder of pages. This file is its shape, and the lighter shape of the other two delivery modes. `scripts/completeness.mjs` (gate axis X, "Template" line) checks the files of the mode named in `DESIGN.md` (`**Delivery mode:**` under `Scope`; production template when the line is missing); any item that truly doesn't apply is excused in the `DESIGN.md` Scope table with "not required for this brief, reason: …". `MEDIA.md` is never excused.
+
+## Delivery modes
+
+Chosen from the user's request (`thinking/sequence.md` → Required output). The mode changes the deliverable, never the design bar: research for new design work, the concept, accessibility, responsiveness, reduced motion, originality and the gate apply to all three.
+
+| Mode | Required files | Not required |
+|---|---|---|
+| Design exploration | `README.md`, `DESIGN.md`, `MOTION.md`, `MEDIA.md`, `CRITIQUE.md`, `GATE.md` | backend, auth, payments, `SCHEMA.md`, `DATA.md`, `data/`, `LICENSE`, `CHANGELOG.md`, `.env.example`, `middleware.ts`, zero-config run |
+| Functional frontend | the above + `SCHEMA.md`, `DATA.md`, `data/` and its `schema.json` (demo-labelled; README demo line) | real backend or integrations, `LICENSE`, `CHANGELOG.md`, `middleware.ts`; `.env.example` only if the code reads env vars |
+| Production template | every file below | nothing by default; excuse with a reason |
 
 ## Zero configuration
 
@@ -29,6 +39,7 @@ npm install && npm run dev
 | `CHANGELOG.md` | starts at `## [0.1.0] - <date>` | with the build |
 | `.env.example` | every environment variable the code reads, each with a placeholder and a comment | with the build |
 | `data/` | mock JSON, typed by the `schema.json` in `data/`, every entry labelled demo | with `SCHEMA.md` |
+| `MEDIA.md` | every image, video, icon, illustration and external visual asset: source, licence / usage status, placeholder?, replace before production? (`craft/media.md`); says so when no external media is used | with the build |
 | `middleware.ts` | auth gate, locale routing, redirects, rate limiting, security headers | with the build |
 | source files | a comment at the top of every non-trivial file (what it does, what it reads); component headers (tier, use-when, avoid-when, reduced-motion, touch) | with the build |
 
@@ -57,8 +68,11 @@ Copy `.env.example` to `.env.local` and fill in the values. Every variable is op
 ## Deploy
 <host>: <the exact steps or button>. Set the variables from `.env.example`. <Anything the host needs.>
 
+## Media
+Every asset and its licence status is in MEDIA.md. <Before launch: replace or clear these temporary or unverified assets: … | No asset needs replacing.>
+
 ## Files
-DESIGN.md, MOTION.md, SCHEMA.md, DATA.md, CRITIQUE.md, GATE.md, CHANGELOG.md, LICENSE
+DESIGN.md, MOTION.md, MEDIA.md, SCHEMA.md, DATA.md, CRITIQUE.md, GATE.md, CHANGELOG.md, LICENSE
 
 ## Licence
 MIT (see LICENSE).
@@ -68,4 +82,4 @@ The line **"All data in data/ is demo. Replace with real data before launch."** 
 
 ## Test
 
-Does `node scripts/completeness.mjs <project>` show `Template: n/n present`, with any excused item carrying its reason? Does `npm install && npm run dev` start with no `.env` file? If not, the build isn't a template yet.
+Does `node scripts/completeness.mjs <project>` show `Template: n/n present` for the delivery mode, with any excused item carrying its reason? For a production template, does `npm install && npm run dev` start with no `.env` file? If not, the build isn't finished.

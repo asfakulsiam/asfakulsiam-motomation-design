@@ -6,7 +6,7 @@ Type a command at the start of a message. Commands combine with flags. Without a
 
 | Flag | Values | Effect |
 |---|---|---|
-| `--route` | full · light | Force the route (`SKILL.md` "Routes"). Without it the agent picks: light for one page or a small fix, full for anything bigger, and says which in its first line |
+| `--route` | full · light | Force the route (`SKILL.md` "Routes"). Without it the agent picks: light for narrow maintenance inside an established design, full for any new design work (even one page), and says which in its first line. Light never skips research for new design work |
 | `--tier` | 1–5 | Force a motion tier |
 | `--energy` `--rhythm` `--motion` | 1–3 | Set a dial (see `principles/dials.md`) |
 | `--style` | a file in `styles/` | Apply a visual language |
@@ -24,8 +24,8 @@ Type a command at the start of a message. Commands combine with flags. Without a
 **Output:** preview block + `DESIGN.md` + `SCHEMA.md` + `MOTION.md` (from `templates/`; `SCHEMA.md` is written with `DESIGN.md`).
 
 ### `/build [brief] [--route=full|light]`
-**What:** the full flow, from brief to finished, gated code. `--route=light` (one page or a small fix) skips the Thinking Sequence, the collision engine and scope derivation, and still runs the whole Delivery Gate.
-**When:** you want a complete page or site (full), or one page / a small fix (light).
+**What:** the full flow, from brief to finished, gated code, in the delivery mode the request asks for (design exploration, functional frontend or production template; `templates/TEMPLATE.md`). `--route=light` (narrow maintenance inside an established design) skips the Thinking Sequence, the collision engine and scope derivation, and still runs the whole Delivery Gate.
+**When:** you want a new page or site, any size (full), or a fix inside an existing design (light).
 **Output:** preview block → complete code → Delivery Gate scores → handoff note.
 
 ### `/invent [topic]`
