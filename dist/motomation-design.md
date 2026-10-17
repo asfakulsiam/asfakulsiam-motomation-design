@@ -3173,7 +3173,7 @@ The root `README.md` explains the media handoff and names every unverified or te
 | no `MEDIA.md`, no media files | nothing to check |
 | no `MEDIA.md`, media files | undocumented `placeholder-…` files and `PLACEHOLDER:` comments fail; with a git baseline, media added or replaced since the last commit fails until `MEDIA.md` exists; without one, a warning that says the check cannot tell what changed |
 
-**Baseline.** In a git working tree with a commit, the last commit is the baseline (`git status`: untracked, added, renamed, modified media). Without git there is none, and the check says so. A file replaced under the same name is detected only with the baseline: if `MEDIA.md` did not change in the same working tree, it warns to confirm the row (a re-export from the same source needs no edit). Changes already committed are invisible to it, so run the gate before committing the fix. Without a baseline, update the row by hand.
+**Baseline.** In a git working tree with a commit, the last commit is the baseline (`git status`: untracked, added, renamed, modified media). Without git there is none, and the check says so. A file replaced under the same name is detected only with the baseline: if `MEDIA.md` did not change in the same working tree, it warns to confirm the row (a re-export from the same source needs no edit). A media file deleted since the last commit while `MEDIA.md` did not change warns to remove or update its row. Changes already committed are invisible to it, so run the gate before committing the fix. Without a baseline, update the row by hand.
 
 ### Media rules
 
@@ -3366,7 +3366,7 @@ backend)" for the [BE] items, never a tick.
 | perf-01 | [FE] | Images compressed; AVIF or WebP, with a fallback where needed | **gate P**: a raster `<img>` (JPEG, PNG, GIF) with no AVIF/WebP `<source>` fails |
 | perf-02 | [FE] | Below-the-fold images use `loading="lazy"` | **gate P**: an `<img>` whose top is below the first 1440 × 900 screen without `loading="lazy"` fails |
 | perf-03 | [FE] | The LCP image is not lazy-loaded | **gate P**: the largest image in the first screen with `loading="lazy"` fails |
-| perf-04 | [FE] | Code-split: no single script over the tier's budget | **gate P**: total gzipped JS over the tier budget above fails; no tier known → the Tier 4–5 budget |
+| perf-04 | [FE] | Code-split: no single script over the tier's budget | **gate P**: gzipped first-load JS beyond the framework over the tier budget above fails; no tier known → the Tier 4–5 budget. The framework is what its build lists as runtime (Next.js: `rootMainFiles` and `polyfillFiles` in `.next/build-manifest.json`, read when a project folder is gated through `out/`); elsewhere, and for a URL target, every script counts. `nomodule` scripts never count |
 | perf-05 | [FE] | API responses cached (SWR, React Query, or `Cache-Control`) | read the data layer; "n/a (no API)" on a static page |
 | perf-06 | [FE] | A CDN fronts static assets | the deploy target (Pages, Vercel, Netlify, Cloudflare) or the CDN config |
 | perf-07 | [FE] | JS and CSS minified in production | **gate P** warns when a script over 2 KB looks unminified (long comments, short lines); the build config decides |
@@ -4962,6 +4962,7 @@ npm i gsap @gsap/react lenis
 - Route changes: call `ScrollTrigger.refresh()` after the new page mounts; `useGSAP` reverts the old page's triggers on unmount.
 - Images: `next/image` with `sizes` and `priority` on the LCP image. Image sequences live in `/public/film/…` and are drawn to a canvas (no `next/image`).
 - Three.js: `dynamic(() => import("./Scene"), { ssr: false })`.
+- Stamp: the build minifies CSS and drops ordinary comments, so write the stamp (`SKILL.md` → Output rules) at the top of `app/globals.css` as `/*! motomation · … */` and check it survives in `.next/static/css/` or `out/_next/static/css/`.
 - Metadata: export `metadata` / `generateMetadata` per route, plus `app/opengraph-image.tsx`, `app/sitemap.ts`, `app/robots.ts` and `public/llms.txt`.
 
 

@@ -85,6 +85,10 @@ const mm4 = maintenanceMedia(mt(null, [["public/placeholder-hero.jpg", "x"]]));
 say(!mm4.pass && mm4.problems.some((p) => /placeholder-hero\.jpg is not listed/.test(p)), "an undocumented placeholder fails even without a Scope section or MEDIA.md");
 const mm5 = maintenanceMedia(mt(null, [["styles.css", "a:hover{color:red}"]]));
 say(mm5.pass && !mm5.warnings.length, "a non-media fix on a site with no media passes with nothing to report");
+// a project kept under a folder named build/ (or dist/, out/) is still checked: only build output inside it is skipped
+const under = (media, files) => { const r = join(mkdtempSync(join(tmpdir(), "moto-u-")), "build", "site"); put(r, "DESIGN.md", "# Existing site\n\n## Concept\nx\n"); if (media !== null) put(r, "MEDIA.md", media); for (const [f, t] of files) put(r, f, t); return r; };
+const ub = maintenanceMedia(under(row("public/hero.jpg", "client-supplied", "approved", "no", "no"), [["public/hero.jpg", "x"], ["public/team.jpg", "x"], ["dist/team.jpg", "x"]]));
+say(!ub.pass && ub.problems.some((p) => /public\/team\.jpg has no row/.test(p)) && !ub.problems.some((p) => /dist\//.test(p)), `a project under a build/ folder: its media are checked, its own dist/ is not (${ub.problems.join("; ")})`);
 // a second table in MEDIA.md (fonts, with other columns) is not read as inventory rows
 const fontsAfter = row("public/hero.webp", "custom", "custom", "no", "no") + "\n## Fonts\n\n| Font | Source | Licence |\n|---|---|---|\n| Fraunces | Google Fonts | OFL |\n";
 const ft = maintenanceMedia(mt(fontsAfter, [["public/hero.webp", "x"]])); say(!ft.problems.length, `MEDIA.md: a fonts table after the inventory is not inventory (${ft.problems.join("; ")})`);
@@ -104,6 +108,8 @@ if (gitOk) {
   say(r5.pass && !r5.warnings.some((w) => /same name/.test(w)), "git: updating the row in the same change clears the warning");
   const g6 = committed(row("public/hero.jpg", "client-supplied", "approved", "no", "no"), [["public/hero.jpg", "x"]]); put(g6, "out/hero.jpg", "build"); put(g6, "public/favicon.png", "f"); const r6 = maintenanceMedia(g6);
   say(r6.pass && !r6.warnings.length, "git: new build output and a favicon need no row");
+  const g7 = committed(row("public/hero.jpg", "client-supplied", "approved", "no", "no"), [["public/hero.jpg", "x"]]); rmSync(join(g7, "public/hero.jpg")); const r7 = maintenanceMedia(g7);
+  say(r7.pass && r7.warnings.some((w) => /public\/hero\.jpg removed since the last commit/.test(w)), "git: media removed with its MEDIA.md row left in place warns");
 } else console.log("skip git baseline cases (git not available)");
 // readiness claims: a prototype is never production-ready, nor is a template with unresolved media
 const rc1 = completeness(explore("# MEDIA.md\n\nNo external media assets were used.\n", [["README.md", "# x\n\nProduction-ready site.\n"]]));

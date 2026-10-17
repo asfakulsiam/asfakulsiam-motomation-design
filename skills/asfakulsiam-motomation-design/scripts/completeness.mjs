@@ -95,6 +95,11 @@ function walk(dir, out = [], depth = 0) {
   }
   return out;
 }
+// build output (out/ dist/ build/ .next/), matched on the path inside the project: a project kept under a folder with
+// one of those names (~/build/site) is still checked
+const BUILT = /(^|\/)(out|dist|build|\.next)\//;
+const rel = (root, p) => relative(root, p).split(sep).join("/");
+const built = (root, p) => BUILT.test(rel(root, p));
 const norm = (r) => { let x = "/" + String(r).trim().replace(/^\/+|\/+$/g, ""); x = x.replace(/\[\[?\.{3}[^\]]+\]?\]/g, "[...]").replace(/\[[^\].]+\]/g, "[*]").replace(/:[a-z0-9_]+/gi, "[*]"); return x === "/" ? "/" : x.toLowerCase(); };
 export function projectRoutes(root) {
   const routes = new Set();
@@ -136,7 +141,7 @@ function demoLabelled(f) { try { const j = JSON.parse(readFileSync(f, "utf8")); 
 // environment variables the code reads (process.env.X, import.meta.env.X), public framework vars included
 function envVars(root) {
   const out = new Set(); const skip = new Set(["NODE_ENV", "NEXT_RUNTIME", "VERCEL", "VERCEL_ENV", "VERCEL_URL", "CI", "PORT"]);
-  for (const f of walk(root)) { if (!/\.(tsx|ts|jsx|js|mjs|astro|svelte)$/.test(f) || /[\\/](out|dist|build|\.next|data)[\\/]/.test(f)) continue; const t = readFileSync(f, "utf8"); for (const m of t.matchAll(/(?:process\.env|import\.meta\.env)\.([A-Z][A-Z0-9_]+)/g)) if (!skip.has(m[1])) out.add(m[1]); }
+  for (const f of walk(root)) { if (!/\.(tsx|ts|jsx|js|mjs|astro|svelte)$/.test(f) || built(root, f) || /(^|\/)data\//.test(rel(root, f))) continue; const t = readFileSync(f, "utf8"); for (const m of t.matchAll(/(?:process\.env|import\.meta\.env)\.([A-Z][A-Z0-9_]+)/g)) if (!skip.has(m[1])) out.add(m[1]); }
   return [...out].sort();
 }
 // heuristic warnings (never fail): middleware coverage, comments in non-trivial files, component headers, demo labels
@@ -144,10 +149,10 @@ function warnings(root) {
   const w = [];
   const mw = ["middleware.ts", "src/middleware.ts", "middleware.js", "src/middleware.js"].map((f) => join(root, f)).find(existsSync);
   if (mw) { const t = readFileSync(mw, "utf8"); for (const [k, re] of [["auth gate", /auth|session|redirect\(.*login/i], ["locale routing", /locale|i18n|accept-language/i], ["redirects", /redirect/i], ["rate limiting", /rate|limit|429/i], ["security headers", /content-security-policy|x-content-type-options|referrer-policy/i]]) if (!re.test(t)) w.push(`middleware: no ${k} found in ${relative(root, mw)}`); }
-  const code = walk(root).filter((f) => /\.(tsx|ts|jsx|js|mjs|css)$/.test(f) && !/[\\/](out|dist|build|\.next)[\\/]/.test(f));
+  const code = walk(root).filter((f) => /\.(tsx|ts|jsx|js|mjs|css)$/.test(f) && !built(root, f));
   const bare = code.filter((f) => { const t = readFileSync(f, "utf8"); return t.split("\n").length > 40 && !/\/\/|\/\*/.test(t); });
   if (bare.length) w.push(`comments: ${bare.length} non-trivial file(s) (> 40 lines) without a comment: ${bare.slice(0, 5).map((f) => relative(root, f)).join(", ")}`);
-  const comps = code.filter((f) => /[\\/]components[\\/]/.test(f) && /\.(tsx|jsx)$/.test(f));
+  const comps = code.filter((f) => /(^|\/)components\//.test(rel(root, f)) && /\.(tsx|jsx)$/.test(f));
   const noHead = comps.filter((f) => { const t = readFileSync(f, "utf8").slice(0, 1500); return !["tier", "use-when", "avoid-when", "reduced-motion", "touch"].every((k) => new RegExp(`\\b${k}\\b`, "i").test(t)); });
   if (noHead.length) w.push(`component headers: ${noHead.length} of ${comps.length} component(s) lack tier / use-when / avoid-when / reduced-motion / touch: ${noHead.slice(0, 5).map((f) => relative(root, f)).join(", ")}`);
   return w;
@@ -158,11 +163,11 @@ function warnings(root) {
 const yes = (v) => /^(yes|y|true)\b/i.test(v); const no = (v) => /^(no|n|false)\b/i.test(v);
 // local media files: images, video and SVG files the project serves (build output, node_modules and favicon.ico excluded)
 const MEDIA_EXT = /\.(jpe?g|png|webp|avif|gif|svg|mp4|webm|mov|m4v)$/i;
-export function mediaFiles(root) { return walk(root).filter((p) => MEDIA_EXT.test(p) && !/[\\/](out|dist|build|\.next)[\\/]/.test(p) && !/(^|[\\/])favicon\./i.test(p)).map((p) => relative(root, p).split(sep).join("/")); }
+export function mediaFiles(root) { return walk(root).filter((p) => MEDIA_EXT.test(p) && !built(root, p) && !/(^|[\\/])favicon\./i.test(p)).map((p) => rel(root, p)); }
 // placeholder files and PLACEHOLDER comments that MEDIA.md (its text, or "" when absent) does not list
 function undocumentedPlaceholders(root, md) {
   const problems = [];
-  for (const p of walk(root).filter((x) => !/[\\/](out|dist|build|\.next)[\\/]/.test(x))) {
+  for (const p of walk(root).filter((x) => !built(root, x))) {
     const base = p.split(/[\\/]/).pop();
     if (/^placeholder-/i.test(base) && !md.includes(base)) problems.push(`placeholder ${relative(root, p)} is not listed in MEDIA.md`);
     if (/\.(html?|tsx|ts|jsx|js|mjs|css|astro|svelte|vue|mdx)$/.test(base)) {
@@ -239,6 +244,7 @@ export function maintenanceMedia(root) {
   if (!has && touched.length) r.problems.push(`this change adds or replaces media since the last commit (${list(touched)}) and the project has no MEDIA.md; create it (craft/media.md)`);
   else if (!has && files.length) warnings.push(base ? `media: ${files.length} media file(s) and no MEDIA.md; none added or replaced since the last commit (git), so none is required for this change` : `media: ${files.length} media file(s) and no MEDIA.md, and no baseline (not a git working tree with a commit): this check cannot tell which files this change touched; if it added, replaced or removed media, create MEDIA.md (craft/media.md)`);
   if (has && base && base.replaced.length && !base.mediaDoc) warnings.push(`media: ${list(base.replaced)} changed under the same name since the last commit and MEDIA.md did not; confirm each row (source, licence status) still holds`);
+  if (has && base && base.removed.length && !base.mediaDoc) warnings.push(`media: ${list(base.removed)} removed since the last commit and MEDIA.md did not change; remove or update its row`);
   if (has && !base && files.length) warnings.push("media: no baseline (not a git working tree with a commit): a file replaced under the same name is not detected; update its MEDIA.md row by hand");
   if (r.unresolved) warnings.push(`media: ${r.unresolved} asset(s) in MEDIA.md must be replaced or cleared before production; not production-ready until they are`);
   return { root, maintenance: true, hasMedia: has, mediaFiles: files.length, baseline: base ? "git (last commit)" : null, changed: base, problems: r.problems, warnings, pass: !r.problems.length };

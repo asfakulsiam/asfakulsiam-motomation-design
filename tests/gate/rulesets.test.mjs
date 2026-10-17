@@ -1,6 +1,10 @@
 // The four rule-set axes bite, without a browser: each rule fails on a planted violation and passes on clean input.
 //   node tests/gate/rulesets.test.mjs
 import { copyRules, seoRules, perfRules, secRules, parseHeadersFile, countOf, rulesAxes, sitemapPages } from "../../skills/asfakulsiam-motomation-design/scripts/rulesets.mjs";
+import { readStamp, stampSource, frameworkFiles } from "../../skills/asfakulsiam-motomation-design/scripts/gate.mjs";
+import { mkdtempSync as mkStampDir, mkdirSync as mkStampSub, writeFileSync as putStamp } from "node:fs";
+import { join as joinStamp } from "node:path";
+import { tmpdir as stampTmp } from "node:os";
 let bad = 0; const say = (ok, m) => { console.log(`${ok ? "ok  " : "FAIL"} ${m}`); if (!ok) bad++; };
 const ids = (r) => [...new Set(r.fails.map((f) => f.id))].sort().join(" ");
 const URL0 = "https://example.org/rooms/";
@@ -36,6 +40,7 @@ say(sitemapPages(SM("/rooms/"), URL0) === 0 && sitemapPages(SM("/", "/rooms/", "
 say(S({ links: ["#a"], sitePages: 0 }) === "", "seo-11: a one-page site (sitemap lists only this page) needs no links to other pages");
 say(S({ links: ["#a", "/visit/"], sitePages: 2 }) === "seo-11" && S({ links: ["/", "/visit/"], sitePages: 2 }) === "", "seo-11: a three-page site must link to both other pages");
 say(S({ links: ["#a", "/visit/"], sitePages: null }) === "seo-11" && S({ links: ["/a/", "/b/"], sitePages: 9 }) === "seo-11", "seo-11: no sitemap, or a larger site, keeps the minimum of 3");
+say(/no sitemap\.xml found/.test(seoRules({ ...goodSeo, links: ["#a"], sitePages: null }).fails[0]?.why || "") && !/no sitemap/.test(seoRules({ ...goodSeo, links: ["/a/"], sitePages: 9 }).fails[0]?.why || ""), "seo-11: without a sitemap the message names the missing sitemap.xml (seo-01)");
 say(S({ links: ["/Rooms/", "/visit/?id=7", "/journal/"] }) === "seo-17", "seo-17: uppercase slug and query caught");
 say(S({ subresources: ["http://cdn.example.org/a.js"] }) === "seo-16", "seo-16: mixed content caught");
 say(S({ ogImage: null }) === "seo-18", "seo-18: missing og:image caught");
@@ -90,6 +95,22 @@ say(countOf(secRules({ ...goodSec, scriptTexts: ["localStorage.setItem('jwt', t)
 const hf = "/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: no-referrer\n/admin/*\n  X-Robots-Tag: noindex\n";
 say(parseHeadersFile(hf, "/studio.html")["x-content-type-options"] === "nosniff" && !parseHeadersFile(hf, "/studio.html")["x-robots-tag"], "_headers: /* applies, /admin/* does not");
 say(rulesAxes({ copy: { fails: [{ id: "copy-04" }, { id: "copy-04" }] }, seo: { fails: [] }, perf: { fails: [] }, sec: { fails: [{ id: "sec-h2" }] } }).segment === "rules: C1 S0 P0 K1", "a rule failing twice counts once: rules: C1 S0 P0 K1");
+
+// the stamp at the top of an external stylesheet (SKILL.md → Output rules; a Next.js build links its CSS) is read with the page
+{ const d = mkStampDir(joinStamp(stampTmp(), "moto-stamp-")); mkStampSub(joinStamp(d, "_next/static/css"), { recursive: true });
+  putStamp(joinStamp(d, "index.html"), '<!doctype html><link rel="stylesheet" href="/_next/static/css/a.css" data-precedence="next"><link rel="stylesheet" href="https://cdn.example.org/x.css"><h1>x</h1>');
+  putStamp(joinStamp(d, "_next/static/css/a.css"), "/*! motomation · archetype: broadsheet · mutation: list-becomes-map · signature: cup · tier: 1 */body{margin:0}");
+  const f = readStamp(stampSource(d))?.fields || {};
+  say(f.archetype === "broadsheet" && f.tier === "1", `stamp: read from a linked local stylesheet (${JSON.stringify(f)})`);
+  putStamp(joinStamp(d, "index.html"), "<!doctype html><h1>x</h1>");
+  say(readStamp(stampSource(d)) === null, "stamp: a page that links no stylesheet and has no stamp has none"); }
+
+// perf-04 counts JS beyond the framework: Next.js lists its runtime in .next/build-manifest.json
+{ const d = mkStampDir(joinStamp(stampTmp(), "moto-fw-")); mkStampSub(joinStamp(d, ".next"), { recursive: true });
+  putStamp(joinStamp(d, ".next/build-manifest.json"), JSON.stringify({ polyfillFiles: ["static/chunks/polyfills-1.js"], rootMainFiles: ["static/chunks/webpack-1.js", "static/chunks/4bd1-1.js"], pages: {} }));
+  const fw = frameworkFiles(d);
+  say(fw.length === 3 && fw.includes("/_next/static/chunks/4bd1-1.js") && fw.includes("/_next/static/chunks/polyfills-1.js"), `perf-04: the Next.js runtime is read from build-manifest.json (${fw.join(", ")})`);
+  say(frameworkFiles(mkStampDir(joinStamp(stampTmp(), "moto-nofw-"))).length === 0, "perf-04: no build manifest, nothing is subtracted"); }
 
 if (bad) { console.error(`\n${bad} check(s) failed`); process.exit(1); }
 console.log("\nevery rule-set check bites");

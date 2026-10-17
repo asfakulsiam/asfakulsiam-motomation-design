@@ -92,7 +92,7 @@ export function seoRules({ pageUrl, title = null, description = null, robots = [
   }
   // the minimum is 3, or every other page when the site's sitemap lists fewer than 3 (a one-page site needs none)
   const minLinks = Number.isFinite(sitePages) ? Math.min(MIN_INTERNAL_LINKS, sitePages) : MIN_INTERNAL_LINKS;
-  if (uniq(internal).length < minLinks) f("seo-11", `${uniq(internal).length} internal link(s) to other pages (≥ ${minLinks}${minLinks < MIN_INTERNAL_LINKS ? `: sitemap.xml lists ${sitePages} other page(s)` : ""})`);
+  if (uniq(internal).length < minLinks) f("seo-11", `${uniq(internal).length} internal link(s) to other pages (≥ ${minLinks}${minLinks < MIN_INTERNAL_LINKS ? `: sitemap.xml lists ${sitePages} other page(s)` : sitePages === null ? "; no sitemap.xml found (seo-01): a site whose sitemap lists fewer pages needs a link to each" : ""})`);
   if (canonicals[0]) { try { const c = new URL(canonicals[0], pageUrl); if (/[A-Z_]/.test(c.pathname) || c.search) badSlugs.push(c.pathname + c.search); } catch {} }
   if (badSlugs.length) f("seo-17", "URL slugs need lowercase, hyphens, no IDs, no parameters", badSlugs.slice(0, 3).join(" "));
   const mixed = subresources.filter((s) => /^http:\/\//i.test(s) && !/^http:\/\/(127\.0\.0\.1|localhost)(:|\/)/i.test(s));

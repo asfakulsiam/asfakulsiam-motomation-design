@@ -4,6 +4,17 @@ All notable changes to this skill. Versions follow [Semantic Versioning](https:/
 
 ## [Unreleased]
 
+### Fixed: gate gaps found by a full workflow run on a real Next.js build (2026-10-17, second pass)
+
+- **Axis X under a folder named `build`, `dist` or `out`.** Build-output paths were matched anywhere in the absolute path, so a project living in e.g. `/home/me/build/site` had its own env vars, components and media skipped and X passed falsely. Only those folders inside the project are skipped now (`scripts/completeness.mjs`). Regression test in `tests/gate/completeness.test.mjs`.
+- **Maintenance media: a removed file.** A media file deleted since the last commit, with its `MEDIA.md` row left behind, was silent; it now warns to remove or update the row (`scripts/completeness.mjs`, `craft/media.md`). Regression test in `tests/gate/completeness.test.mjs`.
+- **seo-11 message.** When a site has no `sitemap.xml`, the failure now says so and points at seo-01, so a one- or two-page site knows why the minimum stayed at 3 (`scripts/rulesets.mjs`). The rule is unchanged.
+- **Journey: a form replaced by its success message.** A form that removes itself on success (common in React) was reported as "no success state". The check now reads the success region recorded before submit (`scripts/journey.mjs`; fixture `fixtures/journey/form-replaced/`; test in `tests/gate/journey.test.mjs`).
+- **Journey: a link wrapped over two lines.** The tap landed between the two line boxes and "did nothing"; it now taps the first line (`scripts/journey.mjs`; test in `tests/gate/journey.test.mjs`).
+- **Stamp in an external stylesheet.** `SKILL.md` puts the stamp at the top of the main stylesheet, but the gate read only `index.html`, so S and M stayed unmeasured on any site with linked CSS. A local target's linked local stylesheets are read too (`stampSource()` in `scripts/gate.mjs`). `adapters/next.md`: Next's CSS minifier drops ordinary comments, so the stamp is written `/*! … */`. Tests in `tests/gate/rulesets.test.mjs`.
+- **perf-04 counted the framework.** The JS budget is documented as "beyond the framework", but the gate counted Next's runtime and its `nomodule` polyfills, so no Next.js site could meet Tier 1 to 3 once its tier was readable (155 KB against 30 KB on the validation build; 16 KB of it was the site's own). The gate now skips `nomodule` scripts and, when a project folder is gated through its Next build, reports the runtime listed in `.next/build-manifest.json` separately (`frameworkFiles()` in `scripts/gate.mjs`; `craft/performance.md` perf-04). A URL target still counts every script. Tests in `tests/gate/rulesets.test.mjs`.
+- Validated on a coffee shop site built through the six checkpoints (outside the repository) and on reconstructed static, Next.js and maintenance cases; each regression test fails on the previous code. No benchmark or eval was run.
+
 ### Fixed: gate false positives and gaps found by validating real builds (2026-10-17)
 
 - **perf-12 on every Next.js build.** The App Router emits its polyfills as `<script nomodule>` in `<head>`; the gate counted it as render-blocking, so no Next.js site could pass P. Browsers that run modules never fetch a `nomodule` script; the gate now records `noModule` and skips it (`scripts/gate.mjs`, `scripts/rulesets.mjs`, `craft/performance.md`). Regression test in `tests/gate/rulesets.test.mjs`.

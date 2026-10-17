@@ -639,7 +639,13 @@ async function numbers(browser, url) {
   return { checked, live: N.live.size, fails };
 }
 
-async function structure(browser, url) {
+// the framework's own runtime, as its build lists it (craft/performance.md: the JS budget is "beyond the framework"). Next.js
+// writes .next/build-manifest.json: rootMainFiles (React, the router) and polyfillFiles. Other frameworks bundle their
+// runtime with the page's code, so nothing is subtracted there and every script counts.
+export function frameworkFiles(project) {
+  try { const m = JSON.parse(readFileSync(join(project, ".next/build-manifest.json"), "utf8")); return [...(m.rootMainFiles || []), ...(m.polyfillFiles || [])].map((f) => "/_next/" + f.replace(/^\/+/, "")); } catch { return []; }
+}
+async function structure(browser, url, framework = []) {
   // entrance pattern per top-level section, and the measurable motion budget (pins, WebGL canvases, JS weight)
   const ctx = await browser.newContext({ bypassCSP: true, viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 }); const page = await ctx.newPage();
   await page.goto(url, { waitUntil: "domcontentloaded", timeout: T(60000) }).catch(() => {});
@@ -665,17 +671,18 @@ async function structure(browser, url) {
   const bud = await page.evaluate(() => {
     const pins = document.querySelectorAll(".pin-spacer").length + [...document.querySelectorAll("*")].filter((e) => getComputedStyle(e).position === "sticky" && e.parentElement && e.parentElement.getBoundingClientRect().height >= innerHeight * 1.5 && (() => { const r = e.getBoundingClientRect(); return r.width * r.height >= innerWidth * innerHeight * 0.15; })()).length;
     const webgl = [...document.querySelectorAll("canvas")].filter((c) => { try { return c.getContext("2d") === null; } catch { return true; } }).length;
-    const scripts = [...document.scripts].map((s) => (s.src ? { src: s.src } : { inline: s.textContent }));
+    const scripts = [...document.scripts].filter((s) => !s.noModule).map((s) => (s.src ? { src: s.src } : { inline: s.textContent })); // a nomodule script is never loaded by a module-capable browser
     const ids = (window.__secs || []).map((s) => s.id || s.getAttribute("aria-label") || s.tagName.toLowerCase()).filter(Boolean);
     return { pins, webgl, scripts, ids };
   });
   await ctx.close();
-  const { gzipSync } = await import("node:zlib"); let js = 0, unknown = 0;
+  const { gzipSync } = await import("node:zlib"); let js = 0, fw = 0, unknown = 0;
   for (const sc of bud.scripts) {
     if (sc.inline !== undefined) { js += gzipSync(sc.inline).length; continue; }
-    try { const r = await fetch(sc.src); js += gzipSync(Buffer.from(await r.arrayBuffer())).length; } catch { unknown++; }
+    const isFw = framework.some((f) => { try { return new URL(sc.src).pathname === f; } catch { return false; } });
+    try { const r = await fetch(sc.src); const n = gzipSync(Buffer.from(await r.arrayBuffer())).length; if (isFw) fw += n; else js += n; } catch { unknown++; }
   }
-  return { sections: patterns.length, patterns, repeats, pins: bud.pins, webgl: bud.webgl, jsKB: Math.round(js / 1024), jsUnknown: unknown, sectionIds: bud.ids };
+  return { sections: patterns.length, patterns, repeats, pins: bud.pins, webgl: bud.webgl, jsKB: Math.round(js / 1024), frameworkKB: Math.round(fw / 1024), jsUnknown: unknown, sectionIds: bud.ids };
 }
 
 // ── the four rule sets (gate/4): facts from the page, judged by scripts/rulesets.mjs → C S P K ──
@@ -1275,7 +1282,7 @@ export async function scan(target, browser, opts = {}) {
   try {
     const c = await contrastAll(browser, url);
     const o = []; for (const w of WIDTHS) o.push(await overflowAt(browser, url, w));
-    const w = await words(browser, url); const m = await motion(browser, url); const n = await names(browser, url); const nu = await numbers(browser, url); const st = await structure(browser, url);
+    const w = await words(browser, url); const m = await motion(browser, url); const n = await names(browser, url); const nu = await numbers(browser, url); const st = await structure(browser, url, opts.framework || []);
     const mq = await motionQuality(browser, url); const ax = await a11y(browser, url); const rf = await ruleFacts(browser, url);
     // advisory (C4): never fails, never in counts, stamp or id; a failure to measure is reported, not raised
     const comp = await composition(browser, url).catch((e) => ({ error: firstLine(e) }));
@@ -1293,13 +1300,13 @@ export async function scan(target, browser, opts = {}) {
     const pageHash = createHash("sha256").update(html.replace(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g, "")).digest("hex").slice(0, 16);
     const overflowFails = o.flatMap((x) => [...(x.pageScroll > 1 ? [{ width: x.width, el: "page", kind: "horizontal scroll", px: x.pageScroll }] : []), ...x.items.map((i) => ({ width: x.width, ...i }))]);
     const counts = { contrast: c.fails.length, overflow: overflowFails.length, words: w.fails.length, motion: m.hiddenUnderReducedMotion.length + (m.pixelsChangingWhenStillPct > 0.5 ? 1 : 0), names: n.fails.length, numbers: nu.fails.length, quality: mq.fails, access: ax.fails, copy: 0, seo: 0, perf: 0, sec: 0 };
-    const pageTier = (() => { try { return !/^https?:/.test(target) ? readStamp(readFileSync(statSync(resolve(target)).isDirectory() ? join(resolve(target), "index.html") : resolve(target), "utf8"))?.fields?.tier : undefined; } catch { return undefined; } })();
+    const pageTier = (() => { try { return !/^https?:/.test(target) ? readStamp(stampSource(target))?.fields?.tier : undefined; } catch { return undefined; } })();
     const rules = judgeRules(rf, url, st.jsKB, opts.tier !== undefined ? opts.tier : pageTier, envIgnoredFor(target)); Object.assign(counts, rules.counts);
     const id = createHash("sha256").update(JSON.stringify({ v: GATE_VERSION, rules: ["copy", "seo", "perf", "sec"].map((k) => rules[k].fails.map((x) => x.id).sort()), counts, sizes: [w.checked, m.compared, n.checked, nu.checked], page: pageHash, c: c.fails.map((x) => x.width + x.el + x.ratio), nu: nu.fails.map((x) => x.el + x.when + x.truth) /* not the shown value: a mid-count frame is timing-dependent */, o: overflowFails.map((x) => x.width + x.el + x.px), w: w.fails.map((x) => x.el + x.problem), m: m.hiddenUnderReducedMotion.map((x) => x.el), n: n.fails.map((x) => x.el) })).digest("hex").slice(0, 10);
     const pass = Object.values(counts).every((v) => v === 0);
     // the critique axes, each derived from a named check (gates/delivery-gate.md, Part 1)
     const local = !/^https?:/.test(target) ? (statSync(resolve(target)).isDirectory() ? resolve(target) : dirname(resolve(target))) : process.cwd();
-    const pageStamp = !/^https?:/.test(target) ? readStamp(readFileSync(statSync(resolve(target)).isDirectory() ? join(resolve(target), "index.html") : resolve(target), "utf8"))?.fields : null;
+    const pageStamp = !/^https?:/.test(target) ? readStamp(stampSource(target))?.fields : null;
     const meta = { ...(pageStamp || {}), ...(opts.archetype ? { archetype: opts.archetype } : {}), ...(opts.signature ? { signature: opts.signature } : {}), ...(opts.tier !== undefined ? { tier: opts.tier } : {}) };
     // records next to the page, then in the page's own <id>/ folder (examples/templates/hotel.html → examples/templates/hotel/),
     // so a shipped page's DESIGN.md and log.json are found in a fresh clone without flags
@@ -1320,6 +1327,15 @@ export async function scan(target, browser, opts = {}) {
   } finally { close(); }
 }
 export const stampOf = (k, id, cov, version = GATE_VERSION) => `gate: c${k.contrast} o${k.overflow} w${k.words} rm${k.motion} a${k.names} n${k.numbers ?? 0}${k.quality !== undefined ? ` q${k.quality} k${k.access}` : ""}${k.copy !== undefined ? ` · rules: C${k.copy} S${k.seo} P${k.perf} K${k.sec}` : ""} · ${version} · ${id}${cov ? ` · skipped ${cov.skipped}/${cov.total}@${cov.width}` : ""}`;
+// the stamp sits in the page or at the top of its main stylesheet (SKILL.md → Output rules): a local target's page is read
+// together with the local stylesheets it links, so a stamp in an external CSS file (any Next.js build, a plain style.css) counts
+export function stampSource(target) {
+  const root = resolve(target); const file = statSync(root).isDirectory() ? join(root, "index.html") : root; const html = readFileSync(file, "utf8");
+  const site = statSync(root).isDirectory() ? root : dirname(file);
+  const css = [...html.matchAll(/<link\b[^>]*>/gi)].map((m) => m[0]).filter((l) => /\brel=["']?stylesheet\b/i.test(l)).map((l) => l.match(/\bhref=["']?([^"' >]+)/i)?.[1]).filter((h) => h && !/^([a-z]+:)?\/\//i.test(h))
+    .map((h) => { try { const clean = decodeURIComponent(h.split(/[?#]/)[0]); return readFileSync(clean.startsWith("/") ? join(site, clean) : join(dirname(file), clean), "utf8"); } catch { return ""; } });
+  return [html, ...css].join("\n");
+}
 export function readStamp(html) {
   // a page may carry the stamp in an HTML comment and in the stylesheet; every stamp that carries a gate segment must hold up
   const all = [...html.matchAll(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g)].map((m) => m[0]);
@@ -1419,7 +1435,7 @@ function print(r) {
   }
   const st = r.structure;
   L(`  hierarchy  h1×${r.words.hier.h1}, ${r.words.hier.skips} skipped heading levels, ${r.words.hier.focalTies} element(s) tied for largest on the first 375px screen`);
-  L(`  structure  ${st.sections} sections, entrances: ${st.patterns.join(" | ")} → ${st.repeats} repeat(s); pins ${st.pins}, WebGL canvases ${st.webgl}, JS ${st.jsKB}KB gzipped${st.jsUnknown ? ` (+${st.jsUnknown} script(s) not fetched)` : ""}`);
+  L(`  structure  ${st.sections} sections, entrances: ${st.patterns.join(" | ")} → ${st.repeats} repeat(s); pins ${st.pins}, WebGL canvases ${st.webgl}, JS ${st.jsKB}KB gzipped${st.frameworkKB ? ` beyond the framework (+${st.frameworkKB}KB framework runtime, from .next/build-manifest.json)` : ""}${st.jsUnknown ? ` (+${st.jsUnknown} script(s) not fetched)` : ""}`);
   L(`  records    DESIGN.md: ${r.sources.design || "none"} · memory log: ${r.sources.log || "none"} · stamp fields: ${JSON.stringify(r.sources.meta)}`);
   L(`  critique → ${r.critique}${/\?/.test(r.critique) ? "   (axes marked ? have no record to derive from)" : ""}`);
   L(`  coverage   ${r.coverage.ok ? "✓" : "✗"} worst width ${r.coverage.width}px: ${r.coverage.skipped} of ${r.coverage.total} text elements skipped (${r.coverage.pct}%; limit ${SKIP_WARN_PCT}% at every width)${r.coverage.low.length ? ` · over the limit at ${r.coverage.low.join("/")}px` : ""}`);
@@ -1524,6 +1540,7 @@ async function main() {
   if (flags.help) { console.log(GATE_USAGE); process.exit(0); }
   if (!targets.length && !flags.verify) gateDie("missing argument: a page, folder or URL to check");
   // a project folder is gated through its build output; its DESIGN.md and .motomation/log.json stay the project's
+  const framework = [];
   for (let i = 0; i < targets.length; i++) {
     let r; try { r = resolveTarget(targets[i]); } catch (e) { gateDie(e.message); }
     if (r.kind === "build") {
@@ -1531,21 +1548,22 @@ async function main() {
       targets[i] = r.target;
       if (!flags.design && existsSync(join(r.project, "DESIGN.md"))) flags.design = join(r.project, "DESIGN.md");
       if (!flags.log && existsSync(join(r.project, ".motomation/log.json"))) flags.log = join(r.project, ".motomation/log.json");
+      const fw = frameworkFiles(r.project); if (fw.length) framework.push(...fw);
     }
   }
   const pw = await loadPlaywright();
   if (!pw) notVerified("no browser (install Playwright: npm i -D playwright && npx playwright install chromium)");
   if (PROBE.constrained) console.error(`gate: constrained machine (${PROBE.why.join(", ")}); a failed scan is retried once in the light footprint`);
   if (PROBE.constrained && TIMEOUT_MS < 240000) console.error(`gate: warning: a ${Math.round(TIMEOUT_MS / 1000)}s budget is shorter than a scan usually takes on a machine like this (2–5 min per page at 4 widths); a timeout here says nothing about the page. Prefer the default (600s) and a tool timeout above it.`);
-  const opts = { design: flags.design ? resolve(String(flags.design)) : undefined, log: flags.log ? resolve(String(flags.log)) : undefined, tier: flags.tier !== undefined ? String(flags.tier) : undefined, archetype: flags.archetype, signature: flags.signature, page: flags.page };
+  const opts = { design: flags.design ? resolve(String(flags.design)) : undefined, log: flags.log ? resolve(String(flags.log)) : undefined, tier: flags.tier !== undefined ? String(flags.tier) : undefined, archetype: flags.archetype, signature: flags.signature, page: flags.page, framework };
   const note = (x) => { if (x.attempts.length) console.error(`gate: measured in the ${x.footprint} footprint after: ${x.attempts.join("; ")}`); };
   try {
     // --rules: only the four rule sets (C S P K) and the JS weight they need; no stamp (a stamp needs every axis).
     // For rule fixtures (scripts/check-fixtures.mjs) and a quick look while fixing copy, head tags or headers.
     if (flags.rules) {
       const out = []; const b = await launch(pw, !!flags.light);
-      try { for (const t of targets) { const { url, close } = await toUrl(t); try { const st = await structure(b, url); const rf = await ruleFacts(b, url);
-        const pageTier = (() => { try { return !/^https?:/.test(t) ? readStamp(readFileSync(statSync(resolve(t)).isDirectory() ? join(resolve(t), "index.html") : resolve(t), "utf8"))?.fields?.tier : undefined; } catch { return undefined; } })();
+      try { for (const t of targets) { const { url, close } = await toUrl(t); try { const st = await structure(b, url, opts.framework || []); const rf = await ruleFacts(b, url);
+        const pageTier = (() => { try { return !/^https?:/.test(t) ? readStamp(stampSource(t))?.fields?.tier : undefined; } catch { return undefined; } })();
         const r = judgeRules(rf, url, st.jsKB, opts.tier !== undefined ? opts.tier : pageTier, envIgnoredFor(t)); out.push({ target: t, jsKB: st.jsKB, ...r });
         if (!flags.json) { console.log(`\n${t}\n  ${r.segment}  (rule sets only; no stamp)`); for (const k of ["copy", "seo", "perf", "sec"]) { for (const f of r[k].fails) console.log(`     ✗ ${f.id}  ${f.why}${f.at ? `  ${f.at}` : ""}`); for (const f of r[k].warns || []) console.log(`     ⚠ ${f.id}  ${f.why}${f.at ? `  ${f.at}` : ""}  (warning)`); } }
       } finally { await close?.(); } } } finally { await b.close().catch(() => {}); }

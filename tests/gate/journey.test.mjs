@@ -15,4 +15,9 @@ for (const k of ["nav", "mobile", "forms", "loading", "errors", "session"]) say(
 const i = run("incomplete"); const ij = JSON.parse(i.out);
 say(i.code === 1 && !ij.pass, `incomplete: exit ${i.code}, ${ij.segment}`);
 for (const k of ["nav", "mobile", "forms", "loading", "errors", "session"]) say(ij[k].ok === false && ij.counts[k] > 0, `incomplete: ${k} fails (${ij.counts[k]} missing: ${(ij[k].fails[0] || {}).why || "?"})`);
+// a form replaced by its success message (React/Vue unmount it) still has its success state seen
+const fr = run("form-replaced"); const frj = JSON.parse(fr.out);
+const wrapped = (frj.mobile.fails || []).filter((f) => /here now/.test(f.el));
+say(!wrapped.length, `form-replaced: a link wrapped over two lines responds to a tap (${wrapped.map((f) => f.why).join("; ") || "no fail"})`);
+say(frj.forms.ok === true && frj.forms.have === 5, `form-replaced: success seen after the form is removed (${frj.forms.have}/${frj.forms.need}${frj.forms.fails.length ? ": " + frj.forms.fails[0].why : ""})`);
 console.log(bad ? `\n${bad} failing` : "\nall journey checks pass"); process.exit(bad ? 1 : 0);

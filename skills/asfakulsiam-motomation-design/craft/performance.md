@@ -114,7 +114,7 @@ backend)" for the [BE] items, never a tick.
 | perf-01 | [FE] | Images compressed; AVIF or WebP, with a fallback where needed | **gate P**: a raster `<img>` (JPEG, PNG, GIF) with no AVIF/WebP `<source>` fails |
 | perf-02 | [FE] | Below-the-fold images use `loading="lazy"` | **gate P**: an `<img>` whose top is below the first 1440 × 900 screen without `loading="lazy"` fails |
 | perf-03 | [FE] | The LCP image is not lazy-loaded | **gate P**: the largest image in the first screen with `loading="lazy"` fails |
-| perf-04 | [FE] | Code-split: no single script over the tier's budget | **gate P**: total gzipped JS over the tier budget above fails; no tier known → the Tier 4–5 budget |
+| perf-04 | [FE] | Code-split: no single script over the tier's budget | **gate P**: gzipped first-load JS beyond the framework over the tier budget above fails; no tier known → the Tier 4–5 budget. The framework is what its build lists as runtime (Next.js: `rootMainFiles` and `polyfillFiles` in `.next/build-manifest.json`, read when a project folder is gated through `out/`); elsewhere, and for a URL target, every script counts. `nomodule` scripts never count |
 | perf-05 | [FE] | API responses cached (SWR, React Query, or `Cache-Control`) | read the data layer; "n/a (no API)" on a static page |
 | perf-06 | [FE] | A CDN fronts static assets | the deploy target (Pages, Vercel, Netlify, Cloudflare) or the CDN config |
 | perf-07 | [FE] | JS and CSS minified in production | **gate P** warns when a script over 2 KB looks unminified (long comments, short lines); the build config decides |

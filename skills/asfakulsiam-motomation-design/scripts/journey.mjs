@@ -120,7 +120,8 @@ async function mobileOne(browser, home, T, seen, multi) {
     for (const e of els) {
       if (/^(mailto|tel|sms):/i.test(e.href)) { protocol.push(e.label); tapped++; continue; } // handed to the OS; a browser shows nothing to observe
       if (dirty) { await go(page, home, T); dirty = false; }
-      const pos = await page.evaluate(`(() => { const e = (${FIND})(${JSON.stringify(e.key)}); if (!e) return null; e.scrollIntoView({ block: "center", inline: "center" }); const r = e.getBoundingClientRect(); const x = r.left + Math.min(r.width / 2, Math.max(4, r.width - 4)), y = r.top + r.height / 2; const hit = document.elementFromPoint(x, y); return { x, y, covered: !!hit && !e.contains(hit) && !hit.contains(e) ? (hit.tagName.toLowerCase() + (hit.id ? "#" + hit.id : "")) : null }; })()`).catch(() => null);
+      // a link wrapped over two lines is tapped on its first line box: its bounding box centre can fall between the lines
+      const pos = await page.evaluate(`(() => { const e = (${FIND})(${JSON.stringify(e.key)}); if (!e) return null; e.scrollIntoView({ block: "center", inline: "center" }); const rs = e.getClientRects(); const r = rs.length > 1 ? rs[0] : e.getBoundingClientRect(); const x = r.left + Math.min(r.width / 2, Math.max(4, r.width - 4)), y = r.top + r.height / 2; const hit = document.elementFromPoint(x, y); return { x, y, covered: !!hit && !e.contains(hit) && !hit.contains(e) ? (hit.tagName.toLowerCase() + (hit.id ? "#" + hit.id : "")) : null }; })()`).catch(() => null);
       if (!pos) { tapFails.push({ el: e.label, why: "element gone before the tap" }); continue; }
       await page.waitForTimeout(T(120)); const idle = await idleTargets(); const before = await state(); const n0 = navs.length, p0 = popups;
       await page.evaluate(() => window.__jm.targets.clear());
@@ -170,7 +171,9 @@ const FILL = `(form) => { for (const f of form.querySelectorAll("input, textarea
   if (v) set(v); } }`;
 const CLEAR = `(form) => { for (const f of form.querySelectorAll("input, textarea, select")) { if (f.type === "hidden" || f.type === "submit" || f.type === "button") continue; if (f.type === "checkbox" || f.type === "radio") { f.checked = false; continue; } if (f.tagName === "SELECT") { f.selectedIndex = 0; continue; } f.value = ""; f.dispatchEvent(new Event("input", { bubbles: true })); } }`;
 // visible text inside the form's region (the form and its parent), and each field's look, to diff before/after
-const SNAPF = `(form) => { const region = form.parentElement || form; const vis = (e) => e.checkVisibility?.({ visibilityProperty: true, opacityProperty: true });
+// a form replaced by its success message is gone from document.forms: the snapshot falls back to the element and the region
+// remembered when the page loaded (window.__jf, window.__jfRegion), so "the form disappeared and a message appeared" is seen
+const SNAPF = `(form) => { const region = form.isConnected ? form.parentElement || form : window.__jfRegion?.isConnected ? window.__jfRegion : document.body; const vis = (e) => e.checkVisibility?.({ visibilityProperty: true, opacityProperty: true });
   const texts = [...region.querySelectorAll("*")].filter((e) => vis(e) && [...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim().length > 1)).map((e) => [...e.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent.trim()).join(" ").trim());
   const live = [...document.querySelectorAll("[role=alert], [role=status], [aria-live]:not([aria-live=off]), output")].filter(vis).map((e) => e.innerText.trim()).filter(Boolean);
   const fields = [...form.querySelectorAll("input, textarea, select")].filter((f) => f.type !== "hidden").map((f) => { const s = getComputedStyle(f); return [s.borderColor, s.outlineColor + s.outlineStyle, s.backgroundColor, s.boxShadow, f.getAttribute("aria-invalid")].join("|"); });
@@ -201,8 +204,9 @@ async function formsOne(browser, home, T, multi) {
         return route.continue().catch(() => {}); });
       try {
         await go(page, home, T);
+        await page.evaluate(`(() => { window.__jf = ${sel}; window.__jfRegion = ${sel}?.parentElement || null; })()`);
         const fh = await page.evaluateHandle(`${sel}`); await page.evaluate((form) => form.scrollIntoView({ block: "center" }), fh).catch(() => {});
-        const s0 = await page.evaluate(`(${SNAPF})(${sel})`);
+        const s0 = await page.evaluate(`(${SNAPF})(${sel} || window.__jf)`);
         return await mode.fn({ page, fh, s0, errors, requests: () => requests, nativeNav: () => nativeNav, arm: () => { mode.armed = true; } });
       } finally { await ctx.close(); }
     };
@@ -212,7 +216,7 @@ async function formsOne(browser, home, T, multi) {
       const lab = await page.evaluate(`(() => { const f = ${sel}; const miss = []; for (const x of f.querySelectorAll("input, textarea, select")) { if (["hidden", "submit", "button", "reset"].includes(x.type)) continue; const named = x.getAttribute("aria-label") || x.getAttribute("aria-labelledby") || x.closest("label") || (x.id && document.querySelector('label[for="' + CSS.escape(x.id) + '"]')) || x.title; if (!named) miss.push(x.name || x.type); } return miss; })()`);
       st.default = s0.formVisible && !lab.length; if (!s0.formVisible) why.default = "form not visible when the page loads"; else if (lab.length) why.default = `field(s) without a label: ${lab.join(", ")}`;
       await page.evaluate(`(${CLEAR})(${sel})`); await submit(page); await page.waitForTimeout(T(700));
-      const s1 = await page.evaluate(`(${SNAPF})(${sel})`).catch(() => null);
+      const s1 = await page.evaluate(`(${SNAPF})(${sel} || window.__jf)`).catch(() => null);
       if (!s1) { why.validation = "the page navigated away on an empty submit (no validation)"; return; }
       const fresh = newTexts(s0, s1); const styled = s1.fields.some((x, k) => x !== s0.fields[k]);
       st.validation = fresh.some((t) => ERR_RX.test(t)) || styled || s1.live.some((t) => ERR_RX.test(t));
@@ -221,12 +225,12 @@ async function formsOne(browser, home, T, multi) {
     // 3 loading + 4 success: the request is held 2 s, then answered 200
     await run({ code: 200, delay: 2000, fn: async ({ page, s0, requests, nativeNav, arm }) => {
       await page.evaluate(`(${FILL})(${sel})`); arm(); await submit(page); await page.waitForTimeout(T(500));
-      const mid = await page.evaluate(`(${SNAPF})(${sel})`).catch(() => null);
+      const mid = await page.evaluate(`(${SNAPF})(${sel} || window.__jf)`).catch(() => null);
       if (!requests()) { why.loading = "no request was made on a valid submit, so there is no pending state to show"; why.success = "no request was made: success cannot follow a server answer"; if (mid && newTexts(s0, mid).some((t) => OK_RX.test(t))) why.success += " (a success message appears without any request)"; return; }
       if (nativeNav()) { why.loading = "native form submit: the page navigates; no in-page loading state"; why.success = "native form submit: success is whatever page the server returns, not a designed state"; why.serverError = "native form submit: a server error shows the server's page, not a designed state"; return; }
       st.loading = !!mid && (mid.btn !== s0.btn || mid.busy || newTexts(s0, mid).some((t) => /send|sending|submitting|loading|wait|…|\.\.\./i.test(t)));
       if (!st.loading) why.loading = "nothing changed while the request was pending (button, aria-busy, progress, text)";
-      await page.waitForTimeout(T(2600)); const end = await page.evaluate(`(${SNAPF})(${sel})`).catch(() => null);
+      await page.waitForTimeout(T(2600)); const end = await page.evaluate(`(${SNAPF})(${sel} || window.__jf)`).catch(() => null);
       const shown = end ? newTexts(s0, end) : [];
       st.success = !!end && (shown.some((t) => OK_RX.test(t)) || (!end.formVisible && shown.length > 0));
       if (!st.success) why.success = shown.length ? `after a 200 the new text does not read as success: "${shown[0].slice(0, 50)}"` : "after a 200 nothing new is shown";
@@ -235,7 +239,7 @@ async function formsOne(browser, home, T, multi) {
     if (!why.serverError) await run({ code: 500, delay: 600, fn: async ({ page, s0, requests, arm }) => {
       await page.evaluate(`(${FILL})(${sel})`); arm(); await submit(page); await page.waitForTimeout(T(2200));
       if (!requests()) { why.serverError = "no request was made, so a server error cannot happen or be shown"; return; }
-      const end = await page.evaluate(`(${SNAPF})(${sel})`).catch(() => null); const shown = end ? newTexts(s0, end) : [];
+      const end = await page.evaluate(`(${SNAPF})(${sel} || window.__jf)`).catch(() => null); const shown = end ? newTexts(s0, end) : [];
       st.serverError = shown.some((t) => ERR_RX.test(t) && !OK_RX.test(t));
       if (!st.serverError) why.serverError = shown.some((t) => OK_RX.test(t)) ? "after a 500 the form shows success" : "after a 500 no error is shown";
     } });
