@@ -2,7 +2,46 @@
 
 The skill's own components, data sets, archetypes and collision engine are one source. Used alone they make every build look like the skill made it. Step 0.5 sends the agent outside the skill before anything is designed. It is required for every build or redesign, and nothing in Step 1 onward may come from "the skill's defaults" alone: **every design decision traces to the brief or to a named reference.**
 
+## The order
+
+Two kinds of research, in this order. Step 0.5 in `thinking/sequence.md` states the requirement; this file is the method.
+
+1. **Read the brief.** Name the exact website type, or the combination of types (a marketplace with a subscription box is two).
+2. **Find 3–5 real websites of that exact type**, with whatever research tools are available. Same job, not same look.
+3. **Investigate them**: routes and page hierarchy, functionality, the states that matter, visible admin or seller surfaces, legal pages ("Type research", below).
+4. **Record what is useful**, each finding marked observed, inferred or unverified.
+5. **Derive the scope** in Step 0.7 from the brief, this evidence, industry knowledge and the constraints that apply (region, regulation, budget).
+6. **Research design inspiration separately**: award work, studios, galleries, interaction references and visual experiments ("The rule" onward).
+7. **Synthesize a distinct concept** for this project. Never a copy of a reference.
+8. **Carry it forward** into Step 0.7 (scope), the plan and the design steps.
+
+Research serves the brief. It is not a box-checking exercise: a one-page build needs a short look, a marketplace needs a real one.
+
+## Type research (exact type, for scope)
+
+For each of the 3–5 sites, as far as it is publicly observable:
+
+| Dimension | Record |
+|---|---|
+| Identity | who it is, purpose, audience, business model |
+| Routes | the discoverable page inventory, nested pages, important route variants |
+| Functionality | what each relevant route lets the visitor do |
+| States | empty, loading, error, success, authentication, permission-dependent, where they apply |
+| Admin | seller-facing or admin surfaces, only if public or documented |
+| Legal | privacy, terms, cookies, returns, accessibility, compliance pages |
+| Structure | navigation, information architecture, content hierarchy, user journeys |
+
+Rules:
+
+- **Observed, inferred, unverified.** Observed: you saw it. Inferred: a reasoned conclusion from what you saw or from the industry. Unverified: you could not reach it (behind a login, a paywall, a private admin, a region block). Never present an inferred or unverified item as observed.
+- **References are evidence, not a specification.** A competitor's feature becomes a scope row only when this brief needs it. A category recipe (`categories/<type>.md`), if one exists, is a starting point for design, not the scope.
+- **Hybrid briefs** research each type separately, then keep only what the actual brief needs.
+- **No category file** for the type: research it as itself. Do not force it into the nearest category.
+- **When research falls short** (no web, blocked pages, too few public examples), say so, work from what you have, and mark the gaps unverified or as stated assumptions. Never fill a gap with an invented finding.
+
 ## The rule
+
+The rest of this file is design-inspiration research (step 6 above).
 
 - Look **outside the skill** first: the live award sources, then the repositories in `references/sources/`. The skill's `examples/`, `data/` and `signatures/` come after, as one more reference.
 - Look **wide**: at least two of the six source files below, plus the live sources for the brief's category.
@@ -55,6 +94,13 @@ Name three specific techniques considered for this brief, each with its source: 
 In `DESIGN.md` (from `templates/DESIGN.md`), before Step 1:
 
 ```markdown
+## Type research
+| Site | Type | Routes | Functionality | States | Admin | Legal | Notes |
+|---|---|---|---|---|---|---|---|
+| <name, URL> | <exact type> | <inventory> (observed / inferred / unverified) | … | … | <visible, or unverified> | … | <IA, journeys> |
+
+**Gaps:** <what could not be verified, and the assumption used instead>
+
 ## References
 **Access:** web (searched YYYY-MM-DD) | no web access: working from training data (limitation: references may be out of date; nothing was checked live)
 
@@ -80,8 +126,8 @@ At least three references, at least one from outside the brief's category, at le
 
 ## No web access
 
-If the tool cannot reach the web, say so in one line before Step 1, set `Access: no web access: working from training data` and state the limitation. Still name three references, three techniques and the pattern being avoided, from what you know, each with the year you last knew it. Don't present remembered sites as current, and don't invent URLs.
+If the tool cannot reach the web, say so in one line before Step 1, set `Access: no web access: working from training data` and state the limitation. Still name 3–5 exact-type sites (every finding marked inferred or unverified, none observed), three references, three techniques and the pattern being avoided, from what you know, each with the year you last knew it. Don't present remembered sites as current, and don't invent URLs.
 
 ## Test
 
-Before Step 1: does `DESIGN.md` have `References looked at` (3), `Techniques considered` (3, sources named), `Pattern being avoided` (with why), the access line, and a decision trace where nothing traces to "the skill's defaults"? If not, Step 1 doesn't start.
+Before Step 1: does `DESIGN.md` have `Type research` (3–5 exact-type sites, each finding marked observed / inferred / unverified, gaps stated), `References looked at` (3), `Techniques considered` (3, sources named), `Pattern being avoided` (with why), the access line, and a decision trace where nothing traces to "the skill's defaults"? If not, Step 1 doesn't start.

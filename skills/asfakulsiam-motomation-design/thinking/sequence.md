@@ -69,6 +69,20 @@ Before any design step, know what you are building in. The stack changes what th
 
 Before designing anything, leave the skill. Its own components, data, archetypes and collision engine are one source; used alone, every build looks like the skill made it. This step is not optional. Protocol: `craft/research.md`.
 
+**First, the exact type.** Find 3–5 real websites that are exactly the type you are building. Not merely visually similar: a banking site for a banking brief, a model portfolio for a model brief, a B2B portal for a B2B brief, an e-commerce marketplace for a marketplace brief, and so on. For each, record in `DESIGN.md` under `Type research`, as far as it is publicly observable:
+
+- identity, purpose, audience and business model
+- the discoverable route or page inventory, including nested pages and important route variants
+- the functionality on each relevant route
+- important states: empty, loading, error, success, authentication and permission-dependent, where they apply
+- visible admin or seller-facing surfaces, if public or documented
+- legal, privacy, policy and compliance pages
+- navigation, information architecture, content hierarchy and user journeys worth noting
+
+Mark each finding **observed**, **inferred**, or **unverified**. Never claim to have inspected hidden routes, private admin panels, authenticated flows or anything you could not reach; label it unverified and fall back on other evidence or a stated assumption. A hybrid brief (two business models or site types) researches each type separately. A type with no category file is researched as itself, never forced into an unrelated category. These findings feed Step 0.7: the scope is derived from the brief, this evidence, industry conventions, legal or regulatory requirements and design judgment. Neither a competitor's feature nor a category recipe becomes a requirement automatically; a recipe, if one exists, is a starting point for design exploration. Proportion the depth to the build: the goal is a justified scope, not an audit of every competitor.
+
+**Then, design inspiration, separately:**
+
 - Search the live sources for the brief's category, last 6 months: Awwwards, FWA, CSSDA, Godly, Land-book, SiteInspire, Dribbble, Behance, Codrops, X and recent design publications (`references/sources/inspiration.md`).
 - Read wide in `references/sources/` (at least two of `skills.md`, `components.md`, `motion.md`, `3d.md`, `foundation.md`, `future.md`) for method and technique. Concepts only: copy no code from any repository.
 - Write in `DESIGN.md` under `References`: **References looked at** (three: name — what it is — what you took from it), **Techniques considered** (three, sources named), **Pattern being avoided** (the overused pattern in this category, and why).
@@ -76,7 +90,7 @@ Before designing anything, leave the skill. Its own components, data, archetypes
 
 If you cannot access the web, say so explicitly, work from training data, and state the limitation in `DESIGN.md` (`Access: no web access: working from training data`).
 
-**Test:** three references, three techniques with sources, the avoided pattern with why, the access line, and no decision traced only to the skill's defaults. If not, Step 1 doesn't start.
+**Test:** 3–5 exact-type websites with their findings marked observed / inferred / unverified, three references, three techniques with sources, the avoided pattern with why, the access line, and no decision traced only to the skill's defaults. If not, Step 1 doesn't start.
 
 ---
 
@@ -84,7 +98,7 @@ If you cannot access the web, say so explicitly, work from training data, and st
 
 The brief names a few pages; a complete site of its type needs more. "Build an e-commerce" means the whole e-commerce, not a homepage and some pages. Derive the scope yourself, from the Step 0.5 research, industry standards and your own knowledge. **Do not pick from a hardcoded list**: there is none in this skill, and `scripts/completeness.mjs` only checks what you derive.
 
-A category recipe (categories/<type>.md) is design opinion, not scope. The scope is derived from research, not read from a file. This applies to every category, not just e-commerce. If the recipe and the derived scope disagree, the derived scope wins.
+A category recipe (`categories/<type>.md`) is design opinion, not scope. The scope is derived from research, not read from a file. This applies to every site type, not just the ones with a category file. If the requested type has no category file, the scope is derived entirely from research. If the recipe and the derived scope disagree, the derived scope wins.
 
 Answer, and write in `DESIGN.md` under `Scope` (from `templates/DESIGN.md`):
 
@@ -313,6 +327,9 @@ Every build ships as a complete, runnable template a designer can sell, not a fo
 - `README.md` (what it is, what is real, what is demo, how to run, how to deploy; it states "All data in data/ is demo. Replace with real data before launch."), `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `DATA.md`, `CRITIQUE.md`, `GATE.md` (the gate output per page, pasted), `LICENSE` (MIT by default), `CHANGELOG.md` (from v0.1.0), `.env.example` (every variable, with a placeholder)
 - `data/`: mock JSON typed by its `schema.json`, every entry labelled demo (`templates/DATA.md`)
 - `middleware.ts`, and a comment at the top of every non-trivial file
+- `MEDIA.md` in the project root, in every build (`craft/media.md`)
+
+For every image, video, icon, illustration, or other externally sourced visual asset, follow `craft/media.md`. Select media appropriate to the project, verify and record its provenance and applicable usage terms, identify temporary or unverified assets as placeholders, and document the assets and replacement requirements in the website project's root `MEDIA.md`.
 
 It runs with zero configuration after `npm install && npm run dev`: mock data committed, no external services required.
 
