@@ -1,0 +1,26 @@
+{
+  "demo": true,
+  "item": {
+    "demo": true,
+    "name": "Tannery Row Coffee",
+    "street": "14 Tannery Row",
+    "town": "Northbank",
+    "postcode": "NB1 4TR",
+    "timeZone": "Europe/London",
+    "email": "hello@tannery-row.example",
+    "directions": [
+      "Two minutes from Northbank station: leave by the river exit and walk past the old dye works.",
+      "Bike racks for eight bikes stand outside the door; the nearest car park is on Mill Street."
+    ],
+    "access": "Step-free entrance and one accessible toilet. Ask at the counter for a table near the door.",
+    "hours": [
+      { "day": 1, "label": "Monday", "open": "07:30", "close": "17:00" },
+      { "day": 2, "label": "Tuesday", "open": "07:30", "close": "17:00" },
+      { "day": 3, "label": "Wednesday", "open": "07:30", "close": "17:00" },
+      { "day": 4, "label": "Thursday", "open": "07:30", "close": "18:30" },
+      { "day": 5, "label": "Friday", "open": "07:30", "close": "18:30" },
+      { "day": 6, "label": "Saturday", "open": "08:30", "close": "17:00" },
+      { "day": 0, "label": "Sunday", "open": "09:00", "close": "16:00" }
+    ]
+  }
+}

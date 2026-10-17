@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "runs": [
+    {
+      "date": "2026-10-17T12:25:07.674Z",
+      "page": "home",
+      "category": "restaurant",
+      "archetype": "broadsheet",
+      "signature": "cup-cross-section",
+      "collision": "x-ray",
+      "fonts": "Newsreader/IBM Plex Sans",
+      "palette": "newsprint + proof red",
+      "motion": "rule draw, pour",
+      "tier": "1",
+      "project": "/home/user/workspace/tannery-row",
+      "brief": "specialty coffee shop website: identity, menu, atmosphere, location and hours, contact",
+      "fingerprint": {
+        "layout": "columns",
+        "sections": [
+          "lead",
+          "counter",
+          "room"
+        ],
+        "tier": 1
+      }
+    }
+  ]
+}

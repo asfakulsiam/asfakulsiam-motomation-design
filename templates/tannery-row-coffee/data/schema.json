@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Tannery Row Coffee demo data",
+  "$defs": {
+    "hours": { "type": "object", "required": ["day", "label", "open", "close"], "properties": { "day": { "type": "integer", "minimum": 0, "maximum": 6, "description": "0 = Sunday, as Date.getDay()" }, "label": { "type": "string" }, "open": { "type": "string", "pattern": "^\\d{2}:\\d{2}$" }, "close": { "type": "string", "pattern": "^\\d{2}:\\d{2}$" } } },
+    "shop": { "type": "object", "required": ["demo", "item"], "properties": { "demo": { "const": true }, "item": { "type": "object", "required": ["demo", "name", "street", "town", "timeZone", "email", "hours"], "properties": { "demo": { "type": "boolean" }, "name": { "type": "string" }, "street": { "type": "string" }, "town": { "type": "string" }, "postcode": { "type": "string" }, "timeZone": { "type": "string", "description": "IANA zone; opening status is computed in the shop's time, not the visitor's" }, "email": { "type": "string", "format": "email" }, "directions": { "type": "array", "items": { "type": "string" } }, "access": { "type": "string" }, "hours": { "type": "array", "items": { "$ref": "#/$defs/hours" } } } } } },
+    "menuItem": { "type": "object", "required": ["demo", "id", "station", "name", "price"], "properties": { "demo": { "type": "boolean" }, "id": { "type": "string" }, "station": { "enum": ["espresso", "brew", "pastry"] }, "name": { "type": "string" }, "price": { "type": "number", "minimum": 0 }, "spec": { "type": "string" }, "notes": { "type": "string" }, "allergens": { "type": "string" }, "soldOut": { "type": "boolean" }, "layers": { "type": "array", "items": { "type": "object", "required": ["kind", "ml"], "properties": { "kind": { "enum": ["espresso", "milk", "foam", "water", "filter", "ice"] }, "ml": { "type": "number", "exclusiveMinimum": 0 } } } } } },
+    "menu": { "type": "object", "required": ["demo", "currency", "items"], "properties": { "demo": { "const": true }, "currency": { "type": "string" }, "items": { "type": "array", "items": { "$ref": "#/$defs/menuItem" } } } }
+  }
+}
