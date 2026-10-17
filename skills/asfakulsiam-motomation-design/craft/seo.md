@@ -21,7 +21,7 @@ The older notes in `craft/seo-performance.md` (content in the HTML, JSON-LD type
 | seo-08 | [M] | Heading order skips no levels (no `h2` → `h4`) | **gate S** |
 | seo-09 | [M] | Alt text on every meaningful image; decorative images use `alt=""` | gate `a` count (names check) |
 | seo-10 | [M] | Schema markup where the page is eligible (Product, Article, FAQ, Event, Organization) | **gate S** warns when no JSON-LD block parses; eligibility is a judgement |
-| seo-11 | [M] | At least 3 internal links per page | **gate S** (same-origin or relative `href`, not `#` alone) |
+| seo-11 | [M] | At least 3 internal links per page (every other page when `sitemap.xml` lists fewer than 3; a one-page site needs none) | **gate S** (same-origin or relative `href`, not `#` alone) |
 | seo-12 | [M] | Zero broken links | site-level: a link checker over the built site |
 | seo-13 | [M] | Images compressed: WebP or AVIF, responsive sizes (`srcset`/`sizes` or `<picture>`) | gate axis P (perf-01) |
 | seo-14 | [M] | Core Web Vitals targets: LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1 | field data or Lighthouse; never claimed unmeasured (`craft/performance.md`) |

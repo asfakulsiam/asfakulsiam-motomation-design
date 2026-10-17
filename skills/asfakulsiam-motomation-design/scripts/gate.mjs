@@ -30,7 +30,7 @@
 //              number of distinct rule IDs that fail (scripts/rulesets.mjs; craft/copy.md, seo.md, performance.md, security.md):
 //              C copy: em dashes, aphorism formulas, two-beat antithesis, warm-up openers, vague CTA labels
 //              S SEO: noindex, one canonical, title ≤ 60, description ≤ 160, one h1, heading order, JSON-LD parses,
-//                ≥ 3 internal links, slugs, mixed content, og:image (1200×630 when stated)
+//                ≥ 3 internal links (each other page when sitemap.xml lists fewer), slugs, mixed content, og:image (1200×630 when stated)
 //              P performance: AVIF/WebP, lazy below the fold, LCP image not lazy, JS gzipped ≤ tier budget, empty
 //                inline scripts, render-blocking head scripts
 //              K security: cookie flags, secret-shaped strings, URL → innerHTML, CORS wildcard, CSP, nosniff,
@@ -40,7 +40,8 @@
 //                (sec-08), CSP only as <meta> on a URL target served over HTTP (sec-h1)
 //
 //   X          (v2.9.0) completeness: when DESIGN.md has a Scope section (Step 0.7), scripts/completeness.mjs checks
-//              (without one, narrow maintenance: maintenanceMedia() checks MEDIA.md and placeholders only)
+//              (without one, narrow maintenance: maintenanceMedia() checks MEDIA.md and placeholders only, with the last
+//              git commit as the baseline for added or replaced media when there is one)
 //              every requested/required route, state, legal page, edge case, admin surface and skeleton the agent
 //              derived, plus the template shape. A missing item fails the page; not in the stamp or its id.
 //   J          (v2.11) journey: the whole site from this page, scripts/journey.mjs. nav (every sitemap route reachable from
@@ -95,7 +96,7 @@ import { statfsSync } from "node:fs";
 import { projectRoot, userDir } from "./memory.mjs";
 import { completeness, completenessLines, maintenanceMedia, maintenanceLines } from "./completeness.mjs";
 import { journey, journeyLines } from "./journey.mjs";
-import { copyRules, seoRules, perfRules, secRules, parseHeadersFile, rulesAxes } from "./rulesets.mjs";
+import { copyRules, seoRules, perfRules, secRules, parseHeadersFile, rulesAxes, sitemapPages } from "./rulesets.mjs";
 
 export const WIDTHS = [375, 390, 768, 1440];
 export const GATE_VERSION = "gate/4"; // gate/4: the four rule sets as counted axes, rules: C (copy) S (SEO) P (performance) K (security), scripts/rulesets.mjs. gate/2: contrast measured per viewport; numbers check (n). gate/3: Q motion axis (progression, smoothness, reduced-motion distinctness; count q) and A accessibility axis (focus-visible, target size, 200% zoom, 320px reflow, forced colors, keyboard trap; count k)
@@ -700,7 +701,7 @@ async function ruleFacts(browser, url) {
       if (document.title) extras.push({ where: "title", text: document.title }); if (meta('meta[name="description"]')) extras.push({ where: "meta description", text: meta('meta[name="description"]') });
       const imgs = [...document.images].map((i) => { const b = i.getBoundingClientRect(); const pic = i.parentElement?.tagName === "PICTURE" ? [...i.parentElement.querySelectorAll("source")] : [];
         return { src: i.currentSrc || i.getAttribute("src") || "", top: b.top + scrollY, area: vis(i) ? b.width * b.height : 0, loading: i.getAttribute("loading"), inPictureModern: pic.some((s) => /image\/(avif|webp)/.test(s.type || "") || /\.(avif|webp)(\s|\?|$)/.test(s.srcset || "")) }; });
-      const scripts = [...document.scripts].map((sc) => ({ src: sc.src || null, inline: !sc.src, inHead: !!sc.closest("head"), defer: sc.defer, async: sc.async, type: sc.getAttribute("type"), text: sc.src ? "" : sc.textContent }));
+      const scripts = [...document.scripts].map((sc) => ({ src: sc.src || null, inline: !sc.src, inHead: !!sc.closest("head"), defer: sc.defer, async: sc.async, noModule: sc.noModule, type: sc.getAttribute("type"), text: sc.src ? "" : sc.textContent }));
       const sub = [...document.querySelectorAll("img[src], script[src], link[rel~=stylesheet][href], iframe[src], source[src], video[src], audio[src]")].map((e) => e.getAttribute("src") || e.getAttribute("href"));
       return { blocks: [...blocks, ...loose], ctas, extras, images: imgs, scripts,
         seo: { title: document.title || null, description: meta('meta[name="description"]'), robots: [...document.querySelectorAll('meta[name="robots"], meta[name="googlebot"]')].map((m) => m.getAttribute("content") || ""),
@@ -712,7 +713,10 @@ async function ruleFacts(browser, url) {
     const html = await fetch(url).then((r) => r.text()).catch(() => "");
     const origin = new URL(url).origin; const scriptTexts = [];
     for (const sc of facts.scripts) { if (sc.inline) { scriptTexts.push(sc.text || ""); continue; } try { if (new URL(sc.src).origin === origin) { sc.text = await fetch(sc.src).then((r) => r.text()); scriptTexts.push(sc.text); } } catch {} }
-    return { ...facts, html, scriptTexts, headers, cookies, status };
+    // seo-11: the pages the site's own sitemap.xml lists (null when it has none), so a one- or two-page site is asked to
+    // link to the pages it has, not to three that don't exist (craft/seo.md)
+    const sitePages = await fetch(new URL("/sitemap.xml", url)).then((r) => (r.ok ? r.text() : "")).then((t) => sitemapPages(t, url)).catch(() => null);
+    return { ...facts, seo: { ...facts.seo, sitePages }, html, scriptTexts, headers, cookies, status };
   } finally { await ctx.close(); }
 }
 // sec-08: is .env ignored by git in the project that holds a local target? URL targets: null (not checked; and only a

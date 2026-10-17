@@ -1,6 +1,6 @@
 // The four rule-set axes bite, without a browser: each rule fails on a planted violation and passes on clean input.
 //   node tests/gate/rulesets.test.mjs
-import { copyRules, seoRules, perfRules, secRules, parseHeadersFile, countOf, rulesAxes } from "../../skills/asfakulsiam-motomation-design/scripts/rulesets.mjs";
+import { copyRules, seoRules, perfRules, secRules, parseHeadersFile, countOf, rulesAxes, sitemapPages } from "../../skills/asfakulsiam-motomation-design/scripts/rulesets.mjs";
 let bad = 0; const say = (ok, m) => { console.log(`${ok ? "ok  " : "FAIL"} ${m}`); if (!ok) bad++; };
 const ids = (r) => [...new Set(r.fails.map((f) => f.id))].sort().join(" ");
 const URL0 = "https://example.org/rooms/";
@@ -30,6 +30,12 @@ say(S({ headings: [1, 1, 2] }) === "seo-07", "seo-07: two h1 caught");
 say(S({ headings: [1, 2, 4] }) === "seo-08", "seo-08: h2 → h4 caught");
 say(S({ jsonld: ["{oops"] }) === "seo-10", "seo-10: unparseable JSON-LD caught");
 say(S({ links: ["#a", "#b", "/visit/"] }) === "seo-11", "seo-11: one internal link caught");
+// seo-11 on a small site: the minimum is the pages its sitemap.xml lists, never more than 3 (a one-page site needs none)
+const SM = (...p) => `<urlset>${p.map((x) => `<url><loc>https://example.org${x}</loc></url>`).join("")}</urlset>`;
+say(sitemapPages(SM("/rooms/"), URL0) === 0 && sitemapPages(SM("/", "/rooms/", "/visit/"), URL0) === 2 && sitemapPages("<html>404</html>", URL0) === null, "sitemapPages: counts the other pages, null without a sitemap");
+say(S({ links: ["#a"], sitePages: 0 }) === "", "seo-11: a one-page site (sitemap lists only this page) needs no links to other pages");
+say(S({ links: ["#a", "/visit/"], sitePages: 2 }) === "seo-11" && S({ links: ["/", "/visit/"], sitePages: 2 }) === "", "seo-11: a three-page site must link to both other pages");
+say(S({ links: ["#a", "/visit/"], sitePages: null }) === "seo-11" && S({ links: ["/a/", "/b/"], sitePages: 9 }) === "seo-11", "seo-11: no sitemap, or a larger site, keeps the minimum of 3");
 say(S({ links: ["/Rooms/", "/visit/?id=7", "/journal/"] }) === "seo-17", "seo-17: uppercase slug and query caught");
 say(S({ subresources: ["http://cdn.example.org/a.js"] }) === "seo-16", "seo-16: mixed content caught");
 say(S({ ogImage: null }) === "seo-18", "seo-18: missing og:image caught");
@@ -54,6 +60,7 @@ say(P({ images: [{ src: "/hero.webp", top: 0, area: 9e5, loading: "lazy" }] }) =
 say(P({ jsKB: 120 }) === "perf-04", "perf-04: JS over budget caught");
 say(P({ scripts: [{ inline: true, type: null, text: "  /* nothing */ " }] }) === "perf-11", "perf-11: empty inline script caught");
 say(P({ scripts: [{ src: "/analytics.js", inline: false, inHead: true }] }) === "perf-12", "perf-12: render-blocking head script caught");
+say(P({ scripts: [{ src: "/_next/static/chunks/polyfills.js", inline: false, inHead: true, noModule: true }] }) === "", "perf-12: a nomodule script (Next.js polyfills) is not render-blocking");
 
 // K · security
 const goodSec = { pageUrl: URL0, html: "<p>hi</p>", scriptTexts: ["const pk = 'pk_live_abcdefghijklmnop';"], headers: { "content-security-policy": "default-src 'self'", "x-content-type-options": "nosniff", "referrer-policy": "strict-origin-when-cross-origin" }, cookies: ["sid=1; Path=/; HttpOnly; Secure; SameSite=Lax"] };

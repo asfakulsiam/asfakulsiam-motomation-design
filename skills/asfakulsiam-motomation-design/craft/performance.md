@@ -122,7 +122,7 @@ backend)" for the [BE] items, never a tick.
 | perf-09 | [FE] | Input handlers debounced (search, resize) | read the handlers; `requestAnimationFrame` or a debounce on every resize/scroll/input listener |
 | perf-10 | [FE] | Large lists paginated or virtualised | any list over ~100 items |
 | perf-11 | [FE] | Unused packages and dead scripts removed | **gate P**: an inline `<script>` with no code (empty or comments only) fails; packages: `npx depcheck` or reading `package.json` |
-| perf-12 | [FE] | Non-critical scripts deferred (analytics, chat) | **gate P**: an external classic `<script>` in `<head>` without `defer`, `async` or `type="module"` fails |
+| perf-12 | [FE] | Non-critical scripts deferred (analytics, chat) | **gate P**: an external classic `<script>` in `<head>` without `defer`, `async`, `type="module"` or `nomodule` fails (a `nomodule` script, such as Next.js polyfills, is skipped by every browser that runs modules) |
 | perf-13 | [FE] | Loading skeletons for async content | read the async views; a skeleton sized like the final content (no layout shift) |
 | perf-14 | [IN] | A load balancer when traffic justifies one, and the reason written down | hosting notes |
 | perf-15 | [BE] | API payloads trimmed to what the client uses | read the handlers or the GraphQL selection |

@@ -2,6 +2,7 @@
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { tmpdir } from "node:os";
+import { spawnSync } from "node:child_process";
 import { completeness, completenessLines, maintenanceMedia } from "../../skills/asfakulsiam-motomation-design/scripts/completeness.mjs";
 let bad = 0; const say = (ok, msg) => { console.log(`${ok ? "ok  " : "FAIL"} ${msg}`); if (!ok) bad++; };
 const put = (root, f, t = "// demo\n") => { mkdirSync(dirname(join(root, f)), { recursive: true }); writeFileSync(join(root, f), t); };
@@ -40,6 +41,9 @@ put(iRoot, "lib/pay.ts", "// demo\nexport const key = process.env.STRIPE_SECRET_
 writeFileSync(join(iRoot, "package.json"), '{"scripts": {"build": "next build"}}');
 const i = completeness(iRoot); const ids = i.missing.map((m) => m.item).sort().join(", ");
 say(ids === ".env.example coverage, README demo line, demo labels, npm run dev", `template content checks bite (${ids})`);
+// demo labels on a file not shaped items[] / item: its top-level arrays of records are checked as entries
+const dRoot = project(["| route | / | requested | |"], ["app/page.tsx"]); const dl = (j) => { writeFileSync(join(dRoot, "data/products.json"), JSON.stringify(j)); return completeness(dRoot).missing.some((m) => m.item === "demo labels"); };
+say(dl({ demo: true, chapters: [{ id: "a", demo: true }, { id: "b" }] }) && !dl({ demo: true, chapters: [{ id: "a", demo: true }], tags: ["x"] }), "demo labels: an unlabelled entry under another key (chapters) fails; plain value arrays are not entries");
 // delivery modes and MEDIA.md (templates/TEMPLATE.md → Delivery modes; craft/media.md)
 const explore = (media, extra = []) => { const r = mkdtempSync(join(tmpdir(), "moto-x-")); put(r, "DESIGN.md", "# x\n\n## Scope\n**Delivery mode:** design exploration\n\n| Kind | Item | Mark | Evidence |\n|---|---|---|---|\n| route | / | requested | |\n\n## Type research\n| Site | Type |\n|---|---|\n| a | studio |\n\n## References\n1. a\n"); for (const f of ["README.md", "MOTION.md", "CRITIQUE.md", "GATE.md", "index.html"]) put(r, f, "x\n"); if (media !== null) put(r, "MEDIA.md", media); for (const [f, t] of extra) put(r, f, t); return r; };
 const j = completeness(explore("# MEDIA.md\n\nNo external media assets were used; every visual is CSS or inline SVG drawn for this build.\n"));
@@ -70,7 +74,7 @@ say(!cv.pass && cv.missing.some((m) => /public\/hero\.jpg has no row/.test(m.why
 // maintenance (no Scope section): media only
 const mt = (media, files) => { const r = mkdtempSync(join(tmpdir(), "moto-m-")); put(r, "DESIGN.md", "# Existing site\n\n## Concept\nx\n"); put(r, "index.html", "<p>x</p>"); if (media !== null) put(r, "MEDIA.md", media); for (const [f, t] of files) put(r, f, t); return r; };
 const mm0 = maintenanceMedia(mt(row("public/hero.jpg", "client-supplied", "approved by the client in writing", "no", "no"), [["public/hero.jpg", "x"], ["styles.css", "a:hover{color:red}"]]));
-say(mm0.pass && !mm0.warnings.length, "maintenance with no media change passes and is not pushed through the full workflow");
+say(mm0.pass && mm0.warnings.length === 1 && /no baseline/.test(mm0.warnings[0]), "maintenance with no media change passes and is not pushed through the full workflow; outside git it says it has no baseline");
 const mm1 = maintenanceMedia(mt(row("public/hero.jpg", "client-supplied", "approved by the client in writing", "no", "no"), [["public/hero.jpg", "x"], ["public/team.jpg", "x"]]));
 say(!mm1.pass && mm1.problems.some((p) => /public\/team\.jpg has no row/.test(p)), "maintenance that adds media without updating MEDIA.md fails");
 const mm2 = maintenanceMedia(mt(row("public/hero.jpg", "client-supplied", "approved", "no", "no") + "| public/team.jpg | https://pexels.com/photo/x | unknown | no | yes |\n", [["public/hero.jpg", "x"], ["public/team.jpg", "x"]]));
@@ -81,6 +85,26 @@ const mm4 = maintenanceMedia(mt(null, [["public/placeholder-hero.jpg", "x"]]));
 say(!mm4.pass && mm4.problems.some((p) => /placeholder-hero\.jpg is not listed/.test(p)), "an undocumented placeholder fails even without a Scope section or MEDIA.md");
 const mm5 = maintenanceMedia(mt(null, [["styles.css", "a:hover{color:red}"]]));
 say(mm5.pass && !mm5.warnings.length, "a non-media fix on a site with no media passes with nothing to report");
+// a second table in MEDIA.md (fonts, with other columns) is not read as inventory rows
+const fontsAfter = row("public/hero.webp", "custom", "custom", "no", "no") + "\n## Fonts\n\n| Font | Source | Licence |\n|---|---|---|\n| Fraunces | Google Fonts | OFL |\n";
+const ft = maintenanceMedia(mt(fontsAfter, [["public/hero.webp", "x"]])); say(!ft.problems.length, `MEDIA.md: a fonts table after the inventory is not inventory (${ft.problems.join("; ")})`);
+// maintenance in a git working tree: the last commit is the baseline for added and replaced media
+const gitOk = spawnSync("git", ["--version"]).status === 0;
+const committed = (media, files) => { const r = mt(media, files); const g = (...a) => spawnSync("git", ["-C", r, "-c", "user.email=t@t", "-c", "user.name=t", ...a]); g("init", "-q"); g("add", "-A"); g("commit", "-qm", "base"); return r; };
+if (gitOk) {
+  const g1 = committed(null, [["public/old.jpg", "x"]]); put(g1, "styles.css", "a:hover{color:red}");
+  const r1 = maintenanceMedia(g1); say(r1.pass && r1.baseline && r1.warnings.some((w) => /none added or replaced since the last commit/.test(w)), "git: a CSS-only fix on an older site without MEDIA.md passes and says no media changed");
+  put(g1, "public/new.jpg", "y"); const r2 = maintenanceMedia(g1);
+  say(!r2.pass && r2.problems.some((p) => /adds or replaces media since the last commit \(public\/new\.jpg\).*no MEDIA\.md/.test(p)), "git: adding media to a site without MEDIA.md fails");
+  const g3 = committed(null, [["public/old.jpg", "x"]]); put(g3, "public/old.jpg", "replaced"); const r3 = maintenanceMedia(g3);
+  say(!r3.pass && r3.problems.some((p) => /public\/old\.jpg/.test(p)), "git: replacing a file under the same name, with no MEDIA.md, fails");
+  const g4 = committed(row("public/hero.jpg", "client-supplied", "approved", "no", "no"), [["public/hero.jpg", "x"]]); put(g4, "public/hero.jpg", "replaced"); const r4 = maintenanceMedia(g4);
+  say(r4.pass && r4.warnings.some((w) => /public\/hero\.jpg changed under the same name/.test(w)), "git: a same-name replacement with MEDIA.md untouched warns to confirm its row");
+  put(g4, "MEDIA.md", row("public/hero.jpg", "client-supplied, new shoot", "approved", "no", "no")); const r5 = maintenanceMedia(g4);
+  say(r5.pass && !r5.warnings.some((w) => /same name/.test(w)), "git: updating the row in the same change clears the warning");
+  const g6 = committed(row("public/hero.jpg", "client-supplied", "approved", "no", "no"), [["public/hero.jpg", "x"]]); put(g6, "out/hero.jpg", "build"); put(g6, "public/favicon.png", "f"); const r6 = maintenanceMedia(g6);
+  say(r6.pass && !r6.warnings.length, "git: new build output and a favicon need no row");
+} else console.log("skip git baseline cases (git not available)");
 // readiness claims: a prototype is never production-ready, nor is a template with unresolved media
 const rc1 = completeness(explore("# MEDIA.md\n\nNo external media assets were used.\n", [["README.md", "# x\n\nProduction-ready site.\n"]]));
 say(!rc1.pass && rc1.missing.some((m) => m.item === "README readiness claim"), "a design exploration that calls itself production-ready fails");

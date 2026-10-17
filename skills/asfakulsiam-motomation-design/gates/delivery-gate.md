@@ -311,7 +311,7 @@ not check. Full rules, with why and examples: `craft/copy.md`, `craft/seo.md`, `
 - [ ] seo-08 [M] Heading order skips no levels (no `h2` → `h4`) · **measured by the gate (S)**
 - [ ] seo-09 [M] Alt text on every meaningful image; decorative images use `alt=""` · measured by the gate (`a` count)
 - [ ] seo-10 [M] Schema markup where the page is eligible (Product, Article, FAQ, Event, Organization) · gate S warns; decide by reading
-- [ ] seo-11 [M] At least 3 internal links per page · **measured by the gate (S)**
+- [ ] seo-11 [M] At least 3 internal links per page (every other page when `sitemap.xml` lists fewer than 3) · **measured by the gate (S)**
 - [ ] seo-12 [M] Zero broken links · check: site-level: a link checker over the built site
 - [ ] seo-13 [M] Images compressed: WebP or AVIF, responsive sizes (`srcset`/`sizes` or `<picture>`) · measured by the gate (axis P)
 - [ ] seo-14 [M] Core Web Vitals targets: LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1 · check: field data or Lighthouse; never claimed unmeasured (`craft/performance.md`)

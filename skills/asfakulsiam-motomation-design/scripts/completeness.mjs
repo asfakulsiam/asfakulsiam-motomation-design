@@ -10,13 +10,14 @@
 // which template files are required: design exploration < functional frontend < production template (the default when
 // the line is missing, so older builds are checked as before). Every mode requires MEDIA.md (craft/media.md), checked
 // for a usable inventory, honest placeholder and licence status, and a README pointer when assets still need replacing.
-// Narrow maintenance (the light route) writes no Scope section, so the gate never runs X, or this media check, on it.
 // A Scope with no Delivery mode line predates modes: a missing MEDIA.md there is a warning, so a fix on an older build
 // doesn't fail for an inventory it never had; every build that states its mode must ship MEDIA.md.
 // Maintenance (no Scope section): the gate runs maintenanceMedia() instead of X, so an absent Scope is never taken as
 // proof that media needs no record. Where MEDIA.md exists, every local media file must be listed in it, so an added or
-// renamed asset fails until its row is written; placeholders are checked everywhere. A file replaced under the same
-// name can't be told apart from the original here: its row is updated by hand (craft/media.md).
+// renamed asset fails until its row is written; placeholders are checked everywhere. In a git working tree the last
+// commit is the baseline: media added, renamed or replaced since then is named, a project with no MEDIA.md fails when
+// the change added or replaced media, and a file replaced under the same name with MEDIA.md untouched warns. Outside
+// git there is no baseline: a same-name replacement can't be told apart from the original (craft/media.md).
 //
 // Usage:
 //   node scripts/completeness.mjs <project-dir | path/to/DESIGN.md> [--json]
@@ -39,6 +40,7 @@
 import { readFileSync, existsSync, statSync, readdirSync } from "node:fs";
 import { join, resolve, dirname, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
+import { spawnSync } from "node:child_process";
 
 const KINDS = { route: "Routes", function: "Functions", state: "States", legal: "Legal", edge: "Edge cases", admin: "Admin", skeleton: "Skeletons", template: "Template" };
 const VERB = { route: "required present", function: "present", state: "defined", legal: "present", edge: "handled", admin: "present", skeleton: "present", template: "present" };
@@ -126,7 +128,11 @@ function evidenceOk(root, ev) {
   return { ok: true };
 }
 
-function demoLabelled(f) { try { const j = JSON.parse(readFileSync(f, "utf8")); if (j.demo !== true && j._demo !== true) return false; const arr = Array.isArray(j.items) ? j.items : j.item ? [j.item] : Array.isArray(j) ? j : []; return arr.every((x) => x && (x.demo === true || x._demo === true)); } catch { return false; } }
+// entries are items[] / item (templates/DATA.md); a file shaped otherwise has its top-level arrays of objects checked as
+// entries, so an unlabelled record under another key (chapters, rows) is not missed
+function demoLabelled(f) { try { const j = JSON.parse(readFileSync(f, "utf8")); if (Array.isArray(j)) return j.every((x) => x && (x.demo === true || x._demo === true)); if (j.demo !== true && j._demo !== true) return false;
+  const arr = Array.isArray(j.items) ? j.items : j.item ? [j.item] : Object.values(j).filter((v) => Array.isArray(v) && v.length && v.every((x) => x && typeof x === "object" && !Array.isArray(x))).flat();
+  return arr.every((x) => x && (x.demo === true || x._demo === true)); } catch { return false; } }
 // environment variables the code reads (process.env.X, import.meta.env.X), public framework vars included
 function envVars(root) {
   const out = new Set(); const skip = new Set(["NODE_ENV", "NEXT_RUNTIME", "VERCEL", "VERCEL_ENV", "VERCEL_URL", "CI", "PORT"]);
@@ -169,9 +175,14 @@ function undocumentedPlaceholders(root, md) {
 export function mediaChecks(root) {
   const f = join(root, "MEDIA.md"); if (!existsSync(f)) return { problems: [], unresolved: 0 }; // the file itself is a template row
   const md = readFileSync(f, "utf8"); const problems = []; let unresolved = 0;
-  const rows = md.split("\n").filter((l) => /^\s*\|/.test(l)).map((l) => l.trim().replace(/^\||\|$/g, "").split("|").map((c) => c.trim()));
+  // the inventory is the table under the header row below, up to its first non-table line: a later table (fonts,
+  // icon packages) has its own columns and is not read as inventory rows
+  const cells = (l) => l.trim().replace(/^\||\|$/g, "").split("|").map((c) => c.trim());
+  const isHead = (r) => r.some((c) => /asset|file/i.test(c)) && r.some((c) => /source/i.test(c)) && r.some((c) => /licen[cs]e|usage/i.test(c)) && r.some((c) => /placeholder/i.test(c)) && r.some((c) => /replace/i.test(c));
+  const lines = md.split("\n"); const start = lines.findIndex((l) => /^\s*\|/.test(l) && isHead(cells(l)));
+  const rows = []; if (start >= 0) for (let i = start; i < lines.length && /^\s*\|/.test(lines[i]); i++) rows.push(cells(lines[i]));
   let listedAssets = [];
-  const hi = rows.findIndex((r) => r.some((c) => /asset|file/i.test(c)) && r.some((c) => /source/i.test(c)) && r.some((c) => /licen[cs]e|usage/i.test(c)) && r.some((c) => /placeholder/i.test(c)) && r.some((c) => /replace/i.test(c)));
+  const hi = rows.length ? 0 : -1;
   if (hi < 0) {
     if (!/no external media/i.test(md)) problems.push("MEDIA.md has no inventory table (File or asset | Source URL | License / usage status | Placeholder? | Replace before production?) and does not state that no external media assets were used");
   } else {
@@ -204,16 +215,36 @@ export function mediaChecks(root) {
 // Narrow maintenance (DESIGN.md without a Scope section, or no DESIGN.md): media only. With a MEDIA.md, the full media
 // check (inventory, contradictions, every media file listed); without one, undocumented placeholders still fail, and
 // media files with no inventory are a warning, since this check can't tell whether the change touched them.
+// The baseline: media files (and MEDIA.md) changed since the last commit, from `git status`; null outside a git working
+// tree or before the first commit, so the caller says it has no baseline instead of guessing.
+export function changedSinceCommit(root) {
+  const git = (...a) => spawnSync("git", ["-C", root, ...a], { encoding: "utf8" });
+  const top = git("rev-parse", "--show-toplevel"); if (top.status !== 0 || git("rev-parse", "--verify", "-q", "HEAD").status !== 0) return null;
+  const st = git("status", "--porcelain=v1", "--untracked-files=all", "--", "."); if (st.status !== 0) return null;
+  const out = { added: [], replaced: [], removed: [], mediaDoc: false }; const media = new Set(mediaFiles(root));
+  for (const line of st.stdout.split("\n").filter(Boolean)) {
+    const code = line.slice(0, 2); const p = relative(root, join(top.stdout.trim(), line.slice(3).split(" -> ").pop().replace(/^"|"$/g, ""))).split(sep).join("/");
+    if (p === "MEDIA.md") { out.mediaDoc = true; continue; }
+    if (!MEDIA_EXT.test(p)) continue;
+    if (code.includes("D")) out.removed.push(p); else if (!media.has(p)) continue; // build output, favicon.*
+    else if (code === "??" || code.includes("A") || code.includes("R") || code.includes("C")) out.added.push(p); else if (code.includes("M")) out.replaced.push(p);
+  }
+  return out;
+}
 export function maintenanceMedia(root) {
   const has = existsSync(join(root, "MEDIA.md"));
   const r = has ? mediaChecks(root) : { problems: undocumentedPlaceholders(root, ""), unresolved: 0 };
-  const files = mediaFiles(root); const warnings = [];
-  if (!has && files.length) warnings.push(`media: ${files.length} media file(s) and no MEDIA.md; if this change adds, replaces or removes media, create MEDIA.md (craft/media.md)`);
+  const files = mediaFiles(root); const warnings = []; const base = changedSinceCommit(root); const touched = base ? [...base.added, ...base.replaced] : [];
+  const list = (xs) => xs.slice(0, 4).join(", ") + (xs.length > 4 ? ` and ${xs.length - 4} more` : "");
+  if (!has && touched.length) r.problems.push(`this change adds or replaces media since the last commit (${list(touched)}) and the project has no MEDIA.md; create it (craft/media.md)`);
+  else if (!has && files.length) warnings.push(base ? `media: ${files.length} media file(s) and no MEDIA.md; none added or replaced since the last commit (git), so none is required for this change` : `media: ${files.length} media file(s) and no MEDIA.md, and no baseline (not a git working tree with a commit): this check cannot tell which files this change touched; if it added, replaced or removed media, create MEDIA.md (craft/media.md)`);
+  if (has && base && base.replaced.length && !base.mediaDoc) warnings.push(`media: ${list(base.replaced)} changed under the same name since the last commit and MEDIA.md did not; confirm each row (source, licence status) still holds`);
+  if (has && !base && files.length) warnings.push("media: no baseline (not a git working tree with a commit): a file replaced under the same name is not detected; update its MEDIA.md row by hand");
   if (r.unresolved) warnings.push(`media: ${r.unresolved} asset(s) in MEDIA.md must be replaced or cleared before production; not production-ready until they are`);
-  return { root, maintenance: true, hasMedia: has, mediaFiles: files.length, problems: r.problems, warnings, pass: !r.problems.length };
+  return { root, maintenance: true, hasMedia: has, mediaFiles: files.length, baseline: base ? "git (last commit)" : null, changed: base, problems: r.problems, warnings, pass: !r.problems.length };
 }
 export function maintenanceLines(r) {
-  const L = [`  X — media (maintenance: no Scope section; ${r.hasMedia ? "MEDIA.md checked" : "no MEDIA.md"})  ${r.pass ? "✓" : "✗"}`];
+  const L = [`  X — media (maintenance: no Scope section; ${r.hasMedia ? "MEDIA.md checked" : "no MEDIA.md"}; baseline: ${r.baseline || "none"})  ${r.pass ? "✓" : "✗"}`];
   for (const p of r.problems) L.push(`      ✗ ${p}`);
   for (const w of r.warnings) L.push(`      ⚠ ${w}  (warning)`);
   return L;

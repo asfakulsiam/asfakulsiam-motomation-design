@@ -94,9 +94,9 @@ The root `README.md` explains the media handoff and names every unverified or te
 |---|---|
 | a `MEDIA.md` | the full media check above: an added or renamed file without a row fails, and so does an unlisted placeholder |
 | no `MEDIA.md`, no media files | nothing to check |
-| no `MEDIA.md`, media files | undocumented `placeholder-…` files and `PLACEHOLDER:` comments fail; other files are a warning (create `MEDIA.md` if this change touched media) |
+| no `MEDIA.md`, media files | undocumented `placeholder-…` files and `PLACEHOLDER:` comments fail; with a git baseline, media added or replaced since the last commit fails until `MEDIA.md` exists; without one, a warning that says the check cannot tell what changed |
 
-A file replaced under the same name looks unchanged to the check: update its row (source, licence status) by hand.
+**Baseline.** In a git working tree with a commit, the last commit is the baseline (`git status`: untracked, added, renamed, modified media). Without git there is none, and the check says so. A file replaced under the same name is detected only with the baseline: if `MEDIA.md` did not change in the same working tree, it warns to confirm the row (a re-export from the same source needs no edit). Changes already committed are invisible to it, so run the gate before committing the fix. Without a baseline, update the row by hand.
 
 ## Media rules
 

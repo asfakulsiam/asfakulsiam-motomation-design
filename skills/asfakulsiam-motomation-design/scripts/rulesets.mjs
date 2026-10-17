@@ -61,7 +61,14 @@ export const TITLE_MAX = 60, DESC_MAX = 160, MIN_INTERNAL_LINKS = 3;
 // not-found, _error), which a static host serves with 200 when the file is opened directly.
 export const ERROR_PAGE_PATH = /(?:^|\/)(?:40[0-9]|50[0-9]|error|not-found|_error)(?:\.html?)?\/?$/i;
 export const isErrorPage = (pageUrl, status = null) => (Number.isFinite(status) && status >= 400) || ERROR_PAGE_PATH.test(new URL(pageUrl).pathname);
-export function seoRules({ pageUrl, title = null, description = null, robots = [], canonicals = [], headings = [], links = [], jsonld = [], ogImage = null, ogWidth = null, ogHeight = null, subresources = [], status = null } = {}) {
+// the distinct pages a sitemap.xml lists other than pageUrl (its own path, index.html and a trailing slash ignored);
+// null when the text has no <loc>, so a site without a sitemap keeps the full seo-11 minimum
+export function sitemapPages(xml, pageUrl) {
+  const locs = [...String(xml || "").matchAll(/<loc>\s*([^<\s]+)\s*<\/loc>/gi)].map((m) => m[1]); if (!locs.length) return null;
+  const path = (h) => { try { return new URL(h, pageUrl).pathname.replace(/\/index\.html?$/i, "/").replace(/\.html?$/i, "").replace(/\/+$/, "") || "/"; } catch { return null; } };
+  const self = path(pageUrl); return uniq(locs.map(path).filter((p) => p && p !== self)).length;
+}
+export function seoRules({ pageUrl, title = null, description = null, robots = [], canonicals = [], headings = [], links = [], jsonld = [], ogImage = null, ogWidth = null, ogHeight = null, subresources = [], status = null, sitePages = null } = {}) {
   const fails = [], warns = [], f = (id, why, at = "") => fails.push({ id, why, at }), w = (id, why, at = "") => warns.push({ id, why, at });
   const page = new URL(pageUrl); const local = /^(127\.0\.0\.1|localhost|\[::1\])$/.test(page.hostname) || page.protocol === "file:";
   if (robots.some((r) => /noindex/i.test(r))) f("seo-03", "robots meta says noindex");
@@ -83,7 +90,9 @@ export function seoRules({ pageUrl, title = null, description = null, robots = [
     const slug = decodeURIComponent(u.pathname);
     if (/[A-Z_]/.test(slug) || u.search || /\/\d{3,}(?:\/|$|\.)/.test(slug) || /\/[0-9a-f]{16,}(?:\/|$)/i.test(slug)) badSlugs.push(u.pathname + u.search);
   }
-  if (uniq(internal).length < MIN_INTERNAL_LINKS) f("seo-11", `${uniq(internal).length} internal link(s) to other pages (≥ ${MIN_INTERNAL_LINKS})`);
+  // the minimum is 3, or every other page when the site's sitemap lists fewer than 3 (a one-page site needs none)
+  const minLinks = Number.isFinite(sitePages) ? Math.min(MIN_INTERNAL_LINKS, sitePages) : MIN_INTERNAL_LINKS;
+  if (uniq(internal).length < minLinks) f("seo-11", `${uniq(internal).length} internal link(s) to other pages (≥ ${minLinks}${minLinks < MIN_INTERNAL_LINKS ? `: sitemap.xml lists ${sitePages} other page(s)` : ""})`);
   if (canonicals[0]) { try { const c = new URL(canonicals[0], pageUrl); if (/[A-Z_]/.test(c.pathname) || c.search) badSlugs.push(c.pathname + c.search); } catch {} }
   if (badSlugs.length) f("seo-17", "URL slugs need lowercase, hyphens, no IDs, no parameters", badSlugs.slice(0, 3).join(" "));
   const mixed = subresources.filter((s) => /^http:\/\//i.test(s) && !/^http:\/\/(127\.0\.0\.1|localhost)(:|\/)/i.test(s));
@@ -109,7 +118,8 @@ export function perfRules({ images = [], scripts = [], jsKB = 0, budgetKB = 250,
   const JS = (t) => !t || /^(text|application)\/(java|ecma)script$|^module$/i.test(t);
   for (const s of scripts) {
     if (s.inline && JS(s.type) && !(s.text || "").replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*|<!--|-->/g, "").trim()) f("perf-11", "inline script with no code (empty or comments only)");
-    if (!s.inline && s.inHead && (!s.type || /javascript/i.test(s.type)) && !s.defer && !s.async) f("perf-12", "render-blocking script in <head> (add defer or async)", clip(s.src || "", 50));
+    // a nomodule script (Next.js polyfills) is never fetched or run by a browser that supports modules, so it blocks nothing
+    if (!s.inline && s.inHead && !s.noModule && (!s.type || /javascript/i.test(s.type)) && !s.defer && !s.async) f("perf-12", "render-blocking script in <head> (add defer or async)", clip(s.src || "", 50));
     const t = s.text || ""; if (t.length > 2048) { const lines = t.split("\n"); const comments = (t.match(/^\s*\/\*[\s\S]*?\*\/|^\s*\/\/[^\n]*/gm) || []).join("").length; // comments that start a line (a "//" inside a URL string is not one)
       if (comments / t.length > 0.25 || (lines.length > 80 && t.length / lines.length < 40)) warns.push({ id: "perf-07", why: "a script over 2 KB that looks unminified", at: s.src ? clip(s.src, 50) : "inline" }); }
   }

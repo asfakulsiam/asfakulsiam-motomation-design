@@ -118,7 +118,7 @@ Read before Step 1. Design inside these. `scripts/gate.mjs` measures them after 
 | seo-07 | one `h1` |
 | seo-08 | no skipped heading level |
 | seo-10 | JSON-LD parses; schema where eligible (warns when missing) |
-| seo-11 | ≥ 3 internal links to other pages |
+| seo-11 | ≥ 3 internal links to other pages (all of them when `sitemap.xml` lists fewer) |
 | seo-16 | no mixed content |
 | seo-17 | slugs lowercase, hyphenated, no IDs or query strings |
 | seo-18 | `og:image` present, 1200 × 630 |

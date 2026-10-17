@@ -131,7 +131,7 @@ async function mobileOne(browser, home, T, seen, multi) {
       const field = /^(input|select|textarea)$/.test(e.tag) || e.editable;
       const responded = !after ? true : navs.length > n0 || popups > p0 || after.href !== before.href || (field && after.active !== before.active) || Math.abs(after.sy - before.sy) > 2 || Math.abs(after.sx - before.sx) > 2 || after.invalid > before.invalid || after.dialogs !== before.dialogs || changed > idle;
       if (responded) { tapped++; if (changed > idle || after?.dialogs !== before.dialogs) dirty = true; }
-      else tapFails.push({ el: `${e.tag} "${e.label}"`, why: pos.covered ? `covered by ${pos.covered} at 375px: the tap lands on it` : "nothing changed after a tap (no DOM change, focus, scroll, navigation or event)" });
+      else tapFails.push({ el: `${e.tag} "${e.label}"`, why: pos.covered ? `covered by ${pos.covered} at 375px: the tap lands on it` : "nothing changed after a tap (no DOM change, scroll, navigation, dialog, or focus moving into a field)" });
       if (after && after.href !== before.href && stripHash(after.href) !== stripHash(before.href)) dirty = true;
       if (!pos.covered) uncovered++;
     }

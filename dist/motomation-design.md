@@ -3171,9 +3171,9 @@ The root `README.md` explains the media handoff and names every unverified or te
 |---|---|
 | a `MEDIA.md` | the full media check above: an added or renamed file without a row fails, and so does an unlisted placeholder |
 | no `MEDIA.md`, no media files | nothing to check |
-| no `MEDIA.md`, media files | undocumented `placeholder-…` files and `PLACEHOLDER:` comments fail; other files are a warning (create `MEDIA.md` if this change touched media) |
+| no `MEDIA.md`, media files | undocumented `placeholder-…` files and `PLACEHOLDER:` comments fail; with a git baseline, media added or replaced since the last commit fails until `MEDIA.md` exists; without one, a warning that says the check cannot tell what changed |
 
-A file replaced under the same name looks unchanged to the check: update its row (source, licence status) by hand.
+**Baseline.** In a git working tree with a commit, the last commit is the baseline (`git status`: untracked, added, renamed, modified media). Without git there is none, and the check says so. A file replaced under the same name is detected only with the baseline: if `MEDIA.md` did not change in the same working tree, it warns to confirm the row (a re-export from the same source needs no edit). Changes already committed are invisible to it, so run the gate before committing the fix. Without a baseline, update the row by hand.
 
 ### Media rules
 
@@ -3374,7 +3374,7 @@ backend)" for the [BE] items, never a tick.
 | perf-09 | [FE] | Input handlers debounced (search, resize) | read the handlers; `requestAnimationFrame` or a debounce on every resize/scroll/input listener |
 | perf-10 | [FE] | Large lists paginated or virtualised | any list over ~100 items |
 | perf-11 | [FE] | Unused packages and dead scripts removed | **gate P**: an inline `<script>` with no code (empty or comments only) fails; packages: `npx depcheck` or reading `package.json` |
-| perf-12 | [FE] | Non-critical scripts deferred (analytics, chat) | **gate P**: an external classic `<script>` in `<head>` without `defer`, `async` or `type="module"` fails |
+| perf-12 | [FE] | Non-critical scripts deferred (analytics, chat) | **gate P**: an external classic `<script>` in `<head>` without `defer`, `async`, `type="module"` or `nomodule` fails (a `nomodule` script, such as Next.js polyfills, is skipped by every browser that runs modules) |
 | perf-13 | [FE] | Loading skeletons for async content | read the async views; a skeleton sized like the final content (no layout shift) |
 | perf-14 | [IN] | A load balancer when traffic justifies one, and the reason written down | hosting notes |
 | perf-15 | [BE] | API payloads trimmed to what the client uses | read the handlers or the GraphQL selection |
@@ -3951,7 +3951,7 @@ The older notes in `craft/seo-performance.md` (content in the HTML, JSON-LD type
 | seo-08 | [M] | Heading order skips no levels (no `h2` → `h4`) | **gate S** |
 | seo-09 | [M] | Alt text on every meaningful image; decorative images use `alt=""` | gate `a` count (names check) |
 | seo-10 | [M] | Schema markup where the page is eligible (Product, Article, FAQ, Event, Organization) | **gate S** warns when no JSON-LD block parses; eligibility is a judgement |
-| seo-11 | [M] | At least 3 internal links per page | **gate S** (same-origin or relative `href`, not `#` alone) |
+| seo-11 | [M] | At least 3 internal links per page (every other page when `sitemap.xml` lists fewer than 3; a one-page site needs none) | **gate S** (same-origin or relative `href`, not `#` alone) |
 | seo-12 | [M] | Zero broken links | site-level: a link checker over the built site |
 | seo-13 | [M] | Images compressed: WebP or AVIF, responsive sizes (`srcset`/`sizes` or `<picture>`) | gate axis P (perf-01) |
 | seo-14 | [M] | Core Web Vitals targets: LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1 | field data or Lighthouse; never claimed unmeasured (`craft/performance.md`) |
@@ -4387,7 +4387,7 @@ not check. Full rules, with why and examples: `craft/copy.md`, `craft/seo.md`, `
 - [ ] seo-08 [M] Heading order skips no levels (no `h2` → `h4`) · **measured by the gate (S)**
 - [ ] seo-09 [M] Alt text on every meaningful image; decorative images use `alt=""` · measured by the gate (`a` count)
 - [ ] seo-10 [M] Schema markup where the page is eligible (Product, Article, FAQ, Event, Organization) · gate S warns; decide by reading
-- [ ] seo-11 [M] At least 3 internal links per page · **measured by the gate (S)**
+- [ ] seo-11 [M] At least 3 internal links per page (every other page when `sitemap.xml` lists fewer than 3) · **measured by the gate (S)**
 - [ ] seo-12 [M] Zero broken links · check: site-level: a link checker over the built site
 - [ ] seo-13 [M] Images compressed: WebP or AVIF, responsive sizes (`srcset`/`sizes` or `<picture>`) · measured by the gate (axis P)
 - [ ] seo-14 [M] Core Web Vitals targets: LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1 · check: field data or Lighthouse; never claimed unmeasured (`craft/performance.md`)
@@ -4602,7 +4602,7 @@ Read before Step 1. Design inside these. `scripts/gate.mjs` measures them after 
 | seo-07 | one `h1` |
 | seo-08 | no skipped heading level |
 | seo-10 | JSON-LD parses; schema where eligible (warns when missing) |
-| seo-11 | ≥ 3 internal links to other pages |
+| seo-11 | ≥ 3 internal links to other pages (all of them when `sitemap.xml` lists fewer) |
 | seo-16 | no mixed content |
 | seo-17 | slugs lowercase, hyphenated, no IDs or query strings |
 | seo-18 | `og:image` present, 1200 × 630 |
@@ -6259,7 +6259,7 @@ Chosen from the user's request (`thinking/sequence.md` → Required output). The
 | Functional frontend | the above + `SCHEMA.md`, `DATA.md`, `data/` and its `schema.json` (demo-labelled; README demo line) | real backend or integrations, `LICENSE`, `CHANGELOG.md`, `middleware.ts`; `.env.example` only if the code reads env vars |
 | Production template | every file below | nothing by default; excuse with a reason |
 
-Every mode also needs `## Type research` and `## References` in `DESIGN.md` (Step 0.5). Only a production template with nothing left to replace in `MEDIA.md` may call itself production-ready in `README.md`; axis X fails any other readiness claim (a line saying "not production-ready" or "before production" is fine).
+Every mode is gated the same way on the built page: the rule sets (S SEO metadata, P modern image formats, K security headers, through `_headers` for a static site) and axis J (including a designed not-found view) apply to a design exploration too; only `--reference`, for a design example that is not a site, skips J. Every mode also needs `## Type research` and `## References` in `DESIGN.md` (Step 0.5). Only a production template with nothing left to replace in `MEDIA.md` may call itself production-ready in `README.md`; axis X fails any other readiness claim (a line saying "not production-ready" or "before production" is fine).
 
 ### Zero configuration
 
