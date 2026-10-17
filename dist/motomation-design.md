@@ -397,6 +397,20 @@ Before any design step, know what you are building in. The stack changes what th
 
 Before designing anything, leave the skill. Its own components, data, archetypes and collision engine are one source; used alone, every build looks like the skill made it. This step is not optional. Protocol: `craft/research.md`.
 
+**First, the exact type.** Find 3–5 real websites that are exactly the type you are building. Not merely visually similar: a banking site for a banking brief, a model portfolio for a model brief, a B2B portal for a B2B brief, an e-commerce marketplace for a marketplace brief, and so on. For each, record in `DESIGN.md` under `Type research`, as far as it is publicly observable:
+
+- identity, purpose, audience and business model
+- the discoverable route or page inventory, including nested pages and important route variants
+- the functionality on each relevant route
+- important states: empty, loading, error, success, authentication and permission-dependent, where they apply
+- visible admin or seller-facing surfaces, if public or documented
+- legal, privacy, policy and compliance pages
+- navigation, information architecture, content hierarchy and user journeys worth noting
+
+Mark each finding **observed**, **inferred**, or **unverified**. Never claim to have inspected hidden routes, private admin panels, authenticated flows or anything you could not reach; label it unverified and fall back on other evidence or a stated assumption. A hybrid brief (two business models or site types) researches each type separately. A type with no category file is researched as itself, never forced into an unrelated category. These findings feed Step 0.7: the scope is derived from the brief, this evidence, industry conventions, legal or regulatory requirements and design judgment. Neither a competitor's feature nor a category recipe becomes a requirement automatically; a recipe, if one exists, is a starting point for design exploration. Proportion the depth to the build: the goal is a justified scope, not an audit of every competitor.
+
+**Then, design inspiration, separately:**
+
 - Search the live sources for the brief's category, last 6 months: Awwwards, FWA, CSSDA, Godly, Land-book, SiteInspire, Dribbble, Behance, Codrops, X and recent design publications (`references/sources/inspiration.md`).
 - Read wide in `references/sources/` (at least two of `skills.md`, `components.md`, `motion.md`, `3d.md`, `foundation.md`, `future.md`) for method and technique. Concepts only: copy no code from any repository.
 - Write in `DESIGN.md` under `References`: **References looked at** (three: name — what it is — what you took from it), **Techniques considered** (three, sources named), **Pattern being avoided** (the overused pattern in this category, and why).
@@ -404,7 +418,7 @@ Before designing anything, leave the skill. Its own components, data, archetypes
 
 If you cannot access the web, say so explicitly, work from training data, and state the limitation in `DESIGN.md` (`Access: no web access: working from training data`).
 
-**Test:** three references, three techniques with sources, the avoided pattern with why, the access line, and no decision traced only to the skill's defaults. If not, Step 1 doesn't start.
+**Test:** 3–5 exact-type websites with their findings marked observed / inferred / unverified, three references, three techniques with sources, the avoided pattern with why, the access line, and no decision traced only to the skill's defaults. If not, Step 1 doesn't start.
 
 ---
 
@@ -412,7 +426,7 @@ If you cannot access the web, say so explicitly, work from training data, and st
 
 The brief names a few pages; a complete site of its type needs more. "Build an e-commerce" means the whole e-commerce, not a homepage and some pages. Derive the scope yourself, from the Step 0.5 research, industry standards and your own knowledge. **Do not pick from a hardcoded list**: there is none in this skill, and `scripts/completeness.mjs` only checks what you derive.
 
-A category recipe (categories/<type>.md) is design opinion, not scope. The scope is derived from research, not read from a file. This applies to every category, not just e-commerce. If the recipe and the derived scope disagree, the derived scope wins.
+A category recipe (`categories/<type>.md`) is design opinion, not scope. The scope is derived from research, not read from a file. This applies to every site type, not just the ones with a category file. If the requested type has no category file, the scope is derived entirely from research. If the recipe and the derived scope disagree, the derived scope wins.
 
 Answer, and write in `DESIGN.md` under `Scope` (from `templates/DESIGN.md`):
 
@@ -641,6 +655,9 @@ Every build ships as a complete, runnable template a designer can sell, not a fo
 - `README.md` (what it is, what is real, what is demo, how to run, how to deploy; it states "All data in data/ is demo. Replace with real data before launch."), `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `DATA.md`, `CRITIQUE.md`, `GATE.md` (the gate output per page, pasted), `LICENSE` (MIT by default), `CHANGELOG.md` (from v0.1.0), `.env.example` (every variable, with a placeholder)
 - `data/`: mock JSON typed by its `schema.json`, every entry labelled demo (`templates/DATA.md`)
 - `middleware.ts`, and a comment at the top of every non-trivial file
+- `MEDIA.md` in the project root, in every build (`craft/media.md`)
+
+For every image, video, icon, illustration, or other externally sourced visual asset, follow `craft/media.md`. Select media appropriate to the project, verify and record its provenance and applicable usage terms, identify temporary or unverified assets as placeholders, and document the assets and replacement requirements in the website project's root `MEDIA.md`.
 
 It runs with zero configuration after `npm install && npm run dev`: mock data committed, no external services required.
 
@@ -3041,6 +3058,113 @@ The pass is done when every row is "none found" or fixed. Record leftovers as `[
 
 ---
 
+<!-- file: craft/media.md -->
+
+## Media
+
+A visually rich site needs real visual material, not generic gradients, empty image boxes and arbitrary placeholders. A reachable URL is not a licence, though, and a direct image link is not a promise that the file stays online or free for commercial use. This file covers how to find media, track where it came from, and make clear what must be replaced before launch. Referenced from `thinking/sequence.md` ("Required output: a sellable template").
+
+### Media selection
+
+Every build weighs its need for photography, video, icons, illustrations, SVGs, screenshots and any other visual asset the brief calls for.
+
+- Select media for the actual project: the page content, the visual concept and the audience. Do not force every format into every build.
+- Prefer real, relevant assets when they improve the design.
+- Use custom illustration, CSS, SVG or another technique when it fits the concept better than stock.
+
+### Where to source media
+
+Starting points:
+
+| Source | For |
+|---|---|
+| Unsplash — https://unsplash.com | photography |
+| Pexels — https://pexels.com | photography, video |
+| Pixabay — https://pixabay.com | photography, video, illustration |
+| Coverr — https://coverr.co | background video |
+| Mixkit — https://mixkit.co | video |
+| unDraw — https://undraw.co | illustration |
+| Heroicons — https://heroicons.com | icons |
+| Lucide — https://lucide.dev | icons |
+| Feather — https://feathericons.com | icons |
+
+These are **discovery sources**, not blanket guarantees. None of them guarantees, for every asset, that it is licence-eligible for this project, free of restrictions, at a stable URL, or available without limits.
+
+- **Verify each selected asset's licence and usage terms** when possible, on the asset's own page and the source's current licence page. Respect attribution, commercial-use restrictions, redistribution rules, hotlinking restrictions and any other condition.
+- **Prefer stable integration**: download the file into the project, or use the source's supported method, when the terms permit it. Do not assume an image URL stays available.
+- **No keys or paid services by default.** Do not require an API key or a paid service when a suitable free, accessible alternative exists. If a source needs registration, an API key, or has access limits, say so; never claim unrestricted access.
+
+### Placeholder identification
+
+Separate temporary reference assets from assets approved for production.
+
+For a temporary or unverified asset, name it, where practical:
+
+```
+placeholder-<description>.<ext>
+```
+
+Where appropriate, add a source and replacement comment:
+
+```html
+<!-- PLACEHOLDER: <source URL>; license/status: <verified or unknown>; replace before production if not approved. -->
+```
+
+```js
+// PLACEHOLDER: <source URL>; license/status: <verified or unknown>; replace before production if not approved.
+```
+
+When a file cannot reasonably be renamed (a CMS path, a framework-imposed name), record its placeholder status in `MEDIA.md` instead.
+
+Do not label a properly licensed, production-approved asset as disposable just because it came from a stock site.
+
+### Required `MEDIA.md`
+
+Every generated website project has a `MEDIA.md` in its root. At least these columns:
+
+```markdown
+| File or asset | Source URL | License / usage status | Placeholder? | Replace before production? |
+|---|---|---|---|---|
+| public/img/placeholder-harbour-dawn.jpg | <asset page URL> | unknown | yes | yes |
+| public/icons/arrow.svg | https://lucide.dev | <licence as stated on the source, verified YYYY-MM-DD> | no | no |
+| hero grain (CSS) | custom, this build | custom | no | no |
+```
+
+- List the photographs, videos, illustrations, externally sourced icons and other assets the project uses.
+- Record the original source where available, the licence or terms that apply, and any attribution or replacement requirement.
+- Write `unknown` when the licence or provenance has not been verified. Never invent a licence, attribution, source URL or permission.
+- Mark custom-created assets as custom, and list external dependencies (an icon package, a hosted font, a video CDN) where relevant.
+- A build with no external media still ships `MEDIA.md`: a short inventory stating that no external media assets were used.
+
+The root `README.md` explains the media handoff and names every unverified or temporary asset that must be reviewed before production.
+
+### Media rules
+
+- Do not take assets from Google Images results, Pinterest, social media or arbitrary websites as though finding them there grants reuse rights. Such places may be looked at for design research; implementation assets come through legitimate, documented channels.
+- For people, prefer appropriately licensed stock photography, or media the client supplied or explicitly authorized.
+- Do not use identifiable real people or public figures as disposable placeholders without appropriate permission and usage rights.
+- Do not copy proprietary code, protected artwork or photography from reference websites. Learn composition, art direction, information architecture and interaction from them; build original or properly licensed implementations.
+- Every temporary or unverified asset is identifiable (name, comment, or a `MEDIA.md` row) and documented.
+- Every website build includes `MEDIA.md`.
+- Do not call the site production-ready while required permissions, attributions or placeholder replacements are unresolved.
+
+### Production handoff
+
+Tell the client which assets need replacement, permission checks, attribution or approval before launch (in the handoff message and in `README.md`, pointing to `MEDIA.md`).
+
+A production-approved asset stays in place when its usage rights, provenance, technical suitability and required conditions have been verified.
+
+### What not to do
+
+- Treat a search result or an accessible URL as proof of a licence.
+- Ship unverified temporary assets silently.
+- Invent provenance or licensing information.
+- Omit `MEDIA.md`.
+- Make every asset a placeholder by default when it is already approved for production.
+
+
+---
+
 <!-- file: craft/mobile-motion-matrix.md -->
 
 ## Mobile Motion Matrix
@@ -3234,7 +3358,46 @@ Each failing gate P item adds one to the P count in the stamp (`rules: C0 S0 P0 
 
 The skill's own components, data sets, archetypes and collision engine are one source. Used alone they make every build look like the skill made it. Step 0.5 sends the agent outside the skill before anything is designed. It is required for every build or redesign, and nothing in Step 1 onward may come from "the skill's defaults" alone: **every design decision traces to the brief or to a named reference.**
 
+### The order
+
+Two kinds of research, in this order. Step 0.5 in `thinking/sequence.md` states the requirement; this file is the method.
+
+1. **Read the brief.** Name the exact website type, or the combination of types (a marketplace with a subscription box is two).
+2. **Find 3–5 real websites of that exact type**, with whatever research tools are available. Same job, not same look.
+3. **Investigate them**: routes and page hierarchy, functionality, the states that matter, visible admin or seller surfaces, legal pages ("Type research", below).
+4. **Record what is useful**, each finding marked observed, inferred or unverified.
+5. **Derive the scope** in Step 0.7 from the brief, this evidence, industry knowledge and the constraints that apply (region, regulation, budget).
+6. **Research design inspiration separately**: award work, studios, galleries, interaction references and visual experiments ("The rule" onward).
+7. **Synthesize a distinct concept** for this project. Never a copy of a reference.
+8. **Carry it forward** into Step 0.7 (scope), the plan and the design steps.
+
+Research serves the brief. It is not a box-checking exercise: a one-page build needs a short look, a marketplace needs a real one.
+
+### Type research (exact type, for scope)
+
+For each of the 3–5 sites, as far as it is publicly observable:
+
+| Dimension | Record |
+|---|---|
+| Identity | who it is, purpose, audience, business model |
+| Routes | the discoverable page inventory, nested pages, important route variants |
+| Functionality | what each relevant route lets the visitor do |
+| States | empty, loading, error, success, authentication, permission-dependent, where they apply |
+| Admin | seller-facing or admin surfaces, only if public or documented |
+| Legal | privacy, terms, cookies, returns, accessibility, compliance pages |
+| Structure | navigation, information architecture, content hierarchy, user journeys |
+
+Rules:
+
+- **Observed, inferred, unverified.** Observed: you saw it. Inferred: a reasoned conclusion from what you saw or from the industry. Unverified: you could not reach it (behind a login, a paywall, a private admin, a region block). Never present an inferred or unverified item as observed.
+- **References are evidence, not a specification.** A competitor's feature becomes a scope row only when this brief needs it. A category recipe (`categories/<type>.md`), if one exists, is a starting point for design, not the scope.
+- **Hybrid briefs** research each type separately, then keep only what the actual brief needs.
+- **No category file** for the type: research it as itself. Do not force it into the nearest category.
+- **When research falls short** (no web, blocked pages, too few public examples), say so, work from what you have, and mark the gaps unverified or as stated assumptions. Never fill a gap with an invented finding.
+
 ### The rule
+
+The rest of this file is design-inspiration research (step 6 above).
 
 - Look **outside the skill** first: the live award sources, then the repositories in `references/sources/`. The skill's `examples/`, `data/` and `signatures/` come after, as one more reference.
 - Look **wide**: at least two of the six source files below, plus the live sources for the brief's category.
@@ -3287,6 +3450,13 @@ Name three specific techniques considered for this brief, each with its source: 
 In `DESIGN.md` (from `templates/DESIGN.md`), before Step 1:
 
 ```markdown
+### Type research
+| Site | Type | Routes | Functionality | States | Admin | Legal | Notes |
+|---|---|---|---|---|---|---|---|
+| <name, URL> | <exact type> | <inventory> (observed / inferred / unverified) | … | … | <visible, or unverified> | … | <IA, journeys> |
+
+**Gaps:** <what could not be verified, and the assumption used instead>
+
 ### References
 **Access:** web (searched YYYY-MM-DD) | no web access: working from training data (limitation: references may be out of date; nothing was checked live)
 
@@ -3312,11 +3482,11 @@ At least three references, at least one from outside the brief's category, at le
 
 ### No web access
 
-If the tool cannot reach the web, say so in one line before Step 1, set `Access: no web access: working from training data` and state the limitation. Still name three references, three techniques and the pattern being avoided, from what you know, each with the year you last knew it. Don't present remembered sites as current, and don't invent URLs.
+If the tool cannot reach the web, say so in one line before Step 1, set `Access: no web access: working from training data` and state the limitation. Still name 3–5 exact-type sites (every finding marked inferred or unverified, none observed), three references, three techniques and the pattern being avoided, from what you know, each with the year you last knew it. Don't present remembered sites as current, and don't invent URLs.
 
 ### Test
 
-Before Step 1: does `DESIGN.md` have `References looked at` (3), `Techniques considered` (3, sources named), `Pattern being avoided` (with why), the access line, and a decision trace where nothing traces to "the skill's defaults"? If not, Step 1 doesn't start.
+Before Step 1: does `DESIGN.md` have `Type research` (3–5 exact-type sites, each finding marked observed / inferred / unverified, gaps stated), `References looked at` (3), `Techniques considered` (3, sources named), `Pattern being avoided` (with why), the access line, and a decision trace where nothing traces to "the skill's defaults"? If not, Step 1 doesn't start.
 
 
 ---
