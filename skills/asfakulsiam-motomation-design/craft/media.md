@@ -86,7 +86,17 @@ Every generated website project has a `MEDIA.md` in its root, in every delivery 
 
 The root `README.md` explains the media handoff and names every unverified or temporary asset that must be reviewed before production.
 
-**What the gate checks** (`scripts/completeness.mjs`, axis X, whenever `DESIGN.md` has a `Scope` section, i.e. website creation): `MEDIA.md` exists and cannot be excused; it has the inventory table, or states that no external media assets were used; each row has a source, a licence / usage status (`unknown` is allowed) and yes / no in both last columns; a placeholder is marked for replacement; an `unknown` or `unverified` licence is marked for replacement; a `placeholder-…` file or a `PLACEHOLDER:` comment in the project is listed; and `README.md` points to `MEDIA.md` when anything still needs replacing. Pending replacements print a not-production-ready warning. It never decides whether a licence is valid. A `Scope` with no `**Delivery mode:**` line (a build from before delivery modes) only warns on a missing `MEDIA.md`, so a fix there doesn't fail. Narrow maintenance (the light route) writes no `Scope` section of its own; when it adds or replaces media in a project that has a `MEDIA.md`, add or update the row by hand.
+**What the gate checks** (`scripts/completeness.mjs`, axis X, whenever `DESIGN.md` has a `Scope` section, i.e. website creation): `MEDIA.md` exists and cannot be excused; it has the inventory table, or states that no external media assets were used; each row has a source, a licence / usage status (`unknown` is allowed) and yes / no in both last columns; a placeholder is marked for replacement; an `unknown` or `unverified` licence is marked for replacement; a `placeholder-…` file or a `PLACEHOLDER:` comment in the project is listed; and `README.md` points to `MEDIA.md` when anything still needs replacing. Pending replacements print a not-production-ready warning. It never decides whether a licence is valid. A `Scope` with no `**Delivery mode:**` line (a build from before delivery modes) only warns on a missing `MEDIA.md`, so a fix there doesn't fail. Every local media file (images, video, SVG files; build output and `favicon.*` aside) needs a row: its path, its file name, or a folder row ending in `/`.
+
+**Maintenance** (the light route; no `Scope` section): the gate still checks media, through `maintenanceMedia()` (`node scripts/completeness.mjs <project> --maintenance` without a browser). A fix that adds, replaces, renames or removes media updates the project's `MEDIA.md` in the same change; one that doesn't touch media writes nothing.
+
+| The project has | The check |
+|---|---|
+| a `MEDIA.md` | the full media check above: an added or renamed file without a row fails, and so does an unlisted placeholder |
+| no `MEDIA.md`, no media files | nothing to check |
+| no `MEDIA.md`, media files | undocumented `placeholder-…` files and `PLACEHOLDER:` comments fail; other files are a warning (create `MEDIA.md` if this change touched media) |
+
+A file replaced under the same name looks unchanged to the check: update its row (source, licence status) by hand.
 
 ## Media rules
 

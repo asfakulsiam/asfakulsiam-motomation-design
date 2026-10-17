@@ -159,7 +159,7 @@ Two routes. `/build --route=light` or `/build --route=full` forces one. Without 
 | Thinking Sequence | Step 0 + all 7 steps, six checkpoints | **Skipped.** Step 0 stack only (keep the project's). Read the existing design first (its tokens, components and `DESIGN.md`). No archetype pick, no reference study, no anti-sameness pass. Two checkpoints: **Plan** (route, stack, the one-line intent, what you will not do) and **Ship** (gate output). A small fix has only **Ship** |
 | Collision engine | `scripts/collide.mjs` draws archetype, mutation, collision, signature | **Not run.** No new signature move; a single page keeps the site's (or has none) |
 | Scope | Step 0.7: the full scope, every route, state and content type, checked by axis X | **Not derived.** The scope is the one page or the one fix. Axis X reads the project's `DESIGN.md` Scope if it has one |
-| Design | `DESIGN.md`, `MOTION.md`, `MEDIA.md` and the rest the delivery mode requires (`templates/TEMPLATE.md`) | Keep the existing design: its type, palette, layout and motion. No new tokens beyond what the change uses. New or replaced media gets its row in the project's `MEDIA.md` (`craft/media.md`) |
+| Design | `DESIGN.md`, `MOTION.md`, `MEDIA.md` and the rest the delivery mode requires (`templates/TEMPLATE.md`) | Keep the existing design: its type, palette, layout and motion. No new tokens beyond what the change uses. Media added, replaced or removed: update the project's `MEDIA.md` in the same change; the gate checks it (`craft/media.md`) |
 | Restraint, reduced motion, accessibility | Yes | Yes: add nothing that isn't needed (note what you didn't add); every motion you touch keeps its reduced-motion path; contrast, names, keyboard and focus for everything you touch |
 | Delivery Gate | Yes, every axis including J (journey) and O (originality), with a stamp | **Yes, the same gate**, every axis including J. A fix: run it before and after, report both. Stamp only if the page already had one or you were asked. O: not run (no new concept to compare) |
 | Cost | Recorded by `scripts/cost.mjs` in a benchmark run | Same record; the route is in it (`route.stated`), so the two routes can be compared |
@@ -175,7 +175,7 @@ Switch to the full route, and say so, when the work turns out to need a new stru
 
 ### The Thinking Sequence (summary; full version in `thinking/sequence.md`)
 
-Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it. Light route (narrow maintenance only): inspect the existing design, change only what the cause needs, run the gate.
+Before Step 0, read `gates/rules.md` and say so in one line (`Rules : gates/rules.md read; designing within it.`). Step 1 does not start without it. Light route (narrow maintenance only): inspect the existing design, change only what the cause needs (changed media: update `MEDIA.md`), run the gate.
 
 0. **Stack**: if the brief (or the existing project) names a stack, use it. Otherwise **Next.js (App Router, TypeScript, Tailwind)** for anything with routes or data, plain HTML for a single static page; never Astro or Vite for e-commerce unless the brief demands it. Every dependency passes the three checks in `craft/stack.md` (active, not deprecated, licence free for commercial use). Record it in `DESIGN.md` and load its adapter. Plain HTML is never the silent default.
 0.5. **Research (mandatory)**: leave the skill before designing. First 3–5 real sites of the exact type (or the closest, gap stated): routes, functions, states, flows, admin, legal; each finding observed, inferred or unverified, nothing hidden claimed. Then, separately, design inspiration: live award sources (last 6 months) and `references/sources/`, concepts only (another industry's site is inspiration, not a type reference). Record the type research, three references, three techniques and the pattern being avoided in `DESIGN.md`; every decision traces to the brief or a reference. No web: say so. See `craft/research.md`.
@@ -371,7 +371,7 @@ Each checkpoint message ends with what the skill is waiting for: `Checkpoint <n>
 The sequence below is the **full route**. Say the route in your first line (`SKILL.md`, "Routes"); `/build --route=light|full` forces it.
 
 - **Full route** (all new design work, whatever its size: a new site even of one page, a new brand, art direction or product experience, a distinctive redesign, Tier 3+, forms, data): every step below, the collision engine in Step 4, the scope in Step 0.7, six checkpoints, the Delivery Gate with a stamp. Depth is proportional: a one-page site gets a shorter Step 0.5 and a smaller Scope table, never none.
-- **Light route** (narrow maintenance in an established design: a broken state, a spacing or responsive defect, contrast, a component adjusted inside its visual system, a page added to an existing system with no new direction): skip Steps 0.5 to 7. Keep only Step 0 (the project's stack) and read the existing design first; no collision draw, no scope derivation. Two checkpoints, Plan and Ship (a fix: Ship only). Change only what the cause needs, inside the existing design. **The Delivery Gate still runs, every axis**, including J. Needs a new direction, structure, signature or concept: switch to full and say so.
+- **Light route** (narrow maintenance in an established design: a broken state, a spacing or responsive defect, contrast, a component adjusted inside its visual system, a page added to an existing system with no new direction): skip Steps 0.5 to 7. Keep only Step 0 (the project's stack) and read the existing design first; no collision draw, no scope derivation. Two checkpoints, Plan and Ship (a fix: Ship only). Change only what the cause needs, inside the existing design; media added, replaced or removed updates the project's `MEDIA.md` (`craft/media.md`). **The Delivery Gate still runs, every axis**, including J. Needs a new direction, structure, signature or concept: switch to full and say so.
 - **Page count never decides the route.** If the work introduces a design direction or needs new product or site research, it is full.
 
 ### 0. Stack
@@ -3163,7 +3163,17 @@ Every generated website project has a `MEDIA.md` in its root, in every delivery 
 
 The root `README.md` explains the media handoff and names every unverified or temporary asset that must be reviewed before production.
 
-**What the gate checks** (`scripts/completeness.mjs`, axis X, whenever `DESIGN.md` has a `Scope` section, i.e. website creation): `MEDIA.md` exists and cannot be excused; it has the inventory table, or states that no external media assets were used; each row has a source, a licence / usage status (`unknown` is allowed) and yes / no in both last columns; a placeholder is marked for replacement; an `unknown` or `unverified` licence is marked for replacement; a `placeholder-…` file or a `PLACEHOLDER:` comment in the project is listed; and `README.md` points to `MEDIA.md` when anything still needs replacing. Pending replacements print a not-production-ready warning. It never decides whether a licence is valid. A `Scope` with no `**Delivery mode:**` line (a build from before delivery modes) only warns on a missing `MEDIA.md`, so a fix there doesn't fail. Narrow maintenance (the light route) writes no `Scope` section of its own; when it adds or replaces media in a project that has a `MEDIA.md`, add or update the row by hand.
+**What the gate checks** (`scripts/completeness.mjs`, axis X, whenever `DESIGN.md` has a `Scope` section, i.e. website creation): `MEDIA.md` exists and cannot be excused; it has the inventory table, or states that no external media assets were used; each row has a source, a licence / usage status (`unknown` is allowed) and yes / no in both last columns; a placeholder is marked for replacement; an `unknown` or `unverified` licence is marked for replacement; a `placeholder-…` file or a `PLACEHOLDER:` comment in the project is listed; and `README.md` points to `MEDIA.md` when anything still needs replacing. Pending replacements print a not-production-ready warning. It never decides whether a licence is valid. A `Scope` with no `**Delivery mode:**` line (a build from before delivery modes) only warns on a missing `MEDIA.md`, so a fix there doesn't fail. Every local media file (images, video, SVG files; build output and `favicon.*` aside) needs a row: its path, its file name, or a folder row ending in `/`.
+
+**Maintenance** (the light route; no `Scope` section): the gate still checks media, through `maintenanceMedia()` (`node scripts/completeness.mjs <project> --maintenance` without a browser). A fix that adds, replaces, renames or removes media updates the project's `MEDIA.md` in the same change; one that doesn't touch media writes nothing.
+
+| The project has | The check |
+|---|---|
+| a `MEDIA.md` | the full media check above: an added or renamed file without a row fails, and so does an unlisted placeholder |
+| no `MEDIA.md`, no media files | nothing to check |
+| no `MEDIA.md`, media files | undocumented `placeholder-…` files and `PLACEHOLDER:` comments fail; other files are a warning (create `MEDIA.md` if this change touched media) |
+
+A file replaced under the same name looks unchanged to the check: update its row (source, licence status) by hand.
 
 ### Media rules
 
@@ -4633,7 +4643,8 @@ Read before Step 1. Design inside these. `scripts/gate.mjs` measures them after 
 | Excused items | "not required for this brief, reason: <why>"; a reason is required |
 | Marks | requested, required, optional, or excused; anything else fails |
 | Template shape (`templates/TEMPLATE.md`, by delivery mode; production template shown, and the default) | `README.md` (with "All data in data/ is demo. Replace with real data before launch."), `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `DATA.md`, `CRITIQUE.md`, `GATE.md`, `LICENSE`, `CHANGELOG.md`, `.env.example` covering every env var the code reads, `middleware.ts`, the build's `data/` folder with its `schema.json` and every entry labelled demo, a `dev` script; each unless excused |
-| Media (`craft/media.md`) | `MEDIA.md` in every mode, never excused: an inventory (or "no external media assets were used"), source and licence status per row, placeholders and unknown licences marked for replacement, every `placeholder-…` file and `PLACEHOLDER:` comment listed, `README.md` pointing to it while anything needs replacing |
+| Research and readiness | with a delivery mode stated: `DESIGN.md` has `## Type research` and `## References`; `README.md` calls the build production-ready only in a production template with no asset left to replace |
+| Media (`craft/media.md`) | `MEDIA.md` in every mode, never excused: an inventory (or "no external media assets were used"), source and licence status per row, placeholders and unknown licences marked for replacement, every local media file and every `placeholder-…` file and `PLACEHOLDER:` comment listed, `README.md` pointing to it while anything needs replacing; without a Scope section (maintenance), the same media check whenever `MEDIA.md` exists, and placeholders always |
 | Middleware, comments, component headers | checked as warnings |
 
 ### Security (gate `rules: K`, `craft/security.md`)
@@ -5935,6 +5946,15 @@ Rules for the data/ folder
 | skeleton | <async surface> | required | <file> |
 | template | <middleware.ts, data/, …> | <required, or not required for this brief, reason: …> | |
 
+### Type research
+<!-- Step 0.5 (craft/research.md): 3–5 real sites of the exact type, or the closest, with the gap stated. Every finding
+     observed / inferred / unverified. Required by gate axis X when the Scope states a delivery mode. -->
+| Site | Type | Routes | Functionality | States | Admin | Legal | Notes |
+|---|---|---|---|---|---|---|---|
+| <name, URL> | <exact type> | <inventory> (observed / inferred / unverified) | … | … | <visible, or unverified> | … | <IA, journeys> |
+
+**Gaps:** <what could not be verified, and the assumption used instead>
+
 ### References
 <!-- Step 0.5, mandatory (craft/research.md). Written before Step 1. Sources: references/sources/ + live award sites. Concepts only, no copied code. -->
 **Access:** <web (searched YYYY-MM-DD) | no web access: working from training data (limitation: <what that means here>)>
@@ -6238,6 +6258,8 @@ Chosen from the user's request (`thinking/sequence.md` → Required output). The
 | Design exploration | `README.md`, `DESIGN.md`, `MOTION.md`, `MEDIA.md`, `CRITIQUE.md`, `GATE.md` | backend, auth, payments, `SCHEMA.md`, `DATA.md`, `data/`, `LICENSE`, `CHANGELOG.md`, `.env.example`, `middleware.ts`, zero-config run |
 | Functional frontend | the above + `SCHEMA.md`, `DATA.md`, `data/` and its `schema.json` (demo-labelled; README demo line) | real backend or integrations, `LICENSE`, `CHANGELOG.md`, `middleware.ts`; `.env.example` only if the code reads env vars |
 | Production template | every file below | nothing by default; excuse with a reason |
+
+Every mode also needs `## Type research` and `## References` in `DESIGN.md` (Step 0.5). Only a production template with nothing left to replace in `MEDIA.md` may call itself production-ready in `README.md`; axis X fails any other readiness claim (a line saying "not production-ready" or "before production" is fine).
 
 ### Zero configuration
 

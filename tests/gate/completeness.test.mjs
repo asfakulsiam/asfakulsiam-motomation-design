@@ -2,7 +2,7 @@
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { tmpdir } from "node:os";
-import { completeness, completenessLines } from "../../skills/asfakulsiam-motomation-design/scripts/completeness.mjs";
+import { completeness, completenessLines, maintenanceMedia } from "../../skills/asfakulsiam-motomation-design/scripts/completeness.mjs";
 let bad = 0; const say = (ok, msg) => { console.log(`${ok ? "ok  " : "FAIL"} ${msg}`); if (!ok) bad++; };
 const put = (root, f, t = "// demo\n") => { mkdirSync(dirname(join(root, f)), { recursive: true }); writeFileSync(join(root, f), t); };
 const MEDIA = "# MEDIA.md\n\n| File or asset | Source URL | License / usage status | Placeholder? | Replace before production? |\n|---|---|---|---|---|\n| public/hero.jpg | client-supplied | approved by the client in writing | no | no |\n";
@@ -10,7 +10,7 @@ const SHAPE = ["MEDIA.md", "README.md", "MOTION.md", "SCHEMA.md", "DATA.md", "CR
 function project(scopeRows, files, mode = "") {
   const root = mkdtempSync(join(tmpdir(), "moto-x-"));
   for (const f of [...SHAPE, ...files]) put(root, f, f === "MEDIA.md" ? MEDIA : f === "SCHEMA.md" ? "## Section contract\n| #cart | empty: Your cart is empty |\n" : f === "data/products.json" ? '{"demo": true, "entity": "Product", "items": [{"id": "p1", "demo": true}]}' : f === "README.md" ? "# Demo\n\nAll data in data/ is demo. Replace with real data before launch.\n" : f === ".env.example" ? "# demo\nSHOP_API_KEY=placeholder\n" : "// demo\n");
-  put(root, "DESIGN.md", `# DESIGN.md\n\n## Scope\n**Site type:** e-commerce\n**Admin panel:** yes\n${mode ? `**Delivery mode:** ${mode}\n` : ""}\n| Kind | Item | Mark | Evidence |\n|---|---|---|---|\n${scopeRows.join("\n")}\n\n## Concept\n`);
+  put(root, "DESIGN.md", `# DESIGN.md\n\n## Scope\n**Site type:** e-commerce\n**Admin panel:** yes\n${mode ? `**Delivery mode:** ${mode}\n` : ""}\n| Kind | Item | Mark | Evidence |\n|---|---|---|---|\n${scopeRows.join("\n")}\n\n## Type research\n| Site | Type |\n|---|---|\n| shop-a | e-commerce |\n\n## References\n1. a\n\n## Concept\n`);
   return root;
 }
 const rows = ["| route | / | requested | |", "| route | /products/[slug] | required | |", "| legal | /privacy | required | |", "| state | /cart: empty | required | SCHEMA.md#empty |", "| admin | /admin/orders | required | |", "| skeleton | product grid | required | app/products/loading.tsx |", "| edge | out of stock | required | |", "| function | wishlist | optional | |", "| route | /blog | not required for this brief, reason: no editorial content in the brief |"];
@@ -41,7 +41,7 @@ writeFileSync(join(iRoot, "package.json"), '{"scripts": {"build": "next build"}}
 const i = completeness(iRoot); const ids = i.missing.map((m) => m.item).sort().join(", ");
 say(ids === ".env.example coverage, README demo line, demo labels, npm run dev", `template content checks bite (${ids})`);
 // delivery modes and MEDIA.md (templates/TEMPLATE.md → Delivery modes; craft/media.md)
-const explore = (media, extra = []) => { const r = mkdtempSync(join(tmpdir(), "moto-x-")); put(r, "DESIGN.md", "# x\n\n## Scope\n**Delivery mode:** design exploration\n\n| Kind | Item | Mark | Evidence |\n|---|---|---|---|\n| route | / | requested | |\n"); for (const f of ["README.md", "MOTION.md", "CRITIQUE.md", "GATE.md", "index.html"]) put(r, f, "x\n"); if (media !== null) put(r, "MEDIA.md", media); for (const [f, t] of extra) put(r, f, t); return r; };
+const explore = (media, extra = []) => { const r = mkdtempSync(join(tmpdir(), "moto-x-")); put(r, "DESIGN.md", "# x\n\n## Scope\n**Delivery mode:** design exploration\n\n| Kind | Item | Mark | Evidence |\n|---|---|---|---|\n| route | / | requested | |\n\n## Type research\n| Site | Type |\n|---|---|\n| a | studio |\n\n## References\n1. a\n"); for (const f of ["README.md", "MOTION.md", "CRITIQUE.md", "GATE.md", "index.html"]) put(r, f, "x\n"); if (media !== null) put(r, "MEDIA.md", media); for (const [f, t] of extra) put(r, f, t); return r; };
 const j = completeness(explore("# MEDIA.md\n\nNo external media assets were used; every visual is CSS or inline SVG drawn for this build.\n"));
 say(j.pass && j.mode === "design exploration", "design exploration needs no SCHEMA, DATA, data/, LICENSE, CHANGELOG, .env.example or middleware");
 const k = completeness(explore(null)); say(!k.pass && k.missing.some((m) => m.item === "MEDIA.md"), "MEDIA.md is required in every delivery mode");
@@ -61,4 +61,29 @@ say(completeness(o1.root).mode === "functional frontend" && !completeness(o1.roo
 const q1Root = project(["| route | / | requested | |"], ["app/page.tsx"]); rmSync(join(q1Root, "MEDIA.md")); const q1 = completeness(q1Root);
 say(q1.pass && q1.warnings.some((w) => /^media: no MEDIA\.md/.test(w)), "an older Scope with no delivery mode warns on a missing MEDIA.md instead of failing a fix");
 const p1 = completeness(project(["| route | / | requested | |"], ["app/page.tsx"], "a vibe")); say(!p1.pass && p1.invalid.some((x) => /delivery mode/.test(x)), "an unknown delivery mode is invalid");
+// research is required in every delivery mode (Step 0.5): a stated mode without Type research fails
+const rr = explore(row("public/a.svg", "custom, this build", "custom", "no", "no"), [["public/a.svg", "<svg/>"]]); writeFileSync(join(rr, "DESIGN.md"), "# x\n\n## Scope\n**Delivery mode:** design exploration\n\n| Kind | Item | Mark | Evidence |\n|---|---|---|---|\n| route | / | requested | |\n");
+say(!completeness(rr).pass && completeness(rr).missing.some((m) => m.item === "DESIGN.md Type research"), "a small design exploration still needs Type research and References");
+// coverage: every local media file has a MEDIA.md row (path, file name or folder row)
+const cv = completeness(explore(row("public/icons/", "https://lucide.dev", "verified on the source's licence page", "no", "no"), [["public/icons/a.svg", "<svg/>"], ["public/icons/b.svg", "<svg/>"], ["public/hero.jpg", "x"]]));
+say(!cv.pass && cv.missing.some((m) => /public\/hero\.jpg has no row/.test(m.why)) && !cv.missing.some((m) => /icons/.test(m.why)), "an unlisted media file fails; a folder row covers its files");
+// maintenance (no Scope section): media only
+const mt = (media, files) => { const r = mkdtempSync(join(tmpdir(), "moto-m-")); put(r, "DESIGN.md", "# Existing site\n\n## Concept\nx\n"); put(r, "index.html", "<p>x</p>"); if (media !== null) put(r, "MEDIA.md", media); for (const [f, t] of files) put(r, f, t); return r; };
+const mm0 = maintenanceMedia(mt(row("public/hero.jpg", "client-supplied", "approved by the client in writing", "no", "no"), [["public/hero.jpg", "x"], ["styles.css", "a:hover{color:red}"]]));
+say(mm0.pass && !mm0.warnings.length, "maintenance with no media change passes and is not pushed through the full workflow");
+const mm1 = maintenanceMedia(mt(row("public/hero.jpg", "client-supplied", "approved by the client in writing", "no", "no"), [["public/hero.jpg", "x"], ["public/team.jpg", "x"]]));
+say(!mm1.pass && mm1.problems.some((p) => /public\/team\.jpg has no row/.test(p)), "maintenance that adds media without updating MEDIA.md fails");
+const mm2 = maintenanceMedia(mt(row("public/hero.jpg", "client-supplied", "approved", "no", "no") + "| public/team.jpg | https://pexels.com/photo/x | unknown | no | yes |\n", [["public/hero.jpg", "x"], ["public/team.jpg", "x"]]));
+say(mm2.pass && mm2.warnings.some((w) => /1 asset\(s\)/.test(w)), "maintenance that records the new asset passes; its unknown licence stays visible");
+const mm3 = maintenanceMedia(mt(null, [["public/old.jpg", "x"]]));
+say(mm3.pass && mm3.warnings.some((w) => /no MEDIA\.md/.test(w)), "an older site with media and no MEDIA.md gets a warning, not a failure");
+const mm4 = maintenanceMedia(mt(null, [["public/placeholder-hero.jpg", "x"]]));
+say(!mm4.pass && mm4.problems.some((p) => /placeholder-hero\.jpg is not listed/.test(p)), "an undocumented placeholder fails even without a Scope section or MEDIA.md");
+const mm5 = maintenanceMedia(mt(null, [["styles.css", "a:hover{color:red}"]]));
+say(mm5.pass && !mm5.warnings.length, "a non-media fix on a site with no media passes with nothing to report");
+// readiness claims: a prototype is never production-ready, nor is a template with unresolved media
+const rc1 = completeness(explore("# MEDIA.md\n\nNo external media assets were used.\n", [["README.md", "# x\n\nProduction-ready site.\n"]]));
+say(!rc1.pass && rc1.missing.some((m) => m.item === "README readiness claim"), "a design exploration that calls itself production-ready fails");
+const rc2 = completeness(explore(row("public/placeholder-a.jpg", "https://unsplash.com/photos/x", "unknown", "yes", "yes"), [["public/placeholder-a.jpg", "x"], ["README.md", "# x\n\nNot production-ready until the photo in MEDIA.md is replaced.\n"]]));
+say(rc2.pass, "saying it is not production-ready, and pointing to MEDIA.md, passes");
 console.log(bad ? `\n${bad} failure(s)` : "\ncompleteness (X) bites"); process.exit(bad ? 1 : 0);

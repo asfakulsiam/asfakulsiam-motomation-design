@@ -40,6 +40,7 @@
 //                (sec-08), CSP only as <meta> on a URL target served over HTTP (sec-h1)
 //
 //   X          (v2.9.0) completeness: when DESIGN.md has a Scope section (Step 0.7), scripts/completeness.mjs checks
+//              (without one, narrow maintenance: maintenanceMedia() checks MEDIA.md and placeholders only)
 //              every requested/required route, state, legal page, edge case, admin surface and skeleton the agent
 //              derived, plus the template shape. A missing item fails the page; not in the stamp or its id.
 //   J          (v2.11) journey: the whole site from this page, scripts/journey.mjs. nav (every sitemap route reachable from
@@ -92,7 +93,7 @@ import { spawnSync } from "node:child_process";
 import os from "node:os";
 import { statfsSync } from "node:fs";
 import { projectRoot, userDir } from "./memory.mjs";
-import { completeness, completenessLines } from "./completeness.mjs";
+import { completeness, completenessLines, maintenanceMedia, maintenanceLines } from "./completeness.mjs";
 import { journey, journeyLines } from "./journey.mjs";
 import { copyRules, seoRules, perfRules, secRules, parseHeadersFile, rulesAxes } from "./rulesets.mjs";
 
@@ -1305,11 +1306,13 @@ export async function scan(target, browser, opts = {}) {
     // axis X (v2.9.0): the scope the agent derived in Step 0.7, when DESIGN.md has a Scope section. Not in the stamp or its id;
     // a missing required item fails the page.
     const compl = designFile && /^##\s+Scope\b/m.test(readFileSync(designFile, "utf8")) ? completeness(designFile) : null;
+    // no Scope section (narrow maintenance): media is still checked, in the project's folder (craft/media.md)
+    const maint = compl ? null : designFile ? maintenanceMedia(dirname(designFile)) : !/^https?:/.test(target) ? maintenanceMedia(local) : null;
     const critique = critiqueOf({ hier: w.hier, words375: w.fails.length, overflow375: overflowFails.filter((x) => x.width === 375).length, motionFails: counts.motion, st, tier: meta.tier, record, mem }); const critique6 = critique; const critiqueFull = `${critique6} ${qAxis(mq)} ${aAxis(ax)}`;
     // coverage: the worst width decides; more than SKIP_WARN_PCT skipped at any width means the page was not measured, not passed
     const worstW = c.byWidth.reduce((a, x) => (x.skippedPct > a.skippedPct ? x : a), c.byWidth[0]);
     const coverage = { ok: !c.lowCoverage, skipped: worstW.skipped, total: worstW.total, pct: worstW.skippedPct, width: worstW.width, low: c.byWidth.filter((x) => x.lowCoverage).map((x) => x.width) };
-    return { target, url, version: GATE_VERSION, pass: pass && (!compl || !!compl.pass) && !!jr.pass, completeness: compl, journey: jr, verified: coverage.ok, coverage, counts, id, stamp: stampOf(counts, id, coverage), critique: critiqueFull, sources: { design: designFile || null, log: logFile || null, meta }, rules, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu, quality: mq, rmStill: still, access: ax, composition: comp, richness: rich, microStates: micro };
+    return { target, url, version: GATE_VERSION, pass: pass && (!compl || !!compl.pass) && (!maint || maint.pass) && !!jr.pass, completeness: compl, media: maint, journey: jr, verified: coverage.ok, coverage, counts, id, stamp: stampOf(counts, id, coverage), critique: critiqueFull, sources: { design: designFile || null, log: logFile || null, meta }, rules, structure: st, contrast: c, overflow: { widths: WIDTHS, fails: overflowFails }, words: w, motion: m, names: n, numbers: nu, quality: mq, rmStill: still, access: ax, composition: comp, richness: rich, microStates: micro };
   } finally { close(); }
 }
 export const stampOf = (k, id, cov, version = GATE_VERSION) => `gate: c${k.contrast} o${k.overflow} w${k.words} rm${k.motion} a${k.names} n${k.numbers ?? 0}${k.quality !== undefined ? ` q${k.quality} k${k.access}` : ""}${k.copy !== undefined ? ` · rules: C${k.copy} S${k.seo} P${k.perf} K${k.sec}` : ""} · ${version} · ${id}${cov ? ` · skipped ${cov.skipped}/${cov.total}@${cov.width}` : ""}`;
@@ -1417,6 +1420,7 @@ function print(r) {
   L(`  critique → ${r.critique}${/\?/.test(r.critique) ? "   (axes marked ? have no record to derive from)" : ""}`);
   L(`  coverage   ${r.coverage.ok ? "✓" : "✗"} worst width ${r.coverage.width}px: ${r.coverage.skipped} of ${r.coverage.total} text elements skipped (${r.coverage.pct}%; limit ${SKIP_WARN_PCT}% at every width)${r.coverage.low.length ? ` · over the limit at ${r.coverage.low.join("/")}px` : ""}`);
   if (r.completeness) for (const l of r.completeness.error ? [`  X — completeness  ✗ ${r.completeness.error}`] : completenessLines(r.completeness)) L(l);
+  else if (r.media) for (const l of maintenanceLines(r.media)) L(l);
   if (r.journey?.skipped) L("  J — journey  – skipped (--reference: a design reference, not a live site; no cross-page navigation, 404 or form-backend requirement)");
   else if (r.journey) for (const l of r.journey.error ? [`  J — journey  ✗ not measured: ${r.journey.error}`] : journeyLines(r.journey)) L(l);
   L(`  ${!r.coverage.ok ? "NOT VERIFIED (coverage)" : r.pass ? "PASS" : "FAIL"}  stamp → critique: ${r.critique} · ${r.stamp}`);

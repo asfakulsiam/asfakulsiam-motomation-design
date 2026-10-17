@@ -12,6 +12,8 @@ Chosen from the user's request (`thinking/sequence.md` → Required output). The
 | Functional frontend | the above + `SCHEMA.md`, `DATA.md`, `data/` and its `schema.json` (demo-labelled; README demo line) | real backend or integrations, `LICENSE`, `CHANGELOG.md`, `middleware.ts`; `.env.example` only if the code reads env vars |
 | Production template | every file below | nothing by default; excuse with a reason |
 
+Every mode also needs `## Type research` and `## References` in `DESIGN.md` (Step 0.5). Only a production template with nothing left to replace in `MEDIA.md` may call itself production-ready in `README.md`; axis X fails any other readiness claim (a line saying "not production-ready" or "before production" is fine).
+
 ## Zero configuration
 
 The template runs with **zero configuration** after:

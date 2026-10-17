@@ -13,9 +13,14 @@
 // Narrow maintenance (the light route) writes no Scope section, so the gate never runs X, or this media check, on it.
 // A Scope with no Delivery mode line predates modes: a missing MEDIA.md there is a warning, so a fix on an older build
 // doesn't fail for an inventory it never had; every build that states its mode must ship MEDIA.md.
+// Maintenance (no Scope section): the gate runs maintenanceMedia() instead of X, so an absent Scope is never taken as
+// proof that media needs no record. Where MEDIA.md exists, every local media file must be listed in it, so an added or
+// renamed asset fails until its row is written; placeholders are checked everywhere. A file replaced under the same
+// name can't be told apart from the original here: its row is updated by hand (craft/media.md).
 //
 // Usage:
 //   node scripts/completeness.mjs <project-dir | path/to/DESIGN.md> [--json]
+//   node scripts/completeness.mjs <project-dir> --maintenance [--json]   (media only, for a fix with no Scope section)
 // Exit: 0 complete · 1 something required is missing (or a mark is invalid) · 2 usage / no Scope section.
 //
 // Scope table (in DESIGN.md, under "## Scope"):
@@ -145,10 +150,27 @@ function warnings(root) {
 // MEDIA.md (craft/media.md): a usable inventory, honest placeholder / licence status, every placeholder documented.
 // Deterministic text checks only; it never decides whether a licence is valid, it only refuses contradictions.
 const yes = (v) => /^(yes|y|true)\b/i.test(v); const no = (v) => /^(no|n|false)\b/i.test(v);
+// local media files: images, video and SVG files the project serves (build output, node_modules and favicon.ico excluded)
+const MEDIA_EXT = /\.(jpe?g|png|webp|avif|gif|svg|mp4|webm|mov|m4v)$/i;
+export function mediaFiles(root) { return walk(root).filter((p) => MEDIA_EXT.test(p) && !/[\\/](out|dist|build|\.next)[\\/]/.test(p) && !/(^|[\\/])favicon\./i.test(p)).map((p) => relative(root, p).split(sep).join("/")); }
+// placeholder files and PLACEHOLDER comments that MEDIA.md (its text, or "" when absent) does not list
+function undocumentedPlaceholders(root, md) {
+  const problems = [];
+  for (const p of walk(root).filter((x) => !/[\\/](out|dist|build|\.next)[\\/]/.test(x))) {
+    const base = p.split(/[\\/]/).pop();
+    if (/^placeholder-/i.test(base) && !md.includes(base)) problems.push(`placeholder ${relative(root, p)} is not listed in MEDIA.md`);
+    if (/\.(html?|tsx|ts|jsx|js|mjs|css|astro|svelte|vue|mdx)$/.test(base)) {
+      let t = ""; try { t = readFileSync(p, "utf8"); } catch {}
+      for (const m of t.matchAll(/PLACEHOLDER:\s*([^;\s]+)/g)) if (!/^<.*>$/.test(m[1]) && !md.includes(m[1])) problems.push(`PLACEHOLDER ${m[1]} in ${relative(root, p)} is not listed in MEDIA.md`);
+    }
+  }
+  return problems;
+}
 export function mediaChecks(root) {
   const f = join(root, "MEDIA.md"); if (!existsSync(f)) return { problems: [], unresolved: 0 }; // the file itself is a template row
   const md = readFileSync(f, "utf8"); const problems = []; let unresolved = 0;
   const rows = md.split("\n").filter((l) => /^\s*\|/.test(l)).map((l) => l.trim().replace(/^\||\|$/g, "").split("|").map((c) => c.trim()));
+  let listedAssets = [];
   const hi = rows.findIndex((r) => r.some((c) => /asset|file/i.test(c)) && r.some((c) => /source/i.test(c)) && r.some((c) => /licen[cs]e|usage/i.test(c)) && r.some((c) => /placeholder/i.test(c)) && r.some((c) => /replace/i.test(c)));
   if (hi < 0) {
     if (!/no external media/i.test(md)) problems.push("MEDIA.md has no inventory table (File or asset | Source URL | License / usage status | Placeholder? | Replace before production?) and does not state that no external media assets were used");
@@ -158,6 +180,7 @@ export function mediaChecks(root) {
     for (const r of rows.slice(hi + 1).filter((r) => !r.every((c) => /^:?-+:?$/.test(c) || !c))) {
       const a = (r[cA] || "").replace(/`/g, ""), src = r[cS] || "", lic = r[cL] || "", ph = r[cP] || "", rp = r[cR] || "";
       if (!a || /^<.*>$/.test(a)) continue; // template example rows
+      listedAssets.push(a.replace(/^\.?\//, ""));
       const name = `MEDIA.md "${a}"`;
       if (!src || /^<.*>$/.test(src)) problems.push(`${name}: no source (a URL, "custom", or "client-supplied")`);
       if (!lic || /^<.*>$/.test(lic)) problems.push(`${name}: no license / usage status (write "unknown" if unverified)`);
@@ -170,16 +193,30 @@ export function mediaChecks(root) {
     }
   }
   // every placeholder file and PLACEHOLDER comment in the project is listed in MEDIA.md
-  for (const p of walk(root).filter((x) => !/[\\/](out|dist|build|\.next)[\\/]/.test(x))) {
-    const base = p.split(/[\\/]/).pop();
-    if (/^placeholder-/i.test(base) && !md.includes(base)) problems.push(`placeholder ${relative(root, p)} is not listed in MEDIA.md`);
-    if (/\.(html?|tsx|ts|jsx|js|mjs|css|astro|svelte|vue|mdx)$/.test(base)) {
-      let t = ""; try { t = readFileSync(p, "utf8"); } catch {}
-      for (const m of t.matchAll(/PLACEHOLDER:\s*([^;\s]+)/g)) if (!/^<.*>$/.test(m[1]) && !md.includes(m[1])) problems.push(`PLACEHOLDER ${m[1]} in ${relative(root, p)} is not listed in MEDIA.md`);
-    }
-  }
+  problems.push(...undocumentedPlaceholders(root, md));
+  // every local media file has a row: its path, its file name, or a folder row ending in "/" that contains it
+  const folders = listedAssets.filter((a) => a.endsWith("/"));
+  for (const m of mediaFiles(root)) { const base = m.split("/").pop(); if (!/^placeholder-/i.test(base) && !listedAssets.some((a) => a === m || a.split("/").pop() === base) && !folders.some((d) => m.startsWith(d))) problems.push(`media file ${m} has no row in MEDIA.md (new or renamed media is recorded with its source and licence status)`); }
   if (unresolved) { const rd = join(root, "README.md"); if (existsSync(rd) && !/MEDIA\.md/.test(readFileSync(rd, "utf8"))) problems.push(`README.md does not point to MEDIA.md, though ${unresolved} asset(s) must be replaced or cleared before production`); }
   return { problems, unresolved };
+}
+
+// Narrow maintenance (DESIGN.md without a Scope section, or no DESIGN.md): media only. With a MEDIA.md, the full media
+// check (inventory, contradictions, every media file listed); without one, undocumented placeholders still fail, and
+// media files with no inventory are a warning, since this check can't tell whether the change touched them.
+export function maintenanceMedia(root) {
+  const has = existsSync(join(root, "MEDIA.md"));
+  const r = has ? mediaChecks(root) : { problems: undocumentedPlaceholders(root, ""), unresolved: 0 };
+  const files = mediaFiles(root); const warnings = [];
+  if (!has && files.length) warnings.push(`media: ${files.length} media file(s) and no MEDIA.md; if this change adds, replaces or removes media, create MEDIA.md (craft/media.md)`);
+  if (r.unresolved) warnings.push(`media: ${r.unresolved} asset(s) in MEDIA.md must be replaced or cleared before production; not production-ready until they are`);
+  return { root, maintenance: true, hasMedia: has, mediaFiles: files.length, problems: r.problems, warnings, pass: !r.problems.length };
+}
+export function maintenanceLines(r) {
+  const L = [`  X — media (maintenance: no Scope section; ${r.hasMedia ? "MEDIA.md checked" : "no MEDIA.md"})  ${r.pass ? "✓" : "✗"}`];
+  for (const p of r.problems) L.push(`      ✗ ${p}`);
+  for (const w of r.warnings) L.push(`      ⚠ ${w}  (warning)`);
+  return L;
 }
 
 export function completeness(target) {
@@ -220,9 +257,19 @@ export function completeness(target) {
   if (used.length) { const listed = existsSync(envEx) ? readFileSync(envEx, "utf8") : ""; const miss = used.filter((v) => !new RegExp(`^\\s*#?\\s*${v}\\s*=`, "m").test(listed)); add(".env.example coverage", !miss.length, `.env.example lacks ${miss.slice(0, 6).join(", ")}`); }
   const pkg = join(root, "package.json");
   if (existsSync(pkg)) { let dev = false; try { dev = !!JSON.parse(readFileSync(pkg, "utf8")).scripts?.dev; } catch {} add("npm run dev", dev, 'package.json has no "dev" script (zero-configuration run)'); }
+  // research for new design work (Step 0.5, craft/research.md): no delivery mode skips it
+  const dtext = readFileSync(designFile, "utf8");
+  for (const [item, re] of [["Type research", /^##\s+Type research\b/m], ["References", /^##\s+References\b/m]]) {
+    const ok = re.test(dtext);
+    if (dm.stated) rows.push({ kind: "template", item: `DESIGN.md ${item}`, mark: "required (skill)", counts: true, ok, why: ok ? "" : `DESIGN.md has no "## ${item}" section (Step 0.5, craft/research.md)` });
+  }
   const media = mediaChecks(root);
   for (const p of media.problems) rows.push({ kind: "template", item: "MEDIA.md inventory", mark: "required (skill)", counts: true, ok: false, why: p });
   if (existsSync(join(root, "MEDIA.md")) && !media.problems.length) rows.push({ kind: "template", item: "MEDIA.md inventory", mark: "required (skill)", counts: true, ok: true, why: "" });
+  // "production-ready" is a claim only a production template with nothing left in MEDIA.md to replace can make
+  if (existsSync(readme)) { const claim = readFileSync(readme, "utf8").split("\n").find((l) => /\bproduction[- ]ready\b/i.test(l) && !/\bnot\b|\bn't\b|\bbefore\b|\buntil\b/i.test(l));
+    if (claim && dm.mode !== "production template") rows.push({ kind: "template", item: "README readiness claim", mark: "required (skill)", counts: true, ok: false, why: `README.md calls a ${dm.mode} production-ready: "${claim.trim().slice(0, 80)}"` });
+    else if (claim && media.unresolved) rows.push({ kind: "template", item: "README readiness claim", mark: "required (skill)", counts: true, ok: false, why: `README.md says production-ready while ${media.unresolved} asset(s) in MEDIA.md must be replaced or cleared` }); }
   const tally = Object.fromEntries(Object.keys(KINDS).map((k) => { const r = rows.filter((x) => x.kind === k && x.counts); return [k, { have: r.filter((x) => x.ok).length, need: r.length, excused: rows.filter((x) => x.kind === k && x.mark === "excused").length }]; }));
   const missing = rows.filter((r) => r.counts && !r.ok);
   const warn = warnings(root); if (media.unresolved) warn.push(`media: ${media.unresolved} asset(s) in MEDIA.md must be replaced or cleared before production; not production-ready until they are`);
@@ -244,7 +291,8 @@ export function completenessLines(r) {
 const isMain = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
   const args = process.argv.slice(2); const json = args.includes("--json"); const target = args.find((a) => !a.startsWith("--"));
-  if (!target || args.includes("--help")) { console.log("Usage: node scripts/completeness.mjs <project-dir | DESIGN.md> [--json]"); process.exit(target ? 0 : 2); }
+  if (!target || args.includes("--help")) { console.log("Usage: node scripts/completeness.mjs <project-dir | DESIGN.md> [--json] | <project-dir> --maintenance [--json]"); process.exit(target ? 0 : 2); }
+  if (args.includes("--maintenance")) { const t = resolve(target); const m = maintenanceMedia(existsSync(t) && statSync(t).isDirectory() ? t : dirname(t)); if (json) console.log(JSON.stringify(m, null, 2)); else for (const l of maintenanceLines(m)) console.log(l); process.exit(m.pass ? 0 : 1); }
   const r = completeness(target);
   if (r.error) { console.error(`completeness: ${r.error}`); process.exit(2); }
   if (json) console.log(JSON.stringify(r, null, 2)); else { console.log(relative(process.cwd(), r.designFile) || r.designFile); for (const l of completenessLines(r)) console.log(l); }

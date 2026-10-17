@@ -33,6 +33,15 @@
 | skeleton | <async surface> | required | <file> |
 | template | <middleware.ts, data/, …> | <required, or not required for this brief, reason: …> | |
 
+## Type research
+<!-- Step 0.5 (craft/research.md): 3–5 real sites of the exact type, or the closest, with the gap stated. Every finding
+     observed / inferred / unverified. Required by gate axis X when the Scope states a delivery mode. -->
+| Site | Type | Routes | Functionality | States | Admin | Legal | Notes |
+|---|---|---|---|---|---|---|---|
+| <name, URL> | <exact type> | <inventory> (observed / inferred / unverified) | … | … | <visible, or unverified> | … | <IA, journeys> |
+
+**Gaps:** <what could not be verified, and the assumption used instead>
+
 ## References
 <!-- Step 0.5, mandatory (craft/research.md). Written before Step 1. Sources: references/sources/ + live award sites. Concepts only, no copied code. -->
 **Access:** <web (searched YYYY-MM-DD) | no web access: working from training data (limitation: <what that means here>)>
