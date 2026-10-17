@@ -54,7 +54,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 | Timing sheet, stagger/overlap, camera moves, chapter rhythm (Tier 3–5) | `motion/choreography.md` |
 | Signature moves and effects | `signatures/` + `references/effects-vocabulary.md` |
 | A visual style (glass, brutalist, swiss…) | `styles/<style>.md`. Style is derived from the brief; `styles/` informs it, there are no presets |
-| A site category (hotel, SaaS, studio…) | `categories/<category>.md` |
+| A site category (hotel, SaaS, studio…) | `categories/<category>.md`: design guidance, not scope. The scope comes from Step 0.7 (`thinking/sequence.md`); if they disagree, the derived scope wins |
 | **Any build or redesign (always, before step 6 Build)** | `craft/copy.md` + `craft/seo.md` + `craft/performance.md` + `craft/security.md` |
 | Accessibility, responsive, mobile motion, scroll sequences | `craft/*.md` |
 | Writing the design system (step 3) | `templates/DESIGN.md`, `templates/SCHEMA.md` and `templates/DATA.md` (always, together); the whole deliverable: `templates/TEMPLATE.md` |
@@ -411,6 +411,8 @@ If you cannot access the web, say so explicitly, work from training data, and st
 ### 0.7 Derive the scope
 
 The brief names a few pages; a complete site of its type needs more. "Build an e-commerce" means the whole e-commerce, not a homepage and some pages. Derive the scope yourself, from the Step 0.5 research, industry standards and your own knowledge. **Do not pick from a hardcoded list**: there is none in this skill, and `scripts/completeness.mjs` only checks what you derive.
+
+A category recipe (categories/<type>.md) is design opinion, not scope. The scope is derived from research, not read from a file. This applies to every category, not just e-commerce. If the recipe and the derived scope disagree, the derived scope wins.
 
 Answer, and write in `DESIGN.md` under `Scope` (from `templates/DESIGN.md`):
 
@@ -2516,10 +2518,18 @@ Each file covers the real job of that kind of site, default dials, suitable arch
 
 Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) and combine two files. Categories set defaults; the concept still decides the design.
 
+**A category file is design guidance, not scope.** Its section order or page set covers the pages it names. It is not the list of everything the site needs. The scope (routes, states, legal pages, admin surface, edge cases) comes from Step 0.7 in `thinking/sequence.md`, derived from research. If the derived scope and a category file disagree, the derived scope wins. This applies to every category.
+
 
 ---
 
 <!-- file: categories/architecture.md -->
+
+> This recipe is design guidance for the pages it names. It is
+> not the scope. Before building, run Step 0.7 and derive the
+> full route list, state list, legal pages, admin surface, and
+> edge cases. If the derived scope and this recipe disagree,
+> the derived scope wins.
 
 ## Category: Architecture / Interiors / Real estate
 
@@ -2541,6 +2551,12 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 ---
 
 <!-- file: categories/ecommerce.md -->
+
+> This recipe is design guidance for the pages it names. It is
+> not the scope. Before building, run Step 0.7 and derive the
+> full route list, state list, legal pages, admin surface, and
+> edge cases. If the derived scope and this recipe disagree,
+> the derived scope wins.
 
 ## Category: E-commerce
 
@@ -2570,6 +2586,12 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 
 <!-- file: categories/education.md -->
 
+> This recipe is design guidance for the pages it names. It is
+> not the scope. Before building, run Step 0.7 and derive the
+> full route list, state list, legal pages, admin surface, and
+> edge cases. If the derived scope and this recipe disagree,
+> the derived scope wins.
+
 ## Category: Education / Courses / Schools
 
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
@@ -2593,6 +2615,12 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 
 <!-- file: categories/event.md -->
 
+> This recipe is design guidance for the pages it names. It is
+> not the scope. Before building, run Step 0.7 and derive the
+> full route list, state list, legal pages, admin surface, and
+> edge cases. If the derived scope and this recipe disagree,
+> the derived scope wins.
+
 ## Category: Event / Festival / Conference
 
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
@@ -2615,6 +2643,12 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 ---
 
 <!-- file: categories/hotel.md -->
+
+> This recipe is design guidance for the pages it names. It is
+> not the scope. Before building, run Step 0.7 and derive the
+> full route list, state list, legal pages, admin surface, and
+> edge cases. If the derived scope and this recipe disagree,
+> the derived scope wins.
 
 ## Category: Hotel / Hospitality
 
@@ -2644,6 +2678,12 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 
 <!-- file: categories/organisation.md -->
 
+> This recipe is design guidance for the pages it names. It is
+> not the scope. Before building, run Step 0.7 and derive the
+> full route list, state list, legal pages, admin surface, and
+> edge cases. If the derived scope and this recipe disagree,
+> the derived scope wins.
+
 ## Category: Organisation / Non-profit / Public sector
 
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
@@ -2667,6 +2707,12 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 
 <!-- file: categories/personal-brand.md -->
 
+> This recipe is design guidance for the pages it names. It is
+> not the scope. Before building, run Step 0.7 and derive the
+> full route list, state list, legal pages, admin surface, and
+> edge cases. If the derived scope and this recipe disagree,
+> the derived scope wins.
+
 ## Category: Personal brand / Creator / Writer
 
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
@@ -2689,6 +2735,12 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 ---
 
 <!-- file: categories/portfolio.md -->
+
+> This recipe is design guidance for the pages it names. It is
+> not the scope. Before building, run Step 0.7 and derive the
+> full route list, state list, legal pages, admin surface, and
+> edge cases. If the derived scope and this recipe disagree,
+> the derived scope wins.
 
 ## Category: Portfolio (designers, developers, photographers, artists)
 
@@ -2721,6 +2773,12 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 
 <!-- file: categories/product-launch.md -->
 
+> This recipe is design guidance for the pages it names. It is
+> not the scope. Before building, run Step 0.7 and derive the
+> full route list, state list, legal pages, admin surface, and
+> edge cases. If the derived scope and this recipe disagree,
+> the derived scope wins.
+
 ## Category: Product launch / Hardware / Single product
 
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
@@ -2742,6 +2800,12 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 
 <!-- file: categories/restaurant.md -->
 
+> This recipe is design guidance for the pages it names. It is
+> not the scope. Before building, run Step 0.7 and derive the
+> full route list, state list, legal pages, admin surface, and
+> edge cases. If the derived scope and this recipe disagree,
+> the derived scope wins.
+
 ## Category: Restaurant / Food & Drink
 
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.
@@ -2762,6 +2826,12 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 ---
 
 <!-- file: categories/saas.md -->
+
+> This recipe is design guidance for the pages it names. It is
+> not the scope. Before building, run Step 0.7 and derive the
+> full route list, state list, legal pages, admin surface, and
+> edge cases. If the derived scope and this recipe disagree,
+> the derived scope wins.
 
 ## Category: SaaS / Software
 
@@ -2792,6 +2862,12 @@ Not listed? Find the closest **job** (sell, book, hire, inform, enrol, attend) a
 ---
 
 <!-- file: categories/studio.md -->
+
+> This recipe is design guidance for the pages it names. It is
+> not the scope. Before building, run Step 0.7 and derive the
+> full route list, state list, legal pages, admin surface, and
+> edge cases. If the derived scope and this recipe disagree,
+> the derived scope wins.
 
 ## Category: Studio / Agency
 

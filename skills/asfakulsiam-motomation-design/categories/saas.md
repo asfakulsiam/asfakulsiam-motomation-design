@@ -1,3 +1,9 @@
+> This recipe is design guidance for the pages it names. It is
+> not the scope. Before building, run Step 0.7 and derive the
+> full route list, state list, legal pages, admin surface, and
+> edge cases. If the derived scope and this recipe disagree,
+> the derived scope wins.
+
 # Category: SaaS / Software
 
 > **Standards vs style:** where this category's job conflicts with house-style defaults (canvas, type scale, grid, accent), the category wins; the universal standards in `principles/restraint.md` always apply.

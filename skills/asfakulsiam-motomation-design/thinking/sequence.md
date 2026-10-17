@@ -84,6 +84,8 @@ If you cannot access the web, say so explicitly, work from training data, and st
 
 The brief names a few pages; a complete site of its type needs more. "Build an e-commerce" means the whole e-commerce, not a homepage and some pages. Derive the scope yourself, from the Step 0.5 research, industry standards and your own knowledge. **Do not pick from a hardcoded list**: there is none in this skill, and `scripts/completeness.mjs` only checks what you derive.
 
+A category recipe (categories/<type>.md) is design opinion, not scope. The scope is derived from research, not read from a file. This applies to every category, not just e-commerce. If the recipe and the derived scope disagree, the derived scope wins.
+
 Answer, and write in `DESIGN.md` under `Scope` (from `templates/DESIGN.md`):
 
 - What routes does a complete <site type> serve?

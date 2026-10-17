@@ -52,7 +52,7 @@ If there is even a small chance this skill applies to a web design task, use it.
 | Timing sheet, stagger/overlap, camera moves, chapter rhythm (Tier 3–5) | `motion/choreography.md` |
 | Signature moves and effects | `signatures/` + `references/effects-vocabulary.md` |
 | A visual style (glass, brutalist, swiss…) | `styles/<style>.md`. Style is derived from the brief; `styles/` informs it, there are no presets |
-| A site category (hotel, SaaS, studio…) | `categories/<category>.md` |
+| A site category (hotel, SaaS, studio…) | `categories/<category>.md`: design guidance, not scope. The scope comes from Step 0.7 (`thinking/sequence.md`); if they disagree, the derived scope wins |
 | **Any build or redesign (always, before step 6 Build)** | `craft/copy.md` + `craft/seo.md` + `craft/performance.md` + `craft/security.md` |
 | Accessibility, responsive, mobile motion, scroll sequences | `craft/*.md` |
 | Writing the design system (step 3) | `templates/DESIGN.md`, `templates/SCHEMA.md` and `templates/DATA.md` (always, together); the whole deliverable: `templates/TEMPLATE.md` |
