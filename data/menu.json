@@ -1,0 +1,18 @@
+{
+  "demo": true,
+  "currency": "GBP",
+  "items": [
+    { "demo": true, "id": "espresso", "station": "espresso", "name": "Espresso", "price": 3.0, "spec": "18 g in, 36 g out, 28 s", "notes": "The house blend: milk chocolate, red apple, a short finish.", "layers": [{ "kind": "espresso", "ml": 36 }] },
+    { "demo": true, "id": "cortado", "station": "espresso", "name": "Cortado", "price": 3.5, "spec": "double shot, 60 ml steamed milk", "notes": "Equal parts, served in a glass.", "layers": [{ "kind": "espresso", "ml": 36 }, { "kind": "milk", "ml": 54 }, { "kind": "foam", "ml": 6 }] },
+    { "demo": true, "id": "flat-white", "station": "espresso", "name": "Flat white", "price": 3.8, "spec": "double shot, 120 ml milk, thin microfoam", "notes": "Our most-ordered cup. Oat milk at no charge.", "layers": [{ "kind": "espresso", "ml": 36 }, { "kind": "milk", "ml": 110 }, { "kind": "foam", "ml": 14 }] },
+    { "demo": true, "id": "cappuccino", "station": "espresso", "name": "Cappuccino", "price": 3.9, "spec": "double shot, 100 ml milk, deep foam", "notes": "Dusted with nothing, unless you ask.", "layers": [{ "kind": "espresso", "ml": 36 }, { "kind": "milk", "ml": 80 }, { "kind": "foam", "ml": 60 }] },
+    { "demo": true, "id": "long-black", "station": "espresso", "name": "Long black", "price": 3.4, "spec": "120 ml hot water, double shot on top", "notes": "Water first, so the crema survives.", "layers": [{ "kind": "water", "ml": 120 }, { "kind": "espresso", "ml": 36 }] },
+    { "demo": true, "id": "batch", "station": "brew", "name": "Batch brew", "price": 3.2, "spec": "brewed every 40 minutes, 60 g per litre", "notes": "This week: a washed Ethiopian lot, bright and tea-like.", "layers": [{ "kind": "filter", "ml": 300 }] },
+    { "demo": true, "id": "v60", "station": "brew", "name": "V60, single origin", "price": 4.5, "spec": "15 g to 250 g water, 3 min 15 s", "notes": "Pick from the two guest coffees on the board.", "layers": [{ "kind": "filter", "ml": 250 }] },
+    { "demo": true, "id": "iced", "station": "brew", "name": "Iced filter", "price": 4.2, "spec": "brewed hot onto ice, 1:15", "notes": "Made to order from April to September.", "layers": [{ "kind": "ice", "ml": 90 }, { "kind": "filter", "ml": 160 }] },
+    { "demo": true, "id": "cardamom-bun", "station": "pastry", "name": "Cardamom bun", "price": 3.6, "allergens": "gluten, milk, egg", "notes": "Baked here at six each morning." },
+    { "demo": true, "id": "almond-croissant", "station": "pastry", "name": "Almond croissant", "price": 3.8, "allergens": "gluten, milk, egg, nuts", "notes": "Twice-baked, from the bakery on Mill Street.", "soldOut": true },
+    { "demo": true, "id": "galette", "station": "pastry", "name": "Seasonal fruit galette", "price": 4.2, "allergens": "gluten, milk", "notes": "Plum until the frost, then poached pear." },
+    { "demo": true, "id": "cookie", "station": "pastry", "name": "Brown butter cookie", "price": 2.5, "allergens": "gluten, milk, egg", "notes": "Sea salt on top. Kept warm in the oven drawer." }
+  ]
+}
