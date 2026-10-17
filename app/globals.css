@@ -70,6 +70,7 @@ p { margin: 0 0 var(--s4); }
 .today { grid-column: 9 / -1; align-self: start; border-left: var(--rule); padding-left: var(--s5); }
 .today__title { font-size: 1.5rem; margin-bottom: var(--s3); }
 .today__address { font-weight: 600; }
+.today p a, .footer__grid p a { display: inline-block; padding: var(--s2) 0; }
 .lead__photo { grid-column: 1 / -1; }
 .lead__photo .photo__frame { aspect-ratio: 21 / 9 !important; }
 .hours { border-collapse: collapse; width: 100%; margin-bottom: var(--s4); }
@@ -192,6 +193,11 @@ p { margin: 0 0 var(--s4); }
   .contact__grid, .footer__grid, .menu .page-head { grid-template-columns: 1fr; }
   .page-head__photo { grid-column: 1; grid-row: auto; }
   .contact__aside { border-left: 0; padding-left: 0; border-top: var(--rule); padding-top: var(--s5); }
+}
+@media (min-width: 561px) and (max-width: 960px) {
+  .room { grid-template-columns: 1fr 1fr; }
+  .room__text { grid-column: 1 / -1; } .room__a { grid-column: 1; } .room__b { grid-column: 2; }
+  .page-head__photo { max-width: 520px; }
 }
 @media (max-width: 560px) {
   .masthead__inner { grid-template-columns: 1fr; }

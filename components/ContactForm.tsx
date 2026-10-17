@@ -41,7 +41,8 @@ export function ContactForm() {
     try {
       const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(fields) });
       if (res.ok) { setPhase({ kind: "sent" }); return; }
-      setPhase({ kind: "error", message: res.status === 404
+      // 404, 405 or 501: a static host with no message service behind /api/contact
+      setPhase({ kind: "error", message: [404, 405, 501].includes(res.status)
         ? `The message service isn't connected in this demo build, so nothing was sent. Email ${shop.email} instead.`
         : `We couldn't send that (error ${res.status}). Your message is still here; try again, or email ${shop.email}.` });
     } catch {

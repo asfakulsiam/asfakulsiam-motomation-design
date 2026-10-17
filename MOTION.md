@@ -19,5 +19,5 @@
 
 ## Signature move
 - Name: Cup cross-section ("the pour")
-- Trigger: choosing a drink at the espresso or brew station (click, tap, Enter or Space on its button, or a `#drink-id` link). Each layer grows from the bottom of the glass (transform scaleY), 220ms `--ease-out`, the next layer 40ms later, so a three-layer drink is drawn in 300ms
+- Trigger: choosing a drink at the espresso or brew station (click, tap, Enter or Space on its button, or a `#drink-id` link); choosing the drink already shown pours it again. Each layer grows from the bottom of the glass (transform scaleY), 220ms `--ease-out`, the next layer 40ms later, so a three-layer drink is drawn in 300ms
 - Off-switch (touch / reduced motion): touch keeps it (it is feedback for a tap, not a hover effect); `prefers-reduced-motion: reduce` shows the finished cup at once. The layers and their volumes are also a text list beside the cup, so nothing depends on seeing the motion

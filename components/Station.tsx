@@ -7,6 +7,7 @@ import { Cup } from "./Cup";
 
 export function Station({ id, title, lede, items }: { id: string; title: string; lede: string; items: MenuItem[] }) {
   const [active, setActive] = useState(items[0]?.id);
+  const [pour, setPour] = useState(0); // choosing the drink already shown pours it again, so every tap answers
   useEffect(() => {
     const pick = () => { const h = decodeURIComponent(window.location.hash.slice(1)); if (items.some((i) => i.id === h)) setActive(h); };
     pick();
@@ -23,12 +24,12 @@ export function Station({ id, title, lede, items }: { id: string; title: string;
       </header>
       <div className="station__body">
         <div className="station__cup" aria-live="polite">
-          <Cup key={current.id} layers={current.layers ?? []} name={current.name} spec={current.spec} />
+          <Cup key={`${current.id}-${pour}`} layers={current.layers ?? []} name={current.name} spec={current.spec} />
         </div>
         <ul className="drinks" aria-label={`${title} drinks`}>
           {items.map((d) => (
             <li key={d.id} id={d.id}>
-              <button type="button" className="drink" aria-pressed={d.id === current.id} onClick={() => setActive(d.id)}>
+              <button type="button" className="drink" aria-pressed={d.id === current.id} onClick={() => { setActive(d.id); setPour((n) => n + 1); }}>
                 <span className="drink__name">{d.name}</span>
                 <span className="drink__price mono">{price(d.price)}</span>
                 {d.notes ? <span className="drink__notes">{d.notes}</span> : null}

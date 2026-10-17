@@ -16,7 +16,7 @@ validated in shape by `data/schema.json`. One endpoint is assumed and not provid
 | Response | The form shows |
 |---|---|
 | 2xx | success: "Thanks, <name>. Your message reached the bar." |
-| 404 | error: the message service isn't connected in this demo build; nothing was sent; email instead |
+| 404, 405 or 501 | error: the message service isn't connected in this demo build; nothing was sent; email instead |
 | other status | error with the status; the message stays in the form for a retry |
 | network failure | error: couldn't reach the server; the message stays |
 
