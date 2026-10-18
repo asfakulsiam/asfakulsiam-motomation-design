@@ -1,0 +1,10 @@
+DESIGN.md
+  X — completeness (B2B freight visibility software, global, admin panel: no) [functional frontend]  ✓
+      Routes:      17/17 required present
+      Journeys:    3/3 connected
+      Functions:   4/4 present · 2 not required (reason given)
+      Legal:       3/3 present
+      Admin:       0/0 present · 1 not required (reason given)
+      Skeletons:   1/1 present
+      Template:    18/18 present
+exit 0
