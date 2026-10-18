@@ -5,7 +5,7 @@ A small build made with the v2.7.0 skill to show the `SCHEMA.md` every build now
 | File | What |
 |---|---|
 | [`brief.md`](brief.md) | the brief |
-| [`DESIGN.md`](DESIGN.md) | rules acknowledgement, Step 0.5 References, concept, type, colour, restraint record |
+| [`DESIGN.md`](DESIGN.md) | rules acknowledgement, Steps 1–2 References, concept, type, colour, restraint record |
 | [`SCHEMA.md`](SCHEMA.md) | data model, routes, section contract, API surface, handoff notes |
 | [`index.html`](index.html), [`style.css`](style.css), [`request.js`](request.js), [`_headers`](_headers) | the page |
 

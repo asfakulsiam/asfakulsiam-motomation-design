@@ -15,7 +15,7 @@ Each example is a real session: the prompt, the commands that ran, their output,
 
 ## Which route
 
-- **Full route** (all seven Thinking Sequence steps, a collision draw, a signature): new pages, sites, sections or redesigns. Start with the [flagship](showcase.md).
+- **Full route** (the Thinking Sequence: product contract, research, directions; optional exploration tools): new pages, sites, sections or redesigns. Start with the [flagship](showcase.md).
 - **Short route** (name the cause, change only what it needs, gate before and after): fixes and swaps on something that exists. Start with [fix-existing](fix-existing.md). The rules are in `SKILL.md` under "When to use the short route".
 
 ## What every example records

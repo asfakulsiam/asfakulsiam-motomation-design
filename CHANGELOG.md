@@ -4,6 +4,26 @@ All notable changes to this skill. Versions follow [Semantic Versioning](https:/
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-10-18
+
+Architecture overhaul: research-first, product-first. The audit behind it is in `docs/AUDIT-v3.md`.
+
+### Changed (breaking for the workflow, not for the scripts' CLIs)
+
+- **Product contract before concept.** The Thinking Sequence is now: 0 Stack, 1 Product contract and scope (Checkpoint 2), 2 Design research, 3 Directions and synthesis (Checkpoint 3), 4 Memory and sameness, 5 Restraint. Before, the concept was approved at Checkpoint 2 and the scope only at Checkpoint 3, so a concept could silently redefine the product. New `thinking/product-contract.md`: jobs, journeys as route sequences, IA, content density, states, constraints, exclusions, capability levels (interface, frontend interaction, persisted, backend, integration) and deferral rules ("Deferring a backend never removes the interface").
+- **Authority hierarchy.** New `principles/authority.md`: user intent and product contract → accessibility and usability → content and brand truth → measured standards → research evidence → project concept → house style and heuristics. Every lower level yields to a higher one, with common conflicts worked through.
+- **Opinions are heuristics, not laws.** New `principles/heuristics.md` registers every style opinion (one focal point, grid break, minimal nav, mandatory signature, one accent, entrance variety, Tier 5 chapter, Lenis, collision, mutation, forced divergence…) with its rationale, when it helps, when it fails, and what a justified override needs. House style, dials, restraint, archetypes, mad-artist, gate rules and the delivery gate now point there instead of stating absolutes. `scripts/check-repo.mjs` fails if an old absolute comes back.
+- **Collision, archetypes, mutations and signatures are optional exploration tools.** `collide.mjs` output says so; archetypes gained a `fails_when` column; "no signature" is a valid answer; a mutation may never remove a rule that protects a journey.
+- **Research-first design.** `craft/research.md` rewritten: research questions from the contract, depth proportional to the brief, what each source type can prove (award sites, Behance/Dribbble, production sites, UI libraries, GitHub, docs), evidence extraction, reference → principle, and a `Research record` with observed / inferred / unverified marks. No fixed "3 references, 3 techniques" quota; no live research is mandatory when the agent has no web access, but the limitation is reported.
+- **Recipes have a contract.** Every `categories/*.md` file ends with a `Recipe contract` table (context, problems solved, assumptions, required vs optional, responsive and accessibility notes, limitations, variations, when to reject). `scripts/check-repo.mjs` enforces it.
+- **Components and motion.** New `craft/components.md` (reuse / adapt / adopt / build, with an adoption checklist: compatibility, maintenance, accessibility, performance, licence, security). New `motion/selection.md` (motion chosen by purpose and evidence, no universal library, reduced-motion and real-browser validation).
+- **Separate pass/fail gates.** `gates/delivery-gate.md` lists which gates block (product contract, completeness X, journey J, measured rulesets, accessibility) and which are advisory (critique, visual scores). A high visual score never hides a failed product or usability gate.
+- **Content realism.** New `scripts/realism.mjs` (template leaks, generic filler, repeated sentences, dead controls), run inside `completeness.mjs`.
+- `templates/DESIGN.md`: Product contract, Scope with a Level column and journey rows, Research record, Directions, Decision trace.
+- `scripts/completeness.mjs`: requires a Product contract and a Research record when a delivery mode is stated; deferral rows must name the interface that stays; a backend or integration claim is invalid outside a production template.
+- Evaluation suite: `evals/briefs/v6/` (diverse product types, conflicting pressures, paired same-contract briefs with contrasting art directions) and a product-integrity hard gate in `evals/rubric.md`. Not run in this release.
+- Lite edition rebuilt for the new sequence (still under 8,000 tokens).
+
 ### Fixed: gate gaps found by a full workflow run on a real Next.js build (2026-10-17, second pass)
 
 - **Axis X under a folder named `build`, `dist` or `out`.** Build-output paths were matched anywhere in the absolute path, so a project living in e.g. `/home/me/build/site` had its own env vars, components and media skipped and X passed falsely. Only those folders inside the project are skipped now (`scripts/completeness.mjs`). Regression test in `tests/gate/completeness.test.mjs`.

@@ -39,7 +39,7 @@
 //                calls printing tokens/keys/passwords/emails (sec-09), .env not ignored by git for a local target
 //                (sec-08), CSP only as <meta> on a URL target served over HTTP (sec-h1)
 //
-//   X          (v2.9.0) completeness: when DESIGN.md has a Scope section (Step 0.7), scripts/completeness.mjs checks
+//   X          (v2.9.0) completeness: when DESIGN.md has a Scope section (Step 1), scripts/completeness.mjs checks
 //              (without one, narrow maintenance: maintenanceMedia() checks MEDIA.md and placeholders only, with the last
 //              git commit as the baseline for added or replaced media when there is one)
 //              every requested/required route, state, legal page, edge case, admin surface and skeleton the agent
@@ -1314,7 +1314,7 @@ export async function scan(target, browser, opts = {}) {
     const designFile = opts.design || [join(local, "DESIGN.md"), ...(own ? [join(own, "DESIGN.md")] : []), join(process.cwd(), "DESIGN.md")].find((f) => existsSync(f));
     const logFile = opts.log || [join(local, ".motomation/log.json"), join(local, "log.json"), ...(own ? [join(own, "log.json"), join(own, ".motomation/log.json")] : []), join(projectRoot(local), ".motomation/log.json"), join(projectRoot(), ".motomation/log.json"), join(userDir(), "log.json")].find((f) => existsSync(f)); // last: the user-level log shared by every project
     const record = readRecord(designFile); const mem = await memoryAxis(logFile, meta, st.sectionIds, { dir: local, designFile });
-    // axis X (v2.9.0): the scope the agent derived in Step 0.7, when DESIGN.md has a Scope section. Not in the stamp or its id;
+    // axis X (v2.9.0): the scope the agent derived in Step 1, when DESIGN.md has a Scope section. Not in the stamp or its id;
     // a missing required item fails the page.
     const compl = designFile && /^##\s+Scope\b/m.test(readFileSync(designFile, "utf8")) ? completeness(designFile) : null;
     // no Scope section (narrow maintenance): media is still checked, in the project's folder (craft/media.md)

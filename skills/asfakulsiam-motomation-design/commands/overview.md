@@ -24,7 +24,7 @@ Type a command at the start of a message. Commands combine with flags. Without a
 **Output:** preview block + `DESIGN.md` + `SCHEMA.md` + `MOTION.md` (from `templates/`; `SCHEMA.md` is written with `DESIGN.md`).
 
 ### `/build [brief] [--route=full|light]`
-**What:** the full flow, from brief to finished, gated code, in the delivery mode the request asks for (design exploration, functional frontend or production template; `templates/TEMPLATE.md`). `--route=light` (narrow maintenance inside an established design) skips the Thinking Sequence, the collision engine and scope derivation, and still runs the whole Delivery Gate.
+**What:** the full flow, from brief to finished, gated code, in the delivery mode the request asks for (design exploration, functional frontend or production template; `templates/TEMPLATE.md`). Full route order: stack → product contract and scope (approved before any concept) → design research → directions and synthesis → memory → restraint → build plan → build → review → gate. `--route=light` (narrow maintenance inside an established design) skips the contract, research and direction work, and still runs the whole Delivery Gate.
 **When:** you want a new page or site, any size (full), or a fix inside an existing design (light).
 **Output:** preview block → complete code → Delivery Gate scores → handoff note.
 
@@ -32,7 +32,7 @@ Type a command at the start of a message. Commands combine with flags. Without a
 **What:** runs the collision engine (`scripts/collide.mjs --n 3 --spread`; `--count N` for more) and proposes **three different concepts**, each with tension, concept, type mode (HOUSE STYLE or SERVICE STYLE, with the reason from the brief), archetype + mutation, collision and signature.
 **Guarantees (enforced by the script, reported in its "Diversity (measured)" block):** the three draws never share an archetype or a signature seed; mutations and collision worlds don't repeat either while their pools last (12 mutations, 20 archetypes, 22 signature seeds). When `--count` asks for more than a pool holds, the script says which pool ran out and from which draw repeats start; it never overlaps silently. Copy that block into the output. Without a shell, draw by hand and state that uniqueness was checked by eye.
 **When:** you're stuck, or the first idea feels familiar.
-**Output:** three concept cards plus the measured diversity line. The draws are fuel, not a menu: each card derives its tension, concept and specifics from the brief, using the drawn archetype, mutation and collision as constraints. Choose a card and continue with `/build`.
+**Output:** three concept cards plus the measured diversity line. The draws are fuel, not a menu: each card derives its tension, concept and specifics from the brief, using the drawn archetype, mutation and collision as constraints. Each card keeps the product contract intact when one exists (`principles/authority.md`); a card that needs a contract change says so. Choose a card and continue with `/build`.
 
 ### `/signature [section]`
 **What:** invents one signature move for the site or a section, bent from `signatures/` to the concept.
@@ -64,7 +64,7 @@ Raises ENERGY by one step: bigger type jumps, stronger contrast, a braver accent
 Lowers ENERGY and/or MOTION by one step: more air, fewer moving parts, softer accent, slower reveals.
 
 ### `/distill [target]`
-Removes until only the essential remains. Runs the Restraint Gate hard: one signature, one accent, fewer sections.
+Removes until only the essential remains. Runs the Restraint Gate hard: at most one signature, one accent, fewer sections; never fewer contract items.
 
 ### `/mutate [target]`
 Keeps the content and concept but changes the **structure**: a different archetype or mutation, drawn with `collide.mjs`. Use it when the layout feels like a template.

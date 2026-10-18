@@ -2,6 +2,10 @@
 
 Proof that the skill does what it claims. Run them before a release.
 
+## Briefs v6 (product-first, not yet run)
+
+`briefs/v6/` (skill v3.0.0): thirteen briefs across marketplace, luxury, B2B, editorial, SaaS dashboard, portfolio, education, travel booking, community directory, data-heavy, mobile-first accessibility, and a pair with one product contract and two contrasting art directions. Each states the expected product contract, conflicting pressures and a bias probe. Score with `rubric.md`, product-integrity gate first. Structure is checked by `tests/evals/briefs-v6.test.mjs`; no v6 benchmark has been run.
+
 ## Benchmark v5 (in progress)
 
 Five sites, one per motion tier. Sequential. Different agents

@@ -1,25 +1,25 @@
 # Fuel, not a menu. Use to inform the brief. Do not pick from the list; derive from the brief, using the list as reference and constraint.
-id,name,shape,best_for,signature_potential,nav_ideas
-specimen,The Specimen,the page is a type specimen,portfolio studio type-led brands,variable axes reacting to the cursor,folio corner; index of sizes
-ledger,The Ledger,rows and columns like an account book,studio agency archive finance,rows expand into case studies,column headers as nav
-film-reel,The Film Reel,scroll is a timeline of scenes,product-launch portfolio storytelling,scroll-scrubbed scenes with timecode,timecode rail; chapter dots
-index,The Index,a huge typographic list is the homepage,portfolio publication directory,hover previews following the cursor,the list is the nav
-manifesto,The Manifesto,one argument set large like a speech,organisation founder movement,words that fill with ink as read,none until the end
-gallery-wall,The Gallery Wall,free-placed images on a wall to roam,photography art fashion,drag-to-pan canvas with inertia,minimap
-workbench,The Workbench,the product UI is the page,saas dev tools,live demo reacting to scroll,command palette
-letter,The Letter,a personal letter with salutation and signature,founder small-brand invitation,signature drawn on scroll,none; P.S. links
-atlas,The Atlas,a map or diagram you move through,hotel travel real-estate logistics,camera moves across a map per section,map legend
-timeline,The Timeline,history on one axis with years as nav,heritage organisation event,year counter that scrubs,year rail
-catalogue,The Catalogue,numbered objects with spec sheets,ecommerce furniture fashion,spec lines draw in,numbered index
-stage,The Stage,one fixed stage where content enters and leaves,product-launch music event,pinned stage with scene changes,programme list
-diptych,The Diptych,two halves in permanent dialogue,comparison dual-brand hotel day-night,the split line moves with scroll,split toggle
-broadsheet,The Broadsheet,newspaper masthead columns and folios,media journalism opinion restaurant-menu,columns reflow as the reader moves,masthead sections
-console,The Console,a terminal is the interface,dev tools technical products,typed commands build the page,command list
-room,The Room,each section is a room you walk into,hotel gallery architecture,doors and thresholds as transitions,floor plan
-shelf,The Shelf,products as objects on shelves,retail books ceramics,pick up an object to inspect it,shelf labels
-lookbook,The Lookbook,full-bleed editorial spreads page by page,fashion beauty photography,crop-shift between spreads,page numbers
-poster,The Poster,one screen one image with layers beneath,event launch campaign,the poster peels into the details,poster corners
-field-guide,The Field Guide,entries with illustrations notes and classes,education nature many-variant products,annotations that point and label,classification tabs
-almanac,The Almanac,a reference year in columns: dated entries side by side,utilities public-service education schedules,the current column fills as the date arrives,month columns
-vitrine,The Vitrine,one object in a lit case; details are labels pinned around it,luxury craft museum single-product,labels draw their leader lines to the object,case labels
-fold,The Fold,one sheet folded in two: each half answers the other when opened,services before-after two-audience,the crease opens with scroll,fold tabs
+id,name,shape,best_for,signature_potential,nav_ideas,fails_when
+specimen,The Specimen,the page is a type specimen,portfolio studio type-led brands,variable axes reacting to the cursor,folio corner; index of sizes,content is not type-led; dense product or catalogue IA
+ledger,The Ledger,rows and columns like an account book,studio agency archive finance,rows expand into case studies,column headers as nav,imagery is the product; casual audiences who skim not scan
+film-reel,The Film Reel,scroll is a timeline of scenes,product-launch portfolio storytelling,scroll-scrubbed scenes with timecode,timecode rail; chapter dots,task-led routes; mobile-first low bandwidth; people need to jump straight to a section
+index,The Index,a huge typographic list is the homepage,portfolio publication directory,hover previews following the cursor,the list is the nav,items need images or comparison to choose; a long list without search or filters
+manifesto,The Manifesto,one argument set large like a speech,organisation founder movement,words that fill with ink as read,none until the end,visitors arrive with a task; trust depends on evidence before rhetoric
+gallery-wall,The Gallery Wall,free-placed images on a wall to roam,photography art fashion,drag-to-pan canvas with inertia,minimap,items need comparison or specs; small screens where scattered layouts become a long column
+workbench,The Workbench,the product UI is the page,saas dev tools,live demo reacting to scroll,command palette,there is no real product UI to show; non-technical audiences
+letter,The Letter,a personal letter with salutation and signature,founder small-brand invitation,signature drawn on scroll,none; P.S. links,many routes or a deep IA; commerce or booking as the main job
+atlas,The Atlas,a map or diagram you move through,hotel travel real-estate logistics,camera moves across a map per section,map legend,location does not matter to the decision; maps would replace accessible lists
+timeline,The Timeline,history on one axis with years as nav,heritage organisation event,year counter that scrubs,year rail,chronology is not the story; visitors need the present, not the past
+catalogue,The Catalogue,numbered objects with spec sheets,ecommerce furniture fashion,spec lines draw in,numbered index,a single hero product; story-led launches
+stage,The Stage,one fixed stage where content enters and leaves,product-launch music event,pinned stage with scene changes,programme list,many products or a catalogue; anything that needs browsing
+diptych,The Diptych,two halves in permanent dialogue,comparison dual-brand hotel day-night,the split line moves with scroll,split toggle,there is no real duality; small screens where halves stack and lose the comparison
+broadsheet,The Broadsheet,newspaper masthead columns and folios,media journalism opinion restaurant-menu,columns reflow as the reader moves,masthead sections,low content volume; product or task flows
+console,The Console,a terminal is the interface,dev tools technical products,typed commands build the page,command list,consumer or non-technical audiences; brands that need warmth
+room,The Room,each section is a room you walk into,hotel gallery architecture,doors and thresholds as transitions,floor plan,nothing spatial to show; task-first products
+shelf,The Shelf,products as objects on shelves,retail books ceramics,pick up an object to inspect it,shelf labels,products need detailed comparison; huge catalogues
+lookbook,The Lookbook,full-bleed editorial spreads page by page,fashion beauty photography,crop-shift between spreads,page numbers,shoppers buy by spec or price; catalogues larger than a season
+poster,The Poster,one screen one image with layers beneath,event launch campaign,the poster peels into the details,poster corners,more than one primary job; content-heavy routes
+field-guide,The Field Guide,entries with illustrations notes and classes,education nature many-variant products,annotations that point and label,classification tabs,few items; items that are not categorisable
+almanac,The Almanac,a reference year in columns: dated entries side by side,utilities public-service education schedules,the current column fills as the date arrives,month columns,no recurring or seasonal content
+vitrine,The Vitrine,one object in a lit case; details are labels pinned around it,luxury craft museum single-product,labels draw their leader lines to the object,case labels,more than a handful of products; comparison shopping
+fold,The Fold,one sheet folded in two: each half answers the other when opened,services before-after two-audience,the crease opens with scroll,fold tabs,there is no real two-sided answer; more than two audiences

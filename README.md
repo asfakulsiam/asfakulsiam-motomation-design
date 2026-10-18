@@ -9,7 +9,7 @@ At the top tier, scrolling plays like a film.
 **New here? [Start here → what it is, who it's for, and what a session looks like](ABOUT.md)** · **[See it in action → worked examples](#see-it-in-action)** · **[Cheatsheet → every command, flag and tier, with example prompts](docs/CHEATSHEET.md)**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.10.1-E0442B?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-3.0.0-E0442B?style=flat-square)](CHANGELOG.md)
 [![Agent Skill](https://img.shields.io/badge/agent%20skill-npx%20skills%20add-111111?style=flat-square)](#install)
 [![Zero dependencies (gate: Playwright, optional)](https://img.shields.io/badge/scripts-zero%20dependencies%20%28gate%3A%20Playwright%2C%20optional%29-111111?style=flat-square)](skills/asfakulsiam-motomation-design/scripts)
 
@@ -59,12 +59,12 @@ Motomation Design changes the thinking:
 
 ## What's inside
 
-- **The Thinking Sequence:** seven steps that make an agent think like a designer: tension → concept → archetype + mutation → forced collision → signature move → anti-sameness check → restraint gate.
+- **The Thinking Sequence (v3, research-first):** stack → **product contract** (jobs, journeys, IA, density, states, approved before any concept) → **design research** (questions, sources chosen by what they prove, evidence with limitations) → **directions and synthesis** (2–3 directions compared against the contract; archetypes, mutation, collision and signature are optional tools) → memory and sameness → restraint. An explicit authority order (`principles/authority.md`) keeps opinions advisory and the product intact.
 - **Mad Artist Mode:** ten invention techniques plus a collision engine (`collide.mjs`) that draws constraints with a cryptographic random number generator instead of the model's most likely choice, without repeats inside a run. It pushes ideas away from the default; it can't promise an idea nobody has had.
 - **Five motion tiers:** CSS → GSAP/ScrollTrigger/SplitText/Lenis → View Transitions, Flip, Lottie, Rive → WebGL, shaders, WebGPU → **Motomation**.
 - **Motomation (Tier 5):** scroll-as-film. Storyboards with timecodes, image-sequence, video-scrub and DOM-timeline techniques, ffmpeg pipelines, frame budgets, and a designed reduced-motion storyboard.
 - **22 signature moves**, each with idea, reason, code, the detail that matters, an off-switch, and a **paste-ready prompt** for any AI tool.
-- **A house style:** minimal canvas, maximal type, one accent, editorial grid, motion with weight.
+- **A house style, with its reasons:** minimal canvas, maximal type, one accent, editorial grid, motion with weight, for brand and editorial surfaces; every opinion is in `principles/heuristics.md` with the problem it solves and when to ignore it.
 - **3 dials** (Energy, Rhythm, Motion, each 1–3), set from the brief; no presets.
 - **12 site categories** and **10 visual styles**, each with its own guidance.
 - **Searchable data:** 68 components, 80 fonts (with axes, licences and script coverage, 15 of them Bangla, Devanagari or Arabic), 40 contrast-verified palettes (light and dark pairs), 50 motion recipes with timings, 12 imagery directions (one per category), 20 archetypes, 12 mutations, 40 collision sources.
@@ -212,7 +212,7 @@ These tools can't run `npx`, so use the single-file edition: **[`dist/motomation
 
 Without a shell, the skill uses the data tables included at the end of the file instead of its scripts.
 
-**Small context?** Custom instructions, rules files and prompt boxes often cap out at a few thousand tokens. Use **[`dist/motomation-lite.md`](dist/motomation-lite.md)** there: <!-- lite-tokens -->about 8.0k tokens<!-- /lite-tokens --> (estimated by the build script) with the five laws, when the light route applies, the research, scope and media rules, the delivery modes, tiers, bans, the seven-step Thinking Sequence, the AI-default scan, the craft checklist and short lists of archetypes, mutations and signatures. Sections it drops to fit are named at its top. `node scripts/build-lite.mjs` regenerates it, and `check-repo` fails if it goes stale, over 8k tokens, or loses one of those rules.
+**Small context?** Custom instructions, rules files and prompt boxes often cap out at a few thousand tokens. Use **[`dist/motomation-lite.md`](dist/motomation-lite.md)** there: <!-- lite-tokens -->about 7.9k tokens<!-- /lite-tokens --> (estimated by the build script) with the five laws, when the light route applies, the research, scope and media rules, the delivery modes, tiers, bans, the seven-step Thinking Sequence, the AI-default scan, the craft checklist and short lists of archetypes, mutations and signatures. Sections it drops to fit are named at its top. `node scripts/build-lite.mjs` regenerates it, and `check-repo` fails if it goes stale, over 8k tokens, or loses one of those rules.
 
 ### Update
 
@@ -371,7 +371,7 @@ The memory log is per project. `memory.mjs` walks up from the folder you run it 
 
 **Styles:** minimal · editorial · swiss · neobrutalism · glass · soft/neumorphism · flat/illustrative · kinetic type · organic · dark luxe
 
-Each has its own file with default dials, archetypes, section order, a signature menu, must-haves and pitfalls. A category file is optional design guidance, never the scope: the scope comes from researching real sites of the exact type (Step 0.7), and a type with no file is researched as itself.
+Each has its own optional recipe file (starting dials, archetypes that can fit, one possible section order, optional treatments, expected conventions, pitfalls) and a recipe contract saying what it assumes, what it doesn't cover and when to reject it. Types without a file (marketplaces, B2B, publications, dashboards, booking) are researched as themselves. A category file is optional design guidance, never the scope: the scope comes from researching real sites of the exact type (Step 1), and a type with no file is researched as itself.
 
 ---
 

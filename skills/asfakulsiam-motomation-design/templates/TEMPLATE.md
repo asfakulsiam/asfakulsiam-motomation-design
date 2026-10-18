@@ -12,7 +12,7 @@ Chosen from the user's request (`thinking/sequence.md` → Required output). The
 | Functional frontend | the above + `SCHEMA.md`, `DATA.md`, `data/` and its `schema.json` (demo-labelled; README demo line) | real backend or integrations, `LICENSE`, `CHANGELOG.md`, `middleware.ts`; `.env.example` only if the code reads env vars |
 | Production template | every file below | nothing by default; excuse with a reason |
 
-Every mode is gated the same way on the built page: the rule sets (S SEO metadata, P modern image formats, K security headers, through `_headers` for a static site) and axis J (including a designed not-found view) apply to a design exploration too; only `--reference`, for a design example that is not a site, skips J. Every mode also needs `## Type research` and `## References` in `DESIGN.md` (Step 0.5). Only a production template with nothing left to replace in `MEDIA.md` may call itself production-ready in `README.md`; axis X fails any other readiness claim (a line saying "not production-ready" or "before production" is fine).
+Every mode is gated the same way on the built page: the rule sets (S SEO metadata, P modern image formats, K security headers, through `_headers` for a static site) and axis J (including a designed not-found view) apply to a design exploration too; only `--reference`, for a design example that is not a site, skips J. Every mode also needs `## Type research` and `## References` in `DESIGN.md` (Steps 1–2). Only a production template with nothing left to replace in `MEDIA.md` may call itself production-ready in `README.md`; axis X fails any other readiness claim (a line saying "not production-ready" or "before production" is fine).
 
 ## Zero configuration
 

@@ -11,8 +11,8 @@ The skill drafts, shows its reasoning, and **stops** after each checkpoint until
 | # | Checkpoint | You see | You can answer |
 |---|---|---|---|
 | 1 | **Stack** | the proposed stack, why, the alternatives | "approve" · "use Astro instead" |
-| 2 | **Research and concept** | 3 references and what was taken from each, the pattern being avoided, tension, concept, archetype + mutation, the collision draw, palette, type, motion tier, signature move, the reasoning | "approve" · "push it further" · "less safe" · "warmer palette" |
-| 3 | **Scope** | routes, states, legal pages, admin, edge cases (requested / required / optional), what is deferred and why | "approve" · "cut the blog" · "add a wholesale page" |
+| 2 | **Product contract** | jobs, journeys (route sequences), IA, density, responsive expectations, exclusions; the Scope table with deferrals and the interface that still ships | "approve" · "cut the blog" · "add a wholesale page" |
+| 3 | **Research and direction** | research questions and record, 2–3 directions compared against the contract, the chosen synthesis, recipes and components used or rejected | "approve" · "try direction B" · "push it further" |
 | 4 | **Build plan** | section order, components to create, animation per section, page transitions | "approve" · "swap sections 2 and 3" · "calmer transitions" |
 | 5 | **Design review** | a preview (a live URL; or a build zip / temporary preview push when no preview is possible), screenshots at 375, 768 and 1440, DESIGN.md, MOTION.md, SCHEMA.md, DATA.md, a one-line summary | "approve" · "fix the mobile hero" (a new preview, then this checkpoint again) |
 | 6 | **Gate and ship** | the gate and the critique on the approved design (pasted, never typed), GATE.md, CRITIQUE.md, where the handoff push went (`design/<name>`, never main) | "accept" |
@@ -190,7 +190,7 @@ Flow: `/shape` → approve → `/build` → `/overdrive` → `/polish`
 Use the skill at full potential: read gates/rules.md first; real research outside the skill
 (award sites + references/sources/), 3 references with what you took, 3 techniques, the cliché
 you avoid; run the memory check and diverge from my past builds; run collide.mjs --n 5 --spread
-and paste the output; show 3 concept directions at Checkpoint 2; MOTION.md with timing sheets
+and paste the output; show 3 concept directions at Checkpoint 3; MOTION.md with timing sheets
 per section; every micro-state; a real reduced-motion version; gate + /critique, fix, re-run,
 paste the real output.
 
@@ -204,7 +204,7 @@ Success: a programmer remembers one image from the site a week later.
 
 ### B. Full e-commerce as a sellable template
 
-Flow: `/build` (answer Checkpoint 3 carefully: that's the whole shop) → `/audit` → `/polish`
+Flow: `/build` (answer Checkpoint 2 carefully: that's the whole shop) → `/audit` → `/polish`
 
 ```text
 /build --stack=next --tier=3 --review
@@ -274,8 +274,8 @@ Approve every checkpoint.
 
 - **Give real facts, never ask it to invent them.** Names, dates, places, prices. The skill refuses fake numbers and logos, so a thin brief gets a thin site.
 - **Name the audience and the success moment.** "A programmer remembers one image a week later" drives the concept better than "make it modern".
-- **Spend your effort at Checkpoint 2.** That's where the concept lives. Ask for alternatives, ask "push it further", reject the safe one.
-- **Spend it again at Checkpoint 3.** That's where the build's completeness is decided.
+- **Spend your effort at Checkpoint 2.** That's where the product is decided: journeys, routes, what's deferred.
+- **Spend it again at Checkpoint 3.** That's where the direction lives. Ask for alternatives, ask "push it further", reject the safe one.
 - **Ask for more than three** when you want range: `--count 5`, "look at 6 references", "show me 5 directions". Three is the minimum, not a limit.
 - **Use `--seed`** when you want to repeat or compare a draw; leave it off for fresh randomness.
 - **Read `GATE.md` and `CRITIQUE.md`.** They are measured and pasted, never typed. If a line says "not measured", the tool didn't run.

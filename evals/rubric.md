@@ -8,6 +8,19 @@ typography, layout, motion, copy, and delivery — not imagery.
 This overrides any rule below that treats placeholders or
 missing images as a zero.
 
+## Gates come first (v6, skill v3.0.0)
+
+Score in this order. Each gate is pass / fail and is reported on its own line; a failed gate is never averaged away by the visual axes, and the visual total is reported only as "not scored (gate failed: …)" when one fails.
+
+| Gate | Passes when | Evidence |
+|---|---|---|
+| **Product integrity** | every required route in the brief exists; every core journey completes; no control looks working without working; deferred capabilities keep their interface and are labelled; the concept did not remove, rename or merge a contract item without the brief allowing it | `completeness.mjs` (X), `journey.mjs` (J), the route list, a click-through |
+| **Usability** | the primary action is reachable by keyboard and by thumb at 375 px; navigation is findable; forms validate and recover; text is readable | `journey.mjs`, screenshots at 375 and 1440 of each journey step |
+| **Accessibility** | the hard gates below | `gate.mjs` (c o w rm a n q k) |
+| **Content truth** | no invented statistics, logos, testimonials or capabilities; no template leaks or filler | `realism.mjs`, reading |
+
+Then score the axes below. For v6 briefs, add to Concept: "the direction is traceable to the brief and the research record". For a paired brief (12a / 12b), also report whether the pair differs (`scripts/originality.mjs`, every axis under 0.4) while both keep the shared contract.
+
 Score each axis 1–5. The weighted total is out of 100.
 
 | Axis | Weight | 1 | 3 | 5 |

@@ -14,27 +14,49 @@
 |---|---|---|---|---|
 | | | | | |
 
+## Product contract
+<!-- Step 1 (thinking/product-contract.md), approved at Checkpoint 2 BEFORE any concept. Authority level 4: no concept may
+     silently remove what it lists. Required by gate axis X when the Scope states a delivery mode. -->
+- **Product:** <what is built and why; the exact subtype>
+- **Audience:** <who, device and connection, expertise, accessibility needs, how often they return>
+- **Jobs:** 1. <in their words, most important first> 2. … 3. …
+- **Business model:** <how it makes money or delivers value, and what that demands>
+- **Core journeys:** <route sequences, e.g. / → /shop → /product/[slug] → /cart → /checkout → /order/[id]>
+- **Information architecture:** <nav model (top nav, mega-menu, sidebar, search-first), route families, depth>
+- **Content and density:** <per route family; data relationships>
+- **Essential interactions and states:** <search, filters, compare, forms, auth-dependent views; empty / loading / error / success>
+- **Responsive expectations:** <what collapses, what becomes a sheet, what stays one tap away on mobile; tablet; desktop>
+- **Constraints:** <stack, existing architecture, dependencies, content availability, region, performance>
+- **Explicit exclusions:** <item: reason, decided by the user | proposed, awaiting approval>
+- **Success criteria:** <if stated>
+- **Assumptions:** <gaps the brief left, answered from type research>
+
 ## Scope
-<!-- Step 0.7 (thinking/sequence.md). Derived from research, standards and knowledge; never from a fixed list.
+<!-- Step 1 (thinking/sequence.md). Derived from the contract, research, standards and knowledge; never from a fixed list.
      Checked by scripts/completeness.mjs (gate axis X). Marks: requested · required · optional · not required for this brief, reason: <why>.
-     Evidence: a path, optionally #<text> it must contain. Routes, legal pages and admin items starting with "/" are found automatically. -->
+     Evidence: a path, optionally #<text> it must contain. Routes, legal pages and admin items starting with "/" are found automatically.
+     A journey's evidence is its route sequence; every route in it must exist.
+     Level (optional): interface · interaction · persisted · backend · integration. A deferred backend or integration names the
+     interface that still ships: "not required for this brief, reason: payment provider deferred; interface: /checkout". -->
 **Site type:** <type, region>
-**Admin panel:** <yes | no> (settled at Checkpoint 3)
+**Admin panel:** <yes | no> (settled at Checkpoint 2)
 **Delivery mode:** <design exploration | functional frontend | production template> (from the request; templates/TEMPLATE.md)
 
-| Kind | Item | Mark | Evidence |
-|---|---|---|---|
-| route | </path> | requested | |
-| function | <route: what it does> | required | <file#text> |
-| state | <route or surface: empty / loading / error / filled> | required | <SCHEMA.md#text or file#text> |
-| legal | </privacy-or-what-the-region-requires> | required | |
-| edge | <edge case> | required | <file#text> |
-| admin | </admin/...> | required | |
-| skeleton | <async surface> | required | <file> |
-| template | <middleware.ts, data/, …> | <required, or not required for this brief, reason: …> | |
+| Kind | Item | Mark | Evidence | Level |
+|---|---|---|---|---|
+| route | </path> | requested | | interface |
+| journey | <name: e.g. buy> | required | </ → /shop → /cart → /checkout> | interaction |
+| function | <route: what it does> | required | <file#text> | interaction |
+| function | <a deferred backend capability> | not required for this brief, reason: <backend deferred>; interface: </route> | | integration |
+| state | <route or surface: empty / loading / error / filled> | required | <SCHEMA.md#text or file#text> | |
+| legal | </privacy-or-what-the-region-requires> | required | | |
+| edge | <edge case> | required | <file#text> | |
+| admin | </admin/...> | required | | |
+| skeleton | <async surface> | required | <file> | |
+| template | <middleware.ts, data/, …> | <required, or not required for this brief, reason: …> | | |
 
 ## Type research
-<!-- Step 0.5 (craft/research.md): 3–5 real sites of the exact type, or the closest, with the gap stated. Every finding
+<!-- Step 1 (craft/research.md): real sites of the exact type (usually 3–5), or the closest, with the gap stated. Every finding
      observed / inferred / unverified. Required by gate axis X when the Scope states a delivery mode. -->
 | Site | Type | Routes | Functionality | States | Admin | Legal | Notes |
 |---|---|---|---|---|---|---|---|
@@ -42,44 +64,62 @@
 
 **Gaps:** <what could not be verified, and the assumption used instead>
 
-## References
-<!-- Step 0.5, mandatory (craft/research.md). Written before Step 1. Sources: references/sources/ + live award sites. Concepts only, no copied code. -->
+## Research record
+<!-- Step 2 (craft/research.md). Questions first; sources chosen by what they prove; evidence, not screenshots.
+     Concepts from inspiration; code only as a vetted dependency or permissively licensed with attribution. -->
 **Access:** <web (searched YYYY-MM-DD) | no web access: working from training data (limitation: <what that means here>)>
 
-**References looked at:**
-1. <name> — <what it is> — <what I took from it, as a principle>
-2. <name> — <what it is> — <what I took from it>
-3. <name> — <what it is> — <what I took from it>
+**Questions:**
+1. <what this project needs to learn to design well>
+2. …
+
+| Source (name, URL) | Kind | Observation | Intended use | Limitation |
+|---|---|---|---|---|
+| <name, URL> | <gallery / case study / shot / production / library / repo / docs> | <what it does and why it works> | <the principle taken, for which route or decision> | <what would fail here; what wasn't verified> |
 
 **Techniques considered:**
 - <technique> (<source>): <used | not used, why>
-- <technique> (<source>): <used | not used, why>
-- <technique> (<source>): <used | not used, why>
 
-**Pattern being avoided:** <the overused pattern in this category> — <why it fails this brief>
+**Pattern being avoided:** <the overused pattern for this type> — <why it fails this product>
+
+## Directions
+<!-- Step 3. 2–3 directions that differ in kind; compared against the contract, not each other's novelty. -->
+| | A <name> | B <name> | C <name> |
+|---|---|---|---|
+| Idea | | | |
+| Structure per route family | | | |
+| Type mode and motion language | | | |
+| Journeys survive? | | | |
+| Suitability · audience · usability · distinction · motion · responsive · technical · originality | | | |
+
+**Chosen:** <A | B | C | a merge> — <why, against the contract>
 
 ## Divergence
-<!-- Memory check (thinking/sequence.md): node scripts/memory.mjs similar --brief "…" --category … (user-level log, every project) -->
+<!-- Step 4 (thinking/sequence.md): node scripts/memory.mjs similar --brief "…" --category … (user-level log, every project) -->
 - **Prior similar build:** <none: first build ever | none similar | run #n, <project>, <date>>
-- **Diverging from → chose:** archetype <x → y> · palette family <x → y> · type pairing <x → y> · motion language <x → y> · signature move <x → y>
+- **Diverging from → chose:** <dimension: x → y, for each unjustified similarity>
+- **Same, justified:** <dimension: why the brief needs the same answer | none>
 
 ## Decision trace
-<!-- Every design decision traces to the brief or a reference above. "Skill default" is not a source. -->
+<!-- Every consequential decision traces to the brief, the contract or research. "Skill default" is not a source; a heuristic is
+     cited with its ID and why it applies here. -->
 | Decision | Traces to |
 |---|---|
-| Archetype | <brief: "…" / reference n / technique> |
+| Structure and IA | <contract / brief: "…" / research row n> |
 | Palette | |
-| Type pairing | |
+| Type pairing and mode | |
 | Motion language | |
-| Signature move | |
+| Signature move (or none) | |
+| Components: reuse / adapt / adopt / build | |
+| Heuristics ignored or adapted | <H-… : reason> |
 
 ## Concept
 - **Tension:** 
 - **Concept sentence:** 
-- **Archetype + mutation:** 
-- **Collision:** 
-- **Signature move:** 
-- **Dials:** ENERGY _ · RHYTHM _ · MOTION _ → Tier _
+- **Structure:** <from the contract | archetype <x> (+ mutation) for <surface> | none>
+- **Exploration tools used or rejected:** <collision, recipes, styles, components: one reason each>
+- **Signature move:** <one | none: identity from <system>>
+- **Dials:** ENERGY _ · RHYTHM _ · MOTION _ → Tier _ (<per route family if they differ>)
 - **Rejected:** 
 
 ## Typography

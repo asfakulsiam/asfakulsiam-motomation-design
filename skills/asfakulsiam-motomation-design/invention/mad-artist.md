@@ -1,6 +1,6 @@
 # Mad Artist Mode: Inventing New Patterns
 
-Templates repeat because models choose the most likely next option. This file is a set of tools that force unlikely but sensible options. Use it when the Thinking Sequence produces something familiar, or when the user says "different", "wild", "never seen before", or `/invent`.
+Templates repeat because models choose the most likely next option. This file is a set of tools that force unlikely but sensible options. Use it when Step 3 of the Thinking Sequence produces something familiar that the product doesn't need, or when the user says "different", "wild", "never seen before", or `/invent`.
 
 ## Rule zero: real randomness
 
@@ -12,7 +12,7 @@ node scripts/collide.mjs --n 3 --spread   # force each draw from a different wor
 node scripts/collide.mjs --category studio --exclude-recent
 ```
 
-Each draw returns an archetype, a mutation, a collision source, a material, a motion verb and a type move. Treat the draw as a **creative constraint**, not a final answer. Combine, reject or bend it, but you have to start from it.
+Each draw returns an archetype, a mutation, a collision source, a material, a motion verb and a type move. Treat the draw as an **optional prompt** (authority level 7), not an answer. Combine, bend or discard it; the product contract and research decide. If a draw doesn't fit, say why in one line and move on; you may then choose freely.
 
 Without a shell, use the seed method: take the brief's character count, divide it by the number of rows in each CSV, and use the remainder as the row index. Say which rows you used.
 
@@ -59,3 +59,7 @@ An invention survives only if it passes all four:
 ## Record what you invented
 
 Log every signature you invent (`node scripts/memory.mjs log --signature <name>`). Over time, the project builds its own vocabulary, and the memory check prevents accidental repeats.
+
+## Guardrail
+
+Invention works on expression, never on the product. No technique here may remove a required journey, hide navigation the contract needs, or make a task slower (`principles/authority.md`). Invent on storytelling surfaces freely; on task surfaces, invent in craft (type, rhythm, feedback quality), not in structure.

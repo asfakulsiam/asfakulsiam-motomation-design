@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-// Completeness (gate axis X, v2.9.0): does the build contain the scope the agent derived in Step 0.7?
+// Completeness (gate axis X, v2.9.0): does the build contain the scope the agent derived in Step 1 (product contract and scope)?
 // Nothing is hardcoded here: the routes, states, legal pages, edge cases, admin surfaces and skeletons come from the
-// `## Scope` table the agent wrote in DESIGN.md (thinking/sequence.md, Step 0.7). This script only checks that each item
+// `## Scope` table the agent wrote in DESIGN.md (thinking/sequence.md, Step 1). This script only checks that each item
 // marked "requested" or "required" exists in the project, and that every excused item carries a reason.
 // The deliverable shape the skill itself requires (templates/TEMPLATE.md) is checked too, as the "Template" line:
 // the files, the README demo line, demo labels on every data/ entry, .env.example covering every env var the code
@@ -40,10 +40,11 @@
 import { readFileSync, existsSync, statSync, readdirSync } from "node:fs";
 import { join, resolve, dirname, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
+import { realism } from "./realism.mjs";
 import { spawnSync } from "node:child_process";
 
-const KINDS = { route: "Routes", function: "Functions", state: "States", legal: "Legal", edge: "Edge cases", admin: "Admin", skeleton: "Skeletons", template: "Template" };
-const VERB = { route: "required present", function: "present", state: "defined", legal: "present", edge: "handled", admin: "present", skeleton: "present", template: "present" };
+const KINDS = { route: "Routes", journey: "Journeys", function: "Functions", state: "States", legal: "Legal", edge: "Edge cases", admin: "Admin", skeleton: "Skeletons", template: "Template" };
+const VERB = { route: "required present", journey: "connected", function: "present", state: "defined", legal: "present", edge: "handled", admin: "present", skeleton: "present", template: "present" };
 // the deliverable shape every build ships (templates/TEMPLATE.md); each can be excused in the Scope table with a reason
 export const TEMPLATE_FILES = [
   ["README.md"], ["DESIGN.md"], ["MOTION.md"], ["SCHEMA.md"], ["DATA.md"], ["CRITIQUE.md"], ["GATE.md"], ["LICENSE", "LICENSE.md"],
@@ -73,7 +74,7 @@ function scopeTable(md) {
   const rows = sec.split("\n").filter((l) => /^\s*\|/.test(l)).map((l) => l.trim().replace(/^\||\|$/g, "").split("|").map((c) => c.trim()));
   const head = rows.findIndex((r) => r[0] && /^kind$/i.test(r[0]));
   const items = rows.slice(head + 1).filter((r) => r.length >= 3 && !/^-+$/.test(r[0].replace(/:/g, "")) && r[0] && !/^<.*>$/.test(r[1] || ""))
-    .map((r) => ({ kind: r[0].toLowerCase().replace(/s$/, "").replace(/^edge case$|^edge-case$/, "edge"), item: r[1].replace(/^`|`$/g, ""), mark: r[2], evidence: (r[3] || "").replace(/^`|`$/g, "") }));
+    .map((r) => ({ kind: r[0].toLowerCase().replace(/s$/, "").replace(/^edge case$|^edge-case$/, "edge"), item: r[1].replace(/^`|`$/g, ""), mark: r[2], evidence: (r[3] || "").replace(/^`|`$/g, ""), level: (r[4] || "").trim().toLowerCase().replace(/^`|`$/g, "") }));
   return { admin, type, mode, items };
 }
 function markOf(m) {
@@ -256,10 +257,13 @@ export function maintenanceLines(r) {
   return L;
 }
 
+const LEVELS = ["interface", "interaction", "persisted", "backend", "integration"];
+const DEFERRAL = /\b(back-?end|integration|provider|infrastructure|server-side|api (?:is |not )|payment processing|auth(?:entication)? (?:service|infrastructure|backend)|database)\b/i;
+const journeySteps = (s) => (s || "").split(/\s*(?:→|->|>)\s*/).map((x) => x.trim().replace(/^`|`$/g, "")).filter((x) => x.startsWith("/"));
 export function completeness(target) {
   const t = resolve(target); const designFile = existsSync(t) && statSync(t).isDirectory() ? join(t, "DESIGN.md") : t; const root = dirname(designFile);
   if (!existsSync(designFile)) return { error: `no DESIGN.md at ${designFile}` };
-  const scope = scopeTable(readFileSync(designFile, "utf8")); if (!scope) return { error: `${designFile} has no "## Scope" section (thinking/sequence.md, Step 0.7)` };
+  const scope = scopeTable(readFileSync(designFile, "utf8")); if (!scope) return { error: `${designFile} has no "## Scope" section (thinking/sequence.md, Step 1)` };
   const routes = projectRoutes(root); const rows = []; const invalid = [];
   const dm = modeOf(scope.mode); if (dm.invalid) invalid.push(`delivery mode "${dm.invalid}" (use design exploration, functional frontend or production template)`);
   const needed = new Set(MODE_FILES[dm.mode]); let legacyNoMedia = false;
@@ -267,6 +271,18 @@ export function completeness(target) {
     const m = markOf(it.mark); if (m.invalid) { invalid.push(`${it.kind} "${it.item}": mark "${m.label}" (use requested, required, optional, or "not required for this brief, reason: …")`); continue; }
     if (!KINDS[it.kind]) { invalid.push(`unknown kind "${it.kind}" for "${it.item}" (kinds: ${Object.keys(KINDS).join(", ")})`); continue; }
     let found = { ok: false, why: "" };
+    // v3.0.0 capability levels (thinking/product-contract.md): interface, interaction, persisted, backend, integration
+    if (it.level && !LEVELS.includes(it.level)) { invalid.push(`${it.kind} "${it.item}": level "${it.level}" (use ${LEVELS.join(", ")})`); continue; }
+    if (m.counts && ["backend", "integration"].includes(it.level) && dm.mode !== "production template") invalid.push(`${it.kind} "${it.item}": level "${it.level}" is claimed in a ${dm.mode}; a ${dm.mode} ships interface or interaction, and a capability is never claimed beyond what exists`);
+    // deferring a backend or integration never removes its interface: the excuse names the interface that still ships
+    if (m.label === "excused" && it.kind !== "template" && DEFERRAL.test(m.reason) && !/\binterface\s*:\s*\S/i.test(m.reason)) invalid.push(`${it.kind} "${it.item}": deferred for a backend or integration reason, but names no interface that still ships (add "; interface: <route or file>", or "interface: none, approved by the user")`);
+    if (m.label === "excused" && /\binterface\s*:\s*\//i.test(m.reason || "")) { const ifc = (m.reason.match(/\binterface\s*:\s*(\/[^\s;,)]*)/i) || [])[1]; if (ifc && !routeMatch(ifc, routes)) invalid.push(`${it.kind} "${it.item}": its interface ${ifc} is not in app/, pages/ or HTML (the deferral promised it ships)`); }
+    if (m.counts && it.kind === "journey") {
+      const steps = journeySteps(it.evidence || it.item);
+      if (steps.length < 2) found = { ok: false, why: `a journey needs its route sequence as evidence ("/ → /shop → /cart")` };
+      else { const miss = steps.filter((r) => !routeMatch(r, routes)); found = miss.length ? { ok: false, why: `route(s) ${miss.join(", ")} not found (journey ${steps.join(" → ")})` } : { ok: true }; }
+      rows.push({ ...it, mark: m.label, reason: m.reason, counts: m.counts, ok: found.ok, why: found.why }); continue;
+    }
     if (m.counts) {
       if (it.evidence && !/^<.*>$/.test(it.evidence)) found = evidenceOk(root, it.evidence);
       else if (["route", "legal", "admin"].includes(it.kind) && it.item.startsWith("/")) found = routeMatch(it.item, routes) ? { ok: true } : { ok: false, why: "route not found in app/, pages/ or HTML" };
@@ -294,12 +310,17 @@ export function completeness(target) {
   if (used.length) { const listed = existsSync(envEx) ? readFileSync(envEx, "utf8") : ""; const miss = used.filter((v) => !new RegExp(`^\\s*#?\\s*${v}\\s*=`, "m").test(listed)); add(".env.example coverage", !miss.length, `.env.example lacks ${miss.slice(0, 6).join(", ")}`); }
   const pkg = join(root, "package.json");
   if (existsSync(pkg)) { let dev = false; try { dev = !!JSON.parse(readFileSync(pkg, "utf8")).scripts?.dev; } catch {} add("npm run dev", dev, 'package.json has no "dev" script (zero-configuration run)'); }
-  // research for new design work (Step 0.5, craft/research.md): no delivery mode skips it
-  const dtext = readFileSync(designFile, "utf8");
-  for (const [item, re] of [["Type research", /^##\s+Type research\b/m], ["References", /^##\s+References\b/m]]) {
+  // research for new design work (Steps 1–2, craft/research.md): no delivery mode skips it
+  const dtext = readFileSync(designFile, "utf8"); const warnUp = [];
+  // v3.0.0: the product contract (Step 1) and the research record (Step 2; "## References" from v2 still counts)
+  for (const [item, re, where] of [["Product contract", /^##\s+Product contract\b/m, "Step 1, thinking/product-contract.md"], ["Type research", /^##\s+Type research\b/m, "Step 1, craft/research.md"], ["Research record", /^##\s+(?:Research record|References)\b/m, "Step 2, craft/research.md"]]) {
     const ok = re.test(dtext);
-    if (dm.stated) rows.push({ kind: "template", item: `DESIGN.md ${item}`, mark: "required (skill)", counts: true, ok, why: ok ? "" : `DESIGN.md has no "## ${item}" section (Step 0.5, craft/research.md)` });
+    if (dm.stated) rows.push({ kind: "template", item: `DESIGN.md ${item}`, mark: "required (skill)", counts: true, ok, why: ok ? "" : `DESIGN.md has no "## ${item}" section (${where})` });
   }
+  if (dm.stated && /^##\s+Product contract\b/m.test(dtext) && !scope.items.some((i) => i.kind === "journey")) warnUp.push("journeys: the Scope table has no journey rows; write each core journey as a route sequence so axis X can check it connects");
+  // content realism (scripts/realism.mjs): leaked process notes, template fixtures, repeated data, dead links
+  const real = realism(root);
+  if (!real.error) { if (!excused("Content realism")) rows.push({ kind: "template", item: "Content realism", mark: "required (skill)", counts: true, ok: real.pass, why: real.problems.slice(0, 4).map((p) => `${p.kind} ${p.file}: ${p.what}`).join(" · ") }); for (const w of real.warnings.slice(0, 4)) warnUp.push(`content: ${w.what}`); }
   const media = mediaChecks(root);
   for (const p of media.problems) rows.push({ kind: "template", item: "MEDIA.md inventory", mark: "required (skill)", counts: true, ok: false, why: p });
   if (existsSync(join(root, "MEDIA.md")) && !media.problems.length) rows.push({ kind: "template", item: "MEDIA.md inventory", mark: "required (skill)", counts: true, ok: true, why: "" });
@@ -309,7 +330,7 @@ export function completeness(target) {
     else if (claim && media.unresolved) rows.push({ kind: "template", item: "README readiness claim", mark: "required (skill)", counts: true, ok: false, why: `README.md says production-ready while ${media.unresolved} asset(s) in MEDIA.md must be replaced or cleared` }); }
   const tally = Object.fromEntries(Object.keys(KINDS).map((k) => { const r = rows.filter((x) => x.kind === k && x.counts); return [k, { have: r.filter((x) => x.ok).length, need: r.length, excused: rows.filter((x) => x.kind === k && x.mark === "excused").length }]; }));
   const missing = rows.filter((r) => r.counts && !r.ok);
-  const warn = warnings(root); if (media.unresolved) warn.push(`media: ${media.unresolved} asset(s) in MEDIA.md must be replaced or cleared before production; not production-ready until they are`);
+  const warn = [...warnings(root), ...warnUp]; if (media.unresolved) warn.push(`media: ${media.unresolved} asset(s) in MEDIA.md must be replaced or cleared before production; not production-ready until they are`);
   if (legacyNoMedia) warn.push("media: no MEDIA.md (craft/media.md); required for every build that states its delivery mode, add it when this build is next delivered");
   if (!dm.stated) warn.push("delivery mode: no \"**Delivery mode:**\" line in the Scope section; checked as production template");
   return { designFile, root, type: scope.type, admin: scope.admin, mode: dm.mode, routesFound: [...routes].sort(), rows, tally, missing, invalid, warnings: warn, pass: !missing.length && !invalid.length && scope.items.length > 0, empty: scope.items.length === 0 };
@@ -318,7 +339,7 @@ export function completeness(target) {
 export function completenessLines(r) {
   const L = [`  X — completeness${r.type ? ` (${r.type}${r.admin ? `, admin panel: ${r.admin}` : ""})` : ""}${r.mode ? ` [${r.mode}]` : ""}  ${r.pass ? "✓" : "✗"}`];
   for (const [k, label] of Object.entries(KINDS)) { const t = r.tally[k]; if (!t.need && !t.excused) continue; L.push(`      ${(label + ":").padEnd(12)} ${t.have}/${t.need} ${VERB[k]}${t.excused ? ` · ${t.excused} not required (reason given)` : ""}`); }
-  if (r.empty) L.push("      ✗ the Scope table has no items: derive the scope in Step 0.7");
+  if (r.empty) L.push("      ✗ the Scope table has no items: derive the scope in Step 1");
   for (const m of r.missing) L.push(`      ✗ ${m.kind} ${m.item}: ${m.why || "missing"}`);
   for (const i of r.invalid) L.push(`      ✗ ${i}`);
   for (const w of r.warnings) L.push(`      ⚠ ${w}  (warning)`);

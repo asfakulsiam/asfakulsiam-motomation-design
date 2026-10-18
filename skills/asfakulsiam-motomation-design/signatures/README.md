@@ -16,4 +16,4 @@ Files:
 
 All entries are searchable: `node scripts/search.mjs signatures "<words>"`.
 
-**Never ship a recipe as is.** Bend it to the concept (Thinking Sequence step 5). A recipe is a starting point for a signature, not the signature itself.
+**Never ship a recipe as is.** Bend it to the concept (Thinking Sequence, Step 3). A recipe is a starting point for a signature, not the signature itself.

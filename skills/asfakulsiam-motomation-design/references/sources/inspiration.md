@@ -26,7 +26,7 @@ Read for **what is being made now and how small details carry a site**. Reposito
 
 ## Live sources to search at build time
 
-Search these in Step 0.5 for the brief's category, last 6 months (`craft/research.md`).
+Search these in Step 2 for the brief's category, last 6 months (`craft/research.md`).
 
 | Source | What it shows |
 |---|---|

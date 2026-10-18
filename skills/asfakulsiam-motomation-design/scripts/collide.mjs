@@ -81,7 +81,7 @@ for (let i = 0; i < n; i++) {
   });
 }
 
-// Fallback archetype per draw: if the drawn archetype can't serve the brief, the agent takes this one instead of
+// Alternative archetype per draw (v3: advisory). If the drawn archetype doesn't fit, this is one more option, instead of
 // picking a favourite by hand (hand-picked overrides converge: v2 SaaS runs replaced two different draws with
 // `console`). It comes from its own seeded stream, so adding it changed no existing draw. It fits the category when
 // one is given, is never an archetype drawn in this run, and prefers a different layout family from its draw.
@@ -127,7 +127,7 @@ console.log(`COLLISION ENGINE${cat ? ` · category: ${cat.name}` : ""}${a.seed !
 draws.forEach((d, i) => {
   console.log(`Draw ${i + 1}`);
   console.log(`  Archetype  : ${d.archetype_name} (${d.archetype}): ${d.shape}`);
-  if (d.fallback) console.log(`  If it can't serve the brief, take: ${d.fallback.archetype_name} (${d.fallback.archetype}), not a favourite`);
+  if (d.fallback) console.log(`  Alternative: ${d.fallback.archetype_name} (${d.fallback.archetype}), if the draw doesn't fit (or neither: choose from the contract)`);
   console.log(`  Mutation   : ${d.mutation.name}: ${d.mutation.operator}`);
   console.log(`  Collision  : ${d.collision.source} (${d.collision.world}) → steal "${d.collision.property}"`);
   console.log(`               e.g. ${d.collision.becomes}`);
@@ -149,5 +149,5 @@ console.log(line("mutations", diversity.mutations, "mutations"));
 console.log(line(a.spread ? "collision worlds" : "collision sources", a.spread ? diversity.collision_worlds : uniq((d) => d.collision.source), a.spread ? "collision worlds" : "collision sources"));
 if (a["exclude-recent"]) console.log("  (recently used archetypes and signatures were removed from the pools first)");
 console.log("");
-console.log("Treat these as constraints, not answers. Combine, bend or reject them, but start from them.");
-console.log("Next: write Tension → Concept with one draw, then run the Thinking Sequence (thinking/sequence.md).");
+console.log("Optional prompts (authority level 7), not answers. Use, combine, bend or discard them; the product contract and research decide.");
+console.log("Check each archetype's fails_when (data/archetypes.csv) against the contract; record what you used or rejected (thinking/sequence.md, Step 3).");
