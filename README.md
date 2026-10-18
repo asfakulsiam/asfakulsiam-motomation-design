@@ -12,3 +12,10 @@ evidence, the evaluator outputs and the validation report live on the main line 
 
 Each run folder has the site, `DESIGN.md`, `CHECKPOINTS.md`, `RUN.md` (the builder's own record) and `screens/`.
 Serve a folder with any static server (most include their own `serve.js` / `server.mjs`). The briefs used are in `briefs-used/`.
+
+## Evaluator additions (2026-10-18)
+
+- `runs/12-paired/compare/`: the two paired directions side by side at 1440px (home, shop, tea detail, cart, checkout), left `a-archival`, right `b-poster`. Visual check behind the `pair.mjs` "partial" verdicts.
+- `runs/12-paired/a-archival/evaluator-walk/`, `runs/12-paired/b-poster/evaluator-walk/`: the checkout walk at 375px (empty cart, added, validation, pending, confirmation), from `evals/results/2026-10-18-v3.0.1-independent/12-paired/checkout-walk.mjs`. Both walks pass 9/9 steps.
+
+Results and verdicts: [`evals/results/2026-10-18-v3.0.1-independent/README.md`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/main/evals/results/2026-10-18-v3.0.1-independent/README.md) on `main`.
