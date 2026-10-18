@@ -24,6 +24,8 @@ jobs:
         run: node tests/repo/workflow-rules.test.mjs
       - name: Memory spans projects and forces divergence (user-level log, temp MOTOMATION_HOME)
         run: node tests/repo/memory.test.mjs
+      - name: Variety (S) reads archetype none (v3.0.1)
+        run: node --test tests/gate/variety.test.mjs
       - name: Completeness axis X bites (derived scope, template shape; no browser)
         run: node tests/gate/completeness.test.mjs
       - name: Async advisory sees modern error handling (catch {}, !r.ok; no browser)
@@ -112,6 +114,15 @@ jobs:
       - name: Richness advisory warns on thin pages and never fails the gate (v2.6.0)
         if: steps.pw.outcome == 'success'
         run: node tests/gate/richness.test.mjs
+      - name: Journey axis, coverage of late-linked forms and Scope routes (v3.0.1)
+        if: steps.pw.outcome == 'success'
+        run: node tests/gate/journey.test.mjs
+      - name: Entrance-repeat metric is time-independent (v3.0.1)
+        if: steps.pw.outcome == 'success'
+        run: node tests/gate/entrance-timing.test.mjs
+      - name: Originality axes, and paired directions route by route (v3.0.1)
+        if: steps.pw.outcome == 'success'
+        run: node tests/gate/originality.test.mjs && node tests/gate/pair.test.mjs
       - name: Tier 4 reduced-motion stills (no canvas, still, own composition)
         if: steps.pw.outcome == 'success'
         run: node tests/components/rm-stills.test.mjs

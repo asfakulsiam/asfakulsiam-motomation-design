@@ -4,6 +4,27 @@ All notable changes to this skill. Versions follow [Semantic Versioning](https:/
 
 ## [Unreleased]
 
+## [3.0.1] - 2026-10-18
+
+Validation of 3.0.0: an audit of each overhaul claim against the code, fixes for the defects it confirmed (each with a regression test that fails on 3.0.0), and independent benchmark runs. Report: `docs/VALIDATION-v3.0.1.md`.
+
+### Fixed
+
+- `journey.mjs`: the forms check covered only the first 12 pages in link order, so a contact or checkout page linked later read `forms n/a`. Nav now records which pages have forms, and every page with a form is checked (up to 30 pages, 5 forms each; anything beyond is listed as not checked). Mobile and loading checks sample home and form pages first. A new coverage line reports pages loaded, pages not sampled, forms not checked, and Scope-table routes no link reaches. Fixture `fixtures/journey/many-pages`.
+- `journey.mjs`: tapping a link to the current page (a logo on the home page) reloads it, but was reported as "nothing changed after a tap". It now counts as a response.
+- `gate.mjs` memory axis: `archetype: none` returned `S?` and skipped memory. The build is now fingerprinted on what it has (sections, tier, layout, palette family). `none` against `none` is not a reuse, and two dimensions alone cannot score as an identical copy.
+- `memory.mjs check`: `archetype none` / `signature none` failed as "used in N of the last runs", and every repeat on a similar brief failed even when the brief justified it. `none` is now never a repeat, and `--justified fonts,motion` turns a justified repeat into a warning.
+- `gate.mjs` V (entrance repeats): entrances were sampled 60 ms after load and 1 s after each scroll, so slower entrances read as `static` and a looping marquee read as an entrance. The page clock is now paused and CSS/WAAPI playback frozen; after each scroll the clock runs 4 s and every finite animation is finished. Results report `timing: frozen`. Fixture `fixtures/motion/entrance-timing`, test `tests/gate/entrance-timing.test.mjs` (3 runs, one result).
+- `originality.mjs`: two pages with no motion scored signature 1.00 (shared absence read as the same signature), which raised every overall score. It is now n/a, like image and interaction.
+- `realism.mjs`: false failures on domain language ("Tier 1 carriers", "Category A" dangerous goods, "Room 2", "every project starts with the brief", "the chef's signature move"). Those words now count only as a numbered run (three or more in one file) or in build-process phrasing. False passes: text rendered by vanilla JS (HTML in string and template literals, display fields of object literals) was never read; it is now.
+- `completeness.mjs`: a core journey written in the Product contract but missing from the Scope table was never checked. It now fails X until it gets a row or an explicit exclusion.
+
+### Added
+
+- `scripts/pair.mjs`: compares paired directions of one product route by route. It checks route parity, forms and navigation parity (these must be high; low means functional drift), per-route visual difference with forms and navigation left out (recomposed · partial · cosmetic-only · repeat), shared markup (element skeleton with form internals collapsed), byte-identical presentation files versus shared logic, and coherence within each direction. Fixtures `fixtures/pair/{archival,reskin,poster}`, test `tests/gate/pair.test.mjs`.
+- `thinking/sequence.md`: guidance for several directions on one contract (what to share, what to compose per direction). The paired eval brief README points to `pair.mjs`.
+- CI: journey, entrance-timing, originality, pair and variety tests are now in the workflow (none of the journey, originality or variety tests were before).
+
 ## [3.0.0] - 2026-10-18
 
 Architecture overhaul: research-first, product-first. The audit behind it is in `docs/AUDIT-v3.md`.

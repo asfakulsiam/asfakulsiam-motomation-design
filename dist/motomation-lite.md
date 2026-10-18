@@ -1,4 +1,4 @@
-# Motomation Design v3.0.0: lite edition
+# Motomation Design v3.0.1: lite edition
 
 Lite edition. Full version at the repo. Dropped: Standards, heuristics and house style, Routes: full and light, Motion tiers, Part 3: Craft checklist.
 
@@ -161,6 +161,8 @@ Choose the direction with the best balance, or merge the best parts of two. Writ
 **Test:** are 2–3 directions compared against the contract? Does the chosen one keep every core journey? Can you name what it took from research, and what it adds beyond any single reference? If a recipe or draw shaped it, is the fit argued?
 
 ---
+
+**Several directions, one contract** (paired brief, A/B): share data, logic, validation, accessibility primitives, routes and form fields; compose each direction's pages, markup, layout, type, colour, imagery and motion separately. A theme swap over one template set is a reskin. Check: `node scripts/pair.mjs <dirA> <dirB>`, output under `Directions`.
 
 ### 4. Memory and sameness check
 

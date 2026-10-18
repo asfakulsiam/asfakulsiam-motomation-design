@@ -260,6 +260,16 @@ export function maintenanceLines(r) {
 const LEVELS = ["interface", "interaction", "persisted", "backend", "integration"];
 const DEFERRAL = /\b(back-?end|integration|provider|infrastructure|server-side|api (?:is |not )|payment processing|auth(?:entication)? (?:service|infrastructure|backend)|database)\b/i;
 const journeySteps = (s) => (s || "").split(/\s*(?:→|->|>)\s*/).map((x) => x.trim().replace(/^`|`$/g, "")).filter((x) => x.startsWith("/"));
+/** Concrete routes the Scope table counts (route and legal kinds, requested/required, no dynamic segment), for the journey
+ *  check's coverage report. `target`: a project dir or its DESIGN.md. [] when there is no Scope section. */
+export function contractRoutes(target) {
+  try {
+    const f = existsSync(target) && statSync(target).isDirectory() ? join(target, "DESIGN.md") : target; if (!existsSync(f)) return [];
+    const t = scopeTable(readFileSync(f, "utf8")); if (!t) return [];
+    return [...new Set(t.items.filter((x) => (x.kind === "route" || x.kind === "legal") && markOf(x.mark).counts && /^\//.test(x.item))
+      .map((x) => x.item.split(/\s/)[0].replace(/[:,;]$/, "")).filter((r) => !/[\[\]:*]/.test(r)))];
+  } catch { return []; }
+}
 export function completeness(target) {
   const t = resolve(target); const designFile = existsSync(t) && statSync(t).isDirectory() ? join(t, "DESIGN.md") : t; const root = dirname(designFile);
   if (!existsSync(designFile)) return { error: `no DESIGN.md at ${designFile}` };
@@ -317,6 +327,16 @@ export function completeness(target) {
     const ok = re.test(dtext);
     if (dm.stated) rows.push({ kind: "template", item: `DESIGN.md ${item}`, mark: "required (skill)", counts: true, ok, why: ok ? "" : `DESIGN.md has no "## ${item}" section (${where})` });
   }
+  // v3.0.1: every core journey the Product contract writes as a route sequence must have a Scope journey row (the rows
+  // are what this axis walks). Before, a contract journey left out of the Scope table was never checked: silently dropped.
+  const pc = dtext.match(/^##\s+Product contract\b[\s\S]*?(?=^##\s)|^##\s+Product contract\b[\s\S]*$/m)?.[0] || "";
+  // the contract's "Core journeys" entry (a bullet, a table row or a ### heading) up to the next entry; arrows elsewhere in
+  // the contract's prose are not journeys
+  const cjText = pc.match(/core journeys?\**\s*[:|]?[\s\S]*?(?=\n\s*(?:[-*]\s+\*\*|\|\s*\*\*|#{2,4}\s)|$)/i)?.[0] || "";
+  const pcJourneys = cjText.split("\n").map((l) => (l.match(/`([^`]*(?:→|->)[^`]*)`/) || l.match(/(\/\S*\s*(?:→|->)\s*[^|]*)/) || [])[1]).filter(Boolean)
+    .map((x) => journeySteps(x).map((r) => r.replace(/[.,;:)]+$/, ""))).filter((st) => st.length >= 2);
+  const scoped = scope.items.filter((i) => i.kind === "journey").map((i) => journeySteps(i.evidence || i.item).map((r) => r.toLowerCase()).join(" → "));
+  for (const st of pcJourneys) { const k = st.map((r) => r.toLowerCase()).join(" → "); if (!scoped.includes(k) && !excused(`journey ${k}`)) rows.push({ kind: "journey", item: `contract journey ${st.join(" → ")}`, mark: "required (contract)", counts: true, ok: false, why: "in the Product contract but not in the Scope table: add it as a journey row (or exclude it there with a reason) so it is checked" }); }
   if (dm.stated && /^##\s+Product contract\b/m.test(dtext) && !scope.items.some((i) => i.kind === "journey")) warnUp.push("journeys: the Scope table has no journey rows; write each core journey as a route sequence so axis X can check it connects");
   // content realism (scripts/realism.mjs): leaked process notes, template fixtures, repeated data, dead links
   const real = realism(root);

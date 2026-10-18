@@ -20,4 +20,19 @@ const fr = run("form-replaced"); const frj = JSON.parse(fr.out);
 const wrapped = (frj.mobile.fails || []).filter((f) => /here now/.test(f.el));
 say(!wrapped.length, `form-replaced: a link wrapped over two lines responds to a tap (${wrapped.map((f) => f.why).join("; ") || "no fail"})`);
 say(frj.forms.ok === true && frj.forms.have === 5, `form-replaced: success seen after the form is removed (${frj.forms.have}/${frj.forms.need}${frj.forms.fails.length ? ": " + frj.forms.fails[0].why : ""})`);
+// v3.0.1 coverage: forms on pages linked after the first 12 (a contact page 16th in link order, a sign-up page one click
+// deeper) are checked, a Scope route no link reaches is reported, and a home-page logo linking to itself is a response
+const mp = run("many-pages"); const mpj = JSON.parse(mp.out);
+say(mpj.forms.ok === true && mpj.forms.forms.length === 2 && mpj.forms.have === 10, `many-pages: both late-linked forms checked (${mpj.forms.forms.length} form(s), ${mpj.forms.have}/${mpj.forms.need} states)`);
+say(mpj.coverage && mpj.coverage.formPages.includes("/contact") && mpj.coverage.formPages.includes("/signup"), `many-pages: coverage names the form pages (${mpj.coverage?.formPages.join(", ")})`);
+say(mpj.coverage && mpj.coverage.contractUnreached.join() === "/checkout", `many-pages: the Scope route no link reaches is reported (${mpj.coverage?.contractUnreached.join(", ") || "none"}), the dynamic one is skipped`);
+say(mpj.coverage && mpj.coverage.notSampled.length === mpj.coverage.loaded - 12, `many-pages: pages beyond the tap/loading sample are listed (${mpj.coverage?.notSampled.length})`);
+say(mpj.mobile.ok === true, `many-pages: a link to the current page (logo on home) counts as a response (${(mpj.mobile.fails || []).map((f) => f.el + ": " + f.why).join("; ") || "no fail"})`);
+say(mp.code === 0 && mpj.pass, `many-pages: exit ${mp.code}, ${mpj.segment}`);
+// v3.0.1: a page wider than the phone is one layout fail with its cause, not a list of taps that "did nothing"
+const ov = run("overflow"); const ovj = JSON.parse(ov.out); const ovf = ovj.mobile.fails || [];
+say(ovj.mobile.ok === false && ovf.length >= 1 && ovf.every((f) => /wider than the phone/.test(f.why)) && /div\.cta|header/.test(ovf[0].why), `overflow: reported as the layout cause (${ovf.length} fail(s): ${(ovf[0] || {}).why?.slice(0, 90)})`);
+const { samplePages } = await import(join(ROOT, "skills/asfakulsiam-motomation-design/scripts/journey.mjs"));
+const order = samplePages(["http://x/", "http://x/a", "http://x/b", "http://x/c.html"], { "/c": 1 }, "http://x/");
+say(order.join() === "http://x/,http://x/c.html,http://x/a,http://x/b", `samplePages: home, then form pages, then the rest (${order.map((u) => new URL(u).pathname).join(" ")})`);
 console.log(bad ? `\n${bad} failing` : "\nall journey checks pass"); process.exit(bad ? 1 : 0);

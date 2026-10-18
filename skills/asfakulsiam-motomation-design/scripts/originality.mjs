@@ -138,7 +138,12 @@ export function compare(A, B, sigFamily = {}) {
   parts.interaction = {}; for (const k of SAME_PRODUCT.on ? ["feedback"] : ["feedback", "forms", "navigation"]) { const x = A.interaction[k], y = B.interaction[k]; if (nonEmpty(x) || nonEmpty(y)) parts.interaction[k] = wjaccard(x, y); }
   const measured = wjaccard(A.signature.tokens, B.signature.tokens);
   const da = A.signature.declared, db = B.signature.declared;
-  parts.signature = da && db ? { declared: da === db ? 1 : sigFamily[da] && sigFamily[da] === sigFamily[db] ? 0.5 : 0, measured } : { measured };
+  // v3.0.1: neither page has a measured signature (nothing changes under time, pointer or scroll) and neither declares
+  // one: not applicable, like image and interaction. Before, two motionless pages scored signature 1.00 (shared absence
+  // read as the same signature) and that lifted every overall score by a sixth.
+  const still = (t) => { const ks = Object.keys(t || {}); return !ks.length || (ks.length === 1 && ks[0] === "static"); }; // signatureOf returns {static: 1} when nothing moves
+  const noSig = still(A.signature.tokens) && still(B.signature.tokens);
+  parts.signature = da && db ? { declared: da === db ? 1 : sigFamily[da] && sigFamily[da] === sigFamily[db] ? 0.5 : 0, ...(noSig ? {} : { measured }) } : noSig ? {} : { measured };
   const W = { structure: { shingles: 0.5, order: 0.5 }, composition: { placement: 0.6, columns: 0.2, density: 0.2 }, typography: { families: 0.4, scale: 0.2, rhythm: 0.2, hierarchy: 0.2 } }; // v2.11: the face counts most; same proportions in different fonts are a weaker repeat than in the same fonts
   const score = {};
   for (const ax of AXES) { const p = parts[ax]; const w = W[ax]; const ks = Object.keys(p); score[ax] = !ks.length ? null : r2(w ? ks.reduce((s, k) => s + p[k] * w[k], 0) / ks.reduce((s, k) => s + w[k], 0) : mean(ks.map((k) => p[k]))); for (const k of ks) p[k] = r2(p[k]); } // score null: the axis does not apply to this pair

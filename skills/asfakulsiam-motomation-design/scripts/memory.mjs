@@ -9,11 +9,13 @@
 //        --fonts "Fraunces/Switzer" --motion "scrubbed reveals" --signature letter-relay --tier 2 --page home
 //   node scripts/memory.mjs recent [--n 5]
 //   node scripts/memory.mjs similar --brief "<brief>" [--category c]       → prior builds with a similar brief, and what to diverge from
-//   node scripts/memory.mjs check --brief "<brief>" [--category c] --archetype x --palette p --fonts a/b --motion m --signature s [--tier n --sections a,b]
+//   node scripts/memory.mjs check --brief "<brief>" [--category c] --archetype x --palette p --fonts a/b --motion m --signature s [--tier n --sections a,b] [--justified fonts,motion]
 //   node scripts/memory.mjs fingerprint --archetype ledger --sections hero,work,contact --type-scale 1.333 --tier 2 --signature letter-relay
 // Three checks: (1) exact IDs used in the last N runs (any project), (2) structural fingerprint similarity, and
-// (3) forced divergence: a prior build with a similar brief (same category, or shared brief words) must differ on all five
-// of archetype, palette family, type pairing, motion language and signature move. No log yet: nothing to diverge from.
+// (3) divergence: a prior build with a similar brief (same category, or shared brief words) must differ on each of
+// archetype, palette family, type pairing, motion language and signature move, unless the brief justifies the repeat
+// (check --justified fonts,motion: a warning, the reason goes in DESIGN.md). "none" (no archetype, no signature move) is
+// a declared choice, never a repeat. No log yet: nothing to diverge from.
 // Deterministic and offline: no network, no models, no embeddings.
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join, resolve, dirname, sep, basename } from "node:path";
@@ -82,8 +84,8 @@ function write(runs) { mkdirSync(DIR, { recursive: true }); writeFileSync(FILE, 
 
 const isMain = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
-  const a = cli("memory", "Usage: node scripts/memory.mjs <log|recent|similar|check|fingerprint> [--brief \"…\"] [--category c] [--motion m] [--archetype x] [--signature y] [--collision \"source\"] [--fonts a/b] [--palette p] [--tier n] [--page p] [--sections a,b,c] [--type-scale 1.333] [--layout family] [--threshold 0.7] [--project <dir>]",
-    Object.fromEntries([...FIELDS, "sections", "type-scale", "layout", "threshold", "project", "n", "url"].concat(["brief", "palette-family", "ground", "accent", "design"]).map((k) => [k, "value"]).concat([["json", "bool"]])), null, { pos: [0, 1] }); const cmd = a._[0];
+  const a = cli("memory", "Usage: node scripts/memory.mjs <log|recent|similar|check|fingerprint> [--brief \"…\"] [--category c] [--motion m] [--archetype x] [--signature y] [--collision \"source\"] [--fonts a/b] [--palette p] [--tier n] [--page p] [--sections a,b,c] [--type-scale 1.333] [--layout family] [--threshold 0.7] [--justified fonts,motion] [--project <dir>]",
+    Object.fromEntries([...FIELDS, "sections", "type-scale", "layout", "threshold", "project", "n", "url"].concat(["brief", "palette-family", "ground", "accent", "design", "justified"]).map((k) => [k, "value"]).concat([["json", "bool"]])), null, { pos: [0, 1] }); const cmd = a._[0];
   // The palette a build declares in DESIGN.md (--design file, else <--dir>/DESIGN.md): named palette or hex list → family
   const designFile = flagVal(a.design) ? resolve(String(a.design)) : flagVal(a.dir) && existsSync(join(resolve(String(a.dir)), "DESIGN.md")) ? join(resolve(String(a.dir)), "DESIGN.md") : null;
   const dpal = designFile && existsSync(designFile) ? designPalette(readFileSync(designFile, "utf8")) : undefined;
@@ -118,9 +120,12 @@ if (isMain) {
       console.log(`✗ similar to run #${h.n} (${h.r.date?.slice(0, 10)}${h.r.project ? `, ${basename(h.r.project)}` : ""}): ${h.cat ? "same category" : ""}${h.cat && h.shared.length ? "; " : ""}${h.shared.length ? `shared: ${h.shared.join(", ")} (${Math.round(h.jac * 100)}%)` : ""}`);
       for (const [k, label] of DIVERGE) console.log(`    diverge from ${label}: ${h.r[k] || "(not logged)"}`);
     }
-    console.log("  → every one of the five must differ; write what you are diverging from in DESIGN.md under Divergence");
+    console.log("  → diverge on each of the five unless the brief justifies the similarity; write what you diverge from, and any justified repeat (check --justified <dims>), in DESIGN.md under Divergence");
   } else if (cmd === "check") {
     const runs = recent(Number(a.n || 5)); let clash = 0;
+    // --justified fonts,motion: dimensions the brief justifies repeating (principles/authority.md: diverge where the brief
+    // doesn't justify the similarity). A justified repeat is a warning with the reason in DESIGN.md, not a clash.
+    const justified = new Set(String(flagVal(a.justified) || "").split(",").map((x) => x.trim().replace(/^palette$/, "palette_family")).filter(Boolean));
     console.log("IDs");
     for (const f of FIELDS) {
       if (f === "category" || f === "dir" || !a[f] || a[f] === true) continue; // the category and the build folder are context, not choices to avoid
@@ -132,6 +137,8 @@ if (isMain) {
         let streak = 0; for (let i = runs.length - 1; i >= 0 && String(runs[i].tier) === String(a.tier); i--) streak++;
         console.log(`⚠ Tier ${a.tier} used in ${streak ? `the last ${streak}` : `${hit.length} of the last ${runs.length}`} builds. This is allowed if the brief requires it. State the reason in DESIGN.md.`); continue;
       }
+      if (/^none$/i.test(String(a[f])) && (f === "archetype" || f === "signature")) { console.log(`· ${f}: none (a declared choice: nothing to repeat)`); continue; }
+      if (hit.length && justified.has(f)) { console.log(`⚠ ${f} "${a[f]}" was used in ${hit.length} of the last ${runs.length} runs: marked justified (--justified) → state the brief's reason in DESIGN.md`); continue; }
       if (hit.length) { clash++; console.log(`✗ ${f} "${a[f]}" was used in ${hit.length} of the last ${runs.length} runs → choose another`); }
       else console.log(`✓ ${f} "${a[f]}" is fresh`);
     }
@@ -139,14 +146,16 @@ if (isMain) {
     const fam = myFamily();
     if (fam) { const hit = runs.filter((r) => famOf(r) === fam); console.log(hit.length ? `⚠ palette family "${fam}" was used in ${hit.length} of the last ${runs.length} runs (${hit.map((r) => r.palette || "?").join(", ")}) → warning: change the palette or state the reason in DESIGN.md` : `✓ palette family "${fam}" is fresh`); }
     else console.log("· palette family: unknown (pass --design DESIGN.md, --dir <build>, --palette or --ground/--accent)");
-    // Forced divergence: a prior build with a similar brief must differ on all five dimensions
+    // Divergence: a prior build with a similar brief must differ on each dimension the brief does not justify repeating
     if (flagVal(a.brief) || flagVal(a.category)) {
       const hits = similarRuns({ brief: a.brief, category: a.category }); const mineD = { archetype: flagVal(a.archetype), palette_family: myFamily(), fonts: flagVal(a.fonts), motion: flagVal(a.motion), signature: flagVal(a.signature) };
       console.log("Divergence (similar briefs, all projects)");
       if (!readLog().length) console.log("  · no log yet: first build, no divergence required");
       else if (!hits.length) console.log("  ✓ no prior build with a similar brief");
       for (const h of hits) for (const [k, label] of DIVERGE) {
+        if (/^none$/i.test(mineD[k] || "")) { console.log(`  · ${label}: none (a declared choice: nothing to repeat)`); continue; }
         if (!mineD[k]) { console.log(`  · ${label}: not given (pass --${k === "palette_family" ? "palette or --palette-family" : k}) · run #${h.n} used ${h.r[k] || "?"}`); continue; }
+        if (h.r[k] && h.r[k].toLowerCase() === mineD[k].toLowerCase() && justified.has(k)) { console.log(`  ⚠ ${label} "${mineD[k]}" repeats run #${h.n}: marked justified (--justified) → state the brief's reason in DESIGN.md under Divergence`); continue; }
         if (h.r[k] && h.r[k].toLowerCase() === mineD[k].toLowerCase()) { clash++; console.log(`  ✗ ${label} "${mineD[k]}" repeats run #${h.n} (similar brief) → diverge`); }
         else console.log(`  ✓ ${label} "${mineD[k]}" differs from run #${h.n}${h.r[k] ? ` (${h.r[k]})` : ""}`);
       }

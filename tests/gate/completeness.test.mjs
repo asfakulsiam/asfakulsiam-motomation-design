@@ -1,5 +1,5 @@
 // v2.9.0 Phase 5: gate axis X (scripts/completeness.mjs) checks the scope the agent derived, nothing hardcoded.
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync, readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { tmpdir } from "node:os";
 import { spawnSync } from "node:child_process";
@@ -135,6 +135,10 @@ say(rc2.pass, "saying it is not production-ready, and pointing to MEDIA.md, pass
   say(!l1.pass && l1.invalid.some((i) => /claimed in a design exploration/.test(i)), "a design exploration cannot claim a backend capability");
   const l2 = completeness(v3([...base, "| function | cart | required | index.html | magic |"]));
   say(!l2.pass && l2.invalid.some((i) => /level "magic"/.test(i)), "an unknown capability level is invalid");
+  // v3.0.1: a journey the Product contract writes must have a Scope row
+  const cj = v3([...base, "| journey | buy | required | / → /shop → /checkout | interaction |"]); { const f = join(cj, "DESIGN.md"); writeFileSync(f, readFileSync(f, "utf8").replace("Jobs: buy.", "Jobs: buy.\n- **Core journeys:**\n  - Buy: `/ → /shop → /checkout`\n  - Return: `/ → /returns`")); }
+  const cjr = completeness(cj); const cjm = cjr.missing.find((m) => /contract journey/.test(m.item));
+  say(!cjr.pass && cjm && /\/returns/.test(cjm.item) && !cjr.missing.some((m) => /contract journey \/ → \/shop/.test(m.item)), `a contract journey missing from the Scope table fails X (${cjm?.item || "not reported"}); the one with a row does not`);
   const p1 = completeness(v3(base, fl, "design exploration", false));
   say(!p1.pass && p1.missing.some((m) => m.item === "DESIGN.md Product contract"), "a build that states its delivery mode needs a Product contract in DESIGN.md");
   const rRoot = v3(base); put(rRoot, "shop/index.html", "<main><h2>Product 1</h2><p>TODO: real copy from the brief</p><a href=\"#\">Buy</a></main>\n");
@@ -150,5 +154,15 @@ say(rc2.pass, "saying it is not production-ready, and pointing to MEDIA.md, pass
   say(!/same sentence/.test(w3), "the same footer sentence on every static page is not reported as repeated content");
   put(rRoot3, "shop/index.html", "<main>" + "<p>Handmade in small batches by our team in the hills.</p>".repeat(4) + "</main>\n");
   say(/same sentence appears 4× on this page/.test(completeness(rRoot3).warnings.join(" ")), "one sentence repeated 4× on one static page still warns");
+}
+// v3.0.1 realism: domain words are not fixtures or leaks; text a vanilla-JS file renders is read
+{
+  const { realism } = await import("../../skills/asfakulsiam-motomation-design/scripts/realism.mjs");
+  const ok = mkdtempSync(join(tmpdir(), "real-ok-")); writeFileSync(join(ok, "index.html"), '<html><body><h1>Freight for Tier 1 carriers</h1><p>We ship Category A dangerous goods under IATA rules.</p><p>Every project starts with the brief and ends with a launch.</p><p>Brand archetypes, explained.</p><p>The chef\'s signature move is smoke.</p><p>Book Room 2 for your meeting.</p></body></html>');
+  const r = realism(ok); say(r.pass, `realism: Tier 1 carriers, Category A goods, "starts with the brief", a chef's signature move, Room 2 are not flagged (${r.problems.map((p) => p.what).join("; ") || "none"})`);
+  const js = mkdtempSync(join(tmpdir(), "real-js-")); writeFileSync(join(js, "index.html"), '<html><body><h1>Shop</h1><div id="g"></div><script src="app.js"></script></body></html>');
+  writeFileSync(join(js, "app.js"), 'const items = [{ name: "Product 1" }, { name: "Product 2" }];\nconst plans = [{ title: "Plan 1" }, { title: "Plan 2" }, { title: "Plan 3" }];\ng.innerHTML = items.map((i) => `<article><h3>${i.name}</h3><p>Lorem ipsum dolor sit amet</p><a href="#">Buy</a></article>`).join("");\n');
+  const j = realism(js); const w = j.problems.map((p) => `${p.kind}:${p.what}`).join(" | ");
+  say(!j.pass && /Product 1/.test(w) && /Plan 1, 2, 3/.test(w) && /lorem/i.test(w) && /dead/.test(w), `realism: fixtures, lorem, a numbered run and a dead link rendered by app.js are found (${j.problems.length} problem(s))`);
 }
 console.log(bad ? `\n${bad} failure(s)` : "\ncompleteness (X) bites"); process.exit(bad ? 1 : 0);

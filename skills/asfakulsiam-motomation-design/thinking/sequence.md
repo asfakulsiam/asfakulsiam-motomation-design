@@ -167,11 +167,13 @@ Choose the direction with the best balance, or merge the best parts of two. Writ
 
 ---
 
+**Several directions, one contract** (paired brief, A/B): share data, logic, validation, accessibility primitives, routes and form fields; compose each direction's pages, markup, layout, type, colour, imagery and motion separately. A theme swap over one template set is a reskin. Check: `node scripts/pair.mjs <dirA> <dirB>`, output under `Directions`.
+
 ## 4. Memory and sameness check
 
 Compare the chosen direction against what was built before, so similar briefs don't collapse into the same site.
 
-1. **Memory** lives at the user level (`~/.motomation/log.json`). Run `node scripts/memory.mjs similar --brief "<one line>" --category <category>`. No log or no similar brief: say so under `Divergence`. A similar prior build: diverge on the dimensions the brief doesn't justify (structure, palette family, type pairing, motion language, signature), and name any similarity the brief does justify (`Same : SERVICE STYLE again; both are dense dashboards`). Never diverge into a worse fit. Confirm with `node scripts/memory.mjs check …` (exit 2 = an unjustified repeat to look at).
+1. **Memory** lives at the user level (`~/.motomation/log.json`). Run `node scripts/memory.mjs similar --brief "<one line>" --category <category>`. No log or no similar brief: say so under `Divergence`. A similar prior build: diverge on the dimensions the brief doesn't justify (structure, palette family, type pairing, motion language, signature), and name any similarity the brief does justify (`Same : SERVICE STYLE again; both are dense dashboards`). Never diverge into a worse fit. Confirm with `node scripts/memory.mjs check …` (exit 2 = an unjustified repeat to look at); `--justified fonts,motion` makes a justified repeat a warning. `none` is never a repeat.
 2. **The AI-default list** in `gates/delivery-gate.md`, Part 2: each "yes" needs a product or concept reason, or a change.
 3. **Earlier builds, measured (after the build):** `node scripts/originality.mjs <this build> <earlier builds for unrelated briefs>` (axis O). An axis at or above **0.4** against an unrelated brief means it came out in the same shape: change that axis or justify it.
 4. **The obvious version:** write what a template would do. Where you match it, it is because the product needs it, and you say so.

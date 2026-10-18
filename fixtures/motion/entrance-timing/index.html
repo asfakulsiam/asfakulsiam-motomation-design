@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Entrance timing fixture</title>
+<!-- Entrances slower than the old fixed waits (60 ms before, 1 s after each scroll): a CSS keyframe hero (1.4 s), scroll-
+     triggered transitions with a 0.9 s delay and 1.6 s duration, a rAF-driven tween (1.5 s), a WAAPI clip reveal (1.3 s),
+     and an infinite marquee that is not an entrance. Known patterns: hero fade+y, two sections fade+y, one x,
+     one clip, marquee static, footer static → fade+y three times = 2 repeats. -->
+<style>
+  body { margin: 0; font: 18px/1.5 system-ui, sans-serif; color: #1d1b16; background: #f6f1e7; }
+  section, footer { min-height: 100vh; padding: 10vh 8vw; box-sizing: border-box; }
+  h1, h2 { margin: 0 0 1rem; } p { max-width: 40ch; }
+  @keyframes rise { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+  .hero h1, .hero p { animation: rise 1.4s ease-out both; }
+  .io > * { opacity: 0; transform: translateY(48px); transition: opacity 1.6s ease 0.9s, transform 1.6s ease 0.9s; }
+  .io.in > * { opacity: 1; transform: none; }
+  .clip > * { clip-path: inset(0 100% 0 0); }
+  .marquee span { display: inline-block; animation: slide 3s linear infinite; }
+  @keyframes slide { to { transform: translateX(-200px); } }
+</style></head>
+<body>
+<main>
+  <section class="hero" id="hero"><h1>Slow entrances</h1><p>Each one takes longer than the gate used to wait.</p></section>
+  <section class="io" id="one"><h2>Delayed rise</h2><p>Starts 0.9 s after it enters, lasts 1.6 s.</p></section>
+  <section class="io" id="two"><h2>Delayed rise again</h2><p>The same entrance: a repeat.</p></section>
+  <section class="tween" id="three"><h2>Tweened slide</h2><p>Moved by requestAnimationFrame over 1.5 s.</p></section>
+  <section class="clip" id="four"><h2>Clip reveal</h2><p>A Web Animations clip-path wipe over 1.3 s.</p></section>
+  <section class="marquee" id="five"><h2><span>Looping marquee</span></h2><p><span>Never settles; not an entrance.</span></p></section>
+</main>
+<footer id="end"><h2>Footer</h2><p>No motion.</p></footer>
+<script>
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) return; const t = e.target; io.unobserve(t);
+    if (t.classList.contains("io")) t.classList.add("in");
+    if (t.classList.contains("clip")) for (const c of t.children) c.animate([{ clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)" }], { duration: 1300, fill: "forwards", easing: "ease-out" });
+    if (t.classList.contains("tween")) { const kids = [...t.children]; const t0 = performance.now(); const step = (now) => { const k = Math.min(1, (now - t0) / 1500); for (const c of kids) { c.style.transform = `translateX(${(1 - k) * -80}px)`; } if (k < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); }
+  }), { threshold: 0.2 });
+  for (const c of document.querySelectorAll(".tween > *")) c.style.transform = "translateX(-80px)"; // set at load, like a GSAP from() with a scroll trigger
+  for (const s of document.querySelectorAll(".io, .clip, .tween")) io.observe(s);
+</script>
+</body></html>

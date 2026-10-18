@@ -9,7 +9,7 @@ At the top tier, scrolling plays like a film.
 **New here? [Start here → what it is, who it's for, and what a session looks like](ABOUT.md)** · **[See it in action → worked examples](#see-it-in-action)** · **[Cheatsheet → every command, flag and tier, with example prompts](docs/CHEATSHEET.md)**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-3.0.0-E0442B?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-3.0.1-E0442B?style=flat-square)](CHANGELOG.md)
 [![Agent Skill](https://img.shields.io/badge/agent%20skill-npx%20skills%20add-111111?style=flat-square)](#install)
 [![Zero dependencies (gate: Playwright, optional)](https://img.shields.io/badge/scripts-zero%20dependencies%20%28gate%3A%20Playwright%2C%20optional%29-111111?style=flat-square)](skills/asfakulsiam-motomation-design/scripts)
 
@@ -212,7 +212,7 @@ These tools can't run `npx`, so use the single-file edition: **[`dist/motomation
 
 Without a shell, the skill uses the data tables included at the end of the file instead of its scripts.
 
-**Small context?** Custom instructions, rules files and prompt boxes often cap out at a few thousand tokens. Use **[`dist/motomation-lite.md`](dist/motomation-lite.md)** there: <!-- lite-tokens -->about 7.9k tokens<!-- /lite-tokens --> (estimated by the build script) with the five laws, when the light route applies, the research, scope and media rules, the delivery modes, tiers, bans, the seven-step Thinking Sequence, the AI-default scan, the craft checklist and short lists of archetypes, mutations and signatures. Sections it drops to fit are named at its top. `node scripts/build-lite.mjs` regenerates it, and `check-repo` fails if it goes stale, over 8k tokens, or loses one of those rules.
+**Small context?** Custom instructions, rules files and prompt boxes often cap out at a few thousand tokens. Use **[`dist/motomation-lite.md`](dist/motomation-lite.md)** there: <!-- lite-tokens -->about 8.0k tokens<!-- /lite-tokens --> (estimated by the build script) with the five laws, when the light route applies, the research, scope and media rules, the delivery modes, tiers, bans, the seven-step Thinking Sequence, the AI-default scan, the craft checklist and short lists of archetypes, mutations and signatures. Sections it drops to fit are named at its top. `node scripts/build-lite.mjs` regenerates it, and `check-repo` fails if it goes stale, over 8k tokens, or loses one of those rules.
 
 ### Update
 
