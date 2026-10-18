@@ -1,0 +1,3 @@
+ARTIFACT INVENTORY PASS: 24 route HTML files; 13 core-journey states at each of 375, 768 and 1440px; 49 screenshots total.
+SERVER STOP PASS: port 4301 refuses connections after SIGTERM to this run’s node server.mjs.
+END UTC: 2026-10-18T11:23:34.888Z

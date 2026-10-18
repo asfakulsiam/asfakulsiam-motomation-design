@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Multi-Modal Freight Tracking: Cargoline Visibility</title>
+  <meta name="description" content="Door-to-door multi-modal container tracking across ocean, air, and rail. Stitches carrier milestones with hourly AIS satellite telemetry.">
+  <link rel="canonical" href="http://localhost:4302/product/tracking">
+  <meta property="og:title" content="Multi-Modal Freight Tracking: Cargoline Visibility">
+  <meta property="og:description" content="Door-to-door multi-modal container tracking across ocean, air, and rail. Stitches carrier milestones with hourly AIS satellite telemetry.">
+  <meta property="og:image" content="http://localhost:4302/assets/og-image.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Cargoline Multimodal Tracking",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web"
+  }
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="brand-link" aria-label="Cargoline home">
+        <img src="/assets/cargoline-mark.svg" alt="Cargoline container mark" class="brand-mark" width="36" height="36" loading="eager">
+        <span>CARGOLINE</span>
+      </a>
+
+      <button type="button" class="mobile-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <div class="nav-dropdown">
+          <a href="/product" class="nav-link active">Product</a>
+          <div class="dropdown-menu">
+            <a href="/product" class="dropdown-item">Platform Overview</a>
+            <a href="/product/tracking" class="dropdown-item">Multi-Modal Tracking</a>
+            <a href="/product/exceptions" class="dropdown-item">Predictive Delay Alerts</a>
+            <a href="/product/customs" class="dropdown-item">Customs &amp; Landed Cost</a>
+          </div>
+        </div>
+        <a href="/integrations" class="nav-link">Integrations</a>
+        <a href="/pricing" class="nav-link">Pricing</a>
+        <a href="/security" class="nav-link">Security</a>
+        <a href="/stories" class="nav-link">Customer Stories</a>
+        <a href="/docs" class="nav-link">Docs</a>
+      </nav>
+
+      <div class="header-cta">
+        <a href="/contact" class="btn btn-dark-outline">Contact Sales</a>
+        <a href="/demo" class="btn btn-primary">Schedule Demo</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="section section-dark">
+      <div class="container">
+        <div class="badge badge-telemetry" style="margin-bottom: 1.25rem;">MULTI-MODAL VISIBILITY</div>
+        <h1>Door-to-Door Container &amp; Air Cargo Tracking</h1>
+        <p class="lead" style="color: var(--dark-muted); margin-top: 1rem;">
+          Connect ocean voyages, air legs, and rail ramps into a single continuous chain of custody. No gaps between forwarder handoffs.
+        </p>
+      </div>
+    </section>
+
+    <!-- Multi-Modal Modes Grid -->
+    <section class="section">
+      <div class="container">
+        <h2>Continuous Visibility Across Every Transportation Mode</h2>
+        <p style="margin-bottom: 3rem;">
+          Eliminate the visibility black hole between port discharge and final warehouse receiving.
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <img src="/assets/icon-ocean.svg" alt="Ocean freight icon" width="32" height="32" loading="lazy" style="margin-bottom: 1rem;">
+            <h3>Ocean Container Tracking</h3>
+            <p>
+              Direct satellite AIS positioning across global shipping lines. Real-time updates for vessel berthing, anchor queue waiting times, container discharge, and gate-out movements.
+            </p>
+            <ul style="margin: 1rem 0 0 1.25rem; font-size: var(--step--1); color: var(--muted);">
+              <li>42 global container carriers pre-connected</li>
+              <li>Hourly vessel positioning updates</li>
+              <li>Terminal dwell countdown tracking</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <img src="/assets/icon-air.svg" alt="Air cargo icon" width="32" height="32" loading="lazy" style="margin-bottom: 1rem;">
+            <h3>International Air Cargo</h3>
+            <p>
+              Master Air Waybill (MAWB) tracking linked with airline radar data. Track critical sample runs and high-value expedites through ground handlers and airport customs gates.
+            </p>
+            <ul style="margin: 1rem 0 0 1.25rem; font-size: var(--step--1); color: var(--muted);">
+              <li>120 international commercial and cargo airlines</li>
+              <li>Flight wheels-up and touchdown timestamps</li>
+              <li>Cold-chain temperature telemetry feeds</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <img src="/assets/icon-intermodal.svg" alt="Intermodal rail icon" width="32" height="32" loading="lazy" style="margin-bottom: 1rem;">
+            <h3>Intermodal Rail &amp; Drayage</h3>
+            <p>
+              Class I rail interchange tracking and local harbor drayage coordination. Know exactly when your container is mounted on a chassis and dispatched toward your distribution center.
+            </p>
+            <ul style="margin: 1rem 0 0 1.25rem; font-size: var(--step--1); color: var(--muted);">
+              <li>Class I rail interchange milestone feeds</li>
+              <li>Drayage appointment verification</li>
+              <li>Live driver gate status updates</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Milestone Simulator -->
+    <section class="section" style="background: var(--surface);">
+      <div class="container">
+        <h2>Multi-Modal Milestone Stepper Architecture</h2>
+        <p style="margin-bottom: 2rem;">
+          How Cargoline stitches distinct carrier data protocols into one unified shipment progression.
+        </p>
+
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Milestone Stage</th>
+                <th>Underlying Protocol</th>
+                <th>Verification Method</th>
+                <th>Standard Transit Buffer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Origin Gate-In</strong></td>
+                <td>EDI 301 / DCSA Booking</td>
+                <td>Terminal gate optical character recognition</td>
+                <td>Zero buffer</td>
+              </tr>
+              <tr>
+                <td><strong>2. Ocean Vessel Transit</strong></td>
+                <td>AIS Satellite Telemetry</td>
+                <td>Dual-frequency transponder geolocation</td>
+                <td>Weather-adjusted arrival curve</td>
+              </tr>
+              <tr>
+                <td><strong>3. Destination Discharge</strong></td>
+                <td>EDI 315 Status AE</td>
+                <td>Quayside crane container barcode scan</td>
+                <td>Free-time clock starts immediately</td>
+              </tr>
+              <tr>
+                <td><strong>4. Rail Ramp Interchange</strong></td>
+                <td>EDI 214 CLM Message</td>
+                <td>Railhead RFID wayside sensor</td>
+                <td>Scheduled connection window</td>
+              </tr>
+              <tr>
+                <td><strong>5. Facility Receiving</strong></td>
+                <td>WMS / ERP Delivery Confirmation</td>
+                <td>Direct electronic delivery order receipt</td>
+                <td>PO lines marked received</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap;">
+          <a href="/demo" class="btn btn-primary">Schedule Multi-Modal Demo</a>
+          <a href="/product/exceptions" class="btn btn-secondary">Next: Delay Exception Management</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="/" class="brand-link" style="margin-bottom: 1rem;">
+            <img src="/assets/cargoline-mark.svg" alt="Cargoline container mark" width="32" height="32" loading="lazy">
+            <span>CARGOLINE</span>
+          </a>
+          <p style="font-size: var(--step--1); color: var(--dark-muted); margin-top: 1rem;">
+            Mission-critical freight visibility and container telemetry for ocean, air, and intermodal importers.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Platform</h3>
+          <ul class="footer-links">
+            <li><a href="/product" class="footer-link">Platform Overview</a></li>
+            <li><a href="/product/tracking" class="footer-link">Multi-Modal Tracking</a></li>
+            <li><a href="/product/exceptions" class="footer-link">Delay Exceptions</a></li>
+            <li><a href="/product/customs" class="footer-link">Landed Cost &amp; Customs</a></li>
+            <li><a href="/integrations" class="footer-link">Integrations Directory</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Procurement</h3>
+          <ul class="footer-links">
+            <li><a href="/pricing" class="footer-link">Pricing Plans</a></li>
+            <li><a href="/security" class="footer-link">Trust &amp; Security</a></li>
+            <li><a href="/security/overview" class="footer-link">Security Whitepaper</a></li>
+            <li><a href="/stories" class="footer-link">Customer Stories</a></li>
+            <li><a href="/stories/midwest-foods" class="footer-link">Midwest Foods Study</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Developers</h3>
+          <ul class="footer-links">
+            <li><a href="/docs" class="footer-link">API Documentation</a></li>
+            <li><a href="/demo" class="footer-link">Schedule Demo</a></li>
+            <li><a href="/contact" class="footer-link">Contact Sales</a></li>
+            <li><a href="/careers" class="footer-link">Careers</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Compliance</h3>
+          <ul class="footer-links">
+            <li><a href="/privacy" class="footer-link">Privacy Policy</a></li>
+            <li><a href="/terms" class="footer-link">Terms of Service</a></li>
+            <li><a href="/cookies" class="footer-link">Cookie Settings</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Cargoline Systems Inc. All rights reserved.</div>
+        <div class="badge badge-neutral">SOC 2 TYPE II AUDITED</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/app.js" defer></script>
+</body>
+</html>

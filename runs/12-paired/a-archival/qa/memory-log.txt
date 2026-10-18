@@ -1,0 +1,2 @@
+Logged run #1 to /home/user/workspace/bench/runs/12-paired/a-archival/.motomation/log.json
+  fingerprint: tier=1

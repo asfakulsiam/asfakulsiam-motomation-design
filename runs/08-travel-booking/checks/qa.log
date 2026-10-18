@@ -1,0 +1,4 @@
+JOURNEYS 375px: PASS room booking, experience addition, confirmation to arrival.
+JOURNEYS 768px: PASS room booking, experience addition, confirmation to arrival.
+JOURNEYS 1440px: PASS room booking, experience addition, confirmation to arrival.
+QA PASS: 9 core-journey completions; 24 route responses; 40 screenshots; 239 assertions; 0 uncaught browser errors.

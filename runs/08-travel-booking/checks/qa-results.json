@@ -1,0 +1,10 @@
+{
+  "checks": {
+    "routes": 24,
+    "journeys": 9,
+    "screens": 40,
+    "assertions": 239
+  },
+  "errors": [],
+  "pageErrors": []
+}

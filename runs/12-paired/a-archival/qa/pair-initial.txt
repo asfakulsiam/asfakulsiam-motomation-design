@@ -1,0 +1,33 @@
+PAIR · a-archival × b-poster · 10 of undefined shared route(s) compared at 1440x900, 375x812 · threshold 0.4 (lower = more different)
+  route parity     ✓ 22 / 22 route(s)
+  coherence        a-archival 1 (fraunces / dm sans) · b-poster 1 (barlow condensed / dm sans)
+  shared files     presentation 0 · logic/data 7 (SCHEMA.md, _headers, assets/DM-Sans-OFL.txt, catalogue.js): expected
+
+| Route | class | structure | composition | image | typography | interaction | signature | overall | markup | forms parity | nav parity |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| / | partial | 0.30 | 0.44 | 0.40 | 0.44 | 0.25 | 0.10 | 0.28 | 0.49 | n/a | 0.67 |
+| /shop | partial | 0.02 | 0.40 | 0.00 | 0.50 | 0.60 | 0.25 | 0.28 | 0.37 | 1.00 | 0.57 |
+| /tea/sylhet-black | repeat ✗ | 0.22 | 0.44 | 0.33 | 0.49 | 0.60 | 0.00 | 0.42 | 0.41 | n/a | 1.00 |
+| /subscriptions | repeat ✗ | 0.38 | 0.61 | n/a | 0.51 | 0.38 | 0.00 | 0.41 | 0.44 | n/a | 0.67 |
+| /subscriptions/build | repeat ✗ | 0.29 | 0.38 | n/a | 0.51 | 0.55 | n/a | 0.42 | 0.50 | 1.00 | 0.67 |
+| /cart | partial | 0.31 | 0.40 | n/a | 0.58 | 0.38 | 0.11 | 0.36 | 0.44 | n/a | 0.67 |
+| /checkout | repeat ✗ | 0.31 | 0.47 | n/a | 0.56 | 0.60 | n/a | 0.49 | 0.44 | 1.00 | 0.67 |
+| /confirmation | partial | 0.56 | 0.38 | n/a | 0.50 | 0.38 | 0.00 | 0.36 | 0.51 | n/a | 0.67 |
+| /account | partial | 0.05 | 0.72 | n/a | 0.44 | 0.50 | 0.00 | 0.39 | 0.48 | n/a | 0.67 |
+| /account/subscription | partial | 0.22 | 0.45 | n/a | 0.57 | 0.60 | 0.00 | 0.39 | 0.41 | 1.00 | 1.00 |
+
+  visual axes: similarity with forms and navigation left out (--same-product), worst viewport · markup: element skeleton, form internals collapsed · parity: required to be high
+  · /: partial (composition at or above 0.4); check the screenshots
+  · /shop: partial (composition at or above 0.4); check the screenshots
+  · /cart: partial (composition at or above 0.4); check the screenshots
+  · /confirmation: partial (structure at or above 0.4); check the screenshots
+  · /account: partial (composition at or above 0.4); check the screenshots
+  · /account/subscription: partial (composition at or above 0.4); check the screenshots
+  · not compared (beyond --max 10): /brewing-guide, /contact, /estates, /privacy, /returns, /shipping, /tea/assam-gold, /tea/bangladesh-green, /tea/darjeeling-first, /tea/ilam-green, /tea/nepal-white, /terms
+  limits: does not judge quality, brief fit, accessibility, journeys or motion: run gate.mjs (and --journey) on each direction
+
+FAIL  4 problem(s):
+  ✗ /tea/sylhet-black: repeat (overall 0.42 ≥ 0.4)
+  ✗ /subscriptions: repeat (overall 0.41 ≥ 0.4)
+  ✗ /subscriptions/build: repeat (overall 0.42 ≥ 0.4)
+  ✗ /checkout: repeat (overall 0.49 ≥ 0.4)

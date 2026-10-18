@@ -1,0 +1,39 @@
+{
+  "demo": true,
+  "entity": "Story",
+  "items": [
+    {
+      "id": "story-01",
+      "slug": "midwest-foods",
+      "company": "Midwest Specialty Foods",
+      "industry": "Perishable Foods & Ingredients",
+      "scale": "2,400 TEUs imported annually via Long Beach and Savannah",
+      "challenge": "Manual tracking through forwarder emails left cold-chain containers vulnerable to terminal dwell, risking spoilage and demurrage penalties during coastal port congestions.",
+      "solution": "Deployed Cargoline automated milestone feeds with temperature telemetry webhooks and early container discharge notifications directly integrated with NetSuite ERP.",
+      "operationalGain": "Zero lost refrigerated loads over 18 operating months and elimination of unexpected terminal demurrage through automated pickup scheduling.",
+      "demo": true
+    },
+    {
+      "id": "story-02",
+      "slug": "cascadia-hardware",
+      "company": "Cascadia Industrial Supply",
+      "industry": "Commercial Hardware & Fasteners",
+      "scale": "4,100 TEUs imported annually across 14 Asian manufacturing origins",
+      "challenge": "Inventory planning teams lacked visibility into transshipment rail connections, causing stockouts at regional distribution centers and emergency air freight expedites.",
+      "solution": "Implemented Cargoline intermodal rail milestone stitching and automated purchase order line reconciliation against ocean bills of lading.",
+      "operationalGain": "Operations managers now view unified container-to-chassis milestone timelines, enabling accurate warehouse labour scheduling 4 days prior to gate arrival.",
+      "demo": true
+    },
+    {
+      "id": "story-03",
+      "slug": "solis-home",
+      "company": "Solis Living Furnishings",
+      "industry": "Consumer Goods & Furniture",
+      "scale": "1,800 TEUs imported through East Coast ports",
+      "challenge": "Finance department spent 12 hours weekly auditing complex carrier detention invoices against disjointed forwarder delivery receipts.",
+      "solution": "Adopted Cargoline Demurrage Risk Ledger, tracking free-time clocks against real-time vessel discharge timestamps with automated invoice dispute documentation.",
+      "operationalGain": "Finance and operations share a single audit trail of terminal gate-out timestamps, reducing invoice reconciliation time from hours to minutes.",
+      "demo": true
+    }
+  ]
+}

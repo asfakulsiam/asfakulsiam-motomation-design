@@ -1,0 +1,5 @@
+{
+  "status": "blocked",
+  "site_name": "Srimangal Hills Guesthouse",
+  "error": "Deployment blocked — forbidden browser APIs detected in: build.mjs, privacy/index.html, checks/edge-qa.mjs, app.js. localStorage, sessionStorage, indexedDB, Pointer Lock, and Fullscreen APIs are unavailable in the preview iframe. Remove these usages — use in-memory variables for transient state, or the backend server for persistent storage."
+}

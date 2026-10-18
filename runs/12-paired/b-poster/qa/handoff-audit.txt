@@ -1,0 +1,4 @@
+PASS handoff inventory: required site files, documentation and six checkpoints present.
+PASS screenshot inventory: all three core journeys at 375 and 1440; intermediate 768 captures also retained.
+PASS rule-output inventory: 23 routes each report rules: C0 S0 P0 K0.
+PASS preview shutdown: port 4312 does not respond.

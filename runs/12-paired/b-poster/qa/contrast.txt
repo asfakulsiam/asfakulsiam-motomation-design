@@ -1,0 +1,10 @@
+#18241e on #f5dd4a: 11.69:1  body PASS · large PASS · AAA PASS
+
+#18241e on #a8d84f: 9.61:1  body PASS · large PASS · AAA PASS
+
+#18241e on #ff8259: 6.55:1  body PASS · large PASS · AAA —
+
+#18241e on #c3b5ed: 8.51:1  body PASS · large PASS · AAA PASS
+
+#526052 on #ddd9c7: 4.70:1  body PASS · large PASS · AAA —
+

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Cargoline: Freight Visibility Platform for Importers</title>
+  <meta name="description" content="Real-time multi-modal container tracking, predictive delay alerts, and automated landed cost calculations for mid-size ocean, air, and intermodal importers.">
+  <link rel="canonical" href="http://localhost:4302/">
+  <meta property="og:title" content="Cargoline: Freight Visibility Platform for Importers">
+  <meta property="og:description" content="Real-time multi-modal container tracking, predictive delay alerts, and automated landed cost calculations for mid-size ocean, air, and intermodal importers.">
+  <meta property="og:image" content="http://localhost:4302/assets/og-image.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Cargoline",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "790",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="brand-link" aria-label="Cargoline home">
+        <img src="/assets/cargoline-mark.svg" alt="Cargoline container mark" class="brand-mark" width="36" height="36" loading="eager">
+        <span>CARGOLINE</span>
+      </a>
+
+      <button type="button" class="mobile-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <div class="nav-dropdown">
+          <a href="/product" class="nav-link">Product</a>
+          <div class="dropdown-menu">
+            <a href="/product" class="dropdown-item">Platform Overview</a>
+            <a href="/product/tracking" class="dropdown-item">Multi-Modal Tracking</a>
+            <a href="/product/exceptions" class="dropdown-item">Predictive Delay Alerts</a>
+            <a href="/product/customs" class="dropdown-item">Customs &amp; Landed Cost</a>
+          </div>
+        </div>
+        <a href="/integrations" class="nav-link">Integrations</a>
+        <a href="/pricing" class="nav-link">Pricing</a>
+        <a href="/security" class="nav-link">Security</a>
+        <a href="/stories" class="nav-link">Customer Stories</a>
+        <a href="/docs" class="nav-link">Docs</a>
+      </nav>
+
+      <div class="header-cta">
+        <a href="/contact" class="btn btn-dark-outline">Contact Sales</a>
+        <a href="/demo" class="btn btn-primary">Schedule Demo</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="section section-dark" id="hero-manifest">
+      <div class="container">
+        <div class="grid-2" style="align-items: center;">
+          <div>
+            <div class="badge badge-warning" style="margin-bottom: 1.5rem;">Maritime Dispatch Telemetry v4.2</div>
+            <h1>Operational Freight Visibility for Growing Importers</h1>
+            <p class="lead" style="color: var(--dark-muted); margin: 1.5rem 0 2rem;">
+              Direct AIS vessel tracking, multi-modal container milestone stitching, and automated demurrage alerts. Built for operations managers who need certainty from origin berth to warehouse dock.
+            </p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <a href="/demo" class="btn btn-primary">Schedule Live Evaluation</a>
+              <a href="/product" class="btn btn-dark-outline">Inspect Tracking Architecture</a>
+            </div>
+          </div>
+
+          <!-- Live Telemetry Simulation Deck -->
+          <div class="telemetry-deck" id="telemetry-deck">
+            <div class="telemetry-header">
+              <span class="telemetry-title">
+                <span class="pulse-indicator"></span>
+                ACTIVE VOYAGE TELEMETRY
+              </span>
+              <span class="badge badge-telemetry">AIS SATELLITE LIVE</span>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: var(--step--1);">
+                <span style="color: var(--dark-muted);">CONTAINER ID:</span>
+                <span style="color: var(--accent); font-weight: 700;">MSCU7821904</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: var(--step--1);">
+                <span style="color: var(--dark-muted);">CARRIER / VESSEL:</span>
+                <span>MSC Isabella (Voyage V-204W)</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: var(--step--1);">
+                <span style="color: var(--dark-muted);">ORIGIN / DESTINATION:</span>
+                <span>Ningbo CN &rarr; Long Beach US</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: var(--step--1);">
+                <span style="color: var(--dark-muted);">CALCULATED ARRIVAL:</span>
+                <span style="color: #38BDF8;">2026-10-24 14:00 UTC</span>
+              </div>
+            </div>
+
+            <!-- Milestone Stepper -->
+            <div class="milestone-stepper">
+              <div class="stepper-progress"><div class="stepper-bar"></div></div>
+              <div class="stepper-node node-complete">
+                <div class="node-circle">&check;</div>
+                <div class="node-label">Gate In Ningbo</div>
+              </div>
+              <div class="stepper-node node-complete">
+                <div class="node-circle">&check;</div>
+                <div class="node-label">Vessel Loaded</div>
+              </div>
+              <div class="stepper-node node-active">
+                <div class="node-circle">&bull;</div>
+                <div class="node-label">Mid-Pacific AIS</div>
+              </div>
+              <div class="stepper-node">
+                <div class="node-circle">&cir;</div>
+                <div class="node-label">Long Beach Berth</div>
+              </div>
+              <div class="stepper-node">
+                <div class="node-circle">&cir;</div>
+                <div class="node-label">Inland Rail Dray</div>
+              </div>
+            </div>
+
+            <!-- Demurrage Early Warning Widget -->
+            <div style="background: rgba(217, 107, 39, 0.15); border: 1px solid var(--accent); border-radius: 4px; padding: 0.75rem 1rem; margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <span style="color: var(--accent); font-weight: 700; font-size: var(--step--2);">PORT CONGESTION BUFFER:</span>
+                <p style="font-size: var(--step--2); color: var(--dark-ink); margin: 0;">Predicted berth wait: 14 hours. Free time clock starts 2026-10-25.</p>
+              </div>
+              <a href="/product/exceptions" class="btn btn-primary" style="padding: 0.4rem 0.8rem; font-size: var(--step--2);">View Alert Details</a>
+            </div>
+
+            <div id="telemetry-skeleton" class="skeleton" style="height: 4px; margin-top: 1rem; width: 100%;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Operational Pressures Section -->
+    <section class="section">
+      <div class="container">
+        <div style="text-align: center; max-width: 760px; margin: 0 auto 3.5rem;">
+          <div class="badge badge-neutral" style="margin-bottom: 1rem;">THE MID-MARKET IMPORTER REALITY</div>
+          <h2>Why Generic SaaS Dashboards Fail Operations Teams</h2>
+          <p>
+            Importers lose days wrestling with fragmented forwarder portals, late EDI transmissions, and surprise demurrage bills. Cargoline centralizes raw shipping telemetry into actionable operational decisions.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-header">
+              <span class="badge badge-warning">BLIND SPOTS</span>
+              <h3 style="margin-top: 0.75rem;">Multi-Modal Gaps</h3>
+            </div>
+            <p>
+              Tracking breaks when freight transfers from ocean vessel to intermodal rail or local drayage. Operations teams spend hours emailing forwarders to find missing containers.
+            </p>
+            <div style="margin-top: auto; padding-top: 1.5rem;">
+              <a href="/product/tracking" style="color: var(--telemetry); font-weight: 600; text-decoration: none;">Explore multi-modal stitching &rarr;</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="badge badge-warning">FINANCIAL DRAIN</span>
+              <h3 style="margin-top: 0.75rem;">Demurrage &amp; Detention</h3>
+            </div>
+            <p>
+              Port congestion and customs holds burn through container free time without warning. Unplanned terminal storage fees rapidly erode operating margins for mid-size importers.
+            </p>
+            <div style="margin-top: auto; padding-top: 1.5rem;">
+              <a href="/product/exceptions" style="color: var(--telemetry); font-weight: 600; text-decoration: none;">Review predictive delay alerts &rarr;</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="badge badge-warning">ERP DISCONNECT</span>
+              <h3 style="margin-top: 0.75rem;">Manual Landed Cost</h3>
+            </div>
+            <p>
+              Finance reconciles freight invoices, tariff duties, and drayage surcharges on spreadsheets weeks after delivery. True inventory valuations remain inaccurate until fiscal month-end.
+            </p>
+            <div style="margin-top: auto; padding-top: 1.5rem;">
+              <a href="/product/customs" style="color: var(--telemetry); font-weight: 600; text-decoration: none;">Calculate automated landed costs &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Platform Capabilities Breakdown -->
+    <section class="section" style="background-color: var(--surface);">
+      <div class="container">
+        <div style="margin-bottom: 3rem;">
+          <div class="badge badge-neutral" style="margin-bottom: 0.75rem;">CORE CAPABILITIES</div>
+          <h2>Engineered for Maritime, Air, and Intermodal Reliability</h2>
+          <p>
+            Designed to fit directly into your daily logistics operations and ERP workflows without extensive custom software development.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div style="border: 1px solid var(--border); border-radius: 6px; padding: 2.5rem; background: var(--ground);">
+            <h3>Direct Carrier Telemetry</h3>
+            <p>
+              Direct ingestion of AIS satellite positioning and DCSA standard OpenAPI event streams across 42 ocean container lines, 120 air cargo operators, and Class I railroads.
+            </p>
+            <ul style="margin: 1.5rem 0 2rem 1.25rem; color: var(--muted); font-size: var(--step--1);">
+              <li style="margin-bottom: 0.5rem;">Hourly AIS position updates with weather-adjusted arrival projections</li>
+              <li style="margin-bottom: 0.5rem;">Automated EDI 214 and 315 milestone normalization</li>
+              <li>Master Air Waybill (MAWB) flight departure and customs clearance alerts</li>
+            </ul>
+            <a href="/integrations" class="btn btn-secondary">Review Carrier Integrations</a>
+          </div>
+
+          <div style="border: 1px solid var(--border); border-radius: 6px; padding: 2.5rem; background: var(--ground);">
+            <h3>Enterprise IT Security &amp; Compliance</h3>
+            <p>
+              Every shipment record, container manifest, and tariff valuation is encrypted with enterprise-grade controls verified under annual SOC 2 Type II audits.
+            </p>
+            <ul style="margin: 1.5rem 0 2rem 1.25rem; color: var(--muted); font-size: var(--step--1);">
+              <li style="margin-bottom: 0.5rem;">AES-256 encryption at rest and TLS 1.3 in transit</li>
+              <li style="margin-bottom: 0.5rem;">SAML 2.0 Single Sign-On and granular Role-Based Access Control</li>
+              <li>Dedicated customer data segregation and annual third-party penetration testing</li>
+            </ul>
+            <a href="/security" class="btn btn-secondary">Review Security Architecture</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Preview Banner -->
+    <section class="section section-dark" id="pricing-preview">
+      <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem; margin-bottom: 3rem;">
+          <div>
+            <div class="badge badge-warning" style="margin-bottom: 0.75rem;">TRANSPARENT PROCUREMENT</div>
+            <h2>Predictable Pricing by Annual Container Volume</h2>
+            <p>No opaque quotes or multi-month sales delays. Transparent subscription tiers for growing import teams.</p>
+          </div>
+          <a href="/pricing" class="btn btn-primary">Compare All Plan Specifications</a>
+        </div>
+
+        <div class="grid-3">
+          <div class="card card-dark">
+            <h3 style="font-size: 1.35rem;">Mid-Market Importer</h3>
+            <p style="font-size: var(--step--1); margin: 0.5rem 0 1.5rem;">For teams moving up to 1,200 TEUs or 300 Air Shipments annually.</p>
+            <div style="font-size: 2.25rem; font-family: var(--font-display); font-weight: 800; color: var(--dark-ink); margin-bottom: 1.5rem;">
+              $790<span style="font-size: 1rem; color: var(--dark-muted); font-weight: 500;">/mo</span>
+            </div>
+            <p style="font-size: var(--step--1); color: var(--dark-muted);">Includes multi-modal container tracking, EDI normalization, and basic exception alerts.</p>
+          </div>
+
+          <div class="card card-dark" style="border-color: var(--accent);">
+            <div class="badge badge-warning" style="align-self: flex-start; margin-bottom: 0.5rem;">MOST POPULAR</div>
+            <h3 style="font-size: 1.35rem;">Commercial Importer</h3>
+            <p style="font-size: var(--step--1); margin: 0.5rem 0 1.5rem;">For teams moving up to 6,000 TEUs or 1,500 Air Shipments annually.</p>
+            <div style="font-size: 2.25rem; font-family: var(--font-display); font-weight: 800; color: var(--dark-ink); margin-bottom: 1.5rem;">
+              $1,650<span style="font-size: 1rem; color: var(--dark-muted); font-weight: 500;">/mo</span>
+            </div>
+            <p style="font-size: var(--step--1); color: var(--dark-muted);">Adds automated landed cost calculation, NetSuite and SAP connectors, and demurrage countdowns.</p>
+          </div>
+
+          <div class="card card-dark">
+            <h3 style="font-size: 1.35rem;">Global Enterprise</h3>
+            <p style="font-size: var(--step--1); margin: 0.5rem 0 1.5rem;">For multi-facility importers with high-volume ocean and air supply chains.</p>
+            <div style="font-size: 2.25rem; font-family: var(--font-display); font-weight: 800; color: var(--dark-ink); margin-bottom: 1.5rem;">
+              $3,400<span style="font-size: 1rem; color: var(--dark-muted); font-weight: 500;">/mo</span>
+            </div>
+            <p style="font-size: var(--step--1); color: var(--dark-muted);">Unlimited TEUs, dedicated tenant isolation, SAML 2.0 SSO, and guaranteed 99.95% uptime SLA.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Evaluation Call to Action -->
+    <section class="section" style="text-align: center;">
+      <div class="container" style="max-width: 800px;">
+        <h2>Ready to Validate Cargoline on Your Active Lanes?</h2>
+        <p class="lead" style="margin: 1.5rem 0 2rem;">
+          Schedule a technical walkthrough with a solutions engineer. We will review your primary ocean and air corridors and demonstrate live milestone reconciliation in real time.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+          <a href="/demo" class="btn btn-primary">Schedule Evaluation Demo</a>
+          <a href="/stories" class="btn btn-secondary">Read Importer Case Studies</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="/" class="brand-link" style="margin-bottom: 1rem;">
+            <img src="/assets/cargoline-mark.svg" alt="Cargoline container mark" width="32" height="32" loading="lazy">
+            <span>CARGOLINE</span>
+          </a>
+          <p style="font-size: var(--step--1); color: var(--dark-muted); margin-top: 1rem;">
+            Mission-critical freight visibility and container telemetry for ocean, air, and intermodal importers.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Platform</h3>
+          <ul class="footer-links">
+            <li><a href="/product" class="footer-link">Platform Overview</a></li>
+            <li><a href="/product/tracking" class="footer-link">Multi-Modal Tracking</a></li>
+            <li><a href="/product/exceptions" class="footer-link">Delay Exceptions</a></li>
+            <li><a href="/product/customs" class="footer-link">Landed Cost &amp; Customs</a></li>
+            <li><a href="/integrations" class="footer-link">Integrations Directory</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Procurement</h3>
+          <ul class="footer-links">
+            <li><a href="/pricing" class="footer-link">Pricing Plans</a></li>
+            <li><a href="/security" class="footer-link">Trust &amp; Security</a></li>
+            <li><a href="/security/overview" class="footer-link">Security Whitepaper</a></li>
+            <li><a href="/stories" class="footer-link">Customer Stories</a></li>
+            <li><a href="/stories/midwest-foods" class="footer-link">Midwest Foods Study</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Developers</h3>
+          <ul class="footer-links">
+            <li><a href="/docs" class="footer-link">API Documentation</a></li>
+            <li><a href="/demo" class="footer-link">Schedule Demo</a></li>
+            <li><a href="/contact" class="footer-link">Contact Sales</a></li>
+            <li><a href="/careers" class="footer-link">Careers</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Compliance</h3>
+          <ul class="footer-links">
+            <li><a href="/privacy" class="footer-link">Privacy Policy</a></li>
+            <li><a href="/terms" class="footer-link">Terms of Service</a></li>
+            <li><a href="/cookies" class="footer-link">Cookie Settings</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Cargoline Systems Inc. All rights reserved.</div>
+        <div class="badge badge-neutral">SOC 2 TYPE II AUDITED</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/app.js" defer></script>
+</body>
+</html>

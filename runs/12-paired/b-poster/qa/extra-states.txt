@@ -1,0 +1,6 @@
+PASS three-pouch plan: exact tea count, $34.00 total, selection persists after reload.
+PASS cart removal: final line removed, empty state survives reload, focus moves to browse link.
+PASS corrupt cart recovery: safe empty state, explicit warning, valid subsequent save and reload.
+PASS image-error fallback: explanation is visible and purchase control remains usable.
+Console errors: 0.
+PASS extra frontend states.

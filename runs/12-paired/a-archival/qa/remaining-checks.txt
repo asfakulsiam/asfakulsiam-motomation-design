@@ -1,0 +1,53 @@
+node /home/user/workspace/bench/runs/12-paired/a-archival/qa/extra-states.mjs
+PASS cart removal: final line removed, empty state survives reload, focus moves to browse link.
+PASS corrupt cart recovery: safe empty state, explicit warning, valid subsequent save and reload.
+PASS image-error fallback: explanation is visible and purchase control remains usable.
+Console errors: 0.
+PASS extra frontend states.
+node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #263d32 #f4f0e6
+#263d32 on #f4f0e6: 10.27:1  body PASS · large PASS · AAA PASS
+node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #526052 #e9e5d8
+#526052 on #e9e5d8: 5.28:1  body PASS · large PASS · AAA —
+node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #f4f0e6 #294d3d
+#f4f0e6 on #294d3d: 8.30:1  body PASS · large PASS · AAA PASS
+node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #8a422c #f4f0e6
+#8a422c on #f4f0e6: 6.37:1  body PASS · large PASS · AAA —
+node /home/user/workspace/bench/skill-v301/scripts/completeness.mjs /home/user/workspace/bench/runs/12-paired/a-archival
+      Legal:       4/4 present
+      Edge cases:  2/2 handled
+      Admin:       0/0 present · 1 not required (reason given)
+      Skeletons:   0/0 present · 1 not required (reason given)
+      Template:    17/17 present · 3 not required (reason given)
+node /home/user/workspace/bench/skill-v301/scripts/realism.mjs /home/user/workspace/bench/runs/12-paired/a-archival
+  Content realism  ✓
+node /home/user/workspace/bench/skill-v301/scripts/gate.mjs http://localhost:4311/ http://localhost:4311/shop http://localhost:4311/tea/sylhet-black http://localhost:4311/tea/assam-gold http://localhost:4311/tea/ilam-green http://localhost:4311/tea/darjeeling-first http://localhost:4311/tea/nepal-white http://localhost:4311/tea/bangladesh-green http://localhost:4311/subscriptions http://localhost:4311/subscriptions/build http://localhost:4311/cart http://localhost:4311/checkout http://localhost:4311/confirmation http://localhost:4311/account http://localhost:4311/account/subscription http://localhost:4311/estates http://localhost:4311/brewing-guide http://localhost:4311/shipping http://localhost:4311/returns http://localhost:4311/privacy http://localhost:4311/terms http://localhost:4311/contact http://localhost:4311/404 --rules
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4311/404
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #18241e #f5dd4a
+#18241e on #f5dd4a: 11.69:1  body PASS · large PASS · AAA PASS
+node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #18241e #a8d84f
+#18241e on #a8d84f: 9.61:1  body PASS · large PASS · AAA PASS
+node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #18241e #ff8259
+#18241e on #ff8259: 6.55:1  body PASS · large PASS · AAA —
+node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #18241e #c3b5ed
+#18241e on #c3b5ed: 8.51:1  body PASS · large PASS · AAA PASS
+node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #526052 #ddd9c7
+#526052 on #ddd9c7: 4.70:1  body PASS · large PASS · AAA —
+node /home/user/workspace/bench/skill-v301/scripts/completeness.mjs /home/user/workspace/bench/runs/12-paired/b-poster
+      Legal:       4/4 present
+      Edge cases:  2/2 handled
+      Admin:       0/0 present · 1 not required (reason given)
+      Skeletons:   0/0 present · 1 not required (reason given)
+      Template:    17/17 present · 3 not required (reason given)
+node /home/user/workspace/bench/skill-v301/scripts/realism.mjs /home/user/workspace/bench/runs/12-paired/b-poster
+  Content realism  ✓
+node /home/user/workspace/bench/skill-v301/scripts/gate.mjs http://localhost:4312/ http://localhost:4312/shop http://localhost:4312/tea/sylhet-black http://localhost:4312/tea/assam-gold http://localhost:4312/tea/ilam-green http://localhost:4312/tea/darjeeling-first http://localhost:4312/tea/nepal-white http://localhost:4312/tea/bangladesh-green http://localhost:4312/subscriptions http://localhost:4312/subscriptions/build http://localhost:4312/cart http://localhost:4312/checkout http://localhost:4312/confirmation http://localhost:4312/account http://localhost:4312/account/subscription http://localhost:4312/estates http://localhost:4312/brewing-guide http://localhost:4312/shipping http://localhost:4312/returns http://localhost:4312/privacy http://localhost:4312/terms http://localhost:4312/contact http://localhost:4312/404 --rules
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/404
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+PASS resumed permitted checks.

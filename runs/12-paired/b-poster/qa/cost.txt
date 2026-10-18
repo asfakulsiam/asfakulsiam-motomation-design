@@ -1,0 +1,5 @@
+b-poster · NOT completed (no run.json) · route not stated
+  tokens   in 0 · out 0
+  time     not recorded wall clock
+  tools    0 call(s): none
+  retries  0

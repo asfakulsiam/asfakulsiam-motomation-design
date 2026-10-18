@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "runs": [
+    {
+      "date": "2026-10-18T12:33:11.249Z",
+      "dir": "/home/user/workspace/bench/runs/12-paired/b-poster",
+      "category": "ecommerce",
+      "archetype": "none",
+      "signature": "origin-pack-fan",
+      "fonts": "Barlow Condensed/DM Sans",
+      "motion": "Tier 3 cross-document pack continuity",
+      "tier": "3",
+      "project": "/home/user/workspace/bench/runs/12-paired/b-poster",
+      "brief": "Leaf and Ledger tea commerce loud poster paired benchmark",
+      "fingerprint": {
+        "tier": 3
+      }
+    }
+  ]
+}

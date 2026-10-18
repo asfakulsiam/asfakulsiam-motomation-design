@@ -1,0 +1,1 @@
+{"name":"srimangal-hills-frontend","private":true,"type":"module","scripts":{"build":"node build.mjs","dev":"node server.mjs","start":"node server.mjs"}}

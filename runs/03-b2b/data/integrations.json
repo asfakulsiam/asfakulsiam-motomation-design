@@ -1,0 +1,70 @@
+{
+  "demo": true,
+  "entity": "Integration",
+  "items": [
+    {
+      "id": "INT-01",
+      "name": "SAP S/4HANA Supply Chain",
+      "category": "ERP",
+      "description": "Bidirectional purchase order synchronization and milestone status feeds via standard OData REST APIs.",
+      "protocol": "REST / Webhooks",
+      "demo": true
+    },
+    {
+      "id": "INT-02",
+      "name": "Oracle NetSuite ERP",
+      "category": "ERP",
+      "description": "Automated inbound shipment creation and item fulfillment tracking with landed cost journal updates.",
+      "protocol": "SuiteTalk REST Web Services",
+      "demo": true
+    },
+    {
+      "id": "INT-03",
+      "name": "CargoWise One",
+      "category": "TMS",
+      "description": "Deep forwarder milestone ingestion and electronic delivery order reconciliation across global freight forwards.",
+      "protocol": "eAdaptor XML / EDI 214",
+      "demo": true
+    },
+    {
+      "id": "INT-04",
+      "name": "Descartes Systems Group",
+      "category": "TMS",
+      "description": "Direct customs filing validation and automated import declaration status synchronization.",
+      "protocol": "GLN EDI / HTTPS",
+      "demo": true
+    },
+    {
+      "id": "INT-05",
+      "name": "Ocean Carrier Direct Feeds",
+      "category": "Ocean",
+      "description": "Direct AIS satellite tracking and EDI 315 status messages from 42 ocean container lines globally.",
+      "protocol": "DCSA OpenAPI & AIS Telemetry",
+      "demo": true
+    },
+    {
+      "id": "INT-06",
+      "name": "IATA Air Cargo Network",
+      "category": "Air",
+      "description": "Real-time master air waybill (MAWB) event tracking across 120 international commercial and cargo airlines.",
+      "protocol": "ONE Record REST API / Cargo-IMP",
+      "demo": true
+    },
+    {
+      "id": "INT-07",
+      "name": "U.S. Customs ACE Portal",
+      "category": "Customs",
+      "description": "Direct automated commercial environment status updates for Section 301 tariffs, CBP holds, and PGA releases.",
+      "protocol": "CBP ACE Direct Webhook",
+      "demo": true
+    },
+    {
+      "id": "INT-08",
+      "name": "Microsoft Dynamics 365 Supply Chain",
+      "category": "ERP",
+      "description": "Syncs inbound shipment delivery dates directly into production scheduling and warehouse receipt registers.",
+      "protocol": "Dataverse Web API",
+      "demo": true
+    }
+  ]
+}

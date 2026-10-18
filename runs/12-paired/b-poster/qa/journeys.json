@@ -1,0 +1,370 @@
+{
+  "direction": "b-poster",
+  "journeys": [
+    "375: one-off / → /shop → /tea/sylhet-black → /cart → /checkout → /confirmation PASS",
+    "375: monthly / → /subscriptions → /subscriptions/build → /checkout → /confirmation PASS",
+    "375: /account → /account/subscription → pause saved → reload → resume → skip saved → reload PASS",
+    "768: one-off / → /shop → /tea/sylhet-black → /cart → /checkout → /confirmation PASS",
+    "768: monthly / → /subscriptions → /subscriptions/build → /checkout → /confirmation PASS",
+    "768: /account → /account/subscription → pause saved → reload → resume → skip saved → reload PASS",
+    "1440: one-off / → /shop → /tea/sylhet-black → /cart → /checkout → /confirmation PASS",
+    "1440: monthly / → /subscriptions → /subscriptions/build → /checkout → /confirmation PASS",
+    "1440: /account → /account/subscription → pause saved → reload → resume → skip saved → reload PASS"
+  ],
+  "routes": [
+    {
+      "path": "/",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/shop",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/tea/sylhet-black",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/tea/assam-gold",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/tea/ilam-green",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/tea/darjeeling-first",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/tea/nepal-white",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/tea/bangladesh-green",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/subscriptions",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/subscriptions/build",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/cart",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/checkout",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/confirmation",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/account",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/account/subscription",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/estates",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/brewing-guide",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/shipping",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/returns",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/privacy",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/terms",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/contact",
+      "width": 375,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/shop",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/tea/sylhet-black",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/tea/assam-gold",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/tea/ilam-green",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/tea/darjeeling-first",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/tea/nepal-white",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/tea/bangladesh-green",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/subscriptions",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/subscriptions/build",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/cart",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/checkout",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/confirmation",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/account",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/account/subscription",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/estates",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/brewing-guide",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/shipping",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/returns",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/privacy",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/terms",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/contact",
+      "width": 1440,
+      "h1": 1,
+      "skipped": false,
+      "badImages": 0,
+      "overflow": 0
+    }
+  ],
+  "issues": [],
+  "consoleErrors": []
+}

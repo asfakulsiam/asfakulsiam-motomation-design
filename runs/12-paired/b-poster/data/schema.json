@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Demo tea catalogue",
+  "type": "object",
+  "required": [
+    "demo",
+    "items"
+  ],
+  "properties": {
+    "demo": {
+      "const": true
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "demo",
+          "id",
+          "name",
+          "origin",
+          "price"
+        ],
+        "properties": {
+          "demo": {
+            "const": true
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "origin": {
+            "enum": [
+              "Bangladesh",
+              "India",
+              "Nepal"
+            ]
+          },
+          "price": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,124 @@
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+
+http://localhost:4301/
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/rooms
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/rooms/garden-veranda
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/rooms/tea-view-double
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/rooms/courtyard-twin
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/rooms/hill-facing-double
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/rooms/family-veranda
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/rooms/quiet-corner
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/availability
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/booking/dates
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/booking/guests
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/booking/details
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/booking/review
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/booking/confirmation
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/experiences
+  rules: C0 S0 P1 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ perf-03  the largest first-screen image is lazy-loaded  http://localhost:4301/assets/tea-gardens.webp
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/experiences/tea-garden-walk
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/experiences/tea-at-the-table
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/getting-there
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/house-rules
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/cancellation-policy
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/privacy
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/terms
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/contact
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+http://localhost:4301/404
+  rules: C0 S0 P0 K1  (rule sets only; no stamp)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible  (warning)
+     ✗ sec-12  URL-controlled value written as HTML (innerHTML / document.write)
+
+RULES CHECK EXIT: 1

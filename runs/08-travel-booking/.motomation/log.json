@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "runs": [
+    {
+      "date": "2026-10-18T11:20:41.946Z",
+      "category": "travel-booking",
+      "archetype": "none",
+      "signature": "none",
+      "fonts": "Gelasio/DM Sans",
+      "palette": "Tea-green ink on warm paper",
+      "motion": "Tier 1 press feedback; instant booking states",
+      "tier": "1",
+      "project": "/home/user/workspace/bench/runs/08-travel-booking",
+      "brief": "Six-room Srimangal tea garden guesthouse direct booking",
+      "fingerprint": {
+        "layout": "split editorial discovery; two-column booking desk",
+        "tier": 1
+      }
+    }
+  ]
+}

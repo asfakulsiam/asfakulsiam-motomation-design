@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Pricing Plans: Cargoline Freight Visibility</title>
+  <meta name="description" content="Transparent subscription pricing based on annual container volume. Compare Mid-Market, Commercial Importer, and Enterprise tiers with zero hidden fees.">
+  <link rel="canonical" href="http://localhost:4302/pricing">
+  <meta property="og:title" content="Pricing Plans: Cargoline Freight Visibility">
+  <meta property="og:description" content="Transparent subscription pricing based on annual container volume. Compare Mid-Market, Commercial Importer, and Enterprise tiers with zero hidden fees.">
+  <meta property="og:image" content="http://localhost:4302/assets/og-image.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "PriceSpecification",
+    "price": "790",
+    "priceCurrency": "USD",
+    "description": "Annual subscription pricing for Cargoline freight visibility software"
+  }
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="brand-link" aria-label="Cargoline home">
+        <img src="/assets/cargoline-mark.svg" alt="Cargoline container mark" class="brand-mark" width="36" height="36" loading="eager">
+        <span>CARGOLINE</span>
+      </a>
+
+      <button type="button" class="mobile-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <div class="nav-dropdown">
+          <a href="/product" class="nav-link">Product</a>
+          <div class="dropdown-menu">
+            <a href="/product" class="dropdown-item">Platform Overview</a>
+            <a href="/product/tracking" class="dropdown-item">Multi-Modal Tracking</a>
+            <a href="/product/exceptions" class="dropdown-item">Predictive Delay Alerts</a>
+            <a href="/product/customs" class="dropdown-item">Customs &amp; Landed Cost</a>
+          </div>
+        </div>
+        <a href="/integrations" class="nav-link">Integrations</a>
+        <a href="/pricing" class="nav-link active">Pricing</a>
+        <a href="/security" class="nav-link">Security</a>
+        <a href="/stories" class="nav-link">Customer Stories</a>
+        <a href="/docs" class="nav-link">Docs</a>
+      </nav>
+
+      <div class="header-cta">
+        <a href="/contact" class="btn btn-dark-outline">Contact Sales</a>
+        <a href="/demo" class="btn btn-primary">Schedule Demo</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="section section-dark" style="text-align: center;">
+      <div class="container" style="max-width: 820px;">
+        <div class="badge badge-warning" style="margin-bottom: 1.25rem;">TRANSPARENT PROCUREMENT</div>
+        <h1>Predictable Pricing by Container Volume</h1>
+        <p class="lead" style="color: var(--dark-muted); margin: 1.25rem 0 2.5rem;">
+          No complex per-seat licensing or unexpected transaction fees. Simple annual volume tiers built for growing mid-market and enterprise operations.
+        </p>
+
+        <!-- Billing Toggle -->
+        <div class="pricing-toggle-wrap" id="billing-toggle">
+          <button type="button" class="toggle-btn active" data-billing="annual" aria-pressed="true">Annual Billing (Save 15%)</button>
+          <button type="button" class="toggle-btn" data-billing="monthly" aria-pressed="false">Monthly Billing</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Cards Grid -->
+    <section class="section" id="pricing-grid">
+      <div class="container">
+        <h2 style="text-align: center; margin-bottom: 2.5rem; font-size: 2rem;">Subscription Plans Scaled to Your Annual Volume</h2>
+        <div class="grid-3" style="align-items: stretch;">
+          <!-- Plan 1: Mid-Market -->
+          <div class="card" style="display: flex; flex-direction: column;">
+            <div class="card-header">
+              <span class="badge badge-neutral">MID-MARKET</span>
+              <h3 style="margin-top: 0.75rem; font-size: 1.5rem;">Mid-Market Importer</h3>
+              <p style="font-size: var(--step--1); color: var(--muted); margin-top: 0.5rem;">
+                For growing importers up to 1,200 TEUs or 300 Air Shipments/year.
+              </p>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <div style="display: flex; align-items: baseline; gap: 0.25rem;">
+                <span class="plan-price" style="font-size: 2.75rem; font-family: var(--font-display); font-weight: 800; color: var(--ink);" data-annual-price="790" data-monthly-price="920">$790</span>
+                <span class="billing-period-label" style="font-size: var(--step--1); color: var(--muted);">/mo (billed annually)</span>
+              </div>
+              <p style="font-size: var(--step--2); color: var(--success); font-weight: 600; margin-top: 0.25rem;">Annual commitment saves $1,560/year</p>
+            </div>
+
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: var(--step--1); color: var(--ink); margin-bottom: 2rem;">
+              <li>&check; Multi-modal container tracking (Ocean &amp; Air)</li>
+              <li>&check; Automated EDI 214 and 315 normalization</li>
+              <li>&check; Predictive arrival estimates updated every 3 hours</li>
+              <li>&check; Basic port congestion and dwell alerts</li>
+              <li>&check; QuickBooks and NetSuite standard sync</li>
+              <li>&check; Up to 15 operational user accounts</li>
+              <li>&check; Standard 8-hour technical support response</li>
+            </ul>
+
+            <div style="margin-top: auto;">
+              <a href="/demo" class="btn btn-secondary" style="width: 100%;">Schedule Evaluation</a>
+            </div>
+          </div>
+
+          <!-- Plan 2: Commercial Importer -->
+          <div class="card" style="display: flex; flex-direction: column; border: 2px solid var(--accent); position: relative;">
+            <div class="badge badge-warning" style="position: absolute; top: -14px; left: 24px;">MOST SELECTED BY IMPORTERS</div>
+            <div class="card-header" style="margin-top: 0.5rem;">
+              <span class="badge badge-neutral">COMMERCIAL TIER</span>
+              <h3 style="margin-top: 0.75rem; font-size: 1.5rem;">Commercial Importer</h3>
+              <p style="font-size: var(--step--1); color: var(--muted); margin-top: 0.5rem;">
+                For mid-size manufacturers and distributors moving up to 6,000 TEUs/year.
+              </p>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <div style="display: flex; align-items: baseline; gap: 0.25rem;">
+                <span class="plan-price" style="font-size: 2.75rem; font-family: var(--font-display); font-weight: 800; color: var(--ink);" data-annual-price="1650" data-monthly-price="1950">$1,650</span>
+                <span class="billing-period-label" style="font-size: var(--step--1); color: var(--muted);">/mo (billed annually)</span>
+              </div>
+              <p style="font-size: var(--step--2); color: var(--success); font-weight: 600; margin-top: 0.25rem;">Annual commitment saves $3,600/year</p>
+            </div>
+
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: var(--step--1); color: var(--ink); margin-bottom: 2rem;">
+              <li>&check; <strong>Everything in Mid-Market included</strong></li>
+              <li>&check; Hourly AIS satellite vessel telemetry</li>
+              <li>&check; Automated Landed Cost &amp; Customs tariff ledger</li>
+              <li>&check; Demurrage &amp; detention risk countdown ledger</li>
+              <li>&check; Native bidirectional SAP S/4HANA &amp; Dynamics connectors</li>
+              <li>&check; Customs hold early-warning flags (FDA, USDA, CBP)</li>
+              <li>&check; Unlimited operational viewer logins</li>
+              <li>&check; Priority 2-hour technical support SLA</li>
+            </ul>
+
+            <div style="margin-top: auto;">
+              <a href="/demo" class="btn btn-primary" style="width: 100%;">Schedule Evaluation</a>
+            </div>
+          </div>
+
+          <!-- Plan 3: Global Enterprise -->
+          <div class="card" style="display: flex; flex-direction: column;">
+            <div class="card-header">
+              <span class="badge badge-neutral">GLOBAL OPERATIONS</span>
+              <h3 style="margin-top: 0.75rem; font-size: 1.5rem;">Global Enterprise</h3>
+              <p style="font-size: var(--step--1); color: var(--muted); margin-top: 0.5rem;">
+                For multi-facility enterprise importers moving high-volume global cargo.
+              </p>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <div style="display: flex; align-items: baseline; gap: 0.25rem;">
+                <span class="plan-price" style="font-size: 2.75rem; font-family: var(--font-display); font-weight: 800; color: var(--ink);" data-annual-price="3400" data-monthly-price="3900">$3,400</span>
+                <span class="billing-period-label" style="font-size: var(--step--1); color: var(--muted);">/mo (billed annually)</span>
+              </div>
+              <p style="font-size: var(--step--2); color: var(--success); font-weight: 600; margin-top: 0.25rem;">Annual commitment saves $6,000/year</p>
+            </div>
+
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: var(--step--1); color: var(--ink); margin-bottom: 2rem;">
+              <li>&check; <strong>Unlimited TEUs and air freight shipments</strong></li>
+              <li>&check; Dedicated cloud tenant isolation options</li>
+              <li>&check; Custom ERP &amp; TMS connector engineering</li>
+              <li>&check; Single Sign-On (SAML 2.0 / Okta / Azure AD)</li>
+              <li>&check; Carrier contract SLA compliance audit tools</li>
+              <li>&check; Custom API rate limits &amp; private webhook relays</li>
+              <li>&check; Dedicated solutions architect &amp; quarterly reviews</li>
+              <li>&check; Guaranteed 99.95% uptime SLA (15-min emergency)</li>
+            </ul>
+
+            <div style="margin-top: auto;">
+              <a href="/contact" class="btn btn-secondary" style="width: 100%;">Contact Enterprise Team</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Plan Comparison Table -->
+    <section class="section" style="background: var(--surface);" id="comparison-table">
+      <div class="container">
+        <h2>Detailed Capability Comparison Matrix</h2>
+        <p style="margin-bottom: 2rem;">
+          Examine feature specifications, integration limits, and SLA commitments across all subscription tiers.
+        </p>
+
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th style="min-width: 280px;">Platform Capability</th>
+                <th style="text-align: center;">Mid-Market Importer</th>
+                <th style="text-align: center;">Commercial Importer</th>
+                <th style="text-align: center;">Global Enterprise</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background: var(--surface-alt); font-weight: 700;">
+                <td colspan="4">SHIPMENT &amp; VESSEL TRACKING</td>
+              </tr>
+              <tr>
+                <td>Annual Volume Allowance</td>
+                <td style="text-align: center;">Up to 1,200 TEUs</td>
+                <td style="text-align: center;">Up to 6,000 TEUs</td>
+                <td style="text-align: center;">Unlimited Volume</td>
+              </tr>
+              <tr>
+                <td>AIS Satellite Vessel Refresh</td>
+                <td style="text-align: center;">Every 3 Hours</td>
+                <td style="text-align: center;">Hourly Updates</td>
+                <td style="text-align: center;">Real-Time Continuous</td>
+              </tr>
+              <tr>
+                <td>Air Cargo (MAWB) Tracking</td>
+                <td style="text-align: center;">Up to 300 Shipments</td>
+                <td style="text-align: center;">Up to 1,500 Shipments</td>
+                <td style="text-align: center;">Unlimited Air Shipments</td>
+              </tr>
+              <tr>
+                <td>Intermodal Rail &amp; Drayage Stitching</td>
+                <td style="text-align: center;">Standard Milestones</td>
+                <td style="text-align: center;">Full Waybill Ingestion</td>
+                <td style="text-align: center;">Live Sensor Ingestion</td>
+              </tr>
+              <tr style="background: var(--surface-alt); font-weight: 700;">
+                <td colspan="4">EXCEPTION DETECTION &amp; COST RECONCILIATION</td>
+              </tr>
+              <tr>
+                <td>Predictive Delay Detection</td>
+                <td style="text-align: center;">Basic Port Congestion</td>
+                <td style="text-align: center;">Advanced ML Weather &amp; Berthing</td>
+                <td style="text-align: center;">Custom Geopolitical Risk Models</td>
+              </tr>
+              <tr>
+                <td>Demurrage Risk Free-Time Clock</td>
+                <td style="text-align: center;">Manual entry thresholds</td>
+                <td style="text-align: center;">Automated terminal tariff rules</td>
+                <td style="text-align: center;">Automated dispute file exports</td>
+              </tr>
+              <tr>
+                <td>Customs Duty &amp; Landed Cost Ledger</td>
+                <td style="text-align: center;">Excluded</td>
+                <td style="text-align: center;">Included (HTS Code Mapping)</td>
+                <td style="text-align: center;">Included (Multi-Currency ERP Sync)</td>
+              </tr>
+              <tr style="background: var(--surface-alt); font-weight: 700;">
+                <td colspan="4">INTEGRATIONS &amp; IT GOVERNANCE</td>
+              </tr>
+              <tr>
+                <td>ERP Connectors (NetSuite, Dynamics, SAP)</td>
+                <td style="text-align: center;">NetSuite Standard</td>
+                <td style="text-align: center;">NetSuite, Dynamics, SAP S/4HANA</td>
+                <td style="text-align: center;">Custom TMS &amp; ERP Connectors</td>
+              </tr>
+              <tr>
+                <td>Single Sign-On (SAML 2.0 / Okta)</td>
+                <td style="text-align: center;">Excluded</td>
+                <td style="text-align: center;">Optional Add-On</td>
+                <td style="text-align: center;">Included (Enforced MFA)</td>
+              </tr>
+              <tr>
+                <td>Tenant Data Isolation</td>
+                <td style="text-align: center;">Multi-Tenant Logical</td>
+                <td style="text-align: center;">Multi-Tenant Logical</td>
+                <td style="text-align: center;">Dedicated Private VPC Option</td>
+              </tr>
+              <tr>
+                <td>Support Response SLA</td>
+                <td style="text-align: center;">8 Business Hours</td>
+                <td style="text-align: center;">2 Business Hours</td>
+                <td style="text-align: center;">15-Minute Critical Emergency</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 3rem; justify-content: center; flex-wrap: wrap;">
+          <a href="/demo" class="btn btn-primary">Schedule Demo &amp; Review Your TEU Tier</a>
+          <a href="/security" class="btn btn-secondary">Review Security &amp; Compliance Details</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="/" class="brand-link" style="margin-bottom: 1rem;">
+            <img src="/assets/cargoline-mark.svg" alt="Cargoline container mark" width="32" height="32" loading="lazy">
+            <span>CARGOLINE</span>
+          </a>
+          <p style="font-size: var(--step--1); color: var(--dark-muted); margin-top: 1rem;">
+            Mission-critical freight visibility and container telemetry for ocean, air, and intermodal importers.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Platform</h3>
+          <ul class="footer-links">
+            <li><a href="/product" class="footer-link">Platform Overview</a></li>
+            <li><a href="/product/tracking" class="footer-link">Multi-Modal Tracking</a></li>
+            <li><a href="/product/exceptions" class="footer-link">Delay Exceptions</a></li>
+            <li><a href="/product/customs" class="footer-link">Landed Cost &amp; Customs</a></li>
+            <li><a href="/integrations" class="footer-link">Integrations Directory</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Procurement</h3>
+          <ul class="footer-links">
+            <li><a href="/pricing" class="footer-link">Pricing Plans</a></li>
+            <li><a href="/security" class="footer-link">Trust &amp; Security</a></li>
+            <li><a href="/security/overview" class="footer-link">Security Whitepaper</a></li>
+            <li><a href="/stories" class="footer-link">Customer Stories</a></li>
+            <li><a href="/stories/midwest-foods" class="footer-link">Midwest Foods Study</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Developers</h3>
+          <ul class="footer-links">
+            <li><a href="/docs" class="footer-link">API Documentation</a></li>
+            <li><a href="/demo" class="footer-link">Schedule Demo</a></li>
+            <li><a href="/contact" class="footer-link">Contact Sales</a></li>
+            <li><a href="/careers" class="footer-link">Careers</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Compliance</h3>
+          <ul class="footer-links">
+            <li><a href="/privacy" class="footer-link">Privacy Policy</a></li>
+            <li><a href="/terms" class="footer-link">Terms of Service</a></li>
+            <li><a href="/cookies" class="footer-link">Cookie Settings</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Cargoline Systems Inc. All rights reserved.</div>
+        <div class="badge badge-neutral">SOC 2 TYPE II AUDITED</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/app.js" defer></script>
+</body>
+</html>

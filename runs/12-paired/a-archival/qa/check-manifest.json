@@ -1,0 +1,342 @@
+[
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/completeness.mjs /home/user/workspace/bench/runs/12-paired/a-archival",
+    "start": "2026-10-18T12:21:51.530Z",
+    "end": "2026-10-18T12:21:51.659Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/a-archival/qa/completeness.txt",
+    "finalLines": [
+      "      Legal:       4/4 present",
+      "      Edge cases:  2/2 handled",
+      "      Admin:       0/0 present · 1 not required (reason given)",
+      "      Skeletons:   0/0 present · 1 not required (reason given)",
+      "      Template:    17/17 present · 3 not required (reason given)"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/realism.mjs /home/user/workspace/bench/runs/12-paired/a-archival",
+    "start": "2026-10-18T12:21:51.659Z",
+    "end": "2026-10-18T12:21:51.758Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/a-archival/qa/realism.txt",
+    "finalLines": [
+      "  Content realism  ✓"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/gate.mjs http://localhost:4311/ http://localhost:4311/shop http://localhost:4311/tea/sylhet-black http://localhost:4311/tea/assam-gold http://localhost:4311/tea/ilam-green http://localhost:4311/tea/darjeeling-first http://localhost:4311/tea/nepal-white http://localhost:4311/tea/bangladesh-green http://localhost:4311/subscriptions http://localhost:4311/subscriptions/build http://localhost:4311/cart http://localhost:4311/checkout http://localhost:4311/confirmation http://localhost:4311/account http://localhost:4311/account/subscription http://localhost:4311/estates http://localhost:4311/brewing-guide http://localhost:4311/shipping http://localhost:4311/returns http://localhost:4311/privacy http://localhost:4311/terms http://localhost:4311/contact http://localhost:4311/404 --rules",
+    "start": "2026-10-18T12:21:51.758Z",
+    "end": "2026-10-18T12:22:28.909Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/a-archival/qa/rules.txt",
+    "finalLines": [
+      "  rules: C0 S0 P0 K0  (rule sets only; no stamp)",
+      "",
+      "http://localhost:4311/404",
+      "  rules: C0 S0 P0 K0  (rule sets only; no stamp)",
+      "gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/completeness.mjs /home/user/workspace/bench/runs/12-paired/b-poster",
+    "start": "2026-10-18T12:22:28.909Z",
+    "end": "2026-10-18T12:22:29.026Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/b-poster/qa/completeness.txt",
+    "finalLines": [
+      "      Legal:       4/4 present",
+      "      Edge cases:  2/2 handled",
+      "      Admin:       0/0 present · 1 not required (reason given)",
+      "      Skeletons:   0/0 present · 1 not required (reason given)",
+      "      Template:    17/17 present · 3 not required (reason given)"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/realism.mjs /home/user/workspace/bench/runs/12-paired/b-poster",
+    "start": "2026-10-18T12:22:29.026Z",
+    "end": "2026-10-18T12:22:29.122Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/b-poster/qa/realism.txt",
+    "finalLines": [
+      "  Content realism  ✓"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/gate.mjs http://localhost:4312/ http://localhost:4312/shop http://localhost:4312/tea/sylhet-black http://localhost:4312/tea/assam-gold http://localhost:4312/tea/ilam-green http://localhost:4312/tea/darjeeling-first http://localhost:4312/tea/nepal-white http://localhost:4312/tea/bangladesh-green http://localhost:4312/subscriptions http://localhost:4312/subscriptions/build http://localhost:4312/cart http://localhost:4312/checkout http://localhost:4312/confirmation http://localhost:4312/account http://localhost:4312/account/subscription http://localhost:4312/estates http://localhost:4312/brewing-guide http://localhost:4312/shipping http://localhost:4312/returns http://localhost:4312/privacy http://localhost:4312/terms http://localhost:4312/contact http://localhost:4312/404 --rules",
+    "start": "2026-10-18T12:22:29.122Z",
+    "end": "2026-10-18T12:23:04.485Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/b-poster/qa/rules.txt",
+    "finalLines": [
+      "  rules: C0 S0 P0 K0  (rule sets only; no stamp)",
+      "",
+      "http://localhost:4312/404",
+      "  rules: C0 S0 P0 K0  (rule sets only; no stamp)",
+      "gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/pair.mjs /home/user/workspace/bench/runs/12-paired/a-archival /home/user/workspace/bench/runs/12-paired/b-poster --max 30 --out /home/user/workspace/bench/runs/12-paired/a-archival/qa/pair.json",
+    "start": "2026-10-18T12:23:04.486Z",
+    "end": "2026-10-18T12:33:18.690Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/a-archival/qa/pair.txt",
+    "finalLines": [
+      "  · /privacy: partial (composition at or above 0.4); check the screenshots",
+      "  · /terms: partial (composition at or above 0.4); check the screenshots",
+      "  limits: does not judge quality, brief fit, accessibility, journeys or motion: run gate.mjs (and --journey) on each direction",
+      "",
+      "PASS  one product, 22 route(s) recomposed or partial, no shared presentation, routes and functions at parity"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/runs/12-paired/a-archival/qa/journeys.mjs a-archival",
+    "start": "2026-10-18T12:33:18.691Z",
+    "end": "2026-10-18T12:34:55.946Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/a-archival/qa/journeys-run.txt",
+    "finalLines": [
+      "1440: /account → /account/subscription → pause saved → reload → resume → skip saved → reload PASS",
+      "Route inspection: 44 route/viewport combinations.",
+      "Console errors: 0.",
+      "Issues: 0.",
+      "PASS lightweight frontend QA: all three journeys complete at 375, 768 and 1440; pause/skip persist; HTTP 404 verified."
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/runs/12-paired/a-archival/qa/journeys.mjs b-poster",
+    "start": "2026-10-18T12:34:55.946Z",
+    "end": "2026-10-18T12:36:33.985Z",
+    "exitCode": 1,
+    "output": "/home/user/workspace/bench/runs/12-paired/b-poster/qa/journeys-run.txt",
+    "finalLines": [
+      "  expected: 0,",
+      "  operator: 'strictEqual'",
+      "}",
+      "",
+      "Node.js v20.20.2"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/runs/12-paired/a-archival/qa/journeys.mjs b-poster",
+    "start": "2026-10-18T12:37:48.631Z",
+    "end": "2026-10-18T12:39:27.292Z",
+    "exitCode": 1,
+    "output": "/home/user/workspace/bench/runs/12-paired/b-poster/qa/journeys-run-final.txt",
+    "finalLines": [
+      "  expected: 0,",
+      "  operator: 'strictEqual'",
+      "}",
+      "",
+      "Node.js v20.20.2"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/runs/12-paired/a-archival/qa/journeys.mjs b-poster",
+    "start": "2026-10-18T12:40:14.331Z",
+    "end": "2026-10-18T12:41:53.330Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/b-poster/qa/journeys-run-final.txt",
+    "finalLines": [
+      "1440: /account → /account/subscription → pause saved → reload → resume → skip saved → reload PASS",
+      "Route inspection: 44 route/viewport combinations.",
+      "Console errors: 0.",
+      "Issues: 0.",
+      "PASS lightweight frontend QA: all three journeys complete at 375, 768 and 1440; pause/skip persist; HTTP 404 verified."
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/runs/12-paired/a-archival/qa/extra-states.mjs",
+    "start": "2026-10-18T12:41:53.332Z",
+    "end": "2026-10-18T12:42:00.148Z",
+    "exitCode": 1,
+    "output": "/home/user/workspace/bench/runs/12-paired/a-archival/qa/extra-states-run.txt",
+    "finalLines": [
+      "  expected: true,",
+      "  operator: '=='",
+      "}",
+      "",
+      "Node.js v20.20.2"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/runs/12-paired/a-archival/qa/extra-states.mjs",
+    "start": "2026-10-18T12:42:23.343Z",
+    "end": "2026-10-18T12:42:36.383Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/a-archival/qa/extra-states-run.txt",
+    "finalLines": [
+      "PASS cart removal: final line removed, empty state survives reload, focus moves to browse link.",
+      "PASS corrupt cart recovery: safe empty state, explicit warning, valid subsequent save and reload.",
+      "PASS image-error fallback: explanation is visible and purchase control remains usable.",
+      "Console errors: 0.",
+      "PASS extra frontend states."
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #263d32 #f4f0e6",
+    "start": "2026-10-18T12:42:36.385Z",
+    "end": "2026-10-18T12:42:36.458Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/a-archival/qa/contrast-263d32-f4f0e6.txt",
+    "finalLines": [
+      "#263d32 on #f4f0e6: 10.27:1  body PASS · large PASS · AAA PASS"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #526052 #e9e5d8",
+    "start": "2026-10-18T12:42:36.459Z",
+    "end": "2026-10-18T12:42:36.536Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/a-archival/qa/contrast-526052-e9e5d8.txt",
+    "finalLines": [
+      "#526052 on #e9e5d8: 5.28:1  body PASS · large PASS · AAA —"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #f4f0e6 #294d3d",
+    "start": "2026-10-18T12:42:36.537Z",
+    "end": "2026-10-18T12:42:36.610Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/a-archival/qa/contrast-f4f0e6-294d3d.txt",
+    "finalLines": [
+      "#f4f0e6 on #294d3d: 8.30:1  body PASS · large PASS · AAA PASS"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #8a422c #f4f0e6",
+    "start": "2026-10-18T12:42:36.610Z",
+    "end": "2026-10-18T12:42:36.694Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/a-archival/qa/contrast-8a422c-f4f0e6.txt",
+    "finalLines": [
+      "#8a422c on #f4f0e6: 6.37:1  body PASS · large PASS · AAA —"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/completeness.mjs /home/user/workspace/bench/runs/12-paired/a-archival",
+    "start": "2026-10-18T12:42:36.695Z",
+    "end": "2026-10-18T12:42:36.810Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/a-archival/qa/completeness.txt",
+    "finalLines": [
+      "      Legal:       4/4 present",
+      "      Edge cases:  2/2 handled",
+      "      Admin:       0/0 present · 1 not required (reason given)",
+      "      Skeletons:   0/0 present · 1 not required (reason given)",
+      "      Template:    17/17 present · 3 not required (reason given)"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/realism.mjs /home/user/workspace/bench/runs/12-paired/a-archival",
+    "start": "2026-10-18T12:42:36.811Z",
+    "end": "2026-10-18T12:42:36.915Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/a-archival/qa/realism.txt",
+    "finalLines": [
+      "  Content realism  ✓"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/gate.mjs http://localhost:4311/ http://localhost:4311/shop http://localhost:4311/tea/sylhet-black http://localhost:4311/tea/assam-gold http://localhost:4311/tea/ilam-green http://localhost:4311/tea/darjeeling-first http://localhost:4311/tea/nepal-white http://localhost:4311/tea/bangladesh-green http://localhost:4311/subscriptions http://localhost:4311/subscriptions/build http://localhost:4311/cart http://localhost:4311/checkout http://localhost:4311/confirmation http://localhost:4311/account http://localhost:4311/account/subscription http://localhost:4311/estates http://localhost:4311/brewing-guide http://localhost:4311/shipping http://localhost:4311/returns http://localhost:4311/privacy http://localhost:4311/terms http://localhost:4311/contact http://localhost:4311/404 --rules",
+    "start": "2026-10-18T12:42:36.916Z",
+    "end": "2026-10-18T12:43:14.025Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/a-archival/qa/rules.txt",
+    "finalLines": [
+      "  rules: C0 S0 P0 K0  (rule sets only; no stamp)",
+      "",
+      "http://localhost:4311/404",
+      "  rules: C0 S0 P0 K0  (rule sets only; no stamp)",
+      "gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #18241e #f5dd4a",
+    "start": "2026-10-18T12:43:14.026Z",
+    "end": "2026-10-18T12:43:14.114Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/b-poster/qa/contrast-18241e-f5dd4a.txt",
+    "finalLines": [
+      "#18241e on #f5dd4a: 11.69:1  body PASS · large PASS · AAA PASS"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #18241e #a8d84f",
+    "start": "2026-10-18T12:43:14.115Z",
+    "end": "2026-10-18T12:43:14.195Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/b-poster/qa/contrast-18241e-a8d84f.txt",
+    "finalLines": [
+      "#18241e on #a8d84f: 9.61:1  body PASS · large PASS · AAA PASS"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #18241e #ff8259",
+    "start": "2026-10-18T12:43:14.196Z",
+    "end": "2026-10-18T12:43:14.279Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/b-poster/qa/contrast-18241e-ff8259.txt",
+    "finalLines": [
+      "#18241e on #ff8259: 6.55:1  body PASS · large PASS · AAA —"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #18241e #c3b5ed",
+    "start": "2026-10-18T12:43:14.279Z",
+    "end": "2026-10-18T12:43:14.352Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/b-poster/qa/contrast-18241e-c3b5ed.txt",
+    "finalLines": [
+      "#18241e on #c3b5ed: 8.51:1  body PASS · large PASS · AAA PASS"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/contrast.mjs #526052 #ddd9c7",
+    "start": "2026-10-18T12:43:14.353Z",
+    "end": "2026-10-18T12:43:14.430Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/b-poster/qa/contrast-526052-ddd9c7.txt",
+    "finalLines": [
+      "#526052 on #ddd9c7: 4.70:1  body PASS · large PASS · AAA —"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/completeness.mjs /home/user/workspace/bench/runs/12-paired/b-poster",
+    "start": "2026-10-18T12:43:14.432Z",
+    "end": "2026-10-18T12:43:14.550Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/b-poster/qa/completeness.txt",
+    "finalLines": [
+      "      Legal:       4/4 present",
+      "      Edge cases:  2/2 handled",
+      "      Admin:       0/0 present · 1 not required (reason given)",
+      "      Skeletons:   0/0 present · 1 not required (reason given)",
+      "      Template:    17/17 present · 3 not required (reason given)"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/realism.mjs /home/user/workspace/bench/runs/12-paired/b-poster",
+    "start": "2026-10-18T12:43:14.550Z",
+    "end": "2026-10-18T12:43:14.645Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/b-poster/qa/realism.txt",
+    "finalLines": [
+      "  Content realism  ✓"
+    ]
+  },
+  {
+    "command": "node /home/user/workspace/bench/skill-v301/scripts/gate.mjs http://localhost:4312/ http://localhost:4312/shop http://localhost:4312/tea/sylhet-black http://localhost:4312/tea/assam-gold http://localhost:4312/tea/ilam-green http://localhost:4312/tea/darjeeling-first http://localhost:4312/tea/nepal-white http://localhost:4312/tea/bangladesh-green http://localhost:4312/subscriptions http://localhost:4312/subscriptions/build http://localhost:4312/cart http://localhost:4312/checkout http://localhost:4312/confirmation http://localhost:4312/account http://localhost:4312/account/subscription http://localhost:4312/estates http://localhost:4312/brewing-guide http://localhost:4312/shipping http://localhost:4312/returns http://localhost:4312/privacy http://localhost:4312/terms http://localhost:4312/contact http://localhost:4312/404 --rules",
+    "start": "2026-10-18T12:43:14.646Z",
+    "end": "2026-10-18T12:43:50.274Z",
+    "exitCode": 0,
+    "output": "/home/user/workspace/bench/runs/12-paired/b-poster/qa/rules.txt",
+    "finalLines": [
+      "  rules: C0 S0 P0 K0  (rule sets only; no stamp)",
+      "",
+      "http://localhost:4312/404",
+      "  rules: C0 S0 P0 K0  (rule sets only; no stamp)",
+      "gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint"
+    ]
+  }
+]

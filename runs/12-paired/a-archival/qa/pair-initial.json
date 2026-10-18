@@ -1,0 +1,1071 @@
+{
+  "pass": false,
+  "threshold": 0.4,
+  "a": "/home/user/workspace/bench/runs/12-paired/a-archival",
+  "b": "/home/user/workspace/bench/runs/12-paired/b-poster",
+  "routes": {
+    "a": 22,
+    "b": 22,
+    "shared": 22,
+    "onlyA": [],
+    "onlyB": [],
+    "compared": [
+      "/",
+      "/shop",
+      "/tea/sylhet-black",
+      "/subscriptions",
+      "/subscriptions/build",
+      "/cart",
+      "/checkout",
+      "/confirmation",
+      "/account",
+      "/account/subscription"
+    ],
+    "skipped": [
+      "/brewing-guide",
+      "/contact",
+      "/estates",
+      "/privacy",
+      "/returns",
+      "/shipping",
+      "/tea/assam-gold",
+      "/tea/bangladesh-green",
+      "/tea/darjeeling-first",
+      "/tea/ilam-green",
+      "/tea/nepal-white",
+      "/terms"
+    ]
+  },
+  "per": [
+    {
+      "route": "/",
+      "class": "partial",
+      "score": {
+        "structure": 0.3,
+        "composition": 0.44,
+        "image": 0.4,
+        "typography": 0.44,
+        "interaction": 0.25,
+        "signature": 0.1,
+        "overall": 0.28
+      },
+      "fn": {
+        "navigation": 0.67
+      },
+      "markup": 0.49,
+      "drift": false,
+      "sharedMarkup": false,
+      "viewports": {
+        "1440x900": {
+          "score": {
+            "structure": 0.3,
+            "composition": 0.44,
+            "image": 0.14,
+            "typography": 0.41,
+            "interaction": 0.25,
+            "signature": 0,
+            "overall": 0.26
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.1,
+              "order": 0.5
+            },
+            "composition": {
+              "placement": 0.35,
+              "columns": 0.5,
+              "density": 0.67
+            },
+            "image": {
+              "ratio_size": 0,
+              "crop_mask": 0,
+              "effects": 0.43
+            },
+            "typography": {
+              "families": 0.55,
+              "scale": 0.21,
+              "rhythm": 0.12,
+              "hierarchy": 0.62
+            },
+            "interaction": {
+              "feedback": 0.25
+            },
+            "signature": {
+              "measured": 0
+            }
+          },
+          "fn": {
+            "navigation": 0.67
+          }
+        },
+        "375x812": {
+          "score": {
+            "structure": 0.06,
+            "composition": 0.44,
+            "image": 0.4,
+            "typography": 0.44,
+            "interaction": 0.25,
+            "signature": 0.1,
+            "overall": 0.28
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.12,
+              "order": 0
+            },
+            "composition": {
+              "placement": 0.38,
+              "columns": 0.25,
+              "density": 0.8
+            },
+            "image": {
+              "ratio_size": 0.67,
+              "crop_mask": 0.11,
+              "effects": 0.43
+            },
+            "typography": {
+              "families": 0.55,
+              "scale": 0.25,
+              "rhythm": 0.17,
+              "hierarchy": 0.68
+            },
+            "interaction": {
+              "feedback": 0.25
+            },
+            "signature": {
+              "measured": 0.1
+            }
+          },
+          "fn": {
+            "navigation": 0.67
+          }
+        }
+      }
+    },
+    {
+      "route": "/shop",
+      "class": "partial",
+      "score": {
+        "structure": 0.02,
+        "composition": 0.4,
+        "image": 0,
+        "typography": 0.5,
+        "interaction": 0.6,
+        "signature": 0.25,
+        "overall": 0.28
+      },
+      "fn": {
+        "forms": 1,
+        "navigation": 0.57
+      },
+      "markup": 0.37,
+      "drift": false,
+      "sharedMarkup": false,
+      "viewports": {
+        "1440x900": {
+          "score": {
+            "structure": 0.01,
+            "composition": 0.4,
+            "image": 0,
+            "typography": 0.41,
+            "interaction": 0.6,
+            "signature": 0.25,
+            "overall": 0.28
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.01,
+              "order": 0
+            },
+            "composition": {
+              "placement": 0.38,
+              "columns": 0.2,
+              "density": 0.67
+            },
+            "image": {
+              "ratio_size": 0,
+              "crop_mask": 0,
+              "effects": 0
+            },
+            "typography": {
+              "families": 0.56,
+              "scale": 0.54,
+              "rhythm": 0.24,
+              "hierarchy": 0.12
+            },
+            "interaction": {
+              "feedback": 0.6
+            },
+            "signature": {
+              "measured": 0.25
+            }
+          },
+          "fn": {
+            "forms": 1,
+            "navigation": 0.57
+          }
+        },
+        "375x812": {
+          "score": {
+            "structure": 0.02,
+            "composition": 0.17,
+            "image": 0,
+            "typography": 0.5,
+            "interaction": 0.6,
+            "signature": 0,
+            "overall": 0.22
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.04,
+              "order": 0
+            },
+            "composition": {
+              "placement": 0.24,
+              "columns": 0.14,
+              "density": 0
+            },
+            "image": {
+              "ratio_size": 0,
+              "crop_mask": 0,
+              "effects": 0
+            },
+            "typography": {
+              "families": 0.56,
+              "scale": 0.73,
+              "rhythm": 0.33,
+              "hierarchy": 0.3
+            },
+            "interaction": {
+              "feedback": 0.6
+            },
+            "signature": {
+              "measured": 0
+            }
+          },
+          "fn": {
+            "forms": 1,
+            "navigation": 0.57
+          }
+        }
+      }
+    },
+    {
+      "route": "/tea/sylhet-black",
+      "class": "repeat",
+      "score": {
+        "structure": 0.22,
+        "composition": 0.44,
+        "image": 0.33,
+        "typography": 0.49,
+        "interaction": 0.6,
+        "signature": 0,
+        "overall": 0.42
+      },
+      "fn": {
+        "navigation": 1
+      },
+      "markup": 0.41,
+      "drift": false,
+      "sharedMarkup": false,
+      "viewports": {
+        "1440x900": {
+          "score": {
+            "structure": 0.22,
+            "composition": 0.44,
+            "image": 0.33,
+            "typography": 0.49,
+            "interaction": 0.6,
+            "signature": null,
+            "overall": 0.42
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.11,
+              "order": 0.33
+            },
+            "composition": {
+              "placement": 0.23,
+              "columns": 1,
+              "density": 0.5
+            },
+            "image": {
+              "ratio_size": 1,
+              "crop_mask": 0,
+              "effects": 0
+            },
+            "typography": {
+              "families": 0.57,
+              "scale": 0.59,
+              "rhythm": 0.31,
+              "hierarchy": 0.41
+            },
+            "interaction": {
+              "feedback": 0.6
+            },
+            "signature": {}
+          },
+          "fn": {
+            "navigation": 1
+          }
+        },
+        "375x812": {
+          "score": {
+            "structure": 0.08,
+            "composition": 0.35,
+            "image": 0.33,
+            "typography": 0.34,
+            "interaction": 0.6,
+            "signature": 0,
+            "overall": 0.28
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.16,
+              "order": 0
+            },
+            "composition": {
+              "placement": 0.44,
+              "columns": 0.17,
+              "density": 0.25
+            },
+            "image": {
+              "ratio_size": 0,
+              "crop_mask": 1,
+              "effects": 0
+            },
+            "typography": {
+              "families": 0.58,
+              "scale": 0.23,
+              "rhythm": 0.15,
+              "hierarchy": 0.2
+            },
+            "interaction": {
+              "feedback": 0.6
+            },
+            "signature": {
+              "measured": 0
+            }
+          },
+          "fn": {
+            "navigation": 1
+          }
+        }
+      }
+    },
+    {
+      "route": "/subscriptions",
+      "class": "repeat",
+      "score": {
+        "structure": 0.38,
+        "composition": 0.61,
+        "image": null,
+        "typography": 0.51,
+        "interaction": 0.38,
+        "signature": 0,
+        "overall": 0.41
+      },
+      "fn": {
+        "navigation": 0.67
+      },
+      "markup": 0.44,
+      "drift": false,
+      "sharedMarkup": false,
+      "viewports": {
+        "1440x900": {
+          "score": {
+            "structure": 0.19,
+            "composition": 0.61,
+            "image": null,
+            "typography": 0.46,
+            "interaction": 0.38,
+            "signature": null,
+            "overall": 0.41
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.04,
+              "order": 0.33
+            },
+            "composition": {
+              "placement": 0.52,
+              "columns": 1,
+              "density": 0.5
+            },
+            "image": {},
+            "typography": {
+              "families": 0.55,
+              "scale": 0.33,
+              "rhythm": 0.3,
+              "hierarchy": 0.57
+            },
+            "interaction": {
+              "feedback": 0.38
+            },
+            "signature": {}
+          },
+          "fn": {
+            "navigation": 0.67
+          }
+        },
+        "375x812": {
+          "score": {
+            "structure": 0.38,
+            "composition": 0.3,
+            "image": null,
+            "typography": 0.51,
+            "interaction": 0.38,
+            "signature": 0,
+            "overall": 0.31
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.09,
+              "order": 0.67
+            },
+            "composition": {
+              "placement": 0.44,
+              "columns": 0.17,
+              "density": 0
+            },
+            "image": {},
+            "typography": {
+              "families": 0.56,
+              "scale": 0.56,
+              "rhythm": 0.33,
+              "hierarchy": 0.57
+            },
+            "interaction": {
+              "feedback": 0.38
+            },
+            "signature": {
+              "measured": 0
+            }
+          },
+          "fn": {
+            "navigation": 0.67
+          }
+        }
+      }
+    },
+    {
+      "route": "/subscriptions/build",
+      "class": "repeat",
+      "score": {
+        "structure": 0.29,
+        "composition": 0.38,
+        "image": null,
+        "typography": 0.51,
+        "interaction": 0.55,
+        "signature": null,
+        "overall": 0.42
+      },
+      "fn": {
+        "forms": 1,
+        "navigation": 0.67
+      },
+      "markup": 0.5,
+      "drift": false,
+      "sharedMarkup": false,
+      "viewports": {
+        "1440x900": {
+          "score": {
+            "structure": 0.26,
+            "composition": 0.38,
+            "image": null,
+            "typography": 0.47,
+            "interaction": 0.55,
+            "signature": null,
+            "overall": 0.42
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.03,
+              "order": 0.5
+            },
+            "composition": {
+              "placement": 0.3,
+              "columns": 0.67,
+              "density": 0.33
+            },
+            "image": {},
+            "typography": {
+              "families": 0.54,
+              "scale": 0.62,
+              "rhythm": 0.3,
+              "hierarchy": 0.33
+            },
+            "interaction": {
+              "feedback": 0.55
+            },
+            "signature": {}
+          },
+          "fn": {
+            "forms": 1,
+            "navigation": 0.67
+          }
+        },
+        "375x812": {
+          "score": {
+            "structure": 0.29,
+            "composition": 0.32,
+            "image": null,
+            "typography": 0.51,
+            "interaction": 0.55,
+            "signature": null,
+            "overall": 0.42
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.08,
+              "order": 0.5
+            },
+            "composition": {
+              "placement": 0.42,
+              "columns": 0.33,
+              "density": 0
+            },
+            "image": {},
+            "typography": {
+              "families": 0.54,
+              "scale": 0.61,
+              "rhythm": 0.29,
+              "hierarchy": 0.57
+            },
+            "interaction": {
+              "feedback": 0.55
+            },
+            "signature": {}
+          },
+          "fn": {
+            "forms": 1,
+            "navigation": 0.67
+          }
+        }
+      }
+    },
+    {
+      "route": "/cart",
+      "class": "partial",
+      "score": {
+        "structure": 0.31,
+        "composition": 0.4,
+        "image": null,
+        "typography": 0.58,
+        "interaction": 0.38,
+        "signature": 0.11,
+        "overall": 0.36
+      },
+      "fn": {
+        "navigation": 0.67
+      },
+      "markup": 0.44,
+      "drift": false,
+      "sharedMarkup": false,
+      "viewports": {
+        "1440x900": {
+          "score": {
+            "structure": 0.26,
+            "composition": 0.36,
+            "image": null,
+            "typography": 0.44,
+            "interaction": 0.38,
+            "signature": null,
+            "overall": 0.36
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.03,
+              "order": 0.5
+            },
+            "composition": {
+              "placement": 0.33,
+              "columns": 0.33,
+              "density": 0.5
+            },
+            "image": {},
+            "typography": {
+              "families": 0.55,
+              "scale": 0.21,
+              "rhythm": 0.13,
+              "hierarchy": 0.79
+            },
+            "interaction": {
+              "feedback": 0.38
+            },
+            "signature": {}
+          },
+          "fn": {
+            "navigation": 0.67
+          }
+        },
+        "375x812": {
+          "score": {
+            "structure": 0.31,
+            "composition": 0.4,
+            "image": null,
+            "typography": 0.58,
+            "interaction": 0.38,
+            "signature": 0.11,
+            "overall": 0.36
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.12,
+              "order": 0.5
+            },
+            "composition": {
+              "placement": 0.5,
+              "columns": 0,
+              "density": 0.5
+            },
+            "image": {},
+            "typography": {
+              "families": 0.55,
+              "scale": 0.63,
+              "rhythm": 0.35,
+              "hierarchy": 0.8
+            },
+            "interaction": {
+              "feedback": 0.38
+            },
+            "signature": {
+              "measured": 0.11
+            }
+          },
+          "fn": {
+            "navigation": 0.67
+          }
+        }
+      }
+    },
+    {
+      "route": "/checkout",
+      "class": "repeat",
+      "score": {
+        "structure": 0.31,
+        "composition": 0.47,
+        "image": null,
+        "typography": 0.56,
+        "interaction": 0.6,
+        "signature": null,
+        "overall": 0.49
+      },
+      "fn": {
+        "forms": 1,
+        "navigation": 0.67
+      },
+      "markup": 0.44,
+      "drift": false,
+      "sharedMarkup": false,
+      "viewports": {
+        "1440x900": {
+          "score": {
+            "structure": 0.27,
+            "composition": 0.39,
+            "image": null,
+            "typography": 0.43,
+            "interaction": 0.6,
+            "signature": null,
+            "overall": 0.42
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.03,
+              "order": 0.5
+            },
+            "composition": {
+              "placement": 0.37,
+              "columns": 0.33,
+              "density": 0.5
+            },
+            "image": {},
+            "typography": {
+              "families": 0.53,
+              "scale": 0.2,
+              "rhythm": 0.1,
+              "hierarchy": 0.79
+            },
+            "interaction": {
+              "feedback": 0.6
+            },
+            "signature": {}
+          },
+          "fn": {
+            "forms": 1,
+            "navigation": 0.67
+          }
+        },
+        "375x812": {
+          "score": {
+            "structure": 0.31,
+            "composition": 0.47,
+            "image": null,
+            "typography": 0.56,
+            "interaction": 0.6,
+            "signature": null,
+            "overall": 0.49
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.12,
+              "order": 0.5
+            },
+            "composition": {
+              "placement": 0.61,
+              "columns": 0,
+              "density": 0.5
+            },
+            "image": {},
+            "typography": {
+              "families": 0.54,
+              "scale": 0.57,
+              "rhythm": 0.34,
+              "hierarchy": 0.8
+            },
+            "interaction": {
+              "feedback": 0.6
+            },
+            "signature": {}
+          },
+          "fn": {
+            "forms": 1,
+            "navigation": 0.67
+          }
+        }
+      }
+    },
+    {
+      "route": "/confirmation",
+      "class": "partial",
+      "score": {
+        "structure": 0.56,
+        "composition": 0.38,
+        "image": null,
+        "typography": 0.5,
+        "interaction": 0.38,
+        "signature": 0,
+        "overall": 0.36
+      },
+      "fn": {
+        "navigation": 0.67
+      },
+      "markup": 0.51,
+      "drift": false,
+      "sharedMarkup": false,
+      "viewports": {
+        "1440x900": {
+          "score": {
+            "structure": 0.02,
+            "composition": 0.31,
+            "image": null,
+            "typography": 0.48,
+            "interaction": 0.38,
+            "signature": null,
+            "overall": 0.3
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.03,
+              "order": 0
+            },
+            "composition": {
+              "placement": 0.23,
+              "columns": 0.33,
+              "density": 0.5
+            },
+            "image": {},
+            "typography": {
+              "families": 0.53,
+              "scale": 0.51,
+              "rhythm": 0.3,
+              "hierarchy": 0.53
+            },
+            "interaction": {
+              "feedback": 0.38
+            },
+            "signature": {}
+          },
+          "fn": {
+            "navigation": 0.67
+          }
+        },
+        "375x812": {
+          "score": {
+            "structure": 0.56,
+            "composition": 0.38,
+            "image": null,
+            "typography": 0.5,
+            "interaction": 0.38,
+            "signature": 0,
+            "overall": 0.36
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.12,
+              "order": 1
+            },
+            "composition": {
+              "placement": 0.46,
+              "columns": 0,
+              "density": 0.5
+            },
+            "image": {},
+            "typography": {
+              "families": 0.54,
+              "scale": 0.63,
+              "rhythm": 0.33,
+              "hierarchy": 0.48
+            },
+            "interaction": {
+              "feedback": 0.38
+            },
+            "signature": {
+              "measured": 0
+            }
+          },
+          "fn": {
+            "navigation": 0.67
+          }
+        }
+      }
+    },
+    {
+      "route": "/account",
+      "class": "partial",
+      "score": {
+        "structure": 0.05,
+        "composition": 0.72,
+        "image": null,
+        "typography": 0.44,
+        "interaction": 0.5,
+        "signature": 0,
+        "overall": 0.39
+      },
+      "fn": {
+        "navigation": 0.67
+      },
+      "markup": 0.48,
+      "drift": false,
+      "sharedMarkup": false,
+      "viewports": {
+        "1440x900": {
+          "score": {
+            "structure": 0.01,
+            "composition": 0.59,
+            "image": null,
+            "typography": 0.44,
+            "interaction": 0.5,
+            "signature": null,
+            "overall": 0.39
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.02,
+              "order": 0
+            },
+            "composition": {
+              "placement": 0.53,
+              "columns": 0.33,
+              "density": 1
+            },
+            "image": {},
+            "typography": {
+              "families": 0.56,
+              "scale": 0.47,
+              "rhythm": 0.28,
+              "hierarchy": 0.35
+            },
+            "interaction": {
+              "feedback": 0.5
+            },
+            "signature": {}
+          },
+          "fn": {
+            "navigation": 0.67
+          }
+        },
+        "375x812": {
+          "score": {
+            "structure": 0.05,
+            "composition": 0.72,
+            "image": null,
+            "typography": 0.44,
+            "interaction": 0.5,
+            "signature": 0,
+            "overall": 0.34
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.1,
+              "order": 0
+            },
+            "composition": {
+              "placement": 0.81,
+              "columns": 0.5,
+              "density": 0.67
+            },
+            "image": {},
+            "typography": {
+              "families": 0.56,
+              "scale": 0.37,
+              "rhythm": 0.25,
+              "hierarchy": 0.46
+            },
+            "interaction": {
+              "feedback": 0.5
+            },
+            "signature": {
+              "measured": 0
+            }
+          },
+          "fn": {
+            "navigation": 0.67
+          }
+        }
+      }
+    },
+    {
+      "route": "/account/subscription",
+      "class": "partial",
+      "score": {
+        "structure": 0.22,
+        "composition": 0.45,
+        "image": null,
+        "typography": 0.57,
+        "interaction": 0.6,
+        "signature": 0,
+        "overall": 0.39
+      },
+      "fn": {
+        "forms": 1,
+        "navigation": 1
+      },
+      "markup": 0.41,
+      "drift": false,
+      "sharedMarkup": false,
+      "viewports": {
+        "1440x900": {
+          "score": {
+            "structure": 0.02,
+            "composition": 0.44,
+            "image": null,
+            "typography": 0.5,
+            "interaction": 0.6,
+            "signature": null,
+            "overall": 0.39
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.05,
+              "order": 0
+            },
+            "composition": {
+              "placement": 0.62,
+              "columns": 0.33,
+              "density": 0
+            },
+            "image": {},
+            "typography": {
+              "families": 0.58,
+              "scale": 0.56,
+              "rhythm": 0.32,
+              "hierarchy": 0.48
+            },
+            "interaction": {
+              "feedback": 0.6
+            },
+            "signature": {}
+          },
+          "fn": {
+            "forms": 1,
+            "navigation": 1
+          }
+        },
+        "375x812": {
+          "score": {
+            "structure": 0.22,
+            "composition": 0.45,
+            "image": null,
+            "typography": 0.57,
+            "interaction": 0.6,
+            "signature": 0,
+            "overall": 0.37
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.1,
+              "order": 0.33
+            },
+            "composition": {
+              "placement": 0.64,
+              "columns": 0,
+              "density": 0.33
+            },
+            "image": {},
+            "typography": {
+              "families": 0.58,
+              "scale": 0.71,
+              "rhythm": 0.36,
+              "hierarchy": 0.62
+            },
+            "interaction": {
+              "feedback": 0.6
+            },
+            "signature": {
+              "measured": 0
+            }
+          },
+          "fn": {
+            "forms": 1,
+            "navigation": 1
+          }
+        }
+      }
+    }
+  ],
+  "sharedFiles": {
+    "presentation": [],
+    "logic": [
+      "SCHEMA.md",
+      "_headers",
+      "assets/DM-Sans-OFL.txt",
+      "catalogue.js",
+      "data/schema.json",
+      "data/teas.json",
+      "store.js"
+    ]
+  },
+  "coherence": {
+    "a": {
+      "share": 1,
+      "faces": "fraunces / dm sans",
+      "variants": 1
+    },
+    "b": {
+      "share": 1,
+      "faces": "barlow condensed / dm sans",
+      "variants": 1
+    }
+  },
+  "fails": [
+    "/tea/sylhet-black: repeat (overall 0.42 ≥ 0.4)",
+    "/subscriptions: repeat (overall 0.41 ≥ 0.4)",
+    "/subscriptions/build: repeat (overall 0.42 ≥ 0.4)",
+    "/checkout: repeat (overall 0.49 ≥ 0.4)"
+  ],
+  "notes": [
+    "/: partial (composition at or above 0.4); check the screenshots",
+    "/shop: partial (composition at or above 0.4); check the screenshots",
+    "/cart: partial (composition at or above 0.4); check the screenshots",
+    "/confirmation: partial (structure at or above 0.4); check the screenshots",
+    "/account: partial (composition at or above 0.4); check the screenshots",
+    "/account/subscription: partial (composition at or above 0.4); check the screenshots",
+    "not compared (beyond --max 10): /brewing-guide, /contact, /estates, /privacy, /returns, /shipping, /tea/assam-gold, /tea/bangladesh-green, /tea/darjeeling-first, /tea/ilam-green, /tea/nepal-white, /terms"
+  ],
+  "viewports": [
+    "1440x900",
+    "375x812"
+  ],
+  "limits": "does not judge quality, brief fit, accessibility, journeys or motion: run gate.mjs (and --journey) on each direction"
+}

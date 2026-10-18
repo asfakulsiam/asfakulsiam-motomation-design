@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CargolineDataSchema",
+  "type": "object",
+  "required": ["demo", "entity", "items"],
+  "properties": {
+    "demo": { "type": "boolean", "const": true },
+    "entity": { "type": "string" },
+    "items": { "type": "array" }
+  },
+  "$defs": {
+    "Shipment": {
+      "type": "object",
+      "required": ["id", "containerNumber", "carrier", "origin", "destination", "mode", "status", "eta", "demo"],
+      "properties": {
+        "id": { "type": "string" },
+        "containerNumber": { "type": "string" },
+        "carrier": { "type": "string" },
+        "origin": { "type": "string" },
+        "destination": { "type": "string" },
+        "mode": { "type": "string", "enum": ["Ocean", "Air", "Intermodal"] },
+        "status": { "type": "string" },
+        "eta": { "type": "string" },
+        "lat": { "type": "number" },
+        "lng": { "type": "number" },
+        "vessel": { "type": "string" },
+        "voyage": { "type": "string" },
+        "demo": { "type": "boolean", "const": true }
+      }
+    },
+    "Integration": {
+      "type": "object",
+      "required": ["id", "name", "category", "description", "protocol", "demo"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string", "enum": ["Ocean", "Air", "ERP", "TMS", "Customs"] },
+        "description": { "type": "string" },
+        "protocol": { "type": "string" },
+        "demo": { "type": "boolean", "const": true }
+      }
+    },
+    "Plan": {
+      "type": "object",
+      "required": ["id", "name", "annualPrice", "monthlyPrice", "teuLimit", "description", "features", "demo"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "annualPrice": { "type": "number" },
+        "monthlyPrice": { "type": "number" },
+        "teuLimit": { "type": "string" },
+        "description": { "type": "string" },
+        "features": { "type": "array", "items": { "type": "string" } },
+        "demo": { "type": "boolean", "const": true }
+      }
+    },
+    "Story": {
+      "type": "object",
+      "required": ["id", "slug", "company", "industry", "scale", "challenge", "solution", "operationalGain", "demo"],
+      "properties": {
+        "id": { "type": "string" },
+        "slug": { "type": "string" },
+        "company": { "type": "string" },
+        "industry": { "type": "string" },
+        "scale": { "type": "string" },
+        "challenge": { "type": "string" },
+        "solution": { "type": "string" },
+        "operationalGain": { "type": "string" },
+        "demo": { "type": "boolean", "const": true }
+      }
+    }
+  }
+}

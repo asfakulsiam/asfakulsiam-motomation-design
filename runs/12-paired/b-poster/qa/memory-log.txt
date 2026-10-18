@@ -1,0 +1,2 @@
+Logged run #1 to /home/user/workspace/bench/runs/12-paired/b-poster/.motomation/log.json
+  fingerprint: tier=3

@@ -1,0 +1,70 @@
+
+http://localhost:4312/
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/shop
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/tea/sylhet-black
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/tea/assam-gold
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/tea/ilam-green
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/tea/darjeeling-first
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/tea/nepal-white
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/tea/bangladesh-green
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/subscriptions
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/subscriptions/build
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/cart
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/checkout
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/confirmation
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/account
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/account/subscription
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/estates
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/brewing-guide
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/shipping
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/returns
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/privacy
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/terms
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/contact
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/404
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint

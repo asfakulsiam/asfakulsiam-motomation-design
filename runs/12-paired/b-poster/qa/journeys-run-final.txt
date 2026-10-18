@@ -1,0 +1,14 @@
+b-poster
+375: one-off / → /shop → /tea/sylhet-black → /cart → /checkout → /confirmation PASS
+375: monthly / → /subscriptions → /subscriptions/build → /checkout → /confirmation PASS
+375: /account → /account/subscription → pause saved → reload → resume → skip saved → reload PASS
+768: one-off / → /shop → /tea/sylhet-black → /cart → /checkout → /confirmation PASS
+768: monthly / → /subscriptions → /subscriptions/build → /checkout → /confirmation PASS
+768: /account → /account/subscription → pause saved → reload → resume → skip saved → reload PASS
+1440: one-off / → /shop → /tea/sylhet-black → /cart → /checkout → /confirmation PASS
+1440: monthly / → /subscriptions → /subscriptions/build → /checkout → /confirmation PASS
+1440: /account → /account/subscription → pause saved → reload → resume → skip saved → reload PASS
+Route inspection: 44 route/viewport combinations.
+Console errors: 0.
+Issues: 0.
+PASS lightweight frontend QA: all three journeys complete at 375, 768 and 1440; pause/skip persist; HTTP 404 verified.

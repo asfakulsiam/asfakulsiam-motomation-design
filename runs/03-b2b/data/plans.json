@@ -1,0 +1,62 @@
+{
+  "demo": true,
+  "entity": "Plan",
+  "items": [
+    {
+      "id": "plan-midmarket",
+      "name": "Mid-Market Importer",
+      "annualPrice": 790,
+      "monthlyPrice": 920,
+      "teuLimit": "Up to 1,200 TEUs or 300 Air Shipments/year",
+      "description": "Designed for growing import teams needing real-time container tracking, carrier milestone normalization, and basic exception alerts.",
+      "features": [
+        "Multi-modal tracking (Ocean container, Air AWB, Drayage)",
+        "Automated EDI 214 and 315 event normalization",
+        "Predictive arrival time estimates updated every 3 hours",
+        "Configurable exception alerts for port congestion and dwell",
+        "Standard integrations for QuickBooks Enterprise and NetSuite",
+        "Email and webhook notifications",
+        "Standard SLA with 8-hour support response"
+      ],
+      "demo": true
+    },
+    {
+      "id": "plan-growth",
+      "name": "Commercial Importer",
+      "annualPrice": 1650,
+      "monthlyPrice": 1950,
+      "teuLimit": "Up to 6,000 TEUs or 1,500 Air Shipments/year",
+      "description": "Ideal for mid-size manufacturers, distributors, and retailers requiring automated landed cost calculation, ERP synchronization, and demurrage mitigation.",
+      "features": [
+        "All Mid-Market capabilities included",
+        "Full AIS satellite vessel telemetry refreshed hourly",
+        "Automated Landed Cost calculator with customs tariff breakdowns",
+        "Demurrage and detention risk countdown ledger",
+        "Native two-way ERP integrations (SAP S/4HANA, Dynamics 365, NetSuite)",
+        "Role-based access control with unlimited viewers",
+        "Customs hold early-warning flags (FDA, USDA, CBP)",
+        "Priority 2-hour technical support response"
+      ],
+      "demo": true
+    },
+    {
+      "id": "plan-enterprise",
+      "name": "Global Enterprise",
+      "annualPrice": 3400,
+      "monthlyPrice": 3900,
+      "teuLimit": "Unlimited TEUs and multi-entity operations",
+      "description": "For high-volume multi-facility importers needing dedicated EDI forwarding pipelines, custom TMS orchestration, and comprehensive IT governance.",
+      "features": [
+        "All Commercial Importer capabilities included",
+        "Dedicated cloud tenant isolation options",
+        "Custom ERP and TMS connector engineering (CargoWise, Blue Yonder)",
+        "Automated carrier contract SLA compliance auditing",
+        "Single Sign-On (SAML 2.0 / Okta / Azure AD)",
+        "Custom API rate limit allotments and private webhooks",
+        "Dedicated enterprise solutions architect and quarterly business reviews",
+        "Guaranteed 99.95% uptime SLA with 15-minute emergency response"
+      ],
+      "demo": true
+    }
+  ]
+}

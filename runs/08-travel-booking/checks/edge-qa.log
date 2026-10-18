@@ -1,0 +1,9 @@
+LINKS PASS: 23 unique rendered internal destinations respond 200.
+PALETTE #203c32 on #f6f4ed: 10.88:1
+PALETTE #59645b on #f6f4ed: 5.61:1
+PALETTE #59645b on #e9ecdf: 5.16:1
+PALETTE #fffefa on #203c32: 11.87:1
+PALETTE #8b3f2d on #f6f4ed: 6.70:1
+PALETTE #a12726 on #fff4f0: 6.86:1
+JS GZIP: 11185 bytes for app.js + app-data.js (Tier 1 limit 30720 bytes).
+EDGE QA PASS: 41 assertions, including blocked nights, long stays, overlap, removal, contact pending/error/success, storage denial and palette math.

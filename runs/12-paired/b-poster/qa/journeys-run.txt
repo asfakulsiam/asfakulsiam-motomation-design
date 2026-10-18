@@ -1,0 +1,17 @@
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: [{"message":"Transition was skipped","url":"http://localhost:4312/shop","stack":""}]
+
+1 !== 0
+
+    at file:///home/user/workspace/bench/runs/12-paired/a-archival/qa/journeys.mjs:116:9 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual'
+}
+
+Node.js v20.20.2

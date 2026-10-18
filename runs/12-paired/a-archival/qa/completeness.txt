@@ -1,0 +1,11 @@
+bench/runs/12-paired/a-archival/DESIGN.md
+  X — completeness (single-estate tea ecommerce, fictional US demo., admin panel: no) [functional frontend]  ✓
+      Routes:      19/19 required present
+      Journeys:    3/3 connected
+      Functions:   4/4 present · 3 not required (reason given)
+      States:      1/1 defined
+      Legal:       4/4 present
+      Edge cases:  2/2 handled
+      Admin:       0/0 present · 1 not required (reason given)
+      Skeletons:   0/0 present · 1 not required (reason given)
+      Template:    17/17 present · 3 not required (reason given)

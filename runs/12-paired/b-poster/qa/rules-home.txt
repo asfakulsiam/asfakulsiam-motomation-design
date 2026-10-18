@@ -1,0 +1,4 @@
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+
+http://localhost:4312
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)

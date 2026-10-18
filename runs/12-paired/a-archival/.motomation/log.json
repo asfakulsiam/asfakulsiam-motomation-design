@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "runs": [
+    {
+      "date": "2026-10-18T12:33:11.170Z",
+      "dir": "/home/user/workspace/bench/runs/12-paired/a-archival",
+      "category": "ecommerce",
+      "archetype": "none",
+      "signature": "specimen-folio",
+      "fonts": "Fraunces/DM Sans",
+      "motion": "Tier 1 ink feedback",
+      "tier": "1",
+      "project": "/home/user/workspace/bench/runs/12-paired/a-archival",
+      "brief": "Leaf and Ledger tea commerce quiet archival paired benchmark",
+      "fingerprint": {
+        "tier": 1
+      }
+    }
+  ]
+}

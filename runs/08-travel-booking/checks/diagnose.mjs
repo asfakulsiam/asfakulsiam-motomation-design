@@ -1,0 +1,12 @@
+import {chromium} from 'playwright';
+const b=await chromium.launch({headless:true,channel:'chromium'}),p=await b.newPage({viewport:{width:375,height:812},isMobile:true,hasTouch:true});
+await p.goto('http://localhost:4301/booking/dates');
+await p.locator('#checkin').fill('2026-11-04');await p.locator('#checkout').fill('2026-11-02');
+console.log('after fill',await p.locator('#calendar-title').innerText());
+await p.locator('#dates-form [type=submit]').click();
+console.log('after submit',await p.locator('#calendar-title').innerText());
+await p.locator('#prev-month').click();console.log('after prev',await p.locator('#calendar-title').innerText());
+await p.locator('#next-month').click();console.log('after next',await p.locator('#calendar-title').innerText());
+console.log(await p.locator('[data-day]').evaluateAll(xs=>xs.slice(0,4).map(x=>({label:x.getAttribute('aria-label'),date:x.dataset.day}))));
+await p.screenshot({path:'/home/user/workspace/bench/runs/08-travel-booking/screens/diagnose-dates.png',fullPage:true});
+await b.close();

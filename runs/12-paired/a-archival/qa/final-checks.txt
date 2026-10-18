@@ -1,0 +1,58 @@
+node /home/user/workspace/bench/skill-v301/scripts/completeness.mjs /home/user/workspace/bench/runs/12-paired/a-archival
+      Legal:       4/4 present
+      Edge cases:  2/2 handled
+      Admin:       0/0 present · 1 not required (reason given)
+      Skeletons:   0/0 present · 1 not required (reason given)
+      Template:    17/17 present · 3 not required (reason given)
+node /home/user/workspace/bench/skill-v301/scripts/realism.mjs /home/user/workspace/bench/runs/12-paired/a-archival
+  Content realism  ✓
+node /home/user/workspace/bench/skill-v301/scripts/gate.mjs http://localhost:4311/ http://localhost:4311/shop http://localhost:4311/tea/sylhet-black http://localhost:4311/tea/assam-gold http://localhost:4311/tea/ilam-green http://localhost:4311/tea/darjeeling-first http://localhost:4311/tea/nepal-white http://localhost:4311/tea/bangladesh-green http://localhost:4311/subscriptions http://localhost:4311/subscriptions/build http://localhost:4311/cart http://localhost:4311/checkout http://localhost:4311/confirmation http://localhost:4311/account http://localhost:4311/account/subscription http://localhost:4311/estates http://localhost:4311/brewing-guide http://localhost:4311/shipping http://localhost:4311/returns http://localhost:4311/privacy http://localhost:4311/terms http://localhost:4311/contact http://localhost:4311/404 --rules
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4311/404
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+node /home/user/workspace/bench/skill-v301/scripts/completeness.mjs /home/user/workspace/bench/runs/12-paired/b-poster
+      Legal:       4/4 present
+      Edge cases:  2/2 handled
+      Admin:       0/0 present · 1 not required (reason given)
+      Skeletons:   0/0 present · 1 not required (reason given)
+      Template:    17/17 present · 3 not required (reason given)
+node /home/user/workspace/bench/skill-v301/scripts/realism.mjs /home/user/workspace/bench/runs/12-paired/b-poster
+  Content realism  ✓
+node /home/user/workspace/bench/skill-v301/scripts/gate.mjs http://localhost:4312/ http://localhost:4312/shop http://localhost:4312/tea/sylhet-black http://localhost:4312/tea/assam-gold http://localhost:4312/tea/ilam-green http://localhost:4312/tea/darjeeling-first http://localhost:4312/tea/nepal-white http://localhost:4312/tea/bangladesh-green http://localhost:4312/subscriptions http://localhost:4312/subscriptions/build http://localhost:4312/cart http://localhost:4312/checkout http://localhost:4312/confirmation http://localhost:4312/account http://localhost:4312/account/subscription http://localhost:4312/estates http://localhost:4312/brewing-guide http://localhost:4312/shipping http://localhost:4312/returns http://localhost:4312/privacy http://localhost:4312/terms http://localhost:4312/contact http://localhost:4312/404 --rules
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+
+http://localhost:4312/404
+  rules: C0 S0 P0 K0  (rule sets only; no stamp)
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+node /home/user/workspace/bench/skill-v301/scripts/pair.mjs /home/user/workspace/bench/runs/12-paired/a-archival /home/user/workspace/bench/runs/12-paired/b-poster --max 30 --out /home/user/workspace/bench/runs/12-paired/a-archival/qa/pair.json
+  · /privacy: partial (composition at or above 0.4); check the screenshots
+  · /terms: partial (composition at or above 0.4); check the screenshots
+  limits: does not judge quality, brief fit, accessibility, journeys or motion: run gate.mjs (and --journey) on each direction
+
+PASS  one product, 22 route(s) recomposed or partial, no shared presentation, routes and functions at parity
+node /home/user/workspace/bench/runs/12-paired/a-archival/qa/journeys.mjs a-archival
+1440: /account → /account/subscription → pause saved → reload → resume → skip saved → reload PASS
+Route inspection: 44 route/viewport combinations.
+Console errors: 0.
+Issues: 0.
+PASS lightweight frontend QA: all three journeys complete at 375, 768 and 1440; pause/skip persist; HTTP 404 verified.
+node /home/user/workspace/bench/runs/12-paired/a-archival/qa/journeys.mjs b-poster
+  expected: 0,
+  operator: 'strictEqual'
+}
+
+Node.js v20.20.2
+file:///home/user/workspace/bench/runs/12-paired/a-archival/qa/final-checks.mjs:13
+ if(!allowed.includes(result.status)){writeFileSync(resolve(base,'a-archival/qa/check-manifest.json'),JSON.stringify(manifest,null,2));throw Error(`Check failed: ${command}`);}
+                                                                                                                                             ^
+
+Error: Check failed: node /home/user/workspace/bench/runs/12-paired/a-archival/qa/journeys.mjs b-poster
+    at run (file:///home/user/workspace/bench/runs/12-paired/a-archival/qa/final-checks.mjs:13:142)
+    at file:///home/user/workspace/bench/runs/12-paired/a-archival/qa/final-checks.mjs:27:45
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v20.20.2

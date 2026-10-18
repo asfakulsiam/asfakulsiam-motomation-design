@@ -1,0 +1,37 @@
+{
+ "schema": "motomation-cost/1",
+ "build": "08-travel-booking",
+ "dir": "/home/user/workspace/bench/runs/08-travel-booking",
+ "arm": null,
+ "brief": null,
+ "seed": null,
+ "route": {
+  "stated": null,
+  "requested": null
+ },
+ "tokens": {
+  "in": 0,
+  "out": 0,
+  "cache_read": 0,
+  "cache_write": 0,
+  "total": 0
+ },
+ "elapsed_ms": null,
+ "elapsed": null,
+ "agent_ms": null,
+ "tool_calls": {
+  "total": 0,
+  "by_type": {},
+  "bash": {}
+ },
+ "retries": {
+  "count": 0,
+  "by_reason": {},
+  "events": []
+ },
+ "turns": null,
+ "completed": false,
+ "completion": "no run.json",
+ "transcript": null,
+ "model": null
+}

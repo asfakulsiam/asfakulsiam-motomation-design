@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Documentation: Cargoline Developer &amp; EDI Guide</title>
+  <meta name="description" content="Technical reference for Cargoline REST APIs, DCSA OpenAPI standards, EDI 214 and 315 ingestion, and real-time outbound webhooks for freight visibility.">
+  <link rel="canonical" href="http://localhost:4302/docs">
+  <meta property="og:title" content="Documentation: Cargoline Developer &amp; EDI Guide">
+  <meta property="og:description" content="Technical reference for Cargoline REST APIs, DCSA OpenAPI standards, EDI 214 and 315 ingestion, and real-time outbound webhooks for freight visibility.">
+  <meta property="og:image" content="http://localhost:4302/assets/og-image.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Cargoline API and EDI Developer Documentation",
+    "description": "Integration guide for supply chain REST APIs and carrier EDI feeds"
+  }
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="brand-link" aria-label="Cargoline home">
+        <img src="/assets/cargoline-mark.svg" alt="Cargoline container mark" class="brand-mark" width="36" height="36" loading="eager">
+        <span>CARGOLINE</span>
+      </a>
+
+      <button type="button" class="mobile-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <div class="nav-dropdown">
+          <a href="/product" class="nav-link">Product</a>
+          <div class="dropdown-menu">
+            <a href="/product" class="dropdown-item">Platform Overview</a>
+            <a href="/product/tracking" class="dropdown-item">Multi-Modal Tracking</a>
+            <a href="/product/exceptions" class="dropdown-item">Predictive Delay Alerts</a>
+            <a href="/product/customs" class="dropdown-item">Customs &amp; Landed Cost</a>
+          </div>
+        </div>
+        <a href="/integrations" class="nav-link">Integrations</a>
+        <a href="/pricing" class="nav-link">Pricing</a>
+        <a href="/security" class="nav-link">Security</a>
+        <a href="/stories" class="nav-link">Customer Stories</a>
+        <a href="/docs" class="nav-link active">Docs</a>
+      </nav>
+
+      <div class="header-cta">
+        <a href="/contact" class="btn btn-dark-outline">Contact Sales</a>
+        <a href="/demo" class="btn btn-primary">Schedule Demo</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="section section-dark">
+      <div class="container">
+        <div class="badge badge-telemetry" style="margin-bottom: 1.25rem;">DEVELOPER PORTAL</div>
+        <h1>Developer &amp; EDI Integration Documentation</h1>
+        <p class="lead" style="color: var(--dark-muted); margin-top: 1rem;">
+          Integrate Cargoline telemetry into your enterprise systems using standardized REST APIs, DCSA OpenAPI models, EDI 214/315 pipelines, and secure webhooks.
+        </p>
+      </div>
+    </section>
+
+    <!-- Documentation Overview Grid -->
+    <section class="section">
+      <div class="container">
+        <div class="grid-2">
+          <!-- API Docs Card -->
+          <div class="card">
+            <div class="card-header">
+              <span class="badge badge-telemetry">REST API v1</span>
+              <h2 style="font-size: 1.4rem; margin-top: 0.5rem;">Cargoline Core Tracking API</h2>
+            </div>
+            <p>
+              Programmatically query container positions, milestone logs, and predictive ETAs. Authenticated via Bearer tokens with scoped tenant permissions.
+            </p>
+            <div style="background: #060E17; color: #F8FAFC; padding: 1.25rem; border-radius: 4px; font-family: var(--font-mono); font-size: var(--step--1); margin: 1.5rem 0;">
+              <span style="color: #38BDF8;">GET</span> /api/v1/shipments/MSCU7821904<br>
+              <span style="color: var(--dark-muted);">Host:</span> api.cargoline.io<br>
+              <span style="color: var(--dark-muted);">Authorization:</span> Bearer sec_tok_live_...
+            </div>
+            <div style="margin-top: auto;">
+              <a href="/pricing" class="btn btn-secondary">Review API Tier Allotments</a>
+            </div>
+          </div>
+
+          <!-- EDI Docs Card -->
+          <div class="card">
+            <div class="card-header">
+              <span class="badge badge-warning">EDI MAPPING</span>
+              <h2 style="font-size: 1.4rem; margin-top: 0.5rem;">Carrier EDI Standards Support</h2>
+            </div>
+            <p>
+              Cargoline natively ingests standard ANSI X12 and EDIFACT messages from ocean carriers and forwarders, normalizing events into standardized JSON schemas.
+            </p>
+            <ul style="margin: 1.25rem 0 1.5rem 1.25rem; font-size: var(--step--1); color: var(--muted);">
+              <li><strong>EDI 315:</strong> Ocean Carrier Status Details (discharge, load, gate out)</li>
+              <li><strong>EDI 214:</strong> Transportation Carrier Shipment Status (drayage &amp; rail)</li>
+              <li><strong>EDI 301:</strong> Confirmation of Booking Details</li>
+            </ul>
+            <div style="margin-top: auto;">
+              <a href="/integrations" class="btn btn-secondary">Explore Pre-Built Carrier Connectors</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Webhook Architecture Section -->
+        <div style="margin-top: 4rem; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 2.5rem;">
+          <h2>Event-Driven Webhook Subscriptions</h2>
+          <p style="margin: 1rem 0 2rem;">
+            Subscribe your ERP or WMS endpoints to real-time supply chain events. Outbound webhooks include cryptographic HMAC-SHA256 signatures for payload verification.
+          </p>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Event Name</th>
+                  <th>Trigger Condition</th>
+                  <th>Standard Payload Fields</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>shipment.exception.detected</code></td>
+                  <td>Port anchor queue exceeds 8 hrs or customs hold flagged</td>
+                  <td><code>containerId</code>, <code>severity</code>, <code>rootCause</code>, <code>etaShiftHours</code></td>
+                </tr>
+                <tr>
+                  <td><code>shipment.milestone.cleared</code></td>
+                  <td>Quayside discharge or terminal gate-out verified</td>
+                  <td><code>containerId</code>, <code>milestoneName</code>, <code>terminalCode</code>, <code>timestamp</code></td>
+                </tr>
+                <tr>
+                  <td><code>customs.status.updated</code></td>
+                  <td>CBP ACE 1C customs entry or agency release received</td>
+                  <td><code>entryNumber</code>, <code>billOfLading</code>, <code>releaseStatus</code>, <code>agencyCode</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+            <a href="/demo" class="btn btn-primary">Schedule Developer Integration Walkthrough</a>
+            <a href="/security" class="btn btn-secondary">Review Security &amp; Token Architecture</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="/" class="brand-link" style="margin-bottom: 1rem;">
+            <img src="/assets/cargoline-mark.svg" alt="Cargoline container mark" width="32" height="32" loading="lazy">
+            <span>CARGOLINE</span>
+          </a>
+          <p style="font-size: var(--step--1); color: var(--dark-muted); margin-top: 1rem;">
+            Mission-critical freight visibility and container telemetry for ocean, air, and intermodal importers.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Platform</h3>
+          <ul class="footer-links">
+            <li><a href="/product" class="footer-link">Platform Overview</a></li>
+            <li><a href="/product/tracking" class="footer-link">Multi-Modal Tracking</a></li>
+            <li><a href="/product/exceptions" class="footer-link">Delay Exceptions</a></li>
+            <li><a href="/product/customs" class="footer-link">Landed Cost &amp; Customs</a></li>
+            <li><a href="/integrations" class="footer-link">Integrations Directory</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Procurement</h3>
+          <ul class="footer-links">
+            <li><a href="/pricing" class="footer-link">Pricing Plans</a></li>
+            <li><a href="/security" class="footer-link">Trust &amp; Security</a></li>
+            <li><a href="/security/overview" class="footer-link">Security Whitepaper</a></li>
+            <li><a href="/stories" class="footer-link">Customer Stories</a></li>
+            <li><a href="/stories/midwest-foods" class="footer-link">Midwest Foods Study</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Developers</h3>
+          <ul class="footer-links">
+            <li><a href="/docs" class="footer-link">API Documentation</a></li>
+            <li><a href="/demo" class="footer-link">Schedule Demo</a></li>
+            <li><a href="/contact" class="footer-link">Contact Sales</a></li>
+            <li><a href="/careers" class="footer-link">Careers</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Compliance</h3>
+          <ul class="footer-links">
+            <li><a href="/privacy" class="footer-link">Privacy Policy</a></li>
+            <li><a href="/terms" class="footer-link">Terms of Service</a></li>
+            <li><a href="/cookies" class="footer-link">Cookie Settings</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Cargoline Systems Inc. All rights reserved.</div>
+        <div class="badge badge-neutral">SOC 2 TYPE II AUDITED</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+node /home/user/workspace/bench/runs/12-paired/a-archival/qa/journeys.mjs b-poster
+1440: /account → /account/subscription → pause saved → reload → resume → skip saved → reload PASS
+Route inspection: 44 route/viewport combinations.
+Console errors: 0.
+Issues: 0.
+PASS lightweight frontend QA: all three journeys complete at 375, 768 and 1440; pause/skip persist; HTTP 404 verified.
+node /home/user/workspace/bench/runs/12-paired/a-archival/qa/extra-states.mjs
+  expected: true,
+  operator: '=='
+}
+
+Node.js v20.20.2
+file:///home/user/workspace/bench/runs/12-paired/a-archival/qa/resume-checks.mjs:14
+ if(r.status!==0)throw Error('Check failed; inspect preserved output.');
+                       ^
+
+Error: Check failed; inspect preserved output.
+    at run (file:///home/user/workspace/bench/runs/12-paired/a-archival/qa/resume-checks.mjs:14:24)
+    at file:///home/user/workspace/bench/runs/12-paired/a-archival/qa/resume-checks.mjs:18:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v20.20.2

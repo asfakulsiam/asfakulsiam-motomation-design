@@ -1,0 +1,12 @@
+DESIGN.md
+  X — completeness (travel-booking, Bangladesh, admin panel: no) [functional frontend]  ✓
+      Routes:      20/20 required present
+      Journeys:    3/3 connected
+      Functions:   3/3 present · 2 not required (reason given)
+      States:      1/1 defined
+      Legal:       4/4 present
+      Edge cases:  1/1 handled
+      Admin:       0/0 present · 1 not required (reason given)
+      Skeletons:   1/1 present
+      Template:    18/18 present · 2 not required (reason given)
+      ⚠ media: 11 asset(s) in MEDIA.md must be replaced or cleared before production; not production-ready until they are  (warning)
