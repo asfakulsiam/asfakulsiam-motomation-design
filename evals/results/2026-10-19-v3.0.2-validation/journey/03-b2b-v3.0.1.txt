@@ -1,0 +1,39 @@
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+
+runs/03-b2b  (journey only; no stamp)
+  J — journey (whole site, real browser; any missing state fails the page; not in the stamp or its id)
+    nav      ✗ 18/19 route(s) reachable from home in ≤ 3 clicks (/:0 /product:1 /product/tracking:1 /product/exceptions:1 /product/customs:1 /integrations:1 /pricing:1 /security:1 …)
+               ✗ /demo/confirmed: not reachable from home in ≤ 3 clicks
+               · sitemap.xml: 19 route(s)
+               · 20 concrete route(s) from the Scope table
+               · 18 page(s) loaded
+    mobile   ✗ 0/12 interactive element(s) respond at 375px · tap 0/12 · swipe n/a · long-press n/a
+               ✗ layout page /: wider than the phone: lays out at 481px in a 375px viewport (div.header-cta → 481px); the browser zooms out, so taps on this page are not measured until it fits
+               ✗ layout page /contact: wider than the phone: lays out at 481px in a 375px viewport (div.header-cta → 481px); the browser zooms out, so taps on this page are not measured until it fits
+               ✗ layout page /demo: wider than the phone: lays out at 481px in a 375px viewport (div.header-cta → 481px); the browser zooms out, so taps on this page are not measured until it fits
+               ✗ layout page /product: wider than the phone: lays out at 481px in a 375px viewport (div.header-cta → 481px, table → 628px); the browser zooms out, so taps on this page are not measured until it fits
+               ✗ layout page /product/tracking: wider than the phone: lays out at 481px in a 375px viewport (div.header-cta → 481px, table → 708px); the browser zooms out, so taps on this page are not measured until it fits
+               ✗ layout page /product/exceptions: wider than the phone: lays out at 481px in a 375px viewport (div.header-cta → 481px, table → 896px); the browser zooms out, so taps on this page are not measured until it fits
+               ✗ layout page /product/customs: wider than the phone: lays out at 481px in a 375px viewport (div.header-cta → 481px, table → 743px); the browser zooms out, so taps on this page are not measured until it fits
+               ✗ layout page /integrations: wider than the phone: lays out at 481px in a 375px viewport (div.header-cta → 481px); the browser zooms out, so taps on this page are not measured until it fits
+               … 4 more
+               · 12 page(s); an element shared by several pages (header, footer) is tapped once
+               · no element declares a long press
+    forms    ✗ 6/9 form state(s) rendered · Full Name * (/contact): default✓ validation✓ loading✗ success✗ serverError✗ · Full Name * (/demo): default✓ validation✓ loading✓ success✓ serverError?
+               ✗ Full Name * (/contact) loading: no request was made on a valid submit, so there is no pending state to show
+               ✗ Full Name * (/contact) success: no request was made: success cannot follow a server answer
+               ✗ Full Name * (/contact) serverError: no request was made, so a server error cannot happen or be shown
+               · 2 page(s) with forms checked: /contact, /demo
+               · not checked (reported, not passed): Full Name * (/demo): serverError not verified (not verified: no request to a server; the form saves in the browser and then moves to /demo/confirmed, so a server error cannot happen)
+    loading  – n/a: no fetch or XHR request after load: no async surface
+    errors   ✓ 1/1 designed not-found view (unknown route → HTTP 404)
+               · probed /__motomation-missing-mve7iy9m/
+    session  ✓ 6/6 · load ✓ · open a second route ✓ · back button ✓ · forward button ✓ · full reload ✓ · two tabs ✓
+               · second page: /product
+    coverage 18 page(s) loaded of 19 required route(s) · forms checked on every page that has one (2 page(s), 2 form(s)) · tap and loading sampled on 12 page(s)
+               · not reached: /demo/confirmed
+               · Scope routes no link reaches (check them in the journey walk): /demo/confirmed, /404
+               · not sampled for tap/loading: /security/overview, /stories/midwest-foods, /careers, /privacy, /terms, /cookies
+               · forms not checked: Full Name * (/demo): serverError not verified (not verified: no request to a server; the form saves in the browser and then moves to /demo/confirmed, so a server error cannot happen)
+    journey: nav1 mobile12 forms3 loading- errors0 session0 → FAIL (16 missing)
+EXIT 1

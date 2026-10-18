@@ -91,7 +91,7 @@ Rows marked *(heuristic)* are advisory defaults (authority level 6, `principles/
 | Accent colours *(heuristic)* | one brand accent; data, status and brand-system colours don't count |
 | Signature moves *(heuristic)* | at most one; none is valid |
 | Placeholder copy | none: no lorem ipsum, "Acme", "John Doe", "Product 1", no TODO or process notes in customer copy (`scripts/realism.mjs`) |
-| Statistics, logos, testimonials, awards | real and sourced, or `[NEEDS COPY]` |
+| Statistics, logos, testimonials, awards | real and sourced, `[NEEDS COPY]`, or labelled illustrative (`scripts/realism.mjs`) |
 | Links, domains, pages | only those the brief supplies or the build creates; no `href="#"` controls that go nowhere |
 | Capability claims | a control is never presented as working when it isn't; demo-only interfaces are labelled (`thinking/product-contract.md`) |
 | Emoji as icons or bullets | none |

@@ -94,6 +94,7 @@ import { spawnSync } from "node:child_process";
 import os from "node:os";
 import { statfsSync } from "node:fs";
 import { projectRoot, userDir } from "./memory.mjs";
+import { writeRecord, RECORD } from "./handoff.mjs";
 import { completeness, completenessLines, maintenanceMedia, maintenanceLines, contractRoutes } from "./completeness.mjs";
 // the Scope table's concrete routes for a local target (its DESIGN.md, or --design), so the journey coverage names them
 const scopeRoutesFor = (target, design) => { try { if (design) return contractRoutes(design); if (/^https?:/.test(target)) return []; const r = resolve(target); return contractRoutes(statSync(r).isDirectory() ? r : dirname(r)); } catch { return []; } };
@@ -137,8 +138,8 @@ const argv = process.argv.slice(2);
 const flags = {}; const targets = [];
 // v2.5.0 (C9): unknown flags and missing values are one friendly line plus the usage, exit 2; boolean flags never
 // swallow the word after them (`--json page.html` used to lose the target).
-const GATE_USAGE = "Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]] [--timeout s | --timeout-ms ms] [--light] [--rules] [--reference] [--rm-still] [--journey] [--page home|category|about|page]   |   --report <file.html>   |   --verify <file.html> [--url u]";
-const GATE_FLAGS = { json: "bool", light: "bool", rules: "bool", journey: "bool", reference: "bool", "rm-still": "bool", help: "bool", report: "optional", verify: "value", url: "value", out: "value", design: "value", log: "value", tier: "value", archetype: "value", signature: "value", timeout: "value", "timeout-ms": "value", page: "value" };
+const GATE_USAGE = "Usage: node scripts/gate.mjs <url|file|dir> … [--json] [--out file] [--design DESIGN.md] [--log .motomation/log.json] [--tier n --archetype x --signature y] [--report [out.html]] [--timeout s | --timeout-ms ms] [--light] [--rules] [--reference] [--rm-still] [--journey] [--record dir | --no-record] [--page home|category|about|page]   |   --report <file.html>   |   --verify <file.html> [--url u]";
+const GATE_FLAGS = { json: "bool", light: "bool", rules: "bool", journey: "bool", reference: "bool", "rm-still": "bool", help: "bool", report: "optional", verify: "value", url: "value", out: "value", design: "value", log: "value", tier: "value", archetype: "value", signature: "value", timeout: "value", "timeout-ms": "value", page: "value", record: "value", "no-record": "bool"};
 const gateDie = (m) => { console.error(`gate: ${m}\n${GATE_USAGE}`); process.exit(2); };
 for (let i = 0; i < argv.length; i++) {
   const t = argv[i];
@@ -1522,7 +1523,14 @@ const PROBE = sandboxProbe();
 const T0 = Date.now();
 let verdictPrinted = false;
 const verdict = (line, code) => { if (!verdictPrinted) { verdictPrinted = true; console.log(line); } process.exit(code); };
+// v3.0.2: every run leaves a record in the project (scripts/handoff.mjs reads it; the handoff status is computed, never typed)
+const SKILL_VERSION = (() => { try { return readFileSync(new URL("../SKILL.md", import.meta.url), "utf8").match(/^\s*version:\s*(\S+)/m)?.[1] || null; } catch { return null; } })();
+const buildProject = new Map();
+const projectFor = (t) => { if (flags.record && flags.record !== true) return resolve(String(flags.record)); if (/^https?:/.test(String(t))) return null; if (buildProject.has(t)) return buildProject.get(t); try { const p = resolve(String(t)); return statSync(p).isDirectory() ? p : dirname(p); } catch { return null; } };
+const record = (mode, results, extra = {}) => { if (flags["no-record"]) return; const by = new Map(); for (const r of (Array.isArray(results) ? results : [results])) { const p = projectFor(r.target); if (!p) { if (/^https?:/.test(String(r.target))) console.error(`gate: no handoff record for ${r.target} (a URL): pass --record <project folder> to write one`); continue; } by.set(p, [...(by.get(p) || []), r]); }
+  for (const [p, rs] of by) { const f = writeRecord(p, mode, rs, { gate: GATE_VERSION, skill: SKILL_VERSION, machine: typeof PROBE !== "undefined" ? machineLine(PROBE) : null, footprint: rs[0]?.footprint || null, ...extra }); if (f && !flags.json) console.error(`gate: record → ${f} (${mode}; node scripts/handoff.mjs ${p} gives the handoff status)`); } };
 const notVerified = (why, extra) => {
+  try { record("not-verified", targets.map((t) => ({ target: t, pass: false, verified: false, reason: why }))); } catch {}
   if (flags.out) { try { writeFileSync(String(flags.out), JSON.stringify({ verified: false, reason: why, ...extra, machine: PROBE }, null, 2)); } catch {} }
   if (flags.json) console.log(JSON.stringify({ verified: false, reason: why, ...extra, machine: PROBE }, null, 2));
   verdict(`not verified — ${why}`, 3);
@@ -1575,7 +1583,7 @@ async function main() {
     let r; try { r = resolveTarget(targets[i]); } catch (e) { gateDie(e.message); }
     if (r.kind === "build") {
       console.error(`gate: ${targets[i]} → its build output ${r.dir}/`);
-      targets[i] = r.target;
+      targets[i] = r.target; buildProject.set(r.target, resolve(r.project));
       if (!flags.design && existsSync(join(r.project, "DESIGN.md"))) flags.design = join(r.project, "DESIGN.md");
       if (!flags.log && existsSync(join(r.project, ".motomation/log.json"))) flags.log = join(r.project, ".motomation/log.json");
       const fw = frameworkFiles(r.project); if (fw.length) framework.push(...fw);
@@ -1597,6 +1605,7 @@ async function main() {
         const r = judgeRules(rf, url, st.jsKB, opts.tier !== undefined ? opts.tier : pageTier, envIgnoredFor(t)); out.push({ target: t, jsKB: st.jsKB, ...r });
         if (!flags.json) { console.log(`\n${t}\n  ${r.segment}  (rule sets only; no stamp)`); for (const k of ["copy", "seo", "perf", "sec"]) { for (const f of r[k].fails) console.log(`     ✗ ${f.id}  ${f.why}${f.at ? `  ${f.at}` : ""}`); for (const f of r[k].warns || []) console.log(`     ⚠ ${f.id}  ${f.why}${f.at ? `  ${f.at}` : ""}  (warning)`); } }
       } finally { await close?.(); } } } finally { await b.close().catch(() => {}); }
+      record("rules", out.map((r) => ({ ...r, pass: Object.values(r.counts).every((n) => !n) })));
       if (flags.json) console.log(JSON.stringify(out.length === 1 ? out[0] : out, null, 2));
       process.exit(out.every((r) => Object.values(r.counts).every((n) => !n)) ? 0 : 1);
     }
@@ -1611,6 +1620,7 @@ async function main() {
     if (flags.journey) {
       const out = []; const b = await launch(pw, !!flags.light);
       try { for (const t of targets) { const { url, close } = await toUrl(t); try { const j = await journey(b, url, { T, contractRoutes: scopeRoutesFor(t, opts.design) }); out.push({ target: t, url, ...j }); if (!flags.json) { console.log(`\n${t}  (journey only; no stamp)`); for (const l of journeyLines(j)) console.log(l); } } finally { await close?.(); } } } finally { await b.close().catch(() => {}); }
+      record("journey", out);
       if (flags.json) console.log(JSON.stringify(out.length === 1 ? out[0] : out, null, 2));
       process.exit(out.every((r) => r.pass) ? 0 : 1);
     }
@@ -1649,6 +1659,7 @@ async function main() {
       x.value.footprint = x.footprint; if (x.attempts.length) x.value.retried = x.attempts;
       all.push(x.value); if (!flags.json) print(x.value);
     }
+    record("full", all.map((r) => ({ ...r, verified: r.coverage.ok })));
     const thin = all.filter((r) => !r.coverage.ok);
     if (thin.length) notVerified(`coverage: ${thin.map((r) => `${r.target}: ${r.coverage.skipped} of ${r.coverage.total} text elements (${r.coverage.pct}%) skipped at ${r.coverage.width}px`).join("; ")} — more than ${SKIP_WARN_PCT}% at any width is not a measurement`, { result: all.length === 1 ? all[0] : all });
     if (flags.json) console.log(JSON.stringify(all.length === 1 ? all[0] : all, null, 2));

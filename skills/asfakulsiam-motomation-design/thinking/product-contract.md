@@ -42,6 +42,26 @@ Rules:
 1. **Deferring a backend never removes the interface.** Deferring payment-provider integration does not justify omitting the payment-selection UI; deferring auth infrastructure does not justify omitting sign-in and registration screens. The Scope row for a deferred backend or integration names the interface that still ships: `not required for this brief, reason: payment provider deferred; interface: /checkout`. `scripts/completeness.mjs` fails a deferral that cites a backend or integration and names no interface.
 2. **Never present a nonfunctional control as working.** A control that only exists at `interface` level is labelled (`Demo: payments are not processed`) or disabled with an explanation. A "Pay now" that silently does nothing is a defect.
 3. **Delivery mode sets the floor.** Design exploration ships `interface` for every required journey; functional frontend ships `interaction` (and `persisted` where users expect it, such as a cart); production template ships what `templates/TEMPLATE.md` lists. A higher level is never claimed without evidence.
+4. **A form says what it really did.** See Forms and operations below.
+
+## Forms and operations: honest success states (v3.0.2)
+
+A frontend prototype may simulate a flow. It may not pretend. Every submit is one of four operations, and its wording matches the one it is:
+
+| Operation | Capability level | Declare on the `<form>` (optional) | What the user sees on a valid submit | What the gate checks (axis J forms) |
+|---|---|---|---|---|
+| **Server-backed** | `backend`, `integration` | `data-capability="backend"` | pending while the request is out, then success after the server answers, or the error it returned | default, validation, loading, success, server error (the request is held, answered 200, answered 500), and **duplicate**: a second submit while the first request is pending sends nothing |
+| **Browser-only** | `persisted` | `data-capability="persisted"` | "Saved in this browser", "Saved. Your plan is paused": what was saved, and where | default, validation, feedback, **persisted** (something was written to localStorage, sessionStorage, cookies or IndexedDB, and it is still there after a reload), **honest** |
+| **Simulated** | `interaction` | `data-capability="interaction"` | the outcome, labelled: "Demo: nothing was sent", "Prototype: no payment is taken" | default, validation, feedback, **honest** (a disclosure is visible) |
+| **Unavailable** | `interface` | `data-capability="interface"` | why it cannot be used yet, and what to do instead: "Online booking is not available yet. Call the front desk." | **honest**: no success wording, and the unavailability is stated |
+
+Rules:
+
+1. **Never say it happened when it did not.** No "sent", "received", "registered", "booked", "order placed", "payment processed", "we'll be in touch" or "a specialist will contact you" unless a request carried it, or the same message says it did not happen ("Demo only: nothing was sent"). `scripts/journey.mjs` (`CLAIM_RX`, `DISCLOSE_RX`) fails a form that makes no request, saves nothing, discloses nothing and still claims success. Denials ("nothing was booked") are not claims. The word "demo" alone is not a disclosure: a site that sells demos ("Schedule Demo", "your demo instance") must still say what happened to the request.
+2. **Not every interaction needs a request.** A browser-only save or a labelled simulation passes on its own states. The request states (loading, success, server error) apply only to server-backed forms. Without a declaration, the gate reads the operation from behaviour: a storage write is browser-only, a disclosure is simulated, an unavailability notice is unavailable.
+3. **No artificial latency.** A pending state shows real work: a request, a heavy computation. A `setTimeout` that fakes a server's delay ("Transmitting inquiry…" for 400 ms, then success) is theatre: show the outcome at once, or send the request. A simulated step that does show a short pending state must also be labelled ("Creating demo receipt…").
+4. **A flow page reached by a form** (a confirmation, a receipt) is written for what really happened: "Request saved in this browser. Demo only: nothing was sent", not "Our team will contact you within 24 hours". It is `noindex`, and stays out of `sitemap.xml` (or declares `<meta name="motomation:entry" content="flow">`). A page shared by direct link only declares `content="deep-link"`.
+5. **The handoff lists every browser-only, simulated and unavailable operation** (`scripts/handoff.mjs` prints them as prototype boundaries). They are the honest edge of the prototype, not defects, as long as the interface says so.
 
 ## The contract vs the concept
 

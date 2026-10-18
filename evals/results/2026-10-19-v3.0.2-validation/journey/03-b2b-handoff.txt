@@ -1,0 +1,6 @@
+handoff: NOT VALIDATED · 2bb7cc33a0b9797b · gate 2026-10-18 20:36
+  the full gate FAILS on runs/03-b2b (copy) (journey: nav0 mobile2 forms2 loading- errors0 session0)
+
+REPORT REJECTED · runs/03-b2b (copy)/GATE.md
+  ✗ no "handoff:" line: paste the first line node scripts/handoff.mjs printed (handoff: NOT VALIDATED · 2bb7cc33a0b9797b · gate 2026-10-18 20:36)
+  ✗ line 9 claims "All 3 core journeys connect" but the status is NOT VALIDATED: "- Product Integrity: All 3 core journeys connect without broken paths across 375px and 1440px viewpo"

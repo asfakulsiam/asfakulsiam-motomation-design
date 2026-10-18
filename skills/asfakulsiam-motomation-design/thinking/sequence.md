@@ -212,7 +212,7 @@ Two paths. Both run the same six steps; only step 2 differs, by whether the agen
 3. **Checkpoint 5:** it shows the preview plus the review pack: screenshots at 375, 768 and 1440, `DESIGN.md`, `MOTION.md`, `MEDIA.md`, `SCHEMA.md` and `DATA.md` (when the delivery mode has them), and a one-line summary.
 4. The author reviews: **approve**, or **request changes**, which loop back to step 1 and a new preview.
 5. The gate (`gates/delivery-gate.md`) and `/critique` run on the approved design. **Pass:** the handoff push to the connected repo. **Fail:** fix, and re-present (step 3).
-6. **Checkpoint 6:** the handoff (the gate output, the critique, `GATE.md`, `CRITIQUE.md`, where the push went).
+6. **Checkpoint 6:** the handoff (the `handoff:` status line from `scripts/handoff.mjs`, the gate output, the critique, `GATE.md`, `CRITIQUE.md`, where the push went). A status other than `VALIDATED` is shown as it is, with its exceptions (`gates/handoff.md`).
 
 **Path B: preview not possible** (no server, no deploy target, no network): the same six steps, except step 2. The agent produces a **build zip**, or pushes to a **temporary preview location** the author can open or deploy themselves. Steps 3–6 are unchanged.
 

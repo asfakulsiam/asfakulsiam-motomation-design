@@ -1,0 +1,241 @@
+{
+  "evaluation": "Independent visual scoring",
+  "rubric": "rubric.md",
+  "brief_version": "v6",
+  "imagery_v5_exception_applied": false,
+  "weights": {
+    "concept": 20,
+    "originality": 20,
+    "typography": 15,
+    "motion": 15,
+    "craft": 15,
+    "access_performance": 15
+  },
+  "weighted_total_formula": "sum(axis score * axis weight) / 5",
+  "browser": "Headless Chromium via installed Playwright; one browser at a time",
+  "evidence_directory": "benchmarks/v3.0.2-scoring:independent-v3.0.2",
+  "report": "SCORES.md",
+  "sites": [
+    {
+      "id": "03-b2b",
+      "name": "Cargoline",
+      "root": "runs/03-b2b",
+      "gates": {
+        "product_integrity": {
+          "pass": false,
+          "evidence": "Contact displays Inquiry Received with zero requests; demo displays confirmed and promises engineer contact without lead submission or a simulated-submission disclosure; security PDF download is actually a social-card SVG.",
+          "sources": ["journey-evidence.json", "supplement-evidence.json", "security-overview-downloaded.svg"]
+        },
+        "usability": {
+          "pass": false,
+          "evidence": "All 20 audited routes have document width 481 px at 320 and 375 px, clipping the header CTA; malformed email strings were accepted by both forms.",
+          "sources": ["initial-browser-audit.json", "journey-evidence.json", "shots/03-b2b-320-overflow.jpg"]
+        },
+        "accessibility": {
+          "pass": false,
+          "evidence": "16 px reading-content links have computed contrast 3.914:1 on the cookie policy and 4.095:1 on the homepage; axe independently reports the homepage failures at both widths.",
+          "sources": ["extra-evidence.json"]
+        },
+        "content_truth": {
+          "pass": false,
+          "evidence": "Unlabelled invented customer volume/results include 2400 annual TEUs and zero spoiled loads in 18 months; unsupported SOC 2 TYPE II AUDITED claims also appear.",
+          "sources": ["initial-browser-audit.json", "runs/03-b2b/stories/midwest-foods/index.html", "runs/03-b2b/security/index.html"]
+        }
+      },
+      "hard_gates": {
+        "no_filler_or_placeholder_components": {"pass": false, "evidence": "Permanent telemetry-skeleton remains rendered and animated after load, with no completion logic; no Lorem ipsum or TODO text found.", "sources": ["runs/03-b2b/index.html", "runs/03-b2b/assets/app.js", "extra-evidence.json"]},
+        "reduced_motion_path": {"pass": true, "evidence": "No running animations under reduced motion; transitions effectively zero.", "sources": ["extra-evidence.json"]},
+        "body_contrast": {"pass": false, "minimum_observed_ratio": 3.914, "sources": ["extra-evidence.json"]},
+        "primary_keyboard_reachability": {"pass": true, "evidence": "Links and submit buttons receive keyboard focus; full form completion uses standard native-select arrow keys.", "sources": ["initial-browser-audit.json", "journey-evidence.json"]},
+        "no_invented_statistics_logos_testimonials": {"pass": false, "evidence": "Unlabelled case-study operational metrics.", "sources": ["initial-browser-audit.json"]}
+      },
+      "checks": {
+        "audited_addresses_including_explicit_404": 20,
+        "false_success": true,
+        "contact_requests_after_submit": 0,
+        "demo_lead_submission_requests": 0,
+        "overflow_375": true,
+        "overflow_320": true,
+        "document_scroll_width_375": 481,
+        "document_scroll_width_320": 481,
+        "primary_tab_enter_space_only_complete": false,
+        "keyboard_note": "Primary action reachable; required native selects needed ArrowDown. The apparent success is independently invalid because no lead submission occurs."
+      },
+      "axes_are_diagnostic_only": true,
+      "axes": {
+        "concept": {"score": 3, "justification": "The freight-terminal idea and logistics research are visible in telemetry/labels but are not sustained beyond conventional SaaS sections.", "sources": ["benchmarks/v3.0.2-scoring:scoring/03-b2b/home-1440.jpg", "shots/03-b2b-verified-scroll-strip.jpg", "runs/03-b2b/DESIGN.md"]},
+        "originality": {"score": 2, "justification": "Orange/navy telemetry adds specificity without escaping the familiar hero/features/pricing/CTA structure.", "sources": ["shots/03-b2b-verified-scroll-strip.jpg"]},
+        "typography": {"score": 3, "justification": "Display/sans/mono hierarchy is readable but conventional rather than identity-defining.", "sources": ["benchmarks/v3.0.2-scoring:scoring/03-b2b/product-1440.jpg", "benchmarks/v3.0.2-scoring:scoring/03-b2b/pricing-1440.jpg"]},
+        "motion": {"score": 2, "justification": "Static sections offer no explanatory scroll progression and the main loop is a perpetual loading shimmer.", "sources": ["shots/03-b2b-verified-scroll-strip.jpg", "extra-evidence.json"]},
+        "craft": {"score": 2, "justification": "Serviceable desktop alignment is undermined by a prominently clipped mobile masthead across routes.", "sources": ["benchmarks/v3.0.2-scoring:scoring/03-b2b/home-1440.jpg", "benchmarks/v3.0.2-scoring:scoring/03-b2b/home-375.jpg", "shots/03-b2b-320-overflow.jpg"]},
+        "access_performance": {"score": 2, "justification": "Focus/reduced-motion paths exist but contrast, reflow and external font dependency weaken accessibility and resilience.", "sources": ["extra-evidence.json", "journey-evidence.json", "benchmarks/v3.0.2-scoring:scoring/03-b2b/focus-14.jpg"]}
+      },
+      "weighted_total": null,
+      "status": "not scored (gate failed: Product integrity, Usability, Accessibility, Content truth)"
+    },
+    {
+      "id": "08-travel-booking",
+      "name": "Srimangal Hills Guesthouse",
+      "root": "runs/08-travel-booking",
+      "gates": {
+        "product_integrity": {"pass": true, "evidence": "Primary booking completed at 375/1440, local reservation persisted, arrival route and experience-add worked, and map button inserted an embed.", "sources": ["journey-followup-evidence.json", "supplement-evidence.json"]},
+        "usability": {"pass": true, "evidence": "Primary path completed with Tab/Enter/Space plus text entry; empty-form validation recovered; mobile navigation fits at 375.", "sources": ["journey-followup-evidence.json", "shots/08-travel-booking-375-menu.jpg"]},
+        "accessibility": {"pass": true, "evidence": "Primary keyboard path, reduced-motion handling, checked minimum reading-text contrast 5.157:1 and selected homepage axe checks pass; 320 reflow defect is recorded separately.", "sources": ["extra-evidence.json", "journey-followup-evidence.json", "initial-browser-audit.json"]},
+        "content_truth": {"pass": true, "evidence": "Reservation/contact states deny real booking/email and location page identifies town-only map and fictional property.", "sources": ["journey-followup-evidence.json", "supplement-evidence.json"]}
+      },
+      "hard_gates": {
+        "no_filler_or_placeholder_components": {"pass": true, "evidence": "No rendered Lorem ipsum/TODO or unfinished placeholder components found; illustrative photographs are actual displayed images.", "sources": ["initial-browser-audit.json", "benchmarks/v3.0.2-scoring:scoring/08-travel-booking/rooms-1440.jpg"]},
+        "reduced_motion_path": {"pass": true, "sources": ["extra-evidence.json"]},
+        "body_contrast": {"pass": true, "minimum_observed_ratio": 5.157, "sources": ["extra-evidence.json"]},
+        "primary_keyboard_reachability": {"pass": true, "sources": ["journey-followup-evidence.json"]},
+        "no_invented_statistics_logos_testimonials": {"pass": true, "evidence": "No unsupported trust/results material found; fictional/demo boundaries are visible.", "sources": ["initial-browser-audit.json"]}
+      },
+      "checks": {
+        "audited_addresses_including_explicit_404": 24,
+        "false_success": false,
+        "submission_network_note": "Save interactions GET a static data/response.json fixture, not a reservation/contact service; UI explicitly says local demo.",
+        "overflow_375": false,
+        "overflow_320": true,
+        "overflow_routes_320": ["/availability", "/booking/dates"],
+        "overflow_document_width_320": 331,
+        "primary_tab_enter_space_only_complete": true,
+        "primary_keyboard_test_widths": [375, 1440]
+      },
+      "axes_are_diagnostic_only": false,
+      "axes": {
+        "concept": {"score": 4, "justification": "Calm discovery and direct booking reconcile the brief's competing pressures and match the regional booking research record.", "sources": ["benchmarks/v3.0.2-scoring:scoring/08-travel-booking/home-1440.jpg", "benchmarks/v3.0.2-scoring:scoring/08-travel-booking/booking_dates-375.jpg", "runs/08-travel-booking/DESIGN.md"]},
+        "originality": {"score": 3, "justification": "Coherent guesthouse voice remains within familiar editorial-hero and serif/green hospitality conventions.", "sources": ["shots/08-travel-booking-verified-scroll-strip.jpg"]},
+        "typography": {"score": 4, "justification": "Serif display, navigation and task headings maintain effective hierarchy across discovery and booking.", "sources": ["benchmarks/v3.0.2-scoring:scoring/08-travel-booking/home-1440.jpg", "benchmarks/v3.0.2-scoring:scoring/08-travel-booking/booking_dates-375.jpg"]},
+        "motion": {"score": 3, "justification": "Static scroll and small action feedback fit the brief but offer no distinctive motion narrative.", "sources": ["shots/08-travel-booking-verified-scroll-strip.jpg", "extra-evidence.json"]},
+        "craft": {"score": 4, "justification": "375/1440 layouts are composed and consistent, with 11 px date-field overflow at 320 preventing a pixel-tight result.", "sources": ["benchmarks/v3.0.2-scoring:scoring/08-travel-booking/home-375.jpg", "benchmarks/v3.0.2-scoring:scoring/08-travel-booking/rooms-1440.jpg", "shots/08-travel-booking-320-overflow.jpg"]},
+        "access_performance": {"score": 3, "justification": "Keyboard, contrast, local state and opt-in map are solid basics but narrow-width date reflow needs repair.", "sources": ["journey-followup-evidence.json", "extra-evidence.json", "supplement-evidence.json", "initial-browser-audit.json"]}
+      },
+      "weighted_total": 70,
+      "status": "scored"
+    },
+    {
+      "id": "12a-archival",
+      "name": "Leaf & Ledger — quiet archival",
+      "root": "runs/12-paired/a-archival",
+      "gates": {
+        "product_integrity": {"pass": true, "evidence": "Both purchase journeys, saved pause/skip and filters/empty/reset states work at tested widths.", "sources": ["journey-followup-evidence.json", "extra-evidence.json", "supplement-evidence.json"]},
+        "usability": {"pass": true, "evidence": "Default purchase journeys complete with Tab/Enter/Space plus typing; errors recover; prices/cart/menu remain visible.", "sources": ["journey-followup-evidence.json", "benchmarks/v3.0.2-scoring:scoring/12a-archival/tea_sylhet-black-375.jpg", "shots/12a-archival-375-menu.jpg"]},
+        "accessibility": {"pass": true, "evidence": "Primary keyboard, checked contrast, reduced motion and 320/375 route reflow pass.", "sources": ["extra-evidence.json", "initial-browser-audit.json", "journey-followup-evidence.json"]},
+        "content_truth": {"pass": true, "evidence": "Order/receipt deny charges/shipping/email; contact says nothing sent; initial account subscription is labelled sample.", "sources": ["initial-browser-audit.json", "journey-followup-evidence.json"]}
+      },
+      "hard_gates": {
+        "no_filler_or_placeholder_components": {"pass": true, "sources": ["initial-browser-audit.json", "benchmarks/v3.0.2-scoring:scoring/12a-archival/shop-1440.jpg"]},
+        "reduced_motion_path": {"pass": true, "sources": ["extra-evidence.json", "benchmarks/v3.0.2-scoring:scoring/12a-archival/home-reduced-motion-1440.jpg"]},
+        "body_contrast": {"pass": true, "minimum_observed_ratio": 9.279, "sources": ["extra-evidence.json"]},
+        "primary_keyboard_reachability": {"pass": true, "sources": ["journey-followup-evidence.json"]},
+        "no_invented_statistics_logos_testimonials": {"pass": true, "sources": ["initial-browser-audit.json"]}
+      },
+      "checks": {
+        "audited_addresses_including_explicit_404": 23,
+        "false_success": false,
+        "service_submission_requests": 0,
+        "overflow_375": false,
+        "overflow_320": false,
+        "primary_tab_enter_space_only_complete": true,
+        "primary_keyboard_test_widths": [375, 1440],
+        "secondary_skip_note": "Selecting skip in the native radio group needs normal ArrowRight, separately verified; pointer skip also persisted."
+      },
+      "axes_are_diagnostic_only": false,
+      "axes": {
+        "concept": {"score": 5, "justification": "Ledger rules, specimen plates, folio captions and quiet commerce consistently express the archival brief and research.", "sources": ["benchmarks/v3.0.2-scoring:scoring/12a-archival/home-1440.jpg", "benchmarks/v3.0.2-scoring:scoring/12a-archival/shop-1440.jpg", "shots/12a-archival-1440-confirmation.jpg", "runs/12-paired/a-archival/DESIGN.md"]},
+        "originality": {"score": 4, "justification": "The botanical ledger has specific identity despite shared pair composition/typography exceeding the strict threshold.", "sources": ["shots/12a-archival-verified-scroll-strip.jpg", "pair-originality.json"]},
+        "typography": {"score": 4, "justification": "Fraunces display, fine captions and restrained hierarchy are carefully controlled without exceptional utility-page typography.", "sources": ["benchmarks/v3.0.2-scoring:scoring/12a-archival/home-1440.jpg", "benchmarks/v3.0.2-scoring:scoring/12a-archival/subscriptions-1440.jpg", "shots/12a-archival-1440-confirmation.jpg"]},
+        "motion": {"score": 3, "justification": "Restrained feedback/static scroll suit Tier 1–2 but add little signature motion storytelling.", "sources": ["shots/12a-archival-verified-scroll-strip.jpg", "extra-evidence.json"]},
+        "craft": {"score": 4, "justification": "Rules, spacing and purchase controls stay clean across desktop/mobile with no 320/375 overflow.", "sources": ["benchmarks/v3.0.2-scoring:scoring/12a-archival/shop-1440.jpg", "benchmarks/v3.0.2-scoring:scoring/12a-archival/tea_sylhet-black-375.jpg", "initial-browser-audit.json"]},
+        "access_performance": {"score": 4, "justification": "Strong checked contrast, focus, keyboard default purchases and compact local state provide robust fallbacks.", "sources": ["benchmarks/v3.0.2-scoring:scoring/12a-archival/focus-2.jpg", "extra-evidence.json", "journey-followup-evidence.json", "runs/12-paired/a-archival/store.js"]}
+      },
+      "weighted_total": 81,
+      "status": "scored"
+    },
+    {
+      "id": "12b-poster",
+      "name": "Leaf & Ledger — loud poster",
+      "root": "runs/12-paired/b-poster",
+      "gates": {
+        "product_integrity": {"pass": true, "evidence": "Shared routes, both purchases, persisted subscription changes and filters/reset remain working.", "sources": ["initial-browser-audit.json", "journey-followup-evidence.json", "supplement-evidence.json"]},
+        "usability": {"pass": true, "evidence": "Default checkouts complete with restricted navigation/activation keys; mobile purchase/filter/cart controls remain available.", "sources": ["journey-followup-evidence.json", "benchmarks/v3.0.2-scoring:scoring/12b-poster/shop-375.jpg", "benchmarks/v3.0.2-scoring:scoring/12b-poster/subscriptions-375.jpg"]},
+        "accessibility": {"pass": true, "evidence": "Checked contrast >=4.701:1, primary keyboard, no measured 320/375 overflow and designed static reduced-motion pack grid.", "sources": ["extra-evidence.json", "initial-browser-audit.json", "benchmarks/v3.0.2-scoring:scoring/12b-poster/home-reduced-motion-1440.jpg"]},
+        "content_truth": {"pass": true, "evidence": "Order/contact success text explicitly says demo/local and denies real payment, shipping or email.", "sources": ["journey-followup-evidence.json", "shots/12b-poster-375-confirmation.jpg"]}
+      },
+      "hard_gates": {
+        "no_filler_or_placeholder_components": {"pass": true, "sources": ["initial-browser-audit.json", "benchmarks/v3.0.2-scoring:scoring/12b-poster/shop-1440.jpg"]},
+        "reduced_motion_path": {"pass": true, "sources": ["extra-evidence.json", "benchmarks/v3.0.2-scoring:scoring/12b-poster/home-reduced-motion-1440.jpg"]},
+        "body_contrast": {"pass": true, "minimum_observed_ratio": 4.701, "note": "Not a complete image/SVG/complex-background pixel audit; axe incompletes retained in limitations.", "sources": ["extra-evidence.json"]},
+        "primary_keyboard_reachability": {"pass": true, "sources": ["journey-followup-evidence.json"]},
+        "no_invented_statistics_logos_testimonials": {"pass": true, "sources": ["initial-browser-audit.json"]}
+      },
+      "checks": {
+        "audited_addresses_including_explicit_404": 23,
+        "false_success": false,
+        "service_submission_requests": 0,
+        "overflow_375": false,
+        "overflow_320": false,
+        "primary_tab_enter_space_only_complete": true,
+        "primary_keyboard_test_widths": [375, 1440],
+        "secondary_skip_note": "Selecting skip in native radio group needs normal ArrowRight, separately verified; pointer skip also persisted."
+      },
+      "axes_are_diagnostic_only": false,
+      "axes": {
+        "concept": {"score": 5, "justification": "Origin posters, condensed type and pack silhouettes sustain the mandated loud direction through commerce and saved states, extending packaging research.", "sources": ["benchmarks/v3.0.2-scoring:scoring/12b-poster/home-1440.jpg", "benchmarks/v3.0.2-scoring:scoring/12b-poster/tea_sylhet-black-1440.jpg", "shots/12b-poster-1440-subscription-saved.jpg", "runs/12-paired/b-poster/DESIGN.md"]},
+        "originality": {"score": 4, "justification": "The pack/origin system is distinctive in pixels though paired composition, image treatment and typography exceed the strict similarity threshold.", "sources": ["shots/12b-poster-verified-scroll-strip.jpg", "pair-originality.json"]},
+        "typography": {"score": 4, "justification": "Condensed display defines identity and scales convincingly on mobile, balanced by readable utility copy.", "sources": ["benchmarks/v3.0.2-scoring:scoring/12b-poster/home-1440.jpg", "benchmarks/v3.0.2-scoring:scoring/12b-poster/home-375.jpg", "benchmarks/v3.0.2-scoring:scoring/12b-poster/subscriptions-375.jpg"]},
+        "motion": {"score": 4, "justification": "Playful pack/action motion has a meaningfully recomposed static fallback, without an exceptional scroll narrative.", "sources": ["shots/12b-poster-verified-scroll-strip.jpg", "extra-evidence.json", "runs/12-paired/b-poster/poster.css", "benchmarks/v3.0.2-scoring:scoring/12b-poster/home-reduced-motion-1440.jpg"]},
+        "craft": {"score": 4, "justification": "Borders, bands and purchase controls stay aligned and usable without measured narrow-width overflow.", "sources": ["benchmarks/v3.0.2-scoring:scoring/12b-poster/shop-1440.jpg", "benchmarks/v3.0.2-scoring:scoring/12b-poster/shop-375.jpg", "initial-browser-audit.json"]},
+        "access_performance": {"score": 4, "justification": "Strong focus, keyboard default purchases, local state and a designed static fallback keep expression nonessential to use.", "sources": ["benchmarks/v3.0.2-scoring:scoring/12b-poster/focus-2.jpg", "journey-followup-evidence.json", "extra-evidence.json"]}
+      },
+      "weighted_total": 84,
+      "status": "scored"
+    }
+  ],
+  "pair": {
+    "ids": ["12a-archival", "12b-poster"],
+    "rule": "Every applicable similarity axis must be strictly below 0.4, taking worst viewport; --same-product excludes contract-required forms/navigation from interaction.",
+    "command": "node originality.mjs http://127.0.0.1:4612/ http://127.0.0.1:4613/ --same-product --labels 12a-archival,12b-poster --out pair-originality.json",
+    "viewports": ["1440x900", "375x812"],
+    "similarity": {"structure": 0.3, "composition": 0.44, "image": 0.4, "typography": 0.44, "interaction": 0.11, "signature": 0.25, "overall": 0.28},
+    "failing_axes": ["composition", "image", "typography"],
+    "shared_contract_preserved": true,
+    "visually_differentiated": true,
+    "strict_pair_pass": false,
+    "individual_scores_invalidated_by_pair_result": false,
+    "verdict": "Visibly differentiated and shared-contract preserving, but FAIL the v6 strict every-axis-below-0.4 pair criterion.",
+    "sources": ["pair-originality.json", "pair-originality.txt", "initial-browser-audit.json", "journey-followup-evidence.json"],
+    "coverage_note": "Fresh independent metric run covers homepages at two widths; existing multi-route qa/pair.txt uses a looser recomposed-or-partial pass criterion and was not substituted for the requested strict rule."
+  },
+  "limitations": [
+    "No screen reader, physical phone/thumb interaction, Safari, Firefox, forced colors, 200 percent zoom or exhaustive assistive-technology audit.",
+    "No full gate.mjs run; passes are examined hard-gate scope, not WCAG certification.",
+    "Computed contrast across routes and selected homepage axe rules are not an exhaustive rendered-pixel audit of dynamic states, SVG glyphs or image/gradient backgrounds; B2B and poster axe incompletes remain recorded.",
+    "No Core Web Vitals trace, throttled performance benchmark, exhaustive offline test, external-font reliability test or production security audit.",
+    "No recording for frame-accurate easing/timing; scores use verified scroll frames and live/CSS observations without claiming measured timing quality.",
+    "No real CRM, reservation, inventory/channel sync, payment, email or protected account capability verified.",
+    "Map iframe insertion and URL checked; third-party tile rendering/reliability and actual property directions not verified.",
+    "Restricted-key tests cover primary/default-plan paths; B2B native selects needed ArrowDown and tea skip needed normal ArrowRight, separately verified.",
+    "Initial travel locator mismatch and early filter-reset observation were harness issues corrected in follow-up evidence, not site failures.",
+    "Independent strict pair metric covers homepages at two widths, not every shared inner route.",
+    "Research records checked for traceability but external references not independently revisited."
+  ],
+  "evidence_files": [
+    "initial-browser-audit.json",
+    "journey-evidence.json",
+    "journey-followup-evidence.json",
+    "extra-evidence.json",
+    "supplement-evidence.json",
+    "verified-scroll-evidence.json",
+    "pair-originality.json",
+    "pair-originality.txt",
+    "security-overview-downloaded.svg"
+  ],
+  "screenshots": {
+    "directory": "shots",
+    "format": "JPEG",
+    "quality": 70,
+    "preferred_scroll_strips": "*-verified-scroll-strip.jpg",
+    "superseded_scroll_strips": "*-scroll-strip.jpg without the verified qualifier"
+  }
+}

@@ -1,0 +1,14 @@
+journey: nav0 mobile1 forms0 loading- errors0 session0
+  nav · sitemap.xml: 23 route(s)
+  nav · 24 concrete route(s) from the Scope table
+  nav · 23 page(s) loaded
+  mobile ✗ label  wider than the viewport at 320px on 2 page(s) (/availability /booking/dates): reaches 343px; one cause: fix it once
+  mobile · layout 3/4 width(s) fit (320✗ 375✓ 768✓ 1440✓) on 23 page(s) · 1 cause(s)
+  mobile · 12 page(s); an element shared by several pages (header, footer) is tapped once
+  mobile · 12 element(s) parked off-canvas (skip links, closed drawers) are keyboard-only by design and not tapped
+  mobile · no element declares a long press
+  forms · 3 page(s) with forms checked: /availability, /contact, /booking/dates
+  forms · not checked (reported, not passed): Your room Garden veranda · BDT 4,200 Tea (/availability): loading, success, serverError not verified (not verified: the form rejected the check's filled values ("Check-out must be after check-in."); fill it by hand or add a fixture value); Your room Garden veranda · BDT 4,200 Tea (/booking/dates): loading, success, serverError not verified (not verified: the form rejected the check's filled values ("Check-out must be after check-in."); fill it by hand or add a fixture value)
+  errors · probed /__motomation-missing-mve9i2wr/
+  session · second page: /rooms
+  operations: 

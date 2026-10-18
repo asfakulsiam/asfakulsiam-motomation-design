@@ -1,0 +1,99 @@
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+DELIVERY GATE · runs/12-paired/a-archival (copy)
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (78 measured; 1 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (78 measured; 1 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (76 measured; 1 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (79 measured; 1 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (9 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (80 compared)
+  names     ✓ 0 missing alt / accessible names  (31 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (15 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  progress  ✓ 0 of 0 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
+  smooth    – no pinned zone, not measured
+  rm-flow   – no pinned zone
+  rm-still  – no motion that needs a still (no zone, canvas, video or looping animation)
+  focus     ✓ 0 of 31 focused elements show no visible focus indicator  (31 tabbable)
+  targets   ✓ 0 under 24px, 16 under 44px (warning) at 375 touch  (32 checked; inline links exempt)
+     128×42  a.wordmark  "Leaf & LedgerSingle-estate tea"
+     33×44  summary  "Menu"
+     112×25  a  "Sylhet Black"
+     109×25  a  "Assam Gold"
+  zoom200   ✗ 5 lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%
+     control covered  a  "Shop teas"  by div.opening-copy
+     control covered  a  "Subscriptions"  by h1
+     control covered  a  "The estates"  by h1
+     control covered  a  "Account"  by h1
+     control covered  a  "Brewing guide"  by div.opening-copy
+  reflow    ✓ 0px horizontal scroll at 320px
+  forced    ✓ 0 of 79 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
+  kbd-trap  ✓ 31 of 31 tabbable reached in 68 Tabs, no cycle
+  C copy     ✓ 0 rule(s) failing  (craft/copy.md; 0 warning(s))
+  S SEO      ✓ 0 rule(s) failing  (craft/seo.md; 0 warning(s))
+  P perf     ✓ 0 rule(s) failing  (craft/performance.md; 0 warning(s))
+  K security ✓ 0 rule(s) failing  (craft/security.md; 1 warning(s))
+     ⚠ sec-08  .env is not ignored by git (no .gitignore found)  runs/12-paired/a-archival (copy)
+  composition (advisory: heuristics, never fail the gate, not in the stamp)
+     pin fill  – no pinned zone
+     focal     ⚠ 1 of 3 screen(s) with text have one clear focal point (heaviest text mass ≥ 1.5× the next); no clear lead on screen 2 (1.22×), 3 (1.45×)
+     scale     ⚠ display:body 1:5.8  (87.84px / 15.2px; warn below 1:6)
+  richness (advisory: "too little" warnings, never fail the gate, not in the stamp)
+     page      home (from path; set with --page home|category|about|page)
+     fold      ✓ 12 meaningful section(s) above the fold at 1440×900: nav header.site-header, heading h1, heading h2, text p.eyebrow, text p, text figcaption, text p, media img, media img, media img, media img, action a.button  (warn below 3)
+     opening   ✓ h1 "A place in every cup."
+  micro-states (advisory: missing states are warnings, never fail the gate, not in the stamp)
+     buttons   – none on the page
+     forms     – none on the page
+     lists     – none on the page
+     images    ✓ 4 image(s)  (have: loading, loaded, error)
+     async     – no async actions in the page's scripts
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  6 sections, entrances: static | static | static | static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 6KB gzipped
+  records    DESIGN.md: runs/12-paired/a-archival (copy)/DESIGN.md · memory log: none · stamp fields: {"archetype":"none","mutation":"none","signature":"botanical-folio"}
+  critique → C5[restraint:kept] H5[375:0] S5[last5:no-log] R5[cuts:2,anim:2] M?[no-tier] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A4[focus:31/31,tgt:0f16w,zoom:5,reflow:0,fc:0,trap:0]   (axes marked ? have no record to derive from)
+  coverage   ✓ worst width 375px: 1 of 79 text elements skipped (1%; limit 30% at every width)
+  X — completeness (single-estate tea ecommerce, fictional US demo., admin panel: no) [functional frontend]  ✗
+      Routes:      19/19 required present
+      Journeys:    3/3 connected
+      Functions:   4/4 present · 3 not required (reason given)
+      States:      1/1 defined
+      Legal:       4/4 present
+      Edge cases:  2/2 handled
+      Admin:       0/0 present · 1 not required (reason given)
+      Skeletons:   0/0 present · 1 not required (reason given)
+      Template:    16/21 present · 3 not required (reason given)
+      ✗ template MEDIA.md inventory: media file evaluator-walk/1-checkout-empty-cart.png has no row in MEDIA.md (new or renamed media is recorded with its source and licence status)
+      ✗ template MEDIA.md inventory: media file evaluator-walk/2-added.png has no row in MEDIA.md (new or renamed media is recorded with its source and licence status)
+      ✗ template MEDIA.md inventory: media file evaluator-walk/3-validation.png has no row in MEDIA.md (new or renamed media is recorded with its source and licence status)
+      ✗ template MEDIA.md inventory: media file evaluator-walk/4-pending.png has no row in MEDIA.md (new or renamed media is recorded with its source and licence status)
+      ✗ template MEDIA.md inventory: media file evaluator-walk/5-confirmation.png has no row in MEDIA.md (new or renamed media is recorded with its source and licence status)
+  J — journey (whole site, real browser; any missing state fails the page; not in the stamp or its id)
+    nav      ✓ 22/22 route(s) reachable from home in ≤ 3 clicks (/:0 /shop:1 /subscriptions:1 /estates:1 /account:1 /brewing-guide:1 /cart:1 /tea/sylhet-black:1 …)
+               · sitemap.xml: 22 route(s)
+               · 23 concrete route(s) from the Scope table
+               · 22 page(s) loaded
+    mobile   ✓ 80/80 interactive element(s) respond at 375px · tap 80/80 · swipe n/a · long-press n/a
+               · layout 4/4 width(s) fit (320✓ 375✓ 768✓ 1440✓) on 22 page(s)
+               · 12 page(s); an element shared by several pages (header, footer) is tapped once
+               · 3 control(s) disabled by an earlier tap (a selection limit reached) are skipped: a disabled control does nothing by specification
+               · 12 element(s) parked off-canvas (skip links, closed drawers) are keyboard-only by design and not tapped
+               · no element declares a long press
+    forms    ✓ 14/14 form state(s) rendered · Full name (/contact): default✓ validation✓ feedback✓ honest✓ · 1. Choose your monthly plan (/subscriptions/build): default✓ loading✓ feedback✓ persisted✓ honest✓ validation? · Choose a change (/account/subscription): default✓ validation✓ feedback✓ persisted✓ honest✓ · 01 / Delivery details (/checkout):  default? validation? loading? success? serverError?
+               · 5 page(s) with forms checked: /shop, /contact, /subscriptions/build, /account/subscription, /checkout
+               · live control(s), no submit (applied on change, states not required): Refine the ledger (/shop)
+               · no request on submit, read by what it did (v3.0.2): Full name (/contact): simulated (disclosed) · 1. Choose your monthly plan (/subscriptions/build): browser-only (persisted: local:ll-cart-v1), then moves to /checkout · Choose a change (/account/subscription): browser-only (persisted: local:ll-subscription-v1)
+               · not checked (reported, not passed): 1. Choose your monthly plan (/subscriptions/build): validation not verified (not verified: the submit control is disabled while the form is incomplete, so an empty submit cannot happen); 01 / Delivery details (/checkout): default, validation, loading, success, serverError not verified (not verified: the form is hidden when the page loads (behind a state a fresh browser does not have, such as an empty cart or a signed-out account); walk it by hand)
+    loading  – n/a: no fetch or XHR request after load: no async surface
+    errors   ✓ 1/1 designed not-found view (unknown route → HTTP 404)
+               · probed /__motomation-missing-mvea0vh4/
+    session  ✓ 6/6 · load ✓ · open a second route ✓ · back button ✓ · forward button ✓ · full reload ✓ · two tabs ✓
+               · second page: /shop
+    coverage 22 page(s) loaded of 22 required route(s) · forms checked on every page that has one (5 page(s), 4 form(s)) · tap and loading sampled on 12 page(s)
+               · Scope routes no link reaches (check them in the journey walk): /404
+               · not sampled for tap/loading: /tea/assam-gold, /tea/ilam-green, /shipping, /returns, /privacy, /terms … 4 more
+               · forms not checked: 1. Choose your monthly plan (/subscriptions/build): validation not verified (not verified: the submit control is disabled while the form is incomplete, so an empty submit cannot happen), 01 / Delivery details (/checkout): default, validation, loading, success, serverError not verified (not verified: the form is hidden when the page loads (behind a state a fresh browser does not have, such as an empty cart or a signed-out account); walk it by hand)
+    journey: nav0 mobile0 forms0 loading- errors0 session0 → PASS
+  FAIL  stamp → critique: C5[restraint:kept] H5[375:0] S5[last5:no-log] R5[cuts:2,anim:2] M?[no-tier] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A4[focus:31/31,tgt:0f16w,zoom:5,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k5 · rules: C0 S0 P0 K0 · gate/4 · 8befc2b9bc · skipped 1/79@375
+
+gate: record → runs/12-paired/a-archival (copy)/.motomation/gate-record.json (full; node scripts/handoff.mjs runs/12-paired/a-archival (copy) gives the handoff status)

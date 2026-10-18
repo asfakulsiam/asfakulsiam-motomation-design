@@ -2,14 +2,14 @@
 
 # Motomation Design
 
-**An agent skill that designs like a person with taste.**
-Original, award-level websites that are minimal, modern and typography-led, with motion as the signature.
-At the top tier, scrolling plays like a film.
+**An agent skill that guides a coding agent through research, art direction, build and validation of a website.**
+It aims for original, typography-led sites that fit the product, with motion as a deliberate choice. At the top tier, scrolling plays like a film.
+The result still depends on the agent, the brief and a human review; the skill does not guarantee award-level output.
 
 **New here? [Start here → what it is, who it's for, and what a session looks like](ABOUT.md)** · **[See it in action → worked examples](#see-it-in-action)** · **[Cheatsheet → every command, flag and tier, with example prompts](docs/CHEATSHEET.md)**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-111111?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-3.0.1-E0442B?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-3.0.2-E0442B?style=flat-square)](CHANGELOG.md)
 [![Agent Skill](https://img.shields.io/badge/agent%20skill-npx%20skills%20add-111111?style=flat-square)](#install)
 [![Zero dependencies (gate: Playwright, optional)](https://img.shields.io/badge/scripts-zero%20dependencies%20%28gate%3A%20Playwright%2C%20optional%29-111111?style=flat-square)](skills/asfakulsiam-motomation-design/scripts)
 
@@ -37,6 +37,7 @@ Real sessions, copied with their commands, outputs, screenshots and gate results
 | [Fix an existing page](skills/asfakulsiam-motomation-design/examples/prompts/fix-existing.md) | The short route on a real failing page: route stated, cause named, a 3-line fix, gate before (32 failures) and after (0) |
 | [Component swap](skills/asfakulsiam-motomation-design/examples/prompts/component.md) | `HoldToCommit` dropped into an existing React app: search, choice, diff, typecheck, gate, interaction test |
 
+
 ---
 
 ## Why this exists
@@ -55,124 +56,8 @@ Motomation Design changes the thinking:
 | **Motion** | Fade-up on everything | Five tiers, four questions, reduced motion designed in, and **Motomation** at the top |
 | **Delivery** | "Here's your page!" | A six-axis critique score, a 25-point AI-default scan, and a handoff note |
 
----
-
-## What's inside
-
-- **The Thinking Sequence (v3, research-first):** stack → **product contract** (jobs, journeys, IA, density, states, approved before any concept) → **design research** (questions, sources chosen by what they prove, evidence with limitations) → **directions and synthesis** (2–3 directions compared against the contract; archetypes, mutation, collision and signature are optional tools) → memory and sameness → restraint. An explicit authority order (`principles/authority.md`) keeps opinions advisory and the product intact.
-- **Mad Artist Mode:** ten invention techniques plus a collision engine (`collide.mjs`) that draws constraints with a cryptographic random number generator instead of the model's most likely choice, without repeats inside a run. It pushes ideas away from the default; it can't promise an idea nobody has had.
-- **Five motion tiers:** CSS → GSAP/ScrollTrigger/SplitText/Lenis → View Transitions, Flip, Lottie, Rive → WebGL, shaders, WebGPU → **Motomation**.
-- **Motomation (Tier 5):** scroll-as-film. Storyboards with timecodes, image-sequence, video-scrub and DOM-timeline techniques, ffmpeg pipelines, frame budgets, and a designed reduced-motion storyboard.
-- **22 signature moves**, each with idea, reason, code, the detail that matters, an off-switch, and a **paste-ready prompt** for any AI tool.
-- **A house style, with its reasons:** minimal canvas, maximal type, one accent, editorial grid, motion with weight, for brand and editorial surfaces; every opinion is in `principles/heuristics.md` with the problem it solves and when to ignore it.
-- **3 dials** (Energy, Rhythm, Motion, each 1–3), set from the brief; no presets.
-- **12 site categories** and **10 visual styles**, each with its own guidance.
-- **Searchable data:** 68 components, 80 fonts (with axes, licences and script coverage, 15 of them Bangla, Devanagari or Arabic), 40 contrast-verified palettes (light and dark pairs), 50 motion recipes with timings, 12 imagery directions (one per category), 20 archetypes, 12 mutations, 40 collision sources.
-- **A Delivery Gate:** a self-critique score, a 25-point AI-default scan and a craft checklist.
-- **A component library:** 68 original effect components in 8 families (type, text, scroll, cursor, backgrounds, layout, ui, micro-interactions), each one file with props, a reduced-motion path and touch behaviour, a live gallery and a shadcn-style registry. See [Component library](#component-library).
-- **Production examples:** 9 strict-TypeScript React components, a shared GSAP setup module (`lib/gsap.ts`) and a single-file HTML Motomation demo.
-- **Evals:** 8 test briefs, a weighted rubric and a release gate against a no-skill baseline.
 
 ---
-
-## Results
-
-### Benchmark v4 (2026-10-12) — builds only, not scored
-
-78 builds were generated at `6f15d45` in Claude Code 2.1.286: 30 matched-effort-vs-skill pairs (5 briefs × 6 seeds) and 9 Tier 4 motion pairs (baseline vs skill). The measurement step ran on GitHub Actions, but its output was never committed. **No v4 pair has been measured or judged, so there are no v4 scores, wins or p-values.** The table below is still v3. Build data that v4 does support: matched-effort enforcement held in 10 of 30 pairs, and 17 of 30 matched runs ended on the turn cap. Report: [`evals/results/2026-10-12-benchmark-v4.md`](evals/results/2026-10-12-benchmark-v4.md).
-
-### Benchmark v3 (2026-10-12)
-
-**Commit tested: [`6f2724f`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/commit/6f2724f5299a19cd55cb94cbad886c1c6af38fd6)** (`6f2724f5299a19cd55cb94cbad886c1c6af38fd6`). Five briefs × three seeds, built in Claude Code 2.1.286 by `claude_sonnet_5_5` in four arms (baseline, baseline + `gate.mjs`, skill, matched-effort baseline) plus three competitor skills, a Tier 4 motion run and a Codex CLI run: 133 builds. Measured on GitHub Actions (Chromium 147, axe-core 4.14.0), judged blind in pairs by GPT-5.4 and Gemini 3.1 Pro. Reports: [main](evals/results/2026-10-12-benchmark-v3.md) · [motion](evals/results/2026-10-12-benchmark-v3-motion.md) · [competitors](evals/results/2026-10-12-benchmark-v3-competitors.md) · [Codex](evals/results/2026-10-12-benchmark-v3-codex.md).
-
-| Skill vs… (15 blind pairs each) | Skill W–L–T | Mean gated (other → skill) | Mean raw (other → skill) |
-|---|---|---|---|
-| Baseline (no skill) | **12–2–1** | 43.4 → 83.7 | 62.8 → 88.9 |
-| Baseline + `gate.mjs` | **14–1–0** | 65.5 → 86.4 | 65.5 → 91.4 |
-| Matched-effort baseline | **10–5–0** | 63.7 → 80.4 | 77.3 → 85.5 |
-| taste-skill | **14–1–0** | 47.2 → 87.2 | 56.1 → 92.2 |
-| ui-ux-pro-max | **14–1–0** | 66.1 → 86.2 | 66.1 → 90.8 |
-| frontend-design (Anthropic) | **11–3–1** | 55.5 → 81.6 | 72.4 → 87.0 |
-| Tier 4 motion, full rubric (9 pairs) | 7–2–0 | 53.1 → 83.4 | 74.8 → 83.4 |
-| Tier 4 motion, motion only from `gate.mjs --report` strips (9) | **3–6–0** | 77.3 → 64.4 | — |
-| Codex CLI + `gpt_5_4` (5 pairs, 1 seed) | 3–2–0 | 77.0 → 76.2 | 77.0 → 76.2 |
-
-| Brief (mean gated of 3 seeds) | Baseline → skill | Gated baseline → skill | Matched → skill |
-|---|---|---|---|
-| 07 Architecture studio | 83.8 → 78.7 | 67.0 → 90.8 | 84.7 → 84.0 |
-| 04 Boutique hotel | 49.0 → 96.3 | 73.2 → 95.5 | 53.8 → 82.2 |
-| 03 Ceramics shop | 49.5 → 61.5 | 67.7 → 61.5 | 86.0 → 56.2 |
-| 02 Developer tool (SaaS) | 34.7 → 90.3 | 57.5 → 92.7 | 44.8 → 91.8 |
-| 05 Climate non-profit | 0.0 → 91.7 | 62.2 → 91.3 | 49.0 → 87.8 |
-
-What v3 found, including where the skill lost:
-- **The gate is about half the win.** A baseline that only runs `gate.mjs` has no hard-gate failures (0 of 15, against 6 for the plain baseline) but isn't better designed (raw 73.0 → 68.3 against the plain baseline), and the skill still beats it 14–1.
-- **Effort explains part of v2's 15–0.** A baseline told to work about as long as the skill beats the plain baseline 12–0–3 and takes 5 of 15 pairs from the skill, including all three ceramics-shop seeds. 10–5 is not significant with 15 pairs (sign test p≈0.30).
-- **On motion alone the skill lost.** At Tier 4, judged only from the gate's scroll-frame strips, the baseline won 6 of 9 seeds. The weakest axis was the reduced-motion fallback (2.50 vs 4.39 of 5). Every skill page reached for WebGL.
-- **In Codex the gate often couldn't run** (the headless browser crashed or timed out in a loaded sandbox). 3 of 5 skill runs shipped without a verified pass, and the SaaS page broke.
-- **One skill page failed a hard gate** (ceramics s3103: dimmed scroll-sequence steps at 2.1:1 that `gate.mjs` measured only in their active state).
-
-#### Before and after (v3)
-
-**Public interest (brief 05), s5102: won, 0 vs 98.5.** The baseline fails axe contrast; the skill sets the Bangla line as the headline.
-<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/v3-public-5102.webp?raw=true" alt="Public-interest brief, v3 seed 5102: without the skill a two-colour hero that fails contrast (gated 0, raw 47.0); with the skill a large Bangla headline on cream with a mangrove-root drawing (98.5)" width="100%">
-
-**Ceramics shop (brief 03), s3102: lost to the matched-effort baseline, 89.5 vs 77.5.** A baseline told to keep refining built a clearer product page.
-<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/v3-ecommerce-3102-matched.webp?raw=true" alt="Ceramics brief, v3 seed 3102: the matched-effort baseline with a large serif headline and a cup card (89.5); the skill with a product-sheet layout (77.5)" width="100%">
-
-**Studio (brief 07), s7101: lost to Anthropic's frontend-design skill, 89.0 vs 65.0.**
-<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/v3-studio-7101-frontend-design.webp?raw=true" alt="Studio brief, v3 seed 7101: the frontend-design skill's page (89.0) and the Motomation skill's page (65.0)" width="100%">
-
-**Festival (brief 08), s8102, Tier 4 runner strip: won on the full rubric (0 vs 87.0) and on motion alone (64 vs 94).**
-<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/v3-festival-8102-strip.webp?raw=true" alt="Festival brief, v3 seed 8102: eight scroll frames for each site at Tier 4" width="100%">
-
-**Launch (brief 06), s6102, Tier 4 runner strip: lost on both (96.5 vs 62.0; motion only 96 vs 40).** The skill's frames overlap mid-transition, and its reduced-motion strip barely differs from full motion.
-<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/v3-launch-6102-strip.webp?raw=true" alt="Launch brief, v3 seed 6102: eight scroll frames for each site at Tier 4; the baseline's ring changes colour per section, the skill's pinned lamp stays while text overlaps" width="100%">
-
-### Benchmark v2 (2026-10-11)
-
-Run inside a real coding agent ([full report](evals/results/2026-10-11-benchmark-v2.md) · [summary](docs/benchmark-summary.md)). Five briefs, three seeds each, built in Claude Code by the same model (`claude_sonnet_5_5`) with and without the skill: 30 runs, 15 blind pairs. Two judges from other model families (GPT-5.4, Gemini 3.1 Pro) scored every pair against [`evals/rubric.md`](evals/rubric.md) without knowing which was which. Hard gates (contrast, keyboard, reduced motion, placeholders) come from Playwright + axe-core and `gate.mjs` measurements.
-
-| | Without skill | With skill |
-|---|---|---|
-| Pairs won | 0 of 15 | **15 of 15** |
-| Mean gated score | 45.9 | **92.4** |
-| Mean raw score (no gates) | 67.1 | **92.4** |
-| Pages failing a measured hard gate | 5 of 15 (contrast) | 0 of 15 |
-
-| Brief | Seeds | Baseline gated (mean) | Skill gated (mean) |
-|---|---|---|---|
-| 07 Architecture studio | 7101–7103 | 74.8 | 96.0 |
-| 04 Boutique hotel | 4101–4103 | 0.0 (all three fail contrast) | 91.7 |
-| 03 Ceramics shop | 3101–3103 | 47.3 | 93.2 |
-| 02 Developer tool (SaaS) | 2101–2103 | 40.0 | 93.2 |
-| 05 Climate non-profit | 5101–5103 | 67.3 | 88.0 |
-
-The skill won every v2 pair before the gates too. v3 tested what v2 couldn't (matched effort, a gate-only baseline, motion from strips, competitors, a second agent), and the margin shrank on each of those tests.
-
-#### Before and after (v1, v2)
-
-Same brief, same model, same seed: without the skill on the left, with it on the right. Losses are included.
-
-**Hotel (brief 04), v2: won.** Without the skill the page fails contrast (gated 0); with it, a full-height door with the name set large (98.5).
-<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/v2-hotel-4102.webp?raw=true" alt="Hotel brief, seed 4102: without the skill a conventional page that fails contrast (gated 0); with the skill a full-height door with the name set large (98.5)" width="100%">
-
-**Hotel (brief 04), v1: lost, 54.5 vs 88.5.** The door-split hero breaks the name into "Have li", the page overflows a phone by 105px, and room prices flip through wrong digits. The gate that now catches all three (`words`, `overflow`, `numbers`) was built because of this page.
-<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/hotel-before-after.webp?raw=true" alt="Hotel brief, v1: without the skill a clean cream page with a small door (88.5); with the skill a dark riveted door filling the screen with the name split as 'Have li' (54.5)" width="100%">
-
-**SaaS (brief 02), v2: won every pair, lost on variety.** Three seeds, three wins (94, 93.5, 92), and three versions of the same page: a big serif headline on the left, a log panel on the right. The cause (the evaluator's note leaking into the prompt) is fixed in v2.4.0; see the [variety report](evals/results/2026-10-11-variety.md).
-<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/v2-saas-sameness.webp?raw=true" alt="SaaS brief, v2: the three skill pages for seeds 2101, 2102 and 2103 side by side, each a large headline left and a log panel right" width="100%">
-
-**SaaS (brief 02), v1: won, 95.5 vs 44.5.** A generic dark template that overflows a phone, against a page where the log stream is the hero.
-<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/saas-before-after.webp?raw=true" alt="SaaS brief, v1: without the skill a generic dark landing page (44.5); with the skill a serif headline over a scrolling log stream (95.5)" width="100%">
-
-**Studio (brief 07), v2: won, 74.5 vs 96.5.**
-<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/v2-studio-7101.webp?raw=true" alt="Studio brief, seed 7101: without the skill 74.5, with the skill 96.5" width="100%">
-
-**Public interest (brief 05), v1: won.** A conventional layout against a bilingual manifesto that keeps the one real figure with its source.
-<img src="https://github.com/asfakulsiam/asfakulsiam-motomation-design/blob/evals/docs/benchmark-images/public-before-after.webp?raw=true" alt="Public-interest brief, v1: a conventional layout without the skill; a bilingual manifesto with the skill" width="100%">
-
-**What v2 didn't show, and what v3 did about it:** effort wasn't matched (v3: matched-effort arm, skill 10–5); the judges saw the measured checks (still true in v3); motion was judged from stills (v3: motion-only judging from strips, skill 3–6); one agent and one model (v3: a one-seed Codex run, 3–2). The v1 single-prompt benchmark (3 of 5 won) is kept in the [CHANGELOG](CHANGELOG.md) and its [report](evals/results/2026-10-11-benchmark.md).
 
 ## Install
 
@@ -220,6 +105,7 @@ Without a shell, the skill uses the data tables included at the end of the file 
 npx skills update asfakulsiam-motomation-design
 ```
 
+
 ---
 
 ## Quick start
@@ -235,6 +121,7 @@ npx skills update asfakulsiam-motomation-design
 Or just ask in plain words ("design a landing page for my app"). The skill triggers on any web design task and runs `/build` by default.
 
 Every command, flag, tier and script with a use case and a copy-paste prompt, plus full-potential recipes: **[docs/CHEATSHEET.md](docs/CHEATSHEET.md)**.
+
 
 ---
 
@@ -291,10 +178,31 @@ Each command lists **what** it does, **when** to use it and **where** it applies
 - **Stuck:** `/invent` → pick one → `/build --review`
 - **Existing site feels generic:** `/critique` → `/mutate` → `/type` → `/signature`
 - **Product launch:** `/shape --energy=3 --rhythm=3` → `/motomate hero-product` → `/audit`
+- **Check while building, validate at handoff:** `completeness.mjs`, `gate.mjs --rules` and `gate.mjs --journey` during the build; the full `gate.mjs <site>` on the approved files, then `handoff.mjs <site> --report GATE.md` ([gates/handoff.md](skills/asfakulsiam-motomation-design/gates/handoff.md))
+
 
 ---
 
-## How it thinks
+## Features
+
+### What's inside
+
+- **The Thinking Sequence (v3, research-first):** stack → **product contract** (jobs, journeys, IA, density, states, approved before any concept) → **design research** (questions, sources chosen by what they prove, evidence with limitations) → **directions and synthesis** (2–3 directions compared against the contract; archetypes, mutation, collision and signature are optional tools) → memory and sameness → restraint. An explicit authority order (`principles/authority.md`) keeps opinions advisory and the product intact.
+- **Mad Artist Mode:** ten invention techniques plus a collision engine (`collide.mjs`) that draws constraints with a cryptographic random number generator instead of the model's most likely choice, without repeats inside a run. It pushes ideas away from the default; it can't promise an idea nobody has had.
+- **Five motion tiers:** CSS → GSAP/ScrollTrigger/SplitText/Lenis → View Transitions, Flip, Lottie, Rive → WebGL, shaders, WebGPU → **Motomation**.
+- **Motomation (Tier 5):** scroll-as-film. Storyboards with timecodes, image-sequence, video-scrub and DOM-timeline techniques, ffmpeg pipelines, frame budgets, and a designed reduced-motion storyboard.
+- **22 signature moves**, each with idea, reason, code, the detail that matters, an off-switch, and a **paste-ready prompt** for any AI tool.
+- **A house style, with its reasons:** minimal canvas, maximal type, one accent, editorial grid, motion with weight, for brand and editorial surfaces; every opinion is in `principles/heuristics.md` with the problem it solves and when to ignore it.
+- **3 dials** (Energy, Rhythm, Motion, each 1–3), set from the brief; no presets.
+- **12 site categories** and **10 visual styles**, each with its own guidance.
+- **Searchable data:** 68 components, 80 fonts (with axes, licences and script coverage, 15 of them Bangla, Devanagari or Arabic), 40 contrast-verified palettes (light and dark pairs), 50 motion recipes with timings, 12 imagery directions (one per category), 20 archetypes, 12 mutations, 40 collision sources.
+- **A Delivery Gate:** a self-critique score, a 25-point AI-default scan and a craft checklist.
+- **A component library:** 68 original effect components in 8 families (type, text, scroll, cursor, backgrounds, layout, ui, micro-interactions), each one file with props, a reduced-motion path and touch behaviour, a live gallery and a shadcn-style registry. See [Component library](#component-library).
+- **Production examples:** 9 strict-TypeScript React components, a shared GSAP setup module (`lib/gsap.ts`) and a single-file HTML Motomation demo.
+- **Evals:** 8 test briefs, a weighted rubric and a release gate against a no-skill baseline.
+
+
+### How it thinks
 
 ```
 MOTOMATION PLAN
@@ -311,9 +219,8 @@ Not doing   : A bento grid of thumbnails under "Hi, I'm Rafi"
 
 The agent shows this block before it writes any code. Every line comes from a step of the [Thinking Sequence](skills/asfakulsiam-motomation-design/thinking/sequence.md).
 
----
 
-## Motion tiers
+### Motion tiers
 
 | Tier | Name | Tools | Use it for |
 |---|---|---|---|
@@ -325,9 +232,8 @@ The agent shows this block before it writes any code. Every line comes from a st
 
 The rule: **use the lowest tier that delivers the concept.** Tier 5 is the signature, not the default.
 
----
 
-## Tools inside the skill
+### Tools inside the skill
 
 Node.js scripts (Node 18+). Everything except the Delivery Gate is zero-dependency: no `npm install` needed.
 
@@ -342,7 +248,7 @@ node scripts/memory.mjs recent --project /path/to/project    # explicit project 
 node scripts/contrast.mjs "#151412" "#F3F0EA"                # WCAG contrast
 ```
 
-### Delivery Gate: `gate.mjs` (optional: needs Playwright)
+#### Delivery Gate: `gate.mjs` (optional: needs Playwright)
 
 `gate.mjs` renders the page in a real browser and measures what the Delivery Gate asks for:
 - contrast against the pixels actually behind each text element (judged by the 10th-percentile sample, with a warning when more than 30% of text can't be measured);
@@ -359,13 +265,15 @@ npm i -D playwright && npx playwright install chromium       # once, in your pro
 node scripts/gate.mjs path/to/index.html                     # or a URL, or a folder of pages
 node scripts/gate.mjs --verify path/to/index.html            # re-scan and check the stamp written in the file
 node scripts/gate.mjs site/ --json --out gate-report.json    # machine-readable report
+node scripts/handoff.mjs site/ --report site/GATE.md        # the handoff status, computed from the gate's record
 ```
+
+Every gate run leaves a record in `<project>/.motomation/gate-record.json`. `handoff.mjs` turns it into the handoff status: **VALIDATED** only when the full gate passed on the current files with nothing left unverified, **CONDITIONAL** when a journey could not be verified, **NOT VALIDATED** when the full gate did not run, failed, or ran on older files. `--report` rejects a handoff note that claims more than that ([gates/handoff.md](skills/asfakulsiam-motomation-design/gates/handoff.md)).
 
 The memory log is per project. `memory.mjs` walks up from the folder you run it in to the nearest `package.json` or `.git`, skips the skill's own folder, and writes `<project>/.motomation/log.json`. So running it from inside `.claude/skills/…` still records the project that installed the skill. `--project <dir>` overrides the lookup.
 
----
 
-## Categories and styles
+### Categories and styles
 
 **Categories:** portfolio · studio/agency · e-commerce · SaaS · hotel · restaurant · organisation/non-profit · event · architecture/real estate · personal brand · product launch · education
 
@@ -373,9 +281,8 @@ The memory log is per project. `memory.mjs` walks up from the folder you run it 
 
 Each has its own optional recipe file (starting dials, archetypes that can fit, one possible section order, optional treatments, expected conventions, pitfalls) and a recipe contract saying what it assumes, what it doesn't cover and when to reject it. Types without a file (marketplaces, B2B, publications, dashboards, booking) are researched as themselves. A category file is optional design guidance, never the scope: the scope comes from researching real sites of the exact type (Step 1), and a type with no file is researched as itself.
 
----
 
-## Component library
+### Component library
 
 68 components, all written for this skill, in 8 families:
 
@@ -406,9 +313,49 @@ npx shadcn@latest add https://raw.githubusercontent.com/asfakulsiam/asfakulsiam-
 
 See them all live: open [`examples/gallery/index.html`](skills/asfakulsiam-motomation-design/examples/gallery/index.html) in a browser. It's one self-contained file, passes the skill's own Delivery Gate, and shows every fallback when your OS has reduced motion turned on.
 
+
 ---
 
-## Repository layout
+## Validation and release status
+
+**Current version: 3.0.2** ([CHANGELOG](CHANGELOG.md)). Validation report: [docs/VALIDATION-v3.0.2.md](docs/VALIDATION-v3.0.2.md), what each fix addresses, its regression test, and what is still unverified.
+
+- **3.0.2** came out of an independent evaluation of 3.0.1 ([v3.0.1 evaluation](evals/results/2026-10-18-v3.0.1-independent/README.md)). The handoff status is now computed from what the gate actually ran (`scripts/handoff.mjs`: VALIDATED, CONDITIONAL or NOT VALIDATED), never typed. Forms that send nothing are judged by what they really did (browser-only save, labelled simulation, unavailable) and fail when they claim to have sent or booked something. Layout overflow is checked at 320, 375, 768 and 1440px and reported once per root cause. Confirmation pages reached by a form, and declared deep links, no longer read as broken navigation.
+- **What "validated" means here:** the full Delivery Gate (`gate.mjs`, every axis including the journey check J) passed on the current files, and nothing it could not verify is left. Development checks (`--journey`, `--rules`, `completeness.mjs`) guide a build and never validate it ([gates/handoff.md](skills/asfakulsiam-motomation-design/gates/handoff.md)).
+- **Works best with** a coding agent that can run Node 18+ scripts; the Delivery Gate also needs Playwright. In chat-only builders the agent follows the same protocol but cannot run the checks, so nothing it reports is measured.
+- **Still needs a person:** brief fit, copy truth (real statistics, logos, certifications), taste, and any real backend.
+- **Not verified by this repository:** screen-reader use (NVDA, VoiceOver, TalkBack), real devices, and real payment, email or booking backends. Keyboard checks are automated (Playwright keyboard input and axe-core), not a person at a keyboard.
+
+---
+
+## Benchmark summary
+
+The latest scored benchmark is **v3** (2026-10-12): five briefs × three seeds in Claude Code, judged blind in pairs by two models from other families. The skill beat a no-skill baseline 12–2–1 and a matched-effort baseline 10–5–0 (not significant with 15 pairs, sign test p≈0.30). It **lost on motion alone** (3–6 at Tier 4, judged from scroll strips). v4 generated builds but was never scored.
+
+| Skill vs… (15 blind pairs each) | Skill W–L–T | Mean gated (other → skill) |
+|---|---|---|
+| Baseline (no skill) | **12–2–1** | 43.4 → 83.7 |
+| Matched-effort baseline | **10–5–0** | 63.7 → 80.4 |
+| Tier 4 motion, motion only (9 pairs) | **3–6–0** | 77.3 → 64.4 |
+
+Full tables per brief, competitor skills, the Codex run, before-and-after screenshots with losses, and v1, v2 and v4: **[docs/benchmark-summary.md](docs/benchmark-summary.md)**. Reports: [v3](evals/results/2026-10-12-benchmark-v3.md) · [v4 (builds only)](evals/results/2026-10-12-benchmark-v4.md) · [v2](evals/results/2026-10-11-benchmark-v2.md).
+
+---
+
+## Documentation
+
+| Read | For |
+|---|---|
+| [ABOUT.md](ABOUT.md) | what the skill is, who it is for, what a session looks like |
+| [docs/CHEATSHEET.md](docs/CHEATSHEET.md) | every command, flag, tier and script, with prompts |
+| [SKILL.md](skills/asfakulsiam-motomation-design/SKILL.md) | the protocol the agent follows |
+| [gates/delivery-gate.md](skills/asfakulsiam-motomation-design/gates/delivery-gate.md) · [gates/handoff.md](skills/asfakulsiam-motomation-design/gates/handoff.md) | what the gate measures; development checks versus handoff validation |
+| [thinking/product-contract.md](skills/asfakulsiam-motomation-design/thinking/product-contract.md) | capability levels and honest form states |
+| [docs/VALIDATION-v3.0.2.md](docs/VALIDATION-v3.0.2.md) · [docs/VALIDATION-v3.0.1.md](docs/VALIDATION-v3.0.1.md) | release validation reports |
+| [docs/benchmark-summary.md](docs/benchmark-summary.md) · [evals/README.md](evals/README.md) | benchmarks, rubric, how to run them |
+| [CHANGELOG.md](CHANGELOG.md) | every version |
+
+### Repository layout
 
 ```
 skills/asfakulsiam-motomation-design/   ← the installable skill
@@ -440,6 +387,7 @@ evals/                       ← test briefs, rubric, release gate
 .claude-plugin/ .cursor-plugin/ .codex-plugin/ gemini-extension.json rules/
 ```
 
+
 ---
 
 ## FAQ
@@ -462,6 +410,7 @@ Yes. GSAP and all its plugins (SplitText, ScrollTrigger, MorphSVG and more) are 
 **Can I use effects from component libraries?**
 You don't need one. The skill ships its own library of 68 components (see [Component library](#component-library)), all written for this project. If your project already uses another library, the skill checks it first and uses it under that library's licence.
 
+
 ---
 
 ## Contributing
@@ -471,4 +420,3 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). In short: original work only, short sing
 ## License
 
 [MIT](LICENSE) © asfakulsiam. Every component, script and document is MIT and original: the repository contains no third-party component code. One exception, not covered by the MIT licence: the runtime files self-hosted for the offline demo in [`examples/html/lib/`](skills/asfakulsiam-motomation-design/examples/html/lib/LICENSES.md) (GSAP under its Standard License, Lenis under MIT, fonts under the SIL OFL), copied unmodified with their notices.
-

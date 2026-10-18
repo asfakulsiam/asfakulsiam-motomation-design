@@ -1,0 +1,43 @@
+same product: interaction compares feedback only (forms and navigation are fixed by the shared contract)
+
+=== at 1440×900 ===
+ORIGINALITY · 2 build(s) · 1 pair(s) · threshold < 0.4 on every axis (lower = more different)
+  12a-archival: 4 content blocks [text:m grid:m statement:s statement:s] · 4 image(s) · type fraunces / dm sans (body 12.8px) · signature measured scroll → colour on text (medium)
+  12b-poster: 3 content blocks [media:m grid:m statement:s] · 6 image(s) · type barlow condensed / dm sans (body 17.6px) · signature measured scroll → transform on media (medium)
+
+| Pair | structure | composition | image | typography | interaction | signature | overall | Verdict |
+|---|---:|---:|---:|---:|---:|---:|---:|---|
+| 12a-archival × 12b-poster | 0.30 | 0.44 ✗ | 0.14 | 0.41 ✗ | 0.11 | 0.25 | 0.28 | repeat on composition, typography |
+
+parts (why each axis scored what it did):
+  12a-archival × 12b-poster: structure shingles=0.1,order=0.5 · composition placement=0.35,columns=0.5,density=0.67 · image ratio_size=0,crop_mask=0,effects=0.43 · typography families=0.55,scale=0.21,rhythm=0.12,hierarchy=0.62 · interaction feedback=0.11 · signature measured=0.25
+
+FAIL  1 of 1 pair(s) at or above 0.4 on at least one axis
+
+=== at 375×812 ===
+ORIGINALITY · 2 build(s) · 1 pair(s) · threshold < 0.4 on every axis (lower = more different)
+  12a-archival: 4 content blocks [statement:m grid:m statement:s statement:s] · 4 image(s) · type fraunces / dm sans (body 12px) · signature measured scroll → colour on text (medium)
+  12b-poster: 4 content blocks [media:m grid:s grid:l statement:m] · 6 image(s) · type barlow condensed / dm sans (body 15.2px) · signature measured scroll → transform on media (medium)
+
+| Pair | structure | composition | image | typography | interaction | signature | overall | Verdict |
+|---|---:|---:|---:|---:|---:|---:|---:|---|
+| 12a-archival × 12b-poster | 0.06 | 0.44 ✗ | 0.40 ✗ | 0.44 ✗ | 0.11 | 0.25 | 0.28 | repeat on composition, image, typography |
+
+parts (why each axis scored what it did):
+  12a-archival × 12b-poster: structure shingles=0.12,order=0 · composition placement=0.38,columns=0.25,density=0.8 · image ratio_size=0.67,crop_mask=0.11,effects=0.43 · typography families=0.55,scale=0.25,rhythm=0.17,hierarchy=0.68 · interaction feedback=0.11 · signature measured=0.25
+
+FAIL  1 of 1 pair(s) at or above 0.4 on at least one axis
+
+=== worst of 1440×900 and 375×812 (the verdict) ===
+ORIGINALITY · 2 build(s) · 1 pair(s) · threshold < 0.4 on every axis (lower = more different)
+  12a-archival: 4 content blocks [text:m grid:m statement:s statement:s] · 4 image(s) · type fraunces / dm sans (body 12.8px) · signature measured scroll → colour on text (medium)
+  12b-poster: 3 content blocks [media:m grid:m statement:s] · 6 image(s) · type barlow condensed / dm sans (body 17.6px) · signature measured scroll → transform on media (medium)
+
+| Pair | structure | composition | image | typography | interaction | signature | overall | Verdict |
+|---|---:|---:|---:|---:|---:|---:|---:|---|
+| 12a-archival × 12b-poster | 0.30 | 0.44 ✗ | 0.40 ✗ | 0.44 ✗ | 0.11 | 0.25 | 0.28 | repeat on composition, image, typography |
+
+parts (why each axis scored what it did):
+  12a-archival × 12b-poster: structure shingles=0.1,order=0.5 · composition placement=0.35,columns=0.5,density=0.67 · image ratio_size=0.67,crop_mask=0.11,effects=0.43 · typography families=0.55,scale=0.25,rhythm=0.17,hierarchy=0.68 · interaction feedback=0.11 · signature measured=0.25
+
+FAIL  1 of 1 pair(s) at or above 0.4 on at least one axis

@@ -8,6 +8,11 @@
 //   repeat   one fixture shipped many times: in a data array of 6+ records, duplicated names or titles (> 25%), every
 //            price identical, or duplicated descriptions (> 50%)
 //   dead     a control that goes nowhere: href="#", href="", href="javascript:…"
+//   proof    (v3.0.2) unsourced proof on a static page that says nothing about it being illustrative: a compliance
+//            certification ("SOC 2 Type II audited", "ISO 27001 certified"), or a customer-results statistic on a case-study
+//            page ("2,400 TEUs annually", "zero spoiled loads over 18 months", "cut demurrage 38%"). rules.md: statistics,
+//            logos, testimonials and awards are real and sourced, or [NEEDS COPY]. A page that says the content is fictional,
+//            illustrative, an example or sample, or carries [NEEDS COPY], passes.
 // Warnings (never fail): [NEEDS COPY] markers left for the client, one long sentence repeated 4+ times in source markup (across files) or on one static HTML page.
 // Usage: node scripts/realism.mjs <project-dir> [--json]   Exit: 0 clean · 1 problems · 2 usage.
 import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
@@ -54,6 +59,11 @@ const LEAK = [
 // v3.0.1: "Tier 1 carriers", "Category A" (dangerous goods), "Room 2" (a real room number), "Plan B" are domain language,
 // not fixtures; those words count only as a sequence ("Tier 1", "Tier 2" and "Tier 3" in one file: see genericRuns)
 const GENERIC = /\b(?:(?:Product|Item|Card|Feature|Service|Project|Article|Post|Listing|Course)\s(?:\d{1,2}|[A-H])|Card title|Section title|Sample (?:product|item|text)|John Doe|Jane Doe|Acme(?: Corp| Inc)?|Lorem Corp|Company Name|Brand Name)\b/;
+// v3.0.2 proof
+const CERT = /\b(SOC ?[12](?: Type (?:I{1,2}|[12]))?(?: (?:audited|certified|compliant|attested|report))?|ISO(?:\/IEC)? ?27001(?: certified)?|HIPAA[- ]compliant|PCI[- ]DSS(?: Level 1)?(?: compliant| certified)?|FedRAMP(?: authori[sz]ed| moderate| high)?|GDPR[- ]certified)\b/i;
+const RESULT = /\b\d[\d,.]*\s?(?:%|percent\b|x (?:faster|more|fewer)\b|×)|\b\d[\d,.]+\s+(?:[a-z-]+\s){0,2}(?:TEUs?|shipments|containers|orders|customers|users|hours|days)\b(?:[^.]{0,30}\b(?:annually|per year|a year|a month|monthly|saved|cut|reduced))|\bzero\s+(?:[a-z-]+\s){0,2}(?:loads|loss(?:es)?|downtime|defects|incidents|breaches|spoil\w*)\b/i;
+const CASE_PAGE = /(^|\/)(stories|story|case-stud(?:y|ies)|customers|testimonials|results|success)(\/|[-.]|$)/i;
+const PROOF_OK = /\b(fictional|fictitious|illustrative|for illustration|example (?:content|data|figures|customer|story)|sample (?:content|data|figures|story)|not a real (?:company|customer|business|product)|demo site|demonstration site)|\[NEEDS COPY\]/i;
 const DEAD = /\bhref\s*=\s*(?:"(?:#|javascript:[^"]*)?"|'(?:#|javascript:[^']*)?'|\{\s*"#"\s*\})/g;
 
 function records(json, out = []) {
@@ -87,6 +97,8 @@ export function realism(target) {
   const files = walk(root);
   const add = (list, kind, file, what) => { if (list.length < 40) list.push({ kind, file: rel(file), what }); };
   const longLines = new Map();
+  // one claim repeated by a shared footer is one problem, with its page count (not one per page)
+  const proofs = new Map(); const proofHit = (what, f) => { const k = what.replace(/^(compliance certification[^"]*"[^"]*")[\s\S]*$/i, (m, a) => a.toLowerCase()); const g = proofs.get(k) || { what, files: [] }; g.files.push(f); proofs.set(k, g); };
   for (const f of files.filter((f) => (CODE.test(f) || (JS.test(f) && !/\.(min|config|test|spec)\.|(^|\/)(sw|service-worker|serve|server)\.m?js$/.test(f))) && !/(^|\/)(scripts|tests?|__tests__|vendor|lib\/vendor)\//.test(rel(f)))) {
     let src; try { src = readFileSync(f, "utf8"); } catch { continue; }
     const isJs = JS.test(f); const texts = isJs ? jsText(src) : visibleText(src);
@@ -101,9 +113,13 @@ export function realism(target) {
       if (t.length >= 40) counts.set(t, (counts.get(t) || 0) + 1);
     }
     if (counts !== longLines) for (const [t, n] of counts) if (n >= 4) add(warnings, "repeat", f, `the same sentence appears ${n}× on this page: "${t.slice(0, 60)}"`);
+    if (/\.html?$/i.test(f)) { const page = texts.join(" \n "); if (!PROOF_OK.test(page)) {
+      const c = texts.find((t) => CERT.test(t)); if (c) proofHit(`compliance certification claimed with no source or "illustrative" label: "${CERT.exec(c)[0]}" (rules.md: real and sourced, or [NEEDS COPY])`, f);
+      if (CASE_PAGE.test(rel(f))) { const r = texts.find((t) => RESULT.test(t)); if (r) proofHit(`customer-results statistic on a case-study page with no source or "illustrative" label: "${r.slice(0, 70)}"`, f); } } }
     const dead = isJs ? [...src.matchAll(/\bhref\s*=\s*\\?["']#\\?["']/g)].length : [...stripComments(src).matchAll(DEAD)].length;
     if (dead) add(problems, "dead", f, `${dead} link(s) to "#" or javascript: (a control that goes nowhere; link it, make it a button, or label it as demo)`);
   }
+  for (const { what, files: fs } of proofs.values()) add(problems, "proof", fs[0], fs.length > 1 ? `${what}; on ${fs.length} pages (${fs.slice(0, 3).map(rel).join(", ")}${fs.length > 3 ? " …" : ""})` : what);
   for (const [t, n] of longLines) if (n >= 4) add(warnings, "repeat", root, `the same sentence appears ${n}× in markup: "${t.slice(0, 60)}"`);
   for (const f of files.filter((f) => /(^|\/)data\/.*\.json$/.test(rel(f)) && !/schema\.json$/.test(f))) {
     let j; try { j = JSON.parse(readFileSync(f, "utf8")); } catch { continue; }

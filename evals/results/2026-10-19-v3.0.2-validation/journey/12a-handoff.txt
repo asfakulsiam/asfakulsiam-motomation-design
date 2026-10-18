@@ -1,0 +1,5 @@
+handoff: NOT VALIDATED · 07ba13968eb7baef · gate 2026-10-18 20:27
+  the full gate FAILS on runs/12-paired/a-archival (copy) (journey: nav0 mobile0 forms0 loading- errors0 session0)
+
+REPORT REJECTED · runs/12-paired/a-archival (copy)/GATE.md
+  ✗ no "handoff:" line: paste the first line node scripts/handoff.mjs printed (handoff: NOT VALIDATED · 07ba13968eb7baef · gate 2026-10-18 20:27)

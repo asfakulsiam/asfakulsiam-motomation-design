@@ -4,7 +4,7 @@ description: Use when designing, building, redesigning, animating, or critiquing
 license: MIT
 metadata:
   author: asfakulsiam
-  version: 3.0.1
+  version: 3.0.2
   repository: https://github.com/asfakulsiam/asfakulsiam-motomation-design
 ---
 
@@ -97,7 +97,7 @@ R. Read the rules     gates/rules.md + principles/authority.md → state "Rules 
                       ■ CHECKPOINT 5 Design review: screenshots 375 / 768 / 1440 for every core journey; stop;
                         approve, or changes → new preview → again
 9. Delivery Gate      gates/delivery-gate.md on the APPROVED design → product gates (X, J, realism), quality gates,
-                        advisory critique; fail → fix and re-present · pass → GATE.md, CRITIQUE.md → handoff push
+                        advisory critique; fail → fix and re-present · pass → handoff.mjs status → GATE.md, CRITIQUE.md → push
                       ■ CHECKPOINT 6 Gate and ship: gate output, critique, where the handoff push went; stop
 ```
 
@@ -241,6 +241,7 @@ node scripts/memory.mjs similar --brief "<brief>" --category <c>   # prior simil
 node scripts/memory.mjs recent --project ../..  # a per-project log, for tests
 node scripts/memory.mjs log --brief "<brief>" --category <c> --archetype ledger --palette "<name>" --fonts "Fraunces/Switzer" --motion "<language>" --signature letter-relay
 node scripts/contrast.mjs "#111111" "#F4F1EA"   # WCAG contrast check
+node scripts/handoff.mjs ./my-site --report GATE.md  # handoff status from the gate's record
 node scripts/completeness.mjs ./my-site          # gate axis X: the Step 1 scope and journeys, present or excused; content realism
 ```
 
@@ -269,5 +270,5 @@ Full behaviour of each command is in `commands/overview.md`. Critique output for
   `/* motomation · archetype: <x | none> · mutation: <y | none> · signature: <z | none> · tier: <n> · critique: <from gate.mjs> · gate: <from gate.mjs> */`
   The critique and gate segments are pasted from `node scripts/gate.mjs`, never typed. Each axis carries its trace, e.g. `H4[375:1]`. See `gates/delivery-gate.md`, Part 1.
 - After delivery, log the run to the user-level memory: `node scripts/memory.mjs log --brief … --category … --archetype … --palette … --fonts … --motion … --signature …` (or append to `~/.motomation/log.json` by hand).
-- **Report honestly.** Say what was verified (gate output, screenshots inspected, journeys clicked through) and what wasn't. Never claim a test passed, a source was browsed or a capability works without the evidence.
+- **Report honestly.** Say what was verified and what wasn't. The handoff status is the pasted `handoff.mjs` line, never typed (`gates/handoff.md`); a form never says "sent" without a request (`thinking/product-contract.md`).
 - End with: what you chose, what you rejected, and one thing to try next.
