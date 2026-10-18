@@ -171,7 +171,7 @@ export async function pair(dirA, dirB, { threshold = THRESHOLD, max = 10, routes
 
 export function pairLines(r, [la, lb] = ["A", "B"]) {
   const L = []; const f2 = (x) => (x === null || x === undefined ? "n/a" : x.toFixed(2));
-  L.push(`PAIR · ${la} × ${lb} · ${r.routes.compared.length} of ${r.routes.shared.length} shared route(s) compared at ${r.viewports.join(", ")} · threshold ${r.threshold} (lower = more different)`);
+  L.push(`PAIR · ${la} × ${lb} · ${r.routes.compared.length} of ${r.routes.shared} shared route(s) compared at ${r.viewports.join(", ")} · threshold ${r.threshold} (lower = more different)`);
   L.push(`  route parity     ${r.routes.onlyA.length || r.routes.onlyB.length ? "✗" : "✓"} ${r.routes.a} / ${r.routes.b} route(s)${r.routes.onlyA.length ? ` · only in ${la}: ${r.routes.onlyA.join(", ")}` : ""}${r.routes.onlyB.length ? ` · only in ${lb}: ${r.routes.onlyB.join(", ")}` : ""}`);
   L.push(`  coherence        ${la} ${r.coherence.a.share ?? "n/a"} (${r.coherence.a.faces || "–"}) · ${lb} ${r.coherence.b.share ?? "n/a"} (${r.coherence.b.faces || "–"})`);
   L.push(`  shared files     presentation ${r.sharedFiles.presentation.length}${r.sharedFiles.presentation.length ? ` ✗ (${r.sharedFiles.presentation.slice(0, 4).join(", ")})` : ""} · logic/data ${r.sharedFiles.logic.length}${r.sharedFiles.logic.length ? ` (${r.sharedFiles.logic.slice(0, 4).join(", ")}): expected` : ""}`);

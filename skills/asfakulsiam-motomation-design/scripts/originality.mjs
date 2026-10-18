@@ -344,7 +344,7 @@ export function locate(target) {
   throw new Error(`no index.html in ${target} and no build output (${BUILD_DIRS.join(", ")})`);
 }
 function serve(root) {
-  return new Promise((ok) => { const srv = createServer((req, res) => { let f = join(root, decodeURIComponent(new URL(req.url, "http://x").pathname)); if (existsSync(f) && statSync(f).isDirectory()) f = join(f, "index.html"); if (!f.startsWith(root) || !existsSync(f)) { res.writeHead(404); return res.end(); } res.writeHead(200, { "content-type": MIME[extname(f)] || "application/octet-stream" }); res.end(readFileSync(f)); }).listen(0, "127.0.0.1", () => ok(srv)); });
+  return new Promise((ok) => { const srv = createServer((req, res) => { let f = join(root, decodeURIComponent(new URL(req.url, "http://x").pathname)); if (existsSync(f) && statSync(f).isDirectory()) f = join(f, "index.html"); if (!existsSync(f) && !extname(f) && existsSync(f + ".html")) f += ".html"; if (!f.startsWith(root) || !existsSync(f)) { res.writeHead(404); return res.end(); } res.writeHead(200, { "content-type": MIME[extname(f)] || "application/octet-stream" }); res.end(readFileSync(f)); }).listen(0, "127.0.0.1", () => ok(srv)); });
 }
 async function loadPlaywright() {
   for (const base of [process.cwd(), dirname(fileURLToPath(import.meta.url))]) { const req = createRequire(join(base, "noop.js")); for (const n of ["playwright", "playwright-core"]) { try { const m = await import(req.resolve(n)); const pw = m.chromium ? m : m.default; if (pw?.chromium) return pw; } catch {} } }

@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Live and locked · Ferry Lane Tea</title><link rel="stylesheet" href="/style.css"></head>
+<body><header><nav aria-label="Main"><a href="/">Home</a> <a href="/next.html">Next step</a></nav></header>
+<main id="main"><h1>Live filter, locked submit, guarded reset</h1>
+<form data-filter><h2>Refine the list</h2><label for="origin">Origin</label><select id="origin" name="origin"><option value="">All</option><option>Sylhet</option><option>Ilam</option></select><button type="reset">Clear filters</button></form>
+<p data-count role="status">2 teas</p><ul data-list><li data-origin="Sylhet">Sylhet Black</li><li data-origin="Ilam">Ilam Green</li></ul>
+<form data-builder><fieldset><legend>Choose two teas</legend>
+<label><input type="checkbox" name="tea" value="a"> Sylhet Black</label>
+<label><input type="checkbox" name="tea" value="b"> Ilam Green</label>
+<label><input type="checkbox" name="tea" value="c"> Nepal White</label>
+<label><input type="checkbox" name="tea" value="d"> Assam Gold</label></fieldset>
+<p data-msg role="status">Choose 2 more teas to continue.</p><button type="submit" data-go disabled>Save selection</button></form>
+<button type="button" data-reset>Reset demo data</button>
+<section aria-label="Checkout"><p data-empty>Your basket is empty. Choose two teas first.</p><form data-checkout hidden><label for="email">Email</label><input id="email" name="email" type="email" required><button type="submit">Place order</button></form></section></main>
+<footer><p>Ferry Lane Tea · Sylhet</p></footer>
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const f=$('[data-filter]');const apply=()=>{const o=$('#origin').value;$$('[data-list] li').forEach(li=>li.hidden=!!o&&li.dataset.origin!==o);$("[data-count]").textContent=$$("[data-list] li:not([hidden])").length+" teas";};f.addEventListener('change',apply);f.addEventListener('reset',()=>setTimeout(apply,0));
+const b=$('[data-builder]');let saved=[];try{saved=JSON.parse(localStorage.getItem('pick')||'[]')}catch{}
+$$('[name=tea]',b).forEach(e=>e.checked=saved.includes(e.value));
+const upd=(save=true)=>{const sel=$$('[name=tea]:checked',b).map(e=>e.value);if(save)localStorage.setItem('pick',JSON.stringify(sel));$$('[name=tea]',b).forEach(e=>e.disabled=!e.checked&&sel.length>=2);$('[data-go]').disabled=sel.length!==2;$('[data-msg]').textContent=sel.length===2?'Your selection is ready.':`Choose ${2-sel.length} more teas to continue.`;};
+b.addEventListener('change',()=>upd());b.addEventListener('submit',e=>{e.preventDefault();const g=$('[data-go]');g.disabled=true;g.textContent='Saving selection…';setTimeout(()=>location.assign('/next.html'),300);});upd(false);
+$('[data-reset]').addEventListener('click',()=>{if(!confirm('Clear the demo data in this browser?'))return;localStorage.clear();location.reload();});
+</script></body></html>

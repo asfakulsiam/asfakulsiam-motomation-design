@@ -178,6 +178,8 @@ function serve(root, { fallback = null } = {}) {
     const srv = createServer((req, res) => {
       let p = decodeURIComponent(new URL(req.url, "http://x").pathname);
       let f = join(root, p); if (existsSync(f) && statSync(f).isDirectory()) f = join(f, "index.html");
+      // a clean URL (/shop) answers shop.html, as static hosts do (Netlify, Cloudflare Pages, Vercel cleanUrls, GitHub Pages)
+      if (!existsSync(f) && !extname(f) && existsSync(f + ".html")) f += ".html";
       if (fallback && (!f.startsWith(root) || !existsSync(f))) { const g = join(fallback, p); if (g.startsWith(fallback) && existsSync(g) && statSync(g).isFile()) f = g; }
       // a missing file answers 404 with the site's own 404.html when it has one, as static hosts (GitHub Pages, Netlify,
       // Cloudflare Pages, Vercel) do; axis J (errors) reads that view
