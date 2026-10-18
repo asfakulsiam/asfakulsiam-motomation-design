@@ -8,6 +8,14 @@ All notable changes to this skill. Versions follow [Semantic Versioning](https:/
 
 Architecture overhaul: research-first, product-first. The audit behind it is in `docs/AUDIT-v3.md`.
 
+### Fixed: found by the v3 paired build (Leaf & Ledger, briefs 12a/12b, 2026-10-18)
+
+- `realism.mjs`: a site-wide footer sentence on every static HTML page was counted as repeated content. Static pages are now counted per page; source files are still compared across files. Regression tests in `tests/gate/completeness.test.mjs` (fail on the old code).
+- `journey.mjs`: a natively disabled button was tapped and reported as "nothing changed after a tap". A `:disabled` control does nothing by specification, so it is skipped. Fixture: `fixtures/journey/complete` now has one (fails on the old code).
+- `gate.mjs` async advisory: optional catch binding (`catch {`) and `!r.ok` were not recognised as an error state. Regression test `tests/gate/async-states.test.mjs` (3 cases fail on the old code); added to CI.
+- `gate.mjs` memory axis: `archetype: none` (allowed in v3) was reported as `S?[no-archetype-in-stamp]`. It now says `S?[archetype:none,not-fingerprinted,use-originality]`.
+- `originality.mjs --same-product`: for two expressions of one product contract, forms and navigation are fixed by the contract and no longer count as a repeat; feedback and every other axis still count. Tests in `tests/gate/originality.test.mjs`. `gates/delivery-gate.md` interaction row now describes what the script measures; stale step numbers fixed there and in `principles/restraint.md`.
+
 ### Changed (breaking for the workflow, not for the scripts' CLIs)
 
 - **Product contract before concept.** The Thinking Sequence is now: 0 Stack, 1 Product contract and scope (Checkpoint 2), 2 Design research, 3 Directions and synthesis (Checkpoint 3), 4 Memory and sameness, 5 Restraint. Before, the concept was approved at Checkpoint 2 and the scope only at Checkpoint 3, so a concept could silently redefine the product. New `thinking/product-contract.md`: jobs, journeys as route sequences, IA, content density, states, constraints, exclusions, capability levels (interface, frontend interaction, persisted, backend, integration) and deferral rules ("Deferring a backend never removes the interface").

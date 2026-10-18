@@ -159,7 +159,7 @@ Type mode: HOUSE STYLE (typography-led) | SERVICE STYLE (information-led) — be
 - `[NEEDS ASSET]` list: 
 
 ## Restraint Gate record
-<!-- Filled in at step 7 of the Thinking Sequence. scripts/gate.mjs derives the C and R critique scores from these lines, so keep the exact prefixes. -->
+<!-- Filled in at Step 5 (Restraint) of the Thinking Sequence. scripts/gate.mjs derives the C and R critique scores from these lines, so keep the exact prefixes. -->
 - Concept survived: <yes | yes, after 1 change | no>
 - Cut: <what was removed> — fails Q1 and Q2 (no hierarchy, feedback or story; the brief doesn't need it)
 - Kept: <element> — fails Q1, passes Q2: <what in the brief needs it>

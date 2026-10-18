@@ -26,6 +26,10 @@ jobs:
         run: node tests/repo/memory.test.mjs
       - name: Completeness axis X bites (derived scope, template shape; no browser)
         run: node tests/gate/completeness.test.mjs
+      - name: Async advisory sees modern error handling (catch {}, !r.ok; no browser)
+        run: node tests/gate/async-states.test.mjs
+      - name: v6 eval briefs carry a product contract and no style expectations
+        run: node tests/evals/briefs-v6.test.mjs
       - name: Template rules bite and templates don't drift (dials 1–3, tier in range, pins ≤ 2, timing sheets)
         run: node tests/templates/template-rules.test.mjs
       - name: Matched-arm turn cap is exact (fake claude)

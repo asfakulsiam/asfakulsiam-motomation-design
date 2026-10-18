@@ -774,6 +774,9 @@ function readRecord(file) {
 // (floor 1); an identical fingerprint is S1. Nothing reused → S5.
 export async function memoryAxis(logFile, stamp, sectionIds, { dir, designFile } = {}) {
   if (!stamp?.archetype || !stamp?.signature) return null;
+  // v3: an archetype is optional. "archetype: none" is a declared choice, not a missing stamp; the memory fingerprint is
+  // keyed on archetype, so it cannot compare this build. Say so; sameness is then measured with originality.mjs.
+  if (stamp.archetype === "none") return { s: "?", trace: "archetype:none,not-fingerprinted,use-originality" };
   const { fingerprint, similarity, load, designPalette, paletteFamily } = await import("./lib.mjs");
   let runs = []; if (logFile && existsSync(logFile)) { try { runs = JSON.parse(readFileSync(logFile, "utf8")).runs || []; } catch {} }
   const pal = designFile && existsSync(designFile) ? designPalette(readFileSync(designFile, "utf8")) : undefined;
@@ -1247,8 +1250,8 @@ const MICRO_PAGE = async () => {
   } : null;
   const asy = asyncJs ? {
     pending: /aria-busy|\.disabled\s*=\s*true|pending|loading|sending|submitting/i.test(js),
-    success: /res\.ok|response\.ok|\.then\(|await\s+fetch[\s\S]{0,400}(ok|status|json)/i.test(js),
-    error: /catch\s*\(|\.catch\(|!res\.ok|!response\.ok/i.test(js),
+    success: /\b\w+\.ok\b|\.then\(|await\s+fetch[\s\S]{0,400}(ok|status|json)/i.test(js),
+    error: /\bcatch\s*[({]|\.catch\(|!\s*\w+\.ok\b|\.ok\s*===?\s*false/i.test(js),
   } : null;
   return { btn, frm, lst, img, asy };
 };

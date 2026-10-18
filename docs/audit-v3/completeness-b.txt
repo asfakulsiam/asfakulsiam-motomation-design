@@ -1,0 +1,11 @@
+b/DESIGN.md
+  X — completeness (DTC tea e-commerce with subscriptions, Bangladesh, admin panel: no) [functional frontend]  ✓
+      Routes:      21/21 required present
+      Journeys:    3/3 connected
+      Functions:   7/7 present · 3 not required (reason given)
+      States:      6/6 defined
+      Legal:       4/4 present
+      Edge cases:  4/4 handled
+      Admin:       0/0 present · 1 not required (reason given)
+      Template:    18/18 present · 3 not required (reason given)
+      ⚠ media: 2 asset(s) in MEDIA.md must be replaced or cleared before production; not production-ready until they are  (warning)

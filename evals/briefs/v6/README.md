@@ -19,7 +19,7 @@ Purpose: test whether the skill keeps the product intact while varying the art d
 
 Every brief has the same sections: the client, the expected product contract (jobs, core journeys as route sequences, required routes, capability levels), pressures that conflict, a bias probe (the failure a biased skill would produce) and pass criteria. Score with `evals/rubric.md`: the product-integrity gate first, then the visual axes.
 
-The paired briefs test the core promise of v3: preserve the product, vary the expression. A pair passes when both builds keep every route, journey and state of the shared contract and the two builds differ measurably (`scripts/originality.mjs` across the pair).
+The paired briefs test the core promise of v3: preserve the product, vary the expression. A pair passes when both builds keep every route, journey and state of the shared contract and the two builds differ measurably (`scripts/originality.mjs --same-product` across the pair, on every shared route: home, listing, the builder or form pages, account).
 
 `tests/evals/briefs-v6.test.mjs` checks the structure of this set (coverage of types, required sections, identical contracts in the pair). It does not run any build.
 

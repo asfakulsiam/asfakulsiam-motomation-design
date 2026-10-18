@@ -1253,7 +1253,7 @@ Test: if obeying a rule would make the brief worse at its real job, and the rule
 
 ### The Restraint Gate (two questions)
 
-Step 7 of `thinking/sequence.md` asks two questions of every element:
+Step 5 of `thinking/sequence.md` asks two questions of every element:
 
 1. **Does this serve hierarchy, feedback, or storytelling?**
 2. **Does the brief need this to feel like itself?**
@@ -4619,15 +4619,18 @@ The table above checks one page against rules. It cannot see that two unrelated 
 | **composition** | placement (each of the first 8 screens as a 12×8 grid of empty / text / media cells), columns and alignment per screen, density per screen |
 | **image** | image treatment: aspect ratio × size class, crop × mask (radius, clip-path, mask-image), filter × blend × rotation |
 | **typography** | display and body families, the size scale relative to body, rhythm (leading, tracking, case, weight per role), h1/h2/h3 hierarchy |
-| **interaction** | hover rules that apply to the page (the property groups they change), click patterns (disclosure, dialog, tabs, toggles, forms, carousels), scroll behaviour (sticky, snap, scroll libraries, properties that change while scrolling), pointer behaviour |
+| **interaction** | feedback (each :hover, :active and :focus rule that applies, as state × the property groups it changes), forms (field types, validation, live regions, fieldsets, submit kind) and navigation (landmarks, in-page vs page links, menu toggle, skip link, breadcrumb, pagination) |
 | **signature** | the element that changes most under time, pointer and scroll (trigger, properties, element kind, size), plus the declared signature when both stamps carry one |
 
 ```bash
 node scripts/originality.mjs <this build> <a build for an unrelated brief> [more …]   # matrix per axis + overall
 node scripts/originality.mjs a/ b/ c/ --json --out originality.json
+node scripts/originality.mjs <direction A url> <direction B url> --same-product   # paired brief: one product, two expressions
 ```
 
-**Pass: every pair below 0.4 on every axis.** An axis at or above 0.4 is a repeat (`✗`): the skill produced the same shape for different briefs on that axis. Go back to Step 6 of the Thinking Sequence and change that axis (not the copy), then re-run. Absence on both sides counts as the same pattern: two builds with no imagery score 1 on image, two builds with no hover feedback score 1 on hover. Which builds: the earlier projects in the memory log (`node scripts/memory.mjs recent` lists each run's project folder). No earlier build on this machine: record `O: not verified — no earlier build to compare` in the report, under **Not verified**. Exit codes: 0 pass, 1 a repeat, 2 usage, 3 not verified (no browser). O is a cross-build axis, so it is not in the stamp or its id; the stamp describes one page. In the benchmark it is the `originality` arm: `node evals/run-agent-benchmark.mjs originality --out <run>` compares, per arm and seed, every brief's build with every other brief's (`originality.json`, `originality.md`), and `score` folds the result into `summary.json`.
+`--same-product` is for two expressions of one product contract (the paired v6 briefs). The contract fixes the forms and the navigation, so both must match; interaction then compares hover, press and focus feedback only, and every other axis counts in full. Never use it for unrelated briefs.
+
+**Pass: every pair below 0.4 on every axis.** An axis at or above 0.4 is a repeat (`✗`): the skill produced the same shape for different briefs on that axis. Go back to Step 4 (Memory and sameness) of the Thinking Sequence and change that axis (not the copy), then re-run. Absence on both sides counts as the same pattern: two builds with no imagery score 1 on image, two builds with no hover feedback score 1 on hover. Which builds: the earlier projects in the memory log (`node scripts/memory.mjs recent` lists each run's project folder). No earlier build on this machine: record `O: not verified — no earlier build to compare` in the report, under **Not verified**. Exit codes: 0 pass, 1 a repeat, 2 usage, 3 not verified (no browser). O is a cross-build axis, so it is not in the stamp or its id; the stamp describes one page. In the benchmark it is the `originality` arm: `node evals/run-agent-benchmark.mjs originality --out <run>` compares, per arm and seed, every brief's build with every other brief's (`originality.json`, `originality.md`), and `score` folds the result into `summary.json`.
 
 Calibration on this repo (`evals/results/originality-templates/`): a page against itself scores 1.00 on every axis; across the 10 shipped templates, 11 of 45 pairs are below 0.4 on every axis. The repeat is mostly **interaction** (the 8 section-library templates share no hover feedback and the same observer, scroll and pointer listener stack), then image (several have no imagery) and typography.
 ---
@@ -6480,7 +6483,7 @@ Type mode: HOUSE STYLE (typography-led) | SERVICE STYLE (information-led) — be
 - `[NEEDS ASSET]` list: 
 
 ### Restraint Gate record
-<!-- Filled in at step 7 of the Thinking Sequence. scripts/gate.mjs derives the C and R critique scores from these lines, so keep the exact prefixes. -->
+<!-- Filled in at Step 5 (Restraint) of the Thinking Sequence. scripts/gate.mjs derives the C and R critique scores from these lines, so keep the exact prefixes. -->
 - Concept survived: <yes | yes, after 1 change | no>
 - Cut: <what was removed> — fails Q1 and Q2 (no hierarchy, feedback or story; the brief doesn't need it)
 - Kept: <element> — fails Q1, passes Q2: <what in the brief needs it>

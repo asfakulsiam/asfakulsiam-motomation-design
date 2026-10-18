@@ -2,7 +2,7 @@
 
 Two small multi-page sites for `scripts/journey.mjs`, run by `scripts/gate.mjs` (and alone with `--journey`).
 
-- `complete/` must pass all six journey checks: a sitemap whose routes are all linked within 3 clicks, every control responds at 375px (tap, swipe on the job reel, long press on the call button), the booking form renders default, validation error, loading, success and server error, the opening hours show a skeleton while their request is pending, a designed `404.html`, and the session survives reload, back, forward and two tabs.
+- `complete/` must pass all six journey checks: a sitemap whose routes are all linked within 3 clicks, every control responds at 375px (tap, swipe on the job reel, long press on the call button; a natively disabled button is skipped, since by specification it does nothing), the booking form renders default, validation error, loading, success and server error, the opening hours show a skeleton while their request is pending, a designed `404.html`, and the session survives reload, back, forward and two tabs.
 - `incomplete/` must fail all six checks: a sitemap route (`/prices`) that nothing links to and a broken link (`gallery.html`), a button that does nothing, a form with an unlabelled field, no validation, no loading state, no server error state, an async list with no skeleton, no 404 page, and a script that throws once the tab has visited the page before (reload, back, forward).
 
 - `form-replaced/` is one page whose form is replaced by its success message on a 200, as a React or Vue app does; its forms check (all five states) and a link that wraps over two lines at 375px (it must respond to a tap) are asserted.

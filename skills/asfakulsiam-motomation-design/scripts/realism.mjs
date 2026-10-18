@@ -8,7 +8,7 @@
 //   repeat   one fixture shipped many times: in a data array of 6+ records, duplicated names or titles (> 25%), every
 //            price identical, or duplicated descriptions (> 50%)
 //   dead     a control that goes nowhere: href="#", href="", href="javascript:…"
-// Warnings (never fail): [NEEDS COPY] markers left for the client, one long sentence repeated 4+ times in markup.
+// Warnings (never fail): [NEEDS COPY] markers left for the client, one long sentence repeated 4+ times in source markup (across files) or on one static HTML page.
 // Usage: node scripts/realism.mjs <project-dir> [--json]   Exit: 0 clean · 1 problems · 2 usage.
 import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import { join, relative, resolve, sep } from "node:path";
@@ -69,12 +69,16 @@ export function realism(target) {
   for (const f of files.filter((f) => CODE.test(f) && !/(^|\/)(scripts|tests?|__tests__)\//.test(rel(f)))) {
     let src; try { src = readFileSync(f, "utf8"); } catch { continue; }
     const texts = visibleText(src);
+    // Static HTML pages repeat their site chrome (header, footer) and shared data on every page by design, so a
+    // generated multi-page site is counted per page; source files (components, templates) are counted across files.
+    const counts = /\.html?$/i.test(f) ? new Map() : longLines;
     for (const t of texts) {
       for (const [re, label] of LEAK) if (re.test(t)) { add(problems, "leak", f, `${label}: "${t.slice(0, 70)}"`); break; }
       const g = GENERIC.exec(t); if (g) add(problems, "generic", f, `template fixture "${g[0]}" in "${t.slice(0, 60)}"`);
       if (/\[NEEDS COPY\]/.test(t)) add(warnings, "needs-copy", f, `[NEEDS COPY] left for the client: "${t.slice(0, 60)}"`);
-      if (t.length >= 40) longLines.set(t, (longLines.get(t) || 0) + 1);
+      if (t.length >= 40) counts.set(t, (counts.get(t) || 0) + 1);
     }
+    if (counts !== longLines) for (const [t, n] of counts) if (n >= 4) add(warnings, "repeat", f, `the same sentence appears ${n}× on this page: "${t.slice(0, 60)}"`);
     const dead = [...stripComments(src).matchAll(DEAD)].length;
     if (dead) add(problems, "dead", f, `${dead} link(s) to "#" or javascript: (a control that goes nowhere; link it, make it a button, or label it as demo)`);
   }

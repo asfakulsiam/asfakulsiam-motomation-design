@@ -31,7 +31,7 @@ Test: if obeying a rule would make the brief worse at its real job, and the rule
 
 ## The Restraint Gate (two questions)
 
-Step 7 of `thinking/sequence.md` asks two questions of every element:
+Step 5 of `thinking/sequence.md` asks two questions of every element:
 
 1. **Does this serve hierarchy, feedback, or storytelling?**
 2. **Does the brief need this to feel like itself?**

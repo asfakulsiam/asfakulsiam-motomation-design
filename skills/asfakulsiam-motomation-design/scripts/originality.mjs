@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Originality: do different briefs produce different designs? Measured in a real browser, never typed.
 //
-//   node scripts/originality.mjs <a> <b> [c …] [--json] [--out report.json] [--threshold 0.4] [--labels a,b,c]
+//   node scripts/originality.mjs <a> <b> [c …] [--json] [--out report.json] [--threshold 0.4] [--labels a,b,c] [--same-product]
 //     each target: a built page (file.html), a project folder (its index.html, else out/ dist/ build/ …) or a URL
 //
 // The Delivery Gate checks rules on one page. It cannot see that two unrelated briefs came out as the same shape. This
@@ -56,7 +56,11 @@ import { cli, load } from "./lib.mjs";
 
 export const AXES = ["structure", "composition", "image", "typography", "interaction", "signature"];
 export const THRESHOLD = 0.4;
-const USAGE = "Usage: node scripts/originality.mjs <a> <b> [c …] | --dir <folder> [--json] [--out report.json] [--threshold 0.4] [--labels a,b,…] [--viewport 1440x900,375x812]";
+// --same-product (v3): the targets are two expressions of one product contract (a paired brief). Forms and navigation are
+// then required to match (same fields, validation, landmarks, skip link, menu), so they are left out of interaction;
+// hover/press/focus feedback and every other axis still count. Never use it to compare different briefs.
+export const SAME_PRODUCT = { on: false };
+const USAGE = "Usage: node scripts/originality.mjs <a> <b> [c …] | --dir <folder> [--json] [--out report.json] [--threshold 0.4] [--labels a,b,…] [--viewport 1440x900,375x812] [--same-product]";
 // --viewport: the sizes each page is measured at (default both). With more than one, every viewport gets its own matrix
 // and the verdict is the worst of them: a pair repeats on an axis if it repeats there at any size. A desktop that
 // differs and a phone layout that collapses both pages into the same single column is still a repeat.
@@ -131,7 +135,7 @@ export function compare(A, B, sigFamily = {}) {
   parts.typography = { families: (famSame(A.typography.display, B.typography.display, A.typography.displayClass, B.typography.displayClass) + famSame(A.typography.body, B.typography.body, A.typography.bodyClass, B.typography.bodyClass) + (A.typography.faces && B.typography.faces ? wjaccard(A.typography.faces, B.typography.faces) : famSame(A.typography.display, B.typography.display))) / 3, scale: wjaccard(A.typography.scale, B.typography.scale), rhythm: wjaccard(A.typography.rhythm, B.typography.rhythm), hierarchy: Math.max(0, 1 - mean(hDiff)) };
   // interaction: feedback, forms, navigation; a part neither page has is not applicable (left out), not a match
   const nonEmpty = (o) => !!o && Object.keys(o).length > 0;
-  parts.interaction = {}; for (const k of ["feedback", "forms", "navigation"]) { const x = A.interaction[k], y = B.interaction[k]; if (nonEmpty(x) || nonEmpty(y)) parts.interaction[k] = wjaccard(x, y); }
+  parts.interaction = {}; for (const k of SAME_PRODUCT.on ? ["feedback"] : ["feedback", "forms", "navigation"]) { const x = A.interaction[k], y = B.interaction[k]; if (nonEmpty(x) || nonEmpty(y)) parts.interaction[k] = wjaccard(x, y); }
   const measured = wjaccard(A.signature.tokens, B.signature.tokens);
   const da = A.signature.declared, db = B.signature.declared;
   parts.signature = da && db ? { declared: da === db ? 1 : sigFamily[da] && sigFamily[da] === sigFamily[db] ? 0.5 : 0, measured } : { measured };
@@ -394,13 +398,14 @@ export function printReport(rep, feats) {
 }
 
 async function main() {
-  const a = cli("originality", USAGE, { json: "bool", out: "value", threshold: "value", labels: "value", dir: "value", viewport: "value" }, null, { pos: [0, Infinity] });
+  const a = cli("originality", USAGE, { json: "bool", out: "value", threshold: "value", labels: "value", dir: "value", viewport: "value", "same-product": "bool" }, null, { pos: [0, Infinity] });
   if (a.dir) { if (a._.length) { console.error(`originality: give --dir or targets, not both\n${USAGE}`); process.exit(2); } if (!existsSync(resolve(String(a.dir)))) { console.error(`originality: not found: ${a.dir}\n${USAGE}`); process.exit(2); } a._ = dirTargets(String(a.dir)); }
   if (a._.length < 2) { console.error(`originality: needs at least two pages to compare\n${USAGE}`); process.exit(2); }
   const threshold = a.threshold !== undefined ? +a.threshold : THRESHOLD; if (!(threshold > 0 && threshold <= 1)) { console.error(`originality: --threshold must be in (0, 1]\n${USAGE}`); process.exit(2); }
   for (const t of a._) { try { locate(t); } catch (e) { console.error(`originality: ${e.message}\n${USAGE}`); process.exit(2); } }
   const labels = a.labels ? String(a.labels).split(",") : a._.map((t) => (/^https?:/.test(t) ? t : basename(resolve(t)).replace(/\.html?$/, "") === "index" ? basename(dirname(resolve(t))) : basename(resolve(t)).replace(/\.html?$/, "")));
   if (labels.length !== a._.length) { console.error(`originality: --labels has ${labels.length} name(s) for ${a._.length} target(s)\n${USAGE}`); process.exit(2); }
+  if (a["same-product"]) { SAME_PRODUCT.on = true; console.log("same product: interaction compares feedback only (forms and navigation are fixed by the shared contract)"); }
   const pw = await loadPlaywright(); if (!pw) { console.log("not verified — no browser (install Playwright: npm i -D playwright && npx playwright install chromium)"); process.exit(3); }
   const vps = parseViewports(a.viewport); if (!vps) { console.error(`originality: --viewport takes WxH[,WxH…], e.g. 1440x900,375x812\n${USAGE}`); process.exit(2); }
   const keys = vps.map(([w, h]) => `${w}x${h}`);

@@ -143,5 +143,12 @@ say(rc2.pass, "saying it is not production-ready, and pointing to MEDIA.md, pass
   const rRoot2 = v3([...base, "| template | data/ | optional | |"]); put(rRoot2, "data/products.json", JSON.stringify({ demo: true, items: Array.from({ length: 8 }, (_, i) => ({ id: "p" + i, demo: true, name: i % 2 ? "Ceramic mug" : "Ceramic bowl", price: 24 })) }));
   const r2 = completeness(rRoot2); const why2 = r2.missing.find((m) => m.item === "Content realism")?.why || "";
   say(!r2.pass && /share a name/.test(why2) && /same price/.test(why2), "content realism fails a fixture repeated with the same name and price");
+  // found by a real static multi-page build (v3.0.0): a footer sentence on every generated page is site chrome, not a repeated fixture
+  const foot = "<footer><p>Single-estate tea, packed in Dhaka by a small team of four.</p></footer>";
+  const rRoot3 = v3(base); for (const f of ["index.html", "shop/index.html", "checkout/index.html", "a/index.html", "b/index.html"]) put(rRoot3, f, `<main><h1>${f}</h1></main>${foot}\n`);
+  const w3 = completeness(rRoot3).warnings.join(" ");
+  say(!/same sentence/.test(w3), "the same footer sentence on every static page is not reported as repeated content");
+  put(rRoot3, "shop/index.html", "<main>" + "<p>Handmade in small batches by our team in the hills.</p>".repeat(4) + "</main>\n");
+  say(/same sentence appears 4× on this page/.test(completeness(rRoot3).warnings.join(" ")), "one sentence repeated 4× on one static page still warns");
 }
 console.log(bad ? `\n${bad} failure(s)` : "\ncompleteness (X) bites"); process.exit(bad ? 1 : 0);

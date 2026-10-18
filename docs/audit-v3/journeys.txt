@@ -1,0 +1,98 @@
+ok   a@375 add to cart updates the cart count
+ok   a@375 cart lists the tea
+ok   a@375 empty checkout shows field errors
+ok   a@375 bad phone number explained
+ok   a@375 server error keeps the form and says nothing was charged
+ok   a@375 order placed (501 → demo save) and confirmation shows the order
+ok   a@375 cart empties after the order
+ok   a@375 plan cannot be added before teas are chosen
+ok   a@375 plan summary explains what is missing
+ok   a@375 plan enabled once 3 teas chosen
+ok   a@375 subscription reaches checkout
+ok   a@375 account shows the new subscription
+ok   a@375 skip next delivery
+ok   a@375 swap a tea
+ok   a@375 change frequency
+ok   a@375 pause for 2 months
+ok   a@375 resume
+ok   a@375 cancel opens a dialog
+ok   a@375 Escape keeps the subscription
+ok   a@375 save offer: pause instead
+ok   a@375 cancel removes it
+ok   a@375 contact validation
+ok   a@375 contact sends, demo save is labelled
+ok   a@375 no page errors
+ok   a@1440 add to cart updates the cart count
+ok   a@1440 cart lists the tea
+ok   a@1440 empty checkout shows field errors
+ok   a@1440 bad phone number explained
+ok   a@1440 server error keeps the form and says nothing was charged
+ok   a@1440 order placed (501 → demo save) and confirmation shows the order
+ok   a@1440 cart empties after the order
+ok   a@1440 plan cannot be added before teas are chosen
+ok   a@1440 plan summary explains what is missing
+ok   a@1440 plan enabled once 3 teas chosen
+ok   a@1440 subscription reaches checkout
+ok   a@1440 account shows the new subscription
+ok   a@1440 skip next delivery
+ok   a@1440 swap a tea
+ok   a@1440 change frequency
+ok   a@1440 pause for 2 months
+ok   a@1440 resume
+ok   a@1440 cancel opens a dialog
+ok   a@1440 Escape keeps the subscription
+ok   a@1440 save offer: pause instead
+ok   a@1440 cancel removes it
+ok   a@1440 contact validation
+ok   a@1440 contact sends, demo save is labelled
+ok   a@1440 no page errors
+ok   b@375 add to cart updates the cart count
+ok   b@375 cart lists the tea
+ok   b@375 empty checkout shows field errors
+ok   b@375 bad phone number explained
+ok   b@375 server error keeps the form and says nothing was charged
+ok   b@375 order placed (501 → demo save) and confirmation shows the order
+ok   b@375 cart empties after the order
+ok   b@375 plan cannot be added before teas are chosen
+ok   b@375 plan summary explains what is missing
+ok   b@375 plan enabled once 3 teas chosen
+ok   b@375 subscription reaches checkout
+ok   b@375 account shows the new subscription
+ok   b@375 skip next delivery
+ok   b@375 swap a tea
+ok   b@375 change frequency
+ok   b@375 pause for 2 months
+ok   b@375 resume
+ok   b@375 cancel opens a dialog
+ok   b@375 Escape keeps the subscription
+ok   b@375 save offer: pause instead
+ok   b@375 cancel removes it
+ok   b@375 contact validation
+ok   b@375 contact sends, demo save is labelled
+ok   b@375 no page errors
+ok   b@1440 add to cart updates the cart count
+ok   b@1440 cart lists the tea
+ok   b@1440 empty checkout shows field errors
+ok   b@1440 bad phone number explained
+ok   b@1440 server error keeps the form and says nothing was charged
+ok   b@1440 order placed (501 → demo save) and confirmation shows the order
+ok   b@1440 cart empties after the order
+ok   b@1440 plan cannot be added before teas are chosen
+ok   b@1440 plan summary explains what is missing
+ok   b@1440 plan enabled once 3 teas chosen
+ok   b@1440 subscription reaches checkout
+ok   b@1440 account shows the new subscription
+ok   b@1440 skip next delivery
+ok   b@1440 swap a tea
+ok   b@1440 change frequency
+ok   b@1440 pause for 2 months
+ok   b@1440 resume
+ok   b@1440 cancel opens a dialog
+ok   b@1440 Escape keeps the subscription
+ok   b@1440 save offer: pause instead
+ok   b@1440 cancel removes it
+ok   b@1440 contact validation
+ok   b@1440 contact sends, demo save is labelled
+ok   b@1440 no page errors
+
+96/96 passed
