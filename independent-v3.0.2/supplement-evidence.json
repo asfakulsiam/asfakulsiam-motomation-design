@@ -1,0 +1,68 @@
+[
+  {
+    "id": "03-b2b",
+    "menu": {
+      "text": "CARGOLINE\nProduct\nPlatform Overview\nMulti-Modal Tracking\nPredictive Delay Alerts\nCustoms & Landed Cost\nIntegrations\nPricing\nSecurity\nCustomer Stories\nDocs\nContact Sales\nSchedule Demo",
+      "scroll": 481
+    },
+    "download": {
+      "href": "/assets/og-image.svg",
+      "label": "Download Architecture Document (SVG/PDF)",
+      "suggestedFilename": "Cargoline-Security-Architecture-Overview.svg",
+      "contents": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1200 630\" width=\"1200\" height=\"630\">\n  <rect width=\"1200\" height=\"630\" fill=\"#0A1622\"/>\n  <rect x=\"40\" y=\"40\" width=\"1120\" height=\"550\" fill=\"none\" stroke=\"#1E3A5F\" stroke-width=\"2\"/>\n  <text x=\"80\" y=\"140\" fill=\"#0284C7\" font-family=\"sans-serif\" font-size=\"24\" font-weight=\"700\" letter-spacing=\"4\">CARGOLINE FREIGHT VISIBILITY</text>\n  <text x=\"80\" y=\"240\" fill=\"#F8FAFC\" font-family=\"sans-serif\" font-size=\"56\" font-weight=\"800\">Operational Precision for Mid-Size Importers</text>\n  <text x=\"80\" y=\"320\" fill=\"#94A3B8\" font-family=\"sans-serif\" font-size=\"26\">Multi-modal tracking, predictive exception alerts, and automated landed cost calculations.</text>\n  <rect x=\"80\" y=\"400\" width=\"220\" height=\"56\" rx=\"4\" fill=\"#D96B27\"/>\n  <text x=\"120\" y=\"436\" fill=\"#FFFFFF\" font-family=\"sans-serif\" font-size=\"20\" font-weight=\"600\">Explore Platform</text>\n</svg>\n"
+    }
+  },
+  {
+    "id": "08-travel-booking",
+    "menu": {
+      "text": "Srimangal Hills\nGUESTHOUSE\nCheck availability\nMenu\n+\nOur rooms\nExperiences\nGetting here\nCheck availability\nYour stay\nContact",
+      "scroll": 375
+    },
+    "map": {
+      "before": "Home\n/\nGetting here\n\nTHE LAST PART OF THE JOURNEY\n\nFind your way to the green.\n\nSrimangal, Moulvibazar, Bangladesh.Keep the useful details with you before you set off.\n\nA note about this house\n\nThis is a fictional guesthouse. No real street address or property pin is available. The map shows Srimangal town for orientation only.\n\nComing by train\n\nUse Srimangal railway station as your arrival point. Check current services with your railway operator before buying tickets.\n\nComing by road\n\nPlan your route to Srimangal town. A real booking would include the house address and final approach instructions before you travel.\n\nBefore you leave\nSave your stay details for an unreliable connection.\nCheck transport times directly with your operator.\nDo not travel to this fictional property or use the town pin as a guesthouse address.\nDownload arrival notes ↓\n\nTOWN ORIENTATION ONLY\nSRIMANGAL\nA map, when you need it.\n\nLoad the interactive OpenStreetMap when you have a connection. It is not needed to read these notes.\n\nLoad town map\n↗\n\nMap data © OpenStreetMap contributors · ODbL",
+      "buttons": [
+        {
+          "id": "download-arrival",
+          "text": "Download arrival notes ↓"
+        },
+        {
+          "id": "load-map",
+          "text": "Load town map\n↗"
+        }
+      ],
+      "iframe": "https://www.openstreetmap.org/export/embed.html?bbox=91.716%2C24.288%2C91.751%2C24.322&layer=mapnik&marker=24.305%2C91.733"
+    }
+  },
+  {
+    "id": "12a-archival",
+    "menu": {
+      "text": "Leaf & Ledger\nSINGLE-ESTATE TEAS\nMenu\nShop teas\nSubscriptions\nThe estates\nAccount\nBrewing guide\nCart\n0",
+      "scroll": 375
+    },
+    "filterReset": {
+      "count": 6,
+      "label": "6 teas"
+    },
+    "managementKeyboardFocus": {
+      "value": "skip",
+      "checked": true
+    },
+    "managementKeyboardSaved": "Next delivery skipped"
+  },
+  {
+    "id": "12b-poster",
+    "menu": {
+      "text": "LEAF &\nLEDGER\nTea with a sense of place.\nMenu +\nThe teas\nSubscriptions\nThe origins\nAccount\nBrewing guide\nCart\n0",
+      "scroll": 375
+    },
+    "filterReset": {
+      "count": 6,
+      "label": "6 teas"
+    },
+    "managementKeyboardFocus": {
+      "value": "skip",
+      "checked": true
+    },
+    "managementKeyboardSaved": "Next delivery skipped"
+  }
+]

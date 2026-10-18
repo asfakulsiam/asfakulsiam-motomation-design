@@ -1,0 +1,1889 @@
+[
+  {
+    "id": "03-b2b",
+    "contrast": [
+      {
+        "route": "/404",
+        "width": 375,
+        "count": 45,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/careers",
+        "width": 375,
+        "count": 49,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/contact",
+        "width": 375,
+        "count": 43,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/cookies",
+        "width": 375,
+        "count": 56,
+        "minBody": 3.914,
+        "failures": [
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "contact sales interface",
+            "size": 16,
+            "weight": "600",
+            "color": "rgb(2, 132, 199)",
+            "bg": [
+              248,
+              250,
+              252,
+              1
+            ],
+            "ratio": 3.914,
+            "backgroundImage": false
+          }
+        ]
+      },
+      {
+        "route": "/demo/confirmed",
+        "width": 375,
+        "count": 43,
+        "minBody": 4.567,
+        "failures": []
+      },
+      {
+        "route": "/demo",
+        "width": 375,
+        "count": 46,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/docs",
+        "width": 375,
+        "count": 78,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/",
+        "width": 375,
+        "count": 111,
+        "minBody": 4.095,
+        "failures": [
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "Explore multi-modal stitching →",
+            "size": 16,
+            "weight": "600",
+            "color": "rgb(2, 132, 199)",
+            "bg": [
+              255,
+              255,
+              255,
+              1
+            ],
+            "ratio": 4.095,
+            "backgroundImage": false
+          },
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "Review predictive delay alerts →",
+            "size": 16,
+            "weight": "600",
+            "color": "rgb(2, 132, 199)",
+            "bg": [
+              255,
+              255,
+              255,
+              1
+            ],
+            "ratio": 4.095,
+            "backgroundImage": false
+          },
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "Calculate automated landed costs →",
+            "size": 16,
+            "weight": "600",
+            "color": "rgb(2, 132, 199)",
+            "bg": [
+              255,
+              255,
+              255,
+              1
+            ],
+            "ratio": 4.095,
+            "backgroundImage": false
+          }
+        ]
+      },
+      {
+        "route": "/integrations",
+        "width": 375,
+        "count": 99,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/pricing",
+        "width": 375,
+        "count": 137,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/privacy",
+        "width": 375,
+        "count": 43,
+        "minBody": 3.914,
+        "failures": [
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "contact sales interface",
+            "size": 16,
+            "weight": "600",
+            "color": "rgb(2, 132, 199)",
+            "bg": [
+              248,
+              250,
+              252,
+              1
+            ],
+            "ratio": 3.914,
+            "backgroundImage": false
+          }
+        ]
+      },
+      {
+        "route": "/product/customs",
+        "width": 375,
+        "count": 71,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/product/exceptions",
+        "width": 375,
+        "count": 82,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/product",
+        "width": 375,
+        "count": 70,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/product/tracking",
+        "width": 375,
+        "count": 77,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/security",
+        "width": 375,
+        "count": 85,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/security/overview",
+        "width": 375,
+        "count": 51,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/stories",
+        "width": 375,
+        "count": 56,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/stories/midwest-foods",
+        "width": 375,
+        "count": 65,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/terms",
+        "width": 375,
+        "count": 43,
+        "minBody": 3.914,
+        "failures": [
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "contact sales interface",
+            "size": 16,
+            "weight": "600",
+            "color": "rgb(2, 132, 199)",
+            "bg": [
+              248,
+              250,
+              252,
+              1
+            ],
+            "ratio": 3.914,
+            "backgroundImage": false
+          }
+        ]
+      },
+      {
+        "route": "/404",
+        "width": 1440,
+        "count": 51,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/careers",
+        "width": 1440,
+        "count": 55,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/contact",
+        "width": 1440,
+        "count": 49,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/cookies",
+        "width": 1440,
+        "count": 62,
+        "minBody": 3.914,
+        "failures": [
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "contact sales interface",
+            "size": 16,
+            "weight": "600",
+            "color": "rgb(2, 132, 199)",
+            "bg": [
+              248,
+              250,
+              252,
+              1
+            ],
+            "ratio": 3.914,
+            "backgroundImage": false
+          }
+        ]
+      },
+      {
+        "route": "/demo/confirmed",
+        "width": 1440,
+        "count": 49,
+        "minBody": 4.567,
+        "failures": []
+      },
+      {
+        "route": "/demo",
+        "width": 1440,
+        "count": 52,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/docs",
+        "width": 1440,
+        "count": 84,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/",
+        "width": 1440,
+        "count": 117,
+        "minBody": 4.095,
+        "failures": [
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "Explore multi-modal stitching →",
+            "size": 16,
+            "weight": "600",
+            "color": "rgb(2, 132, 199)",
+            "bg": [
+              255,
+              255,
+              255,
+              1
+            ],
+            "ratio": 4.095,
+            "backgroundImage": false
+          },
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "Review predictive delay alerts →",
+            "size": 16,
+            "weight": "600",
+            "color": "rgb(2, 132, 199)",
+            "bg": [
+              255,
+              255,
+              255,
+              1
+            ],
+            "ratio": 4.095,
+            "backgroundImage": false
+          },
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "Calculate automated landed costs →",
+            "size": 16,
+            "weight": "600",
+            "color": "rgb(2, 132, 199)",
+            "bg": [
+              255,
+              255,
+              255,
+              1
+            ],
+            "ratio": 4.095,
+            "backgroundImage": false
+          }
+        ]
+      },
+      {
+        "route": "/integrations",
+        "width": 1440,
+        "count": 105,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/pricing",
+        "width": 1440,
+        "count": 143,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/privacy",
+        "width": 1440,
+        "count": 49,
+        "minBody": 3.914,
+        "failures": [
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "contact sales interface",
+            "size": 16,
+            "weight": "600",
+            "color": "rgb(2, 132, 199)",
+            "bg": [
+              248,
+              250,
+              252,
+              1
+            ],
+            "ratio": 3.914,
+            "backgroundImage": false
+          }
+        ]
+      },
+      {
+        "route": "/product/customs",
+        "width": 1440,
+        "count": 77,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/product/exceptions",
+        "width": 1440,
+        "count": 88,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/product",
+        "width": 1440,
+        "count": 76,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/product/tracking",
+        "width": 1440,
+        "count": 83,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/security",
+        "width": 1440,
+        "count": 91,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/security/overview",
+        "width": 1440,
+        "count": 57,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/stories",
+        "width": 1440,
+        "count": 62,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/stories/midwest-foods",
+        "width": 1440,
+        "count": 71,
+        "minBody": 5.286,
+        "failures": []
+      },
+      {
+        "route": "/terms",
+        "width": 1440,
+        "count": 49,
+        "minBody": 3.914,
+        "failures": [
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "contact sales interface",
+            "size": 16,
+            "weight": "600",
+            "color": "rgb(2, 132, 199)",
+            "bg": [
+              248,
+              250,
+              252,
+              1
+            ],
+            "ratio": 3.914,
+            "backgroundImage": false
+          }
+        ]
+      }
+    ],
+    "axe": [
+      {
+        "width": 375,
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": [
+              {
+                "target": [
+                  ".badge-telemetry"
+                ],
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.56 (foreground color: #0284c7, background color: #e0f2fe, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              {
+                "target": [
+                  "div:nth-child(3) > a[href$=\"tracking\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #0284c7, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              {
+                "target": [
+                  "div:nth-child(3) > a[href$=\"exceptions\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #0284c7, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              {
+                "target": [
+                  "div:nth-child(3) > a[href$=\"customs\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #0284c7, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ]
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "width": 1440,
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": [
+              {
+                "target": [
+                  ".badge-telemetry"
+                ],
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.56 (foreground color: #0284c7, background color: #e0f2fe, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              {
+                "target": [
+                  "div:nth-child(3) > a[href$=\"tracking\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #0284c7, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              {
+                "target": [
+                  "div:nth-child(3) > a[href$=\"exceptions\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #0284c7, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              {
+                "target": [
+                  "div:nth-child(3) > a[href$=\"customs\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #0284c7, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ]
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "count": 4
+          }
+        ]
+      }
+    ],
+    "motion": [
+      {
+        "reducedMotion": "no-preference",
+        "data": {
+          "animations": [
+            {
+              "target": "skeleton",
+              "state": "running",
+              "duration": 1800,
+              "iterations": null
+            }
+          ],
+          "transform": [
+            {
+              "cls": "btn btn-dark-outline",
+              "transform": "none",
+              "transition": "background-color 0.15s, color 0.15s, border-color 0.15s",
+              "animation": "none"
+            },
+            {
+              "cls": "btn btn-primary",
+              "transform": "none",
+              "transition": "background-color 0.15s, color 0.15s, border-color 0.15s",
+              "animation": "none"
+            },
+            {
+              "cls": "btn btn-primary",
+              "transform": "none",
+              "transition": "background-color 0.15s, color 0.15s, border-color 0.15s",
+              "animation": "none"
+            },
+            {
+              "cls": "btn btn-dark-outline",
+              "transform": "none",
+              "transition": "background-color 0.15s, color 0.15s, border-color 0.15s",
+              "animation": "none"
+            },
+            {
+              "cls": "btn btn-primary",
+              "transform": "none",
+              "transition": "background-color 0.15s, color 0.15s, border-color 0.15s",
+              "animation": "none"
+            },
+            {
+              "cls": "btn btn-secondary",
+              "transform": "none",
+              "transition": "background-color 0.15s, color 0.15s, border-color 0.15s",
+              "animation": "none"
+            }
+          ]
+        }
+      },
+      {
+        "reducedMotion": "reduce",
+        "data": {
+          "animations": [],
+          "transform": [
+            {
+              "cls": "btn btn-dark-outline",
+              "transform": "none",
+              "transition": "background-color 1e-06s, color 1e-06s, border-color 1e-06s",
+              "animation": "1e-06s"
+            },
+            {
+              "cls": "btn btn-primary",
+              "transform": "none",
+              "transition": "background-color 1e-06s, color 1e-06s, border-color 1e-06s",
+              "animation": "1e-06s"
+            },
+            {
+              "cls": "btn btn-primary",
+              "transform": "none",
+              "transition": "background-color 1e-06s, color 1e-06s, border-color 1e-06s",
+              "animation": "1e-06s"
+            },
+            {
+              "cls": "btn btn-dark-outline",
+              "transform": "none",
+              "transition": "background-color 1e-06s, color 1e-06s, border-color 1e-06s",
+              "animation": "1e-06s"
+            },
+            {
+              "cls": "btn btn-primary",
+              "transform": "none",
+              "transition": "background-color 1e-06s, color 1e-06s, border-color 1e-06s",
+              "animation": "1e-06s"
+            },
+            {
+              "cls": "btn btn-secondary",
+              "transform": "none",
+              "transition": "background-color 1e-06s, color 1e-06s, border-color 1e-06s",
+              "animation": "1e-06s"
+            }
+          ]
+        }
+      }
+    ],
+    "controls": [
+      {
+        "kind": "pricing",
+        "before": [
+          "$790",
+          "$1,650",
+          "$3,400"
+        ],
+        "monthly": [
+          "$920",
+          "$1950",
+          "$3900"
+        ],
+        "annual": [
+          "$790",
+          "$1650",
+          "$3400"
+        ]
+      },
+      {
+        "kind": "integration filter",
+        "button": "ERP & Financials",
+        "visible": [
+          "\n            \n              \n                ERP SYSTEM\n                SAP S/4HANA Supply Chain\n              \n              REST / OData\n            \n            \n              Bidirectional purchase order synchronization and milestone status feeds. Maps inbound container delivery dates directly to warehouse receiving schedules and Material Requirements Planning (MRP).\n            \n            \n              Authentication: OAuth 2.0 Mutual TLS • Latency: Real-time webhook\n            \n          ",
+          "\n            \n              \n                ERP SYSTEM\n                Oracle NetSuite ERP\n              \n              SuiteTalk REST\n            \n            \n              Automated inbound shipment creation and item fulfillment tracking. Generates landed cost journal entries upon customs duty clearance and final warehouse receipt confirmation.\n            \n            \n              Authentication: Token-Based Auth (TBA) • Latency: 5-minute sync\n            \n          ",
+          "\n            \n              \n                ERP SYSTEM\n                Microsoft Dynamics 365 Supply Chain\n              \n              Dataverse Web API\n            \n            \n              Synchronizes inbound container milestone dates into production scheduling registers and purchase order receiving journals with automated delay variance notifications.\n            \n            \n              Authentication: Azure Active Directory OAuth • Latency: Near real-time\n            \n          "
+        ]
+      },
+      {
+        "kind": "security download interface",
+        "text": "Download Security Overview Whitepaper",
+        "download": null
+      },
+      {
+        "kind": "security overview",
+        "url": "http://127.0.0.1:4610/security/overview",
+        "text": "TECHNICAL BRIEFING\nSecurity & Architecture Overview\n\nA detailed architectural briefing on encryption, infrastructure isolation, access governance, and SOC 2 Type II audit readiness for IT security officers.\n\nDownload Architecture Overview PDF\nReturn to Trust Center\nDOCUMENT SEC-2026-V4\nCargoline Technical Security Architecture\nVERSION 4.2 • APPROVED\n1. Executive Summary & Scope\n\nCargoline processes commercial freight shipping manifests, vessel telemetry, customs entry data, and purchase order identifiers on behalf of mid-market and enterprise importing organizations. This document details the technical and administrative controls implemented across the software lifecycle to preserve data integrity and prevent unauthorized disclosure.\n\n2. Encryption Architecture\n\nData transmission between customer web browsers, API clients, carrier gateways, and Cargoline application clusters is strictly restricted to TLS 1.3 encryption. Older protocols (TLS 1.0, TLS 1.1) are explicitly rejected at network edge routers.\n\nAll persistent data stores, database volumes, backups, and message queues are encrypted at rest using AES-256 with keys managed through hardware security modules (HSM) certified under FIPS 140-2 Level 3. Encryption keys undergo automated cryptographic rotation every 90 days.\n\n3. Data Segregation & Tenant Boundaries\n\nCustomer data is logically partitioned utilizing database Row-Level Security (RLS) policies. Every application query carries authenticated tenant context. Container records, bills of lading, and tariff classifications belonging to one importer are cryptographically segregated and completely inaccessible to other platform participants.\n\n4. Incident Response & Business Continuity\n\nCargoline maintains warm cross-region database replicas with automated failover capabilities. The Recovery Point Objective (RPO) is under 5 minutes, and the Recovery Time Objective (RTO) is under 60 minutes for core tracking telemetry pipelines. External penetration tests are executed annually by CREST-accredited testing firms.\n\nDownload Architecture Whitepaper\n\nAccess the complete 12-page executive PDF briefing including detailed network diagrams, data flow maps, and the SOC 2 control index.\n\nDownload Architecture Document (SVG/PDF)\nRequest Auditor Security Questionnaire\n\nFull SOC 2 Type II audit report and Type III attestations are available under standard mutual non-disclosure agreement.",
+        "downloadLinks": 1
+      }
+    ]
+  },
+  {
+    "id": "08-travel-booking",
+    "contrast": [
+      {
+        "route": "/404",
+        "width": 375,
+        "count": 34,
+        "minBody": 10.88,
+        "failures": []
+      },
+      {
+        "route": "/availability",
+        "width": 375,
+        "count": 108,
+        "minBody": 5.157,
+        "failures": []
+      },
+      {
+        "route": "/booking/confirmation",
+        "width": 375,
+        "count": 35,
+        "minBody": 10.88,
+        "failures": []
+      },
+      {
+        "route": "/booking/dates",
+        "width": 375,
+        "count": 108,
+        "minBody": 5.157,
+        "failures": []
+      },
+      {
+        "route": "/booking/details",
+        "width": 375,
+        "count": 59,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/booking/guests",
+        "width": 375,
+        "count": 59,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/booking/review",
+        "width": 375,
+        "count": 59,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/cancellation-policy",
+        "width": 375,
+        "count": 44,
+        "minBody": 10.88,
+        "failures": []
+      },
+      {
+        "route": "/contact",
+        "width": 375,
+        "count": 44,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/experiences",
+        "width": 375,
+        "count": 46,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/experiences/tea-at-the-table",
+        "width": 375,
+        "count": 48,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/experiences/tea-garden-walk",
+        "width": 375,
+        "count": 48,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/getting-there",
+        "width": 375,
+        "count": 52,
+        "minBody": 5.157,
+        "failures": []
+      },
+      {
+        "route": "/house-rules",
+        "width": 375,
+        "count": 46,
+        "minBody": 10.88,
+        "failures": []
+      },
+      {
+        "route": "/",
+        "width": 375,
+        "count": 95,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/privacy",
+        "width": 375,
+        "count": 46,
+        "minBody": 10.88,
+        "failures": []
+      },
+      {
+        "route": "/rooms/courtyard-twin",
+        "width": 375,
+        "count": 59,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/rooms/family-veranda",
+        "width": 375,
+        "count": 59,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/rooms/garden-veranda",
+        "width": 375,
+        "count": 59,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/rooms/hill-facing-double",
+        "width": 375,
+        "count": 59,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/rooms",
+        "width": 375,
+        "count": 97,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/rooms/quiet-corner",
+        "width": 375,
+        "count": 59,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/rooms/tea-view-double",
+        "width": 375,
+        "count": 59,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/terms",
+        "width": 375,
+        "count": 44,
+        "minBody": 10.88,
+        "failures": []
+      },
+      {
+        "route": "/404",
+        "width": 1440,
+        "count": 32,
+        "minBody": 10.88,
+        "failures": []
+      },
+      {
+        "route": "/availability",
+        "width": 1440,
+        "count": 106,
+        "minBody": 5.157,
+        "failures": []
+      },
+      {
+        "route": "/booking/confirmation",
+        "width": 1440,
+        "count": 33,
+        "minBody": 10.88,
+        "failures": []
+      },
+      {
+        "route": "/booking/dates",
+        "width": 1440,
+        "count": 106,
+        "minBody": 5.157,
+        "failures": []
+      },
+      {
+        "route": "/booking/details",
+        "width": 1440,
+        "count": 57,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/booking/guests",
+        "width": 1440,
+        "count": 57,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/booking/review",
+        "width": 1440,
+        "count": 57,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/cancellation-policy",
+        "width": 1440,
+        "count": 42,
+        "minBody": 10.88,
+        "failures": []
+      },
+      {
+        "route": "/contact",
+        "width": 1440,
+        "count": 42,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/experiences",
+        "width": 1440,
+        "count": 44,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/experiences/tea-at-the-table",
+        "width": 1440,
+        "count": 46,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/experiences/tea-garden-walk",
+        "width": 1440,
+        "count": 46,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/getting-there",
+        "width": 1440,
+        "count": 50,
+        "minBody": 5.157,
+        "failures": []
+      },
+      {
+        "route": "/house-rules",
+        "width": 1440,
+        "count": 44,
+        "minBody": 10.88,
+        "failures": []
+      },
+      {
+        "route": "/",
+        "width": 1440,
+        "count": 96,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/privacy",
+        "width": 1440,
+        "count": 44,
+        "minBody": 10.88,
+        "failures": []
+      },
+      {
+        "route": "/rooms/courtyard-twin",
+        "width": 1440,
+        "count": 57,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/rooms/family-veranda",
+        "width": 1440,
+        "count": 57,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/rooms/garden-veranda",
+        "width": 1440,
+        "count": 57,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/rooms/hill-facing-double",
+        "width": 1440,
+        "count": 57,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/rooms",
+        "width": 1440,
+        "count": 95,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/rooms/quiet-corner",
+        "width": 1440,
+        "count": 57,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/rooms/tea-view-double",
+        "width": 1440,
+        "count": 57,
+        "minBody": 5.614,
+        "failures": []
+      },
+      {
+        "route": "/terms",
+        "width": 1440,
+        "count": 42,
+        "minBody": 10.88,
+        "failures": []
+      }
+    ],
+    "axe": [
+      {
+        "width": 375,
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "width": 1440,
+        "violations": [],
+        "incomplete": []
+      }
+    ],
+    "motion": [
+      {
+        "reducedMotion": "no-preference",
+        "data": {
+          "animations": [],
+          "transform": [
+            {
+              "cls": "btn btn-small",
+              "transform": "none",
+              "transition": "transform 0.12s cubic-bezier(0.22, 1, 0.36, 1)",
+              "animation": "none"
+            },
+            {
+              "cls": "btn",
+              "transform": "none",
+              "transition": "transform 0.12s cubic-bezier(0.22, 1, 0.36, 1)",
+              "animation": "none"
+            }
+          ]
+        }
+      },
+      {
+        "reducedMotion": "reduce",
+        "data": {
+          "animations": [],
+          "transform": [
+            {
+              "cls": "btn btn-small",
+              "transform": "none",
+              "transition": "none",
+              "animation": "none"
+            },
+            {
+              "cls": "btn",
+              "transform": "none",
+              "transition": "none",
+              "animation": "none"
+            }
+          ]
+        }
+      }
+    ],
+    "controls": []
+  },
+  {
+    "id": "12a-archival",
+    "contrast": [
+      {
+        "route": "/404",
+        "width": 375,
+        "count": 37,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/account",
+        "width": 375,
+        "count": 45,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/account/subscription",
+        "width": 375,
+        "count": 58,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/brewing-guide",
+        "width": 375,
+        "count": 60,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/cart",
+        "width": 375,
+        "count": 37,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/checkout",
+        "width": 375,
+        "count": 37,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/confirmation",
+        "width": 375,
+        "count": 37,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/contact",
+        "width": 375,
+        "count": 44,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/estates",
+        "width": 375,
+        "count": 61,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/",
+        "width": 375,
+        "count": 81,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/privacy",
+        "width": 375,
+        "count": 52,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/returns",
+        "width": 375,
+        "count": 52,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/shipping",
+        "width": 375,
+        "count": 52,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/shop",
+        "width": 375,
+        "count": 85,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/subscriptions/build",
+        "width": 375,
+        "count": 73,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/subscriptions",
+        "width": 375,
+        "count": 61,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/tea/assam-gold",
+        "width": 375,
+        "count": 68,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/tea/bangladesh-green",
+        "width": 375,
+        "count": 68,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/tea/darjeeling-first",
+        "width": 375,
+        "count": 68,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/tea/ilam-green",
+        "width": 375,
+        "count": 68,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/tea/nepal-white",
+        "width": 375,
+        "count": 68,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/tea/sylhet-black",
+        "width": 375,
+        "count": 68,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/terms",
+        "width": 375,
+        "count": 52,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/404",
+        "width": 1440,
+        "count": 35,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/account",
+        "width": 1440,
+        "count": 43,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/account/subscription",
+        "width": 1440,
+        "count": 56,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/brewing-guide",
+        "width": 1440,
+        "count": 58,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/cart",
+        "width": 1440,
+        "count": 35,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/checkout",
+        "width": 1440,
+        "count": 35,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/confirmation",
+        "width": 1440,
+        "count": 35,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/contact",
+        "width": 1440,
+        "count": 42,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/estates",
+        "width": 1440,
+        "count": 59,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/",
+        "width": 1440,
+        "count": 82,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/privacy",
+        "width": 1440,
+        "count": 50,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/returns",
+        "width": 1440,
+        "count": 50,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/shipping",
+        "width": 1440,
+        "count": 50,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/shop",
+        "width": 1440,
+        "count": 83,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/subscriptions/build",
+        "width": 1440,
+        "count": 71,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/subscriptions",
+        "width": 1440,
+        "count": 59,
+        "minBody": 9.439,
+        "failures": []
+      },
+      {
+        "route": "/tea/assam-gold",
+        "width": 1440,
+        "count": 66,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/tea/bangladesh-green",
+        "width": 1440,
+        "count": 66,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/tea/darjeeling-first",
+        "width": 1440,
+        "count": 66,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/tea/ilam-green",
+        "width": 1440,
+        "count": 66,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/tea/nepal-white",
+        "width": 1440,
+        "count": 66,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/tea/sylhet-black",
+        "width": 1440,
+        "count": 66,
+        "minBody": 9.279,
+        "failures": []
+      },
+      {
+        "route": "/terms",
+        "width": 1440,
+        "count": 50,
+        "minBody": 9.439,
+        "failures": []
+      }
+    ],
+    "axe": [
+      {
+        "width": 375,
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "width": 1440,
+        "violations": [],
+        "incomplete": []
+      }
+    ],
+    "motion": [
+      {
+        "reducedMotion": "no-preference",
+        "data": {
+          "animations": [],
+          "transform": []
+        }
+      },
+      {
+        "reducedMotion": "reduce",
+        "data": {
+          "animations": [],
+          "transform": []
+        }
+      }
+    ],
+    "controls": [
+      {
+        "kind": "origin filter",
+        "count": 2,
+        "text": "2 teas"
+      },
+      {
+        "kind": "empty filter state",
+        "count": 0,
+        "text": "No teas in this selection.\n\nTry a different origin, type or caffeine level, or clear the filters."
+      },
+      {
+        "kind": "filter recovery",
+        "count": 0
+      }
+    ]
+  },
+  {
+    "id": "12b-poster",
+    "contrast": [
+      {
+        "route": "/404",
+        "width": 375,
+        "count": 33,
+        "minBody": 6.557,
+        "failures": []
+      },
+      {
+        "route": "/account",
+        "width": 375,
+        "count": 40,
+        "minBody": 9.619,
+        "failures": []
+      },
+      {
+        "route": "/account/subscription",
+        "width": 375,
+        "count": 55,
+        "minBody": 8.514,
+        "failures": []
+      },
+      {
+        "route": "/brewing-guide",
+        "width": 375,
+        "count": 51,
+        "minBody": 6.557,
+        "failures": []
+      },
+      {
+        "route": "/cart",
+        "width": 375,
+        "count": 34,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/checkout",
+        "width": 375,
+        "count": 33,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/confirmation",
+        "width": 375,
+        "count": 33,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/contact",
+        "width": 375,
+        "count": 39,
+        "minBody": 6.557,
+        "failures": []
+      },
+      {
+        "route": "/estates",
+        "width": 375,
+        "count": 53,
+        "minBody": 6.557,
+        "failures": []
+      },
+      {
+        "route": "/",
+        "width": 375,
+        "count": 77,
+        "minBody": 6.557,
+        "failures": []
+      },
+      {
+        "route": "/privacy",
+        "width": 375,
+        "count": 47,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/returns",
+        "width": 375,
+        "count": 47,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/shipping",
+        "width": 375,
+        "count": 47,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/shop",
+        "width": 375,
+        "count": 85,
+        "minBody": 6.557,
+        "failures": []
+      },
+      {
+        "route": "/subscriptions/build",
+        "width": 375,
+        "count": 65,
+        "minBody": 4.701,
+        "failures": []
+      },
+      {
+        "route": "/subscriptions",
+        "width": 375,
+        "count": 51,
+        "minBody": 8.514,
+        "failures": []
+      },
+      {
+        "route": "/tea/assam-gold",
+        "width": 375,
+        "count": 56,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/tea/bangladesh-green",
+        "width": 375,
+        "count": 56,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/tea/darjeeling-first",
+        "width": 375,
+        "count": 56,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/tea/ilam-green",
+        "width": 375,
+        "count": 56,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/tea/nepal-white",
+        "width": 375,
+        "count": 56,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/tea/sylhet-black",
+        "width": 375,
+        "count": 56,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/terms",
+        "width": 375,
+        "count": 47,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/404",
+        "width": 1440,
+        "count": 31,
+        "minBody": 6.557,
+        "failures": []
+      },
+      {
+        "route": "/account",
+        "width": 1440,
+        "count": 38,
+        "minBody": 9.619,
+        "failures": []
+      },
+      {
+        "route": "/account/subscription",
+        "width": 1440,
+        "count": 53,
+        "minBody": 8.514,
+        "failures": []
+      },
+      {
+        "route": "/brewing-guide",
+        "width": 1440,
+        "count": 49,
+        "minBody": 6.557,
+        "failures": []
+      },
+      {
+        "route": "/cart",
+        "width": 1440,
+        "count": 32,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/checkout",
+        "width": 1440,
+        "count": 31,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/confirmation",
+        "width": 1440,
+        "count": 31,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/contact",
+        "width": 1440,
+        "count": 37,
+        "minBody": 6.557,
+        "failures": []
+      },
+      {
+        "route": "/estates",
+        "width": 1440,
+        "count": 51,
+        "minBody": 6.557,
+        "failures": []
+      },
+      {
+        "route": "/",
+        "width": 1440,
+        "count": 75,
+        "minBody": 6.557,
+        "failures": []
+      },
+      {
+        "route": "/privacy",
+        "width": 1440,
+        "count": 45,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/returns",
+        "width": 1440,
+        "count": 45,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/shipping",
+        "width": 1440,
+        "count": 45,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/shop",
+        "width": 1440,
+        "count": 83,
+        "minBody": 6.557,
+        "failures": []
+      },
+      {
+        "route": "/subscriptions/build",
+        "width": 1440,
+        "count": 63,
+        "minBody": 4.701,
+        "failures": []
+      },
+      {
+        "route": "/subscriptions",
+        "width": 1440,
+        "count": 49,
+        "minBody": 8.514,
+        "failures": []
+      },
+      {
+        "route": "/tea/assam-gold",
+        "width": 1440,
+        "count": 54,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/tea/bangladesh-green",
+        "width": 1440,
+        "count": 54,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/tea/darjeeling-first",
+        "width": 1440,
+        "count": 54,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/tea/ilam-green",
+        "width": 1440,
+        "count": 54,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/tea/nepal-white",
+        "width": 1440,
+        "count": 54,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/tea/sylhet-black",
+        "width": 1440,
+        "count": 54,
+        "minBody": 11.698,
+        "failures": []
+      },
+      {
+        "route": "/terms",
+        "width": 1440,
+        "count": 45,
+        "minBody": 11.698,
+        "failures": []
+      }
+    ],
+    "axe": [
+      {
+        "width": 375,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "width": 1440,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "count": 4
+          }
+        ]
+      }
+    ],
+    "motion": [
+      {
+        "reducedMotion": "no-preference",
+        "data": {
+          "animations": [
+            {
+              "target": "pack-fan",
+              "state": "running",
+              "duration": 520,
+              "iterations": 1
+            }
+          ],
+          "transform": [
+            {
+              "cls": "cta ",
+              "transform": "none",
+              "transition": "transform 0.14s cubic-bezier(0.16, 1, 0.3, 1)",
+              "animation": "none"
+            },
+            {
+              "cls": "pack-fan",
+              "transform": "matrix(1, 3.40122e-07, -3.40122e-07, 1, 0, 0.000116925)",
+              "transition": "all",
+              "animation": "0.52s cubic-bezier(0.16, 1, 0.3, 1) both pack-settle"
+            }
+          ]
+        }
+      },
+      {
+        "reducedMotion": "reduce",
+        "data": {
+          "animations": [],
+          "transform": [
+            {
+              "cls": "cta ",
+              "transform": "none",
+              "transition": "none",
+              "animation": "none"
+            },
+            {
+              "cls": "pack-fan",
+              "transform": "none",
+              "transition": "none",
+              "animation": "none"
+            }
+          ]
+        }
+      }
+    ],
+    "controls": [
+      {
+        "kind": "origin filter",
+        "count": 2,
+        "text": "2 teas"
+      },
+      {
+        "kind": "empty filter state",
+        "count": 0,
+        "text": "No teas in this selection.\n\nTry a different origin, type or caffeine level, or clear the filters."
+      },
+      {
+        "kind": "filter recovery",
+        "count": 0
+      }
+    ]
+  }
+]

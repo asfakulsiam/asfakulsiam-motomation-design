@@ -1,0 +1,4937 @@
+[
+  {
+    "id": "03-b2b",
+    "width": 375,
+    "completed": true,
+    "log": [
+      {
+        "label": "empty demo validation",
+        "url": "http://127.0.0.1:4610/demo",
+        "main": "TECHNICAL EVALUATION\nSchedule a Live Cargoline Platform Walkthrough\n\nEvaluate real-time container tracking, demurrage risk countdowns, and ERP reconciliation on your active shipping lanes.\n\nSTEP 1 OF 1\nSelect Evaluation Parameters\n\nAll fields are validated. Confirm your operational scale to match with a dedicated logistics specialist.\n\nFull Name *\nPlease provide your full name.\nWork Email *\nPlease provide a valid work email address.\nImporting Organization *\nPlease enter your importing organization name.\nAnnual Import Volume *\nSelect volume tier...\nUp to 1,200 TEUs/year (Mid-Market Tier)\n1,200 to 6,000 TEUs/year (Commercial Tier)\nOver 6,000 TEUs/year (Enterprise Tier)\nPlease choose your annual container volume.\nPrimary ERP or TMS Platform *\nSelect system of record...\nOracle NetSuite ERP\nSAP S/4HANA\nMicrosoft Dynamics 365\nCargoWise One\nDescartes Systems\nOther / Custom Database\nPlease indicate your primary system of record.\nHigh-Risk Corridors or Evaluation Questions\nPrivacy Assurance: We respect your confidentiality. Carrier rates and volume data are used exclusively to configure your demo instance.\nConfirm Evaluation Booking →\nLooking for custom enterprise contract pricing? Contact our sales team directly →",
+        "storage": {},
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/product"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/integrations"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/pricing"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/demo"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          }
+        ]
+      },
+      {
+        "label": "demo ready (malformed email)",
+        "url": "http://127.0.0.1:4610/demo",
+        "main": "TECHNICAL EVALUATION\nSchedule a Live Cargoline Platform Walkthrough\n\nEvaluate real-time container tracking, demurrage risk countdowns, and ERP reconciliation on your active shipping lanes.\n\nSTEP 1 OF 1\nSelect Evaluation Parameters\n\nAll fields are validated. Confirm your operational scale to match with a dedicated logistics specialist.\n\nFull Name *\nPlease provide your full name.\nWork Email *\nPlease provide a valid work email address.\nImporting Organization *\nPlease enter your importing organization name.\nAnnual Import Volume *\nSelect volume tier...\nUp to 1,200 TEUs/year (Mid-Market Tier)\n1,200 to 6,000 TEUs/year (Commercial Tier)\nOver 6,000 TEUs/year (Enterprise Tier)\nPlease choose your annual container volume.\nPrimary ERP or TMS Platform *\nSelect system of record...\nOracle NetSuite ERP\nSAP S/4HANA\nMicrosoft Dynamics 365\nCargoWise One\nDescartes Systems\nOther / Custom Database\nPlease indicate your primary system of record.\nHigh-Risk Corridors or Evaluation Questions\nPrivacy Assurance: We respect your confidentiality. Carrier rates and volume data are used exclusively to configure your demo instance.\nConfirm Evaluation Booking →\nLooking for custom enterprise contract pricing? Contact our sales team directly →",
+        "storage": {},
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/product"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/integrations"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/pricing"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/demo"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          }
+        ]
+      },
+      {
+        "label": "false confirmation with invalid email",
+        "url": "http://127.0.0.1:4610/demo/confirmed",
+        "main": "✓\nEVALUATION RESERVED\nYour Demonstration Request is Confirmed\n\nThank you for registering. A Cargoline solutions engineer will contact you within two business hours to confirm your active shipping lanes and provision your test instance.\n\nPreparation Checklist for Your Session\n• Active Container or Booking Numbers: Have 2 to 3 active bills of lading ready to observe live AIS milestone stitching.\n• ERP or TMS Platform: Identify your integration targets (NetSuite, SAP, Dynamics, or custom database).\n• Demurrage Review: Note any marine terminals where detention and storage charges have impacted operations.\nExplore Platform Architecture\nReview Trust & Security Standards\nReturn to Home",
+        "storage": {},
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/demo/confirmed"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          }
+        ]
+      },
+      {
+        "label": "false inquiry received",
+        "url": "http://127.0.0.1:4610/contact",
+        "main": "SALES & SOLUTIONS\nContact Cargoline Solutions Engineering\n\nConnect directly with an enterprise logistics solutions architect to discuss high-volume container pricing, custom TMS orchestration, and IT procurement reviews.\n\nINQUIRY FORM\nSubmit Operational Requirements\n\nOur logistics team responds within 2 business hours during North American and European operating windows.\n\n✓ Your inquiry has been registered. An enterprise solutions specialist will contact you shortly.\nFull Name *\nWork Email *\nImporting Organization *\nYour Operational Role *\nSelect role...\nVP / Director of Operations\nLogistics / Supply Chain Manager\nFinance / Procurement Lead\nIT & Systems Architecture\nExecutive Leadership\nOperational Requirements & Corridor Details *\nInquiry Received\nLooking for immediate software demonstration? Schedule an interactive evaluation demo →",
+        "storage": {},
+        "network": []
+      }
+    ]
+  },
+  {
+    "id": "08-travel-booking",
+    "width": 375,
+    "completed": false,
+    "error": "locator.getAttribute: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('a[href*=\"/booking/dates\"]').first()\n",
+    "log": [
+      {
+        "label": "ERROR: locator.getAttribute: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('a[href*=\"/booking/dates\"]').first()\n",
+        "url": "http://127.0.0.1:4611/rooms/garden-veranda",
+        "main": "Home\n/\nRooms\n/\nGarden veranda\n\nROOM 01 / PRIVATE VERANDA\n\nGarden veranda\nBDT 4,200\nper night · demo rate\nIllustrative photography, not an actual room.\nA room to make your own.\n\nOpen the shutters to the garden. A shaded veranda leaves room for a book and a slow cup of tea.\n\nGUESTS\nUp to 2\nBED\nOne double bed\nROOM SIZE\n24 m²\nBATHROOM\nPrivate, with hot water\nGood to know\n\nGround floor. Two entrance steps; no step-free bathroom. Fan-cooled. Wi-Fi may be intermittent.\n\nDemo rate includes breakfast and all displayed charges. No online payment is taken.\n\nChoose dates for this room\n↗\nCompare the other rooms\nHouse rules\n↗\nCancellation policy\n↗\nAsk about access\n↗",
+        "storage": {},
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4611/"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4611/assets/gelasio.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4611/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4611/app-data.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4611/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-tea-gardens.webp"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4611/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-garden-room.webp"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-tea-view.webp"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4611/rooms"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4611/assets/gelasio.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4611/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4611/app-data.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4611/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-garden-room.webp"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-tea-view.webp"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-twin-room.webp"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4611/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4611/rooms/garden-veranda"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4611/assets/gelasio.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4611/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4611/app-data.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4611/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-garden-room.webp"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4611/assets/dm-sans.woff2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "12a-archival",
+    "width": 375,
+    "completed": false,
+    "error": "Tab target unreachable: input[value=\"skip\"]",
+    "log": [
+      {
+        "label": "empty checkout validation",
+        "url": "http://127.0.0.1:4612/checkout",
+        "main": "ONE LAST PAGE\n\nA cup is nearly yours.\n\nDemo checkout. Use sample details only. No payment is taken and nothing is shipped.\n\n01 / Delivery details\nFull name\nEmail address\nStreet address\nCity\nZIP code\nCountry\nUnited States\n02 / Payment\n\nNo payment provider is connected. Card details are not collected.\n\nCard payment unavailable in demo\nI understand this is a demo order and accept the demo terms.\n\nPlease check the highlighted fields and complete all required details.\n\nPlace demo order\n↗\nYour order\nSylhet Black\n\nBangladesh · 50g · one-off\n\n$14.00\nTeas\n$14.00\nShipping\n$5.00\nTotal USD\n$19.00\n\nSubscription prices recur monthly in the example plan. Shipping is included for subscription-only orders.\n\nEdit your cart ↗",
+        "storage": {
+          "ll-cart-v1": "[{\"kind\":\"tea\",\"teaId\":\"sylhet-black\",\"quantity\":1}]"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-assam-gold.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-ilam-green.svg"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/shop"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-assam-gold.svg"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-ilam-green.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-darjeeling-first.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-nepal-white.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-bangladesh-green.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/tea/sylhet-black"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/cart"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/checkout"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          }
+        ]
+      },
+      {
+        "label": "demo order confirmation",
+        "url": "http://127.0.0.1:4612/confirmation",
+        "main": "THE COLLECTION CONTINUES\n\nA good choice of leaves.\n\nDEMO ORDER SAVED\n\nThank you for exploring.\n\nYour demo order is recorded in this browser. Nothing was charged or shipped. No confirmation email is sent.\n\nReceipt\nLL-MVE8GWJ7\nTotal, USD\n$19.00\nSylhet Black × 1 · $14.00\nOpen your demo account\n↗\nWhile the kettle boils ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8GWJ7\",\"created\":\"2026-10-18T19:43:34.579Z\",\"lines\":[{\"name\":\"Sylhet Black\",\"detail\":\"Bangladesh · 50g · one-off\",\"unit\":14,\"href\":\"/tea/sylhet-black\",\"total\":14,\"quantity\":1}],\"subtotal\":14,\"shipping\":5,\"total\":19}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          }
+        ]
+      },
+      {
+        "label": "empty checkout validation",
+        "url": "http://127.0.0.1:4612/checkout",
+        "main": "ONE LAST PAGE\n\nA cup is nearly yours.\n\nDemo checkout. Use sample details only. No payment is taken and nothing is shipped.\n\n01 / Delivery details\nFull name\nEmail address\nStreet address\nCity\nZIP code\nCountry\nUnited States\n02 / Payment\n\nNo payment provider is connected. Card details are not collected.\n\nCard payment unavailable in demo\nI understand this is a demo order and accept the demo terms.\n\nPlease check the highlighted fields and complete all required details.\n\nPlace demo order\n↗\nYour order\nThe Tea Pair\n\n2 × 50g every month · Sylhet Black, Ilam Green\n\n$24.00\nTeas\n$24.00\nShipping\nIncluded\nTotal USD\n$24.00\n\nSubscription prices recur monthly in the example plan. Shipping is included for subscription-only orders.\n\nEdit your cart ↗",
+        "storage": {
+          "ll-cart-v1": "[{\"kind\":\"subscription\",\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"quantity\":1}]",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8GWJ7\",\"created\":\"2026-10-18T19:43:34.579Z\",\"lines\":[{\"name\":\"Sylhet Black\",\"detail\":\"Bangladesh · 50g · one-off\",\"unit\":14,\"href\":\"/tea/sylhet-black\",\"total\":14,\"quantity\":1}],\"subtotal\":14,\"shipping\":5,\"total\":19}",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-assam-gold.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-ilam-green.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/subscriptions"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/subscriptions/build"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/checkout"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          }
+        ]
+      },
+      {
+        "label": "demo order confirmation",
+        "url": "http://127.0.0.1:4612/confirmation",
+        "main": "THE COLLECTION CONTINUES\n\nA good choice of leaves.\n\nDEMO ORDER SAVED\n\nThank you for exploring.\n\nYour demo order is recorded in this browser. Nothing was charged or shipped. No confirmation email is sent.\n\nReceipt\nLL-MVE8GZ0W\nTotal, USD\n$24.00\nThe Tea Pair × 1 · $24.00\nOpen your demo account\n↗\nWhile the kettle boils ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}",
+          "ll-subscription-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"status\":\"active\",\"skipped\":false,\"next\":\"2026-11-17T19:43:37.010Z\"}",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8GZ0W\",\"created\":\"2026-10-18T19:43:37.808Z\",\"lines\":[{\"name\":\"The Tea Pair\",\"detail\":\"2 × 50g every month · Sylhet Black, Ilam Green\",\"unit\":24,\"href\":\"/subscriptions/build\",\"total\":24,\"quantity\":1}],\"subtotal\":24,\"shipping\":0,\"total\":24}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          }
+        ]
+      },
+      {
+        "label": "subscription paused",
+        "url": "http://127.0.0.1:4612/account/subscription",
+        "main": "Demo account\n/\nSubscription\n\nYOUR STANDING ORDER\n\nKeep your own rhythm.\n\nAll changes here are local demonstrations, not instructions to a real tea shop.\n\nYour current subscription\nPaused\nPlan\nThe Tea Pair\nMonthly charge\n$24.00 / month\nYour teas\nSylhet Black + Ilam Green\nNext delivery\nOn hold until you resume\n\nA sample Tea Pair appears until a demo subscription is ordered. Shipping included. All prices USD.\n\nChoose a change\nPause subscription\nNo future deliveries until you resume.\nSkip next delivery\nMove the next delivery one month forward.\nResume subscription\nRestart monthly deliveries from next month.\nSave subscription change ↗\n\nSaved. Your subscription is paused.\n\nBack to your account ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}",
+          "ll-subscription-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"status\":\"paused\",\"skipped\":false,\"next\":\"2026-11-17T19:43:37.010Z\"}",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8GZ0W\",\"created\":\"2026-10-18T19:43:37.808Z\",\"lines\":[{\"name\":\"The Tea Pair\",\"detail\":\"2 × 50g every month · Sylhet Black, Ilam Green\",\"unit\":24,\"href\":\"/subscriptions/build\",\"total\":24,\"quantity\":1}],\"subtotal\":24,\"shipping\":0,\"total\":24}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/account"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          }
+        ]
+      },
+      {
+        "label": "pause persisted after reload",
+        "url": "http://127.0.0.1:4612/account/subscription",
+        "main": "Demo account\n/\nSubscription\n\nYOUR STANDING ORDER\n\nKeep your own rhythm.\n\nAll changes here are local demonstrations, not instructions to a real tea shop.\n\nYour current subscription\nPaused\nPlan\nThe Tea Pair\nMonthly charge\n$24.00 / month\nYour teas\nSylhet Black + Ilam Green\nNext delivery\nOn hold until you resume\n\nA sample Tea Pair appears until a demo subscription is ordered. Shipping included. All prices USD.\n\nChoose a change\nPause subscription\nNo future deliveries until you resume.\nSkip next delivery\nMove the next delivery one month forward.\nResume subscription\nRestart monthly deliveries from next month.\nSave subscription change\n↗\nBack to your account ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}",
+          "ll-subscription-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"status\":\"paused\",\"skipped\":false,\"next\":\"2026-11-17T19:43:37.010Z\"}",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8GZ0W\",\"created\":\"2026-10-18T19:43:37.808Z\",\"lines\":[{\"name\":\"The Tea Pair\",\"detail\":\"2 × 50g every month · Sylhet Black, Ilam Green\",\"unit\":24,\"href\":\"/subscriptions/build\",\"total\":24,\"quantity\":1}],\"subtotal\":24,\"shipping\":0,\"total\":24}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/account"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          }
+        ]
+      },
+      {
+        "label": "ERROR: Tab target unreachable: input[value=\"skip\"]",
+        "url": "http://127.0.0.1:4612/account/subscription",
+        "main": "Demo account\n/\nSubscription\n\nYOUR STANDING ORDER\n\nKeep your own rhythm.\n\nAll changes here are local demonstrations, not instructions to a real tea shop.\n\nYour current subscription\nActive\nPlan\nThe Tea Pair\nMonthly charge\n$24.00 / month\nYour teas\nSylhet Black + Ilam Green\nNext delivery\nNovember 17, 2026\n\nA sample Tea Pair appears until a demo subscription is ordered. Shipping included. All prices USD.\n\nChoose a change\nPause subscription\nNo future deliveries until you resume.\nSkip next delivery\nMove the next delivery one month forward.\nResume subscription\nRestart monthly deliveries from next month.\nSave subscription change ↗\n\nSaved. Your subscription is active again.\n\nBack to your account ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}",
+          "ll-subscription-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"status\":\"active\",\"skipped\":false,\"next\":\"2026-11-17T19:43:40.240Z\"}",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8GZ0W\",\"created\":\"2026-10-18T19:43:37.808Z\",\"lines\":[{\"name\":\"The Tea Pair\",\"detail\":\"2 × 50g every month · Sylhet Black, Ilam Green\",\"unit\":24,\"href\":\"/subscriptions/build\",\"total\":24,\"quantity\":1}],\"subtotal\":24,\"shipping\":0,\"total\":24}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/account"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "12b-poster",
+    "width": 375,
+    "completed": false,
+    "error": "Tab target unreachable: input[value=\"skip\"]",
+    "log": [
+      {
+        "label": "empty checkout validation",
+        "url": "http://127.0.0.1:4613/checkout",
+        "main": "NEARLY BREW TIME\nONE LAST\nGOOD CHOICE.\n\nDemo checkout. Use sample details only. No payment is taken and nothing is shipped.\n\nTHE ORDER\nSylhet Black\n$14.00\n\nBangladesh · 50g · one-off\n\nTeas\n$14.00\n\nShipping\n$5.00\n\nTotal USD\n$19.00\n\nSubscription prices recur monthly in the example plan. Shipping included for subscription-only orders.\n\nEdit your cart ↗\n01 / Delivery details\nFull name\nEmail address\nStreet address\nCity\nZIP code\nCountry\nUnited States\n02 / Payment\n\nNo payment provider is connected. Card details are not collected.\n\nCard payment unavailable in demo\nI understand this is a demo order and accept the demo terms.\n\nPlease check the highlighted fields and complete all required details.\n\nPlace demo order\n↗",
+        "storage": {
+          "ll-cart-v1": "[{\"kind\":\"tea\",\"teaId\":\"sylhet-black\",\"quantity\":1}]"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-ilam-green.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-assam-gold.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/shop"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-assam-gold.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-ilam-green.svg"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-darjeeling-first.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-nepal-white.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/tea/sylhet-black"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/cart"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/checkout"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          }
+        ]
+      },
+      {
+        "label": "demo order confirmation",
+        "url": "http://127.0.0.1:4613/confirmation",
+        "main": "GOOD CHOICE / DEMO RECEIPT\n\nTHAT IS\nYOUR CUP.\nTEA SHELF EDITION / DEMO ONLY\nDEMO ORDER SAVED.\n\nYour demo order is recorded in this browser. Nothing was charged or shipped. No confirmation email is sent.\n\nReceipt\nLL-MVE8H469\n\nTotal, USD\n$19.00\n\nSylhet Black × 1 · $14.00\nOpen your demo account\n↗\nWhile the kettle boils ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8H469\",\"created\":\"2026-10-18T19:43:44.481Z\",\"lines\":[{\"name\":\"Sylhet Black\",\"detail\":\"Bangladesh · 50g · one-off\",\"unit\":14,\"href\":\"/tea/sylhet-black\",\"total\":14,\"quantity\":1}],\"subtotal\":14,\"shipping\":5,\"total\":19}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          }
+        ]
+      },
+      {
+        "label": "empty checkout validation",
+        "url": "http://127.0.0.1:4613/checkout",
+        "main": "NEARLY BREW TIME\nONE LAST\nGOOD CHOICE.\n\nDemo checkout. Use sample details only. No payment is taken and nothing is shipped.\n\nTHE ORDER\nThe Tea Pair\n$24.00\n\n2 × 50g every month · Sylhet Black, Ilam Green\n\nTeas\n$24.00\n\nShipping\nIncluded\n\nTotal USD\n$24.00\n\nSubscription prices recur monthly in the example plan. Shipping included for subscription-only orders.\n\nEdit your cart ↗\n01 / Delivery details\nFull name\nEmail address\nStreet address\nCity\nZIP code\nCountry\nUnited States\n02 / Payment\n\nNo payment provider is connected. Card details are not collected.\n\nCard payment unavailable in demo\nI understand this is a demo order and accept the demo terms.\n\nPlease check the highlighted fields and complete all required details.\n\nPlace demo order\n↗",
+        "storage": {
+          "ll-cart-v1": "[{\"kind\":\"subscription\",\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"quantity\":1}]",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8H469\",\"created\":\"2026-10-18T19:43:44.481Z\",\"lines\":[{\"name\":\"Sylhet Black\",\"detail\":\"Bangladesh · 50g · one-off\",\"unit\":14,\"href\":\"/tea/sylhet-black\",\"total\":14,\"quantity\":1}],\"subtotal\":14,\"shipping\":5,\"total\":19}",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-ilam-green.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-assam-gold.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/subscriptions"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/subscriptions/build"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/checkout"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          }
+        ]
+      },
+      {
+        "label": "demo order confirmation",
+        "url": "http://127.0.0.1:4613/confirmation",
+        "main": "GOOD CHOICE / DEMO RECEIPT\n\nTHAT IS\nYOUR CUP.\nTEA SHELF EDITION / DEMO ONLY\nDEMO ORDER SAVED.\n\nYour demo order is recorded in this browser. Nothing was charged or shipped. No confirmation email is sent.\n\nReceipt\nLL-MVE8H6R9\n\nTotal, USD\n$24.00\n\nThe Tea Pair × 1 · $24.00\nOpen your demo account\n↗\nWhile the kettle boils ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}",
+          "ll-subscription-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"status\":\"active\",\"skipped\":false,\"next\":\"2026-11-17T19:43:47.026Z\"}",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8H6R9\",\"created\":\"2026-10-18T19:43:47.829Z\",\"lines\":[{\"name\":\"The Tea Pair\",\"detail\":\"2 × 50g every month · Sylhet Black, Ilam Green\",\"unit\":24,\"href\":\"/subscriptions/build\",\"total\":24,\"quantity\":1}],\"subtotal\":24,\"shipping\":0,\"total\":24}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          }
+        ]
+      },
+      {
+        "label": "subscription paused",
+        "url": "http://127.0.0.1:4613/account/subscription",
+        "main": "Demo account\n↗\nSubscription\nYOUR RULES\nCHANGE\nTHE RHYTHM.\n\nAll changes here are local demonstrations, not instructions to a real tea shop.\n\nYOUR CURRENT SUBSCRIPTION\n\nThe Tea Pair\nPaused\nMonthly charge\n$24.00 / month\nYour teas\nSylhet Black + Ilam Green\nNext delivery\nOn hold until you resume\n\nA sample Tea Pair appears until a demo subscription is ordered. Shipping included. All prices USD.\n\nChoose a change\nPAUSE IT.\nPause subscription\nNo future deliveries until you resume.\nSKIP ONE.\nSkip next delivery\nMove the next delivery one month forward.\nWE ARE BACK.\nResume subscription\nRestart monthly deliveries from next month.\nSave subscription change↗\nSaved. Your subscription is paused.\nBack to your account ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}",
+          "ll-subscription-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"status\":\"paused\",\"skipped\":false,\"next\":\"2026-11-17T19:43:47.026Z\"}",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8H6R9\",\"created\":\"2026-10-18T19:43:47.829Z\",\"lines\":[{\"name\":\"The Tea Pair\",\"detail\":\"2 × 50g every month · Sylhet Black, Ilam Green\",\"unit\":24,\"href\":\"/subscriptions/build\",\"total\":24,\"quantity\":1}],\"subtotal\":24,\"shipping\":0,\"total\":24}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/account"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          }
+        ]
+      },
+      {
+        "label": "pause persisted after reload",
+        "url": "http://127.0.0.1:4613/account/subscription",
+        "main": "Demo account\n↗\nSubscription\nYOUR RULES\nCHANGE\nTHE RHYTHM.\n\nAll changes here are local demonstrations, not instructions to a real tea shop.\n\nYOUR CURRENT SUBSCRIPTION\n\nThe Tea Pair\nPaused\nMonthly charge\n$24.00 / month\nYour teas\nSylhet Black + Ilam Green\nNext delivery\nOn hold until you resume\n\nA sample Tea Pair appears until a demo subscription is ordered. Shipping included. All prices USD.\n\nChoose a change\nPAUSE IT.\nPause subscription\nNo future deliveries until you resume.\nSKIP ONE.\nSkip next delivery\nMove the next delivery one month forward.\nWE ARE BACK.\nResume subscription\nRestart monthly deliveries from next month.\nSave subscription change\n↗\nBack to your account ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}",
+          "ll-subscription-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"status\":\"paused\",\"skipped\":false,\"next\":\"2026-11-17T19:43:47.026Z\"}",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8H6R9\",\"created\":\"2026-10-18T19:43:47.829Z\",\"lines\":[{\"name\":\"The Tea Pair\",\"detail\":\"2 × 50g every month · Sylhet Black, Ilam Green\",\"unit\":24,\"href\":\"/subscriptions/build\",\"total\":24,\"quantity\":1}],\"subtotal\":24,\"shipping\":0,\"total\":24}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/account"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          }
+        ]
+      },
+      {
+        "label": "ERROR: Tab target unreachable: input[value=\"skip\"]",
+        "url": "http://127.0.0.1:4613/account/subscription",
+        "main": "Demo account\n↗\nSubscription\nYOUR RULES\nCHANGE\nTHE RHYTHM.\n\nAll changes here are local demonstrations, not instructions to a real tea shop.\n\nYOUR CURRENT SUBSCRIPTION\n\nThe Tea Pair\nActive\nMonthly charge\n$24.00 / month\nYour teas\nSylhet Black + Ilam Green\nNext delivery\nNovember 17, 2026\n\nA sample Tea Pair appears until a demo subscription is ordered. Shipping included. All prices USD.\n\nChoose a change\nPAUSE IT.\nPause subscription\nNo future deliveries until you resume.\nSKIP ONE.\nSkip next delivery\nMove the next delivery one month forward.\nWE ARE BACK.\nResume subscription\nRestart monthly deliveries from next month.\nSave subscription change↗\nSaved. Your subscription is active again.\nBack to your account ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}",
+          "ll-subscription-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"status\":\"active\",\"skipped\":false,\"next\":\"2026-11-17T19:43:50.320Z\"}",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8H6R9\",\"created\":\"2026-10-18T19:43:47.829Z\",\"lines\":[{\"name\":\"The Tea Pair\",\"detail\":\"2 × 50g every month · Sylhet Black, Ilam Green\",\"unit\":24,\"href\":\"/subscriptions/build\",\"total\":24,\"quantity\":1}],\"subtotal\":24,\"shipping\":0,\"total\":24}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/account"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "03-b2b",
+    "width": 1440,
+    "completed": true,
+    "log": [
+      {
+        "label": "empty demo validation",
+        "url": "http://127.0.0.1:4610/demo",
+        "main": "TECHNICAL EVALUATION\nSchedule a Live Cargoline Platform Walkthrough\n\nEvaluate real-time container tracking, demurrage risk countdowns, and ERP reconciliation on your active shipping lanes.\n\nSTEP 1 OF 1\nSelect Evaluation Parameters\n\nAll fields are validated. Confirm your operational scale to match with a dedicated logistics specialist.\n\nFull Name *\nPlease provide your full name.\nWork Email *\nPlease provide a valid work email address.\nImporting Organization *\nPlease enter your importing organization name.\nAnnual Import Volume *\nSelect volume tier...\nUp to 1,200 TEUs/year (Mid-Market Tier)\n1,200 to 6,000 TEUs/year (Commercial Tier)\nOver 6,000 TEUs/year (Enterprise Tier)\nPlease choose your annual container volume.\nPrimary ERP or TMS Platform *\nSelect system of record...\nOracle NetSuite ERP\nSAP S/4HANA\nMicrosoft Dynamics 365\nCargoWise One\nDescartes Systems\nOther / Custom Database\nPlease indicate your primary system of record.\nHigh-Risk Corridors or Evaluation Questions\nPrivacy Assurance: We respect your confidentiality. Carrier rates and volume data are used exclusively to configure your demo instance.\nConfirm Evaluation Booking →\nLooking for custom enterprise contract pricing? Contact our sales team directly →",
+        "storage": {},
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/product"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/integrations"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/pricing"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/demo"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          }
+        ]
+      },
+      {
+        "label": "demo ready (malformed email)",
+        "url": "http://127.0.0.1:4610/demo",
+        "main": "TECHNICAL EVALUATION\nSchedule a Live Cargoline Platform Walkthrough\n\nEvaluate real-time container tracking, demurrage risk countdowns, and ERP reconciliation on your active shipping lanes.\n\nSTEP 1 OF 1\nSelect Evaluation Parameters\n\nAll fields are validated. Confirm your operational scale to match with a dedicated logistics specialist.\n\nFull Name *\nPlease provide your full name.\nWork Email *\nPlease provide a valid work email address.\nImporting Organization *\nPlease enter your importing organization name.\nAnnual Import Volume *\nSelect volume tier...\nUp to 1,200 TEUs/year (Mid-Market Tier)\n1,200 to 6,000 TEUs/year (Commercial Tier)\nOver 6,000 TEUs/year (Enterprise Tier)\nPlease choose your annual container volume.\nPrimary ERP or TMS Platform *\nSelect system of record...\nOracle NetSuite ERP\nSAP S/4HANA\nMicrosoft Dynamics 365\nCargoWise One\nDescartes Systems\nOther / Custom Database\nPlease indicate your primary system of record.\nHigh-Risk Corridors or Evaluation Questions\nPrivacy Assurance: We respect your confidentiality. Carrier rates and volume data are used exclusively to configure your demo instance.\nConfirm Evaluation Booking →\nLooking for custom enterprise contract pricing? Contact our sales team directly →",
+        "storage": {},
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/product"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/integrations"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/pricing"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/demo"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          }
+        ]
+      },
+      {
+        "label": "false confirmation with invalid email",
+        "url": "http://127.0.0.1:4610/demo/confirmed",
+        "main": "✓\nEVALUATION RESERVED\nYour Demonstration Request is Confirmed\n\nThank you for registering. A Cargoline solutions engineer will contact you within two business hours to confirm your active shipping lanes and provision your test instance.\n\nPreparation Checklist for Your Session\n• Active Container or Booking Numbers: Have 2 to 3 active bills of lading ready to observe live AIS milestone stitching.\n• ERP or TMS Platform: Identify your integration targets (NetSuite, SAP, Dynamics, or custom database).\n• Demurrage Review: Note any marine terminals where detention and storage charges have impacted operations.\nExplore Platform Architecture\nReview Trust & Security Standards\nReturn to Home",
+        "storage": {},
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4610/demo/confirmed"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4610/assets/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4610/assets/cargoline-mark.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4610/assets/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+          }
+        ]
+      },
+      {
+        "label": "false inquiry received",
+        "url": "http://127.0.0.1:4610/contact",
+        "main": "SALES & SOLUTIONS\nContact Cargoline Solutions Engineering\n\nConnect directly with an enterprise logistics solutions architect to discuss high-volume container pricing, custom TMS orchestration, and IT procurement reviews.\n\nINQUIRY FORM\nSubmit Operational Requirements\n\nOur logistics team responds within 2 business hours during North American and European operating windows.\n\n✓ Your inquiry has been registered. An enterprise solutions specialist will contact you shortly.\nFull Name *\nWork Email *\nImporting Organization *\nYour Operational Role *\nSelect role...\nVP / Director of Operations\nLogistics / Supply Chain Manager\nFinance / Procurement Lead\nIT & Systems Architecture\nExecutive Leadership\nOperational Requirements & Corridor Details *\nInquiry Received\nLooking for immediate software demonstration? Schedule an interactive evaluation demo →",
+        "storage": {},
+        "network": []
+      }
+    ]
+  },
+  {
+    "id": "08-travel-booking",
+    "width": 1440,
+    "completed": false,
+    "error": "locator.getAttribute: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('a[href*=\"/booking/dates\"]').first()\n",
+    "log": [
+      {
+        "label": "ERROR: locator.getAttribute: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('a[href*=\"/booking/dates\"]').first()\n",
+        "url": "http://127.0.0.1:4611/rooms/garden-veranda",
+        "main": "Home\n/\nRooms\n/\nGarden veranda\n\nROOM 01 / PRIVATE VERANDA\n\nGarden veranda\nBDT 4,200\nper night · demo rate\nIllustrative photography, not an actual room.\nA room to make your own.\n\nOpen the shutters to the garden. A shaded veranda leaves room for a book and a slow cup of tea.\n\nGUESTS\nUp to 2\nBED\nOne double bed\nROOM SIZE\n24 m²\nBATHROOM\nPrivate, with hot water\nGood to know\n\nGround floor. Two entrance steps; no step-free bathroom. Fan-cooled. Wi-Fi may be intermittent.\n\nDemo rate includes breakfast and all displayed charges. No online payment is taken.\n\nChoose dates for this room\n↗\nCompare the other rooms\nHouse rules\n↗\nCancellation policy\n↗\nAsk about access\n↗",
+        "storage": {},
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4611/"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4611/assets/gelasio.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4611/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4611/app-data.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4611/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-tea-gardens.webp"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4611/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-garden-room.webp"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-tea-view.webp"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-twin-room.webp"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4611/rooms"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4611/assets/gelasio.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4611/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4611/app-data.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4611/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-garden-room.webp"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-tea-view.webp"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-twin-room.webp"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4611/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-hill-view.webp"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-family-room.webp"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-quiet-room.webp"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4611/rooms/garden-veranda"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4611/assets/gelasio.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4611/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4611/app-data.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4611/app.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4611/assets/placeholder-garden-room.webp"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4611/assets/dm-sans.woff2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "12a-archival",
+    "width": 1440,
+    "completed": false,
+    "error": "Tab target unreachable: input[value=\"skip\"]",
+    "log": [
+      {
+        "label": "empty checkout validation",
+        "url": "http://127.0.0.1:4612/checkout",
+        "main": "ONE LAST PAGE\n\nA cup is nearly yours.\n\nDemo checkout. Use sample details only. No payment is taken and nothing is shipped.\n\n01 / Delivery details\nFull name\nEmail address\nStreet address\nCity\nZIP code\nCountry\nUnited States\n02 / Payment\n\nNo payment provider is connected. Card details are not collected.\n\nCard payment unavailable in demo\nI understand this is a demo order and accept the demo terms.\n\nPlease check the highlighted fields and complete all required details.\n\nPlace demo order\n↗\nYour order\nSylhet Black\n\nBangladesh · 50g · one-off\n\n$14.00\nTeas\n$14.00\nShipping\n$5.00\nTotal USD\n$19.00\n\nSubscription prices recur monthly in the example plan. Shipping is included for subscription-only orders.\n\nEdit your cart ↗",
+        "storage": {
+          "ll-cart-v1": "[{\"kind\":\"tea\",\"teaId\":\"sylhet-black\",\"quantity\":1}]"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-assam-gold.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-ilam-green.svg"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/shop"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-assam-gold.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-ilam-green.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-darjeeling-first.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-nepal-white.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-bangladesh-green.svg"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/tea/sylhet-black"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/cart"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/checkout"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          }
+        ]
+      },
+      {
+        "label": "demo order confirmation",
+        "url": "http://127.0.0.1:4612/confirmation",
+        "main": "THE COLLECTION CONTINUES\n\nA good choice of leaves.\n\nDEMO ORDER SAVED\n\nThank you for exploring.\n\nYour demo order is recorded in this browser. Nothing was charged or shipped. No confirmation email is sent.\n\nReceipt\nLL-MVE8I4PE\nTotal, USD\n$19.00\nSylhet Black × 1 · $14.00\nOpen your demo account\n↗\nWhile the kettle boils ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8I4PE\",\"created\":\"2026-10-18T19:44:31.826Z\",\"lines\":[{\"name\":\"Sylhet Black\",\"detail\":\"Bangladesh · 50g · one-off\",\"unit\":14,\"href\":\"/tea/sylhet-black\",\"total\":14,\"quantity\":1}],\"subtotal\":14,\"shipping\":5,\"total\":19}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          }
+        ]
+      },
+      {
+        "label": "empty checkout validation",
+        "url": "http://127.0.0.1:4612/checkout",
+        "main": "ONE LAST PAGE\n\nA cup is nearly yours.\n\nDemo checkout. Use sample details only. No payment is taken and nothing is shipped.\n\n01 / Delivery details\nFull name\nEmail address\nStreet address\nCity\nZIP code\nCountry\nUnited States\n02 / Payment\n\nNo payment provider is connected. Card details are not collected.\n\nCard payment unavailable in demo\nI understand this is a demo order and accept the demo terms.\n\nPlease check the highlighted fields and complete all required details.\n\nPlace demo order\n↗\nYour order\nThe Tea Pair\n\n2 × 50g every month · Sylhet Black, Ilam Green\n\n$24.00\nTeas\n$24.00\nShipping\nIncluded\nTotal USD\n$24.00\n\nSubscription prices recur monthly in the example plan. Shipping is included for subscription-only orders.\n\nEdit your cart ↗",
+        "storage": {
+          "ll-cart-v1": "[{\"kind\":\"subscription\",\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"quantity\":1}]",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8I4PE\",\"created\":\"2026-10-18T19:44:31.826Z\",\"lines\":[{\"name\":\"Sylhet Black\",\"detail\":\"Bangladesh · 50g · one-off\",\"unit\":14,\"href\":\"/tea/sylhet-black\",\"total\":14,\"quantity\":1}],\"subtotal\":14,\"shipping\":5,\"total\":19}",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-assam-gold.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4612/assets/plate-ilam-green.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/subscriptions"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/subscriptions/build"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/checkout"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          }
+        ]
+      },
+      {
+        "label": "demo order confirmation",
+        "url": "http://127.0.0.1:4612/confirmation",
+        "main": "THE COLLECTION CONTINUES\n\nA good choice of leaves.\n\nDEMO ORDER SAVED\n\nThank you for exploring.\n\nYour demo order is recorded in this browser. Nothing was charged or shipped. No confirmation email is sent.\n\nReceipt\nLL-MVE8I79P\nTotal, USD\n$24.00\nThe Tea Pair × 1 · $24.00\nOpen your demo account\n↗\nWhile the kettle boils ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}",
+          "ll-subscription-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"status\":\"active\",\"skipped\":false,\"next\":\"2026-11-17T19:44:34.284Z\"}",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8I79P\",\"created\":\"2026-10-18T19:44:35.149Z\",\"lines\":[{\"name\":\"The Tea Pair\",\"detail\":\"2 × 50g every month · Sylhet Black, Ilam Green\",\"unit\":24,\"href\":\"/subscriptions/build\",\"total\":24,\"quantity\":1}],\"subtotal\":24,\"shipping\":0,\"total\":24}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          }
+        ]
+      },
+      {
+        "label": "subscription paused",
+        "url": "http://127.0.0.1:4612/account/subscription",
+        "main": "Demo account\n/\nSubscription\n\nYOUR STANDING ORDER\n\nKeep your own rhythm.\n\nAll changes here are local demonstrations, not instructions to a real tea shop.\n\nYour current subscription\nPaused\nPlan\nThe Tea Pair\nMonthly charge\n$24.00 / month\nYour teas\nSylhet Black + Ilam Green\nNext delivery\nOn hold until you resume\n\nA sample Tea Pair appears until a demo subscription is ordered. Shipping included. All prices USD.\n\nChoose a change\nPause subscription\nNo future deliveries until you resume.\nSkip next delivery\nMove the next delivery one month forward.\nResume subscription\nRestart monthly deliveries from next month.\nSave subscription change ↗\n\nSaved. Your subscription is paused.\n\nBack to your account ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}",
+          "ll-subscription-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"status\":\"paused\",\"skipped\":false,\"next\":\"2026-11-17T19:44:34.284Z\"}",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8I79P\",\"created\":\"2026-10-18T19:44:35.149Z\",\"lines\":[{\"name\":\"The Tea Pair\",\"detail\":\"2 × 50g every month · Sylhet Black, Ilam Green\",\"unit\":24,\"href\":\"/subscriptions/build\",\"total\":24,\"quantity\":1}],\"subtotal\":24,\"shipping\":0,\"total\":24}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/account"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          }
+        ]
+      },
+      {
+        "label": "pause persisted after reload",
+        "url": "http://127.0.0.1:4612/account/subscription",
+        "main": "Demo account\n/\nSubscription\n\nYOUR STANDING ORDER\n\nKeep your own rhythm.\n\nAll changes here are local demonstrations, not instructions to a real tea shop.\n\nYour current subscription\nPaused\nPlan\nThe Tea Pair\nMonthly charge\n$24.00 / month\nYour teas\nSylhet Black + Ilam Green\nNext delivery\nOn hold until you resume\n\nA sample Tea Pair appears until a demo subscription is ordered. Shipping included. All prices USD.\n\nChoose a change\nPause subscription\nNo future deliveries until you resume.\nSkip next delivery\nMove the next delivery one month forward.\nResume subscription\nRestart monthly deliveries from next month.\nSave subscription change\n↗\nBack to your account ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}",
+          "ll-subscription-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"status\":\"paused\",\"skipped\":false,\"next\":\"2026-11-17T19:44:34.284Z\"}",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8I79P\",\"created\":\"2026-10-18T19:44:35.149Z\",\"lines\":[{\"name\":\"The Tea Pair\",\"detail\":\"2 × 50g every month · Sylhet Black, Ilam Green\",\"unit\":24,\"href\":\"/subscriptions/build\",\"total\":24,\"quantity\":1}],\"subtotal\":24,\"shipping\":0,\"total\":24}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/account"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          }
+        ]
+      },
+      {
+        "label": "ERROR: Tab target unreachable: input[value=\"skip\"]",
+        "url": "http://127.0.0.1:4612/account/subscription",
+        "main": "Demo account\n/\nSubscription\n\nYOUR STANDING ORDER\n\nKeep your own rhythm.\n\nAll changes here are local demonstrations, not instructions to a real tea shop.\n\nYour current subscription\nActive\nPlan\nThe Tea Pair\nMonthly charge\n$24.00 / month\nYour teas\nSylhet Black + Ilam Green\nNext delivery\nNovember 17, 2026\n\nA sample Tea Pair appears until a demo subscription is ordered. Shipping included. All prices USD.\n\nChoose a change\nPause subscription\nNo future deliveries until you resume.\nSkip next delivery\nMove the next delivery one month forward.\nResume subscription\nRestart monthly deliveries from next month.\nSave subscription change ↗\n\nSaved. Your subscription is active again.\n\nBack to your account ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}",
+          "ll-subscription-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"status\":\"active\",\"skipped\":false,\"next\":\"2026-11-17T19:44:37.577Z\"}",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8I79P\",\"created\":\"2026-10-18T19:44:35.149Z\",\"lines\":[{\"name\":\"The Tea Pair\",\"detail\":\"2 × 50g every month · Sylhet Black, Ilam Green\",\"unit\":24,\"href\":\"/subscriptions/build\",\"total\":24,\"quantity\":1}],\"subtotal\":24,\"shipping\":0,\"total\":24}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/account"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4612/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/fraunces.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4612/style.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4612/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4612/assets/dm-sans.woff2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "12b-poster",
+    "width": 1440,
+    "completed": false,
+    "error": "Tab target unreachable: input[value=\"skip\"]",
+    "log": [
+      {
+        "label": "empty checkout validation",
+        "url": "http://127.0.0.1:4613/checkout",
+        "main": "NEARLY BREW TIME\nONE LAST\nGOOD CHOICE.\n\nDemo checkout. Use sample details only. No payment is taken and nothing is shipped.\n\nTHE ORDER\nSylhet Black\n$14.00\n\nBangladesh · 50g · one-off\n\nTeas\n$14.00\n\nShipping\n$5.00\n\nTotal USD\n$19.00\n\nSubscription prices recur monthly in the example plan. Shipping included for subscription-only orders.\n\nEdit your cart ↗\n01 / Delivery details\nFull name\nEmail address\nStreet address\nCity\nZIP code\nCountry\nUnited States\n02 / Payment\n\nNo payment provider is connected. Card details are not collected.\n\nCard payment unavailable in demo\nI understand this is a demo order and accept the demo terms.\n\nPlease check the highlighted fields and complete all required details.\n\nPlace demo order\n↗",
+        "storage": {
+          "ll-cart-v1": "[{\"kind\":\"tea\",\"teaId\":\"sylhet-black\",\"quantity\":1}]"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-ilam-green.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-assam-gold.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/shop"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-assam-gold.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-ilam-green.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-darjeeling-first.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-nepal-white.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-bangladesh-green.svg"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/tea/sylhet-black"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/cart"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/checkout"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          }
+        ]
+      },
+      {
+        "label": "demo order confirmation",
+        "url": "http://127.0.0.1:4613/confirmation",
+        "main": "GOOD CHOICE / DEMO RECEIPT\n\nTHAT IS\nYOUR CUP.\nTEA SHELF EDITION / DEMO ONLY\nDEMO ORDER SAVED.\n\nYour demo order is recorded in this browser. Nothing was charged or shipped. No confirmation email is sent.\n\nReceipt\nLL-MVE8ICH5\n\nTotal, USD\n$19.00\n\nSylhet Black × 1 · $14.00\nOpen your demo account\n↗\nWhile the kettle boils ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8ICH5\",\"created\":\"2026-10-18T19:44:41.897Z\",\"lines\":[{\"name\":\"Sylhet Black\",\"detail\":\"Bangladesh · 50g · one-off\",\"unit\":14,\"href\":\"/tea/sylhet-black\",\"total\":14,\"quantity\":1}],\"subtotal\":14,\"shipping\":5,\"total\":19}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          }
+        ]
+      },
+      {
+        "label": "empty checkout validation",
+        "url": "http://127.0.0.1:4613/checkout",
+        "main": "NEARLY BREW TIME\nONE LAST\nGOOD CHOICE.\n\nDemo checkout. Use sample details only. No payment is taken and nothing is shipped.\n\nTHE ORDER\nThe Tea Pair\n$24.00\n\n2 × 50g every month · Sylhet Black, Ilam Green\n\nTeas\n$24.00\n\nShipping\nIncluded\n\nTotal USD\n$24.00\n\nSubscription prices recur monthly in the example plan. Shipping included for subscription-only orders.\n\nEdit your cart ↗\n01 / Delivery details\nFull name\nEmail address\nStreet address\nCity\nZIP code\nCountry\nUnited States\n02 / Payment\n\nNo payment provider is connected. Card details are not collected.\n\nCard payment unavailable in demo\nI understand this is a demo order and accept the demo terms.\n\nPlease check the highlighted fields and complete all required details.\n\nPlace demo order\n↗",
+        "storage": {
+          "ll-cart-v1": "[{\"kind\":\"subscription\",\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"quantity\":1}]",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8ICH5\",\"created\":\"2026-10-18T19:44:41.897Z\",\"lines\":[{\"name\":\"Sylhet Black\",\"detail\":\"Bangladesh · 50g · one-off\",\"unit\":14,\"href\":\"/tea/sylhet-black\",\"total\":14,\"quantity\":1}],\"subtotal\":14,\"shipping\":5,\"total\":19}",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-ilam-green.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-assam-gold.svg"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/subscriptions"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/subscriptions/build"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/checkout"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          }
+        ]
+      },
+      {
+        "label": "demo order confirmation",
+        "url": "http://127.0.0.1:4613/confirmation",
+        "main": "GOOD CHOICE / DEMO RECEIPT\n\nTHAT IS\nYOUR CUP.\nTEA SHELF EDITION / DEMO ONLY\nDEMO ORDER SAVED.\n\nYour demo order is recorded in this browser. Nothing was charged or shipped. No confirmation email is sent.\n\nReceipt\nLL-MVE8IF5I\n\nTotal, USD\n$24.00\n\nThe Tea Pair × 1 · $24.00\nOpen your demo account\n↗\nWhile the kettle boils ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}",
+          "ll-subscription-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"status\":\"active\",\"skipped\":false,\"next\":\"2026-11-17T19:44:44.454Z\"}",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8IF5I\",\"created\":\"2026-10-18T19:44:45.366Z\",\"lines\":[{\"name\":\"The Tea Pair\",\"detail\":\"2 × 50g every month · Sylhet Black, Ilam Green\",\"unit\":24,\"href\":\"/subscriptions/build\",\"total\":24,\"quantity\":1}],\"subtotal\":24,\"shipping\":0,\"total\":24}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          }
+        ]
+      },
+      {
+        "label": "subscription paused",
+        "url": "http://127.0.0.1:4613/account/subscription",
+        "main": "Demo account\n↗\nSubscription\nYOUR RULES\nCHANGE\nTHE RHYTHM.\n\nAll changes here are local demonstrations, not instructions to a real tea shop.\n\nYOUR CURRENT SUBSCRIPTION\n\nThe Tea Pair\nPaused\nMonthly charge\n$24.00 / month\nYour teas\nSylhet Black + Ilam Green\nNext delivery\nOn hold until you resume\n\nA sample Tea Pair appears until a demo subscription is ordered. Shipping included. All prices USD.\n\nChoose a change\nPAUSE IT.\nPause subscription\nNo future deliveries until you resume.\nSKIP ONE.\nSkip next delivery\nMove the next delivery one month forward.\nWE ARE BACK.\nResume subscription\nRestart monthly deliveries from next month.\nSave subscription change↗\nSaved. Your subscription is paused.\nBack to your account ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}",
+          "ll-subscription-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"status\":\"paused\",\"skipped\":false,\"next\":\"2026-11-17T19:44:44.454Z\"}",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8IF5I\",\"created\":\"2026-10-18T19:44:45.366Z\",\"lines\":[{\"name\":\"The Tea Pair\",\"detail\":\"2 × 50g every month · Sylhet Black, Ilam Green\",\"unit\":24,\"href\":\"/subscriptions/build\",\"total\":24,\"quantity\":1}],\"subtotal\":24,\"shipping\":0,\"total\":24}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/account"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          }
+        ]
+      },
+      {
+        "label": "pause persisted after reload",
+        "url": "http://127.0.0.1:4613/account/subscription",
+        "main": "Demo account\n↗\nSubscription\nYOUR RULES\nCHANGE\nTHE RHYTHM.\n\nAll changes here are local demonstrations, not instructions to a real tea shop.\n\nYOUR CURRENT SUBSCRIPTION\n\nThe Tea Pair\nPaused\nMonthly charge\n$24.00 / month\nYour teas\nSylhet Black + Ilam Green\nNext delivery\nOn hold until you resume\n\nA sample Tea Pair appears until a demo subscription is ordered. Shipping included. All prices USD.\n\nChoose a change\nPAUSE IT.\nPause subscription\nNo future deliveries until you resume.\nSKIP ONE.\nSkip next delivery\nMove the next delivery one month forward.\nWE ARE BACK.\nResume subscription\nRestart monthly deliveries from next month.\nSave subscription change\n↗\nBack to your account ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}",
+          "ll-subscription-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"status\":\"paused\",\"skipped\":false,\"next\":\"2026-11-17T19:44:44.454Z\"}",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8IF5I\",\"created\":\"2026-10-18T19:44:45.366Z\",\"lines\":[{\"name\":\"The Tea Pair\",\"detail\":\"2 × 50g every month · Sylhet Black, Ilam Green\",\"unit\":24,\"href\":\"/subscriptions/build\",\"total\":24,\"quantity\":1}],\"subtotal\":24,\"shipping\":0,\"total\":24}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/account"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          }
+        ]
+      },
+      {
+        "label": "ERROR: Tab target unreachable: input[value=\"skip\"]",
+        "url": "http://127.0.0.1:4613/account/subscription",
+        "main": "Demo account\n↗\nSubscription\nYOUR RULES\nCHANGE\nTHE RHYTHM.\n\nAll changes here are local demonstrations, not instructions to a real tea shop.\n\nYOUR CURRENT SUBSCRIPTION\n\nThe Tea Pair\nActive\nMonthly charge\n$24.00 / month\nYour teas\nSylhet Black + Ilam Green\nNext delivery\nNovember 17, 2026\n\nA sample Tea Pair appears until a demo subscription is ordered. Shipping included. All prices USD.\n\nChoose a change\nPAUSE IT.\nPause subscription\nNo future deliveries until you resume.\nSKIP ONE.\nSkip next delivery\nMove the next delivery one month forward.\nWE ARE BACK.\nResume subscription\nRestart monthly deliveries from next month.\nSave subscription change↗\nSaved. Your subscription is active again.\nBack to your account ↗",
+        "storage": {
+          "ll-cart-v1": "[]",
+          "ll-draft-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"]}",
+          "ll-subscription-v1": "{\"plan\":\"duo\",\"teaIds\":[\"sylhet-black\",\"ilam-green\"],\"status\":\"active\",\"skipped\":false,\"next\":\"2026-11-17T19:44:47.869Z\"}",
+          "ll-receipt-v1": "{\"demo\":true,\"ref\":\"LL-MVE8IF5I\",\"created\":\"2026-10-18T19:44:45.366Z\",\"lines\":[{\"name\":\"The Tea Pair\",\"detail\":\"2 × 50g every month · Sylhet Black, Ilam Green\",\"unit\":24,\"href\":\"/subscriptions/build\",\"total\":24,\"quantity\":1}],\"subtotal\":24,\"shipping\":0,\"total\":24}"
+        },
+        "network": [
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/confirmation"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "image",
+            "url": "http://127.0.0.1:4613/assets/pack-sylhet-black.svg"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/account"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "document",
+            "url": "http://127.0.0.1:4613/account/subscription"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/barlow-condensed.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "stylesheet",
+            "url": "http://127.0.0.1:4613/poster.css"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/motion.js"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/store.js"
+          },
+          {
+            "method": "GET",
+            "type": "font",
+            "url": "http://127.0.0.1:4613/assets/dm-sans.woff2"
+          },
+          {
+            "method": "GET",
+            "type": "script",
+            "url": "http://127.0.0.1:4613/catalogue.js"
+          }
+        ]
+      }
+    ]
+  }
+]
