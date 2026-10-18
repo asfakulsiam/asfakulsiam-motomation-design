@@ -1,0 +1,46 @@
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+
+.  (journey only; no stamp)
+  J — journey (whole site, real browser; any missing state fails the page; not in the stamp or its id)
+    nav      ✓ 23/23 route(s) reachable from home in ≤ 3 clicks (/:0 /rooms:1 /experiences:1 /getting-there:1 /booking/confirmation:1 /availability:1 /contact:1 /rooms/garden-veranda:1 …)
+               · sitemap.xml: 23 route(s)
+               · 24 concrete route(s) from the Scope table
+               · 23 page(s) loaded
+    mobile   ✓ 132/132 interactive element(s) respond at 375px · tap 132/132 · swipe n/a · long-press n/a
+               · 12 page(s); an element shared by several pages (header, footer) is tapped once
+               · 12 element(s) parked off-canvas (skip links, closed drawers) are keyboard-only by design and not tapped
+               · no element declares a long press
+    forms    ✗ 9/15 form state(s) rendered · Your room
+Garden veranda · BDT 4,200
+Tea (/availability): default✓ validation✓ loading✗ success✗ serverError✗ · Your name (/contact): default✓ validation✓ loading✓ success✓ serverError✓ · Your room
+Garden veranda · BDT 4,200
+Tea (/booking/dates): default✓ validation✓ loading✗ success✗ serverError✗
+               ✗ Your room
+Garden veranda · BDT 4,200
+Tea (/availability) loading: no request was made on a valid submit, so there is no pending state to show
+               ✗ Your room
+Garden veranda · BDT 4,200
+Tea (/availability) success: no request was made: success cannot follow a server answer
+               ✗ Your room
+Garden veranda · BDT 4,200
+Tea (/availability) serverError: no request was made, so a server error cannot happen or be shown
+               ✗ Your room
+Garden veranda · BDT 4,200
+Tea (/booking/dates) loading: no request was made on a valid submit, so there is no pending state to show
+               ✗ Your room
+Garden veranda · BDT 4,200
+Tea (/booking/dates) success: no request was made: success cannot follow a server answer
+               ✗ Your room
+Garden veranda · BDT 4,200
+Tea (/booking/dates) serverError: no request was made, so a server error cannot happen or be shown
+               · 3 page(s) with forms checked: /availability, /contact, /booking/dates
+    loading  – n/a: no fetch or XHR request after load: no async surface
+    errors   ✓ 1/1 designed not-found view (unknown route → HTTP 404)
+               · probed /__motomation-missing-mvdsf7yr/
+    session  ✓ 6/6 · load ✓ · open a second route ✓ · back button ✓ · forward button ✓ · full reload ✓ · two tabs ✓
+               · second page: /rooms
+    coverage 23 page(s) loaded of 23 required route(s) · forms checked on every page that has one (3 page(s), 3 form(s)) · tap and loading sampled on 12 page(s)
+               · Scope routes no link reaches (check them in the journey walk): /404
+               · not sampled for tap/loading: /cancellation-policy, /privacy, /terms, /rooms/hill-facing-double, /rooms/family-veranda, /rooms/quiet-corner … 5 more
+    journey: nav0 mobile0 forms6 loading- errors0 session0 → FAIL (6 missing)
+exit 1

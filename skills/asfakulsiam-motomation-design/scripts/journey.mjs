@@ -230,10 +230,10 @@ async function formsOne(browser, home, T, multi) {
   const probe = await ctxPage(browser); let forms = [];
   try { await go(probe.page, home, T); forms = await probe.page.evaluate(`(() => [...document.forms].map((f, i) => ({ i, id: f.id || null, action: f.getAttribute("action") || "", method: (f.getAttribute("method") || "get").toLowerCase(), fields: [...f.querySelectorAll("input, textarea, select")].filter((x) => !["hidden", "submit", "button", "reset"].includes(x.type)).length, label: (f.getAttribute("aria-label") || f.querySelector("h1,h2,h3,legend,label")?.innerText || f.id || "form " + (i + 1)).trim().slice(0, 40) })).filter((f) => f.fields > 0))()`); } finally { await probe.ctx.close(); }
   if (!forms.length) return { ok: null, have: 0, need: 0, fails: [], forms: [], notes: ["no form with fields on this page"] };
-  const uncovered = forms.slice(MAX_FORMS_PER_PAGE).map((f) => `${new URL(home).pathname}: form "${f.label}" (beyond ${MAX_FORMS_PER_PAGE} per page)`); forms = forms.slice(0, MAX_FORMS_PER_PAGE);
+  const uncovered = forms.slice(MAX_FORMS_PER_PAGE).map((f) => `${new URL(home).pathname}: form "${String(f.label || "form").replace(/\s+/g, " ").trim().slice(0, 60)}" (beyond ${MAX_FORMS_PER_PAGE} per page)`); forms = forms.slice(0, MAX_FORMS_PER_PAGE);
   const results = [];
   for (const f of forms) {
-    const st = { default: false, validation: false, loading: false, success: false, serverError: false }; const why = {}; const sel = `document.forms[${f.i}]`;
+    const st = { default: false, validation: false, loading: false, success: false, serverError: false }; const why = {}; const unverified = []; const sel = `document.forms[${f.i}]`;
     const run = async (mode) => {
       const { ctx, page, errors } = await ctxPage(browser); let requests = 0, nativeNav = false; const held = [];
       await page.route("**/*", async (route) => { const rq = route.request(); const isDoc = rq.isNavigationRequest() && rq.frame() === page.mainFrame(); const isApi = ["fetch", "xhr"].includes(rq.resourceType()) && rq.method() !== "GET" || (["fetch", "xhr"].includes(rq.resourceType()) && mode.armed);
@@ -264,6 +264,11 @@ async function formsOne(browser, home, T, multi) {
     await run({ code: 200, delay: 2000, fn: async ({ page, s0, requests, nativeNav, arm }) => {
       await page.evaluate(`(${FILL})(${sel})`); arm(); await submit(page); await page.waitForTimeout(T(500));
       const mid = await page.evaluate(`(${SNAPF})(${sel} || window.__jf)`).catch(() => null);
+      // v3.0.1: the check's filled values were rejected by the form's own validation (a calendar that only takes available
+      // dates, a pattern the filler cannot guess): the submit was not valid, so the request states are not verified, not
+      // failed. Before, this read "no request was made on a valid submit" (a booking benchmark build, 6 false fails).
+      if (!requests() && mid) { const said = newTexts(s0, mid).filter((t) => ERR_RX.test(t) && !OK_RX.test(t)); const inv = await page.evaluate(`(() => { const f = ${sel} || window.__jf; return f ? f.querySelectorAll("[aria-invalid=true], :invalid").length : 0; })()`).catch(() => 0);
+        if (said.length || inv) { unverified.push(...["loading", "success", "serverError"]); why.loading = why.success = why.serverError = `not verified: the form rejected the check's filled values${said.length ? ` ("${said[0].slice(0, 70)}")` : ` (${inv} invalid field(s))`}; fill it by hand or add a fixture value`; return; } }
       if (!requests()) { why.loading = "no request was made on a valid submit, so there is no pending state to show"; why.success = "no request was made: success cannot follow a server answer"; if (mid && newTexts(s0, mid).some((t) => OK_RX.test(t))) why.success += " (a success message appears without any request)"; return; }
       if (nativeNav()) { why.loading = "native form submit: the page navigates; no in-page loading state"; why.success = "native form submit: success is whatever page the server returns, not a designed state"; why.serverError = "native form submit: a server error shows the server's page, not a designed state"; return; }
       st.loading = !!mid && (mid.btn !== s0.btn || mid.busy || newTexts(s0, mid).some((t) => /send|sending|submitting|loading|wait|…|\.\.\./i.test(t)));
@@ -274,17 +279,18 @@ async function formsOne(browser, home, T, multi) {
       if (!st.success) why.success = shown.length ? `after a 200 the new text does not read as success: "${shown[0].slice(0, 50)}"` : "after a 200 nothing new is shown";
     } });
     // 5 server error: the request answered 500
-    if (!why.serverError) await run({ code: 500, delay: 600, fn: async ({ page, s0, requests, arm }) => {
+    if (!why.serverError && !unverified.length) await run({ code: 500, delay: 600, fn: async ({ page, s0, requests, arm }) => {
       await page.evaluate(`(${FILL})(${sel})`); arm(); await submit(page); await page.waitForTimeout(T(2200));
       if (!requests()) { why.serverError = "no request was made, so a server error cannot happen or be shown"; return; }
       const end = await page.evaluate(`(${SNAPF})(${sel} || window.__jf)`).catch(() => null); const shown = end ? newTexts(s0, end) : [];
       st.serverError = shown.some((t) => ERR_RX.test(t) && !OK_RX.test(t));
       if (!st.serverError) why.serverError = shown.some((t) => OK_RX.test(t)) ? "after a 500 the form shows success" : "after a 500 no error is shown";
     } });
-    results.push({ form: f.label + (multi ? ` (${new URL(home).pathname})` : ""), method: f.method, action: f.action, states: st, why });
+    results.push({ form: String(f.label || "form").replace(/\s+/g, " ").trim().slice(0, 60) + (multi ? ` (${new URL(home).pathname})` : ""), method: f.method, action: f.action, states: Object.fromEntries(Object.entries(st).filter(([k]) => !unverified.includes(k))), unverified, why });
   }
-  const need = results.length * 5, have = results.reduce((n, r) => n + Object.values(r.states).filter(Boolean).length, 0);
-  return { ok: have === need, have, need, forms: results, uncovered, fails: results.flatMap((r) => Object.entries(r.states).filter(([, v]) => !v).map(([k]) => ({ form: r.form, state: k, why: r.why[k] || "missing" }))), notes: [] };
+  const need = results.reduce((n, r) => n + Object.keys(r.states).length, 0), have = results.reduce((n, r) => n + Object.values(r.states).filter(Boolean).length, 0);
+  const notVerified = results.filter((r) => r.unverified?.length).map((r) => `${r.form}: ${r.unverified.join(", ")} not verified (${r.why.loading})`);
+  return { ok: have === need, have, need, forms: results, uncovered: [...uncovered, ...notVerified], fails: results.flatMap((r) => Object.entries(r.states).filter(([, v]) => !v).map(([k]) => ({ form: r.form, state: k, why: r.why[k] || "missing" }))), notes: [] };
 }
 
 // ── loading ───────────────────────────────────────────────────────────────────
@@ -389,7 +395,7 @@ export async function journey(browser, home, opts = {}) {
 }
 const SUM = { nav: (r) => `${r.have}/${r.need} route(s) reachable from home in ≤ ${MAX_CLICKS} clicks${r.depths ? ` (${Object.entries(r.depths).map(([p, d]) => `${p}:${d}`).slice(0, 8).join(" ")}${Object.keys(r.depths).length > 8 ? " …" : ""})` : ""}`,
   mobile: (r) => `${r.have}/${r.need} interactive element(s) respond at 375px · tap ${r.tap?.have}/${r.tap?.need} · swipe ${r.swipe?.need ? `${r.swipe.have}/${r.swipe.need}` : "n/a"} · long-press ${r.longpress?.need ? `${r.longpress.have}/${r.longpress.need}` : "n/a"}`,
-  forms: (r) => `${r.have}/${r.need} form state(s) rendered${r.forms?.length ? ` · ${r.forms.map((f) => `${f.form}: ${Object.entries(f.states).map(([k, v]) => `${k}${v ? "✓" : "✗"}`).join(" ")}`).join(" · ")}` : ""}`,
+  forms: (r) => `${r.have}/${r.need} form state(s) rendered${r.forms?.length ? ` · ${r.forms.map((f) => `${f.form}: ${Object.entries(f.states).map(([k, v]) => `${k}${v ? "✓" : "✗"}`).join(" ")}${f.unverified?.length ? " " + f.unverified.map((k) => `${k}?`).join(" ") : ""}`).join(" · ")}` : ""}`,
   loading: (r) => `${r.have}/${r.need} async surface(s) show a skeleton while pending`,
   errors: (r) => `${r.have}/${r.need} designed not-found view (unknown route → HTTP ${r.status ?? "?"}${r.soft404 ? ", soft 404" : ""})`,
   session: (r) => `${r.have}/${r.need} · ${(r.checks || []).map((c) => `${c.step} ${c.ok ? "✓" : "✗"}`).join(" · ")}` };
