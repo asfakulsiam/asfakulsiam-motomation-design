@@ -1,0 +1,33 @@
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+
+runs/12-paired/a-archival/  (journey only; no stamp)
+  J — journey (whole site, real browser; any missing state fails the page; not in the stamp or its id)
+    nav      ✗ 3/22 route(s) reachable from home in ≤ 3 clicks (/:0 /shop:1 /subscriptions:1 /estates:1 /account:1 /brewing-guide:1 /cart:1 /tea/sylhet-black:1 …)
+               ✗ /tea/darjeeling-first: not reachable from home in ≤ 3 clicks
+               ✗ /tea/nepal-white: not reachable from home in ≤ 3 clicks
+               ✗ /tea/bangladesh-green: not reachable from home in ≤ 3 clicks
+               ✗ /checkout: not reachable from home in ≤ 3 clicks
+               ✗ /shop: broken link: HTTP 404 (linked from /)
+               ✗ /estates: broken link: HTTP 404 (linked from /)
+               ✗ /brewing-guide: broken link: HTTP 404 (linked from /)
+               ✗ /cart: broken link: HTTP 404 (linked from /)
+               … 11 more
+               · sitemap.xml: 22 route(s)
+               · 23 concrete route(s) from the Scope table
+               · 18 page(s) loaded
+    mobile   ✗ 31/32 interactive element(s) respond at 375px · tap 31/32 · swipe n/a · long-press n/a
+               ✗ tap button "Reset local demo data" (/account): nothing changed after a tap (no DOM change, scroll, navigation, dialog, or focus moving into a field)
+               · 3 page(s); an element shared by several pages (header, footer) is tapped once
+               · 3 element(s) parked off-canvas (skip links, closed drawers) are keyboard-only by design and not tapped
+               · no element declares a long press
+    forms    – n/a: no form with fields on any of 3 loaded page(s)
+    loading  – n/a: no fetch or XHR request after load: no async surface
+    errors   ✓ 1/1 designed not-found view (unknown route → HTTP 404)
+               · probed /__motomation-missing-mvdveiwc/
+    session  ✓ 6/6 · load ✓ · open a second route ✓ · back button ✓ · forward button ✓ · full reload ✓ · two tabs ✓
+               · second page: /subscriptions
+    coverage 3 page(s) loaded of 22 required route(s) · forms checked on every page that has one (0 page(s), 0 form(s)) · tap and loading sampled on 3 page(s)
+               · not reached: /tea/darjeeling-first, /tea/nepal-white, /tea/bangladesh-green, /checkout
+               · Scope routes no link reaches (check them in the journey walk): /tea/darjeeling-first, /tea/nepal-white, /tea/bangladesh-green, /checkout, /404
+    journey: nav19 mobile1 forms- loading- errors0 session0 → FAIL (20 missing)
+exit 1

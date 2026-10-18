@@ -1,0 +1,34 @@
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+
+runs/12-paired/a-archival/  (journey only; no stamp)
+  J — journey (whole site, real browser; any missing state fails the page; not in the stamp or its id)
+    nav      ✓ 22/22 route(s) reachable from home in ≤ 3 clicks (/:0 /shop:1 /subscriptions:1 /estates:1 /account:1 /brewing-guide:1 /cart:1 /tea/sylhet-black:1 …)
+               · sitemap.xml: 22 route(s)
+               · 23 concrete route(s) from the Scope table
+               · 22 page(s) loaded
+    mobile   ✓ 80/80 interactive element(s) respond at 375px · tap 80/80 · swipe n/a · long-press n/a
+               · 12 page(s); an element shared by several pages (header, footer) is tapped once
+               · 3 control(s) disabled by an earlier tap (a selection limit reached) are skipped: a disabled control does nothing by specification
+               · 12 element(s) parked off-canvas (skip links, closed drawers) are keyboard-only by design and not tapped
+               · no element declares a long press
+    forms    ✗ 7/13 form state(s) rendered · Full name (/contact): default✓ validation✓ loading✗ success✗ serverError✗ · 1. Choose your monthly plan (/subscriptions/build): default✓ loading✓ success✓ validation? serverError? · Choose a change (/account/subscription): default✓ validation✓ loading✗ success✗ serverError✗ · 01 / Delivery details (/checkout):  default? validation? loading? success? serverError?
+               ✗ Full name (/contact) loading: no request was made on a valid submit, so there is no pending state to show
+               ✗ Full name (/contact) success: no request was made: success cannot follow a server answer
+               ✗ Full name (/contact) serverError: no request was made, so a server error cannot happen or be shown
+               ✗ Choose a change (/account/subscription) loading: no request was made on a valid submit, so there is no pending state to show
+               ✗ Choose a change (/account/subscription) success: no request was made: success cannot follow a server answer
+               ✗ Choose a change (/account/subscription) serverError: no request was made, so a server error cannot happen or be shown
+               · 5 page(s) with forms checked: /shop, /contact, /subscriptions/build, /account/subscription, /checkout
+               · live control(s), no submit (applied on change, states not required): Refine the ledger (/shop)
+               · not checked (reported, not passed): 1. Choose your monthly plan (/subscriptions/build): validation, serverError not verified (not verified: the submit control is disabled while the form is incomplete, so an empty submit cannot happen; not verified: no request to a server; the form saves in the browser and then moves to /checkout, so a server error cannot happen); 01 / Delivery details (/checkout): default, validation, loading, success, serverError not verified (not verified: the form is hidden when the page loads (behind a state a fresh browser does not have, such as an empty cart or a signed-out account); walk it by hand)
+    loading  – n/a: no fetch or XHR request after load: no async surface
+    errors   ✓ 1/1 designed not-found view (unknown route → HTTP 404)
+               · probed /__motomation-missing-mvdy7sm3/
+    session  ✓ 6/6 · load ✓ · open a second route ✓ · back button ✓ · forward button ✓ · full reload ✓ · two tabs ✓
+               · second page: /shop
+    coverage 22 page(s) loaded of 22 required route(s) · forms checked on every page that has one (5 page(s), 4 form(s)) · tap and loading sampled on 12 page(s)
+               · Scope routes no link reaches (check them in the journey walk): /404
+               · not sampled for tap/loading: /tea/assam-gold, /tea/ilam-green, /shipping, /returns, /privacy, /terms … 4 more
+               · forms not checked: 1. Choose your monthly plan (/subscriptions/build): validation, serverError not verified (not verified: the submit control is disabled while the form is incomplete, so an empty submit cannot happen; not verified: no request to a server; the form saves in the browser and then moves to /checkout, so a server error cannot happen), 01 / Delivery details (/checkout): default, validation, loading, success, serverError not verified (not verified: the form is hidden when the page loads (behind a state a fresh browser does not have, such as an empty cart or a signed-out account); walk it by hand)
+    journey: nav0 mobile0 forms6 loading- errors0 session0 → FAIL (6 missing)
+exit 1
