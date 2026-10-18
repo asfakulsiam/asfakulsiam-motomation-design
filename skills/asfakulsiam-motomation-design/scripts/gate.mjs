@@ -39,7 +39,7 @@
 //                calls printing tokens/keys/passwords/emails (sec-09), .env not ignored by git for a local target
 //                (sec-08), CSP only as <meta> on a URL target served over HTTP (sec-h1)
 //
-//   X          (v2.9.0) completeness: when DESIGN.md has a Scope section (Step 0.7), scripts/completeness.mjs checks
+//   X          (v2.9.0) completeness: when DESIGN.md has a Scope section (Step 1), scripts/completeness.mjs checks
 //              (without one, narrow maintenance: maintenanceMedia() checks MEDIA.md and placeholders only, with the last
 //              git commit as the baseline for added or replaced media when there is one)
 //              every requested/required route, state, legal page, edge case, admin surface and skeleton the agent
@@ -94,7 +94,9 @@ import { spawnSync } from "node:child_process";
 import os from "node:os";
 import { statfsSync } from "node:fs";
 import { projectRoot, userDir } from "./memory.mjs";
-import { completeness, completenessLines, maintenanceMedia, maintenanceLines } from "./completeness.mjs";
+import { completeness, completenessLines, maintenanceMedia, maintenanceLines, contractRoutes } from "./completeness.mjs";
+// the Scope table's concrete routes for a local target (its DESIGN.md, or --design), so the journey coverage names them
+const scopeRoutesFor = (target, design) => { try { if (design) return contractRoutes(design); if (/^https?:/.test(target)) return []; const r = resolve(target); return contractRoutes(statSync(r).isDirectory() ? r : dirname(r)); } catch { return []; } };
 import { journey, journeyLines } from "./journey.mjs";
 import { copyRules, seoRules, perfRules, secRules, parseHeadersFile, rulesAxes, sitemapPages } from "./rulesets.mjs";
 
@@ -176,6 +178,8 @@ function serve(root, { fallback = null } = {}) {
     const srv = createServer((req, res) => {
       let p = decodeURIComponent(new URL(req.url, "http://x").pathname);
       let f = join(root, p); if (existsSync(f) && statSync(f).isDirectory()) f = join(f, "index.html");
+      // a clean URL (/shop) answers shop.html, as static hosts do (Netlify, Cloudflare Pages, Vercel cleanUrls, GitHub Pages)
+      if (!existsSync(f) && !extname(f) && existsSync(f + ".html")) f += ".html";
       if (fallback && (!f.startsWith(root) || !existsSync(f))) { const g = join(fallback, p); if (g.startsWith(fallback) && existsSync(g) && statSync(g).isFile()) f = g; }
       // a missing file answers 404 with the site's own 404.html when it has one, as static hosts (GitHub Pages, Netlify,
       // Cloudflare Pages, Vercel) do; axis J (errors) reads that view
@@ -645,21 +649,40 @@ async function numbers(browser, url) {
 export function frameworkFiles(project) {
   try { const m = JSON.parse(readFileSync(join(project, ".next/build-manifest.json"), "utf8")); return [...(m.rootMainFiles || []), ...(m.polyfillFiles || [])].map((f) => "/_next/" + f.replace(/^\/+/, "")); } catch { return []; }
 }
-async function structure(browser, url, framework = []) {
+// V (entrance repeats) reads each section's entrance at its start and at its end, never at a moment in between. v3.0.0
+// sampled 60 ms after DOMContentLoaded and 1 s after each scroll: an entrance slower than that (a 0.9 s delay, a 1.6 s
+// rise) read as "static" or as a partial pattern, a looping marquee read as an entrance, and the count moved with timing.
+// Now the page clock (timers, requestAnimationFrame, performance.now, Date: Playwright clock) is paused from the first
+// script and CSS/WAAPI playback is frozen (CDP Animation.setPlaybackRate 0); after each scroll the clock is run 4 s
+// forward and every finite animation is finished. Same page → same patterns, on any machine. Without CDP or the clock
+// (not Chromium) the old waits are used and the result says "timed".
+export async function structure(browser, url, framework = []) {
   // entrance pattern per top-level section, and the measurable motion budget (pins, WebGL canvases, JS weight)
   const ctx = await browser.newContext({ bypassCSP: true, viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 }); const page = await ctx.newPage();
-  await page.goto(url, { waitUntil: "domcontentloaded", timeout: T(60000) }).catch(() => {});
+  let frozen = false, cdp = null;
+  try { cdp = await ctx.newCDPSession(page); await cdp.send("Animation.enable"); await cdp.send("Animation.setPlaybackRate", { playbackRate: 0 });
+    await page.clock.install({ time: 1_700_000_000_000 }); await page.clock.pauseAt(1_700_000_000_000); frozen = true; } catch { frozen = false; }
+  await page.goto(url, { waitUntil: frozen ? "load" : "domcontentloaded", timeout: T(60000) }).catch(() => {});
+  if (frozen) { await page.evaluate(() => document.fonts?.ready).catch(() => {}); await page.clock.runFor(50).catch(() => {}); await cdp.send("Animation.setPlaybackRate", { playbackRate: 0 }).catch(() => {}); }
   await page.addScriptTag({ content: PAGE_LIB }).catch(() => {});
   const SNAP = () => { window.__secs = window.__secs || [...document.querySelectorAll("section, main > *, body > header, body > footer")].filter((e, i, a) => !a.some((o) => o !== e && o.contains(e)) && e.getBoundingClientRect().height > 40);
     return __secs.map((sec) => [...sec.querySelectorAll("*")].filter((e) => __g.hasText(e) || ["IMG", "svg", "CANVAS", "VIDEO", "FIGURE", "PICTURE"].includes(e.tagName)).slice(0, 10).map((e) => {
       const cs = getComputedStyle(e); const m = new DOMMatrix(cs.transform === "none" ? undefined : cs.transform);
       return { o: __g.opacity(e), x: m.m41, y: m.m42, sc: Math.hypot(m.a, m.b), clip: cs.clipPath, f: cs.filter };
     })); };
-  await page.waitForTimeout(60);
+  // finish every finite CSS/WAAPI animation (a loop has no end state: it stays frozen at its start)
+  const FINISH = () => { for (const a of document.getAnimations()) { try { const t = a.effect?.getComputedTiming?.(); if (t && Number.isFinite(t.endTime)) a.finish(); } catch {} } };
+  if (!frozen) await page.waitForTimeout(60);
   const pre = await page.evaluate(SNAP).catch(() => []);
-  await page.waitForTimeout(1200);
+  if (!frozen) await page.waitForTimeout(1200);
   const n = await page.evaluate(() => (window.__secs || []).length).catch(() => 0); const post = [];
-  for (let i = 0; i < n; i++) { await page.evaluate((k) => __secs[k].scrollIntoView({ block: "start" }), i); await page.waitForTimeout(1000); post.push((await page.evaluate(SNAP))[i]); }
+  for (let i = 0; i < n; i++) {
+    await page.evaluate((k) => __secs[k].scrollIntoView({ block: "start" }), i);
+    if (frozen) { // let IntersectionObserver deliver (rendering frames still run), then run the clock and finish what started
+      await page.waitForTimeout(T(120)); await page.clock.runFor(4000).catch(() => {}); await page.evaluate(FINISH).catch(() => {}); await page.clock.runFor(50).catch(() => {}); await page.evaluate(FINISH).catch(() => {});
+    } else await page.waitForTimeout(1000);
+    post.push((await page.evaluate(SNAP))[i]);
+  }
   const patterns = pre.map((els, i) => { const counts = {};
     (els || []).forEach((a, j) => { const b = post[i]?.[j]; if (!b) return; const k = [];
       if (Math.abs(a.o - b.o) > 0.05) k.push("fade"); if (Math.abs(a.x - b.x) > 4) k.push("x"); if (Math.abs(a.y - b.y) > 4) k.push("y");
@@ -682,7 +705,7 @@ async function structure(browser, url, framework = []) {
     const isFw = framework.some((f) => { try { return new URL(sc.src).pathname === f; } catch { return false; } });
     try { const r = await fetch(sc.src); const n = gzipSync(Buffer.from(await r.arrayBuffer())).length; if (isFw) fw += n; else js += n; } catch { unknown++; }
   }
-  return { sections: patterns.length, patterns, repeats, pins: bud.pins, webgl: bud.webgl, jsKB: Math.round(js / 1024), frameworkKB: Math.round(fw / 1024), jsUnknown: unknown, sectionIds: bud.ids };
+  return { sections: patterns.length, patterns, repeats, timing: frozen ? "frozen" : "timed", pins: bud.pins, webgl: bud.webgl, jsKB: Math.round(js / 1024), frameworkKB: Math.round(fw / 1024), jsUnknown: unknown, sectionIds: bud.ids };
 }
 
 // ── the four rule sets (gate/4): facts from the page, judged by scripts/rulesets.mjs → C S P K ──
@@ -774,6 +797,10 @@ function readRecord(file) {
 // (floor 1); an identical fingerprint is S1. Nothing reused → S5.
 export async function memoryAxis(logFile, stamp, sectionIds, { dir, designFile } = {}) {
   if (!stamp?.archetype || !stamp?.signature) return null;
+  // v3: an archetype is optional. "archetype: none" (and "signature: none") is a declared choice, not a missing stamp, and
+  // not a reuse: two builds with no archetype share nothing to repeat. The build is still fingerprinted on what it has
+  // (sections, tier, signature family, layout when the stamp names one); v3.0.0 returned "?" here and skipped memory.
+  const NONE = (v) => !v || String(v).toLowerCase() === "none";
   const { fingerprint, similarity, load, designPalette, paletteFamily } = await import("./lib.mjs");
   let runs = []; if (logFile && existsSync(logFile)) { try { runs = JSON.parse(readFileSync(logFile, "utf8")).runs || []; } catch {} }
   const pal = designFile && existsSync(designFile) ? designPalette(readFileSync(designFile, "utf8")) : undefined;
@@ -783,14 +810,17 @@ export async function memoryAxis(logFile, stamp, sectionIds, { dir, designFile }
   if (own < 0) own = runs.map((r) => !r.dir && r.archetype === stamp.archetype && r.signature === stamp.signature && tierEq(r) && (!pal?.family || !famOf(r) || famOf(r) === pal.family)).lastIndexOf(true);
   const history = own >= 0 ? runs.slice(0, own) : runs;
   const prev = history.slice(-5); if (!prev.length) return { s: 5, trace: logFile && existsSync(logFile) ? `last5:none${own >= 0 ? ",self-excluded" : ""}` : "last5:no-log" };
-  const sigs = load("signatures"); const mine = fingerprint({ archetype: stamp.archetype, signature: stamp.signature, tier: stamp.tier, sections: sectionIds }, sigs);
-  const fp = (r) => r.fingerprint || fingerprint({ archetype: r.archetype, signature: r.signature, tier: r.tier, sections: r.sections }, sigs);
-  const worst = Math.max(0, ...prev.map((r) => similarity(mine, fp(r)).score));
-  const reused = { archetype: prev.some((r) => r.archetype === stamp.archetype), signature: prev.some((r) => r.signature === stamp.signature),
+  const sigs = load("signatures"); const fpIn = (r) => ({ archetype: NONE(r.archetype) ? undefined : r.archetype, layout: r.layout, signature: NONE(r.signature) ? undefined : r.signature, tier: r.tier, sections: r.sections });
+  const mine = fingerprint(fpIn({ ...stamp, sections: sectionIds }), sigs);
+  const fp = (r) => r.fingerprint || fingerprint(fpIn(r), sigs);
+  // an identical fingerprint is S1 only when it compares at least three dimensions: two (sections and tier) are not a copy
+  const worst = Math.max(0, ...prev.map((r) => { const x = similarity(mine, fp(r)); return x.compared >= 3 ? x.score : Math.min(x.score, 0.99); }));
+  const reused = { archetype: !NONE(stamp.archetype) && prev.some((r) => r.archetype === stamp.archetype), signature: !NONE(stamp.signature) && prev.some((r) => r.signature === stamp.signature),
     layout: !!mine.layout && prev.some((r) => fp(r).layout === mine.layout), palette: !!pal?.family && prev.some((r) => famOf(r) === pal.family) };
   const n = Object.values(reused).filter(Boolean).length;
   const sc = worst >= 0.999 ? 1 : Math.max(1, 5 - n);
-  return { s: sc, reused, palette: pal?.family || null, trace: `last5:${Object.entries(reused).map(([k, v]) => `${k}-${v ? "reused" : "new"}`).join(",")},fp${Math.round(worst * 100)}${own >= 0 ? ",self-excluded" : ""}` };
+  const decl = [NONE(stamp.archetype) ? "archetype:none" : null, NONE(stamp.signature) ? "signature:none" : null].filter(Boolean);
+  return { s: sc, reused, palette: pal?.family || null, trace: `last5:${decl.length ? decl.join(",") + "," : ""}${Object.entries(reused).map(([k, v]) => `${k}-${v ? "reused" : "new"}`).join(",")},fp${Math.round(worst * 100)}${own >= 0 ? ",self-excluded" : ""}` };
 }
 // ── motion quality (gate/3): progression in pinned zones, smoothness, reduced-motion distinctness → Q axis, count q ──
 const PROG_MIN_PCT = 0.5;   // a zone "moves" between two scroll samples when more than this % of its pixels changes
@@ -1247,8 +1277,8 @@ const MICRO_PAGE = async () => {
   } : null;
   const asy = asyncJs ? {
     pending: /aria-busy|\.disabled\s*=\s*true|pending|loading|sending|submitting/i.test(js),
-    success: /res\.ok|response\.ok|\.then\(|await\s+fetch[\s\S]{0,400}(ok|status|json)/i.test(js),
-    error: /catch\s*\(|\.catch\(|!res\.ok|!response\.ok/i.test(js),
+    success: /\b\w+\.ok\b|\.then\(|await\s+fetch[\s\S]{0,400}(ok|status|json)/i.test(js),
+    error: /\bcatch\s*[({]|\.catch\(|!\s*\w+\.ok\b|\.ok\s*===?\s*false/i.test(js),
   } : null;
   return { btn, frm, lst, img, asy };
 };
@@ -1294,7 +1324,7 @@ export async function scan(target, browser, opts = {}) {
     // --reference (v2.13): a design reference is one page, not a site: no cross-page navigation, no 404 page, demo forms.
     // Axis J is skipped (reported as skipped); every page-level axis above still runs and still fails the page.
     const jr = flags.reference ? { pass: true, skipped: true, fails: 0, segment: "journey: skipped (--reference)" }
-      : await journey(browser, url, { T }).catch((e) => ({ error: firstLine(e), pass: false, fails: 1, segment: "journey: not measured" }));
+      : await journey(browser, url, { T, contractRoutes: scopeRoutesFor(target, opts.design) }).catch((e) => ({ error: firstLine(e), pass: false, fails: 1, segment: "journey: not measured" }));
     // fingerprint of the served HTML with stamp comments removed: same page → same id, any other page → a different id
     const html = await fetch(url).then((r) => r.text()).catch(() => "");
     const pageHash = createHash("sha256").update(html.replace(/<!--[^>]*?motomation ·[\s\S]*?-->|\/\*[^*]*?motomation ·[\s\S]*?\*\//g, "")).digest("hex").slice(0, 16);
@@ -1314,7 +1344,7 @@ export async function scan(target, browser, opts = {}) {
     const designFile = opts.design || [join(local, "DESIGN.md"), ...(own ? [join(own, "DESIGN.md")] : []), join(process.cwd(), "DESIGN.md")].find((f) => existsSync(f));
     const logFile = opts.log || [join(local, ".motomation/log.json"), join(local, "log.json"), ...(own ? [join(own, "log.json"), join(own, ".motomation/log.json")] : []), join(projectRoot(local), ".motomation/log.json"), join(projectRoot(), ".motomation/log.json"), join(userDir(), "log.json")].find((f) => existsSync(f)); // last: the user-level log shared by every project
     const record = readRecord(designFile); const mem = await memoryAxis(logFile, meta, st.sectionIds, { dir: local, designFile });
-    // axis X (v2.9.0): the scope the agent derived in Step 0.7, when DESIGN.md has a Scope section. Not in the stamp or its id;
+    // axis X (v2.9.0): the scope the agent derived in Step 1, when DESIGN.md has a Scope section. Not in the stamp or its id;
     // a missing required item fails the page.
     const compl = designFile && /^##\s+Scope\b/m.test(readFileSync(designFile, "utf8")) ? completeness(designFile) : null;
     // no Scope section (narrow maintenance): media is still checked, in the project's folder (craft/media.md)
@@ -1580,7 +1610,7 @@ async function main() {
     // --journey: only axis J (the six whole-site checks); no stamp (a stamp needs every axis)
     if (flags.journey) {
       const out = []; const b = await launch(pw, !!flags.light);
-      try { for (const t of targets) { const { url, close } = await toUrl(t); try { const j = await journey(b, url, { T }); out.push({ target: t, url, ...j }); if (!flags.json) { console.log(`\n${t}  (journey only; no stamp)`); for (const l of journeyLines(j)) console.log(l); } } finally { await close?.(); } } } finally { await b.close().catch(() => {}); }
+      try { for (const t of targets) { const { url, close } = await toUrl(t); try { const j = await journey(b, url, { T, contractRoutes: scopeRoutesFor(t, opts.design) }); out.push({ target: t, url, ...j }); if (!flags.json) { console.log(`\n${t}  (journey only; no stamp)`); for (const l of journeyLines(j)) console.log(l); } } finally { await close?.(); } } } finally { await b.close().catch(() => {}); }
       if (flags.json) console.log(JSON.stringify(out.length === 1 ? out[0] : out, null, 2));
       process.exit(out.every((r) => r.pass) ? 0 : 1);
     }

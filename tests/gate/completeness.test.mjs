@@ -1,5 +1,5 @@
 // v2.9.0 Phase 5: gate axis X (scripts/completeness.mjs) checks the scope the agent derived, nothing hardcoded.
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync, readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { tmpdir } from "node:os";
 import { spawnSync } from "node:child_process";
@@ -11,7 +11,7 @@ const SHAPE = ["MEDIA.md", "README.md", "MOTION.md", "SCHEMA.md", "DATA.md", "CR
 function project(scopeRows, files, mode = "") {
   const root = mkdtempSync(join(tmpdir(), "moto-x-"));
   for (const f of [...SHAPE, ...files]) put(root, f, f === "MEDIA.md" ? MEDIA : f === "SCHEMA.md" ? "## Section contract\n| #cart | empty: Your cart is empty |\n" : f === "data/products.json" ? '{"demo": true, "entity": "Product", "items": [{"id": "p1", "demo": true}]}' : f === "README.md" ? "# Demo\n\nAll data in data/ is demo. Replace with real data before launch.\n" : f === ".env.example" ? "# demo\nSHOP_API_KEY=placeholder\n" : "// demo\n");
-  put(root, "DESIGN.md", `# DESIGN.md\n\n## Scope\n**Site type:** e-commerce\n**Admin panel:** yes\n${mode ? `**Delivery mode:** ${mode}\n` : ""}\n| Kind | Item | Mark | Evidence |\n|---|---|---|---|\n${scopeRows.join("\n")}\n\n## Type research\n| Site | Type |\n|---|---|\n| shop-a | e-commerce |\n\n## References\n1. a\n\n## Concept\n`);
+  put(root, "DESIGN.md", `# DESIGN.md\n\n## Scope\n**Site type:** e-commerce\n**Admin panel:** yes\n${mode ? `**Delivery mode:** ${mode}\n` : ""}\n| Kind | Item | Mark | Evidence |\n|---|---|---|---|\n${scopeRows.join("\n")}\n\n## Product contract\nJobs: buy a coffee bag. Journeys: / → /shop.\n\n## Type research\n| Site | Type |\n|---|---|\n| shop-a | e-commerce |\n\n## References\n1. a\n\n## Concept\n`);
   return root;
 }
 const rows = ["| route | / | requested | |", "| route | /products/[slug] | required | |", "| legal | /privacy | required | |", "| state | /cart: empty | required | SCHEMA.md#empty |", "| admin | /admin/orders | required | |", "| skeleton | product grid | required | app/products/loading.tsx |", "| edge | out of stock | required | |", "| function | wishlist | optional | |", "| route | /blog | not required for this brief, reason: no editorial content in the brief |"];
@@ -45,7 +45,7 @@ say(ids === ".env.example coverage, README demo line, demo labels, npm run dev",
 const dRoot = project(["| route | / | requested | |"], ["app/page.tsx"]); const dl = (j) => { writeFileSync(join(dRoot, "data/products.json"), JSON.stringify(j)); return completeness(dRoot).missing.some((m) => m.item === "demo labels"); };
 say(dl({ demo: true, chapters: [{ id: "a", demo: true }, { id: "b" }] }) && !dl({ demo: true, chapters: [{ id: "a", demo: true }], tags: ["x"] }), "demo labels: an unlabelled entry under another key (chapters) fails; plain value arrays are not entries");
 // delivery modes and MEDIA.md (templates/TEMPLATE.md → Delivery modes; craft/media.md)
-const explore = (media, extra = []) => { const r = mkdtempSync(join(tmpdir(), "moto-x-")); put(r, "DESIGN.md", "# x\n\n## Scope\n**Delivery mode:** design exploration\n\n| Kind | Item | Mark | Evidence |\n|---|---|---|---|\n| route | / | requested | |\n\n## Type research\n| Site | Type |\n|---|---|\n| a | studio |\n\n## References\n1. a\n"); for (const f of ["README.md", "MOTION.md", "CRITIQUE.md", "GATE.md", "index.html"]) put(r, f, "x\n"); if (media !== null) put(r, "MEDIA.md", media); for (const [f, t] of extra) put(r, f, t); return r; };
+const explore = (media, extra = []) => { const r = mkdtempSync(join(tmpdir(), "moto-x-")); put(r, "DESIGN.md", "# x\n\n## Scope\n**Delivery mode:** design exploration\n\n| Kind | Item | Mark | Evidence |\n|---|---|---|---|\n| route | / | requested | |\n\n## Product contract\nJobs: buy a coffee bag. Journeys: / → /shop.\n\n## Type research\n| Site | Type |\n|---|---|\n| a | studio |\n\n## References\n1. a\n"); for (const f of ["README.md", "MOTION.md", "CRITIQUE.md", "GATE.md", "index.html"]) put(r, f, "x\n"); if (media !== null) put(r, "MEDIA.md", media); for (const [f, t] of extra) put(r, f, t); return r; };
 const j = completeness(explore("# MEDIA.md\n\nNo external media assets were used; every visual is CSS or inline SVG drawn for this build.\n"));
 say(j.pass && j.mode === "design exploration", "design exploration needs no SCHEMA, DATA, data/, LICENSE, CHANGELOG, .env.example or middleware");
 const k = completeness(explore(null)); say(!k.pass && k.missing.some((m) => m.item === "MEDIA.md"), "MEDIA.md is required in every delivery mode");
@@ -65,7 +65,7 @@ say(completeness(o1.root).mode === "functional frontend" && !completeness(o1.roo
 const q1Root = project(["| route | / | requested | |"], ["app/page.tsx"]); rmSync(join(q1Root, "MEDIA.md")); const q1 = completeness(q1Root);
 say(q1.pass && q1.warnings.some((w) => /^media: no MEDIA\.md/.test(w)), "an older Scope with no delivery mode warns on a missing MEDIA.md instead of failing a fix");
 const p1 = completeness(project(["| route | / | requested | |"], ["app/page.tsx"], "a vibe")); say(!p1.pass && p1.invalid.some((x) => /delivery mode/.test(x)), "an unknown delivery mode is invalid");
-// research is required in every delivery mode (Step 0.5): a stated mode without Type research fails
+// research is required in every delivery mode (Steps 1–2): a stated mode without Type research fails
 const rr = explore(row("public/a.svg", "custom, this build", "custom", "no", "no"), [["public/a.svg", "<svg/>"]]); writeFileSync(join(rr, "DESIGN.md"), "# x\n\n## Scope\n**Delivery mode:** design exploration\n\n| Kind | Item | Mark | Evidence |\n|---|---|---|---|\n| route | / | requested | |\n");
 say(!completeness(rr).pass && completeness(rr).missing.some((m) => m.item === "DESIGN.md Type research"), "a small design exploration still needs Type research and References");
 // coverage: every local media file has a MEDIA.md row (path, file name or folder row)
@@ -116,4 +116,53 @@ const rc1 = completeness(explore("# MEDIA.md\n\nNo external media assets were us
 say(!rc1.pass && rc1.missing.some((m) => m.item === "README readiness claim"), "a design exploration that calls itself production-ready fails");
 const rc2 = completeness(explore(row("public/placeholder-a.jpg", "https://unsplash.com/photos/x", "unknown", "yes", "yes"), [["public/placeholder-a.jpg", "x"], ["README.md", "# x\n\nNot production-ready until the photo in MEDIA.md is replaced.\n"]]));
 say(rc2.pass, "saying it is not production-ready, and pointing to MEDIA.md, passes");
+// v3.0.0: journeys, capability levels, deferrals that keep their interface, the product contract, content realism
+{
+  const base = ["| route | / | requested | |", "| route | /shop | required | |", "| route | /checkout | required | |"];
+  const fl = ["index.html", "shop/index.html", "checkout/index.html", "MEDIA.md", "README.md", "MOTION.md", "CRITIQUE.md", "GATE.md"];
+  const v3 = (rows, files = fl, mode = "design exploration", contract = true) => { const r = mkdtempSync(join(tmpdir(), "moto-x3-")); for (const f of files) put(r, f, f === "MEDIA.md" ? "# MEDIA.md\n\nNo external media assets were used; every visual is CSS drawn for this build.\n" : "<html><body><main><h1>Shop</h1><p>Washed Ethiopian, 250 g</p></main></body></html>\n"); put(r, "DESIGN.md", `# x\n\n## Scope\n**Delivery mode:** ${mode}\n\n| Kind | Item | Mark | Evidence | Level |\n|---|---|---|---|---|\n${rows.join("\n")}\n\n${contract ? "## Product contract\nJobs: buy.\n\n" : ""}## Type research\n| Site |\n|---|\n\n## Research record\n| Source |\n|---|\n`); return r; };
+  const j1 = completeness(v3([...base, "| journey | buy | required | / → /shop → /checkout | interaction |"]));
+  say(j1.pass && j1.tally.journey.have === 1, "a journey whose routes all exist passes, and counts as connected");
+  const j2 = completeness(v3([...base, "| journey | buy | required | / → /shop → /cart → /checkout | |"]));
+  say(!j2.pass && /\/cart not found/.test(j2.missing.find((m) => m.kind === "journey")?.why || ""), "a journey through a missing route fails X and names the route");
+  const d1 = completeness(v3([...base, "| function | card payments | not required for this brief, reason: payment provider integration deferred | | integration |"]));
+  say(!d1.pass && d1.invalid.some((i) => /names no interface/.test(i)), "deferring a payment provider without naming the interface that still ships is invalid");
+  const d2 = completeness(v3([...base, "| function | card payments | not required for this brief, reason: payment provider integration deferred; interface: /checkout | | integration |"]));
+  say(d2.pass, "a deferred integration that names its shipped interface passes");
+  const d3 = completeness(v3([...base, "| function | sign in | not required for this brief, reason: auth backend deferred; interface: /sign-in | | backend |"]));
+  say(!d3.pass && d3.invalid.some((i) => /\/sign-in is not in/.test(i)), "a deferral whose promised interface route doesn't exist is invalid");
+  const l1 = completeness(v3([...base, "| function | orders saved | required | index.html | backend |"]));
+  say(!l1.pass && l1.invalid.some((i) => /claimed in a design exploration/.test(i)), "a design exploration cannot claim a backend capability");
+  const l2 = completeness(v3([...base, "| function | cart | required | index.html | magic |"]));
+  say(!l2.pass && l2.invalid.some((i) => /level "magic"/.test(i)), "an unknown capability level is invalid");
+  // v3.0.1: a journey the Product contract writes must have a Scope row
+  const cj = v3([...base, "| journey | buy | required | / → /shop → /checkout | interaction |"]); { const f = join(cj, "DESIGN.md"); writeFileSync(f, readFileSync(f, "utf8").replace("Jobs: buy.", "Jobs: buy.\n- **Core journeys:**\n  - Buy: `/ → /shop → /checkout`\n  - Return: `/ → /returns`")); }
+  const cjr = completeness(cj); const cjm = cjr.missing.find((m) => /contract journey/.test(m.item));
+  say(!cjr.pass && cjm && /\/returns/.test(cjm.item) && !cjr.missing.some((m) => /contract journey \/ → \/shop/.test(m.item)), `a contract journey missing from the Scope table fails X (${cjm?.item || "not reported"}); the one with a row does not`);
+  const p1 = completeness(v3(base, fl, "design exploration", false));
+  say(!p1.pass && p1.missing.some((m) => m.item === "DESIGN.md Product contract"), "a build that states its delivery mode needs a Product contract in DESIGN.md");
+  const rRoot = v3(base); put(rRoot, "shop/index.html", "<main><h2>Product 1</h2><p>TODO: real copy from the brief</p><a href=\"#\">Buy</a></main>\n");
+  const r1 = completeness(rRoot); const why = r1.missing.find((m) => m.item === "Content realism")?.why || "";
+  say(!r1.pass && /leak/.test(why) && /generic/.test(why) && /dead/.test(why), "content realism fails leaked notes, template fixture names and dead links");
+  const rRoot2 = v3([...base, "| template | data/ | optional | |"]); put(rRoot2, "data/products.json", JSON.stringify({ demo: true, items: Array.from({ length: 8 }, (_, i) => ({ id: "p" + i, demo: true, name: i % 2 ? "Ceramic mug" : "Ceramic bowl", price: 24 })) }));
+  const r2 = completeness(rRoot2); const why2 = r2.missing.find((m) => m.item === "Content realism")?.why || "";
+  say(!r2.pass && /share a name/.test(why2) && /same price/.test(why2), "content realism fails a fixture repeated with the same name and price");
+  // found by a real static multi-page build (v3.0.0): a footer sentence on every generated page is site chrome, not a repeated fixture
+  const foot = "<footer><p>Single-estate tea, packed in Dhaka by a small team of four.</p></footer>";
+  const rRoot3 = v3(base); for (const f of ["index.html", "shop/index.html", "checkout/index.html", "a/index.html", "b/index.html"]) put(rRoot3, f, `<main><h1>${f}</h1></main>${foot}\n`);
+  const w3 = completeness(rRoot3).warnings.join(" ");
+  say(!/same sentence/.test(w3), "the same footer sentence on every static page is not reported as repeated content");
+  put(rRoot3, "shop/index.html", "<main>" + "<p>Handmade in small batches by our team in the hills.</p>".repeat(4) + "</main>\n");
+  say(/same sentence appears 4× on this page/.test(completeness(rRoot3).warnings.join(" ")), "one sentence repeated 4× on one static page still warns");
+}
+// v3.0.1 realism: domain words are not fixtures or leaks; text a vanilla-JS file renders is read
+{
+  const { realism } = await import("../../skills/asfakulsiam-motomation-design/scripts/realism.mjs");
+  const ok = mkdtempSync(join(tmpdir(), "real-ok-")); writeFileSync(join(ok, "index.html"), '<html><body><h1>Freight for Tier 1 carriers</h1><p>We ship Category A dangerous goods under IATA rules.</p><p>Every project starts with the brief and ends with a launch.</p><p>Brand archetypes, explained.</p><p>The chef\'s signature move is smoke.</p><p>Book Room 2 for your meeting.</p></body></html>');
+  const r = realism(ok); say(r.pass, `realism: Tier 1 carriers, Category A goods, "starts with the brief", a chef's signature move, Room 2 are not flagged (${r.problems.map((p) => p.what).join("; ") || "none"})`);
+  const js = mkdtempSync(join(tmpdir(), "real-js-")); writeFileSync(join(js, "index.html"), '<html><body><h1>Shop</h1><div id="g"></div><script src="app.js"></script></body></html>');
+  writeFileSync(join(js, "app.js"), 'const items = [{ name: "Product 1" }, { name: "Product 2" }];\nconst plans = [{ title: "Plan 1" }, { title: "Plan 2" }, { title: "Plan 3" }];\ng.innerHTML = items.map((i) => `<article><h3>${i.name}</h3><p>Lorem ipsum dolor sit amet</p><a href="#">Buy</a></article>`).join("");\n');
+  const j = realism(js); const w = j.problems.map((p) => `${p.kind}:${p.what}`).join(" | ");
+  say(!j.pass && /Product 1/.test(w) && /Plan 1, 2, 3/.test(w) && /lorem/i.test(w) && /dead/.test(w), `realism: fixtures, lorem, a numbered run and a dead link rendered by app.js are found (${j.problems.length} problem(s))`);
+}
 console.log(bad ? `\n${bad} failure(s)` : "\ncompleteness (X) bites"); process.exit(bad ? 1 : 0);

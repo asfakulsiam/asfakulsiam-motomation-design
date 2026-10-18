@@ -1,0 +1,1 @@
+document.getElementById("order").addEventListener("submit",e=>{e.preventDefault();e.target.querySelector("[role=status]").textContent=e.target.checkValidity()?"Saved":"Check the fields";});

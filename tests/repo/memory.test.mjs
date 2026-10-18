@@ -19,6 +19,15 @@ const same = run(B, "check", "--brief", "bakery site, cake preorders", "--catego
 say(same.status === 2 && (same.stdout.match(/repeats run #1/g) || []).length === 5, "repeating all five on a similar brief fails (exit 2, five repeats)");
 const div = run(B, "check", "--brief", "bakery site, cake preorders", "--category", "restaurant", "--archetype", "lookbook", "--palette-family", "dark-green", "--fonts", "Instrument Serif/Inter Tight", "--motion", "spring settles", "--signature", "crumb-trail");
 say(div.status === 0 && (div.stdout.match(/differs from run #1/g) || []).length === 5, "diverging on all five passes");
+// v3.0.1: "none" is a declared choice, never a repeat; a repeat the brief justifies (--justified) is a warning, not a clash
+const brief2 = ["--brief", "loose-leaf tea shop with subscriptions", "--category", "retail"];
+run(A, "log", ...brief2, "--archetype", "none", "--palette-family", "dark-green", "--fonts", "Newsreader/Inter", "--motion", "quiet fades", "--signature", "none");
+const none = run(B, "check", ...brief2, "--archetype", "none", "--palette-family", "light-blue", "--fonts", "Literata/Manrope", "--motion", "spring settles", "--signature", "none");
+say(none.status === 0 && /archetype: none \(a declared choice/.test(none.stdout) && !/repeats run/.test(none.stdout), `archetype and signature "none" twice on a similar brief is not a clash (exit ${none.status})`);
+const just = run(B, "check", ...brief2, "--archetype", "none", "--palette-family", "light-blue", "--fonts", "Newsreader/Inter", "--motion", "spring settles", "--signature", "none", "--justified", "fonts");
+say(just.status === 0 && /type pairing "Newsreader\/Inter" repeats run #\d+: marked justified/.test(just.stdout), `a repeat marked --justified warns instead of failing (exit ${just.status})`);
+const unj = run(B, "check", ...brief2, "--archetype", "none", "--palette-family", "light-blue", "--fonts", "Newsreader/Inter", "--motion", "spring settles", "--signature", "none");
+say(unj.status === 2 && /type pairing "Newsreader\/Inter" repeats run/.test(unj.stdout), `the same repeat without --justified still fails (exit ${unj.status})`);
 say(/no prior build with a similar brief/.test(run(B, "similar", "--brief", "observatory night tours booking", "--category", "event").stdout), "a dissimilar brief needs no divergence");
 say(/No runs logged yet/.test(run(B, "recent", "--project", B).stdout), "--project <dir> still uses a per-project log");
 console.log(bad ? `\n${bad} failure(s)` : "\nmemory spans projects and forces divergence"); process.exit(bad ? 1 : 0);

@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Contact</title><link rel="stylesheet" href="/style.css"></head><body><header><a href="/">Many pages</a><nav aria-label="Main"><ul><li><a href="/p01.html">Note 1</a></li><li><a href="/p02.html">Note 2</a></li><li><a href="/p03.html">Note 3</a></li><li><a href="/p04.html">Note 4</a></li><li><a href="/p05.html">Note 5</a></li><li><a href="/p06.html">Note 6</a></li><li><a href="/p07.html">Note 7</a></li><li><a href="/p08.html">Note 8</a></li><li><a href="/p09.html">Note 9</a></li><li><a href="/p10.html">Note 10</a></li><li><a href="/p11.html">Note 11</a></li><li><a href="/p12.html">Note 12</a></li><li><a href="/p13.html">Note 13</a></li><li><a href="/p14.html">Note 14</a></li><li><a href="/contact.html">Contact</a></li></ul></nav></header><main><h1>Book a repair</h1>
+<form id="book" novalidate aria-label="Book a repair">
+  <label for="name">Your name</label><input id="name" name="name" required autocomplete="name" aria-describedby="name-err"><p id="name-err" class="err" hidden></p>
+  <label for="phone">Phone</label><input id="phone" name="phone" type="tel" required autocomplete="tel" aria-describedby="phone-err"><p id="phone-err" class="err" hidden></p>
+  <label for="msg">What is wrong with the engine?</label><textarea id="msg" name="msg" rows="3"></textarea>
+  <p><button type="submit" id="send">Send the booking</button></p>
+  <p id="form-status" role="status"></p>
+</form></main><script>
+const f = document.getElementById("book"), s = document.getElementById("send"), st = document.getElementById("form-status");
+f.addEventListener("submit", async (e) => { e.preventDefault(); let bad = false;
+  for (const [id, msg] of [["name", "Please enter your name."], ["phone", "Please enter a phone number we can call."]]) { const el = document.getElementById(id), er = document.getElementById(id + "-err"); if (!el.value.trim()) { el.setAttribute("aria-invalid", "true"); er.textContent = msg; er.hidden = false; bad = true; } else { el.removeAttribute("aria-invalid"); er.hidden = true; } }
+  if (bad) return;
+  s.disabled = true; s.setAttribute("aria-busy", "true"); s.textContent = "Sending…"; st.textContent = "";
+  try { const r = await fetch("/api/book", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(Object.fromEntries(new FormData(f))) }); if (!r.ok) throw new Error(r.status);
+    st.textContent = "Thank you. We will call you within the hour."; f.reset();
+  } catch { st.textContent = "Sorry, the booking did not go through. Please try again or call 01700-000000."; }
+  finally { s.disabled = false; s.removeAttribute("aria-busy"); s.textContent = "Send the booking"; } });
+</script></body></html>

@@ -1,0 +1,12 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Redeem</title>
+<style>body{margin:0;font:16px/1.5 system-ui;padding:24px}label,input,button{display:block;margin:8px 0;min-height:44px}</style></head>
+<body><main><h1>Redeem a gift card</h1>
+<form id="redeem" novalidate><label for="code">Card code</label><input id="code" name="code" required><button type="submit">Redeem</button><p id="msg" role="alert"></p></form></main>
+<script>
+// only a real card code passes: no generic filler can produce one, so the check must report "not verified", not fail
+const f = document.getElementById("redeem"), msg = document.getElementById("msg"), code = document.getElementById("code");
+f.addEventListener("submit", async (e) => { e.preventDefault();
+  if (!/^LEAF-\d{4}-[A-Z]{2}$/.test(code.value)) { msg.textContent = "Enter the code from your card, for example LEAF-1234-AB. That one is not valid."; code.setAttribute("aria-invalid", "true"); return; }
+  code.removeAttribute("aria-invalid"); const b = f.querySelector("button"); b.disabled = true; b.textContent = "Redeeming…";
+  try { const r = await fetch("/api/redeem", { method: "POST", body: code.value }); if (!r.ok) throw 0; msg.textContent = "Done. Your balance is updated."; } catch { msg.textContent = "Something went wrong. Try again."; } finally { b.disabled = false; b.textContent = "Redeem"; } });
+</script></body></html>

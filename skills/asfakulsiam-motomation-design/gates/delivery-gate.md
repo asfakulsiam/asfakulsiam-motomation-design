@@ -1,6 +1,15 @@
 # Delivery Gate
 
-Verification only. The rules live in `gates/rules.md`, read before Step 1 and designed within; this file checks that the build kept them. Run it before handing back **any** page or component. Four parts: the measured gate (one page, plus axis J for the whole site and axis O across briefs), a self-critique score, the AI-default scan and the craft checklist. If anything fails, fix it and run the gate again. Two passes is normal; needing three means the design was not made inside `gates/rules.md`, so go back to the Thinking Sequence instead of patching.
+Verification only. The rules live in `gates/rules.md`, read before Step 1 and designed within; this file checks that the build kept them. Run it before handing back **any** page or component. **Order of authority (v3):** product gates first, then essential quality gates, then the advisory critique. Each fails independently; a high visual score never conceals a failed product or usability gate (`principles/authority.md`).
+
+| Gate | What | Kind |
+|---|---|---|
+| **Product** | axis X (`scripts/completeness.mjs`: routes, journeys, functions, states, legal, admin, template, capability levels, deferrals with their interface, content realism) and axis J (`scripts/journey.mjs`: nav, mobile nav, forms, states across the whole site) | pass / fail |
+| **Essential quality** | the measured page axes (c o w rm a n q k), the rule sets (C S P K), desktop **and** mobile checked separately (375 and 1440 screenshots of every core journey, inspected) | pass / fail |
+| **Originality** | axis O across unrelated briefs | ≥ 0.4 on an axis → change or justify |
+| **Critique** | H, S, R, M, V, C (Part 1), the AI-default scan (Part 2), the craft checklist (Part 3) | advisory: a low score asks a question; answer it with a fix or a reason |
+
+Four parts: the measured gate (one page, plus axis J for the whole site and axis O across briefs), a self-critique score, the AI-default scan and the craft checklist. If anything fails, fix it and run the gate again. Two passes is normal; needing three means the design was not made inside `gates/rules.md`, so go back to the Thinking Sequence instead of patching.
 
 
 **When it runs: after design approval.** The gate runs at Checkpoint 6, on the design the author approved at Checkpoint 5 (`thinking/sequence.md` → Delivery flow), not on a draft.
@@ -58,7 +67,7 @@ It runs these bounded checks in a real browser and prints numbers. Each one veri
 | `n` | **Numbers** (counters, prices, `progress`/`meter`, `aria-valuenow`) read at scroll 0, at the end and under reduced motion, against the settled value. Live values (a ticker, a clock, `<time>`, `role=timer`/`status`/`log`, `aria-live`) are listed, not judged | Reduced motion (values) |
 | `q` | **Motion quality** (gate/3): pinned-zone progression over 8 frames, p95 `requestAnimationFrame` while scrolling (in a sandbox: `not verified — sandbox`, numbers printed, nothing counted, `docs/adapters/sandbox.md`), reduced-motion distinctness | Motion quality and budgets; Reduced motion A sticky element covering less than 15% of the viewport (a header, a call bar, a progress rail) is chrome, not a pinned zone: it holds no sequence, so it may stay sticky under reduced motion; the report lists it on a `chrome` line. |
 | `k` | **Accessibility** (gate/3): focus-visible on the first 40 focusable elements, target size at 375 touch, 200% zoom, 320px reflow, forced colors (text not on screen at rest is skipped), keyboard trap | Accessibility; Overflow (reflow); Contrast (forced colors) |
-| `X` | **Completeness** (v2.9.0, `scripts/completeness.mjs`, run by the gate when `DESIGN.md` has a `Scope` section): routes, functions, states, legal pages, edge cases, admin surfaces, skeletons, the template shape of the delivery mode and the `MEDIA.md` inventory (`craft/media.md`), each counted `<have>/<need>` against the scope derived in Step 0.7. Missing items fail the page unless marked "not required for this brief, reason:". Not in the stamp or its id | Completeness |
+| `X` | **Completeness** (v2.9.0, `scripts/completeness.mjs`, run by the gate when `DESIGN.md` has a `Scope` section): routes, functions, states, legal pages, edge cases, admin surfaces, skeletons, the template shape of the delivery mode and the `MEDIA.md` inventory (`craft/media.md`), each counted `<have>/<need>` against the scope derived in Step 1. Missing items fail the page unless marked "not required for this brief, reason:". Not in the stamp or its id | Completeness |
 | `J` | **Journey** (v2.11, `scripts/journey.mjs`): the whole site from this page, in a real browser. Six checks, each `<have>/<need>`: **nav**, **mobile**, **forms**, **loading**, **errors**, **session** (below). Any missing state fails the page. Not in the stamp or its id | Completeness; Micro-states; Accessibility |
 | `micro-states` | **Micro-states** (v2.9.0, advisory): buttons (default, hover, focus, active, disabled, loading), forms (validation error, submit loading, success, server error), data-driven lists (empty, loading, error, filled), images (loading, loaded, error), async actions (pending, success, error), read from the page's CSS rules, markup and scripts. Missing states are **warnings only**: never a failure, never in the stamp | Micro-states |
 | `rules` | **The four rule sets** (gate/4, `scripts/rulesets.mjs`), one count per set: distinct failing rule IDs. **C** copy, **S** SEO, **P** performance, **K** security (for local files, headers come from a `_headers` file next to the page). Warnings are printed and not counted | Copy; SEO; Performance; Security |
@@ -147,15 +156,18 @@ The table above checks one page against rules. It cannot see that two unrelated 
 | **composition** | placement (each of the first 8 screens as a 12×8 grid of empty / text / media cells), columns and alignment per screen, density per screen |
 | **image** | image treatment: aspect ratio × size class, crop × mask (radius, clip-path, mask-image), filter × blend × rotation |
 | **typography** | display and body families, the size scale relative to body, rhythm (leading, tracking, case, weight per role), h1/h2/h3 hierarchy |
-| **interaction** | hover rules that apply to the page (the property groups they change), click patterns (disclosure, dialog, tabs, toggles, forms, carousels), scroll behaviour (sticky, snap, scroll libraries, properties that change while scrolling), pointer behaviour |
+| **interaction** | feedback (each :hover, :active and :focus rule that applies, as state × the property groups it changes), forms (field types, validation, live regions, fieldsets, submit kind) and navigation (landmarks, in-page vs page links, menu toggle, skip link, breadcrumb, pagination) |
 | **signature** | the element that changes most under time, pointer and scroll (trigger, properties, element kind, size), plus the declared signature when both stamps carry one |
 
 ```bash
 node scripts/originality.mjs <this build> <a build for an unrelated brief> [more …]   # matrix per axis + overall
 node scripts/originality.mjs a/ b/ c/ --json --out originality.json
+node scripts/originality.mjs <direction A url> <direction B url> --same-product   # paired brief: one product, two expressions
 ```
 
-**Pass: every pair below 0.4 on every axis.** An axis at or above 0.4 is a repeat (`✗`): the skill produced the same shape for different briefs on that axis. Go back to Step 6 of the Thinking Sequence and change that axis (not the copy), then re-run. Absence on both sides counts as the same pattern: two builds with no imagery score 1 on image, two builds with no hover feedback score 1 on hover. Which builds: the earlier projects in the memory log (`node scripts/memory.mjs recent` lists each run's project folder). No earlier build on this machine: record `O: not verified — no earlier build to compare` in the report, under **Not verified**. Exit codes: 0 pass, 1 a repeat, 2 usage, 3 not verified (no browser). O is a cross-build axis, so it is not in the stamp or its id; the stamp describes one page. In the benchmark it is the `originality` arm: `node evals/run-agent-benchmark.mjs originality --out <run>` compares, per arm and seed, every brief's build with every other brief's (`originality.json`, `originality.md`), and `score` folds the result into `summary.json`.
+`--same-product` is for two expressions of one product contract (the paired v6 briefs). The contract fixes the forms and the navigation, so both must match; interaction then compares hover, press and focus feedback only, and every other axis counts in full. Never use it for unrelated briefs.
+
+**Pass: every pair below 0.4 on every axis.** An axis at or above 0.4 is a repeat (`✗`): the skill produced the same shape for different briefs on that axis. Go back to Step 4 (Memory and sameness) of the Thinking Sequence and change that axis (not the copy), then re-run. Absence on both sides counts as the same pattern: two builds with no imagery score 1 on image, two builds with no hover feedback score 1 on hover. Which builds: the earlier projects in the memory log (`node scripts/memory.mjs recent` lists each run's project folder). No earlier build on this machine: record `O: not verified — no earlier build to compare` in the report, under **Not verified**. Exit codes: 0 pass, 1 a repeat, 2 usage, 3 not verified (no browser). O is a cross-build axis, so it is not in the stamp or its id; the stamp describes one page. In the benchmark it is the `originality` arm: `node evals/run-agent-benchmark.mjs originality --out <run>` compares, per arm and seed, every brief's build with every other brief's (`originality.json`, `originality.md`), and `score` folds the result into `summary.json`.
 
 Calibration on this repo (`evals/results/originality-templates/`): a page against itself scores 1.00 on every axis; across the 10 shipped templates, 11 of 45 pairs are below 0.4 on every axis. The repeat is mostly **interaction** (the 8 section-library templates share no hover feedback and the same observer, scroll and pointer listener stack), then image (several have no imagery) and typography.
 ---
@@ -165,11 +177,11 @@ Calibration on this repo (`evals/results/originality-templates/`): a page agains
 | Axis | Question | 5 means |
 |---|---|---|
 | **C**oncept | Is there a clear idea, and does every section serve it? | A stranger could repeat the concept sentence after one visit |
-| **H**ierarchy | Within 2 seconds, is it obvious what's first, second and third on each screen? | One focal point per screen, every time |
+| **H**ierarchy | Within 2 seconds, is it obvious what's first, second and third on each screen? | A clear first read on every screen: a focal point on storytelling screens, a reading order on dense ones |
 | **S**pecificity | Could this only belong to this brief? | Swap the logo, and it would no longer make sense |
 | **R**estraint | Has everything without a job been removed? | Nothing left to cut |
 | **M**otion | Does every animation pass the four questions and have fallbacks? | Motion explains, never decorates, and reduced motion is designed |
-| **V**ariety | Is this structurally different from previous runs (memory log) and from the template? | Different archetype, signature, type and nav from the last 5 runs |
+| **V**ariety | Is this structurally different from previous runs (memory log) and from the template, where the brief doesn't justify similarity? | Nothing repeated from the last 5 runs without a reason; motion repeats only where consistency serves the product |
 
 ### Where each number comes from
 
@@ -191,21 +203,21 @@ A traced stamp reads like this, with the trace in brackets after each number:
 
 That line is an illustration of the format, not numbers to copy. `--verify` recomputes every axis from the page, `DESIGN.md` and the memory log, and rejects the stamp if any number or trace differs. The progression Δ is compared by its verdict, not to the decimal (pixel deltas vary slightly between scans). It also rejects bare scores like `C5 H4 S5 R4 M5 V5`, and axes marked `?` (no record to derive from, e.g. `C?[no-record]` when `DESIGN.md` has no Restraint Gate record).
 
-**Any score below 4 → revise before continuing.** Then paste the stamp line gate.mjs printed into the stamp comment:
-`/* motomation · archetype: <x> · mutation: <y> · signature: <z> · tier: <n> · critique: <paste> · gate: <paste> */`
+**A score below 4 is a question, not a verdict.** For each one, either revise, or write one line in `CRITIQUE.md` saying why the product is right as it is (a dashboard's V2 from consistent row entrances is correct; `principles/heuristics.md` → H-entrance-variety). The critique never overrides axis X, axis J or a measured failure, and never justifies cutting a contract item. Then paste the stamp line gate.mjs printed into the stamp comment:
+`/* motomation · archetype: <x | none> · mutation: <y | none> · signature: <z | none> · tier: <n> · critique: <paste> · gate: <paste> */`
 
 The placeholders are deliberate. There are no numbers to copy. Write the archetype, mutation, signature and tier first, because gate.mjs reads them from the comment. Then run `node scripts/gate.mjs <build>` and replace the critique and gate segments with what it printed. Check with `node scripts/gate.mjs --verify <build>`.
 
 ---
 
-## Part 2: AI-default scan (every answer must be "no")
+## Part 2: AI-default scan (each "yes" needs a product or concept reason, or a change)
 
 **Structure**
 1. Is the page hero → logo wall → 3 features → testimonials → pricing → CTA?
 2. Is the hero a centred headline + subtitle + two buttons + a screenshot, without a reason?
 3. Is there a bento grid without a concept reason?
 4. Do all sections use the same layout?
-5. Is the nav "logo left, 5 links centre, button right", and the footer four columns of links, without thought?
+5. Is the nav "logo left, 5 links centre, button right", and the footer four columns of links, without thought? (For commerce, SaaS apps, publications and institutions a familiar nav is often right: then is it excellent, and does it expose the IA the contract needs?)
 
 **Visual**
 6. Is the display font <!--rule:banned_display_fonts-->Inter, Roboto, Open Sans, Lato, Poppins, Montserrat, Arial, Helvetica or the system UI stack<!--/rule-->? Is <!--rule:caution_fonts-->Playfair Display and Space Grotesk<!--/rule--> used without a stated reason?
@@ -246,13 +258,16 @@ The placeholders are deliberate. There are no numbers to copy. Write the archety
 
 ## Part 3: Craft checklist
 
-- [ ] Concept sentence and signature move are visible in the first screen
+- [ ] Product: every core journey in the contract works end to end at 375 and 1440, clicked through (not just routed); essential functions are no deeper than the contract allows; no control pretends to work
+- [ ] The concept is legible early; where the product has a primary task (search, book, buy, sign up) it is reachable from the first screen
 - [ ] Scope: `node scripts/completeness.mjs <project>` (axis X) prints every line `n/n`; each excused item has its reason
 - [ ] Micro-states: no ⚠ left in the gate's micro-states block, or each one explained in `GATE.md`
 - [ ] Template: the files the delivery mode requires (`templates/TEMPLATE.md`), `MEDIA.md` always; a production template starts with `npm install && npm run dev` and no `.env`; every section `id` has a `SCHEMA.md` row when the mode has one
 - [ ] Type: display face chosen with a reason; body size and measure within `gates/rules.md` (Hierarchy); `text-wrap: balance` on headings
 - [ ] Colour: all text pairs verified (`node scripts/contrast.mjs` while designing, `node scripts/gate.mjs` on the build); accent within `gates/rules.md` (Contrast)
-- [ ] Layout: one deliberate grid break per screen, recomposed (not squeezed) on mobile
+- [ ] Layout: composition intentional on every screen (grid breaks where they serve, H-grid-break), recomposed (not squeezed) on mobile; dense screens stay aligned and scannable
+- [ ] Mobile designed independently: navigation, filters, tables and forms have a mobile form (sheet, stacked cards, sticky action), touch targets and type sized for a phone
+- [ ] Content realism: product data, prices, names and imagery fit the domain; no repeated fixtures, no internal notes in copy (`node scripts/realism.mjs <project>`)
 - [ ] Motion: tokens used; `gsap.matchMedia()` with reduced-motion and pointer conditions; `ScrollTrigger.refresh()` after load
 - [ ] Mobile motion matrix applied
 - [ ] Scroll sequences (pinned, scrubbed, image-sequence, lit-step lists) reviewed per `craft/scroll-sequences.md`, record in the handoff:

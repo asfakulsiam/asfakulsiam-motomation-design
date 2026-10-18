@@ -35,3 +35,17 @@ test("designPalette: the five diversity builds give five palette families", asyn
   const fam = ["01-funeral-home", "02-childrens-dentistry", "03-hardcore-metal-band", "04-luxury-perfume", "05-municipal-water-authority"].map((d) => designPalette(readFileSync(`evals/results/diversity/${d}/DESIGN.md`, "utf8")).family);
   assert.deepEqual(fam, ["light-orange", "light-red", "dark-red", "dark-orange", "light-blue"]);
 });
+// v3.0.1: "archetype: none" is fingerprinted, not skipped (v3.0.0 returned "?"), and none-vs-none is not a reuse
+test("S: archetype none is measured, and two builds without an archetype do not count as an archetype reuse", async () => {
+  const n1 = { dir: "/elsewhere", archetype: "none", signature: "none", tier: "2", sections: ["hero", "catalogue", "subscribe", "faq"] };
+  const mine = { archetype: "none", signature: "none", tier: "2" };
+  const m = await memoryAxis(log([n1]), mine, ["hero", "catalogue", "subscribe", "faq"], { dir: A, designFile: join(A, "DESIGN.md") });
+  assert.notEqual(m.s, "?"); assert.equal(typeof m.s, "number");
+  assert.equal(m.reused.archetype, false); assert.equal(m.reused.signature, false);
+  assert.match(m.trace, /archetype:none/); assert.doesNotMatch(m.trace, /not-fingerprinted/);
+  assert.ok(m.s >= 2, `sections + tier alone (two dimensions) are not an identical copy: S${m.s}`);
+});
+test("S: archetype none still sees a repeated palette family", async () => {
+  const m = await memoryAxis(log([{ archetype: "none", signature: "none", tier: "3", palette_family: "light-orange" }]), { archetype: "none", signature: "none", tier: "1" }, [], { dir: A, designFile: join(A, "DESIGN.md") });
+  assert.equal(m.reused.palette, true); assert.equal(m.s, 4);
+});

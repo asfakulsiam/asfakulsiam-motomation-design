@@ -1,0 +1,26 @@
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+
+runs/08-travel-booking/  (journey only; no stamp)
+  J — journey (whole site, real browser; any missing state fails the page; not in the stamp or its id)
+    nav      ✓ 23/23 route(s) reachable from home in ≤ 3 clicks (/:0 /rooms:1 /experiences:1 /getting-there:1 /booking/confirmation:1 /availability:1 /contact:1 /rooms/garden-veranda:1 …)
+               · sitemap.xml: 23 route(s)
+               · 24 concrete route(s) from the Scope table
+               · 23 page(s) loaded
+    mobile   ✓ 132/132 interactive element(s) respond at 375px · tap 132/132 · swipe n/a · long-press n/a
+               · 12 page(s); an element shared by several pages (header, footer) is tapped once
+               · 12 element(s) parked off-canvas (skip links, closed drawers) are keyboard-only by design and not tapped
+               · no element declares a long press
+    forms    ✓ 9/9 form state(s) rendered · Your room Garden veranda · BDT 4,200 Tea (/availability): default✓ validation✓ loading? success? serverError? · Your name (/contact): default✓ validation✓ loading✓ success✓ serverError✓ · Your room Garden veranda · BDT 4,200 Tea (/booking/dates): default✓ validation✓ loading? success? serverError?
+               · 3 page(s) with forms checked: /availability, /contact, /booking/dates
+               · not checked (reported, not passed): Your room Garden veranda · BDT 4,200 Tea (/availability): loading, success, serverError not verified (not verified: the form rejected the check's filled values ("Check-out must be after check-in."); fill it by hand or add a fixture value); Your room Garden veranda · BDT 4,200 Tea (/booking/dates): loading, success, serverError not verified (not verified: the form rejected the check's filled values ("Check-out must be after check-in."); fill it by hand or add a fixture value)
+    loading  – n/a: no fetch or XHR request after load: no async surface
+    errors   ✓ 1/1 designed not-found view (unknown route → HTTP 404)
+               · probed /__motomation-missing-mvdy3gxm/
+    session  ✓ 6/6 · load ✓ · open a second route ✓ · back button ✓ · forward button ✓ · full reload ✓ · two tabs ✓
+               · second page: /rooms
+    coverage 23 page(s) loaded of 23 required route(s) · forms checked on every page that has one (3 page(s), 3 form(s)) · tap and loading sampled on 12 page(s)
+               · Scope routes no link reaches (check them in the journey walk): /404
+               · not sampled for tap/loading: /cancellation-policy, /privacy, /terms, /rooms/hill-facing-double, /rooms/family-veranda, /rooms/quiet-corner … 5 more
+               · forms not checked: Your room Garden veranda · BDT 4,200 Tea (/availability): loading, success, serverError not verified (not verified: the form rejected the check's filled values ("Check-out must be after check-in."); fill it by hand or add a fixture value), Your room Garden veranda · BDT 4,200 Tea (/booking/dates): loading, success, serverError not verified (not verified: the form rejected the check's filled values ("Check-out must be after check-in."); fill it by hand or add a fixture value)
+    journey: nav0 mobile0 forms0 loading- errors0 session0 → PASS
+exit 0

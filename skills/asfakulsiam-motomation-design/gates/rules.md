@@ -14,7 +14,7 @@ Read before Step 1. Design inside these. `scripts/gate.mjs` measures them after 
 | Scroll-sequence steps | AA in the active state and in every inactive (dimmed) state |
 | Dimmed text | measured as rendered: text × opacity + background × (1 − opacity) |
 | Forced colors | rendered ink ≥ 3:1 against its box |
-| Accent | ≤ 5% of each screen |
+| Accent *(heuristic, H-one-accent)* | ≤ 5% of each screen; colour that encodes data, status or a colour-rich brand system is not accent |
 
 ## Overflow and long words (gate `o`, `w`)
 
@@ -32,7 +32,7 @@ Read before Step 1. Design inside these. `scripts/gate.mjs` measures them after 
 |---|---|
 | `h1` | exactly one per page |
 | Heading levels | no skipped level |
-| Largest text on the first 375px screen | one |
+| Largest text on the first 375px screen *(heuristic, H-focal)* | one on storytelling screens; dense product screens follow a reading order instead |
 | Body size | ≥ 16px |
 | Measure | ≤ 75ch |
 
@@ -59,7 +59,7 @@ Read before Step 1. Design inside these. `scripts/gate.mjs` measures them after 
 | JS gzipped, Tier 2 | ≤ 80KB |
 | JS gzipped, Tier 3 | ≤ 140KB |
 | JS gzipped, Tier 4–5 (or tier unknown) | ≤ 250KB |
-| Section entrance patterns | no two top-level sections share one (static excluded) |
+| Section entrance patterns *(heuristic, H-entrance-variety; critique V)* | on narrative pages, avoid repeating one entrance on every section; on product pages consistency is correct |
 | UI feedback (press, hover, focus, toggle, tooltip) | ≤ <!--rule:ui_feedback_max_ms-->250ms<!--/rule--> |
 | Entrances | no `scale(0)`, no ease-in |
 | Animated properties | `transform`, `opacity`; never `top`, `left`, `width`, `height` |
@@ -81,18 +81,21 @@ Read before Step 1. Design inside these. `scripts/gate.mjs` measures them after 
 
 ## Content and defaults (Delivery Gate Part 2)
 
+Rows marked *(heuristic)* are advisory defaults (authority level 6, `principles/heuristics.md`): a reason in the plan replaces them. The other rows are hard.
+
 | Rule | Limit |
 |---|---|
-| Display face | not <!--rule:banned_display_fonts-->Inter, Roboto, Open Sans, Lato, Poppins, Montserrat, Arial, Helvetica or the system UI stack<!--/rule--> |
-| Caution faces | <!--rule:caution_fonts-->Playfair Display and Space Grotesk<!--/rule--> only with a stated reason |
-| Display faces | one (two only for a contrast concept) |
-| Accent colours | one |
-| Signature moves | one |
-| Placeholder copy | none: no lorem ipsum, "Acme", "John Doe" |
+| Display face *(heuristic, H-banned-display)* | not <!--rule:banned_display_fonts-->Inter, Roboto, Open Sans, Lato, Poppins, Montserrat, Arial, Helvetica or the system UI stack<!--/rule--> |
+| Caution faces *(heuristic)* | <!--rule:caution_fonts-->Playfair Display and Space Grotesk<!--/rule--> only with a stated reason |
+| Display faces *(heuristic)* | one (two only for a contrast concept) |
+| Accent colours *(heuristic)* | one brand accent; data, status and brand-system colours don't count |
+| Signature moves *(heuristic)* | at most one; none is valid |
+| Placeholder copy | none: no lorem ipsum, "Acme", "John Doe", "Product 1", no TODO or process notes in customer copy (`scripts/realism.mjs`) |
 | Statistics, logos, testimonials, awards | real and sourced, or `[NEEDS COPY]` |
-| Links, domains, pages | only those the brief supplies or the build creates |
+| Links, domains, pages | only those the brief supplies or the build creates; no `href="#"` controls that go nowhere |
+| Capability claims | a control is never presented as working when it isn't; demo-only interfaces are labelled (`thinking/product-contract.md`) |
 | Emoji as icons or bullets | none |
-| Gradients, blobs, glass, bento, three-icon feature row | only with a concept reason |
+| Gradients, blobs, glass, bento, three-icon feature row *(heuristic)* | only with a concept reason |
 | Code | no TODOs, `// ...rest`, `markers: true`, stray `console.log` |
 
 ## Copy (gate `rules: C`, `craft/copy.md`)
@@ -154,12 +157,17 @@ Read before Step 1. Design inside these. `scripts/gate.mjs` measures them after 
 
 | Rule | Limit |
 |---|---|
-| Scope | derived in Step 0.7, written in `DESIGN.md` under `Scope`; never from a fixed list |
+| Product contract | written in `DESIGN.md` under `## Product contract` and approved (Checkpoint 2) before any concept; required whenever a delivery mode is stated |
+| Scope | derived in Step 1 from the contract, written in `DESIGN.md` under `Scope`; never from a fixed list |
+| Journeys | each core journey a `journey` row whose evidence is its route sequence (`/ → /shop → /cart`); every route in it exists |
+| Capability levels | optional `Level` column: interface, interaction, persisted, backend, integration; a design exploration or functional frontend never claims backend or integration |
+| Deferrals | a backend or integration deferral names the interface that still ships (`…; interface: /checkout`), and that route exists |
+| Content realism | `scripts/realism.mjs`: no leaked process notes, template fixture names, repeated fixtures (> 25% duplicate names, one price for every record) or dead `#` links |
 | Requested and required items | every one present (route found, or evidence file and text found) |
 | Excused items | "not required for this brief, reason: <why>"; a reason is required |
 | Marks | requested, required, optional, or excused; anything else fails |
 | Template shape (`templates/TEMPLATE.md`, by delivery mode; production template shown, and the default) | `README.md` (with "All data in data/ is demo. Replace with real data before launch."), `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `DATA.md`, `CRITIQUE.md`, `GATE.md`, `LICENSE`, `CHANGELOG.md`, `.env.example` covering every env var the code reads, `middleware.ts`, the build's `data/` folder with its `schema.json` and every entry labelled demo, a `dev` script; each unless excused |
-| Research and readiness | with a delivery mode stated: `DESIGN.md` has `## Type research` and `## References`; `README.md` calls the build production-ready only in a production template with no asset left to replace |
+| Research and readiness | with a delivery mode stated: `DESIGN.md` has `## Product contract`, `## Type research` and `## Research record` (or v2 `## References`); `README.md` calls the build production-ready only in a production template with no asset left to replace |
 | Media (`craft/media.md`) | `MEDIA.md` in every mode, never excused: an inventory (or "no external media assets were used"), source and licence status per row, placeholders and unknown licences marked for replacement, every local media file and every `placeholder-…` file and `PLACEHOLDER:` comment listed, `README.md` pointing to it while anything needs replacing; without a Scope section (maintenance), the same media check whenever `MEDIA.md` exists, and placeholders always |
 | Middleware, comments, component headers | checked as warnings |
 

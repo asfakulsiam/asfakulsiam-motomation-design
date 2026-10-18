@@ -26,11 +26,23 @@ const norm = (p) => { let x = decodeURI(p).replace(/\/index\.html?$/i, "/").repl
 const stripHash = (u) => String(u).split("#")[0];
 export const JOURNEY_AXES = ["nav", "mobile", "forms", "loading", "errors", "session"];
 export const MAX_CLICKS = 3;
+export const MAX_PAGES = 60;   // pages nav loads; routes found beyond it are reported as not loaded
+export const SAMPLE = 12;      // pages the mobile and loading checks sample (home and form pages first)
+export const MAX_FORM_PAGES = 30, MAX_FORMS_PER_PAGE = 5; // the forms check covers every form page up to these caps; the rest is reported
+const FORM_COUNT = () => [...document.forms].filter((f) => [...f.querySelectorAll("input, textarea, select")].some((x) => !["hidden", "submit", "button", "reset"].includes(x.type))).length;
+/** Page order for sampling: home, then pages with forms (in link order), then the rest. Pure, exported for tests. */
+export function samplePages(pages, formPages = {}, home = pages[0]) {
+  const key = (u) => { try { return norm(new URL(u).pathname); } catch { return u; } };
+  const rest = pages.filter((u) => u !== home); const withForms = rest.filter((u) => formPages[key(u)]);
+  return [home, ...withForms, ...rest.filter((u) => !formPages[key(u)])].filter(Boolean);
+}
 
 async function ctxPage(browser, opts = {}) {
   const ctx = await browser.newContext({ bypassCSP: true, deviceScaleFactor: 1, viewport: { width: 1440, height: 900 }, ...opts });
   const page = await ctx.newPage(); const errors = []; page.on("pageerror", (e) => errors.push(firstLine(e)));
-  page.on("dialog", (d) => d.dismiss().catch(() => {}));
+  // a native alert/confirm/prompt is dismissed (the check never accepts a destructive confirm) and counted: a tap that
+  // opens one responded (v3.0.1: a "Reset demo data" button guarded by confirm() read as "nothing changed")
+  page.__dialogs = 0; page.on("dialog", (d) => { page.__dialogs++; d.dismiss().catch(() => {}); });
   return { ctx, page, errors };
 }
 // Chromium throws (net::ERR_HTTP_RESPONSE_CODE_FAILURE) on an error status with an empty body; the status still matters
@@ -49,28 +61,34 @@ const works = async (page, errors, since = 0) => {
 const LINKS = () => [...document.querySelectorAll("a[href]")].filter((a) => a.checkVisibility?.({ visibilityProperty: true }) || a.closest("nav, header, [role=navigation], dialog, details, [aria-hidden=false], [hidden]")).map((a) => a.href);
 
 // ── nav ───────────────────────────────────────────────────────────────────────
-export async function navAxis(browser, home, T) {
+export async function navAxis(browser, home, T, contract = []) {
   const origin = new URL(home).origin, homePath = norm(new URL(home).pathname);
   let sitemap = null, sitemapNote = null;
   try { const r = await fetch(origin + "/sitemap.xml"); if (r.ok) { const x = await r.text(); const locs = [...x.matchAll(/<loc>\s*([^<\s]+)\s*<\/loc>/g)].map((m) => m[1]); sitemap = [...new Set(locs.map((l) => { try { return norm(new URL(l, origin).pathname); } catch { return null; } }).filter(Boolean))]; sitemapNote = `sitemap.xml: ${sitemap.length} route(s)`; } } catch {}
-  const { ctx, page, errors } = await ctxPage(browser); const depth = new Map([[homePath, 0]]), status = new Map(), broken = [], from = new Map(), urlFor = new Map([[homePath, home]]);
+  const { ctx, page, errors } = await ctxPage(browser); const depth = new Map([[homePath, 0]]), status = new Map(), broken = [], from = new Map(), urlFor = new Map([[homePath, home]]), formPages = new Map();
   try {
     const queue = [{ url: home, d: 0 }]; let visited = 0;
-    while (queue.length && visited < 40) {
+    while (queue.length && visited < MAX_PAGES) {
       const { url, d } = queue.shift(); visited++;
       const res = await go(page, url, T); const st = res ? res.status() : await statusOf(url); status.set(norm(new URL(url).pathname), st);
       if (!res || st >= 400) { broken.push({ route: norm(new URL(url).pathname), status: st || "no response", from: from.get(norm(new URL(url).pathname)) || "(home)" }); continue; }
+      // forms on this page (fields beyond hidden/submit): the forms axis checks every page that has one, wherever it sits in link order
+      const nf = await page.evaluate(FORM_COUNT).catch(() => 0); if (nf) formPages.set(norm(new URL(url).pathname), nf);
       if (d >= MAX_CLICKS) continue;
       const links = await page.evaluate(LINKS).catch(() => []);
       for (const h of links) { let u; try { u = new URL(h); } catch { continue; } if (u.origin !== origin || !/^https?:/.test(u.protocol)) continue; if (/\.(pdf|zip|png|jpe?g|webp|svg|mp4|xml|json|txt|ics|vcf)$/i.test(u.pathname)) continue; const p = norm(u.pathname); if (!depth.has(p)) { depth.set(p, d + 1); from.set(p, norm(new URL(url).pathname)); urlFor.set(p, stripHash(u.href)); queue.push({ url: stripHash(u.href), d: d + 1 }); } }
     }
     const need = sitemap && sitemap.length ? sitemap : [...depth.keys()];
+    // concrete routes the Scope table names (completeness.mjs contractRoutes). Reported when no link reaches them, not
+    // failed: a checkout reached by a button or a form submit is legitimately absent from the link graph
+    const contractUnreached = [...new Set(contract.map(norm))].filter((r) => !depth.has(r) || depth.get(r) > MAX_CLICKS);
     const fails = [];
     for (const r of need) { const d = depth.get(r); if (d === undefined) fails.push({ route: r, why: `not reachable from home in ≤ ${MAX_CLICKS} clicks` }); else if (d > MAX_CLICKS) fails.push({ route: r, why: `${d} clicks from home (more than ${MAX_CLICKS})` }); }
     for (const b of broken) fails.push({ route: b.route, why: `broken link: HTTP ${b.status} (linked from ${b.from})` });
     const reached = need.filter((r) => depth.has(r) && depth.get(r) <= MAX_CLICKS && !broken.some((b) => b.route === r));
     const pages = [home, ...[...depth.keys()].filter((r) => r !== homePath && !broken.some((b) => b.route === r) && (status.get(r) || 0) < 400 && status.has(r)).map((r) => urlFor.get(r)).filter(Boolean)];
-    return { ok: fails.length === 0, have: reached.length, need: need.length, fails, pages, depths: Object.fromEntries([...depth].filter(([r]) => need.includes(r))), routes: need, notes: [sitemapNote || "no sitemap.xml: the routes are the ones found by following links from home", `${visited} page(s) loaded`], errors: errors.slice(0, 3) };
+    const unloaded = [...depth.keys()].filter((r) => !status.has(r));
+    return { ok: fails.length === 0, have: reached.length, need: need.length, fails, pages, formPages: Object.fromEntries(formPages), unloaded, contractUnreached, depths: Object.fromEntries([...depth].filter(([r]) => need.includes(r))), routes: need, notes: [sitemapNote || "no sitemap.xml: the routes are the ones found by following links from home", contract.length ? `${contract.length} concrete route(s) from the Scope table` : null, `${visited} page(s) loaded`, unloaded.length ? `${unloaded.length} route(s) found but not loaded (cap ${MAX_PAGES}): ${unloaded.slice(0, 6).join(", ")}${unloaded.length > 6 ? " …" : ""}` : null].filter(Boolean), errors: errors.slice(0, 3) };
   } finally { await ctx.close(); }
 }
 
@@ -79,22 +97,24 @@ const KEY = `(e) => { const p = []; for (let n = e; n && n.nodeType === 1 && n !
 const FIND = `(k) => { let n = document.documentElement; for (const part of k.split(">")) { const [t, i] = part.split(":"); let c = 0, hit = null; for (const ch of n.children) if (ch.tagName.toLowerCase() === t && ++c === +i) { hit = ch; break; } if (!hit) return null; n = hit; } return n; }`;
 const INTERACTIVE = `a[href], button, [role=button], [role=link], [role=tab], [role=switch], [role=checkbox], [role=menuitem], input:not([type=hidden]), select, textarea, summary, [tabindex]:not([tabindex="-1"]), [onclick]`;
 export async function mobileAxis(browser, home, T, pages = [home]) {
-  const all = { have: 0, need: 0, tap: { have: 0, need: 0 }, swipe: { have: 0, need: 0 }, longpress: { have: 0, need: 0 }, fails: [], notes: [], errors: [] }; const seen = new Set(); let parked = 0, protocolN = 0;
-  for (const pg of pages.slice(0, 12)) {
+  const all = { have: 0, need: 0, tap: { have: 0, need: 0 }, swipe: { have: 0, need: 0 }, longpress: { have: 0, need: 0 }, fails: [], notes: [], errors: [] }; const seen = new Set(); let parked = 0, protocolN = 0, disabledN = 0;
+  for (const pg of pages.slice(0, SAMPLE)) {
     const r = await mobileOne(browser, pg, T, seen, pages.length > 1);
     for (const k of ["have", "need"]) all[k] += r[k]; for (const g of ["tap", "swipe", "longpress"]) { all[g].have += r[g].have; all[g].need += r[g].need; }
-    all.fails.push(...r.fails); all.errors.push(...r.errors); parked += r.parked; protocolN += r.protocol;
+    all.fails.push(...r.fails); all.errors.push(...r.errors); parked += r.parked; protocolN += r.protocol; disabledN += r.disabled || 0;
   }
   all.ok = all.need === 0 ? null : all.have === all.need;
-  all.notes = [pages.length > 1 ? `${Math.min(12, pages.length)} page(s); an element shared by several pages (header, footer) is tapped once` : null, protocolN ? `${protocolN} mailto/tel link(s) are handed to the OS and counted as responding` : null, parked ? `${parked} element(s) parked off-canvas (skip links, closed drawers) are keyboard-only by design and not tapped` : null, !all.longpress.need ? "no element declares a long press" : null].filter(Boolean);
+  all.notes = [pages.length > 1 ? `${Math.min(SAMPLE, pages.length)} page(s); an element shared by several pages (header, footer) is tapped once` : null, protocolN ? `${protocolN} mailto/tel link(s) are handed to the OS and counted as responding` : null, disabledN ? `${disabledN} control(s) disabled by an earlier tap (a selection limit reached) are skipped: a disabled control does nothing by specification` : null, parked ? `${parked} element(s) parked off-canvas (skip links, closed drawers) are keyboard-only by design and not tapped` : null, !all.longpress.need ? "no element declares a long press" : null].filter(Boolean);
   if (all.need === 0) all.notes.unshift("no interactive element at 375px");
   return all;
 }
 async function mobileOne(browser, home, T, seen, multi) {
   const where = multi ? ` (${new URL(home).pathname})` : "";
   const { ctx, page, errors } = await ctxPage(browser, { viewport: { width: 375, height: 812 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2 });
-  const navs = []; let popups = 0; ctx.on("page", (p) => { popups++; p.close().catch(() => {}); });
-  await page.route("**/*", (route) => { const rq = route.request(); if (rq.isNavigationRequest() && rq.frame() === page.mainFrame() && stripHash(rq.url()) !== stripHash(home)) { navs.push(rq.url()); return route.abort(); } return route.continue(); });
+  const navs = []; let popups = 0, tapping = false; ctx.on("page", (p) => { popups++; p.close().catch(() => {}); });
+  // a navigation during a tap is the response; it is recorded and stopped. A link to the page itself (a logo on the home
+  // page) reloads it: that is a response too (before v3.0.1 the reload went through and the tap read as "nothing changed")
+  await page.route("**/*", (route) => { const rq = route.request(); if (rq.isNavigationRequest() && rq.frame() === page.mainFrame() && (tapping || stripHash(rq.url()) !== stripHash(home))) { navs.push(rq.url()); return route.fulfill({ status: 204, body: "" }); } return route.continue(); });
   await page.addInitScript(() => {
     window.__jm = { n: 0, targets: new Set(), invalid: 0 };
     const start = () => new MutationObserver((ms) => { for (const m of ms) { if (m.type === "attributes" && /^data-j/.test(m.attributeName || "")) continue; window.__jm.n++; window.__jm.targets.add(m.target); } }).observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
@@ -102,10 +122,17 @@ async function mobileOne(browser, home, T, seen, multi) {
     addEventListener("invalid", () => window.__jm.invalid++, true);
   });
   const cdp = await ctx.newCDPSession(page);
-  const tapFails = [], swipeFails = [], pressFails = [], protocol = []; let tapped = 0, swiped = 0, pressed = 0, uncovered = 0;
+  const tapFails = [], swipeFails = [], pressFails = [], protocol = []; let tapped = 0, swiped = 0, pressed = 0, uncovered = 0, disabledNow = 0;
   try {
     await go(page, home, T);
-    const els0 = await page.evaluate(`(() => { const key = ${KEY}; const out = []; for (const e of document.querySelectorAll(${JSON.stringify(INTERACTIVE)})) { if (!e.checkVisibility || !e.checkVisibility({ visibilityProperty: true, opacityProperty: true })) continue; const r = e.getBoundingClientRect(); if (r.width < 1 || r.height < 1) continue; if (e.closest("[aria-hidden=true], [inert]")) continue; if (out.some((o) => o.el.contains(e))) continue; const href = e.getAttribute("href") || ""; const fixedAnc = (() => { for (let n = e; n && n !== document.body; n = n.parentElement) { const p = getComputedStyle(n).position; if (p === "fixed" || p === "sticky") return true; } return false; })(); const doc = { top: r.top + scrollY, left: r.left + scrollX }; const parked = doc.left + r.width <= 0 || doc.left >= document.documentElement.scrollWidth || doc.top + r.height <= 0 || (fixedAnc && (r.bottom <= 0 || r.top >= innerHeight || r.right <= 0 || r.left >= innerWidth)); out.push({ el: e, key: key(e), label: (e.getAttribute("aria-label") || e.innerText || e.value || e.getAttribute("name") || e.tagName).replace(/\\s+/g, " ").trim().slice(0, 40), tag: e.tagName.toLowerCase(), href, longpress: e.hasAttribute("data-long-press") || e.hasAttribute("data-longpress") || e.hasAttribute("data-hold"), parked, editable: e.isContentEditable, sig: e.tagName + "|" + href + "|" + (e.getAttribute("aria-label") || e.innerText || "").trim().slice(0, 40) + "|" + fixedAnc + "|" + !!e.closest("header, footer, nav") }); if (out.length >= 60) break; } return out.map(({ el, ...x }) => x); })()`);
+    // v3.0.1: a page wider than the phone makes the browser lay it out wider and zoom to fit; tap coordinates then miss
+    // their targets and every tap read as "nothing changed" (a B2B benchmark build: 58 such fails, one real cause). The
+    // overflow is reported once, with the widest elements, and taps on that page are not measured until it is fixed.
+    const ovf = await page.evaluate(() => { const cw = document.documentElement.clientWidth, w = Math.max(innerWidth, document.documentElement.scrollWidth); if (w <= cw + 1) return null;
+      const wide = [...document.querySelectorAll("body *")].filter((e) => e.getBoundingClientRect().right > cw + 1 && getComputedStyle(e).position !== "fixed" && !e.closest("[style*=overflow], .table-wrap, .scroll")).filter((e, i, a) => !a.some((o) => o !== e && o.contains(e))).slice(0, 3)
+        .map((e) => `${e.tagName.toLowerCase()}${e.classList[0] ? "." + e.classList[0] : ""} → ${Math.round(e.getBoundingClientRect().right)}px`); return { w, cw, wide }; }).catch(() => null);
+    if (ovf) { tapFails.push({ el: `page ${new URL(home).pathname}`, why: `wider than the phone: lays out at ${ovf.w}px in a ${ovf.cw}px viewport (${ovf.wide.join(", ") || "no single element"}); the browser zooms out, so taps on this page are not measured until it fits` }); return { have: 0, need: 1, parked: 0, protocol: 0, overflow: ovf, tap: { have: 0, need: 1 }, swipe: { have: 0, need: 0 }, longpress: { have: 0, need: 0 }, fails: tapFails.map((f) => ({ gesture: "layout", el: f.el, why: f.why })), errors: errors.slice(0, 3) }; }
+    const els0 = await page.evaluate(`(() => { const key = ${KEY}; const out = []; for (const e of document.querySelectorAll(${JSON.stringify(INTERACTIVE)})) { if (!e.checkVisibility || !e.checkVisibility({ visibilityProperty: true, opacityProperty: true })) continue; const r = e.getBoundingClientRect(); if (r.width < 1 || r.height < 1) continue; if (e.closest("[aria-hidden=true], [inert]")) continue; if (e.matches(":disabled")) continue; if (out.some((o) => o.el.contains(e))) continue; const href = e.getAttribute("href") || ""; const fixedAnc = (() => { for (let n = e; n && n !== document.body; n = n.parentElement) { const p = getComputedStyle(n).position; if (p === "fixed" || p === "sticky") return true; } return false; })(); const doc = { top: r.top + scrollY, left: r.left + scrollX }; const parked = doc.left + r.width <= 0 || doc.left >= document.documentElement.scrollWidth || doc.top + r.height <= 0 || (fixedAnc && (r.bottom <= 0 || r.top >= innerHeight || r.right <= 0 || r.left >= innerWidth)); out.push({ el: e, key: key(e), label: (e.getAttribute("aria-label") || e.innerText || e.value || e.getAttribute("name") || e.tagName).replace(/\\s+/g, " ").trim().slice(0, 40), tag: e.tagName.toLowerCase(), href, longpress: e.hasAttribute("data-long-press") || e.hasAttribute("data-longpress") || e.hasAttribute("data-hold"), parked, editable: e.isContentEditable, sig: e.tagName + "|" + href + "|" + (e.getAttribute("aria-label") || e.innerText || "").trim().slice(0, 40) + "|" + fixedAnc + "|" + !!e.closest("header, footer, nav") }); if (out.length >= 60) break; } return out.map(({ el, ...x }) => x); })()`);
     let parked = 0; const els = [];
     for (const e of els0) { if (e.parked) { parked++; continue; } const shared = /\|true$/.test(e.sig); if (shared && seen.has(e.sig)) continue; if (shared) seen.add(e.sig); if (els.length < 30) els.push(e); }
     // long-press candidates: elements with a contextmenu listener on themselves (DOMDebugger sees real listeners)
@@ -121,19 +148,25 @@ async function mobileOne(browser, home, T, seen, multi) {
       if (/^(mailto|tel|sms):/i.test(e.href)) { protocol.push(e.label); tapped++; continue; } // handed to the OS; a browser shows nothing to observe
       if (dirty) { await go(page, home, T); dirty = false; }
       // a link wrapped over two lines is tapped on its first line box: its bounding box centre can fall between the lines
-      const pos = await page.evaluate(`(() => { const e = (${FIND})(${JSON.stringify(e.key)}); if (!e) return null; e.scrollIntoView({ block: "center", inline: "center" }); const rs = e.getClientRects(); const r = rs.length > 1 ? rs[0] : e.getBoundingClientRect(); const x = r.left + Math.min(r.width / 2, Math.max(4, r.width - 4)), y = r.top + r.height / 2; const hit = document.elementFromPoint(x, y); return { x, y, covered: !!hit && !e.contains(hit) && !hit.contains(e) ? (hit.tagName.toLowerCase() + (hit.id ? "#" + hit.id : "")) : null }; })()`).catch(() => null);
+      const pos = await page.evaluate(`(() => { const e = (${FIND})(${JSON.stringify(e.key)}); if (!e) return null; if (e.matches(":disabled")) return { disabled: true }; e.scrollIntoView({ block: "center", inline: "center" }); const rs = e.getClientRects(); const r = rs.length > 1 ? rs[0] : e.getBoundingClientRect(); const x = r.left + Math.min(r.width / 2, Math.max(4, r.width - 4)), y = r.top + r.height / 2; const hit = document.elementFromPoint(x, y); return { x, y, covered: !!hit && !e.contains(hit) && !hit.contains(e) ? (hit.tagName.toLowerCase() + (hit.id ? "#" + hit.id : "")) : null }; })()`).catch(() => null);
       if (!pos) { tapFails.push({ el: e.label, why: "element gone before the tap" }); continue; }
-      await page.waitForTimeout(T(120)); const idle = await idleTargets(); const before = await state(); const n0 = navs.length, p0 = popups;
+      // v3.0.1: an earlier tap can disable it (a plan of 2 teas disables the other checkboxes once 2 are picked, and the
+      // choice is saved, so it holds after the reload); a disabled control does nothing by specification and is skipped
+      if (pos.disabled) { disabledNow++; continue; }
+      await page.waitForTimeout(T(120)); const idle = await idleTargets(); const before = await state(); const n0 = navs.length, p0 = popups, d0 = page.__dialogs;
       await page.evaluate(() => window.__jm.targets.clear());
-      await page.touchscreen.tap(pos.x, pos.y).catch(() => {}); await page.waitForTimeout(T(450));
+      tapping = true; await page.touchscreen.tap(pos.x, pos.y).catch(() => {}); await page.waitForTimeout(T(450)); tapping = false;
       const after = await state().catch(() => null); const changed = await page.evaluate(() => window.__jm.targets.size).catch(() => 0);
       // focus alone is a response only for fields (focusing is what a tap on a field does); a button or link that only takes
       // focus did nothing
       const field = /^(input|select|textarea)$/.test(e.tag) || e.editable;
-      const responded = !after ? true : navs.length > n0 || popups > p0 || after.href !== before.href || (field && after.active !== before.active) || Math.abs(after.sy - before.sy) > 2 || Math.abs(after.sx - before.sx) > 2 || after.invalid > before.invalid || after.dialogs !== before.dialogs || changed > idle;
+      const responded = !after ? true : navs.length > n0 || popups > p0 || page.__dialogs > d0 || after.href !== before.href || (field && after.active !== before.active) || Math.abs(after.sy - before.sy) > 2 || Math.abs(after.sx - before.sx) > 2 || after.invalid > before.invalid || after.dialogs !== before.dialogs || changed > idle;
       if (responded) { tapped++; if (changed > idle || after?.dialogs !== before.dialogs) dirty = true; }
       else tapFails.push({ el: `${e.tag} "${e.label}"`, why: pos.covered ? `covered by ${pos.covered} at 375px: the tap lands on it` : "nothing changed after a tap (no DOM change, scroll, navigation, dialog, or focus moving into a field)" });
-      if (after && after.href !== before.href && stripHash(after.href) !== stripHash(before.href)) dirty = true;
+      // v3.0.1: a navigation stopped by the route above used to be aborted, which leaves Chromium's error page in place;
+      // every later tap then landed on that blank page and read as "nothing changed". It is now answered 204 (the browser
+      // stays on the page) and the page is reloaded after any tap that navigated, or when it is no longer the site.
+      if (navs.length > n0 || !after || /^chrome-error:/.test(page.url()) || (after.href !== before.href && stripHash(after.href) !== stripHash(before.href))) dirty = true;
       if (!pos.covered) uncovered++;
     }
     for (const e of els.filter((x) => x.longpress)) {
@@ -157,8 +190,8 @@ async function mobileOne(browser, home, T, seen, multi) {
       if (left !== null && Math.abs(left - pos.left) > 4) swiped++; else swipeFails.push({ el: s.label, why: "horizontal scroller did not move on a touch swipe" });
     }
     const pressN = els.filter((x) => x.longpress).length;
-    const need = els.length + scrollers.length + pressN, have = tapped + swiped + pressed;
-    return { have, need, parked, protocol: protocol.length, tap: { have: tapped, need: els.length }, swipe: { have: swiped, need: scrollers.length }, longpress: { have: pressed, need: pressN }, fails: [...tapFails.map((f) => ({ gesture: "tap", el: f.el + where, why: f.why })), ...swipeFails.map((f) => ({ gesture: "swipe", el: f.el + where, why: f.why })), ...pressFails.map((f) => ({ gesture: "long-press", el: f.el + where, why: f.why }))], errors: errors.slice(0, 3) };
+    const need = els.length - disabledNow + scrollers.length + pressN, have = tapped + swiped + pressed;
+    return { have, need, parked, protocol: protocol.length, disabled: disabledNow, tap: { have: tapped, need: els.length - disabledNow }, swipe: { have: swiped, need: scrollers.length }, longpress: { have: pressed, need: pressN }, fails: [...tapFails.map((f) => ({ gesture: "tap", el: f.el + where, why: f.why })), ...swipeFails.map((f) => ({ gesture: "swipe", el: f.el + where, why: f.why })), ...pressFails.map((f) => ({ gesture: "long-press", el: f.el + where, why: f.why }))], errors: errors.slice(0, 3) };
   } finally { await ctx.close(); }
 }
 
@@ -183,23 +216,44 @@ const SNAPF = `(form) => { const region = form.isConnected ? form.parentElement 
 const ERR_RX = /error|invalid|required|please|must|enter a|isn.?t valid|not valid|missing|fail|wrong|try again|couldn|could not|problem|sorry|unable|ভুল|প্রয়োজন/i;
 const OK_RX = /thank|thanks|sent|received|success|done|subscribed|confirmed|booked|we.?ll be in touch|got it|ধন্যবাদ/i;
 const newTexts = (a, b) => b.texts.filter((t) => !a.texts.includes(t)).concat(b.live.filter((t) => !a.live.includes(t)));
-export async function formsAxis(browser, home, T, pages = [home]) {
-  const all = { have: 0, need: 0, forms: [], fails: [], notes: [] };
-  for (const pg of pages.slice(0, 12)) { const r = await formsOne(browser, pg, T, pages.length > 1); all.have += r.have; all.need += r.need; all.forms.push(...r.forms); all.fails.push(...r.fails); }
-  all.ok = all.need === 0 ? null : all.have === all.need; if (!all.need) all.notes.push(pages.length > 1 ? `no form with fields on any of ${Math.min(12, pages.length)} page(s)` : "no form with fields on this page");
+// formPages (from nav): route → number of forms. Known: every page with a form is checked (up to MAX_FORM_PAGES), whatever
+// its position in link order (before v3.0.1 only the first 12 pages were, so a checkout or contact page linked late was
+// never checked and the axis read n/a). Unknown (a single page): the page itself.
+export async function formsAxis(browser, home, T, pages = [home], formPages = null) {
+  const all = { have: 0, need: 0, forms: [], fails: [], notes: [], uncovered: [], live: [] };
+  const key = (u) => norm(new URL(u).pathname);
+  const targets = formPages ? pages.filter((u) => formPages[key(u)]) : pages.slice(0, SAMPLE);
+  for (const pg of targets.slice(0, MAX_FORM_PAGES)) { const r = await formsOne(browser, pg, T, pages.length > 1); all.have += r.have; all.need += r.need; all.forms.push(...r.forms); all.fails.push(...r.fails); all.uncovered.push(...(r.uncovered || [])); all.live.push(...(r.live || [])); }
+  for (const pg of targets.slice(MAX_FORM_PAGES)) all.uncovered.push(`${key(pg)}: ${formPages[key(pg)]} form(s), page beyond the ${MAX_FORM_PAGES}-page cap`);
+  all.ok = all.need === 0 ? null : all.have === all.need;
+  if (!all.need) all.notes.push(formPages ? `no form with fields on any of ${pages.length} loaded page(s)` : pages.length > 1 ? `no form with fields on any of ${Math.min(SAMPLE, pages.length)} page(s)` : "no form with fields on this page");
+  else if (formPages) all.notes.push(`${Math.min(targets.length, MAX_FORM_PAGES)} page(s) with forms checked: ${targets.slice(0, 8).map(key).join(", ")}${targets.length > 8 ? " …" : ""}`);
+  if (all.live.length) all.notes.push(`live control(s), no submit (applied on change, states not required): ${all.live.slice(0, 4).join("; ")}${all.live.length > 4 ? ` … ${all.live.length - 4} more` : ""}`);
+  if (all.uncovered.length) all.notes.push(`not checked (reported, not passed): ${all.uncovered.slice(0, 4).join("; ")}${all.uncovered.length > 4 ? ` … ${all.uncovered.length - 4} more` : ""}`);
   return all;
 }
 async function formsOne(browser, home, T, multi) {
   const probe = await ctxPage(browser); let forms = [];
-  try { await go(probe.page, home, T); forms = await probe.page.evaluate(`(() => [...document.forms].slice(0, 5).map((f, i) => ({ i, id: f.id || null, action: f.getAttribute("action") || "", method: (f.getAttribute("method") || "get").toLowerCase(), fields: [...f.querySelectorAll("input, textarea, select")].filter((x) => !["hidden", "submit", "button", "reset"].includes(x.type)).length, label: (f.getAttribute("aria-label") || f.querySelector("h1,h2,h3,legend,label")?.innerText || f.id || "form " + (i + 1)).trim().slice(0, 40) })).filter((f) => f.fields > 0))()`); } finally { await probe.ctx.close(); }
+  try { await go(probe.page, home, T); forms = await probe.page.evaluate(`(() => [...document.forms].map((f, i) => ({ i, id: f.id || null, action: f.getAttribute("action") || "", method: (f.getAttribute("method") || "get").toLowerCase(), fields: [...f.querySelectorAll("input, textarea, select")].filter((x) => !["hidden", "submit", "button", "reset"].includes(x.type)).length, label: (f.getAttribute("aria-label") || f.querySelector("h1,h2,h3,legend,label")?.innerText || f.id || "form " + (i + 1)).trim().slice(0, 40), live: !(f.querySelector("button[type=submit], input[type=submit], input[type=image], button:not([type])") || (f.id && document.querySelector('button[form="' + CSS.escape(f.id) + '"]'))) && ![...f.querySelectorAll("input, textarea")].some((x) => !["hidden", "checkbox", "radio", "range", "color", "file", "submit", "button", "reset"].includes(x.type)) })).filter((f) => f.fields > 0))()`); } finally { await probe.ctx.close(); }
+  // v3.0.1: a form with no submit control and no typed field (selects, checkboxes, radios only) is a live control, a
+  // catalogue filter applied on change: it is never submitted, so validation and request states do not apply. Before,
+  // a shop's "Refine" filter read as 4 missing states ("native form submit") in a paired ecommerce benchmark.
+  const live = forms.filter((f) => f.live).map((f) => `${String(f.label || "form").replace(/\s+/g, " ").trim().slice(0, 40)}${multi ? ` (${new URL(home).pathname})` : ""}`); forms = forms.filter((f) => !f.live);
+  if (!forms.length && live.length) return { ok: null, have: 0, need: 0, fails: [], forms: [], live, notes: [] };
   if (!forms.length) return { ok: null, have: 0, need: 0, fails: [], forms: [], notes: ["no form with fields on this page"] };
+  const uncovered = forms.slice(MAX_FORMS_PER_PAGE).map((f) => `${new URL(home).pathname}: form "${String(f.label || "form").replace(/\s+/g, " ").trim().slice(0, 60)}" (beyond ${MAX_FORMS_PER_PAGE} per page)`); forms = forms.slice(0, MAX_FORMS_PER_PAGE);
   const results = [];
   for (const f of forms) {
-    const st = { default: false, validation: false, loading: false, success: false, serverError: false }; const why = {}; const sel = `document.forms[${f.i}]`;
+    const st = { default: false, validation: false, loading: false, success: false, serverError: false }; const why = {}; const unverified = []; const sel = `document.forms[${f.i}]`;
     const run = async (mode) => {
-      const { ctx, page, errors } = await ctxPage(browser); let requests = 0, nativeNav = false; const held = [];
+      const { ctx, page, errors } = await ctxPage(browser); let requests = 0, api = 0, nativeNav = false, scriptNav = null; const held = [];
+      // what a native submit of this form would load: its action (or the page itself) by its method
+      const target = stripHash(new URL(f.action || home, home).href).split("?")[0];
       await page.route("**/*", async (route) => { const rq = route.request(); const isDoc = rq.isNavigationRequest() && rq.frame() === page.mainFrame(); const isApi = ["fetch", "xhr"].includes(rq.resourceType()) && rq.method() !== "GET" || (["fetch", "xhr"].includes(rq.resourceType()) && mode.armed);
-        if (mode.armed && (isApi || (isDoc && stripHash(rq.url()) !== stripHash(home)))) { requests++; if (isDoc) nativeNav = true;
+        if (mode.armed && (isApi || (isDoc && stripHash(rq.url()) !== stripHash(home)))) { requests++; if (!isDoc) api++;
+          // v3.0.1: only a load of the form's own target is a native submit; a script that saves in the browser and then moves
+          // to another route (location.assign("/checkout")) is the next step of a flow, not the server's page
+          if (isDoc) { if (rq.method() !== "GET" || stripHash(rq.url()).split("?")[0] === target) nativeNav = true; else if (!scriptNav) scriptNav = new URL(rq.url()).pathname; }
           await new Promise((r) => setTimeout(r, mode.delay)); const code = mode.code; return route.fulfill({ status: code, contentType: isDoc ? "text/html" : "application/json", body: isDoc ? `<!doctype html><title>${code}</title><p>${code}</p>` : JSON.stringify(code < 400 ? { ok: true, message: "ok" } : { ok: false, error: "Server error" }) }).catch(() => {}); }
         return route.continue().catch(() => {}); });
       try {
@@ -207,15 +261,24 @@ async function formsOne(browser, home, T, multi) {
         await page.evaluate(`(() => { window.__jf = ${sel}; window.__jfRegion = ${sel}?.parentElement || null; })()`);
         const fh = await page.evaluateHandle(`${sel}`); await page.evaluate((form) => form.scrollIntoView({ block: "center" }), fh).catch(() => {});
         const s0 = await page.evaluate(`(${SNAPF})(${sel} || window.__jf)`);
-        return await mode.fn({ page, fh, s0, errors, requests: () => requests, nativeNav: () => nativeNav, arm: () => { mode.armed = true; } });
+        return await mode.fn({ page, fh, s0, errors, requests: () => requests, api: () => api, nativeNav: () => nativeNav, scriptNav: () => scriptNav, arm: () => { mode.armed = true; } });
       } finally { await ctx.close(); }
     };
     const submit = async (page) => { await page.evaluate(`(() => { const f = ${sel}; const b = f.querySelector("button[type=submit], input[type=submit], button:not([type])") || document.querySelector('button[form="' + f.id + '"]'); if (b) b.click(); else if (f.requestSubmit) f.requestSubmit(); else f.submit(); })()`).catch(() => {}); };
     // 1 default + 2 validation (submit empty)
     await run({ code: 200, delay: 0, fn: async ({ page, s0 }) => {
       const lab = await page.evaluate(`(() => { const f = ${sel}; const miss = []; for (const x of f.querySelectorAll("input, textarea, select")) { if (["hidden", "submit", "button", "reset"].includes(x.type)) continue; const named = x.getAttribute("aria-label") || x.getAttribute("aria-labelledby") || x.closest("label") || (x.id && document.querySelector('label[for="' + CSS.escape(x.id) + '"]')) || x.title; if (!named) miss.push(x.name || x.type); } return miss; })()`);
-      st.default = s0.formVisible && !lab.length; if (!s0.formVisible) why.default = "form not visible when the page loads"; else if (lab.length) why.default = `field(s) without a label: ${lab.join(", ")}`;
-      await page.evaluate(`(${CLEAR})(${sel})`); await submit(page); await page.waitForTimeout(T(700));
+      // v3.0.1: a form hidden when the page loads sits behind a state a fresh browser cannot reach (a checkout behind an empty
+      // cart, an account form behind sign-in): none of its states can be seen, so all five are not verified, never passed.
+      // They are listed under "not checked" for the journey walk. Before, an ecommerce checkout read as 2 fails.
+      if (!s0.formVisible) { unverified.push("default", "validation", "loading", "success", "serverError"); why.default = why.validation = why.loading = why.success = why.serverError = "not verified: the form is hidden when the page loads (behind a state a fresh browser does not have, such as an empty cart or a signed-out account); walk it by hand"; return; }
+      st.default = !lab.length; if (lab.length) why.default = `field(s) without a label: ${lab.join(", ")}`;
+      await page.evaluate(`(${CLEAR})(${sel})`);
+      // v3.0.1: a submit control the form keeps disabled while it is incomplete cannot be used empty: the empty submit cannot
+      // happen, so the validation state is not verified (not failed); the guidance it shows meanwhile is reported
+      const locked = await page.evaluate(`(() => { const f = ${sel}; const b = f.querySelector("button[type=submit], input[type=submit], button:not([type])") || (f.id && document.querySelector('button[form="' + f.id + '"]')); return !!b && (b.disabled || b.getAttribute("aria-disabled") === "true"); })()`).catch(() => false);
+      if (locked) { unverified.push("validation"); why.validation = "not verified: the submit control is disabled while the form is incomplete, so an empty submit cannot happen"; return; }
+      await submit(page); await page.waitForTimeout(T(700));
       const s1 = await page.evaluate(`(${SNAPF})(${sel} || window.__jf)`).catch(() => null);
       if (!s1) { why.validation = "the page navigated away on an empty submit (no validation)"; return; }
       const fresh = newTexts(s0, s1); const styled = s1.fields.some((x, k) => x !== s0.fields[k]);
@@ -223,38 +286,50 @@ async function formsOne(browser, home, T, multi) {
       if (!st.validation) why.validation = "an empty submit shows no designed error (no message, no field style change; a browser bubble alone does not count)";
     } });
     // 3 loading + 4 success: the request is held 2 s, then answered 200
-    await run({ code: 200, delay: 2000, fn: async ({ page, s0, requests, nativeNav, arm }) => {
-      await page.evaluate(`(${FILL})(${sel})`); arm(); await submit(page); await page.waitForTimeout(T(500));
-      const mid = await page.evaluate(`(${SNAPF})(${sel} || window.__jf)`).catch(() => null);
+    if (!unverified.includes("loading")) await run({ code: 200, delay: 2000, fn: async ({ page, s0, requests, api, nativeNav, scriptNav, arm }) => {
+      await page.evaluate(`(${FILL})(${sel})`); const sf = await page.evaluate(`(${SNAPF})(${sel} || window.__jf)`).catch(() => s0); arm(); await submit(page);
+      // v3.0.1: sampled from the submit on (every 100 ms for 500 ms), against the filled form: a flow that saves in the browser
+      // and moves on within 500 ms showed its pending state only before the snapshot; and filling alone (a submit button
+      // enabled once the form is complete) is not a loading state
+      const INV = `(() => { const f = ${sel} || window.__jf; return f ? f.querySelectorAll("[aria-invalid=true], :invalid").length : 0; })()`;
+      let mid = null, hit = null, inv0 = null; for (let k = 0; k < 5; k++) { await page.waitForTimeout(T(100)); if (k === 0) inv0 = await page.evaluate(INV).catch(() => 0); const m = await page.evaluate(`(${SNAPF})(${sel} || window.__jf)`).catch(() => null); if (m) mid = m; if (m && !hit && (m.btn !== sf.btn || m.busy)) hit = m; } if (hit) mid = hit;
+      // v3.0.1: the check's filled values were rejected by the form's own validation (a calendar that only takes available
+      // dates, a pattern the filler cannot guess): the submit was not valid, so the request states are not verified, not
+      // failed. Before, this read "no request was made on a valid submit" (a booking benchmark build, 6 false fails).
+      if (!requests() && mid) { const said = newTexts(s0, mid).filter((t) => ERR_RX.test(t) && !OK_RX.test(t)); // read right after the submit: a form that resets itself after a fake success would read as invalid later
+        const inv = inv0 ?? 0;
+        if (said.length || inv) { unverified.push(...["loading", "success", "serverError"]); why.loading = why.success = why.serverError = `not verified: the form rejected the check's filled values${said.length ? ` ("${said[0].slice(0, 70)}")` : ` (${inv} invalid field(s))`}; fill it by hand or add a fixture value`; return; } }
       if (!requests()) { why.loading = "no request was made on a valid submit, so there is no pending state to show"; why.success = "no request was made: success cannot follow a server answer"; if (mid && newTexts(s0, mid).some((t) => OK_RX.test(t))) why.success += " (a success message appears without any request)"; return; }
       if (nativeNav()) { why.loading = "native form submit: the page navigates; no in-page loading state"; why.success = "native form submit: success is whatever page the server returns, not a designed state"; why.serverError = "native form submit: a server error shows the server's page, not a designed state"; return; }
-      st.loading = !!mid && (mid.btn !== s0.btn || mid.busy || newTexts(s0, mid).some((t) => /send|sending|submitting|loading|wait|…|\.\.\./i.test(t)));
+      st.loading = !!mid && (mid.btn !== sf.btn || mid.busy || newTexts(sf, mid).some((t) => /send|sending|submitting|loading|wait|…|\.\.\./i.test(t)));
       if (!st.loading) why.loading = "nothing changed while the request was pending (button, aria-busy, progress, text)";
+      if (scriptNav() && !api()) { st.success = true; unverified.push("serverError"); why.serverError = `not verified: no request to a server; the form saves in the browser and then moves to ${scriptNav()}, so a server error cannot happen`; return; }
       await page.waitForTimeout(T(2600)); const end = await page.evaluate(`(${SNAPF})(${sel} || window.__jf)`).catch(() => null);
       const shown = end ? newTexts(s0, end) : [];
       st.success = !!end && (shown.some((t) => OK_RX.test(t)) || (!end.formVisible && shown.length > 0));
       if (!st.success) why.success = shown.length ? `after a 200 the new text does not read as success: "${shown[0].slice(0, 50)}"` : "after a 200 nothing new is shown";
     } });
     // 5 server error: the request answered 500
-    if (!why.serverError) await run({ code: 500, delay: 600, fn: async ({ page, s0, requests, arm }) => {
+    if (!why.serverError && !unverified.includes("serverError")) await run({ code: 500, delay: 600, fn: async ({ page, s0, requests, arm }) => {
       await page.evaluate(`(${FILL})(${sel})`); arm(); await submit(page); await page.waitForTimeout(T(2200));
       if (!requests()) { why.serverError = "no request was made, so a server error cannot happen or be shown"; return; }
       const end = await page.evaluate(`(${SNAPF})(${sel} || window.__jf)`).catch(() => null); const shown = end ? newTexts(s0, end) : [];
       st.serverError = shown.some((t) => ERR_RX.test(t) && !OK_RX.test(t));
       if (!st.serverError) why.serverError = shown.some((t) => OK_RX.test(t)) ? "after a 500 the form shows success" : "after a 500 no error is shown";
     } });
-    results.push({ form: f.label + (multi ? ` (${new URL(home).pathname})` : ""), method: f.method, action: f.action, states: st, why });
+    results.push({ form: String(f.label || "form").replace(/\s+/g, " ").trim().slice(0, 60) + (multi ? ` (${new URL(home).pathname})` : ""), method: f.method, action: f.action, states: Object.fromEntries(Object.entries(st).filter(([k]) => !unverified.includes(k))), unverified, why });
   }
-  const need = results.length * 5, have = results.reduce((n, r) => n + Object.values(r.states).filter(Boolean).length, 0);
-  return { ok: have === need, have, need, forms: results, fails: results.flatMap((r) => Object.entries(r.states).filter(([, v]) => !v).map(([k]) => ({ form: r.form, state: k, why: r.why[k] || "missing" }))), notes: [] };
+  const need = results.reduce((n, r) => n + Object.keys(r.states).length, 0), have = results.reduce((n, r) => n + Object.values(r.states).filter(Boolean).length, 0);
+  const notVerified = results.filter((r) => r.unverified?.length).map((r) => `${r.form}: ${r.unverified.join(", ")} not verified (${[...new Set(r.unverified.map((k) => r.why[k]))].join("; ")})`);
+  return { ok: have === need, have, need, forms: results, live, uncovered: [...uncovered, ...notVerified], fails: results.flatMap((r) => Object.entries(r.states).filter(([, v]) => !v).map(([k]) => ({ form: r.form, state: k, why: r.why[k] || "missing" }))), notes: [] };
 }
 
 // ── loading ───────────────────────────────────────────────────────────────────
 export async function loadingAxis(browser, home, T, pages = [home]) {
   const all = { have: 0, need: 0, fails: [], surfaces: [], notes: [] }; let req = 0;
-  for (const pg of pages.slice(0, 12)) { const r = await loadingOne(browser, pg, T); all.have += r.have; all.need += r.need; req += r.requests || 0; const where = pages.length > 1 ? ` (${new URL(pg).pathname})` : ""; all.fails.push(...r.fails.map((f) => ({ ...f, surface: f.surface + where }))); all.surfaces.push(...(r.surfaces || []).map((s) => ({ ...s, page: new URL(pg).pathname }))); }
+  for (const pg of pages.slice(0, SAMPLE)) { const r = await loadingOne(browser, pg, T); all.have += r.have; all.need += r.need; req += r.requests || 0; const where = pages.length > 1 ? ` (${new URL(pg).pathname})` : ""; all.fails.push(...r.fails.map((f) => ({ ...f, surface: f.surface + where }))); all.surfaces.push(...(r.surfaces || []).map((s) => ({ ...s, page: new URL(pg).pathname }))); }
   all.ok = all.need === 0 ? null : all.have === all.need;
-  all.notes.push(all.need ? `${req} request(s) held 2.5 s before release${pages.length > 1 ? `, across ${Math.min(12, pages.length)} page(s)` : ""}` : req ? `${req} request(s) after load, but nothing on the page changed when they returned: no async surface` : "no fetch or XHR request after load: no async surface");
+  all.notes.push(all.need ? `${req} request(s) held 2.5 s before release${pages.length > 1 ? `, across ${Math.min(SAMPLE, pages.length)} page(s)` : ""}` : req ? `${req} request(s) after load, but nothing on the page changed when they returned: no async surface` : "no fetch or XHR request after load: no async surface");
   return all;
 }
 async function loadingOne(browser, home, T) {
@@ -335,19 +410,23 @@ export async function sessionAxis(browser, home, T, routes = []) {
 export async function journey(browser, home, opts = {}) {
   const T = opts.T || ((ms) => ms); const out = {};
   const guard = async (k, fn) => { try { out[k] = await fn(); } catch (e) { out[k] = { ok: false, have: 0, need: 1, fails: [{ why: `not measured: ${firstLine(e)}` }], notes: [], error: firstLine(e) }; } };
-  await guard("nav", () => navAxis(browser, home, T));
-  const pages = out.nav?.pages?.length ? out.nav.pages : [home];
+  await guard("nav", () => navAxis(browser, home, T, opts.contractRoutes || []));
+  const pages = out.nav?.pages?.length ? samplePages(out.nav.pages, out.nav.formPages || {}, home) : [home];
   await guard("mobile", () => mobileAxis(browser, home, T, pages));
-  await guard("forms", () => formsAxis(browser, home, T, pages));
+  await guard("forms", () => formsAxis(browser, home, T, pages, out.nav?.formPages || null));
   await guard("loading", () => loadingAxis(browser, home, T, pages));
   await guard("errors", () => errorsAxis(browser, home, T));
   await guard("session", () => sessionAxis(browser, home, T, (out.nav?.pages || []).map((u) => norm(new URL(u).pathname))));
+  // coverage: what this run did and did not reach, stated so a pass is never read as "every page was checked"
+  const pk = (u) => norm(new URL(u).pathname); const fp = out.nav?.formPages || {};
+  out.coverage = { routes: out.nav?.routes?.length || 0, loaded: out.nav?.pages?.length || 0, notLoaded: out.nav?.unloaded || [], contractUnreached: out.nav?.contractUnreached || [], unreached: (out.nav?.fails || []).filter((f) => f.route && !/^broken/.test(f.why)).map((f) => f.route),
+    sampled: pages.slice(0, SAMPLE).map(pk), notSampled: pages.slice(SAMPLE).map(pk), formPages: Object.keys(fp), formsChecked: (out.forms?.forms || []).length, formsUncovered: out.forms?.uncovered || [] };
   const counts = Object.fromEntries(JOURNEY_AXES.map((k) => [k, out[k].ok === false ? Math.max(1, out[k].fails.length) : 0]));
   return { ...out, counts, fails: Object.values(counts).reduce((a, b) => a + b, 0), pass: Object.values(counts).every((n) => n === 0), segment: `journey: ${JOURNEY_AXES.map((k) => `${k}${out[k].ok === null ? "-" : counts[k]}`).join(" ")}` };
 }
 const SUM = { nav: (r) => `${r.have}/${r.need} route(s) reachable from home in ≤ ${MAX_CLICKS} clicks${r.depths ? ` (${Object.entries(r.depths).map(([p, d]) => `${p}:${d}`).slice(0, 8).join(" ")}${Object.keys(r.depths).length > 8 ? " …" : ""})` : ""}`,
   mobile: (r) => `${r.have}/${r.need} interactive element(s) respond at 375px · tap ${r.tap?.have}/${r.tap?.need} · swipe ${r.swipe?.need ? `${r.swipe.have}/${r.swipe.need}` : "n/a"} · long-press ${r.longpress?.need ? `${r.longpress.have}/${r.longpress.need}` : "n/a"}`,
-  forms: (r) => `${r.have}/${r.need} form state(s) rendered${r.forms?.length ? ` · ${r.forms.map((f) => `${f.form}: ${Object.entries(f.states).map(([k, v]) => `${k}${v ? "✓" : "✗"}`).join(" ")}`).join(" · ")}` : ""}`,
+  forms: (r) => `${r.have}/${r.need} form state(s) rendered${r.forms?.length ? ` · ${r.forms.map((f) => `${f.form}: ${Object.entries(f.states).map(([k, v]) => `${k}${v ? "✓" : "✗"}`).join(" ")}${f.unverified?.length ? " " + f.unverified.map((k) => `${k}?`).join(" ") : ""}`).join(" · ")}` : ""}`,
   loading: (r) => `${r.have}/${r.need} async surface(s) show a skeleton while pending`,
   errors: (r) => `${r.have}/${r.need} designed not-found view (unknown route → HTTP ${r.status ?? "?"}${r.soft404 ? ", soft 404" : ""})`,
   session: (r) => `${r.have}/${r.need} · ${(r.checks || []).map((c) => `${c.step} ${c.ok ? "✓" : "✗"}`).join(" · ")}` };
@@ -358,6 +437,10 @@ export function journeyLines(j) {
     for (const f of (r.fails || []).slice(0, 8)) L.push(`               ✗ ${Object.entries(f).filter(([key, v]) => key !== "why" && v !== undefined && v !== null && v !== "").map(([, v]) => v).join(" ")}${f.why ? `${Object.keys(f).length > 1 ? ": " : ""}${f.why}` : ""}`);
     if ((r.fails || []).length > 8) L.push(`               … ${r.fails.length - 8} more`);
     for (const n of r.ok === null ? (r.notes || []).slice(1) : r.notes || []) L.push(`               · ${n}`);
+  }
+  const c = j.coverage; if (c) {
+    L.push(`    coverage ${c.loaded} page(s) loaded of ${c.routes} required route(s) · forms checked on every page that has one (${c.formPages.length} page(s), ${c.formsChecked} form(s)) · tap and loading sampled on ${c.sampled.length} page(s)`);
+    for (const [k, xs] of [["not reached", c.unreached], ["Scope routes no link reaches (check them in the journey walk)", c.contractUnreached], ["found, not loaded", c.notLoaded], ["not sampled for tap/loading", c.notSampled], ["forms not checked", c.formsUncovered]]) if (xs.length) L.push(`               · ${k}: ${xs.slice(0, 6).join(", ")}${xs.length > 6 ? ` … ${xs.length - 6} more` : ""}`);
   }
   L.push(`    ${j.segment} → ${j.pass ? "PASS" : `FAIL (${j.fails} missing)`}`);
   return L;

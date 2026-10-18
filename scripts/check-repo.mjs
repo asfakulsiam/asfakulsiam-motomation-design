@@ -403,12 +403,25 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   for (const f of readdirSync(join(SKILL, "categories")).filter((f) => f.endsWith(".md") && f !== "README.md")) {
     const t = readFileSync(join(SKILL, "categories", f), "utf8");
     if (!t.startsWith(RECIPE_HEAD) || t.split("This recipe is design guidance for the pages it names").length !== 2) fail(`categories/${f}: must open with the scope-precedence block, exactly once`);
+    // v3.0.0 recipe contract: every recipe says what it assumes, what it doesn't cover, and when to reject it
+    for (const k of ["## Recipe contract", "**Intended context**", "**Assumes**", "**Does not cover**", "**Usually required capabilities**", "**Optional treatments**", "**Reject or adapt when**"]) if (!t.includes(k)) fail(`categories/${f}: recipe contract lacks ${k}`);
   }
   const src = (p) => readFileSync(join(SKILL, p), "utf8");
   if (!/Page count never decides/.test(src("SKILL.md")) || !/Page count never decides the route/.test(src("thinking/sequence.md"))) fail("SKILL.md and thinking/sequence.md must say that page count never decides the route");
   for (const p of ["SKILL.md", "thinking/sequence.md", "commands/overview.md"]) if (/one page or a small fix/i.test(src(p))) fail(`${p}: "one page or a small fix" lets new design work skip research; the light route is narrow maintenance only`);
-  if (!/3–5 real websites/.test(src("thinking/sequence.md")) || !/3–5 real websites/.test(src("craft/research.md"))) fail("Step 0.5 and craft/research.md must require 3–5 real websites of the exact type");
-  const POLICY = [/Page count never decides/, /exact type/, /observed, inferred or unverified/, /derived scope wins/, /MEDIA\.md/, /a URL is not a licence/, /Design exploration/, /Functional frontend/, /Production template/, /not production-ready/];
+  // v3.0.0 research-first architecture: product contract before concept, research by source purpose, opinions advisory
+  for (const f of ["principles/authority.md", "principles/heuristics.md", "thinking/product-contract.md", "craft/components.md", "motion/selection.md"]) if (!existsSync(join(SKILL, f))) fail(`${f} is missing (v3 architecture)`);
+  const seq = src("thinking/sequence.md");
+  const at = (re) => { const m = seq.search(re); return m < 0 ? Infinity : m; };
+  if (!(at(/\*\*Checkpoint 2: Product contract\.\*\*/) < at(/^## 2\. Design research/m) && at(/^## 2\. Design research/m) < at(/^## 3\. Directions and synthesis/m))) fail("thinking/sequence.md: the product contract (Checkpoint 2) must be approved before design research and directions");
+  if (!/real (?:sites|websites) of (?:the|this|that) exact type/.test(seq) || !/exact type/.test(src("craft/research.md"))) fail("Step 1 and craft/research.md must research real websites of the exact type");
+  if (!/## What each source proves/.test(src("craft/research.md")) || !/## Extracting evidence/.test(src("craft/research.md"))) fail("craft/research.md must say what each source proves and how evidence is extracted");
+  if (!/principles\/authority\.md/.test(src("SKILL.md")) || !/principles\/heuristics\.md/.test(src("SKILL.md"))) fail("SKILL.md must route to principles/authority.md and principles/heuristics.md");
+  // opinions that used to act as mandatory rules must not come back as absolutes
+  const ABSOLUTES = [[/you have to start from it/i, "a collision draw is optional"], [/but start from them/i, "collide.mjs draws are optional"], [/take the seeded fallback/i, "the fallback archetype is advisory"], [/Never pick the stack you used last/i, "the stack is chosen for fit (H-stack-rotate)"], [/Tier 5 for at least one chapter/i, "Tier 5 is never a quota (H-tier5-chapter)"], [/One focal point per screen\*\*, always/i, "H-focal is a heuristic"], [/Any score below 4 → revise/i, "critique axes are advisory diagnostics"], [/Choose a structure \*\*first\*\*/i, "the contract comes before any archetype"]];
+  for (const f of [...mdFiles, ...["README.md", "AGENTS.md", "rules/motomation.md", "rules/motomation.mdc", "docs/CHEATSHEET.md", "commands/motomation.md"].map((x) => join(ROOT, x))].filter((f) => existsSync(f) && !/principles\/heuristics\.md/.test(f))) { const t = readFileSync(f, "utf8"); for (const [re, why] of ABSOLUTES) if (re.test(t)) fail(`${f}: "${re.source}" is back as an absolute rule; ${why}`); }
+  for (const [i, l] of src("principles/heuristics.md").split("\n").entries()) if (/^\| H-/.test(l) && l.split("|").slice(1, -1).some((c) => !c.trim())) fail(`principles/heuristics.md:${i + 1}: a heuristic needs all six columns (problem, applies, trade-off, ignore-when)`);
+  const POLICY = [/Preserve the ideal product/, /Deferring a backend never removes/, /authority/i, /Product contract/, /Page count never decides/, /exact type/, /observed, inferred or unverified/, /derived scope wins/, /MEDIA\.md/, /a URL is not a licence/, /Design exploration/, /Functional frontend/, /Production template/, /not production-ready/];
   for (const d of ["dist/motomation-design.md", "dist/motomation-lite.md"]) { const t = readFileSync(join(ROOT, d), "utf8"); for (const re of POLICY) if (!re.test(t)) fail(`${d} lost a policy rule (${re.source}); fix the source or the build script, then regenerate`); }
   const { TEMPLATE_FILES, MODE_FILES } = await import("../skills/asfakulsiam-motomation-design/scripts/completeness.mjs");
   if (!TEMPLATE_FILES.some((a) => a[0] === "MEDIA.md") || !Object.values(MODE_FILES).every((l) => l.includes("MEDIA.md"))) fail("scripts/completeness.mjs must require MEDIA.md in every delivery mode");

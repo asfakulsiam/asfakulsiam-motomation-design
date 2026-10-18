@@ -53,30 +53,33 @@ const parts = [
   "",
   "## Without a shell",
   "",
-  "You can't run the collision engine, memory or gate here. So derive the structure, the mutation and the signature from the brief, with the lists below as reference and constraint, state why, and never reuse the previous project's picks. Do the Delivery Gate by reading your own code: contrast per surface, overflow at 375px, long words at 375px, and text visible under reduced motion. Write the stamp's gate fields as `not measured`, never as numbers you didn't measure.",
+  "You can't run the collision engine, memory or gate here. So write the product contract first, take the structure from it and from research, use the lists below only as optional prompts (check each archetype's \"fails when\"), state why, and don't repeat the previous project's picks without a reason. Do the Delivery Gate by reading your own code: contrast per surface, overflow at 375px, long words at 375px, and text visible under reduced motion. Write the stamp's gate fields as `not measured`, never as numbers you didn't measure.",
   "",
   "## Thinking Sequence (steps)",
   "",
   demote(pickSections(unmark(read("thinking/sequence.md")).replace(/^\*\*When the draw doesn't fit\.\*\*[^\n]*\n\n/m, "") // collide.mjs draws need a shell
      .replace(/^\*\*Reuse across projects\.\*\*[^\n]*\n\n/m, "") // the cross-project memory log needs a shell too
-     .replace(/^\*\*WRONG \/ RIGHT\*\*[^\n]*\n\n(?:- [^\n]*\n)+\n/m, ""), // a secondary worked example; the rule above it and its test stay
+     .replace(/^\*\*WRONG \/ RIGHT\*\*[^\n]*\n\n(?:- [^\n]*\n)+\n/m, "") // a secondary worked example; the rule above it and its test stay
+     .replace(/^A \*\*production template\*\* build that has a server also requires[^\n]*\n\n(?:- [^\n]*\n)+\n/m, "") // the server-template file list; templates/TEMPLATE.md has it
+     .replace(/^\*\*Checkpoint [4-6]: [^\n]*\n\n?/gm, "") // checkpoints 4–6 are summarised in SKILL.md's checkpoint block above
+     .replace(/^[13]\. \*\*(?:Memory|Earlier builds, measured)[^\n]*\n/gm, ""), // memory.mjs and originality.mjs need a shell
      (h) => /^[1-7]\. /.test(h))), // Step 0 (Stack) rides in the SKILL.md summary above
   "",
   demote(pickSections(unmark(read("gates/delivery-gate.md")), (h) => /^Part [23]/.test(h))),
   "",
   "## Short lists",
   "",
-  "Archetypes: " + csv("archetypes").map((r) => `${r.name} (${r.shape})`).join("; ") + ".",
+  "Archetypes (optional; skip when the contract sets the structure): " + csv("archetypes").map((r) => `${r.name} (${r.shape}; fails when ${r.fails_when})`).join("; ") + ".",
   "",
-  "Mutations: " + csv("mutations").map((r) => `${r.name}: ${r.operator}`).join("; ") + ".",
+  "Mutations (optional, never on a rule that protects a journey): " + csv("mutations").map((r) => `${r.name}: ${r.operator}`).join("; ") + ".",
   "",
-  "Signatures: " + csv("signatures").map((r) => `${r.name} [T${r.tier}]: ${r.one_line}`).join("; ") + ".",
+  "Signatures (optional, at most one; none is valid): " + csv("signatures").map((r) => `${r.name} [T${r.tier}]`).join("; ") + ".",
   "",
 ];
 const full = parts.join("\n").replace(/\n{3,}/g, "\n\n").trim() + "\n";
 // Over the target, drop whole ### sections in this order (the ones a chat tool needs least first) until it fits, and
 // say so at the top. Nothing in the full skill is shortened to fit.
-const DROP_ORDER = [/^Standards vs house style/, /^Routes: full and light/, /^When to use the short route/, /^Motion tiers/, /^House style defaults/, /^Part 3: Craft checklist/];
+const DROP_ORDER = [/^Standards, heuristics and house style/, /^Routes: full and light/, /^When to use the short route/, /^Motion tiers/, /^House style defaults/, /^Part 3: Craft checklist/];
 const dropSection = (t, re) => { let name = null; const u = t.replace(/^### ([^\n]*)\n[\s\S]*?(?=^#{2,3} |(?![\s\S]))/gm, (m, h) => (name === null && re.test(h) ? ((name = h.replace(/\s*\(.*\)$/, "")), "") : m)); return { text: u, name }; };
 const withNote = (t, dropped) => dropped.length ? t.replace(/^(# [^\n]*\n)/, `$1\nLite edition. Full version at the repo. Dropped: ${dropped.join(", ")}.\n`) : t;
 let body = full; const dropped = [];

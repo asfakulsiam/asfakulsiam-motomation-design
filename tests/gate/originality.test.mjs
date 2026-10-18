@@ -1,6 +1,6 @@
 // Originality math, without a browser: the similarity helpers and the six-axis comparison behave at the edges.
 //   node tests/gate/originality.test.mjs
-import { wjaccard, seqSim, gridSim, compare, signatureOf, AXES, mergeReports, parseViewports, VIEWPORTS } from "../../skills/asfakulsiam-motomation-design/scripts/originality.mjs";
+import { wjaccard, seqSim, gridSim, compare, signatureOf, AXES, mergeReports, parseViewports, VIEWPORTS, SAME_PRODUCT } from "../../skills/asfakulsiam-motomation-design/scripts/originality.mjs";
 let bad = 0; const say = (ok, m) => { console.log(`${ok ? "ok  " : "FAIL"} ${m}`); if (!ok) bad++; };
 
 say(wjaccard({ a: 2, b: 1 }, { a: 2, b: 1 }) === 1, "wjaccard: identical bags → 1");
@@ -53,5 +53,12 @@ const mk = (v) => ({ threshold: 0.4, labels: ["a", "b"], pairs: [{ a: "a", b: "b
 const m = mergeReports([mk(0.2), mk(0.45)], ["1440x900", "375x812"]);
 say(m.pairs[0].score.composition === 0.45 && m.pairs[0].at.composition === "375x812" && m.pairs[0].over.join() === "composition" && !m.pass, "viewports: a repeat at 375 alone fails the pair, and names the viewport");
 say(mergeReports([mk(0.2), mk(0.3)], ["1440x900", "375x812"]).pass, "viewports: below threshold at both sizes passes");
+
+// --same-product (paired brief): forms and navigation are fixed by the shared contract, so only feedback counts in interaction
+const nav = { navigation: { "nav:1": 1, "nav-in-page:some": 1, "skip-link": 1 }, forms: { "email:required": 1, "live-region": 1 } };
+const pa = feat({ interaction: { feedback: { "hover:colour": 2, "focus:outline": 1 }, ...nav } }), pb = feat({ interaction: { feedback: { "hover:transform+shadow": 2, "focus:shadow": 1 }, ...nav } });
+const full = compare(pa, pb); SAME_PRODUCT.on = true; const paired = compare(pa, pb); SAME_PRODUCT.on = false;
+say(full.score.interaction > 0.4 && paired.score.interaction === 0 && !("navigation" in paired.parts.interaction) && !("forms" in paired.parts.interaction), "same-product: shared forms and navigation do not count, different feedback does");
+say(compare(pa, pb).score.interaction === full.score.interaction, "same-product: off again by default");
 
 console.log(bad ? `\n${bad} failing` : "\nall originality checks pass"); process.exit(bad ? 1 : 0);

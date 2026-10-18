@@ -1,0 +1,54 @@
+// End-to-end commerce journeys for the paired build (own test, not part of the skill).
+import { chromium } from "playwright";
+const results = []; const ok = (c, m) => { results.push([c, m]); console.log((c ? "ok   " : "FAIL ") + m); };
+const b = await chromium.launch();
+for (const [id, port] of [["a", 4173], ["b", 4174]]) for (const w of [375, 1440]) {
+  const ctx = await b.newContext({ viewport: { width: w, height: 900 }, hasTouch: w < 800 });
+  const p = await ctx.newPage(); const errs = []; p.on("pageerror", (e) => errs.push(e.message)); p.on("console", (m) => m.type() === "error" && !/404|501|500 \(Internal/.test(m.text()) && errs.push(m.text()));
+  const U = (x) => `http://localhost:${port}${x}`, T = `${id}@${w}`;
+  const tap = (sel) => w < 800 ? p.tap(sel) : p.click(sel);
+  // Buy
+  await p.goto(U("/shop/")); await tap("a[href='/tea/shonali-first-flush/']"); await p.waitForURL(/shonali-first-flush/);
+  await tap("[data-add]"); await p.waitForTimeout(150);
+  ok(/1/.test(await p.textContent(".count, [data-cart-count]")), `${T} add to cart updates the cart count`);
+  await p.goto(U("/cart/")); ok(/Shonali First Flush/.test(await p.textContent("main")), `${T} cart lists the tea`);
+  await tap("[data-checkout]"); await p.waitForURL(/checkout/);
+  await tap("form button[type=submit]"); ok(await p.locator("[data-error]:not(:empty)").count() >= 4, `${T} empty checkout shows field errors`);
+  await p.fill("#f-name", "Rahim Uddin"); await p.fill("#f-email", "rahim@example.com"); await p.fill("#f-phone", "12345"); await p.fill("#f-address", "House 4, Road 2, Dhanmondi"); await p.fill("#f-city", "Dhaka");
+  await tap("form button[type=submit]"); ok(/11-digit/.test(await p.textContent("#f-phone-err")), `${T} bad phone number explained`);
+  await p.fill("#f-phone", "01712345678");
+  await p.route("**/api/orders", (r) => r.fulfill({ status: 500, body: "" }), { times: 1 });
+  await tap("form button[type=submit]"); await p.waitForTimeout(300);
+  ok(/nothing was charged/.test(await p.textContent("[data-form-status]")) && /checkout/.test(p.url()), `${T} server error keeps the form and says nothing was charged`);
+  await tap("form button[type=submit]"); await p.waitForURL(/confirmation/, { timeout: 5000 }).catch(() => {});
+  const conf = await p.textContent("main"); ok(/LL-\d{6}/.test(conf) && /Shonali First Flush/.test(conf), `${T} order placed (501 → demo save) and confirmation shows the order`);
+  ok(/0/.test(await p.textContent(".count, [data-cart-count]")), `${T} cart empties after the order`);
+  // Subscribe
+  await p.goto(U("/subscriptions/"));
+  const add = p.locator("[data-add-plan]"); ok(await add.isDisabled(), `${T} plan cannot be added before teas are chosen`);
+  ok((await p.textContent("[data-summary], [data-status]")).length > 0, `${T} plan summary explains what is missing`);
+  const boxes = p.locator("input[name=tea]"); for (const i of [0, 3, 6]) await boxes.nth(i).check();
+  ok(!(await add.isDisabled()), `${T} plan enabled once 3 teas chosen`); await tap("[data-add-plan]"); await p.waitForTimeout(150);
+  await p.goto(U("/checkout/")); ok(/Subscription box of 3/.test(await p.textContent("main")), `${T} subscription reaches checkout`);
+  await p.fill("#f-name", "Rahim Uddin"); await p.fill("#f-email", "rahim@example.com"); await p.fill("#f-phone", "01712345678"); await p.fill("#f-address", "House 4"); await p.fill("#f-city", "Dhaka");
+  await tap("form button[type=submit]"); await p.waitForURL(/confirmation/, { timeout: 5000 }).catch(() => {});
+  // Account controls
+  await p.goto(U("/account/")); ok(await p.locator("[data-sub]").count() === 1, `${T} account shows the new subscription`);
+  const st = async () => { await p.waitForTimeout(150); return p.textContent("[data-account] > [data-status]"); };
+  await tap("[data-act=skip]"); ok(/Skipped/.test(await st()), `${T} skip next delivery`);
+  await p.selectOption("[data-swap='0']", "kanchan-silver-buds").catch(() => p.selectOption("[data-swap='0']", { index: 4 })); ok(/Saved/.test(await st()), `${T} swap a tea`);
+  await p.selectOption("[data-freq]", { index: 0 }); ok(/Deliveries now/.test(await st()), `${T} change frequency`);
+  await p.selectOption("[data-pause-len]", "60"); await tap("[data-act=pause]"); ok(/Paused until/.test(await st()), `${T} pause for 2 months`);
+  await tap("[data-act=resume]"); ok(/Resumed/.test(await st()), `${T} resume`);
+  await tap("[data-act=cancel]"); ok(await p.locator("dialog[open]").count() === 1, `${T} cancel opens a dialog`);
+  await p.keyboard.press("Escape"); ok(/Kept/.test(await st()), `${T} Escape keeps the subscription`);
+  await tap("[data-act=cancel]"); await tap("[data-close=pause]"); ok(/Paused for a month instead/.test(await st()), `${T} save offer: pause instead`);
+  await tap("[data-act=resume]"); await tap("[data-act=cancel]"); await tap("[data-close=cancel]"); ok(/cancelled/.test(await st()) && await p.locator("[data-sub]").count() === 0, `${T} cancel removes it`);
+  // Contact
+  await p.goto(U("/contact/")); await tap("form[data-contact] button[type=submit]"); ok(await p.locator("[data-error]:not(:empty)").count() >= 3, `${T} contact validation`);
+  await p.fill("#f-name", "Rahim"); await p.fill("#f-email", "rahim@example.com"); await p.selectOption("#f-topic", { index: 1 }); await p.fill("#f-message", "Is the silver buds pouch back in stock?");
+  await tap("form[data-contact] button[type=submit]"); await p.waitForTimeout(400); ok(/Message received/.test(await p.textContent("main")) && /Demo: sending is not connected/.test(await p.textContent("main")), `${T} contact sends, demo save is labelled`);
+  ok(errs.length === 0, `${T} no page errors${errs.length ? ": " + errs.slice(0, 2).join(" | ") : ""}`);
+  await ctx.close();
+}
+await b.close(); const f = results.filter((r) => !r[0]).length; console.log(`\n${results.length - f}/${results.length} passed`); process.exit(f ? 1 : 0);

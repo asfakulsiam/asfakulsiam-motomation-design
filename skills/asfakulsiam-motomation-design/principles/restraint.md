@@ -9,7 +9,7 @@ Restraint is what makes a minimal site feel expensive instead of empty. It is al
 | Standard | The rule | Where it's defined |
 |---|---|---|
 | Accessibility | WCAG 2.2 AA contrast (4.5:1 text, 3:1 large text and UI), keyboard reaches everything with a visible focus, nothing hidden from assistive tech | `craft/accessibility.md` |
-| Restraint | the four cuts and the universal budgets below; one signature move | this file, Restraint Gate in `thinking/sequence.md` |
+| Restraint | the two-question gate: cut what serves neither hierarchy, feedback or storytelling nor the product's identity; never cut a contract item | this file, Restraint Gate in `thinking/sequence.md` |
 | Motion discipline | every animation passes the four questions; UI feedback ≤ <!--rule:ui_feedback_max_ms-->250ms<!--/rule-->; prefer transform/opacity, clip-path when it serves the concept, paint-heavy effects only with a perf check and a static fallback, layout properties never | `motion/tokens.md` ("What to animate") |
 | Real content | no lorem ipsum, invented numbers, fake logos or testimonials | `gates/delivery-gate.md` |
 | Reduced-motion fallback | a designed still that reads as its own composition, not "animations off" and not one frame of the animation (see "Designed stills" below) | `craft/accessibility.md`, each tier file, "Designed stills" below |
@@ -27,9 +27,11 @@ Restraint is what makes a minimal site feel expensive instead of empty. It is al
 
 Test: if obeying a rule would make the brief worse at its real job, and the rule is in the second table, override it and say so in one line of the plan. If it's in the first table, the brief is wrong, not the rule.
 
+**Budgets are heuristics, not standards.** One signature move at most, one display face, a disciplined accent and the motion budget are advisory (authority level 6, `principles/heuristics.md`): they stop noise, and they are ceilings, not quotas. A product with no signature move is not under-designed if its identity comes from its system.
+
 ## The Restraint Gate (two questions)
 
-Step 7 of `thinking/sequence.md` asks two questions of every element:
+Step 5 of `thinking/sequence.md` asks two questions of every element:
 
 1. **Does this serve hierarchy, feedback, or storytelling?**
 2. **Does the brief need this to feel like itself?**
@@ -71,12 +73,12 @@ Before delivery, make four passes through the Restraint Gate and remove what fai
 
 | Item | Budget per page | Kind |
 |---|---|---|
-| Signature moves | 1, echoed at most twice | standard |
-| Simultaneous animations on screen | ≤ 3 groups | standard |
-| WebGL canvases | 1 | standard |
+| Signature moves | at most 1, echoed at most twice; 0 is valid | heuristic (H-signature) |
+| Simultaneous animations on screen | ≤ 3 groups | standard (attention and vestibular safety) |
+| WebGL canvases | 1 | standard (performance) |
 | Pinned sections | ≤ 2 on Tier 2–3; Motomation chapters ≤ 2 | standard |
-| Display typefaces | 1 (2 only if the concept is about contrast); a dashboard may have none | standard |
-| Accent colours | 1 brand accent (data and status colours encode information and don't count) | standard |
+| Display typefaces | 1 (2 only if the concept is about contrast); a dashboard may have none | heuristic (H-one-display) |
+| Accent colours | 1 brand accent (data, status and brand-system colours encode information and don't count) | heuristic (H-one-accent) |
 
 ## Designed stills (reduced motion at Tier 3–5)
 

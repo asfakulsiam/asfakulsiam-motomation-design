@@ -1,26 +1,28 @@
 # The Thinking Sequence
 
-This is the missing key: it makes an agent think like a designer instead of a template engine. Run Step 0 and all seven design steps for every page.
+This is how Motomation thinks like a designer instead of a template engine: **understand the product, research the landscape, synthesise a direction, then build and validate it.** Product first, art direction second, and neither may compensate for failure in the other. A beautiful site missing its journeys fails; a complete site that looks generic fails too.
 
-**Data is fuel, not a menu.** The files in `data/` (archetypes, palettes, fonts, mutations, collisions, motion, signatures, styles) inform the brief. Do not pick from a list; derive from the brief, using the list as reference and constraint. A draw from `scripts/collide.mjs` is a constraint to design inside, not a finished answer. Write the results into the preview block. Each step has a test. If the test fails, redo the step.
+**Authority.** When instructions disagree, `principles/authority.md` decides: user requirements, then safety and accessibility, then project constraints, then the product contract, then research evidence, then heuristics, then recipes and examples. Recipes, archetypes, components and draws are starting material at the bottom of that list. The agent is expected to look beyond them and may find something better than anything in the library.
 
-**Six checkpoints.** The user decides at every meaningful step. The skill drafts, shows its reasoning, and waits. After each checkpoint the skill **stops** and waits for the user's answer: approve, redirect, or ask for more information.
+**Data is fuel, not a menu.** The files in `data/` (archetypes, palettes, fonts, mutations, collisions, motion, signatures, styles) are reference and constraint. A draw from `scripts/collide.mjs` is an optional prompt, never an answer. Each step has a test; if the test fails, redo the step.
+
+**Six checkpoints.** The user decides at every meaningful step. The skill drafts, shows its reasoning, and waits.
 
 | Checkpoint | Comes after | The skill shows | The user |
 |---|---|---|---|
 | **1 Stack** | Step 0 | the proposed stack, why, and the alternatives | approves or overrides |
-| **2 Research and concept** | Step 0.5, Steps 1–7, dials, type and colour | the 3 references looked at and what it took from each; the pattern it is avoiding; the tension, concept, archetype and mutation; the collision draw output (`scripts/collide.mjs`, pasted); the palette, typography, motion tier and signature move; its reasoning for each | approves or redirects |
-| **3 Scope** | Step 0.7 | the derived route list, states, legal pages, admin surface and edge cases, each marked requested / required / optional; what it is deferring and why | approves, cuts or adds |
-| **4 Build plan** | the motion plan (`MOTION.md`) | the section order, the components it will create (compose, extend or invent), the animation language per section, the page-to-page transitions | approves or redirects |
-| **5 Design review** | the build and its preview (Path A or B, below) | the preview (a live URL, or a build zip / temporary preview location), screenshots at 375, 768 and 1440, `DESIGN.md`, `MOTION.md`, `MEDIA.md`, `SCHEMA.md` and `DATA.md` (when the delivery mode has them) and a one-line summary | approves, or requests changes (a new preview, then Checkpoint 5 again) |
+| **2 Product contract** | Step 1 | the product contract (jobs, journeys, IA, density, responsive expectations, exclusions) and the Scope table derived from it: routes, states, legal pages, admin surface, edge cases, each marked requested / required / optional, each deferral with its reason and the interface that still ships | approves, cuts or adds |
+| **3 Research and direction** | Steps 2–5, dials, type and colour | the research questions and record (sources, findings, applicability, limitations); the 2–3 directions compared against the contract; the chosen synthesis with tension, concept, structure, motion language, type, palette, signature (or "none: identity from <system>"); which recipes and components were used, adapted or rejected, and why | approves, redirects or picks another direction |
+| **4 Build plan** | the motion plan (`MOTION.md`) | route-by-route section order, the components it will reuse, adapt, adopt or build, the motion per section with its purpose, page transitions, and the mobile layout for each journey | approves or redirects |
+| **5 Design review** | the build and its preview (Path A or B, below) | the preview, screenshots at 375, 768 and 1440 **for every core journey**, not just the home page, `DESIGN.md`, `MOTION.md`, `MEDIA.md`, `SCHEMA.md` and `DATA.md` (when the delivery mode has them) and a one-line summary | approves, or requests changes (a new preview, then Checkpoint 5 again) |
 | **6 Gate and ship** | the gate and `/critique` on the **approved** design | the gate output (pasted), the critique (pasted), `GATE.md` and `CRITIQUE.md`, and where the handoff push went | accepts; a gate failure is fixed and the design re-presented first |
 
-**Order:** Step 0 → **Checkpoint 1** → Step 0.5, the memory check, Steps 1–7, the dials, type and colour → **Checkpoint 2** → Step 0.7 → **Checkpoint 3** → the motion plan and section order → **Checkpoint 4** → build → preview → **Checkpoint 5** (loops until approved) → gate and `/critique` on the approved design → handoff push → **Checkpoint 6**. (Step 0.7 is written below Step 0.5 because its research overlaps; it is shown at Checkpoint 3, after the concept is approved.)
+**Order:** Step 0 → **Checkpoint 1** → Step 1 (product contract and scope) → **Checkpoint 2** → Steps 2–5 (research, directions and synthesis, memory, restraint), the dials, type and colour → **Checkpoint 3** → the motion plan and build plan → **Checkpoint 4** → build → preview → **Checkpoint 5** (loops until approved) → gate and `/critique` on the approved design → handoff push → **Checkpoint 6**. The contract is approved before a concept exists, so a concept can never quietly shrink the product.
 
 Rules at every checkpoint:
 
 - **"Show me alternatives" is a valid answer.** The skill shows 2–3 options, each with its reasoning, and waits again.
-- **The user can override any decision** the skill made, at this checkpoint or an earlier one. An override replaces the decision; the skill redoes only what depends on it and shows the affected checkpoint again.
+- **The user can override any decision** the skill made, at this checkpoint or an earlier one. An override replaces the decision; the skill redoes only what depends on it and shows the affected checkpoint again. A concept that needs a contract change goes back to Checkpoint 2 with the change proposed, not applied.
 - **The skill never proceeds without an explicit answer.** Silence, "hmm" or a question is not approval; answer the question and wait.
 - **The skill never asks the same question twice.** An answered question stays answered (record it in `DESIGN.md` under `Decision trace`); a later checkpoint states it, it does not re-ask it.
 - **If the brief already answers a checkpoint** (e.g. "use Next.js"), the skill states the answer and skips the question, but the user can still override. A brief that answers every checkpoint in advance (for example a benchmark or CI brief that says "approve every checkpoint") counts as the brief answering; without that, a run with no one to answer stops at the checkpoint.
@@ -29,7 +31,7 @@ Each checkpoint message ends with what the skill is waiting for: `Checkpoint <n>
 
 **Rules come first, the gate comes last.** Before Step 0, read `gates/rules.md`: every limit the gate measures (contrast, overflow, reduced motion, accessibility, SEO, security, performance budgets). It is design input. Design inside it from the first step; `gates/delivery-gate.md` only verifies it at the end. A design that passes the gate by patching (an invented link, domain or page added to satisfy a check) was not designed within the rules.
 
-**No component limits.** The components in examples/components/ are references and starting points. They are not a menu. They are not a limit. If the brief needs something that does not exist in the library, build it. Write it as one file, with a header that records tier, use-when, avoid-when, reduced-motion, and touch behaviour, following the same pattern as the library. The skill grows when the agent builds something new. Every step below composes, extends, or invents; none of them chooses from the library.
+**Components are leverage, not a ceiling.** `examples/components/` is a toolkit. Reuse a component when it fits the concept, the contract and the stack; adapt it when it is close; adopt a well-maintained external one when it is better (`craft/components.md`); build a custom one when nothing fits. Never force a library component into a design because it exists, and never rebuild a solved accessible component for no reason.
 
 ---
 
@@ -37,91 +39,63 @@ Each checkpoint message ends with what the skill is waiting for: `Checkpoint <n>
 
 The sequence below is the **full route**. Say the route in your first line (`SKILL.md`, "Routes"); `/build --route=light|full` forces it.
 
-- **Full route** (all new design work, whatever its size: a new site even of one page, a new brand, art direction or product experience, a distinctive redesign, Tier 3+, forms, data): every step below, the collision engine in Step 4, the scope in Step 0.7, six checkpoints, the Delivery Gate with a stamp. Depth is proportional: a one-page site gets a shorter Step 0.5 and a smaller Scope table, never none.
-- **Light route** (narrow maintenance in an established design: a broken state, a spacing or responsive defect, contrast, a component adjusted inside its visual system, a page added to an existing system with no new direction): skip Steps 0.5 to 7. Keep only Step 0 (the project's stack) and read the existing design first; no collision draw, no scope derivation. Two checkpoints, Plan and Ship (a fix: Ship only). Change only what the cause needs, inside the existing design; media added, replaced or removed updates the project's `MEDIA.md` (`craft/media.md`). **The Delivery Gate still runs, every axis**, including J. Needs a new direction, structure, signature or concept: switch to full and say so.
+- **Full route** (all new design work, whatever its size: a new site even of one page, a new brand, art direction or product experience, a distinctive redesign, Tier 3+, forms, data): every step below, six checkpoints, the Delivery Gate with a stamp. Depth is proportional (`craft/research.md` → Depth): a one-page site gets a short contract, a short research pass and a small Scope table, never none.
+- **Light route** (narrow maintenance in an established design: a broken state, a spacing or responsive defect, contrast, a component adjusted inside its visual system, a page added to an existing system with no new direction): skip Steps 1 to 5. Keep only Step 0 (the project's stack) and read the existing design first; no direction work, no scope derivation. Two checkpoints, Plan and Ship (a fix: Ship only). Change only what the cause needs, inside the existing design; media added, replaced or removed updates the project's `MEDIA.md` (`craft/media.md`). **The Delivery Gate still runs, every axis**, including J. Needs a new direction, structure, signature or concept: switch to full and say so.
 - **Page count never decides the route.** If the work introduces a design direction or needs new product or site research, it is full.
 
 ## 0. Stack
 
 Before any design step, know what you are building in. The stack changes what the design can be (server rendering, a single file, a build step), so it is decided first and never guessed. Default and dependency rule: `craft/stack.md`.
 
-1. **The brief names a stack** ("Next.js", "Astro", "a single HTML file", `--stack=<x>`), or the project already has one (read `package.json` and the framework config, say what you found): use it.
+1. **The brief names a stack** ("Next.js", "Astro", "a single HTML file", `--stack=<x>`), or the project already has one (read `package.json` and the framework config, say what you found): use it. The existing project's architecture, component system and package policy are authority level 3; respect them.
 2. **The brief says "ask me":** propose at Checkpoint 1, with Next.js as the default and the alternatives.
-3. **The brief says "you choose", or names none:** choose **Next.js (App Router, TypeScript, Tailwind)** for anything with routes or data. A single static page may be plain HTML/CSS/JS. Never pick Astro or React + Vite for e-commerce unless the brief demands it. Never pick the stack you used last.
+3. **The brief says "you choose", or names none:** choose for the project. **Next.js (App Router, TypeScript, Tailwind)** is the default for anything with routes or data. A single static page may be plain HTML/CSS/JS. Astro suits content-heavy, mostly static sites; React + Vite suits a client-only embed or prototype. Say why the choice fits.
 
    | Stack | When | Adapter |
    |---|---|---|
-   | **Next.js (App Router, TS, Tailwind): the default** | anything with routes or data; every e-commerce | `adapters/next.md` |
+   | **Next.js (App Router, TS, Tailwind): the default** | anything with routes or data; commerce | `adapters/next.md` |
    | Plain HTML/CSS/JS | a single static page | `adapters/vanilla.md` |
-   | Astro | only when the brief asks for it | `adapters/astro.md` |
-   | React + Vite | only when the brief asks for a client-only embed or prototype | `adapters/react-vite.md` |
+   | Astro | content-heavy, mostly static sites, or when the brief asks | `adapters/astro.md` |
+   | React + Vite | a client-only embed or prototype | `adapters/react-vite.md` |
 
-4. **Every dependency passes the three checks** in `craft/stack.md` (active, not deprecated, licence free for commercial use) before it is added: npm and the repo for the deprecation notice, the last release date and the licence. A failure means an alternative or building it from scratch. Platform first; no heavy package for a small feature.
-5. **Record it** in `DESIGN.md` under `Stack` and `Dependencies` (from `templates/DESIGN.md`): the stack, who chose it (brief, project, or you, approved at Checkpoint 1), the reason, and each dependency's three checks.
+4. **Every dependency passes the three checks** in `craft/stack.md` (active, not deprecated, licence free for commercial use) before it is added, plus the fit checks in `craft/components.md` (compatibility, accessibility, bundle cost, security, whether the benefit justifies it). Platform first; no heavy package for a small feature; never a dependency added only to reproduce a reference.
+5. **Record it** in `DESIGN.md` under `Stack` and `Dependencies`: the stack, who chose it, the reason, and each dependency's checks.
 6. **Load the adapter** for that stack. The adapter is chosen here, not at build time, and it is never skipped.
 
-**Test:** can you point to where the stack came from (the brief, the project, or the default with its reason, shown in the plan), and does every dependency in `DESIGN.md` show three passed checks? If not, fix it before Step 0.5.
+**Test:** can you point to where the stack came from (the brief, the project, or the default with its reason), and does every dependency in `DESIGN.md` show its checks passed? If not, fix it before Step 1.
 
-**Checkpoint 1: Stack.** Show the proposed stack, why, and the alternatives (e.g. Next.js · plain HTML · Astro, each with its trade-off). If the brief or project named the stack, state it and skip the question; the user can still override. Stop and wait.
-
----
-
-## 0.5 Research (mandatory)
-
-Before designing anything, leave the skill. Its own components, data, archetypes and collision engine are one source; used alone, every build looks like the skill made it. This step is not optional. Protocol: `craft/research.md`.
-
-**First, the exact type.** Find 3–5 real websites that are exactly the type you are building. Not merely visually similar: a banking site for a banking brief, a model portfolio for a model brief, a B2B portal for a B2B brief, an e-commerce marketplace for a marketplace brief, and so on. If fewer than three credible ones exist, use the closest genuinely comparable products and state the limitation; never invent one. A striking site from another industry is design inspiration (below), not a type reference. For each, record in `DESIGN.md` under `Type research`, as far as it is publicly observable:
-
-- identity, purpose, audience and business model
-- the discoverable route or page inventory, including nested pages and important route variants
-- the functionality on each relevant route, and its flows: forms, search, filters, sorting, pagination; account, sign-in and onboarding; cart, checkout, payment and orders, or the type's equivalent
-- important states: empty, loading, error, success, disabled, validation, authentication and permission-dependent, where they apply
-- responsive behaviour and mobile navigation
-- visible admin or seller-facing surfaces, if public or documented
-- legal, privacy, policy and compliance pages
-- navigation, information architecture, content hierarchy and user journeys worth noting
-
-Mark each finding **observed**, **inferred**, or **unverified**. Never claim to have inspected hidden routes, private admin panels, authenticated flows or anything you could not reach; label it unverified and fall back on other evidence or a stated assumption. A hybrid brief (two business models or site types) researches each type separately. A type with no category file is researched as itself, never forced into an unrelated category. These findings feed Step 0.7: the scope is derived from the brief, this evidence, industry conventions, legal or regulatory requirements, the delivery mode and design judgment. Neither a competitor's feature nor a category recipe becomes a requirement automatically; a recipe, if one exists, is a starting point for design exploration. Proportion the depth to the build: the goal is a justified scope, not an audit of every competitor.
-
-**Then, design inspiration, separately:**
-
-- Search the live sources for the brief's category, last 6 months: Awwwards, FWA, CSSDA, Godly, Land-book, SiteInspire, Dribbble, Behance, Codrops, X and recent design publications (`references/sources/inspiration.md`).
-- Read wide in `references/sources/` (at least two of `skills.md`, `components.md`, `motion.md`, `3d.md`, `foundation.md`, `future.md`) for method and technique. Concepts only: copy no code from any repository.
-- Write in `DESIGN.md` under `References`: **References looked at** (three: name — what it is — what you took from it), **Techniques considered** (three, sources named), **Pattern being avoided** (the overused pattern in this category, and why).
-- Fill the **Decision trace** in `DESIGN.md` as you go: every design decision traces to the brief or a named reference. "The skill's defaults" alone is never a source.
-
-If you cannot access the web, say so explicitly, work from training data, and state the limitation in `DESIGN.md` (`Access: no web access: working from training data`).
-
-**Test:** 3–5 exact-type websites (or the closest, with the gap stated) with their findings marked observed / inferred / unverified, three references, three techniques with sources, the avoided pattern with why, the access line, and no decision traced only to the skill's defaults. If not, Step 1 doesn't start.
+**Checkpoint 1: Stack.** Show the proposed stack, why, and the alternatives, each with its trade-off. If the brief or project named the stack, state it and skip the question; the user can still override. Stop and wait.
 
 ---
 
-## 0.7 Derive the scope
+## 1. Product contract and scope
 
-The brief names a few pages; a complete site of its type needs more. "Build an e-commerce" means the whole e-commerce, not a homepage and some pages. Derive the scope yourself, from the brief and its explicit requirements, the Step 0.5 type research, the functionality and journeys the type needs, industry and legal expectations, technical constraints, the delivery mode, and reasoned judgment where evidence is missing (marked as such). **Do not pick from a hardcoded list**: there is none in this skill, and `scripts/completeness.mjs` only checks what you derive.
+Before any art direction, define the ideal product. Method: `thinking/product-contract.md`. This step is where "what are we building" is settled; nothing in Steps 2–5 may silently change it.
 
-A category recipe (`categories/<type>.md`) is design opinion, not scope. The scope is derived from research, not read from a file. This applies to every site type, not just the ones with a category file. If the requested type has no category file, the scope is derived entirely from research. If the recipe and the derived scope disagree, the derived scope wins.
+1. **Write the product contract** in `DESIGN.md` under `Product contract`: product and exact subtype, audience, jobs, business model, core journeys (each as a route sequence), information architecture, content and density, essential interactions and states, responsive expectations, constraints, explicit exclusions with reasons, success criteria.
+2. **Look at real sites of this exact type** (`craft/research.md` → Type research): a proportionate number of real sites of the same job, not the same look, for their routes, functions, states, flows, admin surfaces, legal pages, navigation and mobile behaviour. Mark each finding observed, inferred or unverified; never claim to have seen hidden or authenticated routes. A competitor's feature is evidence, not a requirement. A hybrid brief researches each type. A type with no category file is researched as itself.
+3. **Derive the scope** from the contract, the brief, the type research, industry and legal expectations, the delivery mode and judgment, never from a fixed list. A category file (`categories/<type>.md`) is a recipe at authority level 7: it can remind you of conventions; the derived scope wins.
 
-Answer, and write in `DESIGN.md` under `Scope` (from `templates/DESIGN.md`), with the **Delivery mode** line (Required output, below):
+Answer, and write in `DESIGN.md` under `Scope` with the **Delivery mode** line (Required output, below):
 
-- What routes does a complete <site type> serve, and which user journeys run through them?
-- What functionality exists on each page?
-- What states does each page need?
+- What routes does a complete product of this type serve, and which journeys run through them?
+- What functionality exists on each route, and at which capability level (`interface`, `interaction`, `persisted`, `backend`, `integration`)?
+- What states does each route need?
 - What legal, policy and support pages are required in this region?
 - What edge cases must be handled?
 - What admin surface does this type need?
-- What skeleton states exist (one for every async surface: lists, grids, search, detail pages, cart, checkout, account, admin, whatever this type has)?
+- What skeleton states exist (one for every async surface)?
 
-Write each as a row of the Scope table (`| Kind | Item | Mark | Evidence |`; kinds: route, function, state, legal, edge, admin, skeleton, template) and mark it:
+Write each as a row of the Scope table (`| Kind | Item | Mark | Evidence | Level |`; kinds: route, journey, function, state, legal, edge, admin, skeleton, template; `Level` is optional) and mark it:
 
 - **requested**: the brief asks for it
-- **required**: the site type needs it, though the brief didn't ask
+- **required**: the product type needs it, though the brief didn't ask
 - **optional**: nice to have; not checked
-- **not required for this brief, reason: <why>**: excused, with the reason
+- **not required for this brief, reason: <why>**: excused, with the reason. A deferred backend or integration also names the interface that still ships (`…; interface: /checkout`).
 
-Show the Scope table at **Checkpoint 3**, with the admin panel (included / not included) and what is deferred, each with its reason. The user approves, cuts or adds; then the scope is settled.
+A `journey` row's evidence is its route sequence (`/ → /shop → /product/[slug] → /cart → /checkout`); axis X checks that every route in it exists.
 
-A **production template** build that has a server also requires (each one excused in the table with a reason when it doesn't apply, e.g. a single static page; the other delivery modes need only what `templates/TEMPLATE.md` lists for them):
+A **production template** build that has a server also requires (each one excused with a reason when it doesn't apply):
 
 - `middleware.ts` with the auth gate, locale routing, redirects, rate limiting and security headers
 - a skeleton for every async surface
@@ -130,151 +104,100 @@ A **production template** build that has a server also requires (each one excuse
 - a sellable template: `README.md`, `DESIGN.md`, `MOTION.md`, `SCHEMA.md`, `CRITIQUE.md`, `GATE.md`, `LICENSE`, `CHANGELOG.md`, `.env.example`
 - component headers (tier, use-when, avoid-when, reduced-motion, touch)
 
-**Test:** is every route, state, legal page, edge case, admin surface and skeleton the site type needs in the Scope table, each marked, each excuse with a reason? `node scripts/completeness.mjs <project>` (gate axis X) will check them after the build; a missing item fails the gate.
+**Test:** does the contract name the jobs, the core journeys as route sequences, the IA, the density and the exclusions? Is every route, journey, state, legal page, edge case, admin surface and skeleton the type needs in the Scope table, each marked, each excuse with a reason, each deferred backend paired with its interface? `node scripts/completeness.mjs <project>` (gate axis X) checks them after the build; a missing item fails the gate.
 
-**Checkpoint 3: Scope** (after Checkpoint 2). Show the route list, states, legal pages, admin surface and edge cases, each marked requested / required / optional, and what is deferred and why. Stop and wait: the user approves, cuts or adds.
+**Checkpoint 2: Product contract.** Show the contract and the Scope table, with the admin panel (included / not included) and what is deferred and why. Raise consequential ambiguities here as questions. Stop and wait: the user approves, cuts or adds. After this, the contract is level 4 authority.
 
-## Memory check (mandatory, before Step 1)
+---
 
-Memory lives at the user level (`~/.motomation/log.json`, every project), not in the project. Before designing, check it for similar briefs:
+## 2. Design research
 
-`node scripts/memory.mjs similar --brief "<the brief, one line>" --category <category>`
+Leave the skill before designing. Its own recipes, components and draws are one source; used alone, every build looks like the skill made it. Method: `craft/research.md`.
 
-- **No log yet** (first build ever): no divergence required. Say so in `DESIGN.md` under `Divergence`.
-- **No similar brief:** say so, and continue.
-- **A similar prior build** (same category, or shared brief words): the new build must differ on **all five**: archetype, palette family, type pairing, motion language, signature move. Write in `DESIGN.md` under `Divergence` what you are diverging from (run, project, and the five values) and what you chose instead. Confirm with `node scripts/memory.mjs check --brief … --category … --archetype … --palette … --fonts … --motion … --signature …` (exit 2 = a repeat).
+1. **Write the research questions** this project needs answered (3–6, from the contract): "How do premium grocery apps keep a 2,000-item catalogue browsable on mobile?" "What makes procurement tables scannable without looking like a spreadsheet?" "How do award-level hospitality sites hand off from story to booking?" Questions, not sources, decide where you look.
+2. **Pick sources by what they can prove** (`craft/research.md` → What each source proves): award galleries for art direction and motion; case studies for whole systems; shot galleries for component treatments; **real production sites** for navigation, IA, journeys and responsive behaviour; UI and component libraries for accessible patterns; GitHub and official docs for implementation. A concept shot is not proof a pattern works in a product; a popular production site is not automatically a good visual reference.
+3. **Extract evidence, not screenshots.** For each important reference: the problem it solves, how its hierarchy and IA work, how it handles navigation, content, interaction and responsive layout, what makes the composition distinctive, what its motion communicates, what applies here, and what would fail here.
+4. **Record it** in `DESIGN.md` under `Research record`: source (name and URL), observation, intended use, limitation. Fill the `Decision trace` as you go: every consequential decision traces to the brief, the contract or a research finding; "the skill's defaults" alone is never a source.
 
-Without a shell, read `~/.motomation/log.json` by hand and compare the five values. **Test:** does `DESIGN.md` have a `Divergence` section that names the prior build (or says there is none)? If not, Step 1 doesn't start.
+Depth scales with the project (`craft/research.md` → Depth): a one-page site asks two or three questions and looks at a handful of references; a marketplace or an immersive launch looks harder. Research that doesn't change a decision is skipped, not padded. No web access: say so, set `Access: no web access`, work from what you know, mark every finding unverified and invent no URLs.
 
-## 1. Tension
+**Test:** are there research questions, a research record with sources, applicability and limitations, and at least one finding that changed a decision? If research changed nothing, either the questions were wrong or the record is decoration; fix one.
 
-**Required before this step:** `gates/rules.md` has been read. State it in one line before the step starts:
-`Rules : gates/rules.md read; designing within it.`
-If you haven't read it, stop and read it. No step of the sequence runs without that line.
+---
 
-Every good brief hides a conflict. Design lives in that conflict.
+## 3. Directions and synthesis
 
-Ask: **what two true things about this brief pull against each other?**
+Find the tension, then explore a small number of meaningfully different directions, then choose or synthesise the one that serves the contract best.
 
-| Brief | Tension |
+**Tension.** Every good brief hides a conflict, and design lives in it. Ask: what two true things about this product pull against each other? (Centuries-old lanes ↔ a hotel that wants to feel new; huge volumes of noise ↔ finding one line; a 2,000-SKU catalogue ↔ a premium feel.) **Test:** could this tension belong to a different brief? If yes, make it specific.
+
+**Directions.** Sketch 2–3 directions that differ in kind, not in colour: different structure, different type role, different motion language, different relationship between story and task. Each direction is a few lines: the concept sentence, the structural idea per route family, the type mode, the motion language, what it borrows from research, and how every core journey survives in it. One direction may be deliberately conventional-done-excellently; for many products that is the strongest answer.
+
+**Compare them against the contract**, not against each other's novelty:
+
+| Criterion | Question |
 |---|---|
-| Boutique hotel in old Dhaka | Centuries-old lanes ↔ a hotel that wants to feel new |
-| Developer tool for logs | Huge volumes of noise ↔ finding one line |
-| Ceramic studio shop | Slow handmade objects ↔ fast online buying |
-| Climate non-profit | Urgent emergency ↔ readers worn out by alarm |
-| Designer portfolio | "Look at my range" ↔ "remember one thing about me" |
+| Product suitability | Does every core journey stay discoverable and fast? Does the IA survive? |
+| Audience and brand fit | Would this audience trust it and find their way? |
+| Usability and accessibility | Keyboard, contrast, reading order, touch, reduced motion |
+| Visual distinction | Could it be mistaken for a template or for the last build? |
+| Motion and interaction potential | Does motion have something to communicate here? |
+| Responsive feasibility | Does it work at 375px as a designed layout, not a squeezed one? |
+| Technical feasibility | Within the stack, budget and performance limits? |
+| Originality beyond references | Is it a synthesis, or one reference with a new logo? |
 
-**Test:** could this tension belong to a different brief? If yes, it's too generic ("modern vs classic" fits everything). Make it specific.
+Choose the direction with the best balance, or merge the best parts of two. Write the comparison in `DESIGN.md` under `Directions`.
 
----
+**Concept.** Resolve the tension in one sentence a client would repeat: "A site that [does something unexpected] so that [the tension resolves]." It is an idea, not a layout or a colour, and it is expressed through the product's routes, not instead of them.
 
-## 2. Concept
+**Exploration tools (optional, authority level 7).** Use them when they help; skip them when the contract and research already point somewhere better. Say in the plan which you used, adapted or rejected, and why.
 
-The concept resolves the tension in one sentence. It is an idea, not a layout or a colour.
+- **Structures** (`structures/archetypes.md`, `data/archetypes.csv`): page metaphors with what each demands and when it fails. An archetype may shape the whole site, one route family, one storytelling surface, or nothing. A product with conventional IA (marketplace, dashboard, B2B, publication) gets its structure from the contract; an archetype at most shapes a narrative surface.
+- **Mutation**: break one rule of the chosen structure, never a rule that protects a journey, the nav, a required state or accessibility (`principles/heuristics.md` → H-mutation).
+- **Collision** (`scripts/collide.mjs`, `data/collisions.csv`, `invention/mad-artist.md`): steal one property from an unrelated world when exploration stalls. A draw is a prompt; if it doesn't fit, discard it and say why. You may choose freely after discarding it.
+- **Signature move** (`signatures/`, `references/effects-vocabulary.md`): at most one interaction people remember, tied to the concept, used where the product has room for it. "No signature; identity from <the system>" is a valid answer for a product whose strength is calm, speed or density (`principles/heuristics.md` → H-signature).
+- **Category recipes and styles** (`categories/`, `styles/`): checklists of conventions and treatments for a type; each says when to reject or adapt it.
 
-Formula: **"A site that [does something unexpected] so that [the tension resolves]."**
+**WRONG / RIGHT** (brief: "a B2B fastener supplier: 12,000 SKUs, account pricing, reorders"):
 
-- Hotel: "The site is a slow walk down one lane, where each scroll step opens a door."
-- Log tool: "Everything is noise until you type, then the page goes quiet around your one line."
-- Ceramics: "Every product page is a kiln firing: it starts raw and finishes glazed as you scroll."
-- Non-profit: "Instead of alarms, the page counts what is still saveable, and it grows as you read."
-- Portfolio: "One name, set huge, that every project slides behind like a stage curtain."
+- **WRONG:** `Archetype: The Letter. Signature: letter-relay. Nav: wordmark plus three links.` A drawn metaphor overrode the product: no search, no catalogue IA, no reorder path.
+- **RIGHT:** `Structure: from the contract (search-first header, category rail, spec tables, quick-reorder). Concept: "the catalogue reads like an engineer's datasheet: exact, dense, calm". Archetype: none site-wide; Spec Sheet (adapted) for product detail. Signature: none; identity from the datasheet type system and the tolerance-ruler spacing scale.`
 
-**Test:** would a client repeat the sentence to a friend? Can you draw it in three frames? If not, sharpen it.
-
----
-
-## 3. Archetype + Mutation
-
-Derive the page's structure from the concept. `structures/archetypes.md` and `data/archetypes.csv` are reference and constraint: they tell you what structures exist and what each one demands, not which one to take. Then **mutate** it: break one rule of that structure on purpose.
-
-Mutation operators (or draw one with `node scripts/collide.mjs`):
-- **Invert the axis.** Vertical becomes horizontal, or time runs backwards.
-- **Change the scale.** One element becomes 10× bigger or smaller than expected.
-- **Swap the material.** Paper becomes glass, a list becomes a map.
-- **Remove the expected.** No nav, no hero image, no grid.
-- **Make the UI the content.** The scrollbar is the timeline, the cursor is the product.
-- **Slow it down / speed it up.** One section moves at film speed while the rest stay still.
-- **Borrow a rule from print.** Marginalia, footnotes, a folio, a masthead, a colophon.
-
-**WRONG / RIGHT** (brief: "a 1962 family bakery in Old Dhaka; it should feel like the shop"):
-
-- **WRONG:** `Archetype: The Ledger. Mutation: invert-axis.` Two rows copied from the CSVs; it would read the same for a law firm.
-- **RIGHT:** `Structure: the shop's order book (Ledger as reference: dated rows, running totals). Each section is a day's page, bakes as line items. Mutation (invert-axis as the constraint): the book reads back in time, today first, the 1962 opening entry last.` The rows set the constraints; the brief supplied every specific.
-
-**Test:** name the original structure, then name the rule you broke. If you can't name the broken rule, you haven't mutated it. If your plan line could be pasted onto a different brief unchanged, you copied a row instead of deriving.
-
-**When the draw doesn't fit.** If the drawn archetype can't serve the brief, take the draw's seeded fallback (`collide.mjs` prints "If it can't serve the brief, take: …"). Don't swap in the archetype you like best: hand-picked replacements converge. In the v2 benchmark, two SaaS runs drew different archetypes (Lookbook, Gallery Wall), both replaced them with Console, and the two pages came out as the same structure. If the fallback can't serve the brief either, write one line in the plan saying why both failed, then choose.
+**Test:** are 2–3 directions compared against the contract? Does the chosen one keep every core journey? Can you name what it took from research, and what it adds beyond any single reference? If a recipe or draw shaped it, is the fit argued?
 
 ---
 
-## 4. Forced Collision
+**Several directions, one contract** (paired brief, A/B): share data, logic, validation, accessibility primitives, routes and form fields; compose each direction's pages, markup, layout, type, colour, imagery and motion separately. A theme swap over one template set is a reskin. Check: `node scripts/pair.mjs <dirA> <dirB>`, output under `Directions`.
 
-Take something from a world unrelated to the brief and steal **one property** from it. This is where original patterns come from.
+## 4. Memory and sameness check
 
-Run `node scripts/collide.mjs --n 3`, or read `data/collisions.csv` as fuel: the worlds show the kind of distance that works; steal from a world the brief suggests, not the next row. Examples:
+Compare the chosen direction against what was built before, so similar briefs don't collapse into the same site.
 
-| Source | Property stolen | Becomes |
-|---|---|---|
-| Railway departure board | Flipping characters, rows as a schedule | A menu that flips into place |
-| Tailor's measuring tape | Numbered ruler, tension when pulled | A scroll progress bar that stretches |
-| Darkroom | Images appear slowly in red light | Photos develop from blank as they enter view |
-| Theatre curtain | Reveal by withdrawal | Sections open sideways, not upward |
-| Seismograph | One continuous line that reacts | A hairline across the page that tracks the cursor |
-| Library card catalogue | Index cards and tabs | Case studies as pull-out cards |
+1. **Memory** lives at the user level (`~/.motomation/log.json`). Run `node scripts/memory.mjs similar --brief "<one line>" --category <category>`. No log or no similar brief: say so under `Divergence`. A similar prior build: diverge on the dimensions the brief doesn't justify (structure, palette family, type pairing, motion language, signature), and name any similarity the brief does justify (`Same : SERVICE STYLE again; both are dense dashboards`). Never diverge into a worse fit. Confirm with `node scripts/memory.mjs check …` (exit 2 = an unjustified repeat to look at); `--justified fonts,motion` makes a justified repeat a warning. `none` is never a repeat.
+2. **The AI-default list** in `gates/delivery-gate.md`, Part 2: each "yes" needs a product or concept reason, or a change.
+3. **Earlier builds, measured (after the build):** `node scripts/originality.mjs <this build> <earlier builds for unrelated briefs>` (axis O). An axis at or above **0.4** against an unrelated brief means it came out in the same shape: change that axis or justify it.
+4. **The obvious version:** write what a template would do. Where you match it, it is because the product needs it, and you say so.
 
-**Test:** the collision must be visible in the final site but not literal. No clip-art trains: steal the behaviour, not the picture.
+**Test:** if a stranger saw this site next to the last one, would they think it was made on autopilot? If yes, the direction needs more work, not a palette swap.
 
 ---
 
-## 5. Signature Move
-
-Invent one interaction or motion that people will remember and describe. Use `signatures/` and `examples/components/` as references, then make it specific to this concept: compose, extend, or invent. If what the concept needs is not in the library, build it as a new file with the library's header.
-
-Good signature moves are:
-- **Tied to the concept.** For the hotel lane: doors that open on scroll. For the log tool: the page goes quiet as you type.
-- **Felt in the first 5 seconds.**
-- **Repeated with variation**, at least twice: introduced in the hero, echoed later.
-- **Describable in one line**: "the name breaks into letters and each one runs into the header".
-
-**Test:** if you removed it, would the site lose its identity? If not, it's decoration, not a signature.
-
----
-
-## 6. Anti-Sameness Check
-
-Compare your plan against four things:
-1. **The AI-default list** in `gates/delivery-gate.md`. Count the matches.
-2. **Memory (IDs and structure, every project):** run
-   `node scripts/memory.mjs check --archetype <x> --signature <y> --tier <n> --sections hero,work,contact --type-scale <ratio>`.
-   It checks the last 5 runs in the user-level log, from any project. First, exact IDs: an archetype or signature already used. A repeated motion tier is only a warning ("Tier 2 used in the last N builds. This is allowed if the brief requires it. State the reason in DESIGN.md."): the tier follows the brief, so it is never forced to change. A repeated palette family is also a warning, and so is a collision source drawn in the last 5 builds (`memory.mjs log --collision "<source>"`; `collide.mjs --exclude-recent` skips those sources). Second, a **structural fingerprint**: layout family, type-scale bucket, section order, motion tier and signature type, scored 0–100%. A different archetype with the same rows layout, the same section order and the same kind of signature is still a repeat. At **≥ 70%** the script names the run you're rebuilding and the dimensions that match, and offers a mutation aimed at the heaviest one. Apply it (or justify the overlap in one line) and check again. Exit code 2 means a clash. `/invent` prints each draw's partial fingerprint and flags draws that rebuild a recent page. After delivery, `memory.mjs log` with the same flags stores the fingerprint. Without a shell, compare the five dimensions by hand against `~/.motomation/log.json`.
-3. **Earlier builds, measured (after the build):** the plan is checked here; the result is checked by `node scripts/originality.mjs <this build> <earlier builds for unrelated briefs>`, axis O of `gates/delivery-gate.md`. It scores structure, composition, image treatment, typography, interaction and signature move from 0 to 1 against each earlier build. Any axis at or above **0.4** means this brief came out in the same shape as an unrelated one: change that axis and re-run. The memory check compares what you intended; this compares what the browser renders.
-4. **The obvious version:** write down what a template would do. Your plan must differ in at least **three** of: structure, type, colour, motion, signature, imagery.
-
-**Reuse across projects.** Memory now spans every project, so a repeat from another project is caught like one from this project. A deliberate reuse is allowed only for a dissimilar brief, as a documented mutation (a different mutation **and** a different structural fingerprint), stated in one line: `Reuse : Letter again (used in <project>), mutated by remove-expected; signature type micro, not type`. For a similar brief, the five-way divergence above always applies.
-
-**Test:** if a stranger saw your site next to the last one you made, would they think the same person made them on autopilot? If yes, mutate again.
-
----
-
-## 7. Restraint Gate
+## 5. Restraint gate
 
 Test every element (section, ornament, texture, colour moment, animation) with two questions:
 
 1. **Does this serve hierarchy, feedback, or storytelling?**
-2. **Does the brief need this to feel like itself?** (the café's hand-drawn map, the darkroom's grain)
+2. **Does the product or brand need this to feel like itself?**
 
-**Cut only what fails both.** Failing question 1 alone is no reason to cut: a brand's texture or ornament can do no informational work and still be the point. Passing question 2 needs a reason traceable to the brief, its audience or the concept sentence; "it looks nice" is not one.
-
-The budgets hold either way: one signature move, one accent moment per screen, one display face (two only for a contrast concept), every animation passes the four questions in `motion/tokens.md`. Question 2 keeps an element; it never buys a second signature or a contrast failure. Log `- Cut:` (failed both) and `- Kept:` (failed Q1, passed Q2, with the reason) in `DESIGN.md`. Example and counter-example: `principles/restraint.md`.
+**Cut only what fails both.** Passing question 2 needs a reason traceable to the brief, the audience or the concept. Restraint never cuts a required capability: a contract item is not an "element" here. Advisory budgets (one signature at most, one display face, a disciplined accent) are in `principles/heuristics.md`; every animation passes the four questions in `motion/tokens.md`. Log `- Cut:` and `- Kept:` in `DESIGN.md`. Example and counter-example: `principles/restraint.md`.
 
 **Test:** for every element, can you name the question it passes? If neither, cut it.
 
-**Checkpoint 2: Research and concept** (after the dials, type and colour). Show the 3 references looked at and what was taken from each, the pattern being avoided, the tension, concept, archetype and mutation, the collision draw output (pasted), the palette, typography, motion tier and signature move, with the reasoning for each. Stop and wait: the user approves or redirects.
+**Checkpoint 3: Research and direction** (after the dials, type and colour). Show the research questions and record, the directions compared, the chosen synthesis (tension, concept, structure per route family, motion language, type mode, type, palette, signature or none), what recipes and components it uses, adapts or rejects, and how each core journey survives. Stop and wait.
 
-**Checkpoint 4: Build plan** (after `MOTION.md`). Show the section order, the components to create (compose, extend or invent, each named), the animation language per section, and the page-to-page transitions. Stop and wait.
+**Checkpoint 4: Build plan** (after `MOTION.md`). Show, per route family: the section order, the components to reuse, adapt, adopt or build (`craft/components.md`), the motion per section with its purpose (`motion/selection.md`), page transitions, and the mobile layout of each core journey. Stop and wait.
 
-**Checkpoint 5: Design review**: the preview and review pack; approve, or changes and a new preview.
+**Checkpoint 5: Design review**: the preview and review pack, with 375 / 768 / 1440 screenshots of each core journey; approve, or changes and a new preview.
 
 **Checkpoint 6: Gate and ship**: the gate and `/critique` on the approved design, pasted, and the handoff. Nothing is pushed before the gate passes.
 
@@ -349,18 +272,25 @@ It runs with zero configuration after `npm install && npm run dev`: mock data co
 
 ---
 
+---
+
 ## Worked example: "Portfolio for a motion designer in Dhaka"
 
 ```
-Stack     : none named → Next.js (App Router, TS, Tailwind): the default for a site with routes (case studies) and data (the reel list); approved at Checkpoint 1
-Tension   : 10 years of varied work ↔ clients remember one thing
-Concept   : The site is a single film reel; each project is a frame you scrub through
-Archetype : Film Reel (Tier 5 scroll-film) mutated by "invert the axis": the reel runs horizontally while the page scrolls vertically
-Collision : 35mm contact sheet → frame numbers, sprocket holes as a progress rail, grease-pencil circles as hover marks
-Signature : Hovering a project draws a grease-pencil circle around it; scrolling past the reel's end rewinds it with a film-leader countdown
-Dials     : ENERGY 3 · RHYTHM 2 · MOTION 3 → Tier 5
-Type mode : HOUSE STYLE (a portfolio: the work and the name are the impression, nobody comes to compare rows)
-Type      : Big Shoulders Display (condensed, cinematic) / Switzer (neutral text)
-Palette   : Darkroom: #0E0D0B, #F2EEE6, accent safelight red #E0442B
-Not doing : Bento grid of thumbnails with a centred "Hi, I'm…" hero
+Stack      : none named → Next.js (App Router, TS, Tailwind): routes (case studies) and data (the reel list); approved at Checkpoint 1
+Contract   : jobs: clients judge range and craft in under a minute, then make contact · journeys: / → /work/[slug] → /contact; / → /about · IA: wordmark + Work, About, Contact · density: low · mobile: reel becomes a vertical list, contact one tap away
+Research   : Q1 how do award-level motion portfolios show range without a grid of thumbnails? Q2 how do they keep case studies fast on mobile? (record: 6 sources, 2 changed decisions)
+Directions : A film reel (scrubbed horizontally) · B index of credits (typographic, quiet) · C conventional grid done excellently → A chosen: best motion potential, journeys intact; B's credit list kept for /about
+Tension    : 10 years of varied work ↔ clients remember one thing
+Concept    : The site is a single film reel; each project is a frame you scrub through
+Structure  : Film Reel (archetype used, adapted) mutated by "invert the axis": the reel runs horizontally while the page scrolls vertically; case-study pages stay conventional long-reads
+Collision  : 35mm contact sheet → frame numbers, sprocket holes as a progress rail
+Signature  : Hovering a project draws a grease-pencil circle around it (desktop); on touch, the frame number lights instead
+Dials      : ENERGY 3 · RHYTHM 2 · MOTION 3 → Tier 5 on the home reel only; Tier 1–2 elsewhere
+Type mode  : HOUSE STYLE (a portfolio: the work and the name are the impression)
+Type       : Big Shoulders Display (condensed, cinematic) / Switzer (neutral text)
+Palette    : Darkroom: #0E0D0B, #F2EEE6, accent safelight red #E0442B
+Not doing  : Bento grid of thumbnails with a centred "Hi, I'm…" hero
 ```
+
+Contrast it with a dense product: for "a B2B fastener supplier", the contract decides a search-first header, a category rail and spec tables; the directions explore how a datasheet type system and a calm tolerance-ruler grid can make that density feel premium; no archetype is used site-wide and there is no signature move. Both are full-route builds; they share a process, not a shape.

@@ -56,7 +56,7 @@ For every section on every page. The section id matches the `id` attribute in th
 | `#<id>` | <Entity.fields, filter, limit> | <what renders when there is no data, or "never empty: <why>"> | <skeleton / reserved space (no layout shift) / "static: n/a"> | <message + retry, or the fallback content> | <what renders, in one line> |
 
 ## States
-Every state of every route and async surface, in one index (the section contract has the detail). Derived from the Step 0.7 scope; nothing here is a fixed list.
+Every state of every route and async surface, in one index (the section contract has the detail). Derived from the Step 1 scope; nothing here is a fixed list.
 
 | Route or surface | States | Where defined |
 |---|---|---|

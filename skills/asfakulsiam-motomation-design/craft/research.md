@@ -1,25 +1,30 @@
-# Research protocol (Step 0.5, mandatory)
+# Research protocol (Steps 1 and 2)
 
-The skill's own components, data sets, archetypes and collision engine are one source. Used alone they make every build look like the skill made it. Step 0.5 sends the agent outside the skill before anything is designed. It is required for all new design work (a new site of any page count, a new brand or art direction, a new product experience, a distinctive redesign); only narrow maintenance inside an established design (the light route, `SKILL.md` "Routes") skips it, and nothing in Step 1 onward may come from "the skill's defaults" alone: **every design decision traces to the brief or to a named reference.**
+The skill's own recipes, components, data sets, archetypes and collision engine are one source. Used alone they make every build look like the skill made it, and they cannot cover the range of real products. Research sends the agent outside the skill twice: in Step 1 to learn what this exact type of product must do, and in Step 2 to discover how it could be designed. It is required for all new design work; its depth is proportional to the project.
 
 ## The order
 
-Two kinds of research, in this order. Step 0.5 in `thinking/sequence.md` states the requirement; this file is the method.
+1. **Read the brief and write the product contract** (`thinking/product-contract.md`). Name the exact type and subtype, or the combination (a marketplace with a subscription box is two).
+2. **Type research (Step 1):** look at real websites of that exact type, same job not same look; record routes, functions, states, flows, admin and legal surfaces, each finding observed, inferred or unverified. It informs the contract and the Scope table.
+3. **Write the design research questions (Step 2):** what this project needs to learn to design well.
+4. **Choose sources by what they can prove** (below), search, and **extract evidence**: what works, why, what applies, what would fail here.
+5. **Record it** with URLs and limitations.
+6. **Synthesise** directions in Step 3. Never a copy of one reference, never a forced variation of a built-in recipe.
 
-1. **Read the brief.** Name the exact website type, or the combination of types (a marketplace with a subscription box is two).
-2. **Find 3–5 real websites of that exact type**, with whatever research tools are available. Same job, not same look. Fewer than three credible ones: use the closest genuinely comparable products and say so. Never invent a reference.
-3. **Investigate them**: routes and page hierarchy, functionality, the states that matter, visible admin or seller surfaces, legal pages ("Type research", below).
-4. **Record what is useful**, each finding marked observed, inferred or unverified.
-5. **Derive the scope** in Step 0.7 from the brief, this evidence, industry knowledge and the constraints that apply (region, regulation, budget).
-6. **Research design inspiration separately**: award work, studios, galleries, interaction references and visual experiments ("The rule" onward).
-7. **Synthesize a distinct concept** for this project. Never a copy of a reference.
-8. **Carry it forward** into Step 0.7 (scope), the plan and the design steps.
+## Depth: proportional, not fixed
 
-Research serves the brief. It is not a box-checking exercise: a one-page build needs a short look, a marketplace needs a real one. Short is still not skipped: a one-page site for a new brand is new design work.
+| Project | Type research | Design research |
+|---|---|---|
+| One informational page for a new brand | 2–3 comparable sites, a quick look | 2–3 questions, a handful of references |
+| A multi-route brand or portfolio site | 3–5 sites | 3–5 questions, references across galleries and production sites |
+| Commerce, marketplace, booking, SaaS app, publication, institution | 3–5 sites per type, deeper on journeys and states | 4–6 questions, including production patterns, component libraries and implementation sources |
+| Immersive or award-ambition launch | as needed for the product | add motion and technique research: case studies, GitHub implementations, official docs |
 
-## Type research (exact type, for scope)
+Research that doesn't change a decision is stopped, not padded. Research that keeps finding the same answer has found it.
 
-For each of the 3–5 sites, as far as it is publicly observable:
+## Type research (exact type, for the product contract)
+
+For each exact-type site (usually 3–5; fewer when few exist, gap stated), as far as it is publicly observable:
 
 | Dimension | Record |
 |---|---|
@@ -44,16 +49,7 @@ Rules:
 - **No category file** for the type: research it as itself. Do not force it into the nearest category.
 - **When research falls short** (no web, blocked pages, too few public examples), say so, work from what you have, and mark the gaps unverified or as stated assumptions. Never fill a gap with an invented finding.
 
-## The rule
-
-The rest of this file is design-inspiration research (step 6 above).
-
-- Look **outside the skill** first: the live award sources, then the repositories in `references/sources/`. The skill's `examples/`, `data/` and `signatures/` come after, as one more reference.
-- Look **wide**: at least two of the six source files below, plus the live sources for the brief's category.
-- Take **principles, never code**. Nothing is copied from any repository: no components, shaders, markup, styles or assets. Concepts only. Nothing at all from CreativeAgencyStyle (reported as malware).
-- **Record it** in `DESIGN.md` before Step 1, in the format below.
-
-## Where to look
+## Where to look (source files)
 
 | File | Holds | Look here when |
 |---|---|---|
@@ -67,18 +63,49 @@ The rest of this file is design-inspiration research (step 6 above).
 
 Live search, last 6 months, by the brief's category (a bakery searches bakeries, food and hospitality; a SaaS brief searches the product's domain, not "SaaS landing page"). Older references only for heritage briefs, labelled as older. Search queries that work: `awwwards <category> site of the day <year>`, `<category> website <year> godly`, `codrops <technique>`.
 
-## What to look for
 
-For each reference, one transferable decision, not its look:
+## Design research questions
 
-- **Structure**: order of the page, where proof lands, what the scroll is for.
-- **Type**: the role type plays (image, navigation, data).
-- **Motion**: what moves, what triggers it, what it explains.
-- **Interaction**: the one thing a visitor would describe to someone else.
-- **States**: how it handles empty, loading, error and success.
-- **Restraint**: what it chose not to do.
+Questions decide where you look. Write 2–6, drawn from the contract and its tensions. Good questions name the product's real difficulty:
 
-Also note what repeats across the category. The pattern on five of the first ten results is the overused one.
+- "How do premium grocery apps keep a 2,000-item catalogue browsable on a phone?"
+- "How do award-level hotel sites hand off from story to booking without a jarring change of register?"
+- "What makes dense procurement tables scannable without looking like a spreadsheet?"
+- "What motion language do the best editorial publications use for article transitions, and what do they avoid?"
+
+A question like "what are good websites?" finds nothing useful.
+
+## What each source proves
+
+Sources serve different purposes. Choose by relevance and quality; you don't consult every platform for every project.
+
+| Source | Good evidence for | Weak evidence for |
+|---|---|---|
+| **Awwwards, FWA, CSSDA, Godly, SiteInspire** | art direction, composition, interaction ideas, motion language | whether a pattern works in a real product at scale; accessibility |
+| **Behance case studies** | complete brand and product systems, visual narratives, how an identity extends across touchpoints | live behaviour, responsive reality, implementation cost |
+| **Dribbble shots** | focused component and interface treatments, micro-interaction ideas | anything structural; many shots are never built |
+| **Real production websites** (category leaders, specialist players) | navigation, IA, journeys, content hierarchy, responsive behaviour, functional conventions users already know | visual originality; popularity is not quality |
+| **UI and component libraries** (shadcn/ui, Radix, React Aria, Headless UI, platform design systems) | accessible patterns, states, keyboard models, responsive components | identity; their defaults look like their defaults |
+| **GitHub repositories, Codrops, CodePen** | how an effect or interaction is actually implemented, its cost and its edge cases | product fit; demos skip states and accessibility |
+| **Official framework and library docs** | correct APIs, version compatibility, performance and accessibility guidance | design direction |
+| **Design publications, specialist studios, industry references** | context, rationale, trends with their reasons | details |
+
+A concept shot is not proof that a pattern works. A production site is not automatically a good visual reference. Pair them: the gallery shows what is possible, the production site shows what users need, the library or repository shows how to build it properly.
+
+## Extracting evidence
+
+For each important reference, record more than its look:
+
+- **Problem:** what problem does this design solve, for whom?
+- **Hierarchy and IA:** how is the content ordered, how is navigation organised, how deep does it go?
+- **Interaction and states:** how does it handle search, filtering, feedback, empty, loading, error?
+- **Responsive:** what actually happens at 375px?
+- **Composition:** what makes it distinctive (grid, scale, rhythm, image treatment, type role)?
+- **Motion:** what moves, what triggers it, what it communicates (hierarchy, continuity, feedback, narrative, mood)?
+- **Applies here:** which part transfers to this project, as a principle?
+- **Fails here:** which part would break this contract, audience, stack or budget?
+
+Only claim what you saw. A page you didn't load, a flow behind a login, an animation you only read about: mark it inferred or unverified.
 
 ## Reference into principle, not a copy
 
@@ -86,17 +113,23 @@ Also note what repeats across the category. The pattern on five of the first ten
 2. **Say why it works there.** What problem in that brief does it solve?
 3. **State it as a principle.** "Lead with the inventory, not the atmosphere." A principle has no colour, font, brand or code in it.
 4. **Test it against this brief.** Same problem here? If not, drop it.
-5. **Hand it to the sequence.** It feeds Step 1 (Tension), 2 (Concept), 4 (Collision) or 5 (Signature). Input, not the concept.
+5. **Hand it to the sequence.** It feeds Step 3: a direction, the tension, the concept, a structure or a signature. Input, not the concept.
 
 If the build would still be recognisable as the reference with the logo swapped, it is a copy. Go back to 3.
 
-## Techniques
+## Code, components and techniques from research
 
-Name three specific techniques considered for this brief, each with its source: a repository from `references/sources/`, a Codrops article, a showcase entry, or a live site. "Scroll-scrubbed text split by line (GSAP SplitText, `motion.md`)", not "nice animations". Say which one is used and why the others were not. A technique is a method; the code is written for this build.
+Concepts come from inspiration sources; **code** enters a build only in one of three ways:
+
+1. **A dependency** that passes the checks in `craft/stack.md` and `craft/components.md` (maintained, licence fits, accessible, compatible, worth its weight).
+2. **Code under a permissive licence** (MIT, Apache-2.0, BSD, ISC), adapted for this build, with attribution in a comment and in `README.md` when the licence requires it.
+3. **Code written for this build**, using a technique learned from a source.
+
+Never copy protected visual work (layouts, illustrations, brand assets, distinctive compositions) or code with no licence or an incompatible one. Nothing at all from CreativeAgencyStyle (reported as malware). Name the techniques considered and their sources, say which one is used and why; the count follows the project, not a quota.
 
 ## How to record it
 
-In `DESIGN.md` (from `templates/DESIGN.md`), before Step 1:
+In `DESIGN.md` (from `templates/DESIGN.md`):
 
 ```markdown
 ## Type research
@@ -106,33 +139,31 @@ In `DESIGN.md` (from `templates/DESIGN.md`), before Step 1:
 
 **Gaps:** <what could not be verified, and the assumption used instead>
 
-## References
-**Access:** web (searched YYYY-MM-DD) | no web access: working from training data (limitation: references may be out of date; nothing was checked live)
+## Research record
+**Access:** web (searched YYYY-MM-DD) | no web access: working from training data (limitation stated)
 
-**References looked at:**
-1. <name> — <what it is> — <what I took from it, as a principle>
-2. <name> — <what it is> — <what I took from it>
-3. <name> — <what it is> — <what I took from it>
+**Questions:**
+1. <question>
 
-**Techniques considered:**
-- <technique> (<source>): <used | not used, why>
-- <technique> (<source>): <used | not used, why>
-- <technique> (<source>): <used | not used, why>
+| Source (name, URL) | Kind | Observation | Intended use | Limitation |
+|---|---|---|---|---|
+| <name, URL> | gallery / case study / shot / production / library / repo / docs | <what it does and why it works> | <the principle taken, for which route or decision> | <what would fail here, what wasn't verified> |
 
-**Pattern being avoided:** <the overused pattern in this category> — <why it fails this brief>
+**Techniques considered:** <technique> (<source>): <used | not used, why>
+**Pattern being avoided:** <the overused pattern for this type> — <why it fails this product>
 
 ## Decision trace
 | Decision | Traces to |
 |---|---|
-| <archetype, palette, type, motion language, signature, layout> | <brief: "quote" | reference 1–3 | technique> |
+| <structure, IA, type, palette, motion language, signature, component choice> | <brief: "quote" | contract | research row n | heuristic H-… with reason> |
 ```
 
-At least three references, at least one from outside the brief's category, at least one from the live sources. Every row of the decision trace names the brief or a reference; "skill default" is not an allowed answer.
+At least one finding from outside the skill must change a decision. Every row of the decision trace names the brief, the contract or research; "skill default" is not an allowed answer, and a heuristic is cited with the reason it applies.
 
 ## No web access
 
-If the tool cannot reach the web, say so in one line before Step 1, set `Access: no web access: working from training data` and state the limitation. Still name 3–5 exact-type sites (every finding marked inferred or unverified, none observed), three references, three techniques and the pattern being avoided, from what you know, each with the year you last knew it. Don't present remembered sites as current, and don't invent URLs.
+Say so in one line before Step 2, set `Access: no web access: working from training data` and state the limitation. Still name exact-type sites and references from what you know, each finding marked inferred or unverified, each with the year you last knew it. Don't present remembered sites as current, and don't invent URLs. Never claim browsing you didn't do.
 
 ## Test
 
-Before Step 1: does `DESIGN.md` have `Type research` (3–5 exact-type sites, each finding marked observed / inferred / unverified, gaps stated), `References looked at` (3), `Techniques considered` (3, sources named), `Pattern being avoided` (with why), the access line, and a decision trace where nothing traces to "the skill's defaults"? If not, Step 1 doesn't start.
+Before Step 3: does `DESIGN.md` have `Type research` (findings marked, gaps stated), a `Research record` with questions, sources with URLs, intended use and limitations, the access line, and a decision trace where nothing traces to "the skill's defaults"? Did at least one finding change a decision? If not, Step 3 doesn't start.

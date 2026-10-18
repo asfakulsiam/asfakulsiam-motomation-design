@@ -1,0 +1,12 @@
+ok   fresh browser: /checkout hides the form and shows the designed empty state "Your cart is waiting for a leaf. Choose a tea ↗"
+ok   add to cart on /tea/sylhet-black: cart count reads "1"
+ok   with a tea in the cart: checkout form visible
+ok   empty submit: designed error "Please check the highlighted fields and complete all required details.", 6 field(s) marked invalid
+ok   valid submit: pending state "Creating demo receipt…" aria-busy=true, shown for 121 ms before the next page
+ok   lands on /confirmation with a demo receipt reference (LL-MVDXDQFS)
+ok   after the order: the cart shows its empty state again
+ok   receipt survives a reload
+ok   no uncaught errors
+
+all steps pass
+exit 0
