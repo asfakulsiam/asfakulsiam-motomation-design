@@ -378,6 +378,20 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   }
 }
 
+// 12b. Registry counts in prose agree with the data files (v3.0.2: the README said 20 archetypes after the registry
+//      grew to 23). Only "<n> <noun>" phrases tied to one registry are matched; CHANGELOG.md and evals/ are history.
+{
+  const n = (f) => parseCSV(readFileSync(join(SKILL, `data/${f}.csv`), "utf8")).length;
+  const REG = [[/\b(\d+) archetypes\b/g, "archetypes"], [/\b(\d+) mutations\b/g, "mutations"], [/\b(\d+) signature(?: moves| seeds| -move recipes|-move recipes)\b/g, "signatures"],
+    [/\b(\d+) collision sources\b/g, "collisions"], [/\b(\d+) (?:contrast-verified )?palettes\b/g, "palettes"], [/\b(\d+) motion recipes\b/g, "motion"]].map(([re, f]) => [re, f, n(f)]);
+  const docs = ["README.md", "ABOUT.md", "llms.txt", "AGENTS.md", "docs/CHEATSHEET.md", "dist/motomation-design.md", "dist/motomation-lite.md",
+    "skills/asfakulsiam-motomation-design/SKILL.md", "skills/asfakulsiam-motomation-design/commands/overview.md", "skills/asfakulsiam-motomation-design/examples/sections/README.md"];
+  for (const d of docs) {
+    const f = join(ROOT, d); if (!existsSync(f)) continue;
+    readFileSync(f, "utf8").split("\n").forEach((line, i) => { for (const [re, file, want] of REG) for (const m of line.matchAll(re)) if (+m[1] !== want) fail(`${d}:${i + 1} says "${m[0]}" but data/${file}.csv has ${want}`); });
+  }
+}
+
 // 13. docs/benchmark-summary.md names the newest main benchmark report as current.
 //     Main reports are evals/results/<date>-benchmark[-v<N>].md (companion reports have a suffix after the version).
 {

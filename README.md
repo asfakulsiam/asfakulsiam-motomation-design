@@ -97,7 +97,7 @@ These tools can't run `npx`, so use the single-file edition: **[`dist/motomation
 
 Without a shell, the skill uses the data tables included at the end of the file instead of its scripts.
 
-**Small context?** Custom instructions, rules files and prompt boxes often cap out at a few thousand tokens. Use **[`dist/motomation-lite.md`](dist/motomation-lite.md)** there: <!-- lite-tokens -->about 8.0k tokens<!-- /lite-tokens --> (estimated by the build script) with the five laws, when the light route applies, the research, scope and media rules, the delivery modes, tiers, bans, the seven-step Thinking Sequence, the AI-default scan, the craft checklist and short lists of archetypes, mutations and signatures. Sections it drops to fit are named at its top. `node scripts/build-lite.mjs` regenerates it, and `check-repo` fails if it goes stale, over 8k tokens, or loses one of those rules.
+**Small context?** Custom instructions, rules files and prompt boxes often cap out at a few thousand tokens. Use **[`dist/motomation-lite.md`](dist/motomation-lite.md)** there: <!-- lite-tokens -->about 8.0k tokens<!-- /lite-tokens --> (estimated by the build script) with the five laws, when the light route applies, the research, scope and media rules, the delivery modes, tiers, bans, the Thinking Sequence (stack, product contract, research, directions, memory, restraint), the AI-default scan, the craft checklist and short lists of archetypes, mutations and signatures. Sections it drops to fit are named at its top. `node scripts/build-lite.mjs` regenerates it, and `check-repo` fails if it goes stale, over 8k tokens, or loses one of those rules.
 
 ### Update
 
@@ -195,7 +195,7 @@ Each command lists **what** it does, **when** to use it and **where** it applies
 - **A house style, with its reasons:** minimal canvas, maximal type, one accent, editorial grid, motion with weight, for brand and editorial surfaces; every opinion is in `principles/heuristics.md` with the problem it solves and when to ignore it.
 - **3 dials** (Energy, Rhythm, Motion, each 1–3), set from the brief; no presets.
 - **12 site categories** and **10 visual styles**, each with its own guidance.
-- **Searchable data:** 68 components, 80 fonts (with axes, licences and script coverage, 15 of them Bangla, Devanagari or Arabic), 40 contrast-verified palettes (light and dark pairs), 50 motion recipes with timings, 12 imagery directions (one per category), 20 archetypes, 12 mutations, 40 collision sources.
+- **Searchable data:** 68 components, 80 fonts (with axes, licences and script coverage, 15 of them Bangla, Devanagari or Arabic), 40 contrast-verified palettes (light and dark pairs), 50 motion recipes with timings, 12 imagery directions (one per category), 23 archetypes, 12 mutations, 40 collision sources.
 - **A Delivery Gate:** a self-critique score, a 25-point AI-default scan and a craft checklist.
 - **A component library:** 68 original effect components in 8 families (type, text, scroll, cursor, backgrounds, layout, ui, micro-interactions), each one file with props, a reduced-motion path and touch behaviour, a live gallery and a shadcn-style registry. See [Component library](#component-library).
 - **Production examples:** 9 strict-TypeScript React components, a shared GSAP setup module (`lib/gsap.ts`) and a single-file HTML Motomation demo.

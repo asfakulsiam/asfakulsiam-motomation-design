@@ -2,7 +2,7 @@
 // Page sections: validate every examples/sections/*.tsx header and write examples/sections/README.md.
 //   node scripts/build-sections.mjs                  validate + write the README
 //   node scripts/build-sections.mjs --preview out/   also bundle a preview page (all sections, in order) for screenshots
-// A section must: name its kind and one of the 20 archetypes (data/archetypes.csv); list the library components it
+// A section must: name its kind and one of the archetypes (data/archetypes.csv); list the library components it
 // uses, each of which must exist in data/components.csv and be imported from ../components/ (and nothing else
 // imported from there); and carry what / signature / mobile / reduced-motion notes. check-repo runs collect().
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from "node:fs";
@@ -55,8 +55,9 @@ export function collect() {
 export function renderReadme(sections) {
   const count = (k) => sections.filter((s) => s.kind === k).length;
   const archetypes = [...new Set(sections.map((s) => s.archetype))].sort();
+  const archetypeCount = csvRows(join(SKILL, "data/archetypes.csv")).length;
   const L = ["# Page sections", "",
-    `${sections.length} sections composed from the library in \`examples/components/\`, as references: a new build composes, extends, or invents its own sections and effects, and is not limited to these. Each is tied to one of the 20 archetypes (\`structures/archetypes.md\`), and its header records what it is, which components it uses, why it earns its place (signature), its mobile layout and its reduced-motion behaviour. \`node scripts/build-sections.mjs\` (run from the repository root) checks every header and that each listed component exists and is imported, and writes this file.`, "",
+    `${sections.length} sections composed from the library in \`examples/components/\`, as references: a new build composes, extends, or invents its own sections and effects, and is not limited to these. Each is tied to one of the ${archetypeCount} archetypes (\`structures/archetypes.md\`), and its header records what it is, which components it uses, why it earns its place (signature), its mobile layout and its reduced-motion behaviour. \`node scripts/build-sections.mjs\` (run from the repository root) checks every header and that each listed component exists and is imported, and writes this file.`, "",
     `By kind: ${Object.entries(KINDS).filter(([k]) => count(k)).map(([k, t]) => `${t.toLowerCase()} ${count(k)}`).join(" · ")}. Archetypes used: ${archetypes.length} of 20 (${archetypes.join(", ")}).`, "",
     "**Theme.** Sections read colours and fonts from CSS variables, so a page restyles all of them at once: `--ground --surface --ink --muted --line --accent` and `--font-display --font-text --font-mono` (see `_shared.tsx` for the fallbacks). Each page template sets them once for its brand.", "",
     "**Use one.** Copy the section file and `_shared.tsx`, plus the components it imports (and their `_lib` helpers). Replace the copy: every section ships with a specific, believable brand, which is the point; don't ship the sample words.", ""];
