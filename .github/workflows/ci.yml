@@ -58,7 +58,7 @@ jobs:
           npx tsc -p tsconfig.json
   gate-fixtures:
     # The real Delivery Gate in a real browser. Playwright is not a dependency of the skill, so this job installs it
-    # itself. If the install fails (no network, registry down) the job says "not verified" instead of passing; once
+    # itself. If the install fails (no network, registry down) the job fails as NOT VERIFIED instead of passing; once
     # Playwright is installed, the fixtures are enforced: good must pass, bad must fail with the expected errors.
     name: gate fixtures (Playwright)
     runs-on: ubuntu-latest
@@ -81,8 +81,12 @@ jobs:
           if [ "${{ steps.pw.outcome }}" = "success" ]; then
             REQUIRE_BROWSER=1 node scripts/check-fixtures.mjs
           else
-            echo "::warning::Playwright could not be installed; gate fixtures not verified"
-            node scripts/check-fixtures.mjs
+            # v3.0.2: the browser checks below are skipped without Playwright. Fail the job so a skip is never shown as
+            # a green check; the run reads NOT VERIFIED, not PASS. Re-run the job once the registry is reachable.
+            node scripts/check-fixtures.mjs || true
+            echo "::error::NOT VERIFIED: Playwright could not be installed; gate fixtures, journey, pair, originality and reduced-motion checks did not run"
+            echo "### gate fixtures: NOT VERIFIED (no browser; browser checks skipped)" >> "$GITHUB_STEP_SUMMARY"
+            exit 1
           fi
       - name: Composition heuristics measure and stay advisory (C4)
         if: steps.pw.outcome == 'success'
