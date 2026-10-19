@@ -353,6 +353,7 @@ No scored benchmark has been run on 3.x yet. Full history (v1–v4, competitor s
 | [thinking/product-contract.md](skills/asfakulsiam-motomation-design/thinking/product-contract.md) | capability levels and honest form states |
 | [docs/VALIDATION-v3.0.2.md](docs/VALIDATION-v3.0.2.md) · [docs/VALIDATION-v3.0.1.md](docs/VALIDATION-v3.0.1.md) | release validation reports |
 | [docs/benchmark-summary.md](docs/benchmark-summary.md) · [evals/README.md](evals/README.md) | benchmarks, rubric, how to run them |
+| [docs/evaluation-protocol.md](docs/evaluation-protocol.md) | how an independent evaluation is recorded, and which product types are still untested |
 | [CHANGELOG.md](CHANGELOG.md) | every version |
 
 ### Repository layout

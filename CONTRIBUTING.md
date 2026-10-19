@@ -9,6 +9,10 @@ Thank you for helping make AI-made websites less alike.
 4. **Data rows** need a unique kebab-case id and must not break the CSV columns. Palettes must pass `node skills/asfakulsiam-motomation-design/scripts/contrast.mjs --palettes`.
 5. **New behaviour** needs an eval brief in `evals/briefs/`.
 
+## Cloning
+
+The evidence branches (`benchmarks/*`, `bench-v4`, `evals`) hold builds and screenshots: a full clone is about 230 MiB, `main`'s own history about 140 MiB (older evidence that was committed before it moved off `main`), while the current tree is under the 15 MB budget. `git clone --single-branch` skips the evidence branches; `--depth 1` or `--filter=blob:none` is enough to work on the skill. Fetch an evidence branch only when you need it.
+
 ## Before opening a PR
 ```bash
 node scripts/build-dist.mjs     # regenerate the single-file edition (and build-lite.mjs, build-sections.mjs if you touched them)
