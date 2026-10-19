@@ -27,6 +27,18 @@ Release hardening from the independent evaluation of 3.0.1 (`evals/results/2026-
 ### Changed
 
 - README restructured: overview, value, install, quick start, commands and workflows, features, validation and release status, a short benchmark summary, documentation links, contributing and licence. The long benchmark tables and before/after images moved to `docs/benchmark-summary.md`.
+- **Stack is chosen for fit.** `craft/stack.md` banned Astro and React + Vite for e-commerce unless the brief demanded them. The stack now follows the existing project, the product's rendering and integration needs, hosting, performance and maintainability; Next.js stays the default when nothing points elsewhere, and `DESIGN.md` records the fit, trade-offs and alternatives. `check-repo.mjs` fails if the ban returns.
+- **ABOUT.md describes v3**: product contract and scope before art direction, research before design, optional archetypes, collisions and signature moves, the authority order, six checkpoints and the computed handoff status. The v2.x worked examples are labelled as the historical workflow.
+- **README evaluation summary** names the skill version each piece of evidence tested (benchmark v3 tested v2.3.0) and its limits; registry counts corrected (23 archetypes, not 20).
+- Plugin manifests and `package.json`: product-first description.
+
+### Added (validation and CI)
+
+- `npm test` (`scripts/test.mjs`): the canonical fast check and the CI `check` job's single list; PASS/FAIL per check, exit 1 on any failure, browser tiers reported NOT VERIFIED. `npm test -- --list` shows every tier.
+- CI now runs `tests/evals/cost.test.mjs` (fake claude) and `tests/components/graphemes.test.mjs` (Bangla, emoji ZWJ, Arabic); neither ran before.
+- `check-repo.mjs`: registry counts in active docs must match `data/*.csv`; a test file nothing runs fails unless listed as manual with a reason; benchmark evidence inside the installable skill folder fails.
+- The `gate-fixtures` job fails as NOT VERIFIED when Playwright cannot be installed (it was green with a warning while the journey, pair and originality steps were skipped); `repo-rules.mjs` rejects an optional step that gates later steps without a failure path.
+- `gates/delivery-gate.md`: what the journey check does not verify (reset, later multi-step steps, real backends, assistive technology, devices).
 
 ## [3.0.1] - 2026-10-18
 
