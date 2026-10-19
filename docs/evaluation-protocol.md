@@ -52,9 +52,10 @@ alone are not evidence of a different direction.
 | 03-b2b | B2B | yes ([v3.0.1 runs](../evals/results/2026-10-18-v3.0.1-independent/README.md)) | yes ([scores](../evals/results/2026-10-19-v3.0.2-validation/independent/SCORES.md)) | v3.0.0 (`226085d`) |
 | 08-travel-booking | booking | yes | yes | v3.0.0 (`226085d`) |
 | 12a / 12b | boutique commerce, paired | yes | yes | v3.0.1 working tree |
-| 01 marketplace, 02 luxury, 04 editorial, 05 SaaS dashboard, 06 portfolio, 07 education, 09 community directory, 10 data-heavy, 11 mobile accessibility | | no | no | NOT VERIFIED |
+| 05-saas-dashboard | SaaS dashboard | yes ([v3.0.2 run](../evals/results/2026-10-19-v3.0.2-independent/README.md)) | yes, 76/100, all gates PASS | **v3.0.2** (`52255c0`) |
+| 01 marketplace, 02 luxury, 04 editorial, 06 portfolio, 07 education, 09 community directory, 10 data-heavy, 11 mobile accessibility | | no | no | NOT VERIFIED |
 
-No v6 brief has been built with 3.0.2. Highest-value next runs, in order: `05-saas-dashboard` (signed-in app, states),
-`01-marketplace` (two-sided commerce), `04-editorial` (density, bilingual type), each with a judge from another model
-family. Running them needs builder and judge model credentials (`evals/run-agent-benchmark.mjs`, `claude` or `codex`
-CLI) and is a manual, paid step; it is never part of routine CI.
+One v6 brief has been built with 3.0.2 (`05-saas-dashboard`). Highest-value next runs: `01-marketplace` (two-sided
+commerce), `04-editorial` (density, bilingual type), each with a judge from another model family. Two ways to run them: Perplexity Computer subagents with requested models (how the 3.0.1 and 3.0.2 runs were made; no
+API keys), or `evals/run-agent-benchmark.mjs` with the `claude` or `codex` CLI and model credentials. Either is a manual
+step, never part of routine CI.
