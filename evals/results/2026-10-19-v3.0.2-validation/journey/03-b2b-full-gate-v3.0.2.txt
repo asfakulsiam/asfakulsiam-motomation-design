@@ -1,0 +1,126 @@
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+DELIVERY GATE · runs/03-b2b (copy)
+  contrast  ✗ 26 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✗ 6 below AA  (110 measured; 1 skipped; 0 not visible at scan time)
+        3.57:1 < 4.5:1  #0284c7 on #e0f2fe  12px  span.badge.badge-telemetry  "AIS SATELLITE LIVE"
+        1.06:1 < 4.5:1  #0a1622 on #060e17  12px  div.node-circle  "•"
+        4.1:1 < 4.5:1  #0284c7 on #ffffff  16px  a  "Explore multi-modal stitching →"
+        4.1:1 < 4.5:1  #0284c7 on #ffffff  16px  a  "Review predictive delay alerts →"
+        4.1:1 < 4.5:1  #0284c7 on #ffffff  16px  a  "Calculate automated landed costs →"
+        2.41:1 < 4.5:1  #475569 on #0a1622  12px  div.badge.badge-neutral  "SOC 2 TYPE II AUDITED"
+      390px  ✗ 6 below AA  (110 measured; 1 skipped; 0 not visible at scan time)
+        3.57:1 < 4.5:1  #0284c7 on #e0f2fe  12px  span.badge.badge-telemetry  "AIS SATELLITE LIVE"
+        4.46:1 < 4.5:1  #0a1622 on #0284c7  12px  div.node-circle  "•"
+        4.1:1 < 4.5:1  #0284c7 on #ffffff  16px  a  "Explore multi-modal stitching →"
+        4.1:1 < 4.5:1  #0284c7 on #ffffff  16px  a  "Review predictive delay alerts →"
+        4.1:1 < 4.5:1  #0284c7 on #ffffff  16px  a  "Calculate automated landed costs →"
+        2.41:1 < 4.5:1  #475569 on #0a1622  12px  div.badge.badge-neutral  "SOC 2 TYPE II AUDITED"
+      768px  ✗ 7 below AA  (110 measured; 1 skipped; 0 not visible at scan time)
+        3.57:1 < 4.5:1  #0284c7 on #e0f2fe  12px  span.badge.badge-telemetry  "AIS SATELLITE LIVE"
+        4.1:1 < 4.5:1  #ffffff on #0284c7  12px  div.node-circle  "✓"
+        4.1:1 < 4.5:1  #ffffff on #0284c7  12px  div.node-circle  "✓"
+        1.06:1 < 4.5:1  #0a1622 on #060e17  12px  div.node-circle  "•"
+        4.1:1 < 4.5:1  #0284c7 on #ffffff  16px  a  "Explore multi-modal stitching →"
+        4.1:1 < 4.5:1  #0284c7 on #ffffff  16px  a  "Review predictive delay alerts →"
+        4.1:1 < 4.5:1  #0284c7 on #ffffff  16px  a  "Calculate automated landed costs →"
+     1440px  ✗ 7 below AA  (116 measured; 1 skipped; 0 not visible at scan time)
+        3.57:1 < 4.5:1  #0284c7 on #e0f2fe  12px  span.badge.badge-telemetry  "AIS SATELLITE LIVE"
+        4.1:1 < 4.5:1  #ffffff on #0284c7  12px  div.node-circle  "✓"
+        4.1:1 < 4.5:1  #ffffff on #0284c7  12px  div.node-circle  "✓"
+        1.06:1 < 4.5:1  #0a1622 on #060e17  12px  div.node-circle  "•"
+        4.1:1 < 4.5:1  #0284c7 on #ffffff  16px  a  "Explore multi-modal stitching →"
+        4.1:1 < 4.5:1  #0284c7 on #ffffff  16px  a  "Review predictive delay alerts →"
+        4.1:1 < 4.5:1  #0284c7 on #ffffff  16px  a  "Calculate automated landed costs →"
+  overflow  ✗ 2 at 375/390/768/1440px
+     375px  horizontal scroll by 106px  page
+     390px  horizontal scroll by 91px  page
+  words     ✓ 0 display-text problems at 375px  (20 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (117 compared)
+  names     ✓ 0 missing alt / accessible names  (39 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (17 numbers checked at scroll 0, scroll end and reduced motion; 1 live values skipped)
+  progress  ✓ 0 of 0 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
+  smooth    – no pinned zone, not measured
+  chrome    · sticky chrome, not a pinned zone (< 15% of the viewport): header.site-header 8%
+  rm-flow   – no pinned zone
+  rm-still  ⚠ reduced motion differs from full motion by 0.12% of pixels at scroll 0px, 1440×900 (frozen-frame control: 0%; warn below 25%; advisory, not in the stamp)  [1 looping animation(s)]
+     ⚠ rm-still  the reduced-motion screen differs from full motion by 0.12% of pixels at scroll 0px (under 25%): it reads as a frozen frame, not a designed still (the frozen-frame control differs by 0%)
+  focus     ✓ 0 of 40 focused elements show no visible focus indicator  (39 tabbable)
+  targets   ✗ 19 under 24px, 3 under 44px (warning) at 375 touch  (34 checked; inline links exempt)
+     245×20  a  "Explore multi-modal stitching "
+     241×20  a  "Review predictive delay alerts"
+     119×18  a.footer-link  "Platform Overview"
+     137×18  a.footer-link  "Multi-Modal Tracking"
+     110×18  a.footer-link  "Delay Exceptions"
+     156×18  a.footer-link  "Landed Cost & Customs"
+     140×18  a.footer-link  "Integrations Directory"
+     83×18  a.footer-link  "Pricing Plans"
+     102×18  a.footer-link  "Trust & Security"
+     134×18  a.footer-link  "Security Whitepaper"
+  zoom200   ✓ 0 lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%
+  reflow    ✗ 161px horizontal scroll at 320px
+  forced    ✓ 0 of 79 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
+  kbd-trap  ✓ 43 of 39 tabbable reached in 84 Tabs, no cycle
+  C copy     ✓ 0 rule(s) failing  (craft/copy.md; 0 warning(s))
+  S SEO      ✓ 0 rule(s) failing  (craft/seo.md; 0 warning(s))
+  P perf     ✓ 0 rule(s) failing  (craft/performance.md; 1 warning(s))
+     ⚠ perf-07  a script over 2 KB that looks unminified  http://127.0.0.1:45713/assets/app.js
+  K security ✓ 0 rule(s) failing  (craft/security.md; 1 warning(s))
+     ⚠ sec-08  .env is not ignored by git (no .gitignore found)  runs/03-b2b (copy)
+  composition (advisory: heuristics, never fail the gate, not in the stamp)
+     pin fill  – no pinned zone
+     focal     ⚠ 1 of 5 screen(s) with text have one clear focal point (heaviest text mass ≥ 1.5× the next); no clear lead on screen 2 (1.14×), 3 (1.22×), 4 (1.15×), 5 (1.15×)
+     scale     ⚠ display:body 1:3  (48px / 16px; warn below 1:6)
+  richness (advisory: "too little" warnings, never fail the gate, not in the stamp)
+     page      home (from path; set with --page home|category|about|page)
+     fold      ✓ 6 meaningful section(s) above the fold at 1440×900: nav header.site-header, heading h1, heading h2, text p.lead, text p, action a.btn.btn-primary  (warn below 3)
+     opening   ✓ h1 "Operational Freight Visibility for Growi"
+  micro-states (advisory: missing states are warnings, never fail the gate, not in the stamp)
+     buttons   – none on the page
+     forms     – none on the page
+     lists     – 2 static list(s): not judged (mark data lists with data-entity)
+     images    ⚠ 2 image(s): no loaded, error state found  (have: loading)
+     async     – no async actions in the page's scripts
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  7 sections, entrances: static | static | static | static | static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 3KB gzipped
+  records    DESIGN.md: runs/03-b2b (copy)/DESIGN.md · memory log: none · stamp fields: {"archetype":"console","mutation":"none","signature":"milestone-stepper","tier":"1"}
+  critique → C5[restraint:kept] H4[375:1] S5[last5:no-log] R3[cuts:1,anim:1] M5[t1:pins0/2,webgl0/1,js3/30KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A3[focus:40/40,tgt:19f3w,zoom:0,reflow:161,fc:0,trap:0]
+  coverage   ✓ worst width 375px: 1 of 111 text elements skipped (1%; limit 30% at every width)
+  X — completeness (B2B freight visibility software, global, admin panel: no) [functional frontend]  ✗
+      Routes:      17/17 required present
+      Journeys:    3/3 connected
+      Functions:   4/4 present · 2 not required (reason given)
+      Legal:       3/3 present
+      Admin:       0/0 present · 1 not required (reason given)
+      Skeletons:   1/1 present
+      Template:    17/18 present
+      ✗ template Content realism: proof 404.html: compliance certification claimed with no source or "illustrative" label: "SOC 2 TYPE II AUDITED" (rules.md: real and sourced, or [NEEDS COPY]); on 20 pages (404.html, careers/index.html, contact/index.html …) · proof stories/index.html: customer-results statistic on a case-study page with no source or "illustrative" label: "Zero lost refrigerated loads over 18 operating months and complete eli" · proof stories/midwest-foods/index.html: customer-results statistic on a case-study page with no source or "illustrative" label: "How a mid-size perishable food importer importing 2,400 refrigerated T"
+  J — journey (whole site, real browser; any missing state fails the page; not in the stamp or its id)
+    nav      ✓ 19/19 route(s) reachable from home in ≤ 3 clicks (/:0 /product:1 /product/tracking:1 /product/exceptions:1 /product/customs:1 /integrations:1 /pricing:1 /security:1 …)
+               · sitemap.xml: 19 route(s)
+               · 20 concrete route(s) from the Scope table
+               · 18 page(s) loaded
+               · /demo/confirmed: reached by submitting "Full Name * (/demo)" (a flow page, not a missing link); it is in sitemap.xml and indexable: noindex it or drop it from the sitemap
+    mobile   ✗ 0/14 interactive element(s) respond at 375px · tap 0/12 · swipe n/a · long-press n/a
+               ✗ layout div.header-cta: cut off: content runs past the viewport and overflow-x on html/body hides it (masked, not fixed) at 320, 375px on 18 page(s) (/ /contact /demo /product /product/tracking …): reaches 481px; one cause: fix it once
+               ✗ layout div.card: cut off: content runs past the viewport and overflow-x on html/body hides it (masked, not fixed) at 320px on 1 page(s) (/docs): reaches 374px; width: 349.594px; one cause: fix it once
+               · layout 2/4 width(s) fit (320✗ 375✗ 768✓ 1440✓) on 18 page(s) · 2 cause(s)
+               · 12 page(s) wider than the phone at 375px: taps there are not measured until the layout cause above is fixed
+               · 12 page(s); an element shared by several pages (header, footer) is tapped once
+               · no element declares a long press
+    forms    ✗ 7/9 form state(s) rendered · Full Name * (/contact): default✓ validation✓ feedback✓ honest✗ · Full Name * (/demo): default✓ validation✓ loading✓ feedback✓ honest✗
+               ✗ Full Name * (/contact) honest: says "Transmitting" but no request was made and nothing was saved: send the request, or say what really happened (a labelled demo: data-capability="interaction"; a browser save: "persisted"; not built: "interface")
+               ✗ Full Name * (/demo) honest: says "RESERVED" but no request was made and nothing was saved: send the request, or say what really happened (a labelled demo: data-capability="interaction"; a browser save: "persisted"; not built: "interface")
+               · 2 page(s) with forms checked: /contact, /demo
+               · no request on submit, read by what it did (v3.0.2): Full Name * (/contact): no request, nothing saved, nothing disclosed · Full Name * (/demo): no request, nothing saved, nothing disclosed, then moves to /demo/confirmed
+    loading  – n/a: no fetch or XHR request after load: no async surface
+    errors   ✓ 1/1 designed not-found view (unknown route → HTTP 404)
+               · probed /__motomation-missing-mveacp55/
+    session  ✓ 6/6 · load ✓ · open a second route ✓ · back button ✓ · forward button ✓ · full reload ✓ · two tabs ✓
+               · second page: /product
+    coverage 18 page(s) loaded of 19 required route(s) · forms checked on every page that has one (2 page(s), 2 form(s)) · tap and loading sampled on 12 page(s)
+               · Scope routes no link reaches (check them in the journey walk): /demo/confirmed, /404
+               · not sampled for tap/loading: /security/overview, /stories/midwest-foods, /careers, /privacy, /terms, /cookies
+    journey: nav0 mobile2 forms2 loading- errors0 session0 → FAIL (4 missing)
+  FAIL  stamp → critique: C5[restraint:kept] H4[375:1] S5[last5:no-log] R3[cuts:1,anim:1] M5[t1:pins0/2,webgl0/1,js3/30KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A3[focus:40/40,tgt:19f3w,zoom:0,reflow:161,fc:0,trap:0] · gate: c26 o2 w0 rm0 a0 n0 q0 k20 · rules: C0 S0 P0 K0 · gate/4 · c400610b7d · skipped 1/111@375
+
+gate: record → runs/03-b2b (copy)/.motomation/gate-record.json (full; node scripts/handoff.mjs runs/03-b2b (copy) gives the handoff status)

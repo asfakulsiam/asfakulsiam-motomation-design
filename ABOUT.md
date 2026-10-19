@@ -14,37 +14,38 @@ You don't need to be a designer to use it. You do need one of those AI coding to
 
 ## The problem it solves
 
-Most design skills for AI agents are one of two things: a list of rules ("don't use purple gradients"), or a box of parts (components to paste in). Rules alone don't produce ideas, and parts alone produce pages that look like the parts. Motomation does three things those don't:
+Most design skills for AI agents are one of two things: a list of rules ("don't use purple gradients"), or a box of parts (components to paste in). Rules alone don't produce ideas, and parts alone produce pages that look like the parts. Motomation does four things those don't:
 
-1. **It forces a decision before any code.** A seven-step Thinking Sequence (below) has to produce a written plan: the conflict in the brief, the idea that resolves it, the page structure, one memorable interaction. The agent shows this plan before building.
-2. **It adds randomness where AI has none.** A small program (`collide.mjs`) picks an unrelated source of inspiration from a list at random, such as a railway departure board or a tailor's tape. Left alone, an AI picks the most likely option every time; a random pick breaks that habit. The pick comes from a number (a "seed"), so the same number gives the same pick again if you want to repeat a result.
-3. **It measures instead of trusting.** `gate.mjs` opens the page in an invisible browser at desktop and phone sizes, checks that text is dark or light enough against what is really behind it, finds text that overflows or wraps a single letter onto its own line, and finds content that disappears when the visitor has asked for reduced motion. The numbers it prints go into a stamp at the top of the code. If the browser isn't available, the stamp says "not verified" rather than inventing a score.
+1. **It settles the product before the look.** Before any art direction, the agent writes a product contract: who the site is for, the jobs they come to do, the journeys as sequences of routes, the information architecture, the states each page needs (empty, loading, error, success), and what is deliberately excluded. You approve it at a checkpoint. A later visual idea can change how the product is presented; it cannot remove a journey or a required page (`principles/authority.md`).
+2. **It researches before it designs.** The agent looks at real sites of the exact type and at design references chosen for what they can prove, and records each finding as observed, inferred or unverified, with links. Without web access it says so instead of inventing references.
+3. **It explores directions on purpose.** It sketches two or three different directions, compares them against the contract, and chooses or merges one. Archetypes, the random collision draw (`collide.mjs`), mutations, signature moves, category recipes and styles are optional tools for getting away from the most likely answer; each is used, adapted or rejected with a reason. A build with no signature move is a valid result.
+4. **It measures instead of trusting.** `gate.mjs` opens the site in a real (headless) browser at desktop and phone sizes and checks contrast against what is really behind the text, overflow, content hidden under reduced motion, accessibility names, whether every scoped route and journey is reachable and whether forms behave (completeness and journey checks). `handoff.mjs` then computes the handoff status from what actually ran: VALIDATED, CONDITIONAL (with the unverified items listed) or NOT VALIDATED. If the browser isn't available, the result is "not verified", never a pass.
 
-There is also a per-project memory (`.motomation/log.json`) so the next page in the same project avoids the structure and signature used last time.
+There is also a memory of earlier builds (`memory.mjs`), so a new site doesn't silently repeat the archetype, structure, palette or motion tier of earlier ones unless the brief justifies it.
 
 ## The philosophy in one paragraph
 
-A good website has one idea and says it well. Type is chosen first and with a reason; on a portfolio or brand site it can be the main image, on a dashboard it leads by being clear rather than big. Motion is allowed only when it tells the visitor something, and there is always a designed version for people who turn motion off. Everything that doesn't serve the idea is removed: one signature move, not five. Accessibility, real content and performance are standards, not style, so no brief can switch them off.
+The product comes first, then evidence, then taste. Requirements, accessibility and the product contract outrank every aesthetic opinion; the skill's own house style (strong type, restraint, one accent, motion with weight) is a set of heuristics with stated reasons and stated exceptions (`principles/heuristics.md`), not a style every site must wear. Motion is chosen for a purpose (feedback, hierarchy, storytelling), at the lowest tier that delivers it, and always with a designed reduced-motion version. Accessibility, real content and honest claims are standards, not style, so no brief can switch them off.
 
 ## A typical session, start to finish
 
 1. **You install it** in your project with one command (`npx skills add asfakulsiam/asfakulsiam-motomation-design`) and give your agent a brief, for example: "/build a site for a 12-room hotel in Sylhet that sells quiet."
-2. **The agent reads the brief** and notes who it's for, what they need to do, how it should feel, and what's missing.
-3. **It runs the Thinking Sequence** and shows you a short plan: tension, concept, page structure and how it's broken, the drawn collision, the signature move, the motion tier, the fonts and palette, and what it rejected. If you asked to review first (`--review`), it stops here.
-4. **It writes two short files**, `DESIGN.md` (type, colour, layout) and `MOTION.md` (what moves and why), so later changes stay consistent.
-5. **It builds the page**, using the skill's own component library for standard effects and designing the signature moment for your brief.
-6. **It runs the gate** (`node scripts/gate.mjs index.html`), fixes what fails, and pastes the measured stamp into the code.
-7. **It logs the choices** to the project memory and ends with what it chose, what it rejected, and one thing to try next.
+2. **Checkpoint 1, stack.** The agent uses your project's existing stack, or proposes one with its reasons, trade-offs and alternatives (`craft/stack.md`).
+3. **Checkpoint 2, product contract and scope.** Jobs, journeys, routes, states and exclusions, with a Scope table of what is required, optional or deferred.
+4. **Checkpoint 3, research and direction.** The research record, two or three directions compared against the contract, the chosen concept, fonts, palette, motion tier, and what it decided not to do.
+5. **Checkpoint 4, page plan.** Sections, components and motion per route, and the mobile layouts.
+6. **Checkpoint 5, build and preview.** It builds the site (reusing the component library where it fits), writes `DESIGN.md`, `MOTION.md` and `MEDIA.md`, and shows a preview with screenshots of each core journey for your review.
+7. **Checkpoint 6, gate and handoff.** It runs the full gate on the approved design, fixes what fails, and reports the handoff status computed from the gate record, with anything not verified listed by name.
 
-For a small fix ("tighten the spacing on the pricing cards"), the agent uses a short route instead: no new concept, but the same accessibility, reduced-motion and restraint checks.
+Each checkpoint waits for you unless the brief already answers it. For a small fix ("tighten the spacing on the pricing cards"), the agent uses a light route instead: no new direction, but the same accessibility, reduced-motion and gate checks.
 
 ## What it does not do
 
-- **It doesn't guarantee originality across the internet.** The memory only knows about your project. Two people with the same brief and seed can get similar plans.
+- **It doesn't guarantee originality or award-level quality.** The memory only knows about earlier builds on your machine, and a passing gate means the measured checks passed, not that the design is good; that still needs human judgement. Two people with the same brief and seed can get similar plans.
 - **It doesn't replace a designer's judgement.** It makes an AI's first build much less generic; it doesn't know your brand history, your users or your business.
 - **It doesn't supply images, logos, testimonials or statistics.** It refuses to invent them. If the brief has none, the page says so or uses typography instead.
 - **It doesn't add animation for its own sake.** Many briefs end up at the lowest motion tier, and that's the intended result.
-- **It doesn't certify accessibility.** The gate catches common, measurable failures (contrast, overflow, hidden content, keyboard reach in the benchmark). It is not a formal accessibility audit (WCAG) and doesn't test with screen readers or other assistive tools.
-- **It doesn't need a build system or a framework.** It works with a plain web page or with the common web frameworks (React, Next.js, Astro and others), but it won't set one up for you unless you ask.
+- **It doesn't certify accessibility.** The gate catches common, measurable failures (contrast, overflow, hidden content, accessibility names, focus and target checks). It is not a formal accessibility audit (WCAG) and doesn't test with screen readers or other assistive tools.
+- **It doesn't need a build system or a framework.** It works with a plain web page or with the common web frameworks (Next.js, Astro, React + Vite and others); in an existing project it uses the stack that is already there.
 
 Next: [the worked examples](skills/asfakulsiam-motomation-design/examples/prompts/README.md) show real prompts, real output and real gate results.

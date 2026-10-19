@@ -1,0 +1,18 @@
+journey: nav0 mobile2 forms2 loading- errors0 session0
+  nav · sitemap.xml: 19 route(s)
+  nav · 20 concrete route(s) from the Scope table
+  nav · 18 page(s) loaded
+  nav · /demo/confirmed: reached by submitting "Full Name * (/demo)" (a flow page, not a missing link); it is in sitemap.xml and indexable: noindex it or drop it from the sitemap
+  mobile ✗ div.header-cta  cut off: content runs past the viewport and overflow-x on html/body hides it (masked, not fixed) at 320, 375px on 18 page(s) (/ /contact /demo /product /product/tracking …): reaches 481px; one cause: fix it once
+  mobile ✗ div.card  cut off: content runs past the viewport and overflow-x on html/body hides it (masked, not fixed) at 320px on 1 page(s) (/docs): reaches 374px; width: 349.594px; one cause: fix it once
+  mobile · layout 2/4 width(s) fit (320✗ 375✗ 768✓ 1440✓) on 18 page(s) · 2 cause(s)
+  mobile · 12 page(s) wider than the phone at 375px: taps there are not measured until the layout cause above is fixed
+  mobile · 12 page(s); an element shared by several pages (header, footer) is tapped once
+  mobile · no element declares a long press
+  forms ✗ Full Name * (/contact) honest says "Transmitting" but no request was made and nothing was saved: send the request, or say what really happened (a labelled demo: data-capability="interaction"; a browser save: "persisted"; not built: "interface")
+  forms ✗ Full Name * (/demo) honest says "RESERVED" but no request was made and nothing was saved: send the request, or say what really happened (a labelled demo: data-capability="interaction"; a browser save: "persisted"; not built: "interface")
+  forms · 2 page(s) with forms checked: /contact, /demo
+  forms · no request on submit, read by what it did (v3.0.2): Full Name * (/contact): no request, nothing saved, nothing disclosed · Full Name * (/demo): no request, nothing saved, nothing disclosed, then moves to /demo/confirmed
+  errors · probed /__motomation-missing-mve9jtno/
+  session · second page: /product
+  operations: 

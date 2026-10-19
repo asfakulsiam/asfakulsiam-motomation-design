@@ -36,7 +36,7 @@ npm install && npm run dev
 | `SCHEMA.md` | every entity, route, state, the API surface and handoff notes (`templates/SCHEMA.md`) | with `DESIGN.md` |
 | `DATA.md` | the shape of the `data/` folder (`templates/DATA.md`) | with `SCHEMA.md` |
 | `CRITIQUE.md` | the `/critique` output, pasted, never typed, in three sections: Measured, Judged, Not verified (`templates/CRITIQUE.md`) | after the gate |
-| `GATE.md` | the gate output per page (`node scripts/gate.mjs …`), pasted, never typed, including the X and J lines, in three sections: Measured, Judged, Not verified (`templates/GATE.md`) | after the gate |
+| `GATE.md` | the `handoff:` status line from `node scripts/handoff.mjs`, then the gate output per page (`node scripts/gate.mjs …`), pasted, never typed, including the X and J lines, in three sections: Measured, Judged, Not verified (`templates/GATE.md`) | after the gate |
 | `LICENSE` | MIT by default (the brief can name another) | with the build |
 | `CHANGELOG.md` | starts at `## [0.1.0] - <date>` | with the build |
 | `.env.example` | every environment variable the code reads, each with a placeholder and a comment | with the build |

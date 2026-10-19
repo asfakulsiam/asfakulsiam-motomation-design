@@ -182,7 +182,10 @@ export function pairLines(r, [la, lb] = ["A", "B"]) {
   L.push(""); L.push("  visual axes: similarity with forms and navigation left out (--same-product), worst viewport · markup: element skeleton, form internals collapsed · parity: required to be high");
   for (const n of r.notes) L.push(`  · ${n}`);
   L.push(`  limits: ${r.limits}`);
-  L.push(""); L.push(r.pass ? `PASS  one product, ${r.per.length} route(s) recomposed or partial, no shared presentation, routes and functions at parity` : `FAIL  ${r.fails.length} problem(s):`);
+  L.push(""); // v3.0.2: the counts are split. "22 route(s) recomposed or partial" hid 19 partial routes; evals/rubric.md's paired test
+  // (originality.mjs, every axis under the threshold) is stricter than this structural pass, and a partial route fails it
+  const nPart = r.per.filter((p) => p.class === "partial").length, nRe = r.per.filter((p) => p.class === "recomposed").length;
+  L.push(r.pass ? `PASS  one product, ${nRe} route(s) recomposed${nPart ? `, ${nPart} partial` : ""}, no shared presentation, routes and functions at parity${nPart ? `\n      structural pass only: ${nPart} partial route(s) have an axis at or above ${r.threshold}, so the pair does not meet the strict every-axis test (evals/rubric.md); report it as partial, not as fully different` : ""}` : `FAIL  ${r.fails.length} problem(s):`);
   for (const f of r.fails) L.push(`  ✗ ${f}`);
   return L;
 }

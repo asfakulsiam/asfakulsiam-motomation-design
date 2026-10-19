@@ -1,0 +1,278 @@
+{
+  "threshold": 0.4,
+  "labels": [
+    "12a-archival",
+    "12b-poster"
+  ],
+  "pairs": [
+    {
+      "a": "12a-archival",
+      "b": "12b-poster",
+      "score": {
+        "structure": 0.3,
+        "composition": 0.44,
+        "image": 0.4,
+        "typography": 0.44,
+        "interaction": 0.11,
+        "signature": 0.25,
+        "overall": 0.28
+      },
+      "parts": {
+        "structure": {
+          "shingles": 0.1,
+          "order": 0.5
+        },
+        "composition": {
+          "placement": 0.35,
+          "columns": 0.5,
+          "density": 0.67
+        },
+        "image": {
+          "ratio_size": 0.67,
+          "crop_mask": 0.11,
+          "effects": 0.43
+        },
+        "typography": {
+          "families": 0.55,
+          "scale": 0.25,
+          "rhythm": 0.17,
+          "hierarchy": 0.68
+        },
+        "interaction": {
+          "feedback": 0.11
+        },
+        "signature": {
+          "measured": 0.25
+        }
+      },
+      "at": {
+        "structure": "1440x900",
+        "composition": "1440x900",
+        "image": "375x812",
+        "typography": "375x812",
+        "interaction": "1440x900",
+        "signature": "1440x900",
+        "overall": "1440x900"
+      },
+      "over": [
+        "composition",
+        "image",
+        "typography"
+      ]
+    }
+  ],
+  "pass": false,
+  "max": {
+    "structure": 0.3,
+    "composition": 0.44,
+    "image": 0.4,
+    "typography": 0.44,
+    "interaction": 0.11,
+    "signature": 0.25,
+    "overall": 0.28
+  },
+  "viewports": [
+    "1440x900",
+    "375x812"
+  ],
+  "byViewport": {
+    "1440x900": {
+      "threshold": 0.4,
+      "labels": [
+        "12a-archival",
+        "12b-poster"
+      ],
+      "pairs": [
+        {
+          "a": "12a-archival",
+          "b": "12b-poster",
+          "score": {
+            "structure": 0.3,
+            "composition": 0.44,
+            "image": 0.14,
+            "typography": 0.41,
+            "interaction": 0.11,
+            "signature": 0.25,
+            "overall": 0.28
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.1,
+              "order": 0.5
+            },
+            "composition": {
+              "placement": 0.35,
+              "columns": 0.5,
+              "density": 0.67
+            },
+            "image": {
+              "ratio_size": 0,
+              "crop_mask": 0,
+              "effects": 0.43
+            },
+            "typography": {
+              "families": 0.55,
+              "scale": 0.21,
+              "rhythm": 0.12,
+              "hierarchy": 0.62
+            },
+            "interaction": {
+              "feedback": 0.11
+            },
+            "signature": {
+              "measured": 0.25
+            }
+          },
+          "over": [
+            "composition",
+            "typography"
+          ]
+        }
+      ],
+      "pass": false,
+      "max": {
+        "structure": 0.3,
+        "composition": 0.44,
+        "image": 0.14,
+        "typography": 0.41,
+        "interaction": 0.11,
+        "signature": 0.25,
+        "overall": 0.28
+      }
+    },
+    "375x812": {
+      "threshold": 0.4,
+      "labels": [
+        "12a-archival",
+        "12b-poster"
+      ],
+      "pairs": [
+        {
+          "a": "12a-archival",
+          "b": "12b-poster",
+          "score": {
+            "structure": 0.06,
+            "composition": 0.44,
+            "image": 0.4,
+            "typography": 0.44,
+            "interaction": 0.11,
+            "signature": 0.25,
+            "overall": 0.28
+          },
+          "parts": {
+            "structure": {
+              "shingles": 0.12,
+              "order": 0
+            },
+            "composition": {
+              "placement": 0.38,
+              "columns": 0.25,
+              "density": 0.8
+            },
+            "image": {
+              "ratio_size": 0.67,
+              "crop_mask": 0.11,
+              "effects": 0.43
+            },
+            "typography": {
+              "families": 0.55,
+              "scale": 0.25,
+              "rhythm": 0.17,
+              "hierarchy": 0.68
+            },
+            "interaction": {
+              "feedback": 0.11
+            },
+            "signature": {
+              "measured": 0.25
+            }
+          },
+          "over": [
+            "composition",
+            "image",
+            "typography"
+          ]
+        }
+      ],
+      "pass": false,
+      "max": {
+        "structure": 0.06,
+        "composition": 0.44,
+        "image": 0.4,
+        "typography": 0.44,
+        "interaction": 0.11,
+        "signature": 0.25,
+        "overall": 0.28
+      }
+    }
+  },
+  "targets": [
+    "http://127.0.0.1:4612/",
+    "http://127.0.0.1:4613/"
+  ],
+  "features": [
+    {
+      "label": "12a-archival",
+      "blocks": [
+        "text:m",
+        "grid:m",
+        "statement:s",
+        "statement:s"
+      ],
+      "images": 4,
+      "display": "fraunces",
+      "body": "dm sans",
+      "signature": {
+        "tokens": {
+          "trigger:scroll": 1,
+          "prop:colour": 1,
+          "el:text": 1,
+          "size:medium": 1,
+          "mech:scroll>colour": 1
+        },
+        "found": {
+          "trigger": [
+            "scroll"
+          ],
+          "props": [
+            "colour"
+          ],
+          "kind": "text",
+          "size": "medium"
+        },
+        "declared": null
+      }
+    },
+    {
+      "label": "12b-poster",
+      "blocks": [
+        "media:m",
+        "grid:m",
+        "statement:s"
+      ],
+      "images": 6,
+      "display": "barlow condensed",
+      "body": "dm sans",
+      "signature": {
+        "tokens": {
+          "trigger:scroll": 1,
+          "prop:transform": 1,
+          "el:media": 1,
+          "size:medium": 1,
+          "mech:scroll>transform": 1
+        },
+        "found": {
+          "trigger": [
+            "scroll"
+          ],
+          "props": [
+            "transform"
+          ],
+          "kind": "media",
+          "size": "medium"
+        },
+        "declared": null
+      }
+    }
+  ]
+}

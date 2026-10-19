@@ -165,4 +165,19 @@ say(rc2.pass, "saying it is not production-ready, and pointing to MEDIA.md, pass
   const j = realism(js); const w = j.problems.map((p) => `${p.kind}:${p.what}`).join(" | ");
   say(!j.pass && /Product 1/.test(w) && /Plan 1, 2, 3/.test(w) && /lorem/i.test(w) && /dead/.test(w), `realism: fixtures, lorem, a numbered run and a dead link rendered by app.js are found (${j.problems.length} problem(s))`);
 }
+// v3.0.2 realism: unsourced proof (the B2B benchmark build: "SOC 2 TYPE II AUDITED" in every footer, "2,400 refrigerated
+// TEUs annually" and "zero spoiled loads over 18 months" in a case study, none labelled illustrative)
+{
+  const { realism } = await import("../../skills/asfakulsiam-motomation-design/scripts/realism.mjs");
+  const foot = '<footer><p>SOC 2 TYPE II AUDITED</p></footer>';
+  const pr = mkdtempSync(join(tmpdir(), "real-proof-")); mkdirSync(join(pr, "stories/acme-foods"), { recursive: true });
+  for (const f of ["index.html", "pricing.html", "contact.html"]) writeFileSync(join(pr, f), `<html><body><h1>Freight visibility</h1><p>Track 40% of your lanes today.</p>${foot}</body></html>`);
+  writeFileSync(join(pr, "stories/acme-foods/index.html"), `<html><body><h1>Cold-chain certainty</h1><p>An importer moving 2,400 refrigerated TEUs annually cut demurrage.</p><p>Zero spoiled loads over 18 months.</p>${foot}</body></html>`);
+  const r = realism(pr); const p = r.problems.filter((x) => x.kind === "proof"); const w = p.map((x) => x.what).join(" | ");
+  say(!r.pass && p.length === 2 && /SOC 2 TYPE II AUDITED.*on 4 pages/.test(w) && /case-study/.test(w), `realism: an unsourced certification in a shared footer is one problem (4 pages), a case-study statistic another; a marketing "40%" outside a case study is not flagged (${w})`);
+  const lab = mkdtempSync(join(tmpdir(), "real-proof-ok-")); mkdirSync(join(lab, "stories/acme-foods"), { recursive: true });
+  writeFileSync(join(lab, "stories/acme-foods/index.html"), '<html><body><h1>Cold-chain certainty</h1><p>An importer moving 2,400 refrigerated TEUs annually.</p><p>SOC 2 Type II audited</p><p>Illustrative case study: a fictional customer and example figures.</p></body></html>');
+  writeFileSync(join(lab, "security.html"), '<html><body><h1>Security</h1><p>SOC 2 Type II report: [NEEDS COPY]</p></body></html>');
+  const r2 = realism(lab); say(r2.problems.every((x) => x.kind !== "proof"), `realism: the same claims labelled illustrative/fictional or left as [NEEDS COPY] pass (${r2.problems.map((x) => x.what).join(" | ") || "none"})`);
+}
 console.log(bad ? `\n${bad} failure(s)` : "\ncompleteness (X) bites"); process.exit(bad ? 1 : 0);

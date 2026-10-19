@@ -8,6 +8,7 @@ import { renderRule, rules as loadRules, bannedDisplayFonts } from "../skills/as
 import { fileURLToPath } from "node:url";
 import { SIZE, sizeProblems, workflowProblems } from "./repo-rules.mjs";
 import { cli } from "../skills/asfakulsiam-motomation-design/scripts/lib.mjs";
+import { FAST, NOT_RUN } from "./test.mjs";
 if (process.argv[1] && process.argv[1].endsWith("check-repo.mjs")) cli("check-repo", "Usage: node scripts/check-repo.mjs   (no arguments)", {}, null, { pos: [0, 0] });
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url)); // decoded and OS-native (Windows drive letters, spaces)
@@ -378,6 +379,39 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   }
 }
 
+// 12b. Registry counts in prose agree with the data files (v3.0.2: the README said 20 archetypes after the registry
+//      grew to 23). Only "<n> <noun>" phrases tied to one registry are matched; CHANGELOG.md and evals/ are history.
+{
+  const n = (f) => parseCSV(readFileSync(join(SKILL, `data/${f}.csv`), "utf8")).length;
+  const REG = [[/\b(\d+) archetypes\b/g, "archetypes"], [/\b(\d+) mutations\b/g, "mutations"], [/\b(\d+) signature(?: moves| seeds| -move recipes|-move recipes)\b/g, "signatures"],
+    [/\b(\d+) collision sources\b/g, "collisions"], [/\b(\d+) (?:contrast-verified )?palettes\b/g, "palettes"], [/\b(\d+) motion recipes\b/g, "motion"]].map(([re, f]) => [re, f, n(f)]);
+  const docs = ["README.md", "ABOUT.md", "llms.txt", "AGENTS.md", "docs/CHEATSHEET.md", "dist/motomation-design.md", "dist/motomation-lite.md",
+    "skills/asfakulsiam-motomation-design/SKILL.md", "skills/asfakulsiam-motomation-design/commands/overview.md", "skills/asfakulsiam-motomation-design/examples/sections/README.md"];
+  for (const d of docs) {
+    const f = join(ROOT, d); if (!existsSync(f)) continue;
+    readFileSync(f, "utf8").split("\n").forEach((line, i) => { for (const [re, file, want] of REG) for (const m of line.matchAll(re)) if (+m[1] !== want) fail(`${d}:${i + 1} says "${m[0]}" but data/${file}.csv has ${want}`); });
+  }
+}
+
+// 12c. Every test file is run by something (v3.0.2: cost.test.mjs and graphemes.test.mjs existed, but no workflow ran them).
+//      It must be in scripts/test.mjs FAST (npm test, the CI check job), named in a workflow, or listed in NOT_RUN with a reason.
+{
+  const wf = readdirSync(join(ROOT, ".github/workflows")).filter((f) => f.endsWith(".yml")).map((f) => readFileSync(join(ROOT, ".github/workflows", f), "utf8")).join("\n");
+  const known = new Set([...FAST.flatMap(([a]) => a.filter((x) => !x.startsWith("--"))), ...Object.values(NOT_RUN).flatMap((t) => (Array.isArray(t.files) ? t.files : Object.keys(t.files)))]);
+  const tests = execFileSync("git", ["ls-files", "tests"], { cwd: ROOT, encoding: "utf8" }).split("\n").filter((f) => /\.mjs$/.test(f) && !f.includes("/fixtures/") || f === "tests/evals/fixtures/fake-claude.mjs");
+  for (const t of tests) if (!known.has(t) && !wf.includes(t)) fail(`${t} is not run by npm test (scripts/test.mjs FAST) or any workflow, and not listed in NOT_RUN with a reason`);
+  for (const t of known) if (!existsSync(join(ROOT, t))) fail(`scripts/test.mjs names ${t}, which does not exist`);
+}
+
+// 12d. The installable skill folder (what `npx skills add` copies, and what build-dist/build-lite read) carries no
+//      benchmark evidence: no run folders, transcripts, gate records or cost/meta files (v3.0.2). Evidence lives in
+//      evals/results/ (text) and on the benchmarks/* branches (sites, screenshots).
+{
+  const leaked = execFileSync("git", ["ls-files", "skills"], { cwd: ROOT, encoding: "utf8" }).split("\n")
+    .filter((f) => /(^|\/)(evals|runs|benchmarks?|bench-[^/]*)\/|transcript|gate-record\.json$|(^|\/)(cost|meta)\.json$/i.test(f));
+  for (const f of leaked) fail(`${f}: benchmark evidence inside the installable skill folder (keep it in evals/results/ or a benchmarks/* branch)`);
+}
+
 // 13. docs/benchmark-summary.md names the newest main benchmark report as current.
 //     Main reports are evals/results/<date>-benchmark[-v<N>].md (companion reports have a suffix after the version).
 {
@@ -418,7 +452,7 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   if (!/## What each source proves/.test(src("craft/research.md")) || !/## Extracting evidence/.test(src("craft/research.md"))) fail("craft/research.md must say what each source proves and how evidence is extracted");
   if (!/principles\/authority\.md/.test(src("SKILL.md")) || !/principles\/heuristics\.md/.test(src("SKILL.md"))) fail("SKILL.md must route to principles/authority.md and principles/heuristics.md");
   // opinions that used to act as mandatory rules must not come back as absolutes
-  const ABSOLUTES = [[/you have to start from it/i, "a collision draw is optional"], [/but start from them/i, "collide.mjs draws are optional"], [/take the seeded fallback/i, "the fallback archetype is advisory"], [/Never pick the stack you used last/i, "the stack is chosen for fit (H-stack-rotate)"], [/Tier 5 for at least one chapter/i, "Tier 5 is never a quota (H-tier5-chapter)"], [/One focal point per screen\*\*, always/i, "H-focal is a heuristic"], [/Any score below 4 → revise/i, "critique axes are advisory diagnostics"], [/Choose a structure \*\*first\*\*/i, "the contract comes before any archetype"]];
+  const ABSOLUTES = [[/you have to start from it/i, "a collision draw is optional"], [/but start from them/i, "collide.mjs draws are optional"], [/take the seeded fallback/i, "the fallback archetype is advisory"], [/Never pick the stack you used last/i, "the stack is chosen for fit (H-stack-rotate)"], [/Tier 5 for at least one chapter/i, "Tier 5 is never a quota (H-tier5-chapter)"], [/One focal point per screen\*\*, always/i, "H-focal is a heuristic"], [/Any score below 4 → revise/i, "critique axes are advisory diagnostics"], [/Choose a structure \*\*first\*\*/i, "the contract comes before any archetype"], [/never Astro or (?:React \+ )?Vite/i, "the stack is chosen for fit; commerce has no banned framework (craft/stack.md)"]];
   for (const f of [...mdFiles, ...["README.md", "AGENTS.md", "rules/motomation.md", "rules/motomation.mdc", "docs/CHEATSHEET.md", "commands/motomation.md"].map((x) => join(ROOT, x))].filter((f) => existsSync(f) && !/principles\/heuristics\.md/.test(f))) { const t = readFileSync(f, "utf8"); for (const [re, why] of ABSOLUTES) if (re.test(t)) fail(`${f}: "${re.source}" is back as an absolute rule; ${why}`); }
   for (const [i, l] of src("principles/heuristics.md").split("\n").entries()) if (/^\| H-/.test(l) && l.split("|").slice(1, -1).some((c) => !c.trim())) fail(`principles/heuristics.md:${i + 1}: a heuristic needs all six columns (problem, applies, trade-off, ignore-when)`);
   const POLICY = [/Preserve the ideal product/, /Deferring a backend never removes/, /authority/i, /Product contract/, /Page count never decides/, /exact type/, /observed, inferred or unverified/, /derived scope wins/, /MEDIA\.md/, /a URL is not a licence/, /Design exploration/, /Functional frontend/, /Production template/, /not production-ready/];

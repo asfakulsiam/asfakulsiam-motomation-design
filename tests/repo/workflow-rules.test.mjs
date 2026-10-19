@@ -15,6 +15,10 @@ say(workflowProblems("p", job("    timeout-minutes: 5\n", NODE + PW)).some((p) =
 say(workflowProblems("c", job("    timeout-minutes: 5\n", "      - run: node x.mjs   # not npm \n")).length === 0, "a job without npm needs no npm cache");
 say(workflowProblems("s", job("    timeout-minutes: 5\n", "      - name: npm cache and playwright install, in prose\n        run: node x.mjs\n")).length === 0, "step names are prose: npm or playwright in a name is not a command");
 say(workflowProblems("e", job("    timeout-minutes: 5\n", "      - uses: actions/setup-node@v4\n        with: { node-version: \"${{ matrix.node, cache: npm }}\", cache: npm }\n")).some((p) => /swallows a YAML key/.test(p)), "an expression that swallows a YAML key fails (the C10 ci.yml break)");
+const OPT = "      - id: pw\n        continue-on-error: true\n        run: echo install\n";
+const GATED = "      - if: steps.pw.outcome == 'success'\n        run: node journey.mjs\n";
+say(workflowProblems("g", job("    timeout-minutes: 5\n", OPT + GATED)).some((p) => /skipped checks would look green/.test(p)), "an optional step gating later checks, with no failure path, fails (v3.0.2)");
+say(workflowProblems("h", job("    timeout-minutes: 5\n", OPT + "      - run: |\n          if [ \"${{ steps.pw.outcome }}\" != success ]; then exit 1; fi\n" + GATED)).length === 0, "the same with a step that exits 1 when it failed passes");
 const W = join(ROOT, ".github/workflows"); const real = readdirSync(W).filter((f) => f.endsWith(".yml")).flatMap((f) => workflowProblems(f, readFileSync(join(W, f), "utf8")));
 say(real.length === 0, `every real workflow is clean${real.length ? ": " + real.join("; ") : ""}`);
 console.log(fails ? `\n${fails} failure(s)` : "\nworkflow rules bite"); process.exit(fails ? 1 : 0);

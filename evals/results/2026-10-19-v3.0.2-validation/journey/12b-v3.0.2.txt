@@ -1,0 +1,16 @@
+journey: nav0 mobile0 forms0 loading- errors0 session0
+  nav · sitemap.xml: 22 route(s)
+  nav · 23 concrete route(s) from the Scope table
+  nav · 22 page(s) loaded
+  mobile · layout 4/4 width(s) fit (320✓ 375✓ 768✓ 1440✓) on 22 page(s)
+  mobile · 12 page(s); an element shared by several pages (header, footer) is tapped once
+  mobile · 3 control(s) disabled by an earlier tap (a selection limit reached) are skipped: a disabled control does nothing by specification
+  mobile · 12 element(s) parked off-canvas (skip links, closed drawers) are keyboard-only by design and not tapped
+  mobile · no element declares a long press
+  forms · 5 page(s) with forms checked: /shop, /contact, /subscriptions/build, /account/subscription, /checkout
+  forms · live control(s), no submit (applied on change, states not required): Origin All origins Bangladesh India Nepa (/shop)
+  forms · no request on submit, read by what it did (v3.0.2): Full name (/contact): simulated (disclosed) · 01 / Plan size (/subscriptions/build): browser-only (persisted: local:ll-cart-v1), then moves to /checkout · Choose a change (/account/subscription): browser-only (persisted: local:ll-subscription-v1)
+  forms · not checked (reported, not passed): 01 / Plan size (/subscriptions/build): validation not verified (not verified: the submit control is disabled while the form is incomplete, so an empty submit cannot happen); 01 / Delivery details (/checkout): default, validation, loading, success, serverError not verified (not verified: the form is hidden when the page loads (behind a state a fresh browser does not have, such as an empty cart or a signed-out account); walk it by hand)
+  errors · probed /__motomation-missing-mve9t491/
+  session · second page: /shop
+  operations: Full name (/contact): simulated, labelled · 01 / Plan size (/subscriptions/build): saved in this browser only · Choose a change (/account/subscription): saved in this browser only

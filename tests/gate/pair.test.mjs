@@ -18,6 +18,16 @@ say(skeleton('<body><form><input><select><option>a</select></form><main><h1>x</h
 say(coherence([{ display: "a", body: "b" }, { display: "a", body: "b" }, { display: "c", body: "b" }]).share === 0.67, "coherence: share of routes on the dominant pairing");
 const sf = sharedFiles(join(F, "archival"), join(F, "poster"));
 say(sf.presentation.length === 0 && sf.logic.join() === "order.js", `shared files: the shared order.js is logic, not presentation (${sf.logic.join(", ")})`);
+// v3.0.2: a structural pass with partial routes says so, and says it is not the rubric's strict every-axis test
+{
+  const { pairLines } = await import("../../skills/asfakulsiam-motomation-design/scripts/pair.mjs");
+  const mk = (cls) => ({ route: "/" + cls, class: cls, score: { structure: 0.3, composition: cls === "partial" ? 0.44 : 0.2, overall: 0.3 }, fn: {}, markup: 0.2 });
+  const base = { pass: true, threshold: 0.4, routes: { a: 3, b: 3, shared: 3, onlyA: [], onlyB: [], compared: ["/a", "/b", "/c"], skipped: [] }, viewports: ["1440x900"], coherence: { a: { share: 1 }, b: { share: 1 } }, sharedFiles: { presentation: [], logic: [] }, fails: [], notes: [], limits: "x" };
+  const t = pairLines({ ...base, per: [mk("recomposed"), mk("partial"), mk("partial")] }).join("\n");
+  say(/1 route\(s\) recomposed, 2 partial/.test(t) && /structural pass only/.test(t) && !/recomposed or partial/.test(t), "pair summary: partial routes are counted apart and the pass is labelled structural only");
+  const u = pairLines({ ...base, per: [mk("recomposed")] }).join("\n");
+  say(/1 route\(s\) recomposed, no shared/.test(u) && !/structural pass only/.test(u), "pair summary: an all-recomposed pair has no partial caveat");
+}
 const run = (...a) => { const r = spawnSync(process.execPath, [S, ...a, "--json"], { encoding: "utf8", maxBuffer: 32 << 20 }); return { code: r.status, j: r.status === 3 ? null : JSON.parse(r.stdout) }; };
 const rs = run(join(F, "archival"), join(F, "reskin"), "--viewport", "1440x900");
 if (rs.code === 3) { console.log("not verified — no browser"); process.exit(0); }

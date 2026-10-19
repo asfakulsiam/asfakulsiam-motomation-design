@@ -2,6 +2,8 @@
 
 Each example is a real session: the prompt, the commands that ran, their output, screenshots and the gate's verdict. Pick by what you're about to do.
 
+**Historical workflow.** These sessions were recorded with v2.x of the skill (each page names its version), before v3.0.0 put the product contract and research ahead of the concept. Their commands, outputs and gate results are real for that version; their step order (concept first, a signature per site, a seven-step sequence) is not the current workflow. The current one is in `SKILL.md` and `thinking/sequence.md`.
+
 | Example | Use it when you want to… | Route | Agent | Tier | Gate result |
 |---|---|---|---|---|---|
 | [Flagship: one prompt, the whole skill](showcase.md) | See every step of the full route once, including an Anti-Sameness Check that fails and a stamp traced field by field | Full | Perplexity Computer (Claude Opus 5.5), by hand | 2 | PASS, stamp verified (`93085a8d44`) |

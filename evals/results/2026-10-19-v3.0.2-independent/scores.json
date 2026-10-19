@@ -1,0 +1,48 @@
+{
+  "model_identity": "not exposed",
+  "build": "/home/user/workspace/bench/runs/05-saas-dashboard",
+  "served": "http://127.0.0.1:4410",
+  "gates": {
+    "product_integrity": "PASS",
+    "usability": "PASS",
+    "accessibility": "PASS",
+    "content_truth": "PASS"
+  },
+  "axes": {
+    "concept": 4,
+    "originality": 3,
+    "typography": 4,
+    "motion": 4,
+    "craft": 4,
+    "access_and_performance": 4
+  },
+  "weights": {
+    "concept": 20,
+    "originality": 20,
+    "typography": 15,
+    "motion": 15,
+    "craft": 15,
+    "access_and_performance": 15
+  },
+  "weighted_total": 76,
+  "weighted_total_formula": "(4*20 + 3*20 + 4*15 + 4*15 + 4*15 + 4*15) / 5 = 76",
+  "extra": {
+    "journey_completeness": 5,
+    "information_architecture": 4,
+    "responsive_usability": 4,
+    "motion_quality_and_restraint": 5,
+    "content_realism": 4,
+    "technical_reliability": 4
+  },
+  "commands": [
+    {"command": "PORT=4410 node server.mjs", "exit": "running", "note": "4305 already in use"},
+    {"command": "node scripts/completeness.mjs <project>", "exit": 0},
+    {"command": "node scripts/realism.mjs <project>", "exit": 0},
+    {"command": "node scripts/gate.mjs http://localhost:4410/dashboard --design DESIGN.md --journey --timeout 900 --no-record", "exit": 0},
+    {"command": "node evals/keyboard-walk.mjs dist --routes <required> --start /sign-in --journey Continue to demo>Add expense>Save expense --json", "exit": 0},
+    {"command": "node evals/keyboard-walk.mjs dist --routes /dashboard,/transactions,/invoices --start /dashboard --journey Invoices>New invoice>Save & preview|Transactions>Category --json", "exit": 0},
+    {"command": "node bench/judge/05-saas-dashboard/walk.mjs", "exit": 0, "note": "two earlier attempts exited 1 (import, then offline navigation)"},
+    {"command": "node bench/judge/05-saas-dashboard/followup.mjs", "exit": 0},
+    {"command": "node scripts/contrast.mjs <token pairs>", "exit": 0}
+  ]
+}

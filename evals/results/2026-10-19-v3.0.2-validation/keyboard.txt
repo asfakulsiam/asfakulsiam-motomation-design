@@ -1,0 +1,37 @@
+keyboard walk · runs/03-b2b
+  /: 40 stop(s); first a "Skip to main content" (skip link); trap none; focus not visible on 0; hidden but focusable 0
+  /pricing: 36 stop(s); first a "Skip to main content" (skip link); trap none; focus not visible on 0; hidden but focusable 0
+  /demo: 37 stop(s); first a "Skip to main content" (skip link); trap none; focus not visible on 0; hidden but focusable 0
+  /contact: 36 stop(s); first a "Skip to main content" (skip link); trap none; focus not visible on 0; hidden but focusable 0
+  journey ✓ Schedule Demo
+    ✓ "Schedule Demo" → a "Schedule Demo" (Enter) → /demo
+keyboard walk · runs/08-travel-booking
+  /: 35 stop(s); first a "Skip to content" (skip link); trap none; focus not visible on 0; hidden but focusable 0
+  /rooms: 37 stop(s); first a "Skip to content" (skip link); trap none; focus not visible on 0; hidden but focusable 0
+  /availability: 42 stop(s); first a "Skip to content" (skip link); trap none; focus not visible on 0; hidden but focusable 0
+  /contact: 22 stop(s); first a "Skip to content" (skip link); trap none; focus not visible on 0; hidden but focusable 0
+  journey ✓ Check availability
+    ✓ "Check availability" → a "Check availability ↗" (Enter) → /availability
+keyboard walk · runs/12-paired/a-archival
+  /: 31 stop(s); first a "Skip to content" (skip link); trap none; focus not visible on 0; hidden but focusable 0
+  /shop: 35 stop(s); first a "Skip to content" (skip link); trap none; focus not visible on 0; hidden but focusable 0
+  /contact: 25 stop(s); first a "Skip to content" (skip link); trap none; focus not visible on 0; hidden but focusable 0
+  /checkout: 19 stop(s); first a "Skip to content" (skip link); trap none; focus not visible on 0; hidden but focusable 0
+  /subscriptions: 21 stop(s); first a "Skip to content" (skip link); trap none; focus not visible on 0; hidden but focusable 0
+  journey ✓ Shop teas>Sylhet Black>Add to cart>Cart>Checkout
+    ✓ "Shop teas" → a "Shop teas" (Enter) → /shop
+    ✓ "Sylhet Black" → a "Sylhet Black" (Enter) → /tea/sylhet-black
+    ✓ "Add to cart" → button "Add to cart +" (Enter)
+    ✓ "Cart" → a "View cart & checkout ↗" (Enter) → /cart
+    ✓ "Checkout" → a "Checkout ↗" (Enter) → /checkout
+keyboard walk · runs/12-paired/b-poster
+  /: 30 stop(s); first a "Skip to content" (skip link); trap none; focus not visible on 0; hidden but focusable 0
+  /shop: 34 stop(s); first a "Skip to content" (skip link); trap none; focus not visible on 0; hidden but focusable 0
+  /contact: 25 stop(s); first a "Skip to content" (skip link); trap none; focus not visible on 0; hidden but focusable 0
+  /checkout: 19 stop(s); first a "Skip to content" (skip link); trap none; focus not visible on 0; hidden but focusable 0
+  journey ✓ Shop>Sylhet Black>Add to cart>Cart>Checkout
+    ✓ "Shop" → a "Shop the teas ↗" (Enter) → /shop
+    ✓ "Sylhet Black" → a "Sylhet Black" (Enter) → /tea/sylhet-black
+    ✓ "Add to cart" → button "Add to cart +" (Enter)
+    ✓ "Cart" → a "View cart & checkout ↗" (Enter) → /cart
+    ✓ "Checkout" → a "Checkout ↗" (Enter) → /checkout

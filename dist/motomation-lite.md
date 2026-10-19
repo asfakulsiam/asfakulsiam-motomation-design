@@ -1,4 +1,4 @@
-# Motomation Design v3.0.1: lite edition
+# Motomation Design v3.0.2: lite edition
 
 Lite edition. Full version at the repo. Dropped: Standards, heuristics and house style, Routes: full and light, Motion tiers, Part 3: Craft checklist.
 
@@ -68,7 +68,7 @@ These patterns became AI defaults. Each one is allowed only with a product or co
 - Put a stamp comment at the top of the main stylesheet or layout:
   `/* motomation · archetype: <x | none> · mutation: <y | none> · signature: <z | none> · tier: <n> · critique: <from gate.mjs> · gate: <from gate.mjs> */`
   The critique and gate segments are pasted from `node scripts/gate.mjs`, never typed. Each axis carries its trace, e.g. `H4[375:1]`. See `gates/delivery-gate.md`, Part 1.
-- **Report honestly.** Say what was verified (gate output, screenshots inspected, journeys clicked through) and what wasn't. Never claim a test passed, a source was browsed or a capability works without the evidence.
+- **Report honestly.** Say what was verified and what wasn't. The handoff status is the pasted `handoff.mjs` line, never typed (`gates/handoff.md`); a form never says "sent" without a request (`thinking/product-contract.md`).
 - End with: what you chose, what you rejected, and one thing to try next.
 
 ## Without a shell

@@ -31,6 +31,13 @@ export function workflowProblems(name, text) {
     const code = t.replace(/^\s*-?\s*name:.*$/gm, "").replace(/#.*$/gm, ""); // step names and comments are prose, not commands
     if (/(^|[\s;&|(])(npm|npx) /m.test(code) && !/setup-node@[\s\S]*?cache:\s*npm/.test(t)) out.push(`${name} job ${id}: runs npm but actions/setup-node has no cache: npm`);
     if (/playwright install/.test(code) && !/actions\/cache@[\s\S]*?~\/\.cache\/ms-playwright/.test(t)) out.push(`${name} job ${id}: installs Playwright but does not cache ~/.cache/ms-playwright`);
+    // v3.0.2: a step allowed to fail (continue-on-error) that gates later steps on its outcome must also make the job
+    // fail when it did fail; otherwise the gated checks are skipped and the job is green: a skip reported as a pass.
+    for (const m of t.matchAll(/id:\s*([A-Za-z0-9_-]+)\s*\n\s*continue-on-error:\s*true/g)) {
+      const sid = m[1];
+      if (new RegExp(`steps\\.${sid}\\.outcome\\s*==\\s*'success'`).test(t) && !new RegExp(`steps\\.${sid}\\.outcome[\\s\\S]*?exit 1`).test(t))
+        out.push(`${name} job ${id}: steps run only if '${sid}' succeeds, but nothing fails the job when '${sid}' fails (skipped checks would look green)`);
+    }
   }
   return out;
 }
