@@ -403,6 +403,15 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
   for (const t of known) if (!existsSync(join(ROOT, t))) fail(`scripts/test.mjs names ${t}, which does not exist`);
 }
 
+// 12d. The installable skill folder (what `npx skills add` copies, and what build-dist/build-lite read) carries no
+//      benchmark evidence: no run folders, transcripts, gate records or cost/meta files (v3.0.2). Evidence lives in
+//      evals/results/ (text) and on the benchmarks/* branches (sites, screenshots).
+{
+  const leaked = execFileSync("git", ["ls-files", "skills"], { cwd: ROOT, encoding: "utf8" }).split("\n")
+    .filter((f) => /(^|\/)(evals|runs|benchmarks?|bench-[^/]*)\/|transcript|gate-record\.json$|(^|\/)(cost|meta)\.json$/i.test(f));
+  for (const f of leaked) fail(`${f}: benchmark evidence inside the installable skill folder (keep it in evals/results/ or a benchmarks/* branch)`);
+}
+
 // 13. docs/benchmark-summary.md names the newest main benchmark report as current.
 //     Main reports are evals/results/<date>-benchmark[-v<N>].md (companion reports have a suffix after the version).
 {
