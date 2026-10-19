@@ -53,7 +53,7 @@ Before any design step, know what you are building in. The stack changes what th
 
    | Stack | When | Adapter |
    |---|---|---|
-   | **Next.js (App Router, TS, Tailwind): the default** | anything with routes or data; commerce | `adapters/next.md` |
+   | **Next.js (App Router, TS, Tailwind): the default** | anything with routes or data, including most commerce (alternatives: `craft/stack.md`) | `adapters/next.md` |
    | Plain HTML/CSS/JS | a single static page | `adapters/vanilla.md` |
    | Astro | content-heavy, mostly static sites, or when the brief asks | `adapters/astro.md` |
    | React + Vite | a client-only embed or prototype | `adapters/react-vite.md` |

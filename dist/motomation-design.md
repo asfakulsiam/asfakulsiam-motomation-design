@@ -461,7 +461,7 @@ Before any design step, know what you are building in. The stack changes what th
 
    | Stack | When | Adapter |
    |---|---|---|
-   | **Next.js (App Router, TS, Tailwind): the default** | anything with routes or data; commerce | `adapters/next.md` |
+   | **Next.js (App Router, TS, Tailwind): the default** | anything with routes or data, including most commerce (alternatives: `craft/stack.md`) | `adapters/next.md` |
    | Plain HTML/CSS/JS | a single static page | `adapters/vanilla.md` |
    | Astro | content-heavy, mostly static sites, or when the brief asks | `adapters/astro.md` |
    | React + Vite | a client-only embed or prototype | `adapters/react-vite.md` |
@@ -4394,9 +4394,17 @@ as "relative (local)". Schema markup only warns: whether a page is eligible is a
 
 Step 0 of `thinking/sequence.md` decides the stack. This file holds the default and the three checks every dependency passes.
 
-### The default
+### The default, and when it yields
 
-**Next.js (App Router, TypeScript, Tailwind CSS)** for anything with routes or data. Adapter: `adapters/next.md`.
+**Next.js (App Router, TypeScript, Tailwind CSS)** is the default for anything with routes or data when nothing in the project points elsewhere. Adapter: `adapters/next.md`. A default is a starting point, not a rule: an existing repository, a stated constraint or the product's own needs outrank it (`principles/authority.md`).
+
+What decides the stack, in this order:
+
+1. **What already exists**: the repository's framework, component system, package policy and deployment.
+2. **What the product needs**: rendering (static, server, client-only), routes, data fetching, persistence, authentication, payments and other integrations (`thinking/product-contract.md`, capability levels).
+3. **Where it runs**: the hosting the brief names or the team uses, and what that host serves well.
+4. **Performance and accessibility** for the tier and content (`gates/rules.md`).
+5. **Who maintains it**: the team's skills, cost, licences, compatibility with the dependencies the product needs.
 
 | The brief | Stack |
 |---|---|
@@ -4404,11 +4412,11 @@ Step 0 of `thinking/sequence.md` decides the stack. This file holds the default 
 | says "ask me" | propose at Checkpoint 1 (`thinking/sequence.md`), Next.js as the default, with the alternatives |
 | says "you choose", or names none, and the site has routes or data | Next.js |
 | is a single static page (one route, no data, no build step wanted) | plain HTML/CSS/JS is fine (`adapters/vanilla.md`) |
-| is e-commerce | Next.js. Never Astro or React + Vite for e-commerce unless the brief demands it |
+| is e-commerce | usually Next.js (server-rendered product pages, cart and checkout routes, payment integrations). Astro (static catalogue with interactive islands, or in front of a hosted commerce backend) or a React + Vite client behind an existing API is a valid choice when the existing project, the commerce platform or the hosting points to it; say which and why |
 | is a client-only embed or prototype the brief asks for as such | React + Vite (`adapters/react-vite.md`) |
-| is content-only and the brief asks for Astro | Astro (`adapters/astro.md`) |
+| is content-heavy and mostly static (editorial, docs, a publication), or the brief asks for Astro | Astro is a strong fit (`adapters/astro.md`) |
 
-Never pick a stack because it was the last one used. The choice and its reason go in the plan and in `DESIGN.md` under `Stack`.
+Never pick a stack because it was the last one used. The choice goes in the plan and in `DESIGN.md` under `Stack` with three things: why it fits this project (the factors above), the meaningful trade-offs, and the alternatives considered.
 
 ### Dependencies
 
