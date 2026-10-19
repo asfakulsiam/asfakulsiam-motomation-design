@@ -328,17 +328,17 @@ See them all live: open [`examples/gallery/index.html`](skills/asfakulsiam-motom
 
 ---
 
-## Benchmark summary
+## Evaluation summary
 
-The latest scored benchmark is **v3** (2026-10-12): five briefs × three seeds in Claude Code, judged blind in pairs by two models from other families. The skill beat a no-skill baseline 12–2–1 and a matched-effort baseline 10–5–0 (not significant with 15 pairs, sign test p≈0.30). It **lost on motion alone** (3–6 at Tier 4, judged from scroll strips). v4 generated builds but was never scored.
+What has been measured, by whom, and on which version. A passing automated check means the measured rules passed; it is not evidence of award-level design.
 
-| Skill vs… (15 blind pairs each) | Skill W–L–T | Mean gated (other → skill) |
-|---|---|---|
-| Baseline (no skill) | **12–2–1** | 43.4 → 83.7 |
-| Matched-effort baseline | **10–5–0** | 63.7 → 80.4 |
-| Tier 4 motion, motion only (9 pairs) | **3–6–0** | 77.3 → 64.4 |
+| Evidence | Skill version | What it shows | Limits |
+|---|---|---|---|
+| Scored benchmark v3 (2026-10-12): 5 briefs × 3 seeds, blind pairwise judging by two models from other families | **v2.3.0** (`6f2724f`), before the v3 product-first architecture | beat a no-skill baseline 12–2–1 and a matched-effort baseline 10–5–0 (sign test p≈0.30, not significant); lost on Tier 4 motion 3–6 | one agent, 15 pairs; says nothing directly about 3.x |
+| Independent builds (2026-10-18): 4 builds of 3 v6 briefs by agents that did not write the skill | v3.0.0 (`226085d`) and the v3.0.1 working tree | completeness and realism passed on all 4; the journey check failed on 3 of 4 ([report](docs/VALIDATION-v3.0.1.md)) | 3 product types (B2B, booking, boutique commerce) |
+| Independent scoring of those 4 builds (2026-10-19) by a separate evaluator model | same builds, rescored with v3.0.2 checkers | B2B failed the gates; the others scored 70, 81 and 84/100; the paired builds failed the strict originality test ([scores](evals/results/2026-10-19-v3.0.2-validation/independent/SCORES.md), [report](docs/VALIDATION-v3.0.2.md)) | one evaluator, no human judging, no new 3.0.2 builds |
 
-Full tables per brief, competitor skills, the Codex run, before-and-after screenshots with losses, and v1, v2 and v4: **[docs/benchmark-summary.md](docs/benchmark-summary.md)**. Reports: [v3](evals/results/2026-10-12-benchmark-v3.md) · [v4 (builds only)](evals/results/2026-10-12-benchmark-v4.md) · [v2](evals/results/2026-10-11-benchmark-v2.md).
+No scored benchmark has been run on 3.x yet. Full history (v1–v4, competitor skills, the Codex run, screenshots including losses): **[docs/benchmark-summary.md](docs/benchmark-summary.md)**. Builds and screenshots live on the evidence branches [`benchmarks/v3.0.1-runs`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/tree/benchmarks/v3.0.1-runs) and [`benchmarks/v3.0.2-scoring`](https://github.com/asfakulsiam/asfakulsiam-motomation-design/tree/benchmarks/v3.0.2-scoring), not on `main`.
 
 ---
 
