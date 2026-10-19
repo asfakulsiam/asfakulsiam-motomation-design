@@ -149,6 +149,8 @@ The axes above check the page the gate was given. Axis J starts from that page a
 
 A check with nothing to check (no form, no request after load, no long press) prints `n/a` with the reason and does not fail. Everything else is counted: the line `journey: nav0 mobile0 forms0 loading0 errors0 session0` must be all zeros (a `-` is n/a). J is not in the stamp or its id, like X: the stamp describes one page, J the site around it. Fixtures: `fixtures/journey/complete/` passes all six; `fixtures/journey/incomplete/` fails all six.
 
+**What J does not verify** (list these under Not verified in the handoff when the product has them): reset buttons and what a form looks like after a reset (J fills and submits; it never presses `type=reset`); later steps of a multi-step flow beyond the next step J reaches after a submit; behaviour that needs a real backend, payment provider or email; screen readers, real devices and keyboard-only use (a keyboard walk is a separate, manual check). A green J line means the six measured checks passed on the pages J reached, not that every journey was walked.
+
 ### Axis O: originality across briefs (`scripts/originality.mjs`)
 
 The table above checks one page against rules. It cannot see that two unrelated briefs came out as the same shape. Axis **O** compares this build with builds made for **other, unrelated briefs** and scores every pair from 0 (nothing shared) to 1 (the same) on six axes, all measured in a real browser at 1440×900:
