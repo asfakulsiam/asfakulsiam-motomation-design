@@ -1,0 +1,29 @@
+COMMAND: "bash" "-lc" "sed -n \"1626,1647p\" /home/user/workspace/bench/skill-52255c0/scripts/gate.mjs; date -Iseconds"
+START: 2026-10-19T05:40:54.929Z
+    }
+    if (flags.verify) {
+      const file = String(flags.verify); const st = readStamp(readFileSync(file, "utf8"));
+      if (!st) verdict(`STAMP REJECTED · ${file}: no motomation stamp comment found`, 2);
+      if (!st.gate) verdict(`STAMP REJECTED · ${file}: the stamp has no measured gate values (a hand-written or copied stamp). Run node scripts/gate.mjs and paste its stamp.\n  found: ${st.raw.slice(0, 160)}`, 2);
+      if (!st.critique) verdict(`STAMP REJECTED · ${file}: no critique segment. Paste the full "critique: … · gate: …" line gate.mjs printed.`, 2);
+      if (st.gate.version !== GATE_VERSION) verdict(`STAMP REJECTED · ${file}: stamp is ${st.gate.version}; this gate is ${GATE_VERSION} (gate/4 adds the four rule sets, rules: C copy · S SEO · P performance · K security; gate/3 added Q and A). Re-gate the page and paste the new line.`, 2);
+      if (!/^C\d\[[^\]]+\] H\d\[[^\]]+\] S\d\[[^\]]+\] R\d\[[^\]]+\] M\d\[[^\]]+\] V\d\[[^\]]+\] Q\d\[[^\]]+\] A\d\[[^\]]+\]$/.test(st.critique)) verdict(`STAMP REJECTED · ${file}: critique "${st.critique}" is not traced. Every axis needs its number and the check it came from, e.g. H4[375:1]. Unmeasured scores are rejected.`, 2);
+      const x = await withRetry(pw, file, (b) => scan(flags.url ? String(flags.url) : file, b, opts)); note(x); const r = x.value; await x.browser.close().catch(() => {}); print(r);
+      console.log(`  stamp skips: ${st.gate.skipped ? `${st.gate.skipped.skipped}/${st.gate.skipped.total}@${st.gate.skipped.width}` : "not recorded (stamp predates the coverage field)"} · fresh scan: ${r.coverage.skipped}/${r.coverage.total}@${r.coverage.width} (${r.coverage.pct}%)`);
+      if (!r.coverage.ok) notVerified(`coverage: ${r.coverage.skipped} of ${r.coverage.total} text elements (${r.coverage.pct}%) skipped at ${r.coverage.width}px; more than ${SKIP_WARN_PCT}% at ${r.coverage.low.join("/")}px, so the stamp cannot be checked`);
+      // the progression Δ is a pixel measurement that varies slightly between scans; it must agree on pass/fail
+      // (the Q score), not to the decimal
+      const norm = (c) => c.replace(/prog:Δ[\d.]+%/, "prog:Δ");
+      if (norm(st.critique) !== norm(r.critique)) verdict(`STAMP REJECTED · critique says "${st.critique}" but the checks give "${r.critique}"`, 2);
+      for (const g of [st.gate, ...st.others.map((o) => o.gate)]) {
+        const same = JSON.stringify(g.counts) === JSON.stringify(r.counts) && g.id === r.id && g.version === r.version;
+        if (!same) verdict(`STAMP REJECTED · stamp says "${stampOf(g.counts, g.id, null, g.version)}" but a fresh scan measures "${r.stamp}"`, 2);
+      }
+      verdict(`STAMP VERIFIED · critique and gate numbers match a fresh scan${r.pass ? " · gate PASS" : " · but the gate FAILS (the stamp honestly records failures)"}`, r.pass ? 0 : 1);
+    }
+    const all = [];
+2026-10-19T05:40:54+00:00
+
+EXIT: 0
+END: 2026-10-19T05:40:54.940Z
+

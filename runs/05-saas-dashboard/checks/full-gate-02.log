@@ -1,0 +1,93 @@
+COMMAND: "node" "/home/user/workspace/bench/skill-52255c0/scripts/gate.mjs" "http://localhost:4305/dashboard" "--design" "/home/user/workspace/bench/runs/05-saas-dashboard/DESIGN.md" "--record" "/home/user/workspace/bench/runs/05-saas-dashboard" "--tier" "1" "--archetype" "none" "--signature" "none" "--timeout" "900"
+START: 2026-10-19T05:42:33.806Z
+DELIVERY GATE · http://localhost:4305/dashboard
+  contrast  ✓ 0 below AA across 375/390/768/1440px  (measured against rendered pixels at each width)
+      375px  ✓ 0 below AA  (90 measured; 21 skipped; 0 not visible at scan time)
+      390px  ✓ 0 below AA  (90 measured; 21 skipped; 0 not visible at scan time)
+      768px  ✓ 0 below AA  (109 measured; 21 skipped; 0 not visible at scan time)
+     1440px  ✓ 0 below AA  (109 measured; 21 skipped; 0 not visible at scan time)
+  overflow  ✓ 0 at 375/390/768/1440px
+  words     ✓ 0 display-text problems at 375px  (5 display elements checked)
+  motion    ✓ 0 text elements hidden only under reduced motion; pixels changing on a still page: 0%  (130 compared)
+  names     ✓ 0 missing alt / accessible names  (31 interactive elements checked)
+  numbers   ✓ 0 values shown wrong before they settle  (59 numbers checked at scroll 0, scroll end and reduced motion; 0 live values skipped)
+  progress  ✓ 0 of 0 pinned/scrubbed zone(s) static (median change between 8 scroll samples ≤ 0.5% of pixels)
+  smooth    – no pinned zone, not measured
+  rm-flow   – no pinned zone
+  rm-still  – no motion that needs a still (no zone, canvas, video or looping animation)
+  focus     ✓ 0 of 31 focused elements show no visible focus indicator  (31 tabbable)
+  targets   ✓ 0 under 24px, 10 under 44px (warning) at 375 touch  (25 checked; inline links exempt)
+     92×28  a  "Manage data"
+     169×30  a.text-link  "View connection settings"
+     71×30  a.text-link  "View all"
+     68×24  a.record-link  "Shop sales"
+  zoom200   ✓ 0 lost at 200% (1440×900 → 720×450): text clipped or controls unreachable that were fine at 100%
+  reflow    ✓ 0px horizontal scroll at 320px
+  forced    ✗ 1 of 80 texts illegible in forced colors (rendered ink under 3:1 against its box, or no ink)
+     1:1  td  "$643.00"  forced-color-adjust: auto
+  kbd-trap  ✓ 31 of 31 tabbable reached in 68 Tabs, no cycle
+  C copy     ✓ 0 rule(s) failing  (craft/copy.md; 0 warning(s))
+  S SEO      ✓ 0 rule(s) failing  (craft/seo.md; 2 warning(s))
+     ⚠ seo-04  canonical "/dashboard" is not absolute (accepted for a local file)
+     ⚠ seo-10  no JSON-LD; add Product, Article, FAQ, Event or Organization where the page is eligible
+  P perf     ✓ 0 rule(s) failing  (craft/performance.md; 0 warning(s))
+  K security ✓ 0 rule(s) failing  (craft/security.md; 0 warning(s))
+  composition (advisory: heuristics, never fail the gate, not in the stamp)
+     pin fill  – no pinned zone
+     focal     ⚠ 0 of 2 screen(s) with text have one clear focal point (heaviest text mass ≥ 1.5× the next); no clear lead on screen 1 (1.22×), 2 (1.22×)
+     scale     ⚠ display:body 1:2.9  (35px / 12px; warn below 1:6)
+  richness (advisory: "too little" warnings, never fail the gate, not in the stamp)
+     page      page (from path; set with --page home|category|about|page)
+     fold      ✓ 11 meaningful section(s) above the fold at 1440×900: nav nav, heading h1, heading h2, heading h2, heading h2, heading h2, text p, text p, text p.muted, text p, action a.wordmark  (warn below 3)
+  micro-states (advisory: missing states are warnings, never fail the gate, not in the stamp)
+     buttons   – none on the page
+     forms     – none on the page
+     lists     – none on the page
+     images    – none on the page
+     async     – no async actions in the page's scripts
+  hierarchy  h1×1, 0 skipped heading levels, 1 element(s) tied for largest on the first 375px screen
+  structure  5 sections, entrances: static | static | static | static | static → 0 repeat(s); pins 0, WebGL canvases 0, JS 20KB gzipped
+  records    DESIGN.md: /home/user/workspace/bench/runs/05-saas-dashboard/DESIGN.md · memory log: /home/user/workspace/bench/runs/05-saas-dashboard/.motomation/log.json · stamp fields: {"archetype":"none","signature":"none","tier":"1"}
+  critique → C5[restraint:kept] H5[375:0] S5[last5:none,self-excluded] R5[cuts:4,anim:3] M5[t1:pins0/2,webgl0/1,js20/30KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A4[focus:31/31,tgt:0f10w,zoom:0,reflow:0,fc:1,trap:0]
+  coverage   ✓ worst width 375px: 21 of 111 text elements skipped (19%; limit 30% at every width)
+  X — completeness (signed-in small-business finance dashboard; local fictional evaluation, no launch region., admin panel: no) [functional frontend]  ✓
+      Routes:      16/16 required present
+      Journeys:    3/3 connected
+      Functions:   4/4 present · 3 not required (reason given)
+      States:      4/4 defined
+      Legal:       0/0 present · 1 not required (reason given)
+      Edge cases:  1/1 handled
+      Admin:       0/0 present · 1 not required (reason given)
+      Skeletons:   0/0 present · 1 not required (reason given)
+      Template:    19/19 present · 1 not required (reason given)
+  J — journey (whole site, real browser; any missing state fails the page; not in the stamp or its id)
+    nav      ✓ 15/15 route(s) reachable from home in ≤ 3 clicks (/dashboard:0 /transactions:1 /invoices:1 /customers:1 /settings:1 /sign-in:1 /expenses/new:1 /invoices/new:1 …)
+               · sitemap.xml: 15 route(s)
+               · 16 concrete route(s) from the Scope table
+               · reached outside the link graph, declared: /expenses/saved (flow), /invoices/sent (flow)
+               · 13 page(s) loaded
+    mobile   ✓ 149/149 interactive element(s) respond at 375px · tap 149/149 · swipe n/a · long-press n/a
+               · layout 4/4 width(s) fit (320✓ 375✓ 768✓ 1440✓) on 13 page(s)
+               · 12 page(s); an element shared by several pages (header, footer) is tapped once
+               · 12 element(s) parked off-canvas (skip links, closed drawers) are keyboard-only by design and not tapped
+               · no element declares a long press
+    forms    ✓ 30/30 form state(s) rendered · Name * (/settings): default✓ validation✓ feedback✓ persisted✓ honest✓ · Business name * (/settings): default✓ validation✓ feedback✓ persisted✓ honest✓ · Invoice reminders Remind me when an invo (/settings): default✓ validation✓ feedback✓ persisted✓ honest✓ · Open your workspace (/sign-in): default✓ validation✓ feedback✓ persisted✓ honest✓ · Expense details (/expenses/new): default✓ validation✓ feedback✓ persisted✓ honest✓ · Invoice details (/invoices/new): default✓ validation✓ feedback✓ persisted✓ honest✓
+               · 4 page(s) with forms checked: /settings, /sign-in, /expenses/new, /invoices/new
+               · no request on submit, read by what it did (v3.0.2): Name * (/settings): browser-only (persisted: local:ledgerly.workspace.v1) · Business name * (/settings): browser-only (persisted: local:ledgerly.workspace.v1) · Invoice reminders Remind me when an invo (/settings): browser-only (persisted: local:ledgerly.workspace.v1) · Open your workspace (/sign-in): browser-only (persisted: local:ledgerly.workspace.v1) … 2 more
+    loading  – n/a: no fetch or XHR request after load: no async surface
+    errors   ✓ 1/1 designed not-found view (unknown route → HTTP 404)
+               · probed /__motomation-missing-mveu7jos/
+    session  ✓ 6/6 · load ✓ · open a second route ✓ · back button ✓ · forward button ✓ · full reload ✓ · two tabs ✓
+               · second page: /transactions
+    coverage 13 page(s) loaded of 15 required route(s) · forms checked on every page that has one (4 page(s), 6 form(s)) · tap and loading sampled on 12 page(s)
+               · Scope routes no link reaches (check them in the journey walk): /expenses/saved, /invoices/sent, /404
+               · not sampled for tap/loading: /error
+    journey: nav0 mobile0 forms0 loading- errors0 session0 → PASS
+  FAIL  stamp → critique: C5[restraint:kept] H5[375:0] S5[last5:none,self-excluded] R5[cuts:4,anim:3] M5[t1:pins0/2,webgl0/1,js20/30KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A4[focus:31/31,tgt:0f10w,zoom:0,reflow:0,fc:1,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k1 · rules: C0 S0 P0 K0 · gate/4 · 9d7c0d59bd · skipped 21/111@375
+
+gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+gate: record → /home/user/workspace/bench/runs/05-saas-dashboard/.motomation/gate-record.json (full; node scripts/handoff.mjs /home/user/workspace/bench/runs/05-saas-dashboard gives the handoff status)
+
+EXIT: 1
+END: 2026-10-19T05:52:18.242Z
+

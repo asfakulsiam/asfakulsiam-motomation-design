@@ -1,0 +1,9 @@
+COMMAND: "node" "checks/stamp.mjs" "full-gate-04"
+START: 2026-10-19T06:13:53.450Z
+Measured dashboard stamp copied to src/styles.css
+Measured dashboard stamp copied to dist/styles.css
+critique: C5[restraint:kept] H5[375:0] S5[last5:none,self-excluded] R5[cuts:4,anim:3] M5[t1:pins0/2,webgl0/1,js20/30KB,rm0] V5[entrance-repeats:0] Q5[prog:n/a,smooth:n/a,rm:n/a] A5[focus:31/31,tgt:0f10w,zoom:0,reflow:0,fc:0,trap:0] · gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · 6227d76815 · skipped 0/87@375
+
+EXIT: 0
+END: 2026-10-19T06:13:53.524Z
+

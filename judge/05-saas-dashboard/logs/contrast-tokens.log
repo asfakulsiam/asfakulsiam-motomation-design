@@ -1,0 +1,10 @@
+COMMANDS (skill contrast.mjs), all exit 0:
+#232b25 on #f5f3ed: 13.10:1  body PASS · large PASS · AAA PASS
+#232b25 on #ffffff: 14.54:1  body PASS · large PASS · AAA PASS
+#596157 on #f5f3ed: 5.78:1  body PASS · large PASS · AAA —
+#596157 on #ffffff: 6.41:1  body PASS · large PASS · AAA —
+#ffffff on #9b4229: 6.55:1  body PASS · large PASS · AAA —
+#294b3e on #eaf0e7: 8.34:1  body PASS · large PASS · AAA PASS
+#294b3e on #f5f3ed: 8.72:1  body PASS · large PASS · AAA PASS
+
+NOTE: A Playwright getComputedStyle ratio against transparent backgrounds is invalid and was not used as a contrast failure. Full gate.mjs pixel contrast (axes c/o/w/rm/a/n/q/k) was not re-run.

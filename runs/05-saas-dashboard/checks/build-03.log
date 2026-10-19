@@ -1,0 +1,11 @@
+COMMAND: "npm" "run" "build"
+START: 2026-10-19T05:28:00.222Z
+
+> ledgerly-local-benchmark@1.0.0 build
+> node build.mjs
+
+Built 16 entry routes plus designed 404 in /home/user/workspace/bench/runs/05-saas-dashboard/dist
+
+EXIT: 0
+END: 2026-10-19T05:28:00.445Z
+

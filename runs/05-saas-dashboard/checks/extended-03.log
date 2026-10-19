@@ -1,0 +1,24 @@
+COMMAND: "node" "checks/extended.mjs"
+START: 2026-10-19T05:42:02.238Z
+PASS 320: 13 route layouts and control bounds
+PASS 390: 13 route layouts and control bounds
+PASS 720: 13 route layouts and control bounds
+PASS 1024: 13 route layouts and control bounds
+PASS keyboard skip link, main focus and 12 further Tab steps with visible focus; not a complete assistive-technology audit
+PASS native dialog Escape dismissal
+PASS transaction CSV download
+PASS numeric amount and chronological date ordering
+PASS invalid date range and empty search state
+PASS existing invoice draft edit survives reload
+PASS existing customer edit survives reload
+PASS workspace JSON download
+PASS second-tab business update after storage event
+PASS corrected required inputs clear validation styling and summary
+PASS already-open workspace expense saves and navigates offline
+PASS reduced-motion document has no running animation
+PASS cross-tab active-form conflict blocks submit until reload
+PASS structurally readable but invalid-date JSON opens recovery instead of crashing
+
+EXIT: 0
+END: 2026-10-19T05:42:08.847Z
+

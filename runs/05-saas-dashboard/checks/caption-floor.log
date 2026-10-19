@@ -1,0 +1,7 @@
+COMMAND: "node" "--input-type=module" "-e" "import{readFileSync,writeFileSync}from'node:fs';const p='src/styles.css';const x=readFileSync(p,'utf8');const hits=[...x.matchAll(/font-size:(?:8|9|10|11)px/g)].length;writeFileSync(p,x.replace(/font-size:(?:8|9|10|11)px/g,'font-size:12px'));console.log('Raised '+hits+' caption declarations to 12px floor.');"
+START: 2026-10-19T05:28:00.085Z
+Raised 85 caption declarations to 12px floor.
+
+EXIT: 0
+END: 2026-10-19T05:28:00.152Z
+

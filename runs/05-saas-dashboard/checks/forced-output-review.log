@@ -1,0 +1,17 @@
+COMMAND: "bash" "-lc" "tail -10 checks/forced-colors-01.log; tail -5 checks/journeys-07.log 2>/dev/null; date -Iseconds"
+START: 2026-10-19T05:53:34.882Z
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    }
+  ]
+}
+
+EXIT: 0
+END: 2026-10-19T05:53:28.283Z
+
+2026-10-19T05:53:34+00:00
+
+EXIT: 0
+END: 2026-10-19T05:53:34.954Z
+

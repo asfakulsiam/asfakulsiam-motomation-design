@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "runs": [
+    {
+      "date": "2026-10-19T05:34:46.542Z",
+      "dir": "/home/user/workspace/bench/runs/05-saas-dashboard",
+      "category": "saas-dashboard",
+      "archetype": "none",
+      "signature": "none",
+      "fonts": "DM Sans/Georgia",
+      "palette": "#f5f3ed #294c38 #9b4229",
+      "motion": "CSS press feedback only; instant tasks",
+      "tier": "1",
+      "project": "/home/user/workspace/bench/runs/05-saas-dashboard",
+      "brief": "Ledgerly local small-business finance dashboard",
+      "fingerprint": {
+        "tier": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "demo": true,
+  "entity": "profile",
+  "items": [
+    {
+      "name": "Alex Morgan",
+      "email": "alex@example.com",
+      "demo": true
+    }
+  ]
+}

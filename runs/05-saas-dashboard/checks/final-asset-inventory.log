@@ -1,0 +1,17 @@
+COMMAND: "bash" "-lc" "printf \"RUNTIME\\n\"; wc -c src/app.js src/styles.css; printf \"SCREENSHOT COUNTS\\n\"; printf \"full PNG: \"; rg --files screens | rg \"/(1440|375|768)-[0-9]+-.*png$\" | wc -l; printf \"viewport PNG: \"; rg --files screens | rg \"viewport.*png$\" | wc -l; printf \"HTTP 404\\n\"; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4305/missing-final; printf \"CLOCK\\n\"; date -Iseconds"
+START: 2026-10-19T05:42:27.821Z
+RUNTIME
+ 59019 src/app.js
+ 43034 src/styles.css
+102053 total
+SCREENSHOT COUNTS
+full PNG: 82
+viewport PNG: 81
+HTTP 404
+404
+CLOCK
+2026-10-19T05:42:27+00:00
+
+EXIT: 0
+END: 2026-10-19T05:42:27.848Z
+

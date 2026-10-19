@@ -1,0 +1,63 @@
+COMMAND: "node" "/home/user/workspace/bench/skill-52255c0/scripts/search.mjs" "fonts" "small business finance warm legible"
+START: 2026-10-19T05:12:31.172Z
+fonts: top 5 for "small business finance warm legible"
+
+■ Petrona  (score 3.38)
+  source         Google Fonts
+  license        OFL
+  role           text/display serif
+  axes           wght
+  personality    energetic serif with wide weight range from hairline to black
+  pairs_with     Albert Sans; DM Sans
+  use_for        editorial features, food writing, culture sites
+  avoid          formal finance
+  scripts        latin vietnamese
+
+■ Tilt Warp  (score 3.12)
+  source         Google Fonts
+  license        OFL
+  role           display sans
+  axes           XROT YROT
+  personality    chunky display face with rotation axes that tilt the letters in 3D
+  pairs_with     Work Sans; DM Mono
+  use_for        playful kinetic headlines, children's and game sites
+  avoid          body text, serious finance
+  scripts        latin vietnamese
+
+■ Gambetta  (score 2.90)
+  source         Fontshare
+  license        ITF Free Font License
+  role           text/display serif
+  axes           wght
+  personality    warm robust serif
+  pairs_with     Satoshi; Switzer
+  use_for        organic, food, publishing
+  avoid          neobrutalism
+  scripts        latin (check the foundry's language list)
+
+■ Instrument Sans  (score 2.82)
+  source         Google Fonts
+  license        OFL
+  role           text/display sans
+  axes           wdth wght
+  personality    precise neo-grotesk with a width axis
+  pairs_with     Instrument Serif; Fraunces
+  use_for        SaaS, studios, minimal
+  avoid          when you need warmth
+  scripts        latin
+
+■ Crimson Pro  (score 2.73)
+  source         Google Fonts
+  license        OFL
+  role           text serif
+  axes           wght
+  personality    Garalde book face, quiet and warm in running text
+  pairs_with     Work Sans; Figtree
+  use_for        books, poetry, academic writing
+  avoid          bold display shouting
+  scripts        latin vietnamese
+
+
+EXIT: 0
+END: 2026-10-19T05:12:31.256Z
+

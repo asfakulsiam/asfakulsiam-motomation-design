@@ -1,0 +1,32 @@
+{
+  "started": "2026-10-19T06:03:49.068Z",
+  "widths": [
+    {
+      "width": 1440,
+      "coreJourneys": "passed with assertions",
+      "screenshots": 27,
+      "expenseBefore": "$2,732.30",
+      "expenseAfter": "$2,775.05",
+      "pageErrors": []
+    },
+    {
+      "width": 375,
+      "coreJourneys": "passed with assertions",
+      "screenshots": 27,
+      "expenseBefore": "$2,732.30",
+      "expenseAfter": "$2,775.05",
+      "pageErrors": []
+    },
+    {
+      "width": 768,
+      "coreJourneys": "passed with assertions",
+      "screenshots": 27,
+      "expenseBefore": "$2,732.30",
+      "expenseAfter": "$2,775.05",
+      "pageErrors": []
+    }
+  ],
+  "errors": [],
+  "ended": "2026-10-19T06:04:04.333Z",
+  "pass": true
+}

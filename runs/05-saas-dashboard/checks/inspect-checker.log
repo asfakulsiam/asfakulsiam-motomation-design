@@ -1,0 +1,138 @@
+COMMAND: "bash" "-lc" "sed -n '90,124p' /home/user/workspace/bench/skill-52255c0/scripts/completeness.mjs; sed -n '308,357p' /home/user/workspace/bench/skill-52255c0/scripts/completeness.mjs; sed -n '1,140p' /home/user/workspace/bench/skill-52255c0/gates/handoff.md"
+START: 2026-10-19T05:25:22.449Z
+// every route the project serves, read from the file system: Next.js app/ and pages/, then static HTML
+function walk(dir, out = [], depth = 0) {
+  if (depth > 12 || !existsSync(dir)) return out;
+  for (const e of readdirSync(dir, { withFileTypes: true })) {
+    if (e.name === "node_modules" || e.name.startsWith(".")) continue;
+    const p = join(dir, e.name); if (e.isDirectory()) walk(p, out, depth + 1); else out.push(p);
+  }
+  return out;
+}
+// build output (out/ dist/ build/ .next/), matched on the path inside the project: a project kept under a folder with
+// one of those names (~/build/site) is still checked
+const BUILT = /(^|\/)(out|dist|build|\.next)\//;
+const rel = (root, p) => relative(root, p).split(sep).join("/");
+const built = (root, p) => BUILT.test(rel(root, p));
+const norm = (r) => { let x = "/" + String(r).trim().replace(/^\/+|\/+$/g, ""); x = x.replace(/\[\[?\.{3}[^\]]+\]?\]/g, "[...]").replace(/\[[^\].]+\]/g, "[*]").replace(/:[a-z0-9_]+/gi, "[*]"); return x === "/" ? "/" : x.toLowerCase(); };
+export function projectRoutes(root) {
+  const routes = new Set();
+  for (const app of ["app", "src/app"]) for (const f of walk(join(root, app))) {
+    const m = /[\\/](page|route)\.(tsx|ts|jsx|js|mdx)$/.exec(f); if (!m) continue;
+    const segs = relative(join(root, app), dirname(f)).split(sep).filter((s) => s && !/^\(.*\)$/.test(s) && !s.startsWith("@") && s !== ".");
+    routes.add(norm(segs.join("/")));
+  }
+  for (const pages of ["pages", "src/pages"]) for (const f of walk(join(root, pages))) {
+    const m = /\.(tsx|ts|jsx|js|mdx|astro|md)$/.exec(f); if (!m || /[\\/]_(app|document)\./.test(f)) continue;
+    routes.add(norm(relative(join(root, pages), f).replace(/\.[^.]+$/, "").replace(/(^|[\\/])index$/, "").split(sep).join("/")));
+  }
+  for (const base of [root, join(root, "out"), join(root, "dist"), join(root, "build"), join(root, "public")]) for (const f of walk(base)) {
+    if (!/\.html?$/.test(f) || /[\\/](node_modules|app|pages|src)[\\/]/.test(relative(root, f) ? "/" + relative(root, f) : "")) continue;
+    routes.add(norm(relative(base, f).replace(/\.html?$/, "").replace(/(^|[\\/])index$/, "").split(sep).join("/")));
+  }
+  return routes;
+}
+function routeMatch(item, routes) {
+  const want = norm(item.split(/\s/)[0].replace(/\.html?$/, "").replace(/(^|\/)index$/, "")); if (routes.has(want)) return true; // /prices.html names the same route as /prices
+  const w = want.split("/"); // a concrete item (/products/linen-shirt) matches a dynamic route (/products/[*])
+    const ok = alts.some((a) => existsSync(join(root, a)));
+    if (alts[0] === "MEDIA.md" && !ok && !dm.stated) { legacyNoMedia = true; continue; }
+    rows.push({ kind: "template", item: alts[0], mark: "required (skill)", counts: true, ok, why: ok ? "" : "not found" });
+  }
+  // template content checks (templates/TEMPLATE.md), each excusable by a template row naming it
+  const excused = (name) => rows.some((r) => r.kind === "template" && r.item === name && !r.counts);
+  const add = (item, ok, why) => { if (!excused(item)) rows.push({ kind: "template", item, mark: "required (skill)", counts: true, ok, why: ok ? "" : why }); };
+  const readme = join(root, "README.md");
+  if (existsSync(readme) && (dm.mode !== "design exploration" || existsSync(join(root, "data")))) add("README demo line", /All data in data\/ is demo\. Replace with real data before launch\./.test(readFileSync(readme, "utf8")), 'README.md lacks "All data in data/ is demo. Replace with real data before launch."');
+  const dataFiles = walk(join(root, "data")).filter((f) => f.endsWith(".json") && !/schema\.json$/.test(f));
+  if (existsSync(join(root, "data"))) { const bad = dataFiles.filter((f) => !demoLabelled(f)); add("demo labels", dataFiles.length > 0 && !bad.length, dataFiles.length ? `entries not labelled "demo": true in ${bad.slice(0, 4).map((f) => relative(root, f)).join(", ")}` : "data/ has no JSON files"); }
+  const used = envVars(root); const envEx = join(root, ".env.example");
+  if (used.length) { const listed = existsSync(envEx) ? readFileSync(envEx, "utf8") : ""; const miss = used.filter((v) => !new RegExp(`^\\s*#?\\s*${v}\\s*=`, "m").test(listed)); add(".env.example coverage", !miss.length, `.env.example lacks ${miss.slice(0, 6).join(", ")}`); }
+  const pkg = join(root, "package.json");
+  if (existsSync(pkg)) { let dev = false; try { dev = !!JSON.parse(readFileSync(pkg, "utf8")).scripts?.dev; } catch {} add("npm run dev", dev, 'package.json has no "dev" script (zero-configuration run)'); }
+  // research for new design work (Steps 1–2, craft/research.md): no delivery mode skips it
+  const dtext = readFileSync(designFile, "utf8"); const warnUp = [];
+  // v3.0.0: the product contract (Step 1) and the research record (Step 2; "## References" from v2 still counts)
+  for (const [item, re, where] of [["Product contract", /^##\s+Product contract\b/m, "Step 1, thinking/product-contract.md"], ["Type research", /^##\s+Type research\b/m, "Step 1, craft/research.md"], ["Research record", /^##\s+(?:Research record|References)\b/m, "Step 2, craft/research.md"]]) {
+    const ok = re.test(dtext);
+    if (dm.stated) rows.push({ kind: "template", item: `DESIGN.md ${item}`, mark: "required (skill)", counts: true, ok, why: ok ? "" : `DESIGN.md has no "## ${item}" section (${where})` });
+  }
+  // v3.0.1: every core journey the Product contract writes as a route sequence must have a Scope journey row (the rows
+  // are what this axis walks). Before, a contract journey left out of the Scope table was never checked: silently dropped.
+  const pc = dtext.match(/^##\s+Product contract\b[\s\S]*?(?=^##\s)|^##\s+Product contract\b[\s\S]*$/m)?.[0] || "";
+  // the contract's "Core journeys" entry (a bullet, a table row or a ### heading) up to the next entry; arrows elsewhere in
+  // the contract's prose are not journeys
+  const cjText = pc.match(/core journeys?\**\s*[:|]?[\s\S]*?(?=\n\s*(?:[-*]\s+\*\*|\|\s*\*\*|#{2,4}\s)|$)/i)?.[0] || "";
+  const pcJourneys = cjText.split("\n").map((l) => (l.match(/`([^`]*(?:→|->)[^`]*)`/) || l.match(/(\/\S*\s*(?:→|->)\s*[^|]*)/) || [])[1]).filter(Boolean)
+    .map((x) => journeySteps(x).map((r) => r.replace(/[.,;:)]+$/, ""))).filter((st) => st.length >= 2);
+  const scoped = scope.items.filter((i) => i.kind === "journey").map((i) => journeySteps(i.evidence || i.item).map((r) => r.toLowerCase()).join(" → "));
+  for (const st of pcJourneys) { const k = st.map((r) => r.toLowerCase()).join(" → "); if (!scoped.includes(k) && !excused(`journey ${k}`)) rows.push({ kind: "journey", item: `contract journey ${st.join(" → ")}`, mark: "required (contract)", counts: true, ok: false, why: "in the Product contract but not in the Scope table: add it as a journey row (or exclude it there with a reason) so it is checked" }); }
+  if (dm.stated && /^##\s+Product contract\b/m.test(dtext) && !scope.items.some((i) => i.kind === "journey")) warnUp.push("journeys: the Scope table has no journey rows; write each core journey as a route sequence so axis X can check it connects");
+  // content realism (scripts/realism.mjs): leaked process notes, template fixtures, repeated data, dead links
+  const real = realism(root);
+  if (!real.error) { if (!excused("Content realism")) rows.push({ kind: "template", item: "Content realism", mark: "required (skill)", counts: true, ok: real.pass, why: real.problems.slice(0, 4).map((p) => `${p.kind} ${p.file}: ${p.what}`).join(" · ") }); for (const w of real.warnings.slice(0, 4)) warnUp.push(`content: ${w.what}`); }
+  const media = mediaChecks(root);
+  for (const p of media.problems) rows.push({ kind: "template", item: "MEDIA.md inventory", mark: "required (skill)", counts: true, ok: false, why: p });
+  if (existsSync(join(root, "MEDIA.md")) && !media.problems.length) rows.push({ kind: "template", item: "MEDIA.md inventory", mark: "required (skill)", counts: true, ok: true, why: "" });
+  // "production-ready" is a claim only a production template with nothing left in MEDIA.md to replace can make
+  if (existsSync(readme)) { const claim = readFileSync(readme, "utf8").split("\n").find((l) => /\bproduction[- ]ready\b/i.test(l) && !/\bnot\b|\bn't\b|\bbefore\b|\buntil\b/i.test(l));
+    if (claim && dm.mode !== "production template") rows.push({ kind: "template", item: "README readiness claim", mark: "required (skill)", counts: true, ok: false, why: `README.md calls a ${dm.mode} production-ready: "${claim.trim().slice(0, 80)}"` });
+    else if (claim && media.unresolved) rows.push({ kind: "template", item: "README readiness claim", mark: "required (skill)", counts: true, ok: false, why: `README.md says production-ready while ${media.unresolved} asset(s) in MEDIA.md must be replaced or cleared` }); }
+  const tally = Object.fromEntries(Object.keys(KINDS).map((k) => { const r = rows.filter((x) => x.kind === k && x.counts); return [k, { have: r.filter((x) => x.ok).length, need: r.length, excused: rows.filter((x) => x.kind === k && x.mark === "excused").length }]; }));
+  const missing = rows.filter((r) => r.counts && !r.ok);
+  const warn = [...warnings(root), ...warnUp]; if (media.unresolved) warn.push(`media: ${media.unresolved} asset(s) in MEDIA.md must be replaced or cleared before production; not production-ready until they are`);
+  if (legacyNoMedia) warn.push("media: no MEDIA.md (craft/media.md); required for every build that states its delivery mode, add it when this build is next delivered");
+  if (!dm.stated) warn.push("delivery mode: no \"**Delivery mode:**\" line in the Scope section; checked as production template");
+  return { designFile, root, type: scope.type, admin: scope.admin, mode: dm.mode, routesFound: [...routes].sort(), rows, tally, missing, invalid, warnings: warn, pass: !missing.length && !invalid.length && scope.items.length > 0, empty: scope.items.length === 0 };
+}
+# Development checks and handoff validation (v3.0.2)
+
+Two kinds of checking, never confused. **Development checks** are fast and partial: they guide the build. **Handoff validation** is the full gate on the approved files: it decides what the handoff may claim. The handoff status is computed by `scripts/handoff.mjs` from what actually ran. It is pasted, never typed.
+
+Why this exists: in the v3.0.1 benchmark, three of the four builders never ran the journey check (axis J), because the full gate was too heavy for their machines. Two of them said so. The third wrote "All 3 core journeys connect without broken paths" in `GATE.md`, with J never run. Nothing in the toolchain could tell the two kinds of note apart. Now it can: `handoff.mjs --report GATE.md` rejects the second one (`fixtures/handoff/b2b-overclaim-GATE.md`, `tests/gate/handoff.test.mjs`).
+
+## The two tiers
+
+| Tier | Commands | When | What it may claim |
+|---|---|---|---|
+| **Development checks** | `node scripts/completeness.mjs <site>` (X, seconds) · `node scripts/gate.mjs --rules <page>` (C S P K, seconds) · `node scripts/gate.mjs --journey <site>` (J only, a few minutes) · `node scripts/gate.mjs <one page>` while fixing it | any time during the build, as often as useful | nothing beyond its own line. A `--journey` pass is not a handoff; a `--rules` pass says nothing about journeys |
+| **Handoff validation** | `node scripts/gate.mjs <site>` (every axis, J included, on the approved files), then `node scripts/handoff.mjs <site> --report GATE.md` | once, at Checkpoint 6, after the author approved the design, and again after any later edit | exactly the status `handoff.mjs` printed |
+
+Run J as a development check early, as soon as two routes and one form exist (`--journey`, a few minutes). Most J failures (an overflowing header, a form that claims to send) are cheaper to fix then than at the end.
+
+## The record and the status
+
+Every gate run writes `<project>/.motomation/gate-record.json`: the mode (`full`, `journey`, `rules`, or `not-verified` when the run could not finish), the date, the machine, each target's result, the journey summary, and a hash of the site's files (stamps pasted into pages, `GATE.md`, `CRITIQUE.md` and other notes do not count as changes). A URL target has no files to hash: pass `--record <project folder>`. `--no-record` writes nothing (fixtures, experiments).
+
+`node scripts/handoff.mjs <project>` reads the record and prints one line, then the reasons:
+
+| Status | When | Exit |
+|---|---|---|
+| `VALIDATED` | a full gate run passed on the current files; J ran, passed, and left nothing unverified | 0 |
+| `CONDITIONAL` | the full run passed, but J listed something it could not verify: a form behind a state a fresh browser lacks (an empty cart, a signed-out account), a form that rejected the filled values, a submit kept disabled while empty, a Scope route no link reaches, a route beyond the page cap | 3 |
+| `NOT VALIDATED` | no full run; only development checks ran; the full run was on older files; the run failed; the run ended "not verified" (no browser, a constrained machine, a timeout); J was not measured | 1 |
+| `REFERENCE` | a design reference gated with `--reference`: J does not apply | 0 |
+
+A build with an unverified critical journey never gets `VALIDATED`. Walking an exception by hand is useful and goes in `GATE.md` under **Judged** (`self (opinion): walked the checkout by hand at 375px, …`), but the status stays `CONDITIONAL`: a hand walk is a judgement, not a measurement.
+
+**Prototype boundaries** are listed separately, not as exceptions: forms that save only in the browser, simulations that say so, features marked unavailable (`thinking/product-contract.md` → Forms and operations). They do not block `VALIDATED`, and the handoff names them, so nobody mistakes a labelled demo for a working flow.
+
+## The handoff note
+
+`GATE.md` and the handoff note (`gates/delivery-gate.md` → Handoff note) start with the `handoff:` line `handoff.mjs` printed, pasted. Then:
+
+- `node scripts/handoff.mjs <site> --report GATE.md` checks the note against the record. It rejects a note with no `handoff:` line, a status other than the computed one, a line pasted before the last change (a different hash), and, unless the status is `VALIDATED`, any unqualified claim such as "fully validated", "all journeys connect", "production-ready" or "no known issues". A `CONDITIONAL` note must list every exception. Exit 2 means the note contradicts the record. Fix the note (or the site), not the checker.
+- A note may never say a check passed when it did not run. "Rule-only results; the journey check did not run (CPU limit)" is honest and accepted. "Product integrity: all 3 core journeys connect" with J never run is rejected.
+
+## When the full gate cannot run
+
+On a constrained machine (2 CPUs, a short tool timeout) the full gate may not finish. Then:
+
+1. Run the development checks that do finish: `completeness.mjs`, `gate.mjs --rules`, and `gate.mjs --journey` (J alone takes minutes, not the full gate's 2–5 minutes per page per width). Fix what they find.
+2. Try the full gate once with the default budget and a tool timeout above it. `gate.mjs` already retries a failed scan in the light footprint (`--light`).
+3. If it still cannot finish, the run ends `not verified — <reason>`, and the record says so. `handoff.mjs` prints `NOT VALIDATED` with that reason. Paste it. The handoff says the build was not validated, and why, and lists the development checks that did run under **Measured** with their own names (`gate.mjs --journey: journey: nav0 …`). Never as the full gate.
+4. Validation is then a separate step on a machine that can run it (CI, a larger sandbox): `gate.mjs <site>` there, then `handoff.mjs`. That is the honest path, not a weaker gate.
+
+EXIT: 0
+END: 2026-10-19T05:25:22.459Z
+

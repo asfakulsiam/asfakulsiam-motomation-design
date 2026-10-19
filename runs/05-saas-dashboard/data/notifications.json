@@ -1,0 +1,11 @@
+{
+  "demo": true,
+  "entity": "notifications",
+  "items": [
+    {
+      "invoice": true,
+      "weekly": false,
+      "demo": true
+    }
+  ]
+}

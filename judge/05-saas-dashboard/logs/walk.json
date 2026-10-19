@@ -1,0 +1,279 @@
+{
+  "origin": "http://127.0.0.1:4410",
+  "started": "2026-10-19T06:35:09.970Z",
+  "widths": {
+    "375": {
+      "width": 375,
+      "journeys": {
+        "signinInvalid": "Check your display name. This field is required.",
+        "expenseBefore": "Expenses $2,732.30 8 recorded expenses",
+        "expenseInvalid": "Check merchant. This field is required.",
+        "expenseInvalidFields": 2,
+        "savedText": "Expense saved Your books are up to date on this device. Harbor Paper recorded $42.75 · Supplies · Oct 19, 2026 Saved in this browser. No bank transaction was created. Back to overview Add another expense View transaction",
+        "expenseAfter": "Expenses $2,775.05 9 recorded expenses",
+        "recentHasHarbor": 1,
+        "expenseAfterReload": "Expenses $2,775.05 9 recorded expenses",
+        "j1ok": true,
+        "invoiceDateError": "Check description. This field is required.",
+        "invoiceCalc": "Tax rate (%) Subtotal $55.50 Tax $4.44 Total (USD) $59.94",
+        "previewText": "Juniper Supply 18 Garden Lane Portland, OR 97205 hello@example.com INVOICE INV-1045 BILL TO Maple Workshop 42 Grove Street Portland, OR accounts@maple.example.com Issued Oct 19, 2026 Due date Nov 2, 2026 Currency USD Description Qty Unit price Amount Linen market bags 3 $18.50 $55.50 Thank you for supporting our shop. Subtotal $55.50 Tax (8%) $4.44 Total due $59.94 Demo invoice · Not a request for",
+        "markVisible": 1,
+        "sentText": "Invoice marked sent",
+        "sentMain": "Invoice marked sent Your invoice status has been updated locally. INV-1045 marked sent Maple Workshop · $59.94 No email was sent. Email delivery is deferred in this demo. Back to invoices View invoice Back to overview",
+        "invoiceListHas": 1,
+        "awaitingHasNew": 1,
+        "filterCount": "2 transactions · Inventory",
+        "filterNames": [
+          "Cedar Wholesale",
+          "Terrace Ceramics"
+        ],
+        "detailHeading": "Cedar Wholesale",
+        "detailCategory": "Category Inventory Payment method Business card Type Expense Storage Saved on this device Notes Restock: ceramic planters and glass vases.",
+        "detailMatchesFilter": true,
+        "filterSurvivesBack": "2 transactions · Inventory",
+        "sortFirst": "Garden Lane Properties",
+        "page1": "1–8 of 19 Previous Page 1 of 3 Next",
+        "page2": "9–16 of 19 Previous Page 2 of 3 Next",
+        "page2First": "Parcel Post"
+      },
+      "states": {
+        "invalidRange": "Start date must be on or before end date.",
+        "settingsHeadings": [
+          "Profile",
+          "Business",
+          "Notifications",
+          "Bank connection",
+          "Workspace data"
+        ],
+        "bankDisabled": true,
+        "bankText": "Bank connection Bring transactions into your ledger. Not connected Deferred Bank sync requires a secure server and bank provider. It is not available in this demo. No bank credentials are collected. Connect bank · unavailable",
+        "profileInvalid": "Check name. This field is required.",
+        "emptyDialog": "Start an empty workspace? Your transactions, invoices and customers will be removed from this device. Export a backup first. Profile and business settings are kept. Cancel Start empty workspace",
+        "emptyDash": "Overview A clear view of your shop’s day. Add expense New invoice Juniper Supply Monday, October 19 Overview period This month Last 7 days Sales $0.00 Oct 1–19 · recorded income Expenses $0.00 0 recorded expenses Net cash flow $0.00 Sales less expenses Outstanding invoices $0.00 0 invoices awaiting payment Money in, money out October 13–19, side by side. Cash in Cash out Your story starts here Record your first transaction to see cash flow. View daily amounts Today’s position October 19 · record",
+        "emptyTx": "Transactions Every sale and expense, in one place. Export CSV Add expense Search transactions Category All categories Inventory Supplies Rent Shipping Utilities Marketing Travel Other Sales From To Sort by Date, newest first Date, oldest first Amount, highest first Amount, lowest first Clear filters 0 transactions No matching transactions Try a different search, category or date range. Clear filters 0–0 of 0 Previous Page 1 of 1 Next",
+        "emptyInvoiceCustomers": [
+          "Choose a customer"
+        ],
+        "emptyInvoiceError": "Check customer. This field is required.",
+        "errorRoute": "Your data needs a moment",
+        "offlineRoute": "Offline, still in business Your local ledger keeps working. Saved here. Ready when you are. Once this workspace is open, you can save expenses, draft invoices and navigate without a network. Opening or reloading the app needs a connection to the local server. Bank sync and email delivery are deferred, online or offline. Back to overview View transactions Keep a workspace export as a backup. Browser data can be cleared by your device.",
+        "corruptDash": "Your data needs a moment We couldn’t open this workspace. Let’s get your books back Browser storage may be unavailable, full, or contain an unreadable record. Retry first. Restoring demo records replaces the local ledger; export a copy if you can. Retry loading data Export stored copy Restore demo records",
+        "http404": 404,
+        "notfoundText": "Your data needs a moment We couldn’t open this workspace. Let’s get your books back Browser storage may be unavailable, full, or contain an unreadable record. Retry first. Restoring demo records replaces the local ledger; export a copy if you can. Retry loading data Export stored copy Restore demo records",
+        "http404route": 404,
+        "route404text": "Your data needs a moment",
+        "offlineBannerHidden": null,
+        "offlineBannerText": "You’re offline. You can still save on this device. Bank sync is unavailable.",
+        "offlineSavedUrl": "http://127.0.0.1:4410/expenses/saved",
+        "offlineSaved": "Expense saved Your books are up to date on this device. Offline kiosk recorded $9.50 · Inventory · Oct 19, 2026 Saved in this browser. No bank transaction was created. Back to overview Add another expense View transaction",
+        "offlineDashUrl": "http://127.0.0.1:4410/dashboard",
+        "offlineDashHas": 1
+      },
+      "layout": {
+        "signinH1": "Back to your books.",
+        "signinHeroProbe": {
+          "text": "Back to your books.",
+          "font": "Georgia, serif",
+          "size": "37px",
+          "top": 162,
+          "height": 43
+        },
+        "addExpenseBox": {
+          "x": 20,
+          "y": 346.5,
+          "width": 125.53125,
+          "height": 44
+        },
+        "navBox": {
+          "x": 20,
+          "y": 78,
+          "width": 335,
+          "height": 55
+        },
+        "overflow": {
+          "sw": 375,
+          "iw": 375
+        },
+        "bias": {
+          "h1": "Overview",
+          "h1Size": "25px",
+          "h1Family": "\"DM Sans\", sans-serif",
+          "runningAnimations": 0,
+          "hasHeroClass": false,
+          "scrollBehavior": "auto"
+        },
+        "overflowPages": {
+          "/dashboard": {
+            "scrollWidth": 375,
+            "clientWidth": 375,
+            "overflowing": []
+          },
+          "/transactions": {
+            "scrollWidth": 375,
+            "clientWidth": 375,
+            "overflowing": []
+          },
+          "/invoices": {
+            "scrollWidth": 375,
+            "clientWidth": 375,
+            "overflowing": []
+          },
+          "/invoices/new": {
+            "scrollWidth": 375,
+            "clientWidth": 375,
+            "overflowing": []
+          },
+          "/settings": {
+            "scrollWidth": 375,
+            "clientWidth": 375,
+            "overflowing": []
+          },
+          "/customers": {
+            "scrollWidth": 375,
+            "clientWidth": 375,
+            "overflowing": []
+          }
+        }
+      },
+      "errors": []
+    },
+    "1440": {
+      "width": 1440,
+      "journeys": {
+        "signinInvalid": "Check your display name. This field is required.",
+        "expenseBefore": "Expenses $2,732.30 8 recorded expenses",
+        "expenseInvalid": "Check merchant. This field is required.",
+        "expenseInvalidFields": 2,
+        "savedText": "Expense saved Your books are up to date on this device. Harbor Paper recorded $42.75 · Supplies · Oct 19, 2026 Saved in this browser. No bank transaction was created. Back to overview Add another expense View transaction",
+        "expenseAfter": "Expenses $2,775.05 9 recorded expenses",
+        "recentHasHarbor": 1,
+        "expenseAfterReload": "Expenses $2,775.05 9 recorded expenses",
+        "j1ok": true,
+        "invoiceDateError": "Check description. This field is required.",
+        "invoiceCalc": "Tax rate (%) Subtotal $55.50 Tax $4.44 Total (USD) $59.94",
+        "previewText": "Juniper Supply 18 Garden Lane Portland, OR 97205 hello@example.com INVOICE INV-1045 BILL TO Maple Workshop 42 Grove Street Portland, OR accounts@maple.example.com Issued Oct 19, 2026 Due date Nov 2, 2026 Currency USD Description Qty Unit price Amount Linen market bags 3 $18.50 $55.50 Thank you for supporting our shop. Subtotal $55.50 Tax (8%) $4.44 Total due $59.94 Demo invoice · Not a request for",
+        "markVisible": 1,
+        "sentText": "Invoice marked sent",
+        "sentMain": "Invoice marked sent Your invoice status has been updated locally. INV-1045 marked sent Maple Workshop · $59.94 No email was sent. Email delivery is deferred in this demo. Back to invoices View invoice Back to overview",
+        "invoiceListHas": 1,
+        "awaitingHasNew": 1,
+        "filterCount": "2 transactions · Inventory",
+        "filterNames": [
+          "Cedar Wholesale",
+          "Terrace Ceramics"
+        ],
+        "detailHeading": "Cedar Wholesale",
+        "detailCategory": "Category Inventory Payment method Business card Type Expense Storage Saved on this device Notes Restock: ceramic planters and glass vases.",
+        "detailMatchesFilter": true,
+        "filterSurvivesBack": "2 transactions · Inventory",
+        "sortFirst": "Garden Lane Properties",
+        "page1": "1–8 of 19 Previous Page 1 of 3 Next",
+        "page2": "9–16 of 19 Previous Page 2 of 3 Next",
+        "page2First": "Parcel Post"
+      },
+      "states": {
+        "invalidRange": "Start date must be on or before end date.",
+        "settingsHeadings": [
+          "Profile",
+          "Business",
+          "Notifications",
+          "Bank connection",
+          "Workspace data"
+        ],
+        "bankDisabled": true,
+        "bankText": "Bank connection Bring transactions into your ledger. Not connected Deferred Bank sync requires a secure server and bank provider. It is not available in this demo. No bank credentials are collected. Connect bank · unavailable",
+        "profileInvalid": "Check name. This field is required.",
+        "emptyDialog": "Start an empty workspace? Your transactions, invoices and customers will be removed from this device. Export a backup first. Profile and business settings are kept. Cancel Start empty workspace",
+        "emptyDash": "Overview A clear view of your shop’s day. Add expense New invoice Juniper Supply Monday, October 19 Overview period This month Last 7 days Sales $0.00 Oct 1–19 · recorded income Expenses $0.00 0 recorded expenses Net cash flow $0.00 Sales less expenses Outstanding invoices $0.00 0 invoices awaiting payment Money in, money out October 13–19, side by side. Cash in Cash out Your story starts here Record your first transaction to see cash flow. View daily amounts Today’s position October 19 · record",
+        "emptyTx": "Transactions Every sale and expense, in one place. Export CSV Add expense Search transactions Category All categories Inventory Supplies Rent Shipping Utilities Marketing Travel Other Sales From To Sort by Date, newest first Date, oldest first Amount, highest first Amount, lowest first Clear filters 0 transactions No matching transactions Try a different search, category or date range. Clear filters 0–0 of 0 Previous Page 1 of 1 Next",
+        "emptyInvoiceCustomers": [
+          "Choose a customer"
+        ],
+        "emptyInvoiceError": "Check customer. This field is required.",
+        "errorRoute": "Your data needs a moment",
+        "offlineRoute": "Offline, still in business Your local ledger keeps working. Saved here. Ready when you are. Once this workspace is open, you can save expenses, draft invoices and navigate without a network. Opening or reloading the app needs a connection to the local server. Bank sync and email delivery are deferred, online or offline. Back to overview View transactions Keep a workspace export as a backup. Browser data can be cleared by your device.",
+        "corruptDash": "Your data needs a moment We couldn’t open this workspace. Let’s get your books back Browser storage may be unavailable, full, or contain an unreadable record. Retry first. Restoring demo records replaces the local ledger; export a copy if you can. Retry loading data Export stored copy Restore demo records",
+        "http404": 404,
+        "notfoundText": "Your data needs a moment We couldn’t open this workspace. Let’s get your books back Browser storage may be unavailable, full, or contain an unreadable record. Retry first. Restoring demo records replaces the local ledger; export a copy if you can. Retry loading data Export stored copy Restore demo records",
+        "http404route": 404,
+        "route404text": "Your data needs a moment",
+        "offlineBannerHidden": null,
+        "offlineBannerText": "You’re offline. You can still save on this device. Bank sync is unavailable.",
+        "offlineSavedUrl": "http://127.0.0.1:4410/expenses/saved",
+        "offlineSaved": "Expense saved Your books are up to date on this device. Offline kiosk recorded $9.50 · Inventory · Oct 19, 2026 Saved in this browser. No bank transaction was created. Back to overview Add another expense View transaction",
+        "offlineDashUrl": "http://127.0.0.1:4410/dashboard",
+        "offlineDashHas": 1
+      },
+      "layout": {
+        "signinH1": "Back to your books.",
+        "signinHeroProbe": {
+          "text": "Back to your books.",
+          "font": "Georgia, serif",
+          "size": "48px",
+          "top": 341,
+          "height": 53
+        },
+        "addExpenseBox": {
+          "x": 1114.546875,
+          "y": 166.796875,
+          "width": 141.90625,
+          "height": 42
+        },
+        "navBox": {
+          "x": 18,
+          "y": 204,
+          "width": 187,
+          "height": 254
+        },
+        "overflow": {
+          "sw": 1440,
+          "iw": 1440
+        },
+        "bias": {
+          "h1": "Overview",
+          "h1Size": "28px",
+          "h1Family": "\"DM Sans\", sans-serif",
+          "runningAnimations": 0,
+          "hasHeroClass": false,
+          "scrollBehavior": "auto"
+        },
+        "overflowPages": {
+          "/dashboard": {
+            "scrollWidth": 1440,
+            "clientWidth": 1440,
+            "overflowing": []
+          },
+          "/transactions": {
+            "scrollWidth": 1440,
+            "clientWidth": 1440,
+            "overflowing": []
+          },
+          "/invoices": {
+            "scrollWidth": 1440,
+            "clientWidth": 1440,
+            "overflowing": []
+          },
+          "/invoices/new": {
+            "scrollWidth": 1440,
+            "clientWidth": 1440,
+            "overflowing": []
+          },
+          "/settings": {
+            "scrollWidth": 1440,
+            "clientWidth": 1440,
+            "overflowing": []
+          },
+          "/customers": {
+            "scrollWidth": 1440,
+            "clientWidth": 1440,
+            "overflowing": []
+          }
+        }
+      },
+      "errors": []
+    }
+  },
+  "defects": [],
+  "notes": [],
+  "ended": "2026-10-19T06:35:42.727Z"
+}

@@ -1,0 +1,28 @@
+COMMAND: node /home/user/workspace/bench/skill-52255c0/scripts/gate.mjs http://localhost:4410/dashboard --design /home/user/workspace/bench/runs/05-saas-dashboard/DESIGN.md --journey --timeout 900 --no-record
+STDERR (first observed line): gate: constrained machine (2 CPUs); a failed scan is retried once in the light footprint
+EXIT: 0
+
+http://localhost:4410/dashboard  (journey only; no stamp)
+  J — journey (whole site, real browser; any missing state fails the page; not in the stamp or its id)
+    nav      ✓ 15/15 route(s) reachable from home in ≤ 3 clicks (/dashboard:0 /transactions:1 /invoices:1 /customers:1 /settings:1 /sign-in:1 /expenses/new:1 /invoices/new:1 …)
+               · sitemap.xml: 15 route(s)
+               · 16 concrete route(s) from the Scope table
+               · reached outside the link graph, declared: /expenses/saved (flow), /invoices/sent (flow)
+               · 13 page(s) loaded
+    mobile   ✓ 149/149 interactive element(s) respond at 375px · tap 149/149 · swipe n/a · long-press n/a
+               · layout 4/4 width(s) fit (320✓ 375✓ 768✓ 1440✓) on 13 page(s)
+               · 12 page(s); an element shared by several pages (header, footer) is tapped once
+               · 12 element(s) parked off-canvas (skip links, closed drawers) are keyboard-only by design and not tapped
+               · no element declares a long press
+    forms    ✓ 30/30 form state(s) rendered · Name * (/settings): default✓ validation✓ feedback✓ persisted✓ honest✓ · Business name * (/settings): default✓ validation✓ feedback✓ persisted✓ honest✓ · Invoice reminders Remind me when an invo (/settings): default✓ validation✓ feedback✓ persisted✓ honest✓ · Open your workspace (/sign-in): default✓ validation✓ feedback✓ persisted✓ honest✓ · Expense details (/expenses/new): default✓ validation✓ feedback✓ persisted✓ honest✓ · Invoice details (/invoices/new): default✓ validation✓ feedback✓ persisted✓ honest✓
+               · 4 page(s) with forms checked: /settings, /sign-in, /expenses/new, /invoices/new
+               · no request on submit, read by what it did (v3.0.2): Name * (/settings): browser-only (persisted: local:ledgerly.workspace.v1) · Business name * (/settings): browser-only (persisted: local:ledgerly.workspace.v1) · Invoice reminders Remind me when an invo (/settings): browser-only (persisted: local:ledgerly.workspace.v1) · Open your workspace (/sign-in): browser-only (persisted: local:ledgerly.workspace.v1) … 2 more
+    loading  – n/a: no fetch or XHR request after load: no async surface
+    errors   ✓ 1/1 designed not-found view (unknown route → HTTP 404)
+               · probed /__motomation-missing-mvevofyr/
+    session  ✓ 6/6 · load ✓ · open a second route ✓ · back button ✓ · forward button ✓ · full reload ✓ · two tabs ✓
+               · second page: /transactions
+    coverage 13 page(s) loaded of 15 required route(s) · forms checked on every page that has one (4 page(s), 6 form(s)) · tap and loading sampled on 12 page(s)
+               · Scope routes no link reaches (check them in the journey walk): /expenses/saved, /invoices/sent, /404
+               · not sampled for tap/loading: /error
+    journey: nav0 mobile0 forms0 loading- errors0 session0 → PASS

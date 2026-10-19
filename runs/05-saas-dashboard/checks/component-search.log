@@ -1,0 +1,8 @@
+COMMAND: "node" "/home/user/workspace/bench/skill-52255c0/scripts/search.mjs" "components" "table form"
+START: 2026-10-19T05:12:31.473Z
+search: unknown dataset "components" (one of: fonts, palettes, motion, imagery, signatures, archetypes, mutations, collisions, styles, categories, kinetics)
+Usage: node scripts/search.mjs <dataset> "<query>" [--n 5] [--tier N] [--json]
+
+EXIT: 2
+END: 2026-10-19T05:12:31.548Z
+

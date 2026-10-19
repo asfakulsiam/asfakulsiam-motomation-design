@@ -1,0 +1,9 @@
+COMMAND: "node" "checks/assets.mjs"
+START: 2026-10-19T05:25:15.305Z
+dm-sans-regular.ttf: 48280 bytes from https://fonts.gstatic.com/s/dmsans/v17/rP2tp2ywxg089UriI5-g4vlH9VoD8CmcqZG40F9JadbnoEwAopxhTg.ttf
+dm-sans-bold.ttf: 48200 bytes from https://fonts.gstatic.com/s/dmsans/v17/rP2tp2ywxg089UriI5-g4vlH9VoD8CmcqZG40F9JadbnoEwARZthTg.ttf
+OFL.txt: 4482 bytes from https://raw.githubusercontent.com/google/fonts/main/ofl/dmsans/OFL.txt
+
+EXIT: 0
+END: 2026-10-19T05:25:15.562Z
+

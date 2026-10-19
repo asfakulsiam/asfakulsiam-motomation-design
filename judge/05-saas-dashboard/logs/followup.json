@@ -1,0 +1,289 @@
+{
+  "375": {
+    "http": 404,
+    "h1": "Page not found",
+    "body": "404 · NOT FOUND Page not found That page isn’t in your ledger. Check the address, or return to your workspace. Back to overview View transactions",
+    "route404": {
+      "http": 404,
+      "h1": "Page not found"
+    },
+    "dueError": "Due date must be on or after the issue date.",
+    "stillOnEditor": "http://127.0.0.1:4410/invoices/new",
+    "contrast": [
+      {
+        "text": ".",
+        "size": 31,
+        "color": "rgb(155, 66, 41)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "400"
+      },
+      {
+        "text": "Overview",
+        "size": 25,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700"
+      },
+      {
+        "text": "$7,455.00",
+        "size": 26,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700"
+      },
+      {
+        "text": "$2,732.30",
+        "size": 26,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700"
+      },
+      {
+        "text": "$4,722.70",
+        "size": 26,
+        "color": "rgb(41, 75, 62)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700"
+      },
+      {
+        "text": "$1,305.00",
+        "size": 26,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700"
+      }
+    ],
+    "contrastRatios": [
+      {
+        "text": ".",
+        "size": 31,
+        "color": "rgb(155, 66, 41)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "400",
+        "ratio": 3.2050174368107642
+      },
+      {
+        "text": "Overview",
+        "size": 25,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700",
+        "ratio": 1.4437300541100695
+      },
+      {
+        "text": "$7,455.00",
+        "size": 26,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700",
+        "ratio": 1.4437300541100695
+      },
+      {
+        "text": "$2,732.30",
+        "size": 26,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700",
+        "ratio": 1.4437300541100695
+      },
+      {
+        "text": "$4,722.70",
+        "size": 26,
+        "color": "rgb(41, 75, 62)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700",
+        "ratio": 2.1702742811692186
+      },
+      {
+        "text": "$1,305.00",
+        "size": 26,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700",
+        "ratio": 1.4437300541100695
+      }
+    ]
+  },
+  "1440": {
+    "http": 404,
+    "h1": "Page not found",
+    "body": "404 · NOT FOUND Page not found That page isn’t in your ledger. Check the address, or return to your workspace. Back to overview View transactions",
+    "route404": {
+      "http": 404,
+      "h1": "Page not found"
+    },
+    "dueError": "Due date must be on or after the issue date.",
+    "stillOnEditor": "http://127.0.0.1:4410/invoices/new",
+    "contrast": [
+      {
+        "text": ".",
+        "size": 35,
+        "color": "rgb(155, 66, 41)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "400"
+      },
+      {
+        "text": "Overview",
+        "size": 28,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700"
+      },
+      {
+        "text": "$7,455.00",
+        "size": 29,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700"
+      },
+      {
+        "text": "$2,732.30",
+        "size": 29,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700"
+      },
+      {
+        "text": "$4,722.70",
+        "size": 29,
+        "color": "rgb(41, 75, 62)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700"
+      },
+      {
+        "text": "$1,305.00",
+        "size": 29,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700"
+      },
+      {
+        "text": "Money in, money out",
+        "size": 16,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700"
+      },
+      {
+        "text": "Today’s position",
+        "size": 16,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700"
+      },
+      {
+        "text": "Recent transactions",
+        "size": 16,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700"
+      },
+      {
+        "text": "On your radar",
+        "size": 16,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700"
+      }
+    ],
+    "contrastRatios": [
+      {
+        "text": ".",
+        "size": 35,
+        "color": "rgb(155, 66, 41)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "400",
+        "ratio": 3.2050174368107642
+      },
+      {
+        "text": "Overview",
+        "size": 28,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700",
+        "ratio": 1.4437300541100695
+      },
+      {
+        "text": "$7,455.00",
+        "size": 29,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700",
+        "ratio": 1.4437300541100695
+      },
+      {
+        "text": "$2,732.30",
+        "size": 29,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700",
+        "ratio": 1.4437300541100695
+      },
+      {
+        "text": "$4,722.70",
+        "size": 29,
+        "color": "rgb(41, 75, 62)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700",
+        "ratio": 2.1702742811692186
+      },
+      {
+        "text": "$1,305.00",
+        "size": 29,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700",
+        "ratio": 1.4437300541100695
+      },
+      {
+        "text": "Money in, money out",
+        "size": 16,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700",
+        "ratio": 1.4437300541100695
+      },
+      {
+        "text": "Today’s position",
+        "size": 16,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700",
+        "ratio": 1.4437300541100695
+      },
+      {
+        "text": "Recent transactions",
+        "size": 16,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700",
+        "ratio": 1.4437300541100695
+      },
+      {
+        "text": "On your radar",
+        "size": 16,
+        "color": "rgb(35, 43, 37)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "weight": "700",
+        "ratio": 1.4437300541100695
+      }
+    ]
+  },
+  "keyboardOnly": [
+    "focused display-name after 4 tabs",
+    "focused submit",
+    "url http://127.0.0.1:4410/dashboard",
+    "focused add expense",
+    "url http://127.0.0.1:4410/expenses/new",
+    "typed merchant",
+    "typed amount",
+    "saved via enter",
+    "url http://127.0.0.1:4410/expenses/saved",
+    "Expense saved Your books are up to date on this device. Key Merchant recorded $15.25 · Inventory · Oct 19, 2026 Saved in this browser. No bank transaction was created. Back to over"
+  ],
+  "reducedMotion": {
+    "transition": "0s",
+    "animation": "none",
+    "transform": "none"
+  }
+}

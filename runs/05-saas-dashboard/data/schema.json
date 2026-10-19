@@ -1,0 +1,241 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ledgerly demo data envelope",
+  "type": "object",
+  "required": [
+    "demo",
+    "entity",
+    "items"
+  ],
+  "properties": {
+    "demo": {
+      "const": true
+    },
+    "entity": {
+      "enum": [
+        "transactions",
+        "invoices",
+        "customers",
+        "profile",
+        "business",
+        "notifications"
+      ]
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "demo"
+        ],
+        "properties": {
+          "demo": {
+            "const": true
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Transaction": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "date",
+        "category",
+        "amount",
+        "type",
+        "method",
+        "demo"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "category": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "type": {
+          "enum": [
+            "income",
+            "expense"
+          ]
+        },
+        "method": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "demo": {
+          "const": true
+        }
+      }
+    },
+    "Customer": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "email",
+        "demo"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "address": {
+          "type": "string"
+        },
+        "demo": {
+          "const": true
+        }
+      }
+    },
+    "Invoice": {
+      "type": "object",
+      "required": [
+        "id",
+        "number",
+        "customerId",
+        "lines",
+        "issued",
+        "due",
+        "status",
+        "demo"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
+        },
+        "customerId": {
+          "type": "string"
+        },
+        "lines": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Line"
+          }
+        },
+        "issued": {
+          "type": "string",
+          "format": "date"
+        },
+        "due": {
+          "type": "string",
+          "format": "date"
+        },
+        "tax": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "note": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "sent",
+            "paid"
+          ]
+        },
+        "demo": {
+          "const": true
+        }
+      }
+    },
+    "Line": {
+      "type": "object",
+      "required": [
+        "description",
+        "qty",
+        "price"
+      ],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "qty": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "price": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "Profile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "demo": {
+          "const": true
+        }
+      }
+    },
+    "Business": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "currency": {
+          "const": "USD"
+        },
+        "demo": {
+          "const": true
+        }
+      }
+    },
+    "Notifications": {
+      "type": "object",
+      "properties": {
+        "invoice": {
+          "type": "boolean"
+        },
+        "weekly": {
+          "type": "boolean"
+        },
+        "demo": {
+          "const": true
+        }
+      }
+    }
+  }
+}

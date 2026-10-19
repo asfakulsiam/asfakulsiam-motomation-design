@@ -1,0 +1,80 @@
+COMMAND: "bash" "-lc" "printf \"Final artifact presence\\n\"; for f in DESIGN.md MOTION.md MEDIA.md CHECKPOINTS.md RUN.md GATE.md CRITIQUE.md dist/index.html src/app.js src/styles.css checks/full-gate-04.log checks/verify-stamp.log; do test -s \"$f\" || exit 1; printf \"%s\\n\" \"$f\"; done; printf \"Core screenshot counts\\n\"; for width in 375 768 1440; do printf \"%s: \" \"$width\"; rg --files screens | rg \"/${width}-[0-9][0-9]-\" | wc -l; done; printf \"Git working tree (local only)\\n\"; git status --short; printf \"Current time\\n\"; date -Iseconds"
+START: 2026-10-19T06:24:00.148Z
+Final artifact presence
+DESIGN.md
+MOTION.md
+MEDIA.md
+CHECKPOINTS.md
+RUN.md
+GATE.md
+CRITIQUE.md
+dist/index.html
+src/app.js
+src/styles.css
+checks/full-gate-04.log
+checks/verify-stamp.log
+Core screenshot counts
+375: 28
+768: 27
+1440: 27
+Git working tree (local only)
+ M .motomation/gate-record.json
+ M CHECKPOINTS.md
+ M CRITIQUE.md
+ M DESIGN.md
+ M GATE.md
+ M checks/commands-journal.log
+ M checks/extended-results.json
+ M checks/extended.mjs
+ M checks/journey-results.json
+ M checks/report.mjs
+ M dist/app.js
+ M dist/styles.css
+ M screens/1440-15-transactions-filtered.png
+ M screens/1440-17-transaction-pagination.png
+ M screens/1440-20-settings.png
+ M screens/1440-viewport-15-transactions-filtered.png
+ M screens/1440-viewport-17-transaction-pagination.png
+ M screens/375-17-transaction-pagination.png
+ M screens/375-viewport-17-transaction-pagination.png
+ M screens/768-17-transaction-pagination.png
+ M screens/768-viewport-04-expense-validation.png
+ M screens/768-viewport-17-transaction-pagination.png
+ M screens/review-1440-2.jpg
+ M screens/review-1440-3.jpg
+ M screens/review-768-2.jpg
+ M src/app.js
+ M src/styles.css
+?? RUN.md
+?? checks/build-08.log
+?? checks/build-09.log
+?? checks/completeness-05.log
+?? checks/contact-sheets-final.log
+?? checks/extended-04.log
+?? checks/final-asset-inventory.log
+?? checks/forced-colors-01.log
+?? checks/forced-colors.mjs
+?? checks/forced-output-review.log
+?? checks/full-gate-02.log
+?? checks/full-gate-03.log
+?? checks/full-gate-04.log
+?? checks/gate-03-progress.log
+?? checks/handoff-final.log
+?? checks/handoff-report.log
+?? checks/inspect-forced.log
+?? checks/inspect-stamp-format.log
+?? checks/journeys-07.log
+?? checks/journeys-08.log
+?? checks/local-commit.log
+?? checks/report-final.log
+?? checks/stamp-final.log
+?? checks/stamp.mjs
+?? checks/verify-stamp.log
+?? screens/forced-colors-closed.png
+?? screens/forced-colors-open.png
+Current time
+2026-10-19T06:24:00+00:00
+
+EXIT: 0
+END: 2026-10-19T06:24:00.236Z
+

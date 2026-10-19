@@ -1,0 +1,81 @@
+{
+  "schema": "motomation-handoff/1",
+  "project": "/home/user/workspace/bench/runs/05-saas-dashboard",
+  "runs": {
+    "full": {
+      "at": "2026-10-19T06:13:47.587Z",
+      "gate": "gate/4",
+      "skill": "3.0.2",
+      "hash": "16d0da5c7e61a36a",
+      "files": 94,
+      "machine": "2 CPU, load 0.59, 7579 MB free, /dev/shm 3979 MB",
+      "footprint": "standard",
+      "targets": [
+        {
+          "target": "http://localhost:4305/dashboard",
+          "pass": true,
+          "verified": true,
+          "stamp": "gate: c0 o0 w0 rm0 a0 n0 q0 k0 · rules: C0 S0 P0 K0 · gate/4 · 6227d76815 · skipped 0/87@375",
+          "reason": null,
+          "reference": false,
+          "completeness": {
+            "ran": true,
+            "pass": true,
+            "error": null
+          },
+          "journey": {
+            "ran": true,
+            "skipped": false,
+            "error": null,
+            "pass": true,
+            "segment": "journey: nav0 mobile0 forms0 loading- errors0 session0",
+            "counts": {
+              "nav": 0,
+              "mobile": 0,
+              "forms": 0,
+              "loading": 0,
+              "errors": 0,
+              "session": 0
+            },
+            "exceptions": [],
+            "prototype": [
+              "Name * (/settings): saved in this browser only",
+              "Business name * (/settings): saved in this browser only",
+              "Invoice reminders Remind me when an invo (/settings): saved in this browser only",
+              "Open your workspace (/sign-in): saved in this browser only",
+              "Expense details (/expenses/new): saved in this browser only",
+              "Invoice details (/invoices/new): saved in this browser only"
+            ],
+            "excused": [
+              "/expenses/saved (flow)",
+              "/invoices/sent (flow)"
+            ],
+            "layout": "layout 4/4 width(s) fit (320✓ 375✓ 768✓ 1440✓) on 13 page(s)",
+            "coverage": {
+              "loaded": 13,
+              "routes": 15,
+              "sampled": 12,
+              "notSampled": 1,
+              "formsChecked": 6
+            }
+          },
+          "counts": {
+            "contrast": 0,
+            "overflow": 0,
+            "words": 0,
+            "motion": 0,
+            "names": 0,
+            "numbers": 0,
+            "quality": 0,
+            "access": 0,
+            "copy": 0,
+            "seo": 0,
+            "perf": 0,
+            "sec": 0
+          }
+        }
+      ]
+    }
+  },
+  "updated": "2026-10-19T06:13:47.587Z"
+}

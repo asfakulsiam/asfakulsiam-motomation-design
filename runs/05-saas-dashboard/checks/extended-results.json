@@ -1,0 +1,24 @@
+{
+  "pass": true,
+  "results": [
+    "PASS 320: 13 route layouts and control bounds",
+    "PASS 390: 13 route layouts and control bounds",
+    "PASS 720: 13 route layouts and control bounds",
+    "PASS 1024: 13 route layouts and control bounds",
+    "PASS keyboard skip link, main focus and 12 further Tab steps with visible focus; not a complete assistive-technology audit",
+    "PASS native dialog Escape dismissal",
+    "PASS transaction CSV download",
+    "PASS numeric amount and chronological date ordering",
+    "PASS invalid date range and empty search state",
+    "PASS existing invoice draft edit survives reload",
+    "PASS existing customer edit survives reload",
+    "PASS workspace JSON download",
+    "PASS second-tab business name and monogram update after storage event",
+    "PASS corrected required inputs clear validation styling and summary",
+    "PASS already-open workspace expense saves and navigates offline",
+    "PASS reduced-motion document has no running animation",
+    "PASS cross-tab active-form conflict blocks submit until reload",
+    "PASS structurally readable but invalid-date JSON opens recovery instead of crashing",
+    "PASS sign-in does not overwrite an unreadable workspace without recovery"
+  ]
+}

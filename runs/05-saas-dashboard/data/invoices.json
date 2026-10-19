@@ -1,0 +1,83 @@
+{
+  "demo": true,
+  "entity": "invoices",
+  "items": [
+    {
+      "id": "inv-1042",
+      "number": "INV-1042",
+      "customerId": "pine",
+      "issued": "2026-10-12",
+      "due": "2026-10-18",
+      "status": "sent",
+      "lines": [
+        {
+          "description": "Stoneware planters",
+          "qty": 12,
+          "price": 2800
+        },
+        {
+          "description": "Linen tea towels",
+          "qty": 8,
+          "price": 1800
+        }
+      ],
+      "tax": 0,
+      "note": "Thank you for supporting our shop.",
+      "demo": true
+    },
+    {
+      "id": "inv-1043",
+      "number": "INV-1043",
+      "customerId": "marlow",
+      "issued": "2026-10-15",
+      "due": "2026-10-29",
+      "status": "sent",
+      "lines": [
+        {
+          "description": "Studio ceramics collection",
+          "qty": 1,
+          "price": 82500
+        }
+      ],
+      "tax": 0,
+      "note": "Payment within 14 days, please.",
+      "demo": true
+    },
+    {
+      "id": "inv-1044",
+      "number": "INV-1044",
+      "customerId": "olive",
+      "issued": "2026-10-18",
+      "due": "2026-11-01",
+      "status": "draft",
+      "lines": [
+        {
+          "description": "Cotton market totes",
+          "qty": 20,
+          "price": 1400
+        }
+      ],
+      "tax": 0,
+      "note": "Thank you for shopping with us.",
+      "demo": true
+    },
+    {
+      "id": "inv-1041",
+      "number": "INV-1041",
+      "customerId": "maple",
+      "issued": "2026-10-04",
+      "due": "2026-10-18",
+      "status": "paid",
+      "lines": [
+        {
+          "description": "Autumn wholesale collection",
+          "qty": 1,
+          "price": 126000
+        }
+      ],
+      "tax": 0,
+      "note": "Paid by bank transfer.",
+      "demo": true
+    }
+  ]
+}

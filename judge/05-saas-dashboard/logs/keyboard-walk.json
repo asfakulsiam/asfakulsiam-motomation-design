@@ -1,0 +1,161 @@
+{
+  "site": "/home/user/workspace/bench/runs/05-saas-dashboard/dist",
+  "routes": [
+    {
+      "route": "/sign-in",
+      "stops": 7,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    },
+    {
+      "route": "/dashboard",
+      "stops": 31,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    },
+    {
+      "route": "/transactions",
+      "stops": 38,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    },
+    {
+      "route": "/transactions/detail",
+      "stops": 14,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    },
+    {
+      "route": "/expenses/new",
+      "stops": 20,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    },
+    {
+      "route": "/expenses/saved",
+      "stops": 14,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    },
+    {
+      "route": "/invoices",
+      "stops": 25,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    },
+    {
+      "route": "/invoices/new",
+      "stops": 26,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    },
+    {
+      "route": "/invoices/preview",
+      "stops": 13,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    },
+    {
+      "route": "/invoices/sent",
+      "stops": 14,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    },
+    {
+      "route": "/customers",
+      "stops": 17,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    },
+    {
+      "route": "/settings",
+      "stops": 33,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    },
+    {
+      "route": "/empty",
+      "stops": 13,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    },
+    {
+      "route": "/error",
+      "stops": 14,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    },
+    {
+      "route": "/offline",
+      "stops": 13,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    },
+    {
+      "route": "/404",
+      "stops": 5,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    }
+  ],
+  "journeys": [
+    {
+      "journey": "Continue to demo>Add expense>Save expense",
+      "ok": true,
+      "steps": [
+        "✓ \"Continue to demo\" → button \"Continue to demo\" (Enter) → /dashboard",
+        "✓ \"Add expense\" → a \"Add expense\" (Enter) → /expenses/new",
+        "✓ \"Save expense\" → button \"Save expense\" (Enter)"
+      ],
+      "endedOn": "/expenses/new"
+    }
+  ]
+}

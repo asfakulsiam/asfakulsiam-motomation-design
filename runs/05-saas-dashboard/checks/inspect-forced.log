@@ -1,0 +1,92 @@
+COMMAND: "bash" "-lc" "rg -n \"async function forced|forced-color-adjust|forcedColors|function forced\" /home/user/workspace/bench/skill-52255c0/scripts/gate.mjs; sed -n \"980,1060p\" /home/user/workspace/bench/skill-52255c0/scripts/gate.mjs; rg -n \"chart-data\" src/styles.css"
+START: 2026-10-19T05:52:26.529Z
+1056:    const { ctx, page } = await open(browser, url, { viewport: { width: 1440, height: 900 }, forcedColors: "active" });
+1420:  for (const f of a.forced.fails.slice(0, 8)) L(`     ${f.ratio}:1  ${f.el}  "${f.text}"  forced-color-adjust: ${f.adjust}`);
+    for (let i = 0; i < Math.min(total + 2, FOCUS_MAX + 10) && pairs.length < FOCUS_MAX; i++) {
+      await page.keyboard.press("Tab"); await page.waitForTimeout(260);
+      const info = await page.evaluate(() => { const e = document.activeElement; if (!e || e === document.body) return null; const r = e.getBoundingClientRect(); return { key: __g.key(e), label: __g.label(e), text: (e.textContent || e.getAttribute("aria-label") || "").trim().slice(0, 30), r: { x: r.left, y: r.top, w: r.width, h: r.height }, vw: innerWidth, vh: innerHeight }; });
+      if (!info || seen.has(info.key)) { if (info) break; continue; } seen.add(info.key);
+      const pad = 6; const x = Math.max(0, info.r.x - pad), y = Math.max(0, info.r.y - pad); const w = Math.min(info.vw - x, info.r.w + 2 * pad), h = Math.min(info.vh - y, info.r.h + 2 * pad);
+      if (w < 2 || h < 2) continue; const clip = { x, y, width: w, height: h };
+      const on = (await page.screenshot({ type: "jpeg", quality: 90, clip })).toString("base64");
+      await page.evaluate(() => document.activeElement.blur()); await page.waitForTimeout(260);
+      const off = (await page.screenshot({ type: "jpeg", quality: 90, clip })).toString("base64");
+      // put focus back so the next Tab continues from here
+      await page.evaluate((k) => { const e = [...document.querySelectorAll("*")].find((n) => __g.key(n) === k); e?.focus({ preventScroll: true }); }, info.key);
+      pairs.push({ info, shots: [on, off], area: w * h });
+    }
+    for (const p of pairs) { const [d] = await pixelDiffs(browser, p.shots); out.focus.checked++; if (!(d >= 1.0)) out.focus.fails.push({ el: p.info.label, text: p.info.text, changedPct: d }); }
+    out.focus.tabbables = total; await ctx.close();
+  }
+  // keyboard trap: Tab twice round the page; focus that keeps cycling inside one region while other controls are never reached is a trap
+  {
+    const { ctx, page } = await open(browser, url, { viewport: { width: 1440, height: 900 } });
+    const all = await page.evaluate((sel) => [...document.querySelectorAll(sel)].filter((e) => !__g.decorative(e) && getComputedStyle(e).visibility !== "hidden" && e.getClientRects().length).map((e) => __g.key(e)), TABBABLE);
+    const seq = []; const n = Math.min(160, all.length * 2 + 6);
+    for (let i = 0; i < n; i++) { await page.keyboard.press("Tab"); seq.push(await page.evaluate(() => (document.activeElement && document.activeElement !== document.body ? __g.key(document.activeElement) : "body"))); }
+    const visited = new Set(seq.filter((k) => k !== "body")); const tail = seq.slice(-Math.min(20, Math.floor(n / 2))); const cycle = new Set(tail);
+    const unreached = all.filter((k) => !visited.has(k));
+    const trapped = all.length > 2 && unreached.length > 0 && cycle.size <= Math.max(2, Math.floor(all.length / 2)) && !cycle.has("body") && [...cycle].every((k) => !k.startsWith("html:1>body:1>a:")) && unreached.length >= all.length - visited.size;
+    let region = null; if (trapped) region = await page.evaluate((ks) => { const els = ks.map((k) => [...document.querySelectorAll("*")].find((n) => __g.key(n) === k)).filter(Boolean); let a = els[0]?.parentElement; while (a && !els.every((e) => a.contains(e))) a = a.parentElement; return a ? __g.label(a) : "?"; }, [...cycle]);
+    out.trap = { tabbables: all.length, presses: n, visited: visited.size, unreached: unreached.length, trapped, region };
+    await ctx.close();
+  }
+  // target size at 375 on touch: < 24px fails (inline links inside a sentence are exempt, as in WCAG 2.5.8); < 44px warns
+  {
+    const { ctx, page } = await open(browser, url, { viewport: { width: 375, height: 812 }, hasTouch: true, isMobile: true });
+    const r = await page.evaluate(({ sel, min, touch }) => {
+      const res = { checked: 0, fails: [], warns: [] };
+      for (const e of document.querySelectorAll(sel + ', [role="button"], [role="link"], [role="tab"], [role="switch"]')) {
+        if (__g.decorative(e) || __g.srOnly(e)) continue; const cs = getComputedStyle(e); if (cs.visibility === "hidden" || cs.display === "none" || parseFloat(cs.opacity) === 0) continue;
+        const b = e.getBoundingClientRect(); if (b.width === 0 || b.height === 0) continue;
+        const inline = e.tagName === "A" && cs.display === "inline" && [...(e.parentElement?.childNodes || [])].some((n) => n.nodeType === 3 && n.textContent.trim().length > 1);
+        if (inline) continue; res.checked++;
+        const s = { el: __g.label(e), text: (e.textContent || e.getAttribute("aria-label") || "").trim().slice(0, 30), w: Math.round(b.width), h: Math.round(b.height) };
+        if (b.width < min - 0.5 || b.height < min - 0.5) res.fails.push(s); else if (b.width < touch - 0.5 || b.height < touch - 0.5) res.warns.push(s);
+      }
+      return res;
+    }, { sel: TABBABLE, min: TARGET_MIN, touch: TARGET_TOUCH });
+    out.target = r; await ctx.close();
+  }
+  // 200% zoom: 1440×900 at 200% is a 720×450 CSS viewport. Anything readable or usable at 1440 must still be at 720:
+  // text not cut off by an overflow: hidden/clip box (its own or an ancestor's, up to the nearest scroller, whose
+  // content is reachable by scrolling it), every control on screen after
+  // scrolling to it and not covered. Only losses at 720 that don't already exist at 1440 count.
+  {
+    const lost = (sel) => {
+      const f = [];
+      const clipper = (e) => { for (let a = e; a && a !== document.body; a = a.parentElement) { const cs = getComputedStyle(a); if (a !== e && /auto|scroll/.test(cs.overflowX + cs.overflowY)) return null; /* inside a scroller: reachable by scrolling it */ if (/hidden|clip/.test(cs.overflowY + cs.overflowX) && a.clientHeight > 0) { const r = a.getBoundingClientRect(), b = e.getBoundingClientRect(); if (b.bottom > r.bottom + 2 || b.right > r.right + 2 || (a === e && (e.scrollHeight > e.clientHeight + 2 && cs.webkitLineClamp === "none" && cs.textOverflow !== "ellipsis"))) return a; } } return null; };
+      for (const e of __g.textEls()) { if (__g.decorative(e) || __g.srOnly(e)) continue; const cs = getComputedStyle(e); if (cs.display === "none" || cs.visibility === "hidden" || !e.getClientRects().length) continue; const c = clipper(e); if (c) f.push({ key: __g.key(e), kind: "text clipped", el: __g.label(e), text: e.textContent.trim().slice(0, 30), by: __g.label(c) }); }
+      for (const e of document.querySelectorAll(sel)) { if (__g.decorative(e) || __g.srOnly(e)) continue; const cs = getComputedStyle(e); if (cs.visibility === "hidden" || !e.getClientRects().length) continue;
+        e.scrollIntoView({ block: "center", inline: "center", behavior: "instant" }); const b = e.getBoundingClientRect(); if (b.width < 1 || b.height < 1) continue;
+        const cx = Math.min(innerWidth - 1, Math.max(0, b.left + b.width / 2)), cy = Math.min(innerHeight - 1, Math.max(0, b.top + b.height / 2));
+        const top = document.elementFromPoint(cx, cy); const off = b.right < 0 || b.left > innerWidth || b.bottom < 0 || b.top > innerHeight;
+        if (off || (top && top !== e && !e.contains(top) && !top.contains(e))) f.push({ key: __g.key(e), kind: off ? "control off screen" : "control covered", el: __g.label(e), text: (e.textContent || "").trim().slice(0, 30), by: top ? __g.label(top) : null }); }
+      scrollTo(0, 0); return f;
+    };
+    const { ctx, page } = await open(browser, url, { viewport: { width: 1440, height: 900 } });
+    const at100 = new Set((await page.evaluate(lost, TABBABLE)).map((x) => x.key + x.kind));
+    await page.setViewportSize({ width: 720, height: 450 }); await page.waitForTimeout(T(900)); await settle(page);
+    out.zoom.fails = (await page.evaluate(lost, TABBABLE)).filter((x) => !at100.has(x.key + x.kind)).map(({ key, ...r }) => r);
+    await ctx.close();
+  }
+  // 320px reflow (WCAG 1.4.10): no horizontal scrolling at a 320 CSS px viewport
+  { // a 320px window (1280px at 400%), not mobile emulation: a mobile layout viewport grows to fit wide content and hides the scroll
+    const { ctx, page } = await open(browser, url, { viewport: { width: 320, height: 640 } });
+    out.reflow.px = await page.evaluate(() => Math.max(0, document.documentElement.scrollWidth - innerWidth)); await ctx.close(); }
+  // forced colors (Windows High Contrast), judged on rendered pixels: computed styles under forced colors still report
+  // author values for some properties (-webkit-text-fill-color), so each text box is screenshotted and its ink is
+  // measured against the box's dominant colour. Invisible text (a transparent fill that survives) reads as 1:1.
+  {
+    const { ctx, page } = await open(browser, url, { viewport: { width: 1440, height: 900 }, forcedColors: "active" });
+    const items = await page.evaluate(() => __g.textEls().filter((e) => !__g.decorative(e) && !__g.srOnly(e) && e.getClientRects().length && getComputedStyle(e).visibility !== "hidden" && __g.opacity(e) > 0.05 /* a resting, faded-out caption is not on screen to read */ && !__g.clippedAway(e)).slice(0, 80).map((e) => ({ key: __g.key(e), el: __g.label(e), text: e.textContent.trim().slice(0, 30), adjust: getComputedStyle(e).forcedColorAdjust })));
+    const shots = [];
+    for (const it of items) {
+      const box = await page.evaluate(async (k) => { const e = [...document.querySelectorAll("*")].find((n) => __g.key(n) === k); if (!e) return null; e.scrollIntoView({ block: "center", behavior: "instant" }); const frame = () => new Promise((ok) => requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(ok, 80)))); await frame(); /* scroll-driven layers (a pinned reel) move on the next frame: measure where the text ended up */
+27:.cash-chart{display:flex;gap:15px;height:177px;padding:8px 24px 0 20px}.chart-axis{display:flex;flex-direction:column;justify-content:space-between;padding-bottom:30px;font-size:12px;color:var(--muted);min-width:47px}.chart-plot{position:relative;display:flex;align-items:stretch;justify-content:space-around;gap:10px;flex:1;min-width:0}.chart-lines{position:absolute;inset:0 0 30px;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none}.chart-lines i{border-top:1px dashed #e1e4db;display:block;width:100%}.chart-day{position:relative;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;min-width:0;flex:1;z-index:1}.bar-pair{display:flex;align-items:flex-end;justify-content:center;gap:5px;height:calc(100% - 30px);width:100%}.bar{height:calc(var(--bar) * 100%);width:16px;border-radius:3px 3px 0 0;min-height:1px}.income-bar{background:#476b52}.expense-bar{background:#c58c62}.chart-day>span{font-size:12px;white-space:nowrap;height:30px;padding-top:10px;color:var(--muted)}.chart-data{padding:8px 23px 15px;font-size:12px;color:var(--muted)}summary{cursor:pointer;min-height:24px}.chart-data table{width:100%;border-collapse:collapse}.chart-data th,.chart-data td{padding:7px 3px;text-align:left;border-bottom:1px solid var(--line);font-size:13px}
+52:@media(max-width:550px){.page-heading{flex-direction:column;align-items:stretch}.page-heading .actions{justify-content:flex-start}.page-heading .actions .button{font-size:12px}.page-heading h1+p{max-width:none}.metric{padding:18px 16px}.metric>strong{font-size:26px;letter-spacing:-.8px}.metric>span:first-child{font-size:12px;margin-bottom:8px}.metric-note{font-size:12px}.metric>a{font-size:12px;line-height:1.6;min-height:30px;align-items:center;flex-wrap:wrap}.metrics{border-radius:8px}.metric>strong.positive{font-size:26px}.panel-heading h2{font-size:15px}.chart-legend{flex-direction:column;gap:3px;font-size:12px}.cash-chart{height:168px}.bar-pair{gap:3px}.bar{width:10px}.chart-plot{gap:2px}.chart-day>span{font-size:12px}.chart-data{font-size:12px;padding-left:20px}.today-panel{display:block}.today-panel>.panel-heading{padding:19px 20px 10px}.today-panel>p{font-size:12px;padding-inline:20px}.today-row{padding:12px 20px}.bank-notice{margin-inline:20px}.bank-notice p{font-size:12px}.dashboard-lower{display:block}.recent-panel{margin-bottom:20px}.due-panel{display:block}.due-item{padding:18px 20px}.due-item strong{font-size:13px}.due-item span:not(.badge){font-size:12px}.due-item .badge{font-size:12px}.panel-bottom-link{font-size:13px;min-height:48px}
+63:.wordmark{min-height:44px;display:inline-flex;align-items:center}.avatar{width:44px;height:44px}.demo-strip>a{min-height:28px}.period-label select{min-height:44px}.chart-data summary{min-height:44px;align-content:center}
+
+EXIT: 0
+END: 2026-10-19T05:52:26.540Z
+

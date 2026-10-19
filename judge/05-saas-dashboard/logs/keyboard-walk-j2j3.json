@@ -1,0 +1,53 @@
+{
+  "site": "/home/user/workspace/bench/runs/05-saas-dashboard/dist",
+  "routes": [
+    {
+      "route": "/dashboard",
+      "stops": 31,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    },
+    {
+      "route": "/transactions",
+      "stops": 38,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    },
+    {
+      "route": "/invoices",
+      "stops": 25,
+      "firstStop": "a \"Skip to content\"",
+      "skipLink": true,
+      "trap": null,
+      "focusNotVisible": [],
+      "hiddenFocusable": []
+    }
+  ],
+  "journeys": [
+    {
+      "journey": "Invoices>New invoice>Save & preview",
+      "ok": true,
+      "steps": [
+        "✓ \"Invoices\" → a \"Invoices\" (Enter) → /invoices",
+        "✓ \"New invoice\" → a \"New invoice\" (Enter) → /invoices/new",
+        "✓ \"Save & preview\" → button \"Save & preview\" (Enter)"
+      ],
+      "endedOn": "/invoices/new"
+    },
+    {
+      "journey": "Transactions>Category",
+      "ok": false,
+      "steps": [
+        "✓ \"Transactions\" → a \"Transactions\" (Enter) → /transactions",
+        "✗ \"Category\": not reached by Tab on /transactions"
+      ],
+      "endedOn": "/transactions"
+    }
+  ]
+}

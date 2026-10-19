@@ -1,0 +1,163 @@
+COMMAND: "node" "checks/forced-colors.mjs"
+START: 2026-10-19T05:53:27.099Z
+{
+  "pass": true,
+  "closed": {
+    "display": "none",
+    "cells": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "open": [
+    {
+      "text": "Oct 13, 2026",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "$487.00",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "$0.00",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "Oct 14, 2026",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "$643.00",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "$327.50",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "Oct 15, 2026",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "$596.00",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "$65.00",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "Oct 16, 2026",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "$729.00",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "$1,450.00",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "Oct 17, 2026",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "$948.00",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "$0.00",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "Oct 18, 2026",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "$1,260.00",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "$72.40",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "Oct 19, 2026",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "$684.00",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    },
+    {
+      "text": "$214.90",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(255, 255, 255)",
+      "visible": true
+    }
+  ]
+}
+
+EXIT: 0
+END: 2026-10-19T05:53:28.283Z
+

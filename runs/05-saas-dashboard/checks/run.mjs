@@ -1,0 +1,12 @@
+import {spawnSync} from 'node:child_process';
+import {appendFileSync,writeFileSync,mkdirSync} from 'node:fs';
+import {resolve} from 'node:path';
+const root=resolve(import.meta.dirname,'..');
+const [name,command,...args]=process.argv.slice(2);
+mkdirSync(resolve(root,'checks'),{recursive:true});
+const start=new Date().toISOString();
+const result=spawnSync(command,args,{cwd:root,encoding:'utf8',maxBuffer:100*1024*1024,timeout:1800000,env:{...process.env,MOTOMATION_HOME:resolve(root,'.motomation')}});
+const out=`COMMAND: ${[command,...args].map(x=>JSON.stringify(x)).join(' ')}\nSTART: ${start}\n${result.stdout||''}${result.stderr||''}\nEXIT: ${result.status}\nEND: ${new Date().toISOString()}\n${result.error||''}\n`;
+writeFileSync(resolve(root,'checks',name+'.log'),out);
+appendFileSync(resolve(root,'checks','commands-journal.log'),JSON.stringify({name,command,args,start,end:new Date().toISOString(),exit:result.status,error:String(result.error||'')})+'\n');
+process.stdout.write(out); process.exitCode=result.status??1;

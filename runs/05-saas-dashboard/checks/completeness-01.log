@@ -1,0 +1,45 @@
+COMMAND: "node" "/home/user/workspace/bench/skill-52255c0/scripts/completeness.mjs" "/home/user/workspace/bench/runs/05-saas-dashboard"
+START: 2026-10-19T05:25:15.786Z
+DESIGN.md
+  X — completeness (signed-in small-business finance dashboard; local fictional evaluation, no launch region., admin panel: no) [functional frontend]  ✗
+      Routes:      0/16 required present
+      Journeys:    0/4 connected
+      Functions:   4/4 present · 3 not required (reason given)
+      States:      4/4 defined
+      Legal:       0/0 present · 1 not required (reason given)
+      Edge cases:  1/1 handled
+      Admin:       0/0 present · 1 not required (reason given)
+      Skeletons:   0/0 present · 1 not required (reason given)
+      Template:    13/18 present · 2 not required (reason given)
+      ✗ route /sign-in: route not found in app/, pages/ or HTML
+      ✗ route /dashboard: route not found in app/, pages/ or HTML
+      ✗ route /transactions: route not found in app/, pages/ or HTML
+      ✗ route /transactions/detail: route not found in app/, pages/ or HTML
+      ✗ route /expenses/new: route not found in app/, pages/ or HTML
+      ✗ route /expenses/saved: route not found in app/, pages/ or HTML
+      ✗ route /invoices: route not found in app/, pages/ or HTML
+      ✗ route /invoices/new: route not found in app/, pages/ or HTML
+      ✗ route /invoices/preview: route not found in app/, pages/ or HTML
+      ✗ route /invoices/sent: route not found in app/, pages/ or HTML
+      ✗ route /customers: route not found in app/, pages/ or HTML
+      ✗ route /settings: route not found in app/, pages/ or HTML
+      ✗ route /empty: route not found in app/, pages/ or HTML
+      ✗ route /error: route not found in app/, pages/ or HTML
+      ✗ route /offline: route not found in app/, pages/ or HTML
+      ✗ route /404: route not found in app/, pages/ or HTML
+      ✗ journey Record expense: route(s) /sign-in, /dashboard, /expenses/new, /expenses/saved, /dashboard not found (journey /sign-in → /dashboard → /expenses/new → /expenses/saved → /dashboard)
+      ✗ journey Invoice lifecycle: route(s) /dashboard, /invoices, /invoices/new, /invoices/preview, /invoices/sent not found (journey /dashboard → /invoices → /invoices/new → /invoices/preview → /invoices/sent)
+      ✗ journey Find transaction: route(s) /dashboard, /transactions, /transactions/detail not found (journey /dashboard → /transactions → /transactions/detail)
+      ✗ template CRITIQUE.md: not found
+      ✗ template GATE.md: not found
+      ✗ template data/: not found
+      ✗ template data/schema.json: not found
+      ✗ template README demo line: README.md lacks "All data in data/ is demo. Replace with real data before launch."
+      ✗ journey contract journey /sign-in → /dashboard → /expenses/new → /expenses/saved → /dashboard; /dashboard → /invoices → /invoices/new → /invoices/preview → /invoices/sent; /dashboard → /transactions → /transactions/detail: in the Product contract but not in the Scope table: add it as a journey row (or exclude it there with a reason) so it is checked
+      ✗ function "Authentication backend": its interface /sign-in is not in app/, pages/ or HTML (the deferral promised it ships)
+      ✗ function "Bank sync": its interface /settings is not in app/, pages/ or HTML (the deferral promised it ships)
+      ✗ function "Email delivery": its interface /invoices/preview is not in app/, pages/ or HTML (the deferral promised it ships)
+
+EXIT: 1
+END: 2026-10-19T05:25:15.905Z
+

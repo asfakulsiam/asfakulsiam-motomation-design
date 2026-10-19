@@ -1,0 +1,13 @@
+{
+  "demo": true,
+  "entity": "business",
+  "items": [
+    {
+      "name": "Juniper Supply",
+      "address": "18 Garden Lane\nPortland, OR 97205",
+      "email": "hello@example.com",
+      "currency": "USD",
+      "demo": true
+    }
+  ]
+}

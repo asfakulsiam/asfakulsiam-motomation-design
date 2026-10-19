@@ -1,0 +1,68 @@
+COMMAND: "bash" "-lc" "sed -n \"65,126p\" /home/user/workspace/bench/skill-52255c0/scripts/journey.mjs"
+START: 2026-10-19T05:38:54.121Z
+  const origin = new URL(home).origin, homePath = norm(new URL(home).pathname);
+  let sitemap = null, sitemapNote = null;
+  try { const r = await fetch(origin + "/sitemap.xml"); if (r.ok) { const x = await r.text(); const locs = [...x.matchAll(/<loc>\s*([^<\s]+)\s*<\/loc>/g)].map((m) => m[1]); sitemap = [...new Set(locs.map((l) => { try { return norm(new URL(l, origin).pathname); } catch { return null; } }).filter(Boolean))]; sitemapNote = `sitemap.xml: ${sitemap.length} route(s)`; } } catch {}
+  const { ctx, page, errors } = await ctxPage(browser); const depth = new Map([[homePath, 0]]), status = new Map(), broken = [], from = new Map(), urlFor = new Map([[homePath, home]]), formPages = new Map();
+  try {
+    const queue = [{ url: home, d: 0 }]; let visited = 0;
+    while (queue.length && visited < MAX_PAGES) {
+      const { url, d } = queue.shift(); visited++;
+      const res = await go(page, url, T); const st = res ? res.status() : await statusOf(url); status.set(norm(new URL(url).pathname), st);
+      if (!res || st >= 400) { broken.push({ route: norm(new URL(url).pathname), status: st || "no response", from: from.get(norm(new URL(url).pathname)) || "(home)" }); continue; }
+      // forms on this page (fields beyond hidden/submit): the forms axis checks every page that has one, wherever it sits in link order
+      const nf = await page.evaluate(FORM_COUNT).catch(() => 0); if (nf) formPages.set(norm(new URL(url).pathname), nf);
+      if (d >= MAX_CLICKS) continue;
+      const links = await page.evaluate(LINKS).catch(() => []);
+      for (const h of links) { let u; try { u = new URL(h); } catch { continue; } if (u.origin !== origin || !/^https?:/.test(u.protocol)) continue; if (/\.(pdf|zip|png|jpe?g|webp|svg|mp4|xml|json|txt|ics|vcf)$/i.test(u.pathname)) continue; const p = norm(u.pathname); if (!depth.has(p)) { depth.set(p, d + 1); from.set(p, norm(new URL(url).pathname)); urlFor.set(p, stripHash(u.href)); queue.push({ url: stripHash(u.href), d: d + 1 }); } }
+    }
+    const need = sitemap && sitemap.length ? sitemap : [...depth.keys()];
+    // concrete routes the Scope table names (completeness.mjs contractRoutes). Reported when no link reaches them, not
+    // failed: a checkout reached by a button or a form submit is legitimately absent from the link graph
+    const contractUnreached = [...new Set(contract.map(norm))].filter((r) => !depth.has(r) || depth.get(r) > MAX_CLICKS);
+    const fails = [];
+    // v3.0.2: a sitemap route no link reaches may be a flow's page (a confirmation reached by submitting a form) or a deep
+    // link shared outside the site. It is excused when the page says so (<meta name="motomation:entry" content="flow"> or
+    // "deep-link") or when a form's flow is seen to reach it (journey() below); an undeclared one still fails, and a route
+    // that answers 404 always does. Before, a B2B build's /demo/confirmed read as a navigation failure.
+    const excused = [], noindexed = new Set();
+    for (const r of need) { const d = depth.get(r); if (d === undefined) { let html = "", code = 0; try { const rr = await fetch(origin + r); code = rr.status; html = await rr.text(); } catch {}
+        const entry = (html.match(/<meta[^>]+name=["']motomation:entry["'][^>]*>/i)?.[0].match(/content=["']([^"']+)/i) || [])[1]; const noindex = /<meta[^>]+name=["']robots["'][^>]+noindex/i.test(html);
+        if (code >= 400 || !code) fails.push({ route: r, why: `listed in sitemap.xml but answers HTTP ${code || "no response"}` });
+        else if (/^(flow|deep-link)$/i.test(entry || "")) excused.push({ route: r, entry: entry.toLowerCase(), noindex });
+        else { fails.push({ route: r, why: `not reachable from home in ≤ ${MAX_CLICKS} clicks` }); if (noindex) noindexed.add(r); } } else if (d > MAX_CLICKS) fails.push({ route: r, why: `${d} clicks from home (more than ${MAX_CLICKS})` }); }
+    for (const b of broken) fails.push({ route: b.route, why: `broken link: HTTP ${b.status} (linked from ${b.from})` });
+    const reached = need.filter((r) => depth.has(r) && depth.get(r) <= MAX_CLICKS && !broken.some((b) => b.route === r));
+    const pages = [home, ...[...depth.keys()].filter((r) => r !== homePath && !broken.some((b) => b.route === r) && (status.get(r) || 0) < 400 && status.has(r)).map((r) => urlFor.get(r)).filter(Boolean)];
+    const unloaded = [...depth.keys()].filter((r) => !status.has(r));
+    if (excused.length) reached.push(...excused.map((e) => e.route));
+    return { ok: fails.length === 0, have: reached.length, need: need.length, fails, excused, noindexed: [...noindexed], pages, formPages: Object.fromEntries(formPages), unloaded, contractUnreached, depths: Object.fromEntries([...depth].filter(([r]) => need.includes(r))), routes: need, notes: [sitemapNote || "no sitemap.xml: the routes are the ones found by following links from home", contract.length ? `${contract.length} concrete route(s) from the Scope table` : null, excused.length ? `reached outside the link graph, declared: ${excused.map((e) => `${e.route} (${e.entry}${e.entry === "flow" && !e.noindex ? "; a flow page in sitemap.xml is indexed: noindex it or drop it from the sitemap" : ""})`).join(", ")}` : null, `${visited} page(s) loaded`, unloaded.length ? `${unloaded.length} route(s) found but not loaded (cap ${MAX_PAGES}): ${unloaded.slice(0, 6).join(", ")}${unloaded.length > 6 ? " …" : ""}` : null].filter(Boolean), errors: errors.slice(0, 3) };
+  } finally { await ctx.close(); }
+}
+
+// ── mobile ────────────────────────────────────────────────────────────────────
+const KEY = `(e) => { const p = []; for (let n = e; n && n.nodeType === 1 && n !== document.documentElement; n = n.parentElement) { let i = 1, s = n; while ((s = s.previousElementSibling)) if (s.tagName === n.tagName) i++; p.unshift(n.tagName.toLowerCase() + ":" + i); } return p.join(">"); }`;
+const FIND = `(k) => { let n = document.documentElement; for (const part of k.split(">")) { const [t, i] = part.split(":"); let c = 0, hit = null; for (const ch of n.children) if (ch.tagName.toLowerCase() === t && ++c === +i) { hit = ch; break; } if (!hit) return null; n = hit; } return n; }`;
+const INTERACTIVE = `a[href], button, [role=button], [role=link], [role=tab], [role=switch], [role=checkbox], [role=menuitem], input:not([type=hidden]), select, textarea, summary, [tabindex]:not([tabindex="-1"]), [onclick]`;
+// v3.0.2: layout fit across widths, by cause. Every loaded page (up to LAYOUT_PAGES) is laid out at a narrow phone, a
+// standard phone, a tablet and a desktop. An overflow is traced to its outermost element (the one whose parent still fits)
+// and grouped: one cause shared by every page (a header that does not wrap) is one failure listing its pages and widths,
+// not one per page (the v3.0.1 B2B build: div.header-cta read as 12 separate mobile failures). Overflow masked by
+// overflow-x: hidden on html or body still cuts content off: it is found by the element, not by the scroll width.
+export const LAYOUT_WIDTHS = [320, 375, 768, 1440], LAYOUT_PAGES = 30;
+const OVF = `(() => { const de = document.documentElement, cw = de.clientWidth, sw = Math.max(de.scrollWidth, document.body ? document.body.scrollWidth : 0);
+  const clipX = (e) => { const s = getComputedStyle(e); return /hidden|clip/.test(s.overflowX) ? s.overflowX : null; }; const masked = clipX(de) || (document.body && clipX(document.body));
+  const sel = (e) => e.tagName.toLowerCase() + (e.id ? "#" + e.id : e.classList[0] ? "." + e.classList[0] : "");
+  const own = (e) => { for (let n = e.parentElement; n && n !== document.body && n !== de; n = n.parentElement) { const s = getComputedStyle(n); if (/auto|scroll|hidden|clip/.test(s.overflowX)) return true; } return false; };
+  const out = []; if (sw <= cw + 1 && !masked) return { cw, sw, causes: out };
+  for (const e of document.querySelectorAll("body *")) { const r = e.getBoundingClientRect(); if (r.width < 1 || r.height < 1) continue; if (!(r.right > cw + 1 || r.left < -1)) continue; const cs = getComputedStyle(e); if (cs.position === "fixed" || cs.visibility === "hidden") continue;
+    if (e.closest("[aria-hidden=true], [inert], [hidden]") || own(e)) continue; if (e.checkVisibility && !e.checkVisibility({ contentVisibilityAuto: true })) continue; // v3.0.2: inside a closed <details> (a mobile menu) or content-visibility: hidden: not rendered, widens nothing
+    const p = e.parentElement; if (p && p !== document.body) { const pr = p.getBoundingClientRect(); if (pr.right > cw + 1 || pr.left < -1) continue; }
+    if (out.length < 6) out.push({ sel: sel(e), right: Math.round(r.right), left: Math.round(r.left), text: !!(e.innerText || "").trim() || !!e.querySelector("a, button, input, select, textarea, img, svg") , ws: cs.whiteSpace, minw: cs.minWidth, w: cs.width }); }
+  return { cw, sw, rootClip: masked || null, causes: masked ? out.filter((c) => c.text) : out }; })()`;
+export async function layoutSweep(browser, pages, T) {
+  const byCause = new Map(), widthsOk = {}; let checked = 0;
+
+EXIT: 0
+END: 2026-10-19T05:38:54.126Z
+

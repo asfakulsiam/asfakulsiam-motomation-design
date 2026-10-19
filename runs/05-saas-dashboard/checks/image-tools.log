@@ -1,0 +1,8 @@
+COMMAND: "node" "--input-type=module" "-e" "for(const p of ['sharp','@napi-rs/canvas'])try{console.log(p,import.meta.resolve(p))}catch{console.log(p,'unavailable')}"
+START: 2026-10-19T05:29:02.542Z
+sharp file:///home/user/node_modules/sharp/dist/index.mjs
+@napi-rs/canvas unavailable
+
+EXIT: 0
+END: 2026-10-19T05:29:02.615Z
+

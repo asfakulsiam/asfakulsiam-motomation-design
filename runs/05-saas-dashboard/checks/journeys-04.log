@@ -1,0 +1,91 @@
+COMMAND: "node" "checks/journeys.mjs"
+START: 2026-10-19T05:37:37.923Z
+1440 screenshot 01-sign-in, document fits 1440px
+1440 screenshot 02-dashboard, document fits 1440px
+1440 screenshot 03-add-expense, document fits 1440px
+1440 screenshot 04-expense-validation, document fits 1440px
+1440 screenshot 05-expense-filled, document fits 1440px
+1440 screenshot 06-expense-saved, document fits 1440px
+1440 screenshot 07-dashboard-updated, document fits 1440px
+1440 screenshot 08-invoices, document fits 1440px
+1440 screenshot 09-invoice-editor, document fits 1440px
+1440 screenshot 10-invoice-filled, document fits 1440px
+1440 screenshot 11-invoice-preview, document fits 1440px
+1440 screenshot 12-invoice-marked-sent, document fits 1440px
+1440 screenshot 13-invoices-updated, document fits 1440px
+1440 screenshot 14-transactions, document fits 1440px
+1440 screenshot 15-transactions-filtered, document fits 1440px
+1440 screenshot 16-transaction-detail, document fits 1440px
+1440 screenshot 17-transaction-pagination, document fits 1440px
+1440 screenshot 18-customer-dialog, document fits 1440px
+1440 screenshot 19-customers, document fits 1440px
+1440 screenshot 20-settings, document fits 1440px
+1440 screenshot 21-offline-guide, document fits 1440px
+1440 screenshot 22-offline-state, document fits 1440px
+1440 screenshot 23-not-found, document fits 1440px
+1440 screenshot 24-new-account-guide, document fits 1440px
+1440 screenshot 25-empty-dashboard, document fits 1440px
+1440 screenshot 26-storage-recovery, document fits 1440px
+1440 screenshot 27-storage-read-error, document fits 1440px
+PASS 1440: expense, invoice, filtered detail, pagination, customer, settings, offline, 404, empty and recovery
+375 screenshot 01-sign-in, document fits 375px
+375 screenshot 02-dashboard, document fits 375px
+375 screenshot 03-add-expense, document fits 375px
+375 screenshot 04-expense-validation, document fits 375px
+375 screenshot 05-expense-filled, document fits 375px
+375 screenshot 06-expense-saved, document fits 375px
+375 screenshot 07-dashboard-updated, document fits 375px
+375 screenshot 08-invoices, document fits 375px
+375 screenshot 09-invoice-editor, document fits 375px
+375 screenshot 10-invoice-filled, document fits 375px
+375 screenshot 11-invoice-preview, document fits 375px
+375 screenshot 12-invoice-marked-sent, document fits 375px
+375 screenshot 13-invoices-updated, document fits 375px
+375 screenshot 14-transactions, document fits 375px
+375 screenshot 15-transactions-filtered, document fits 375px
+375 screenshot 16-transaction-detail, document fits 375px
+375 screenshot 17-transaction-pagination, document fits 375px
+375 screenshot 18-customer-dialog, document fits 375px
+375 screenshot 19-customers, document fits 375px
+375 screenshot 20-settings, document fits 375px
+375 screenshot 21-offline-guide, document fits 375px
+375 screenshot 22-offline-state, document fits 375px
+375 screenshot 23-not-found, document fits 375px
+375 screenshot 24-new-account-guide, document fits 375px
+375 screenshot 25-empty-dashboard, document fits 375px
+375 screenshot 26-storage-recovery, document fits 375px
+375 screenshot 27-storage-read-error, document fits 375px
+PASS 375: expense, invoice, filtered detail, pagination, customer, settings, offline, 404, empty and recovery
+768 screenshot 01-sign-in, document fits 768px
+768 screenshot 02-dashboard, document fits 768px
+768 screenshot 03-add-expense, document fits 768px
+768 screenshot 04-expense-validation, document fits 768px
+768 screenshot 05-expense-filled, document fits 768px
+768 screenshot 06-expense-saved, document fits 768px
+768 screenshot 07-dashboard-updated, document fits 768px
+768 screenshot 08-invoices, document fits 768px
+768 screenshot 09-invoice-editor, document fits 768px
+768 screenshot 10-invoice-filled, document fits 768px
+768 screenshot 11-invoice-preview, document fits 768px
+768 screenshot 12-invoice-marked-sent, document fits 768px
+768 screenshot 13-invoices-updated, document fits 768px
+768 screenshot 14-transactions, document fits 768px
+768 screenshot 15-transactions-filtered, document fits 768px
+768 screenshot 16-transaction-detail, document fits 768px
+768 screenshot 17-transaction-pagination, document fits 768px
+768 screenshot 18-customer-dialog, document fits 768px
+768 screenshot 19-customers, document fits 768px
+768 screenshot 20-settings, document fits 768px
+768 screenshot 21-offline-guide, document fits 768px
+768 screenshot 22-offline-state, document fits 768px
+768 screenshot 23-not-found, document fits 768px
+768 screenshot 24-new-account-guide, document fits 768px
+768 screenshot 25-empty-dashboard, document fits 768px
+768 screenshot 26-storage-recovery, document fits 768px
+768 screenshot 27-storage-read-error, document fits 768px
+PASS 768: expense, invoice, filtered detail, pagination, customer, settings, offline, 404, empty and recovery
+PASS write error: retained form input and visible error
+
+EXIT: 0
+END: 2026-10-19T05:37:54.283Z
+

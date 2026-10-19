@@ -1,0 +1,4 @@
+COMMAND: node /home/user/workspace/bench/skill-52255c0/scripts/realism.mjs /home/user/workspace/bench/runs/05-saas-dashboard
+EXIT: 0
+
+  Content realism  ✓

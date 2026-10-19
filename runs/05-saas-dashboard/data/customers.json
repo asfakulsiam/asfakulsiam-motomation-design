@@ -1,0 +1,34 @@
+{
+  "demo": true,
+  "entity": "customers",
+  "items": [
+    {
+      "id": "maple",
+      "name": "Maple Workshop",
+      "email": "accounts@maple.example.com",
+      "address": "42 Grove Street\nPortland, OR",
+      "demo": true
+    },
+    {
+      "id": "pine",
+      "name": "Pine & Paper",
+      "email": "hello@pine.example.com",
+      "address": "16 Willow Avenue\nPortland, OR",
+      "demo": true
+    },
+    {
+      "id": "marlow",
+      "name": "Marlow Studio",
+      "email": "studio@marlow.example.com",
+      "address": "8 Birch Road\nPortland, OR",
+      "demo": true
+    },
+    {
+      "id": "olive",
+      "name": "Olive Market",
+      "email": "team@olive.example.com",
+      "address": "25 Cedar Street\nPortland, OR",
+      "demo": true
+    }
+  ]
+}

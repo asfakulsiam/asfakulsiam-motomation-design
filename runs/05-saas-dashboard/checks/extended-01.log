@@ -1,0 +1,17 @@
+COMMAND: "node" "checks/extended.mjs"
+START: 2026-10-19T05:37:32.250Z
+PASS 320: 13 route layouts and control bounds
+PASS 390: 13 route layouts and control bounds
+PASS 720: 13 route layouts and control bounds
+PASS 1024: 13 route layouts and control bounds
+PASS keyboard skip link, main focus and 12 further Tab steps with visible focus; not a complete assistive-technology audit
+PASS native dialog Escape dismissal
+PASS transaction CSV download
+PASS workspace JSON download
+PASS second-tab business update after storage event
+PASS already-open workspace expense saves and navigates offline
+PASS reduced-motion document has no running animation
+
+EXIT: 0
+END: 2026-10-19T05:37:37.854Z
+
