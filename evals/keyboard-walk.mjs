@@ -1,14 +1,18 @@
 #!/usr/bin/env node
 // keyboard-walk.mjs — keyboard-only walk of a static build (evaluator tool, v3.0.2; needs Playwright).
 //
-//   node evals/keyboard-walk.mjs <site folder> [--routes /,/shop,/contact] [--journey "Shop teas>Sylhet Black>Add to cart>Cart>Checkout"] [--json]
+//   node evals/keyboard-walk.mjs <site folder> [--routes /,/shop,/contact] [--journey "Shop teas>Sylhet Black>Add to cart>Cart>Checkout"] [--expect /checkout] [--json]
+//   (several journeys: separate with |, in --journey and --expect alike)
 //
-// Only the keyboard: Tab, Shift+Tab, Enter, Space and typing. Never a mouse event, never element.click().
+// Only the keyboard: Tab, Shift+Tab, Enter and Space (no typing). Never a mouse event, never element.click().
 // Per route: Tab through the page (up to 120 presses) and record every stop: whether focus is visible (outline,
 // box-shadow, or a changed border/background against the unfocused element), focus traps (Tab stops moving), a skip
 // link as the first stop, and focusable elements hidden from view. A journey is a list of accessible names: each step
 // Tabs to the first element whose name matches, presses Enter (Space for checkboxes, radios and buttons that ignore
-// Enter), and waits for the page to settle. It records whether every step was reached by keyboard alone.
+// Enter), and waits for the page to settle. It records whether every step was reached by keyboard alone (`reached`).
+// It does not type into fields. A journey is `completed` only when --expect gives its end route and the walk ended
+// there; without --expect it is `not-verified`, never a pass. Names come from aria-label, aria-labelledby, <label>,
+// then text.
 // This is automated keyboard input, not a person at a keyboard, and says nothing about screen readers.
 import { createServer } from "node:http";
 import { readFileSync, existsSync, statSync } from "node:fs";
@@ -22,7 +26,9 @@ const srv = createServer((q, s) => { let u = decodeURIComponent(q.url.split("?")
 await new Promise((r) => srv.listen(0, "127.0.0.1", r)); const ORIGIN = `http://127.0.0.1:${srv.address().port}`;
 const routes = String(flags.routes || "/").split(",").map((r) => r.trim()).filter(Boolean);
 const STOP = `(() => { const e = document.activeElement; if (!e || e === document.body || e === document.documentElement) return null;
-  const name = (e.getAttribute("aria-label") || e.innerText || e.value || e.getAttribute("title") || e.getAttribute("alt") || e.getAttribute("placeholder") || e.name || "").replace(/\\s+/g, " ").trim().slice(0, 60);
+  const lb = (e.getAttribute("aria-labelledby") || "").split(/\\s+/).map((id) => document.getElementById(id)?.innerText || "").join(" ").trim();
+  const lab = e.labels && e.labels.length ? [...e.labels].map((l) => l.innerText).join(" ") : "";
+  const name = (e.getAttribute("aria-label") || lb || lab || (e.tagName === "SELECT" ? "" : e.innerText) || e.value || e.getAttribute("title") || e.getAttribute("alt") || e.getAttribute("placeholder") || e.name || "").replace(/\\s+/g, " ").trim().slice(0, 60);
   const r = e.getBoundingClientRect(); const s = getComputedStyle(e); const vis = r.width > 0 && r.height > 0 && s.visibility !== "hidden" && s.opacity !== "0";
   const ring = (s.outlineStyle !== "none" && parseFloat(s.outlineWidth) > 0) || (s.boxShadow && s.boxShadow !== "none");
   return { tag: e.tagName.toLowerCase(), type: e.type || null, role: e.getAttribute("role"), name, href: e.getAttribute("href"), vis, ring, key: e.tagName + "|" + name + "|" + Math.round(r.x) + "," + Math.round(r.y), style: [s.outlineStyle, s.outlineWidth, s.boxShadow, s.borderColor, s.backgroundColor, s.textDecorationLine, s.color].join(";") }; })()`;
@@ -54,9 +60,15 @@ for (const j of (flags.journey ? String(flags.journey).split("|") : [])) {
     if (!hit) { log.push(`✗ "${step}": not reached by Tab on ${new URL(page.url()).pathname}`); ok = false; break; }
     const u0 = page.url(); const key = hit.type === "checkbox" || hit.type === "radio" ? "Space" : "Enter"; await page.keyboard.press(key); await page.waitForTimeout(600); await page.waitForLoadState("load").catch(() => {});
     log.push(`✓ "${step}" → ${hit.tag} "${hit.name}" (${key})${page.url() !== u0 ? ` → ${new URL(page.url()).pathname}` : ""}`); }
-  out.journeys.push({ journey: j, ok, steps: log, endedOn: new URL(page.url()).pathname }); await ctx.close();
+  // v3.0.2 (found by the independent judge): "ok" meant every step was reached, and read as a completed journey even
+  // when a required field (the walk does not type) kept the form on its page. "reached" is that; "outcome" is
+  // completed only when --expect names the route the journey must end on and it did, else not-verified.
+  const endedOn = new URL(page.url()).pathname; const expect = flags.expect ? String(flags.expect).split("|")[out.journeys.length] : null;
+  const outcome = !ok ? "failed" : expect ? (endedOn === expect ? "completed" : "failed") : "not-verified";
+  if (ok && expect && endedOn !== expect) log.push(`✗ ended on ${endedOn}, expected ${expect} (the walk does not type into fields; a required field stops a form here)`);
+  out.journeys.push({ journey: j, reached: ok, outcome, expected: expect || null, steps: log, endedOn }); await ctx.close();
 }
 await browser.close(); srv.close();
 if (flags.json) console.log(JSON.stringify(out, null, 2));
 else { console.log(`keyboard walk · ${ROOT}`); for (const r of out.routes) console.log(`  ${r.route}: ${r.stops} stop(s); first ${r.firstStop}${r.skipLink ? " (skip link)" : ""}; trap ${r.trap || "none"}; focus not visible on ${r.focusNotVisible.length}${r.focusNotVisible.length ? ": " + r.focusNotVisible.slice(0, 5).join(", ") : ""}; hidden but focusable ${r.hiddenFocusable.length}`);
-  for (const j of out.journeys) { console.log(`  journey ${j.ok ? "✓" : "✗"} ${j.journey}`); for (const s of j.steps) console.log(`    ${s}`); } }
+  for (const j of out.journeys) { console.log(`  journey ${j.outcome === "completed" ? "✓ completed" : j.outcome === "failed" ? "✗ failed" : "? NOT VERIFIED (steps reached; pass --expect <route> to check the end)"} · ${j.journey}`); for (const s of j.steps) console.log(`    ${s}`); } }

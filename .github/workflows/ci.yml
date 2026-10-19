@@ -103,6 +103,9 @@ jobs:
       - name: Originality axes, and paired directions route by route (v3.0.1)
         if: steps.pw.outcome == 'success'
         run: node tests/gate/originality.test.mjs && node tests/gate/pair.test.mjs
+      - name: Keyboard walk reports reached, completed and not verified apart; <label for> names (v3.0.2)
+        if: steps.pw.outcome == 'success'
+        run: REQUIRE_BROWSER=1 node tests/evals/keyboard-walk.test.mjs
       - name: Tier 4 reduced-motion stills (no canvas, still, own composition)
         if: steps.pw.outcome == 'success'
         run: node tests/components/rm-stills.test.mjs

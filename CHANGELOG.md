@@ -22,7 +22,7 @@ Release hardening from the independent evaluation of 3.0.1 (`evals/results/2026-
 
 ### Added
 
-- `evals/keyboard-walk.mjs`: a keyboard-only walk (Tab, Shift+Tab, Enter, Space, typing; never a pointer) that records focus stops, visible focus, traps, skip links and whether named journeys complete.
+- `evals/keyboard-walk.mjs`: a keyboard-only walk (Tab, Shift+Tab, Enter and Space; it does not type; never a pointer) that records focus stops, visible focus, traps, skip links and whether named journeys complete.
 
 ### Changed
 
@@ -38,6 +38,7 @@ Release hardening from the independent evaluation of 3.0.1 (`evals/results/2026-
 - CI now runs `tests/evals/cost.test.mjs` (fake claude) and `tests/components/graphemes.test.mjs` (Bangla, emoji ZWJ, Arabic); neither ran before.
 - `check-repo.mjs`: registry counts in active docs must match `data/*.csv`; a test file nothing runs fails unless listed as manual with a reason; benchmark evidence inside the installable skill folder fails.
 - The `gate-fixtures` job fails as NOT VERIFIED when Playwright cannot be installed (it was green with a warning while the journey, pair and originality steps were skipped); `repo-rules.mjs` rejects an optional step that gates later steps without a failure path.
+- `evals/keyboard-walk.mjs` (found by the independent judge of the 3.0.2 SaaS dashboard run): a journey whose steps were all reached read as `ok` even when a required field kept the form on its page. It now reports `reached` and an `outcome` that is `completed` only against `--expect <route>`, otherwise `not-verified`; names come from `aria-labelledby` and `<label for>`. Regression: `tests/evals/keyboard-walk.test.mjs` (CI gate-fixtures).
 - `gates/delivery-gate.md`: what the journey check does not verify (reset, later multi-step steps, real backends, assistive technology, devices).
 
 ## [3.0.1] - 2026-10-18

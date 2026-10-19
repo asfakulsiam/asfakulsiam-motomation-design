@@ -93,9 +93,9 @@ Handoff demonstration: full gate plus `handoff.mjs --report GATE.md`, run on cop
 ## Accessibility
 
 - **Automated:** axe-core inside the gate's A axis (not re-run as a separate study here).
-- **Keyboard-only (performed):** `evals/keyboard-walk.mjs` drove each build with Tab, Shift+Tab, Enter, Space and typing,
+- **Keyboard-only (performed):** `evals/keyboard-walk.mjs` drove each build with Tab, Shift+Tab, Enter and Space (it does not type),
   never a pointer. All four: a skip link is the first stop, no focus traps, focus visible on every stop, no hidden
-  focusable elements. Journeys completed: 12a and 12b Shop → Sylhet Black → Add to cart → Cart → Checkout; 08 Check
+  focusable elements. Journey steps reached by keyboard (the tool's `✓` in this output meant reached, not completed; corrected in the final 3.0.2 tool, which needs `--expect`): 12a and 12b Shop → Sylhet Black → Add to cart → Cart → Checkout; 08 Check
   availability; 03-b2b Schedule Demo. The keyboard walk reaches each journey's form; the independent evaluator then
   completed the forms with Tab, Enter and Space only: the 08 booking, and the 12a/12b one-off and subscription checkouts.
   The B2B demo form needed ArrowDown for its native selects, so it does not meet a strict three-key completion test. Output: [`keyboard.txt`](../evals/results/2026-10-19-v3.0.2-validation/keyboard.txt).
