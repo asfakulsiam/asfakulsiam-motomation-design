@@ -8,6 +8,7 @@ import { renderRule, rules as loadRules, bannedDisplayFonts } from "../skills/as
 import { fileURLToPath } from "node:url";
 import { SIZE, sizeProblems, workflowProblems } from "./repo-rules.mjs";
 import { cli } from "../skills/asfakulsiam-motomation-design/scripts/lib.mjs";
+import { FAST, NOT_RUN } from "./test.mjs";
 if (process.argv[1] && process.argv[1].endsWith("check-repo.mjs")) cli("check-repo", "Usage: node scripts/check-repo.mjs   (no arguments)", {}, null, { pos: [0, 0] });
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url)); // decoded and OS-native (Windows drive letters, spaces)
@@ -390,6 +391,16 @@ if (!run([join(ROOT, "scripts/build-lite.mjs"), "--check"])) fail("dist/motomati
     const f = join(ROOT, d); if (!existsSync(f)) continue;
     readFileSync(f, "utf8").split("\n").forEach((line, i) => { for (const [re, file, want] of REG) for (const m of line.matchAll(re)) if (+m[1] !== want) fail(`${d}:${i + 1} says "${m[0]}" but data/${file}.csv has ${want}`); });
   }
+}
+
+// 12c. Every test file is run by something (v3.0.2: cost.test.mjs and graphemes.test.mjs existed, but no workflow ran them).
+//      It must be in scripts/test.mjs FAST (npm test, the CI check job), named in a workflow, or listed in NOT_RUN with a reason.
+{
+  const wf = readdirSync(join(ROOT, ".github/workflows")).filter((f) => f.endsWith(".yml")).map((f) => readFileSync(join(ROOT, ".github/workflows", f), "utf8")).join("\n");
+  const known = new Set([...FAST.flatMap(([a]) => a.filter((x) => !x.startsWith("--"))), ...Object.values(NOT_RUN).flatMap((t) => (Array.isArray(t.files) ? t.files : Object.keys(t.files)))]);
+  const tests = execFileSync("git", ["ls-files", "tests"], { cwd: ROOT, encoding: "utf8" }).split("\n").filter((f) => /\.mjs$/.test(f) && !f.includes("/fixtures/") || f === "tests/evals/fixtures/fake-claude.mjs");
+  for (const t of tests) if (!known.has(t) && !wf.includes(t)) fail(`${t} is not run by npm test (scripts/test.mjs FAST) or any workflow, and not listed in NOT_RUN with a reason`);
+  for (const t of known) if (!existsSync(join(ROOT, t))) fail(`scripts/test.mjs names ${t}, which does not exist`);
 }
 
 // 13. docs/benchmark-summary.md names the newest main benchmark report as current.

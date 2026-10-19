@@ -85,6 +85,8 @@ jobs:
         run: NODE_PATH=$PWD/node_modules node tests/components/confetti.test.mjs
       - name: Adversarial inputs, every text and type component (punctuation, taka, accents, Bangla, emoji ZWJ, Arabic, 200 chars, empty)
         run: NODE_PATH=$PWD/node_modules node tests/components/adversarial.test.mjs --out /tmp/adv
+      - name: Grapheme-safe split text (Bangla, emoji ZWJ, Arabic rendered split vs unsplit; SplitFlap settles on the exact value)
+        run: NODE_PATH=$PWD/node_modules node tests/components/graphemes.test.mjs --out /tmp/graphemes
       - name: Keep the adversarial evidence
         if: always()
         uses: actions/upload-artifact@v4

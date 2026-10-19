@@ -10,6 +10,7 @@
   "keywords": ["agent-skill", "claude-skill", "design", "gsap", "lenis", "scroll-animation", "typography", "motion-design", "anti-slop", "webgl"],
   "engines": { "node": ">=18" },
   "scripts": {
+    "test": "node scripts/test.mjs",
     "check": "node scripts/check-repo.mjs",
     "build:dist": "node scripts/build-dist.mjs",
     "build:lite": "node scripts/build-lite.mjs",
